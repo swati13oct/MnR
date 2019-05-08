@@ -35,11 +35,15 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
 	
-	@FindBy(css= "#claimSearchButtonBottom")
-	public WebElement claimsHistoryLink;
+	//tbd @FindBy(css= "#claimSearchButtonBottom")
+	//tbd public WebElement claimsHistoryLink;
+
+	@FindBy (xpath =".//*[@id='claimSearchButtons']")
+	private WebElement claimsSummaryLinkOnDetailTopPage;
+
 	
 	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
-	private WebElement historylink;
+	private WebElement claimsSummaryLinkOnDetailBottomPage;
 
 	@FindBy(xpath=".//*[@id='claimNumberLabel']/p/b")
 	private WebElement claimNumber;
@@ -542,9 +546,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	 * @toDo : validate the Claims History Button
 	 */
 	public void TBR_claimshistorylink(){	//tbd-remove whole method
-		validate (historylink);
+		validate (claimsSummaryLinkOnDetailBottomPage);
 		System.out.println("history link is seen");
-		historylink.click();
+		claimsSummaryLinkOnDetailBottomPage.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -557,21 +561,28 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
 		}
 	}
-	public void validateClaimHistory(){
-		/* tbd-remove
+	
+	public void validateClaimsSummaryLinkOnDetailTopPage(){
+		CommonUtility.checkPageIsReady(driver);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(1000); //need this sleep, MA case somehow takes longer to load for the link to be clickable
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-	validate(claimsHistoryLink);
-	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
-	claimsHistoryLink.click();
-	*/
-		CommonUtility.waitForPageLoad(driver, historylink, 10);
-		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(historylink));
-		historylink.click();
+		}
+		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailTopPage, 10);
+		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(claimsSummaryLinkOnDetailTopPage));
+		claimsSummaryLinkOnDetailTopPage.click();
+		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 5);
+		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
+		System.out.println("The member has navigated from details page back to Summary page ---------->"+driver.getCurrentUrl());
+	}
+
+	
+	public void validateClaimsSummaryLinkOnDetailBottomPage(){
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailBottomPage, 10);
+		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(claimsSummaryLinkOnDetailBottomPage));
+		claimsSummaryLinkOnDetailBottomPage.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());

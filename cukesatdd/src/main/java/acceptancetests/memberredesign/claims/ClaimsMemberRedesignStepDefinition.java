@@ -132,25 +132,20 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void search_claims_period_redesigned_site(DataTable timeAttributes) throws InterruptedException{
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
 		for (int i = 0; i < timeAttributesRow.size(); i++) {
-
 			urlAttributesMap .put(timeAttributesRow.get(i).getCells()
 					.get(0), timeAttributesRow.get(i).getCells().get(1));
 		}
-		
-
 		System.out.println("claim period"+urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-
 		if(s.equals("custom-search")){
 			System.out.println("custom");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
-		}else{
-		newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
+		} else{
+			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
 		}
 
 		if(newClaimsSummaryPage != null)
@@ -207,7 +202,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * @toDo : View a Page Header in Claims Summary page in AARP
 	 */
-	/* do not remove we need to impliment this one
+	/* tbd-remove - covered by step: I can validate the claims summary header
 	@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 	public void validate_the_header()
 	{
@@ -252,17 +247,18 @@ public class ClaimsMemberRedesignStepDefinition {
 	*/
 	
 	
-	@And("^I can see the print and download option in claims details table$")
+	@And("^I can see the learn more and print and download option in claims summary table section$")
 	public void i_can_see_print_and_download_option_in_claims_table() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyPrintAndDownloadOption());
+		Assert.assertTrue(claimSummarypage.validateLearnMoreAndPrintAndDownloadOption());
 	   	}
 	
+	/* tbd-remove
 	@And("I validate the print and download option in claims details table$")
 	public void i_validate_print_and_download_option_in_claims_table() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.validatePrintAndDownloadOption());
-	   	}
+	   	} */
 
 	@And("^I validate the pagination on the claims summary page$")
 	public void i_validate_the_pagination_on_the_claims_summary_page() throws Throwable {
@@ -531,24 +527,31 @@ public class ClaimsMemberRedesignStepDefinition {
 	}*/
 	
 	@Then("^I can validate the claims summary header$")
-	public void i_can_validate_the_claims_summary_header()  {
+	public void i_can_validate_the_claims_summary_header(DataTable memberAttributes)  {
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.validateClaimsFromDropDowns1();
-		newClaimsSummaryPage.validateClaimsPlantype();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
+		newClaimsSummaryPage.validateYouHavemessage();
 		
 	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
 	    
 	}
 	
+	/* tbd-remove
 	@Then("^I validate the claim summary header$")
-	public void i_validate_the_claims_summary_header()  {
+	public void i_validate_the_claims_summary_header()  { //tbd-remove
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.validateClaimsFromDropDown2();		
+		newClaimsSummaryPage.validateClaimsSummaryHeaderSection();		
 		newClaimsSummaryPage.validateYouHavemessage();
 		//newClaimsSummaryPage.validateLearnmoreaboutsection1();
-	}
+	} */
 	@When("^I navigate to the Claim Details page in redesigned site$")
 	public void i_navigate_to_member_redesign_claim_details(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -632,13 +635,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * 
 	 */
-	@Then("^I can view a claim search back button in Claims Details page in AARP site$")
+	/*tbd-remove : coverd by step: I validate the claims summary link on claims detail page
+	@Then("^I can view a claim search back button in Claims Details page in AARP site$") 
 	public void validate_claim_search_button()
 	{
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 
-		claimDetailspage.validateClaimHistory();
-	}
+		claimDetailspage.validateClaimsSummaryLinkOnDetailPage();
+	} */
 	/**
 	 * 
 	 */
@@ -674,11 +678,38 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		
 	}
-	@And("^I validate the claims history Button$")
-	public void validate_claims_History_Button(){
+	@And("^I validate the claims summary link on claims detail top page$")
+	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		if (planType.toLowerCase().contains("pdp")) {
+			System.out.println("PDP case doesn't have 'MORE INFO', skip this step");
+			return;
+		} 
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimHistory();
+		claimDetailspage.validateClaimsSummaryLinkOnDetailTopPage();
+          }
+
+	@And("^I validate the claims summary link on claims detail bottom page$")
+	public void I_validate_the_claims_summary_link_on_claims_detail_bottom_page(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		if (planType.toLowerCase().contains("pdp")) {
+			System.out.println("PDP case doesn't have 'MORE INFO', skip this step");
+			return;
+		} 
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		claimDetailspage.validateClaimsSummaryLinkOnDetailBottomPage();
           }
 
 	@Then("^I validate the text for PCP & medica members$")
@@ -982,9 +1013,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (numClaims <=0) {
-			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyPrintAndDownloadOptions(numClaims));
+			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyLearnMoreAndPrintAndDownloadOptions(numClaims));
 		} else {
-			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyPrintAndDownloadOptions(numClaims));
+			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyLearnMoreAndPrintAndDownloadOptions(numClaims));
 	   	}
 	}
 	

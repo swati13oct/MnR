@@ -54,6 +54,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id="claim-type")
 	private WebElement claimTypeMAPD;*/  //TBD
     
+	@FindBy(xpath = "//h1")
+	private WebElement pageHeader;
+	
 	@FindBy(xpath = ".//*[@id='planNameFed']")
 	private WebElement planame;
 	
@@ -67,6 +70,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy (id="learnmoresummarytoggle")
 	private WebElement learnMoreAboutClaims;
 
+	@FindBy(xpath="//div[contains(@class,'LearnMoreAboutYour') and not(contains(@class,'ng-hide'))]") 
+	private WebElement learnMoreAboutClaimsContent;
+	
 	/*@FindBy (xpath=".//*[@id='table-medical']/div[1]/div[1]/div/h2[2]")
 	private WebElement dynamicNumberOfClaimsTextPdp;*/
 
@@ -175,15 +181,29 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(id= "claims_1")
 	private static WebElement claimsLink;
 
+	@FindBy(xpath="//label[@for='fed-document-date']")
+	private WebElement viewclaimsFromLabel;
+
 	@FindBy(id="fed-document-date")
-	private WebElement claimFromDropDown1;
-	
-		
+	private WebElement searchclaimsRangeDropDown;
+
+	@FindBy(xpath="//label[@for='claim-type']")
+	private WebElement claimTypeLabel;
+
 	@FindBy(id="claim-type")
-	private WebElement clamtypeFromDropDown;
+	private WebElement claimTypeDropDown;
 	
+	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(@class,'table-body-cell') and contains(text(),'Medical')]")
+	private WebElement claimTypeJustMedical;
+
+	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(@class,'table-body-cell') and contains(text(),'Prescription Drug')]")
+	private WebElement claimTypeJustDrug;
+
 	@FindBy(xpath = "//*[@id='IPerceptionsEmbed']")
 	private WebElement WelcomePage_iPerceptionPresent;
+	
+	@FindBy(xpath="//div[contains(@class,'ReviewYourClaimsLanguage') and not(contains(@class,'ng-hide'))]")
+	private WebElement reviewClaimsText;
 	
 	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
 	private WebElement iPerceptionPopUp1;
@@ -217,10 +237,10 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement clamsSummaryCopyText;
 	
 	@FindBy(id = "all-claims-print-claims-btn")
-	private WebElement validateclaimsprintbutton;
+	private WebElement claimsSummaryPrintButton;
 	
 	@FindBy(id = "all-claims-download-btn")
-	private WebElement validateclaimsdownloadbutton;
+	private WebElement claimsSummaryDownloadButton;
 
 	@FindBy(xpath = "//div[contains(@class,'shipCompSection')]//select[@name='document-date']")
 	private WebElement claimDropDownBoxForShip;	
@@ -569,48 +589,43 @@ public class ClaimSummarypage extends UhcDriver{
 			Select dropdown=new Select (claimDropDownBoxForShip);	
 			dropdown.selectByVisibleText("Last 24 months");
 			System.out.println("Clicked 24 months option");
-		}
-		else if (planType.contains("PDP")) {
+		} else if (planType.contains("PDP")) {
 			System.out.println("!!!Claim type PDP is validated !!!");
 			Select dropdown=new Select (claimDropDownBoxForFed);	
 			dropdown.selectByVisibleText("Last 24 months");
 			System.out.println("Clicked 24 months option");
 			validate(pdpPrescriptionDrug);
-		}
-		else if (planType.contains("MAPD") || planType.contains("MA")||planType.contains("PCP") || planType.contains("MEDICA")){
-					System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
-					last24months = driver.findElement(By.id("date24MAtdd"));
-					last24months.click();
-					System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
-					validate (Medical);
-					System.out.println("!! Claim type Medical is validated!!! ");
-					validate (Medical);
-					if (planType.contains("MAPD") || planType.contains("PCP")) {
-					validate(PrescriptionDrug);
-	    			System.out.println("!!!Claim type PDP is validated !!!");
-	    			PrescriptionDrug.click();
-					System.out.println("!!! Claim Type PDP is clicked !!!");
-					validate(claimsTablePrescriptionDrug);
-					System.out.println("!!! Claims Table PDP is seen on the Claims Summary page!!!");
-				    validate (RxNumberinthecalimstable);
-				    System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
-					System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
-					Medical.click();
-					}
-				
+		} else if (planType.contains("MAPD") || planType.contains("MA")||planType.contains("PCP") || planType.contains("MEDICA")){
+			System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
+			last24months = driver.findElement(By.id("date24MAtdd"));
+			last24months.click();
+			System.out.println("!!! Month Selected from the view claims from drop down is ====>"+(last24months.getText()));
+			validate (Medical);
+			System.out.println("!! Claim type Medical is validated!!! ");
+			validate (Medical);
+			if (planType.contains("MAPD") || planType.contains("PCP")) {
+				validate(PrescriptionDrug);
+				System.out.println("!!!Claim type PDP is validated !!!");
+				PrescriptionDrug.click();
+				System.out.println("!!! Claim Type PDP is clicked !!!");
+				validate(claimsTablePrescriptionDrug);
+				System.out.println("!!! Claims Table PDP is seen on the Claims Summary page!!!");
+				validate (RxNumberinthecalimstable);
+				System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
+				System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
+				Medical.click();
 			}
-			else{
-				validate (customSearch);
-				System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
-				System.out.println("!!! Validating the drop down to select the claims !!!");
-			
-				//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
-			}
-			validate (learnMoreAboutClaims);
-			System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
-			//validate(claimsTablePagination);
-			//System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
+		} else{
+			validate (customSearch);
+			System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
+			System.out.println("!!! Validating the drop down to select the claims !!!");
+			//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 		}
+		//tbd validate (learnMoreAboutClaims);
+		//tbd System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
+		//validate(claimsTablePagination);
+		//System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
+	}
 	
 	
 	/**
@@ -778,37 +793,101 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 		}
 	}
 
- public void validateClaimsFromDropDowns1() {
+ public void TBR_validateClaimsFromDropDowns1() {
  		
 		 
- 		Select select = new Select(claimFromDropDown1);
+ 		Select select = new Select(searchclaimsRangeDropDown);
  		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
  		for(int i=0;i<select.getOptions().size();i++){
  			System.out.println(select.getOptions().get(i).getAttribute("value"));
  		} 		
  	}
  /**
-	 * @toDo : Validate claims FROM DROP DOWN
-	 */
- public void validateClaimsFromDropDown2() {
-		
- System.out.println("The title of Claims page is-------->"+driver.getTitle());
-	//System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
-	
-	if(driver.getTitle().equalsIgnoreCase("Claims")){
-		System.out.println("!!! The member is on Claims Summary page !!!");
-		validate(planame);
-		System.out.println("The Plan Name is ===>"+(planame.getText()));
-		validate(claimFromDropDown1);
-		 System.out.println("*** Drop down for months visible***");	
-		 
-	 		Select select = new Select(claimFromDropDown1);
-	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
-	 		for(int i=0;i<select.getOptions().size();i++){
-	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
-	 		} 	
-	 		  }
-	             }	
+  * Validate claims FROM DROP DOWN
+  */
+ public void validateClaimsSummaryHeaderSection(String planType) {
+
+	 //note: validate page title
+	 String expPageTitle="Claims Summary";
+	 Assert.assertTrue("PROBLEM - not getting expected page title for claims summary page. Expected to contains="+expPageTitle+" | Actual="+driver.getTitle(), driver.getTitle().contains(expPageTitle));
+	 System.out.println("The title of Claims page is-------->"+driver.getTitle());
+
+	 //note: validate header element
+	 String expPageHeadingText="Claims Summary";
+	 Assert.assertTrue("PROBLEM - unable to locate page header element on claims summary page", validate(pageHeader));
+	 Assert.assertTrue("PROBLEM - not getting expected page header text on claims summary page. Expected="+expPageHeadingText+" | Actual="+pageHeader.getText(), expPageHeadingText.equals(pageHeader.getText()));
+	 System.out.println("The header text-------->"+pageHeader.getText());
+
+	 //note: validate plan name element
+	 Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", validate(planame));
+	 System.out.println("The Plan Name is ===>"+(planame.getText()));
+
+	 //note: validate claims date range search dropdown options
+	 String expViewClaimsLabelText="View Claims From:";
+	 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' label element on claims summary page", validate(viewclaimsFromLabel));
+	 Assert.assertTrue("PROBLEM - "+expViewClaimsLabelText+"' label text is not as expected.  Expected="+expViewClaimsLabelText+" | Actual="+viewclaimsFromLabel.getText(), viewclaimsFromLabel.getText().equals(expViewClaimsLabelText));
+	 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' dropdown element on claims summary page", validate(searchclaimsRangeDropDown));
+
+	 List<String> expOptionsList=new ArrayList<String>();
+	 expOptionsList.add("Last 30 days");
+	 expOptionsList.add("Last 90 days");
+	 expOptionsList.add("Last 6 months");
+	 expOptionsList.add("Last 12 months");
+	 expOptionsList.add("Last 24 months");
+	 expOptionsList.add("Custom search");
+	 Select RangeSelect = new Select(searchclaimsRangeDropDown);
+	 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected="+expOptionsList.get(1)+" | Actual="+RangeSelect.getFirstSelectedOption().getText(), (expOptionsList.get(1)).equals(RangeSelect.getFirstSelectedOption().getText()));
+	 System.out.println("Default selected option is  =>" +RangeSelect.getFirstSelectedOption().getText());
+	 int expNumOptions=6;
+	 Assert.assertTrue("PROBLEM - number of '"+expViewClaimsLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumOptions+" | Actual="+RangeSelect.getOptions().size(), RangeSelect.getOptions().size()==expNumOptions);
+	 for(int i=0;i<RangeSelect.getOptions().size();i++){
+		 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected="+expOptionsList.get(i)+" | Actual="+RangeSelect.getOptions().get(i).getText(), (expOptionsList.get(i)).equals(RangeSelect.getOptions().get(i).getText()));
+		 System.out.println("Located dropdown option =>"+RangeSelect.getOptions().get(i).getText());
+	 } 	
+
+	 //note: validate claims type search dropdown options
+	 String expClaimTypeLabelText="Claim Type:";
+	 Assert.assertTrue("PROBLEM - unable to '"+expClaimTypeLabelText+"' label element on claims summary page", validate(claimTypeLabel));
+	 Assert.assertTrue("PROBLEM - "+expClaimTypeLabelText+"' label text is not as expected.  Expected="+expClaimTypeLabelText+" | Actual="+claimTypeLabel.getText(), claimTypeLabel.getText().equals(expClaimTypeLabelText));
+
+	 System.out.println("Validating claimType dropdown options for planType="+planType+" scenario...");
+	 if (planType.equalsIgnoreCase("MA")) {
+		 //note: only Medical
+		 Assert.assertTrue("PROBLEM - unable to locate 'Medical' for Claim Type field on claims summary page", validate(claimTypeJustMedical));
+	 } else if (planType.equalsIgnoreCase("PDP")) {
+		 //note: only Prescription drug
+		 Assert.assertTrue("PROBLEM - unable to locate 'Prescription drug' for Claim Type field on claims summary page", validate(claimTypeJustDrug));
+	 } else if (planType.equalsIgnoreCase("SHIP")) {
+		 //note: All Providers or more depends on if claims...validate it has >=1
+		 List<String> expTypeOptionsList=new ArrayList<String>();
+		 expTypeOptionsList.add("All Providers");
+		 int expNumTypeOptions=expTypeOptionsList.size();
+		 Select claimTypeSelect = new Select(claimTypeDropDown);
+		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(1)).equals(claimTypeSelect.getFirstSelectedOption().getText()));
+		 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+claimTypeSelect.getOptions().size(), claimTypeSelect.getOptions().size()>=expNumTypeOptions);
+		 for(int i=0;i<claimTypeSelect.getOptions().size();i++){
+			 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected='"+expTypeOptionsList.get(i)+"' | Actual='"+claimTypeSelect.getOptions().get(i).getText()+"'", (expTypeOptionsList.get(i)).equals(claimTypeSelect.getOptions().get(i).getText()));
+			 System.out.println("Located dropdown option =>"+claimTypeSelect.getOptions().get(i).getText());
+		 } 	
+	 } else {
+		 //note: both Medical and Prescription drug
+		 Assert.assertTrue("PROBLEM - unable to locate '"+expClaimTypeLabelText+"' dropdown element on claims summary page", validate(claimTypeDropDown));
+		 List<String> expTypeOptionsList=new ArrayList<String>();
+		 expTypeOptionsList.add("Medical");
+		 expTypeOptionsList.add("Prescription drug");
+		 int expNumTypeOptions=expTypeOptionsList.size();
+		 Select claimTypeSelect = new Select(claimTypeDropDown);
+		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(0)).equals(claimTypeSelect.getFirstSelectedOption().getText()));
+		 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+claimTypeSelect.getOptions().size(), claimTypeSelect.getOptions().size()==expNumTypeOptions);
+		 for(int i=0;i<claimTypeSelect.getOptions().size();i++){
+			 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected='"+expTypeOptionsList.get(i)+"' | Actual='"+claimTypeSelect.getOptions().get(i).getText()+"'", (expTypeOptionsList.get(i)).equals(claimTypeSelect.getOptions().get(i).getText()));
+			 System.out.println("Located dropdown option =>"+claimTypeSelect.getOptions().get(i).getText());
+		 } 	
+	 }
+	 
+	//note: validate 'review your claims' element exists
+	 Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", validate(reviewClaimsText));
+ }	
 		
  public void validateLearnmoreaboutsection1(){
 	 validate(learmore);
@@ -818,7 +897,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
 	 public void validateClaimsPlantype() {
 	 		// TODO Auto-generated method stub
-	 		Select select = new Select(clamtypeFromDropDown);
+	 		Select select = new Select(claimTypeDropDown);
 	 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
 	 		for(int i=0;i<select.getOptions().size();i++){
 	 			System.out.println(select.getOptions().get(i).getAttribute("value"));
@@ -1088,26 +1167,48 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				} while (counter < 2);
 			}
 			
+			/* tbd
 			public boolean verifyPrintAndDownloadOption() {
 				if(MRScenario.environment.equalsIgnoreCase("team-a"))
 				{
 					CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);				
-					validateNew (validateclaimsprintbutton);
-					validateNew (validateclaimsdownloadbutton);
+					validateNew (claimsSummaryPrintButton);
+					validateNew (claimsSummaryDownloadButton);
 					return true;	
 				}else{
 					return true;
 				}
 								
-			}
+			} */
 
-			public boolean validatePrintAndDownloadOption() {
+			public boolean validateLearnMoreAndPrintAndDownloadOption() {
+				if (validate (learnMoreAboutClaims) && validate(claimsSummaryPrintButton) && validate(claimsSummaryDownloadButton)) {
+					learnMoreAboutClaims.click();
+					Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", validate(learnMoreAboutClaimsContent));
+
+					claimsSummaryDownloadButton.click();
+
+					String winHandleBefore = driver.getWindowHandle();
+					claimsSummaryPrintButton.click();
+					switchToNewTab();
+					String expPrintPageTitle="Print: My Claims Details";
+					Assert.assertTrue("PROBLEM - print is not bringing up new page with expected title.  Expected='"+expPrintPageTitle+"' | Actual='"+driver.getTitle()+"'", driver.getTitle().equals(expPrintPageTitle));
+					System.out.println("New window for print = "+driver.getTitle());
+					driver.close();
+					driver.switchTo().window(winHandleBefore);
+					System.out.println("Main window = "+driver.getTitle());	
+					return true;
+				} else
+					return false;
+
+
+				/* tbd-remove
 				if(MRScenario.environment.equalsIgnoreCase("team-a"))
 				{
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				String winHandleBefore = driver.getWindowHandle();
-				validateclaimsdownloadbutton.click();
-				validateclaimsprintbutton.click();
+				claimsSummaryDownloadButton.click();
+				claimsSummaryPrintButton.click();
 				switchToNewTab();
 				System.out.println("New window = "+driver.getTitle());
 				driver.switchTo().window(winHandleBefore);
@@ -1115,8 +1216,8 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				return true;
 				}else{
 					return true;
-				}
-			}
+				} */
+			} 
 
 			public ProfileandPreferencesPage navigateDirectToProfilePage() {
 			
@@ -1258,24 +1359,45 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 					System.out.println("!!! Validating the drop down to select the claims !!!");
 				}
-				validate (learnMoreAboutClaims);
-				System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
 			}
 
-			public boolean verifyPrintAndDownloadOptions(int numClaims) {
+			public boolean verifyLearnMoreAndPrintAndDownloadOptions(int numClaims) {
 				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 				if (numClaims >0) {
-					System.out.println("Has claim(s), expect to see print and download buttons");
-					if (validate(validateclaimsprintbutton) && validate(validateclaimsdownloadbutton)) {
+					System.out.println("Has claim(s), expect to see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
+					if (validateLearnMoreAndPrintAndDownloadOption()) {
+						/*tbd-remove
+					}
+					if (validate (learnMoreAboutClaims) && validate(claimsSummaryPrintButton) && validate(claimsSummaryDownloadButton)) {
+						
+						learnMoreAboutClaims.click();
+						Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", validate(learnMoreAboutClaimsContent));
+						
+						claimsSummaryDownloadButton.click();
+
+						String winHandleBefore = driver.getWindowHandle();
+						claimsSummaryPrintButton.click();
+						switchToNewTab();
+						String expPrintPageTitle="Print: My Claims Details";
+						Assert.assertTrue("PROBLEM - print is not bringing up new page with expected title.  Expected='"+expPrintPageTitle+"' | Actual='"+driver.getTitle()+"'", driver.getTitle().equals(expPrintPageTitle));
+						System.out.println("New window = "+driver.getTitle());
+		x				driver.switchTo().window(winHandleBefore);
+						System.out.println("Main window = "+driver.getTitle());	*/		
 						return true;
 					} else {
+						System.out.println("locate 'Learn More About Your Claims' link result="+validate(learnMoreAboutClaims));
+						System.out.println("locate 'Print' button result="+validate(claimsSummaryPrintButton));
+						System.out.println("locate 'Download Claims' button result="+validate(claimsSummaryDownloadButton));
 						return false;
 					}
 				} else {
-					System.out.println("Has no claim, expect NOT to see print and download buttons");
-					if (!validate(validateclaimsprintbutton) && !validate(validateclaimsdownloadbutton)) {
+					System.out.println("Has no claim, expect NOT to see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
+					if (!validate (learnMoreAboutClaims) && !validate(claimsSummaryPrintButton) && !validate(claimsSummaryDownloadButton)) {
 						return true;
 					} else {
+						System.out.println("locate 'Learn More About Your Claims' link result="+validate(learnMoreAboutClaims));
+						System.out.println("locate 'Print' button result="+validate(claimsSummaryPrintButton));
+						System.out.println("locate 'Download Claims' button result="+validate(claimsSummaryDownloadButton));
 						return false;
 					}
 				}
