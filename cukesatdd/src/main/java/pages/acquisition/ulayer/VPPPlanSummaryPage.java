@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
@@ -2677,6 +2678,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return getValEstimatedAnnualDrugCostValue(planName).getText().trim();
 		
 		
+	}
+
+
+
+	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
+	//a[contains(@class, 'EBRC')]
+	
+	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	private WebElement DecisionGuideLink;
+	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
+		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
+		DecisionGuideLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("medicare-information.html"))
+			return new IsDecisionGuideStep1(driver);
+		else
+			return null;
 	}
 
 	
