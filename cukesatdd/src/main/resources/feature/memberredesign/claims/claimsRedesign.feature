@@ -135,51 +135,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 #	   | TID   | planType | claimssystem |
 #	   | 15258 | PHIP     | SHIPCLAIMS   |
 	  
-#	  #This Scenario can only execute when max claims indicator as true
-#	  @MaxClaimsResultsError
-#	  Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error
-#	  Given I am an AARP member on the redesigned site
-#	      | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	     | Claim Period | <claimPeriod> |
-#	  Then The User can able to see Drug Claims History: Reached Maximum Claim Results Error
-#	
-#	  Examples: 
-#	     | planType | claimPeriod    | domain |
-#	     | PDP      | Last 24 Months | NA     |
-#	
-#	  @shipDateRangeGreaterThan24MonthsErrmsg
-#	  Scenario Outline: To Verify the SHIP Date Range Greater Than 24-Months Error
-#	  Given I am an AARP member on the redesigned site
-#	     | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	    | Claim Period | <claimPeriod> |
-#	  And the user search claims for the following time interval in redesigned site
-#	    | Claims To Date   | <claimToDate>   |
-#	    | Claims From Date | <claimFromDate> |
-#	  Then the user should be able to see the SHIP Date Range Greater Than 24-Months Error
-#	
-#	  Examples: 
-#	    | planType | claimPeriod   | domain | claimToDate | claimFromDate |
-#	    | SHIP     | Custom Search | NA     | 10/10/2017  | 06/14/2012    |
-#	
-#	  @govtDateRangeGreaterThan24MonthsErrmsg
-#	  Scenario Outline: To Verify the FED Date Range Greater Than 24-Months Error
-#	  Given I am an AARP member on the redesigned site
-#	     | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	     | Claim Period | <claimPeriod> |
-#	  And the user search claims for the following time interval in redesigned site
-#	     | Claims To Date   | <claimToDate>   |
-#	     | Claims From Date | <claimFromDate> |
-#	  Then the user should be able to see the FED Date Range Greater Than 24-Months Error
-#	
-#	  Examples: 
-#	     | planType | claimPeriod   | claimToDate | claimFromDate |
-#	     | MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
 	  
 	@claims7  @claimsSummaryAndDetails @regressionMember
     Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site

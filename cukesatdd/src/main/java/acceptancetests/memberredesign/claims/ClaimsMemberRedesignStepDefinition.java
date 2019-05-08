@@ -42,81 +42,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	/**
-	 * @toDo : Login as a member on the redesigned site.
-	 */
-	/* tbd-remove
-	@Given("^I am an Individual or Group member on the redesigned site$")
-	public void i_am_an_arrp_member_on_the_member_site(DataTable memberAttributes) {
 
-		 Reading the given attribute from feature file 
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
-			{
-				String key = iterator.next();
-				if (!memberAttributesMap.get(key).isEmpty()) {
-					desiredAttributes.add(memberAttributesMap.get(key));
-				}
-			}
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-		Map<String, String> loginCreds = loginScenario.getAMPMemberWithDesiredAttributes(desiredAttributes);
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a " + desiredAttributes + " member");
-		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd);
-			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);			
-		}
-		WebDriver wd = getLoginScenario().getWebDriver();
-
-		LoginPage loginPage = new LoginPage(wd);
-		
-		
-		{
-			loginPage.navigateToNewDashboardUrl();
-			getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
-			AccountHomePage accountHomePage = (AccountHomePage) loginPage.teamhloginWith(userName, pwd);
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-			Assert.assertTrue(true);
-		}
-		
-	}*/
-	/**
-	 * @toDo: Navigate to Claims Summary page.
-	 */
-
-	@When("^TBR_I navigate to the claims Summary page in redesigned site$")
-	public void TBRnavigate_Claims_Summary_redesigned()
-		{
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
-		
-
-		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-		try {
-			accountHomePage.feebackpopupClose();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	/**
 	 * @toDo : This method click on cliams tab from test harness page or dashboard page
 	 */
@@ -284,24 +210,9 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
 	/**
-	 * @toDo : navigate to the Claims Summary page in AARP
-	 */
-	/* tbd-remove
-	@When("^I navigate to the Claims Summary page in AARP site$")	
-	public void i_navigate_to_member_redesign_claims_page(){
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		ClaimSummarypage newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
-		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-		String planType = memberAttributesMap.get("Plan Type");
-		newClaimsSummaryPage.selectRequiredPlanType(planType);
-
-		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);			
-
-	} */
-	/**
 	 * @toDo : View a Page Header in Claims Summary page in AARP
 	 */
-	/* tbd-remove
+	/* do not remove we need to impliment this one
 	@Then("^I can view a Page Header in Claims Sumamry page in AARP site$")
 	public void validate_the_header()
 	{
@@ -309,17 +220,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	newClaimsSummaryPage.validateHeader();
 
 	} */
-	/**
-	 * @toDo : View Claims from drop down menu that defaults to last 90 days in Claims Summary page
-	 */
-	/* tbd-remove
-	@And("^A View Claims from dropdown menu that defaults to last 90 days in Claims Sumamry page in AARP site$")
-	public void validate_viewClaimsForm_dropdown(){
-		//String planType = memberAttributesMap.get("Plan Type");
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);	
-		Assert.assertEquals("Last 90 Days", claimSummarypage.validateViewClaimsFromDropDown());
 
-	}*/
 	/**
 	 * @toDo : Claim type drop down in Claims Summary page.
 	 */
@@ -335,7 +236,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * @toDo : All Body Copy on the page in Claims Summary page.
 	 */
-	/* tbd-remove
+	/* need to impliment
 	@And("^All Body Copy on the page in Claims Sumamry page in AARP site$")
 	public void validate_body_copay(){
 
@@ -346,7 +247,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * @toDo : view all Body Copy on the Claims Summary page.
 	 */
-	/* tbd-remove
+	/*need to impliment
 	@Then ("^I can view all Body Copy on the page in AARP site$")
 	public void validate_claims_table_body_copy_text(){
 
@@ -354,16 +255,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		Assert.assertTrue(claimSummarypage.verifyCopyText2());
 	}
 	*/
-	/**
-	 * @toDo : Dynamic text with the number of claims and search criteria, or date range for custom search.
-	 */
-	/* tbd-remove
-	@And("^Dynamic text with the number of claims and search criteria, or date range for custom search$")
-	public void validate_dynamic_nuber_of_claims_text(){
-
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyDynamicText());
-	} */
 	
 	
 	@And("^I can see the print and download option in claims details table$")
@@ -377,15 +268,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.validatePrintAndDownloadOption());
 	   	}
-	/**
-	 * @toDo : Claims Table & pagination (if there are more than 10 claims.)
-	 */
-	/* tbd-remove
-	 @And ("^A Claims Table with pagination in AARP site$")
-	public void validate_claims_table_and_pagination(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination());
-	}*/
+
 	@And("^I validate the pagination on the claims summary page$")
 	public void i_validate_the_pagination_on_the_claims_summary_page() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -426,90 +309,14 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		Assert.assertTrue(claimSummarypage.validateEobfordifferentDomainType(domain, planType));
 	}
-	/**
-	 * @toDo : On Claims Summary page view the "Learn More About Your Cost Breakdown section"
-	 */
-	/* tbd-remove
-	@Then("^I can view the Learn More About Your Cost Breakdown section$")
-	public void validate_learn_more_about_section(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 
-		Assert.assertTrue(claimSummarypage.validateLearnmoreaboutsection());
-	}*/
-	/**
-	 * @toDo : View and validate the download my data button in calims summary page
-	 */
-	/* tbd-remove
-	@Then("^I can view and validate the download my data button in calims summary page$")
-	public void validate_bownload_my_data_button(){
-
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.validateDownloadMyDataButton());
-
-	} */
-	/**
-	 * @toDo : navigate to the Claim Details page
-	 */
 	@When("^I navigate to the Claim Details page for federal members$")	
 	public void i_navigate_to_member_redesign_claim_details_page(){
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		ClaimDetailsPage newClaimDetailsPage =claimSummarypage.navigateToClaimDetailsPage();
-		//tbd AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		
-		//tbd ClaimDetailsPage newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPage();
-		//tbd System.out.println("claims-============"+newClaimDetailsPage);
-		
-		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
-	
-	/**
-	 * @toDo : validate the Claims Table in claims details page
-	 */
-	/* tbd-remove
-	@And("^I validate the Claims Table in claims details page for federal members$")
-	public void validate_claimsTable_claimsDetails_AARP(){
-		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		
-		
-		newclaimDetailspage.validateClaimsTableInDetailsPage();
-		if(newclaimDetailspage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
-	} */
-	
-	/**
-	 * @toDo : validate the Learn more section in claims details page
-	 */
-	/* tbd-remove
-	@Then("^I validate the Learn more section in claims details page in AARP site$")
-	public void validate_Learn_More_details_AARP(){
-		//ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		//claimDetailspage.validateLearnMoreInDetailsPage();		
-		
-		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		newclaimDetailspage.validateLearnMoreInDetailsPage();	
-	} */
-	/**
-	 * @toDo : validate the header in claims details page.
-	 */
-	/* tbd-remove
-	@And("^the user validates the header in claims details in AARP site$")
-	public void validate_header_claims_details_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimSearch();
-		claimDetailspage.validateHeader();
-		claimDetailspage.clickOnEOB();	
-	}*/
-	/**
-	 * @toDo : validate the EOB section on claims details page
-	 */
-	/* tbd-remove
-	@And("^the user validates the EOB section in claims details page in AARP site$")
-	public void validates_EOB_claimsDetails_AARP(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateEOB();
-	} */
 	
 	/**
 	 * @toDo : validate the Claims Total in claims details page
@@ -1229,7 +1036,6 @@ public class ClaimsMemberRedesignStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType=memberAttributesMap.get("Plan Type");
-
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar calendar = Calendar.getInstance();
 		Date currentDate=calendar.getTime();
@@ -1276,16 +1082,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) {
 			hasYourShare=false;
 		}
-		/* tbd 
-		boolean hasYourShare=false;;
-		if (hasYourShareStr.equalsIgnoreCase("yes")) {
-			hasYourShare=true;
-		} else if (hasYourShareStr.equalsIgnoreCase("no")) {
-			hasYourShare=false;
-		} else {
-			Assert.assertTrue("PROBLEM - 'Has Your Share' can only be yes or no.  Actual="+hasYourShareStr, false);
-		} */
-
 		int numClaims=allClaims.get(claimPeriod);
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateClaimsTable(planType, numClaims, claimType, claimSystem, hasYourShare);
