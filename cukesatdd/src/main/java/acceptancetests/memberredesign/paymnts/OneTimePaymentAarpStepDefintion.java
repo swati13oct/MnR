@@ -2055,5 +2055,12 @@ public class OneTimePaymentAarpStepDefintion {
 				.getBean(PageConstants.Payments_History_Page);
 		paymentHistoryPage.validatePaymentHistoryForSupplementInsurancePlan();
 	}	
+	
+	@Then("^user validates download PDF for monthly bill PDF$")
+	public void user_validates_download_Link_for_monthly_bill_PDF() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+		paymentHistoryPage.validatePDFDownloadLink();
+	}
 	// ^^^ note: added for F247601 Payment History SHIP testing	
 }

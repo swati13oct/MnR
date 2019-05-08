@@ -1307,12 +1307,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allMAPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-3']//label[contains(text(),'Add to compare')]"));
-
-		if (allMAPlans != null) {
-			allMAPlans.get(0).click();
-
+		List<WebElement> allPDPPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));
+		
+		if (allPDPPlans != null) {
+			for (int i = 0; i < allPDPPlans.size(); i++) {
+				allPDPPlans.get(i).click();
+				if (i == 3){
+					break;
+				}
+			}
 		}
 
 	}
@@ -1710,7 +1714,7 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 public ComparePlansPageBlayer clickOnCompareLink(){
 		
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 
