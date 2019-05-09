@@ -18,7 +18,7 @@ Feature: 1.06-VBF-Acq-To test request an appointment with an agent flow in AARP 
 #
 #Examples: 
 #| firstName | lastName | city | address      | state      | zipcode | phone      |
-#| John      | Doe      | Test | 100 Test way | New Jersey |   08854 | 7324567890 |
+#| TEST-Firstname      | TEST-Lastname      | Test | 100 Test way | New Jersey |   08854 | 7324567890 |
 
 @agentAppointmentUlayerSmoke
 Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow in AARP site
@@ -38,4 +38,4 @@ Then the user fills the form out and submits the agent appointment application
 
 Examples: 
 | TCID    | firstName | lastName | city | address      | state | zipcode | phone        |
-| F266872 | John      | Doe      | Test | 100 Test way | NJ    |   08854 | 732-456-7890 |
+| F266872 | TEST-Firstname      | TEST-Lastname      | Test | 100 Test way | NJ    |   08854 | 732-456-7890 |
