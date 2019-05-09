@@ -341,6 +341,12 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
 	private WebElement comboTab_SHIP;
 
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	private WebElement comboTab_PDP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
+	private WebElement comboTab_SSUP;
+
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	private WebElement pageContainsPdfDocText;
 	
@@ -851,7 +857,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 	 Assert.assertTrue("PROBLEM - "+expClaimTypeLabelText+"' label text is not as expected.  Expected="+expClaimTypeLabelText+" | Actual="+claimTypeLabel.getText(), claimTypeLabel.getText().equals(expClaimTypeLabelText));
 
 	 System.out.println("Validating claimType dropdown options for planType="+planType+" scenario...");
-	 if (planType.equalsIgnoreCase("MA")) {
+	 if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("SSUP")) {
 		 //note: only Medical
 		 Assert.assertTrue("PROBLEM - unable to locate 'Medical' for Claim Type field on claims summary page", validate(claimTypeJustMedical));
 	 } else if (planType.equalsIgnoreCase("PDP")) {
@@ -1783,6 +1789,24 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				}
 				return totalRow;
 			}
+			@FindBy(xpath="//p[contains(text(),'View your current prescription drug cost summary at')]//a[contains(text(),'OptumRx.com')]")
+			private WebElement viewCurrentDrugCostText;
+			
+			@FindBy(xpath="//a[contains(text(),'OptumRx.com')]")
+			private WebElement viewCurrentDrugCostLink;
+			
+			public void validateCliamsTableSectionText(String planType, String claimSystem) {
+				if (planType.equalsIgnoreCase("PDP") && claimSystem.toLowerCase().contains("group")) {
+					Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
+					viewCurrentDrugCostLink.click();
+					switchToNewTab();
+					System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
+					String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
+					//TODO - need to assert this after confirming URL
+					ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+					driver.switchTo().window(tabs.get(0)); //switch back to original tab
+				} 
+			}
 
 			public void validateSystemErrorMsgNotExist() {
 				Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
@@ -1800,6 +1824,12 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				} else if (planType.equalsIgnoreCase("ship")) {
 					Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
 					comboTab_SHIP.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+					comboTab_PDP.click();
+				} else if (planType.equalsIgnoreCase("ssup")) {
+					Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+					comboTab_SSUP.click();
 				} else {
 					Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
 				}
@@ -1870,6 +1900,9 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					if(leavingsitepopup.isDisplayed()){
 						proceedButtonDownloadPopUp.click();
 						switchToNewTab();
+						String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
+						System.out.println("TEST - download - driver.getCurrentUrl()="+driver.getCurrentUrl());
+						//TODO - validate the URL
 						//driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 						//CommonUtility.waitForPageLoad(driver, makeTheMostPopup, 5);
 						//Assert.assertTrue("PROBLEM - process button is not functioning as expected",driver.getCurrentUrl().contains("medicares-blue-button-blue-button"));

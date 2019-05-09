@@ -536,6 +536,15 @@ public class ClaimsMemberRedesignStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType = memberAttributesMap.get("Plan Type");
+		String claimSystem = memberAttributesMap.get("Claim System");
+
+		if (claimSystem.toLowerCase().contains("combo_")) {
+			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
+			newClaimsSummaryPage.validateComboTabs();
+			//click the target tab for testing
+			newClaimsSummaryPage.goToSpecificComboTab(planType);
+		}
+
 		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
 		newClaimsSummaryPage.validateYouHavemessage();
 		
@@ -790,10 +799,13 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		String claimType = memberAttributesMap.get("Claim Type");
+		String planType = memberAttributesMap.get("Plan Type");
+		String claimSystem=memberAttributesMap.get("Claim System");
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
 		allClaims.put(claimPeriod, numClaims);
+		claimSummarypage.validateCliamsTableSectionText(planType,claimSystem);
 		claimSummarypage.validateSystemErrorMsgNotExist();
 	}
 	
@@ -1001,7 +1013,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 
-	@And("^I can validate the print and download option in claims details table for given range$")
+	@And("^I can validate the learn more and print and download option in claims details table for given range$")
 	public void validate_print_and_download_option_in_claims_table(DataTable memberAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
