@@ -805,7 +805,9 @@ public class ClaimsMemberRedesignStepDefinition {
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
 		allClaims.put(claimPeriod, numClaims);
-		claimSummarypage.validateCliamsTableSectionText(planType,claimSystem);
+		if (claimType.equalsIgnoreCase("Prescription drug")) {
+			claimSummarypage.validateClaimsTableSectionText(numClaims);
+		}
 		claimSummarypage.validateSystemErrorMsgNotExist();
 	}
 	

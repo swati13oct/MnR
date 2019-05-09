@@ -362,9 +362,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
     #----- begin of claims00 ---------------------------------------------------------
     # note: bypassIssue-1 - YourShare value mismatch between summary and detail INC10332773
-    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - pending INC
-    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - pending INC
-    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - pending INC
+    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - INC11365785
+    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - INC11365785
+    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - INC11365785
 	# note: any additional Example will need to tag with either one of these 
 	# note:   @claims00_COSMOS_MEDICAL, @claims00_COSMOS_DRUG, 
 	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
@@ -647,15 +647,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | Yes                |
 
-	#@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
-	#Examples: 
-	#  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	#  |15    |1041| PDP      | RX     | COMBO_GROUP_RXCLAIMS         | Prescription drug | No                 |
+	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |15    |1041| PDP      | RX     | COMBO_GROUP_RXCLAIMS         | Prescription drug | No                 |
 
-	#@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
-	#Examples: 
-	#  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	#  |16    |1041| SSUP     | COSMOS | COMBO_GROUP_COSMOSCLAIMS     | Medical           | Yes                |
+	@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
+	Examples: 
+	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	  |16    |1041| SSUP     | COSMOS | COMBO_GROUP_COSMOSCLAIMS     | Medical           | Yes                |
 
 	@claims00_17 @claims00_COMBO @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
