@@ -1,7 +1,7 @@
 @fixedTestCaseTest @pharmacylocatorulayer
 Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
-  @pharmacylocatorulayerSmoke
+  @pharmacylocatorulayerSmoke  @pharmacyLocatorPerformanceUlayer
   Scenario Outline: To verify available pharmacies in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
@@ -155,20 +155,3 @@ Given the user is on AARP medicare acquisition site landing page
     Examples: 
       | zipcode | languageName1 | languageName2 |
       |   80002 | Chinese       | Spanish       |
-
- @pharmacyLocatorPerformanceUlayer
-Scenario Outline: To verify available pharmacies in AARP site for zipcode <zipcode> and county <county> for performance
-Given the user is on AARP medicare acquisition site landing page
-When the user hovers to Our Plans and select pharmacy search for following plan type in AARP Site
-And the user enters following details for pharmacy search in AARP Site
-      | Zip Code    | <zipcode>  |
-      | Distance    | <distance> |
-      | County Name | <county>   |
-And the user chooses a plan from dropdown in AARP Site
-      | planname | <planName> |
-      | planyear | <planYear> |
-Then the user validates the available pharmacies page in AARP site
-
-Examples: 
-      | zipcode | distance | county       | planName                                          | 
-      |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |  

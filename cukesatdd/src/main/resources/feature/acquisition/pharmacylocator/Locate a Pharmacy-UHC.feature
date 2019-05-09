@@ -1,7 +1,7 @@
 @fixedTestCaseTest
 @pharmacylocatorblayer
 Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
-@PharmacyLocatorBlayerSmoke 
+@PharmacyLocatorBlayerSmoke @pharmacyLocatorPerformanceBlayer
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the UMS Medicare Site landing page
 When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site
@@ -157,18 +157,3 @@ Examples:
       | zipcode | languageName1 | languageName2 |
       |   80002 | Chinese       | Spanish       |	
       
-@pharmacyLocatorPerformanceBlayer
-Scenario Outline:To verify available pharmacies in UMS site for zipcode <zipcode> and county <county> for performance
-Given the user is on the uhcmedicaresolutions site landing page
-When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site
-And the user enters following details for pharmacy search in UMS Site
-	| Zip Code	| <zipcode>	 |
-	| Distance	| <distance> |
-	| County Name | <county> |
-And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
-	| planyear | <planYear> |
-Then the user validates the available pharmacies page in UMS site
-Examples:
-	| zipcode | distance  | county      |                     planName 			             |   
-	| 80002  | 25 miles  | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |
