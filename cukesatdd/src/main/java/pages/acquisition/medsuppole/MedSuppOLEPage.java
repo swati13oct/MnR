@@ -82,7 +82,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
 		private WebElement medSuppOlePlanSection;
 		
-		@FindBy(id = "importantdocuments_0")
+		@FindBy(xpath = "(//a[contains(@id,'importantdocuments_')])[1]")
 		private WebElement medSuppImpDoc_PlanOverview;
 		
 		@FindBy(xpath = "//img[@title='aarp-card']")

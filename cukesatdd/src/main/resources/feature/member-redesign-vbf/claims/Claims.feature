@@ -54,3 +54,24 @@ Feature: 1.02-VBF-MemRedesign-To test claim functionality
    #  |  GroupRetiree |MAPD |  Last 24 months | NICE   | NICECLAIMS   |name1      | color1   | number1     |
    #  | GroupRetiree |MAPD |  Last 24 months | Rx   | RxCLAIMS   | name1      | color1   | number1     |
    
+   
+   @claims_Performance
+ Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Plan Type    | <planType>    |
+      | Member Type    | <memberType>   |
+    When the above plantype user logs in member redesign for Direct Login
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+    Then member should navigate to Home page
+    When I navigate to the claims Summary page in redesigned site
+    And the user search claims for the following claim period in AARP site
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+      | ClaimSystem  | <claimssystem>|
+    Then user validates the claims displayed based on the selection in redesigned site
+    
+     Examples: 
+     | memberType    | planType | claimPeriod     | domain | claimssystem | friendname | favcolor | phonenumber |
+ 	 |  grpPerf 	   |  PDP    | Last 24 months  | NA     | NICECLAIMS   |  name1     | color1   | number1     |
