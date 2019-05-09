@@ -75,7 +75,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
 	private WebElement MedicareClaimNumberDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Medicare Number')]//following-sibling::*")
