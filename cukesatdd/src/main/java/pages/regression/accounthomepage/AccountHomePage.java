@@ -1295,13 +1295,40 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver,logoImage,30); 
-        String logo_src = logoImage.getAttribute("src");
-        String logo_alt = logoImage.getAttribute("alt");
-        System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
-        System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
-        Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-        System.out.println("Dashboard page Primary logo assert condition is passed");
+		Thread.sleep(9000);
+		if(logoImage.isDisplayed()){
+			//CommonUtility.waitForPageLoad(driver,logoImage,30); 
+			String logo_src = logoImage.getAttribute("src");
+			String logo_alt = logoImage.getAttribute("alt");
+			System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+			System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+			System.out.println("Dashboard page Primary logo assert condition is passed");
+		} else{
+			//tbd locateElementWithinShadowRoot(shadowRootHeader, "div > span > div > header > div.container.utility-nav-container > a > img");
+			if (validate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1=expandRootElement(shadowRootHeader);
+				try {
+					WebElement logo=root1.findElement(By.cssSelector("div > span > div > header > div.container.utility-nav-container > a > img"));
+					Assert.assertTrue("Dashboard header is not displayed", validate(logo));
+					//'element' is your logo
+					String logo_src = logo.getAttribute("src");
+					String logo_alt = logo.getAttribute("alt");
+					System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+					System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+					Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+					System.out.println("Dashboard page Primary logo assert condition is passed");
+				} catch (Exception e) {
+					System.out.println("can't locate element. Exception e="+e);
+					Assert.assertTrue("Dashboard header not functioning as expected", false);
+				}
+			} else {
+				System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+				Assert.assertTrue("Dashboard header is not displayed", false);
+			}
+
+		}
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
