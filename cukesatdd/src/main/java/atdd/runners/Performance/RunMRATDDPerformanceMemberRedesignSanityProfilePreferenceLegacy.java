@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPerformanceMemberRedesignSanityProfilePreferenceLegacy.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPerformanceMemberRedesignSanityProfilePreferenceLegacy")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF" }, features = { "src/main/resources/feature/member-redesign-vbf/profile-and-preference" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDPerformanceMemberRedesignSanityProfilePreferenceLegacy.json" }, tags = { "@smokeTest_ProfileAndPreference, @smokeTest_GoGreen" },monochrome = true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDPerformanceMemberRedesignSanityProfilePreferenceLegacy.json" }, tags = { "@profilePref_Peformance" },monochrome = true)
 
 public class RunMRATDDPerformanceMemberRedesignSanityProfilePreferenceLegacy {
 
