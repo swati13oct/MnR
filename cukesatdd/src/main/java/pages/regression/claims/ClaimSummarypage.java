@@ -1197,8 +1197,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					String winHandleBefore = driver.getWindowHandle();
 					claimsSummaryPrintButton.click();
 					switchToNewTab();
-					String expPrintPageTitle="Print: My Claims Details";
-					Assert.assertTrue("PROBLEM - print is not bringing up new page with expected title.  Expected='"+expPrintPageTitle+"' | Actual='"+driver.getTitle()+"'", driver.getTitle().equals(expPrintPageTitle));
+					CommonUtility.checkPageIsReady(driver);
 					System.out.println("New window for print = "+driver.getTitle());
 					driver.close();
 					driver.switchTo().window(winHandleBefore);
@@ -1900,6 +1899,12 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					if(leavingsitepopup.isDisplayed()){
 						proceedButtonDownloadPopUp.click();
 						switchToNewTab();
+						try {
+							Thread.sleep(1000); //need to give it a sec otherwise NPE
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						CommonUtility.checkPageIsReady(driver);
 						String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
 						System.out.println("TEST - download - driver.getCurrentUrl()="+driver.getCurrentUrl());
 						//TODO - validate the URL

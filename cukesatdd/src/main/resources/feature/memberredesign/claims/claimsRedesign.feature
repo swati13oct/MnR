@@ -390,15 +390,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 30 days            |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 30 days            |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Last 30 days            |
-		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 30 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 30 days            |
 		# And I can validate the EOB section based on domain in redesigned site
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
@@ -421,15 +421,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 90 days            |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 90 days            |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Last 90 days            |
-		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 90 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 90 days            |
 		# And I can validate the EOB section based on domain in redesigned site
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
@@ -452,15 +452,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 6 months           |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 6 months           |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Last 6 months           |
-		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 6 months           |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 6 months           |
 		# And I can validate the EOB section based on domain in redesigned site
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
@@ -483,15 +483,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 12 months          |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 12 months          |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Last 12 months          |
-		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 12 months          |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 12 months          |
 		# And I can validate the EOB section based on domain in redesigned site
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
@@ -547,10 +547,10 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Custom search           |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Custom search           |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Custom search           |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Custom search           |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Custom search           |
 		# And I can validate the EOB section based on domain in redesigned site
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
