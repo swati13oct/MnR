@@ -740,3 +740,39 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | FID    | planType | claimssystem          |
       | 267688 | SSUP     | Group_SSUP_EOB_CLAIMS |
+      
+      
+      @E2EClaimstcase
+      Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
+		Given login with following details logins in the member portal and validate elements
+		  | Plan Type      | <planType>     |
+		  | Test Data Type | <claimssystem> |
+		  | Member Type    | <memberType>   |
+		When I navigate to the claims Summary page in redesigned site
+		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
+		And I can search claims for the following claim period on redesigned site
+		  | Plan Type    | <planType>    |
+		  | Claim Period | <claimPeriod> |
+		Then I can see the claims displayed based on the selection in redesigned site
+		And I validate the pagination on the claims summary page 
+		And I can see the learn more and print and download option in claims summary table section 
+		And the user validates the EOB section based on domain in redesigned site
+		  | Domain     | <domain>      |
+		  | Plan Type  | <planType>    |
+		And the user validates the DownloadMyData section in redesigned site
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+		And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
+	    And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+	    And I validate the claims summary link on claims detail top page
+		  | Plan Type  | <planType>    |
+	    Examples: 
+		    | TID   | planType | claimPeriod    | domain | claimssystem | memberType |
+		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
+		   

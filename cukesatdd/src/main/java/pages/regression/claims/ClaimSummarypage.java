@@ -386,6 +386,9 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
 	private WebElement specificclaimlinkforeob;
+	
+	@FindBy (id = "numClaims1")
+	private WebElement medicalclaimsnumber;
 
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -402,6 +405,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates claims table and pagination
 	 */
 	public boolean verifyClaimsTableAndPagination(){
+		validateYouHavemessage();
        try {
 		if(validate (verifyClaimSummaryAndPagination)){
 			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
@@ -435,7 +439,7 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * @toDo : Validate Pagination under the claims table  
 	 */
-	public boolean verifyClaimsTableAndPagination1(){
+	public boolean verifyClaimsTableAndPagination1(){ // This is pagination is verified for MAPD and working fine
 				
 	     try{
 	    	 
@@ -775,6 +779,12 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
      public void validateYouHavemessage() {
     	 CommonUtility.checkPageIsReadyNew(driver);
+    	try {// As of now i am keepting it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
+    		//for this scenario
+    		 System.out.println("Member Has ========> "+ ":"+ medicalclaimsnumber.getText()+ " Claims"); 	
+		} catch (Exception e) {
+			// TODO: handle exception
+		} 
     	 WebElement e=Youhave3;
     	 if(validate(Youhave1)) {
     		 e=Youhave1;
