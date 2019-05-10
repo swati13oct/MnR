@@ -60,4 +60,8 @@ Feature: 1.05-VBF-MemRedesign-To test EOB functionality (GATED)
       | MAPD     | UHCIndividualCosmosEOB  | 18 Months | Medical           | name1      | color1   | number1     |
       | MAPD     | UHCIndividualEOB  | 18 Months | Prescription Drug | name1      | color1   | number1     |
    
+   @eob_AARP_Performance
+   Examples:
+   | planType | memberType        | dateRange   | eobType        | friendname | favcolor | phonenumber |    
+      | MA    | eobPerf  | 18 Months | Medical           | name1      | color1   | number1     |
 		

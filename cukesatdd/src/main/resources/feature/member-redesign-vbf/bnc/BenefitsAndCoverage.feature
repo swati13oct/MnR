@@ -60,3 +60,22 @@ Feature: 1.01-VBF-MemRedesign-To test plan benefits and Coverage functionality
     Examples: 
       | memberType            | friendname | favcolor | phonenumber |
       | BncnonlisGroupRetiree | name1      | color1   | number1     |
+
+      
+  @benefitsAndCoverage_Performance 
+    Scenario Outline: Navigate to Benefits and Coverage page for Performance ATDD
+    Given I am a authenticated member on the member redesign site for Direct Login
+      |Plan Type | <planType> |
+      | Member Type | <memberType> |
+    When the above plantype user logs in member redesign for Direct Login
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+    Then member should navigate to Home page
+    And the user navigates to Rally Dashboard Page for bnc
+    And the user validates plan overview section
+     
+     Examples: 
+      | memberType  | planType          | friendname | favcolor | phonenumber |
+      |grpPerf | PDP  | name1      | color1   | number1     |
+    

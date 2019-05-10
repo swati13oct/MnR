@@ -45,7 +45,7 @@ Feature: 1.13-VBF-MemRedesign-To test My Profile & Preferences and Go Green flow
      | AARPMapdIndEPMP | name1      | color1   | number1     |
      
      
-  @smokeTest_ProfileAndPreference @rallyDashboard @testharness
+  @smokeTest_ProfileAndPreference @rallyDashboard @testharness @profilePref_Peformance
   Scenario Outline: Verify Plan Name, Member name, Member ID and account section
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |

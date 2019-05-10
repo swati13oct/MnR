@@ -144,6 +144,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedTotalAnnualCost;
 	
+	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
+	private WebElement editProviderButtonOnPlanDetails;
 	
 	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
@@ -680,16 +682,17 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean providerinfo() {
-
 		
+		CommonUtility.checkPageIsReadyNew(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
-		
-	
-		if (providerCountUpdated.isDisplayed()) {
+		String editProviderButtonText=editProviderButtonOnPlanDetails.getText();
+        System.out.println(editProviderButtonText);
+		if (editProviderButtonText.contains("Edit Provider")) {
 			return true;
 		}
 		return false;
+		
 	}
 
 

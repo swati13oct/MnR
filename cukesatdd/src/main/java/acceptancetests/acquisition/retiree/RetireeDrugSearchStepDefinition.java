@@ -48,7 +48,7 @@ public class RetireeDrugSearchStepDefinition {
 		retireedruglookuppage.selectTheGroupName(arg1);
 	}
 
-	@When("^The user navigates to the SEARCH FOR A DRUG page and searchfor a drug$")
+	@When("^The user navigates to the SEARCH FOR A DRUG page and search for a drug$")
 	public void the_user_navigates_to_the_SEARCH_FOR_A_DRUG_page_and_searchfor_a_drug() throws Throwable {
 		DrugLookUpPage retireedruglookuppage = (DrugLookUpPage) getLoginScenario()
 				.getBean(RetireeCommonConstants.RETIREE_DRUG_LOOKUP_PAGE);
