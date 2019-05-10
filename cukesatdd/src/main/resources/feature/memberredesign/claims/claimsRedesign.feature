@@ -406,7 +406,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Plan Type    | <planType>              |
 		# And I can validates the DownloadMyData section in redesigned site
 		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content value and Learn More and EOB		  
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
 	    #   | Plan Type    | <planType>              |
 		#   | Claim Type   | <claimType>             |
@@ -437,7 +437,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Plan Type    | <planType>              |
 		# And I can validates the DownloadMyData section in redesigned site
 		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content value and Learn More and EOB		  
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
 	    #   | Plan Type    | <planType>              |
 		#   | Claim Type   | <claimType>             |
@@ -468,7 +468,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Plan Type    | <planType>              |
 		# And I can validates the DownloadMyData section in redesigned site
 		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content value and Learn More and EOB		  
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
 	    #   | Plan Type    | <planType>              |
 		#   | Claim Type   | <claimType>             |
@@ -499,7 +499,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Plan Type    | <planType>              |
 		# And I can validates the DownloadMyData section in redesigned site
 		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content value and Learn More and EOB		  
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
 	    #   | Plan Type    | <planType>              |
 		#   | Claim Type   | <claimType>             |
@@ -530,7 +530,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type    | <planType>              |
 		And I can validates the DownloadMyData section in redesigned site
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
+		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		  | Domain       | <domain>                |
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
@@ -558,7 +558,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Plan Type    | <planType>              |
 		# And I can validates the DownloadMyData section in redesigned site
 		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content value and Learn More and EOB		  
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
 	    #   | Plan Type    | <planType>              |
 		#   | Claim Type   | <claimType>             |
@@ -674,14 +674,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | No                 |
 
-	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
-	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
+	#note: covered by COMBO case unless locate user data with claims for SSUP only user
+	#@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
+	#Examples: 
+	#  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	#  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
-     #note: these will be in team-a env only
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | No                |
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                |
+    #note: these will be in team-a env only
+	#  |xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | No                |
+	#  |xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                |
 	#----- end of claims00 ---------------------------------------------------------
 
 	
@@ -743,11 +744,10 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       
       
       @E2EClaimstcase
-      Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
+      Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
-		  | Member Type    | <memberType>   |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
@@ -772,10 +772,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type  | <planType>    |
 	    And I validate the claims summary link on claims detail top page
 		  | Plan Type  | <planType>    |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+	       | Plan Type    | <planType>              |
+		   | Domain       | <domain>                |
+		   | Claim Type   | <claimType>             |
+		  
 	    Examples: 
-		    | TID   | planType | claimPeriod    | domain | claimssystem | memberType |
-		  	#| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
-		  	#| 15235 | MA       | Last 24 months | NICE   | NICECLAIMS   | Individual |
-		    #| 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     | Individual |
-		     | 15268 | PCP      | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
+		    | TID   | planType | claimPeriod    | domain | claimssystem | 
+		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+		  	| 15235 | MA       | Last 24 months | NICE   | NICECLAIMS   | 
+		    | 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     | 
+		    | 15268 | PCP      | Last 24 months | COSMOS | COSMOSCLAIMS | 
 		     
