@@ -220,7 +220,12 @@ public class HSIDLoginPage extends UhcDriver {
 			
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
-			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (NullPointerException  e) {
+				System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
 			waitToReachDashboard();	//note: after page is completed state, still need this wait for the page to finish loading
 
 			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
