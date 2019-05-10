@@ -572,7 +572,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailTopPage, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(claimsSummaryLinkOnDetailTopPage));
 		claimsSummaryLinkOnDetailTopPage.click();
-		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 5);
+		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 10);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page back to Summary page ---------->"+driver.getCurrentUrl());
 	}
@@ -583,7 +583,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailBottomPage, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(claimsSummaryLinkOnDetailBottomPage));
 		claimsSummaryLinkOnDetailBottomPage.click();
-		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 5);
+		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 10);//need this more time to load SOFL pages 
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
 	}

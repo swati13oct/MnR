@@ -389,6 +389,12 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy (id = "numClaims1")
 	private WebElement medicalclaimsnumber;
+	
+	@FindBy (id = "numClaims3")
+	private WebElement rxclaimsnumber;
+	
+	@FindBy(css = ".claimDetTableMainSection")
+	public WebElement claimDetTableMainSection;
 
 	public ClaimSummarypage(WebDriver driver) {
 		super(driver);
@@ -481,6 +487,12 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates EOB 
 	 */
 	public boolean validateEobfordifferentDomainType(String domain, String plantype){
+		if(plantype.equals("PCP"))
+		{
+			plantype = "MAPD";
+			System.out.println("PCP new plan type is MAPD");
+		}
+		
 
 		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
 		{
@@ -510,10 +522,15 @@ public class ClaimSummarypage extends UhcDriver{
 			return ShipClaimsEobText.isDisplayed();			
 			
 		}
-		else {
+		else if(domain.equals("RX")){
 			System.out.println("for PDP prescription drug EOB's are diaplayed ====> "+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 
+		}else{
+			System.err.println("You have to pass the Correct Domain and Plan Type");
+			System.out.println("please correct domain domain and plan type used" +plantype + "&&" +domain);
+			Assert.fail();
+			return false ;
 		}
 	}
 		/**
@@ -781,7 +798,8 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
     	 CommonUtility.checkPageIsReadyNew(driver);
     	try {// As of now i am keepting it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
     		//for this scenario
-    		 System.out.println("Member Has ========> "+ ":"+ medicalclaimsnumber.getText()+ " Claims"); 	
+    		 System.out.println("Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims");//This is working for MA and MAPD COSMOS or NICE 
+    		 System.out.println("Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"); 
 		} catch (Exception e) {
 			// TODO: handle exception
 		} 
@@ -926,6 +944,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 			scrollToView(claimstablemoreinfolink);
 			claimstablemoreinfolink.click();
 			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver,claimDetTableMainSection , 10);
 			/* tbd 
 			int counter =0;
 			do{
@@ -943,11 +962,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
 			return null;
 		}
-		
-
-			
-
-		
 
 		public 	 ClaimSummarypage comboTabSelection1(){
 			CommonUtility.checkPageIsReadyNew(driver);

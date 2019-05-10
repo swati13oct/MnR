@@ -287,7 +287,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		   
 		Examples: 
 	      | TID   | planType | claimPeriod    | domain | claimssystem |
-	      | 15268 | PCP      | Last 24 months | PCP    | COSMOSCLAIMS |
+	      | 15268 | PCP      | Last 24 months | COSMOS    | COSMOSCLAIMS |
 	      
 	    
 	@claims12  @claimsprintanddownload @thePredators @regressionMember
@@ -774,5 +774,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type  | <planType>    |
 	    Examples: 
 		    | TID   | planType | claimPeriod    | domain | claimssystem | memberType |
-		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
-		   
+		  	#| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
+		  	#| 15235 | MA       | Last 24 months | NICE   | NICECLAIMS   | Individual |
+		    #| 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     | Individual |
+		     | 15268 | PCP      | Last 24 months | COSMOS | COSMOSCLAIMS | Individual |
+		     
