@@ -9,6 +9,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -45,6 +46,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -75,7 +77,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#| Claims From Date | <claimFromDate>  |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
@@ -96,7 +97,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		Examples: 
@@ -154,6 +154,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    When I navigate to the claims Summary page in redesigned site
 	    Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -164,7 +165,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
@@ -202,6 +202,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    When I navigate to the claims Summary page in redesigned site
 	    Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -212,7 +213,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
@@ -223,7 +223,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	    Examples: 
 	         | TID   | planType | claimPeriod    | domain | claimssystem |
 		   # | 15235 | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
-		     | 15230 | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS  |
+		     | 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS  |
 	     
 	  
 	@claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS @regressionMember
@@ -234,6 +234,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 	    Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -242,8 +243,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	   	And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
-	 	  When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
+	 	When I navigate to the Claim Details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
@@ -266,6 +266,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		Then I validate the text for PCP & medica members 
 		And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
@@ -277,7 +278,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 		And the user validates the DownloadMyData section in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
@@ -298,12 +298,12 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |      
 		Then I can see the claims displayed based on the selection in redesigned site
 		Then I can see the learn more and print and download option in claims summary table section
-		#tbd-remove And I validate the print and download option in claims details table
 		And I validate the pagination on the claims summary page 
 		And the user validates the EOB section based on domain in redesigned site    
 	      | Domain       | <domain>      |
@@ -326,6 +326,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -346,6 +347,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
 		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -361,7 +363,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
 
     #----- begin of claims00 ---------------------------------------------------------
-    # note: bypassIssue-1 - YourShare value mismatch between summary and detail INC10332773
+    # note: bypassIssue-1 - YourShare value mismatch between summary and detail - INC10332773
     # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - INC11365785
     # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - INC11365785
     # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - INC11365785
