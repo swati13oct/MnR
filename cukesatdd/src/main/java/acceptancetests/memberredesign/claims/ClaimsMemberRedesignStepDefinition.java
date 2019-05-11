@@ -805,8 +805,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		String claimType = memberAttributesMap.get("Claim Type");
-		//String planType = memberAttributesMap.get("Plan Type");
-		//String claimSystem=memberAttributesMap.get("Claim System");
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
@@ -904,7 +902,8 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 	
-	@And("^I can search claims for the following claim period and claim type on redesigned site$")
+	//@And("^I can search claims for claim period \"([^\"]*)\" and claim type \"([^\"]*)\" on redesigned site$")
+	@And("^I can search claims for claim period and claim type on claim summary page$")
 	public void search_claims_period_for_claimType_redesigned_site(DataTable timeAttributes) throws InterruptedException{
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
@@ -1117,7 +1116,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	   	}
 	}
 	
-	@And("^the user custom search claims for the following time interval in redesigned site$")
+	@And("^the user custom search claims for the specific time interval in redesigned site$")
 	public void custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1135,7 +1134,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
-	@And("^the user custom search claims for the following invalid time interval in redesigned site$")
+	@And("^the user custom search claims for the following invalid time interval on claims summary page$")
 	public void invalid_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1152,7 +1151,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
-	@And("^the user custom search claims for over two years time interval from current date in redesigned site$")
+	@And("^the user custom search claims for over two years time interval from current date on claims summary page$")
 	public void greaterThanTwoYears_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1189,7 +1188,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimSummarypage.validatefromDateLaterThanToDateError(planType);
 	}
 
-	@Then("^I can validate claims table displayed based on the selection in redesigned site$")
+	@Then("^I can validate claims table displayed based on the selection on claims summary page$")
 	public void validate_claims_table_display(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1215,7 +1214,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	}
 	
-	@And("^I can validate the EOB section based on domain in redesigned site$")
+	@And("^I can validate the EOB section based on domain on claims summary page$")
 	public void validate_EOB_redesigned_site(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
@@ -1243,7 +1242,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
 	
-	@And("^I can validates the DownloadMyData section in redesigned site$")
+	@And("^I can validates the DownloadMyData section on claims summary page$")
 	public void validate_DownloadMyData_redesigned_site(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();

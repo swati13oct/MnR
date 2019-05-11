@@ -373,7 +373,7 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	# note: 
 	#----------------------------------------------------------------------------------
     @claims00 @def1041 @thePredators
-	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - To validate claims for both summary and detail page for each search range options
+	Scenario Outline: DID: <DID> -plan: <planType> -claimsSystem: <claimssystem> -claimType: <claimType> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>            |
 		  | Test Data Type | <claimssystem>        |
@@ -381,182 +381,25 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		Then I can validate the claims summary header
 		  | Plan Type    | <planType>              |
 		  | Claim System | <claimssystem>          |
-		#----------------- Test for- Last 30 days --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 30 days            |
-		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 30 days            |
-		#And I validate the pagination on the claims summary page for given range 
-		#  | Claim Period | Last 30 days            |
-		#Then I can validate the learn more and print and download option in claims details table for given range
-		#  | Claim Period | Last 30 days            |
-		#Then I can validate claims table displayed based on the selection in redesigned site
-		#  | Plan Type    | <planType>              |
-		#  | Claim Type   | <claimType>             |
-		#  | Claim System | <claimssystem>          |
-		#  | Claim Period | Last 30 days            |
-		# And I can validate the EOB section based on domain in redesigned site
-		#   | Domain       | <domain>                |
-		#   | Plan Type    | <planType>              |
-		# And I can validates the DownloadMyData section in redesigned site
-		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
-		#   | Domain       | <domain>                |
-	    #   | Plan Type    | <planType>              |
-		#   | Claim Type   | <claimType>             |
-		#   | Claim System | <claimssystem>          |
-		#   | Claim Period | Last 30 days            |
-		#----------------- Test for Last 90 days --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 90 days            |
-		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 90 days            |
-		#And I validate the pagination on the claims summary page for given range 
-		#  | Claim Period | Last 90 days            |
-		#Then I can validate the learn more and print and download option in claims details table for given range
-		#  | Claim Period | Last 90 days            |
-		#Then I can validate claims table displayed based on the selection in redesigned site
-		#  | Plan Type    | <planType>              |
-		#  | Claim Type   | <claimType>             |
-		#  | Claim System | <claimssystem>          |
-		#  | Claim Period | Last 90 days            |
-		# And I can validate the EOB section based on domain in redesigned site
-		#   | Domain       | <domain>                |
-		#   | Plan Type    | <planType>              |
-		# And I can validates the DownloadMyData section in redesigned site
-		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
-		#   | Domain       | <domain>                |
-	    #   | Plan Type    | <planType>              |
-		#   | Claim Type   | <claimType>             |
-		#   | Claim System | <claimssystem>          |
-		#   | Claim Period | Last 90 days            |
-		#----------------- Test for Last 6 months --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 6 months           |
-		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 6 months           |
-		#And I validate the pagination on the claims summary page for given range 
-		#  | Claim Period | Last 6 months           |
-		#Then I can validate the learn more and print and download option in claims details table for given range
-		#  | Claim Period | Last 6 months           |
-		#Then I can validate claims table displayed based on the selection in redesigned site
-		#  | Plan Type    | <planType>              |
-		#  | Claim Type   | <claimType>             |
-		#  | Claim System | <claimssystem>          |
-		#  | Claim Period | Last 6 months           |
-		# And I can validate the EOB section based on domain in redesigned site
-		#   | Domain       | <domain>                |
-		#   | Plan Type    | <planType>              |
-		# And I can validates the DownloadMyData section in redesigned site
-		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
-		#   | Domain       | <domain>                |
-	    #   | Plan Type    | <planType>              |
-		#   | Claim Type   | <claimType>             |
-		#   | Claim System | <claimssystem>          |
-		#   | Claim Period | Last 6 months           |
-		#----------------- Test for Last 12 months --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 12 months          |
-		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 12 months          |
-		#And I validate the pagination on the claims summary page for given range 
-		#  | Claim Period | Last 12 months          |
-		#Then I can validate the learn more and print and download option in claims details table for given range
-		#  | Claim Period | Last 12 months          |
-		#Then I can validate claims table displayed based on the selection in redesigned site
-		#  | Plan Type    | <planType>              |
-		#  | Claim Type   | <claimType>             |
-		#  | Claim System | <claimssystem>          |
-		#  | Claim Period | Last 12 months          |
-		# And I can validate the EOB section based on domain in redesigned site
-		#   | Domain       | <domain>                |
-		#   | Plan Type    | <planType>              |
-		# And I can validates the DownloadMyData section in redesigned site
-		#   | Plan Type    | <planType>              |
-		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
-		#   | Domain       | <domain>                |
-	    #   | Plan Type    | <planType>              |
-		#   | Claim Type   | <claimType>             |
-		#   | Claim System | <claimssystem>          |
-		#   | Claim Period | Last 12 months          |
-		#----------------- Test for Last 24 months --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 24 months          |
-		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 24 months          |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 24 months          |
-		Then I can validate the learn more and print and download option in claims details table for given range
-		  | Claim Period | Last 24 months          |
-		Then I can validate claims table displayed based on the selection in redesigned site
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 24 months          |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
-		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  | Claim Period | Last 24 months          |
 		#----------------- Test for Custom search --------------------------
-		And I can search claims for the following claim period and claim type on redesigned site
+		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Custom search           |
-		And the user custom search claims for the following time interval in redesigned site
+		And the user custom search claims for the specific time interval in redesigned site
 		  | Plan Type    | <planType>              |
 		Then I can see the number of claims
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Custom search           |
 		#And I validate the pagination on the claims summary page for given range 
 		#  | Claim Period | Custom search           |
 		#Then I can validate the learn more and print and download option in claims details table for given range
 		#  | Claim Period | Custom search           |
-		# And I can validate the EOB section based on domain in redesigned site
+		# And I can validate the EOB section based on domain on claims summary page
 		#   | Domain       | <domain>                |
 		#   | Plan Type    | <planType>              |
-		# And I can validates the DownloadMyData section in redesigned site
+		# And I can validates the DownloadMyData section on claims summary page
 		#   | Plan Type    | <planType>              |
 		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		#   | Domain       | <domain>                |
@@ -565,16 +408,161 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#   | Claim System | <claimssystem>          |
 		#   | Claim Period | Custom search           |
 		#----------------- Test Custom search error cases --------------------------
-		And the user custom search claims for the following invalid time interval in redesigned site
+		And the user custom search claims for the following invalid time interval on claims summary page
 		  | Plan Type        | <planType>          |
 		  | Claims From Date | 01/02/2019          |
 		  | Claims To Date   | 01/02/2018          |
 		Then the user should be able to see the from date is greater than the to date error message being displayed
 		  | Plan Type        | <planType>          |
-		And the user custom search claims for over two years time interval from current date in redesigned site
+		And the user custom search claims for over two years time interval from current date on claims summary page
 		  | Plan Type        | <planType>          |
 		Then the user should be able to see the search range is greater than two years error
 		  | Plan Type        | <planType>          |
+		#----------------- Test for- Last 30 days --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 30 days            |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 30 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate claims table displayed based on the selection on claims summary page
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 30 days            |
+		# And I can validate the EOB section based on domain on claims summary page
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section on claims summary page
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 30 days            |
+		#----------------- Test for Last 90 days --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 90 days            |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 90 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate claims table displayed based on the selection on claims summary page
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 90 days            |
+		# And I can validate the EOB section based on domain on claims summary page
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section on claims summary page
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 90 days            |
+		#----------------- Test for Last 6 months --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 6 months           |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 6 months           |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate claims table displayed based on the selection on claims summary page
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 6 months           |
+		# And I can validate the EOB section based on domain on claims summary page
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section on claims summary page
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 6 months           |
+		#----------------- Test for Last 12 months --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 12 months          |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 12 months          |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate claims table displayed based on the selection on claims summary page
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 12 months          |
+		# And I can validate the EOB section based on domain on claims summary page
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section on claims summary page
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 12 months          |
+		#----------------- Test for Last 24 months --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 24 months          |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 24 months          |
+		And I validate the pagination on the claims summary page for given range 
+		  | Claim Period | Last 24 months          |
+		Then I can validate the learn more and print and download option in claims details table for given range
+		  | Claim Period | Last 24 months          |
+		Then I can validate claims table displayed based on the selection on claims summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 24 months          |
+		And I can validate the EOB section based on domain on claims summary page
+		  | Domain       | <domain>                |
+		  | Plan Type    | <planType>              |
+		And I can validates the DownloadMyData section on claims summary page
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		  | Domain       | <domain>                |
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimssystem>          |
+		  | Claim Period | Last 24 months          |
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
 		  | Flag Zero Claims User | <flagZeroClaimsUser> |
@@ -783,4 +771,5 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  	| 15235 | MA       | Last 24 months | NICE   | NICECLAIMS   | 
 		    | 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     | 
 		    | 15268 | PCP      | Last 24 months | COSMOS | COSMOSCLAIMS | 
+
 		     

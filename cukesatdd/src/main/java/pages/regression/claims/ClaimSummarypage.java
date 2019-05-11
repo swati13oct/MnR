@@ -355,6 +355,12 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
 	private WebElement searchEobStatementsText;
+
+	@FindBy(xpath="//p[contains(text(),'View your current prescription drug cost summary at')]//a[contains(text(),'OptumRx.com')]")
+	private WebElement viewCurrentDrugCostText;
+	
+	@FindBy(xpath="//a[contains(text(),'OptumRx.com')]")
+	private WebElement viewCurrentDrugCostLink;
 	//^^^ note:	added for def1041				
 
 	@FindBy(id="eobC1")
@@ -1818,22 +1824,19 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				}
 				return totalRow;
 			}
-			@FindBy(xpath="//p[contains(text(),'View your current prescription drug cost summary at')]//a[contains(text(),'OptumRx.com')]")
-			private WebElement viewCurrentDrugCostText;
-			
-			@FindBy(xpath="//a[contains(text(),'OptumRx.com')]")
-			private WebElement viewCurrentDrugCostLink;
-			
+
 			public void validateClaimsTableSectionText(int numClaims) {
 				if (numClaims==0) {
-				Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
-				viewCurrentDrugCostLink.click();
-				switchToNewTab();
-				System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
-				String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
-				//TODO - need to assert this after confirming URL, the curent URL  on stage is not working
-				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-				driver.switchTo().window(tabs.get(0)); //switch back to original tab
+					/* TODO - need to turn on the validation once confirm the behavior for drug option with this link
+					Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
+					viewCurrentDrugCostLink.click();
+					switchToNewTab();
+					System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
+					String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
+					//TODO - need to assert this after confirming URL, the curent URL  on stage is not working
+					ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+					driver.switchTo().window(tabs.get(0)); //switch back to original tab
+					*/
 				} else {
 					//TODO - on offline user has a different link when there is claims, need to confirm behavior then code the assert here
 				}
