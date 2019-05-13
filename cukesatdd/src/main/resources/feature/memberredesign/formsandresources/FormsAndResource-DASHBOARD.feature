@@ -41,7 +41,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | 15108   | MAPD     | Individual_FormsResources     | IndEffectiveUHC   | ENGLISH  | 6   |NoRider|
 	  | 15108   | MAPD     | Individual_FormsResourcesl    | IndEffectiveUHC   | ENGLISH  | 6   |Rider  |
 	  | 00000   | PCP      | Individual_FormsResources     | IndEffectivePCP   | ENGLISH  | 6   |NoRider|
-	#  | 15128   | MEDICA   | Individual_FormsResourcesl    | IndEffectiveMedica| ENGLISH  | 6   |NoRider|
+	  | 15128   | MEDICA   | Individual_FormsResourcesl    | IndEffectiveMedica| ENGLISH  | 6   |NoRider|
 	  
 	  
 @formsAndResources2 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember 

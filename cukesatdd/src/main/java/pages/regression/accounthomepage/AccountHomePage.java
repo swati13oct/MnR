@@ -1306,13 +1306,13 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Dashboard page Primary logo assert condition is passed");
 		} else{
 			//tbd locateElementWithinShadowRoot(shadowRootHeader, "div > span > div > header > div.container.utility-nav-container > a > img");
-			if (validate(shadowRootHeader)) {
+		A	if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1=expandRootElement(shadowRootHeader);
 				try {
+					// Going inside shadow root to get element, in this case the logo is in the shadow root header
 					WebElement logo=root1.findElement(By.cssSelector("div > span > div > header > div.container.utility-nav-container > a > img"));
 					Assert.assertTrue("Dashboard header is not displayed", validate(logo));
-					//'element' is your logo
 					String logo_src = logo.getAttribute("src");
 					String logo_alt = logo.getAttribute("alt");
 					System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
