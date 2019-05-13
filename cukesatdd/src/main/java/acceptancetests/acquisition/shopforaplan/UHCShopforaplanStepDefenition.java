@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -13,6 +15,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.EnrollmentBasicsPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.ShopforaplanUHClayer;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
@@ -164,6 +167,45 @@ public class UHCShopforaplanStepDefenition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER, shopaplanpage);
 		else
 			System.out.println("continue button is not displayed provider search page");
+	}
+	
+	@Given("^click on Enroll Plan on shop for plan$")
+	public void click_on_Enroll_Plan_on_shop_for_plan() throws Throwable {
+		ShopforaplanUHClayer shopaplan = (ShopforaplanUHClayer) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER);
+		EnrollmentBasicsPage enrollPage = shopaplan.enrollLinkOnShopPlan();
+		if (enrollPage != null)
+			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollPage);
+		else
+			System.out.println("continue button is not displayed provider search page");
+	}
+	
+	@Given("^click on Learn how to enroll plan on enroll page$")
+	public void click_on_Learn_how_to_enroll_plan_on_enroll_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		String planName = givenAttributesMap.get("Plan Name");
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		EnrollmentBasicsPage enrollPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickONEnrollLink(plantype, planName);
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
 	}
 
 }
