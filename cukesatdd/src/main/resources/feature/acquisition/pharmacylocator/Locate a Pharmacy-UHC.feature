@@ -5,14 +5,13 @@ Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
 Scenario Outline:To verify available pharmacies in UMS site
 Given the user is on the uhcmedicaresolutions site landing page
 When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site
-#When the user navigates to pharmacy search page in UMS Site
+When the user navigates to pharmacy search page in UMS Site
 And the user enters following details for pharmacy search in UMS Site
 	| Zip Code	| <zipcode>	 |
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
 	| planname | <planName> |
-	| planyear | <planYear> |
 #And the user searches available pharmacies by selecting "Show pharmacies for ALL types"
 Then the user validates the available pharmacies page in UMS site
 		

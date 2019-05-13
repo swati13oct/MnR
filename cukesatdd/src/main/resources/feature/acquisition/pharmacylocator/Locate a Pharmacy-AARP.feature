@@ -13,7 +13,6 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
         | planname | <planName> |
-      | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
 
     Examples: 
