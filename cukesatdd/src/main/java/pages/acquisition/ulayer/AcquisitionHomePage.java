@@ -774,7 +774,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-		if (driver.getCurrentUrl().contains("plan-summary")) {
+		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
