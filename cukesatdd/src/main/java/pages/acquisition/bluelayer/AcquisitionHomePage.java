@@ -181,7 +181,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[2]/option[1]")
 	private WebElement StandaloneSNPoptions;
 
-	@FindBy(xpath = "//*[@class='btn--bottom']")
+	@FindBy(xpath = "//*[contains(@class,'btn--bottom')]")
 	private WebElement StandalonSearchCounty;
 
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
