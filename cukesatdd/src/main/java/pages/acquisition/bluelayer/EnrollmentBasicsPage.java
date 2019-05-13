@@ -39,6 +39,18 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(id="uhc-arrow")
 	private WebElement btnNext;
 	
+	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
+	private WebElement maLeanHowToEnrollLink;
+	
+	@FindBy(xpath = "//a[contains(@href,'pdp-enrollment')]")
+	private WebElement pdpLeanHowToEnrollLink;
+	
+	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
+	private WebElement EnrollmentLink;
+	
+	@FindBy(id = "js-ole-zip-search")
+	private WebElement StandaloneZipcode;
+	
 	public WebElement getBtnNext() {
 		return btnNext;
 	}
@@ -74,6 +86,21 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	public Object backMedicareEducationHome() {
 		getLnkBackMedicareEducationHome().click();
 		return null;
+	}
+	
+	public void clickONEnrollLink(String plantype, String planName) throws Exception{
+		if(plantype.equals("MAPD") || plantype.equals("MA") || plantype.equals("SNP")){
+			waitforElement(maLeanHowToEnrollLink);
+			maLeanHowToEnrollLink.click();
+			Thread.sleep(5000);
+			EnrollmentLink.click();
+		}
+		else if(plantype.equals("PDP")){
+			waitforElement(pdpLeanHowToEnrollLink);
+			pdpLeanHowToEnrollLink.click();
+			Thread.sleep(5000);
+			EnrollmentLink.click();
+		}		
 	}
 
 }

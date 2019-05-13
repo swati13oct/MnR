@@ -774,7 +774,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-		if (driver.getCurrentUrl().contains("plan-summary")) {
+		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
@@ -1245,5 +1245,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	
      		return new DrugCostEstimatorPage(driver);
 	 }
+	
+	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
+    {             
+           waitforElement(ShopForaplan);
+     if (ShopForaplan.isDisplayed()) {
+            Actions action = new Actions(driver);
+            action.moveToElement(ShopForaplan).build().perform();
+            return new ShopforaplanAARPlayer(driver);
+     }
+           else {
+                  return null;}
+    }
 	
 }

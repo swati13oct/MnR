@@ -127,7 +127,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
 		}
-		String planName = zipAttributesMap.get("planname");
+		String planName = zipAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		String planYear = zipAttributesMap.get("planyear");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
