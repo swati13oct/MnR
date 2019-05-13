@@ -18,7 +18,7 @@ Feature:1.05-VBF-Acq-To test request an appointment with an agent flow in UHC si
 #	|Phone 	| <phone> |
 #Examples:
 #	|firstName	 | lastName | 	city    |address        |state   	|  zipcode |phone |
-#	| John       |  Doe		| 	Test 	|100 Test way   | New Jersey | 08854  |7324567890 |
+#	| TEST-Firstname       |  TEST-Lastname		| 	Test 	|100 Test way   | New Jersey | 08854  |7324567890 |
 	
 
 
@@ -40,4 +40,4 @@ Then the user fills the form out and submits the uhc agent appointment applicati
 
 Examples: 
 | TCID    | firstName | lastName | city | address      | state      | zipcode | phone      |
-| F266872 | John      | Doe      | Test | 100 Test way | NJ |   08854 | 7324567890 |
+| F266872 | TEST-Firstname      | TEST-Lastname      | Test | 100 Test way | NJ |   08854 | 7324567890 |
