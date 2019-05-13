@@ -18,11 +18,7 @@ Then the user validates the available pharmacies page in UMS site
 		
 Examples:
 	| zipcode     | distance  | county       |  planName 			               	  | plantype|
-<<<<<<< HEAD
-	| 80002       | 25 miles        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|
-=======
 	| 80002       | 25 miles       | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|
->>>>>>> refs/heads/develop
 #	| 80002       | 15        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA|
 #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    | PDP|
 	
