@@ -166,11 +166,13 @@ public class ClaimSummarypage extends UhcDriver {
 			Select dateDropdown = new Select(viewClaimsFromShip);
 			dateDropdown.selectByVisibleText(claimPeriod);
 		} else {
-			Select claimTypeDropdown = new Select(claimsType);
-			if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
-				claimTypeDropdown.selectByValue("drug");
-			} else {
-				claimTypeDropdown.selectByValue("medical");
+			if(validate(claimsType)){
+				Select claimTypeDropdown = new Select(claimsType);
+				if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
+					claimTypeDropdown.selectByValue("drug");
+				} else {
+					claimTypeDropdown.selectByValue("medical");
+				}
 			}
 			Select dateDropdown = new Select(viewClaimsFrom);
 			dateDropdown.selectByVisibleText(claimPeriod);

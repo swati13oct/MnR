@@ -26,3 +26,19 @@ Feature: 1.10-VBF-MemRedesign-To test order materials functionality
 		# |  UhcIndMA | Member Materials |name1      | color1   | number1     |
 		# |  AARPIndPDP | Welcome Guide    |name1      | color1   | number1     |
 		# | Ship  | Member ID Card |name1      | color1   | number1     |
+ 
+  @peformanceTest_OrderPlanMaterial 
+  Scenario Outline: Verify order materials confirmation page in Redesign site
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Member Type | <memberType> |
+    When the above plantype user logs in member redesign for Direct Login
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+    Then member should navigate to Home page
+    When the user views order materials in Member Redesign Order Materials page
+    And user Validates Page Header and Sub-Header text
+    
+    Examples: 
+		 | memberType      | friendname | favcolor | phonenumber |
+		 | UhcMapdIndPerformance  |name1      | color1   | number1     |

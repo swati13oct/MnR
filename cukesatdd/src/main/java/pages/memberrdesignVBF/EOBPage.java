@@ -98,11 +98,12 @@ public class EOBPage extends UhcDriver {
 		Select select = new Select(eobMonthDateRange);
 		System.out.println(dateRange);
 		select.selectByValue(dateRange);
-		validateNew(eobType);
-		if (planType.equalsIgnoreCase("MAPD")) {
-			Select selectType = new Select(eobType);
-			selectType.selectByValue(eobTypeData);
-			System.out.println(eobTypeData);
+		if(validate(eobType)){
+			if (planType.equalsIgnoreCase("MAPD")) {
+				Select selectType = new Select(eobType);
+				selectType.selectByValue(eobTypeData);
+				System.out.println(eobTypeData);
+			}
 		}
 		try{
 			validateDateRangeContentDisplayed(dateRange);
