@@ -11,7 +11,8 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
+      | planyear | <planYear> |
 #And the user searches available pharmacies by selecting "Show pharmacies for ALL types"
 Then the user validates the available pharmacies page in UMS site
 		
@@ -30,7 +31,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
 	| planyear | <planYear> |
 Then the user validates the available pharmacies page in UMS site
 When the user selects a language from dropdown in UMS Site
@@ -51,7 +52,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
 	| planyear | <planYear> |
 Then the user validates the available pharmacies page in UMS site
 Then the user chooses the Pharmacy Type blayer
@@ -73,7 +74,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
 	| planyear | <planYear> |
 And the user searches available pharmacies by selecting "Show pharmacies for these services."
 	| <pharmacytype> |
@@ -94,7 +95,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
 	| planyear | <planYear> |
 And the user validates the error message for no pharmacies found for below pharmacy
 	| <pharmacytype> |
@@ -113,7 +114,7 @@ And the user enters following details for pharmacy search in UMS Site
 	| Distance	| <distance> |
 	| County Name | <county> |
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
 	| planyear | <planYear> |
 Then the user validates the available pharmacies page in UMS site
 Then the user chooses the Pharmacy Type blayer
@@ -125,7 +126,7 @@ When the user selects a language from dropdown in UMS Site
 	| <languageName> |
 And the user validates language changes in UMS site
 And the user chooses a plan from dropdown in UMS Site
-	| planname | <planName> |
+	| Plan Name | <planName> |
     | planyear | <planYear> |
 Then the user validates the available pharmacies page in UMS site
 Examples:

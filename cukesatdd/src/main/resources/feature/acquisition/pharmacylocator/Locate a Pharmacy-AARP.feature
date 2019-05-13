@@ -12,7 +12,7 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-        | planname | <planName> |
+        | Plan Name | <planName> |
     Then the user validates the available pharmacies page in AARP site
 
     Examples: 
@@ -31,7 +31,7 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-    | planname | <planName> |
+    | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     When the user selects a language from dropdown in AARP Site
@@ -55,7 +55,7 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-  | planname | <planName> |
+  | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     Then the user chooses the Pharmacy Type
@@ -79,7 +79,7 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-    | planname | <planName> |
+    | Plan Name | <planName> |
       | planyear | <planYear> |
     And the user searches available pharmacies by selecting "Show pharmacies for these services." in AARP site
       | <pharmacytype> |
@@ -102,7 +102,7 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-     | planname | <planName> |
+     | Plan Name | <planName> |
       | planyear | <planYear> |
     And the user validates the error message for no pharmacies found for below pharmacy in the AARP Site
       | <pharmacytype> |
@@ -120,7 +120,7 @@ Given the user is on AARP medicare acquisition site landing page
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | planname | <planName> |
+      | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     Then the user chooses the Pharmacy Type
@@ -132,7 +132,7 @@ Given the user is on AARP medicare acquisition site landing page
       | <languageName> |
     And the user validates language changes in AARP site
     And the user chooses a plan from dropdown in AARP Site
-      | planname | <planName> |
+      | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
 
