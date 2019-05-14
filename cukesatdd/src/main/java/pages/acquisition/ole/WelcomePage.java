@@ -169,42 +169,6 @@ public class WelcomePage extends UhcDriver{
 		return false;
 	}
 
-	public boolean validateDisclaimerCheckBox() {
-		
-		boolean flag = false;
-		
-		boolean Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
-		boolean NextBtn_Flag = (NextBtn.isEnabled())?true:false;
-		if(!Disclaimer_Flag){
-			if(!NextBtn_Flag){
-				System.out.println("Disclaimer Agree checkbox is not checked and Next button is disabled  : Validation Passed");
-				flag = true;
-			}
-			else
-			{
-				System.out.println("Disclaimer Agree checkbox is not checked and Next button is ENABLED : Validation failed");
-				flag = false;
-			}
-		}
-		DisclaimerAgreeSelect.click();
-		
-		Disclaimer_Flag = (DisclaimerAgreeSelect.isSelected())?true:false;
-		NextBtn_Flag = (NextBtn.isEnabled())?true:false;
-		if(Disclaimer_Flag){
-			if(NextBtn_Flag){
-				System.out.println("Disclaimer Agree checkbox is checked and Next button is enabled : Validation Passed");
-				flag = true;
-			}
-			else
-			{
-				System.out.println("Disclaimer Agree checkbox is checked and Next button is DISABLED : Validation failed");
-				flag = false;
-
-			}
-		}
-		return flag;
-	}
-
 	public MedicareInformationPage navigate_to_medicare_info_page() {
 		
 		validateNew(NextBtn);

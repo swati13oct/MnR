@@ -18,7 +18,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
@@ -114,7 +113,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -194,7 +192,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -293,7 +290,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | Plan Type | <plantype> |
     Then the user validates the Enroll Now Button present for the Chronic plan type
       | Plan Name | <planName> |
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user enters following required Medicare Information
       | First Name      | <firstname>      |
@@ -323,7 +319,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     #Then the user validates the Plan details on OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -356,7 +351,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
@@ -414,76 +408,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
       |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 123456787t     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | true      |
 
-  @StandaloneZipcode @Feb_release_2019
-  Scenario Outline: Home Zipcode widget To reach VPP page via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs zipcode search using widget following information in the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
-  @StandaloneZipcodeOLE @Feb_release_2019
-  Scenario Outline: Home Zipcode widget To reach Online Enrollment page via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs zipcode search to welcome OLE Page using widget on the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   90210 |
-
-  @StandaloneMA @Feb_release_2019
-  Scenario Outline: MA Zipcode widget To reach VPP page via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to MA Landing and performs zipcode search using widget following information in the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
-  @StandaloneMA @Feb_release_2019
-  Scenario Outline: MA Zipcode widget To reach Online Enrollment via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
-  @StandaloneMASNP @Feb_release_2019
-  Scenario Outline: MA Special Need plans To reach OLE page via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
-  @StandalonePDP @Feb_release_2019
-  Scenario Outline: PDP Zipcode widget To reach VPP page via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
-  @StandalonePDP @Feb_release_2019
-  Scenario Outline: PDP Zipcode widget To reach Online Enrollment via standalone Zipcode
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
   @acquisitionRegression @April_release_2019 @Ancillary_Widget @OLE_Regression
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from UHC Acquisition site VPP Plan Summary for Anciallry Widget
     Given the user is on the uhcmedicaresolutions site landing page
@@ -501,7 +425,6 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    #Then the user validates and selects the Disclaimer Checkbox
     Then the user navigates to Medicare Information Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
