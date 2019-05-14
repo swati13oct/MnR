@@ -391,22 +391,6 @@ public class oleStepDefinition {
 
 	}
 
-
-	@Then("^the user validates and selects the Disclaimer Checkbox$")
-	public void the_user_validates_and_selects_the_Disclaimer_Checkbox() throws Throwable {
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		boolean Validation_Status = welcomePage.validateDisclaimerCheckBox();
-		if(Validation_Status){
-			System.out.println("Disclaimer agreement Checkbox Validation : "+Validation_Status);
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assert.assertTrue(true);
-		}
-		else{
-			System.out.println("Disclaimer agreement Checkbox Validation : "+Validation_Status);
-			Assert.fail();
-		}
-	}
-
 	@Then("^the user navigates to Medicare Information Page$")
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
