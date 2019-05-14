@@ -551,7 +551,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 
 		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
-		newClaimsSummaryPage.validateYouHavemessage();
+		newClaimsSummaryPage.validateYouHavemessage(planType);
 		
 	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
 	    
@@ -1027,6 +1027,10 @@ public class ClaimsMemberRedesignStepDefinition {
 								System.out.println("Encountered issue for INC11365785_searchEOBHistory on detail page");
 								recordInvokedBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 							}
+							
+							System.out.println("Proceed to validate 'Need Help' section on detail page");
+							newclaimDetailspage.validateNeedHelpSection(planType);
+							
 							// if all goes well, go back to the summary page to prep for next run
 							claimSummarypage= newClaimDetailsPage.navigateBackToClaimSummaryPage(planType, claimPeriod);
 							if(claimSummarypage != null) {
@@ -1281,7 +1285,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	}	
 
 	@When("^I navigate to the claims Summary page from dashboard or testharness page$")
-	public void navigate_Claims_Summary_redesigned() {
+	public void navigate_Claims_Summary_page() {
 		ClaimSummarypage newClaimsSummaryPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -1293,11 +1297,20 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-
 	
-
-	
+	@When("^I validate the Need Help section content on claims summary page$")	
+	public void validateNeedHelpSectionOnClaimsSummaryPage(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newclaimsSummarypage.validateNeedHelpSection(planType);
+	}
 	//^^^ note: added for def1041	
+	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1315,6 +1328,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
+	
 	@Then("^I can validate the view as pdf link on claims details page header$")	
 	public void i_can_validate_the_eob_link(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -1330,6 +1344,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		System.out.println("claims-============"+claimsdetailspage);
 	}
+	
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
 	public void i_navigate_to_the_eobclaims_detailspage(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1348,4 +1363,4 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
 	
-          }
+}

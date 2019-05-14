@@ -247,7 +247,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
               Thread.sleep(20000);
               switchToNewTab();
               System.out.println("Switched to new tab");
-              if(MRScenario.environment.equalsIgnoreCase("stage")){
+              if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")){
             	  waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
             		  System.out.println("CSR Dashboard Page is displayed for the Member");      
