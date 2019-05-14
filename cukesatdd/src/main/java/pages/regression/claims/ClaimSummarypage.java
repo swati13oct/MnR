@@ -355,6 +355,15 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
 	private WebElement searchEobStatementsText;
+
+	@FindBy(xpath="//p[contains(text(),'View your current prescription drug cost summary at')]//a[contains(text(),'OptumRx.com')]")
+	private WebElement viewCurrentDrugCostText;
+	
+	@FindBy(xpath="//a[contains(text(),'OptumRx.com')]")
+	private WebElement viewCurrentDrugCostLink;
+	
+	@FindBy(xpath="//div[@id='datesEmptyErrorContent']//p//span")
+	private WebElement EmptyDatesError;
 	//^^^ note:	added for def1041				
 
 	@FindBy(id="eobC1")
@@ -486,7 +495,7 @@ public class ClaimSummarypage extends UhcDriver{
 	/** keep for EOB story
 	 * @toDo : this method validates EOB 
 	 */
-	public boolean validateEobfordifferentDomainType(String domain, String plantype){
+	public boolean validateEobfordifferentClaimsSystem(String claimSystem, String plantype){
 		if(plantype.equals("PCP"))
 		{
 			plantype = "MAPD";
@@ -494,41 +503,41 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		
 
-		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
+		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD"))
 		{
 			System.out.println("for MAPD COSMOS  medical and precription drug EOB's are displayed===> "+ (medicalEobText.isDisplayed() && PrescriptionEobText.isDisplayed()));
 			return medicalEobText.isDisplayed() && PrescriptionEobText.isDisplayed();
 
 		}
-		else if (domain.equals("NICE")&&plantype.equals("MAPD"))
+		else if (claimSystem.toUpperCase().contains("NICE")&&plantype.equals("MAPD"))
 		{
 			System.out.println("for MAPD NICE prescription drug EOB's are displayed ===>"+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 		}
-		else if ( (domain.equals("COSMOS")&&plantype.equals("MA")))
+		else if ( (claimSystem.toUpperCase().contains("COSMOS")&&plantype.equals("MA")))
 		{
 			validate(medicalEobText);
 			System.out.println("for MA medical Eob is diplayed ====>"+ (medicalEobText.isDisplayed()));
 			return medicalEobText.isDisplayed();
 		}
-		else if ((domain.equals("NICE")&&plantype.equals("MA")))
+		else if ((claimSystem.toUpperCase().contains("NICE")&&plantype.equals("MA")))
 		{
 			System.out.println("Medical EOB is Displayed for MA NICE member" + (medicalEobText.isDisplayed()));
 			return true;
 		}
 		//SHIP CLAIMS EOB
-		else if ((domain.equals("NA") && plantype.equals("SHIP"))){
+		else if ((claimSystem.toUpperCase().contains("COMPASS") && plantype.equals("SHIP"))){
 			System.out.println("for SHIP Eob is diplayed ====>"+ (ShipClaimsEobText.isDisplayed()));
 			return ShipClaimsEobText.isDisplayed();			
 			
 		}
-		else if(domain.equals("RX")){
+		else if(claimSystem.toUpperCase().contains("RX")){
 			System.out.println("for PDP prescription drug EOB's are diaplayed ====> "+ (PrescriptionEobText.isDisplayed()));
 			return PrescriptionEobText.isDisplayed();
 
 		}else{
 			System.err.println("You have to pass the Correct Domain and Plan Type");
-			System.out.println("please correct domain domain and plan type used" +plantype + "&&" +domain);
+			System.out.println("please correct domain domain and plan type used" +plantype + "&&" +claimSystem);
 			Assert.fail();
 			return false ;
 		}
@@ -665,7 +674,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if (validate(claimstablemoreinfolink)) {
 			System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
 		}
-		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
+//KEEP		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			if (claimsTableMedical.isDisplayed())System.out.println("!!! Claims Table is seen for Federal members on Claims Summary page!!!");
 			else if (claimsTablePrescriptionDrug.isDisplayed())System.out.println("!!! Claims Table is seen for PDP members on Claims Summary page!!!");
@@ -798,8 +807,8 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
     	 CommonUtility.checkPageIsReadyNew(driver);
     	try {// As of now i am keepting it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
     		//for this scenario
-    		 System.out.println("Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims");//This is working for MA and MAPD COSMOS or NICE 
-    		 System.out.println("Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"); 
+    		 System.out.println("medical claims - Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims");//This is working for MA and MAPD COSMOS or NICE 
+    		 System.out.println("rx claims      - Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"); 
 		} catch (Exception e) {
 			// TODO: handle exception
 		} 
@@ -1310,7 +1319,9 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					if (claimType.equalsIgnoreCase("prescription drug")) {
 						numClaimsElement=numberOfClaimsPrescriptionDrugCustomSearch;
 					} else if (claimType.equalsIgnoreCase("medical")) {
-						numClaimsElement=customSearchNumberOfClaims;
+						if (validate(customSearchNumberOfClaims)) {
+							numClaimsElement=customSearchNumberOfClaims;
+						} 
 					} else {
 						numClaimsElement=numberOfClaimsShipCustomSearch;
 					}
@@ -1334,6 +1345,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				}
 				return 0;
 			}
+			
 			public void searchClaimsByTimePeriodClaimType(String planType,String claimPeriod, String claimType) throws InterruptedException {
 				//MA - Medical
 				//MAPID | PCP - Medical & Prescription drug
@@ -1438,7 +1450,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				}
 			}
 
-			public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, String claimsSystem, boolean hasYourShare) {
+			public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, String claimSystem, boolean hasYourShare) {
 				HashMap<String,String> dataMap=new HashMap<String,String> ();
 				//note: for claim summary medical table
 				if (claimType.equalsIgnoreCase("medical")) {
@@ -1479,7 +1491,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
 					key="med_yourShare";
 					if (hasYourShare) {
-						if (claimsSystem.contains("NICE")) {
+						if (claimSystem.contains("NICE")) {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[8]";
 						} else {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[7]";
@@ -1489,7 +1501,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 						value=element.getText().trim();
 						dataMap.put(key, value);
 					} else {
-						if (claimsSystem.contains("NICE")) {
+						if (claimSystem.contains("NICE")) {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[8]";
 						} else {
 							xpath="//table[@id='medical']//tr["+rowNum+"]//td[7]";
@@ -1641,6 +1653,13 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				if(!errorTextElement.getText().contains("Your From date needs to come before or")){
 					Assert.fail(errorTextElement + "is not beind dsiplayed");	
 				}
+			}
+			
+			public void  validateEmptyDatesError() {
+				searchButton.click();
+				Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(EmptyDatesError));
+				String expectedErrorText="The dates are empty, please re-enter the date in the following format: MM/DD/YYYY";
+				Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. Expected='"+expectedErrorText+"' | Actual='"+EmptyDatesError.getText()+"'", EmptyDatesError.getText().contains(expectedErrorText));
 			}
 
 			public void validateClaimsTableHeaderColumns(String claimType, String claimSystem, boolean hasYourShare) {
@@ -1818,22 +1837,19 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				}
 				return totalRow;
 			}
-			@FindBy(xpath="//p[contains(text(),'View your current prescription drug cost summary at')]//a[contains(text(),'OptumRx.com')]")
-			private WebElement viewCurrentDrugCostText;
-			
-			@FindBy(xpath="//a[contains(text(),'OptumRx.com')]")
-			private WebElement viewCurrentDrugCostLink;
-			
+
 			public void validateClaimsTableSectionText(int numClaims) {
 				if (numClaims==0) {
-				Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
-				viewCurrentDrugCostLink.click();
-				switchToNewTab();
-				System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
-				String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
-				//TODO - need to assert this after confirming URL, the curent URL  on stage is not working
-				ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-				driver.switchTo().window(tabs.get(0)); //switch back to original tab
+					/* TODO - need to turn on the validation once confirm the behavior for drug option with this link
+					Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
+					viewCurrentDrugCostLink.click();
+					switchToNewTab();
+					System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
+					String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
+					//TODO - need to assert this after confirming URL, the curent URL  on stage is not working
+					ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+					driver.switchTo().window(tabs.get(0)); //switch back to original tab
+					*/
 				} else {
 					//TODO - on offline user has a different link when there is claims, need to confirm behavior then code the assert here
 				}
@@ -1865,44 +1881,44 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
 				}
 			}
-			
-			public boolean validate_SearchEobHistory_onSummaryPage(String domain, String plantype){
+						
+			public boolean validate_SearchEobHistory_onSummaryPage(String claimSystem, String plantype){
 				boolean invokeBypass_INC11365785_searchEOBHistory=false;
 				if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
-						(domain.equals("COSMOS") || domain.equals("NICE"))) {
+						(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE"))) {
 					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MAPD));
 					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_MAPD));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical and precription drug EOB's are displayed===> "+ (medicalEOB_MAPD.isDisplayed() && drugEOB_MAPD.isDisplayed()));
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - medical and precription drug EOB's are displayed===> "+ (medicalEOB_MAPD.isDisplayed() && drugEOB_MAPD.isDisplayed()));
 				}
-				else if (plantype.equals("MA") && domain.equals("COSMOS")) {
+				else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("COSMOS")) {
 					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", validate(medicalEOB_MA));
 					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (medicalEOB_MA.isDisplayed()));
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - medical EOB's are displayed===> "+ (medicalEOB_MA.isDisplayed()));
 				}
-				else if (plantype.equals("MA") && domain.equals("NICE")) {
+				else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("NICE")) {
 					//note: not expected behavior but existing behavior, there is an existing defect in prod
 					Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on summary page (NOTE: this is not the right behavior- bypassIssue2)", !validate(medicalEOB_MA));
 					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
-					System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical or precription drug EOB's are displayed");
 					invokeBypass_INC11365785_searchEOBHistory=true;
 				}
 				else if (plantype.equals("PDP")) {
 					Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", !validate(medicalEOB_PDP));
 					Assert.assertTrue("PROBLEM - unable to locate Prescription EOB link on summary page", validate(drugEOB_PDP));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - medical EOB's are displayed===> "+ (drugEOB_PDP.isDisplayed()));
 				}
 				else if (plantype.equals("SSUP")) {
 					//note: F267688
 					Assert.assertTrue("PROBLEM - should NOT be able to locate medical EOB link on summary page", !validate(medicalEOB_MA));
 					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
-					System.out.println("for '"+plantype+" and "+domain+"' - no medical or precription drug EOB's are displayed");
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical or precription drug EOB's are displayed");
 				}
-				else if (plantype.equals("SHIP") && domain.equals("NA")){
+				else if (plantype.equals("SHIP") && claimSystem.toUpperCase().contains("SHIP")){
 					Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
 					System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
 				}
 				else {
-					Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype+" and domain="+domain+" EOB expectation", false);
+					Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype+" and domain="+claimSystem+" EOB expectation", false);
 				}
 				return invokeBypass_INC11365785_searchEOBHistory;
 			}
