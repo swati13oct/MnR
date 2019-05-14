@@ -190,7 +190,7 @@ public class UHCShopforaplanStepDefenition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-
+		String planyear = "2019"; 
 		String plantype = givenAttributesMap.get("Plan Type");
 		String planName = givenAttributesMap.get("Plan Name");
 		try {
@@ -206,6 +206,7 @@ public class UHCShopforaplanStepDefenition {
 		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planyear);
 	}
 
 }
