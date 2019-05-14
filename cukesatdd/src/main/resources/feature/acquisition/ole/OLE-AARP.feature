@@ -442,16 +442,6 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | zipcode |
       |   78006 |
 
-  @StandalonePDP @Feb_release_2019
-  Scenario Outline: PDP Zipcode widget To reach Online Enrollment via standalone Zipcode
-    Given the user is on AARP medicare acquisition site landing page
-    When the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site
-      | Zip Code | <zipcode> |
-
-    Examples: 
-      | zipcode |
-      |   78006 |
-
   @OLE_PlanCompare_Aarp
   Scenario Outline: OLE Landing from VPP Plan Compare
     Given the user is on AARP medicare acquisition site landing page
@@ -611,7 +601,6 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | PartA Date      | <partadate>      |
       | PartB Date      | <partbdate>      |
       | Card Type       | <cardtype>       |
-    Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
