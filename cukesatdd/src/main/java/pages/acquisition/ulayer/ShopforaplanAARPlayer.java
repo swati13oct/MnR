@@ -55,6 +55,12 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement pcontinue;
 
+	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
+	private WebElement enrollLink;
+
+	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
+	private WebElement maLeanHowToEnrollLink;
+
 	public ShopforaplanAARPlayer(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -66,6 +72,17 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, ShopForaplan, 60);
 		validateNew(ShopForaplan);
 	}
-	
+
+	public EnrollmentBasicsPage enrollLinkOnShopPlan() throws Exception {
+		waitforElement(enrollLink);
+		enrollLink.click();
+		Thread.sleep(4000);
+		if (validate(maLeanHowToEnrollLink)) {
+			waitforElement(maLeanHowToEnrollLink);
+			System.out.println("OLE Learn More Modal is Displayed");
+			return new EnrollmentBasicsPage(driver);
+		}
+		return null;
+	}
 
 }

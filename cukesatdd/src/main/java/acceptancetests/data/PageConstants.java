@@ -138,6 +138,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
 	
     public static final String SHOP_FOR_A_PLAN_UHCLAYER = "ShopforaplanUHClayer";	
+    
+    public static final String SHOP_FOR_A_PLAN_AARPLAYER = "ShopforaplanAARPlayer";
 	
 	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
 	
