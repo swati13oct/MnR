@@ -806,7 +806,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
     # note: this setup is for the case when we need to validate on offline prod environment
     # note: this is intended for local run where you can put in your own member auth username/password and offline username
     # note: run with environment variable set to offline. -Denvironment="offline"
-    # note: *** DO NOT save these login to github ***
+    # note: *** DO NOT save your login or test username to github ***
     # note: replace the following fields with valid value -
     # note:   username = your memAuth page login username 
     # note:   password = your memAuth page login password
