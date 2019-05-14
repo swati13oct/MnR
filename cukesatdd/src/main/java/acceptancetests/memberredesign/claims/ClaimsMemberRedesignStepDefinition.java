@@ -1185,12 +1185,13 @@ public class ClaimsMemberRedesignStepDefinition {
 	}
 	
 	@Then("^I should be able to see the error message when no to and form dates being entered$")
-	public void validateEmptyDatesErrorMessage(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+	//tbd public void validateEmptyDatesErrorMessage(DataTable memberAttributes){
+	public void validateEmptyDatesErrorMessage(){
+	/* tbd 	List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		//tbd	String planType=memberAttributesMap.get("Plan Type");		
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validateEmptyDatesError();

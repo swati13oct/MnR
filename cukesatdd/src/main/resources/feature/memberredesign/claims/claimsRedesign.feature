@@ -394,6 +394,23 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		Then I can validate the claims summary header on claims summary page
 		  | Plan Type    | <planType>             |
 		  | Member Type    | <memberType>         |
+		#----------------- Test Custom search error cases --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Member Type    | <memberType>          |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Custom search           |
+		And I should be able to see the error message when no to and form dates being entered
+		And I custom search claims for the following invalid time interval on claims summary page
+		  | Plan Type        | <planType>          |
+		  | Claims From Date | 01/02/2019          |
+		  | Claims To Date   | 01/02/2018          |
+		Then I should be able to see the from date is greater than the to date error message being displayed
+		  | Plan Type        | <planType>          |
+		And I custom search claims for over two years time interval from current date on claims summary page
+		  | Plan Type        | <planType>          |
+		Then I should be able to see the search range is greater than two years error
+		  | Plan Type        | <planType>          |
 		#----------------- Test for Custom search --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
@@ -419,18 +436,6 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Claim Type   | <claimType>            |
 		#  | Claim System | <claimSystem>          |
 		#  | Claim Period | Custom search          |
-		#----------------- Test Custom search error cases --------------------------
-		And I should be able to see the error message when no to and form dates being entered
-		And I custom search claims for the following invalid time interval on claims summary page
-		  | Plan Type        | <planType>          |
-		  | Claims From Date | 01/02/2019          |
-		  | Claims To Date   | 01/02/2018          |
-		Then I should be able to see the from date is greater than the to date error message being displayed
-		  | Plan Type        | <planType>          |
-		And I custom search claims for over two years time interval from current date on claims summary page
-		  | Plan Type        | <planType>          |
-		Then I should be able to see the search range is greater than two years error
-		  | Plan Type        | <planType>          |
 		#----------------- Test for- Last 30 days --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
@@ -730,7 +735,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | FID    | planType | memberType              | claimSystem   |
           | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
       
-    @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
+    @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - to validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
           | Plan Type      | <planType>     |
@@ -743,7 +748,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
       
       
-    @abc @E2EClaimstcase
+    @E2EClaimstcase
     Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims summary page for federal members
 	Given login with following details logins in the member portal and validate elements
          | Plan Type      | <planType>     |
@@ -779,9 +784,9 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	  
 	   Examples:   
 	     | TID   | planType | memberType | claimPeriod    | claimSystem   | 
-	#     | 15230 | MAPD     | Individual | Last 24 months | COSMOS_CLAIMS |
+	     | 15230 | MAPD     | Individual | Last 24 months | COSMOS_CLAIMS |
 	     | 15235 | MA       | Individual | Last 24 months | NICE_CLAIMS   | 
-	#     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
-	#     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS | 
+	     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
+	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS | 
 
 		     
