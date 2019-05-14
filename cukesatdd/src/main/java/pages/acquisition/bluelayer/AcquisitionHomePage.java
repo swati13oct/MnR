@@ -1116,8 +1116,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * ); }
 		 */
 		CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
-
-		if (driver.getCurrentUrl().contains("plan-summary")) {
+		
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
