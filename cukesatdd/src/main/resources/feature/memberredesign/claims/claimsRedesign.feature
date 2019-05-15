@@ -8,11 +8,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
 		And I validate the pagination on the claims summary page 
+		And I can see the learn more and print and download option in claims summary table section 
 		And the user validates the EOB section based on domain in redesigned site
 		  | Domain     | <domain>      |
 		  | Plan Type  | <planType>    |
@@ -21,7 +24,13 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Plan Type  | <planType>    |
 		And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
-		Examples: 
+	    And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+	    And I validate the claims summary link on claims detail top page
+		  | Plan Type  | <planType>    |
+	    Examples: 
 		    | TID   | planType | claimPeriod    | domain | claimssystem |
 		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
 		   #| 15234 | MA       | Last 24 months | COSMOS | COSMOSCLAIMS |
@@ -29,13 +38,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		    | 15235 | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
 		    | 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     |
 	
-	@claims2 @claimsSummarySHIP  @febrelease @regressionMember
+	@claims2 @claimsSummarySHIP  @febrelease @regressionMember 
 	Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the SHIP member on claims summary page for SHIP members
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -66,7 +77,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		#| Claims From Date | <claimFromDate>  |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
@@ -87,7 +97,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim Period | <claimPeriod> |
 		Then I can see the claims displayed based on the selection in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		Examples: 
@@ -114,7 +123,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And I validate the LEARN MORE ABOUT COST BreakDown Link 
 		Then I validate the Claims Table in claims details page for Combo
 		Then I validate EOB
-		And I can view a claim search back button in Claims Details page in AARP site
+		And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
 		And I validate the two COMBO tabs on the page 
 		And I validate the two COMBO tabs on the claim Summary page 
 		#And the user validates the DownloadMyData section in redesigned site   
@@ -135,51 +145,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 #	   | TID   | planType | claimssystem |
 #	   | 15258 | PHIP     | SHIPCLAIMS   |
 	  
-#	  #This Scenario can only execute when max claims indicator as true
-#	  @MaxClaimsResultsError
-#	  Scenario Outline: To Verify the Drug Claims History: Reached Maximum Claim Results Error
-#	  Given I am an AARP member on the redesigned site
-#	      | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	     | Claim Period | <claimPeriod> |
-#	  Then The User can able to see Drug Claims History: Reached Maximum Claim Results Error
-#	
-#	  Examples: 
-#	     | planType | claimPeriod    | domain |
-#	     | PDP      | Last 24 Months | NA     |
-#	
-#	  @shipDateRangeGreaterThan24MonthsErrmsg
-#	  Scenario Outline: To Verify the SHIP Date Range Greater Than 24-Months Error
-#	  Given I am an AARP member on the redesigned site
-#	     | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	    | Claim Period | <claimPeriod> |
-#	  And the user search claims for the following time interval in redesigned site
-#	    | Claims To Date   | <claimToDate>   |
-#	    | Claims From Date | <claimFromDate> |
-#	  Then the user should be able to see the SHIP Date Range Greater Than 24-Months Error
-#	
-#	  Examples: 
-#	    | planType | claimPeriod   | domain | claimToDate | claimFromDate |
-#	    | SHIP     | Custom Search | NA     | 10/10/2017  | 06/14/2012    |
-#	
-#	  @govtDateRangeGreaterThan24MonthsErrmsg
-#	  Scenario Outline: To Verify the FED Date Range Greater Than 24-Months Error
-#	  Given I am an AARP member on the redesigned site
-#	     | Plan Type | <planType> |
-#	  When I navigate to the claims Summary page in redesigned site
-#	  And the user search claims for the following claim period in AARP site
-#	     | Claim Period | <claimPeriod> |
-#	  And the user search claims for the following time interval in redesigned site
-#	     | Claims To Date   | <claimToDate>   |
-#	     | Claims From Date | <claimFromDate> |
-#	  Then the user should be able to see the FED Date Range Greater Than 24-Months Error
-#	
-#	  Examples: 
-#	     | planType | claimPeriod   | claimToDate | claimFromDate |
-#	     | MAPD     | Custom Search | 10/10/2017  | 06/14/2012    |
 	  
 	@claims7  @claimsSummaryAndDetails @regressionMember
     Scenario Outline:  TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
@@ -188,6 +153,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Test Data Type | <claimssystem> |
 	    When I navigate to the claims Summary page in redesigned site
 	    Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -198,7 +165,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
@@ -235,6 +201,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Test Data Type | <claimssystem> |
 	    When I navigate to the claims Summary page in redesigned site
 	    Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -245,17 +213,17 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 	    When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
-	    And I validate the claims history Button
+	    And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
 		   
 	    Examples: 
 	         | TID   | planType | claimPeriod    | domain | claimssystem |
 		   # | 15235 | MAPD     | Last 24 months | NICE   | NICECLAIMS   |
-		     | 15230 | MAPD     | Last 24 months | COSMOS| COSMOSCLAIMS  |
+		     | 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS  |
 	     
 	  
 	@claims10  @TC01_FED_AARP_Individual_NICE @TC04_FED_UHC_Individual_COSMOS @regressionMember
@@ -264,7 +232,9 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
-	    Then I validate the claim summary header
+	    Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 	    And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
@@ -273,13 +243,13 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	   	And the user validates the EOB section based on domain in redesigned site
 	      | Domain     | <domain>      |
 	      | Plan Type  | <planType>    |
-	 	  When I navigate to the Claim Details page for federal members
-	    #tbd-remove And I validate the Claims Table in claims details page for federal members
+	 	When I navigate to the Claim Details page for federal members
 	    And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 	    And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
-	    And I can view a claim search back button in Claims Details page in AARP site
+	    And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
 	    And the user validates the DownloadMyData section in redesigned site
 		   
 	    Examples: 
@@ -295,6 +265,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		Then I validate the text for PCP & medica members 
 		And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
@@ -306,16 +278,16 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type  | <planType>    |
 		And the user validates the DownloadMyData section in redesigned site
 		When I navigate to the Claim Details page for federal members
-		#tbd-remove And I validate the Claims Table in claims details page for federal members
 		And I validate the Claims Table in claims details page in redesigned site
 		  | Plan Type      | <planType>     |
 		And I validate the Claims Total in claims details page in AARP site
 		  | Plan Type  | <planType>    |
-		And I validate the claims history Button
+		And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
 		   
 		Examples: 
 	      | TID   | planType | claimPeriod    | domain | claimssystem |
-	      | 15268 | PCP      | Last 24 months | PCP    | COSMOSCLAIMS |
+	      | 15268 | PCP      | Last 24 months | COSMOS    | COSMOSCLAIMS |
 	      
 	    
 	@claims12  @claimsprintanddownload @thePredators @regressionMember
@@ -324,13 +296,14 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	      | Plan Type      | <planType>     |
 	      | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
-		#Then I can validate the claims summary header
+		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |      
 		Then I can see the claims displayed based on the selection in redesigned site
-		Then I can see the print and download option in claims details table
-		And I validate the print and download option in claims details table
+		Then I can see the learn more and print and download option in claims summary table section
 		And I validate the pagination on the claims summary page 
 		And the user validates the EOB section based on domain in redesigned site    
 	      | Domain       | <domain>      |
@@ -352,6 +325,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -371,6 +346,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Test Data Type | <claimssystem> |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
 		And I can search claims for the following claim period on redesigned site
 		  | Plan Type    | <planType>    |
 		  | Claim Period | <claimPeriod> |
@@ -386,10 +363,10 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 
 
     #----- begin of claims00 ---------------------------------------------------------
-    # note: bypassIssue-1 - YourShare value mismatch between summary and detail INC10332773
-    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - pending INC
-    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - pending INC
-    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - pending INC
+    # note: bypassIssue-1 - YourShare value mismatch between summary and detail - INC10332773
+    # note: bypassIssue-2 - MA NICE missing Search EOB History on both summary and detail page - INC11365785
+    # note: bypassIssue-2 - MAPD NICE missing Search EOB History on detail page - INC11365785
+    # note: bypassIssue-3 - MA and MAPD NICE missing This page contains PDF doc text on detail page - INC11365785
 	# note: any additional Example will need to tag with either one of these 
 	# note:   @claims00_COSMOS_MEDICAL, @claims00_COSMOS_DRUG, 
 	# note:   @claims00_NICE_MEDICAL, @claims00_NICE_DRUG or @claims00_NOT_NICE_OR_COSMOS
@@ -402,6 +379,8 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Test Data Type | <claimssystem>        |
 		When I navigate to the claims Summary page in redesigned site
 		Then I can validate the claims summary header
+		  | Plan Type    | <planType>              |
+		  | Claim System | <claimssystem>          |
 		#----------------- Test for- Last 30 days --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
@@ -409,30 +388,30 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 30 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 30 days            |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 30 days            |
-		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 30 days            |
-		Then I can validate claims table displayed based on the selection in redesigned site
 		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
-		  | Claim Period | Last 30 days            |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
-		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 30 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 30 days            |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 30 days            |
+		# And I can validate the EOB section based on domain in redesigned site
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section in redesigned site
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 30 days            |
 		#----------------- Test for Last 90 days --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
@@ -440,30 +419,30 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 90 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 90 days            |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 90 days            |
-		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 90 days            |
-		Then I can validate claims table displayed based on the selection in redesigned site
 		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
-		  | Claim Period | Last 90 days            |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
-		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 90 days            |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 90 days            |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 90 days            |
+		# And I can validate the EOB section based on domain in redesigned site
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section in redesigned site
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 90 days            |
 		#----------------- Test for Last 6 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
@@ -471,30 +450,30 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 6 months           |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 6 months           |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 6 months           |
-		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 6 months           |
-		Then I can validate claims table displayed based on the selection in redesigned site
 		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
-		  | Claim Period | Last 6 months           |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
-		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 6 months           |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 6 months           |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 6 months           |
+		# And I can validate the EOB section based on domain in redesigned site
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section in redesigned site
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 6 months           |
 		#----------------- Test for Last 12 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
@@ -502,30 +481,30 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 12 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 12 months          |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 12 months          |
-		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Last 12 months          |
-		Then I can validate claims table displayed based on the selection in redesigned site
 		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
-		  | Claim Period | Last 12 months          |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
-		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 12 months          |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Last 12 months          |
+		#Then I can validate claims table displayed based on the selection in redesigned site
+		#  | Plan Type    | <planType>              |
+		#  | Claim Type   | <claimType>             |
+		#  | Claim System | <claimssystem>          |
+		#  | Claim Period | Last 12 months          |
+		# And I can validate the EOB section based on domain in redesigned site
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section in redesigned site
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Last 12 months          |
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
 		  | Plan Type    | <planType>              |
@@ -533,29 +512,29 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		  | Claim System | <claimssystem>          |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
+		  | Plan Type    | <planType>              |
+		  | Claim System | <claimssystem>          |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
 		  | Claim Period | Last 24 months          |
-		Then I can validate the print and download option in claims details table for given range
+		Then I can validate the learn more and print and download option in claims details table for given range
 		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection in redesigned site
 		  | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 24 months          |
 		And I can validate the EOB section based on domain in redesigned site
 		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
 		And I can validates the DownloadMyData section in redesigned site
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
+		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 		  | Domain       | <domain>                |
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
 		  | Claim Period | Last 24 months          |
 		#----------------- Test for Custom search --------------------------
 		And I can search claims for the following claim period and claim type on redesigned site
@@ -566,24 +545,25 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 		And the user custom search claims for the following time interval in redesigned site
 		  | Plan Type    | <planType>              |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Custom search           |
-		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Custom search           |
-		Then I can validate the print and download option in claims details table for given range
-		  | Claim Period | Custom search           |
-		And I can validate the EOB section based on domain in redesigned site
-		  | Domain       | <domain>                |
 		  | Plan Type    | <planType>              |
-		And I can validates the DownloadMyData section in redesigned site
-		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content value and Learn More and EOB		  
-		  | Domain       | <domain>                |
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimssystem>          |
-		  #tbd | Has Your Share | <SummaryHasYourShare> |
+		  | Claim Type   | <claimType>             |
 		  | Claim Period | Custom search           |
+		#And I validate the pagination on the claims summary page for given range 
+		#  | Claim Period | Custom search           |
+		#Then I can validate the learn more and print and download option in claims details table for given range
+		#  | Claim Period | Custom search           |
+		# And I can validate the EOB section based on domain in redesigned site
+		#   | Domain       | <domain>                |
+		#   | Plan Type    | <planType>              |
+		# And I can validates the DownloadMyData section in redesigned site
+		#   | Plan Type    | <planType>              |
+		# Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+		#   | Domain       | <domain>                |
+	    #   | Plan Type    | <planType>              |
+		#   | Claim Type   | <claimType>             |
+		#   | Claim System | <claimssystem>          |
+		#   | Claim Period | Custom search           |
 		#----------------- Test Custom search error cases --------------------------
 		And the user custom search claims for the following invalid time interval in redesigned site
 		  | Plan Type        | <planType>          |
@@ -669,15 +649,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
 	  |14    |1041| SHIP     | NA     | SHIPCLAIMS                   | NA                | Yes                |
 
-	@claims00_15 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_MEDICAL
+	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	  |15    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Medical           | No                 |
+	  |15    |1041| PDP      | RX     | COMBO_GROUP_RXCLAIMS         | Prescription drug | No                 |
 
-	@claims00_16 @claims00_COMBO @claims00_MAPD @claims00_COSMOS_DRUG
+	@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	  |16    |1041| MAPD     | COSMOS | COMBO_COSMOSCLAIMS           | Prescription drug | No                 |
+	  |16    |1041| SSUP     | COSMOS | COMBO_GROUP_COSMOSCLAIMS     | Medical           | Yes                |
 
 	@claims00_17 @claims00_COMBO @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
@@ -694,14 +674,15 @@ Feature: T1.1To validate the new changes related to claims page on the member re
 	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
 	  |19    |1041| MAPD     | COSMOS | GROUP_COSMOSCLAIMS           | Prescription drug | No                 |
 
-	@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
-	Examples: 
-	  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
-	  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
+	#note: covered by COMBO case unless locate user data with claims for SSUP only user
+	#@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
+	#Examples: 
+	#  |index |DID | planType | domain | claimssystem                 | claimType         | flagZeroClaimsUser |
+	#  |20    |1041| SSUP     | COSMOS | COSMOSCLAIMS                 | Medical           | Yes                |
 
-     #note: these will be in team-a env only
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | No                |
-	 #|xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                |
+    #note: these will be in team-a env only
+	#  |xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Medical           | No                |
+	#  |xx    |1041| MAPD     | COSMOS | t_diffGrpsDiffYrs_COSMOSCLAIMS | Prescription drug | No                |
 	#----- end of claims00 ---------------------------------------------------------
 
 	
@@ -712,7 +693,6 @@ Feature: T1.1To validate the new changes related to claims page on the member re
       | Plan Type      | <planType>     |
       | Test Data Type | <claimssystem> |
     When I navigate to the claims Summary page in redesigned site
-    Then I validate the claim summary header
     And I can search claims for the following claim period on redesigned site
       | Plan Type    | <planType>    |
       | Claim Period | <claimPeriod> |
@@ -761,3 +741,46 @@ Feature: T1.1To validate the new changes related to claims page on the member re
     Examples: 
       | FID    | planType | claimssystem          |
       | 267688 | SSUP     | Group_SSUP_EOB_CLAIMS |
+      
+      
+      @E2EClaimstcase
+      Scenario Outline: TID: <TID> -plan: <planType> -claimsSystem: <claimssystem> - To validate the claims present for the Federal member on claims summary page for federal members
+		Given login with following details logins in the member portal and validate elements
+		  | Plan Type      | <planType>     |
+		  | Test Data Type | <claimssystem> |
+		When I navigate to the claims Summary page in redesigned site
+		Then I can validate the claims summary header
+		  | Plan Type      | <planType>     |
+		  | Claim System   | <claimssystem> |
+		And I can search claims for the following claim period on redesigned site
+		  | Plan Type    | <planType>    |
+		  | Claim Period | <claimPeriod> |
+		Then I can see the claims displayed based on the selection in redesigned site
+		And I validate the pagination on the claims summary page 
+		And I can see the learn more and print and download option in claims summary table section 
+		And the user validates the EOB section based on domain in redesigned site
+		  | Domain     | <domain>      |
+		  | Plan Type  | <planType>    |
+		And the user validates the DownloadMyData section in redesigned site
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+		And I validate the Claims Total in claims details page in AARP site
+		  | Plan Type  | <planType>    |
+	    And I validate the claims summary link on claims detail bottom page
+		  | Plan Type  | <planType>    |
+		Then I navigate to the Claim Details page in redesigned site
+		  | Plan Type  | <planType>    |
+	    And I validate the claims summary link on claims detail top page
+		  | Plan Type  | <planType>    |
+		Then I validate Claim Details page content value and Learn More and EOB		  
+	       | Plan Type    | <planType>              |
+		   | Domain       | <domain>                |
+		   | Claim Type   | <claimType>             |
+		  
+	    Examples: 
+		    | TID   | planType | claimPeriod    | domain | claimssystem | 
+		  	| 15230 | MAPD     | Last 24 months | COSMOS | COSMOSCLAIMS |
+		  	| 15235 | MA       | Last 24 months | NICE   | NICECLAIMS   | 
+		    | 15299 | PDP      | Last 24 months | RX     | RXCLAIMS     | 
+		    | 15268 | PCP      | Last 24 months | COSMOS | COSMOSCLAIMS | 
+		     

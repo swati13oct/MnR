@@ -1246,4 +1246,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
      		return new DrugCostEstimatorPage(driver);
 	 }
 	
+	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
+    {             
+           waitforElement(ShopForaplan);
+     if (ShopForaplan.isDisplayed()) {
+            Actions action = new Actions(driver);
+            action.moveToElement(ShopForaplan).build().perform();
+            return new ShopforaplanAARPlayer(driver);
+     }
+           else {
+                  return null;}
+    }
+	
 }
