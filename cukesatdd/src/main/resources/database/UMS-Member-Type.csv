@@ -45,9 +45,12 @@ q2_jun_grp0440/Password@1,MAPD,Terminated_Group_MAPD_COSMOS_ContactUs,
 q2_jun_ssup001/Password@1,SSP,Terminated_Group_SSP_ContactUs,
 q3_sep_uhc0061/Password@1,MA,Terminated_Individual_MA_COSMOS_ContactUs,
 q2_jun_aarp0059/Password@1,MAPD,Terminated_Individual_MAPD_NICE_ContactUs,
-q2_jun_grp0008/Password@1,MAPD,CALPERSGroup_ContactUs,
-q2_jun_grp0085/Password@1,MAPD,GEORGIAGroup_ContactUs,
-q4_grp_dec0003/Password@1,MAPD,TEXASERSGroup_ContactUs,
+q2_jun_grp008/Password@1,MAPD,CALPERSGroup_ContactUs_GetStarted,
+q2_jun_grp0090/Password@1,MAPD,GEORGIAGroup_ContactUs_GetStarted,
+q4_grp_dec0003/Password@1,MAPD,TEXASERSGroup_ContactUs_GetStarted,
+q2_may_calpers_02/Password@1,MAPD,CALPERSGroup_ContactUs_SendMessage,
+q2_may_gaDCH_03/Password@1,MAPD,GEORGIAGroup_ContactUs_SendMessage,
+q2_jun_grp0075/Password@1,MAPD,TEXASERSGroup_ContactUs_SendMessage,
 q2_jun_aarp0035/Password@1,MA_ContactUs,
 q4_dec_uhc149/Password@1,MAPD,Ind_ContactUs,
 testMem30Apr19/Password@1,PDP,ContactUs,
@@ -189,11 +192,11 @@ PDPSSUPCrossCombo2/Password@1,PDP,ComboUpdateStopRec_Payments,
 q2_jun_ship0195/Password@1,SHIP,SHIPSetup_Payments,
 q2_jun_aarp0057/Password@1,MAPD,EPMPEnabled,Individual,,
 q4_oct_sofl0012/Password@1,MAPD,PCPProblemTicket,
-preeffectiveFEDMA_001/Password@1,IndMA,preeffectiveIndMA
-preeffectiveFEDMAPD_001/Password@1,IndMAPD,preeffectiveIndMAPD
-preeffectiveFEDPDP_001/Password@1,IndPDP,preeffectiveIndPDP
-preeffective_GroupMA_001/Password@1,GroupMA,preeffectiveGroupMA
-preeffectivegroupmapd_001/Password@1,GroupMAPD,preeffectiveGroupMAPD
-ssuppreeffective00001/Password@1,GroupSSUP,preeffectiveGroupSSUP
-preeffectiveGroupPDP_001/Password@1,GroupPDP,preeffectiveGroupPDP
-ship_preeffective_only02/Password@1,SHIPPreffective,preeffectiveGroupPDP
+preeffectiveFEDMA_001/Password@1,IndMA,preeffectiveIndMA,NON LIS,
+preeffectiveFEDMAPD_001/Password@1,IndMAPD,preeffectiveIndMAPD,NON LIS,
+preeffectiveFEDPDP_001/Password@1,IndPDP,preeffectiveIndPDP,NON LIS,
+preeffective_GroupMA_001/Password@1,GroupMA,preeffectiveGroupMA,NON LIS,
+preeffectivegroupmapd_001/Password@1,GroupMAPD,preeffectiveGroupMAPD,NON LIS,
+ssuppreeffective00001/Password@1,GroupSSUP,preeffectiveGroupSSUP,NON LIS,
+preeffectiveGroupPDP_001/Password@1,GroupPDP,preeffectiveGroupPDP,NON LIS,
+ship_preeffective_only02/Password@1,SHIPPreffective,preeffectiveSHIPOnly,NON LIS,
