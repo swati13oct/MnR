@@ -551,7 +551,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 
 		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
-		newClaimsSummaryPage.validateYouHavemessage();
+		newClaimsSummaryPage.validateYouHavemessage(planType);
 		
 	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
 	    
@@ -1027,6 +1027,10 @@ public class ClaimsMemberRedesignStepDefinition {
 								System.out.println("Encountered issue for INC11365785_searchEOBHistory on detail page");
 								recordInvokedBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 							}
+							
+							System.out.println("Proceed to validate 'Need Help' section on detail page");
+							newclaimDetailspage.validateNeedHelpSection(planType);
+							
 							// if all goes well, go back to the summary page to prep for next run
 							claimSummarypage= newClaimDetailsPage.navigateBackToClaimSummaryPage(planType, claimPeriod);
 							if(claimSummarypage != null) {
@@ -1054,10 +1058,10 @@ public class ClaimsMemberRedesignStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType = memberAttributesMap.get("Plan Type");
-		String claimType = memberAttributesMap.get("Claim Type");
+		String claimSystem = memberAttributesMap.get("Claim System");
 		//tbd String domain = memberAttributesMap.get("Domain");
 
-		if (planType.equalsIgnoreCase("PDP")|| claimType.equalsIgnoreCase("prescription drug")) {
+		if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, and EOB on claims detail page");
 			return;
 		} else {
@@ -1068,14 +1072,15 @@ public class ClaimsMemberRedesignStepDefinition {
 			//don't bother if getting system error already
 			claimSummarypage.validateSystemErrorMsgNotExist();
 
-			//note: gather data on summary page for validation on detail page
-			System.out.println("Determine number of data rows on table");
-			int totalDataRows=claimSummarypage.getTableTotalDataRows(claimType);
-			int total=(totalDataRows+2); //note: cap at max =5 to cut down test time
-			if (total>5) {
-				total=5;
-				System.out.println("Total claims='"+totalDataRows+"', will validate the first 5 for detail to shorten test time");
-			}
+			//tbd System.out.println("Determine number of data rows on table");
+			//tbd int totalDataRows=claimSummarypage.getTableTotalDataRows(claimType);
+			//tbd int total=(totalDataRows+2); //note: cap at max =5 to cut down test time
+			//tbd if (total>5) {
+			//tbd 	total=5;
+			//tbd 	System.out.println("Total claims='"+totalDataRows+"', will validate the first 5 for detail to shorten test time");
+			//tbd }
+			
+			//note: use the first claim data for validation
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage(2);
 			if (null != newClaimDetailsPage) {
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
@@ -1097,7 +1102,7 @@ public class ClaimsMemberRedesignStepDefinition {
 					newclaimDetailspage.learnMoreCostLink();
 
 					System.out.println("Proceed to validate 'EOB' links on detail page");
-					newclaimDetailspage.validate_SearchEobHistory_onDetailPage(claimType,planType);
+					newclaimDetailspage.validate_SearchEobHistory_onDetailPage(claimSystem,planType);
 				} 
 			} else {
 				Assert.fail("Claims details page is not loaded!!!");
@@ -1281,7 +1286,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	}	
 
 	@When("^I navigate to the claims Summary page from dashboard or testharness page$")
-	public void navigate_Claims_Summary_redesigned() {
+	public void navigate_Claims_Summary_page() {
 		ClaimSummarypage newClaimsSummaryPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -1293,11 +1298,20 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-
 	
-
-	
+	@When("^I validate the Need Help section content on claims summary page$")	
+	public void validateNeedHelpSectionOnClaimsSummaryPage(DataTable memberAttributes){
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newclaimsSummarypage.validateNeedHelpSection(planType);
+	}
 	//^^^ note: added for def1041	
+	
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1315,6 +1329,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
+	
 	@Then("^I can validate the view as pdf link on claims details page header$")	
 	public void i_can_validate_the_eob_link(DataTable memberAttributes){
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -1330,6 +1345,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		System.out.println("claims-============"+claimsdetailspage);
 	}
+	
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
 	public void i_navigate_to_the_eobclaims_detailspage(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1348,4 +1364,77 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
 	
-          }
+	//vvv note:	added for VBF	
+	@Then("^I validate the claims displayed based on the selection on claims summary page$")
+	public void vbf_validate_claims_table_redesigned_site() {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.vbf_validateClaimsTable();
+	}	
+	
+	public static String vbf_claimType;
+	@And("^I can navigate to the Claim Details page from claims summary page$")
+	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String claimSystem = memberAttributesMap.get("Claim System");
+
+		if (claimSystem.equalsIgnoreCase("COSMOSCLAIMS") || claimSystem.equalsIgnoreCase("NICECLAIMS")
+				|| claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+			if (claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+				vbf_claimType = "SHIP";
+			} else {
+				vbf_claimType = "Medical";
+			}
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
+					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
+			if (null != newClaimDetailsPage)
+				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+			else {
+				Assert.fail("Claims details page is not loaded!!!");
+			}
+		} else if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
+			vbf_claimType = "Drug";
+			System.out.println("Skipping Claim Details navigation!!!");
+		} else {
+			Assert.fail("Please check Claim syatems!!!");
+		}
+	}
+	
+	@Then("^I can validate the Claims Table on claims details page$")
+	public void vbf_validate_claimsTable_claimsDetails_AARP() {
+		
+			if (vbf_claimType.equalsIgnoreCase("Medical")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+				System.out.println("Skipping Claim Details validation!!!");
+			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+			}
+	}
+	
+	@And("^I can validate the Claims Total on claims details page$")
+	public void vbf_validate_claims_total_AARP() {
+			if (vbf_claimType.equalsIgnoreCase("Medical")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTotalInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateShipClaimsTotalInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+				System.out.println("Skipping Claim Details validation!!!");
+			}
+		
+	}
+	//^^^ note:	added for VBF	
+	
+}

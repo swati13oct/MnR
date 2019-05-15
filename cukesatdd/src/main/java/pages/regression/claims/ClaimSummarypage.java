@@ -57,8 +57,14 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//h1")
 	private WebElement pageHeader;
 	
+	@FindBy(xpath="//div[contains(@class,'shipCompSection')]//h2")
+	private WebElement ship_subPageHeader;
+	
 	@FindBy(xpath = ".//*[@id='planNameFed']")
-	private WebElement planame;
+	private WebElement planName;
+	
+	@FindBy(xpath="//ul[@ng-repeat='planName in shipPlansList']//li")
+	private WebElement ship_planName;
 	
 	//@FindBy (xpath = "//*[@id='document-date']//option[contains(@value,'custom-search')]")
 	@FindBy(xpath =".//*[@id='dateCustomSearchAtdd']")
@@ -183,15 +189,27 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//label[@for='fed-document-date']")
 	private WebElement viewclaimsFromLabel;
+	
+	@FindBy(xpath="//label[@id='viewClaimsShipAtdd']")
+	private WebElement ship_viewclaimsFromLabel;
 
 	@FindBy(id="fed-document-date")
 	private WebElement searchclaimsRangeDropDown;
 
+	@FindBy(id="document-date")
+	private WebElement ship_searchclaimsRangeDropDown;
+	
 	@FindBy(xpath="//label[@for='claim-type']")
 	private WebElement claimTypeLabel;
 
+	@FindBy(xpath="//label[@for='provider-type']")
+	private WebElement ship_claimTypeLabel;
+	
 	@FindBy(id="claim-type")
 	private WebElement claimTypeDropDown;
+
+	@FindBy(id="claim-provider")
+	private WebElement ship_claimTypeDropDown;
 	
 	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(@class,'table-body-cell') and contains(text(),'Medical')]")
 	private WebElement claimTypeJustMedical;
@@ -204,6 +222,9 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(xpath="//div[contains(@class,'ReviewYourClaimsLanguage') and not(contains(@class,'ng-hide'))]")
 	private WebElement reviewClaimsText;
+	
+	@FindBy(xpath="//div[contains(@class,'GeneralContentSHIP') and not(contains(@class,'ng-hide'))]")
+	private WebElement ship_reviewClaimsText;
 	
 	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
 	private WebElement iPerceptionPopUp1;
@@ -236,10 +257,10 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//*[@class='otherPages ReviewYourClaimsLanguage']//p")
 	private WebElement clamsSummaryCopyText;
 	
-	@FindBy(id = "all-claims-print-claims-btn")
+	@FindBy(xpath="//button[@id='all-claims-print-claims-btn']")
 	private WebElement claimsSummaryPrintButton;
 	
-	@FindBy(id = "all-claims-download-btn")
+	@FindBy(xpath="//button[@id='all-claims-download-btn']")
 	private WebElement claimsSummaryDownloadButton;
 
 	@FindBy(xpath = "//div[contains(@class,'shipCompSection')]//select[@name='document-date']")
@@ -364,6 +385,91 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(xpath="//div[@id='datesEmptyErrorContent']//p//span")
 	private WebElement EmptyDatesError;
+
+    //note: need help section
+    @FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
+    private WebElement needHelp_SectionHeader;
+    
+    //note: need help - technical section
+    @FindBy(xpath="//div[contains(@class,'technical section')]")
+    private WebElement needHelp_TechicalSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
+    private WebElement needHelp_TechicalSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
+    private WebElement needHelp_TechicalSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
+    private WebElement needHelp_TechicalSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
+    private WebElement needHelp_TechicalSupport_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
+    private WebElement needHelp_TechicalSupport_wkEndHrs;
+
+    //note: need help - general section
+    @FindBy(xpath="//div[contains(@class,'general section')]")
+    private WebElement needHelp_GeneralQuestionsSection;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
+    private WebElement needHelp_GeneralQuestions_img;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
+    private WebElement needHelp_GeneralQuestions_phone;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
+    private WebElement needHelp_GeneralQuestions_tty;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
+    private WebElement needHelp_GeneralQuestions_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
+    private WebElement needHelp_GeneralQuestions_wkEndHrs;
+    
+    //note: need help - claims section
+    @FindBy(xpath="//div[contains(@class,'claims section')]")
+    private WebElement needHelp_ClaimsSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
+    private WebElement needHelp_ClaimsSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
+    private WebElement needHelp_ClaimsSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
+    private WebElement needHelp_ClaimsSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
+    private WebElement needHelp_ClaimsSupport_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
+    private WebElement needHelp_ClaimsSupport_wkEndHrs;
+    
+    //note: need help - plan support
+    @FindBy(xpath="//div[contains(@class,'plan section')]")
+    private WebElement needHelp_PlanSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
+    private WebElement needHelp_PlanSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
+    private WebElement needHelp_PlanSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
+    private WebElement needHelp_PlanSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
+    private WebElement needHelp_PlanSupport_wkDayHrs;
+    
+    //note: need help - more ways
+    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
+    private WebElement needHelp_seeMoreWaysTo;
+
+    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
+    private WebElement needHelp_contactUsLink;
+
 	//^^^ note:	added for def1041				
 
 	@FindBy(id="eobC1")
@@ -420,7 +526,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @toDo : this method validates claims table and pagination
 	 */
 	public boolean verifyClaimsTableAndPagination(){
-		validateYouHavemessage();
+		//tbd validateYouHavemessage();
        try {
 		if(validate (verifyClaimSummaryAndPagination)){
 			System.out.println("Pagination is seen ===>"+verifyClaimSummaryAndPagination.getText());
@@ -536,8 +642,8 @@ public class ClaimSummarypage extends UhcDriver{
 			return PrescriptionEobText.isDisplayed();
 
 		}else{
-			System.err.println("You have to pass the Correct Domain and Plan Type");
-			System.out.println("please correct domain domain and plan type used" +plantype + "&&" +claimSystem);
+			System.err.println("You have to pass the Correct Claims System  and Plan Type");
+			System.out.println("please correct Claims System and Plan Type - current test used" +plantype + "&&" +claimSystem);
 			Assert.fail();
 			return false ;
 		}
@@ -674,7 +780,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if (validate(claimstablemoreinfolink)) {
 			System.out.println("more info seen claim summary page ==>" +claimstablemoreinfolink);
 		}
-//KEEP		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
+		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
 		if(claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed() || claimsTableSHIP.isDisplayed()){
 			if (claimsTableMedical.isDisplayed())System.out.println("!!! Claims Table is seen for Federal members on Claims Summary page!!!");
 			else if (claimsTablePrescriptionDrug.isDisplayed())System.out.println("!!! Claims Table is seen for PDP members on Claims Summary page!!!");
@@ -689,8 +795,6 @@ public class ClaimSummarypage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
 		return false;
 		}
-		
-		
 	}
 	/**
 	 * @toDo: On Claims Summary page the member Validates the Download my data section.
@@ -803,7 +907,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 	 * This Need to be re-write the logic
 	 */
 
-     public void validateYouHavemessage() {
+     public void validateYouHavemessage(String planType) {
     	 CommonUtility.checkPageIsReadyNew(driver);
     	try {// As of now i am keepting it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
     		//for this scenario
@@ -813,18 +917,31 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 			// TODO: handle exception
 		} 
     	 WebElement e=Youhave3;
+    	 if (planType.equalsIgnoreCase("SHIP")) {
+    		 Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", validate(e));
+    	 } else {
+        	 if(validate(Youhave1)) {
+        		 e=Youhave1;
+        	 } else if (validate(Youhave2)) {
+        		 e=Youhave2;
+        	 }
+    		 Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", validate(Youhave1) || validate(Youhave2));
+    	 }
+    	 String expText="You have";
+		 Assert.assertTrue("PROBLEM - 'You have...' message on page is not as expected.  Expected to contain='' | Actual msg='"+e.getText()+"'", (e.getText()).contains(expText));
+    	 /* tbd
     	 if(validate(Youhave1)) {
     		 e=Youhave1;
     	 } else if (validate(Youhave2)) {
     		 e=Youhave2;
     	 } else {
     		 Assert.assertTrue("Unable to locate the 'You have...' message on page", false);
-    	 }
+    	 } 
  		if (e.getText().contains("You have"))
  		{
  			System.out.println(e.getText());
  			System.out.println("You have claims messgae displayed ");
- 		}	
+ 		}	*/
  		
  	} 
 
@@ -861,75 +978,100 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 	 Assert.assertTrue("PROBLEM - not getting expected page header text on claims summary page. Expected="+expPageHeadingText+" | Actual="+pageHeader.getText(), expPageHeadingText.equals(pageHeader.getText()));
 	 System.out.println("The header text-------->"+pageHeader.getText());
 
-	 //note: validate plan name element
-	 Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", validate(planame));
-	 System.out.println("The Plan Name is ===>"+(planame.getText()));
+	 if (planType.equalsIgnoreCase("SHIP")) {
+		 String expSubHeader="My Supplement Insurance Plan Claims";
+		 Assert.assertTrue("PROBLEM - unable to locate sub header element on claims summary page for SHIP user", validate(ship_subPageHeader));
+		 Assert.assertTrue("PROBLEM - "+expSubHeader+"' label text is not as expected.  Expected="+expSubHeader+" | Actual="+ship_subPageHeader.getText(), ship_subPageHeader.getText().equals(expSubHeader));
+		 
+		 //note: validate plan name element
+		 Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", validate(ship_planName));
+		 System.out.println("The Plan Name is ===>"+(ship_planName.getText()));
 
-	 //note: validate claims date range search dropdown options
-	 String expViewClaimsLabelText="View Claims From:";
-	 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' label element on claims summary page", validate(viewclaimsFromLabel));
-	 Assert.assertTrue("PROBLEM - "+expViewClaimsLabelText+"' label text is not as expected.  Expected="+expViewClaimsLabelText+" | Actual="+viewclaimsFromLabel.getText(), viewclaimsFromLabel.getText().equals(expViewClaimsLabelText));
-	 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' dropdown element on claims summary page", validate(searchclaimsRangeDropDown));
+		 //note: validate claims date range search dropdown options
+		 String expViewClaimsLabelText="View Claims From:";
+		 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' label element on claims summary page", validate(ship_viewclaimsFromLabel));
+		 Assert.assertTrue("PROBLEM - "+expViewClaimsLabelText+"' label text is not as expected.  Expected="+expViewClaimsLabelText+" | Actual="+ship_viewclaimsFromLabel.getText(), ship_viewclaimsFromLabel.getText().equals(expViewClaimsLabelText));
+		 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' dropdown element on claims summary page", validate(ship_searchclaimsRangeDropDown));
 
-	 List<String> expOptionsList=new ArrayList<String>();
-	 expOptionsList.add("Last 30 days");
-	 expOptionsList.add("Last 90 days");
-	 expOptionsList.add("Last 6 months");
-	 expOptionsList.add("Last 12 months");
-	 expOptionsList.add("Last 24 months");
-	 expOptionsList.add("Custom search");
-	 Select RangeSelect = new Select(searchclaimsRangeDropDown);
-	 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected="+expOptionsList.get(1)+" | Actual="+RangeSelect.getFirstSelectedOption().getText(), (expOptionsList.get(1)).equals(RangeSelect.getFirstSelectedOption().getText()));
-	 System.out.println("Default selected option is  =>" +RangeSelect.getFirstSelectedOption().getText());
-	 int expNumOptions=6;
-	 Assert.assertTrue("PROBLEM - number of '"+expViewClaimsLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumOptions+" | Actual="+RangeSelect.getOptions().size(), RangeSelect.getOptions().size()==expNumOptions);
-	 for(int i=0;i<RangeSelect.getOptions().size();i++){
-		 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected="+expOptionsList.get(i)+" | Actual="+RangeSelect.getOptions().get(i).getText(), (expOptionsList.get(i)).equals(RangeSelect.getOptions().get(i).getText()));
-		 System.out.println("Located dropdown option =>"+RangeSelect.getOptions().get(i).getText());
-	 } 	
-
-	 //note: validate claims type search dropdown options
-	 String expClaimTypeLabelText="Claim Type:";
-	 Assert.assertTrue("PROBLEM - unable to '"+expClaimTypeLabelText+"' label element on claims summary page", validate(claimTypeLabel));
-	 Assert.assertTrue("PROBLEM - "+expClaimTypeLabelText+"' label text is not as expected.  Expected="+expClaimTypeLabelText+" | Actual="+claimTypeLabel.getText(), claimTypeLabel.getText().equals(expClaimTypeLabelText));
-
-	 System.out.println("Validating claimType dropdown options for planType="+planType+" scenario...");
-	 if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("SSUP")) {
-		 //note: only Medical
-		 Assert.assertTrue("PROBLEM - unable to locate 'Medical' for Claim Type field on claims summary page", validate(claimTypeJustMedical));
-	 } else if (planType.equalsIgnoreCase("PDP")) {
-		 //note: only Prescription drug
-		 Assert.assertTrue("PROBLEM - unable to locate 'Prescription drug' for Claim Type field on claims summary page", validate(claimTypeJustDrug));
-	 } else if (planType.equalsIgnoreCase("SHIP")) {
+		 System.out.println("Validating provider dropdown options for planType="+planType+" scenario...");
 		 //note: All Providers or more depends on if claims...validate it has >=1
+		 String expClaimTypeLabelText="From Provider:";
 		 List<String> expTypeOptionsList=new ArrayList<String>();
 		 expTypeOptionsList.add("All Providers");
 		 int expNumTypeOptions=expTypeOptionsList.size();
-		 Select claimTypeSelect = new Select(claimTypeDropDown);
-		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(1)).equals(claimTypeSelect.getFirstSelectedOption().getText()));
-		 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+claimTypeSelect.getOptions().size(), claimTypeSelect.getOptions().size()>=expNumTypeOptions);
-		 for(int i=0;i<claimTypeSelect.getOptions().size();i++){
-			 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected='"+expTypeOptionsList.get(i)+"' | Actual='"+claimTypeSelect.getOptions().get(i).getText()+"'", (expTypeOptionsList.get(i)).equals(claimTypeSelect.getOptions().get(i).getText()));
-			 System.out.println("Located dropdown option =>"+claimTypeSelect.getOptions().get(i).getText());
+		 Select ship_claimTypeSelect = new Select(ship_claimTypeDropDown);
+		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+ship_claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(0)).equals(ship_claimTypeSelect.getFirstSelectedOption().getText()));
+		 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+ship_claimTypeSelect.getOptions().size(), ship_claimTypeSelect.getOptions().size()>=expNumTypeOptions);
+		 System.out.println("Due to user data often changed, will not validate list of available providers from the drop down.  Will only printout the list of providers");
+		 for(int i=0;i<ship_claimTypeSelect.getOptions().size();i++){
+			 System.out.println("Located dropdown option =>"+ship_claimTypeSelect.getOptions().get(i).getText());
 		 } 	
+
+		 //note: validate 'review your claims' element exists
+		 Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", validate(ship_reviewClaimsText));
+
 	 } else {
-		 //note: both Medical and Prescription drug
-		 Assert.assertTrue("PROBLEM - unable to locate '"+expClaimTypeLabelText+"' dropdown element on claims summary page", validate(claimTypeDropDown));
-		 List<String> expTypeOptionsList=new ArrayList<String>();
-		 expTypeOptionsList.add("Medical");
-		 expTypeOptionsList.add("Prescription drug");
-		 int expNumTypeOptions=expTypeOptionsList.size();
-		 Select claimTypeSelect = new Select(claimTypeDropDown);
-		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(0)).equals(claimTypeSelect.getFirstSelectedOption().getText()));
-		 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+claimTypeSelect.getOptions().size(), claimTypeSelect.getOptions().size()==expNumTypeOptions);
-		 for(int i=0;i<claimTypeSelect.getOptions().size();i++){
-			 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected='"+expTypeOptionsList.get(i)+"' | Actual='"+claimTypeSelect.getOptions().get(i).getText()+"'", (expTypeOptionsList.get(i)).equals(claimTypeSelect.getOptions().get(i).getText()));
-			 System.out.println("Located dropdown option =>"+claimTypeSelect.getOptions().get(i).getText());
+		 //note: validate plan name element
+		 Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", validate(planName));
+		 System.out.println("The Plan Name is ===>"+(planName.getText()));
+
+		 //note: validate claims date range search dropdown options
+		 String expViewClaimsLabelText="View Claims From:";
+		 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' label element on claims summary page", validate(viewclaimsFromLabel));
+		 Assert.assertTrue("PROBLEM - "+expViewClaimsLabelText+"' label text is not as expected.  Expected="+expViewClaimsLabelText+" | Actual="+viewclaimsFromLabel.getText(), viewclaimsFromLabel.getText().equals(expViewClaimsLabelText));
+		 Assert.assertTrue("PROBLEM - unable to locate '"+expViewClaimsLabelText+"' dropdown element on claims summary page", validate(searchclaimsRangeDropDown));
+
+		 List<String> expOptionsList=new ArrayList<String>();
+		 expOptionsList.add("Last 30 days");
+		 expOptionsList.add("Last 90 days");
+		 expOptionsList.add("Last 6 months");
+		 expOptionsList.add("Last 12 months");
+		 expOptionsList.add("Last 24 months");
+		 expOptionsList.add("Custom search");
+		 Select RangeSelect = new Select(searchclaimsRangeDropDown);
+		 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected="+expOptionsList.get(1)+" | Actual="+RangeSelect.getFirstSelectedOption().getText(), (expOptionsList.get(1)).equals(RangeSelect.getFirstSelectedOption().getText()));
+		 System.out.println("Default selected option is  =>" +RangeSelect.getFirstSelectedOption().getText());
+		 int expNumOptions=6;
+		 Assert.assertTrue("PROBLEM - number of '"+expViewClaimsLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumOptions+" | Actual="+RangeSelect.getOptions().size(), RangeSelect.getOptions().size()==expNumOptions);
+		 for(int i=0;i<RangeSelect.getOptions().size();i++){
+			 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected="+expOptionsList.get(i)+" | Actual="+RangeSelect.getOptions().get(i).getText(), (expOptionsList.get(i)).equals(RangeSelect.getOptions().get(i).getText()));
+			 System.out.println("Located dropdown option =>"+RangeSelect.getOptions().get(i).getText());
 		 } 	
+
+		 //note: validate claims type search dropdown options
+		 String expClaimTypeLabelText="Claim Type:";
+		 Assert.assertTrue("PROBLEM - unable to '"+expClaimTypeLabelText+"' label element on claims summary page", validate(claimTypeLabel));
+		 Assert.assertTrue("PROBLEM - "+expClaimTypeLabelText+"' label text is not as expected.  Expected="+expClaimTypeLabelText+" | Actual="+claimTypeLabel.getText(), claimTypeLabel.getText().equals(expClaimTypeLabelText));
+
+		 System.out.println("Validating claimType dropdown options for planType="+planType+" scenario...");
+		 if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("SSUP")) {
+			 //note: only Medical
+			 Assert.assertTrue("PROBLEM - unable to locate 'Medical' for Claim Type field on claims summary page", validate(claimTypeJustMedical));
+		 } else if (planType.equalsIgnoreCase("PDP")) {
+			 //note: only Prescription drug
+			 Assert.assertTrue("PROBLEM - unable to locate 'Prescription drug' for Claim Type field on claims summary page", validate(claimTypeJustDrug));
+		 } else {
+			 //note: both Medical and Prescription drug
+			 Assert.assertTrue("PROBLEM - unable to locate '"+expClaimTypeLabelText+"' dropdown element on claims summary page", validate(claimTypeDropDown));
+			 List<String> expTypeOptionsList=new ArrayList<String>();
+			 expTypeOptionsList.add("Medical");
+			 expTypeOptionsList.add("Prescription drug");
+			 int expNumTypeOptions=expTypeOptionsList.size();
+			 Select claimTypeSelect = new Select(claimTypeDropDown);
+			 Assert.assertTrue("PROBLEM - default search claims date range dropdown option is not as expected.  Expected='"+expTypeOptionsList.get(0)+"' | Actual='"+claimTypeSelect.getFirstSelectedOption().getText()+"'", (expTypeOptionsList.get(0)).equals(claimTypeSelect.getFirstSelectedOption().getText()));
+			 Assert.assertTrue("PROBLEM - number of '"+expClaimTypeLabelText+"' drop down optons is not as expected on claims summary page.  Expected="+expNumTypeOptions+" | Actual="+claimTypeSelect.getOptions().size(), claimTypeSelect.getOptions().size()==expNumTypeOptions);
+			 for(int i=0;i<claimTypeSelect.getOptions().size();i++){
+				 Assert.assertTrue("PROBLEM - dropdown option value/order is not as expected.  Expected='"+expTypeOptionsList.get(i)+"' | Actual='"+claimTypeSelect.getOptions().get(i).getText()+"'", (expTypeOptionsList.get(i)).equals(claimTypeSelect.getOptions().get(i).getText()));
+				 System.out.println("Located dropdown option =>"+claimTypeSelect.getOptions().get(i).getText());
+			 } 	
+		 }
+		//note: validate 'review your claims' element exists
+		Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", validate(reviewClaimsText));
 	 }
+
+
+
 	 
-	//note: validate 'review your claims' element exists
-	 Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", validate(reviewClaimsText));
  }	
 		
  public void validateLearnmoreaboutsection1(){
@@ -1233,7 +1375,11 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
 					String winHandleBefore = driver.getWindowHandle();
 					claimsSummaryPrintButton.click();
-					switchToNewTab();
+			        //note: need to dynamically determine the number of tabs because if running offline prod then extra tab
+			        ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			        int afterClicked_numTabs=afterClicked_tabs.size();					
+			        driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+					
 					CommonUtility.checkPageIsReady(driver);
 					System.out.println("New window for print = "+driver.getTitle());
 					String expPrintPageTitle="Print: My Claims Details";
@@ -1413,23 +1559,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				if (numClaims >0) {
 					System.out.println("Has claim(s), expect to see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
 					if (validateLearnMoreAndPrintAndDownloadOption()) {
-						/*tbd-remove
-					}
-					if (validate (learnMoreAboutClaims) && validate(claimsSummaryPrintButton) && validate(claimsSummaryDownloadButton)) {
-						
-						learnMoreAboutClaims.click();
-						Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", validate(learnMoreAboutClaimsContent));
-						
-						claimsSummaryDownloadButton.click();
-
-						String winHandleBefore = driver.getWindowHandle();
-						claimsSummaryPrintButton.click();
-						switchToNewTab();
-						String expPrintPageTitle="Print: My Claims Details";
-						Assert.assertTrue("PROBLEM - print is not bringing up new page with expected title.  Expected='"+expPrintPageTitle+"' | Actual='"+driver.getTitle()+"'", driver.getTitle().equals(expPrintPageTitle));
-						System.out.println("New window = "+driver.getTitle());
-		x				driver.switchTo().window(winHandleBefore);
-						System.out.println("Main window = "+driver.getTitle());	*/		
 						return true;
 					} else {
 						System.out.println("locate 'Learn More About Your Claims' link result="+validate(learnMoreAboutClaims));
@@ -1913,7 +2042,7 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", !validate(drugEOB_MA));
 					System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical or precription drug EOB's are displayed");
 				}
-				else if (plantype.equals("SHIP") && claimSystem.toUpperCase().contains("SHIP")){
+				else if (plantype.equals("SHIP")){
 					Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(EOB_SHIP));
 					System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
 				}
@@ -2007,6 +2136,82 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
            			    		}
 
              }
+             
+
+            public void validateNeedHelpSection(String planType) {
+        		if (planType.equalsIgnoreCase("SHIP")) {
+        			String expectedTechnicalPhone="1-866-254-3132";
+        			String expectedGeneralPhone="1-800-523-5800";
+        			String expectedClaimsPhone="1-800-523-5880";
+        			
+        			System.out.println("Proceed to validate the Need Help section header");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+        			
+        			System.out.println("Proceed to validate the Need Help - Technical Support section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
+        			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
+        			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
+        			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
+        			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkEndHrs));
+
+        			System.out.println("Proceed to validate the Need Help - General Questions section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help - General Questions section element",validate(needHelp_GeneralQuestionsSection));
+        			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_img));
+        			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_phone));
+        			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - General Questions section. Expected='"+expectedGeneralPhone+"' | Actual='"+needHelp_GeneralQuestions_phone.getText()+"'",expectedGeneralPhone.equals(needHelp_GeneralQuestions_phone.getText()));
+        			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_tty));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkDayHrs));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkEndHrs));
+
+        			System.out.println("Proceed to validate the Need Help - Claims Support section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Claims Support section element",validate(needHelp_ClaimsSupportSection));
+        			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_img));
+        			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_phone));
+        			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Claims Support section. Expected='"+expectedClaimsPhone+"' | Actual='"+needHelp_ClaimsSupport_phone.getText()+"'",expectedClaimsPhone.equals(needHelp_ClaimsSupport_phone.getText()));
+        			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_tty));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkDayHrs));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkEndHrs));
+
+        			System.out.println("Proceed to validate the Need Help - See More Ways section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
+        			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",validate(needHelp_contactUsLink));
+        			needHelp_contactUsLink.click();
+					CommonUtility.checkPageIsReady(driver);
+					String expContactUsTitle="Help & Contact Us";
+					String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
+					System.out.println("New window URL = "+driver.getCurrentUrl());
+					System.out.println("New window title = "+driver.getTitle());
+					Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
+					Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
+					driver.navigate().back();
+					System.out.println("Main window = "+driver.getTitle());	
+        		} else {
+        			String expectedTechnicalPhone="1-800-721-0627";
+        			String expectedPlanSupportPhone="1-800-950-9355";
+        			
+        			System.out.println("Proceed to validate the Need Help section header");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+        			
+        			System.out.println("Proceed to validate the Need Help - Technical Support section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
+        			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
+        			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
+        			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
+        			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+
+        			System.out.println("Proceed to validate the Need Help - Plan Support section content");
+        			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Plan Support section element",validate(needHelp_PlanSupportSection));
+        			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_img));
+        			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_phone));
+        			//KEEP - turn this validation on when find out the expected right number
+        			//KEEP - Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Plan Support section. Expected='"+expectedPlanSupportPhone+"' | Actual='"+needHelp_PlanSupport_phone.getText()+"'",expectedPlanSupportPhone.equals(needHelp_PlanSupport_phone.getText()));
+        			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_tty));
+        			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_wkDayHrs));
+        		}
+            }
 			//^^^ note:	added for def1041			
              
          	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
@@ -2033,4 +2238,66 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
         		}
         		return new ClaimDetailsPage(driver);
         	}
+         	
+			//vvv note:	added for VBF	
+         	
+        	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='ship']/tbody/tr/th/p[text() ='Provider']/parent::th/preceding-sibling::th)+1]")
+        	private WebElement vbf_shipProviderNameValue;
+
+        	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_medicalTableRow;
+
+        	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='medical']/tbody/tr/th/p[contains(text(),'Provider Name')]/parent::th/preceding-sibling::th)+1]")
+        	private WebElement vbf_providerNameValue;
+
+        	@FindBy(xpath = "//table[@id='prescriptionDrug']/tbody/tr[2]/td[not (contains(@class,'ng-hide'))][not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_drugTableRow;
+        	
+        	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_shipTableRow;
+
+        	public void vbf_validateClaimsTable() {
+        		CommonUtility.waitForPageLoadNew(driver, ClaimsSummaryPage, 60);
+        		scrollToView(ClaimsSummaryPage);
+        		if (claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed()
+        				|| claimsTableSHIP.isDisplayed()) {
+        			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
+        			int counter = 0;
+        			if (claimsTableMedical.isDisplayed()) {
+
+        				int columnSize = vbf_medicalTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_medicalTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        				validateNew(vbf_providerNameValue);
+        			} else if (claimsTablePrescriptionDrug.isDisplayed()) {
+        				int columnSize = vbf_drugTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_drugTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        			} else if (claimsTableSHIP.isDisplayed()) {
+
+        				int columnSize = vbf_shipTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_shipTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        				validateNew(vbf_shipProviderNameValue);
+        			}
+        		}else{
+        			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+        			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+        			
+        		}
+        	}
+			//^^^ note:	added for VBF			
+         	
 }
