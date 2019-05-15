@@ -252,8 +252,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(css=".icon-search")
 	private WebElement searchbutton;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
+	
 	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
 	private WebElement providerSearchFromGlobalHeader;
 	

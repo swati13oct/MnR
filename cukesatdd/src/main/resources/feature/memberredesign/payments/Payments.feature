@@ -22,6 +22,11 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
       | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2019 |
       | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2019 |
 
+	@oneTimeCCPerformance
+	Examples:
+	| TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
+	| Performace| MAPD	| OneTimePaymentPerformance			  | Test | 4111111111111111 | 04        |2019  |
+
   @paymentsMarch @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card Other amount
     Given login with following details logins in the member portal and validate elements
