@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -1375,29 +1374,34 @@ public class ClaimsMemberRedesignStepDefinition {
 	
 	public static String vbf_claimType;
 	@And("^I can navigate to the Claim Details page from claims summary page$")
-	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable timeAttributes) throws InterruptedException {
-			String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("Claim System");
-			if (ClaimSystem.equalsIgnoreCase("COSMOSCLAIMS") || ClaimSystem.equalsIgnoreCase("NICECLAIMS")
-					|| ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
-				if (ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
-					vbf_claimType = "SHIP";
-				} else {
-					vbf_claimType = "Medical";
-				}
-				ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-				ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
-				if (null != newClaimDetailsPage)
-					getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-				else {
-					Assert.fail("Claims details page is not loaded!!!");
-				}
-			} else if (ClaimSystem.equalsIgnoreCase("RxCLAIMS")) {
-				vbf_claimType = "Drug";
-				System.out.println("Skipping Claim Details navigation!!!");
+	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String claimSystem = memberAttributesMap.get("Claim System");
+
+		if (claimSystem.equalsIgnoreCase("COSMOSCLAIMS") || claimSystem.equalsIgnoreCase("NICECLAIMS")
+				|| claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+			if (claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+				vbf_claimType = "SHIP";
 			} else {
-				Assert.fail("Please check Claim syatems!!!");
+				vbf_claimType = "Medical";
 			}
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
+					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
+			if (null != newClaimDetailsPage)
+				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+			else {
+				Assert.fail("Claims details page is not loaded!!!");
+			}
+		} else if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
+			vbf_claimType = "Drug";
+			System.out.println("Skipping Claim Details navigation!!!");
+		} else {
+			Assert.fail("Please check Claim syatems!!!");
+		}
 	}
 	
 	@Then("^I can validate the Claims Table on claims details page$")
