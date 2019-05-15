@@ -1222,48 +1222,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public VPPPlanSummaryPage GotoVPP(String zipcode) {
-		try {
-			Thread.sleep(8000);
-			System.out.println("Sleep done");
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
-
-		sendkeys(StandaloneZipcode, zipcode);
-		StandalonSearchCounty.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		try {
-			if (countyDropdown.isDisplayed()) {
-				countyDropdown.click();
-				Thread.sleep(3000);
-				// StandalonSearchCounty.click();
-			}
-
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		jse.executeScript("window.scrollBy(0,150)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		StandaloneVPP.click();
-
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
-	}
-	
-	
-	
-
-	
-
 	public void OurPlanMALanding() {
 
 		Actions action = new Actions(driver);
@@ -1303,80 +1261,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public WelcomePage ZipcodeSearchToOLE(String zipcode) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
-
-		sendkeys(StandaloneZipcode, zipcode);
-		StandalonSearchCounty.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		try {
-			if (countyDropdown.isDisplayed()) {
-				countyDropdown.click();
-				Thread.sleep(3000);
-				// StandalonSearchCounty.click();
-			}
-
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		jse.executeScript("window.scrollBy(0,100)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		selectFirstOptionOnPlanSelect.click();
-		enrollButton.click();
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
-	}
-
-	public WelcomePage SpecialNeedPlansZipcodeSearchToOLE(String zipcode) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
-
-		sendkeys(StandaloneZipcode, zipcode);
-		StandalonSearchCounty.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		try {
-			if (countyDropdown.isDisplayed()) {
-				countyDropdown.click();
-				Thread.sleep(3000);
-				// StandalonSearchCounty.click();
-			}
-
-		} catch (Exception e) {
-			System.out.println("county box not found");
-		}
-		jse.executeScript("window.scrollBy(0,100)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		StandaloneSNPoptions.click();
-		enrollButton.click();
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
 	}
 	
 	public static void checkModelPopup(WebDriver driver) {

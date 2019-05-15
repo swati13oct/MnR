@@ -323,14 +323,14 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * this method validates EOB for different domain 
 	 */
-	public boolean validateMedicalEOBfordifferentDomainType(String domain, String plantype){
+	public boolean validateMedicalEOBfordifferentClaimssystem(String claimSystem, String plantype){
 		//keep for EOB story
-		if (domain.equals("COSMOS")&& plantype.equals("MAPD"))
+		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD"))
 		{
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for MAPD COSMOS EOB's are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
 			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
-		}else if((plantype.equals("MA")||(plantype.equals("MAPD"))&&domain.equals("NICE")))
+		}else if((plantype.equals("MA")||(plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE")))
 		{
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for NICE view as pdf link are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
@@ -935,16 +935,16 @@ public class ClaimDetailsPage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	
-	public boolean validate_SearchEobHistory_onDetailPage(String domain, String plantype){
+	public boolean validate_SearchEobHistory_onDetailPage(String claimSystem, String plantype){
 		boolean invokeBypass_INC11365785_searchEOBHistory=false;
 			if (!plantype.equals("SHIP")) {
-				if ((plantype.equals("MA") || plantype.equals("MAPD")) && (domain.equals("NICE"))) {
+				if ((plantype.equals("MA") || plantype.equals("MAPD")) && (claimSystem.toUpperCase().contains("NICE"))) {
 					Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page (NOTE: this is not the right behavior,there is a prod defect)", !validate(detail_medicalEOB));
-					System.out.println("for '"+plantype+" and "+domain+"' - no medical EOB is displayed - (NOTE: this is not the right behavior,there is a prod defect)");
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical EOB is displayed - (NOTE: this is not the right behavior,there is a prod defect)");
 					invokeBypass_INC11365785_searchEOBHistory=true;
 				} else {
 					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on detail page", validate(detail_medicalEOB));
-					System.out.println("for '"+plantype+" and "+domain+"' - medical EOB is displayed===> "+ detail_medicalEOB.isDisplayed());
+					System.out.println("for '"+plantype+" and "+claimSystem+"' - medical EOB is displayed===> "+ detail_medicalEOB.isDisplayed());
 				}
 			} else {
 				Assert.assertTrue("PROBLEM - unable to locate EOB link on detail page for SHIP user", validate(EOB_SHIP));
