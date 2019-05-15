@@ -761,7 +761,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
       
       
     @E2EClaimstcase
-    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims summary page for federal members
+    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims Summary and details page E2E Scenario
 	Given login with following details logins in the member portal and validate elements
          | Plan Type      | <planType>     |
 	     | Member Type    | <memberType>   |
@@ -799,7 +799,9 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | 15230 | MAPD     | Individual | Last 24 months | COSMOS_CLAIMS |
 	     | 15235 | MA       | Individual | Last 24 months | NICE_CLAIMS   | 
 	     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
-	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS | 
+	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MAPD     | Group      | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MA       | Group      | Last 24 months | COSMOS_CLAIMS | 
 
 
     #----- begin of claims test for offline prod - local run only ------------------
