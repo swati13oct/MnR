@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberrdesignVBF.common.CommonStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -1058,10 +1059,10 @@ public class ClaimsMemberRedesignStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String planType = memberAttributesMap.get("Plan Type");
-		String claimType = memberAttributesMap.get("Claim Type");
+		String claimSystem = memberAttributesMap.get("Claim System");
 		//tbd String domain = memberAttributesMap.get("Domain");
 
-		if (planType.equalsIgnoreCase("PDP")|| claimType.equalsIgnoreCase("prescription drug")) {
+		if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, and EOB on claims detail page");
 			return;
 		} else {
@@ -1072,14 +1073,15 @@ public class ClaimsMemberRedesignStepDefinition {
 			//don't bother if getting system error already
 			claimSummarypage.validateSystemErrorMsgNotExist();
 
-			//note: gather data on summary page for validation on detail page
-			System.out.println("Determine number of data rows on table");
-			int totalDataRows=claimSummarypage.getTableTotalDataRows(claimType);
-			int total=(totalDataRows+2); //note: cap at max =5 to cut down test time
-			if (total>5) {
-				total=5;
-				System.out.println("Total claims='"+totalDataRows+"', will validate the first 5 for detail to shorten test time");
-			}
+			//tbd System.out.println("Determine number of data rows on table");
+			//tbd int totalDataRows=claimSummarypage.getTableTotalDataRows(claimType);
+			//tbd int total=(totalDataRows+2); //note: cap at max =5 to cut down test time
+			//tbd if (total>5) {
+			//tbd 	total=5;
+			//tbd 	System.out.println("Total claims='"+totalDataRows+"', will validate the first 5 for detail to shorten test time");
+			//tbd }
+			
+			//note: use the first claim data for validation
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage(2);
 			if (null != newClaimDetailsPage) {
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
@@ -1101,7 +1103,7 @@ public class ClaimsMemberRedesignStepDefinition {
 					newclaimDetailspage.learnMoreCostLink();
 
 					System.out.println("Proceed to validate 'EOB' links on detail page");
-					newclaimDetailspage.validate_SearchEobHistory_onDetailPage(claimType,planType);
+					newclaimDetailspage.validate_SearchEobHistory_onDetailPage(claimSystem,planType);
 				} 
 			} else {
 				Assert.fail("Claims details page is not loaded!!!");
@@ -1362,5 +1364,73 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
+	
+	//vvv note:	added for VBF	
+	@Then("^I validate the claims displayed based on the selection on claims summary page$")
+	public void vbf_validate_claims_table_redesigned_site() {
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
+				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.vbf_validateClaimsTable();
+	}	
+	
+	public static String vbf_claimType;
+	@And("^I can navigate to the Claim Details page from claims summary page$")
+	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable timeAttributes) throws InterruptedException {
+			String ClaimSystem = CommonStepDefinition.getMemberAttributeMap().get("Claim System");
+			if (ClaimSystem.equalsIgnoreCase("COSMOSCLAIMS") || ClaimSystem.equalsIgnoreCase("NICECLAIMS")
+					|| ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+				if (ClaimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
+					vbf_claimType = "SHIP";
+				} else {
+					vbf_claimType = "Medical";
+				}
+				ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
+				if (null != newClaimDetailsPage)
+					getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+				else {
+					Assert.fail("Claims details page is not loaded!!!");
+				}
+			} else if (ClaimSystem.equalsIgnoreCase("RxCLAIMS")) {
+				vbf_claimType = "Drug";
+				System.out.println("Skipping Claim Details navigation!!!");
+			} else {
+				Assert.fail("Please check Claim syatems!!!");
+			}
+	}
+	
+	@Then("^I can validate the Claims Table on claims details page$")
+	public void vbf_validate_claimsTable_claimsDetails_AARP() {
+		
+			if (vbf_claimType.equalsIgnoreCase("Medical")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+				System.out.println("Skipping Claim Details validation!!!");
+			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+			}
+	}
+	
+	@And("^I can validate the Claims Total on claims details page$")
+	public void vbf_validate_claims_total_AARP() {
+			if (vbf_claimType.equalsIgnoreCase("Medical")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateClaimsTotalInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
+						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+				claimDetailspage.vbf_validateShipClaimsTotalInDetailsPage();
+			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+				System.out.println("Skipping Claim Details validation!!!");
+			}
+		
+	}
+	//^^^ note:	added for VBF	
 	
 }

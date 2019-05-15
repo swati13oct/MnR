@@ -642,8 +642,8 @@ public class ClaimSummarypage extends UhcDriver{
 			return PrescriptionEobText.isDisplayed();
 
 		}else{
-			System.err.println("You have to pass the Correct Domain and Plan Type");
-			System.out.println("please correct domain domain and plan type used" +plantype + "&&" +claimSystem);
+			System.err.println("You have to pass the Correct Claims System  and Plan Type");
+			System.out.println("please correct Claims System and Plan Type - current test used" +plantype + "&&" +claimSystem);
 			Assert.fail();
 			return false ;
 		}
@@ -795,8 +795,6 @@ public class ClaimSummarypage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
 		return false;
 		}
-		
-		
 	}
 	/**
 	 * @toDo: On Claims Summary page the member Validates the Download my data section.
@@ -2240,4 +2238,66 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
         		}
         		return new ClaimDetailsPage(driver);
         	}
+         	
+			//vvv note:	added for VBF	
+         	
+        	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='ship']/tbody/tr/th/p[text() ='Provider']/parent::th/preceding-sibling::th)+1]")
+        	private WebElement vbf_shipProviderNameValue;
+
+        	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_medicalTableRow;
+
+        	@FindBy(xpath = "//table[@id='medical']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='medical']/tbody/tr/th/p[contains(text(),'Provider Name')]/parent::th/preceding-sibling::th)+1]")
+        	private WebElement vbf_providerNameValue;
+
+        	@FindBy(xpath = "//table[@id='prescriptionDrug']/tbody/tr[2]/td[not (contains(@class,'ng-hide'))][not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_drugTableRow;
+        	
+        	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
+        	private List<WebElement> vbf_shipTableRow;
+
+        	public void vbf_validateClaimsTable() {
+        		CommonUtility.waitForPageLoadNew(driver, ClaimsSummaryPage, 60);
+        		scrollToView(ClaimsSummaryPage);
+        		if (claimsTableMedical.isDisplayed() || claimsTablePrescriptionDrug.isDisplayed()
+        				|| claimsTableSHIP.isDisplayed()) {
+        			System.out.println("!!!!!!!!! Able to find the claims table !!!!!!!!!");
+        			int counter = 0;
+        			if (claimsTableMedical.isDisplayed()) {
+
+        				int columnSize = vbf_medicalTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_medicalTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        				validateNew(vbf_providerNameValue);
+        			} else if (claimsTablePrescriptionDrug.isDisplayed()) {
+        				int columnSize = vbf_drugTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_drugTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        			} else if (claimsTableSHIP.isDisplayed()) {
+
+        				int columnSize = vbf_shipTableRow.size();
+        				for (int columnNum = 1; columnNum < columnSize; columnNum++) {
+        					String columnActualText = vbf_shipTableRow.get(columnNum).getText();
+        					if (!columnActualText.isEmpty())
+        						counter++;
+        				}
+        				Assert.assertTrue("Claims table gets displayed", counter > 0);
+        				validateNew(vbf_shipProviderNameValue);
+        			}
+        		}else{
+        			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+        			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
+        			
+        		}
+        	}
+			//^^^ note:	added for VBF			
+         	
 }

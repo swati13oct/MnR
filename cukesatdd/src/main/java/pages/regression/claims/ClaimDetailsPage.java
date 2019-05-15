@@ -1,8 +1,8 @@
 package pages.regression.claims;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -183,7 +183,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
 
-
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	private WebElement pageContainsPdfDocText;
 	
@@ -300,22 +299,31 @@ public class ClaimDetailsPage extends UhcDriver{
 
     @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
     private WebElement needHelp_contactUsLink;
-
 	//^^^ note: added for def1041
 	
+	//vvv note:	added for VBF		
+	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
+	public List<WebElement> claimTableValues;
+
+	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']")
+	public WebElement ShipclaimstotalTable;
+
+	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']//div[@class='col-md-2']/p[contains(text(),'$')]")
+	public List<WebElement> shipClaimTotalValues;
+	//^^^ note:	added for VBF		
+
+
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
-
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-
 	}
 	
 	//tbd @SuppressWarnings("deprecation")
@@ -333,8 +341,8 @@ public class ClaimDetailsPage extends UhcDriver{
 		else{
 			Assert.assertTrue("Claims Search button is not present in Claims Details Page", false);
 		}
-		
 	}
+	
 	/**
 	 * @toDo :this method validates header
 	 */
@@ -1258,5 +1266,45 @@ public class ClaimDetailsPage extends UhcDriver{
    }
 	//^^^ note:	added for def1041		
 	
+	//vvv note:	added for VBF		
+
+	public void vbf_validateClaimsTableInDetailsPage() {
+		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
+		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
+		int columSize = claimTableValues.size();
+		for (int columnNum = 1; columnNum < columSize; columnNum++) {
+			String input = claimTableValues.get(columnNum).getText();
+			Pattern pattern = Pattern.compile("^[-]?\\$\\d+.*\\.\\d{2}$");
+			if (pattern.matcher(input).matches()) {
+				Assert.assertTrue("value exists in column - " + columnNum, true);
+			} else {
+				throw new IllegalArgumentException("Invalid String");
+			}
+		}
+	}
 	
+	public void vbf_validateClaimsTotalInDetailsPage() {
+		validateNew(claimstotalTable);
+		if (claimstotalTable.isDisplayed()) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
+		}
+
+	}
+
+	public void vbf_validateShipClaimsTotalInDetailsPage() {
+		validateNew(ShipclaimstotalTable);
+		int columSize = shipClaimTotalValues.size();
+		for (int columnNum = 1; columnNum < columSize; columnNum++) {
+			String input = shipClaimTotalValues.get(columnNum).getText();
+			Pattern pattern = Pattern.compile("^\\$\\d+\\.\\d{2}$");
+			if (pattern.matcher(input).matches()) {
+				Assert.assertTrue("value exists in column - " + columnNum, true);
+			} else {
+				throw new IllegalArgumentException("Invalid String");
+			}
+		}
+	}
+	//^^^ note:	added for VBF		
 }
