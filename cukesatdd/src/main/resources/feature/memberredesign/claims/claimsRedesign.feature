@@ -662,7 +662,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
 	  |14    |1041| SHIP     | Individual                 | COMPASS_CLAIMS| NA                | Yes                |
 
-	@abc @claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
+	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
 	  |15    |1041| PDP      | COMBO_GROUP                | RXCLAIMS     | Prescription drug | No                 |
