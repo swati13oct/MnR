@@ -183,6 +183,6 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
 
     Examples: 
       | UID       | plantype | memberType                         | newEmail       | newConfirmEmail |
-#      | US1742771 | MAPD     | CALPERSGroup_ContactUs_GetStarted  | test@optum.com | test@optum.com  |
+      | US1742771 | MAPD     | CALPERSGroup_ContactUs_GetStarted  | test@optum.com | test@optum.com  |
       | US1742771 | MAPD     | GEORGIAGroup_ContactUs_GetStarted  | test@optum.com | test@optum.com  |
-#      | US1742771 | MAPD     | TEXASERSGroup_ContactUs_GetStarted | test@optum.com | test@optum.com  |
+      | US1742771 | MAPD     | TEXASERSGroup_ContactUs_GetStarted | test@optum.com | test@optum.com  |
