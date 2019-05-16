@@ -34,13 +34,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
 	
-	//tbd @FindBy(css= "#claimSearchButtonBottom")
-	//tbd public WebElement claimsHistoryLink;
-
 	@FindBy (xpath =".//*[@id='claimSearchButtons']")
 	private WebElement claimsSummaryLinkOnDetailTopPage;
 
-	
 	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
 	private WebElement claimsSummaryLinkOnDetailBottomPage;
 
@@ -80,11 +76,9 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(css = ".claimDetTableMainSection")
 	public WebElement claimDetTableMainSection;
 	
-	//@FindBy(className = "claimdettable")
 	@FindBy(css = ".claimsTotalTable")
 	public WebElement claimstotalTable;
 	
-	//@FindBy(id = "learnmoretoggleship")
 	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']")
 	private WebElement learnMoreLink;
 	
@@ -329,12 +323,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	//tbd @SuppressWarnings("deprecation")
 	public void validateClaimSearch() {
 		CommonUtility.waitForPageLoadNew(driver, claimSearch, 5);
-		/* //tbd-remove try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 		if(claimSearch.isDisplayed()){
 			Assert.assertTrue(true);
 		}
@@ -383,37 +371,6 @@ public class ClaimDetailsPage extends UhcDriver{
 		return claimNumDynamic.isDisplayed();
 
 	}
-	/**
-	 * @toDo : this method validates claim type 
-	 */
-	public boolean TBR_validateClaimType() {	//tbd-remove whole method
-		System.out.println("validateClaimType");
-		return claimTypeLabel.isDisplayed();
-
-	}
-	/**
-	 * @toDo : this method validates Dynamic claim type 
-	 */
-
-	public boolean TBR_validateDynamicClaimType(){	//tbd-remove whole method
-		System.out.println("validateDynamicClaimType");
-			return claimsTypeDynamic.isDisplayed();
-		}
-	/**
-	 * @toDo :this method validates claim status 
-	 */
-	public boolean TBR_validateClaimStatus(){	//tbd-remove whole method
-		System.out.println("validateClaimStatus");
-		return claimStatusLabel.isDisplayed();
-	}
-	/**
-	 * @toDo :this method validates dynamic claim status 
-	 */
-	public boolean TBR_validateDynamicClaimStatus(){	//tbd-remove whole method
-		System.out.println("validateDynamicClaimStatus");
-		return claimStatusDynamic.isDisplayed();
-	}
-	
 	/**
 	 * this method validates EOB for different domain 
 	 */
@@ -520,27 +477,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		} else{
 			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
 		}
-		/* //tbd-remove
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(medicalClaimDetailsText));
-		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(claimNumber));
-		System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",validate(learnMoreLink));
-		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",validate(claimDetTableMainSection));
-		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
-		if(claimDetTableMainSection.isDisplayed()){
-			Assert.assertTrue(true);
-		} else{
-			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
-		}
-		 */
+		
 	}
 
 	//tbd @SuppressWarnings("deprecation")
@@ -585,23 +522,6 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	public void validateClaimsTotalInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimstotalTable, 5);
-		/* //tbd-remove
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(claimstotalTable);
-		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
-		validate(claimstotalTable);
-		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
-		if(claimstotalTable.isDisplayed()){
-			Assert.assertTrue(true);			
-		}
-		else{
-			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
-		} */
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", validate(claimstotalTable));
 	
 	}
@@ -645,58 +565,8 @@ public class ClaimDetailsPage extends UhcDriver{
 		//validate(EOBshipcombo);
 		System.out.println("EOB for combo ship plan is seen on claim details page");
 }
-	/**
-	 * @toDo : validate Claim History Button
-	 */
-	/*public void validateClaimHistory(){	//tbd-remove
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	validate(claimsHistoryLink);
-	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
-	claimsHistoryLink.click();
-	if (driver.getCurrentUrl().contains("/overview"))
-	{
-	System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
-	}
-	
-}
-	
 
-	/**
-	 * @toDo :validate the two COMBO tabs on the claims Summary page
-	 */
-	/*public void comboTabs() { //tbd-remove
-		
-		for (WebElement webElement : comboTabsOnclaimsPage) {
-			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
-			webElement.click();
-			System.out.println(driver.getCurrentUrl());
-		}*/
- //}
-	/**
-	 * @toDo : validate the Claims History Button
-	 */
-	public void TBR_claimshistorylink(){	//tbd-remove whole method
-		validate (claimsSummaryLinkOnDetailBottomPage);
-		System.out.println("history link is seen");
-		claimsSummaryLinkOnDetailBottomPage.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		if (driver.getCurrentUrl().contains("/overview"))
-		{
-		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
-		}
-	}
-	
+
 	public ClaimSummarypage validateClaimsSummaryLinkOnDetailTopPage(){
 		CommonUtility.checkPageIsReady(driver);
 		try {

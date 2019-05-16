@@ -36,23 +36,8 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
 	public WebElement preEffectiveTechSupportNumber;
 
-	/*@FindBy (xpath=".//*[@id='MA']") //TBD
-	private WebElement MA;
-
-	@FindBy (xpath=".//*[@id='MAPD']")
-	private WebElement MAPD;
-
-	@FindBy (xpath=".//*[@id='PDP']")
-	private WebElement PDP;*/ 
-
 	@FindBy(css = ".claim-results")
 	private WebElement ClaimsSummaryPage;//in use
-
-/*	@FindBy(xpath="//div[normalize-space()='Medical']")
-	private WebElement claimTypeMA; //TBD
-
-	@FindBy(id="claim-type")
-	private WebElement claimTypeMAPD;*/  //TBD
     
 	@FindBy(xpath = "//h1")
 	private WebElement pageHeader;
@@ -119,16 +104,7 @@ public class ClaimSummarypage extends UhcDriver{
 	
 	@FindBy(id = "atddPagination")
 	private WebElement verifyClaimSummaryAndPagination3;//in use
-	
-	/*@FindBy (xpath=".//*[@id='custom_from_date_fed']")
-	private WebElement fromDate;
-	*/
-	/*@FindBy (xpath=".//*[@id='custom_to_date_fed']")
-	private WebElement toDate;*/
-	
-	/*@FindBy (xpath=".//*[@id='customsearchbuttonFedBtn']")
-	private WebElement srch;*/
-	
+
 	@FindBy (xpath= ".//*[@id='validDivErr']")
 	private WebElement messageaftersrch;//in use
 
@@ -518,7 +494,7 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 	@Override
-	public void openAndValidate() { // need to add some validaation to check claims page loaded fine or not
+	public void openAndValidate() { 
 
 	}
 
@@ -648,63 +624,6 @@ public class ClaimSummarypage extends UhcDriver{
 			return false ;
 		}
 	}
-		/**
-	 * @toDo : this method validates Down Load my Data Button
-	 */
-	public /*Boolean*/ void TBR_validateDownloadMyDataButton(){ //tbd-remove whole method
-		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
-		validate(downloadmydatabutton);
-		  System.out.println("!!! Blue Button-DownLoad my Data Button is displayed ===>"+downloadmydatabutton.isDisplayed());
-		  downloadmydatabutton.click();
-		  validate(leavingsitepopup);
-		  System.out.println("!!!Proceed Button is displayed ===>"+leavingsitepopup.isDisplayed());
-		  validate(cancelButtonDownloadPopUp);
-		  System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonDownloadPopUp.isDisplayed());
-		if (downloadmydatabutton.isDisplayed())      
-		{			
-			downloadmydatabutton.click();
-			//now click cancel and validate any element on page
-			cancelButtonDownloadPopUp.click();
-			if(driver.getTitle().contains("Claims")){
-				System.out.println("Cancel button functionality is working as expected");
-				//now again validate site leaving popup
-				downloadmydatabutton.click();
-				//now click on proceed and validate new tab opens
-				//proceedToDownloadPopUp.click();
-			waitforElement(leavingsitepopup);
-			System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
-			//now click on proceed and validate new tab opens
-			//proceedToDownloadPopUp.click();
-			if(leavingsitepopup.isDisplayed()){
-				proceedButtonDownloadPopUp.click();
-				switchToNewTab();
-				driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-				CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
-			if (downloadmydatabutton.isDisplayed())
-			{			
-				downloadmydatabutton.click();		
-				waitforElement(leavingsitepopup);
-				System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
-				//proceedToDownloadPopUp.click();
-				if(leavingsitepopup.isDisplayed()){
-					proceedButtonDownloadPopUp.click();
-					System.out.println("Proceed button functionality is working as expected");
-				}
-				cancelButtonDownloadPopUp.click();
-				if(driver.getTitle().contains("Claims")){
-					System.out.println("Cancel button functionality is working as expected");
-				}
-			}
-			else 
-			{
-				System.out.println("Downlaod my data button is not displayed ");
-			}
-			}
-			}
-		}
-			
-}
-
 	/**
 	 * @toDo : this method validates claims by time interval 
 	 */
@@ -763,10 +682,7 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("!!! Validating the drop down to select the claims !!!");
 			//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 		}
-		//tbd validate (learnMoreAboutClaims);
-		//tbd System.out.println("!!! Learn More About Claims link is seen on the claims Summary page ===>"+(learnMoreAboutClaims.isDisplayed()));
-		//validate(claimsTablePagination);
-		//System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
+		
 	}
 	
 	
@@ -929,19 +845,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
     	 }
     	 String expText="You have";
 		 Assert.assertTrue("PROBLEM - 'You have...' message on page is not as expected.  Expected to contain='' | Actual msg='"+e.getText()+"'", (e.getText()).contains(expText));
-    	 /* tbd
-    	 if(validate(Youhave1)) {
-    		 e=Youhave1;
-    	 } else if (validate(Youhave2)) {
-    		 e=Youhave2;
-    	 } else {
-    		 Assert.assertTrue("Unable to locate the 'You have...' message on page", false);
-    	 } 
- 		if (e.getText().contains("You have"))
- 		{
- 			System.out.println(e.getText());
- 			System.out.println("You have claims messgae displayed ");
- 		}	*/
  		
  	} 
 
@@ -1116,12 +1019,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 
 		public 	 ClaimSummarypage comboTabSelection1(){
 			CommonUtility.checkPageIsReadyNew(driver);
-			/* tbd-remove try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} */
 			for (WebElement webElement : comboTabsOnclaimsPage) {
 				System.out.println(webElement.getText());
 				webElement.click();
@@ -1347,20 +1244,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 					counter++;
 				} while (counter < 2);
 			}
-			
-			/* tbd
-			public boolean verifyPrintAndDownloadOption() {
-				if(MRScenario.environment.equalsIgnoreCase("team-a"))
-				{
-					CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);				
-					validateNew (claimsSummaryPrintButton);
-					validateNew (claimsSummaryDownloadButton);
-					return true;	
-				}else{
-					return true;
-				}
-								
-			} */
 
 			public boolean validateLearnMoreAndPrintAndDownloadOption() {
 				if (validate (learnMoreAboutClaims) && validate(claimsSummaryPrintButton) && validate(claimsSummaryDownloadButton)) {
@@ -1391,22 +1274,6 @@ public boolean ValidatePHIPErrorMessage() throws InterruptedException{ //Need to
 				} else
 					return false;
 
-
-				/* tbd-remove
-				if(MRScenario.environment.equalsIgnoreCase("team-a"))
-				{
-				CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
-				String winHandleBefore = driver.getWindowHandle();
-				claimsSummaryDownloadButton.click();
-				claimsSummaryPrintButton.click();
-				switchToNewTab();
-				System.out.println("New window = "+driver.getTitle());
-				driver.switchTo().window(winHandleBefore);
-				System.out.println("Main window = "+driver.getTitle());				
-				return true;
-				}else{
-					return true;
-				} */
 			} 
 
 			public ProfileandPreferencesPage navigateDirectToProfilePage() {
