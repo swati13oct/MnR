@@ -85,7 +85,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
     #----- end of VBF claims scenarios section ------------------------   
 
 
-    @claims01 @E2EClaimstcase
+    @claims01 @E2EClaimstcase @regressionMember
     Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims Summary and details page E2E Scenario
 	Given login with following details logins in the member portal and validate elements
          | Plan Type      | <planType>     |
@@ -135,7 +135,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
 
 #    #need test data to execute this specific scenario, will re-active this once data is available
-#	 @claims6 @TC_09claimsPHIP
+#	 @claims6 @TC_09claimsPHIP @regressionMember
 #	 Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
 #	 Given login with following details logins in the member portal and validate elements
 #	   | Plan Type      | <planType>     |
