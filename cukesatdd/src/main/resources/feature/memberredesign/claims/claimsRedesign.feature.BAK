@@ -665,7 +665,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |15    |1041| PDP      | COMBO_GROUP                | RXCLAIMS     | Prescription drug | No                 |
+	  |15    |1041| PDP      | COMBO_GROUP                | RX_CLAIMS     | Prescription drug | No                 |
 
 	@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
 	Examples: 
@@ -915,10 +915,6 @@ Feature: T1.1To validate the new changes related to claims page on the member si
        #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS |
        #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
        #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
-    @smokeTest @MemberVBF @rallyDashboard @testharness
-    Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
-	    Given login with following details logins in the member portal and validate elements
-          | Plan Type      | <planType>     |
        
    @smokeTest @MemberVBF @claims_Performance
    Scenario Outline: To validate that claims are present on claims summary page for performance ATDD

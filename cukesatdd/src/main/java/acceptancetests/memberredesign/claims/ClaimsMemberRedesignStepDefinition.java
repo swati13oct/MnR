@@ -33,141 +33,105 @@ import pages.regression.testharness.TestHarness;
 public class ClaimsMemberRedesignStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
-	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	//tbd Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	/**
-	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
-	 */
-	
+
 	@When("^Explanation of benefits sub navigation under Claims tab is not displayed$")
-	public void check_ExplanationOfBenefits_SubNavigation_UnderClaimsTab() throws Throwable 
-	{
+	public void check_ExplanationOfBenefits_SubNavigation_UnderClaimsTab() throws Throwable {
 		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummaryPage.validateExplanationOfBenefitsSubNavNotDisplayedForSSUP();
-	    
 	}	
-	
+
 	@When("^Validate Explanation of benefits Page for group SSUP$")
-	public void Validate_EOB_Tab_underClaims() throws Throwable 
-	{
+	public void Validate_EOB_Tab_underClaims() throws Throwable {
 		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummaryPage.validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP();
-	    
 	}
-	/**
-	 * @toDo : This method checks that Explanation of benefits sub navigation under Claims tab is not displayed
-	 */
-	
+
 	@When("^Explanation of benefits deep link is invoked and validate the Page$")
-	public void check_ExplanationOfBenefits_DeepLink() throws Throwable 
-	{
+	public void check_ExplanationOfBenefits_DeepLink() throws Throwable {
 		ClaimSummarypage claimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummaryPage.invokeEOBDeepLink();
-	    
 	}
-	/**
-	 * @toDo : I search claims for the following time interval on claims summary page
-	 */
 
 	@And("^I search claims for the following time interval on claims summary page$")
-	
-	public void search_claims_redesigned_site(DataTable timeAttributes) throws InterruptedException{
-			List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
-			Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-			for (int i = 0; i < timeAttributesRow.size(); i++) {
-
-				urlAttributesMap .put(timeAttributesRow.get(i).getCells()
-						.get(0), timeAttributesRow.get(i).getCells().get(1));
-			}
-			
+	public void search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
+	/* tbd public void search_claims_redesigned_site(DataTable timeAttributes) throws InterruptedException{
+		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < timeAttributesRow.size(); i++) {
+			urlAttributesMap .put(timeAttributesRow.get(i).getCells().get(0), timeAttributesRow.get(i).getCells().get(1));
+		}
 		System.out.println(urlAttributesMap.get("Claim Period"));
-
 		String toDate = urlAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
-		String fromDate = urlAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
+		String fromDate = urlAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE); */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		System.out.println(memberAttributesMap.get("Claim Period"));
+		String toDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
+		String fromDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.searchClaimsByTimeInterval(toDate,fromDate);
-
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-
 	}
-	/**
-	 * @throws InterruptedException 
-	 * @toDo: Member is able to select claims from the "View Claims From" drop-down. 
-	 */
 
 	@And("^I can search claims for the following claim period on claims summary page$")
 	public void search_claims_period_redesigned_site(DataTable timeAttributes) throws InterruptedException{
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < timeAttributesRow.size(); i++) {
-			urlAttributesMap .put(timeAttributesRow.get(i).getCells()
-					.get(0), timeAttributesRow.get(i).getCells().get(1));
+			urlAttributesMap .put(timeAttributesRow.get(i).getCells().get(0), timeAttributesRow.get(i).getCells().get(1));
 		}
 		System.out.println("claim period"+urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
-		
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if(s.equals("custom-search")){
-			System.out.println("custom");
+			System.out.println("custom search");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
 		} else{
 			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
 		}
-
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 	}
-	/**
-	 * @toDo : On Claims Summary page the member validates the Claims Summary table or claims.
-	 */
+
 	@Then("^I can see the claims displayed based on the selection on claims summary page$")
 	public void validate_claims_table_redesigned_site(){
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateClaimsTable();
-
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-
 	}
-	/**
-	 * @toDo : On Claims Summary page the member validates the EOB section based on the plan type.
-	 */
 
 	@And("^I validate the EOB section based on claims system on claims summary page$")
 	public void validates_EOB_redesigned_site(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-
+		/* tbd 
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimSystem  = memberAttributesMap.get("Claim System");
 		String planType = memberAttributesMap.get("Plan Type");
-		
-
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobfordifferentClaimsSystem(claimSystem, planType);
-
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
-	/**
-	 * @toDo: On Claims Summary page the member Validates the Download my data section.
-	 */
 
 	@And("^I validate the DownloadMyData section on claims summary page$")
-	public void validates_DownloadMyData_redesigned_site(){
+	public void validates_DownloadMyData_redesigned_site(DataTable memberAttributes){
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = memberAttributesMap.get("Plan Type");
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateDownloadMyData();
-
+		newclaimsSummarypage.validateDownloadMyData(planType);
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}	
@@ -176,46 +140,35 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void i_can_see_print_and_download_option_in_claims_table() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue(claimSummarypage.validateLearnMoreAndPrintAndDownloadOption());
-	   	}
+	}
 
 	@And("^I validate the pagination on the claims summary page$")
 	public void i_validate_the_pagination_on_the_claims_summary_page() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue("PROBLEM - not getting expected pagination.  NOTE: pagination will only show if user has claims for the search range",claimSummarypage.verifyClaimsTableAndPagination());
-	   	}
-	
-	
+	}
+
 	@And("^I validate the pagination on the claims summary page combo member PDP plan$")
-		public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
-		   	}
+	public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
+	}
 	@And("^I validate the pagination on the claims summary page for members$")
-		public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination3());
-		   	}
-		
-	
-	/**
-	 * @toDo :view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type
-	 */
-	//keep for EOB story
+	public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
+		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination3());
+	}
+
 	@Then("^I can view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type$")
 	public void validate_EOB_medical_or_Prescription(DataTable memberAttributes){
-
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		//Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem  = memberAttributesMap.get("Claim System");
-
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-
 		Assert.assertTrue(claimSummarypage.validateEobfordifferentClaimsSystem(claimSystem, planType));
 	}
 
@@ -226,17 +179,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
-	
-	/**
-	 * @toDo : validate the Claims Total in claims details page
-	 */
+
 	@And("^I validate the Claims Total on claims details page$")
 	public void validate_claims_total_AARP(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		if (planType.toLowerCase().contains("pdp")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step for claims total validation on claims detail page");
@@ -246,111 +196,78 @@ public class ClaimsMemberRedesignStepDefinition {
 		newclaimDetailspage.validateClaimsTotalInDetailsPage();
 	}
 
-	/**
-	 * @toDo : Validate Medical EOB for MAPD Cosmos type in Claims Details page
-	 */
-	//keep for EOB story
 	@And("^A Medical EOB for MAPD Cosmos type in Claims Details page in AARP site$")
 	public void validate_medical_eob(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
-		//Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem  = memberAttributesMap.get("Claim System");
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-
 		Assert.assertTrue(claimDetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem, planType));
-
 	}
 
-	/**
-	 * @toDo : Reached Maximum Claim Results Error on Claim summary page
-	 */
-	//tbd - need to see what this is for
 	@Then("^The User can able to see Drug Claims History: Reached Maximum Claim Results Error$")
 	public void validateMaxRxclaimsResultError(){
-
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-
 		Assert.assertTrue(claimSummarypage.validateRxReachexMaxClaimsErrorMsg());
-
 	}
-	/**
-	 * @toDo : SHIP Date Range Greater Than 24-Months Error - on Claims Summary page 
-	 */
+
 	@Then("^the user should be able to see the SHIP Date Range Greater Than 24-Months Error$")
 	public void validateDateRangeErrorSHIP(){
-
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validateShipGreaterThan24MonthsErrorMsg();
 	}
-	/**
-	 * @toDo : FED Date Range Greater Than 24-Months Error - on claims summary page
-	 */
+
 	@Then("^the user should be able to see the FED Date Range Greater Than 24-Months Error$")
 	public void validateDateRangeErrorMsgFED(){
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validateFedGreaterThan24MonthsErrorMsg();
-
 	}
-	/**
-	 * @toDo :the from date is greater than to date error message - on claims summary page.
-	 */
+
 	@Then("^I should be able to see the from date is greater than to date error message$")
 	public void validateToDateErrorMessage(){
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//.Assert.assertTrue(claimSummarypage.validateShipGreaterThan24MonthsErrorMsg());
 		claimSummarypage.validatefromDateLaterThanToDateError();
 	}
-	
+
 	@When("^I validate the error message for a PHIP Member on the screen$")
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable {
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		 claimSummarypage.ValidatePHIPErrorMessage();
-	  
-	 
+		claimSummarypage.ValidatePHIPErrorMessage();
 	}
-		
+
 	@Then("^I can validate the claims summary header on claims summary page$")
 	public void i_can_validate_the_claims_summary_header(DataTable memberAttributes)  {
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String memberType = memberAttributesMap.get("Member Type");
-		//tbd String claimSystem = memberAttributesMap.get("Claim System");
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 
 		if (memberType.toLowerCase().contains("combo_")) {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			newClaimsSummaryPage.validateComboTabs();
-			//click the target tab for testing
-			newClaimsSummaryPage.goToSpecificComboTab(planType);
+			newClaimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
 		}
-
 		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
 		newClaimsSummaryPage.validateYouHavemessage(planType);
-		
-	//	newClaimsSummaryPage.validateClaimsHeaderCopyText();
-	    
+		newClaimsSummaryPage.validateClaimsHeaderCopyText();
 	}
 
 	@When("^I navigate to the Claim Details page from claims summary page$")
 	public void i_navigate_to_member_redesign_claim_details(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		}*/
 		String planType = memberAttributesMap.get("Plan Type");
 		if (planType.toLowerCase().contains("pdp")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to navigate to claims detail page");
@@ -364,17 +281,16 @@ public class ClaimsMemberRedesignStepDefinition {
 		else {
 			Assert.fail("Claims details page is not loaded!!!");
 		}
-
 	}
-
 
 	@And("^I validate the Claims Table on claims details page$")
 	public void validate_claimsTable_claimsDetails(DataTable memberAttributes) {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
@@ -383,42 +299,31 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimDetailspage);
 
 	}
-	
-	//keep for EOB story
+
 	@And("^I validate the EOB option on claims details page$")
 	public void validate_EOB_option_claimsDetails() {
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateEobInDetailsPage();
 	}
-	/**
-	 * 
-	 */
+
 	@And("^I validate the Claim Search link on top$")
 	public void i_validate_claimSearch_link_on_DetailsPage() {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.validateClaimSearchLINK();			
 	}
-	/**
-	 * 
-	 */
+
 	@And("^I validate the LEARN MORE ABOUT COST BreakDown Link$")	 
 	public void i_validate_learmMore_costbreakdown_link() {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.learnMoreCostLink();	
-		
 	}
-	/**
-	 * 
-	 */
+
 	@Then("^I validate the Claims Table on claims details page for Combo$")
 	public void i_validate_the_calims_deatails_table(){
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.shipdetailcombo();
 	}
-	/**
-	 * 
-	 */
+
 	@And("^I validate EOB$")
 	public void i_validate_EOB_COMBO(){
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
@@ -429,18 +334,16 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void i_validate_COMBO_tabs() {
 		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetailspage.comboTabs();			
-}
+	}
+
 	@And("^I validate the two COMBO tabs on the claim Summary page$")
 	public void I_validate_combo_tab_claim_summary_page(){
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.comboTabSelection1();	   
 	}
-	/**
-	 * @toDo : navigate to the Claim Details page for combo member 
-	 */
+
 	@And("^I navigate to the Claim Details page in AARP site for COMBO member$")	
 	public void i_navigate_to_member_redesign_claim_details_page_COMBOMember()  {
-		//if from testharness, go from summary page
 		ClaimDetailsPage newClaimDetailsPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -452,83 +355,79 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 		if(newClaimDetailsPage  != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-		
 	}
+	
 	@And("^I validate the claims summary link on claims detail top page$")
 	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		if (planType.toLowerCase().contains("pdp")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate top claims summary link on claims detail page");
 			return;
 		} 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		ClaimSummarypage claimSummarypage =claimDetailspage.validateClaimsSummaryLinkOnDetailTopPage();
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimSummarypage claimSummarypage =claimDetailspage.validateClaimsSummaryLinkOnDetailTopPage(planType);
 		if(claimSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimSummarypage);
 	}
 
 	@And("^I validate the claims summary link on claims detail bottom page$")
 	public void I_validate_the_claims_summary_link_on_claims_detail_bottom_page(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		if (planType.toLowerCase().contains("pdp")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate bottom claims summary link on claims detail page");
 			return;
 		} 
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		ClaimSummarypage claimSummarypage =claimDetailspage.validateClaimsSummaryLinkOnDetailBottomPage();
 		if(claimSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimSummarypage);
-          }
+	}
 
 	@Then("^I validate the text for PCP and medica members$")
 	public void i_validate_the_text_for_PCP_members(){
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validatePCPtext();
 	}
+	
 	@And("^I validate the EOB section on claims summary page$")
 	public void validate_PDPEOB (){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobPDP();
-
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
-		
+
 	}
 	@Then("^I can see the claims displayed based on the selection on claims summary page for PDP plans$") 
 	public void validate_claims_table_PDPmember_site(){
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.validateClaimsTablePDP();
-
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-	
+
 	//vvv note: added for def1041
 	@Then("^I should be able to see the search range is greater than two years error$")
 	public void validateGreaterThanTwoYearsMessage(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validateGreaterThanTwoYearError(planType);
-		
-		//assume this is the last step in the test, print out a summary of the claims for logging purpose
+
+		//note: assume this is the last step in the test, print out a summary of the claims for logging purpose
 		if (allClaims==null) {
 			System.out.println("========================================");
 			System.out.println("allClaims object is null");
@@ -540,16 +439,16 @@ public class ClaimsMemberRedesignStepDefinition {
 			System.out.println("========================================");
 		}
 	}
-	
+
 	@Then("^I can see the claims table displayed based on the selection in redesigned site$") 
 	public void validate_claims_table(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
-		
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (planType.equalsIgnoreCase("pdp")) {
 			newClaimsSummaryPage.validateClaimsTablePDP();
@@ -559,16 +458,16 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-	
+
 	HashMap<String, Integer> allClaims = new HashMap<String, Integer>();
 	List<String> recordInvokedBypass=new ArrayList<String>();
 	@Then("^I can see the number of claims$")
 	public void getClaimsNumber(DataTable memberAttributes) {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		String claimType = memberAttributesMap.get("Claim Type");
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -583,15 +482,15 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println(Arrays.asList(allClaims)); 
 		System.out.println("------------ end list of claims result ---------------");
 	}
-	
+
 	@Then("^I can validate the numbers of claims from all search periods$")
 	public void compareAllClaimsPeriods(DataTable memberAttributes) {
 		//note: use this flag to determine if you want to fail the case if zero claims
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String flagZeroClaimsUserInput = memberAttributesMap.get("Flag Zero Claims User");
 		boolean flagZeroClaimsUser=true;
 		if (flagZeroClaimsUserInput.equalsIgnoreCase("yes")) {
@@ -601,7 +500,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		} else {
 			Assert.assertTrue("PROBLEM - 'Flag Zero Claims User' can only be yes or no.  Actual="+flagZeroClaimsUser, false);
 		}
-		
+
 		//note: display any of the issues encountered that are currently bypassed
 		System.out.println("================================================================");
 		System.out.println("========== Data collected during test run ======================");
@@ -614,7 +513,7 @@ public class ClaimsMemberRedesignStepDefinition {
 				System.out.println("  issue: "+s);
 			}
 		}
-		
+
 		//note: do the logic for validating whether claims number makes sense between pages
 		int last30days=allClaims.get("Last 30 days");
 		int last90days=allClaims.get("Last 90 days");
@@ -643,7 +542,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		Assert.assertTrue("PROBLEM - number of claims from last6months should be less than or equals to last12months.  last6months='"+last6months+"' | last12months='"+last12months+"'", last6months <= last12months);
 		Assert.assertTrue("PROBLEM - number of claims from last12months should be less than or equals to last24months.  last12months='"+last12months+"' | last24months='"+last24months+"'", last12months <= last24months);
 		Assert.assertTrue("PROBLEM - number of claims from customSearch should be less than or equals to last24months.  customeSearch='"+customeSearch+"' | last24months='"+last24months+"'", customeSearch <= last24months);
-		
+
 		if (flagZeroClaimsUser) {
 			Assert.assertTrue("PROBLEM - While this user has passed all basic claims validations for each search period, but this user has 0 claims. please select another user with claims for comprehensive claims testing.  last24months='"+last24months+"'", last24months > 0);
 		} else {
@@ -652,14 +551,14 @@ public class ClaimsMemberRedesignStepDefinition {
 			}
 		}
 	}
-	
+
 	@And("^I validate the pagination on the claims summary page for given range$")
 	public void validatePagination(DataTable memberAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=allClaims.get(claimPeriod);
@@ -670,33 +569,33 @@ public class ClaimsMemberRedesignStepDefinition {
 			Assert.assertTrue("PROBLEM - Pagination should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyClaimsTableAndPagination());
 		}
 	}
-	
-	//@And("^I can search claims for claim period \"([^\"]*)\" and claim type \"([^\"]*)\" on redesigned site$")
+
 	@And("^I can search claims for claim period and claim type on claim summary page$")
-	public void search_claims_period_for_claimType_redesigned_site(DataTable timeAttributes) throws InterruptedException{
+	public void search_claims_period_for_claimType_redesigned_site(DataTable memberAttributes) throws InterruptedException{
+	/*tbd public void search_claims_period_for_claimType_redesigned_site(DataTable timeAttributes) throws InterruptedException{
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < timeAttributesRow.size(); i++) {
-			urlAttributesMap .put(timeAttributesRow.get(i).getCells().get(0), 
-					timeAttributesRow.get(i).getCells().get(1));
-		}
-		System.out.println("===================================================================================================");
-		System.out.println("Proceed to test for claim period="+urlAttributesMap.get("Claim Period"));
+			urlAttributesMap .put(timeAttributesRow.get(i).getCells().get(0),timeAttributesRow.get(i).getCells().get(1));
+		} 
 		String claimPeriod=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
 		String memberType = urlAttributesMap.get("Member Type");
-		String claimType = urlAttributesMap.get("Claim Type");
-		//tbd String claimSystem = urlAttributesMap.get("Claim System");
-		
+		String claimType = urlAttributesMap.get("Claim Type"); */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String claimPeriod=memberAttributesMap.get("Claim Period");
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
+		String claimType = memberAttributesMap.get("Claim Type");
+
+		System.out.println("===================================================================================================");
+		System.out.println("Proceed to test for claim period="+claimPeriod);
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//parse claimSystem determine which tab to click
-		if (memberType.toLowerCase().contains("combo_")) {
+		if (memberType.toLowerCase().contains("combo_")) { //note: parse claimSystem determine which tab to click
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			newClaimsSummaryPage.validateComboTabs();
-			//click the target tab for testing
-			newClaimsSummaryPage.goToSpecificComboTab(planType);
+			newClaimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
 		}
-
 		newClaimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
@@ -705,17 +604,16 @@ public class ClaimsMemberRedesignStepDefinition {
 	@When("^I validate Claim Details page content in detail for value and Learn More and EOB$")
 	public void validate_claim_details_extensive_validatoin(DataTable memberAttributes) throws InterruptedException {
 		// only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		String claimType = memberAttributesMap.get("Claim Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-		//tbd String domain = memberAttributesMap.get("Domain");
-		
+
 		boolean hasYourShare=true;
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp") ) {
 			hasYourShare=false;
@@ -727,10 +625,8 @@ public class ClaimsMemberRedesignStepDefinition {
 			int numClaims=allClaims.get(claimPeriod);
 			if (numClaims > 0) {	//note: only do this if claims > 0
 				System.out.println("Proceed to Claims Summary page");
-				ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-				//don't bother if getting system error already
-				claimSummarypage.validateSystemErrorMsgNotExist();
+				ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				claimSummarypage.validateSystemErrorMsgNotExist();  //note: don't bother if getting system error already
 
 				//note: gather data on summary page for validation on detail page
 				System.out.println("Determine number of data rows on table");
@@ -740,7 +636,7 @@ public class ClaimsMemberRedesignStepDefinition {
 					total=5;
 					System.out.println("Total claims='"+totalDataRows+"', will validate the first 5 for detail to shorten test time");
 				}
-				//for (int x=2; x<(totalDataRows+2); x++) {		//note: use this instead if want to validate all entries
+				//KEEP- for (int x=2; x<(totalDataRows+2); x++) {		//note: use this instead if want to validate all entries
 				for (int x=2; x<total; x++) {
 					System.out.println("========================================================================");
 					System.out.println("Proceed to validate data row index="+x+" ===============================");
@@ -759,9 +655,7 @@ public class ClaimsMemberRedesignStepDefinition {
 							System.out.println("Proceed to validate header section content on detail page");
 							newclaimDetailspage.validateClaimsDetailPageHeaderSection(planType);
 							newclaimDetailspage.validateClaimsTableInDetailsPage(planType);
-							//tbd System.out.println("Proceed to validate medicalEob links on detail page");
-							//tbd newclaimDetailspage.validateMedicalEob(claimType);
-														
+
 							System.out.println("Proceed to validate 'Learn More...' link");
 							newclaimDetailspage.learnMoreCostLink();
 
@@ -780,7 +674,6 @@ public class ClaimsMemberRedesignStepDefinition {
 								recordInvokedBypass.add("invokedBypass_INC10332773_YourShareMissmatched_detailPage");
 							}
 							System.out.println("Proceed to validate claims total - if encounter INC10332773 then ignore the failure for now");
-							//newclaimDetailspage.validateClaimsTotalInDetailsPage();
 							newclaimDetailspage.validateClaimsTotalAccurateInDetailsPage(invokedBypass_INC10332773_YourShareMissmatched, planType);
 
 							System.out.println("Proceed to validate 'EOB' links on detail page");
@@ -789,11 +682,11 @@ public class ClaimsMemberRedesignStepDefinition {
 								System.out.println("Encountered issue for INC11365785_searchEOBHistory on detail page");
 								recordInvokedBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 							}
-							
+
 							System.out.println("Proceed to validate 'Need Help' section on detail page");
 							newclaimDetailspage.validateNeedHelpSection(planType);
-							
-							// if all goes well, go back to the summary page to prep for next run
+
+							//note: if all goes well, go back to the summary page to prep for next run
 							claimSummarypage= newClaimDetailsPage.navigateBackToClaimSummaryPage(planType, claimPeriod);
 							if(claimSummarypage != null) {
 								getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimSummarypage);
@@ -813,26 +706,22 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@When("^I validate Claim Details page content value and Learn More and EOB$")
 	public void validate_claim_details(DataTable memberAttributes) throws InterruptedException {
-		// only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-		//tbd String domain = memberAttributesMap.get("Domain");
 
 		if (planType.equalsIgnoreCase("PDP")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, and EOB on claims detail page");
 			return;
-		} else {
-			//this test is assume prior test steps passed so user has claims
+		} else {  //note: this test is assume prior test steps passed so user has claims
 			System.out.println("Proceed to Claims Summary page");
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-			//don't bother if getting system error already
-			claimSummarypage.validateSystemErrorMsgNotExist();
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+			claimSummarypage.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
 			//note: use the first claim data for validation
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage(2);
 			if (null != newClaimDetailsPage) {
@@ -858,14 +747,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 
-	
+
 	@And("^I can validate the learn more and print and download option in claims details table for given range$")
 	public void validate_print_and_download_option_in_claims_table(DataTable memberAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimPeriod = memberAttributesMap.get("Claim Period");
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
@@ -874,21 +763,21 @@ public class ClaimsMemberRedesignStepDefinition {
 			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyLearnMoreAndPrintAndDownloadOptions(numClaims));
 		} else {
 			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyLearnMoreAndPrintAndDownloadOptions(numClaims));
-	   	}
+		}
 	}
-	
+
 	@And("^I custom search claims for the specific time interval on claims summary page$")
 	public void custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
 		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
-	    String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-	    System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
@@ -897,15 +786,15 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@And("^I custom search claims for the following invalid time interval on claims summary page$")
 	public void invalid_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
 		String fromDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
 		String toDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
-		
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
@@ -914,11 +803,11 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	@And("^I custom search claims for over two years time interval from current date on claims summary page$")
 	public void greaterThanTwoYears_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar calendar = Calendar.getInstance();
@@ -936,44 +825,36 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-	
+
 	@Then("^I should be able to see the error message when no to and form dates being entered$")
-	//tbd public void validateEmptyDatesErrorMessage(DataTable memberAttributes){
 	public void validateEmptyDatesErrorMessage(){
-	/* tbd 	List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		//tbd	String planType=memberAttributesMap.get("Plan Type");		
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validateEmptyDatesError();
 	}
-	
+
 	@Then("^I should be able to see the from date is greater than the to date error message being displayed$")
 	public void validateToDateInvalidErrorMessage(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-			String planType=memberAttributesMap.get("Plan Type");		
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");		
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validatefromDateLaterThanToDateError(planType);
 	}
 
 	@Then("^I can validate claims table displayed based on the selection on claims summary page$")
 	public void validate_claims_table_display(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),memberAttributesRow.get(i).getCells().get(1));
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");		
 		String claimPeriod=memberAttributesMap.get("Claim Period");		
 		String claimType=memberAttributesMap.get("Claim Type");		
 		String claimSystem=memberAttributesMap.get("Claim System");		
-		//tbd String hasYourShareStr = memberAttributesMap.get("Has Your Share");
 
 		boolean hasYourShare=true;
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) {
@@ -985,23 +866,20 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-
 	}
-	
+
 	@And("^I can validate the EOB section based on claims system on claims summary page$")
 	public void validate_EOB_redesigned_site(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		//tbd String domain  = memberAttributesMap.get("Domain");
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-				
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//tbd boolean invokeBypass_INC11365785_searchEOBHistory=newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(domain, planType);
 		boolean invokeBypass_INC11365785_searchEOBHistory=newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(claimSystem, planType);
 		if (invokeBypass_INC11365785_searchEOBHistory) {
 			System.out.println("Encountered issue for INC11365785_searchEOBHistory on summary page");
@@ -1017,14 +895,15 @@ public class ClaimsMemberRedesignStepDefinition {
 		if(newclaimsSummarypage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
-	
+
 	@And("^I can validates the DownloadMyData section on claims summary page$")
 	public void validate_DownloadMyData_redesigned_site(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateDownloadMyData(planType);
@@ -1046,20 +925,20 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
-	
+
 	@When("^I validate the Need Help section content on claims summary page$")	
 	public void validateNeedHelpSectionOnClaimsSummaryPage(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newclaimsSummarypage.validateNeedHelpSection(planType);
+		newclaimsSummarypage.validateNeedHelpSection(planType);
 	}
 	//^^^ note: added for def1041	
-	
+
 	@When("^I navigate to the Claim details page to see view as pdf EOB$")	
 	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1068,32 +947,30 @@ public class ClaimsMemberRedesignStepDefinition {
 			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			
 			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
 		}
 		System.out.println("claims-============"+newClaimDetailsPage);
-		
-		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
-	
+
 	@Then("^I can validate the view as pdf link on claims details page header$")	
 	public void i_can_validate_the_eob_link(DataTable memberAttributes){
-		List<DataTableRow> memberAttributesRow = memberAttributes
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-		//tbd String domain = memberAttributesMap.get("Domain");
 		ClaimDetailsPage claimsdetailspage = (ClaimDetailsPage )getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimsdetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem,planType);
-		
+
 		System.out.println("claims-============"+claimsdetailspage);
 	}
-	
+
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
 	public void i_navigate_to_the_eobclaims_detailspage(){
 		ClaimDetailsPage newClaimDetailsPage;
@@ -1102,33 +979,29 @@ public class ClaimsMemberRedesignStepDefinition {
 			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink();
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			
 			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
 		}
 		System.out.println("claims details page -============"+newClaimDetailsPage);
-		
-		//getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
-	
+
 	//vvv note:	added for VBF	
 	@Then("^I validate the claims displayed based on the selection on claims summary page$")
 	public void vbf_validate_claims_table_redesigned_site() {
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.vbf_validateClaimsTable();
 	}	
-	
+
 	public static String vbf_claimType;
 	@And("^I can navigate to the Claim Details page from claims summary page$")
 	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable memberAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		/* tbd List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		} */
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimSystem = memberAttributesMap.get("Claim System");
-
 		if (claimSystem.equalsIgnoreCase("COSMOSCLAIMS") || claimSystem.equalsIgnoreCase("NICECLAIMS")
 				|| claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
 			if (claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
@@ -1136,8 +1009,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			} else {
 				vbf_claimType = "Medical";
 			}
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPage();
 			if (null != newClaimDetailsPage)
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
@@ -1151,38 +1023,41 @@ public class ClaimsMemberRedesignStepDefinition {
 			Assert.fail("Please check Claim syatems!!!");
 		}
 	}
-	
+
 	@Then("^I can validate the Claims Table on claims details page$")
 	public void vbf_validate_claimsTable_claimsDetails_AARP() {
-		
-			if (vbf_claimType.equalsIgnoreCase("Medical")) {
-				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
-			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
-				System.out.println("Skipping Claim Details validation!!!");
-			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
-				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-				claimDetailspage.vbf_validateClaimsTableInDetailsPage();
-			}
+		if (vbf_claimType.equalsIgnoreCase("Medical")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+		} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+			System.out.println("Skipping Claim Details validation!!!");
+		} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.vbf_validateClaimsTableInDetailsPage();
+		}
 	}
-	
+
 	@And("^I can validate the Claims Total on claims details page$")
 	public void vbf_validate_claims_total_AARP() {
-			if (vbf_claimType.equalsIgnoreCase("Medical")) {
-				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-				claimDetailspage.vbf_validateClaimsTotalInDetailsPage();
-			} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
-				ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-						.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-				claimDetailspage.vbf_validateShipClaimsTotalInDetailsPage();
-			} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
-				System.out.println("Skipping Claim Details validation!!!");
-			}
-		
+		if (vbf_claimType.equalsIgnoreCase("Medical")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.vbf_validateClaimsTotalInDetailsPage();
+		} else if (vbf_claimType.equalsIgnoreCase("SHIP")) {
+			ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
+			claimDetailspage.vbf_validateShipClaimsTotalInDetailsPage();
+		} else if (vbf_claimType.equalsIgnoreCase("Drug")) {
+			System.out.println("Skipping Claim Details validation!!!");
+		}
 	}
 	//^^^ note:	added for VBF	
 	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
 }
