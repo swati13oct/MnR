@@ -1767,7 +1767,7 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 	public void validateSystemErrorMsgNotExist() {
-//TBD		Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
+		Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
 	}
 
 	public void validateComboTabs(){

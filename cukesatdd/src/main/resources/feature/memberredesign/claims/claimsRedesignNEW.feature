@@ -34,7 +34,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
         And I validate the DownloadMyData section on claims summary page
 	      | Plan Type    | <planType>    |
         And I can navigate to the Claim Details page from claims summary page
-          | Claim System | <claimSystem>|
+          | Claim System | <claimSystem> |
         And I can validate the Claims Table on claims details page
         And I can validate the Claims Total on claims details page
 
@@ -91,6 +91,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
          | Plan Type      | <planType>     |
 	     | Member Type    | <memberType>   |
          | Claim System   | <claimSystem>  |
+	When if I access via dashboard I can navigate to claims summary page from View Your Claims 
 	When I navigate to the claims Summary page from dashboard or testharness page
 	Then I can validate the claims summary header on claims summary page
 	     | Plan Type      | <planType>     |
@@ -117,7 +118,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	And I validate the claims summary link on claims detail top page
 	     | Plan Type  | <planType>    |
 	Then I validate Claim Details page content value and Learn More and EOB		  
-	     | Plan Type    | <planType>  |
+	     | Plan Type    | <planType>    |
 	     | Claim System | <claimSystem> |
 	  
 	   Examples:   

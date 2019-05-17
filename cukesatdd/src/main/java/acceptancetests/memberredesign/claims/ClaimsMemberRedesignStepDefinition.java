@@ -234,6 +234,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
 		newClaimsSummaryPage.validateYouHavemessage(planType);
 		newClaimsSummaryPage.validateClaimsHeaderCopyText();
+		newClaimsSummaryPage.validateSystemErrorMsgNotExist();
 	}
 
 	@When("^I navigate to the Claim Details page from claims summary page$")
@@ -864,6 +865,16 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	}
 
+	@And("^if I access via dashboard I can navigate to claims summary page from View Your Claims$")
+	public void fromDashboardNavigateToClaimsSummaryViaViewYourClaims() {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			System.out.println("Running from testharness, this test step not applicable, skipping...");
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.navigateToClaimsPageByViewYorClaimsLinkThenBackToHome();
+		}
+	}
+		
 	//vvv note:	added for VBF	
 	@Then("^I validate the claims displayed based on the selection on claims summary page$") 
 	public void vbf_validate_claims_table_redesigned_site() { //in-use
