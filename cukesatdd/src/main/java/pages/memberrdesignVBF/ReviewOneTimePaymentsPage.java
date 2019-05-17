@@ -4,17 +4,18 @@
 package pages.memberrdesignVBF;
 
 import junit.framework.Assert;
+import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.JavascriptExecutor;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
+import com.google.common.base.Strings;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -23,41 +24,33 @@ import atdd.framework.UhcDriver;
  *
  */
 public class ReviewOneTimePaymentsPage extends UhcDriver {
+	
+	public static boolean isBusinessValidation = false;
+	
+	@FindBy(xpath = "//button[text()='CHANGE CARD']")
+	private WebElement ChangeCard;
 
-	@FindBy(xpath = "//div[@id='atdd_reviewonetime_label']/div[3]/div[2]/span")
-	private WebElement amountPayed;
+	@FindBy(xpath = "//button[text()='MAKE PAYMENT']")
+	private WebElement MakePaymentButton;
 
-	@FindBy(xpath = "//div[@id='atdd_reviewonetime_label']/div[4]/div[2]/span")
-	private WebElement routingNumber;
-
-	@FindBy(xpath = "//*[@id='atdd_reviewonetime_label']/div[5]/div[2]/span")
-	private WebElement AccountNumber;
-
-	@FindBy(xpath = "/html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[5]/div[2]/span")
-	private WebElement AccountNumberPaymentSubmittedPage;
-
-	@FindBy(xpath = "//*[@id='atdd_reviewonetime_label']/div[6]/div[2]/span")
-	private WebElement AccountHolderName;
-
-	@FindBy(xpath = "html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[6]/div[2]/span")
-	private WebElement AccountHolderNamePaymentSubmittedpage;
+	@FindBy(xpath = "//button[contains(@class,'btn--primary')][contains(text(),'Submit')]")
+	private WebElement submitPayment;
 
 	@FindBy(id = "termError")
-	private WebElement Legalcheckbox;
+	private WebElement AgreeCheckBox;
 
-	@FindBy(xpath = "//button[contains(text(), 'Authorize monthly Payments')][1]")
-	private WebElement SubmitButton;
+	@FindBy(id = "custom-page-title")
+	private WebElement confirmPageHeader;
+	
+	@FindBy(xpath = "//div[contains(@class,'payments')]//div[contains(@class,'intro_text')][contains(@style,'color:red;')]//*[string-length(normalize-space(text()))>1]")
+	private WebElement errorMessage;
 
-	@FindBy(xpath = "html/body/div[2]/div/div[2]/div/div/div[1]/div/div/div[1]/div[2]/span")
-	private WebElement PaymentType;
+	@FindBy(xpath = "//div[contains(@class,'payment-confirm')]//div[contains(@class,'table-body-row')]")
+	private List<WebElement> paymentConfirmRows;
 
-	@FindBy(xpath = "//div[@class='payments']//div[@class='col-md-12']//div[@class='ng-scope'][3]/div/p[2]")
-	private WebElement OTPError;
-
-	private PageData reviewOneTime;
-
-	public JSONObject reviewOneTimeJson;
-
+	@FindBy(xpath = "//div[contains(@class,'loading-block')]")
+	private WebElement loadingBlock;
+	
 	public ReviewOneTimePaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -66,116 +59,50 @@ public class ReviewOneTimePaymentsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(amountPayed);
-		validateNew(routingNumber);
+		validateNew(AgreeCheckBox);
+		validateNew(submitPayment);
+		validateNew(ChangeCard);
 	}
-
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnMakePayment() {
+		
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(AgreeCheckBox);
+		submitPayment.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		waitforElementDisapper(By.xpath("//div[contains(@class,'loading-block')]"), 60);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Payment Submitted")) {
+			System.out.println("User is on Confirmation Page");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else if(errorMessage.getText().contains("Only one payment request can be submitted per business day")) {
+			System.out.println("Buiness Validation message appears -- "+errorMessage.getText());
+			isBusinessValidation = true;
+			return null;
+		}
+		else {
+			System.out.println("User is not on Confirmation Page");
+			return null;
+		}
+	}
 	@SuppressWarnings("deprecation")
-	public ReviewOneTimePaymentsPage validateValues() {
-		if (AccountNumber.getText().equalsIgnoreCase("1234567890")) {
-			System.out.println("Account number value matched on Review Page");
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Account number Value does not match" + AccountNumber.getText());
-		}
-
-		if (AccountHolderName.getText().equalsIgnoreCase("first second third")) {
-			System.out.println("Account Holder Name value matched on Review Page");
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Account number Value does not match" + AccountHolderName.getText());
-		}
-		Legalcheckbox.click();
-		System.out.println("Legal terms checkbox clicked");
-		SubmitButton.click();
-		System.out.println("Submit Button clicked");
-		if (driver.getTitle().equalsIgnoreCase("My Benefits & Coverage")) {
-			return new ReviewOneTimePaymentsPage(driver);
-		}
-		return null;
-	}
-
-	public OneTimePaymentPageSubmitted navigateToOTPSubmittedPage() throws InterruptedException {
-
-		Thread.sleep(2000);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
-		Thread.sleep(2000);
-		Legalcheckbox.click();
-		System.out.println("Checkbox clicked");
-		Thread.sleep(2000);
-		jse.executeScript("window.scrollBy(0,250)", "");
-		Thread.sleep(2000);
-		SubmitButton.click();
-		System.out.println("Submit Button clicked");
-		Thread.sleep(5000);
-		if (driver.getTitle().equalsIgnoreCase("overview") || driver.getTitle().equalsIgnoreCase("onetimepayments")) {
-			return new OneTimePaymentPageSubmitted(driver);
-		}
-		return null;
-	}
-
-	public ReviewOneTimePaymentsPage ValidateOnePaymentPerDayErrorMessage() throws InterruptedException {
-
-		Thread.sleep(2000);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
-		Thread.sleep(2000);
-		Legalcheckbox.click();
-		System.out.println("Checkbox clicked");
-		Thread.sleep(2000);
-		jse.executeScript("window.scrollBy(0,250)", "");
-		Thread.sleep(2000);
-		SubmitButton.click();
-		System.out.println("Submit Button clicked");
-		Thread.sleep(5000);
-		if (OTPError.getText().contains("Only one payment request can be submitted per business day") || OTPError
-				.getText().contains("Due to a system error, your request cannot be processed at this time")) {
-			return new ReviewOneTimePaymentsPage(driver);
-		}
-		return null;
-	}
-
-	@SuppressWarnings("deprecation")
-	public ReviewOneTimePaymentsPage validateOTPSubmittedPageValues() {
-		if (AccountNumberPaymentSubmittedPage.getText().equalsIgnoreCase("1234567890")) {
-			System.out.println("Account number value matched on Submitted Page");
-		} else {
-			Assert.fail("Account number Value does not match " + AccountNumber.getText());
-		}
-		if (AccountHolderNamePaymentSubmittedpage.getText().equalsIgnoreCase("first second third")) {
-			System.out.println("Account Holder Name value matched on Submitted Page");
-		} else {
-			Assert.fail("Account Holder Name Value does not match " + AccountHolderName.getText());
-		}
-		if (PaymentType.getText().equalsIgnoreCase("EFT-Checking (One-Time)")) {
-			System.out.println("Payment Type Value mtached");
-		} else {
-			Assert.fail("Payment Type not matched " + PaymentType.getText());
-		}
-		return new ReviewOneTimePaymentsPage(driver);
-	}
-
-	public JSONObject reviewOneTimeValues() {
-		String fileName = CommonConstants.REVIEW_ONE_TIME_PAGE_DATA;
-		reviewOneTime = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_MEMBER);
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : reviewOneTime.getExpectedData().keySet()) {
-			WebElement element = findElement(reviewOneTime.getExpectedData().get(key));
-			if (element != null) {
-				if (validateNew(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
+	public void PaymentsDataVerificationonReviewPage() {
+		List<WebElement> columnsList = null;
+		for (WebElement row : paymentConfirmRows) {
+			columnsList = row.findElements(By.tagName("div"));
+			for (WebElement column : columnsList) {
+				System.out.print(column.getText() + " - ");
+				if ((Strings.isNullOrEmpty(column.getText()))) {
+					Assert.fail("Coloumn Header or value is null");
 				}
 			}
 		}
-		reviewOneTimeJson = jsonObject;
-
-		return reviewOneTimeJson;
 	}
 
 }

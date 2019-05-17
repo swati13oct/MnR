@@ -16,7 +16,7 @@ q1_grp_feb009/Test2day,MAPD,NICECLAIMS,GroupRetiree
 q2_jun_grp0082/Password@1,MAPD,COSMOSCLAIMS,GroupRetiree
 q2_jun_grp0004/Password@1,MAPD,RxCLAIMS,GroupRetiree
 q2_jun_ship0003486/Password@1,SHIP,SHIPCLAIMS,ShipInd
-q1_apr_uhc002/Password@1,UhcIndMAPDPayments
+q2_jun_aarp0076/Password@1,MakeOneTimeCCOther_Payments
 q2_jun_aarp0042/Password@1,AARPIndMAPDPayments
 q1_feb_uhc_eft008/Password@1,GroupRetireePayment
 q2_jun_ship0003486/Password@1,Medsupp,Ship,ShipEOB
