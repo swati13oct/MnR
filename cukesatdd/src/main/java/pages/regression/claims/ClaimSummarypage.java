@@ -944,7 +944,7 @@ public class ClaimSummarypage extends UhcDriver{
 	public ClaimDetailsPage navigateToClaimDetailsPage()  {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
-		//scrollToView(claimstablemoreinfolink);
+		scrollToView(claimsSummaryPrintButton);
 		claimstablemoreinfolink.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver,claimDetTableMainSection , 10);
@@ -1701,7 +1701,7 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("Go to claim detail page by clicking 'More Info' button");
 		CommonUtility.waitForPageLoadNew(driver, claimstablemoreinfolink, 60);
 		WebElement row=driver.findElement(By.xpath("//div[@class='claim-results']//table[not (contains(@class,'ng-hide'))]//tbody//tr["+rowNum+"]//a[text()='MORE INFO']"));
-		//scrollToView(row);
+		scrollToView(claimsSummaryPrintButton);
 		row.click();
 		int counter =0;
 		do{
