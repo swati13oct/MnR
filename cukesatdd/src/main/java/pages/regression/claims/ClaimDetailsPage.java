@@ -26,7 +26,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	private  WebElement myCaimsDetailsText;
 
 	@FindBy(xpath=".//*[@id='dateRange']")
-	private  WebElement  dateRange;
+	private WebElement dateRange;
 	
 	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][1]//div[@class='table-body-cell'][1]//p")
 	private WebElement ship_dateRangeLabel;
@@ -424,7 +424,6 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 
 		//note: validate header section body content
-
 		if (planType.equalsIgnoreCase("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate ship_claimNumberLabel element on claims detail page", validate(ship_claimNumberLabel));
 			Assert.assertTrue("PROBLEM - unable to locate ship_dateRangeLabel element on claims detail page", validate(ship_dateRangeLabel));

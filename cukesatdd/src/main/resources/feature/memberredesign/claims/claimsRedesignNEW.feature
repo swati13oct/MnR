@@ -99,7 +99,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | Plan Type    | <planType>    |
 	     | Claim Period | <claimPeriod> |
 	Then I can see the claims displayed based on the selection on claims summary page
-	And I validate the pagination on the claims summary page 
+	And I validate the pagination on the claims summary page
 	And I can see the learn more and print and download option on claims summary table section 
 	And I validate the EOB section based on claims system on claims summary page
 	     | Plan Type    | <planType>    |
@@ -296,7 +296,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
-		  | Member Type    | <memberType>   |
+		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
@@ -304,7 +304,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
 		  | Claim Period | Last 24 months          |
-		Then I can validate the learn more and print and download option in claims details table for given range
+		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
 		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
 		  | Plan Type    | <planType>              |
@@ -314,8 +314,6 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		And I can validate the EOB section based on claims system on claims summary page
 		  | Plan Type    | <planType>              |
 		  | Claim System | <claimSystem>           |
-		And I can validates the DownloadMyData section on claims summary page
-		  | Plan Type    | <planType>              |
 		And I validate the Need Help section content on claims summary page
 		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
@@ -471,7 +469,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
-		  | Member Type    | <memberType>   |
+		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
@@ -479,7 +477,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
 		  | Claim Period | Last 24 months          |
-		Then I can validate the learn more and print and download option in claims details table for given range
+		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
 		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
 		  | Plan Type    | <planType>              |
@@ -489,8 +487,6 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		And I can validate the EOB section based on claims system on claims summary page
 		  | Plan Type    | <planType>              |
 		  | Claim System | <claimSystem>           |
-		And I can validates the DownloadMyData section on claims summary page
-		  | Plan Type    | <planType>              |
 		And I validate the Need Help section content on claims summary page
 		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
