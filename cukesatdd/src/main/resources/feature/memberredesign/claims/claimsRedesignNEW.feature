@@ -306,6 +306,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		And I validate the pagination on the claims summary page for given range 
 		  | Claim Period | Last 24 months          |
 		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
+		  | Plan Type    | <planType>              |
 		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
 		  | Plan Type    | <planType>              |
@@ -374,7 +375,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |10    |1041| PCP      | Individual                 | D_COSMOS_CLAIMS| Prescription drug | No                 |
+	  |10    |1041| PCP      | Individual                 | COSMOS_CLAIMS  | Prescription drug | No                 |
 
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
@@ -479,6 +480,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		And I validate the pagination on the claims summary page for given range 
 		  | Claim Period | Last 24 months          |
 		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
+		  | Plan Type    | <planType>              |
 		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
 		  | Plan Type    | <planType>              |

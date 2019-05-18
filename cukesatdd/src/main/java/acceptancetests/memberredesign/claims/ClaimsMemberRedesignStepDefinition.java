@@ -673,13 +673,15 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void validate_print_and_download_option_in_claims_table(DataTable memberAttributes) throws Throwable { //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String claimPeriod = memberAttributesMap.get("Claim Period");
+		String planType = memberAttributesMap.get("Plan Type");
+		
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (numClaims <=0) {
-			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(numClaims));
+			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(numClaims, planType));
 		} else {
-			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(numClaims));
+			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimSummarypage.verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(numClaims, planType));
 		}
 	}
 

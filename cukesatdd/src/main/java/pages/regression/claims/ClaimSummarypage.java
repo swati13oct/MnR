@@ -1333,31 +1333,43 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 	}
 
-	public boolean verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(int numClaims) {
+	public boolean verifyDownloadMyDataAndLearnMoreAndPrintAndDownloadOptions(int numClaims, String planType) {
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
+		boolean result=true;
 		if (numClaims >0) {
-			System.out.println("Has claim(s), expect to see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
-			if (validateLearnMoreAndPrintAndDownloadOptionExistAndWork() && validateDownloadMyDataExistsAndWorks()) {
-				return true;
-			} else {
+			if (!validateLearnMoreAndPrintAndDownloadOptionExistAndWork()) {
 				System.out.println("locate 'Learn More About Your Claims' link result="+validate(learnMoreAboutClaims));
 				System.out.println("locate 'Print' button result="+validate(claimsSummaryPrintButton));
 				System.out.println("locate 'Download Claims' button result="+validate(claimsSummaryDownloadButton));
 				System.out.println("locate 'DownloadMyData' button result="+validate(downloadmydatabutton));
-				return false;
+				result=false;
 			}
+			System.out.println("Has claim(s), Got the expected behavior, able to locate 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
 		} else {
-			System.out.println("Has no claim, expect NOT to see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' and 'DownloadMyData' button");
-			if (!validate (learnMoreAboutClaims) && !validate(claimsSummaryPrintButton) && !validate(claimsSummaryDownloadButton) && !validate(downloadmydatabutton)) {
-				return true;
-			} else {
+			if (validate (learnMoreAboutClaims) || validate(claimsSummaryPrintButton) || validate(claimsSummaryDownloadButton)) {
 				System.out.println("locate 'Learn More About Your Claims' link result="+validate(learnMoreAboutClaims));
 				System.out.println("locate 'Print' button result="+validate(claimsSummaryPrintButton));
 				System.out.println("locate 'Download Claims' button result="+validate(claimsSummaryDownloadButton));
-				System.out.println("locate 'DownloadMyData' button result="+validate(downloadmydatabutton));
-				return false;
+				result=false;
 			}
+			System.out.println("Has no claim, Got the expected behavior and didn't see 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS'");
 		}
+		if (planType.equalsIgnoreCase("SHIP")) {
+			//note: ship user doesn't have DownloadMyData button
+			if (validate(downloadmydatabutton)) {
+				System.out.println("locate 'DownloadMyData' button result="+validate(downloadmydatabutton));
+				result=false;
+			}
+			System.out.println("Got the expected behavior where 'DownloadMyData' button not exist for SHIP user ");
+		} else {
+			//note: all other users should have DownloadMyData button 
+			if (!validateDownloadMyDataExistsAndWorks()) {
+				System.out.println("validateDownloadMyDataExistsAndWorks failed");
+				result=false;
+			}
+			System.out.println("Got the expected 'DownloadMyData' button");
+		}
+		return result;
 	}
 
 	public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, String claimSystem, boolean hasYourShare) {
