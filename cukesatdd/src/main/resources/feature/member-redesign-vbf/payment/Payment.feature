@@ -25,3 +25,8 @@ Feature: 1.11-VBF-MemRedesign-To test the payment history (GATED)
     Examples: 
       | TID       | memberType                       | Name | CreditCardNumber | validMonth | validYear |friendname | favcolor | phonenumber |
       | F243897   | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2020 |name1      | color1   | number1     |
+      
+     @oneTimeCCPaymentPerf
+     Examples:
+       | memberType                       | Name | CreditCardNumber | validMonth | validYear |friendname | favcolor | phonenumber |
+       | oneTimeCCPaymentPerf      | Test | 4111111111111111 |         04 |      2020 |name1      | color1   | number1     |
