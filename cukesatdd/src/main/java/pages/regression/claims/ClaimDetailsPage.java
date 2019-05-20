@@ -361,7 +361,6 @@ public class ClaimDetailsPage extends UhcDriver{
 			ship_eobTooltipsButton.click();
 			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
 			String expEobTooltipsText="EOB statements created prior to December "+sixYearsPrior+" are not posted to this site. In addition, although recent claims may be available for viewing, the corresponding EOB statement has not yet been processed and posted to this site for viewing.";
-			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
 			tooltipsElementText.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
@@ -371,7 +370,6 @@ public class ClaimDetailsPage extends UhcDriver{
 			claimsStatusTooltipsButton.click();
 			Assert.assertTrue("PROBLEM - unable to locate claims status tooltips text after clicking", validate(tooltipsElementText));
 			String expClaimsStatusTooltipsText="This information tells you whether or not your claim is pending payment, paid or denied. A status of adjusted means that the original payment amount has changed.";
-			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expClaimsStatusTooltipsText));
 
 			tooltipsElementText.click();
@@ -381,7 +379,6 @@ public class ClaimDetailsPage extends UhcDriver{
 			eobTooltipsButton.click();
 			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
 			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
-			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
 			tooltipsElementText.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));

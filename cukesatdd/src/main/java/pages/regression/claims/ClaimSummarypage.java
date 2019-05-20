@@ -1841,7 +1841,6 @@ public class ClaimSummarypage extends UhcDriver{
 				e.printStackTrace();
 			}
 			CommonUtility.checkPageIsReady(driver);
-			System.out.println("TEST - download - driver.getCurrentUrl()="+driver.getCurrentUrl());
 			String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
 			if (!driver.getCurrentUrl().contains(expectedURL)) {
 				System.out.println("PROBLEM - process button is not functioning as expected");
