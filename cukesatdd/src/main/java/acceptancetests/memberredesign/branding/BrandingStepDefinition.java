@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -22,6 +23,7 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.testharness.TestHarness;
 /**
  * 
  * @author jkuma14
@@ -40,17 +42,21 @@ public class BrandingStepDefinition{
 	 * 
 	 */
 
-@Given("^verify that correct logo is displayed on the home page$")
+@Given("^verify that correct logo is displayed on the home page or test harness page$")
+
 public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
+	
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
+	for (int i = 0; i < memberAttributesRow.size(); i++) 
+	{
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
-	}
-
+     }
+		
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
 	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
 	Thread.sleep(3000);
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -58,9 +64,27 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 	accountHomePage.validateImagePresent(logoToBeDisplayedOnDashboard);	
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	
+	}
+	
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		
+		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
+		Thread.sleep(3000);
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		System.out.println("Now checking for logo on Team-h or stage test harness page");
+		testHarnessPage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
+		System.out.println("logo on test harness page was displayed.");
+	    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+	}
+	    else 
+	    {
+			System.out.println("Not verifying anything as the environment is not set to team-h or Stage, update the step definition please");
+		}
+	
 }
 
-@Given("^verify that correct logo and cologo are displayed on the home page$")
+@Given("^verify that correct logo and cologo are displayed on the home page or test harness page$")
 public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable givenAttributes) throws Throwable {
 	List<DataTableRow> memberAttributesRow = givenAttributes
 			.getGherkinRows();
@@ -70,6 +94,9 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
+	
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
 
 	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
 	String cologoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard CoLogo");
@@ -80,14 +107,57 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 	accountHomePage.validateCoLogoImagePresent(cologoToBeDisplayedOnDashboard);		
 	getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 	
+	}
+	
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
+		String cologoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page CoLogo");
+		
+		Thread.sleep(3000);
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		System.out.println("Now checking for logo and cologo on Team-h or stage test harness page");
+		testHarnessPage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
+		testHarnessPage.validateCoLogoImagePresent(cologoToBeDisplayedOnSecondaryPage);
+		System.out.println("logo and cologo on test harness page were displayed.");
+	    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+		
+	}
+	
+	else 
+    {
+		System.out.println("Not verifying anything as the environment is not set to team-h or Stage, update the step definition please");
+	}
+	
 }
 
-@Then("^user clicks on benefits and coverage tab on home page$")
+@Then("^user clicks on benefits and coverage tab on home page or test harness page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
+	
+	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	{
+	
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 	Thread.sleep(9000);
 	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateToBandCPage();
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+	}
+	
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	{
+		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		BenefitsAndCoveragePage coverageandbenefitsPage = testHarnessPage.clickOnBenefitsandCoverageTab();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, coverageandbenefitsPage);
+		System.out.println("Now waiting for 20 seconds");
+		
+	}
+	
+	else 
+    {
+		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage");
+	}
+	
 	
 }
 	

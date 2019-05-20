@@ -67,6 +67,11 @@ public class ShopforaplanUHClayer extends UhcDriver {
     @FindBy(xpath="//button[@type='submit']")
    	private WebElement pcontinue;
     
+    @FindBy(xpath="//div[@id='planTypesColumn']//a[text()='Enroll']")
+	private WebElement enrollLink;
+  
+    @FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
+	private WebElement maLeanHowToEnrollLink;
   
     
   
@@ -252,5 +257,17 @@ public class ShopforaplanUHClayer extends UhcDriver {
         {
         	return null;
         }
+	}
+	
+	public EnrollmentBasicsPage enrollLinkOnShopPlan() throws Exception{
+		waitforElement(enrollLink);
+		enrollLink.click();
+		 Thread.sleep(4000);
+		 if(validate(maLeanHowToEnrollLink)){
+			 waitforElement(maLeanHowToEnrollLink);
+				System.out.println("OLE Learn More Modal is Displayed");
+				return new EnrollmentBasicsPage(driver);
+			}
+			return null;
 	}
 }
