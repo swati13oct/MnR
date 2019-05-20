@@ -1154,7 +1154,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
@@ -1439,7 +1439,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]"));	
+		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));	
 
 		if(allPDPlans !=null){
 			for(int i = 0; i<allPDPlans.size(); i++){
@@ -2035,7 +2035,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 		Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
 	
-		//note: temperary, remove the following when email option is enable, this is just to make sure it wasn't turn on by mistake
+		/* tbd-remove 
+		//note: temperary - remove the following when email option is enable, this is just to make sure it wasn't turn on by mistake
 		WebElement emailElement=null;
 		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
 			//System.out.println("TEST - going to validate the print and email element for MA");
@@ -2050,6 +2051,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
 		}
 		Assert.assertTrue("PROBLEM - Email option should NOT show up (disabled until feature approved). emailCheck="+validate(emailElement), !validate(emailElement));
+		*/
 	}
 
 	public void validateDefaultNoSavedPlan(String planType) {

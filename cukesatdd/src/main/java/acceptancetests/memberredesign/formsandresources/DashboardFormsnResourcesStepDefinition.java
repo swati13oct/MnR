@@ -3,6 +3,9 @@ package acceptancetests.memberredesign.formsandresources;
 
 import gherkin.formatter.model.DataTableRow;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,8 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.memberauth.MemberAuthPage;
+import pages.regression.testharness.TestHarness;
+import pages.member_deprecated.redesign.TestHarnessPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.testharness.TestHarness;
 import atdd.framework.*;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -146,25 +153,47 @@ public class DashboardFormsnResourcesStepDefinition {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo : navigation to the forms and resources page from dashboard for active
 	 *       member
 	 */
 	@And("^user clicks on the view document and resources link and navigate to forms and resource page$")
-	public void clickOnFormAndResourcesLinkActive(DataTable attributes) throws InterruptedException {
+	public void clickOnFormAndResourcesLinkActive(DataTable attributes) throws InterruptedException  {
+		
+		System.out.println("***The user navigates to Forms and Resources page***");
+		FormsAndResourcesPage formsAndResourcesPage=null;
+		if (("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			TestHarness testharnessHomepage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			
+			 formsAndResourcesPage = testharnessHomepage.navigateDirectToFnRPage();
+		} 
+		else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			List<List<String>> data = attributes.raw();
+
+			String planType=data.get(0).get(1);
+			String memberType=data.get(1).get(1);
+
+			 formsAndResourcesPage = accountHomePage.navigatetoFormsnResources(memberType,planType);
+		}
+		
+		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE,formsAndResourcesPage);
+		
+		
 		AccountHomePage accounthomepage = (AccountHomePage) loginScenario.getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		// Thread.sleep(20000);
 		
-		List<List<String>> data = attributes.raw();
-
-		String planType=data.get(0).get(1);
-		String memberType=data.get(1).get(1);
-		
-
-		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
+//		List<List<String>> data = attributes.raw();
+//
+//		String planType=data.get(0).get(1);
+//		String memberType=data.get(1).get(1);
+//		
+//
+//		FormsAndResourcesPage formsAndResourcesPage = accounthomepage.navigatetoFormsnResources(memberType,planType);
 		System.out.println("navigation worked");
-		// Thread.sleep(5000);
-		formsAndResourcesPage.waitforFNRpage();
-		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
+//		// Thread.sleep(5000);
+//		formsAndResourcesPage.waitforFNRpage();
+//		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
 		System.out.println("forms and resources page");
 
 	}
@@ -283,6 +312,75 @@ public class DashboardFormsnResourcesStepDefinition {
 		
 		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 	}
+	
+	@And("^the Pharmacy locator link is displayed for MAPD Group$")
+	public void phamacymapd(DataTable attributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		formsAndResourcesPage.scroll();
+		
+		if(formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()){
+			System.out.println("pharmacy locator link is present");
+		}
+			else
+				System.out.println("pharmacy locator link is NOT present");
+		}
+	
+	@And("^the Pharmacy locator link is displayed texas$")
+	public void phamacytexas(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkTexas().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+	
+	@And("^the Pharmacy locator link is displayed PDP UHC Group$")
+	public void phamacypdpUhc(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroup().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+	
+	@And("^the Pharmacy locator link is displayed for ALPeehip$")
+	public void phamacyAlPeehip(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkAlPeehip().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+		
 
 	@And("^the Pharmacy locator link is displayed$")
 	public void phamacypdp(DataTable attributes) {
@@ -293,7 +391,7 @@ public class DashboardFormsnResourcesStepDefinition {
 
 		List<List<String>> data = attributes.raw();
 
-		if (data.get(0).get(1).contains("Group")) {
+	if (data.get(1).get(2).contains("Group")) {
 			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("pharmacy locator link is present");
@@ -412,7 +510,9 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getAnocforgroup().get(1).isDisplayed()) {
+		
+	
+		if (formsAndResourcesPage.getAnocforgroup().get(2).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc for grp is present");
 		} else {
@@ -661,7 +761,9 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("Anoc pdfs aren't coming correctly");
 		}
 	}
-
+	
+	
+	
 	/**
 	 * @throws InterruptedException
 	 * @toDo : verifies the plan material section
@@ -1127,8 +1229,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	@Then("^user verifies presence of jump links on F&R page$")
 	public void user_verifies_presence_of_jump_links(DataTable rows) throws Throwable {
 		List<List<String>> data = rows.raw();
-		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
-				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 
 		int planId = 0;
 		String planType = data.get(0).get(1).trim();
@@ -1155,31 +1256,34 @@ public class DashboardFormsnResourcesStepDefinition {
 		if (planType.equalsIgnoreCase("SSUP"))
 			planId = 5;
 
-		switch (planId) {
-		case 1:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksMAPD(rider, planType, memberType,identifier);
-			break;
-
-		case 2:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksMA(rider, planType, memberType,identifier);
-			break;
-
-		case 3:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType,identifier);
-			break;
-
-		case 4:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksPDP(rider, planType, memberType, identifier);
-			break;
-
-		case 5:
-			formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType,identifier);
-			break;
-
-		default:
-			System.out.println("Plan Not Found");
-			break;
-
+		System.out.println("formsAndResourcesPage==="+formsAndResourcesPage);
+		if(formsAndResourcesPage!=null){
+			switch (planId) {
+			case 1:
+				formsAndResourcesPage.verifyPresenceOfJumpLinksMAPD(rider, planType, memberType,identifier);
+				break;
+	
+			case 2:
+				formsAndResourcesPage.verifyPresenceOfJumpLinksMA(rider, planType, memberType,identifier);
+				break;
+	
+			case 3:
+				formsAndResourcesPage.verifyPresenceOfJumpLinksMedSupp(rider, planType, memberType,identifier);
+				break;
+	
+			case 4:
+				formsAndResourcesPage.verifyPresenceOfJumpLinksPDP(rider, planType, memberType, identifier);
+				break;
+	
+			case 5:
+				formsAndResourcesPage.verifyPresenceOfJumpLinksSSUP(rider, planType, memberType,identifier);
+				break;
+	
+			default:
+				System.out.println("Plan Not Found");
+				break;
+	
+			}
 		}
 
 	}

@@ -18,13 +18,13 @@ import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-//import pages.memberrdesignVBF.BenefitsAndCoveragePage;
 import pages.regression.benefitandcoverage.*;
+import pages.regression.formsandresources.*;
 import pages.regression.claims.*;
 import pages.regression.contactus.ContactUsPage;
 import pages.memberrdesignVBF.DrugCostEstimatorPage;
 import pages.memberrdesignVBF.EOBPage;
-import pages.memberrdesignVBF.FormsAndResourcesPage;
+
 import pages.regression.healthandwellness.*;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
@@ -210,6 +210,12 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'benefits')]")
 	private WebElement benefitsPagetestharnessLink;
+	
+	 @FindBy(css = "img.img-responsive")
+     private WebElement logoImage;
+	 
+	 @FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
+     private WebElement cologoImage;
 	
 
 	String category = null;
@@ -652,8 +658,9 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public FormsAndResourcesPage navigateDirectToFnRPage() {
+	public FormsAndResourcesPage navigateDirectToFnRPage() throws InterruptedException {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(formsPageLink);
@@ -667,6 +674,7 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
+	
 	/***
 	 * 
 	 * @return
@@ -735,8 +743,9 @@ public class TestHarness extends UhcDriver {
 	/***
 	 * 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public FormsAndResourcesPage clickFormsAndResourcesTab() {
+	public FormsAndResourcesPage clickFormsAndResourcesTab() throws InterruptedException {
 
 		validateNew(formsAndResources);
 		formsAndResources.click();
@@ -899,4 +908,28 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
+	
+    public void validateImagePresent(String logoToBeDisplayedOnSecondaryPage) throws InterruptedException {
+        CommonUtility.waitForPageLoad(driver,logoImage,15);
+        String logo_src = logoImage.getAttribute("src");
+        String logo_alt = logoImage.getAttribute("alt");
+        System.out.println("Actual logo's source on Test Harness page is   "+logo_src+" and Expected logo source is  "+logoToBeDisplayedOnSecondaryPage+" . ");                     
+        System.out.println("logo's alt text on secondary page is   "+logo_alt);          
+        Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnSecondaryPage));
+        System.out.println("Test harness page main logo assert condition is passed");              
+}
+
+
+
+        public void validateCoLogoImagePresent(String cologoToBeDisplayedOnSecondaryPage) throws InterruptedException {
+        
+        CommonUtility.waitForPageLoad(driver,cologoImage,15);
+        String cologo_src = cologoImage.getAttribute("src");
+        String cologo_alt = cologoImage.getAttribute("alt");
+        System.out.println("Actual logo's source on Test harness page is   " + cologo_src
+                                      + " and Expected logo source is  " + cologoToBeDisplayedOnSecondaryPage + " . ");
+        System.out.println("logo's alt text on secondary page is   " + cologo_alt);
+        Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
+        System.out.println("Test Harness page co logo assert condition is passed");
+}
 }

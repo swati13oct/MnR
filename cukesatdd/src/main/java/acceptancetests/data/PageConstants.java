@@ -138,6 +138,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String REQUEST_AGENT_APPOINTMENT_PAGE = "requestAgentAppointmentPage";
 	
     public static final String SHOP_FOR_A_PLAN_UHCLAYER = "ShopforaplanUHClayer";	
+    
+    public static final String SHOP_FOR_A_PLAN_AARPLAYER = "ShopforaplanAARPlayer";
 	
 	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
 	
@@ -650,6 +652,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String Keyword_Search ="keywordsearch"; 
 
+	public static final String ENROLLMENT_BASICS_PAGE = "enrollmentBasicsPage";
 	
 	//Agency Feature - IS Decision Guide Page Constants
 	public static final String IS_DECISION_GUIDE_PAGE1 ="isDecisionGuideStep1Page"; 

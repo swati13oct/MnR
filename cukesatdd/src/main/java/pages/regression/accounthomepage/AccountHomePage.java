@@ -53,6 +53,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='dropdown-options-0']/a[3]/span")
 	private WebElement acctProfile;
 	
+	@FindBy(xpath = "//a[contains(text(),'Go to Forms and Resource page')]")
+	private WebElement FormRsrceLinkTestHarness;
+	
 	@FindBy(xpath = "//*[@id='dropdown-options--1']/a[3]")
 	private WebElement acctSetting;
 	
@@ -386,6 +389,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(tagName="arcade-footer")
 	private WebElement shadowRootFooter;
+	
+	@FindBy(xpath="//span[contains(@class,'account-info-label')]")
+	private WebElement accountLabel;
 
 	private PageData myAccountHome;
 
@@ -638,11 +644,26 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
-				acctProfile.click();
-				acctSetting.click();
+				if (validate(acctProfile)) {
+					acctProfile.click();
+					acctSetting.click();
+				} else {
+					//check to see if link is inside shadow-root element
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
+					System.out.println("clicked header menu");
+
+					if (validate(accountLabel) && 
+							(accountLabel.getText().toLowerCase().contains("supplement") 
+							|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(2) > span");	
+					} else {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(3) > span");	
+					}
+					System.out.println("clicked header button");
+				}
+				Thread.sleep(6000);	   
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
-				Thread.sleep(6000);	   
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
 				}
@@ -1275,13 +1296,40 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateImagePresent(String logoToBeDisplayedOnDashboard) throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver,logoImage,30); 
-        String logo_src = logoImage.getAttribute("src");
-        String logo_alt = logoImage.getAttribute("alt");
-        System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
-        System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
-        Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
-        System.out.println("Dashboard page Primary logo assert condition is passed");
+		Thread.sleep(9000);
+		if(logoImage.isDisplayed()){
+			//CommonUtility.waitForPageLoad(driver,logoImage,30); 
+			String logo_src = logoImage.getAttribute("src");
+			String logo_alt = logoImage.getAttribute("alt");
+			System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+			System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+			Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+			System.out.println("Dashboard page Primary logo assert condition is passed");
+		} else{
+			//tbd locateElementWithinShadowRoot(shadowRootHeader, "div > span > div > header > div.container.utility-nav-container > a > img");
+			if (validate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1=expandRootElement(shadowRootHeader);
+				try {
+					// Going inside shadow root to get element, in this case the logo is in the shadow root header
+					WebElement logo=root1.findElement(By.cssSelector("div > span > div > header > div.container.utility-nav-container > a > img"));
+					Assert.assertTrue("Dashboard header is not displayed", validate(logo));
+					String logo_src = logo.getAttribute("src");
+					String logo_alt = logo.getAttribute("alt");
+					System.out.println("Actual logo's source on Dashboard page is   "+logo_src+" and Expected logo source    "+logoToBeDisplayedOnDashboard+" .");   
+					System.out.println("logo's alt text on Dashboard page is   "+logo_alt);           
+					Assert.assertTrue(logo_src.contains(logoToBeDisplayedOnDashboard));
+					System.out.println("Dashboard page Primary logo assert condition is passed");
+				} catch (Exception e) {
+					System.out.println("can't locate element. Exception e="+e);
+					Assert.assertTrue("Dashboard header not functioning as expected", false);
+				}
+			} else {
+				System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+				Assert.assertTrue("Dashboard header is not displayed", false);
+			}
+
+		}
 	}
 
 	public void validateCoLogoImagePresent(String cologoToBeDisplayedOnDashboard) throws InterruptedException {
@@ -1306,15 +1354,20 @@ public class AccountHomePage extends UhcDriver {
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			return new ClaimSummarypage(driver);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");
+		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
+			System.out.println("user is on '"+MRScenario.environmentMedicare+"' login page");
 			if (driver.getCurrentUrl().contains("/dashboard"))
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				if(MRScenario.isTestHarness.equals("YES")){
+				if(MRScenario.isTestHarness != null && MRScenario.isTestHarness.equals("YES")){
 					claimsTestharnessLink.click();
 				}else{
-					claimsDashboardLink.click();
+					if (validate(claimsDashboardLink)) {
+						claimsDashboardLink.click();
+					} else {
+						System.out.println("Check for shadow-root before giving up");
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(2)");
+					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				/* tbd 	try {
@@ -1449,14 +1502,22 @@ public class AccountHomePage extends UhcDriver {
 	@SuppressWarnings("unused")
 	public FormsAndResourcesPage navigatetoFormsnResources(String memberType, String planType)
 			throws InterruptedException {
-		// waitForHomePage(helloPerson);
+		
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		if (validate(iPerceptionAutoPopUp)) {
 			iPerceptionAutoPopUp.click();
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+		
+		if (MRScenario.isTestHarness.equals("YES")) {
+			System.out.println("user is on TestHarness login page");
+			
+			CommonUtility.waitForPageLoad(driver, FormRsrceLinkTestHarness, 30);
+			FormRsrceLinkTestHarness.click();
+		
+		}
+		else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "
@@ -2654,13 +2715,14 @@ public class AccountHomePage extends UhcDriver {
 		return ele;
 	}
 	
-	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
 			try {
 				WebElement element=root1.findElement(By.cssSelector(inputSelector));
 				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				return element;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);
@@ -2669,6 +2731,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
 			Assert.assertTrue("Dashboard header is not displayed", false);
 		}
+		return null;
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {

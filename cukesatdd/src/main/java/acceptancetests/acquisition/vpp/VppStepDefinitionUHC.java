@@ -17,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
+
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -56,7 +57,7 @@ public class VppStepDefinitionUHC {
 	 */
 	@Given("^the user is on the uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
@@ -130,206 +131,6 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		//VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-
-		}
-
-	}
-
-	@When("^the user performs zipcode search using widget following information in the UHC site$")
-	public void the_user_performs_zipcode_search_using_widget_following_information_in_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		// String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		// getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.GotoVPP(zipcode);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-
-		}
-	}
-
-	@When("^the user performs zipcode search to welcome OLE Page using widget on the UHC site$")
-	public void the_user_performs_zipcode_search_to_welcome_OLE_Page_using_widget_on_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site$")
-	public void the_user_goes_to_MA_Landing_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlanMALanding();
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the UHC site$")
-	public void the_user_goes_to_MA_selects_Special_Need_Plans_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		WelcomePage welcomeOLEPage = aquisitionhomepage.SpecialNeedPlansZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the UHC site$")
-	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlansPDPLanding();
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to MA Landing and performs zipcode search using widget following information in the UHC site$")
-	public void the_user_goes_to_MA_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlanMALanding();
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.GotoVPP(zipcode);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating the Plan Summary Page");
-
-		}
-	}
-
-	@When("^the user goes to MA Landing page Options$")
-	public void MA_Landing_planOptions_in_TeamC_site(DataTable givenAttributes) {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlansMALandingForSNP();
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.GotoVPP(zipcode);
-
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -683,36 +484,6 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 			comparePlansPage.validatetopbacktoplanslink();
 	}
-
-
-	@When("^the user goes to PDP Landing and performs zipcode search using widget following information in the UHC site$")
-	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_UHC_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		aquisitionhomepage.OurPlansPDPLanding();
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.GotoVPP(zipcode);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
 	
 	@Then("^the user validates the following Additional Benefits Plan details for the plan in UMS$")
 	public void the_user_validates_the_following_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
@@ -927,6 +698,34 @@ public class VppStepDefinitionUHC {
 			} else
 				Assert.fail("Error in loading the compare plans page");
 		}
+		
+		
+		@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
+		public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType) throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.clickOnPDPPlans();
+			plansummaryPage.clickCompareChkBoxPDP();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 		
 		@And("^I Click on DCE link on Plan compare$")
 		public void I_Click_On_DCE_link_on_Plan_Compare() {
@@ -1692,6 +1491,43 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 		
+		
+		@When("^the user performs plan search using Standalone Zipcode information in the UHC site$")
+		public void the_user_performs_plan_search_using_Standalone_Zipcode_information_in_the_UHC_site(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String county = memberAttributesMap.get("County Name");
+			String isMultiCounty = memberAttributesMap.get("Is Multi County");
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			
+			String PlanType= (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			String PlanName= (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			
+			WelcomePage welcomePage;
+			if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+				welcomePage = aquisitionhomepage.ZipcodeSearchToOLEWithOutCounty(zipcode,PlanName);
+			} else {
+				welcomePage = aquisitionhomepage.ZipcodeSearchToOLEWithCounty(zipcode,county,PlanName);
+			}
+			Thread.sleep(7000);
+			if (welcomePage != null) {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			} else {
+				Assert.fail("Error Loading OLE Welcome page");
+			}
+		}
 		
 		
 }

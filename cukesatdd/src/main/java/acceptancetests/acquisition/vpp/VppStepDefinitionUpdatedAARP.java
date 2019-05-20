@@ -53,7 +53,7 @@ public class VppStepDefinitionUpdatedAARP {
 	 */
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -415,34 +415,6 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	@When("^the user performs zipcode search to welcome OLE Page using widget on the AARP site$")
-	public void the_user_performs_zipcode_search_to_welcome_OLE_Page_using_widget_on_the_AARP_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading Welcome Page for OLE");
-		}
-	}
-
 	@When("^the user goes to MA Landing and performs zipcode search using widget following information in the AARP site$")
 	public void the_user_goes_to_MA_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
@@ -501,89 +473,6 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	@When("^the user goes to MA Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$")
-	public void the_user_goes_to_MA_Landing_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_AARP_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlanMALanding();
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to MA selects Special Need Plans and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$")
-	public void the_user_goes_to_MA_selects_Special_Need_Plans_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_AARP_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		WelcomePage welcomeOLEPage = aquisitionhomepage.SpecialNeedPlansZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-
-	@When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$")
-	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_AARP_site(
-			DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.OurPlansPDPLanding();
-		WelcomePage welcomeOLEPage = aquisitionhomepage.ZipcodeSearchToOLE(zipcode);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading OLE Welcome page");
-		}
-	}
-	
 	@Then("^the user validates the following Additional Benefits Plan details for the plan$")
 	public void the_user_validates_the_following_Additional_Benefits_Plan_details_for_the_plan(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -896,6 +785,32 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 			Assert.fail("Error in loading the compare plans page");
 	}
 	
+	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link in AARP$")
+	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.clickOnPDPPlans();
+			plansummaryPage.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
 	
 	@And("^I Click on DCE link on Plan compare for AARP$")
 	public void I_Click_On_DCE_link_on_Plan_Compare_for_AARP() {
@@ -1589,6 +1504,44 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 	
 	}
 	
+	@When("^the user performs plan search using Standalone Zipcode information in the AARP site$")
+	public void the_user_performs_plan_search_using_Standalone_Zipcode_information_in_the_AARP_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		String PlanType= (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+		String PlanName= (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		
+		WelcomePage welcomePage;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			welcomePage = aquisitionhomepage.ZipcodeSearchToOLEWithOutCounty(zipcode,PlanName);
+		} else {
+			welcomePage = aquisitionhomepage.ZipcodeSearchToOLEWithCounty(zipcode,county,PlanName);
+		}
+		Thread.sleep(7000);
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		} else {
+			Assert.fail("Error Loading OLE Welcome page");
+		}
+	}
+	
+
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	@Then("^the user clicks on Request a Free Decision Guide on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on AARP site$")
 	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_AARP_site() throws Throwable {
@@ -1602,4 +1555,5 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
 		}
 	}
+
 }

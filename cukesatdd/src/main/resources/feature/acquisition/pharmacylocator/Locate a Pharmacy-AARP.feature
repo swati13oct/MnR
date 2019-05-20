@@ -1,25 +1,25 @@
 @fixedTestCaseTest @pharmacylocatorulayer
 Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
-  @pharmacylocatorulayerSmoke
+  @pharmacylocatorulayerSmoke  @pharmacyLocatorPerformanceUlayer
   Scenario Outline: To verify available pharmacies in AARP site
     Given the user is on the AARP Medicare Site landing page
     When the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site
-      | <plantype> |
+   		|plantype|
     When the user navigates to pharmacy search page in AARP Site
     And the user enters following details for pharmacy search in AARP Site
       | Zip Code    | <zipcode>  |
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | <planName> |
+        | Plan Name | <planName> |
     Then the user validates the available pharmacies page in AARP site
 
     Examples: 
       | zipcode | distance | county       | planName                                          | plantype |
       |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |
+ #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
 
-  #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
   @availablePharmAARP
   Scenario Outline: To verify available pharmacies with language in AARP site
     Given the user is on the AARP Medicare Site landing page
@@ -31,7 +31,8 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | <planName> |
+    | Plan Name | <planName> |
+      | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     When the user selects a language from dropdown in AARP Site
       | <languageName> |
@@ -54,7 +55,8 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | <planName> |
+  | Plan Name | <planName> |
+      | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     Then the user chooses the Pharmacy Type
       | <pharmacytype> |
@@ -77,7 +79,8 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | <planName> |
+    | Plan Name | <planName> |
+      | planyear | <planYear> |
     And the user searches available pharmacies by selecting "Show pharmacies for these services." in AARP site
       | <pharmacytype> |
     Then the user validates the available pharmacies page in AARP site
@@ -86,8 +89,8 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     Examples: 
       | zipcode | distance | county | planName | pharmacytype | plantype |
 
-  #	| 80002       | 25        | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Long-term care|MA|
-  #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |    Standard Network Pharmacy 				|PDP|
+  #	| 80002       | 25 miles   | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Long-term care|MA|
+# 	| 90210       | 2 miles     | None      | AARP MedicareRx Preferred (PDP)                    |    Standard Network Pharmacy 				|PDP|
   @errorMessageNoPharamcyAARP
   Scenario Outline: To verify error message for no results found for pharmacy type in UMS site
     Given the user is on the AARP Medicare Site landing page
@@ -99,14 +102,15 @@ Feature: 1.17-VBF-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | <planName> |
+     | Plan Name | <planName> |
+      | planyear | <planYear> |
     And the user validates the error message for no pharmacies found for below pharmacy in the AARP Site
       | <pharmacytype> |
 
     Examples: 
       | zipcode | distance | county | planName | pharmacytype | plantype |
 
-  #	| 90210       | 2        |       | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
+ #| 90210       |  2 miles      | None   | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
 @pharmacyLocatorUlayerSmoke
   Scenario Outline: To verify available pharmacies in AARP site for zipcode <zipcode> and county <county>
 Given the user is on AARP medicare acquisition site landing page
@@ -116,7 +120,7 @@ Given the user is on AARP medicare acquisition site landing page
       | Distance    | <distance> |
       | County Name | <county>   |
     And the user chooses a plan from dropdown in AARP Site
-      | planname | <planName> |
+      | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
     Then the user chooses the Pharmacy Type
@@ -128,7 +132,7 @@ Given the user is on AARP medicare acquisition site landing page
       | <languageName> |
     And the user validates language changes in AARP site
     And the user chooses a plan from dropdown in AARP Site
-      | planname | <planName> |
+      | Plan Name | <planName> |
       | planyear | <planYear> |
     Then the user validates the available pharmacies page in AARP site
 

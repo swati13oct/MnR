@@ -6,6 +6,7 @@ package pages.regression.payments;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
@@ -309,6 +310,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='custom-from']")
 	private WebElement customSearchFrom;
+	
+	@FindBy(xpath = "//table[@class='table-responsive']//tr//td//a[text()='Download']")
+	private WebElement downloadLink;
+	
+	@FindBy(xpath = "//embed[@id='plugin']")
+	private WebElement pDFDoc;
+	
 	
 	@FindBy(xpath="//ul[@class='dropdown-menu ng-valid ng-valid-date-disabled'][1]//button[@class='btn btn-default btn-sm pull-left']")
 	private WebElement customSearchFromLeftButton;
@@ -1600,5 +1608,48 @@ public class PaymentHistoryPage extends UhcDriver {
 		if(driver.getCurrentUrl().contains("benefits"))
 			return new BenefitsAndCoveragePage(driver);
 		return null;
+	}
+	
+	
+	public void validatePDFDownloadLink() throws Exception {
+		new Actions(driver).moveToElement(DateRangerDropDown).perform();
+		waitAndClick(last24MonthsOption);
+		sleepBySec(5);
+		String expectedText = "Last 24 months";
+		String actualText = last24MonthsOption.getAttribute("innerHTML");
+		Assert.assertTrue("PROBLEM - last24MonthsOption text is not as expected. Expected='" + expectedText
+				+ "' | Actual='" + actualText + "'", expectedText.equals(actualText));
+		Assert.assertTrue("PROBLEM - got server error for last24MonthsOption option", !hasServerError());
+		List<WebElement> totalTableRowsList = driver
+				.findElements(By.xpath("//div[@id='paymentTable1']/div/div/table/tbody/tr"));
+		int totalRows_24Months = totalTableRowsList.size();
+		System.out.println("total rows including header Last 24 Months=" + totalRows_24Months);
+
+		String ParentWindow = driver.getTitle();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", downloadLink);
+		jsClickNew(downloadLink);
+
+		Thread.sleep(25000);
+		Set<String> handles1 = driver.getWindowHandles();
+		for (String windowHandle : handles1) {
+			if (!windowHandle.equals(ParentWindow)) {
+				driver.switchTo().window(windowHandle);
+				String title = driver.getTitle();
+				System.out.println("Window title is : " + title);
+				if (title.contains("PRO Document")) {
+					System.out.println("We are on PRO Document winodow opened");
+					driver.manage().window().maximize();
+					Thread.sleep(3000);
+					waitforElement(pDFDoc);
+					break;
+				}
+			} else {
+				System.out.println("Not found PRO Document Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+
+		}
+
 	}
 }

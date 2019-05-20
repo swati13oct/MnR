@@ -155,7 +155,7 @@ public void verifyPaymentsPage() throws Throwable {
 
 @Then("^user clicks on the benefits and coverage tab on the dashboard home page or test harness page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environmentMedicare.contains("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(3000);
@@ -166,7 +166,7 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		
 	}
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) || (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) || (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.contains("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		
 		System.out.println("Now clicking on Coverage and Benefits tab from Team-f or Team-h or Stage test harness page");
