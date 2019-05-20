@@ -403,7 +403,33 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 
+	@And("the user validates Default drug cost drop down value")
+	public void user_validates_default_dropDwnOption() {
+		System.out.println("***the user validates Default drug cost drop down value***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_drugCostdropdown_select();
 
+	}
+	
+	@And("the Individual user validates Default drug cost drop down value")
+	public void user_validates_default_dropDwnOptionIndi() {
+		System.out.println("***the Individual user validates Default drug cost drop down value***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_drugCostdropdownzIndividualMAPD_select();
+
+	}
+	
+	@And("the user validates View all Benefits link and Prescription drug cost section")
+	public void user_validates_values_on_Rally() throws InterruptedException {
+		System.out.println("***the Individual user validates Default drug cost drop down value***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.rally_dashboardValues();
+
+	}
+	
 	/** 
 	 * @toDo : The user validates the language dropdown in Documents section and make a selection in the dropdown
 	 */
@@ -425,7 +451,23 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.Language, language);
 		benefitsCoveragePage.validate_langdropdown_select(language);
 	}
-
+	@And("^the user select the documents language$")
+	public void Select_languagedropdown(DataTable givenAttributes) {
+		System.out.println("***the user select the documents language***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String language = memberAttributesMap.get("Language");
+		getLoginScenario().saveBean(LoginCommonConstants.Language, language);
+		benefitsCoveragePage.Select_langdropdown_selection(language);
+	}
+	
+	
 
 	/** 
 	 * @toDo : The user validates the language dropdown in Documents section and validates the default selected language
@@ -525,6 +567,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
 
+	@And("^user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link$")
+	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
+		System.out.println("***user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.VIEW_ALL_ANCILLARY_BENEFITS();
+	}
+	
 	/** 
 	 * @toDo : The user validates the Learn more button under Exclusive hearing section  of Ancillary benefits
 	 */
@@ -860,6 +910,45 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
+	@And("the Group PDP LIS1 user should see drug cost table for Lis members")
+	public void user_validate_drugcosttablePDP_LIS1_Group() {
+		System.out.println("***the Group PDP LIS1 user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttablePDPGroupLIS1();
+	}
+	
+	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
+	public void user_validate_drugcosttablePDP_NONLIS_Group() {
+		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS();
+	}
+	
+	@And("the PDP individual NON-LIS  user should see drug cost table for Lis members")
+	public void user_validate_drugcosttablePDP_NONLIS_Indi() throws InterruptedException {
+		System.out.println("***the PDP individual NON-LIS  user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS();
+	}
+	
+	@And("the MAPD group user should see drug cost table for Lis members")
+	public void user_validate_drugcosttableGroup() {
+		System.out.println("***the MAPD group user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttableMAPDLIS4();
+	}
+	
+	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
+	public void user_validate_drugcosttableGroup_NONLIS() {
+		System.out.println("***the MAPD NON-LIS group user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS();
+	}
 
 	/** 
 	 * @toDo : Validates the  Ways to save section
@@ -876,11 +965,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 	@And("the user validates plan overview section for group")
 	public void user_validate_planOverview() {
+		System.out.println("***the user validates plan overview section for group***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewgroup();
 	}
-
+	
+	@And("the NON LIS user validates plan overview section for group")
+	public void user_validate_planOverviewNoNLIS() {
+		System.out.println("***the NON LIS user validates plan overview section for group***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewgroupNONLIS();
+	
+	}
+	
+	
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
 	 */
@@ -1066,6 +1166,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("the user validates the Group Primarycare Provider section")
 	public void user_validate_PrimaryCareProvForHmo() {
+		System.out.println("***the user validates the Group Primarycare Provider section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProviderForGroup();
@@ -1219,6 +1320,31 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.fedtabledata();
 	}
+	
+	@Then("^the indi MAPD user able to see drug table and values in it")
+	public void validategroupdrugtableMAPD() throws InterruptedException {
+		System.out.println("***the indi MAPD user able to see drug table and values in it***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validategroupdrugtableMAPD();
+	}
+	
+	@Then("^the Medica user able to see drug table and values in it")
+	public void validategroupdrugtableMedica() throws InterruptedException {
+		System.out.println("***the Medica user able to see drug table and values in it***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validategroupdrugtableMedica();
+	}
+	
+	@Then("^the PCP user able to see drug table and values in it")
+	public void validategroupdrugtablePCP() throws InterruptedException {
+		System.out.println("***the PCP user able to see drug table and values in it***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validategroupdrugtablePCP();
+	}
+	
 	/** 
 	 * @toDo : Validates the group drug table
 	 */
@@ -1388,7 +1514,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
 		System.out.println(values.size());
-
+		System.out.println(values.size());
 		boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
 		System.out.println(arraycheck);
 		if (arraycheck == true)
@@ -1447,6 +1573,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsnCoveragepage.validatevillagetabletext();
+
+	}
+	
+	
+	@And("^the user validates copay and CoInsurance section$")
+	public void validatevillageCopaySection() throws InterruptedException   {
+		System.out.println("***the user validates copay and CoInsurance section***");
+		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsnCoveragepage.validatevillageCopaySection();
 
 	}
 	/**
@@ -1673,14 +1809,28 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		planBenefitsCoverage.validateOfficeVisitssectionWidget();
 
 	}
+	@And("the user without providertier validates the Outpatient Surgery Center Visits section")
+	public void outpatientcenterwithoutprovidertier(){                           
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.outpatientcenterwithoutprovidertier();
 
-
+	}
+	
 	@And("the user validates the Outpatient Surgery Center Visits section")
 	public void user_validate_outpatientSurgeryVisitssection() {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		planBenefitsCoverage.validateoutpatientsurgerycenterVisitssection();
+
+	}
+	@And("the user with providerTier validates the Outpatient Surgery Center Visits section")
+	public void OutpatientSurgeryCentervisits_withprovidertiering() {
+
+		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		planBenefitsCoverage.OutpatientSurgeryCentervisits_withprovidertiering();
 
 	}
 	@And("the user validates the ways to save section")
@@ -1704,7 +1854,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	//note: added argument to support SSUP case
 	@And("the user validates the Benefits for MA member")
-	//public void userValidatesMAsection() {
 	public void userValidatesMAsection(DataTable rows) {
 		List<List<String>> data = rows.raw();                                                      
 
