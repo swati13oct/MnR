@@ -110,7 +110,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @benefitsAndCoverage22 @CMShip
+  @benefitsAndCoverage22 @CMShip @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -139,7 +139,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
 
  #TC12_Benefits_for_MedicaMember
-  @benefitsAndCoverage12_1 @CMFedDrugNonLis
+  @benefitsAndCoverage12_1 @CMFedDrugNonLis @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -222,7 +222,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15096 | SSUP     | Group_BnC      |
 
   #TC14_Benefits_for_PCPMember
-  @benefitsAndCoverage14_2 @CMFedDrugNonLis
+  @benefitsAndCoverage14_2 @CMFedDrugNonLis @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -286,7 +286,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | ESPAÑOL  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos | 中文      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
-  @benefitsAndCoverage21 @CMAncillarysection2
+  @benefitsAndCoverage21 @CMAncillarysection2 @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify CMAncillarysection2 section is in place on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -329,7 +329,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15238 | MAPD     | Individual_BnC | NON LIS       |
 
   #TC16Part-2(SHIP)_Ancilliary Benefits for Group member(PDP and other than Group members)
-  @benefitsAndCoverage32_2 @ancillarybenefitnegativescenarioscodemonkeysPart2
+  @benefitsAndCoverage32_2 @ancillarybenefitnegativescenarioscodemonkeysPart2 @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -380,7 +380,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     #  | 15243 | MAPD     | withRider_BnC |
       
   #TC25_Group members_MAPD_LIS(3,4)
-  @benefitsAndCoverage1 @regressionMember @CMGroupmembersTC25
+  @benefitsAndCoverage1 @regressionMember @CMGroupmembersTC25 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -452,7 +452,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15369 | PDP      | Group_BnC  | LIS 1         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
 
   #TC23_Group NON LIS_MAPD
-  @benefitsAndCoverage23 @CMMapdGroupNonLis
+  @benefitsAndCoverage23 @CMMapdGroupNonLis @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -539,7 +539,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   #TC14_Benefits_for_PCPMember
-  @benefitsAndCoverage14 @CMFedDrugNonLis
+  @benefitsAndCoverage14 @CMFedDrugNonLis @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -613,7 +613,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   # | 15097 | PCP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage     | Comprehensive Formulary - Drug List | Alternative Drug List              | BDFAEC CBADEADF       | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
   #  | 15097 | PCP      | Individual_BnC | NON LIS       | ESPAÑOL | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | BDFAEC CBADEADF       | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @benefitsAndCoverage15 @CMFedPDPNonLis
+  @benefitsAndCoverage15 @CMFedPDPNonLis @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -664,7 +664,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
   # | 15377 | PDP      | Individual_BnC | NON LIS       | ESPAÑOL | Resumen de Beneficios | Comprobante de Cobertura | Formulario Completo                 | Lista de Medicamentos Alternativos | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        |
   # | 15377 | PDP      | Individual_BnC | NON LIS       | 中文   |                       |                          |                                     |                                    | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        |
   #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @benefitsAndCoverage18 @CMFedNonLisVillage
+  @benefitsAndCoverage18 @CMFedNonLisVillage @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -683,13 +683,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | name                | memberid     | effectivedate | monthlypremium |
-      | 15367 | MAPDVill | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
-
-
-
-
-
-
+      | 15367 | MAPDVill_BnC | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
 
   @benefitsAndCoverage17 @CMPdpFedTable
   Scenario Outline: Verify fed table data on Benefits and Coverage page for PDP nonLis member
@@ -924,7 +918,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | UID     | planType | memberType     |
-      | 1410989 | MAPDVill | Individual_BnC |
+      | 1410989 | MAPDVill_BnC | Individual_BnC |
 
   @benefitsAndCoverage34 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> -rider: <rider> - Verify jump links for individual MAPD member
