@@ -65,19 +65,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimsSummaryPage.invokeEOBDeepLink();
 	}
 
-	/* tbd-remove @And("^I search claims for the following time interval on claims summary page$")
-	public void search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		System.out.println(memberAttributesMap.get("Claim Period"));
-		String toDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
-		String fromDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
-
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimeInterval(toDate,fromDate);
-		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-	}*/
-
 	@And("^I can search claims for the following claim period on claims summary page$") 
 	public void search_claims_period_redesigned_site(DataTable timeAttributes) throws InterruptedException{ //in-use
 		List<DataTableRow> timeAttributesRow = timeAttributes.getGherkinRows();
@@ -139,35 +126,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		Assert.assertTrue("PROBLEM - not getting expected pagination.  NOTE: pagination will only show if user has claims for the search range",claimSummarypage.verifyClaimsTableAndPagination());
 	}
 
-	/* tbd-remove @And("^I validate the pagination on the claims summary page combo member PDP plan$")
-	public void i_validate_the_pagination_on_the_claims_summary_page_COMBOmember_PDP() throws Throwable {
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination1());
-	} */
-	
-	/* tbd-remove @And("^I validate the pagination on the claims summary page for members$")
-	public void i_validate_the_pagination_on_the_claims_summary_page_members() throws Throwable {
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.verifyClaimsTableAndPagination3());
-	} */
-
-	/* tbd-remove  @Then("^I can view an Explanation of Benefits component with the Medical and/or Prescription Drug EOB search buttons based on my plan type$")
-	public void validate_EOB_medical_or_Prescription(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem  = memberAttributesMap.get("Claim System");
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.validateEobfordifferentClaimsSystem(claimSystem, planType));
-	} */
-
-	/* tbd-remove  @When("^I navigate to the Claim Details page for federal members$")	
-	public void i_navigate_to_member_redesign_claim_details_page(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		ClaimDetailsPage newClaimDetailsPage =claimSummarypage.navigateToClaimDetailsPage();
-		if(newClaimDetailsPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-	} */
-
 	@And("^I validate the Claims Total on claims details page$")
 	public void validate_claims_total_AARP(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
@@ -179,39 +137,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimDetailsPage newclaimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		newclaimDetailspage.validateClaimsTotalInDetailsPage();
 	}
-
-	/* tbd-remove  @And("^A Medical EOB for MAPD Cosmos type in Claims Details page in AARP site$")
-	public void validate_medical_eob(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem  = memberAttributesMap.get("Claim System");
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		Assert.assertTrue(claimDetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem, planType));
-	} */
-
-	/* tbd-remove  @Then("^The User can able to see Drug Claims History: Reached Maximum Claim Results Error$")
-	public void validateMaxRxclaimsResultError(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimSummarypage.validateRxReachexMaxClaimsErrorMsg());
-	} */
-
-	/* tbd-remove @Then("^the user should be able to see the SHIP Date Range Greater Than 24-Months Error$")
-	public void validateDateRangeErrorSHIP(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimSummarypage.validateShipGreaterThan24MonthsErrorMsg();
-	} */
-
-	/* tbd-remove  @Then("^the user should be able to see the FED Date Range Greater Than 24-Months Error$")
-	public void validateDateRangeErrorMsgFED(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimSummarypage.validateFedGreaterThan24MonthsErrorMsg();
-	} */
-
-	/* tbd-remove  @Then("^I should be able to see the from date is greater than to date error message$")
-	public void validateToDateErrorMessage(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimSummarypage.validatefromDateLaterThanToDateError();
-	} */
 
 	@When("^I validate the error message for a PHIP Member on the screen$")
 	public void i_validate_the_error_message_for_a_PHIP_Member_on_the_screen() throws Throwable { //in-use
@@ -231,7 +156,7 @@ public class ClaimsMemberRedesignStepDefinition {
 			newClaimsSummaryPage.validateComboTabs();
 			newClaimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
 		}
-		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType);		
+		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType,memberType);		
 		newClaimsSummaryPage.validateYouHavemessage(planType);
 		newClaimsSummaryPage.validateClaimsHeaderCopyText();
 		newClaimsSummaryPage.validateSystemErrorMsgNotExist();
@@ -255,75 +180,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	} 
 
-	/* tbd-remove @And("^I validate the Claims Table on claims details page$")
-	public void validate_claimsTable_claimsDetails(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimsTableInDetailsPage(planType);
-		if(claimDetailspage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, claimDetailspage);
-
-	} */
-
-	/* tbd-remove @And("^I validate the EOB option on claims details page$")
-	public void validate_EOB_option_claimsDetails() {
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateEobInDetailsPage();
-	} */
-
-	/* tbd-remove @And("^I validate the Claim Search link on top$")
-	public void i_validate_claimSearch_link_on_DetailsPage() {
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.validateClaimSearchLINK();			
-	} */
-
-	/* tbd-remove @And("^I validate the LEARN MORE ABOUT COST BreakDown Link$")	 
-	public void i_validate_learmMore_costbreakdown_link() {
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.learnMoreCostLink();	
-	} */
-
-	/* tbd-remove  @Then("^I validate the Claims Table on claims details page for Combo$")
-	public void i_validate_the_calims_deatails_table(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.shipdetailcombo();
-	} */
-
-	/* tbd-remove  @And("^I validate EOB$")
-	public void i_validate_EOB_COMBO(){
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.EOBShipcombo();
-	} */
-
-	/* tbd-remove  @And("^I validate the two COMBO tabs on the page$")
-	public void i_validate_COMBO_tabs() {
-		ClaimDetailsPage claimDetailspage = (ClaimDetailsPage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailspage.comboTabs();			
-	} */
-
-	/* tbd-remove  @And("^I validate the two COMBO tabs on the claim Summary page$")
-	public void I_validate_combo_tab_claim_summary_page(){
-		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimSummarypage.comboTabSelection1();	   
-	} */
-
-	/* tbd-remove  @And("^I navigate to the Claim Details page in AARP site for COMBO member$")	
-	public void i_navigate_to_member_redesign_claim_details_page_COMBOMember()  {
-		ClaimDetailsPage newClaimDetailsPage;
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
-		} else {
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPageCombo();
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-		}
-		if(newClaimDetailsPage  != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-	} */
-	
 	@And("^I validate the claims summary link on claims detail top page$")
 	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
@@ -352,20 +208,6 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimSummarypage);
 	} 
 
-	/* tbd-remove @Then("^I validate the text for PCP and medica members$")
-	public void i_validate_the_text_for_PCP_members(){
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.validatePCPtext();
-	} */
-	
-	/* tbd-remove @And("^I validate the EOB section on claims summary page$")
-	public void validate_PDPEOB (){
-		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateEobPDP();
-		if(newclaimsSummarypage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
-
-	} */
 	@Then("^I can see the claims displayed based on the selection on claims summary page for PDP plans$") 
 	public void validate_claims_table_PDPmember_site(){ //in-use
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -374,7 +216,6 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	} 
 
-	//vvv note: added for def1041
 	@Then("^I should be able to see the search range is greater than two years error$")
 	public void validateGreaterThanTwoYearsMessage(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
@@ -394,21 +235,6 @@ public class ClaimsMemberRedesignStepDefinition {
 			System.out.println("========================================");
 		}
 	}
-
-	/* tbd-remove @Then("^I can see the claims table displayed based on the selection in redesigned site$") 
-	public void validate_claims_table(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (planType.equalsIgnoreCase("pdp")) {
-			newClaimsSummaryPage.validateClaimsTablePDP();
-		} else {
-			newClaimsSummaryPage.validateClaimsTable();
-		}
-		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-	} */
 
 	HashMap<String, Integer> allClaims = new HashMap<String, Integer>();
 	List<String> recordInvokedBypass=new ArrayList<String>();
@@ -629,7 +455,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 
-	@When("^I validate Claim Details page content value and Learn More and EOB$")
+	@When("^I validate Claim Details page content value and Learn More and EOB and tooltops$")
 	public void validate_claim_details(DataTable memberAttributes) throws InterruptedException { //in-use
 		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
@@ -653,12 +479,13 @@ public class ClaimsMemberRedesignStepDefinition {
 				newclaimDetailspage.validateClaimsTableInDetailsPage(planType);
 				if(newclaimDetailspage != null) {
 					getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newclaimDetailspage);
-					System.out.println("Proceed to validate claims total");
 
+					System.out.println("Proceed to validate claims header and tooltips");
 					newclaimDetailspage.validateClaimsDetailPageHeaderSection(planType);
+
 					System.out.println("Proceed to validate 'Learn More...' link");
 					newclaimDetailspage.learnMoreCostLink();
-
+					
 					System.out.println("Proceed to validate 'EOB' links on detail page");
 					newclaimDetailspage.validate_SearchEobHistory_onDetailPage(claimSystem,planType);
 				} 
@@ -667,7 +494,6 @@ public class ClaimsMemberRedesignStepDefinition {
 			}
 		}
 	}
-
 
 	@And("^I can validate the learn more and print and download option and DownloadMyData section on claims summary page$")
 	public void validate_print_and_download_option_in_claims_table(DataTable memberAttributes) throws Throwable { //in-use
@@ -790,18 +616,6 @@ public class ClaimsMemberRedesignStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
 	}
 
-	/* tbd-remove 
-	@And("^I can validates the DownloadMyData section on claims summary page$")
-	public void validate_DownloadMyData_redesigned_site(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateDownloadMyData(planType);
-
-		if(newclaimsSummarypage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newclaimsSummarypage);
-	}	*/
-
 	@When("^I navigate to the claims Summary page from dashboard or testharness page$") 
 	public void navigate_Claims_Summary_page() { //in-use
 		ClaimSummarypage newClaimsSummaryPage;
@@ -823,23 +637,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateNeedHelpSection(planType);
 	}
-	//^^^ note: added for def1041	
-
-	/* tbd-remove @When("^I navigate to the Claim details page to see view as pdf EOB$")	
-	public void i_navigate_to_the_claim_detailspage_for_eob_pdf(){ 
-		ClaimDetailsPage newClaimDetailsPage;
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPage();
-		} else {
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
-		}
-		System.out.println("claims-============"+newClaimDetailsPage);
-
-		if(newClaimDetailsPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-	} */
 
 	@Then("^I can validate the view as pdf link on claims details page header$")	
 	public void i_can_validate_the_eob_link(DataTable memberAttributes){ //in-use

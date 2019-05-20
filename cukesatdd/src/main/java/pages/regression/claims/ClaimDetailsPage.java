@@ -1,5 +1,6 @@
 package pages.regression.claims;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -130,7 +130,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='medicalEOB']/span/p/b")
 	private WebElement EOBunavailable;
 
-	//vvv note: added for def1041
 	//note: for claim summary medical table
 	@FindBy(xpath="//p[@id='dateRange']")
 	private WebElement med_dateOfService; //note: value need to strip and process before validation e.g. 2019-01-25 vs 01/25/2019 to 01/25/2019
@@ -320,7 +319,19 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	private WebElement needHelp_contactUsLink;
-	//^^^ note: added for def1041
+	
+	//note: tooltips
+	@FindBy(xpath="//div[@id='claimDynamicStatus']//button[contains(@class,'tooltip')]")
+	private WebElement claimsStatusTooltipsButton;
+
+	@FindBy(xpath="//div[contains(@ng-show,'medicalDetails') and not(contains(@class,'ng-hide'))]//button[contains(@class,'tooltip')]")
+	private WebElement eobTooltipsButton;
+
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//button[contains(@class,'tooltip-large')]")
+	private WebElement ship_eobTooltipsButton;
+
+	@FindBy(xpath="//div[@class='tooltipster-content']")
+	private WebElement tooltipsElementText;
 
 	//vvv note:	added for VBF		
 	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
@@ -342,24 +353,38 @@ public class ClaimDetailsPage extends UhcDriver{
 	public void openAndValidate() {
 	}
 
-	public void validateClaimSearch() {
-		CommonUtility.waitForPageLoadNew(driver, claimSearch, 5);
-		if(claimSearch.isDisplayed()){
-			Assert.assertTrue(true);
-		}
-		else{
-			Assert.assertTrue("Claims Search button is not present in Claims Details Page", false);
-		}
-	}
+	public void validateTooltips(String planType) {
+		if (planType.equalsIgnoreCase("SHIP")) {
+			int sixYearsPrior = Calendar.getInstance().get(Calendar.YEAR)-6;
+			
+			Assert.assertTrue("PROBLEM - unable to locate the EOB tooltips button=",validate(ship_eobTooltipsButton));
+			ship_eobTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
+			String expEobTooltipsText="EOB statements created prior to December "+sixYearsPrior+" are not posted to this site. In addition, although recent claims may be available for viewing, the corresponding EOB statement has not yet been processed and posted to this site for viewing.";
+			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
+			
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the claims status tooltips button=",validate(claimsStatusTooltipsButton));
+			claimsStatusTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate claims status tooltips text after clicking", validate(tooltipsElementText));
+			String expClaimsStatusTooltipsText="This information tells you whether or not your claim is pending payment, paid or denied. A status of adjusted means that the original payment amount has changed.";
+			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expClaimsStatusTooltipsText));
 
-	/**
-	 * this method validates header
-	 */
-	public void validateHeader() {
-		if(myCaimsDetailsText.getText().equals("My Claims Details")){
-			Assert.assertTrue(true);
-		} else{
-			Assert.assertTrue("Claims Details Header is not present in Claims Details Page", false);
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate claims status tooltips after clicking again, claims status tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
+
+			Assert.assertTrue("PROBLEM - unable to locate the EOB tooltips button=",validate(eobTooltipsButton));
+			eobTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
+			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) is a summary of the claims UnitedHealthcare receives from your doctors each month. Your EOB shows the claims we received , what we paid and what you owe. If you do not have any claims , you wont receive an EOB for that month.";
+			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
 		}
 	}
 
@@ -389,20 +414,13 @@ public class ClaimDetailsPage extends UhcDriver{
 		return false;
 	}
 
-	/**
-	 * this method validates "Learn more about section"
-	 */
-	public boolean TBR_validateDetailsLearnmoreaboutsectionDetails() {
-		//keep to add validation
-		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
-	}
-
 	public void validateClaimsDetailPageHeaderSection(String planType) {
 		//note: validate URL
 		if (driver.getCurrentUrl().contains("member/claims.html#/details")) {
 			Assert.assertTrue("PROBLEM - claims detail page URL is not as expected. Expected to contains 'details' | Actual='"+driver.getCurrentUrl()+"'",driver.getCurrentUrl().contains("details"));
 			System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
 		}
+		
 		//note: validate page title
 		Assert.assertTrue("PROBLEM - claims detail page URL is not as expected. Expected to contains 'Claims Summary' | Actual='"+driver.getTitle()+"'",driver.getTitle().contains("Claims Summary"));
 		System.out.println("The title of Claims page is-------->"+driver.getTitle().contains("Claims Summary"));
@@ -423,6 +441,9 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - sub-header text is not as expected on claims detail page. Expected='"+expSubHeaderText+"' | Actual='"+nonship_medicalClaimDetailsText.getText()+"'", expSubHeaderText.equals(nonship_medicalClaimDetailsText.getText()));
 		}
 
+		//note: validate tooltips
+		validateTooltips(planType);
+		
 		//note: validate header section body content
 		if (planType.equalsIgnoreCase("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate ship_claimNumberLabel element on claims detail page", validate(ship_claimNumberLabel));
@@ -496,46 +517,12 @@ public class ClaimDetailsPage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", validate(claimstotalTable));
 	}
 
-	/**
-	 * validateClaimSearchLINK
-	 */
-	public void validateClaimSearchLINK(){ //tbd-remove after consolidation
-		if (driver.getTitle().equalsIgnoreCase("/details")) {
-			System.out.println("*** Combo Member is on Claims Details Page ***");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} 
-		}
-	}
-
-	/**
-	 * Validate learnMoreCostLink
-	 */
 	public void learnMoreCostLink(){  
 		CommonUtility.waitForPageLoad(driver, learnmoreCost, 10);
 		Assert.assertTrue("PROBLEM - unable to locate the Learn More link on detail page", validate(learnmoreCost));
 		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
 		learnmoreCost.click();		
 	}
-
-	/**
-	 * Validate Claims Table in claims details page for Combo
-	 */
-	public void shipdetailcombo(){ //tbd-remove after consolidation
-		//validate(shipcombotable);
-		System.out.println("Cliam detail table is seen for Ship combo member");
-	}
-
-	/**
-	 * Validate EOB for Combo members 
-	 */
-	public void EOBShipcombo(){  //tbd-remove after consolidation
-		//validate(EOBshipcombo);
-		System.out.println("EOB for combo ship plan is seen on claim details page");
-	}
-
 
 	public ClaimSummarypage validateClaimsSummaryLinkOnDetailTopPage(String planType){
 		WebElement topButton=claimsSummaryLinkOnDetailTopPage;
@@ -568,27 +555,6 @@ public class ClaimDetailsPage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	
-	/**
-	 * validate the two COMBO tabs on the claims Summary page
-	 */
-	public void comboTabs() {  //tbd-remove after consolidation
-		for (WebElement webElement : comboTabsOnclaimsPage) {
-			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
-			webElement.click();
-			System.out.println(driver.getCurrentUrl());
-		}
-	}
-
-	public void validateEobInDetailsPage() { //tbd-remove after consolidation
-		if(MRScenario.environment.equalsIgnoreCase("team-a")) {
-			validate(EOBunavailable);
-			System.out.println("Unavailable = "+driver.getTitle());
-		} else{
-			System.out.println("Available = "+driver.getTitle());	
-		}
-	}
-
-	//vvv note: added for def1041
 	public HashMap<String,String> gatherDataFromDetailPage(String claimType) {
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		if (claimType.equalsIgnoreCase("medical")) {
@@ -1037,29 +1003,14 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
 
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkEndHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,needHelp_TechicalSupport_wkEndHrs);
 
-			System.out.println("Proceed to validate the Need Help - General Questions section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - General Questions section element",validate(needHelp_GeneralQuestionsSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkEndHrs));
+			validateSection="Need Help - General Questions";
+			validateNeedHelpSectionContent(validateSection, needHelp_GeneralQuestionsSection, needHelp_GeneralQuestions_img, needHelp_GeneralQuestions_phone, needHelp_GeneralQuestions_tty, needHelp_GeneralQuestions_wkDayHrs,needHelp_GeneralQuestions_wkEndHrs);
 
-			System.out.println("Proceed to validate the Need Help - Claims Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Claims Support section element",validate(needHelp_ClaimsSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkEndHrs));
+			validateSection="Need Help - Claims Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_ClaimsSupportSection, needHelp_ClaimsSupport_img, needHelp_ClaimsSupport_phone, needHelp_ClaimsSupport_tty, needHelp_ClaimsSupport_wkDayHrs,needHelp_ClaimsSupport_wkEndHrs);
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
@@ -1078,22 +1029,25 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
 
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,null);
 
-			System.out.println("Proceed to validate the Need Help - Plan Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Plan Support section element",validate(needHelp_PlanSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_wkDayHrs));
+			validateSection="Need Help - Plan Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
 		}
 	}
-	//^^^ note:	added for def1041		
+	
+	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
+		System.out.println("Proceed to validate the "+section+" section content");
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",validate(imgElement));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",validate(phoneElement));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",validate(ttyElement));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement1));
+		if (hrsOperationElement2!=null) {
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement2));
+		}
+	}
 
 	//vvv note:	added for VBF		
 	public void vbf_validateClaimsTableInDetailsPage() {

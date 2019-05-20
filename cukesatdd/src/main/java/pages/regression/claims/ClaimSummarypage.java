@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -234,7 +233,6 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//div[@id='tableAtddFed']//div[contains(text(),'Prescription Drug')]")
 	public WebElement pdpPrescriptionDrug;
 
-	//vvv note:	added for def1041	
 	@FindBy(xpath="//div[@id='twoValidDivErr']//p//span") 
 	private WebElement greaterThanTwoYearsError;
 
@@ -431,7 +429,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	private WebElement needHelp_contactUsLink;
-	//^^^ note:	added for def1041				
 
 	@FindBy(id="eobC1")
 	private WebElement EOB_claims;
@@ -529,7 +526,6 @@ public class ClaimSummarypage extends UhcDriver{
 		customSearch.click();
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 		System.out.println("!!! Validating the drop down to select the claims !!!");
-
 	}
 
 	/**
@@ -654,7 +650,6 @@ public class ClaimSummarypage extends UhcDriver{
 			validate (customSearch);
 			System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
-			//last24months = driver.findElement(By.xpath("//div[@class='medical-claims']//h2[@ng-bind-html='planName']/parent::div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 		}
 	}
 
@@ -676,38 +671,11 @@ public class ClaimSummarypage extends UhcDriver{
 			return true;
 		} else {
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!! - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed());
-			//	validate(claimsTablePagination);
-			//	System.out.println(" !!! Pagination is seen on Claims Summary page under the claims table ===>"+claimsTablePagination.isDisplayed());
 			Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
 			return false;
 		}
 	}
 	
-	/**
-	 * On Claims Summary page the member Validates the Download my data section.
-	 */
-	/* tbd 
-	public void validateDownloadMyData() {// This need to be debug and need to understand what it is doing and need to modify what it is doing
-		CommonUtility.waitForPageLoad(driver, downloadmydatabutton, 60);
-		validate(downloadmydatabutton);
-		System.out.println("!!! Blue Button-DownLoad my Data Button is displayed ===>"+downloadmydatabutton.isDisplayed());
-		downloadmydatabutton.click();
-		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-		validate(leavingsitepopup);
-		System.out.println("!!!Leaving site popup is displayed ===>"+leavingsitepopup.isDisplayed());
-		validate(cancelButtonDownloadPopUp);
-		System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonDownloadPopUp.isDisplayed());
-		validate(proceedButtonDownloadPopUp);
-		System.out.println("!!!Proceed Button is displayed ===>"+proceedButtonDownloadPopUp.isDisplayed());
-		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-		cancelButtonDownloadPopUp.click();
-		if(driver.getTitle().contains("Claims")){
-			System.out.println("Cancel button functionality is working as expected");
-		} else {
-			System.out.println("Downlaod my data button is not displayed ");
-		}
-	} */
-
 	/**
 	 * this method validates Error Max claims reached 
 	 */
@@ -795,7 +763,6 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("medical claims - Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims");//This is working for MA and MAPD COSMOS or NICE 
 			System.out.println("rx claims      - Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"); 
 		} catch (Exception e) {
-			// TODO: handle exception
 		} 
 		WebElement e=Youhave3;
 		if (planType.equalsIgnoreCase("SHIP")) {
@@ -813,22 +780,24 @@ public class ClaimSummarypage extends UhcDriver{
 	} 
 
 	public void validateClaimsHeaderCopyText() {
-		if (clamsSummaryCopyText.getText().contains("Review your claims search")) {
-			Assert.assertTrue(
-					clamsSummaryCopyText.getText().contains("Review your claims search") + "copy text is displayed",
-					true);
-		}
+		if (clamsSummaryCopyText.getText().contains("Review your claims search")) 
+			Assert.assertTrue(clamsSummaryCopyText.getText().contains("Review your claims search") + "copy text is displayed", true);
 	}
 
 	/**
 	 * Validate claims FROM DROP DOWN
 	 */
-	public void validateClaimsSummaryHeaderSection(String planType) {
+	public void validateClaimsSummaryHeaderSection(String planType, String memberType) {
 		//note: validate page title
 		String expPageTitle="Claims Summary";
 		Assert.assertTrue("PROBLEM - not getting expected page title for claims summary page. Expected to contains="+expPageTitle+" | Actual="+driver.getTitle(), driver.getTitle().contains(expPageTitle));
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
 
+		if (memberType.toLowerCase().contains("combo")) {
+			validateComboTabs();
+			goToSpecificComboTab(planType);
+		}
+		
 		//note: validate header element
 		String expPageHeadingText="Claims Summary";
 		Assert.assertTrue("PROBLEM - unable to locate page header element on claims summary page", validate(pageHeader));
@@ -863,10 +832,8 @@ public class ClaimSummarypage extends UhcDriver{
 			for(int i=0;i<ship_claimTypeSelect.getOptions().size();i++){
 				System.out.println("Located dropdown option =>"+ship_claimTypeSelect.getOptions().get(i).getText());
 			} 	
-
 			//note: validate 'review your claims' element exists
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", validate(ship_reviewClaimsText));
-
 		} else {
 			//note: validate plan name element
 			Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", validate(planName));
@@ -933,7 +900,6 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 	public void validateClaimsPlantype() {
-		// TODO Auto-generated method stub
 		Select select = new Select(claimTypeDropDown);
 		System.out.println("Slected value is  =>" +select.getFirstSelectedOption().getText());
 		for(int i=0;i<select.getOptions().size();i++){
@@ -951,7 +917,6 @@ public class ClaimSummarypage extends UhcDriver{
 		while(!(driver.getCurrentUrl().contains("/details")));
 		if (driver.getCurrentUrl().contains("/details")) {
 			return new pages.regression.claims.ClaimDetailsPage(driver);
-
 		}
 		return null;
 	}
@@ -994,7 +959,6 @@ public class ClaimSummarypage extends UhcDriver{
 	 */
 	public void validateClaimsSummarySubNavNotDisplayed() throws InterruptedException {
 		System.out.println("Now checking for claims summary sub navigation of Claims");
-
 		Dimension size = driver.findElement(By.id("claimsummaryC1")).getSize();
 		System.out.println(size);
 		int height = size.getHeight();
@@ -1011,7 +975,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void validateExplanationOfBenefitsSubNavNotDisplayed() throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.id("eobC1")), 5);
-		//tbd Thread.sleep(2000);  
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 
 		Dimension size = driver.findElement(By.id("eobC1")).getSize();
@@ -1030,7 +993,6 @@ public class ClaimSummarypage extends UhcDriver{
 
 	public void validateExplanationOfBenefitsSubNavNotDisplayedForSSUP() throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, EOB_claims, 5);
-		//tbd Thread.sleep(2000);  
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 		try {
 			EOB_claims.isDisplayed();
@@ -1044,11 +1006,9 @@ public class ClaimSummarypage extends UhcDriver{
 	public void validateExplanationOfBenefitsSubNavDisplayedForGroupSSUP() throws InterruptedException 
 	{
 		CommonUtility.waitForPageLoad(driver, EOB_claims, 5);
-		//tbd Thread.sleep(2000);  
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 		EOB_claims.click();
 		CommonUtility.checkPageIsReady(driver);
-		//tbd Thread.sleep(2000);
 		try {
 			validateNew(EOB_claims);
 			validateNew(EOB_header);
@@ -1062,7 +1022,6 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("Now checking for Explanation of benefits page for SSUP plan");
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		//tbd Thread.sleep(4000);
 		try {
 			validateNew(EOB_claims);
 			validateNew(ssup_Plan);
@@ -1070,10 +1029,8 @@ public class ClaimSummarypage extends UhcDriver{
 			ssup_Plan.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("SSUP plan has been selected");
-			//tbd Thread.sleep(3000);
 			EOB_claims.click();
 			CommonUtility.checkPageIsReady(driver);
-			//tbd Thread.sleep(3000);
 			validateNew(EOB_MsgForPDP);
 			System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link under Claims was displayed as PDP Plan, Test step is passed due to it");
 		} catch (Exception e) {
@@ -1108,7 +1065,6 @@ public class ClaimSummarypage extends UhcDriver{
 	public void verifyCorrectMessageForPreEffectiveMembers() throws InterruptedException 
 	{
 		CommonUtility.waitForPageLoad(driver, messageForPreeffective, 5);
-		//tbd Thread.sleep(2000);  
 		System.out.println("Now checking for message on Claims Page for Pre-effective members");
 		System.out.println("The message displayed on screen is "+messageForPreeffective.getText());
 		String expText="When your plan starts,";
@@ -1123,7 +1079,6 @@ public class ClaimSummarypage extends UhcDriver{
 		String expPhone="1-866-254-3132";
 		Assert.assertEquals("PROBLEM - not getting expected phone#.  Expected='"+expPhone+"' | Actual='"+preEffectiveTechSupportNumber.getText()+"'", preEffectiveTechSupportNumber.getText(),expPhone);
 		System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
-
 	}
 	
 	public void verifyPaymentTabIsDisplayedForPreEffectiveMembers() throws InterruptedException {
@@ -1200,7 +1155,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if(driver.findElement(By.id("accountprofile")).isDisplayed()){
 			driver.findElement(By.id("accountprofile")).click();
 			driver.findElement(By.linkText("Account Settings")).click();
-		}else
+		} else
 			Assert.fail("Account profile dropdown not found");
 		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("//h1[contains(text(),'Account Settings')]")),20 );
 		if (driver.getCurrentUrl().contains("profile")) {
@@ -1210,7 +1165,6 @@ public class ClaimSummarypage extends UhcDriver{
 		return null;
 	}
 
-	//vvv note:	added for def1041	
 	public void validateGreaterThanTwoYearError(String planType) {
 		String errorTextContent1="The time between your From date and your To date cannot be more than 24 months.For help with claims older than 24 months, call Customer Service at the number listed on the Contact Us web page.";
 		String errorTextContent2="For information about claims older than 2 years, contact Customer Service toll-free at 1-800-523-5880.";
@@ -1235,7 +1189,6 @@ public class ClaimSummarypage extends UhcDriver{
 			try {
 				Thread.sleep(1000);
 				if (validate(verifyClaimSummaryAndPagination)) {
-					//tbd if (verifyClaimsTableAndPagination()) {
 					Thread.sleep(extra); //give it more time to settle the page
 					System.out.println("sleep for another 2 sec for the page to settle down...");
 					System.out.println("there is some indication of claims...let's check it out");
@@ -1543,7 +1496,6 @@ public class ClaimSummarypage extends UhcDriver{
 			Date date = srcDf.parse(inputDateString);	 // parse the date string into Date object
 			DateFormat destDf = new SimpleDateFormat("MM/dd/yyyy");
 			dateStr = destDf.format(date);	// format the date into another format
-			//System.out.println("TEST - Converted date format from '"+inputDateString+"' to  '" + dateStr+"'");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -1760,7 +1712,7 @@ public class ClaimSummarypage extends UhcDriver{
 		return totalRow;
 	}
 
-	//note: DO NOT REMOVE THIS METHOD
+	//note: DO NOT REMOVE THIS METHOD, need to confirm behavior then code this
 	public void validateClaimsTableSectionText(int numClaims) {
 		if (numClaims==0) {
 			/* TODO - need to turn on the validation once confirm the behavior for drug option with this link
@@ -1878,13 +1830,10 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
 		if(leavingsitepopup.isDisplayed()){
 			String winHandleBefore = driver.getWindowHandle();
-			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-			System.out.println("TEST - beforeClicked_tabs size="+beforeClicked_tabs.size());
 			proceedButtonDownloadPopUp.click();
 
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
-			System.out.println("TEST - afterClicked_numTabs size="+afterClicked_tabs.size());
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			try {
 				Thread.sleep(2000); //note: need this for the page to load before it can check page ready
@@ -1904,46 +1853,6 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		return true;
 	}
-		/* tbd 
-		Assert.assertTrue("PROBLEM - not getting expected leavingsitepopup",validate(leavingsitepopup));
-		System.out.println("!!!Proceed Button is displayed ===>"+leavingsitepopup.isDisplayed());
-		Assert.assertTrue("PROBLEM - not getting expected cancelButtonDownloadPopUp",validate(cancelButtonDownloadPopUp));
-		//now click cancel and validate any element on page
-		cancelButtonDownloadPopUp.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		Assert.assertTrue("PROBLEM - Cancel button on DownloadPopUp is not working", driver.getTitle().contains("Claims"));
-		System.out.println("Cancel button functionality is working as expected");
-		//now again validate site leaving popup
-		downloadmydatabutton.click();
-		waitforElement(leavingsitepopup);
-		System.out.println("Proceed button is displayed ===>"+(leavingsitepopup.isDisplayed()));
-		if(leavingsitepopup.isDisplayed()){
-			String winHandleBefore = driver.getWindowHandle();
-			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-			System.out.println("TEST - beforeClicked_tabs size="+beforeClicked_tabs.size());
-			proceedButtonDownloadPopUp.click();
-
-			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-			int afterClicked_numTabs=afterClicked_tabs.size();					
-			System.out.println("TEST - afterClicked_numTabs size="+afterClicked_tabs.size());
-			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-			try {
-				Thread.sleep(2000); //note: need this for the page to load before it can check page ready
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			CommonUtility.checkPageIsReady(driver);
-			System.out.println("TEST - download - driver.getCurrentUrl()="+driver.getCurrentUrl());
-			String expectedURL="https://www.medicare.gov/manage-your-health/medicares-blue-button-blue-button-20";
-			Assert.assertTrue("PROBLEM - process button is not functioning as expected",driver.getCurrentUrl().contains(expectedURL));
-			driver.close();
-			driver.switchTo().window(winHandleBefore);
-			System.out.println("Main window = "+driver.getTitle());	
-		}
-		System.out.println("validation for DownloadMyData passed");
-		return true; //note: if any of the conditions are not met, it will fail the assert and won't get to here anyway
-		*/
-
 
 	public boolean validatePageContainsPdfDocText() {
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
@@ -1989,29 +1898,14 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
 
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkEndHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,needHelp_TechicalSupport_wkEndHrs);
 
-			System.out.println("Proceed to validate the Need Help - General Questions section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - General Questions section element",validate(needHelp_GeneralQuestionsSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkEndHrs));
+			validateSection="Need Help - General Questions";
+			validateNeedHelpSectionContent(validateSection, needHelp_GeneralQuestionsSection, needHelp_GeneralQuestions_img, needHelp_GeneralQuestions_phone, needHelp_GeneralQuestions_tty, needHelp_GeneralQuestions_wkDayHrs,needHelp_GeneralQuestions_wkEndHrs);
 
-			System.out.println("Proceed to validate the Need Help - Claims Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Claims Support section element",validate(needHelp_ClaimsSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkEndHrs));
+			validateSection="Need Help - Claims Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_ClaimsSupportSection, needHelp_ClaimsSupport_img, needHelp_ClaimsSupport_phone, needHelp_ClaimsSupport_tty, needHelp_ClaimsSupport_wkDayHrs,needHelp_ClaimsSupport_wkEndHrs);
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
@@ -2030,22 +1924,25 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
 
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,null);
 
-			System.out.println("Proceed to validate the Need Help - Plan Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Plan Support section element",validate(needHelp_PlanSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_phone));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_wkDayHrs));
+			validateSection="Need Help - Plan Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
 		}
 	}
-	//^^^ note:	added for def1041			
+	
+	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
+		System.out.println("Proceed to validate the "+section+" section content");
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",validate(imgElement));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",validate(phoneElement));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",validate(ttyElement));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement1));
+		if (hrsOperationElement2!=null) {
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement2));
+		}
+	}
 
 	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
 		try {
@@ -2111,7 +2008,6 @@ public class ClaimSummarypage extends UhcDriver{
 		}else{
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
 			Assert.fail("!!!!!!!!! NOT Able to find the claim table !!!!!!!!!");
-
 		}
 	}
 	//^^^ note:	added for VBF			
