@@ -380,9 +380,9 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - unable to locate the EOB tooltips button=",validate(eobTooltipsButton));
 			eobTooltipsButton.click();
 			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
-			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) is a summary of the claims UnitedHealthcare receives from your doctors each month. Your EOB shows the claims we received , what we paid and what you owe. If you do not have any claims , you wont receive an EOB for that month.";
+			String expEobTooltipsText="'The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
 			System.out.println("TEST - claimsStatusTooltipsElement="+tooltipsElementText.getText());
-			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
 			tooltipsElementText.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
 		}
