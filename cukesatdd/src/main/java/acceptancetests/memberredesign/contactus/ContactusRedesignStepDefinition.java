@@ -30,18 +30,18 @@ public class ContactusRedesignStepDefinition {
 	/**
 	 * 
 	 */
-		@Autowired
-		MRScenario loginScenario;
+	@Autowired
+	MRScenario loginScenario;
 
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		
-		public MRScenario getLoginScenario() {
-			return loginScenario;
-		}
-		
-		/**
-		 * 		@toDO : user login with the registered member
-		 *//*
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
+
+	/**
+	 * 		@toDO : user login with the registered member
+	 *//*
 		@Given("^registered UMS member with following attributes$")
 		public void registered_member_orderplanmaterials_ums(DataTable givenAttributes) throws InterruptedException {
 
@@ -52,7 +52,7 @@ public class ContactusRedesignStepDefinition {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 			}
-			
+
 			Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 			List<String> desiredAttributes = new ArrayList<String>();
 			for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator.hasNext();) {
@@ -82,8 +82,8 @@ public class ContactusRedesignStepDefinition {
 			WebDriver wd = getLoginScenario().getWebDriver();
 
 			LoginPage loginPage = new LoginPage(wd);
-			
-			
+
+
 			{
 				loginPage.navigateToNewDashboardUrl();
 				getLoginScenario().saveBean(PageConstantsMnR.LOGIN_PAGE, loginPage);
@@ -93,306 +93,326 @@ public class ContactusRedesignStepDefinition {
 				Assert.assertTrue(true);
 			}
 		}*/
-		
-		/**
-		 *  @toDO : the user navigate to the contact us page
-		 */
-		@When("^the user navigates to contact us page in UHC site$")
-		public void validates_contactUs_Redesign_Page() {
-			ContactUsPage contactUsPage;
-			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-				TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-				contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
-			} else {
-				AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-				contactUsPage = accountHomePage.navigateToContactUsPage();
-			}
-			if(contactUsPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactUsPage);
-		}
-		
-		/**  DIANE
-		 * @toDo : user validates static phone number on contact us page
-		 */
-		
-		@Then("^user should see a static phone number for tech support in redesign contact us page$")
-		public void user_should_see_a_static_phone_number_for_tech_support_in_redesign_contact_us_page(DataTable givenAttributes) {
 
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			String expectedTFN = memberAttributesMap.get("Expected TFN");
-			
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-				contactusPage.validateTFN(expectedTFN);
-		
-			
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
+	/**
+	 *  @toDO : the user navigate to the contact us page
+	 */
+	@When("^the user navigates to contact us page in UHC site$")
+	public void validates_contactUs_Redesign_Page() {
+		ContactUsPage contactUsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			contactUsPage = accountHomePage.navigateToContactUsPage();
 		}
-		
+		if(contactUsPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactUsPage);
+	}
+
+	/**  DIANE
+	 * @toDo : user validates static phone number on contact us page
+	 */
+
+	@Then("^user should see a static phone number for tech support in redesign contact us page$")
+	public void user_should_see_a_static_phone_number_for_tech_support_in_redesign_contact_us_page(DataTable givenAttributes) {
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String expectedTFN = memberAttributesMap.get("Expected TFN");
+
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateTFN(expectedTFN);
 
 
-		
-		
 
-		/**
-		 *  @toDO : the user validates cancel link on secure email widget on contact us page
-		 */
-		@Then("^user validates cancel click on secure email widget in redesign contact us page$")
-		public void user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateSecureEmailUsWidgetSection(givenAttributes);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
-		/**
-		 *  @toDO : the user fills the fill out contact form and submit on contact us page
-		 */
-		@Then("^user fill all the details of Email a question widget and submit$")
-		public void user_fill_all_the_details_of_Email_a_question_widget_and_submit(DataTable givenAttributes)
-		{
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateEmailAQuestionWidget(givenAttributes);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/**
-		 * @toDO : the user validate the confirmation message after successful submission 
-		 */
-		@And("^UI should be replaced by a confirmation display$")
-		public void UI_should_be_replaced_by_a_confirmation_display(DataTable givenAttributes){
-			
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			String expectedMessage = memberAttributesMap.get("Expected Message");
-			
-			contactusPage.validateThankYouMessage(expectedMessage);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/**
-		 * @toDO : the user validate the confirmation message after successful submission 
-		 */
-		@And("^UI should be replaced by a success confirmation display$")
-		public void UI_should_be_replaced_by_a_success_confirmation_display(DataTable givenAttributes){
-			
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			String expectedMessage = memberAttributesMap.get("Expected Message");
-			String phoneNumber = memberAttributesMap.get("Format Phone Number");
-			
-			contactusPage.validateRequestACallSuccessMessage(expectedMessage, phoneNumber);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/**
-		 * @toDO : the user validate invalid phone number
-		 */
-		@Then("^user fill all the invalid details of Email a question widget and submit$")
-		public void alternative_email_idError_Validations(DataTable givenAttributes)
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.fillInvalidDetailsInEmailAQuestionWidget(givenAttributes);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
-		/**
-		 * @toDO : the user validate the confirmation message after successful submission 
-		 */
-		@And("^UI should be replaced by error messages$")
-		public void UI_should_be_replaced_by_error_messages(DataTable givenAttributes){
-			
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateFiledValidationErrorMessages(givenAttributes);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/**
-		 * @toDO : the user validates go to inbox
-		 */
-		@Then("^user validates go To Inbox button in redesign contact us page$")
-		public void user_validates_go_To_Inbox_button_in_redesign_contact_us_page()
-		{
-			ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactus.validateGoToInbox();
-			
-		}
-		
-		/**
-		 * @toDO : the user validates request to call button
-		 */
-		@Then("^user validates clickToCallButton display on contactUS redesign page$")
-		public void validates_clickToCall_widget()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validates_clickToCall_widget();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
-		/**
-		 * @toDO : the user validates request to call confirmation
-		 */
-		@And("^user clicks on cancel button on Request a call widget$")
-		public void user_clicks_on_cancel_button_on_Request_a_call_widget(DataTable givenAttributes)
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.reqACall_Cancel(givenAttributes);
-		}
-		
-		/**
-		 * @toDO : the user validates request to call confirmation
-		 */
-		@And("^user clicks on Request Confirmation Click$")
-		public void RequestcallConfimration_click(DataTable givenAttributes)
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.reqACall(givenAttributes);
-			
-		}
-		
-		/**
-		 * @toDO : the user validates header display for PDP member
-		 */
-		@Then("^user validates PDP page display in redesign contact us page$")
-		public void PdpPageDisplay()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.PdpPageDisplay();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
-		
-		/**
-		 *  @toDO : the user fills the Email form and submit on contact us page
-		 */
-		@Then("^user fill all the email Form details and submit$")
-		public void user_fill_all_the_email_Form_details_and_submit(DataTable givenAttributes)
-		{
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateEmailFormWidget(givenAttributes);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/**
-		 * @toDO : the user validate the confirmation message after successful submission in Email Form
-		 */
-		@And("^UI should be replaced by success request received$")
-		public void UI_should_be_replaced_by_success_request_received(DataTable givenAttributes){
-			
-			/* Reading the given attribute from feature file */
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-			
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			String expectedMessage = memberAttributesMap.get("Expected Message");
-			
-			contactusPage.validateEmailUsSuccessMessage(expectedMessage);
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-		}
-		
-		/***
-		 * 
-		 */
-		@Then("^user should only see the Technical Support and Plan Support components$")
-		public void user_should_only_see_the_Technical_Support_and_Plan_Support_components() {
-			ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			contactusPage.validateWidgetsForTerminatedMembers();
-		}
-		
-		@Then("^The user validates the connector model group TFN number$")
-		public void the_user_validates_the_TFNNumber()
-		{
-			ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-			
-			contactusPage.validateConnectroModelTFNNumber();
-			
-			if(contactusPage != null)				
-				getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-						contactusPage);
-			
-		}
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+
+
+
+
+
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^user validates cancel click on secure email widget in redesign contact us page$")
+	public void user_validates_cancel_click_on_secure_email_widget_in_redesign_contact_us_page(DataTable givenAttributes)
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateSecureEmailUsWidgetSection(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
 
 	}
+
+	/**
+	 *  @toDO : the user fills the fill out contact form and submit on contact us page
+	 */
+	@Then("^user fill all the details of Email a question widget and submit$")
+	public void user_fill_all_the_details_of_Email_a_question_widget_and_submit(DataTable givenAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateEmailAQuestionWidget(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/**
+	 * @toDO : the user validate the confirmation message after successful submission 
+	 */
+	@And("^UI should be replaced by a confirmation display$")
+	public void UI_should_be_replaced_by_a_confirmation_display(DataTable givenAttributes){
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		String expectedMessage = memberAttributesMap.get("Expected Message");
+
+		contactusPage.validateThankYouMessage(expectedMessage);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/**
+	 * @toDO : the user validate the confirmation message after successful submission 
+	 */
+	@And("^UI should be replaced by a success confirmation display$")
+	public void UI_should_be_replaced_by_a_success_confirmation_display(DataTable givenAttributes){
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		String expectedMessage = memberAttributesMap.get("Expected Message");
+		String phoneNumber = memberAttributesMap.get("Format Phone Number");
+
+		contactusPage.validateRequestACallSuccessMessage(expectedMessage, phoneNumber);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/**
+	 * @toDO : the user validate invalid phone number
+	 */
+	@Then("^user fill all the invalid details of Email a question widget and submit$")
+	public void alternative_email_idError_Validations(DataTable givenAttributes)
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.fillInvalidDetailsInEmailAQuestionWidget(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+
+	/**
+	 * @toDO : the user validate the confirmation message after successful submission 
+	 */
+	@And("^UI should be replaced by error messages$")
+	public void UI_should_be_replaced_by_error_messages(DataTable givenAttributes){
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateFiledValidationErrorMessages(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/**
+	 * @toDO : the user validates go to inbox
+	 */
+	@Then("^user validates go To Inbox button in redesign contact us page$")
+	public void user_validates_go_To_Inbox_button_in_redesign_contact_us_page()
+	{
+		ContactUsPage contactus=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactus.validateGoToInbox();
+
+	}
+
+	/**
+	 * @toDO : the user validates request to call button
+	 */
+	@Then("^user validates clickToCallButton display on contactUS redesign page$")
+	public void validates_clickToCall_widget()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validates_clickToCall_widget();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+
+	/**
+	 * @toDO : the user validates request to call confirmation
+	 */
+	@And("^user clicks on cancel button on Request a call widget$")
+	public void user_clicks_on_cancel_button_on_Request_a_call_widget(DataTable givenAttributes)
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.reqACall_Cancel(givenAttributes);
+	}
+
+	/**
+	 * @toDO : the user validates request to call confirmation
+	 */
+	@And("^user clicks on Request Confirmation Click$")
+	public void RequestcallConfimration_click(DataTable givenAttributes)
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.reqACall(givenAttributes);
+
+	}
+
+	/**
+	 * @toDO : the user validates header display for PDP member
+	 */
+	@Then("^user validates PDP page display in redesign contact us page$")
+	public void PdpPageDisplay()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.PdpPageDisplay();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+
+	/**
+	 *  @toDO : the user fills the Email form and submit on contact us page
+	 */
+	@Then("^user fill all the email Form details and submit$")
+	public void user_fill_all_the_email_Form_details_and_submit(DataTable givenAttributes)
+	{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateEmailFormWidget(givenAttributes);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/**
+	 * @toDO : the user validate the confirmation message after successful submission in Email Form
+	 */
+	@And("^UI should be replaced by success request received$")
+	public void UI_should_be_replaced_by_success_request_received(DataTable givenAttributes){
+
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		String expectedMessage = memberAttributesMap.get("Expected Message");
+
+		contactusPage.validateEmailUsSuccessMessage(expectedMessage);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+
+	/***
+	 * 
+	 */
+	@Then("^user should only see the Technical Support and Plan Support components$")
+	public void user_should_only_see_the_Technical_Support_and_Plan_Support_components() {
+		ContactUsPage contactusPage = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactusPage.validateWidgetsForTerminatedMembers();
+	}
+
+	@Then("^The user validates the connector model group TFN number$")
+	public void the_user_validates_the_TFNNumber()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateConnectroModelTFNNumber();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+
+	/**
+	 * @author sdwaraka
+	 * Added for May2 2019 Release
+	 * Added to validate Secure email, send a message and Secure Message page as part of validation for F282564
+	 * @throws Throwable
+	 */
+
+	@Then("^user click on send a message in the secure email widget in redesign contact us page$")
+	public void user_click_on_send_a_message_in_the_secure_email_widget_in_redesign_contact_us_page() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.clickOnSendMessage_SecureEmail();
+	}
+
+	@Then("^the user validates that the SSO secure message Page opens in a new window$")
+	public void the_user_validates_that_the_SSO_secure_message_Page_opens_in_a_new_window() throws Throwable {
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.validateSSOInbox();
+	}
+
+}
 

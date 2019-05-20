@@ -23,6 +23,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 
@@ -41,10 +42,12 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
 	private WebElement staticTFN; 
 	
+	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
+	private WebElement preEffectiveTechSupportNumber;
 		
 	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
 	private WebElement getStartedButton;
-
+	
 	@FindBy(id = "message-cancel")
 	private WebElement cancelLink;
 	
@@ -757,4 +760,96 @@ public class ContactUsPage extends UhcDriver{
 		}
 	}
 
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) {
+		
+	    System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
+	    System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+	    boolean TFNvalidation = true;
+	    if(preEffectiveTechSupportNumber.getText().contains(technicalPhNo)){
+	    	TFNvalidation = true;
+	    }
+	    else
+	    	TFNvalidation=false;
+	    Assert.assertTrue("Extected TFN is not dispalyed", TFNvalidation);
+		System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
+		
+	}
+
+    /**
+	 * @author sdwaraka
+	 * Added for May2 2019 Release
+	 * Added to validate Secure email, send a message and Secure Message page as part of validation for F282564
+    */
+	
+	//Secure Message access
+	@FindBy(xpath = "//a[contains(@class, 'goToInbox ')]")
+	private WebElement sendAmessageButton;
+	
+	//Email Us modal
+	@FindBy(xpath = "//div[@id='messageModal']//div[contains(@class, 'modal-content')]")
+	private WebElement EmailUsModal;
+	
+/*	@FindBy(xpath = "//*[contains(@class, 'btn') and contains(text(), 'CONTINUE')]")
+	private WebElement EmailUsModal_ContinueBtn;*/
+	
+	@FindBy(xpath = "//div[@id='messageModal']//button/span[text()='CONTINUE']")
+	private WebElement EmailUsModalbtnContinue;
+	
+	@FindBy(xpath = "//a[@id='btn-compose']")
+	private WebElement messengerComposeBtn;
+	
+	@FindBy(id = "signed-in")
+	private WebElement messengerSignIn;
+	
+	@FindBy(xpath = "//div[@id='list-folders']//a[contains(text(),'Inbox')]")
+	private WebElement messengerInbox;
+    
+	
+	//Click on Send a Message button on Secure Message widget on Contact Us Page
+    public void clickOnSendMessage_SecureEmail() {
+   	 if(validate(sendAmessageButton)){
+   		 sendAmessageButton.click();
+   		 System.out.println("Send A Message button is clicked");  		 
+   	 }
+   	 else{
+   		 Assert.assertTrue("Send A message Button not displayed", false);
+   	 }
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(validate(EmailUsModal) && validate(EmailUsModalbtnContinue)){
+	   		 System.out.println("Email Us Moal and COntinue Button are displayed");  		 
+	   	 }
+	   	 else{
+	   		 Assert.assertTrue("Email Us Moal and COntinue Button are not displayed", false);
+	   	 }
+	}
+    
+    
+	/**
+     * Validate the go to inbox button for a member who has already opted out for secure email and navigate to SSO inbox
+     */
+     public void validateSSOInbox(){
+            try {
+                   validateNew(EmailUsModalbtnContinue);
+                   if (!((MRScenario.environment).toLowerCase().contains("team"))) {
+                   switchToNewTabNew(EmailUsModalbtnContinue);
+                   CommonUtility.checkPageIsReadyNew(driver);
+                   CommonUtility.waitForPageLoadNew(driver, messengerComposeBtn, 60);
+                   Assert.assertTrue(driver.getTitle().contains("Messenger"));                  
+                   validateNew(messengerInbox);
+                   }
+                   else{
+                	   System.out.println("Skipping Go To Inbox functionslity in Team environment");
+                   }
+            } catch (Exception e) {
+                   e.printStackTrace();
+            }
+     }
+
+
+     
 }
