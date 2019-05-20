@@ -1306,7 +1306,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Dashboard page Primary logo assert condition is passed");
 		} else{
 			//tbd locateElementWithinShadowRoot(shadowRootHeader, "div > span > div > header > div.container.utility-nav-container > a > img");
-		A	if (validate(shadowRootHeader)) {
+			if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1=expandRootElement(shadowRootHeader);
 				try {
