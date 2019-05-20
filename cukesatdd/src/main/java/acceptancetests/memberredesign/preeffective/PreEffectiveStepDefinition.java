@@ -160,7 +160,9 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(3000);
 		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
+		//BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		
 	}
