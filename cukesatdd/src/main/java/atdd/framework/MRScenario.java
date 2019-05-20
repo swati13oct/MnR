@@ -97,10 +97,14 @@ public class MRScenario {
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
-	public static final String USERNAME = "ucpadmin";
+	
+	public static final String USERNAME = "sdwaraka";
+	public static final String ACCESS_KEY ="15a5b9fe-1a49-426d-95f0-4e0b14f4323f";
+
+/*	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
-
+*/
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
 	//public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
