@@ -1769,7 +1769,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public CommunicationPreferencePage navigateToCommunicationPreferencePage() {
 		if (editPreferencesLink.isDisplayed())
 			editPreferencesLink.click();
-		if (driver.getCurrentUrl().contains("preferences")) {
+		if (driver.getTitle().contains("Preferences")) {
 			return new CommunicationPreferencePage(driver);
 		}
 		return null;
@@ -2254,7 +2254,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.assertFalse("Communication preferences section should  be coming for a ship member", true);
 
 		}
-
 	}
 
 	public void validateCommunicationPreferencesForPcpMedica() {
@@ -2460,8 +2459,4 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		}
 	}
-	
-	
-	
-
 }
