@@ -2798,10 +2798,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		sendkeysNew(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
-		
-		//Actions action = new Actions(driver);
-		//action.moveToElement(monthDrpDwn).doubleClick().perform();
-		//monthDrpDwn.click();
 		//monthDrpDwn.click();
 		jsClickNew(monthDrpDwn);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
