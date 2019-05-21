@@ -1,5 +1,6 @@
 package pages.regression.claims;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,35 +13,57 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
  * Functionality : this page validates Claims Details Page. 
  */
 public class ClaimDetailsPage extends UhcDriver{
-	
-
 	@FindBy (xpath=".//*[@id='claimSearchButton']/p/b")
 	private WebElement claimSearch;
 
 	@FindBy(xpath = "//html/body/div[2]/div/div/div/div/main/div/div[1]/div[2]/header/div/div/div/div/div/div/h2")
 	private  WebElement myCaimsDetailsText;
 
-
 	@FindBy(xpath=".//*[@id='dateRange']")
-	private  WebElement  dateRange;
+	private WebElement dateRange;
+	
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][1]//div[@class='table-body-cell'][1]//p")
+	private WebElement ship_dateRangeLabel;
+	
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][1]//div[@class='table-body-cell'][2]//p")
+	private WebElement ship_dateRangeValue;
+	
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][2]//div[@class='table-body-cell'][1]//p")
+	private WebElement ship_claimNumLabel;
+
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][2]//div[@class='table-body-cell'][2]//p")
+	private WebElement ship_claimNumValue;
+	
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][3]//div[@class='table-body-cell'][1]//p")
+	private WebElement ship_claimTypeLabel;
+
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][3]//div[@class='table-body-cell'][2]//p")
+	private WebElement ship_claimTypeValue;
+
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][4]//div[1]//p")
+	private WebElement ship_eobLabel;
+
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][4]//div[2]//p")
+	private WebElement ship_eobValue;
+
+	@FindBy(xpath="//div[contains(@class,'eobinformation')]")
+	private WebElement ship_eobStatementText;
 
 	@FindBy(xpath=".//*[@id='providerName']")
 	private  WebElement providerName;
-	
-	//tbd @FindBy(css= "#claimSearchButtonBottom")
-	//tbd public WebElement claimsHistoryLink;
 
 	@FindBy (xpath =".//*[@id='claimSearchButtons']")
 	private WebElement claimsSummaryLinkOnDetailTopPage;
-
 	
+	@FindBy (xpath =".//*[@id='claimSearchButton']")
+	private WebElement ship_claimsSummaryLinkOnDetailTopPage;
+
 	@FindBy (xpath =".//*[@id='claimSearchButtonBottom']")
 	private WebElement claimsSummaryLinkOnDetailBottomPage;
 
@@ -49,7 +72,7 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'ship')]//p//b[contains(text(),'Claim #:')]")
 	private WebElement ship_claimNumberLabel;
-	
+
 	@FindBy(xpath=".//*[@id='claimDynamicNum']")
 	private WebElement claimNumDynamic;
 
@@ -61,7 +84,7 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy (xpath=".//*[@id='claimStatusLabel']")
 	private WebElement claimStatusLabel;
-	
+
 	@FindBy (xpath=".//*[@id='claimDynamicStatus']")
 	private WebElement claimStatusDynamic;
 
@@ -70,27 +93,25 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy (xpath=".//*[@id='viewPDF']")
 	private WebElement viewPDF;
-	
+
 	@FindBy (xpath="//*[@id='learnmoreMA']")
 	private WebElement learnmoreMA;
-	
+
 	@FindBy (xpath="//*[@id='learnmorePDP']")
 	private WebElement learnmorePDP;
-	
+
 	@FindBy(css = ".claimDetTableMainSection")
 	public WebElement claimDetTableMainSection;
-	
-	//@FindBy(className = "claimdettable")
+
 	@FindBy(css = ".claimsTotalTable")
 	public WebElement claimstotalTable;
-	
-	//@FindBy(id = "learnmoretoggleship")
+
 	@FindBy(xpath = ".//*[@id='learnmoredetailstoggle']")
 	private WebElement learnMoreLink;
-	
+
 	@FindBy(id = "eobClass")
 	private WebElement headerEOB;
-	
+
 	@FindBy(xpath =".//*[@id='claimDetailsHeaders']/p")
 	private WebElement medicalClaimDetailsText;
 
@@ -102,14 +123,13 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy (xpath= "//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li")
 	private List<WebElement> comboTabsOnclaimsPage;
-	
+
 	@FindBy(xpath = ".//*[@id='ship_eob']/div/section/a/p")
 	private WebElement EOB;
-	
+
 	@FindBy(xpath = ".//*[@id='medicalEOB']/span/p/b")
 	private WebElement EOBunavailable;
-	
-	//vvv note: added for def1041
+
 	//note: for claim summary medical table
 	@FindBy(xpath="//p[@id='dateRange']")
 	private WebElement med_dateOfService; //note: value need to strip and process before validation e.g. 2019-01-25 vs 01/25/2019 to 01/25/2019
@@ -139,7 +159,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	private WebElement drug_youPaid;
 	@FindBy(xpath="//table[@id='prescriptionDrug']//tr[2]//td[8]")
 	private WebElement drug_otherPayments;
-	
+
 	//note: for claim summary ship table
 	@FindBy(xpath="//b[contains(text(),'Service Date(s):')]/../..")   
 	private WebElement ship_dateOfService;   // note: will need to process before validation e.g. Service Date(s): 06/01/2017 - 06/06/2017
@@ -155,7 +175,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	private WebElement ship_paidToProvider;
 	@FindBy(xpath="//div[@class='table-body-cell']//b[contains(text(),'Processed Date')]/../../../../div[2]//p")
 	private WebElement ship_processedDate;  // 2017-06-01 vs 05/07/2018
-
+	
 	@FindBy(xpath="//a[@id='claimsummaryC1']")
 	private WebElement claimsSummaryLink;
 
@@ -167,13 +187,13 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//p[contains(text(),'Medical Claim Details')]")
 	private WebElement claimsDetailHeader;
-	
+
 	@FindBy(xpath="//h1[contains(@class,'heading')]")
 	private WebElement claimsSummaryHeader;
-	
+
 	@FindBy(xpath="//div[@class='learnmorearea learnMoreAboutBreakdownDetails']")
 	private WebElement learnmoreCost; 
-	
+
 	@FindBy(xpath="//div[contains(@class,'EOBComponentMA') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Medical')]/../p[contains(text(),'SEARCH YOUR HISTORY')]")
 	private WebElement detail_medicalEOB;
 
@@ -185,17 +205,17 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	private WebElement pageContainsPdfDocText;
-	
+
 	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'SEARCH')]")
 	private WebElement searchAnyEobHistoryText;
 
 	@FindBy(xpath="//div[contains(@class,'EOBComponent') and not(contains(@class,'ng-hide'))]//*[contains(text(),'VIEW EOB')]")
 	private WebElement searchEobStatementsText;
-	
+
 	//this give u number of rows on the claims list table
 	@FindBy(xpath="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]")
 	private List<WebElement> claimsTableRows;
-	
+
 	//note: total will be 8, just take p[1] - [4] 
 	@FindBy(xpath="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]//div[@class='row margin-small']//div[@class='col-md-3']//p")
 	private List<WebElement> claimsColumnsItems;
@@ -205,102 +225,114 @@ public class ClaimDetailsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']")
 	private List<WebElement> ship_claimsTableRows;
-	
+
 	@FindBy(xpath="//b[contains(text(),'Note')]")
 	private WebElement note;
-	
+
 	@FindBy(xpath="//b[contains(text(),'Medical Explanation of Benefits (EOB):')]")
 	private WebElement medicalEobText;
 	@FindBy(xpath="//div[@id='medicaleobNotavialable']//p[text()='Not Available (Pending)']")
 	private WebElement medicalEobNotAvaText;
 	@FindBy (xpath=".//*[@id='viewPDF']")
 	private WebElement medicalEobViewPDF;
+
+	//note: need help section
+	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
+	private WebElement needHelp_SectionHeader;
+
+	//note: need help - technical section
+	@FindBy(xpath="//div[contains(@class,'technical section')]")
+	private WebElement needHelp_TechicalSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
+	private WebElement needHelp_TechicalSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
+	private WebElement needHelp_TechicalSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
+	private WebElement needHelp_TechicalSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
+	private WebElement needHelp_TechicalSupport_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
+	private WebElement needHelp_TechicalSupport_wkEndHrs;
+
+	//note: need help - general section
+	@FindBy(xpath="//div[contains(@class,'general section')]")
+	private WebElement needHelp_GeneralQuestionsSection;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
+	private WebElement needHelp_GeneralQuestions_img;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
+	private WebElement needHelp_GeneralQuestions_phone;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
+	private WebElement needHelp_GeneralQuestions_tty;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
+	private WebElement needHelp_GeneralQuestions_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
+	private WebElement needHelp_GeneralQuestions_wkEndHrs;
+
+	//note: need help - claims section
+	@FindBy(xpath="//div[contains(@class,'claims section')]")
+	private WebElement needHelp_ClaimsSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
+	private WebElement needHelp_ClaimsSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
+	private WebElement needHelp_ClaimsSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
+	private WebElement needHelp_ClaimsSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
+	private WebElement needHelp_ClaimsSupport_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
+	private WebElement needHelp_ClaimsSupport_wkEndHrs;
+
+	//note: need help - plan support
+	@FindBy(xpath="//div[contains(@class,'plan section')]")
+	private WebElement needHelp_PlanSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
+	private WebElement needHelp_PlanSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
+	private WebElement needHelp_PlanSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
+	private WebElement needHelp_PlanSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
+	private WebElement needHelp_PlanSupport_wkDayHrs;
+
+	//note: need help - more ways
+	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
+	private WebElement needHelp_seeMoreWaysTo;
+
+	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
+	private WebElement needHelp_contactUsLink;
 	
-    //note: need help section
-    @FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
-    private WebElement needHelp_SectionHeader;
-    
-    //note: need help - technical section
-    @FindBy(xpath="//div[contains(@class,'technical section')]")
-    private WebElement needHelp_TechicalSupportSection;
+	//note: tooltips
+	@FindBy(xpath="//div[@id='claimDynamicStatus']//button[contains(@class,'tooltip')]")
+	private WebElement claimsStatusTooltipsButton;
 
-    @FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
-    private WebElement needHelp_TechicalSupport_img;
+	@FindBy(xpath="//div[contains(@ng-show,'medicalDetails') and not(contains(@class,'ng-hide'))]//button[contains(@class,'tooltip')]")
+	private WebElement eobTooltipsButton;
 
-    @FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
-    private WebElement needHelp_TechicalSupport_phone;
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//button[contains(@class,'tooltip-large')]")
+	private WebElement ship_eobTooltipsButton;
 
-    @FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
-    private WebElement needHelp_TechicalSupport_tty;
+	@FindBy(xpath="//div[@class='tooltipster-content']")
+	private WebElement tooltipsElementText;
 
-    @FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
-    private WebElement needHelp_TechicalSupport_wkDayHrs;
-    
-    @FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
-    private WebElement needHelp_TechicalSupport_wkEndHrs;
-
-    //note: need help - general section
-    @FindBy(xpath="//div[contains(@class,'general section')]")
-    private WebElement needHelp_GeneralQuestionsSection;
-
-    @FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
-    private WebElement needHelp_GeneralQuestions_img;
-
-    @FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
-    private WebElement needHelp_GeneralQuestions_phone;
-
-    @FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
-    private WebElement needHelp_GeneralQuestions_tty;
-
-    @FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
-    private WebElement needHelp_GeneralQuestions_wkDayHrs;
-    
-    @FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
-    private WebElement needHelp_GeneralQuestions_wkEndHrs;
-    
-    //note: need help - claims section
-    @FindBy(xpath="//div[contains(@class,'claims section')]")
-    private WebElement needHelp_ClaimsSupportSection;
-
-    @FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
-    private WebElement needHelp_ClaimsSupport_img;
-
-    @FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
-    private WebElement needHelp_ClaimsSupport_phone;
-
-    @FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
-    private WebElement needHelp_ClaimsSupport_tty;
-
-    @FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
-    private WebElement needHelp_ClaimsSupport_wkDayHrs;
-    
-    @FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
-    private WebElement needHelp_ClaimsSupport_wkEndHrs;
-    
-    //note: need help - plan support
-    @FindBy(xpath="//div[contains(@class,'plan section')]")
-    private WebElement needHelp_PlanSupportSection;
-
-    @FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
-    private WebElement needHelp_PlanSupport_img;
-
-    @FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
-    private WebElement needHelp_PlanSupport_phone;
-
-    @FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
-    private WebElement needHelp_PlanSupport_tty;
-
-    @FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
-    private WebElement needHelp_PlanSupport_wkDayHrs;
-    
-    //note: need help - more ways
-    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
-    private WebElement needHelp_seeMoreWaysTo;
-
-    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
-    private WebElement needHelp_contactUsLink;
-	//^^^ note: added for def1041
-	
 	//vvv note:	added for VBF		
 	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
 	public List<WebElement> claimTableValues;
@@ -312,143 +344,80 @@ public class ClaimDetailsPage extends UhcDriver{
 	public List<WebElement> shipClaimTotalValues;
 	//^^^ note:	added for VBF		
 
-
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
-
 		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void openAndValidate() {
-		// TODO Auto-generated method stub
 	}
-	
-	//tbd @SuppressWarnings("deprecation")
-	public void validateClaimSearch() {
-		CommonUtility.waitForPageLoadNew(driver, claimSearch, 5);
-		/* //tbd-remove try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
-		if(claimSearch.isDisplayed()){
-			Assert.assertTrue(true);
-		}
-		else{
-			Assert.assertTrue("Claims Search button is not present in Claims Details Page", false);
+
+	public void validateTooltips(String planType) {
+		if (planType.equalsIgnoreCase("SHIP")) {
+			int sixYearsPrior = Calendar.getInstance().get(Calendar.YEAR)-6;
+			
+			Assert.assertTrue("PROBLEM - unable to locate the EOB tooltips button=",validate(ship_eobTooltipsButton));
+			ship_eobTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
+			String expEobTooltipsText="EOB statements created prior to December "+sixYearsPrior+" are not posted to this site. In addition, although recent claims may be available for viewing, the corresponding EOB statement has not yet been processed and posted to this site for viewing.";
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
+			
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the claims status tooltips button=",validate(claimsStatusTooltipsButton));
+			claimsStatusTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate claims status tooltips text after clicking", validate(tooltipsElementText));
+			String expClaimsStatusTooltipsText="This information tells you whether or not your claim is pending payment, paid or denied. A status of adjusted means that the original payment amount has changed.";
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expClaimsStatusTooltipsText));
+
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate claims status tooltips after clicking again, claims status tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
+
+			Assert.assertTrue("PROBLEM - unable to locate the EOB tooltips button=",validate(eobTooltipsButton));
+			eobTooltipsButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElementText));
+			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
+			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
+			tooltipsElementText.click();
+			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
 		}
 	}
-	
+
 	/**
-	 * @toDo :this method validates header
-	 */
-	public void validateHeader() {
-		if(myCaimsDetailsText.getText().equals("My Claims Details")){
-			Assert.assertTrue(true);
-		}
-		else{
-			Assert.assertTrue("Claims Details Header is not present in Claims Details Page", false);
-		}
-	}
-	/**
-	 * @toDo :this method validates date range 
+	 * this method validates date range 
 	 */
 	public boolean verifyDateRange(){
 		System.out.println("verifyDateRange");
 		return dateRange.isDisplayed();
 	}
-	/**
-	 * @toDo :this method validates provider name
-	 */
-	public boolean TBR_verifyProviderName(){	//tbd-remove whole method
-		System.out.println("verifyProviderName");
-		return providerName.isDisplayed();
-	}
-	/**
-	 * @toDo :this method validates claim number 
-	 */
-	public boolean TBR_verifyClaimNumber(){	//tbd-remove whole method
-		System.out.println("verifyClaimNumber");
-		return claimNumberLabel.isDisplayed();
-	}
-	/**
-	 * @toDo :this method validates dynamic claim number 
-	 */
-	public boolean TBR_verifyDynamicClaimNumber(){	//tbd-remove whole method
-		System.out.println("verifyDynamicClaimNumber");
-		return claimNumDynamic.isDisplayed();
 
-	}
-	/**
-	 * @toDo : this method validates claim type 
-	 */
-	public boolean TBR_validateClaimType() {	//tbd-remove whole method
-		System.out.println("validateClaimType");
-		return claimTypeLabel.isDisplayed();
-
-	}
-	/**
-	 * @toDo : this method validates Dynamic claim type 
-	 */
-
-	public boolean TBR_validateDynamicClaimType(){	//tbd-remove whole method
-		System.out.println("validateDynamicClaimType");
-			return claimsTypeDynamic.isDisplayed();
-		}
-	/**
-	 * @toDo :this method validates claim status 
-	 */
-	public boolean TBR_validateClaimStatus(){	//tbd-remove whole method
-		System.out.println("validateClaimStatus");
-		return claimStatusLabel.isDisplayed();
-	}
-	/**
-	 * @toDo :this method validates dynamic claim status 
-	 */
-	public boolean TBR_validateDynamicClaimStatus(){	//tbd-remove whole method
-		System.out.println("validateDynamicClaimStatus");
-		return claimStatusDynamic.isDisplayed();
-	}
-	
 	/**
 	 * this method validates EOB for different domain 
 	 */
 	public boolean validateMedicalEOBfordifferentClaimssystem(String claimSystem, String plantype){
 		//keep for EOB story
-		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD"))
-		{
+		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD")) {
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for MAPD COSMOS EOB's are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
 			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
-		}else if((plantype.equals("MA")||(plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE")))
-		{
+		}else if((plantype.equals("MA")||(plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE"))){
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for NICE view as pdf link are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
 			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
 		}
 		Assert.fail();
 		return false;
-		
 	}
 
-	/**
-	 * this method validates "Learn more about section"
-	 */
-	public boolean validateDetailsLearnmoreaboutsectionDetails() {
-		//keep to add validation
-		return learnmoreMA.isDisplayed() || learnmorePDP.isDisplayed();
-	}
-	
 	public void validateClaimsDetailPageHeaderSection(String planType) {
 		//note: validate URL
 		if (driver.getCurrentUrl().contains("member/claims.html#/details")) {
 			Assert.assertTrue("PROBLEM - claims detail page URL is not as expected. Expected to contains 'details' | Actual='"+driver.getCurrentUrl()+"'",driver.getCurrentUrl().contains("details"));
 			System.out.println("The URL of the Claims page is---------->"+driver.getCurrentUrl());
 		}
+		
 		//note: validate page title
 		Assert.assertTrue("PROBLEM - claims detail page URL is not as expected. Expected to contains 'Claims Summary' | Actual='"+driver.getTitle()+"'",driver.getTitle().contains("Claims Summary"));
 		System.out.println("The title of Claims page is-------->"+driver.getTitle().contains("Claims Summary"));
@@ -460,260 +429,118 @@ public class ClaimDetailsPage extends UhcDriver{
 
 		//note: validate sub-header
 		if (planType.equalsIgnoreCase("SHIP")) {
-			Assert.assertTrue("PROBLEM - unable to locate sub-header element on claims detail page", validate(nonship_medicalClaimDetailsText));
+			Assert.assertTrue("PROBLEM - unable to locate sub-header element on claims detail page", validate(ship_medicalClaimDetailsText));
 			String expSubHeaderText="Claim Details";
-			Assert.assertTrue("PROBLEM - sub-header text is not as expected on claims detail page. Expected='"+expSubHeaderText+"' | Actual='"+nonship_medicalClaimDetailsText.getText()+"'", expSubHeaderText.equals(nonship_medicalClaimDetailsText.getText()));
+			Assert.assertTrue("PROBLEM - sub-header text is not as expected on claims detail page. Expected='"+expSubHeaderText+"' | Actual='"+ship_medicalClaimDetailsText.getText()+"'", expSubHeaderText.equals(ship_medicalClaimDetailsText.getText()));
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate sub-header element on claims detail page", validate(nonship_medicalClaimDetailsText));
 			String expSubHeaderText="Medical Claim Details";
 			Assert.assertTrue("PROBLEM - sub-header text is not as expected on claims detail page. Expected='"+expSubHeaderText+"' | Actual='"+nonship_medicalClaimDetailsText.getText()+"'", expSubHeaderText.equals(nonship_medicalClaimDetailsText.getText()));
 		}
+
+		//note: validate tooltips
+		validateTooltips(planType);
 		
 		//note: validate header section body content
-		Assert.assertTrue("PROBLEM - unable to locate dateRange element on claims detail page", validate(dateRange));
-		Assert.assertTrue("PROBLEM - unable to locate providerName element on claims detail page", validate(providerName));
-		
-		//	        
 		if (planType.equalsIgnoreCase("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate ship_claimNumberLabel element on claims detail page", validate(ship_claimNumberLabel));
+			Assert.assertTrue("PROBLEM - unable to locate ship_dateRangeLabel element on claims detail page", validate(ship_dateRangeLabel));
+			Assert.assertTrue("PROBLEM - unable to locate ship_dateRangeValue element on claims detail page", validate(ship_dateRangeValue));
+			Assert.assertTrue("PROBLEM - unable to locate ship_claimNumLabel element on claims detail page", validate(ship_claimNumLabel));
+			Assert.assertTrue("PROBLEM - unable to locate ship_claimNumValue element on claims detail page", validate(ship_claimNumValue));
+			Assert.assertTrue("PROBLEM - unable to locate ship_claimTypeLabel element on claims detail page", validate(ship_claimTypeLabel));
+			Assert.assertTrue("PROBLEM - unable to locate ship_claimTypeValue element on claims detail page", validate(ship_claimTypeValue));
+			Assert.assertTrue("PROBLEM - unable to locate ship_eobLabel element on claims detail page", validate(ship_eobLabel));
+			Assert.assertTrue("PROBLEM - unable to locate ship_eobValue element on claims detail page", validate(ship_eobValue));
+			Assert.assertTrue("PROBLEM - unable to locate ship_eobStatementText element on claims detail page", validate(ship_eobStatementText));
+			Assert.assertTrue("PROBLEM - unable to locate ship_paidToYou element on claims detail page", validate(ship_paidToYou));
+			Assert.assertTrue("PROBLEM - unable to locate ship_paidToProvider element on claims detail page", validate(ship_paidToProvider));
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate claimNumberLabel element on claims detail page", validate(claimNumberLabel));
+			Assert.assertTrue("PROBLEM - unable to locate dateRange element on claims detail page", validate(dateRange));
+			Assert.assertTrue("PROBLEM - unable to locate providerName element on claims detail page", validate(providerName));
+			Assert.assertTrue("PROBLEM - unable to locate claimNum value element on claims detail page", validate(claimNumDynamic));
+
+			Assert.assertTrue("PROBLEM - unable to locate claimTypeLabel element on claims detail page", validate(claimTypeLabel));
+			Assert.assertTrue("PROBLEM - unable to locate claimsType value element on claims detail page", validate(claimsTypeDynamic));
+
+			Assert.assertTrue("PROBLEM - unable to locate claimStatusLabel element on claims detail page", validate(claimStatusLabel));
+			Assert.assertTrue("PROBLEM - unable to locate claimStatus value element on claims detail page", validate(claimStatusDynamic));
+
+			Assert.assertTrue("PROBLEM - unable to locate medicalEOBLabel element on claims detail page", validate(medicalEOBLabel));
+			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field value is not as expected, should either be 'Not Available (Pending)' or 'view PDF'", (validate(medicalEobNotAvaText) || validate(medicalEobViewPDF)));
 		}
-		Assert.assertTrue("PROBLEM - unable to locate claimNum value element on claims detail page", validate(claimNumDynamic));
-
-		Assert.assertTrue("PROBLEM - unable to locate claimTypeLabel element on claims detail page", validate(claimTypeLabel));
-		Assert.assertTrue("PROBLEM - unable to locate claimsType value element on claims detail page", validate(claimsTypeDynamic));
-
-		Assert.assertTrue("PROBLEM - unable to locate claimStatusLabel element on claims detail page", validate(claimStatusLabel));
-		Assert.assertTrue("PROBLEM - unable to locate claimStatus value element on claims detail page", validate(claimStatusDynamic));
-
-		Assert.assertTrue("PROBLEM - unable to locate medicalEOBLabel element on claims detail page", validate(medicalEOBLabel));
-		Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field value is not as expected, should either be 'Not Available (Pending)' or 'view PDF'", (validate(medicalEobNotAvaText) || validate(medicalEobViewPDF)));
 	}
 
 	/**
-     * @toDo : validateClaimsTableInDetailsPage
-     */
-	//tbd @SuppressWarnings("deprecation")
+	 * validateClaimsTableInDetailsPage
+	 */
 	public void validateClaimsTableInDetailsPage(String planType) {
-		//wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
 		if (planType.equalsIgnoreCase("ship")) {
 			CommonUtility.waitForPageLoadNew(driver, ship_medicalClaimDetailsText, 5);
 			Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(ship_medicalClaimDetailsText));
 			System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ ship_medicalClaimDetailsText.isDisplayed());
-			//tbd Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(ship_claimNumberLabel));
-			//tbd System.out.println("!!!Claim Number is displayed===>"+ship_claimNumberLabel.isDisplayed());
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, medicalClaimDetailsText, 5);
 			Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(medicalClaimDetailsText));
 			System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
-			//tbd Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(claimNumberLabel));
-			//tbd System.out.println("!!!Claim Number is displayed===>"+claimNumberLabel.isDisplayed());
 		}
 		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",validate(learnMoreLink));
 		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
 		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",validate(claimDetTableMainSection));
+		Assert.assertTrue("PROBLEM - Claims Table is not present in Claims Details Page", claimDetTableMainSection.isDisplayed());
 		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
-		if(claimDetTableMainSection.isDisplayed()){
-			Assert.assertTrue(true);
-		} else{
-			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
-		}
-		/* //tbd-remove
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		Assert.assertTrue("PROBLEM - unable to locate medicalClaimDetailsText",validate(medicalClaimDetailsText));
-		System.out.println("!!! Medical Claims Details text is seen on the Claims Details page !!!  "+ medicalClaimDetailsText.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate claimNumber",validate(claimNumber));
-		System.out.println("!!!Claim Number is displayed===>"+claimNumber.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",validate(learnMoreLink));
-		System.out.println("!!!Learn More link is seen on the Claims Details Page !!!"+ learnMoreLink.isDisplayed());
-		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",validate(claimDetTableMainSection));
-		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
-		if(claimDetTableMainSection.isDisplayed()){
-			Assert.assertTrue(true);
-		} else{
-			Assert.assertTrue("Claims Table is not present in Claims Details Page", false);
-		}
-		 */
 	}
 
-	//tbd @SuppressWarnings("deprecation")
-	public void TBR_validateLearnMoreInDetailsPage() {	//tbd-remove whole method
-		validate(learnMoreLink);
-		System.out.println("!!! Learn more link is seen on the claims Details page ===>"+learnMoreLink.getText());
-		if(learnMoreLink.isDisplayed()){
-			Assert.assertTrue(true);
-		}
-			else{
-				Assert.assertTrue("Learn more section is not present in Claims Details Page", false);
-		}
-		
+	public void clickOnEOB() { 
+		Assert.assertTrue("PROBLEM - EOB link is not present in Claims Details Page", validate(headerEOB));
+		headerEOB.click();			
 	}
 
-	//tbd @SuppressWarnings("deprecation")
-	public void clickOnEOB() { //keep for EOB story
-		if(headerEOB.isDisplayed()){
-			Assert.assertTrue(true);
-			headerEOB.click();			
-		} else{
-			Assert.assertTrue("EOB link is not present in Claims Details Page", false);
-		}
-		
-	}
 	/**
-	 * @toDo :this method validates EOB
+	 * this method validates EOB
 	 */
-	public void validateEOB() { //keep for EOB story
-		if(EOB.isDisplayed()){
-			Assert.assertTrue(true);
-			EOB.click();			
-		}
-		else{
-			Assert.assertTrue("Search your history button is not present in Claims Details Page", false);
-		}
-		
+	public void validateEOB_ship() { //keep for EOB story
+		Assert.assertTrue("Search your history button is not present in Claims Details Page", validate(EOB));
+		EOB.click();			
 	}
-	/**
-	 * @toDo :this method validates Claims total 
-	 */
 
+	/**
+	 * this method validates Claims total 
+	 */
 	public void validateClaimsTotalInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimstotalTable, 5);
-		/* //tbd-remove
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(claimstotalTable);
-		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
-		validate(claimstotalTable);
-		System.out.println("!!! Claims Total $$ table is displayed on the Claims Details page===>"+claimstotalTable.isDisplayed());
-		if(claimstotalTable.isDisplayed()){
-			Assert.assertTrue(true);			
-		}
-		else{
-			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
-		} */
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", validate(claimstotalTable));
-	
 	}
-	/**
-	 * @toDo :validateClaimSearchLINK
-	 */
-	public void validateClaimSearchLINK(){ //need to investigate to see how to cover this
-		//CommonUtility.waitForPageLoad(driver, claimsHistoryLink, 90);	//tbd-remove
-		//validate(claimsearch);
-		//System.out.println("*** Claim search Link is seen on the page ===>"+claimsearch.isDisplayed());
-		if (driver.getTitle().equalsIgnoreCase("/details")) {
-			System.out.println("*** Combo Member is on Claims Details Page ***");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
-	}
-	/**
-	 * @toDo: Validate learnMoreCostLink
-	 */
+
 	public void learnMoreCostLink(){  
 		CommonUtility.waitForPageLoad(driver, learnmoreCost, 10);
 		Assert.assertTrue("PROBLEM - unable to locate the Learn More link on detail page", validate(learnmoreCost));
 		System.out.println("Learm more cost break down link is seen" +learnmoreCost.isDisplayed());
 		learnmoreCost.click();		
 	}
-	/**
-	 * @toDo : Validate Claims Table in claims details page for Combo
-	 */
-	public void shipdetailcombo(){ //need to investigate to see what this one is about
-		//validate(shipcombotable);
-		System.out.println("Cliam detail table is seen for Ship combo member");
-	}
-	/**
-	 * @toDo : Validate EOB for Combo members 
-	 */
-	public void EOBShipcombo(){  //need to investigate to see what this one is about
-		//validate(EOBshipcombo);
-		System.out.println("EOB for combo ship plan is seen on claim details page");
-}
-	/**
-	 * @toDo : validate Claim History Button
-	 */
-	/*public void validateClaimHistory(){	//tbd-remove
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	validate(claimsHistoryLink);
-	System.out.println("claimsHistoryLink.isDisplayed==>"+claimsHistoryLink.isDisplayed());
-	claimsHistoryLink.click();
-	if (driver.getCurrentUrl().contains("/overview"))
-	{
-	System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
-	}
-	
-}
-	
 
-	/**
-	 * @toDo :validate the two COMBO tabs on the claims Summary page
-	 */
-	/*public void comboTabs() { //tbd-remove
-		
-		for (WebElement webElement : comboTabsOnclaimsPage) {
-			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
-			webElement.click();
-			System.out.println(driver.getCurrentUrl());
-		}*/
- //}
-	/**
-	 * @toDo : validate the Claims History Button
-	 */
-	public void TBR_claimshistorylink(){	//tbd-remove whole method
-		validate (claimsSummaryLinkOnDetailBottomPage);
-		System.out.println("history link is seen");
-		claimsSummaryLinkOnDetailBottomPage.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public ClaimSummarypage validateClaimsSummaryLinkOnDetailTopPage(String planType){
+		WebElement topButton=claimsSummaryLinkOnDetailTopPage;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			topButton=ship_claimsSummaryLinkOnDetailTopPage;
 		}
-	
-		if (driver.getCurrentUrl().contains("/overview"))
-		{
-		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
-		}
-	}
-	
-	public ClaimSummarypage validateClaimsSummaryLinkOnDetailTopPage(){
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			Thread.sleep(1000); //need this sleep, MA case somehow takes longer to load for the link to be clickable
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailTopPage, 10);
-		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(claimsSummaryLinkOnDetailTopPage));
-		claimsSummaryLinkOnDetailTopPage.click();
+		CommonUtility.waitForPageLoad(driver, topButton, 10);
+		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",validate(topButton));
+		topButton.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummaryHeader, 10);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page back to Summary page ---------->"+driver.getCurrentUrl());
 		return new ClaimSummarypage(driver);
-
 	}
-	
+
 	public ClaimSummarypage validateClaimsSummaryLinkOnDetailBottomPage(){
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailBottomPage, 10);
@@ -724,29 +551,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("The member has navigated from details page to Summary page ---------->"+driver.getCurrentUrl());
 		return new ClaimSummarypage(driver);
 	}
-	/**
-	 * @toDo :validate the two COMBO tabs on the claims Summary page
-	 */
-	public void comboTabs() {  //investigate and see how to cover this case
-		
-		for (WebElement webElement : comboTabsOnclaimsPage) {
-			System.out.println("The COMBO plans names seen on the page are ==> " + webElement.getText());
-			webElement.click();
-			System.out.println(driver.getCurrentUrl());
-		}
- }
-
-	public void validateEobInDetailsPage() { //keep for EOB story
-		if(MRScenario.environment.equalsIgnoreCase("team-a"))
-		{
-		validate(EOBunavailable);
-		System.out.println("Unavailable = "+driver.getTitle());
-		}else{
-			System.out.println("Available = "+driver.getTitle());	
-		}
-	}
-
-	//vvv note: added for def1041
+	
 	public HashMap<String,String> gatherDataFromDetailPage(String claimType) {
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		if (claimType.equalsIgnoreCase("medical")) {
@@ -774,7 +579,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			}
 			System.out.println("waited total of "+x+" sec for the data to populate on detail page");
 			try {
-			value=tmp[0].trim();
+				value=tmp[0].trim();
 			} catch (ArrayIndexOutOfBoundsException e) {
 				Assert.assertTrue("PROBLEM - not getting expected data value on detail page, please check to see if service is down or timing issue with script", false);
 			}
@@ -903,7 +708,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			String valueFromSummary=dataMapSummary.get(key);
 			String valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			//note: for provider name, some backend test data was setup with space, some doesn't
 			key="med_providerName";
 			valueFromSummary=dataMapSummary.get(key);
@@ -914,12 +719,12 @@ public class ClaimDetailsPage extends UhcDriver{
 			valueFromSummary=valueFromSummary.replaceAll("\\s","");
 			boolean check2=valueFromSummary.equals(valueFromDetail);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", (check1 || check2));
-	
+
 			key="med_providerType";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="med_amountBilled";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
@@ -932,12 +737,12 @@ public class ClaimDetailsPage extends UhcDriver{
 				System.out.println("*** Modify validation to check for value is the same between the pages when the fix comes in");
 				Assert.assertTrue("PROBLEM: value for element "+key+" should not be empty in claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", !valueFromSummary.equals("") && !valueFromSummary.equals(""));
 			}
-	
+
 			key="med_claimStatus";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="med_yourShare";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
@@ -958,32 +763,32 @@ public class ClaimDetailsPage extends UhcDriver{
 			//String valueFromSummary=dataMapSummary.get(key);
 			//String valueFromDetail=dataMapDetail.get(key);
 			//Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			String key="ship_provider";
 			String valueFromSummary=dataMapSummary.get(key);
 			String valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromDetail.contains(valueFromSummary));
-	
+
 			key="ship_claimType";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="ship_charged";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="ship_paidToYou";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="ship_paidToProvider";
 			valueFromSummary=dataMapSummary.get(key).replaceAll("\\s","");
 			valueFromDetail=dataMapDetail.get(key);
 			Assert.assertTrue("PROBLEM: value for element "+key+" is not the same betweeen claims summary and detail pages. From summary: '"+valueFromSummary+"' | From detail: '"+valueFromDetail+"'", valueFromSummary.equals(valueFromDetail));
-	
+
 			key="ship_processedDate";
 			valueFromSummary=dataMapSummary.get(key);
 			valueFromDetail=dataMapDetail.get(key);
@@ -1028,25 +833,25 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 		return new ClaimSummarypage(driver);
 	}
-	
+
 	public boolean validate_SearchEobHistory_onDetailPage(String claimSystem, String plantype){
 		boolean invokeBypass_INC11365785_searchEOBHistory=false;
-			if (!plantype.equals("SHIP")) {
-				if ((plantype.equals("MA") || plantype.equals("MAPD")) && (claimSystem.toUpperCase().contains("NICE"))) {
-					Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page (NOTE: this is not the right behavior,there is a prod defect)", !validate(detail_medicalEOB));
-					System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical EOB is displayed - (NOTE: this is not the right behavior,there is a prod defect)");
-					invokeBypass_INC11365785_searchEOBHistory=true;
-				} else {
-					Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on detail page", validate(detail_medicalEOB));
-					System.out.println("for '"+plantype+" and "+claimSystem+"' - medical EOB is displayed===> "+ detail_medicalEOB.isDisplayed());
-				}
+		if (!plantype.equals("SHIP")) {
+			if ((plantype.equals("MA") || plantype.equals("MAPD")) && (claimSystem.toUpperCase().contains("NICE"))) {
+				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page (NOTE: this is not the right behavior,there is a prod defect)", !validate(detail_medicalEOB));
+				System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical EOB is displayed - (NOTE: this is not the right behavior,there is a prod defect)");
+				invokeBypass_INC11365785_searchEOBHistory=true;
 			} else {
-				Assert.assertTrue("PROBLEM - unable to locate EOB link on detail page for SHIP user", validate(EOB_SHIP));
-				System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
+				Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on detail page", validate(detail_medicalEOB));
+				System.out.println("for '"+plantype+" and "+claimSystem+"' - medical EOB is displayed===> "+ detail_medicalEOB.isDisplayed());
 			}
-			return invokeBypass_INC11365785_searchEOBHistory;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate EOB link on detail page for SHIP user", validate(EOB_SHIP));
+			System.out.println("for SHIP Eob is diplayed ====>"+ (EOB_SHIP.isDisplayed()));
+		}
+		return invokeBypass_INC11365785_searchEOBHistory;
 	}
-	
+
 	public void validateMedicalEob(String claimType) {
 		if (claimType.equalsIgnoreCase("medical")) {
 			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field should show up for claimType='"+claimType+"'", validate(medicalEobText));
@@ -1062,7 +867,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field should not show up for claimType='"+claimType+"'", !validate(medicalEobText));
 		}
 	}
-	
+
 	public boolean validatePageContainsPdfDocText() {
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
@@ -1084,11 +889,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		WebElement r=driver.findElement(By.xpath(elementXpath));
 		return Float.parseFloat(r.getText().replace("$", "").replace(",",""));
 	}
-	
+
 	public float findValue(WebElement e) {
 		return Float.parseFloat(e.getText().replace("$", "").replace(",",""));
 	}
-	
+
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
 
@@ -1117,15 +922,15 @@ public class ClaimDetailsPage extends UhcDriver{
 				value=findValue(xpath2+"[2]/p");
 				System.out.println("rows Medicare Approved value="+value);
 				rowTotalMedicareApproved=rowTotalMedicareApproved+value;
-				
+
 				value=findValue(xpath2+"[3]/p");
 				System.out.println("rows Medicare Deductible value="+value);
 				rowTotalMedicareDeducible=rowTotalMedicareDeducible+value;
-				
+
 				value=findValue(xpath2+"[4]/p");
 				System.out.println("rows Medicare Paid value="+value);
 				rowTotalMedicarePaid=rowTotalMedicarePaid+value;
-				
+
 				value=findValue(xpath2+"[5]/p");
 				System.out.println("rows Plan Cost Share value="+value);
 				rowTotalPlanCostShare=rowTotalPlanCostShare+value;
@@ -1163,7 +968,7 @@ public class ClaimDetailsPage extends UhcDriver{
 				float value=findValue(xpath1+"[1]/p");
 				System.out.println("rows AmountBilled value="+value);
 				rowsTotalAmountBilled=rowsTotalAmountBilled+value;
-				
+
 				value=findValue(xpath1+"[2]/p");
 				rowsTotalAdjustment=rowsTotalAdjustment+value;
 				System.out.println("rows Adjustment value="+value);
@@ -1176,7 +981,7 @@ public class ClaimDetailsPage extends UhcDriver{
 				rowsTotalYourShare=rowsTotalYourShare+value;
 				System.out.println("rows YourShare value="+value);
 			}
-			
+
 			//note: check to see if total match
 			Assert.assertTrue("PROBLEM - 'Adjustments' from each list doesn't add up to the value from claims total section.  totalAdjustment="+totalAdjustment+" | rowsTotalAdjustment="+rowsTotalAdjustment, totalAdjustment==rowsTotalAdjustment);
 			Assert.assertTrue("PROBLEM - 'Plan's share' from each list doesn't add up to the value from claims total section.  totalPlanShare="+totalPlanShare+" | rowsTotalPlanShare="+rowsTotalPlanShare, totalPlanShare==rowsTotalPlanShare);
@@ -1188,43 +993,21 @@ public class ClaimDetailsPage extends UhcDriver{
 			}
 		}
 	}
-	
 
-   public void validateNeedHelpSection(String planType) {
+
+	public void validateNeedHelpSection(String planType) {
 		if (planType.equalsIgnoreCase("SHIP")) {
-			String expectedTechnicalPhone="1-866-254-3132";
-			String expectedGeneralPhone="1-800-523-5800";
-			String expectedClaimsPhone="1-800-523-5880";
-			
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
-			
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkEndHrs));
 
-			System.out.println("Proceed to validate the Need Help - General Questions section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - General Questions section element",validate(needHelp_GeneralQuestionsSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_phone));
-			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - General Questions section. Expected='"+expectedGeneralPhone+"' | Actual='"+needHelp_GeneralQuestions_phone.getText()+"'",expectedGeneralPhone.equals(needHelp_GeneralQuestions_phone.getText()));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkEndHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,needHelp_TechicalSupport_wkEndHrs);
 
-			System.out.println("Proceed to validate the Need Help - Claims Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Claims Support section element",validate(needHelp_ClaimsSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_phone));
-			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Claims Support section. Expected='"+expectedClaimsPhone+"' | Actual='"+needHelp_ClaimsSupport_phone.getText()+"'",expectedClaimsPhone.equals(needHelp_ClaimsSupport_phone.getText()));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkDayHrs));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkEndHrs));
+			validateSection="Need Help - General Questions";
+			validateNeedHelpSectionContent(validateSection, needHelp_GeneralQuestionsSection, needHelp_GeneralQuestions_img, needHelp_GeneralQuestions_phone, needHelp_GeneralQuestions_tty, needHelp_GeneralQuestions_wkDayHrs,needHelp_GeneralQuestions_wkEndHrs);
+
+			validateSection="Need Help - Claims Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_ClaimsSupportSection, needHelp_ClaimsSupport_img, needHelp_ClaimsSupport_phone, needHelp_ClaimsSupport_tty, needHelp_ClaimsSupport_wkDayHrs,needHelp_ClaimsSupport_wkEndHrs);
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
@@ -1240,34 +1023,30 @@ public class ClaimDetailsPage extends UhcDriver{
 			driver.navigate().back();
 			System.out.println("Main window = "+driver.getTitle());	
 		} else {
-			String expectedTechnicalPhone="1-800-721-0627";
-			String expectedPlanSupportPhone="1-800-950-9355";
-			
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
-			
-			System.out.println("Proceed to validate the Need Help - Technical Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
-			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
 
-			System.out.println("Proceed to validate the Need Help - Plan Support section content");
-			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Plan Support section element",validate(needHelp_PlanSupportSection));
-			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_img));
-			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_phone));
-			//KEEP - turn it back on when confirmed expected behavior
-			//KEEP - Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Plan Support section. Expected='"+expectedPlanSupportPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedPlanSupportPhone.equals(needHelp_PlanSupport_phone.getText()));
-			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_tty));
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_wkDayHrs));
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,null);
+
+			validateSection="Need Help - Plan Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
 		}
-   }
-	//^^^ note:	added for def1041		
+	}
 	
-	//vvv note:	added for VBF		
+	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
+		System.out.println("Proceed to validate the "+section+" section content");
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",validate(imgElement));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",validate(phoneElement));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",validate(ttyElement));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement1));
+		if (hrsOperationElement2!=null) {
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement2));
+		}
+	}
 
+	//vvv note:	added for VBF		
 	public void vbf_validateClaimsTableInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
 		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
@@ -1282,7 +1061,7 @@ public class ClaimDetailsPage extends UhcDriver{
 			}
 		}
 	}
-	
+
 	public void vbf_validateClaimsTotalInDetailsPage() {
 		validateNew(claimstotalTable);
 		if (claimstotalTable.isDisplayed()) {
@@ -1290,7 +1069,6 @@ public class ClaimDetailsPage extends UhcDriver{
 		} else {
 			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
 		}
-
 	}
 
 	public void vbf_validateShipClaimsTotalInDetailsPage() {
