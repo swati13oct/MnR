@@ -135,18 +135,19 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
 
 #    #need test data to execute this specific scenario, will re-active this once data is available
-#	 @claims6 @TC_09claimsPHIP @regressionMember
-#	 Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
-#	 Given login with following details logins in the member portal and validate elements
-#	   | Plan Type      | <planType>     |
-#      | Member Type    | <memberType>   |
-#	   | Claim System   | <claimSystem>  |
-#	 When I navigate to the claims Summary page from dashboard or testharness page
-#	 And I validate the error message for a PHIP Member on the screen
-#	 Examples: 
-#	   | TID   | planType | memberType | claimSystem    |
-#	   | 15258 | PHIP     | Individual | COMPASS_CLAIMS |
+ @claims6 @TC_09claimsPHIP @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type     | <planType>     |
+      | Plan Category | <planCategory> |
+      | Member Type   | <memberType>   |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    And I validate the error message for a PHIP Member on the screen
 
+    Examples: 
+      | TID   | planType | planCategory | memberType |
+      | 15258 | SHIP     | PHIP         | SHIP_PHIP  |
+      
     @claims01 @claimsEOB @US1268210 @F244667 @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
