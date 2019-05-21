@@ -27,6 +27,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	    And I can search claims for the following claim period on claims summary page
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
+          | Claim System | <claimSystem> |
         Then I validate the claims displayed based on the selection on claims summary page
 		And I validate the EOB section based on claims system on claims summary page
 	      | Plan Type    | <planType>    |
@@ -76,6 +77,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	    And I can search claims for the following claim period on claims summary page
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
+          | Claim System | <claimSystem> |
         Then I validate the claims displayed based on the selection on claims summary page
     
         Examples: 
@@ -98,6 +100,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	And I can search claims for the following claim period on claims summary page
 	     | Plan Type    | <planType>    |
 	     | Claim Period | <claimPeriod> |
+	     | Claim System | <claimSystem> |
 	Then I can see the claims displayed based on the selection on claims summary page
 	And I validate the pagination on the claims summary page
 	And I can see the learn more and print and download option on claims summary table section 
@@ -107,26 +110,34 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	And I validate the DownloadMyData section on claims summary page
 	     | Plan Type    | <planType>    |
 	Then I navigate to the Claim Details page from claims summary page
-	     | Plan Type  | <planType>    |
+	     | Plan Type    | <planType>    |
+	     | Claim System | <claimSystem> |
 	And I validate the Claims Total on claims details page
-	     | Plan Type  | <planType>    |
+	     | Plan Type    | <planType>    |
+	     | Claim System | <claimSystem> |
 	And I validate the claims summary link on claims detail bottom page
-	     | Plan Type  | <planType>    |
+	     | Plan Type    | <planType>    |
+	     | Claim System | <claimSystem> |
 	Then I navigate to the Claim Details page from claims summary page
-	     | Plan Type  | <planType>    |
+	     | Plan Type    | <planType>    |
+	     | Claim System | <claimSystem> |
 	And I validate the claims summary link on claims detail top page
-	     | Plan Type  | <planType>    |
+	     | Plan Type    | <planType>    |
+	     | Claim System | <claimSystem> |
 	Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
 	     | Plan Type    | <planType>    |
 	     | Claim System | <claimSystem> |
 	  
+       #note1 - need to locate user with claims and update csv
 	   Examples:   
-	     | TID   | planType | memberType | claimPeriod    | claimSystem   | 
-	     | 15227 | MA       | Individual | Last 24 months | NICE_CLAIMS   | 
-	     | 15230 | MAPD     | Individual | Last 24 months | COSMOS_CLAIMS |
+	     | TID   | planType | memberType      | claimPeriod    | claimSystem     | 
+	     | 15227 | MA       | AARP_Individual | Last 24 months | NICE_CLAIMS   | 
+	     | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS |
+	     #see note1 | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS |
+	     | 15234 | MA       | UHC_Individual | Last 24 months | COSMOS_CLAIMS   | 
+	     #see note1 | 15235 | MAPD       | UHC_Individual | Last 24 months | M_NICE_CLAIMS   | 
+	     | 15235 | MAPD     | UHC_Individual | Last 24 months | D_NICE_CLAIMS   | 
 	     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
-	     | 15227 | MA       | Individual | Last 24 months | COSMOS_CLAIMS |
-	     | 15230 | MAPD     | Individual | Last 24 months | NICE_CLAIMS   |
 	     | 15236 | SHIP     | Individual | Last 24 Months | COMPASS_CLAIMS|
          | 15300 | PDP      | GROUP      | Last 24 months | RX_CLAIMS     |
          | 15259 | SHIP     | COMBO      | Last 24 months | COMPASS_CLAIMS|
@@ -134,19 +145,18 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | xxxxx | MAPD     | GROUP      | Last 24 months | COSMOS_CLAIMS |
 	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
 
-#    #need test data to execute this specific scenario, will re-active this once data is available
- @claims6 @TC_09claimsPHIP @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+    @claims6 @TC_09claimsPHIP @regressionMember
+    Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
       | Plan Type     | <planType>     |
       | Plan Category | <planCategory> |
-      | Member Type   | <memberType>   |
+      | Claim System  | <claimSystem>  |
     When I navigate to the claims Summary page from dashboard or testharness page
     And I validate the error message for a PHIP Member on the screen
 
     Examples: 
-      | TID   | planType | planCategory | memberType |
-      | 15258 | SHIP     | PHIP         | SHIP_PHIP  |
+      | TID   | planType | planCategory | claimSystem   |
+      | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS|
       
     @claims01 @claimsEOB @US1268210 @F244667 @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
@@ -158,6 +168,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
     And I can search claims for the following claim period on claims summary page
           | Plan Type    | <planType>    |
           | Claim Period | <claimPeriod> |
+          | Claim System | <claimSystem> |
     Then I can see the claims displayed based on the selection on claims summary page
     When I navigate to the Claim details page to see eob link on details page
     Then I can validate the view as pdf link on claims details page header
@@ -229,14 +240,14 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	    When if I access via dashboard I can navigate to claims summary page from View Your Claims 
 		When I navigate to the claims Summary page from dashboard or testharness page
 		Then I can validate the claims summary header on claims summary page
-		  | Plan Type    | <planType>             |
+		  | Plan Type      | <planType>           |
 		  | Member Type    | <memberType>         |
 		#----------------- Test Custom search error cases --------------------------
 		And I can search claims for claim period and claim type on claim summary page
-		  | Plan Type    | <planType>              |
+		  | Plan Type      | <planType>            |
 		  | Member Type    | <memberType>          |
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Custom search           |
+		  | Claim Type     | <claimType>           |
+		  | Claim Period   | Custom search         |
 		And I should be able to see the error message when no to and form dates being entered
 		And I custom search claims for the following invalid time interval on claims summary page
 		  | Plan Type        | <planType>          |
@@ -330,48 +341,51 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  
 	@claims00_01 @claims00_MAPD @claims00_COSMOS_MEDICAL @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser | 
-	  |01    |1041| MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS| Medical           | Yes                | 
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser | 
+	  |01    |1041| MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Medical           | Yes                | 
 
 	@claims00_02 @claims00_MAPD @claims00_COSMOS_DRUG @diffGrpsDiffYrs
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |02    |1041| MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS | Prescription drug| No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |02    |1041| MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Prescription drug | No                 |
 
 	@claims00_03 @claims00_MA @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |03    |1041| MA       | Individual                 | COSMOS_CLAIMS| Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |03_1  |1041| MA       | AARP_Individual            | COSMOS_CLAIMS  | Medical           | Yes                |
+	  |03_2  |1041| MA       | UHC_Individual             | COSMOS_CLAIMS  | Medical           | Yes                |
 
 	@claims00_04 @claims00_MA @claims00_NICE_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |04    |1041| MA       | Individual                 | NICE_CLAIMS  | Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |04    |1041| MA       | AARP_Individual            | NICE_CLAIMS    | Medical           | Yes                |
 
 	@claims00_05 @claims00_MAPD @claims00_NICE_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |05    |1041| MAPD     | Individual                 | NICE_CLAIMS  | Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |05    |1041| MAPD     | AARP_Individual            | M_NICE_CLAIMS  | Medical           | Yes                |
 
 	@claims00_06 @claims00_MAPD @claims00_NICE_DRUG
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |06    |1041| MAPD     | Individual                 | NICE_CLAIMS  | Prescription drug | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |06    |1041| MAPD     | AARP_Individual            | D_NICE_CLAIMS  | Prescription drug | Yes                |
 
 	@claims00_07 @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |07    |1041| MAPD     | Individual                 | COSMOS_CLAIMS| Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |07_1  |1041| MAPD     | AARP_Individual            | M_COSMOS_CLAIMS| Medical           | Yes                |
+	  |07_2  |1041| MAPD     | UHC_Individual             | M_COSMOS_CLAIMS| Medical           | Yes                |
 
 	@claims00_08 @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |08    |1041| MAPD     | Individual                 | COSMOS_CLAIMS| Prescription drug | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |08_1  |1041| MAPD     | AARP_Individual            | D_COSMOS_CLAIMS| Prescription drug | No                 |
+	  |08_2  |1041| MAPD     | UHC_Individual             | D_COSMOS_CLAIMS| Prescription drug | No                 |
 
 	@claims00_09 @claims00_PCP @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem  | claimType         | flagZeroClaimsUser |
-	  |09    |1041| PCP      | Individual                 | COSMOS_CLAIMS| Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |09    |1041| PCP      | Individual                 | COSMOS_CLAIMS  | Medical           | Yes                |
 
 	@claims00_10 @claims00_PCP @claims00_COSMOS_DRUG
 	Examples: 
@@ -380,62 +394,62 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS | Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Medical           | Yes                |
 
 	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS | Prescription drug | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Prescription drug | Yes                |
 
 	@claims00_13 @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |13    |1041| PDP      | Individual                 | RX_CLAIMS     | Prescription drug | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |13    |1041| PDP      | Individual                 | RX_CLAIMS      | Prescription drug | Yes                |
 
 	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |14    |1041| SHIP     | Individual                 | COMPASS_CLAIMS| NA                | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |14    |1041| SHIP     | Individual                 | COMPASS_CLAIMS | NA                | Yes                |
 
 	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |15    |1041| PDP      | COMBO_GROUP                | RX_CLAIMS     | Prescription drug | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |15    |1041| PDP      | COMBO_GROUP                | RX_CLAIMS      | Prescription drug | No                 |
 
 	@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |16    |1041| SSUP     | COMBO_GROUP                | COSMOS_CLAIMS | Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |16    |1041| SSUP     | COMBO_GROUP                | COSMOS_CLAIMS  | Medical           | Yes                |
 
 	@claims00_17 @claims00_COMBO @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |17    |1041| SHIP     | COMBO                      | COMPASS_CLAIMS| NA                | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |17    |1041| SHIP     | COMBO                      | COMPASS_CLAIMS | NA                | Yes                |
 
 	@claims00_18 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |18    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS | Medical           | Yes                |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |18    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS  | Medical           | Yes                |
 
 	@claims00_19 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |19    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS | Prescription drug | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |19    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS  | Prescription drug | No                 |
 
 	@claims00_20 @claims00_GROUP @claims00_MA @claims00_COSMOS_MEDICAL
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |20    |1041| MA       | GROUP                      | COSMOS_CLAIMS | Medical           | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |20    |1041| MA       | GROUP                      | COSMOS_CLAIMS  | Medical           | No                 |
 
 	@claims00_21 @claims00_GROUP @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
-	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |21    |1041| PDP      | GROUP                      | RX_CLAIMS     | Prescription drug | No                 |
+	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
+	  |21    |1041| PDP      | GROUP                      | RX_CLAIMS      | Prescription drug | No                 |
 
     #note: these will be in team-a env only
-	#  |xx    |1041| MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS | Medical           | No                |
-	#  |xx    |1041| MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS | Prescription drug | No                |
+	#  |xx    |1041| MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Medical           | No                |
+	#  |xx    |1041| MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Prescription drug | No                |
 	#----- end of claims00 ---------------------------------------------------------------
 
 	
