@@ -23,7 +23,7 @@ q2_jun_ship0003486/Password@1,Medsupp,Ship,ShipEOB
 q2_apr_uhc0045/Password@1,MAPD,UHCIndividualCosmosEOB,Medical
 q1_apr_uhc083/Password@3,MAPD,UHCIndividualEOB,Prescription Drug
 q1_aarp_apr158141/Password@1,MAPD,AARPIndividualCosmosEOB,Medical
-q1_apr_aarpeob002/Test2day,MAPD,AARPIndividualNiceEOB,Medical
+q1_apr_aarpeob002/Password@3,MAPD,AARPIndividualNiceEOB,Medical
 q1_aarp_apr158141/Password@1,MAPD,AARPIndividualEOB,Prescription Drug
 q1_grp_apr031/Password@1,MAPD,GroupRetireeCosmosEOB,Medical
 q1_aarp_apr194test/Password@1,MAPD,IndAARPPharmacyFnR

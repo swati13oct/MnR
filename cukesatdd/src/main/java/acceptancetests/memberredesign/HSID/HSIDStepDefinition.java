@@ -67,7 +67,7 @@ public class HSIDStepDefinition {
 		String category = memberAttributesMap.get("Member Type");
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
-		String testDataType = memberAttributesMap.get("Test Data Type");
+		String testDataType = memberAttributesMap.get("Claim System");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
