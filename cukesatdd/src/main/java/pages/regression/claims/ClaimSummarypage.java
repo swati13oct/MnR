@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 
 
@@ -32,11 +33,14 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
 	private WebElement messageForPreeffective;
 
-	@FindBy(xpath = "//p[contains(text(),'1-866-254-3132')]")
+	@FindBy(css = ".claim-results")
+	private WebElement ClaimsSummaryPage;
+
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
 	public WebElement preEffectiveTechSupportNumber;
 
-	@FindBy(css = ".claim-results")
-	private WebElement ClaimsSummaryPage;//in use
+	@FindBy(xpath = "//a[@id = 'contactUsAtdd']")
+	public WebElement ContactUsLink;
 
 	@FindBy(xpath = "//h1")
 	private WebElement pageHeader;
@@ -560,7 +564,7 @@ public class ClaimSummarypage extends UhcDriver{
 			return false;
 		}
 	}		
-	
+
 	/** 
 	 * this method validates EOB 
 	 */
@@ -596,7 +600,7 @@ public class ClaimSummarypage extends UhcDriver{
 			return false ;
 		}
 	}
-	
+
 	/**
 	 * this method validates claims by time interval 
 	 */
@@ -675,7 +679,7 @@ public class ClaimSummarypage extends UhcDriver{
 			return false;
 		}
 	}
-	
+
 	/**
 	 * this method validates Error Max claims reached 
 	 */
@@ -690,7 +694,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if (!shipDateRangeErrMsg.isDisplayed())
 			Assert.fail(shipDateRangeErrMsg + "is not being displayed");
 	}
-	
+
 	/**
 	 * this method validates Error message greater than 24 months.
 	 */	
@@ -701,7 +705,7 @@ public class ClaimSummarypage extends UhcDriver{
 		if(!messageaftersrch.isDisplayed())
 			Assert.fail(messageaftersrch +"Is not being displayed");		
 	}
-	
+
 	/**
 	 * this method validates ERROR message from date later than to date 
 	 */	
@@ -710,7 +714,7 @@ public class ClaimSummarypage extends UhcDriver{
 			Assert.fail(fromDateLaterThanToDateError + "is not beind dsiplayed");	
 		}
 	}
-	
+
 	/**
 	 * this method validates combo tab section
 	 */
@@ -797,7 +801,7 @@ public class ClaimSummarypage extends UhcDriver{
 			validateComboTabs();
 			goToSpecificComboTab(planType);
 		}
-		
+
 		//note: validate header element
 		String expPageHeadingText="Claims Summary";
 		Assert.assertTrue("PROBLEM - unable to locate page header element on claims summary page", validate(pageHeader));
@@ -1072,24 +1076,21 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("Assert for preeffective message on claims page was passed");
 	}
 
-
-	public void verifyCorrectTechSupportNumberForPreEffectiveMembers() throws InterruptedException {
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException {
 		System.out.println("Now checking for Tech Support Number for Pre-effective members on claims page");
 		System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-		String expPhone="1-866-254-3132";
-		Assert.assertEquals("PROBLEM - not getting expected phone#.  Expected='"+expPhone+"' | Actual='"+preEffectiveTechSupportNumber.getText()+"'", preEffectiveTechSupportNumber.getText(),expPhone);
-		System.out.println("Assert for correct Tech Suppport Phone Number on claims page was passed");
+		Assert.assertEquals("PROBLEM - not getting expected phone#.  Expected='"+technicalPhNo+"' | Actual='"+preEffectiveTechSupportNumber.getText()+"'", preEffectiveTechSupportNumber.getText(),technicalPhNo);
+		System.out.println("Assert for correct Tech Suppport Phone Number on claims summary page was passed");
 	}
-	
+
 	public void verifyPaymentTabIsDisplayedForPreEffectiveMembers() throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate Payment tab",(driver.findElement(By.xpath("//a[contains(text(),'Premium Payments')]"))).isDisplayed());
-		System.out.println("Premium Payment tab was displayed on Claims secondary page");
+		System.out.println("Premium Payment tab was displayed on Claims summary page");
 	}
 
 	public static void checkForIPerceptionModel(WebDriver driver) {
 		int counter = 0;
 		do {
-
 			System.out.println("current value of counter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
@@ -1121,7 +1122,7 @@ public class ClaimSummarypage extends UhcDriver{
 
 			//note: validate download
 			try {
-			claimsSummaryDownloadButton.click();
+				claimsSummaryDownloadButton.click();
 			} catch(Exception e) {
 				Assert.assertTrue("PROBLEM - encounted exception when attempting to click donwload button", false);
 			}
@@ -1930,7 +1931,7 @@ public class ClaimSummarypage extends UhcDriver{
 			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
 		}
 	}
-	
+
 	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
 		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
@@ -2011,4 +2012,20 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 	//^^^ note:	added for VBF			
 
+	public ContactUsPage ClickContactUs_NavigateToContactUsPage() {
+		System.out.println("Now clicking on Contact Us link in Claims Page");
+		ContactUsLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		/* tbd 
+		System.out.println("Now waiting for 10 seconds");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
+		String title = driver.getTitle();
+		System.out.println("Now user is on this page:" + title);
+		return new ContactUsPage(driver);
+	}
 }
