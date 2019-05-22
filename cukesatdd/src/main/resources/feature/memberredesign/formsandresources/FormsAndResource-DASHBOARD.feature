@@ -3,7 +3,7 @@
 Feature: G1.1 To validate forms and resources page in dashboard site
 
 
-@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember 
+@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Rider: <rider>-To verify quicklinks for a MAPD member
    	Given login with following details logins in the member portal and validate elements
    	  | Plan Type      | <planType>      |
@@ -632,18 +632,18 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | STEP THERAPY CRITERIA             | <steptherapy>            |
       | FORMULARY ADDITIONS               | <formularyadd>           |
       | FORMULARY DELETIONS               | <formularydel>           |
-   # Then the member validate the correct Membership Materials section is coming
-   #   | GETTING STARTED GUIDE    | <gettingstartedguide>    |
-    #  | BENEFIT-HIGHLIGHT        | <benefithighlight>       |
-    #  | COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
-    #  | ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
-    #  | EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
-    #  | CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
-    #Then validate that the anoc section is displayed for group
-    # And the user verifies that the correct pdfs are coming in the anoc section PDP UHC Group
+    #Then the member validate the correct Membership Materials section is coming
+      #| GETTING STARTED GUIDE    | <gettingstartedguide>    |
+      #| BENEFIT-HIGHLIGHT        | <benefithighlight>       |
+      #| COMPREHENSIVE FORMULARY  | <comprehensiveformulary> |
+      #| ADDITIONAL DRUG COVERAGE | <additionaldrugcoverage> |
+      #| EVIDENCE OF COVERAGE     | <evidenceofcoverage>     |
+      #| CERTIFICATE OF COVERAGE  | <certificateofcoverage>  |
+    Then validate that the anoc section is displayed for group
+     And the user verifies that the correct pdfs are coming in the anoc section
       | Member Type                        | <memberType>                 |
-      | ANNUAL NOTICE OF CHANGES (ANOC)    | <anoc>                       |
-      | EVIDENCE OF COVERAGE (EOC)         | <evidenceofcoverageanoc>     |
+      | ANNUAL NOTICE OF CHANGES    | <anoc>                       |
+      | EVIDENCE OF COVERAGE         | <evidenceofcoverageanoc>     |
       | CERTIFICATE 0F COVERAGE            |  <certificateofcoverage>     |
       | COMPREHENSIVE FORMULARY            | <comprehensiveformularyanoc> |
       | ADDITIONAL DRUG COVERAGE           | <additionaldruganoc>         |
@@ -661,7 +661,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
 
     Examples: 
      | TID   | planType 			| memberType  | language| gettingstartedguide       | benefithighlight   |   evidenceofcoverage| certificateofcoverage   | summaryofbenefits  |   abridgedformulary   | comprehensiveformulary              | additionaldrug            | anoc                            | evidenceofcoverageanoc    |comprehensiveformularyanoc  |additionaldruganoc        |priorauth                   | steptherapy           | formularyadd        | formularydel        |
-     | 15131 | PDP_FormsResources   | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights  |Evidence of Coverage |Certificate of Coverage  | Summary of Benefit |Formulary/Drug List    | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes (ANOC) |Evidence of Coverage (EOC) | Comprehensive Formulary    | Additional Drug Coverage |Prior Authorization Criteria| Step Therapy Criteria | Formulary Additions | Formulary Deletions |
+     | 15131 | PDP_FormsResources   | UHCGroupFnR | ENGLISH |   Getting Started Guide   |Benefit Highlights  |Evidence of Coverage |Certificate of Coverage  | Summary of Benefit |Formulary/Drug List    | Formulary/Drug List - Comprehensive | Additional Drug Coverage  | Annual Notice of Changes        |Evidence of Coverage		  | Comprehensive Formulary    | Additional Drug Coverage |Prior Authorization Criteria| Step Therapy Criteria | Formulary Additions | Formulary Deletions |
 
  
      
@@ -784,14 +784,12 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | TID   | planType   				    | memberType       | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |additionaldrug            |anoc              | 
       | 15130 | MAPDALPeehip_FromsResources | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Annual Notice of Changes|  
 
-  @formsAndResources17 @pcpfnrvalidation  @regressionMember1
+  @formsAndResources17 @pcpfnrvalidation  @regressionMember1 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for PCP
     Given login with following details in the member redesign portal
        | Plan Type   | <planType>   |
        | Member Type | <memberType> |
-       |Type		 |<type>        |
-       
-    And user clicks on the view document and resources link and navigate to forms and resource page
+  And user clicks on the view document and resources link and navigate to forms and resource page
     | Plan Type   | <planType>   |
     | Member Type | <memberType> |
    #And validates that PEEHIP logo is not displayed
@@ -809,7 +807,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
     Then validate that the anoc section is not displayed
     Then validate that annual directory section is displayed
     | Member Type | <memberType> |
-    And both the Pharmacy locator & provider search links are displayed
+    And both the Pharmacy locator & provider search links are displayed for PCP
     Then validate that My Document section is displayed
     Then validate that the EOB Section is displayed
     And both the drug and medical EOB links are displayed
@@ -867,7 +865,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
    ##   | CERTIFICATE_OF_COVERAGE   | <certificateofcoverage>  |
    #   | PRIVACY_NOTICE            | <privacynotice>          |
     Then validate that the anoc section is not displayed
-    Then validate that the annual directories section is not displayed
+    Then validate that the annual directories section is not displayed for ssupFnr
     And both the Pharmacy locator and provider search links are not displayed
     Then validate that My Document section is displayed
     Then validate that the EOB section and both the type of Eobs are not displayed
