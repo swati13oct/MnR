@@ -2899,7 +2899,12 @@ public String StartApplicationButton(String DateOfBirth, String FirstName, Strin
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	try {
-		monthDrpDwn.click();
+	CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
+			  JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", monthDrpDwn);
+	
+	//	monthDrpDwn.click();
 		monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
