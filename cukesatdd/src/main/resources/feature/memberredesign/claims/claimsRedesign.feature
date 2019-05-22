@@ -145,20 +145,20 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | xxxxx | MAPD     | GROUP      | Last 24 months | COSMOS_CLAIMS |
 	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
 
-    @claims6 @TC_09claimsPHIP @regressionMember
+    @claims2 @TC_09claimsPHIP @regressionMember
     Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
-      | Plan Type     | <planType>     |
-      | Plan Category | <planCategory> |
-      | Claim System  | <claimSystem>  |
+         | Plan Type     | <planType>     |
+         | Plan Category | <planCategory> |
+         | Claim System  | <claimSystem>  |
     When I navigate to the claims Summary page from dashboard or testharness page
     And I validate the error message for a PHIP Member on the screen
 
     Examples: 
-      | TID   | planType | planCategory | claimSystem   |
-      | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS|
+         | TID   | planType | planCategory | claimSystem   |
+         | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS|
       
-    @claims01 @claimsEOB @US1268210 @F244667 @regressionMember
+    @claims03 @claimsEOB @US1268210 @F244667 @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
           | Plan Type      | <planType>     |
@@ -179,20 +179,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | FID    | planType | memberType     | claimPeriod    | claimSystem  |
           | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS  |
 
-    @claims02 @claims16 @US1662790 @F267688 @claimsEOB_SSUP_Plan @regressionMember
-    Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that sub-navigation to EOB page under Claims tab is suppressed for SSUP Only Plan member
-    Given login with following details logins in the member portal and validate elements
-          | Plan Type      | <planType>     |
- 		  | Member Type    | <memberType>   |
-          | Claim System   | <claimSystem>  |
-	When I navigate to the claims Summary page from dashboard or testharness page
-    Then Explanation of benefits sub navigation under Claims tab is not displayed
-
-    Examples: 
-          | FID    | planType | memberType              | claimSystem   |
-          | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
-      
-    @claims03 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+    @claims04 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
           | Plan Type      | <planType>     |
@@ -206,7 +193,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
       
       
-    @claims04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+    @claims05 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
           | Plan Type      | <planType>     |
