@@ -1353,15 +1353,20 @@ public class AccountHomePage extends UhcDriver {
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
 			return new ClaimSummarypage(driver);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("user is on Stage login page");
+		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
+			System.out.println("user is on '"+MRScenario.environmentMedicare+"' login page");
 			if (driver.getCurrentUrl().contains("/dashboard"))
 			{
 				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				if(MRScenario.isTestHarness.equals("YES")){
+				if(MRScenario.isTestHarness != null && MRScenario.isTestHarness.equals("YES")){
 					claimsTestharnessLink.click();
 				}else{
-					claimsDashboardLink.click();
+					if (validate(claimsDashboardLink)) {
+						claimsDashboardLink.click();
+					} else {
+						System.out.println("Check for shadow-root before giving up");
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(2)");
+					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				/* tbd 	try {
@@ -2709,13 +2714,14 @@ public class AccountHomePage extends UhcDriver {
 		return ele;
 	}
 	
-	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
 			try {
 				WebElement element=root1.findElement(By.cssSelector(inputSelector));
 				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				return element;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);
@@ -2724,6 +2730,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
 			Assert.assertTrue("Dashboard header is not displayed", false);
 		}
+		return null;
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {

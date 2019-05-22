@@ -2,6 +2,7 @@ package pages.regression.claims;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -182,7 +183,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'EOBComponentSHIP') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Ship')]/../p[contains(text(),'VIEW EOB STATEMENT')]")
 	private WebElement EOB_SHIP;
 
-
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	private WebElement pageContainsPdfDocText;
 	
@@ -215,21 +215,115 @@ public class ClaimDetailsPage extends UhcDriver{
 	private WebElement medicalEobNotAvaText;
 	@FindBy (xpath=".//*[@id='viewPDF']")
 	private WebElement medicalEobViewPDF;
+	
+    //note: need help section
+    @FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
+    private WebElement needHelp_SectionHeader;
+    
+    //note: need help - technical section
+    @FindBy(xpath="//div[contains(@class,'technical section')]")
+    private WebElement needHelp_TechicalSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
+    private WebElement needHelp_TechicalSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
+    private WebElement needHelp_TechicalSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
+    private WebElement needHelp_TechicalSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
+    private WebElement needHelp_TechicalSupport_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
+    private WebElement needHelp_TechicalSupport_wkEndHrs;
+
+    //note: need help - general section
+    @FindBy(xpath="//div[contains(@class,'general section')]")
+    private WebElement needHelp_GeneralQuestionsSection;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
+    private WebElement needHelp_GeneralQuestions_img;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
+    private WebElement needHelp_GeneralQuestions_phone;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
+    private WebElement needHelp_GeneralQuestions_tty;
+
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
+    private WebElement needHelp_GeneralQuestions_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
+    private WebElement needHelp_GeneralQuestions_wkEndHrs;
+    
+    //note: need help - claims section
+    @FindBy(xpath="//div[contains(@class,'claims section')]")
+    private WebElement needHelp_ClaimsSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
+    private WebElement needHelp_ClaimsSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
+    private WebElement needHelp_ClaimsSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
+    private WebElement needHelp_ClaimsSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
+    private WebElement needHelp_ClaimsSupport_wkDayHrs;
+    
+    @FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
+    private WebElement needHelp_ClaimsSupport_wkEndHrs;
+    
+    //note: need help - plan support
+    @FindBy(xpath="//div[contains(@class,'plan section')]")
+    private WebElement needHelp_PlanSupportSection;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
+    private WebElement needHelp_PlanSupport_img;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
+    private WebElement needHelp_PlanSupport_phone;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
+    private WebElement needHelp_PlanSupport_tty;
+
+    @FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
+    private WebElement needHelp_PlanSupport_wkDayHrs;
+    
+    //note: need help - more ways
+    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
+    private WebElement needHelp_seeMoreWaysTo;
+
+    @FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
+    private WebElement needHelp_contactUsLink;
 	//^^^ note: added for def1041
 	
+	//vvv note:	added for VBF		
+	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
+	public List<WebElement> claimTableValues;
+
+	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']")
+	public WebElement ShipclaimstotalTable;
+
+	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']//div[@class='col-md-2']/p[contains(text(),'$')]")
+	public List<WebElement> shipClaimTotalValues;
+	//^^^ note:	added for VBF		
+
+
 	public ClaimDetailsPage(WebDriver driver) {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
 		//CommonUtility.waitForPageLoad(driver, ClaimDetailsPage, 60);
-
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-
 	}
 	
 	//tbd @SuppressWarnings("deprecation")
@@ -247,8 +341,8 @@ public class ClaimDetailsPage extends UhcDriver{
 		else{
 			Assert.assertTrue("Claims Search button is not present in Claims Details Page", false);
 		}
-		
 	}
+	
 	/**
 	 * @toDo :this method validates header
 	 */
@@ -1093,8 +1187,124 @@ public class ClaimDetailsPage extends UhcDriver{
 				Assert.assertTrue("PROBLEM - 'Your share' from each list doesn't add up to the value from claims total section.  totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, totalYourShare==rowsTotalYourShare);
 			}
 		}
-	}	
+	}
+	
+
+   public void validateNeedHelpSection(String planType) {
+		if (planType.equalsIgnoreCase("SHIP")) {
+			String expectedTechnicalPhone="1-866-254-3132";
+			String expectedGeneralPhone="1-800-523-5800";
+			String expectedClaimsPhone="1-800-523-5880";
+			
+			System.out.println("Proceed to validate the Need Help section header");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+			
+			System.out.println("Proceed to validate the Need Help - Technical Support section content");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
+			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
+			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
+			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkEndHrs));
+
+			System.out.println("Proceed to validate the Need Help - General Questions section content");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help - General Questions section element",validate(needHelp_GeneralQuestionsSection));
+			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_img));
+			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_phone));
+			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - General Questions section. Expected='"+expectedGeneralPhone+"' | Actual='"+needHelp_GeneralQuestions_phone.getText()+"'",expectedGeneralPhone.equals(needHelp_GeneralQuestions_phone.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_tty));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkDayHrs));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - General Questions section",validate(needHelp_GeneralQuestions_wkEndHrs));
+
+			System.out.println("Proceed to validate the Need Help - Claims Support section content");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Claims Support section element",validate(needHelp_ClaimsSupportSection));
+			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_img));
+			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_phone));
+			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Claims Support section. Expected='"+expectedClaimsPhone+"' | Actual='"+needHelp_ClaimsSupport_phone.getText()+"'",expectedClaimsPhone.equals(needHelp_ClaimsSupport_phone.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_tty));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekday elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkDayHrs));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for weekend elemnt in Need Help - Claims Support section",validate(needHelp_ClaimsSupport_wkEndHrs));
+
+			System.out.println("Proceed to validate the Need Help - See More Ways section content");
+			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
+			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",validate(needHelp_contactUsLink));
+			needHelp_contactUsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			String expContactUsTitle="Help & Contact Us";
+			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
+			System.out.println("New window URL = "+driver.getCurrentUrl());
+			System.out.println("New window title = "+driver.getTitle());
+			Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
+			Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
+			driver.navigate().back();
+			System.out.println("Main window = "+driver.getTitle());	
+		} else {
+			String expectedTechnicalPhone="1-800-721-0627";
+			String expectedPlanSupportPhone="1-800-950-9355";
+			
+			System.out.println("Proceed to validate the Need Help section header");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+			
+			System.out.println("Proceed to validate the Need Help - Technical Support section content");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Technical Support section element",validate(needHelp_TechicalSupportSection));
+			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_img));
+			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_phone));
+			Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Technical Support section. Expected='"+expectedTechnicalPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedTechnicalPhone.equals(needHelp_TechicalSupport_phone.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_tty));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Technical Support section",validate(needHelp_TechicalSupport_wkDayHrs));
+
+			System.out.println("Proceed to validate the Need Help - Plan Support section content");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help - Plan Support section element",validate(needHelp_PlanSupportSection));
+			Assert.assertTrue("PROBLEM - unable to locate the img elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_img));
+			Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_phone));
+			//KEEP - turn it back on when confirmed expected behavior
+			//KEEP - Assert.assertTrue("PROBLEM - not getting expected phone number in Need Help - Plan Support section. Expected='"+expectedPlanSupportPhone+"' | Actual='"+needHelp_TechicalSupport_phone.getText()+"'",expectedPlanSupportPhone.equals(needHelp_PlanSupport_phone.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_tty));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in Need Help - Plan Support section",validate(needHelp_PlanSupport_wkDayHrs));
+		}
+   }
 	//^^^ note:	added for def1041		
 	
+	//vvv note:	added for VBF		
+
+	public void vbf_validateClaimsTableInDetailsPage() {
+		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
+		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
+		int columSize = claimTableValues.size();
+		for (int columnNum = 1; columnNum < columSize; columnNum++) {
+			String input = claimTableValues.get(columnNum).getText();
+			Pattern pattern = Pattern.compile("^[-]?\\$\\d+.*\\.\\d{2}$");
+			if (pattern.matcher(input).matches()) {
+				Assert.assertTrue("value exists in column - " + columnNum, true);
+			} else {
+				throw new IllegalArgumentException("Invalid String");
+			}
+		}
+	}
 	
+	public void vbf_validateClaimsTotalInDetailsPage() {
+		validateNew(claimstotalTable);
+		if (claimstotalTable.isDisplayed()) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue("Claims Total is not present in Claims Details Page", false);
+		}
+
+	}
+
+	public void vbf_validateShipClaimsTotalInDetailsPage() {
+		validateNew(ShipclaimstotalTable);
+		int columSize = shipClaimTotalValues.size();
+		for (int columnNum = 1; columnNum < columSize; columnNum++) {
+			String input = shipClaimTotalValues.get(columnNum).getText();
+			Pattern pattern = Pattern.compile("^\\$\\d+\\.\\d{2}$");
+			if (pattern.matcher(input).matches()) {
+				Assert.assertTrue("value exists in column - " + columnNum, true);
+			} else {
+				throw new IllegalArgumentException("Invalid String");
+			}
+		}
+	}
+	//^^^ note:	added for VBF		
 }

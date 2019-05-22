@@ -181,7 +181,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	
 	
 	@claims8 @TC03_FEDAARPIndividualPDP @regressionMember
-    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the PDP member on claims sumamry page for AARP site
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 		  | Member Type    | <memberType>   |
@@ -267,7 +267,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	      
 	     
 	@claims11 @TC11_PCP @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims sumamry page for AARP site
+	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the PCP member on claims summary page for AARP site
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 		  | Member Type    | <memberType>   |
@@ -300,7 +300,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	      
 	    
 	@claims12 @claimsprintanddownload @thePredators @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the <claimSystem> on claims summary page
+	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the <claimSystem> on claims summary page for print and download
 		Given login with following details logins in the member portal and validate elements
 	      | Plan Type      | <planType>     |
 		  | Member Type    | <memberType>   |
@@ -351,7 +351,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | 15230 | MAPD     | Individual | custom-search | COSMOS_CLAIMS | 11/06/2018  | 01/02/2019    |
 	     
 	@claims14 @claimsPagination @regressionMember
-	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims summary page for federal members
+	Scenario Outline:  TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims summary page for federal members focus on Pagination testing
 		Given login with following details logins in the member portal and validate elements
 		  | Plan Type      | <planType>     |
 		  | Member Type    | <memberType>   |
@@ -431,6 +431,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Claim System | <claimSystem>          |
 		#And I can validates the DownloadMyData section on claims summary page
 		#  | Plan Type    | <planType>             |
+		#And I validate the Need Help section content on claims summary page
+		#  | Plan Type    | <planType>              |
 		#Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	    #  | Plan Type    | <planType>             |
 		#  | Claim Type   | <claimType>            |
@@ -458,6 +460,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Plan Type    | <planType>              |
 		#  | Claim System | <claimSystem>           |
 		#And I can validates the DownloadMyData section on claims summary page
+		#  | Plan Type    | <planType>              |
+		#And I validate the Need Help section content on claims summary page
 		#  | Plan Type    | <planType>              |
 		#Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	    #  | Plan Type    | <planType>              |
@@ -487,6 +491,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Claim System | <claimSystem>           |
 		#And I can validates the DownloadMyData section on claims summary page
 		#  | Plan Type    | <planType>              |
+		#And I validate the Need Help section content on claims summary page
+		#  | Plan Type    | <planType>              |
 		#Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	    #  | Plan Type    | <planType>              |
 		#  | Claim Type   | <claimType>             |
@@ -514,6 +520,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Plan Type    | <planType>              |
 		#  | Claim System | <claimSystem>           |
 		#And I can validates the DownloadMyData section on claims summary page
+		#  | Plan Type    | <planType>              |
+		#And I validate the Need Help section content on claims summary page
 		#  | Plan Type    | <planType>              |
 		#Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	    #  | Plan Type    | <planType>              |
@@ -543,6 +551,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		#  | Claim System | <claimSystem>           |
 		#And I can validates the DownloadMyData section on claims summary page
 		#  | Plan Type    | <planType>              |
+		#And I validate the Need Help section content on claims summary page
+		#  | Plan Type    | <planType>              |
 		#Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	    #  | Plan Type    | <planType>              |
 		#  | Claim Type   | <claimType>             |
@@ -570,6 +580,8 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Plan Type    | <planType>              |
 		  | Claim System | <claimSystem>           |
 		And I can validates the DownloadMyData section on claims summary page
+		  | Plan Type    | <planType>              |
+		And I validate the Need Help section content on claims summary page
 		  | Plan Type    | <planType>              |
 		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
 	      | Plan Type    | <planType>              |
@@ -653,7 +665,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_15 @claims00_COMBO @claims00_GROUP @claims00_PDP @claims00_NOT_NICE_OR_COSMOS @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |15    |1041| PDP      | COMBO_GROUP                | RX_CLAIMS     | Prescription drug | No                 |
+	  |15    |1041| PDP      | COMBO_GROUP                | RXCLAIMS     | Prescription drug | No                 |
 
 	@claims00_16 @claims00_COMBO @claims00_GROUP @claims00_SSUP @claims00_COSMOS @claims00_COSMOS_MEDICAL
 	Examples: 
@@ -673,13 +685,12 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_19 @claims00_GROUP @claims00_MAPD @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
-	  |19    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS | Prescription drug | No                 |
+	  |19    |1041| MAPD     | GROUP                      | COSMOS_CLAIMS | Prescription drug | No                |
 
-	#note: covered by COMBO case unless locate user data with claims for SSUP only user
-	#@claims00_20 @claims00_SSUP @claims00_COSMOS_MEDICAL
-	#Examples: 
-	#  |index |DID | planType | memberType                | claimSystem   | claimType         | flagZeroClaimsUser |
-	#  |20    |1041| SSUP     | EOB_Deeplink_Individual   | COSMOS_CLAIMS | Medical           | Yes                |
+	@claims00_20 @claims00_GROUP @claims00_MA @claims00_COSMOS_MEDICAL
+	Examples: 
+	  |index |DID | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
+	  |20    |1041| MA       | GROUP                      | COSMOS_CLAIMS | Medical           | No                 |
 
     #note: these will be in team-a env only
 	#  |xx    |1041| MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS | Medical           | No                |
@@ -736,7 +747,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
       
     @claims18 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-    Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - to validate that SSUP member accessing EOB page via deep link
+    Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - to validate that SSUP GROUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
           | Plan Type      | <planType>     |
 		  | Member Type    | <memberType>   |
@@ -749,7 +760,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
       
       
     @E2EClaimstcase
-    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims present for the Federal member on claims summary page for federal members
+    Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims Summary and details page E2E Scenario
 	Given login with following details logins in the member portal and validate elements
          | Plan Type      | <planType>     |
 	     | Member Type    | <memberType>   |
@@ -780,13 +791,148 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | Plan Type  | <planType>    |
 	Then I validate Claim Details page content value and Learn More and EOB		  
 	     | Plan Type    | <planType>  |
-	     | Claim Type   | <claimType> |
+	     | Claim System | <claimSystem> |
 	  
 	   Examples:   
 	     | TID   | planType | memberType | claimPeriod    | claimSystem   | 
 	     | 15230 | MAPD     | Individual | Last 24 months | COSMOS_CLAIMS |
 	     | 15235 | MA       | Individual | Last 24 months | NICE_CLAIMS   | 
 	     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
-	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS | 
+	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MAPD     | GROUP      | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
 
-		     
+
+    #----- begin of claims test for offline prod - local run only ------------------
+    # note: this setup is for the case when we need to validate on offline prod environment
+    # note: this is intended for local run where you can put in your own member auth username/password and offline username
+    # note: run with environment variable set to offline. -Denvironment="offline"
+    # note: *** DO NOT save your login or test username to github ***
+    # note: replace the following fields with valid value -
+    # note:   username = your memAuth page login username 
+    # note:   password = your memAuth page login password
+    # note:   MemUsername =  username of the user on offline prod that you want to test
+    # note:   planType = the type of plan this test user has e.g. MAPD/MA/SHIP, etc
+    # note:   memberType = e.g. Individual / GROUP/ COMBO, etc
+    # note:   claimSystem = e.g. COSMOS / NICE / RX / COMPASS
+    # note:   claimType = e.g. Prescription drug / Medical / NA (for ship)        
+    # note:   flagZeroClaimsUser = Yes / No (do you want to fail the test if user has 0 claims)
+    @forLocalTestOnly
+	Scenario Outline: To validate via member authorization access 
+	    Given the user is on member auth login flow page
+	    When the member is able to login with correct username and password
+	      | Username      | <username>     |
+	      | Password      | <password>     |
+	    And Member Enters the Username he wants to search
+	      | MemUsername | <MemUserName> |   
+	    And user clicks on member to select
+	    When I navigate to the claims Summary page from dashboard or testharness page
+		Then I can validate the claims summary header on claims summary page
+		  | Plan Type    | <planType>             |
+		  | Member Type    | <memberType>         |
+		#----------------- Test for Last 24 months --------------------------
+		And I can search claims for claim period and claim type on claim summary page
+		  | Plan Type    | <planType>              |
+		  | Member Type    | <memberType>   |
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 24 months          |
+		Then I can see the number of claims
+		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 24 months          |
+		And I validate the pagination on the claims summary page for given range 
+		  | Claim Period | Last 24 months          |
+		Then I can validate the learn more and print and download option in claims details table for given range
+		  | Claim Period | Last 24 months          |
+		Then I can validate claims table displayed based on the selection on claims summary page
+		  | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
+		  | Claim Period | Last 24 months          |
+		And I can validate the EOB section based on claims system on claims summary page
+		  | Plan Type    | <planType>              |
+		  | Claim System | <claimSystem>           |
+		And I can validates the DownloadMyData section on claims summary page
+		  | Plan Type    | <planType>              |
+		And I validate the Need Help section content on claims summary page
+		  | Plan Type    | <planType>              |
+		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
+		  | Claim Period | Last 24 months          |
+		  
+  Examples: 
+	  |index |TID | username   | password   | MemUserName  | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
+	  |01    |000 | myUsername | myPassword | testUsername | SHIP     | COMBO                      | COMPASS_CLAIMS| NA                | Yes                |
+    #----- end of claims test for offline prod - local run only ------------------
+
+
+    #----- begin of VBF claims test ------------------
+    @smokeTest @MemberVBF @rallyDashboard @testharness
+    Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+	    Given login with following details logins in the member portal and validate elements
+          | Plan Type      | <planType>     |
+          | Claim System   | <claimSystem>  |
+	      | Member Type    | <memberType>   |
+	    When I navigate to the claims Summary page from dashboard or testharness page
+	    And I can search claims for the following claim period on claims summary page
+	      | Plan Type    | <planType>    |
+	      | Claim Period | <claimPeriod> |
+        Then I validate the claims displayed based on the selection on claims summary page
+		And I validate the EOB section based on claims system on claims summary page
+	      | Plan Type    | <planType>    |
+		  | Claim System | <claimSystem> |
+        And I validate the DownloadMyData section on claims summary page
+        And I can navigate to the Claim Details page from claims summary page
+          | Claim System | <claimSystem>|
+        And I can validate the Claims Table on claims details page
+        And I can validate the Claims Total on claims details page
+
+	    @smokeTest_Claims
+        Examples: 
+          | memberType   | planType | claimPeriod    | claimSystem  | 
+ 	      | ShipInd 	 | SHIP     | Last 24 months | SHIPCLAIMS   | 
+          | ULayerInd 	 | MAPD     | Last 24 months | COSMOSCLAIMS | 
+          | ULayerInd	 | MAPD     | Last 24 months | NICECLAIMS   | 
+       	  | ULayerInd    | MAPD     | Last 24 months | RxCLAIMS     | 
+       #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS | 
+       #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     | 
+       #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   | 
+       #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS | 
+       #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   | 
+       #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     | 
+
+       @gatingTest_Claims
+       Examples: 
+          | memberType   | planType | claimPeriod    | claimSystem  |
+ 		  | ShipInd 	 | SHIP     | Last 24 months | SHIPCLAIMS   |
+          | ULayerInd 	 | MAPD     | Last 24 months | COSMOSCLAIMS |
+       #  | ULayerInd	 | MAPD     | Last 24 months | NICECLAIMS   |
+       #  | ULayerInd    | MAPD     | Last 24 months | RxCLAIMS     |
+       #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
+       #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
+       #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   |
+       #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS |
+       #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
+       #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
+    @smokeTest @MemberVBF @rallyDashboard @testharness
+    Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+	    Given login with following details logins in the member portal and validate elements
+          | Plan Type      | <planType>     |
+       
+   @smokeTest @MemberVBF @claims_Performance
+   Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
+	  Given login with following details logins in the member portal and validate elements
+          | Plan Type      | <planType>     |
+          | Claim System   | <claimSystem>  |
+	      | Member Type    | <memberType>   |
+	    When I navigate to the claims Summary page from dashboard or testharness page
+	    And I can search claims for the following claim period on claims summary page
+	      | Plan Type    | <planType>    |
+	      | Claim Period | <claimPeriod> |
+        Then I validate the claims displayed based on the selection on claims summary page
+    
+        Examples: 
+          | memberType    | planType | claimPeriod     | claimSystem |
+ 	      | grpPerf 	  | PDP      | Last 24 months  | NICECLAIMS  |
+    #----- end of VBF claims test ------------------   
