@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppPlanSummary
 Feature: To test VPP Plan Summary Page in AARP Site
 
-  @vppPlanCardsRegression
+  @vppPlanCardsRegressionUlayer @fastandfurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -48,7 +48,7 @@ Feature: To test VPP Plan Summary Page in AARP Site
        | 15552  |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  | 
                                                                                                                                                                                                                                                                          
       
-   @rightRailRegression
+   @rightRailRegressionUlayer @fastandfurious
    Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
    Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site

@@ -3,6 +3,9 @@ package acceptancetests.memberredesign.formsandresources;
 
 import gherkin.formatter.model.DataTableRow;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -288,6 +291,14 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.scroll();
 		Assert.assertTrue(formsAndResourcesPage.checkAnnualDirectoriesforgroup());
 	}
+	
+	@Then("^validate that the annual directories section is not displayed for ssupFnr$")
+	public void annualdirectoriesnotdispalyedssupFnr() {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Assert.assertTrue(formsAndResourcesPage.checkAnnualDirectoriesforgroupssup());
+	}
 
 	@And("^both the Pharmacy locator and provider search links are not displayed$")
 	public void providerpharacygroupnotdisplayed() throws InterruptedException {
@@ -309,6 +320,75 @@ public class DashboardFormsnResourcesStepDefinition {
 		
 		Assert.assertFalse(formsAndResourcesPage.checkpharmacyforMA());
 	}
+	
+	@And("^the Pharmacy locator link is displayed for MAPD Group$")
+	public void phamacymapd(DataTable attributes) {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		formsAndResourcesPage.scroll();
+		
+		if(formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()){
+			System.out.println("pharmacy locator link is present");
+		}
+			else
+				System.out.println("pharmacy locator link is NOT present");
+		}
+	
+	@And("^the Pharmacy locator link is displayed texas$")
+	public void phamacytexas(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkTexas().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+	
+	@And("^the Pharmacy locator link is displayed PDP UHC Group$")
+	public void phamacypdpUhc(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroup().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+	
+	@And("^the Pharmacy locator link is displayed for ALPeehip$")
+	public void phamacyAlPeehip(DataTable attributes) {
+	
+		
+			FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+					.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+			formsAndResourcesPage.scroll();
+			formsAndResourcesPage.scroll();
+			
+			if(formsAndResourcesPage.getLnkPharmacyLocatorLinkAlPeehip().isDisplayed()){
+				System.out.println("pharmacy locator link is present");
+			}
+				else
+					System.out.println("pharmacy locator link is NOT present");
+					Assert.assertTrue(true);
+					
+			}
+		
 
 	@And("^the Pharmacy locator link is displayed$")
 	public void phamacypdp(DataTable attributes) {
@@ -319,7 +399,7 @@ public class DashboardFormsnResourcesStepDefinition {
 
 		List<List<String>> data = attributes.raw();
 
-		if (data.get(0).get(1).contains("Group")) {
+	if (data.get(1).get(2).contains("Group")) {
 			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("pharmacy locator link is present");
@@ -438,7 +518,9 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getAnocforgroup().get(1).isDisplayed()) {
+		
+	
+		if (formsAndResourcesPage.getAnocforgroup().get(2).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc for grp is present");
 		} else {
@@ -656,6 +738,27 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("provider search link is not present");
 		}
 	}
+	
+	@And("^both the Pharmacy locator & provider search links are displayed for PCP$")
+	public void pharmacyproviderPCP() {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		if (formsAndResourcesPage.getLnkPharmacyLocatorLinkPCP().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("pharmacy locator is present");
+
+		} else {
+			Assert.fail("pharmacy locator is not present");
+		}
+
+		if (formsAndResourcesPage.getprovisesearchlinkPCP().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("provider search link is present");
+
+		} else {
+			Assert.fail("provider search link is not present");
+		}
+	}
 
 	@And("^the user verifies that the correct pdfs are coming in the anoc section$")
 	public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException {
@@ -687,7 +790,9 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("Anoc pdfs aren't coming correctly");
 		}
 	}
-
+	
+	
+	
 	/**
 	 * @throws InterruptedException
 	 * @toDo : verifies the plan material section
@@ -747,7 +852,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = attributeType.raw();
 		String memberType=data.get(0).get(1);
 		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
-		formsAndResourcesPage.validateIDCard(memberType);
+
 
 	}
 
@@ -1093,7 +1198,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 
 	}
 
