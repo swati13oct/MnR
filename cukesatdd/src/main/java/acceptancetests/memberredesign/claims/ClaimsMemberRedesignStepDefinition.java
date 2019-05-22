@@ -75,13 +75,14 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println("claim period"+urlAttributesMap.get("Claim Period"));
 		String s=urlAttributesMap.get("Claim Period");
 		String planType = urlAttributesMap.get("Plan Type");
-
+		String claimSystem = urlAttributesMap.get("Claim System");
+		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if(s.equals("custom-search")){
 			System.out.println("custom search");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
 		} else{
-			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s);
+			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s,claimSystem);
 		}
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
@@ -130,7 +131,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void validate_claims_total_AARP(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
-		if (planType.toLowerCase().contains("pdp")) {
+		String claimSystem = memberAttributesMap.get("Claim System");
+		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step for claims total validation on claims detail page");
 			return;
 		} 
@@ -166,7 +168,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void i_navigate_to_member_redesign_claim_details(DataTable memberAttributes) throws InterruptedException { //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
-		if (planType.toLowerCase().contains("pdp")) {
+		String claimSystem = memberAttributesMap.get("Claim System");
+		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to navigate to claims detail page");
 			return;
 		} 
@@ -184,7 +187,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
-		if (planType.toLowerCase().contains("pdp")) {
+		String claimSystem = memberAttributesMap.get("Claim System");
+		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate top claims summary link on claims detail page");
 			return;
 		} 
@@ -198,7 +202,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void I_validate_the_claims_summary_link_on_claims_detail_bottom_page(DataTable memberAttributes){ //in-use
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
-		if (planType.toLowerCase().contains("pdp")) {
+		String claimSystem = memberAttributesMap.get("Claim System");
+		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate bottom claims summary link on claims detail page");
 			return;
 		} 
@@ -462,7 +467,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
 
-		if (planType.equalsIgnoreCase("PDP")) {
+		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, and EOB on claims detail page");
 			return;
 		} else {  //note: this test is assume prior test steps passed so user has claims
