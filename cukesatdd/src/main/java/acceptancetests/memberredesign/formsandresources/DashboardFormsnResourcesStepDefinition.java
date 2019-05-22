@@ -291,6 +291,14 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.scroll();
 		Assert.assertTrue(formsAndResourcesPage.checkAnnualDirectoriesforgroup());
 	}
+	
+	@Then("^validate that the annual directories section is not displayed for ssupFnr$")
+	public void annualdirectoriesnotdispalyedssupFnr() {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Assert.assertTrue(formsAndResourcesPage.checkAnnualDirectoriesforgroupssup());
+	}
 
 	@And("^both the Pharmacy locator and provider search links are not displayed$")
 	public void providerpharacygroupnotdisplayed() throws InterruptedException {
@@ -730,6 +738,27 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("provider search link is not present");
 		}
 	}
+	
+	@And("^both the Pharmacy locator & provider search links are displayed for PCP$")
+	public void pharmacyproviderPCP() {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		if (formsAndResourcesPage.getLnkPharmacyLocatorLinkPCP().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("pharmacy locator is present");
+
+		} else {
+			Assert.fail("pharmacy locator is not present");
+		}
+
+		if (formsAndResourcesPage.getprovisesearchlinkPCP().isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("provider search link is present");
+
+		} else {
+			Assert.fail("provider search link is not present");
+		}
+	}
 
 	@And("^the user verifies that the correct pdfs are coming in the anoc section$")
 	public void verifyanocpdfscoming(DataTable givenAttributes) throws InterruptedException {
@@ -823,7 +852,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		List<List<String>> data = attributeType.raw();
 		String memberType=data.get(0).get(1);
 		formsAndResourcesPage.getTemporaryIdcardlink(memberType).isDisplayed();
-		formsAndResourcesPage.validateIDCard(memberType);
+
 
 	}
 
@@ -1169,7 +1198,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 
 	}
 
