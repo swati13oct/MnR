@@ -29,6 +29,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimSummarypage;
+import pages.regression.contactus.ContactUsPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
@@ -159,14 +160,16 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(3000);
 		AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
+		//BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.clickOnBenefitsandCoverageTab();
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		
 	}
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.contains("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) || (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.contains("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		
-		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
+		System.out.println("Now clicking on Coverage and Benefits tab from Team-f or Team-h or Stage test harness page");
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		BenefitsAndCoveragePage coverageandbenefitsPage = testHarnessPage.clickOnBenefitsandCoverageTab();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, coverageandbenefitsPage);
@@ -206,11 +209,22 @@ public void validateCorrectMessageIsDisplayedOnBenefitsCoevargePage() throws Thr
 }
 
 @Then("^verify that correct phone number is displayed in technical support section of coverage and benefits page$")
-public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage() throws Throwable {
+public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
+	
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
-	benefitsCoveragePage.verifyCorrectTechSupportNumberForPreEffectiveMembers();
+	benefitsCoveragePage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 
 }
 
@@ -346,13 +360,25 @@ public void verifyCorrectPreEffectiveMessageIsDisplayedOnClaimsPage() throws Thr
                
 }
 
+
+//***** Updating the following Step for Contact Us Technical TFN validation as part for Fast and Furious Feature# F296012
+
 @Then("^verify that correct phone number is displayed in technical support section of claims page$")
-public void verifyCorrectTechnicalSupportPhoneNumberIsDisplayedOnClaimsPage() throws Throwable {
-	
+public void verifyCorrectTechnicalSupportPhoneNumberIsDisplayedOnClaimsPage(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
 	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
-	newclaimsSummarypage.verifyCorrectTechSupportNumberForPreEffectiveMembers();
+	newclaimsSummarypage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 	
                
 }
@@ -534,4 +560,38 @@ public void preffective_member_lands_on_dashboard() throws Throwable{
 System.out.println("	going to validate account home page ");
 	accounthomepage.validateHomePage1();
 }
+
+//***** Adding the following Step for Contact Us Technical TFN validation as part for Fast and Furious Feature# F296012
+@Given("^user clicks on the Contact Us link in Need help Section of Claims Page$")
+public void user_clicks_on_the_Contact_Us_link_in_Need_help_Section_of_Claims_Page() throws Throwable {
+    // User navigates to Contact Us page by clicking on "contact us" link in CLaims Page
+	ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario()
+			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
+	ClaimSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	ContactUsPage contactUsPage = newclaimsSummarypage.ClickContactUs_NavigateToContactUsPage();
+	getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);                      
+
+}
+
+//***** Adding the following Step for Contact Us Technical TFN validation as part for Fast and Furious Feature# F296012
+@Given("^verity that correct phone number is displayed in Technical Support section of Contact Us Page$")
+public void verity_that_correct_phone_number_is_displayed_in_Technical_Support_section_of_Contact_Us_Page(DataTable givenAttributes) throws Throwable {
+	/* Reading the Expected Technical TFN for the Member from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
+	ContactUsPage contactUsPage= (ContactUsPage) getLoginScenario()
+			.getBean(PageConstants.CONTACT_US_PAGE);
+	contactUsPage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
+	
+               
+}
+
+
 }

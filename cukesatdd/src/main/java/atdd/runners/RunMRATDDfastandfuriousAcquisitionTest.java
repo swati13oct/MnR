@@ -14,9 +14,9 @@ import cucumber.api.CucumberOptions;
 
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDfastandfuriousAcquisitionTest")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp", "acceptancetests.acquisition.pharmacylocator","acceptancetests.acquisition.ole"  },
-features = { "src/main/resources/feature/acquisition/vpp", "src/main/resources/feature/acquisition/pharmacylocator", "src/main/resources/feature/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { " @F251983, @validateAmbulatorySurgicalCenterPackage, @validateEyeWearCredit" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp","acceptancetests.acquisition.ole"  },
+features = { "src/main/resources/feature/acquisition/vpp", "src/main/resources/feature/acquisition/IsDecisionGuide", "src/main/resources/feature/acquisition/ole" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDfastandfuriousAcquisitionTest.json" }, tags = { "@IS_DecisionGuide_AARP" })
 //@validateEyeWearCredit,@F250062,@validatePCPandSpecialistTiering
 public class RunMRATDDfastandfuriousAcquisitionTest { 
 }

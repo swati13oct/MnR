@@ -99,6 +99,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "claims_1")
 	private WebElement claims;
 
+	@FindBy(xpath="//a[@class='quick-link' and contains(@href,'claims/overview.html')]")
+	private WebElement viewYourClaimsLink;
 	/*
 	 * @FindBy(xpath = "//li[@id='fd_myMenu']/a")
 	 */
@@ -242,8 +244,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
-	@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
-	//@FindBy(xpath = "//*[@id='claims_1']") @FindBy(xpath = "//a[text()='Go to Claims page']")
+	//@FindBy(xpath = "//*[@id='dashboard']//span[text()='View Your Claims']")
+	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[3]")
 	private WebElement claimsDashboardLink;
 
 	//note: for workaround if getting 'Sorry' error, go to account setting then go to claims
@@ -392,6 +394,9 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath="//span[contains(@class,'account-info-label')]")
 	private WebElement accountLabel;
+	
+	@FindBy(xpath="//*[contains(@id,'home')]")
+	private WebElement HomeTopMenuButton;
 
 	private PageData myAccountHome;
 
@@ -534,6 +539,7 @@ public class AccountHomePage extends UhcDriver {
 						"https://" +MRScenario.environmentMedicare+"-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
 				}
 		}
+		
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		/*if (driver.getTitle().equalsIgnoreCase("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
@@ -1365,7 +1371,13 @@ public class AccountHomePage extends UhcDriver {
 						claimsDashboardLink.click();
 					} else {
 						System.out.println("Check for shadow-root before giving up");
-						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(2)");
+						
+						WebElement tmp=locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(2)");
+						if (tmp.getText().equalsIgnoreCase("Claims")) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(2)");
+						} else {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(3)");
+						}
 					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -2752,4 +2764,22 @@ public class AccountHomePage extends UhcDriver {
 			Assert.assertTrue("Dashboard header is not displayed", false);
 		}
 	}	
+	
+	public void navigateToClaimsPageByViewYorClaimsLinkThenBackToHome() {
+		Assert.assertTrue("PROBLEM - unable to locate 'VIEW YOUR CLAIMS' link on dashboard page",validate(viewYourClaimsLink));
+		viewYourClaimsLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		String expUrl="member/claims/overview.html";
+		Assert.assertTrue("PROBLEM - not getting expected claims page. Expected URL contains '"+expUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'",driver.getCurrentUrl().contains(expUrl));
+		String expPageTitle="Claims Summary";
+		Assert.assertTrue("PROBLEM - not getting expected page title for claims summary page. Expected to contains="+expPageTitle+" | Actual="+driver.getTitle(), driver.getTitle().contains(expPageTitle));
+		System.out.println("The title of Claims page is-------->"+driver.getTitle());
+		if (validate(HomeTopMenuButton)) {
+			HomeTopMenuButton.click();
+		} else {
+			locateElementWithinShadowRoot(shadowRootHeader,"#home_2");
+		}
+		CommonUtility.checkPageIsReady(driver);
+		
+	}
 }
