@@ -175,7 +175,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='otherPages PlanDocumentsActiveCallouts2018']//*[contains(text(),'VIEW MEMBER')]")
 	private WebElement MemberIdCardlink;
 
-	@FindBy(xpath = "(//*[@id=\"globalContentIdForSkipLink\"]//div[2]//section//div[1]//div[4]//ul/li[2]/a)[2]")
+	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[5]/div/div/div/div/div/div/div/ul/li[2]/a")
 	private WebElement lnkMemberIdCardlink;
 
 	/* for terminated */
@@ -190,7 +190,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//div[2]//div[2]/div/div[2]//section/div/div[1]//div[4]//ul/li[1]/a")
 	private WebElement lnkOrderPlanMaterialLink;
 
-	@FindBy(xpath = "(//*[@id=\"globalContentIdForSkipLink\"]//div[2]//section//div[1]//div[4]//ul/li[1]/a)[2]")
+	@FindBy(xpath = "//*[@id='plan_material_fnr']/div/div[5]/div/div/div/div/div/div/div/ul/li[1]/a[contains(text(),'ORDER PLAN MATERIALS')]")
 	private WebElement pcpOrderPlanMaterialLink;
 
 	@FindBy(xpath = "//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2")
@@ -258,6 +258,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Provider Search Link for MAPD */
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section//div[2]/div/div[1]/div[3]//ul/li[1]/a")
 	private WebElement lnkProviderSearchLink;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[8]/div/div/div/div/section/div/div[2]/div/div[1]/div[4]/div/div/div/div/div/div/div/ul/li[1]/a")
+	private WebElement lnkProviderSearchLinkPCP;
 
 	/* Pharmacy Locator Link for MAPD and MA */
 
@@ -269,6 +272,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[8]//section/div/div[2]//div[1]/div[3]//ul/li[2]/a")
 	private WebElement lnkPharmacyLocatorLink;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[8]/div/div/div/div/section/div/div[2]/div/div[1]/div[4]/div/div/div/div/div/div/div/ul/li[2]/a")
+	private WebElement lnkPharmacyLocatorLinkpcp;
 
 	/* PharmacyLocatorLink for MAPD */
 	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[7]")
@@ -474,6 +480,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public WebElement getLnkPharmacyLocatorLink() {
 		return lnkPharmacyLocatorLink;
+	}
+	
+	public WebElement getLnkPharmacyLocatorLinkPCP() {
+		return lnkPharmacyLocatorLinkpcp;
 	}
 
 	public WebElement getBtnEobSectionall() {
@@ -859,6 +869,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement getprovisesearchlink() {
 		return lnkProviderSearchLink;
 	}
+	
+	public WebElement getprovisesearchlinkPCP() {
+		return lnkProviderSearchLinkPCP;
+	}
 
 	/**
 	 * @toDo : pharmacy search link
@@ -1153,16 +1167,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public boolean pdfComparison(String[] a, List<WebElement> listOfPdf, boolean checkflag) {
 		java.util.List<WebElement> pdfs = listOfPdf;
-		System.out.println(pdfs.size());
-		System.out.println(a.length);
+		System.out.println("Actual PDF size="+pdfs.size());
+		System.out.println("Expected PDF size="+a.length);
 		for (int i = 0; i < pdfs.size(); i++) {
 			String pdfnames = null;
 			pdfnames = (pdfs.get(i).getText());
-			System.out.println(pdfnames);
+			System.out.println("Actual PDF index="+i+" | filename="+pdfnames);
 		}
 
 		for (int i = 0; i < pdfs.size(); i++) {
 			String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
+			System.out.println("Compare Actual   ="+pdf[0].trim().toLowerCase());
+			System.out.println("Compare Expected ="+a[i].trim().toLowerCase());
 			if (pdf[0].trim().toLowerCase().contains(a[i].trim().toLowerCase())) {
 				System.out.println(pdf[0]);
 				checkflag = true;
@@ -1211,6 +1227,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public boolean checkAnnualDirectoriesforgroup() {
 
 		if (hdrAnnualDirectorySection.get(1).isDisplayed()) {
+			System.out.println("Annual Directories section is present");
+			return false;
+		} else {
+			System.out.println("Annual Directories section is not present");
+			return true;
+		}
+
+	}
+	
+	public boolean checkAnnualDirectoriesforgroupssup() {
+
+		if (hdrAnnualDirectorySection.get(0).isDisplayed()) {
 			System.out.println("Annual Directories section is present");
 			return false;
 		} else {
@@ -1548,45 +1576,46 @@ public class FormsAndResourcesPage extends UhcDriver {
 			throws InterruptedException
 
 	{
+		//note: 'a' is the target string array that stores the list of expected filenames
+		//note: xpathofwebelement is the actual string array that stores the list of actual filenames
+
 		Thread.sleep(20000);
 		System.out.println("reached in function");
 		boolean checkflag = true;
-		List<WebElement> pdfs = (List<WebElement>) xpathofwebelement;
-		System.out.println(pdfs);
-		System.out.println(pdfs.size());
+		List<WebElement> pdfs = (List<WebElement>) xpathofwebelement; //note: pdfs is same as xpathofwebelement, the actual list of filenames
+		//System.out.println(pdfs);
+		System.out.println("------------------ expected number of files=" +a.length);
 		for (int i = 0; i < pdfs.size(); i++) {
 			String pdfnames = null;
 			pdfnames = (pdfs.get(i).getText());
-			System.out.println(pdfnames);
+			System.out.println("i='+i+' | actual filename = "+pdfnames);
+		}
+		System.out.println("------------------ actual number of files=" +pdfs.size());
+		for (int i = 0; i < a.length; i++) {
+			System.out.println("i='"+i+"' | expected filename = "+a[i]);
 		}
 
-		if (pdfs.size() == 0) {
-			Assert.fail("no pdfs are coming");
-			checkflag = false;
-
-		} else if (pdfs.size() != a.length) {
-			Assert.fail("less or more pdfs are coming");
-			checkflag = false;
-
-		} else {
-
-			for (int i = 0; i < pdfs.size(); i++) {
-				String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
-				if (pdf[0].contains(a[i])) {
-					System.out.println(pdf[0]);
-					checkflag = true;
-				} else {
-					checkflag = false;
-					break;
-				}
+		Assert.assertFalse("no pdfs are coming",pdfs.size() == 0);
+		Assert.assertFalse("less or more pdfs are coming",pdfs.size() != a.length);
+		for (int i = 0; i < pdfs.size(); i++) {
+			String pdf[] = pdfs.get(i).getText().split(Pattern.quote("("));
+			System.out.println("Comparing filename:");
+			System.out.println("actual  ='"+pdf[0]+"'");
+			System.out.println("expected='"+a[i]+"'");
+			if (pdf[0].contains(a[i])) {
+				System.out.println("matched portion ="+pdf[0]);
+				checkflag = true;
+			} else {
+				checkflag = false;
+				break;
 			}
-
 		}
 		return checkflag;
 	}
 
 	public boolean xpathSelectionSectionwise(String a[], String section, String memberType)
 			throws InterruptedException {
+		//note: 'a' is the target string array that stores the list of expected filename
 		if (section == "plan material") {
 			return verifypdfnamesfordocuments(a, planmaterialxpath);
 
@@ -1673,6 +1702,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 			 */
 
 		}
+
 		boolean arraycheck = formsAndResourcesPage.verifyPdfNames(targetArray, temp);
 		SystemOutPrintln(arraycheck);
 		Assert.assertTrue("Incorrect pdf's shown", arraycheck == true);
@@ -1748,12 +1778,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 			if (identifier.toString().trim().contains("AARP") && memberType.toString().trim().contains("Individual"))
 				clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
-						getAnocHeaderSection().get(0)
+						getAnocHeaderSection().get(1)
 						);
 
 			if (identifier.toString().trim().contains("UHC") && memberType.toString().trim().contains("Group"))
 				clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(2),
-						getAnocHeaderSection().get(0)
+						getAnocHeaderSection().get(2)
 						);
 
 		}
@@ -1779,9 +1809,12 @@ public class FormsAndResourcesPage extends UhcDriver {
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(4 - t),
 				getMyDocumentSection());
 
-		if (memberType.toString().trim().contains("Group") || (memberType.toString().trim().contains("Individual")
-				&& (identifier.contains("UHC") || identifier.toString().trim().contains("PCP")
-						|| identifier.toString().trim().contains("Medica"))))
+		if ( (memberType.toString().trim().contains("Individual") && (identifier.contains("UHC") )))
+			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5 - t),
+					getEobHeaderSection().get(5));
+		
+		if (memberType.toString().trim().contains("Group") && (identifier.contains("UHC") || identifier.toString().trim().contains("PCP")
+						|| identifier.toString().trim().contains("Medica")))
 			clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(5 - t),
 					getEobHeaderSection().get(6));
 		else
