@@ -12,8 +12,8 @@ q2_jun_aarp0060/Password@1,MAPD,Individualwithpharmacy_DCE
 q2_jun_aarp0024/Password@1,MAPD,Individualwithoutpharmacy_DCE
 q2_jun_grp0022/Password@1,PDP,IndAARPPDP_Pharmacylocator
 q2_jun_grp0318/Password@1,MAPD,GroupMAPD_Pharmacylocator
-q2_jun_sofl0019/Password@1,MAPD,Medica_Pharmacylocator
-q2_jun_aarp0051/Password@1,MAPD,PCP_Pharmacylocator,
+q2_jun_aarp0048/Password@1,MAPD,Medica_Pharmacylocator
+q3_sep_aarp00982/Password@1,MAPD,PCP_Pharmacylocator,
 ucpgrouppdptxers01/Password@1,PDP,TexasRx_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndMAPDUHC_Pharmacylocator,
 q1_apr_uhc002/Password@1,MAPD,IndUHC_Pharmacylocator,
@@ -99,11 +99,11 @@ q2_uhc_user006/Password@1,MAPD,UHC_Individual,D_COSMOS_CLAIMS,
 q3_sep_aarp00982/Password@1,PCP,Individual,COSMOS_CLAIMS,
 q2_jun_aarp0210/Password@1,PDP,Individual,RX_CLAIMS,
 q2_june_preffec_019/Password@1,SHIP,PHIP,COMPASS_CLAIMS,
-q2_may_SHIP_001/Password@1,SHIP,Individual,COMPASS_CLAIMS,
+q2_may_shipUAT001/Password@1,SHIP,Individual,COMPASS_CLAIMS,
 q2_jun_grp00001/Password@1,MAPD,GROUP,COSMOS_CLAIMS,
 q2_jun_grp0154/Password@1,MA,GROUP,COSMOS_CLAIMS,
-q2_may_combo001/Password@1,MAPD,COMBO,COSMOS_CLAIMS,
-q2_may_combo001/Password@1,SHIP,COMBO,COMPASS_CLAIMS,
+q2_may_combo006/Password@1,MAPD,COMBO,COSMOS_CLAIMS,
+q2_may_combo006/Password@1,SHIP,COMBO,COMPASS_CLAIMS,
 q2_jun_grp0250/Password@1,SSUP,COMBO_GROUP,COSMOS_CLAIMS,
 q2_jun_grp0250/Password@1,PDP,COMBO_GROUP,RX_CLAIMS,
 q2_jun_grp0022/Password@1,PDP,GROUP,RX_CLAIMS,
