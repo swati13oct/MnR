@@ -126,7 +126,9 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | Claim System | <claimSystem> |
 	Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
 	     | Plan Type    | <planType>    |
+	     | Member Type  | <memberType>  |
 	     | Claim System | <claimSystem> |
+	     | Claim Period | <claimPeriod> |
 	  
        #note1 - need to locate user with claims and update csv
 	   Examples:   
@@ -257,6 +259,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Custom search           |
+		Then I perform extensive validation for values between claims summary and claim details page		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
+		  | Claim Period | Custom search           |
 		#----------------- Test for- Last 30 days --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
@@ -265,6 +272,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim Period | Last 30 days            |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 30 days            |
+		Then I perform extensive validation for values between claims summary and claim details page		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
 		  | Claim Period | Last 30 days            |
 		#----------------- Test for Last 90 days --------------------------
 		And I can search claims for claim period and claim type on claim summary page
@@ -275,6 +287,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 90 days            |
+		Then I perform extensive validation for values between claims summary and claim details page		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
+		  | Claim Period | Last 90 days            |
 		#----------------- Test for Last 6 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
@@ -284,6 +301,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
 		  | Claim Period | Last 6 months           |
+		Then I perform extensive validation for values between claims summary and claim details page		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
+		  | Claim Period | Last 6 months           |
 		#----------------- Test for Last 12 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
@@ -292,6 +314,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim Period | Last 12 months          |
 		Then I can see the number of claims
 		  | Claim Type   | <claimType>             |
+		  | Claim Period | Last 12 months          |
+		Then I perform extensive validation for values between claims summary and claim details page		  
+	      | Plan Type    | <planType>              |
+		  | Claim Type   | <claimType>             |
+		  | Claim System | <claimSystem>           |
 		  | Claim Period | Last 12 months          |
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
@@ -317,13 +344,19 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim System | <claimSystem>           |
 		And I validate the Need Help section content on claims summary page
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+	    Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
+	      | Plan Type    | <planType>              |
+	      | Member Type  | <memberType>            |
+	      | Claim System | <claimSystem>           |
+		  | Claim Period | Last 12 months          |
+		Then I perform extensive validation for values between claims summary and claim details page		  
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimSystem>           |
 		  | Claim Period | Last 24 months          |
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
+		  | Claim Type   | <claimType>             |
 		  | Flag Zero Claims User | <flagZeroClaimsUser> |
 		  
 	@claims00_01 @claims00_MAPD @claims00_COSMOS_MEDICAL @diffGrpsDiffYrs
@@ -382,12 +415,12 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Medical           | Yes                |
+	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Medical           | No                |
 
 	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Prescription drug | Yes                |
+	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Prescription drug | No                |
 
 	@claims00_13 @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
@@ -494,7 +527,12 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Claim System | <claimSystem>           |
 		And I validate the Need Help section content on claims summary page
 		  | Plan Type    | <planType>              |
-		Then I validate Claim Details page content in detail for value and Learn More and EOB		  
+	    Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
+	      | Plan Type    | <planType>              |
+	      | Member Type  | <memberType>            |
+	      | Claim System | <claimSystem>           |
+		  | Claim Period | Last 12 months          |
+		Then I perform extensive validation for values between claims summary and claim details page		  
 	      | Plan Type    | <planType>              |
 		  | Claim Type   | <claimType>             |
 		  | Claim System | <claimSystem>           |
@@ -504,4 +542,3 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	  |index |TID | username   | password   | MemUserName  | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
 	  |01    |000 | myUsername | myPassword | testUsername | SHIP     | COMBO                      | COMPASS_CLAIMS| NA                | Yes                |
     #----- end of claims test for offline prod - local run only ------------------------
-
