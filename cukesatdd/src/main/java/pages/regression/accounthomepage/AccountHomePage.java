@@ -2782,4 +2782,22 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		
 	}
+	//This method validates login for bswift SSO
+			public void validatebswiftSSO() throws InterruptedException {
+		        Thread.sleep(10000);
+		        System.out.println(" @@@ The title of the page is "+driver.getTitle());         
+		        if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {        	 
+		     	   System.out.println("On the dashboard ");            
+		        }
+		        Thread.sleep(10000);
+		        System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
+		        if (driver.getCurrentUrl().contains("https://member.int.uhc.com/retiree/dashboard"));
+		        System.out.println("****CE member is on the dashboard****");
+		        
+		        if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {
+					Assert.assertTrue(true);
+				} else {
+					Assert.assertTrue(false);
+				}
+}
 }

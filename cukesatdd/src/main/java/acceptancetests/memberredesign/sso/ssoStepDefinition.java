@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import pages.member_deprecated.bluelayer.ProfilePageHsid;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.sso.bswiftPage;
 import pages.regression.sso.cqLoginPage;
 import pages.regression.sso.ssoTestHarnessPage;
 import acceptancetests.data.CommonConstants;
@@ -144,9 +145,7 @@ public void user_clicks_on_account_setting_link() throws Throwable {
 	else
     {
 		System.out.println("Pnp page object is Null Here");
-	}
-
-  
+	}  
 }
 
 @Then("^security and password reset link should not be visible$")
@@ -157,5 +156,69 @@ public void security_and_password_reset_link_should_not_be_visible() throws Thro
 	System.out.println("Health Safe Password Link was not present as expected");
 	profilePageHsid.validateHealthSafeAccountLinkNOTPresent();
 	System.out.println("Health Safe Account Link was not present as expected");
+}
+/** 
+ * @todo :SSO for bswift client with CE group MAPD plan 
+ */
+@Given("^CE MAPD group member lands on the SSO test harness page$")
+public void the_user_is_pingFederate_Testharness_Page() throws InterruptedException{
+	WebDriver wd = getLoginScenario().getWebDriver();
+	bswiftPage bswiftpage = new bswiftPage(wd);
+	bswiftpage.navigateToLoginURL1();
+	getLoginScenario().saveBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift, bswiftpage);	
+}
+/** 
+ * @todo :bswift CE testharness page elements  
+ */
+@And("^testharness page is displayed with all the fields$")
+public void thetestharness_pageis_displayed(){
+	bswiftPage bswiftpage = (bswiftPage) loginScenario.getBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift);
+	bswiftpage.validatePageElements();
+} 
+
+/** 
+ * @todo :bswift CE testharness page enter member details  
+ */
+@Given("^on testharness I enter the member details and click continue$")
+public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws InterruptedException{
+	/* Reading the given attribute from feature file */
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String ssopartner = memberAttributesMap.get("SSO Partner");
+	String firstname  = memberAttributesMap.get("First Name");
+	String lastname = memberAttributesMap.get("Last Name");
+	String dob  = memberAttributesMap.get("DOB");
+	String mbi = memberAttributesMap.get("MBI");
+	String url = memberAttributesMap.get("Target URL");
+	System.out.println("firstName: "+firstname +"lastName: "+lastname +"dob: "+dob+"MIB: "+mbi);
+	bswiftPage bswiftpage = (bswiftPage) getLoginScenario().getBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift);
+	Thread.sleep(5000);
+	System.out.println("Title of new page : "+bswiftpage.getTitle());
+	bswiftpage.enterssopartner(ssopartner);
+	bswiftpage.enterFirstName1(firstname);
+	bswiftpage.enterLastName1(lastname);
+	bswiftpage.enterDOB1(dob);
+	bswiftpage.enterMBI(mbi);
+	bswiftpage.enterURL(url);
+	//bswiftpage.clickSubmit1();
+}
+/** 
+ * @todo :bswift CE member lands on Dashboard after clicking Submit
+ */
+ @Given("^user is navigated to the Dashboard$")
+ public void user_navigatedTo_Dashboard() throws InterruptedException{
+	 bswiftPage bswiftpage = (bswiftPage) getLoginScenario().getBean(PageConstants.STAGE_SSO_TESTHANESS_URL_bswift);
+	 bswiftpage.clickSubmit1();
+     Thread.sleep(3000);
+  AccountHomePage accountHomePage = new AccountHomePage(bswiftpage.driver);
+  getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+  accountHomePage.validatebswiftSSO();
 }
 }
