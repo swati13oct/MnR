@@ -18,6 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -235,7 +236,7 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement greaterThan24monthsError;
 
 	@FindBy(xpath="//span[@id='numClaims1']")	
-	private WebElement numberOfClaims;
+	private WebElement numberOfClaimsMedical;
 
 	@FindBy(xpath="//span[@id='numClaims3']")	
 	private WebElement numberOfClaimsPrescriptionDrug;
@@ -250,7 +251,7 @@ public class ClaimSummarypage extends UhcDriver{
 	private WebElement numberOfClaimsShipCustomSearch;
 
 	@FindBy(xpath="//span[contains(@class,'days-title')]//span[@id='numClaims2']")
-	private WebElement customSearchNumberOfClaims;
+	private WebElement numberOfClaimsMedicalCustomSearch;
 
 	@FindBy(xpath="//div[contains(@class,'shipCompSection')]//p[contains(@id,'validShipDivErr')]/..//p[2]//span")
 	private WebElement greaterThan24monthsErrorShip;
@@ -341,6 +342,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(xpath="//div[@id='datesEmptyErrorContent']//p//span")
 	private WebElement EmptyDatesError;
 
+	@FindBy(xpath="//div//p[@id='datesEmptyErrorDivErr']/../p/span")
+	private WebElement shipEmptyDatesError;
+	
 	//note: need help section
 	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
 	private WebElement needHelp_SectionHeader;
@@ -457,7 +461,7 @@ public class ClaimSummarypage extends UhcDriver{
 
 	@FindBy (id = "numClaims1")
 	private WebElement medicalclaimsnumber;
-
+	
 	@FindBy (id = "numClaims3")
 	private WebElement rxclaimsnumber;
 
@@ -676,11 +680,23 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page 
 	 */
-	public void validateYouHavemessage(String planType) {
+	public String validateYouHavemessage(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
+		String claimResult="none";
 		try {// As of now i am keeping it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
-			System.out.println("medical claims - Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims");//This is working for MA and MAPD COSMOS or NICE 
-			System.out.println("rx claims      - Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"); 
+			if (validate(medicalclaimsnumber)) 
+				claimResult="medical claims - Member Has ========> "+ ":"+ (medicalclaimsnumber.getText())+ " Claims";//This is working for MA and MAPD COSMOS or NICE 
+			if (validate(rxclaimsnumber)) 
+				claimResult="rx claims - Member Has ========> "+ ":"+ (rxclaimsnumber.getText())+ " Claims"; 
+			if (validate(numberOfClaimsShip)) 
+				claimResult="ship claims - Member Has ========> "+ ":"+ (numberOfClaimsShip.getText())+ " Claims"; 
+			if (validate(numberOfClaimsMedicalCustomSearch)) 
+				claimResult="medical claims (custom search) - Member Has ========> "+ ":"+ (numberOfClaimsMedicalCustomSearch.getText())+ " Claims";//This is working for MA and MAPD COSMOS or NICE 
+			if (validate(numberOfClaimsPrescriptionDrugCustomSearch)) 
+				claimResult="rx claims (custom search) - Member Has ========> "+ ":"+ (numberOfClaimsPrescriptionDrugCustomSearch.getText())+ " Claims"; 
+			if (validate(numberOfClaimsShipCustomSearch)) 
+				claimResult="ship claims (custom search) - Member Has ========> "+ ":"+ (numberOfClaimsShipCustomSearch.getText())+ " Claims"; 
+			Assert.assertTrue("PROBLEM - unable to locate any type of number of claims value", !claimResult.equals("none"));
 		} catch (Exception e) {
 		} 
 		WebElement e=Youhave3;
@@ -696,6 +712,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		String expText="You have";
 		Assert.assertTrue("PROBLEM - 'You have...' message on page is not as expected.  Expected to contain='' | Actual msg='"+e.getText()+"'", (e.getText()).contains(expText));
+		return claimResult;
 	} 
 
 	/**
@@ -1124,13 +1141,13 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up"); 
 
-		WebElement numClaimsElement=numberOfClaims;
+		WebElement numClaimsElement=numberOfClaimsMedical;
 		if (range.equalsIgnoreCase("custom search")) {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numberOfClaimsPrescriptionDrugCustomSearch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (validate(customSearchNumberOfClaims)) {
-					numClaimsElement=customSearchNumberOfClaims;
+				if (validate(numberOfClaimsMedicalCustomSearch)) {
+					numClaimsElement=numberOfClaimsMedicalCustomSearch;
 				} 
 			} else {
 				numClaimsElement=numberOfClaimsShipCustomSearch;
@@ -1139,7 +1156,7 @@ public class ClaimSummarypage extends UhcDriver{
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numberOfClaimsPrescriptionDrug;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				numClaimsElement=numberOfClaims;
+				numClaimsElement=numberOfClaimsMedical;
 			} else {
 				numClaimsElement=numberOfClaimsShip;
 			}
@@ -1460,11 +1477,13 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @param fromDate
 	 * @param toDate
 	 */
-	public void searchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
-		System.out.println("The title of the page is-------->"+driver.getTitle());
+	public void customSearchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
+		System.out.println("Perform custom search with 'From' date='"+fromDate+"' and 'To' date='"+toDate+"' for planType="+planType);
 		if(driver.getTitle().contains("Claims Summary")){
-			if (planType.equals("SHIP")) {
+			if (planType.equalsIgnoreCase("SHIP")) {
+				sendkeys(shipFrom,fromDate);//note: don't know why but need to do it twice for the value to get in, manually works fine
 				sendkeys(shipFrom,fromDate);
+				sendkeys(shipTo,toDate);
 				sendkeys(shipTo,toDate);
 				CommonUtility.waitForPageLoad(driver, shipSearchButton,60);
 				shipSearchButton.click();
@@ -1474,6 +1493,7 @@ public class ClaimSummarypage extends UhcDriver{
 				CommonUtility.waitForPageLoad(driver, searchButton,60);
 				searchButton.click();
 			}
+			System.out.println("Clicked search button");
 		}
 	}
 
@@ -1494,11 +1514,18 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * Validate error message for custom search case when input 'from' and 'to' dates are empty
 	 */
-	public void  validateEmptyDatesError() {
-		searchButton.click();
-		Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(EmptyDatesError));
-		String expectedErrorText="The dates are empty, please re-enter the date in the following format: MM/DD/YYYY";
-		Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. Expected='"+expectedErrorText+"' | Actual='"+EmptyDatesError.getText()+"'", EmptyDatesError.getText().contains(expectedErrorText));
+	public void  validateEmptyDatesError(String planType) {
+		if (planType.equalsIgnoreCase("SHIP")) {
+			shipSearchButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(shipEmptyDatesError));
+			String expectedErrorText="he Dates are empty please reenter the date in MM/DD/YYYY format";
+			Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. Expected='"+expectedErrorText+"' | Actual='"+shipEmptyDatesError.getText()+"'", shipEmptyDatesError.getText().contains(expectedErrorText));
+		} else {
+			searchButton.click();
+			Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(EmptyDatesError));
+			String expectedErrorText="The dates are empty, please re-enter the date in the following format: MM/DD/YYYY";
+			Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. Expected='"+expectedErrorText+"' | Actual='"+EmptyDatesError.getText()+"'", EmptyDatesError.getText().contains(expectedErrorText));
+		}
 	}
 
 	/**
@@ -1924,7 +1951,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * Validate each section in Need Help section on claims summary page
 	 * @param planType
 	 */
-	public void validateNeedHelpSection(String planType) {
+	public String validateNeedHelpSection(String planType, String memberType) {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
@@ -1941,16 +1968,26 @@ public class ClaimSummarypage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
 			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",validate(needHelp_contactUsLink));
+			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
+			if (memberType.toLowerCase().contains("combo")) {
+				System.out.println("This test is for combo plans, select the tab accordingly");
+				goToSpecificComboTab(planType); //note: click the target tab for testing
+				goToSpecificComboTab(planType); //note: manually one click is okay, but for selenium needs 2 clicks for this to work here, don't know why
+			}
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
 			System.out.println("New window URL = "+driver.getCurrentUrl());
 			System.out.println("New window title = "+driver.getTitle());
 			Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
 			Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
-			driver.navigate().back();
-			System.out.println("Main window = "+driver.getTitle());	
+			if (memberType.toLowerCase().contains("combo")) {
+				driver.get(originalUrl);
+				goToSpecificComboTab(planType); 
+			} else {
+				driver.navigate().back();
+			}
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
@@ -1961,6 +1998,8 @@ public class ClaimSummarypage extends UhcDriver{
 			validateSection="Need Help - Plan Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
 		}
+		System.out.println("Main window = "+driver.getTitle());
+		return driver.getCurrentUrl();
 	}
 
 	/**

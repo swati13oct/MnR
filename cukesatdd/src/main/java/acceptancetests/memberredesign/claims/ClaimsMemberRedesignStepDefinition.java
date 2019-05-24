@@ -88,18 +88,46 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I can search claims for the following claim period on claims summary page$") 
 	public void search_claims_period_redesigned_site(DataTable memberAttributes) throws InterruptedException{
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String s=memberAttributesMap.get("Claim Period");
+		String claimPeriod=memberAttributesMap.get("Claim Period");
+		String memberType=memberAttributesMap.get("Member Type");
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
-		System.out.println("claim period = "+s);
+		
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD, claimPeriod);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM, claimSystem);
+
+		System.out.println("claim period = "+claimPeriod);
 		
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if(s.equals("custom-search")){
+		if(claimPeriod.equals("custom-search")){
 			System.out.println("custom search");
-			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,s);
+			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,claimPeriod);
 		} else{
-			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,s,claimSystem);
+			newClaimsSummaryPage.searchClaimsByTimePeriod(planType,claimPeriod,claimSystem);
 		}
+		//note: store test note to be displayed at later time
+		String resultNumOfClaims=newClaimsSummaryPage.validateYouHavemessage(planType);
+		
+		List<String> noteList=new ArrayList<String>();
+		noteList.add("================================================================");
+		noteList.add("===== TEST NOTE ================================================");
+		noteList.add("Plan Type        = "+planType);
+		noteList.add("Member Type      = "+memberType);
+		noteList.add("Claim System     = "+claimSystem);
+		noteList.add("Claim Period     = "+claimPeriod);
+		noteList.add("Number of Claims = "+resultNumOfClaims);
+		noteList.add("================================================================");
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RESULT_NOTE, noteList);
+
+		@SuppressWarnings("unchecked")		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
+		System.out.println("\n\nPrint result note");
+		for (String s: testNote) {
+			System.out.println(s);
+		}
+
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
@@ -121,10 +149,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@And("^I validate the EOB section based on claims system on claims summary page$")
-	public void validates_EOB_redesigned_site(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimSystem  = memberAttributesMap.get("Claim System");
-		String planType = memberAttributesMap.get("Plan Type");
+	public void validates_EOB_redesigned_site(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateEobfordifferentClaimsSystem(claimSystem, planType);
 		if(newclaimsSummarypage != null)
@@ -136,7 +164,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@And("^I validate the DownloadMyData section on claims summary page$")
-	public void validates_DownloadMyData_redesigned_site(DataTable memberAttributes){
+	public void validates_DownloadMyData_redesigned_site(){
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newclaimsSummarypage.validateDownloadMyDataExistsAndWorks();
 		if(newclaimsSummarypage != null)
@@ -174,10 +202,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@And("^I validate the Claims Total on claims details page$")
-	public void validate_claims_total_AARP(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void validate_claims_total_AARP(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
 		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step for claims total validation on claims detail page");
 			return;
@@ -214,8 +242,8 @@ public class ClaimsMemberRedesignStepDefinition {
 			newClaimsSummaryPage.validateComboTabs();
 			newClaimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
 		}
-		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType,memberType);		
-		newClaimsSummaryPage.validateYouHavemessage(planType);
+		newClaimsSummaryPage.validateClaimsSummaryHeaderSection(planType,memberType);	
+		
 		newClaimsSummaryPage.validateClaimsHeaderCopyText();
 		newClaimsSummaryPage.validateSystemErrorMsgNotExist();
 	}
@@ -227,10 +255,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @throws InterruptedException
 	 */
 	@When("^I navigate to the Claim Details page from claims summary page$")
-	public void i_navigate_to_member_redesign_claim_details(DataTable memberAttributes) throws InterruptedException {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void i_navigate_to_member_redesign_claim_details() throws InterruptedException {
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
 		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to navigate to claims detail page");
 			return;
@@ -247,10 +275,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@And("^I validate the claims summary link on claims detail top page$")
-	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void I_validate_the_claims_summary_link_on_claims_detail_top_page(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
 		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate top claims summary link on claims detail page");
 			return;
@@ -266,10 +294,9 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@And("^I validate the claims summary link on claims detail bottom page$")
-	public void I_validate_the_claims_summary_link_on_claims_detail_bottom_page(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void I_validate_the_claims_summary_link_on_claims_detail_bottom_page(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		if (planType.toLowerCase().contains("pdp") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step to validate bottom claims summary link on claims detail page");
 			return;
@@ -285,9 +312,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * @param memberAttributes
 	 */
 	@Then("^I should be able to see the search range is greater than two years error$")
-	public void validateGreaterThanTwoYearsMessage(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
+	public void validateGreaterThanTwoYearsMessage(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validateGreaterThanTwoYearError(planType);
 
@@ -310,10 +336,10 @@ public class ClaimsMemberRedesignStepDefinition {
 	HashMap<String, Integer> allClaims = new HashMap<String, Integer>();
 	List<String> recordInvokedBypass=new ArrayList<String>();
 	@Then("^I can see the number of claims$")
-	public void getClaimsNumber(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimPeriod = memberAttributesMap.get("Claim Period");
-		String claimType = memberAttributesMap.get("Claim Type");
+	public void getClaimsNumber() {
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
@@ -346,10 +372,11 @@ public class ClaimsMemberRedesignStepDefinition {
 		
 		//note: use this flag to determine if you want to fail the case if zero claims
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimType = memberAttributesMap.get("Claim Type");
 		String flagZeroClaimsUserInput = memberAttributesMap.get("Flag Zero Claims User");
 		Assert.assertTrue("PROBLEM - 'Flag Zero Claims User' can only be yes or no.  Actual="+flagZeroClaimsUserInput, 
 				flagZeroClaimsUserInput.equalsIgnoreCase("yes") || flagZeroClaimsUserInput.equalsIgnoreCase("no"));
+
+		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
 
 		boolean flagZeroClaimsUser=true;
 		if (flagZeroClaimsUserInput.equalsIgnoreCase("yes")) {
@@ -362,31 +389,55 @@ public class ClaimsMemberRedesignStepDefinition {
 		claimSummarypage.validateNumOfClaimsForEachPeriod(allClaims, flagZeroClaimsUser); 
 		claimSummarypage.validateDataRowsSequenceAndDataExistsInOtherSearchPeriods(searchOptions, allClaimsData, claimType);
 
+
+		//note: store the test note to display later if needed
+		List<String> noteList=new ArrayList<String>();
 		//note: display any of the issues encountered that are currently bypassed
-		System.out.println("================================================================");
-		System.out.println("========== Data collected during test run ======================");
-		System.out.println("========== known issues ==========");
+		noteList.add("================================================================");
+		noteList.add("===== TEST NOTE ================================================");
+		noteList.add("Plan Type    = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE));
+		noteList.add("Member Type  = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE));
+		noteList.add("Claim System = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM));
+		noteList.add("Claim Type   = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE));
+		noteList.add("========== Data collected during test run ======================");
+		noteList.add("========== known issues ==========");
 		if (recordInvokedBypass.size()==0) {
-			System.out.println("Did not encounter any existing known issues");
+			noteList.add("Did not encounter any existing known issues");
 		} else {
-			System.out.println("Encounted existing known issues:");
+			noteList.add("Encounted existing known issues:");
 			for (String s: recordInvokedBypass) {
-				System.out.println("  issue: "+s);
+				noteList.add("  issue: "+s);
 			}
 		}
-		claimSummarypage.printListOfClaimsResult(allClaims);
+		noteList.add("------------ begin list of claims result ---------------");
+		noteList.add("Number of claims for 'Last 30 days'       = "+String.valueOf(allClaims.get("Last 30 days")));
+		noteList.add("Number of claims for 'Last 90 days'       = "+String.valueOf(allClaims.get("Last 90 days")));
+		noteList.add("Number of claims for 'Last 6 months'      = "+String.valueOf(allClaims.get("Last 6 months")));
+		noteList.add("Number of claims for 'Last 12 months'     = "+String.valueOf(allClaims.get("Last 12 months")));
+		noteList.add("Number of claims for 'Last 24 months'     = "+String.valueOf(allClaims.get("Last 24 months")));
+		noteList.add("Number of claims for 'Last Custom search' = "+String.valueOf(allClaims.get("Custom search")));
+		noteList.add("------------ end list of claims result ---------------");
+		noteList.add("================================================================");
+		
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RESULT_NOTE, noteList);
 
+		@SuppressWarnings("unchecked")
+		List<String> result_testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
+
+		System.out.println("\n\nPrint out result note:");
+		for (String s: result_testNote) {
+			System.out.println(s);
+		}
 	}
 
 	/**
 	 * This step validates pagination.  Pagination should show when there is claims.
-	 * @param memberAttributes
 	 * @throws Throwable
 	 */
 	@And("^I validate the pagination on the claims summary page for given range$")
-	public void validatePagination(DataTable memberAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimPeriod = memberAttributesMap.get("Claim Period");
+	public void validatePagination() throws Throwable {
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
@@ -410,6 +461,13 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String memberType = memberAttributesMap.get("Member Type");
 		String claimType = memberAttributesMap.get("Claim Type");
+		String claimSystem = memberAttributesMap.get("Claim System");
+
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE, claimType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD, claimPeriod);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM, claimSystem);
 
 		System.out.println("===================================================================================================");
 		System.out.println("Proceed to test for claim period="+claimPeriod);
@@ -422,6 +480,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		newClaimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		
 	}	
 
 	/**
@@ -437,28 +496,22 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - 'Need Help' section
 	 * Current bypass known issue:  INC11365785, INC10332773
 	 * At the end of this step, it will go back to claims summary page to get ready for next step
-	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	HashMap<String,List<HashMap<String,String>>> allClaimsData=new LinkedHashMap<String, List<HashMap<String,String>>>();
-	//@Then("^I validate Claim Details page content in detail for value and Learn More and EOB$")
 	@Then("^I perform extensive validation for values between claims summary and claim details page$")
-	public void validate_claim_details_extensive(DataTable memberAttributes) throws InterruptedException {
+	public void validate_claim_details_extensive() throws InterruptedException {
 		// note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimPeriod = memberAttributesMap.get("Claim Period");
-		String claimType = memberAttributesMap.get("Claim Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
-		
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
 		boolean hasYourShare=true;
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp") ) {
 			hasYourShare=false;
 		}
 
-		//tbd if (claimType.equalsIgnoreCase("prescription drug")) {
-		//tbd 	System.out.println("Prescription drug doesn't have more info for claims, skip claims detail validation");
-		//tbd } else {
 			int numClaims=allClaims.get(claimPeriod);
 			List<HashMap<String,String>> claimsDataForSearchPeriod=new ArrayList<HashMap<String,String>>();
 			if (numClaims > 0) {	//note: only do this if claims > 0
@@ -486,7 +539,6 @@ public class ClaimsMemberRedesignStepDefinition {
 					if (claimType.equalsIgnoreCase("prescription drug")) {
 						System.out.println("Prescription drug doesn't have more info for claims, skip claims detail validation");
 					} else {
-						System.out.println("TEST - skip for now");
 						ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPageForGivenClaimRow(x);
 						Assert.assertTrue("PROBLEM - unable to load claims detail page from a given claims row on claims summary page. table row index='"+x+"'", newClaimDetailsPage!=null);
 							System.out.println("Proceed to validate claims table");
@@ -521,17 +573,20 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - 'Search EOB History' links
 	 * - claims total row content
 	 * - 'Need Help' section
-	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	@When("^I validate Claim Details page content value and Learn More and EOB and tooltops$")
-	public void validate_claim_details_basic(DataTable memberAttributes) throws InterruptedException {
+	public void validate_claim_details_basic() throws InterruptedException {
 		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimPeriod = memberAttributesMap.get("Claim Period");
-		String claimSystem = memberAttributesMap.get("Claim System");
-		String memberType = memberAttributesMap.get("Member Type");
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+		String memberType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		
+		String claimType="Medical";
+		if (claimSystem.toUpperCase().contains("D_")) {
+			claimType="Prescription drug";
+		} 
 
 		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, and EOB on claims detail page");
@@ -539,7 +594,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		} else {  //note: this test is assume prior test steps passed so user has claims
 			System.out.println("Proceed to Claims Summary page");
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+			if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
+				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
+				claimSummarypage.goToSpecificComboTab(planType); //note: click the target tab for testing
+			}
+			claimSummarypage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
+			if (!claimSummarypage.validateClaimsTable()) {
+				System.out.println("Claim Period '"+claimPeriod+"' has no claims, skipping claims detail validation step...");
+				return;
+			}
 			claimSummarypage.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
+			
 			//note: use the first claim data for validation
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPageForGivenClaimRow(2);
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",newClaimDetailsPage != null);
@@ -590,14 +655,12 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - print button
 	 * - download button
 	 * - DownloadMyData button
-	 * @param memberAttributes
 	 * @throws Throwable
 	 */
 	@And("^I can validate the learn more and print and download option and DownloadMyData section on claims summary page$")
-	public void validate_print_and_download_option_in_claims_table(DataTable memberAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimPeriod = memberAttributesMap.get("Claim Period");
-		String planType = memberAttributesMap.get("Plan Type");
+	public void validate_print_and_download_option_in_claims_table() throws Throwable {
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
@@ -613,19 +676,17 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * This step performs claims search using custom search option.
 	 * It takes today's date 'To' date,  and 'from' date is the date 18 months ago from today's date
 	 * Using the time different of 18 months on purpose in case in the future we want to compare search result with the EOB page search result (EOB max search range is 18 months)
-	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	@And("^I custom search claims for the specific time interval on claims summary page$")
-	public void custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType=memberAttributesMap.get("Plan Type");
+	public void custom_search_claims_redesigned_site() throws InterruptedException{
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
 		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
@@ -639,12 +700,12 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I custom search claims for the following invalid time interval on claims summary page$")
 	public void invalid_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType=memberAttributesMap.get("Plan Type");
 		String fromDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_FROM_DATE);
 		String toDate = memberAttributesMap.get(RedesignClaimsCommonConstants.CLAIMS_TO_DATE);
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
@@ -652,13 +713,11 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * This step performs claims search using custom search option with date range that exceed two years starting from today's date.
 	 * Validate expected error message
-	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	@And("^I custom search claims for over two years time interval from current date on claims summary page$")
-	public void greaterThanTwoYears_custom_search_claims_redesigned_site(DataTable memberAttributes) throws InterruptedException{
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType=memberAttributesMap.get("Plan Type");
+	public void greaterThanTwoYears_custom_search_claims_redesigned_site() throws InterruptedException{
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar calendar = Calendar.getInstance();
 		Date currentDate=calendar.getTime();
@@ -671,7 +730,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println("2 yrs and 1 day ago date="+fromDate);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.searchClaimsByTimeInterval(planType, fromDate,toDate);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
@@ -680,36 +739,33 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * This step performs claims search using custom search option with empty date inputs.
 	 * Validate expected error message
 	 */
-	@Then("^I should be able to see the error message when no to and form dates being entered$")
+	@Then("^I should be able to see the error message when no to and from dates being entered$")
 	public void validateEmptyDatesErrorMessage(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimSummarypage.validateEmptyDatesError();
+		claimSummarypage.validateEmptyDatesError(planType);
 	}
 
 	/**
 	 * This step performs claims search using custom search option with input arguments where the 'to' date older than 'from' date.
 	 * Validate expected error message
-	 * @param memberAttributes
 	 */
 	@Then("^I should be able to see the from date is greater than the to date error message being displayed$")
-	public void validateToDateInvalidErrorMessage(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType=memberAttributesMap.get("Plan Type");		
+	public void validateToDateInvalidErrorMessage(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimSummarypage.validatefromDateLaterThanToDateError(planType);
 	}
 
 	/**
 	 * This step performs validation for the claims table on claims summary page based on the input search period
-	 * @param memberAttributes
 	 */
 	@Then("^I can validate claims table displayed based on the selection on claims summary page$")
-	public void validate_claims_table_display(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType=memberAttributesMap.get("Plan Type");		
-		String claimPeriod=memberAttributesMap.get("Claim Period");		
-		String claimType=memberAttributesMap.get("Claim Type");		
-		String claimSystem=memberAttributesMap.get("Claim System");		
+	public void validate_claims_table_display(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
 
 		boolean hasYourShare=true;
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) {
@@ -725,13 +781,11 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	/**
 	 * This step performs validation for 'Search EOB History' links on claims summary page based on the input arguments
-	 * @param memberAttributes
 	 */
 	@And("^I can validate the EOB section based on claims system on claims summary page$")
-	public void validate_EOB_redesigned_site(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void validate_EOB_redesigned_site(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean invokeBypass_INC11365785_searchEOBHistory=newclaimsSummarypage.validate_SearchEobHistory_onSummaryPage(claimSystem, planType);
@@ -771,25 +825,25 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	/**
 	 * This step performs validation for the 'Need Help' section content on the claims summary page
-	 * @param memberAttributes
 	 */
 	@When("^I validate the Need Help section content on claims summary page$")	
-	public void validateNeedHelpSectionOnClaimsSummaryPage(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
+	public void validateNeedHelpSectionOnClaimsSummaryPage(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		
 		ClaimSummarypage newclaimsSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newclaimsSummarypage.validateNeedHelpSection(planType);
+		newclaimsSummarypage.validateNeedHelpSection(planType, memberType);
 	}
 
 	/**
 	 * This step performs validation for the 'This page contains PDF documents...' text on claims summary page
-	 * @param memberAttributes
 	 */
 	@Then("^I can validate the view as pdf link on claims details page header$")	
-	public void i_can_validate_the_eob_pdf_link(DataTable memberAttributes){
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String planType = memberAttributesMap.get("Plan Type");
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void i_can_validate_the_eob_pdf_link(){
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+
+		
 		ClaimDetailsPage claimsdetailspage = (ClaimDetailsPage )getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimsdetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem,planType);
 		System.out.println("claims-============"+claimsdetailspage);
@@ -846,9 +900,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	 */
 	public static String vbf_claimType;
 	@And("^I can navigate to the Claim Details page from claims summary page$")
-	public void vbf_i_navigate_to_member_redesign_claim_details_page(DataTable memberAttributes) throws InterruptedException {
-		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		String claimSystem = memberAttributesMap.get("Claim System");
+	public void vbf_i_navigate_to_member_redesign_claim_details_page() throws InterruptedException {
+		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		if (claimSystem.equalsIgnoreCase("COSMOSCLAIMS") || claimSystem.equalsIgnoreCase("NICECLAIMS")
 				|| claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
 			if (claimSystem.equalsIgnoreCase("SHIPCLAIMS")) {
