@@ -613,7 +613,12 @@ public class ClaimSummarypage extends UhcDriver{
 	/**
 	 * this method validates claims table
 	 */
-	public boolean validateClaimsTable() {
+	public boolean validateClaimsTableExists(boolean flagZeroUserNow) {
+		if (flagZeroUserNow) {
+			System.out.println("WILL fail test if user has no claim table");
+		} else {
+			System.out.println("WILL NOT fail test if user has no claim table");
+		}
 		CommonUtility.waitForPageLoad(driver, ClaimsSummaryPage,60);
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", !validate(systemErrorMsg));
 		if (validate(claimsTableMedical))
@@ -627,12 +632,14 @@ public class ClaimSummarypage extends UhcDriver{
 				System.out.println("!!! Claims Table is seen for PDP members on Claims Summary page!!!");
 			else if (claimsTableSHIP.isDisplayed())
 				System.out.println("!!! Claims Table is seen for Ship  members on Claims Summary page!!!");
-			return true;
 		} else {
 			System.out.println("!!!!!!!!! NOT Able to find the claim table !!!!!!!!! - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed());
-			Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
+			if (flagZeroUserNow) {
+				Assert.assertTrue("PROBLEM - no claims table showing, check to see if test user has any claims or getting system error, test assumes user will have claims for the given test range so the claims table should have show accordingly - MedicalTable="+claimsTableMedical.isDisplayed()+" | PrescriptionTable="+claimsTablePrescriptionDrug.isDisplayed()+" | ShipTable="+claimsTableSHIP.isDisplayed(), false);
+			}
 			return false;
 		}
+		return true;
 	}
 
 	/**
@@ -644,22 +651,25 @@ public class ClaimSummarypage extends UhcDriver{
 	}
 
 	/**
+	 * Used by AccountHomePage
 	 * this method validates combo tab section
+	 * Assumption: user has claims, therefore, claims table exists
 	 */
 	public ClaimSummarypage comboTabSelection(){
+		boolean flagZeroClaimUser=true;
 		for (WebElement webElement : comboTabsOnclaimsPage) {
 			System.out.println(webElement.getText());
 			webElement.click();
 			try { 	
 				CommonUtility.waitForPageLoadNew(driver, last24months, 10);	
 				last24months.click();
-				if (validateClaimsTable())
+				if (validateClaimsTableExists(flagZeroClaimUser))
 					break;
 			} catch (Exception e) {
 				//unable to locate the last24months with xpath for federal case, try the one for ship before giving up
 				WebElement diff_last24months = driver.findElement(By.xpath("//div[@class='medical-claims shipCompSection']//div//*[@id='document-date']//option[contains(@value,'24 months')]"));
 				diff_last24months.click();
-				if (validateClaimsTable())
+				if (validateClaimsTableExists(flagZeroClaimUser))
 					break;
 				e.printStackTrace();
 			}
