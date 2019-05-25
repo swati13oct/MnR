@@ -28,14 +28,11 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	      | Plan Type    | <planType>    |
 	      | Claim Period | <claimPeriod> |
           | Claim System | <claimSystem> |
+	      | Member Type  | <memberType>  |
         Then I validate the claims displayed based on the selection on claims summary page
 		And I validate the EOB section based on claims system on claims summary page
-	      | Plan Type    | <planType>    |
-		  | Claim System | <claimSystem> |
         And I validate the DownloadMyData section on claims summary page
-	      | Plan Type    | <planType>    |
         And I can navigate to the Claim Details page from claims summary page
-          | Claim System | <claimSystem> |
         And I can validate the Claims Table on claims details page
         And I can validate the Claims Total on claims details page
 
@@ -76,6 +73,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	    When I navigate to the claims Summary page from dashboard or testharness page
 	    And I can search claims for the following claim period on claims summary page
 	      | Plan Type    | <planType>    |
+	      | Member Type  | <memberType>  |
 	      | Claim Period | <claimPeriod> |
           | Claim System | <claimSystem> |
         Then I validate the claims displayed based on the selection on claims summary page
@@ -99,36 +97,20 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | Member Type    | <memberType>   |
 	And I can search claims for the following claim period on claims summary page
 	     | Plan Type    | <planType>    |
+	     | Member Type  | <memberType>  |
 	     | Claim Period | <claimPeriod> |
 	     | Claim System | <claimSystem> |
 	Then I can see the claims displayed based on the selection on claims summary page
 	And I validate the pagination on the claims summary page
 	And I can see the learn more and print and download option on claims summary table section 
 	And I validate the EOB section based on claims system on claims summary page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
 	And I validate the DownloadMyData section on claims summary page
-	     | Plan Type    | <planType>    |
 	Then I navigate to the Claim Details page from claims summary page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
 	And I validate the Claims Total on claims details page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
 	And I validate the claims summary link on claims detail bottom page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
 	Then I navigate to the Claim Details page from claims summary page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
 	And I validate the claims summary link on claims detail top page
-	     | Plan Type    | <planType>    |
-	     | Claim System | <claimSystem> |
-	Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
-	     | Plan Type    | <planType>    |
-	     | Member Type  | <memberType>  |
-	     | Claim System | <claimSystem> |
-	     | Claim Period | <claimPeriod> |
+	Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltops  
 	  
        #note1 - need to locate user with claims and update csv
 	   Examples:   
@@ -169,14 +151,13 @@ Feature: T1.1To validate the new changes related to claims page on the member si
     When I navigate to the claims Summary page from dashboard or testharness page
     And I can search claims for the following claim period on claims summary page
           | Plan Type    | <planType>    |
+		  | Member Type  | <memberType>  |
           | Claim Period | <claimPeriod> |
           | Claim System | <claimSystem> |
     Then I can see the claims displayed based on the selection on claims summary page
     When I navigate to the Claim details page to see eob link on details page
     Then I can validate the view as pdf link on claims details page header
-          | Plan Type    | <planType>    |
-		  | Claim System | <claimSystem> |
-
+ 
     Examples: 
           | FID    | planType | memberType     | claimPeriod    | claimSystem  |
           | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS  |
@@ -190,6 +171,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Explanation of benefits sub navigation under Claims tab is not displayed
     Then Explanation of benefits deep link is invoked and validate the Page
+    
     Examples: 
           | FID    | planType | memberType              | claimSystem   |
           | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
@@ -236,127 +218,78 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Plan Type      | <planType>            |
 		  | Member Type    | <memberType>          |
 		  | Claim Type     | <claimType>           |
+	      | Claim System   | <claimSystem>         |
 		  | Claim Period   | Custom search         |
-		And I should be able to see the error message when no to and form dates being entered
+		And I should be able to see the error message when no to and from dates being entered
 		And I custom search claims for the following invalid time interval on claims summary page
-		  | Plan Type        | <planType>          |
 		  | Claims From Date | 01/02/2019          |
 		  | Claims To Date   | 01/02/2018          |
 		Then I should be able to see the from date is greater than the to date error message being displayed
-		  | Plan Type        | <planType>          |
 		And I custom search claims for over two years time interval from current date on claims summary page
-		  | Plan Type        | <planType>          |
 		Then I should be able to see the search range is greater than two years error
-		  | Plan Type        | <planType>          |
 		#----------------- Test for Custom search --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type    | <memberType>          |
 		  | Claim Type   | <claimType>             |
+	      | Claim System   | <claimSystem>         |
 		  | Claim Period | Custom search           |
 		And I custom search claims for the specific time interval on claims summary page
-		  | Plan Type    | <planType>              |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Custom search           |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Custom search           |
 		#----------------- Test for- Last 30 days --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 30 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 30 days            |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 30 days            |
 		#----------------- Test for Last 90 days --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 90 days            |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 90 days            |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 90 days            |
 		#----------------- Test for Last 6 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 6 months           |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 6 months           |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 6 months           |
 		#----------------- Test for Last 12 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 12 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 12 months          |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 12 months          |
 		#----------------- Test for Last 24 months --------------------------
 		And I can search claims for claim period and claim type on claim summary page
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 24 months          |
 		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 24 months          |
 		And I can validate the EOB section based on claims system on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimSystem>           |
 		And I validate the Need Help section content on claims summary page
-		  | Plan Type    | <planType>              |
 	    Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
-	      | Plan Type    | <planType>              |
-	      | Member Type  | <memberType>            |
-	      | Claim System | <claimSystem>           |
-		  | Claim Period | Last 12 months          |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 24 months          |
 		#----------------- Final Test claims number makes sense from search periods --------------
 		And I can validate the numbers of claims from all search periods
-		  | Claim Type   | <claimType>             |
 		  | Flag Zero Claims User | <flagZeroClaimsUser> |
 		  
 	@claims00_01 @claims00_MAPD @claims00_COSMOS_MEDICAL @diffGrpsDiffYrs
@@ -415,7 +348,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_11 @claims00_MEDICA @claims00_COSMOS_MEDICAL
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Medical           | No                |
+	  |11    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Medical           | No                 |
 
 	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
@@ -508,37 +441,19 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 		  | Plan Type    | <planType>              |
 		  | Member Type  | <memberType>            |
 		  | Claim Type   | <claimType>             |
+	      | Claim System | <claimSystem>           |
 		  | Claim Period | Last 24 months          |
 		Then I can see the number of claims
-		  | Claim Type   | <claimType>             |
-		  | Claim Period | Last 24 months          |
 		And I validate the pagination on the claims summary page for given range 
-		  | Claim Period | Last 24 months          |
 		Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim Period | Last 24 months          |
 		Then I can validate claims table displayed based on the selection on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 24 months          |
 		And I can validate the EOB section based on claims system on claims summary page
-		  | Plan Type    | <planType>              |
-		  | Claim System | <claimSystem>           |
 		And I validate the Need Help section content on claims summary page
-		  | Plan Type    | <planType>              |
 	    Then I validate Claim Details page content value and Learn More and EOB and tooltops		  
-	      | Plan Type    | <planType>              |
-	      | Member Type  | <memberType>            |
-	      | Claim System | <claimSystem>           |
-		  | Claim Period | Last 12 months          |
 		Then I perform extensive validation for values between claims summary and claim details page		  
-	      | Plan Type    | <planType>              |
-		  | Claim Type   | <claimType>             |
-		  | Claim System | <claimSystem>           |
-		  | Claim Period | Last 24 months          |
 		  
   Examples: 
 	  |index |TID | username   | password   | MemUserName  | planType | memberType                 | claimSystem   | claimType         | flagZeroClaimsUser |
 	  |01    |000 | myUsername | myPassword | testUsername | SHIP     | COMBO                      | COMPASS_CLAIMS| NA                | Yes                |
     #----- end of claims test for offline prod - local run only ------------------------
+
