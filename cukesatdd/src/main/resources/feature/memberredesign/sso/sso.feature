@@ -88,3 +88,20 @@ Feature: To test SSO functionality for SSO groups
     Examples: 
       | TID   | GroupName    | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID      | empNumber | userName       | passWord   |
       | 15388 | Verizon MAPD | conduent   | DAFB      | DCFDECCD |    06191926 |       | C6AC8162F |    002203 | sso_dummy_user | Password@1 |
+      
+    @Ssobswift @US1769264 @CodeTransformers
+    Scenario Outline: Verify As CenterPoint Energy MAPD Group Member is allowed to land on the dashboard for the medicare.uhc.com site.  
+      Given CE MAPD group member lands on the SSO test harness page 
+      And testharness page is displayed with all the fields
+      And on testharness I enter the member details and click continue
+      | SSO Partner | <ssoPartner>  |
+      | First Name  | <firstName>   |
+      | Last Name   | <lastName>    |
+      | DOB         | <dateOfBirth> |
+      | MBI         | <uhcID>       |
+      |Target URL   | <url>         |
+     And user is navigated to the Dashboard       
+     Examples: 
+       | ssoPartner    | firstName | lastName | dateOfBirth |   uhcID         |url                                            |  userName       | passWord   |
+       | bswift       | EBERA     | WOLFMANA |    10241939  |   2Y55K31PM63 |https://stage-medicare.uhc.com/sso/inbound/bswift| sso_dummy_user  | Password@1 |
+        

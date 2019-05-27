@@ -27,10 +27,17 @@ public class ClaimsCommonConstants {
 	public static final Object CLAIMS_FROM_DATE = "Claims From Date";
 	public static final String CUSTOM_SEARCH = "Custom Search";
 	public static final String CLAIM_SUMMARY_EXPECTED = "claimSummaryExpected";
-	
 	public static final String CLAIM_SUMMARY_ACTUAL = "claimSummaryActual";
-
 	public static final String CLAIM_DETAILS_EXPECTED = "claimsDetailsExpected";
-
 	public static final String CLAIM_DETAILS_ACTUAL = "claimDetailsActual";
+	
+	public static final String TEST_INPUT_PLAN_TYPE = "input_planType";
+	public static final String TEST_INPUT_MEMBER_TYPE = "input_memberType";
+	public static final String TEST_INPUT_CLAIM_TYPE = "input_claimType";
+	public static final String TEST_INPUT_CLAIM_PERIOD = "input_claimPeriod";
+	public static final String TEST_INPUT_CLAIM_SYSTEM = "input_claimSystem";
+	public static final String TEST_RESULT_NOTE = "result_claimsNote";
+	
+	
+	
 }

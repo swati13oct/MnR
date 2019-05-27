@@ -310,19 +310,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
     @FindBy(xpath =".//*[@id='vpp-monthly-premium-modal-header']/ancestor::div[contains (@class , 'popup-modal active')]")
     private WebElement learnMoreModalPopUp;
     
-    @FindBy(xpath=".//*[@class='popup-modal active']/descendant::div[@class='modal-footer']/a[@class='cta-button close-modal']")
+    @FindBy(id="lisBackBtn")
     private WebElement backButtonInLearnMoreModal;
     
     @FindBy(xpath="//div[@class='col-md-3']")
     public WebElement RightRailSection;
     
-    @FindBy(xpath="//*[contains(text() , 'Need Help?')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']")
+    @FindBy(xpath="//*[contains(text() , 'Need Help?')]/ancestor::div[contains(@class,'rightrail')]//div[contains(@class,'uhc-container')]")
     public WebElement needHelpRightRail;
     
-    @FindBy(xpath="//*[contains(text() , 'Need Help?')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']//a[contains(text(),'Find an agent in your area')]")
+    @FindBy(xpath="//*[contains(text(),'Find an agent in your area')]")
     public WebElement RightRail_AgentInYourArea; 
     
-    @FindBy(xpath="//*[contains(text() , 'Get a Free Medicare Guide')]/ancestor::div[@class ='rightrail']//div[@class='uhc-container']")
+    @FindBy(xpath="//*[contains(text() , 'Get a Free Medicare Guide')]/ancestor::div[contains(@class,'uhc-container')]")
     public WebElement MedicareGuideRightRail;
     
     @FindBy(xpath="//*[contains(text() , 'Need More Information?')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']")
@@ -331,7 +331,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
     @FindBy(xpath="//*[contains(text() , 'Need More Information?')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']//a[contains(text(),'Choose a video ')]")
     public WebElement ChooseAVideo;
     
-    @FindBy(xpath="//*[contains(text() , 'Need a Step Back')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']")
+    @FindBy(xpath="//*[contains(text() , 'Need a Step Back')]/ancestor::div[contains (@class ,'uhc-container')]")
     public WebElement PlanSelectorToolRightRail; 
     
     //@FindBy(xpath="//*[contains(text() , 'Plan Selector Tool')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']//span")
@@ -341,7 +341,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
     @FindBy(xpath="//input[@name='firstname']")
     public WebElement firstNameField;
     
-    @FindBy(xpath="//input[@class='field-type-email ng-pristine ng-valid']")
+    @FindBy(xpath="//input[@placeholder='Email Address']")
     public WebElement emailField;
     
     @FindBy(xpath="//input[@name='lastname']")
@@ -1309,13 +1309,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		List<WebElement> allPDPPlans = driver
 				.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));
-		
+
 		if (allPDPPlans != null) {
 			for (int i = 0; i < allPDPPlans.size(); i++) {
 				allPDPPlans.get(i).click();
 				if (i == 3){
 					break;
-				}
+		}
 			}
 		}
 
@@ -1876,7 +1876,7 @@ public void validateAndClickAddtoCompareinUMS(String planType , String planName)
 }
 
 public boolean compareTextAfterclickingAddtoCompareinUMS(String planName) throws InterruptedException {                
-WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='single-added-text show']"));    
+WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));    
     if(compareText.getText().contains("1 plan added")){
                     System.out.println("1 plan has been selected for comparison");                
                     return true;
@@ -1886,7 +1886,7 @@ WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '"+pl
     }
 public void validateAddToCompareNotPresentForDSNP(String planName){
 try{
-if(driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'compare-plan')]")).isDisplayed()){
+if(driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'compare-plan')]")).isDisplayed()){
 Assert.fail("Add to compare checkbox is present for DSNP Plans");  
 }
 }
@@ -1902,18 +1902,18 @@ backButtonInLearnMoreModal.click();
 }
 public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , String planName) throws InterruptedException {
     if (planType.equalsIgnoreCase("MAPD")) {
-    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
+    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
     validateNew(learnMoreAboutExtraHelp);            
     learnMoreAboutExtraHelp.click();
     }
     if (planType.equalsIgnoreCase("SNP")) {
-                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
+                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
                     CommonUtility.waitForPageLoadNew(driver,learnMoreAboutExtraHelp, 30);
                     validateNew(learnMoreAboutExtraHelp);
                     learnMoreAboutExtraHelp.click();
                     }
     if (planType.equalsIgnoreCase("PDP")) {
-                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
+                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
                     validateNew(learnMoreAboutExtraHelp);
                     learnMoreAboutExtraHelp.click();
                     }
@@ -1921,7 +1921,7 @@ public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , Strin
     	try{
        //WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
        //validateNonPresenceOfElement(driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]")));
-    	if(driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]")).isDisplayed()){
+    	if(driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]")).isDisplayed()){
     		Assert.fail("Learn More About Extra Help is present for MA plans");
     	}	
     	}
@@ -1983,7 +1983,7 @@ public void clicksOnIsProviderCoveredUMS(String planName) throws InterruptedExce
                     }
 
 public void validatePlanPremium (String planName , String monthlyPremium){
-    WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Monthly Premium')]/span)[1]"));
+    WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Monthly Premium')]/span)[1]"));
     CommonUtility.waitForPageLoadNew(driver,PremiumForPlan, 30);
     String PlanPremium = PremiumForPlan.getText();
     if(PlanPremium.equals(monthlyPremium)){
@@ -1995,7 +1995,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     }
     
     public void validatePrimaryCarePhysicianBenefit (String planType , String planName , String primaryCarePhysician){
-    	WebElement PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Primary Care Physician')]/span"));
+    	WebElement PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Primary Care Physician')]/span"));
         CommonUtility.waitForPageLoadNew(driver,PrimaryCarePhysicianForPlan, 30);
         if(!planType.equals("SNP")){
         	String PrimaryCare = PrimaryCarePhysicianForPlan.getText();	
@@ -2018,7 +2018,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     }
     
     public void validateSpecialistBenefit (String planType , String planName , String specialist) {
-    	WebElement SpecialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Specialist')]/span"));
+    	WebElement SpecialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Specialist')]/span"));
         CommonUtility.waitForPageLoadNew(driver,SpecialistForPlan, 30);
         if(!planType.equals("SNP")){
         String SpecialistBenefit = SpecialistForPlan.getText();
@@ -2041,7 +2041,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
         }
     
     public void validateReferrralRequiredBenefit (String planName , String referralRequired) {
-    	WebElement ReferralRequiredForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Referral Required')]/span"));
+    	WebElement ReferralRequiredForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Referral Required')]/span"));
         CommonUtility.waitForPageLoadNew(driver,ReferralRequiredForPlan, 30);
         String ReferRequired = ReferralRequiredForPlan.getText();
         if(ReferRequired.equals(referralRequired)){
@@ -2053,7 +2053,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 }
     
     public void validatesOutOfPocketMaximum (String planName , String outOfPocketMaximum) {
-    	WebElement OOPForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Out Of Pocket Maximum')]/span"));
+    	WebElement OOPForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Out Of Pocket Maximum')]/span"));
         CommonUtility.waitForPageLoadNew(driver,OOPForPlan, 30);
         String OOPMax = OOPForPlan.getText();
          if(OOPMax.equals(outOfPocketMaximum)){
@@ -2065,7 +2065,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 }
     
     public void validatePrescriptionDrugsTier1(String planName , String prescriptionDrugsTier1) {
-    	WebElement DrugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[1]"));
+    	WebElement DrugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[1]"));
         CommonUtility.waitForPageLoadNew(driver,DrugsForPlan, 30);
         System.out.println("Expected value " + prescriptionDrugsTier1);
         String PrescriptionDrugs = DrugsForPlan.getText();
@@ -2079,7 +2079,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 }
     
     public void validateAnnualDeductible(String planName , String annualDeductible) {
-    	WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Annual Deductible')]/span)[2]"));
+    	WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
         String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
           /* try {
            	 
@@ -2099,18 +2099,18 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     
     public void validateMarketingBullets(String planType , String planName){
     	if(!planType.equals("PDP")){
-             WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//div[@class='vppColumnDivisionContainer']"));
+             WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class ,'vppColumnDivisionContainer')]"));
              validateNew(marketingBullets);
 	            }
 	            if(planType.equals("PDP")){
-	            	WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//ul)[2]"));
+	            	WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//ul)[2]"));
 	            	validateNew(marketingBullets);
 	            }
     }
     
     public void toolTipForPremium0(String planName){
-		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use']"));
-		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span"));
+		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"));
+		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
 		Actions action = new Actions(driver);
 		action.moveToElement(toolTip).build().perform();
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
@@ -2123,8 +2123,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	}
 	
 	public void toolTipForAnnualDeductible(String planName) {
-		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//*[name()='use'])[2]"));
-		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//descendant :: span[@class='standalone']//span)[2]"));
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
 		Actions action = new Actions(driver);
 		action.moveToElement(toolTip).build().perform();
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
@@ -2137,7 +2137,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	}
     
     public DrugCostEstimatorPage navigatetoDCEPage(String planName){
-    	WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+    	WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
     	DCELink.click();
     	CommonUtility.checkPageIsReadyNew(driver);
     	if(driver.getCurrentUrl().contains("drug-cost-estimator")){
@@ -2301,10 +2301,10 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	  sendkeysNew(emailField, EmailAddress);
 	  validateNew(Submitbutton);
 	  Submitbutton.click();
-	  WebElement popup = driver.findElement(By.xpath("//div[@class='closeBg']/*[contains (text() , 'Thank you for your interest')]"));
+	  WebElement popup = driver.findElement(By.xpath("//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]"));
 	  if(validateNew(popup)){
 		  System.out.println("Pop up message has been displayed");
-		  WebElement closePopUp = driver.findElement(By.xpath("//a[@class='emailsubmit_close']"));
+		  WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
 		  closePopUp.click();
 		  CommonUtility.checkPageIsReadyNew(driver);
 		  Assert.assertTrue(true);
@@ -2899,7 +2899,12 @@ public String StartApplicationButton(String DateOfBirth, String FirstName, Strin
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	try {
-		monthDrpDwn.click();
+	CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
+			  JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", monthDrpDwn);
+	
+	//	monthDrpDwn.click();
 		monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");

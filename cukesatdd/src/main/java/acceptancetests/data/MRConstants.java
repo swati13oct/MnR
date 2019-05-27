@@ -374,6 +374,7 @@ public class MRConstants {
   public static final String OFFLINE_PROD_MEMBER_AUTH = "https://offline-generic.uhc.com/memberonlineaccount#/memberAuthLogin";
   public static final String ONLINE_PROD_MEMBER_AUTH = "https://generic.uhc.com/memberonlineaccount#/memberAuthLogin";
   //^^^ note:
+  public static final String STAGE_SSO_TESTHANESS_URL_bswift = "http://apsr9052:9080/adapterTest2/bswiftExtTestHarness.html";
   
  }
 

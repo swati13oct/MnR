@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppPlanSummary
 Feature: To test VPP Plan Summary Page in UMS Site
 
- @vppPlanCardsRegression  @vppPlanCardsRegressionUHC @fastandfurious
+ @vppPlanCardsRegressionBlayer @fastandfurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -46,7 +46,7 @@ Feature: To test VPP Plan Summary Page in UMS Site
    |  15542 |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              |  $4,900.00         |  No drug coverage                            |                                                        | 
    |  15543 |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  |
       
-   @rightRailRegression @rightRailRegressionUHC
+   @rightRailRegressionBlayer @fastandfurious
    Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
    Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
