@@ -2654,7 +2654,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
-		monthDrpDwn.click();
+		//monthDrpDwn.click();
+		jsClickNew(monthDrpDwn);
 		monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
