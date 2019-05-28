@@ -1031,10 +1031,8 @@ public class ClaimDetailsPage extends UhcDriver{
 				rowsTotalAmountBilled=format(rowsTotalAmountBilled+value);
 
 				value=findValue(xpath1+"[2]/p");
-				System.out.println("TEST MATH - rowsTotalAdjustment="+rowsTotalAdjustment+"+"+value);
 				rowsTotalAdjustment=format(rowsTotalAdjustment+value);
 				System.out.println("rows Adjustment value="+value);
-System.out.println("TEST NOW - rowsTotalAdjustment="+rowsTotalAdjustment);
 				value=findValue(xpath1+"[4]/p");
 				rowsTotalPlanShare=format(rowsTotalPlanShare+value);
 				System.out.println("rows PlanShare value="+value);
