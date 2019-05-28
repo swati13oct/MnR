@@ -16,11 +16,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionFormsandResources.json",detailedReport = true, detailedAggregatedReport = true,
+jsonReport = "target/cucumber-RunMRATDDRegressionFormsandResourcesPart2.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionFormsandResources")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/formsandresources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFormsandResources.json" }, tags = { "@Part2of2" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFormsandResourcesPart2.json" }, tags = { "@Part2of2" })
 public class RunMRATDDRegressionFormsandResourcesPart2 {
 
 }
