@@ -108,7 +108,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement eobDrugButtonPDP;
 
 	/** Renew Magazine Section - Forms And Resources page */
-	@FindBy(css = ".customsegments:nth-child(19) .med-heading")
+	@FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_GROUP_MA_MAPD']//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2")
 	private WebElement renewMagazineSectionMAPDAARP;
 
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_AARP_PDP']")
@@ -298,7 +298,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Pharmacy Locator Link for PDP */
 	// @FindBy(xpath = "//*[@class='otherPages
 	// PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
-	@FindBy(xpath = "(//*[contains(@href,'pharmacy-locator')])[3]")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[9]/div/div/div/div/section/div/div[2]/div/div[1]/div[2]/div/div/div/div/div/div/div/ul/li/a")
 	private WebElement PharmacyLocatorLinkPDP;
 
 	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[4]")
@@ -2042,7 +2042,7 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType,
-			String identifier) {
+			String identifier) throws InterruptedException {
 System.out.println("Tamzid - 1");
 System.out.println("Tamzid - 11 getDirectorySection(planType, memberType, identifier).get(0)="+getDirectorySection(planType, memberType, identifier).get(0));
 		if (planType.equalsIgnoreCase("MedSupp")) {
@@ -2057,6 +2057,7 @@ System.out.println("Tamzid - 11 getDirectorySection(planType, memberType, identi
 		
 		
 System.out.println("Tamzid - 2");
+		Thread.sleep(5000);
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(1),
 				getEobHeaderSection().get(2));
 		System.out.println("Tamzid - 3");
