@@ -3,6 +3,7 @@
  */
 package pages.memberrdesignVBF;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.CreditCardUPGPage;
 
 /**
  * @author saduri
@@ -17,7 +19,7 @@ import atdd.framework.UhcDriver;
  */
 public class OneTimePaymentsPage extends UhcDriver {
 
-	@FindBy(xpath = ".//*[@id='otheramt']")
+	/*@FindBy(xpath = ".//*[@id='otheramt']")
 	private WebElement otherAmountRadio;
 
 	@FindBy(id = "other-amount-number")
@@ -45,55 +47,92 @@ public class OneTimePaymentsPage extends UhcDriver {
 	private WebElement reviewContinue;
 	
 	@FindBy(xpath = ".//*[@id='atdd_electronicsignature_label']//label[@for='consent']")
-	private WebElement electronicSignatureCheck;
+	private WebElement electronicSignatureCheck;*/
+	
+	@FindBy(id = "otherAmount")
+	private WebElement OtherAmountButton;
+	
+	@FindBy(xpath = "//section[contains(@class,'payment-selection')]//aside[contains(@class,'info-panel')]")
+	private WebElement PaymentSummaryCard;
+	
+	@FindBy(xpath = "//aside[contains(@class,'info-panel')]//*[@id='info-panel__title'][contains(text(),'Payment Summary')]")
+	private WebElement PaymentSummaryCardHeader;
+	
+	@FindBy(xpath = "//aside[contains(@class,'info-panel')]//div[contains(@class,'info-panel__body')]//dl[contains(@class,'dl-horizontal')]/dt[contains(text(),'Remaining Amount:')]/following-sibling::dd[contains(@class,'onetime-bill')][contains(text(),'$')]")
+	private WebElement PaymentSummaryCardRemainingAmt;
+	
+	@FindBy(id = "otherAmount")
+	private WebElement otherAmountRadioButton;
+	
+	@FindBy(id = "amountInput")
+	private WebElement otherAmountInput;
+	
+	@FindBy(id = "optionsRadios20")
+	private WebElement creditcardRadioButton;
+	
+	@FindBy(id = "optionsRadios10")
+	private WebElement CheckingAccountRadioButton;
+	
+	@FindBy(xpath = "//form//div[@class='payment-selection__actions']/button[contains(@class,'payment-selection__btn')]")
+	private WebElement NextButton;
 
+	@FindBy(xpath = "//div[contains(@class,'loading-block')]")
+	private WebElement loadingBlock;
+	
 	public OneTimePaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, otherAmountRadio, 30);
-		validateNew(otherAmountRadio);
-		validateNew(otherAmountNumber);
-		validateNew(routingNumberField);
-		validateNew(confirmRoutingNumberField);
-		validateNew(accountNumberField);
-		validateNew(confirmAccountNumberField);
-		validateNew(firstNameField);
-		validateNew(lastNameField);
-		validateNew(electronicSignatureCheck);
-		validateNew(reviewContinue);
-
+		CommonUtility.waitForPageLoadNew(driver, OtherAmountButton, 30);
+		validateNew(PaymentSummaryCard);
+		validateNew(PaymentSummaryCardHeader);
+		validateNew(PaymentSummaryCardRemainingAmt);
+		
+	}
+	
+	public void selectAndEnterAmount(String otherAmount) {
+		validateNew(otherAmountRadioButton);
+		otherAmountRadioButton.click();
+		sendkeysNew(otherAmountInput, otherAmount);
+		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
 	}
 
-	/***
-	 * 
-	 * @return
-	 * @throws InterruptedException
-	 */
-	public ReviewOneTimePaymentsPage enterInfoAndContinue() throws InterruptedException {
 
-		sendkeysNew(routingNumberField, "123123000");
-		sendkeysNew(confirmRoutingNumberField, "123123000");
-		sendkeysNew(accountNumberField, "1234");
-		sendkeysNew(confirmAccountNumberField, "1234");
-		sendkeysNew(firstNameField, "Test First");
-		sendkeysNew(lastNameField, "Test Last");
-		scrollToView(otherAmountRadio);
-		otherAmountRadio.click();
-		sendkeysNew(otherAmountNumber, "0.01");
-		scrollToView(electronicSignatureCheck);
-		electronicSignatureCheck.click();
-		validateNew(reviewContinue);
-		reviewContinue.click();
-		if ("overview".equalsIgnoreCase(driver.getTitle()) || "onetimepayments".equalsIgnoreCase(driver.getTitle())) {
-			return new ReviewOneTimePaymentsPage(driver);
+	public void selectCreditCardOption() {
+		validateNew(creditcardRadioButton);
+		creditcardRadioButton.click();
+		System.out.println("User selects Credit Card Option");
+
+	}
+	
+	public void selectCheckingAccountOption() {
+		validate(CheckingAccountRadioButton);
+		CheckingAccountRadioButton.click();
+		System.out.println("User selects Checking Account Option");
+
+	}
+	
+	public CreditCardUPGPage clickOnNextButton() {
+		NextButton.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
+		waitforElementDisapper(By.xpath("//div[contains(@class,'loading-block')]"), 60);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().contains("Payment")) {
+			System.out.println("Navigated to UPG Credit card page");
+			return new CreditCardUPGPage(driver);
+		} else {
+			System.out.println("UPG is not displayed");
+			return null;
+		}
 	}
 
 }

@@ -203,11 +203,10 @@ public class TestHarness extends UhcDriver {
 	 */
 	public PaymentsOverview navigateToPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToPaymentOverview functions");
-		CommonUtility.waitForPageLoad(driver, PaymentPageLink, 30);
-		if(validateNew(PaymentPageLink))
-			PaymentPageLink.click();
+		CommonUtility.waitForPageLoadNew(driver, premiumPayment, 30);
+		premiumPayment.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		CommonUtility.waitForPageLoadNew(driver, heading, 60);
 		if (driver.getTitle().contains("Payments")) {
 			return new PaymentsOverview(driver);
 		}
