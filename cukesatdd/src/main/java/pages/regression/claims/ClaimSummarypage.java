@@ -468,6 +468,9 @@ public class ClaimSummarypage extends UhcDriver{
 	@FindBy(css = ".claimDetTableMainSection")
 	private WebElement claimDetTableMainSection;
 
+	@FindBy(xpath="//div[contains(@class,'claimsSummaryAllTables')]/table[not(contains(@class,'ng-hide'))]")
+	private WebElement anyTypeOfClaimTable;
+	
 	//vvv note:	added for VBF	
 	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))][count(//table[@id='ship']/tbody/tr/th/p[text() ='Provider']/parent::th/preceding-sibling::th)+1]")
 	private WebElement vbf_shipProviderNameValue;
@@ -692,6 +695,8 @@ public class ClaimSummarypage extends UhcDriver{
 	 */
 	public String validateYouHavemessage(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Driver is ready...Proceed to wait and see if any claim table will show up, max wait is 15 sec");
+		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimTable, 15);
 		String claimResult="none";
 		try {// As of now i am keeping it in try block as i need to run for more members and need to write a logic like NICE SHIP RX is pending 
 			if (validate(medicalclaimsnumber)) 
@@ -1134,6 +1139,8 @@ public class ClaimSummarypage extends UhcDriver{
 	 */
 	public int getNumClaims(String range, String claimType) {
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimTable, 20);
+		/* tbd-remove
 		// note: do not modify this check - critical to wait
 		int extra=2000;
 		int x=0;
@@ -1150,7 +1157,7 @@ public class ClaimSummarypage extends UhcDriver{
 			x=x+1;
 		}
 		System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up"); 
-
+		*/
 		WebElement numClaimsElement=numberOfClaimsMedical;
 		if (range.equalsIgnoreCase("custom search")) {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -2289,14 +2296,6 @@ public class ClaimSummarypage extends UhcDriver{
 		System.out.println("Now clicking on Contact Us link in Claims Page");
 		ContactUsLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		/* tbd 
-		System.out.println("Now waiting for 10 seconds");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 		String title = driver.getTitle();
 		System.out.println("Now user is on this page:" + title);
 		return new ContactUsPage(driver);
