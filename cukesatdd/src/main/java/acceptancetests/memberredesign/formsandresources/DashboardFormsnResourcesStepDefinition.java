@@ -756,7 +756,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			System.out.println("provider search link is present");
 
 		} else {
-			Assert.fail("provider search link is not present");
+		Assert.fail("provider search link is not present");
 		}
 	}
 
@@ -1357,7 +1357,6 @@ public class DashboardFormsnResourcesStepDefinition {
 		case 2:
 			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMA(rider, planType, memberType,identifier);
 			break;
-
 		case 3:
 			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType,identifier);
 			break;

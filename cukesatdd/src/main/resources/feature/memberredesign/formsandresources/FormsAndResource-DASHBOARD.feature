@@ -1,6 +1,7 @@
 @formsAndResources
 @dashBoardFormsAndResources @gladiators 
 Feature: G1.1 To validate forms and resources page in dashboard site
+		# Regression Runner devided into 2 runs with 2 runner, One runner with @Regression Member, next one with @Part2of2Regression, it devided the scenarios 17 each
 
 
 @formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
@@ -77,9 +78,9 @@ Feature: G1.1 To validate forms and resources page in dashboard site
    Examples: 
       | TID      | planType | memberType                        |Identifier        | language  |count |rider  |
       | 15130    | MA       | Group_FormsResources              |GrpEffectiveUHC   | ENGLISH   | 7    |NoRider|
-      | 00000    | MA       | Individual_FormsResourcesl        |IndEffectiveUHC   | ENGLISH   | 6    |Rider  |
+      | 00000    | MA       | Individual_FormsResourcesl        |IndEffectiveUHC   | ENGLISH   | 7    |Rider  |
       | 00000    | MA       | Individual_FormsResources         |IndEffectiveAARP  | ENGLISH   | 7    |Rider  |
-      | 00000    | MA       | Individual_FormsResources         |IndEffectiveAARP  | ENGLISH   | 7    |NoRider|
+      | 00000    | MA       | Individual_FormsResources         |IndEffectiveAARP_NR  | ENGLISH   | 7    |NoRider|
 	   
 @formsAndResources3 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify jump links for a MedSupp member
@@ -252,7 +253,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      
 
 
-@formsAndResources8 @fnrpdpaarpindividualvalidationPre-Effective  @regressionMember 
+@formsAndResources8 @fnrpdpaarpindividualvalidationPre-Effective  @Part2of2Regression 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP AARP Individual Pre-Effective
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -289,7 +290,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
 
 
 #Effective Users
-  @formsAndResources9 @fnrmapdaarpindividualvalidation  @regressionMember 
+  @formsAndResources9 @fnrmapdaarpindividualvalidation  @Part2of2Regression 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MAPD AARP Individual
    	Given login with following details in the member redesign portal
     	| Plan Type   | <planType>   |
@@ -348,7 +349,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | TID   | planType             | memberType         | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |unitedhealthpassportprogram |alternativedruglist|providerdirectory   | vendorInformationsheet    |pharmacydirectoryinformation  |
       | 15108 | MAPD_FormsResources  | IndAARPPharmacyFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |UnitedHealth Passport Program |Alternative Drug List| Provider Directory  | Vendor Information Sheet          |Pharmacy Directory Information|
 
-  @formsAndResources10 @fnrpdpuhcindividual  @regressionMember 
+  @formsAndResources10 @fnrpdpuhcindividual  @Part2of2Regression 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP UHC Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -409,7 +410,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      | TID   | planType 			| memberType          | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist|gettingstartedguide|pharmacydirectoryinformation|
      | 15127 | PDP_FormsResources   | PdpuhcindividualFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List|Getting Started Guide|Pharmacy Directory Information|
 
-  @formsAndResources11 @fnrmapdgroupvalidation  @regressionMember 
+  @formsAndResources11 @fnrmapdgroupvalidation  @Part2of2Regression 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page MAPD group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -478,7 +479,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
   # |MAPD     | GroupPharmacyFnR  | SPANISH           |Beneficios Importantes |Resumen de Beneficios |Comprobante de Cobertura |Comprehensive Formulary-Spanish |
   
   
-  @formsAndResources12 @fnrpdpaarpindividualvalidation @regressionMember 
+  @formsAndResources12 @fnrpdpaarpindividualvalidation @Part2of2Regression 
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -536,7 +537,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | TID   | planType			 | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        | anoc                     | evidenceofcoverageanoc | comprehensiveformularyanoc |alternativedruglist   |pharmacydirectoryinformation|
       | 15126 | PDP_FormsResources   | IndAARPFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Annual Notice of Changes | Evidence Of Coverage   | Comprehensive Formulary    |Alternative Drug List |Pharmacy Directory Information|
 
-  @formsAndResources13 @fnrpdptexasgroupvalidation  @regressionMember
+  @formsAndResources13 @fnrpdptexasgroupvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP Texas group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -599,7 +600,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | TID   | planType 				| memberType             | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc | additionaldruganoc       |anoc        				   |
       | 15373 | PDP_FormsResources      | TexasRxPharmacyFnRPage | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage | Annual Notice of Changes |
 
-  @formsAndResources14 @fnrpdpgroupvalidation  @regressionMember 
+  @formsAndResources14 @fnrpdpgroupvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page PDP UHC group
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -665,7 +666,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
 
  
      
-  @formsAndResources15 @fnrmaindividualvalidation  @regressionMember1 
+  @formsAndResources15 @fnrmaindividualvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page  MA AARP Individual
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -719,7 +720,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
     | TID   | planType           | memberType | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | unitedhealthpassportprogram   | anoc                     | evidenceofcoverageanoc |providerdirectory   | vendorInformationsheet    |
     | 15129 | MA_FormsResources  | AARPIndFnR | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Annual Notice of Changes | Evidence Of Coverage   |Provider Directory  | Vendor Information Sheet        |
 
-  @formsAndResources16 @fnralpeehipgroupvalidation  @regressionMember1 
+  @formsAndResources16 @fnralpeehipgroupvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page alpeehip group 
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -784,7 +785,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
       | TID   | planType   				    | memberType       | language | gettingstartedguide   | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   | abridgedformulary   | comprehensiveformulary              | additionaldrug           | doctorflyer  | providerdirectoryinsert   | priorauth           | steptherapy  | formularyadd        | formularydel        | evidenceofcoverageanoc | comprehensiveformularyanoc |additionaldrug            |anoc              | 
       | 15130 | MAPDALPeehip_FromsResources | GroupAlPeehipFnR | ENGLISH  | Getting Started Guide | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Formulary/Drug List | Formulary/Drug List - Comprehensive | Additional Drug Coverage | Doctor Flyer | Provider Directory Insert | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | Evidence of Coverage   | Comprehensive Formulary    | Additional Drug Coverage |Annual Notice of Changes|  
 
-  @formsAndResources17 @pcpfnrvalidation  @regressionMember1 
+  @formsAndResources17 @pcpfnrvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for PCP
     Given login with following details in the member redesign portal
        | Plan Type   | <planType>   |
@@ -841,7 +842,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
   # | MAPD     | PCPFnR | SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
  
  
- @formsAndResources18 @ssupfnrvalidation  @regressionMember1
+ @formsAndResources18 @ssupfnrvalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for ssupFnr 
     Given login with following details in the member redesign portal
         |Type        |<type>        |
@@ -885,7 +886,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
   #  | 00000   | MAPD     | PCPFnR |  #SPANISH | Benefit Highlights  | Summary of Benefits  | Evidence of Coverage  | Comprehensive Formulary  | Prior Authorization  | Step Therapy  | Formulary Additions  | Formulary Deletions  |
   
   
-  @formsAndResources19 @combovalidation  @regressionMember1
+  @formsAndResources19 @combovalidation @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for combo members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -911,7 +912,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      | TID   | planType 				| memberType |
      | 15233 | Combo_FromsResources     | ComboFnR   |
 
-  @formsAndResources20 @terminatedmembervalidation  @regressionMember1
+  @formsAndResources20 @terminatedmembervalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for Terminated Members
     Given login with following details in the member redesign portal
       | Plan Type   | <planType>   |
@@ -934,7 +935,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      | 15129 | MA_FromsResources | IndAARPMATerminatedFnR |
      # uhc
  
-  @formsAndResources21 @shipscenario  @regressionMember1
+  @formsAndResources21 @shipscenario @Part2of2Regression
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
     Given login with following details in the member redesign portal
 	      | Plan Type   | <planType>   |
@@ -965,7 +966,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      | 15119 | SHIP_FromsResources     | IndPharmacyShipFnR | Benefits Table |Plan Overview |Outline of Coverage |
 
   
-  @formsAndResources22 @memberauthfnrpagevalidation  @regressionMember1
+  @formsAndResources22 @memberauthfnrpagevalidation  @Part2of2Regression
   Scenario Outline:  TID: <TID> -Username: <username> - To validate the forms and resources page through Member auth.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -988,7 +989,7 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      
      
           
-     @formsAndResources23 @pcpMedicaValidationOfProviderSearch  @regressionMember1
+     @formsAndResources23 @pcpMedicaValidationOfProviderSearch  @Part2of2Regression
   Scenario Outline: To validate the forms and resources page for PCP medica members Provider search link
     Given login with following details in the member redesign portal
        | Plan Type   | <planType>   |
@@ -1001,8 +1002,8 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
  
     Examples: 
        |planType | memberType | 
-        |MAPD     | PCP        |
-        #|MAPD     | MEDICA  |
+        |MAPD     | PCP       |
+        |MAPD     | MEDICA    |
         
 
  
