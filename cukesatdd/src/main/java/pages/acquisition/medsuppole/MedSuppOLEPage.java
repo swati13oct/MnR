@@ -201,8 +201,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		validateNew(medSuppOleHospitalPartA);
-		medSuppOleHospitalPartA.sendKeys("01/01/2019");
+		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
 		nextButton.click();
 		validateNew(medSuppOlePartABYesRadioBtn);

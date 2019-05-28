@@ -1,4 +1,5 @@
 package pages.regression.claims;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -333,15 +334,27 @@ public class ClaimDetailsPage extends UhcDriver{
 	@FindBy(xpath="//div[@class='tooltipster-content']")
 	private WebElement tooltipsElementText;
 
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+	private WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
+	private WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	private WebElement comboTab_PDP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
+	private WebElement comboTab_SSUP;
+
 	//vvv note:	added for VBF		
 	@FindBy(xpath = "//div[@class='claimDetTableMainSection']//div[@class='card-body']//div/p[contains(text(),'$')]")
-	public List<WebElement> claimTableValues;
+	private List<WebElement> claimTableValues;
 
 	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']")
-	public WebElement ShipclaimstotalTable;
+	private WebElement ShipclaimstotalTable;
 
 	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']//div[@class='col-md-2']/p[contains(text(),'$')]")
-	public List<WebElement> shipClaimTotalValues;
+	private List<WebElement> shipClaimTotalValues;
 	//^^^ note:	added for VBF		
 
 	public ClaimDetailsPage(WebDriver driver) {
@@ -353,6 +366,10 @@ public class ClaimDetailsPage extends UhcDriver{
 	public void openAndValidate() {
 	}
 
+	/**
+	 * Validate tooltips on claims detail page
+	 * @param planType
+	 */
 	public void validateTooltips(String planType) {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			int sixYearsPrior = Calendar.getInstance().get(Calendar.YEAR)-6;
@@ -364,7 +381,6 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  Expected='' | Actual='"+tooltipsElementText.getText()+"'", tooltipsElementText.getText().equals(expEobTooltipsText));
 			tooltipsElementText.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, eob tooltips text should have disappeared after clicking something", !validate(tooltipsElementText));
-			
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the claims status tooltips button=",validate(claimsStatusTooltipsButton));
 			claimsStatusTooltipsButton.click();
@@ -386,14 +402,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 
 	/**
-	 * this method validates date range 
-	 */
-	public boolean verifyDateRange(){
-		System.out.println("verifyDateRange");
-		return dateRange.isDisplayed();
-	}
-
-	/**
 	 * this method validates EOB for different domain 
 	 */
 	public boolean validateMedicalEOBfordifferentClaimssystem(String claimSystem, String plantype){
@@ -411,6 +419,10 @@ public class ClaimDetailsPage extends UhcDriver{
 		return false;
 	}
 
+	/**
+	 * Validate header section content on claims detail page
+	 * @param planType
+	 */
 	public void validateClaimsDetailPageHeaderSection(String planType) {
 		//note: validate URL
 		if (driver.getCurrentUrl().contains("member/claims.html#/details")) {
@@ -473,7 +485,7 @@ public class ClaimDetailsPage extends UhcDriver{
 	}
 
 	/**
-	 * validateClaimsTableInDetailsPage
+	 * Validate claims table section content on claims detail page
 	 */
 	public void validateClaimsTableInDetailsPage(String planType) {
 		System.out.println("!!! Validating the elements on the Claims Details page !!!");
@@ -493,27 +505,17 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("!!! Claims table is seen in the Cliams details page ===>"+claimDetTableMainSection.isDisplayed());
 	}
 
-	public void clickOnEOB() { 
-		Assert.assertTrue("PROBLEM - EOB link is not present in Claims Details Page", validate(headerEOB));
-		headerEOB.click();			
-	}
-
 	/**
-	 * this method validates EOB
-	 */
-	public void validateEOB_ship() { //keep for EOB story
-		Assert.assertTrue("Search your history button is not present in Claims Details Page", validate(EOB));
-		EOB.click();			
-	}
-
-	/**
-	 * this method validates Claims total 
+	 * this method validates Claims total table on claims detail page
 	 */
 	public void validateClaimsTotalInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimstotalTable, 5);
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", validate(claimstotalTable));
 	}
 
+	/**
+	 * Validate 'Learn More...' link on claims detail page
+	 */
 	public void learnMoreCostLink(){  
 		CommonUtility.waitForPageLoad(driver, learnmoreCost, 10);
 		Assert.assertTrue("PROBLEM - unable to locate the Learn More link on detail page", validate(learnmoreCost));
@@ -521,6 +523,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		learnmoreCost.click();		
 	}
 
+	/** 
+	 * Validate 'Claims Summary' link display on top of claims detail page
+	 * @param planType
+	 * @return
+	 */
 	public ClaimSummarypage validateClaimsSummaryLinkOnDetailTopPage(String planType){
 		WebElement topButton=claimsSummaryLinkOnDetailTopPage;
 		if (planType.equalsIgnoreCase("SHIP")) {
@@ -541,6 +548,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 
+	/** 
+	 * Validate 'Claims Summary' link display on bottom of claims detail page
+	 * @param planType
+	 * @return
+	 */
 	public ClaimSummarypage validateClaimsSummaryLinkOnDetailBottomPage(){
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, claimsSummaryLinkOnDetailBottomPage, 10);
@@ -552,6 +564,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 	
+	/**
+	 * Helper method to gather data value from claims detail page for further validation
+	 * @param claimType
+	 * @return
+	 */
 	public HashMap<String,String> gatherDataFromDetailPage(String claimType) {
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		if (claimType.equalsIgnoreCase("medical")) {
@@ -700,6 +717,14 @@ public class ClaimDetailsPage extends UhcDriver{
 		return dataMap;
 	}
 
+	/** 
+	 * Helper method - validate the data between claims summary and claim detail page
+	 * return true if knonw issue is encounted
+	 * @param claimType
+	 * @param dataMapSummary
+	 * @param dataMapDetail
+	 * @return
+	 */
 	public boolean compareSummaryAndDetailData(String claimType, HashMap<String,String> dataMapSummary, HashMap<String,String> dataMapDetail) {
 		boolean invokedBypass_INC10332773_YourShareMissmatched=false;
 		if (claimType.equalsIgnoreCase("medical")) {
@@ -797,6 +822,12 @@ public class ClaimDetailsPage extends UhcDriver{
 		return invokedBypass_INC10332773_YourShareMissmatched;
 	}
 
+	/** 
+	 * Navigate back to claims summary page for specific claim search period
+	 * @param planType
+	 * @param claimPeriod
+	 * @return
+	 */
 	public ClaimSummarypage navigateBackToClaimSummaryPage(String planType, String claimPeriod) {
 		WebElement backButton=claimsSummaryBackButton;
 		if (planType.equalsIgnoreCase("ship")) {
@@ -834,6 +865,12 @@ public class ClaimDetailsPage extends UhcDriver{
 		return new ClaimSummarypage(driver);
 	}
 
+	/** 
+	 * Validate 'Search EOB History' links on claims detail page
+	 * @param claimSystem
+	 * @param plantype
+	 * @return
+	 */
 	public boolean validate_SearchEobHistory_onDetailPage(String claimSystem, String plantype){
 		boolean invokeBypass_INC11365785_searchEOBHistory=false;
 		if (!plantype.equals("SHIP")) {
@@ -852,6 +889,10 @@ public class ClaimDetailsPage extends UhcDriver{
 		return invokeBypass_INC11365785_searchEOBHistory;
 	}
 
+	/**
+	 * Validate medical EOB from header section of claims detail page
+	 * @param claimType
+	 */
 	public void validateMedicalEob(String claimType) {
 		if (claimType.equalsIgnoreCase("medical")) {
 			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field should show up for claimType='"+claimType+"'", validate(medicalEobText));
@@ -868,6 +909,10 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
+	/**
+	 * validate Adobe PDF section on claims detail page
+	 * @return
+	 */
 	public boolean validatePageContainsPdfDocText() {
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
@@ -885,59 +930,75 @@ public class ClaimDetailsPage extends UhcDriver{
 		return invokeBypass_INC11365785_conatinsPdfDocText;
 	}
 
-	public float findValue(String elementXpath) {
+	/**
+	 * Helper method for data gathering
+	 * @param elementXpath
+	 * @return
+	 */
+	public double findValue(String elementXpath) {
 		WebElement r=driver.findElement(By.xpath(elementXpath));
-		return Float.parseFloat(r.getText().replace("$", "").replace(",",""));
+		return Double.valueOf(r.getText().replace("$", "").replace(",",""));
 	}
 
-	public float findValue(WebElement e) {
-		return Float.parseFloat(e.getText().replace("$", "").replace(",",""));
+	/**
+	 * Helper method for data gathering
+	 */
+	public double findValue(WebElement e) {
+		return Double.valueOf(e.getText().replace("$", "").replace(",",""));
 	}
 
+	public double format(double x) {
+		return Math.round(x * 100.0) / 100.0;
+	}
+	/**
+	 * Validate values in claims total row is accurate
+	 * @param invokedBypass
+	 * @param planType
+	 */
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
-
+		DecimalFormat df = new DecimalFormat("0.00");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
-			float totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
-			float totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
-			float totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
-			float totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
-			float totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
-			float totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
+			double totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
+			double totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
+			double totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
+			double totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
+			double totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
+			double totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
 
-			float rowTotalAmountCharged=0.0f;
-			float rowTotalMedicareApproved=0.0f;
-			float rowTotalMedicareDeducible=0.0f;
-			float rowTotalMedicarePaid=0.0f;
-			float rowTotalPlanCostShare=0.0f;
-			float rowTotalYourPlanPaid=0.0f;
+			double rowTotalAmountCharged=0.0;
+			double rowTotalMedicareApproved=0.0;
+			double rowTotalMedicareDeducible=0.0;
+			double rowTotalMedicarePaid=0.0;
+			double rowTotalPlanCostShare=0.0;
+			double rowTotalYourPlanPaid=0.0;
 			for (int x=0; x<ship_claimsTableRows.size(); x++) {
 				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
 				System.out.println("--- index= "+x+" -----------------------");
-				float value=findValue(xpath2+"[1]/p");
+				double value=findValue(xpath2+"[1]/p");
 				System.out.println("rows Amount Charged value="+value);
-				rowTotalAmountCharged=rowTotalAmountCharged+value;
+				rowTotalAmountCharged=format(rowTotalAmountCharged+value);
 
 				value=findValue(xpath2+"[2]/p");
 				System.out.println("rows Medicare Approved value="+value);
-				rowTotalMedicareApproved=rowTotalMedicareApproved+value;
+				rowTotalMedicareApproved=format(rowTotalMedicareApproved+value);
 
 				value=findValue(xpath2+"[3]/p");
 				System.out.println("rows Medicare Deductible value="+value);
-				rowTotalMedicareDeducible=rowTotalMedicareDeducible+value;
+				rowTotalMedicareDeducible=format(rowTotalMedicareDeducible+value);
 
 				value=findValue(xpath2+"[4]/p");
 				System.out.println("rows Medicare Paid value="+value);
-				rowTotalMedicarePaid=rowTotalMedicarePaid+value;
+				rowTotalMedicarePaid=format(rowTotalMedicarePaid+value);
 
 				value=findValue(xpath2+"[5]/p");
 				System.out.println("rows Plan Cost Share value="+value);
-				rowTotalPlanCostShare=rowTotalPlanCostShare+value;
+				rowTotalPlanCostShare=format(rowTotalPlanCostShare+value);
 
 				value=findValue(xpath2+"[6]/p");
 				System.out.println("rows Your Plan Paid value="+value);
-				rowTotalYourPlanPaid=rowTotalYourPlanPaid+value;
+				rowTotalYourPlanPaid=format(rowTotalYourPlanPaid+value);
 			}
 
 			Assert.assertTrue("PROBLEM - 'Amount Charged' from each list doesn't add up to the value from claims total section.  totalAmountCharged="+totalAmountCharged+" | rowTotalAmountCharged="+rowTotalAmountCharged, totalAmountCharged==rowTotalAmountCharged);
@@ -948,37 +1009,38 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, totalYourPlanPaid==rowTotalYourPlanPaid);
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotalItems.size()>0);
-			float totalAmountBilled=findValue(claimsTotalItems.get(0));
+			double totalAmountBilled=findValue(claimsTotalItems.get(0));
 			System.out.println("totalAmountBilled="+totalAmountBilled);
-			float totalAdjustment=findValue(claimsTotalItems.get(1));
+			double totalAdjustment=findValue(claimsTotalItems.get(1));
 			System.out.println("totalAdjustment="+totalAdjustment);
-			float totalPlanShare=findValue(claimsTotalItems.get(2));
+			double totalPlanShare=findValue(claimsTotalItems.get(2));
 			System.out.println("totalPlanShare="+totalPlanShare);
-			float totalYourShare=findValue(claimsTotalItems.get(3));
+			double totalYourShare=findValue(claimsTotalItems.get(3));
 			System.out.println("totalYourShare="+totalYourShare);
 
 			//note: add up value for each row
-			float rowsTotalAmountBilled=0.0f;
-			float rowsTotalAdjustment=0.0f;
-			float rowsTotalPlanShare=0.0f;
-			float rowsTotalYourShare=0.0f;
+			double rowsTotalAmountBilled=0.0;
+			double rowsTotalAdjustment=0.0;
+			double rowsTotalPlanShare=0.0;
+			double rowsTotalYourShare=0.0;
 			for(int x=0; x<claimsTableRows.size(); x++) {
 				System.out.println("--- index= "+x+" -----------------------");
 				String xpath1="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div";
-				float value=findValue(xpath1+"[1]/p");
+				double value=findValue(xpath1+"[1]/p");
 				System.out.println("rows AmountBilled value="+value);
-				rowsTotalAmountBilled=rowsTotalAmountBilled+value;
+				rowsTotalAmountBilled=format(rowsTotalAmountBilled+value);
 
 				value=findValue(xpath1+"[2]/p");
-				rowsTotalAdjustment=rowsTotalAdjustment+value;
+				System.out.println("TEST MATH - rowsTotalAdjustment="+rowsTotalAdjustment+"+"+value);
+				rowsTotalAdjustment=format(rowsTotalAdjustment+value);
 				System.out.println("rows Adjustment value="+value);
-
+System.out.println("TEST NOW - rowsTotalAdjustment="+rowsTotalAdjustment);
 				value=findValue(xpath1+"[4]/p");
-				rowsTotalPlanShare=rowsTotalPlanShare+value;
+				rowsTotalPlanShare=format(rowsTotalPlanShare+value);
 				System.out.println("rows PlanShare value="+value);
 
 				value=findValue(xpath1+"[5]/p");
-				rowsTotalYourShare=rowsTotalYourShare+value;
+				rowsTotalYourShare=format(rowsTotalYourShare+value);
 				System.out.println("rows YourShare value="+value);
 			}
 
@@ -994,8 +1056,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
-
-	public void validateNeedHelpSection(String planType) {
+	/**
+	 * Validate need help section on claims detail page
+	 * @param planType
+	 */
+	public String validateNeedHelpSection(String planType, String memberType) {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
@@ -1012,16 +1077,26 @@ public class ClaimDetailsPage extends UhcDriver{
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
 			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",validate(needHelp_contactUsLink));
+			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
+			if (memberType.toLowerCase().contains("combo")) {
+				System.out.println("This test is for combo plans, select the tab accordingly");
+				goToSpecificComboTab(planType); //note: click the target tab for testing
+				goToSpecificComboTab(planType); //note: manually one click is okay, but for selenium needs 2 clicks for this to work here, don't know why
+			}
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
 			System.out.println("New window URL = "+driver.getCurrentUrl());
 			System.out.println("New window title = "+driver.getTitle());
 			Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
 			Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
-			driver.navigate().back();
-			System.out.println("Main window = "+driver.getTitle());	
+			if (memberType.toLowerCase().contains("combo")) {
+				driver.get(originalUrl);
+				goToSpecificComboTab(planType); 
+			} else {
+				driver.navigate().back();
+			}
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
@@ -1031,9 +1106,22 @@ public class ClaimDetailsPage extends UhcDriver{
 
 			validateSection="Need Help - Plan Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
+			driver.navigate().back();
 		}
+		System.out.println("Main window = "+driver.getTitle());
+		return driver.getCurrentUrl();
 	}
 	
+	/**
+	 * Helper method - validate the need help section content with giving input arguments
+	 * @param section
+	 * @param SectionElement
+	 * @param imgElement
+	 * @param phoneElement
+	 * @param ttyElement
+	 * @param hrsOperationElement1
+	 * @param hrsOperationElement2
+	 */
 	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
 		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
@@ -1046,7 +1134,36 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
-	//vvv note:	added for VBF		
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 */
+	public void goToSpecificComboTab(String planType) {
+		if (planType.equalsIgnoreCase("mapd")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			comboTab_MAPD.click();
+		} else if (planType.equalsIgnoreCase("ship")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			comboTab_SHIP.click();
+		} else if (planType.equalsIgnoreCase("pdp")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			comboTab_PDP.click();
+		} else if (planType.equalsIgnoreCase("ssup")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			comboTab_SSUP.click();
+		} else {
+			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+		}
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Clicked tab");
+	}
+	
+	
+	//vvv note:	added for VBF	
+	/**
+	 * For VBF
+	 * Validate claims table on claims detail page for VBF testing
+	 */
 	public void vbf_validateClaimsTableInDetailsPage() {
 		CommonUtility.waitForPageLoadNew(driver, claimDetTableMainSection, 60);
 		Assert.assertTrue(claimDetTableMainSection.isDisplayed());
@@ -1062,6 +1179,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
+	/**
+	 * Validate claims total on claims detail page for VBF testing
+	 */
 	public void vbf_validateClaimsTotalInDetailsPage() {
 		validateNew(claimstotalTable);
 		if (claimstotalTable.isDisplayed()) {
@@ -1071,6 +1191,9 @@ public class ClaimDetailsPage extends UhcDriver{
 		}
 	}
 
+	/**
+	 * Validate claims total on claims detail page for SHIP user for VBF testing
+	 */
 	public void vbf_validateShipClaimsTotalInDetailsPage() {
 		validateNew(ShipclaimstotalTable);
 		int columSize = shipClaimTotalValues.size();
