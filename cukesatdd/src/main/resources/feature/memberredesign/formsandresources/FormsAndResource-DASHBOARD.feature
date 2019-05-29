@@ -989,8 +989,8 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
      
      
           
-     @formsAndResources23 @pcpMedicaValidationOfProviderSearch  @Part2of2
-  Scenario Outline: To validate the forms and resources page for PCP medica members Provider search link
+     @formsAndResources23 @pcpMedicaValidationOfProviderSearch  @Part2of2 
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for PCP medica members Provider search link
     Given login with following details in the member redesign portal
        | Plan Type   | <planType>   |
        | Member Type | <memberType> |
@@ -1001,9 +1001,9 @@ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> 
     
  
     Examples: 
-       |planType | memberType | 
-        |MAPD     | PCP       |
-        |MAPD     | MEDICA    |
+     | TID    |planType | memberType               | 
+     | 00001  |MAPD     | PCP_FromsandResources    |
+     | 00002  |MAPD     | MEDICA_FromsandResources |
         
 
  
