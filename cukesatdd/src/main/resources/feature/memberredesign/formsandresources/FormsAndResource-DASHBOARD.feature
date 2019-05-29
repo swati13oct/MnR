@@ -79,8 +79,8 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | TID      | planType | memberType                        |Identifier        | language  |count |rider  |
       | 15130    | MA       | Group_FormsResources              |GrpEffectiveUHC   | ENGLISH   | 7    |NoRider|
       | 00000    | MA       | Individual_FormsResourcesl        |IndEffectiveUHC   | ENGLISH   | 7    |Rider  |
-      | 00000    | MA       | Individual_FormsResources         |IndEffectiveAARP  | ENGLISH   | 7    |Rider  |
-      | 00000    | MA       | Individual_FormsResources         |IndEffectiveAARP_NR  | ENGLISH   | 7    |NoRider|
+      | 00001    | MA       | Individual_FormsResources         |IndEffectiveAARP  | ENGLISH   | 7    |Rider  |
+      | 00002    | MA       | Individual_FormsResources         |IndEffectiveAARP_NR  | ENGLISH   | 7    |NoRider|
 	   
 @formsAndResources3 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify jump links for a MedSupp member

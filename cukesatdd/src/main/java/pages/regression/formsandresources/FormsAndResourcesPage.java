@@ -1965,7 +1965,9 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(1,targetPlanType,targetMemberType,targetIdentifier); //note: first parameter is the jumplink index
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
+			Thread.sleep(5000);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateEOB(1,targetPlanType,targetMemberType,targetIdentifier);  // its 1 for the no rider index,
@@ -1986,7 +1988,9 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(2,targetPlanType,targetMemberType,targetIdentifier); 
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
+			Thread.sleep(5000);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateEOB(1,targetPlanType,targetMemberType,targetIdentifier);  // its 1 for the no rider index,
@@ -2006,6 +2010,7 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(2,targetPlanType,targetMemberType,targetIdentifier); //note: first parameter is the jumplink index
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
