@@ -108,6 +108,17 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(css="div#mail-preferences-selector-SHIP h3")
 	private WebElement shipPlanName;
 	
+	@FindBy(css="div#mail-preferences-selector-SHIP input#requiredplan")
+	private WebElement agreeRequiredNoticeCheckBox;
+	
+	@FindBy(id="save-prefs-btn-SHIP")
+	private WebElement btnSavePrefSHIP;
+	
+	@FindBy(css="div#savePreferencesPopUpContent input#savepreferyes")
+	private WebElement welcomeKitYES;
+	
+	
+	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
