@@ -156,11 +156,13 @@ Feature: T1.1To validate the new changes related to claims page on the member si
           | Claim System | <claimSystem> |
     Then I can see the claims displayed based on the selection on claims summary page
     When I navigate to the Claim details page to see eob link on details page
+          | Page Number | <pageNum> |
+          | Row Number   | <rowNum> |
     Then I can validate the view as pdf link on claims details page header
  
     Examples: 
-          | FID    | planType | memberType     | claimPeriod    | claimSystem  |
-          | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS  |
+          | FID    | planType | memberType     | claimPeriod    | claimSystem  | pageNum | rowNum |
+          | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS  | 1       | 2      |
 
     @claims04 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
     Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
