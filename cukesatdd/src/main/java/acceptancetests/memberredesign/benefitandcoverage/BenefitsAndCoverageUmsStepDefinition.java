@@ -910,6 +910,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
+	
+	@And("the user MAPD LIS should see drug cost table for Lis members")
+	public void user_validate_drugcosttableMapdLIS() throws InterruptedException {
+		System.out.println("***the user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttableMapdLIS();
+	}
+	
+	
 	@And("the Group PDP LIS1 user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_LIS1_Group() {
 		System.out.println("***the Group PDP LIS1 user should see drug cost table for Lis members***");
@@ -1781,8 +1791,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
-	public void user_validate_MailOrderCostSharing_Drugtable() {
-		System.out.println("***the user verifies the Mail Order Cost sharing table***");
+	public void user_validate_MailOrderCostSharing_Drugtable() throws InterruptedException {
+		System.out.println("***the user verifies the user validates the Benefits for Peehip memberthe Mail Order Cost sharing table***");
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -1900,8 +1910,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validatesRemoveRider();
-
+			planBenefitsCoverage.validatesRemoveRider();
 	}
 
 	@Then("^verify ancillary benefit section is not displayed$")
