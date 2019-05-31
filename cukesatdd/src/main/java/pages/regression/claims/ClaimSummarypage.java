@@ -2045,20 +2045,27 @@ public class ClaimSummarypage extends UhcDriver{
 	 * Navigate to claims detail page.  This is a very specific step for a given user test data.
 	 * @return
 	 */
-	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
+	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink(int pageNum, int rowNum) {
 		try {
 			validateNew(claimstablemoreinfolink);
-			paginationRightArrow.click();
-			paginationRightArrow.click();
-			paginationRightArrow.click();
+			//note: start with page1, every click increment 1 page
+			for (int i=0; i<pageNum-1; i++) {
+				paginationRightArrow.click();
+			}
 			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
 			try {
 				Thread.sleep(2000); //keep, sometimes detail takes longer to load
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", specificclaimlinkforeob);
+			try {
+				//note: rowIndex is rowNum-1
+				WebElement targetRowMoreInfo=driver.findElement(By.xpath("//*[@id='moreInfoLinkAtdd"+(rowNum-1)+"']/a"));
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", targetRowMoreInfo);
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate the More Info link element that is expected to have EOB", false);
+			}
 			System.out.println(driver.getTitle());
 			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
 				System.out.println("*** Claims Details Page ***");
