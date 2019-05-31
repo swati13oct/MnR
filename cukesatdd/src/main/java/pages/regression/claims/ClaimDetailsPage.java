@@ -1,4 +1,5 @@
 package pages.regression.claims;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -934,18 +935,21 @@ public class ClaimDetailsPage extends UhcDriver{
 	 * @param elementXpath
 	 * @return
 	 */
-	public float findValue(String elementXpath) {
+	public double findValue(String elementXpath) {
 		WebElement r=driver.findElement(By.xpath(elementXpath));
-		return Float.parseFloat(r.getText().replace("$", "").replace(",",""));
+		return Double.valueOf(r.getText().replace("$", "").replace(",",""));
 	}
 
 	/**
 	 * Helper method for data gathering
 	 */
-	public float findValue(WebElement e) {
-		return Float.parseFloat(e.getText().replace("$", "").replace(",",""));
+	public double findValue(WebElement e) {
+		return Double.valueOf(e.getText().replace("$", "").replace(",",""));
 	}
 
+	public double format(double x) {
+		return Math.round(x * 100.0) / 100.0;
+	}
 	/**
 	 * Validate values in claims total row is accurate
 	 * @param invokedBypass
@@ -953,48 +957,48 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
-
+		DecimalFormat df = new DecimalFormat("0.00");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
-			float totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
-			float totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
-			float totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
-			float totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
-			float totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
-			float totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
+			double totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
+			double totalMedicareApproved=findValue(xpath1+"[2]//p[contains(@class,'h5')]");
+			double totalMedicareDeducible=findValue(xpath1+"[3]//p[contains(@class,'h5')]");
+			double totalMedicarePaid=findValue(xpath1+"[4]//p[contains(@class,'h5')]");
+			double totalPlanCostShare=findValue(xpath1+"[5]//p[contains(@class,'h5')]");
+			double totalYourPlanPaid=findValue(xpath1+"[6]//p[contains(@class,'h5')]");
 
-			float rowTotalAmountCharged=0.0f;
-			float rowTotalMedicareApproved=0.0f;
-			float rowTotalMedicareDeducible=0.0f;
-			float rowTotalMedicarePaid=0.0f;
-			float rowTotalPlanCostShare=0.0f;
-			float rowTotalYourPlanPaid=0.0f;
+			double rowTotalAmountCharged=0.0;
+			double rowTotalMedicareApproved=0.0;
+			double rowTotalMedicareDeducible=0.0;
+			double rowTotalMedicarePaid=0.0;
+			double rowTotalPlanCostShare=0.0;
+			double rowTotalYourPlanPaid=0.0;
 			for (int x=0; x<ship_claimsTableRows.size(); x++) {
 				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
 				System.out.println("--- index= "+x+" -----------------------");
-				float value=findValue(xpath2+"[1]/p");
+				double value=findValue(xpath2+"[1]/p");
 				System.out.println("rows Amount Charged value="+value);
-				rowTotalAmountCharged=rowTotalAmountCharged+value;
+				rowTotalAmountCharged=format(rowTotalAmountCharged+value);
 
 				value=findValue(xpath2+"[2]/p");
 				System.out.println("rows Medicare Approved value="+value);
-				rowTotalMedicareApproved=rowTotalMedicareApproved+value;
+				rowTotalMedicareApproved=format(rowTotalMedicareApproved+value);
 
 				value=findValue(xpath2+"[3]/p");
 				System.out.println("rows Medicare Deductible value="+value);
-				rowTotalMedicareDeducible=rowTotalMedicareDeducible+value;
+				rowTotalMedicareDeducible=format(rowTotalMedicareDeducible+value);
 
 				value=findValue(xpath2+"[4]/p");
 				System.out.println("rows Medicare Paid value="+value);
-				rowTotalMedicarePaid=rowTotalMedicarePaid+value;
+				rowTotalMedicarePaid=format(rowTotalMedicarePaid+value);
 
 				value=findValue(xpath2+"[5]/p");
 				System.out.println("rows Plan Cost Share value="+value);
-				rowTotalPlanCostShare=rowTotalPlanCostShare+value;
+				rowTotalPlanCostShare=format(rowTotalPlanCostShare+value);
 
 				value=findValue(xpath2+"[6]/p");
 				System.out.println("rows Your Plan Paid value="+value);
-				rowTotalYourPlanPaid=rowTotalYourPlanPaid+value;
+				rowTotalYourPlanPaid=format(rowTotalYourPlanPaid+value);
 			}
 
 			Assert.assertTrue("PROBLEM - 'Amount Charged' from each list doesn't add up to the value from claims total section.  totalAmountCharged="+totalAmountCharged+" | rowTotalAmountCharged="+rowTotalAmountCharged, totalAmountCharged==rowTotalAmountCharged);
@@ -1005,37 +1009,36 @@ public class ClaimDetailsPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, totalYourPlanPaid==rowTotalYourPlanPaid);
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotalItems.size()>0);
-			float totalAmountBilled=findValue(claimsTotalItems.get(0));
+			double totalAmountBilled=findValue(claimsTotalItems.get(0));
 			System.out.println("totalAmountBilled="+totalAmountBilled);
-			float totalAdjustment=findValue(claimsTotalItems.get(1));
+			double totalAdjustment=findValue(claimsTotalItems.get(1));
 			System.out.println("totalAdjustment="+totalAdjustment);
-			float totalPlanShare=findValue(claimsTotalItems.get(2));
+			double totalPlanShare=findValue(claimsTotalItems.get(2));
 			System.out.println("totalPlanShare="+totalPlanShare);
-			float totalYourShare=findValue(claimsTotalItems.get(3));
+			double totalYourShare=findValue(claimsTotalItems.get(3));
 			System.out.println("totalYourShare="+totalYourShare);
 
 			//note: add up value for each row
-			float rowsTotalAmountBilled=0.0f;
-			float rowsTotalAdjustment=0.0f;
-			float rowsTotalPlanShare=0.0f;
-			float rowsTotalYourShare=0.0f;
+			double rowsTotalAmountBilled=0.0;
+			double rowsTotalAdjustment=0.0;
+			double rowsTotalPlanShare=0.0;
+			double rowsTotalYourShare=0.0;
 			for(int x=0; x<claimsTableRows.size(); x++) {
 				System.out.println("--- index= "+x+" -----------------------");
 				String xpath1="//div[@class='medical-claims']//div[@class='claimDetTableMainSection']//div[contains(@ng-repeat,'bl in billLineDetailsList')]["+(x+1)+"]//div[@class='row margin-small']/div";
-				float value=findValue(xpath1+"[1]/p");
+				double value=findValue(xpath1+"[1]/p");
 				System.out.println("rows AmountBilled value="+value);
-				rowsTotalAmountBilled=rowsTotalAmountBilled+value;
+				rowsTotalAmountBilled=format(rowsTotalAmountBilled+value);
 
 				value=findValue(xpath1+"[2]/p");
-				rowsTotalAdjustment=rowsTotalAdjustment+value;
+				rowsTotalAdjustment=format(rowsTotalAdjustment+value);
 				System.out.println("rows Adjustment value="+value);
-
 				value=findValue(xpath1+"[4]/p");
-				rowsTotalPlanShare=rowsTotalPlanShare+value;
+				rowsTotalPlanShare=format(rowsTotalPlanShare+value);
 				System.out.println("rows PlanShare value="+value);
 
 				value=findValue(xpath1+"[5]/p");
-				rowsTotalYourShare=rowsTotalYourShare+value;
+				rowsTotalYourShare=format(rowsTotalYourShare+value);
 				System.out.println("rows YourShare value="+value);
 			}
 
@@ -1152,6 +1155,8 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Clicked tab");
 	}
+	
+	
 	//vvv note:	added for VBF	
 	/**
 	 * For VBF
