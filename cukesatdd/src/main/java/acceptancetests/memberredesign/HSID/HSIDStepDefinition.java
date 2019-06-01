@@ -613,6 +613,9 @@ public class HSIDStepDefinition {
 				return false;
 			}
 		}
+		System.out.println("TEST - testDataType="+testDataType);
+		System.out.println("TEST - category="+category);
+		System.out.println("TEST - planType="+planType);
 		String type="";
 		if ((testDataType==null) && (category!=null)) {
 			type=category.toLowerCase();
