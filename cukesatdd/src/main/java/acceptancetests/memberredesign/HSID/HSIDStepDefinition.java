@@ -618,6 +618,8 @@ public class HSIDStepDefinition {
 			type=category.toLowerCase();
 		} else if ((testDataType!=null) && (category==null)) {
 			type=testDataType.toLowerCase();
+		} else if ((testDataType!=null) && (category!=null)) {
+			type=testDataType.toLowerCase();
 		} else if ((testDataType==null) && (category==null)) {
 			type=planType.toLowerCase();
 		}
