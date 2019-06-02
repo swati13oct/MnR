@@ -1,5 +1,6 @@
 package pages.regression.claims;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -404,19 +405,36 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * this method validates EOB for different domain 
 	 */
-	public boolean validateMedicalEOBfordifferentClaimssystem(String claimSystem, String plantype){
+	public void validateMedicalEOBfordifferentClaimssystem(String claimSystem, String planType){
 		//keep for EOB story
-		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD")) {
+		if (claimSystem.toUpperCase().contains("COSMOS")&& planType.equals("MAPD")) {
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for MAPD COSMOS EOB's are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
-			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
-		}else if((plantype.equals("MA")||(plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE"))){
+			Assert.assertTrue("PROBLEM - not getting expected EOB", medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed());
+		} else if((planType.equals("MA")||(planType.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE"))){
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for NICE view as pdf link are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
-			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
+			Assert.assertTrue("PROBLEM - not getting expected EOB", medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed());
+		} else {
+			Assert.assertTrue("PROBLEM - need to code to handle planType='"+planType+"' and claimSystem='"+claimSystem+"' EOB validation", false);
 		}
-		Assert.fail();
-		return false;
+		String winHandleBefore = driver.getWindowHandle();
+		viewPDF.click();
+		
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();					
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("New window for print = "+driver.getTitle());
+
+		String currentURL=driver.getCurrentUrl();
+		String expectedURL="https://stage-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/niceMedicalEob.pdf";
+		Assert.assertTrue("PROBLEM - URL not getting expected portion.  \nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				currentURL.contains(expectedURL));
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		System.out.println("Main window = "+driver.getTitle());	
 	}
 
 	/**
