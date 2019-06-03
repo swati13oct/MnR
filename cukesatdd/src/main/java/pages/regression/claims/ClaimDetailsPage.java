@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -429,7 +430,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		System.out.println("New window for print = "+driver.getTitle());
 
 		String currentURL=driver.getCurrentUrl();
-		String expectedURL="https://stage-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/niceMedicalEob.pdf";
+		String expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/niceMedicalEob.pdf";
 		Assert.assertTrue("PROBLEM - URL not getting expected portion.  \nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
 				currentURL.contains(expectedURL));
 		driver.close();
