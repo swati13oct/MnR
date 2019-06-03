@@ -885,7 +885,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
-
 		ClaimDetailsPage claimsdetailspage = (ClaimDetailsPage )getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimsdetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem,planType);
 		System.out.println("claims-============"+claimsdetailspage);
@@ -897,14 +896,19 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * TODO - make this more flexible when we have more user data with EOB in the future
 	 */
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
-	public void i_navigate_to_the_eobclaims_detailspage(){
+	public void i_navigate_to_the_eobclaims_detailspage(DataTable memberAttributes){
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		int pageNum=Integer.valueOf(memberAttributesMap.get("Page Number").trim());
+		int rowNum=Integer.valueOf(memberAttributesMap.get("Row Number").trim());
+
 		ClaimDetailsPage newClaimDetailsPage;
+		
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink();
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink(pageNum, rowNum);
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink(pageNum, rowNum);
 		}
 		System.out.println("claims details page -============"+newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
