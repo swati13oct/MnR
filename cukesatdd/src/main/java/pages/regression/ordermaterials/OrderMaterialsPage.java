@@ -257,7 +257,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@SuppressWarnings("deprecation")
 	public void ValidateOptions(String PlanType){
 		System.out.println("Proceed to validate for planType="+PlanType);
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")|| PlanType.contentEquals("SSUP")) {
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")|| PlanType.contentEquals("SSUP") || PlanType.contentEquals("PCP") || PlanType.contentEquals("MEDICA")) {
 			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
 				Assert.assertTrue(true);
 				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");

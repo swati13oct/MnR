@@ -16,13 +16,13 @@ Feature:P1.5 To test order materials in Redesign site
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
  
     Examples: 
-      | TID   | planType | memberType           | option              |
-      | 15287 | MA       | AARPIndividual_order | Replacement ID card |
-      | 15288 | MAPD     | AARPIndividual_order | Replacement ID card |
-      | 15286 | MAPD     | PCP_order            | Replacement ID card |
-      | 15285 | MAPD     | Medica_order         | Replacement ID card | 
-      | 15292 | PDP      | AARPIndividual_order | Welcome Guide       |
-      | 15293 | SHIP     | AARPIndividual_order | Claims Envelope     |
+      | TID   | planType | memberType              | option              |
+      | 15287 | MA       | AARP_Individual_order   | Replacement ID card |
+      | 15288 | MAPD     | AARP_Individual_order   | Replacement ID card |
+      | 15286 | PCP      | Individual_order        | Replacement ID card |
+      | 15285 | MEDICA   | Individual_order        | Replacement ID card | 
+      | 15292 | PDP      | AARP_Individual_order   | Welcome Guide       |
+      | 15293 | SHIP     | EFT_MedSelectPlan_order | Claims Envelope     |
 
   #note: for SHIP user to get this error, user must have signed up for EFT i.e. recurring payments
   @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
@@ -39,8 +39,8 @@ Feature:P1.5 To test order materials in Redesign site
     Then the user validates error message for SHIP invalid selection in Order Materials page
 
     Examples: 
-      | TID   | planType | memberType           | option      | 
-      | 15293 | SHIP     | AARPIndividual_order | Coupon Book | 
+      | TID   | planType | memberType              | option      | 
+      | 15293 | SHIP     | EFT_MedSelectPlan_order | Coupon Book | 
 
   @orderPlanMaterials3 @GroupMemberOrderSelectionandConfirmation @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify order plan materials in Redesign site for radio button validation and Order Confirmation for UHC plan Members
@@ -54,10 +54,10 @@ Feature:P1.5 To test order materials in Redesign site
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
 
     Examples: 
-      | TID   | planType | memberType          | option              |
-      | 15289 | MA       | UHCGroup_order      | Replacement ID card |
-      | 15290 | PDP      | UHCGroup_order      | Welcome Guide       |
-      | 15289 | MAPD     | UHCGroup_order      | Replacement ID card |
+      | TID   | planType | memberType           | option              |
+      | 15289 | MA       | UHC_Group_order      | Replacement ID card |
+      | 15290 | PDP      | UHC_Group_order      | Welcome Guide       |
+      | 15289 | MAPD     | UHC_Group_order      | Replacement ID card |
 
  #note: in comboPlans column, the order of the planTypes should follow the same as tabs order in the order plan materials page 	
  @orderPlanMaterials4 @ValidateHeaderComboTabs @regressionMember
@@ -72,8 +72,8 @@ Feature:P1.5 To test order materials in Redesign site
     And user Validates Page Header and Sub-Header text
     Examples: 
     | TID   | planType | memberType            | comboPlans   |
-    | 15281 | MAPD	   | MAPDwithMedSupp_order | MedSupp,MAPD | 
-    | 15291 | SSUP     | PDPwithSSUP_order	   | PDP,SSUP	  |
+    | 15281 | MEDSUPP	   | COMBO_order | MedSupp,MAPD | 
+    | 15291 | SSUP     | COMBO_order	   | PDP,SSUP	  |
 
  @orderPlanMaterials5 @TerminatedMemberNegativeScenario @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Terminated members cannot access Order Plan materials Page
@@ -85,5 +85,5 @@ Feature:P1.5 To test order materials in Redesign site
 
     Examples: 
     | TID   | planType | memberType                 |
-    | 15284 | MAPD     | AARPTerminatedmember_order |
+    | 15284 | MAPD     | AARP_Terminatedmember_order|
            
