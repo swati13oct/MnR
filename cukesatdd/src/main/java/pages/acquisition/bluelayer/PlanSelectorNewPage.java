@@ -225,7 +225,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 		NonePreference.click();
 		NextQuestionButton2.click();
 		for (int i = 3; i <= 7; i++) {
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			System.out.println("Question #" + i);
 			if (validateNonPresenceOfElement(MandatoryQuestion)
 					&& QuestionsCounter.getText().contains(String.valueOf(i))) {
