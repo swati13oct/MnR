@@ -364,6 +364,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id=\"resources\"]/div/div[2]/div/div/div[13]/div/div/div/ul/li[1]/a")
 	private WebElement eftpdfforship;
+	
+	@FindBy(xpath = "//div[@id='eobsection']//h3[text()='SHIP EOB']")
+	private WebElement shipEOBHeader;
 
 	/** i perception pop up objects */
 	@FindBy(id = "IPerceptionsEmbed")
@@ -474,6 +477,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_2019_PCP_Medica']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPCPMedica;
+	
+	@FindBy(xpath = "//div[contains(@class,'preeffectiveShip')]//h4")
+	private WebElement preEffecShipPlanName;
+	
+	@FindBy(xpath = "//h4//parent::div[@ng-show='showshiplist']//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']")
+	private WebElement preEffectiveCoverageDate;
+	
+	@FindBy(xpath = "//div[@id='plan_material_fnr_preeffective']//a[contains(@href,'order-materials')]")
+	private WebElement preEffecShipOrderPlan;
 
 	public WebElement getEobSectionall() {
 		return eobSectionall;
@@ -1512,6 +1524,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return eftpdfforship;
 	}
 
+	public WebElement getShipEobHeader() {
+		return shipEOBHeader;
+	}
+	
 	public void checkshipdocuments() {
 		java.util.List<WebElement> pdfs = driver.findElements(By.xpath(
 				"(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li"));
@@ -2367,6 +2383,26 @@ System.out.println(memberType);
 			return new pages.memberrdesignVBF.ProviderSearchPage(driver);
 		}
 		return null;
+	}
+	
+	public void verifyPreeffectiveshipPlan(Map<String, String> memberAttributesMap) {
+
+		String PlanName = memberAttributesMap.get("ShipPreEffe PlanName");
+		String CovDate = memberAttributesMap.get("Coverge Date");
+		System.out.println("Ship Pre effective Plan name is : " + preEffecShipPlanName.getText());
+		Assert.assertEquals(preEffecShipPlanName.getText().trim(), PlanName);
+		System.out.println("Ship Pre Effective Plan name is Displayed : " + PlanName);
+		System.out.println("Coverage Date is : " + preEffectiveCoverageDate.getText().trim());
+		Assert.assertEquals(preEffectiveCoverageDate.getText().trim(), CovDate);
+		System.out.println("Ship Pre Effective Coverage Date is : " + preEffectiveCoverageDate.getText().trim());
+	}
+
+	public void verifypreEffShipOderplanNotDisplay() {
+		if (!(preEffecShipOrderPlan.isDisplayed())) {
+			System.out.println("OrderPlan Materials is not displayed for pre Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
 	}
 
 }

@@ -1433,10 +1433,41 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		
-		formsAndResourcesPage.validateFindCareUrl();
+		formsAndResourcesPage.validateFindCareUrl();	
+	}
+	
+	@Then("^verifies Ship EOB field is displayed for effecitve plan$")
+	public void verifies_Ship_EOB_field_is_displayed_for_effecitve_plan() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		
+		if (formsAndResourcesPage.getShipEobHeader().isDisplayed()) {
+			System.out.println("the ShipEOB is present for Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("ShipEOB Header is not coming");
+	}
+	
+	@Then("^verify Preeffective plan name and Coverage Date for preeffective plan$")
+	public void verify_Preeffective_plan_name_and_Coverage_Date_for_preeffective_plan(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
 		
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifyPreeffectiveshipPlan(memberAttributesMap);
 		
+	}
+	
+	@Then("^verify orderPlan Material link is not displayed preeffective plan$")
+	public void verify_orderPlan_Material_link_is_not_displayed_preeffective_plan() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifypreEffShipOderplanNotDisplay();
 		
 	}
 }
