@@ -978,7 +978,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | 00002 | MAPD     | MEDICA_FromsandResources |
       
            #Need a ship Active member with New pre effective plan
-    @ShipActiveShipPre @regressionMember @release_june_20191
+    @ShipActiveShipPre @regressionMember @release_june_2019 @Part2of2
   Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -1009,7 +1009,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 
  
      #Need a ship Active member with New pre effective plan
-    @ShipTerminatedShipPre @regressionMember @release_june_20191
+    @ShipTerminatedShipPre @regressionMember @release_june_2019 @Part2of2
   Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
