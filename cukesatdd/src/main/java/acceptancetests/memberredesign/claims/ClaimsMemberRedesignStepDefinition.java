@@ -407,7 +407,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (recordInvokedBypass.size()==0) {
 			noteList.add("Did not encounter any existing known issues");
 		} else {
-			noteList.add("Encounted existing known issues:");
+			noteList.add("Encountered existing known issues:");
 			for (String s: recordInvokedBypass) {
 				noteList.add("  issue: "+s);
 			}
