@@ -857,7 +857,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, backButton, 5);
 		backButton.click();
 		System.out.println("Clicked claims summary back button...");
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println("current url="+driver.getCurrentUrl());		//note: only do the following for non-ship and non-custom search case to make sure it gets back to the right search period
 		if (!planType.equalsIgnoreCase("ship")) {
 			if (driver.getCurrentUrl().contains("overview")) {
@@ -976,7 +976,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
-		DecimalFormat df = new DecimalFormat("0.00");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
 			double totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");

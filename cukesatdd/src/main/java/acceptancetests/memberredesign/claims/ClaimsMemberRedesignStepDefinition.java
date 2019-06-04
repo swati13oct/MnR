@@ -83,7 +83,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	/**
 	 * This step performs search using input search period (non-custom-search). 
-	 * @param timeAttributes
+	 * @param timeAttributesf
 	 * @throws InterruptedException
 	 */
 	@And("^I can search claims for the following claim period on claims summary page$") 
@@ -112,7 +112,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String resultNumOfClaims=newClaimsSummaryPage.validateYouHavemessage(planType);
 
 		List<String> noteList=new ArrayList<String>();
-		noteList.add("================================================================");
+		noteList.add("\n\n================================================================");
 		noteList.add("===== TEST NOTE ================================================");
 		noteList.add("Plan Type        = "+planType);
 		noteList.add("Member Type      = "+memberType);
@@ -341,13 +341,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void getClaimsNumber() {
 		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
 		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		String memberType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
 		allClaims.put(claimPeriod, numClaims);
-		if (claimType.equalsIgnoreCase("Prescription drug")) {
-			claimSummarypage.validateClaimsTableSectionText(numClaims);
+		if (claimType.equalsIgnoreCase("Prescription drug") && memberType.toUpperCase().contains("SSO")) {
+			claimSummarypage.validateClaimsTableSectionOptumRxText(numClaims);
 		}
 		claimSummarypage.validateSystemErrorMsgNotExist();
 		claimSummarypage.printListOfClaimsResult(allClaims);
@@ -395,7 +396,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		//note: store the test note to display later if needed
 		List<String> noteList=new ArrayList<String>();
 		//note: display any of the issues encountered that are currently bypassed
-		noteList.add("================================================================");
+		noteList.add("\n\n================================================================");
 		noteList.add("===== TEST NOTE ================================================");
 		noteList.add("Plan Type    = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE));
 		noteList.add("Member Type  = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE));
@@ -1005,18 +1006,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 	//^^^ note:	added for VBF	
-//added code to print test results note in jenkins report
+	
+	//added code to print test results note in jenkins report at the end of test for successful cases
 	@cucumber.api.java.After
-public void testResultNote(Scenario scenario) {
-    if(null!=getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE)) {   
-        @SuppressWarnings("unchecked")   
-        List<String> testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
-        scenario.write("\n\nPrint result note");
-        for (String s: testNote) {   
-                scenario.write(s);
-        }
-	    testNote.clear(); 
-}
-
-}
+	public void testResultNote(Scenario scenario) {
+		if(null!=getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
 }

@@ -118,16 +118,16 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | 15227 | MA       | AARP_Individual | Last 24 months | NICE_CLAIMS   | 
 	     | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS |
 	     #see note1 | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS |
-	     | 15234 | MA       | UHC_Individual | Last 24 months | COSMOS_CLAIMS   | 
-	     #see note1 | 15235 | MAPD       | UHC_Individual | Last 24 months | M_NICE_CLAIMS   | 
-	     | 15235 | MAPD     | UHC_Individual | Last 24 months | D_NICE_CLAIMS   | 
-	     | 15299 | PDP      | Individual | Last 24 months | RX_CLAIMS     | 
-	     | 15236 | SHIP     | Individual | Last 24 Months | COMPASS_CLAIMS|
-         | 15300 | PDP      | GROUP      | Last 24 months | RX_CLAIMS     |
-         | 15259 | SHIP     | COMBO      | Last 24 months | COMPASS_CLAIMS|
-	     | 15268 | PCP      | Individual | Last 24 months | COSMOS_CLAIMS |
-	     | xxxxx | MAPD     | GROUP      | Last 24 months | COSMOS_CLAIMS |
-	     | xxxxx | MA       | GROUP      | Last 24 months | COSMOS_CLAIMS | 
+	     | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 
+	     #see note1 | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 
+	     | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 
+	     | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS     | 
+	     | 15236 | SHIP     | Individual      | Last 24 Months | COMPASS_CLAIMS|
+         | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS     |
+         | 15259 | SHIP     | COMBO           | Last 24 months | COMPASS_CLAIMS|
+	     | 15268 | PCP      | Individual      | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS |
+	     | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS | 
 
     @claims2 @TC_09claimsPHIP @regressionMember
     Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
@@ -355,12 +355,14 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	@claims00_12 @claims00_MEDICA @claims00_COSMOS_DRUG
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Prescription drug | No                |
+	  |12    |1041| MEDICA   | Individual                 | COSMOS_CLAIMS  | Prescription drug | No                 |
 
+    # note: if memberType contains SSO then will perform additional validation for the optumrx.com link in claim table section
+    # note: user needs to have valid entry in optum rx site and should be eligible in HSID site to pass the optumrx related valiation
 	@claims00_13 @claims00_PDP @claims00_RX @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
 	  |index |DID | planType | memberType                 | claimSystem    | claimType         | flagZeroClaimsUser |
-	  |13    |1041| PDP      | Individual                 | RX_CLAIMS      | Prescription drug | Yes                |
+	  |13    |1041| PDP      | SSO_Individual             | RX_CLAIMS      | Prescription drug | Yes                |
 
 	@claims00_14 @claims00_SHIP @claims00_NOT_NICE_OR_COSMOS
 	Examples: 
