@@ -129,7 +129,7 @@ Feature: T1.1To validate the new changes related to claims page on the member si
 	     | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS |
 	     | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS | 
 
-    @claims2 @TC_09claimsPHIP @regressionMember
+    @claims02 @TC_09claimsPHIP @regressionMember
     Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
          | Plan Type     | <planType>     |
