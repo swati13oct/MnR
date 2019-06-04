@@ -494,8 +494,12 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String Credit_Card_Payments_Page = "creditCardPaymentPage";
 	
+	public static final String Checking_Account_Payments_Page = "checkingAccountPaymentPage";
+	
 	public static final String Review_OneTime_Payments_Page = "reviewOneTimePaymentsPage";
 
+	public static final String Review_CA_OneTime_Payments_Page = "reviewCAOneTimePaymentsPage";
+	
 	public static final String CONFIRM_ONE_TIME_PAYMENT_PAGE = "confirmOneTimePaymentPage";
 
 	public static final String ONE_TIME_PAYMENT_SUCCESS_PAGE = "oneTimePaymentSuccessPage";
@@ -613,6 +617,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String Payments_Form_Page = "paymentsFormPage";
 
+	public static final String Payments_Form_Pages = "paymentsFormPage";
+	
 	public static final String Review_OneTime_Page = "reviewOneTimePaymentPage";
 
 	public static final String SECURITY_QUESTIONS_PAGE = "securityQuestionsPage";
