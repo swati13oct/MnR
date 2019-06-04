@@ -1004,5 +1004,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 	//^^^ note:	added for VBF	
+//added code to print test results note in jenkins report
+	@cucumber.api.java.After
+public void testResultNote(Scenario scenario) {
+    if(null!=getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE)) {   
+        @SuppressWarnings("unchecked")   
+        List<String> testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
+        scenario.write("\n\nPrint result note");
+        for (String s: testNote) {   
+                scenario.write(s);
+        }
+}
 
+}
 }
