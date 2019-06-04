@@ -83,7 +83,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	/**
 	 * This step performs search using input search period (non-custom-search). 
-	 * @param timeAttributesf
+	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	@And("^I can search claims for the following claim period on claims summary page$") 
