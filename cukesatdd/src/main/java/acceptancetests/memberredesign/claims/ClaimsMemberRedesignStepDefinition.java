@@ -426,8 +426,6 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		@SuppressWarnings("unchecked")
 		List<String> result_testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
-
-		System.out.println("\n\nPrint out result note:");
 		for (String s: result_testNote) {
 			System.out.println(s);
 		}
