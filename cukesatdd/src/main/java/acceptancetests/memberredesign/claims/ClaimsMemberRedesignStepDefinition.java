@@ -1015,6 +1015,7 @@ public void testResultNote(Scenario scenario) {
         for (String s: testNote) {   
                 scenario.write(s);
         }
+	    testNote.clear(); 
 }
 
 }
