@@ -67,7 +67,7 @@ Feature:P1.5 To test order materials in Redesign site
   # note: for ship user without Medicare Select Plan will get expected error when ordering Medicare Select Hospital Directory
   # note: 
   #####################################################
-  @orderPlanMaterials01 @ConfirmationPage @regressionMember
+  @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -107,7 +107,7 @@ Feature:P1.5 To test order materials in Redesign site
       | 15291 | PDP      | COMBO_order	         |
       | 15291 | SSUP     | COMBO_order	         |
 
-    @ValidateSHIPErrorMessage
+    @ValidateSHIPCouponBookErrorMessage
     Examples: 
       | TID   | planType | memberType               | 
       | 15293 | SHIP     | EFT_MedSelectPlan_order  | 
