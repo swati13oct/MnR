@@ -103,6 +103,12 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg1");
 		if (SuccessMsgText.getAttribute("textContent").contains(expectedSuccessMsg2)) 
 			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg2");
+		if (actualSuccessMsg.contains("?")) {
+			System.out.println("TEST2 - has ?");
+			System.out.println("TEST2 - "+actualSuccessMsg.replaceAll("\\?", "-"));
+			
+		}
+			
 		Assert.assertTrue(false);
 		
 		//String actualSuccessMsg=SuccessMsgText.getText().trim().replaceAll("(\\r|\\n)", "");
