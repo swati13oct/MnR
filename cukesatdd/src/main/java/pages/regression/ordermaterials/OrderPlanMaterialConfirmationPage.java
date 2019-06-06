@@ -83,37 +83,11 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 	public void validateSuccessmessage(String planType, String memberType, String expectedOrderedItem, boolean skipIdCheck) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
 		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
+		//note: jenkins run doesn't parse the string with - as expected, so breaking the string into two for validation
 		String expectedSuccessMsg="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 – 10 business days.";
 		String expectedSuccessMsg1="Your order has been submitted. You should be receiving the following plan materials by mail in about 7";
 		String expectedSuccessMsg2="10 business days.";
-		//String expectedSuccessMsg1="Your order has been submitted";
-		//String expectedSuccessMsg2="You should be receiving the following plan materials by mail in about 7 – 10 business days";
 		String actualSuccessMsg=SuccessMsgText.getText();
-		System.out.println("TEST - SuccessMsgText.getText()="+SuccessMsgText.getText());
-		System.out.println("TEST - SuccessMsgText.getAttribute(textContent)="+SuccessMsgText.getAttribute("textContent"));
-		System.out.println("TEST - SuccessMsgText.getAttribute(innerHTML )="+SuccessMsgText.getAttribute("innerHTML"));
-		if (expectedSuccessMsg.equals(SuccessMsgText.getAttribute("textContent")))
-			System.out.println("TEST - textContent = true");
-		String strRegEx = "<[^>]*>";
-		if (expectedSuccessMsg.equals(SuccessMsgText.getAttribute("innerHTML").replaceAll(strRegEx, "")))
-			System.out.println("TEST - innerHTML = true");
-		if (actualSuccessMsg.contains(expectedSuccessMsg1)) 
-			System.out.println("TEST - actualSuccessMsg contains expectedSuccessMsg1");
-		if (actualSuccessMsg.contains(expectedSuccessMsg2)) 
-			System.out.println("TEST - actualSuccessMsg contains expectedSuccessMsg2");
-		if (SuccessMsgText.getAttribute("textContent").contains(expectedSuccessMsg1)) 
-			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg1");
-		if (SuccessMsgText.getAttribute("textContent").contains(expectedSuccessMsg2)) 
-			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg2");
-		if (actualSuccessMsg.contains("\\?")) {
-			System.out.println("TEST2 - has ?");
-			System.out.println("TEST2 - "+actualSuccessMsg.replaceAll("\\?", "-"));
-			
-		}
-			
-		Assert.assertTrue(false);
-		
-		//String actualSuccessMsg=SuccessMsgText.getText().trim().replaceAll("(\\r|\\n)", "");
 		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to contain '"+expectedSuccessMsg1+"' and '"+expectedSuccessMsg2+"' \nActual='"+actualSuccessMsg+"'",actualSuccessMsg.contains(expectedSuccessMsg1) && actualSuccessMsg.contains(expectedSuccessMsg2) );
 
 		if (!validate(orderedItem_idCard)) {
