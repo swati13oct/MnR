@@ -83,9 +83,10 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 	public void validateSuccessmessage(String planType, String memberType, String expectedOrderedItem, boolean skipIdCheck) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
 		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
-		String expectedSuccessMsg="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 – 10 business days.";
+		String expectedSuccessMsg1="Your order has been submitted";
+		String expectedSuccessMsg2="You should be receiving the following plan materials by mail in about 7 – 10 business days";
 		String actualSuccessMsg=SuccessMsgText.getText().trim().replaceAll("(\\r|\\n)", "");
-		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected='"+expectedSuccessMsg+"' \nActual='"+actualSuccessMsg+"'",expectedSuccessMsg.equals(actualSuccessMsg));
+		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to contain '"+expectedSuccessMsg1+"' and '"+expectedSuccessMsg2+"' \nActual='"+actualSuccessMsg+"'",actualSuccessMsg.contains(expectedSuccessMsg1) && actualSuccessMsg.contains(expectedSuccessMsg2) );
 
 		if (!validate(orderedItem_idCard)) {
 			if (planType.equalsIgnoreCase("SHIP")) {
