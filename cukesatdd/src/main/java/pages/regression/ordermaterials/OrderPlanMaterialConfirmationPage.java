@@ -84,12 +84,15 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
 		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
 		//note: jenkins run doesn't parse the string with - as expected, so breaking the string into two for validation
-		String expectedSuccessMsg="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 – 10 business days.";
+		String expectedSuccessPattern="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 (.*) 10 business days.";
 		String expectedSuccessMsg1="Your order has been submitted. You should be receiving the following plan materials by mail in about 7";
 		String expectedSuccessMsg2="10 business days.";
 		String actualSuccessMsg=SuccessMsgText.getText();
 		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to contain '"+expectedSuccessMsg1+"' and '"+expectedSuccessMsg2+"' \nActual='"+actualSuccessMsg+"'",actualSuccessMsg.contains(expectedSuccessMsg1) && actualSuccessMsg.contains(expectedSuccessMsg2) );
-
+		if (actualSuccessMsg.matches(expectedSuccessPattern)) 
+			System.out.println("TEST - matched msg the pattern");
+		else 
+			System.out.println("TEST - CANNOT matched msg the pattern");
 		if (!validate(orderedItem_idCard)) {
 			if (planType.equalsIgnoreCase("SHIP")) {
 				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_ship));
@@ -108,8 +111,9 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 			if (skipIdCheck) {
 				System.out.println("Test is for VBF, skip ID check");
 			} else {
-				if (MRScenario.isTestHarness.equalsIgnoreCase("YES") && memberType.toUpperCase().contains("UHC")) {
-					//note: if testing from testharness, UHC user's ID card link will redirect to 'systest3.myhc.com' instead.
+				//note: if testing from testharness will validate element contains the right URL only.
+				//note: UHC user's ID card link will redirect to 'systest3.myhc.com' instead.
+				if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 					System.out.println("For UHC user testing via testharness, the ID link will get redirect to systest3, so just validate the link element has the correct link");
 					WebElement e=driver.findElement(By.xpath("//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]"));
 					Assert.assertTrue("PROBLEM - not getting expected ID card link element with expected URL",validate(e));
