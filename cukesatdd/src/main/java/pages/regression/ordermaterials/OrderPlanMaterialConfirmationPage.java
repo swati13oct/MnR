@@ -86,17 +86,26 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 		String expectedSuccessMsg="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 – 10 business days.";
 		String expectedSuccessMsg1="Your order has been submitted";
 		String expectedSuccessMsg2="You should be receiving the following plan materials by mail in about 7 – 10 business days";
+		String actualSuccessMsg=SuccessMsgText.getText();
 		System.out.println("TEST - SuccessMsgText.getText()="+SuccessMsgText.getText());
 		System.out.println("TEST - SuccessMsgText.getAttribute(textContent)="+SuccessMsgText.getAttribute("textContent"));
 		System.out.println("TEST - SuccessMsgText.getAttribute(innerHTML )="+SuccessMsgText.getAttribute("innerHTML"));
 		if (expectedSuccessMsg.equals(SuccessMsgText.getAttribute("textContent")))
 			System.out.println("TEST - textContent = true");
 		String strRegEx = "<[^>]*>";
-		if (expectedSuccessMsg.equals(SuccessMsgText.getAttribute("innerHTML").replaceAll( strRegEx, "")))
+		if (expectedSuccessMsg.equals(SuccessMsgText.getAttribute("innerHTML").replaceAll(strRegEx, "")))
 			System.out.println("TEST - innerHTML = true");
+		if (actualSuccessMsg.contains(expectedSuccessMsg1)) 
+			System.out.println("TEST - actualSuccessMsg contains expectedSuccessMsg1");
+		if (actualSuccessMsg.contains(expectedSuccessMsg2)) 
+			System.out.println("TEST - actualSuccessMsg contains expectedSuccessMsg2");
+		if (SuccessMsgText.getAttribute("textContent").contains(expectedSuccessMsg1)) 
+			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg1");
+		if (SuccessMsgText.getAttribute("textContent").contains(expectedSuccessMsg2)) 
+			System.out.println("TEST1 - actualSuccessMsg contains expectedSuccessMsg2");
+		Assert.assertTrue(false);
 		
-		System.exit(0);
-		String actualSuccessMsg=SuccessMsgText.getText().trim().replaceAll("(\\r|\\n)", "");
+		//String actualSuccessMsg=SuccessMsgText.getText().trim().replaceAll("(\\r|\\n)", "");
 		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to contain '"+expectedSuccessMsg1+"' and '"+expectedSuccessMsg2+"' \nActual='"+actualSuccessMsg+"'",actualSuccessMsg.contains(expectedSuccessMsg1) && actualSuccessMsg.contains(expectedSuccessMsg2) );
 
 		if (!validate(orderedItem_idCard)) {
