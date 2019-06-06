@@ -84,8 +84,10 @@ public class OrderPlanMaterialConfirmationPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
 		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
 		String expectedSuccessMsg="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 – 10 business days.";
-		String expectedSuccessMsg1="Your order has been submitted";
-		String expectedSuccessMsg2="You should be receiving the following plan materials by mail in about 7 – 10 business days";
+		String expectedSuccessMsg1="Your order has been submitted. You should be receiving the following plan materials by mail in about 7";
+		String expectedSuccessMsg2="10 business days.";
+		//String expectedSuccessMsg1="Your order has been submitted";
+		//String expectedSuccessMsg2="You should be receiving the following plan materials by mail in about 7 – 10 business days";
 		String actualSuccessMsg=SuccessMsgText.getText();
 		System.out.println("TEST - SuccessMsgText.getText()="+SuccessMsgText.getText());
 		System.out.println("TEST - SuccessMsgText.getAttribute(textContent)="+SuccessMsgText.getAttribute("textContent"));
