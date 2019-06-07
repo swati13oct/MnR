@@ -198,5 +198,5 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
 
     Examples: 
-      | TID   | planType          | memberType | claimSystem    |
-      | 15259 | SHIP_7Year_Claims | COMBO      | COMPASS_CLAIMS |
+      | TID   | planType          | memberType | claimType |claimSystem    |
+      | 15259 | SHIP_7Year_Claims | COMBO      | NA        |COMPASS_CLAIMS |
