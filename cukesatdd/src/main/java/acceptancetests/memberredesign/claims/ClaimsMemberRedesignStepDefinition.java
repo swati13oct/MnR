@@ -723,14 +723,28 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I custom search claims for the specific time interval on claims summary page$")
 	public void custom_search_claims_redesigned_site() throws InterruptedException{
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
-		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
-		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		if (planType.equalsIgnoreCase("SHIP_7Year_Claims"))
+		{
+			System.out.println("Starting to execute the SHIP greater than last 24 months which is last 6 years claims");
+			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(55).toDate());
+			String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(43).toDate());
+			System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+			
+			ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+			if(newClaimsSummaryPage != null)
+				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		}else{
+			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
+			String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+			System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+			
+			ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+			newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+			if(newClaimsSummaryPage != null)
+				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		}		
 	}
 
 	/**
