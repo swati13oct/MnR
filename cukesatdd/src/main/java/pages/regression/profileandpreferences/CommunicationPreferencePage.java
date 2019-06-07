@@ -28,7 +28,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 	private WebElement iframeEPMP;
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
-	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[1]/fieldset/label/div")
+	//@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[1]/fieldset/label/div")
+	@FindBy(xpath = "//*[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
 	private WebElement paperlessRadioBtn;
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
@@ -36,7 +37,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	private WebElement mailRadioBtn;
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
-	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[5]/div[1]/label/div[2]")
+	@FindBy(xpath = "//input[@type='checkbox' and @name='paperlessConsent']/../div[2]")
 	private WebElement agreeCheckBox;
 
 	@FindBy(id = "IPerceptionsEmbed")

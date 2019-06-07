@@ -367,7 +367,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='mailingAddress']/div[1]/a[2]")
 	private WebElement mailingCancelButtontoptempAddress;
 
-	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div/fieldset/label/div")
+	//@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div/fieldset/label/div")
+	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
 	private WebElement gopaperlessbutton;
 
 	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")

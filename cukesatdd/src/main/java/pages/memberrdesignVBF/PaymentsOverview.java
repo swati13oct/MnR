@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -60,7 +58,7 @@ public class PaymentsOverview extends UhcDriver {
 		validateNew(OneTimePaymentButton);
 		OneTimePaymentButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("onetime/eft/overview.htm")) {
+		if (driver.getCurrentUrl().contains("onetime/make-onetime/overview.htm")) {
 			return new OneTimePaymentsPage(driver);
 		}
 		return null;

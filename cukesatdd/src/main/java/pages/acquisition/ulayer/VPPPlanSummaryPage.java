@@ -2523,7 +2523,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		try {
-			monthDrpDwn.click();
+			
+			CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
+			  JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", monthDrpDwn);
+			//monthDrpDwn.click();
 			monthDrpDwnOption.click();
 			Thread.sleep(2000);
 			System.out.println("Effective date- month value selected");
@@ -2649,7 +2654,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
-		monthDrpDwn.click();
+		//monthDrpDwn.click();
+		jsClickNew(monthDrpDwn);
 		monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");

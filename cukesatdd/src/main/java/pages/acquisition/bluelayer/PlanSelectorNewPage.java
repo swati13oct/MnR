@@ -123,6 +123,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
+	
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private List<WebElement> countyModal1;
 
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
 	private WebElement PreferencesHeader;
@@ -225,7 +228,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 		NonePreference.click();
 		NextQuestionButton2.click();
 		for (int i = 3; i <= 7; i++) {
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 			System.out.println("Question #" + i);
 			if (validateNonPresenceOfElement(MandatoryQuestion)
 					&& QuestionsCounter.getText().contains(String.valueOf(i))) {
@@ -274,8 +277,8 @@ public class PlanSelectorNewPage extends UhcDriver {
 		PlanDetailsPageButton.click();
 		driver.switchTo().defaultContent();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(countyModal.isDisplayed()){
-			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if(1==countyModal1.size()){
+			CommonUtility.waitForPageLoad(driver, countyModal1.get(0), 45);
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + County + "']")).click();
 		}else
 			System.out.println("No County popu displayed");

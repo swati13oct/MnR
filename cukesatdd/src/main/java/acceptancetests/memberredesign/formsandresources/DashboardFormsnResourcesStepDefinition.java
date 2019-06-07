@@ -398,22 +398,25 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.scroll();
 
 		List<List<String>> data = attributes.raw();
-
-	if (data.get(1).get(2).contains("Group")) {
+		for(String s: data.get(0)) {
+			System.out.println("Tamzid - s="+s);
+		}
+		
+		if (data.get(0).get(1).contains("Group")) {
 			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("pharmacy locator link is present");
 			} else {
-				
+
 				if(data.get(0).get(1).contains("UHCGroupFnR")&&formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroupFnR().isDisplayed()) {
 					Assert.assertTrue(true);
-				System.out.println("pharmacy locator link is present");
+					System.out.println("pharmacy locator link is present");
 				}
 				else
-				Assert.fail("pharmacy locator link is not present");
+					Assert.fail("pharmacy locator link is not present");
 			}
-			
-			
+
+
 
 		} else {
 
@@ -681,6 +684,21 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("anoc section is not present");
 		}
 	}
+	
+	@Then("^validate that the AnocSection is displayed for MAPD$")
+	public void validate_that_the_Anoc_Section_is_displayed_MAPD() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Thread.sleep(2000);
+		if (formsAndResourcesPage.getANOCSection().get(2).isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("anoc section is present");
+
+		} else {
+			Assert.fail("anoc section is not present");
+		}
+	}
 
 	/*
 	 * @Then("^validate that the anoc section is displayed$") public void anocsec()
@@ -756,7 +774,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			System.out.println("provider search link is present");
 
 		} else {
-			Assert.fail("provider search link is not present");
+		Assert.fail("provider search link is not present");
 		}
 	}
 
@@ -1198,8 +1216,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
-		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 
 	}
 
@@ -1249,6 +1267,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 			
 	}
+	
 	
 	@Then("^validate that the renew magazine section is displayed$")
 	public void validate_that_the_renew_magazine_section_is_displayed() throws Throwable {
@@ -1357,7 +1376,6 @@ public class DashboardFormsnResourcesStepDefinition {
 		case 2:
 			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMA(rider, planType, memberType,identifier);
 			break;
-
 		case 3:
 			formsAndResourcesPage.clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(rider, planType, memberType,identifier);
 			break;
