@@ -328,7 +328,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -440,7 +440,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @RegressionPredators
+  @feature-F265872 @us1603378 @vppPrintRegressionUlayer @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @RegressionPredators
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on AARP medicare acquisition site landing page
