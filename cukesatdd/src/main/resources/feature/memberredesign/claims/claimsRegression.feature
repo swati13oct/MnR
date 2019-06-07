@@ -199,4 +199,4 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     Examples: 
       | TID   | planType          | memberType | claimType |claimSystem    |
-      | 15259 | SHIP_7Year_Claims | COMBO      | NA        |COMPASS_CLAIMS |
+      | 15259 | SHIP              | COMBO      | NA        |COMPASS_CLAIMS_7Year |
