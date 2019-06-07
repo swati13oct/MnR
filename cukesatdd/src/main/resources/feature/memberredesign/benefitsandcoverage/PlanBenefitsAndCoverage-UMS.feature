@@ -731,7 +731,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | name                | memberid     | effectivedate | monthlypremium |
-      | 15367 | MAPDVill_BnC | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
+      | 15367 | MAPDVill | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
 
 
 

@@ -189,8 +189,8 @@ public class MedSuppOLEPage extends UhcDriver {
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
 		nextButton.click();
 		waitforElementVisibilityInTime(firstName,30);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		sendkeysNew(firstName,FirstName);
+		sendkeysNew(lastName,LastName);
 		nextButton.click();
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
