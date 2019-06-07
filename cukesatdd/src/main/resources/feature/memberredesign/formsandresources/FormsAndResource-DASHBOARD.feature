@@ -976,11 +976,11 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | TID   | planType | memberType               |
       | 00001 | MAPD     | PCP_FromsandResources    |
       | 00002 | MAPD     | MEDICA_FromsandResources |
-      
-           #Need a ship Active member with New pre effective plan
-    @ShipActiveShipPre @regressionMember @release_june_2019 @Part2of2
+
+  #Need a ship Active member with New pre effective plan
+  @formsAndResources24 @ShipActiveShipPre @regressionMember @release_june_2019 @Part2of2
   Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
-     Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
@@ -999,19 +999,18 @@ Feature: G1.1 To validate forms and resources page in dashboard site
     Then verifies that Electronic Funds pdf for ship is displayed
     Then verifies Ship EOB field is displayed for effecitve plan
     Then verify Preeffective plan name and Coverage Date for preeffective plan
-    | ShipPreEffe PlanName | <ShipPreEffePlan>   |
-    | Coverge Date | <CoverageDate> |
+      | ShipPreEffe PlanName | <ShipPreEffePlan> |
+      | Coverge Date         | <CoverageDate>    |
     Then verify orderPlan Material link is not displayed preeffective plan
-    
-    Examples: 
-      | FID   | planType | memberType         | benefitstable  | planoverview  | outlineofcoverage   | ShipPreEffePlan  | CoverageDate|
-      | F282605  | SHIP     | ShipActievNewPreShip | Benefits Table | Plan Overview | Outline of Coverage |AARP MEDICARE SELECT PLAN CS1| Coverage Starts 08/01/2019|
 
- 
-     #Need a ship Active member with New pre effective plan
-    @ShipTerminatedShipPre @regressionMember @release_june_2019 @Part2of2
+    Examples: 
+      | FID     | planType | memberType           | benefitstable  | planoverview  | outlineofcoverage   | ShipPreEffePlan               | CoverageDate               |
+      | F282605 | SHIP     | ShipActievNewPreShip | Benefits Table | Plan Overview | Outline of Coverage | AARP MEDICARE SELECT PLAN CS1 | Coverage Starts 08/01/2019 |
+
+  #Need a ship Active member with New pre effective plan
+  @formsAndResources25 @ShipTerminatedShipPre @regressionMember @release_june_2019 @Part2of2
   Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
-     Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     And user clicks on the view document and resources link and navigate to forms and resource page
@@ -1025,11 +1024,69 @@ Feature: G1.1 To validate forms and resources page in dashboard site
     Then verifies that Electronic Funds pdf for ship is displayed
     Then verifies Ship EOB field is displayed for effecitve plan
     Then verify Preeffective plan name and Coverage Date for preeffective plan
-    | ShipPreEffe PlanName | <ShipPreEffePlan>   |
-    | Coverge Date | <CoverageDate> |
+      | ShipPreEffe PlanName | <ShipPreEffePlan> |
+      | Coverge Date         | <CoverageDate>    |
     Then verify orderPlan Material link is not displayed preeffective plan
-    
+
     Examples: 
-      | FID   | planType | memberType         | benefitstable  | planoverview  | outlineofcoverage   | ShipPreEffePlan  | CoverageDate|
-      | F282605  | SHIP     | ShipTerNewPreShip | Benefits Table | Plan Overview | Outline of Coverage |AARP MEDICARE SUPPLEMENT PLAN K01| Coverage Starts 08/01/2019|
-   
+      | FID     | planType | memberType        | benefitstable  | planoverview  | outlineofcoverage   | ShipPreEffePlan                   | CoverageDate               |
+      | F282605 | SHIP     | ShipTerNewPreShip | Benefits Table | Plan Overview | Outline of Coverage | AARP MEDICARE SUPPLEMENT PLAN K01 | Coverage Starts 08/01/2019 |
+
+  #Need a Fed Active member with New pre effective plan
+  @formsAndResources26 @FedActiveShipPre @regressionMember @release_june_2019 @Part2of2
+  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user clicks on the view document and resources link and navigate to forms and resource page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user is on the forms and resources page for Selected plan tab
+      | PlanName | <FirstPlanName> |
+    Then validate that the plan material section is displayed
+      | Member Type | <memberType> |
+    And validate for active member Temporary Id Card and Plan Order Material links are displayed
+      | Member Type | <memberType> |
+    And the user scrolls till the end of the page to check the forms and resources section
+    And user is on the forms and resources page for Selected plan tab
+      | PlanName | <SecondPlanName> |
+    Then verify Preeffective plan name and Coverage Date for preeffective plan for Combo
+      | ShipPreEffe PlanName | <ShipPreEffePlan> |
+      | Coverge Date         | <CoverageDate>    |
+    Then verify orderPlan Material link is not displayed preeffective plan for Combo
+
+    Examples: 
+      | FID     | planType | memberType          | FirstPlanName          | SecondPlanName                     | ShipPreEffePlan               | CoverageDate               |
+      | F282605 | Combo    | FedActiveNewPreShip | Prescription Drug Plan | Medicare Supplement Insurance Plan | AARP MEDICARE SUPPLEMENT PLAN | Coverage Starts 08/01/2019 |
+
+  #Need a Fed Terminated member with New pre effective plan
+  @formsAndResources27 @FedTerminatedShipPre @regressionMember @release_june_2019 @Part2of2
+  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user clicks on the view document and resources link and navigate to forms and resource page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user is on the forms and resources page for Selected plan tab
+      | PlanName | <FirstPlanName> |
+    Then validate that the plan material section is displayed
+      | Member Type | <memberType> |
+    And for terminated member order plan materials link is not displayed
+    Then validate that the anoc section is not displayed
+    And both the Pharmacy locator and provider search links are not displayed
+    Then validate that My Document section is displayed
+    Then validate that the renew magazine section is not displayed
+    Then validate that the annual directories section is not displayed
+    Then validate that the EOB Section is displayed
+    And the user scrolls till the end of the page to check the forms and resources section
+    And user is on the forms and resources page for Selected plan tab
+      | PlanName | <SecondPlanName> |
+    Then verify Preeffective plan name and Coverage Date for preeffective plan for Combo
+      | ShipPreEffe PlanName | <ShipPreEffePlan> |
+      | Coverge Date         | <CoverageDate>    |
+    Then verify orderPlan Material link is not displayed preeffective plan for Combo
+
+    Examples: 
+      | FID     | planType | memberType       | FirstPlanName                                          | SecondPlanName                     | ShipPreEffePlan               | CoverageDate               |
+      | F282605 | Combo    | FedTerNewPreShip | Medicare Advantage Prescription Drug Plan (Terminated) | Medicare Supplement Insurance Plan | AARP MEDICARE SUPPLEMENT PLAN | Coverage Starts 08/01/2019 |

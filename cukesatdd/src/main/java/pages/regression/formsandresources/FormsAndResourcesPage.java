@@ -128,7 +128,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[10]/div/div/div/section//*[@id='myDocHeader']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@id='myDocHeader']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -466,10 +466,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[12]//section/div/div[2]//a")
+	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//a[contains(@class,'btn btn--secondary') and contains(text(),'EOB HISTORY')]")
 	private WebElement btnEobSectionall;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
+	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//h3[contains(text(),'EOB')]")
 	private WebElement eobSectionall;
 	
 	@FindBy(xpath = "//*[@class='otherPages UHC_IND_MAPD']//ul/li[3]/a")
@@ -481,10 +481,19 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'preeffectiveShip')]//h4")
 	private WebElement preEffecShipPlanName;
 	
+	@FindBy(xpath = "//h4")
+	private WebElement preEffecShipPlanNameCombo;
+	
+	
 	@FindBy(xpath = "//h4//parent::div[@ng-show='showshiplist']//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']")
 	private WebElement preEffectiveCoverageDate;
 	
-	@FindBy(xpath = "//div[@id='plan_material_fnr_preeffective']//a[contains(@href,'order-materials')]")
+	@FindBy(xpath = "//h4//parent::div[contains(@ng-if,'shipPlanProfileList')]//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']")
+	private WebElement preEffectiveComboCoverageDate;
+	
+	//h4//parent::div[contains(@ng-if,'shipPlanProfileList')]//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']
+	
+	@FindBy(xpath = "//div[@id='plan_material_fnr']//a[contains(@href,'order-materials')]")
 	private WebElement preEffecShipOrderPlan;
 
 	public WebElement getEobSectionall() {
@@ -1497,6 +1506,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return FirstTab;
 
 	}
+	
+	public WebElement getplantabTobeSelected(String PlanName) {
+		WebElement PlanTabToSelect = driver.findElement(
+				By.xpath("//a[contains(@class,'tab-change') and normalize-space(text())='" + PlanName + "']"));
+		return PlanTabToSelect;
+
+	}
 
 	public WebElement getsecondplantab() {
 		return SecondTab;
@@ -2397,6 +2413,18 @@ System.out.println(memberType);
 		System.out.println("Ship Pre Effective Coverage Date is : " + preEffectiveCoverageDate.getText().trim());
 	}
 
+	public void verifyPreeffectiveshipPlanforCombo(Map<String, String> memberAttributesMap) {
+
+		String PlanName = memberAttributesMap.get("ShipPreEffe PlanName");
+		String CovDate = memberAttributesMap.get("Coverge Date");
+		System.out.println("Ship Pre effective Plan name is : " + preEffecShipPlanNameCombo.getText());
+		Assert.assertEquals(preEffecShipPlanNameCombo.getText().trim(), PlanName);
+		System.out.println("Ship Pre Effective Plan name is Displayed : " + PlanName);
+		System.out.println("Coverage Date is : " + preEffectiveComboCoverageDate.getText().trim());
+		Assert.assertEquals(preEffectiveComboCoverageDate.getText().trim(), CovDate);
+		System.out.println("Ship Pre Effective Coverage Date is : " + preEffectiveComboCoverageDate.getText().trim());
+	}
+
 	public void verifypreEffShipOderplanNotDisplay() {
 		if (!(preEffecShipOrderPlan.isDisplayed())) {
 			System.out.println("OrderPlan Materials is not displayed for pre Effective ship Plan");
@@ -2404,5 +2432,14 @@ System.out.println(memberType);
 		} else
 			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
 	}
+
+	public void verifypreEffShipOderplanNotDisplayforCombo() {
+		if (!(preEffecShipOrderPlan.isDisplayed())) {
+			System.out.println("OrderPlan Materials is not displayed for pre Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
+	}
+	
 
 }
