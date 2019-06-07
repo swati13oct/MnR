@@ -724,7 +724,8 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void custom_search_claims_redesigned_site() throws InterruptedException{
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		if (planType.equalsIgnoreCase("SHIP_7Year_Claims"))
+		String claimsystem = (String)getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
+		if (claimsystem.equalsIgnoreCase("COMPASS_CLAIMS_7Year"))
 		{
 			System.out.println("Starting to execute the SHIP greater than last 24 months which is last 6 years claims");
 			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(55).toDate());
