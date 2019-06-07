@@ -1168,6 +1168,16 @@ public class AccountHomePage extends UhcDriver {
 
 		return new pages.regression.payments.PaymentHistoryPage(driver);
 	}
+	
+	public ContactUsPage navigateToContactUsPageTemporarySolution() {
+		
+		driver.navigate().to("https://stage-medicare.uhc.com/medicare/member/contact-us/overview.html#/contact-us-two");
+		CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
+		if (driver.getTitle().contains("contact-us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+	}
 
 	public ContactUsPage navigateToContactUsPage() {
 
@@ -1196,7 +1206,7 @@ public class AccountHomePage extends UhcDriver {
 						linkContactUs.click();
 					} else {
 						System.out.println("Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
-						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(1) > ul > li:nth-child(1) > a");	
+						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(2) > div:nth-child(2) > ul > li:nth-child(1) > a");	
 					}
 				}
 			}
@@ -1207,6 +1217,30 @@ public class AccountHomePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public WebElement expandRootElement1(WebElement element) {
+		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
+	.executeScript("return arguments[0].shadowRoot", element);
+		return ele;
+	}
+	
+	public ContactUsPage navigateToContactUsPage2() throws InterruptedException {
+			
+			WebElement premiumpaymentLink = driver.findElement(By.cssSelector("#main-nav > div > div > div > a:nth-child(5)"));
+			WebElement shadowRootpaymentLink = expandRootElement(premiumpaymentLink);
+			shadowRootpaymentLink.click();
+			Thread.sleep(5000);
+			if(driver.findElement(By.xpath("//*[@id='needhelpsectioncontactus']/section/div/div[1]/div/h2")).isDisplayed()){
+				driver.findElement(By.xpath("/html/body/div[2]/div/footer/div/div/div[2]/div/div[1]/div[1]/div/div[1]/div/ul/li[1]/a")).click();
+			}
+			
+			 CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
+			if (driver.getTitle().contains("Contact Us")) {
+				return new ContactUsPage(driver);
+			}
+		
 		return null;
 	}
 
@@ -2792,8 +2826,12 @@ public class AccountHomePage extends UhcDriver {
 			WebElement root1=expandRootElement(shadowRootElement);
 			try {
 				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
-				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				Assert.assertTrue("Dashboard Shadow Root Elemnt is not accessible", validate(element));
 				System.out.println("element is located, click it...");
+				System.out.println("We are looking for: "+element.getText()+" and we got it.");
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scrollBy(0,10000)");
+				Thread.sleep(5000);
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
 			} catch (Exception e) {
