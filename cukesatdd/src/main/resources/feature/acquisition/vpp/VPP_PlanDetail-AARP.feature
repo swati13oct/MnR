@@ -84,7 +84,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Plan costs tab and validates
+    Then the user click on Plan costs tab and validates in AARP site
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
@@ -105,10 +105,10 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Optional Services tab and add the rider
+    Then the user click on Optional Services tab and add the rider in AARP site
       | Optional Rider  | <optionalRider>  |
       | Monthly Premium | <monthlyPremium> |
-    Then the user click on Plan costs tab and validate riders monthly and yearly premium
+    Then the user click on Plan costs tab and validate riders monthly and yearly premium  in AARP site
       | Optional Rider  | <optionalRider>  |
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
