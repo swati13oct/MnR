@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
-import pages.regression.ordermaterials.OrderPlanMaterialConfirmationPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -64,7 +62,7 @@ public class OrderPlanMaterialsAarpStepDefinition {
 
 		if (memberType.toUpperCase().contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - expect user to have combo plan but unable to locate combo tab elements", orderPlanMaterialsPage.hasComboTabs());
-			orderPlanMaterialsPage.goToSpecificComboTab(planType);
+			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType);
 		}
 		getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,orderPlanMaterialsPage);
 	}
@@ -128,6 +126,12 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	@And("^user validates error message when submit without any selection$")
 	public void user_submits_with_no_option_selected() throws InterruptedException{
 		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		String planType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		if (memberType.toUpperCase().contains("COMBO")) {
+			Assert.assertTrue("PROBLEM - expect user to have combo plan but unable to locate combo tab elements", orderPlanMaterialsPage.hasComboTabs());
+			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType);
+		}
 		String result = orderPlanMaterialsPage.selectOption("None");
 		Assert.assertTrue("PROBLEM - user should not be able to navigate to Order Confirmation page when no option is selected", result == null);
 		System.out.println("User is still on Order Materials Page");
@@ -140,19 +144,8 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		String planType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String memberType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-		orderPlanMaterialsPage.validateOrderAllItemsIndvidually(planType, memberType);
-	}
-	
-	//vvv --------- note: for VBF --------------------------------------
-	@And("^user validates Page Header and Sub-Header text$")
-	public void user_validates_orderMaterialsHeader_vbf() {
-		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
-		if (!orderPlanMaterialsPage.vbfValidateHeader()) {
-			System.out.println("Header Text and Subtext not displayed for Order materials Page");
-			Assert.fail("Header Text and Subtext not displayed for Order materials Page");
-		} else {
-			System.out.println("Header Text and Subtext displayed for Order materials Page");
-		}
+		boolean skipIdCheck=false;
+		orderPlanMaterialsPage.validateOrderAllItemsIndvidually(planType, memberType, skipIdCheck);
 	}
 	
 	@Then("^user validates ability to submit order for item$")
@@ -163,26 +156,14 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		String planType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String memberType=(String) getLoginScenario().getBean(OrderPlanMaterialsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		String option = givenAttributesMap.get("Option");
-		OrderPlanMaterialConfirmationPage planMaterialConfirmationPage=orderPlanMaterialsPage.vbfValidateOrderItem(planType, memberType, option);
-		getLoginScenario().saveBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE, planMaterialConfirmationPage);
+		boolean skipIdCheck=true;
+		orderPlanMaterialsPage.validateOrderOneItem(planType, memberType, option, skipIdCheck);
+		getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE, orderPlanMaterialsPage);
 	}
 	
 	@And("^the user validate order additional material and click to add other order additional material in Order Confirmation Page$")
 	public void validate_add_order_additional_material_vbf() throws InterruptedException {
-		OrderPlanMaterialConfirmationPage planMaterialConfirmationPage = (OrderPlanMaterialConfirmationPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PLAN_MATERIALS_CONFIRMATION_PAGE);
 		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
-		if (planMaterialConfirmationPage == null) {
-			System.out.println("@@@@@@@@@@  Order Material Failed  @@@@@@@@@@");
-			orderPlanMaterialsPage.validateErrorMessage();
-			Assert.fail("Order Plan Materials Submission Failed. Confirmation page not displayed");
-		}
-
-		System.out.println("@@@@@@@@@@  Order Material Confirmation Displayed  @@@@@@@@@@");
-
-		boolean isOrderMaterialPage = planMaterialConfirmationPage.navigateToValidateOrderConfirmationInRedesignPage();
-		if (!isOrderMaterialPage)
-			Assert.fail("Navigation to order plan material page failed");
+		Assert.assertTrue("PROBLEM - Navigation back to order plan material page failed", orderPlanMaterialsPage.navigateToOrderMore());
 	}
-	//^^^ --------- note: for VBF --------------------------------------
 }

@@ -1,10 +1,8 @@
 package pages.regression.ordermaterials;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,20 +10,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.regression.accounthomepage.AccountHomePage;
 
 /**
  * @author rkodumur
  */
-public class OrderMaterialsPage extends UhcDriver  {
-	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
-	private WebElement iPerceptionPopUp;
-
-	@FindBy(xpath = "//*[@id = 'closeButton']")
-	private WebElement iPerceptionClose;
-
+public class OrderMaterialsPage extends OrderMaterialsBase  {
 	@FindBy(xpath = "//[contains(text(), 'Hospital Indemnity')]")
 	private WebElement planTab_HIP;
 
@@ -39,7 +28,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	private WebElement planTab_SrSupp;
 
 	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']")
-	private WebElement errorMsg_SHIP;
+	private WebElement errorMsg_serviceFail;
 
 	@FindBy(id = "order-materials-error")
 	private WebElement errorMsg_OrderMaterials;
@@ -62,8 +51,6 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath = "//*[contains(text(),'Plan Materials Order Confirmation')]")
 	private WebElement header_OrderConfirmation;
 
-	@FindBy(id="additionalMaterialsText")
-	private WebElement addOrderMaterialLink_OrderConfirmation;
 
 	@FindBy(className = "orderplanmaterials")
 	private WebElement orderPlanMaterialsSection;
@@ -89,6 +76,15 @@ public class OrderMaterialsPage extends UhcDriver  {
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']")
 	private WebElement common_selectionSection;
 
+	@FindBy(xpath="//*[@id = 'member-materials']/..//div[contains(@class,'group') and not(contains(@class,'ng-hide'))]")
+	private WebElement option_fed_memberMaterialsfield_WelcomeKit;
+	
+	//@FindBy(xpath="//*[@id = 'member-materials']/..//div[not(contains(@class,'ng-hide'))]//p[contains(text(),'Welcome Guide')]")
+	//private WebElement option_fed_memberMaterialsfield_WelcomeGuide;
+
+	//@FindBy(xpath="//*[@id = 'member-materials']/..//div[not(contains(@class,'ng-hide'))]//p[contains(text(),'Membership Materials')]")
+	//private WebElement option_fed_memberMaterialsfield_MembershipMaterials;
+
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	private WebElement option_fed_memberMaterialsfield;
 
@@ -97,12 +93,6 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	@FindBy(xpath="//label[@for='replacement-id']//a[text()='VIEW MEMBER ID CARD']")
 	private WebElement link_fed_memberIDcardLink;
-
-	@FindBy(xpath="//h1[@id='modal-header']")
-	private WebElement memberIdCardsPageHeader;
-
-	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
-	private WebElement orderMaterial_Dashboard;
 
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")
 	private WebElement selectionInstruction_ship;
@@ -232,43 +222,33 @@ public class OrderMaterialsPage extends UhcDriver  {
 
 	@FindBy(xpath="//div[@class='card-body']//a[contains(text(),'PLAN DOCUMENTS & RESOURCES')]")
 	private WebElement printableDocLink;
+	
+	@FindBy(xpath="//a[contains(text(),'CARD')]")
+	private WebElement viewIdCard;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
-	private WebElement comboTab_MAPD;
+	@FindBy(xpath="//h2[contains(text(),'Confirmation')]/../div[contains(@class,'success')]")
+	private WebElement SuccessMsgbox;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
-	private WebElement comboTab_SHIP;
+	@FindBy(xpath="//div[contains(@class,'confirmationtext')]//p")
+	private WebElement SuccessMsgText;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
-	private WebElement comboTab_PDP;
+	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//div[contains(@class,'otherPages') and not(contains(@class,'ng-hide'))]")
+	private WebElement orderedItem;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
-	private WebElement comboTab_SSUP;
+	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//li")
+	private WebElement orderedItem_ship;
 
-	//vvv --------- note: for VBF --------------------------------------
-	@FindBy(xpath = "//h1[contains(@class,'margin-none')]")
-	private WebElement vbf_orderMaterialHeading1;
+	@FindBy(xpath="//span[contains(text(),'card') or contains(text(),'Card')]")
+	private WebElement orderedItem_idCard;
 
-	@FindBy(xpath = "//h2[contains(@class,'margin-large')]")
-	private WebElement vbf_orderMaterialHeading2;
-	//^^^ --------- note: for VBF --------------------------------------
+	@FindBy(xpath="//h2[contains(text(), 'Confirmation')]")
+	private WebElement confirmationPageSubHeader;
 
 	public OrderMaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReadyNew(driver);
-		try{
-			if(validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal Present");
-				iPerceptionClose.click();
-				if (validate(iPerceptionPopUp)){
-					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-				} else
-					System.out.println("FeedBack Modal Closed");
-			}
-		} catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-		}
+		//takeCareiPerceptionPopUp();
 		openAndValidate();
 	}
 
@@ -306,7 +286,8 @@ public class OrderMaterialsPage extends UhcDriver  {
 	 * @param planType
 	 */
 	public void validateSubHeaderSection(String planType) {
-		if (planType.equalsIgnoreCase("SHIP")) {
+		//takeCareiPerceptionPopUp();
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			Assert.assertTrue("PROBLEM - unable to locate the sub section text element on Order Plan Materials",validate(subSectionText_ship));
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the sub section text element on Order Plan Materials",validate(subSectionText_fed));
@@ -322,7 +303,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	 */
 	public void validateSelectionSection(String planType, String memberType) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the selection section on Order Plan Materials",validate(common_selectionSection));
-		if (planType.equalsIgnoreCase("SHIP")) {
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction element on Order Plan Materials",validate(selectionInstruction_ship));
 
 			Assert.assertTrue("PROBLEM - unable to locate 'Member ID Card (Health Insurance Card)' selection option on Order Plan Materials",validate(option_ship_memberIDcardField));
@@ -340,83 +321,10 @@ public class OrderMaterialsPage extends UhcDriver  {
 			Assert.assertTrue("PROBLEM - unable to locate 'VIEW MEMBER ID CARD' link on Order Plan Materials",validate(link_fed_memberIDcardLink));
 		}
 
-		String expected_url="dashboard/modal/id-cards";
-		String cardType="";
-		if (MRScenario.isTestHarness.equalsIgnoreCase("YES") && memberType.toUpperCase().contains("UHC")) {
-			//note: if testing from testharness, UHC user's ID card link will redirect to 'systest3.myhc.com' instead.
-			System.out.println("For UHC user testing via testharness, the ID link will get redirect to systest3, so just validate the link element has the correct link");
-			WebElement e=driver.findElement(By.xpath("//div[@id='notShipRadio']//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]"));
-			Assert.assertTrue("PROBLEM - not getting expected ID card link element with expected URL",validate(e));
-		} else {
-			if (planType.equalsIgnoreCase("SHIP")) {
-				cardType="VIEW HEALTH INSURANCE CARD";
-				link_ship_memberIDcardLink.click();
-			} else {
-				cardType="VIEW MEMBER ID CARD";
-				link_fed_memberIDcardLink.click();
-			}
-			System.out.println("Clicked view ID card...");
-
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, memberIdCardsPageHeader, 10);
-			Assert.assertTrue("PROBLEM - not getting expected URL after clicking '"+cardType+"' link.  Expected URL to contain '"+expected_url+"' | Actual URL='"+driver.getCurrentUrl()+"'",driver.getCurrentUrl().contains(expected_url));
-			System.out.println("Successfully validated expected content for selection section on Order Plan Materials page");
-
-			Assert.assertTrue("PROBLEM - unable to locate the close button on the ID card page",validate(idCardCloseButton));
-			idCardCloseButton.click();
-			System.out.println("Attempt to close ID card view...should go back to dashboard view after...");
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, orderMaterial_Dashboard, 10);
-			Assert.assertTrue("PROBLEM - unable to be back on dashboard page after closing ID card page", driver.getCurrentUrl().contains("dashboard"));
-			navigateToOrderPlanMaterialsPageFromTopMenu();
-			System.out.println("Able to come back to order plan material page from top menu access");
-		}
-	}
-
-	/**
-	 * Navigate to order plan materials page from top menu option (Benefits & Coverage --> sub menu to order plan materials)
-	 * @throws InterruptedException
-	 */
-	public void navigateToOrderPlanMaterialsPageFromTopMenu() throws InterruptedException {
-		CommonUtility.checkPageIsReady(driver);
-		AccountHomePage accountHomePage=new AccountHomePage(driver);
-		OrderMaterialsPage OrderMaterialsPage=accountHomePage.navigateToOrderPlanMaterialsPageFromTopMenu();
-		Assert.assertTrue("PROBLEM - unable to navigate to order plan material page via top menu sub option under BnC", OrderMaterialsPage!=null);
-	}
-
-	/**
-	 * Helper method to go back to prior page via browser back, also handles the case if combo tab is involved
-	 * @param planType
-	 * @param memberType
-	 * @param originalUrl
-	 */
-	public void goBackToPriorPageViaBack(String planType, String memberType,String originalUrl) {
-		if (memberType.toLowerCase().contains("combo")) {
-			driver.get(originalUrl);
-			goToSpecificComboTab(planType); 
-		} else 
-			driver.navigate().back();
-	}
-	
-	/**
-	 * Helper method to go back to prior page via Plan Documents and Resources page Order Plan Materials link, also handles the case if combo tab is involved
-	 * @param planType
-	 * @param memberType
-	 * @param originalUrl
-	 */
-	public void goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(String planType, String memberType,String originalUrl) {
-		int year = Calendar.getInstance().get(Calendar.YEAR);
-		try {
-			WebElement orderPlanMaterialsLink=driver.findElement(By.xpath("//div[contains(@class,'PlanDocumentsActiveCallouts"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]"));
-			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 10);
-			orderPlanMaterialsLink.click();
-			CommonUtility.checkPageIsReady(driver);
-			if (memberType.toLowerCase().contains("combo")) {
-				goToSpecificComboTab(planType); 
-			} 
-		} catch(Exception e) {
-			Assert.assertTrue("PROBLEM - unable to go back to Order Plan Materials page via 'Plan Documents & Resources' page's 'ORDER PLAN MATERIALS' link", false);
-		}
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP"))
+			validateIDCard("orderPage",planType,link_ship_memberIDcardLink);
+		else
+			validateIDCard("orderPage",planType,link_fed_memberIDcardLink);
 	}
 
 	/**
@@ -454,7 +362,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 		printableDocLink.click();
 		String expectedUrl="member/documents/overview.html";
 		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
-		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl);
+		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
 	}
 
 	/**
@@ -475,11 +383,11 @@ public class OrderMaterialsPage extends UhcDriver  {
 	 * @throws InterruptedException
 	 */
 	public void validateShipErrorMessage() throws InterruptedException{
-		CommonUtility.waitForPageLoad(driver, errorMsg_SHIP, 10);
-		Assert.assertTrue("PROBLEM - unable to locate error message after submitting without selection", validate(errorMsg_SHIP));
+		CommonUtility.waitForPageLoad(driver, errorMsg_serviceFail, 10);
+		Assert.assertTrue("PROBLEM - unable to locate error message after submitting without selection", validate(errorMsg_serviceFail));
 		System.out.println("*************Error Message displayed for SHIP invalid Selection in Order materials Page***************");
 		String expectedErrorText="request cannot be processed at this time";
-		Assert.assertTrue("PROBLEM - error text is not as expected.  Expected to contain '"+expectedErrorText+"' | Actual error msg='"+errorMsg_SHIP.getText()+"'", errorMsg_SHIP.getText().contains(expectedErrorText));
+		Assert.assertTrue("PROBLEM - error text is not as expected.  Expected to contain '"+expectedErrorText+"' | Actual error msg='"+errorMsg_serviceFail.getText()+"'", errorMsg_serviceFail.getText().contains(expectedErrorText));
 	}
 
 	/**
@@ -490,18 +398,9 @@ public class OrderMaterialsPage extends UhcDriver  {
 	 * @throws InterruptedException
 	 */
 	public String selectOption(String option) throws InterruptedException {
-		driver.navigate().refresh();
-		if(validate(iPerceptionPopUp)){
-			System.out.println("FeedBack Modal Present");
-			iPerceptionClose.click();
-			if (validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-			} else
-				System.out.println("FeedBack Modal Closed");
-		}
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", common_subSectionHeader);
-
+		//takeCareiPerceptionPopUp();
 		CommonUtility.checkPageIsReady(driver);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", common_subSectionHeader);
 		String itemType="";
 		WebElement itemToOrderElement=null;
 		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
@@ -551,9 +450,8 @@ public class OrderMaterialsPage extends UhcDriver  {
 				Assert.assertTrue("PROBLEM - unable to locate the state dropdown element", validate(option_ship_hospitalDirectory_stateDropdown));
 				Select ship_hopspitalStateDropdown = new Select(option_ship_hospitalDirectory_stateDropdown);
 				Assert.assertTrue("PROBLEM - there should be total of 58 options from dropdown.  Actual="+ship_hopspitalStateDropdown.getOptions().size(), ship_hopspitalStateDropdown.getOptions().size()==58);
-				for(int i=0; i<ship_hopspitalStateDropdown.getOptions().size(); i++) {
-					System.out.println("Located dropdown option ==> "+ship_hopspitalStateDropdown.getOptions().get(i).getText());
-				} 
+				//for(int i=0; i<ship_hopspitalStateDropdown.getOptions().size(); i++)
+				//	System.out.println("Located dropdown option ==> "+ship_hopspitalStateDropdown.getOptions().get(i).getText());
 			}
 			result=itemToOrderElement.getText();
 		}
@@ -585,7 +483,7 @@ public class OrderMaterialsPage extends UhcDriver  {
 	 * @return
 	 */
 	public String validateNeedHelpSection(String planType, String memberType) {
-		if (planType.equalsIgnoreCase("SHIP")) {
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
 
@@ -604,15 +502,10 @@ public class OrderMaterialsPage extends UhcDriver  {
 			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
-			if (memberType.toLowerCase().contains("combo")) {
-				System.out.println("This test is for combo plans, select the tab accordingly");
-				goToSpecificComboTab(planType); //note: click the target tab for testing
-				goToSpecificComboTab(planType); //note: manually one click is okay, but for selenium needs 2 clicks for this to work here, don't know why
-			}
+			handleComboTabIfComboUser(planType, memberType);
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
-			System.out.println("New window URL = "+driver.getCurrentUrl());
-			System.out.println("New window title = "+driver.getTitle());
+			System.out.println("New window URL = "+driver.getCurrentUrl()+"| New window title = "+driver.getTitle());
 			Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
 			Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
 			goBackToPriorPageViaBack(planType, memberType, originalUrl);
@@ -631,60 +524,15 @@ public class OrderMaterialsPage extends UhcDriver  {
 	}
 
 	/**
-	 * Helper method for validating Need Help section
-	 * @param section
-	 * @param SectionElement
-	 * @param imgElement
-	 * @param phoneElement
-	 * @param ttyElement
-	 * @param hrsOperationElement1
-	 * @param hrsOperationElement2
-	 */
-	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, 
-			WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
-		System.out.println("Proceed to validate the "+section+" section content");
-		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
-		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",validate(imgElement));
-		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",validate(phoneElement));
-		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",validate(ttyElement));
-		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement1));
-		if (hrsOperationElement2!=null) {
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement2));
-		}
-	}
-
-	/**
-	 * Helper method to go to a specific combo tab based on given planType
-	 * @param planType
-	 */
-	public void goToSpecificComboTab(String planType) {
-		if (planType.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
-			comboTab_MAPD.click();
-		} else if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("medsupp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
-			comboTab_SHIP.click();
-		} else if (planType.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
-			comboTab_PDP.click();
-		} else if (planType.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
-			comboTab_SSUP.click();
-		} else {
-			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
-		}
-	}
-
-	/**
 	 * Validate order material functionality
 	 * Will order each available item one at a time, will click on order additional material to order next item
 	 * @param planType
 	 * @param memberType
 	 * @throws InterruptedException
 	 */
-	public void validateOrderAllItemsIndvidually(String planType, String memberType) throws InterruptedException {
+	public void validateOrderAllItemsIndvidually(String planType, String memberType, boolean skipIdCheck) throws InterruptedException {
 		List<String> listOfItems=new ArrayList<String>();
-		if (planType.equalsIgnoreCase("SHIP")) {
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			listOfItems.add("Member ID Card");
 			listOfItems.add("Electronic Funds Transfer (EFT) Brochure");
 			listOfItems.add("Medicare Select Hospital Directory");
@@ -696,105 +544,86 @@ public class OrderMaterialsPage extends UhcDriver  {
 			listOfItems.add("Replacement ID card");
 		}
 		boolean result=true;
-		List<String> problemItems=new ArrayList<String>();
 		for (String item: listOfItems) {
-			String orderedItem = selectOption(item);
-			if (orderedItem==null) {
-				if (planType.equalsIgnoreCase("SHIP") && memberType.toUpperCase().contains("EFT")) {
-					if (!validate(errorMsg_SHIP)) {
-						System.out.println("PROBLEM - for SHIP user with 'EFT' setup should have gotten error message when attempting to order 'coupon book'");
-						problemItems.add(item+"-should NOT be able to order");
-						result=false;
-					} else 
-						System.out.println("Expected - NOT able to order item="+item);
-					//note: no need to click order additional material link because would still be on order page
-				} else if (planType.equalsIgnoreCase("SHIP") && !memberType.toUpperCase().contains("MEDSELECTPLAN")) {
-					if (!validate(errorMsg_SHIP)) {
-						System.out.println("PROBLEM - for SHIP user without 'MEDICARE_SELECT_PLAN' setup should have gotten error message when attempting to order 'Medicare Select Hospital Directory'");
-						problemItems.add(item+"-should NOT be able to order");
-						result=false;
-					} else
-						System.out.println("Expected - NOT able to order item="+item);
-				} else if (!planType.equalsIgnoreCase("PDP") && memberType.toUpperCase().contains("GROUP") && item.equalsIgnoreCase("Member Materials")) {
-					if (!validate(errorMsg_SHIP)) {
-						System.out.println("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'");
-						problemItems.add(item+"-should NOT be able to order");
-						result=false;
-					} else
-						System.out.println("Expected - NOT able to order item="+item);
-				} else {
-					System.out.println("PROBLEM - unable to order this material: "+item);
-					problemItems.add(item+"-should BE able to order");
-					result=false;
-				}
+			System.out.println("Proceed to order item="+item+"...");
+			handleComboTabIfComboUser(planType, memberType);
+			validateOrderOneItem(planType, memberType, item, skipIdCheck);
+		}
+		Assert.assertTrue("PROBLEM - unable to order all available materials individually", result);
+	}
+
+	/**
+	 * Validate the success message element and content
+	 * If applicable, will validate the view ID link that shows up in success message box
+	 * note: to simplify matter, if testing from testharness will validate element contains the right URL only.
+	 * note: UHC user's ID card link will redirect to 'systest3.myhc.com' instead on testharness access
+	 * @param planType
+	 * @param memberType
+	 * @param expectedOrderedItem
+	 * @throws InterruptedException
+	 */
+	public void validateSuccessmessage(String planType, String memberType, String expectedOrderedItem, boolean skipIdCheck) throws InterruptedException {
+		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
+		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
+		//note: jenkins run doesn't like the dash '-' in the string so use regex pattern matches instead
+		String expectedSuccessPattern="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 (.*) 10 business days.";
+		String actualSuccessMsg=SuccessMsgText.getText();
+		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to match '"+expectedSuccessPattern+"' pattern \nActual msg='"+actualSuccessMsg+"'",actualSuccessMsg.matches(expectedSuccessPattern));
+		if (validate(orderedItem_idCard)) {
+			Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_idCard));
+			Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_idCard.getText()+"'",expectedOrderedItem.equals(orderedItem_idCard.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the VIEW MEMEBR ID CARD element for confirmation",validate(viewIdCard));
+
+			if (skipIdCheck) {
+				System.out.println("This test will skip ID validation");
 			} else {
-				System.out.println("Expected - ABLE to order item="+item);
-				OrderPlanMaterialConfirmationPage planMaterialConfirmationPage=new OrderPlanMaterialConfirmationPage(driver);
-				boolean skipIdCheck=false; //note: for regression test will validate ID card link
-				planMaterialConfirmationPage.validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
-				if (orderedItem.contains("Replacement ID card") || orderedItem.contains("Member ID Card")) {
-					System.out.println("After validating success result for Replacement ID card, would be landing back on the order page instead, so no need to look for order additional item link in this case");
-				} else {
-					System.out.println("Proceed to click 'ORDER ADDITIONAL MATERIALS' link");
-					addOrderMaterialLink_OrderConfirmation.click();
-				}
+				validateIDCard("confirmPage",planType,viewIdCard);
+			}
+		} else {
+			if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_ship));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_ship.getText()+"'",expectedOrderedItem.equals(orderedItem_ship.getText()));
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem.getText()+"'",expectedOrderedItem.equals(orderedItem.getText()));
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to order all available materials individually. Problem ones are: "+problemItems, result);
 	}
 
-	//vvv --------- note: for VBF --------------------------------------
-	public boolean vbfValidateHeader() {
-		if (vbf_orderMaterialHeading1.isDisplayed() && vbf_orderMaterialHeading2.isDisplayed()) {
-			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
-			return true;
-		} else {
-			System.out.println("************Header Text and Subtext not displayed for Order materials Page***************");
-			return false;
-		}
-	}
-
-	public OrderPlanMaterialConfirmationPage vbfValidateOrderItem(String planType, String memberType, String option) throws InterruptedException {
-		boolean result=true;
-		boolean skipIdCheck=true; //note: for VBF, will skip ID card link validation
+	public String validateOrderOneItem(String planType, String memberType, String option, boolean skipIdCheck) throws InterruptedException {
 		String orderedItem = selectOption(option);
 		if (orderedItem==null) {
-			if (planType.equalsIgnoreCase("SHIP") && memberType.toUpperCase().contains("EFT")) {
-				if (!validate(errorMsg_SHIP)) {
-					System.out.println("PROBLEM - for SHIP user with 'EFT' setup should have gotten error message when attempting to order 'coupon book'");
-					result=false;
-				} else 
+			if ((planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP"))) {
+				if (memberType.toUpperCase().contains("EFT")) {
+					Assert.assertTrue("PROBLEM - for SHIP user with 'EFT' setup should have gotten error message when attempting to order 'coupon book'",
+							validate(errorMsg_serviceFail));
 					System.out.println("Expected - NOT able to order item="+option);
+				} else if (!memberType.toUpperCase().contains("MEDSELECTPLAN")) {
+					Assert.assertTrue("PROBLEM - for SHIP user without 'MEDICARE_SELECT_PLAN' setup should have gotten error message when attempting to order 'Medicare Select Hospital Directory'",
+							validate(errorMsg_serviceFail));
+					System.out.println("Expected - NOT able to order item="+option);
+				}
 				//note: no need to click order additional material link because would still be on order page
-			} else if (planType.equalsIgnoreCase("SHIP") && !memberType.toUpperCase().contains("MEDSELECTPLAN")) {
-				if (!validate(errorMsg_SHIP)) {
-					System.out.println("PROBLEM - for SHIP user without 'MEDICARE_SELECT_PLAN' setup should have gotten error message when attempting to order 'Medicare Select Hospital Directory'");
-					result=false;
-				} else
+			} else if (!planType.equalsIgnoreCase("PDP") && validate(option_fed_memberMaterialsfield_WelcomeKit)) { //note: only PDP can order Welcome Guide
+				Assert.assertTrue("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'",
+						validate(errorMsg_serviceFail));
 					System.out.println("Expected - NOT able to order item="+option);
-			} else if (!planType.equalsIgnoreCase("PDP") && memberType.toUpperCase().contains("GROUP") && option.equalsIgnoreCase("Member Materials")) {
-				if (!validate(errorMsg_SHIP)) {
-					System.out.println("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'");
-					result=false;
-				} else
-					System.out.println("Expected - NOT able to order item="+option);
+			//} else if ((!planType.equalsIgnoreCase("MA") && !planType.equalsIgnoreCase("MAPD"))&& validate(option_fed_memberMaterialsfield_MembershipMaterials)) {
+		//		Assert.assertTrue("PROBLEM - for non-MA or non-MAPD user should have gotten error message when attempting to order 'Membership Materials'",
+		//				validate(errorMsg_serviceFail));
+		//			System.out.println("Expected - NOT able to order item="+option);
 			} else {
-				System.out.println("PROBLEM - unable to order this material: "+option);
-				result=false;
+				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
 			}
 		} else {
 			System.out.println("Expected - ABLE to order item="+option);
-			OrderPlanMaterialConfirmationPage planMaterialConfirmationPage=new OrderPlanMaterialConfirmationPage(driver);
-			planMaterialConfirmationPage.validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
+			validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
 			if (orderedItem.contains("Replacement ID card") || orderedItem.contains("Member ID Card")) {
 				System.out.println("After validating success result for Replacement ID card, would be landing back on the order page instead, so no need to look for order additional item link in this case");
 			} else {
-				System.out.println("Proceed to click 'ORDER ADDITIONAL MATERIALS' link");
-				addOrderMaterialLink_OrderConfirmation.click();
+				navigateToOrderMore();
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to order material '"+option+"'", result);
-		return new OrderPlanMaterialConfirmationPage(driver);
+		return orderedItem;
 	}
-	//^^^ --------- note: for VBF --------------------------------------
 }

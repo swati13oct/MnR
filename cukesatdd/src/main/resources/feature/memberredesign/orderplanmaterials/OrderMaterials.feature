@@ -25,7 +25,7 @@ Feature:P1.5 To test order materials in Redesign site
     When user navigates to order plan materials page
       | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-    And user validates Page Header and Sub-Header text
+    And user validates header section of page content on order materials page
     And user validates ability to submit order for item
       | Plan Type | <planType> |
       | Option    | <option>   |
@@ -48,7 +48,7 @@ Feature:P1.5 To test order materials in Redesign site
     When user navigates to order plan materials page
       | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-    And user validates Page Header and Sub-Header text
+    And user validates header section of page content on order materials page
     
     Examples: 
 	  | planType | memberType            |
@@ -90,22 +90,25 @@ Feature:P1.5 To test order materials in Redesign site
       | 15288 | MAPD     | UHC_Individual_order  |
       | 15286 | PCP      | Individual_order      |
       | 15285 | MEDICA   | Individual_order      |
+    
+    Examples: 
+      | TID   | planType | memberType            | 
       | 15293 | SHIP     | MEDSUPP_order         | 
 
-   @GroupMemberOrderSelectionandConfirmation 
+    @GroupMemberOrderSelectionandConfirmation 
     Examples: 
       | TID   | planType | memberType            | 
       | 15289 | MA       | UHC_Group_order       |
       | 15289 | MAPD     | UHC_Group_order       |
       | 15290 | PDP      | UHC_Group_order       |
 
-    @ValidateHeaderComboTabs
+   @ValidateHeaderComboTabs
     Examples: 
       | TID   | planType | memberType            | 
       | 15281 | MAPD	 | COMBO_order           |
       | 15281 | MEDSUPP	 | COMBO_order           |
       | 15291 | PDP      | COMBO_order	         |
-      | 15291 | SSUP     | COMBO_order	         |
+   #bad   | 15291 | SSUP     | COMBO_order	         |
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 
