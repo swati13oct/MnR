@@ -3,6 +3,8 @@ package pages.regression.profileandpreferences;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -101,6 +103,23 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Plan Documents']")
 	private WebElement planDocumentsLabel;
 
+	@FindBy(xpath = "//*[@id='communicationAddressCardHeight' or @id='communicationAddress']")
+	private List<WebElement> communicationPreferncessection;
+	
+	@FindBy(css="div#mail-preferences-selector-SHIP h3")
+	private WebElement shipPlanName;
+	
+	@FindBy(css="div#mail-preferences-selector-SHIP input#requiredplan")
+	private WebElement agreeRequiredNoticeCheckBox;
+	
+	@FindBy(id="save-prefs-btn-SHIP")
+	private WebElement btnSavePrefSHIP;
+	
+	@FindBy(css="div#savePreferencesPopUpContent input#savepreferyes")
+	private WebElement welcomeKitYES;
+	
+	
+	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -242,6 +261,33 @@ public class CommunicationPreferencePage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 	}
-	
 
+	/**
+	 * @author bnaveen4
+	 * Validates the preferences for the SHIP members
+	 */
+	public void validateCommunicationPreferencesForShip(String planName) {
+
+		Assert.assertTrue(validateNew(claimsLabel));
+		Assert.assertTrue(validateNew(planDocumentsLabel));
+		Assert.assertEquals(planName, shipPlanName.getText().trim());
+		
+	}
+	
+	public CommunicationPreferencePage selectPreferences(String delivery,String preference) {
+		
+		if(delivery.replaceAll("\"", "").equalsIgnoreCase("electronic delivery")) {
+			delivery = "EMAIL";
+		}else {
+			delivery = "US MAIL";
+		}
+		
+		WebElement deliveryWebElement = driver.findElement(By.xpath("//div[@id='mail-preferences-selector-SHIP']"
+				+ "//legend[text()='"+preference.replaceAll("\"", "")+"']/following::input[@value='"+delivery+"']/ancestor::div[1]/label"));
+		
+		jsClickNew(deliveryWebElement);
+		
+		return new CommunicationPreferencePage(driver);
+		}
 }
+
