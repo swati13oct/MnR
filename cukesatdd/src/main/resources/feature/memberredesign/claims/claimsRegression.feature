@@ -120,56 +120,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | FID    | planType | memberType | claimSystem   |
       | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
-  #----- beginning of claims test for offline prod - local run only ------------------
-  # DO NOT REMOVE this scenario
-  # This scenario is not part of the regular regression run BUT is for aiding the team to do offline prod testing if needed
-  # note: this setup is for the case when we need to validate on offline prod environment
-  # note: this is intended for local run where you can put in your own member auth username/password and offline username
-  # note: run with environment variable set to offline. -Denvironment="offline"
-  # note: *** DO NOT save your login or test username to github ***
-  # note: replace the following fields with valid value -
-  # note:   username = your memAuth page login username
-  # note:   password = your memAuth page login password
-  # note:   MemUsername =  username of the user on offline prod that you want to test
-  # note:   planType = the type of plan this test user has e.g. MAPD/MA/SHIP, etc
-  # note:   memberType = e.g. Individual / GROUP/ COMBO, etc
-  # note:   claimSystem = e.g. COSMOS / NICE / RX / COMPASS
-  # note:   claimType = e.g. Prescription drug / Medical / NA (for ship)
-  # note:   flagZeroClaimsUser = Yes / No (do you want to fail the test if user has 0 claims)
-  @forLocalTestOnly
-  Scenario Outline: To validate via member authorization access
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    When I navigate to the claims Summary page from dashboard or testharness page
-    Then I can validate the claims summary header on claims summary page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    #----------------- Test for Last 24 months --------------------------
-    And I can search claims for claim period and claim type on claim summary page
-      | Plan Type    | <planType>     |
-      | Member Type  | <memberType>   |
-      | Claim Type   | <claimType>    |
-      | Claim System | <claimSystem>  |
-      | Claim Period | Last 24 months |
-    Then I can see the number of claims
-    And I validate the pagination on the claims summary page for given range
-    Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
-    Then I can validate claims table displayed based on the selection on claims summary page
-    And I can validate the EOB section based on claims system on claims summary page
-    And I validate the Need Help section content on claims summary page
-    Then I validate Claim Details page content value and Learn More and EOB and tooltops
-    Then I perform extensive validation for values between claims summary and claim details page
-
-    Examples: 
-      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | flagZeroClaimsUser |
-      |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | Yes                |
-
-  @SHIP7yearsClaims
+  @claims06 @SHIP7yearsClaims
   Scenario Outline: To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -198,5 +149,5 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
 
     Examples: 
-      | TID   | planType          | memberType | claimType |claimSystem    |
-      | 15259 | SHIP              | COMBO      | NA        |COMPASS_CLAIMS_7Year |
+      | TID   | planType          | memberType | claimType | claimSystem          |
+      | 15259 | SHIP              | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
