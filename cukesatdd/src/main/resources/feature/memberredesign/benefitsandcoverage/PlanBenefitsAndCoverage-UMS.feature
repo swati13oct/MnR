@@ -283,7 +283,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies |  ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | ESPAÃOL  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos | ä¸­æ      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+       | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | ESPAÑOL  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos | 中文      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
   @benefitsAndCoverage21 @CMAncillarysection2 @regressionMember
@@ -731,7 +731,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | name                | memberid     | effectivedate | monthlypremium |
-      | 15367 | MAPDVill_BnC | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
+      | 15367 | MAPDVill | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
 
 
 
