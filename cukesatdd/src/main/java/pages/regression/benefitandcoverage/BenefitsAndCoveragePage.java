@@ -881,13 +881,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath="//*[@class='subtitle atdd-benefitssummary-dental']")
 	private WebElement ssupDental;
 
-	@FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div")
+	@FindBy(xpath="//a[@class='expressLeavingPopup']/parent::p/parent::div")
 	private WebElement accessDrugsBenfitsBlock;
 
-	@FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/parent::div/h3")
+	@FindBy(xpath="//a[@class='expressLeavingPopup']/parent::p/parent::div/h3")
 	private WebElement accessDrugsBenfitsBlockHeader;
 
-	@FindBy(xpath="//a[@class='siteLeavingPopup']/parent::p/a")
+	@FindBy(css="a.expressLeavingPopup")
 	private WebElement accessDrugsBenfitsBlockExpressScriptsLink;
 
 	@FindBy(css="div.siteleaving-popup-footer>div")
@@ -4439,8 +4439,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		boolean bAccessDrugsBenfitsBlockValidation = true;
 		jsClickNew(siteLeavingPopUpProceedBtn);
 		if(driver.getWindowHandles().size()>0) {
-			bAccessDrugsBenfitsBlockValidation=true;
-			Assert.assertTrue(driver.getWindowHandles().size()>0);
+			try {
+				bAccessDrugsBenfitsBlockValidation=true;
+				Assert.assertTrue(driver.getWindowHandles().size()>0);
+				switchToNewTab();
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Assert.assertTrue(driver.getCurrentUrl().contains("https://wwwuat.express-scripts.com"));
 		}else {
 			bAccessDrugsBenfitsBlockValidation=false;
 		}

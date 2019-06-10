@@ -22,6 +22,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import gherkin.formatter.model.DataTableRow;
 
 /**
  * @author gumeshna
@@ -146,6 +147,23 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
 	private WebElement editProviderButtonOnPlanDetails;
+	
+	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
+	private WebElement planMonthlyPremium;
+	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
+	private WebElement planYearlyPremium;
+	
+	@FindBy(xpath="//div[@id='planCosts']//td//b[contains(text(),'Estimated Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
+	private WebElement estimateAnnualCost;
+	
+	@FindBy(id="optionalservices")
+	private WebElement optionalServicesTab;
+	
+	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Monthly']/following-sibling::strong[1]")
+	private WebElement riderMonthlyPremium;
+	
+	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
+	private WebElement riderYearlyPremium;
 	
 	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
@@ -708,7 +726,113 @@ public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
         return null;
 }
     
-    
+/**
+ * @author bnaveen4
+ * @param additionalBenefits --> Data table which has the different benefit types
+ * To validate all the additional benefits given in the feature file
+ */
+public void validatingAdditionalBenefitTextInPlanDetails(List<DataTableRow> additionalBenefits) {
+	
+	//boolean validationFlag = true;
+	WebElement AdditionalBenefitType;
+	WebElement ActualTextforBenefit;
+	String displayedText;
+	
+	for(int i=0;i<additionalBenefits.size();i=i+2) {
+		if(additionalBenefits.get(i).getCells().get(1).contains("Fitness")) {
+			AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
+			ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
+			displayedText = ActualTextforBenefit.getText();
+			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+			System.out.println(displayedText);
+			Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+		}else {
+			AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
+			ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+			displayedText = ActualTextforBenefit.getText();
+			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+			System.out.println(displayedText);
+			Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+		}
+		
+	}
+}
+
+/**
+ * @author bnaveen4
+ * @param medicalBenefits --> Data table which has the different benefit types
+ * To validate all the medical benefits given in the feature file
+ */
+public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medicalBenefits) {
+	
+	WebElement medicalBenefitType;
+	WebElement ActualTextforBenefit;
+	String displayedText;
+	
+	for(int i=0;i<medicalBenefits.size();i=i+2) {
+			medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			System.out.println("The additional Benefit to Valuidate : "+medicalBenefitType.getText());
+			ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
+			displayedText = ActualTextforBenefit.getText();
+			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+			System.out.println(displayedText);
+			Assert.assertEquals(displayedText, medicalBenefits.get(i+1).getCells().get(1));
+	}
+}
+/**
+ * @author bnaveen4
+ * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
+ * @param monthlyPremium
+ * @param yearlyPremium
+ * @return
+ */
+public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
+	boolean bValidation = false;
+	planCostsTab.click();
+	if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
+		bValidation = true;
+	else
+		bValidation = false;
+	return bValidation;
+}
+/**
+ * @author bnaveen4
+ * Add the optional rider
+ * @param optionalRider
+ * @return
+ */
+public String addOptionalRider(String optionalRider) {
+	optionalServicesTab.click();
+	WebElement rider = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//label"));
+	//rider.click();
+	jsClickNew(rider);
+	String optionalRiderPremium = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//b")).getText().trim();
+	return optionalRiderPremium;
+}
+
+/**
+ * @author bnaveen4
+ * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
+ * @param monthlyPremium
+ * @param yearlyPremium
+ * @return
+ */
+public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,String yearlyPremium) {
+	boolean bValidation = false;
+	planCostsTab.click();
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	if(monthlyPremium.equals(riderMonthlyPremium.getText().trim()) && yearlyPremium.equals(riderYearlyPremium.getText().trim()))	
+		bValidation = true;
+	else
+		bValidation = false;
+	return bValidation;
+}
     
 
 
