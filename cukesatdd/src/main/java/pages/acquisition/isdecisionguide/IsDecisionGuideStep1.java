@@ -160,7 +160,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 			}
 			if(validate(DistributionMethodError) && DistributionMethodError.isDisplayed()){
-				if(!DistributionMethodError.getText().contains("Please select how you would like to receive your information.")){
+				if(!DistributionMethodError.getText().contains("Please select how would you like to receive your information.")){
 					System.out.println("Distribution Method Error is Not  displayed : "+DistributionMethodError.getText());
 					flag=false;
 				}
