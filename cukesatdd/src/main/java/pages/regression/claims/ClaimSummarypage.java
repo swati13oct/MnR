@@ -518,7 +518,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @throws InterruptedException 
 	 */
 	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
-		Assert.assertTrue("PROBLEM - unable to locate 'Custom Search' option from dropdown",validate(customSearch));
+		Assert.assertTrue("PROBLEM - unable to locate 'Custom search' option from dropdown",validate(customSearch));
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 		customSearch.click();
 		System.out.println("!!! Validating the drop down to select the claims !!!");

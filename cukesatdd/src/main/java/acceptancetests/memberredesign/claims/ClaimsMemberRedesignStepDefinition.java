@@ -102,7 +102,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println("claim period = "+claimPeriod);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if(claimPeriod.equals("custom-search")){
+		if(claimPeriod.equals("Custom search")){
 			System.out.println("custom search");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,claimPeriod);
 		} else{
@@ -724,28 +724,35 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void custom_search_claims_redesigned_site() throws InterruptedException{
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		String claimsystem = (String)getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
-		if (claimsystem.equalsIgnoreCase("COMPASS_CLAIMS_7Year"))
-		{
-			System.out.println("Starting to execute the SHIP greater than last 24 months which is last 6 years claims");
-			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(55).toDate());
-			String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(43).toDate());
-			System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
-			
-			ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-			if(newClaimsSummaryPage != null)
-				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-		}else{
-			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
-			String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-			System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
-			
-			ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-			if(newClaimsSummaryPage != null)
-				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
-		}		
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
+		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
+
+	/**
+	 * This step performs claims search using custom search option.
+	 * It searches claims that goes back to 6 years
+	 * Note: custom search range max is 24 months between from - to date. BUT the date of the claims can go back to 6 years
+	 * @throws InterruptedException
+	 */
+	@And("^I custom search claims for ship users for 6 years claims on claims summary page$")
+	public void custom_search_claims_last6years() throws InterruptedException{
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+
+		System.out.println("Starting to execute the SHIP greater than last 24 months which is last 6 years claims");
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(55).toDate());
+		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(43).toDate());
+		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
 	/**
@@ -908,7 +915,6 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * This step performs navigation from claims summary page to claims detail page using specific claims row on claims summary page
 	 * This test is targeting a specific user data setup at the moment.  
-	 * TODO - make this more flexible when we have more user data with EOB in the future
 	 */
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
 	public void i_navigate_to_the_eobclaims_detailspage(DataTable memberAttributes){
@@ -1020,7 +1026,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	}
 	//^^^ note:	added for VBF	
 	
-	//added code to print test results note in jenkins report at the end of test for successful cases
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
 	@cucumber.api.java.After
 	public void testResultNote(Scenario scenario) {
 		if(null!=getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE)) {   
