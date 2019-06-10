@@ -120,7 +120,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | FID    | planType | memberType | claimSystem   |
       | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
-  @claims06 @SHIP7yearsClaims
+  @claims06 @SHIP7yearsClaims @regressionMember
   Scenario Outline: To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
