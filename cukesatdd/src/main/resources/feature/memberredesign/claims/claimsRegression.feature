@@ -91,7 +91,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     Examples: 
       | FID    | planType | memberType     | claimPeriod    | claimSystem | pageNum | rowNum |
-      | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS |       1 |      2 |
+      | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS |       1 |      9 |
 
   @claims04 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
