@@ -108,6 +108,9 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 	@FindBy(xpath = "//div[contains(@class, 'ebrcFooter')]")
 	private WebElement DisclosureScrollBox;
+	
+	@FindBy(xpath= "//div[contains(@class, 'error errorheader is-invalid')]")
+	private WebElement topErrorMsg;
 
 	public IsDecisionGuideStep1(WebDriver driver) {
 		super(driver);
@@ -204,8 +207,19 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			else{
 				System.out.println("ZipCode Error field is not displayed");
 			}
-		}
-		else{
+			if(validate(topErrorMsg)){
+			    if(!topErrorMsg.getText().contains("Hmm... The information below doesn’t seem correct. Please take a look at the fields indicated below. If you need help, call 1-888-378-0254.")){
+			    	System.out.println("Error message on top of the step 1 is not displayed : "+topErrorMsg.getText());
+			    	flag=false;
+			    }
+			    System.out.println("Step 1 error message : "+topErrorMsg.getText());
+			}
+		    else{
+			System.out.println("Error Message on top of the Step 1 is not displayed");	
+			
+		    }
+	      }
+		  else{
 			System.out.println("Next Button is not displayed");
 			flag=false;
 		}
@@ -314,6 +328,19 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		else{
 			System.out.println("City Error field is not displayed");
 
+		}
+		
+		ZipTxt.sendKeys("12");
+		NextBtn.click();
+		if(validate(ZipError)) {
+		  if(!ZipError.getText().contains("Please enter a valid 5-digit ZIP code in the format 12345.")){
+			  System.out.println("Zip Invalid Error is not displayed : "+ZipError.getText());
+			  flag=false;
+		  }
+		  System.out.println("Zip Code Invalid Error : "+ZipError.getText());
+		}
+		else{
+			System.out.println("Zip code invalid error field is not displayed");
 		}
 
 		return flag;
