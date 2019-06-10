@@ -14,6 +14,7 @@ Feature: To test pre-effective functionality
     And verify that subnavigation is supressed on the coverage and benefits page
     And verify that correct preeffective message and plan documents button are displayed on coverage and benefits page
     And verify that correct phone number is displayed in technical support section of coverage and benefits page
+     | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
       | Member Type | <memberType> |
     And user click on the plan documents button
@@ -23,22 +24,25 @@ Feature: To test pre-effective functionality
       | Member Type | <memberType> |
     And verify that correct preeffective message is displayed on claims page
     And verify that correct phone number is displayed in technical support section of claims page
+     | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
       | Member Type | <memberType> |
     And verify that payment tab is displayed to Preeffective member from secondary pages
       | Member Type | <memberType> |
 
     Examples: 
-      | planType | memberType         | copayCategory |
-      #      | IndMA           | preeffectiveIndMA     | NON LIS       |
-      #      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |
-      | IndPDP   | preeffectiveIndPDP | NON LIS       |
-
-  #      | GroupMA         | preeffectiveGroupMA   | NON LIS       |
-  #      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |
-  #      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |
-  #      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |
-  #      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |
+      | planType			  | memberType            | copayCategory |technicalTFN  |
+      | IndMA           | preeffectiveIndMA     | NON LIS       |1-888-980-8125|
+      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125|
+      | IndPDP          | preeffectiveIndPDP    | NON LIS       |1-888-980-8125|
+      | GroupMA         | preeffectiveGroupMA   | NON LIS       |1-888-980-8125|
+      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |1-888-980-8125|
+      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |1-888-980-8125|
+      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |1-888-980-8125|
+      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |1-866-254-3132|
+      
+      
+      
   @preEffective2 @regressionMember @regression_Pre-Effective_AccountSettings_Page @codetransformers
   Scenario Outline: Verify that a preffective member is able to see the Account settings page
     Given login with following details logins in the member portal and validate elements
@@ -51,12 +55,12 @@ Feature: To test pre-effective functionality
     And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
 
     Examples: 
-      | planType  | memberType            | copayCategory |
-      #     | IndMA    | preeffectiveIndMA    | NON LIS       |
-      #   | IndMAPD  | preeffectiveIndMAPD  | NON LIS       |
-      #   | IndPDP   | preeffectiveIndPDP   | NON LIS       |
-      #   | GroupPDP | preeffectiveGroupPDP | NON LIS       |
-      | GroupSSUP | preeffectiveGroupSSUP | NON LIS       |
+      | planType  | memberType          | copayCategory |
+      | IndMA    | preeffectiveIndMA    | NON LIS       |
+      | IndMAPD  | preeffectiveIndMAPD  | NON LIS       |
+      | IndPDP   | preeffectiveIndPDP   | NON LIS       |
+      | GroupPDP | preeffectiveGroupPDP | NON LIS       |
+      | GroupSSUP | preeffectiveGroupSSUP | NON LIS     |
 
   @preEffective3 @preffectiveRegistration
   Scenario Outline: Verify HSID registration.

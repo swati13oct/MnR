@@ -2708,7 +2708,11 @@ public class AccountHomePage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("int.uhc.com/internal-error")) {
 			//in this case, there will be no userType identifier in URL, do one more step
 			//first click the account settings link on footer, get the URL for additional parsing
-			locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(3) > ul:nth-child(2) > li > a");
+			//tbd locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(3) > ul:nth-child(2) > li > a");
+
+			locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-3");
+			locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-3 > a:nth-child(1)");
+		
 		}
 
 		//assumption this is the sorry error url, parse the URL to determine which URL to use
