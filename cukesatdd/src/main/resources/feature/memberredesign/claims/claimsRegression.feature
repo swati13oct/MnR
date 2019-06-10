@@ -71,6 +71,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | planCategory | claimSystem    |
       | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS |
 
+  # note: pageNum is the claims page where the EOB pdf is located
+  # note: rowNum is the data row where EOB pdf is located - only count the data row, exclude header row
   @claims03 @claimsEOB @US1268210 @F244667 @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
@@ -91,7 +93,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     Examples: 
       | FID    | planType | memberType     | claimPeriod    | claimSystem | pageNum | rowNum |
-      | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS |       1 |      9 |
+      | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS |       1 |      8 |
 
   @claims04 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
