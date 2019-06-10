@@ -85,6 +85,9 @@ public class isDecisionGuideStepDefenition {
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Blank Field Error Validation failed", false);
 		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
 	}
 
 	@Then("^the user validated all fields for invalid validation on Step(\\d+)$")
