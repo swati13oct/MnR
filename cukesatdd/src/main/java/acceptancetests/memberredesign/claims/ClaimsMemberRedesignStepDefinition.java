@@ -604,7 +604,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - 'Need Help' section
 	 * @throws InterruptedException
 	 */
-	@When("^I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltops$")
+	@When("^I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips$")
 	public void validate_claim_details_expect_non_zero_claims() throws InterruptedException {
 		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
