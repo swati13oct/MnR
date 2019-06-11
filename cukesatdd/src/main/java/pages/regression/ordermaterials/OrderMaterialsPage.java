@@ -1,538 +1,615 @@
-/**
- * 
- */
 package pages.regression.ordermaterials;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 
 /**
  * @author rkodumur
- *
  */
-public class OrderMaterialsPage extends UhcDriver  {
-	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
-	private WebElement iPerceptionPopUp;
-
-	@FindBy(xpath = "//*[@id = 'closeButton']")
-	private WebElement iPerceptionClose;
-	
-	@FindBy(xpath = "//a[contains(text(), 'Medicare Advantage Plan')]")
-	private WebElement MAPlanTab;
-
+public class OrderMaterialsPage extends OrderMaterialsBase  {
 	@FindBy(xpath = "//[contains(text(), 'Hospital Indemnity')]")
-	private WebElement HIPplanTab;
-	
+	private WebElement planTab_HIP;
+
 	@FindBy(xpath = "//[contains(text(), 'Medicare Prescription Drug Plan')]")
-	private WebElement PDPPlanTab;
+	private WebElement planTab_PDP;
 
 	@FindBy(xpath = "//[contains(text(), 'Medicare Supplement Insurance Plan')]")
-	private WebElement MedSuppPlanTab;
-	
+	private WebElement planTab_MedSupp;
+
 	@FindBy(xpath = "//[contains(text(), 'Senior Supplement Plan')]")
-	private WebElement SrSuppTab;
-
-	@FindBy(xpath = "//*[@id = 'member-materials']/..")
-	private WebElement memberMaterialsfield;
-
-	@FindBy(xpath = "//*[@id='replacement-id']/..")
-	private WebElement replacementIdField;
-	
-	@FindBy(xpath = "//*[@id='member-id-card']/..")
-	private WebElement MemberIDcardField;
-	
-	@FindBy(xpath = "//*[@id='eft-id']/..")
-	private WebElement EFTbrochureField;
+	private WebElement planTab_SrSupp;
 
 	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']")
-	private WebElement SHIPerrorMsg;
-	
+	private WebElement errorMsg_serviceFail;
+
 	@FindBy(id = "order-materials-error")
-	private WebElement OrderMaterialsErrorMsg;
-	
+	private WebElement errorMsg_OrderMaterials;
+
 	@FindBy(xpath = "//*[@id = 'ppe-id']/..")
-	private WebElement premiumPayment;
+	private WebElement option_premiumPayment;
 
-	@FindBy(xpath = "//*[@id = 'couponBook-id']/..")
-	private WebElement couponBook;
-
-/*	@FindBy(xpath = "//*[@id='shipRadio']/div[3]/div")
-	private WebElement couponBook;
-*/	
 	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
-	private WebElement medicareHospital;
+	private WebElement option_ship_hospitalDirectory;
 
-	@FindBy(xpath = "//*[@id = 'claimsEnvelope-id']/..")
-	private WebElement claimsEnvelope;
+	@FindBy(xpath="//select[@id='state']")
+	private WebElement option_ship_hospitalDirectory_stateDropdown;
 
-	@FindBy(xpath = "//*[@id = 'coi-id']/..")
-	private WebElement certificateInsurance;
-	
 	@FindBy(xpath = "//*[@class='nav nav-tabs']//a")
-	private List <WebElement> ComboTabs;
-
+	private List <WebElement> comboTabs;
 
 	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
-	private WebElement needhelpcomponent;
-	
-	//@FindBy(id = "memberPlanList")
-	//private WebElement planField;
+	private WebElement needHelpComponent;
 
-	
-	@FindBy(id="submit-order-materials")
-	private WebElement submitButton;
-	
 	@FindBy(xpath = "//*[contains(text(),'Plan Materials Order Confirmation')]")
-	private WebElement OrderConfirmationHeader;
-	
-	@FindBy(id="additionalMaterialsText")
-	private WebElement OrderConfirmation_addordermaterialLink;
-	
-	//@FindBy(className = "orderplancontsec")
+	private WebElement header_OrderConfirmation;
+
 	@FindBy(className = "orderplanmaterials")
-	private WebElement OrderPlanMaterialsSection;
-	
+	private WebElement orderPlanMaterialsSection;
 
 	@FindBy(id = "disclosure_link")
-	private WebElement logOut;
-	
+	private WebElement logout_link;
+
+	@FindBy(xpath="//h1[@class='main-heading margin-none']")
+	private WebElement common_header_orderPlanMaterialsPage; 
+
+	@FindBy(xpath="//h2[@class='med-heading medium margin-large']")
+	private WebElement common_subSectionHeader;
+
+	@FindBy(xpath="//div[contains(@class,'header')]//div[contains(@class,'federal')]//p")
+	private WebElement subSectionText_fed;
+
+	@FindBy(xpath="//div[contains(@class,'header')]//div[contains(@class,'ship')]//p")
+	private WebElement subSectionText_ship;
+
+	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'federal')]//p")
+	private WebElement selectionInstruction_fed;
+
+	@FindBy(xpath="//form[@id='ordermaterial_form_id']")
+	private WebElement common_selectionSection;
+
+	@FindBy(xpath="//*[@id = 'member-materials']/..//div[contains(@class,'group') and not(contains(@class,'ng-hide'))]")
+	private WebElement option_fed_memberMaterialsfield_WelcomeKit;
+
+	@FindBy(xpath = "//*[@id = 'member-materials']/..")
+	private WebElement option_fed_memberMaterialsfield;
+
+	@FindBy(xpath = "//*[@id='replacement-id']/..")
+	private WebElement option_fed_replacementIdField;
+
+	@FindBy(xpath="//label[@for='replacement-id']//a[text()='VIEW MEMBER ID CARD']")
+	private WebElement link_fed_memberIDcardLink;
+
+	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")
+	private WebElement selectionInstruction_ship;
+
+	@FindBy(xpath = "//*[@id='member-id-card']/..")
+	private WebElement option_ship_memberIDcardField;
+
+	@FindBy(xpath="//label[@for='member-id-card']//a[text()='VIEW HEALTH INSURANCE CARD']")
+	private WebElement link_ship_memberIDcardLink;
+
+	@FindBy(xpath = "//*[@id='eft-id']/..")
+	private WebElement option_ship_brochureField_EFT;
+
+	@FindBy(xpath = "//*[@id = 'couponBook-id']/..")
+	private WebElement option_ship_couponBook;
+
+	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
+	private WebElement option_ship_medicareHospital;
+
+	@FindBy(xpath = "//*[@id = 'claimsEnvelope-id']/..")
+	private WebElement option_ship_claimsEnvelope;
+
+	@FindBy(xpath = "//*[@id = 'coi-id']/..")
+	private WebElement option_ship_certificateInsurance;
+
+	@FindBy(xpath="//button[@class='modal-close-btn']")
+	private WebElement idCardCloseButton;
+
+	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]")
+	private WebElement common_sectionShipAddress;
+
+	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]/../div")
+	private WebElement common_sectionShipAddressContent;
+
+	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]/../div//a")
+	private WebElement common_sectionShipAddressContent_needHelpLink;
+
+	//note: need help section
+	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
+	private WebElement needHelp_SectionHeader;
+
+	//note: need help - technical section
+	@FindBy(xpath="//div[contains(@class,'technical section')]")
+	private WebElement needHelp_TechicalSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
+	private WebElement needHelp_TechicalSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
+	private WebElement needHelp_TechicalSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
+	private WebElement needHelp_TechicalSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
+	private WebElement needHelp_TechicalSupport_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
+	private WebElement needHelp_TechicalSupport_wkEndHrs;
+
+	//note: need help - general section
+	@FindBy(xpath="//div[contains(@class,'general section')]")
+	private WebElement needHelp_GeneralQuestionsSection;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
+	private WebElement needHelp_GeneralQuestions_img;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
+	private WebElement needHelp_GeneralQuestions_phone;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
+	private WebElement needHelp_GeneralQuestions_tty;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
+	private WebElement needHelp_GeneralQuestions_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
+	private WebElement needHelp_GeneralQuestions_wkEndHrs;
+
+	//note: need help - claims section
+	@FindBy(xpath="//div[contains(@class,'claims section')]")
+	private WebElement needHelp_ClaimsSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
+	private WebElement needHelp_ClaimsSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
+	private WebElement needHelp_ClaimsSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
+	private WebElement needHelp_ClaimsSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
+	private WebElement needHelp_ClaimsSupport_wkDayHrs;
+
+	@FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
+	private WebElement needHelp_ClaimsSupport_wkEndHrs;
+
+	//note: need help - plan support
+	@FindBy(xpath="//div[contains(@class,'plan section')]")
+	private WebElement needHelp_PlanSupportSection;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
+	private WebElement needHelp_PlanSupport_img;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
+	private WebElement needHelp_PlanSupport_phone;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
+	private WebElement needHelp_PlanSupport_tty;
+
+	@FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
+	private WebElement needHelp_PlanSupport_wkDayHrs;
+
+	//note: need help - more ways
+	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
+	private WebElement needHelp_seeMoreWaysTo;
+
+	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
+	private WebElement needHelp_contactUsLink;
+
+	@FindBy(id="submit-order-materials")
+	private WebElement submitButton;
+
+	@FindBy(xpath="//h2[contains(text(),'Printable Documents')]")
+	private WebElement printableDocSection;
+
+	@FindBy(xpath="//div[@class='card-body']//a[contains(text(),'PLAN DOCUMENTS & RESOURCES')]")
+	private WebElement printableDocLink;
+
+	@FindBy(xpath="//a[contains(text(),'CARD')]")
+	private WebElement viewIdCard;
+
+	@FindBy(xpath="//h2[contains(text(),'Confirmation')]/../div[contains(@class,'success')]")
+	private WebElement SuccessMsgbox;
+
+	@FindBy(xpath="//div[contains(@class,'confirmationtext')]//p")
+	private WebElement SuccessMsgText;
+
+	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//div[contains(@class,'otherPages') and not(contains(@class,'ng-hide'))]")
+	private WebElement orderedItem;
+
+	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//li")
+	private WebElement orderedItem_ship;
+
+	@FindBy(xpath="//span[contains(text(),'card') or contains(text(),'Card')]")
+	private WebElement orderedItem_idCard;
+
+	@FindBy(xpath="//h2[contains(text(), 'Confirmation')]")
+	private WebElement confirmationPageSubHeader;
 
 	public OrderMaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//tbd Thread.sleep(5000);
-		//tbd CommonUtility.checkPageIsReady(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
-		try{
-			if(validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal Present");
-
-				iPerceptionClose.click();
-				if (validate(iPerceptionPopUp)){
-					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-				}
-				else
-					System.out.println("FeedBack Modal Closed");
-			}
-		}
-		catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-
-		}
-		//openAndValidate();
+		//takeCareiPerceptionPopUp();
+		openAndValidate();
 	}
+
+	@Override
+	public void openAndValidate() {
+		Assert.assertTrue("PROBLEM - unable to locate the header element",validate(common_header_orderPlanMaterialsPage));
+	}
+
 	/**
-	* @todo : ordermatials page options based on plan type
-	*/
-
-	@SuppressWarnings("deprecation")
-	public boolean navigatePlanTabs(String PlanType){
-		driver.navigate().refresh();
-
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	 * Determine if there is combo tabs on screen
+	 * @return
+	 */
+	public boolean hasComboTabs() {
+		if (comboTabs.size()>1) {
+			return true;
 		}
-		try{
-			if(validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal Present");
-
-				iPerceptionClose.click();
-				if (validate(iPerceptionPopUp)){
-					System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-				}
-				else
-					System.out.println("FeedBack Modal Closed");
-			}
-		}
-		catch (Exception e) {
-			System.out.println("FeedBack Modal NOT Present");
-		}
-
-		CommonUtility.checkPageIsReady(driver);
-
-		Assert.assertTrue("PROBLEM: test user doesn't have combo plans, please select applicable user",ComboTabs.size() >1);
-
-		//note: determine which tab is for what
-		WebElement mapdTab=null;
-		WebElement medsuppTab=null;
-		WebElement pdpTab=null;
-		WebElement ssupTab=null;
-		WebElement hipTab=null;
-		for(WebElement tab: ComboTabs) {
-			if (tab.getText().contains("MEDICARE SUPPLEMENT INSURANCE PLAN")) {
-				medsuppTab=tab;
-			} else if (tab.getText().contains("MEDICARE ADVANTAGE")) {
-				mapdTab=tab;
-			} else if (tab.getText().contains("Prescription Drug Plan") && !tab.getText().contains("MEDICARE ADVANTAGE")) {
-				pdpTab=tab;
-			} else if (tab.getText().contains("Senior Supplement Plan")) {
-				ssupTab=tab;
-			} else if (tab.getText().contains("Hospital Indemnity Insurance Plan")) {
-				hipTab=tab;
-			}
-		}
-		System.out.println("Combo Tabs are Displayed - Member with multiple Plans");
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
-			if (validate(mapdTab)){
-				mapdTab.click();
-				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
-				return true;
-			}
-		}
-		else if (PlanType.contentEquals("SHIP")) {
-			if (validate(medsuppTab)){
-				medsuppTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
-			}
-			else if (validate(hipTab)){
-				hipTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-			else {
-				System.out.println("*************No SHIP Plans available for this Member **********");
-				return false;
-			}
-		}
-		else if (PlanType.contentEquals("HIP")) {
-			if (validate(hipTab)){
-				hipTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-		}
-		else if (PlanType.contentEquals("PDP")) {
-			if (validate(pdpTab)){
-				pdpTab.click();
-				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying PDP Plan Tab **********");
-				return true;
-			}
-		}
-		else if (PlanType.contentEquals("MedSupp")) {
-			if (validate(medsuppTab)){
-				medsuppTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
-			}
-		}
-		else if (PlanType.contentEquals("SSUP")) {
-			if (validate(ssupTab)){
-				ssupTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
-				return true;
-			}
-		}
-
-		//note: if get here, something is wrong...
-		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}
 
 	/**
-	* @todo : displaying error messages of order plan materials for different plans
-	*/
+	 * Validate header section content
+	 */
+	public void validateHeaderSection() {
+		String expectedHeaderText="Order Plan Materials";
+		Assert.assertTrue("PROBLEM - unable to locate the header text element on Order Plan Materials",validate(common_header_orderPlanMaterialsPage));
+		Assert.assertTrue("PROBLEM - header text on Order Plan Materials is not as expected. Expected='"+expectedHeaderText+"' | Actual='"+common_header_orderPlanMaterialsPage.getText()+"'",expectedHeaderText.equals(common_header_orderPlanMaterialsPage.getText()));
 
-	@SuppressWarnings("deprecation")
-	public void ValidateOptions(String PlanType){
-		System.out.println("Proceed to validate for planType="+PlanType);
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD") || PlanType.contentEquals("PDP")|| PlanType.contentEquals("SSUP") || PlanType.contentEquals("PCP") || PlanType.contentEquals("MEDICA")) {
-			if (validate(memberMaterialsfield) && validate(replacementIdField) ){
-				Assert.assertTrue(true);
-				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");
-			}
-			else{
-				System.out.println("************* All Order Plan Material Options are NOT DISPLAYED for "+PlanType+ "**********");
-				Assert.fail();
-				
-			}
-		}
-		else if (PlanType.contentEquals("HIP") || PlanType.contentEquals("MedSupp") ||PlanType.contentEquals("SHIP")) {
-			if (validate(MemberIDcardField) && validate(EFTbrochureField) && validate(couponBook) && validate(claimsEnvelope) && validate(certificateInsurance) && validate(medicareHospital) ){
-				Assert.assertTrue(true);
-				System.out.println("*************Displaying All Order Plan Material Options for "+PlanType+ "**********");
-			}
-			else{
-				System.out.println("*************All Order Plan Material Options are NOT DISPLAYED for "+PlanType+ "**********");
-				Assert.fail();
-
-			}
-		}
-		else{
-			System.out.println("Invalid Plan Type / Plan Type not found");
-			Assert.fail();
-		}
-	}
-	/**
-	* @todo : Validate header in order materials page
-	*/
-
-	
-	public boolean ValidateHeader(){
-		//if (driver.findElement(By.xpath("//h1[@class='h4 margin-none']")).isDisplayed() && driver.findElement(By.xpath("//h2[@class='h3 medium margin-large']")).isDisplayed()){
-		String targetH1Xpath="//h1[@class='main-heading margin-none']";
-		String targetH2Xpath="//*[@id='globalContentIdForSkipLink']/div[4]/div/div/div/section[1]/div[2]/div[2]/div/h2";
-		if (driver.findElement(By.xpath(targetH1Xpath)).isDisplayed() && driver.findElement(By.xpath(targetH2Xpath)).isDisplayed()){
-			System.out.println("*************Header Text and Subtext displayed for Order materials Page***************");
-			
-			return true;
-		}
-		else{ 
-			System.out.println("************Header Text and Subtext not displayed for Order materials Page***************");
-			return false;}
-		
-	}
-	
-	/**
-	* @todo : Display error message
-	*/
-
-	public boolean ValidateErrorMessage() throws InterruptedException{
-		CommonUtility.waitForPageLoad(driver, OrderMaterialsErrorMsg, 5);
-		//tbd Thread.sleep(3000);
-		if (validate(OrderMaterialsErrorMsg)){
-			System.out.println("*************Error Message Displayed displayed for Order materials Page***************");
-			System.out.println("*************Error Message : "+OrderMaterialsErrorMsg.getText()+" ***************");
-			return true;
-		} else{ 
-			System.out.println("************Error message not displayed for Order materials Page***************");
-			return false;
-		}
+		String expectedSubSectionHeader="Get plan documents and materials by mail.";
+		Assert.assertTrue("PROBLEM - unable to locate the sub section header element on Order Plan Materials",validate(common_subSectionHeader));
+		Assert.assertTrue("PROBLEM - sub section header content on Order Plan Materials is not as expected. Expected='"+expectedSubSectionHeader+"' | Actual='"+common_subSectionHeader.getText()+"'",expectedSubSectionHeader.equals(common_subSectionHeader.getText()));
 	}
 
 	/**
-	* @throws InterruptedException 
-	 * @todo : error message for ship members
-	*/
-
-	public boolean ValidateSHIPErrorMessage() throws InterruptedException{
-		/* tbd-remove
-		try {
-			Thread.sleep(8000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
-		CommonUtility.waitForPageLoad(driver, SHIPerrorMsg, 10);
-		if (validate(SHIPerrorMsg)){
-			if(SHIPerrorMsg.getText().contains("request cannot be processed at this time")){
-				System.out.println("*************Error Message Displayed displayed for SHIP invalid Selection in Order materials Page***************");
-				System.out.println("*************Error Message : "+SHIPerrorMsg.getText()+"***************");
-				return true;
-			} else {
-				System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
-				return false;
-			}
+	 * Validate sub header section content
+	 * @param planType
+	 */
+	public void validateSubHeaderSection(String planType) {
+		//takeCareiPerceptionPopUp();
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			Assert.assertTrue("PROBLEM - unable to locate the sub section text element on Order Plan Materials",validate(subSectionText_ship));
 		} else {
-			System.out.println("************Error message not displayed for SHIP invalid Selection - Order materials Page***************");
-			return false;
+			Assert.assertTrue("PROBLEM - unable to locate the sub section text element on Order Plan Materials",validate(subSectionText_fed));
 		}
 	}
-	
+
 	/**
-	* @todo : Plan confirmation page validation of order materials page
-	*/
+	 * Validate selection section content based on planType, memberType
+	 * Will validate click to open ID view if applicable
+	 * @param planType
+	 * @param memberType
+	 * @throws InterruptedException
+	 */
+	public void validateSelectionSection(String planType, String memberType) throws InterruptedException {
+		Assert.assertTrue("PROBLEM - unable to locate the selection section on Order Plan Materials",validate(common_selectionSection));
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			Assert.assertTrue("PROBLEM - unable to locate the selection instruction element on Order Plan Materials",validate(selectionInstruction_ship));
 
-	public OrderPlanMaterialConfirmationPage selectsOption(String option) throws InterruptedException {
+			Assert.assertTrue("PROBLEM - unable to locate 'Member ID Card (Health Insurance Card)' selection option on Order Plan Materials",validate(option_ship_memberIDcardField));
+			Assert.assertTrue("PROBLEM - unable to locate 'VIEW HEALTH INSURANCE CARD' link on Order Plan Materials",validate(link_ship_memberIDcardLink));
+			Assert.assertTrue("PROBLEM - unable to locate 'Electronic Funds Transfer(EFT) Brochure' selection option on Order Plan Materials",validate(option_ship_brochureField_EFT));
+			Assert.assertTrue("PROBLEM - unable to locate 'Coupon Book' selection option on Order Plan Materials",validate(option_ship_couponBook));
+			Assert.assertTrue("PROBLEM - unable to locate 'Medicare Select Hospital Directory' selection option on Order Plan Materials",validate(option_ship_medicareHospital));
+			Assert.assertTrue("PROBLEM - unable to locate 'Claims Envelope' selection option on Order Plan Materials",validate(option_ship_medicareHospital));
+			Assert.assertTrue("PROBLEM - unable to locate 'Certificate of Insurance' selection option on Order Plan Materials",validate(option_ship_certificateInsurance));
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the selection instruction on Order Plan Materials",validate(selectionInstruction_fed));
 
-		driver.navigate().refresh();
-		/* tbd-remove
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
-		CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 5);
-		if(validate(iPerceptionPopUp)){
-			System.out.println("FeedBack Modal Present");
-
-			iPerceptionClose.click();
-			if (validate(iPerceptionPopUp)){
-				System.out.println("FeedBack Modal NOT CLOSING - Close button is clicked");
-			}
-			else
-				System.out.println("FeedBack Modal Closed");
+			Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",validate(option_fed_memberMaterialsfield));
+			Assert.assertTrue("PROBLEM - unable to locate 'Replacement ID card' selection option on Order Plan Materials",validate(option_fed_replacementIdField));
+			Assert.assertTrue("PROBLEM - unable to locate 'VIEW MEMBER ID CARD' link on Order Plan Materials",validate(link_fed_memberIDcardLink));
 		}
 
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP"))
+			validateIDCard("orderPage",planType,link_ship_memberIDcardLink);
+		else
+			validateIDCard("orderPage",planType,link_fed_memberIDcardLink);
+	}
+
+	/**
+	 * Validate the shipping address section content
+	 */
+	public void validateShippingAddressSection() {
+		Assert.assertTrue("PROBLEM - unable to locate the 'Shipping Address' section header element on Order Plan Materials",validate(common_sectionShipAddress));
+		Assert.assertTrue("PROBLEM - unable to locate the 'Shipping Address' section content element on Order Plan Materials",validate(common_sectionShipAddressContent));
+		Assert.assertTrue("PROBLEM - unable to locate the 'Shipping Address' contact Customer Service link element on Order Plan Materials",validate(common_sectionShipAddressContent_needHelpLink));
+
+		common_sectionShipAddressContent_needHelpLink.click();
 		CommonUtility.checkPageIsReady(driver);
+		Assert.assertTrue("PROBLEM - unable to locate the 'Shipping Address' contact Customer Service link element on Order Plan Materials",validate(common_sectionShipAddressContent_needHelpLink));
+		Assert.assertTrue("PROBLEM - unable to locate the 'Need Help' section header after clicking contact Customer Service link on Order Plan Materials",needHelp_SectionHeader.isDisplayed());
+	}
 
+	/**
+	 * Validate submit button is located
+	 */
+	public void validateSubmitButton() {
+		Assert.assertTrue("PROBLEM - unable to locate the 'Submit' button element on Order Plan Materials",validate(submitButton));
+	}
+
+	/**
+	 * Validate Printable Documents section content
+	 * Will validate clicking of the link
+	 * @param planType
+	 * @param memberType
+	 */
+	public void validatePrintableDocSection(String planType, String memberType) {
+		//"member/documents/overview.html"
+		Assert.assertTrue("PROBLEM - unable to locate the 'Printable Documents' section header element on Order Plan Materials",validate(printableDocSection));
+		Assert.assertTrue("PROBLEM - unable to locate the 'Printable Documents' link element on Order Plan Materials",validate(printableDocLink));
+		String originalUrl=driver.getCurrentUrl();
+		printableDocLink.click();
+		String expectedUrl="member/documents/overview.html";
+		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
+		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
+	}
+
+	/**
+	 * Validate error message related element and text for case when no selection was made when submit button was clicked
+	 * @throws InterruptedException
+	 */
+	public void validateErrorMessage() throws InterruptedException{
+		CommonUtility.waitForPageLoad(driver, errorMsg_OrderMaterials, 5);
+		Assert.assertTrue("PROBLEM - unable to locate error message after submitting without selection", validate(errorMsg_OrderMaterials));
+		Assert.assertTrue("PROBLEM - unable to locate error message text after submitting without selection", validate(errorMsg_OrderMaterials));
+		String expectedErrorText="Please select one of the items above.";
+		Assert.assertTrue("PROBLEM - not getting expected error text. Expected='"+expectedErrorText+"' | Actual='"+errorMsg_OrderMaterials.getText()+"'", expectedErrorText.equals(errorMsg_OrderMaterials.getText()));
+		System.out.println("*************Error Message Displayed: "+errorMsg_OrderMaterials.getText()+" ***************");
+	}
+
+	/**
+	 * Validate the error message element and text for the SHIP error cases
+	 * @throws InterruptedException
+	 */
+	public void validateShipErrorMessage() throws InterruptedException{
+		CommonUtility.waitForPageLoad(driver, errorMsg_serviceFail, 10);
+		Assert.assertTrue("PROBLEM - unable to locate error message after submitting without selection", validate(errorMsg_serviceFail));
+		System.out.println("*************Error Message displayed for SHIP invalid Selection in Order materials Page***************");
+		String expectedErrorText="request cannot be processed at this time";
+		Assert.assertTrue("PROBLEM - error text is not as expected.  Expected to contain '"+expectedErrorText+"' | Actual error msg='"+errorMsg_serviceFail.getText()+"'", errorMsg_serviceFail.getText().contains(expectedErrorText));
+	}
+
+	/**
+	 * Select the material option based on input and submit the request
+	 * Will return the selected order item for further validation
+	 * @param option
+	 * @return
+	 * @throws InterruptedException
+	 */
+	public String selectOption(String option) throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", common_subSectionHeader);
+		String itemType="";
+		WebElement itemToOrderElement=null;
 		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
-			System.out.println("*************Selecting Member materials Radio***************");
-			memberMaterialsfield.click();
-			if(!memberMaterialsfield.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Member materials Radio***************");
-			}
-		}
-		if (option.contains("Replacement ID card")) {
-			System.out.println("*************Selecting Replacement ID card Radio***************");
-			replacementIdField.click();
-			if(!replacementIdField.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Replacement ID card Radio***************");
-			}
-		}
-		
-		if (option.contains("Member ID Card")) {
-			System.out.println("*************Selecting Member ID Card Radio***************");
-			MemberIDcardField.click();
-			if(!MemberIDcardField.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Member ID Card Radio***************");
-			}
-		}
-
-		if (option.contains("Electronic Funds Transfer (EFT) Brochure")) {
-			System.out.println("*************Selecting Electronic Funds Transfer (EFT) Brochure Radio***************");
-			EFTbrochureField.click();
-			if(!EFTbrochureField.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Electronic Funds Transfer (EFT) Brochure Radio***************");
-			}
-
-		}
-
-		if (option.contains("Premium Payment Envelopes")) {
-			System.out.println("*************Selecting Premium Payment Envelopes Radio***************");
-			premiumPayment.click();
-			if(!premiumPayment.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Premium Payment Envelopes Radio***************");
-			}
-
+			itemType="Member materials / Welcome Guide / Welcome kit";
+			itemToOrderElement=option_fed_memberMaterialsfield;
+		} else if (option.contains("Replacement ID card")) {
+			itemType="Replacement ID card";
+			itemToOrderElement=option_fed_replacementIdField;
+		} else if (option.contains("Member ID Card")) {
+			itemType="Member ID Card";
+			itemToOrderElement=option_ship_memberIDcardField;			
+		} else if (option.contains("Electronic Funds Transfer (EFT) Brochure")) {
+			itemType="Electronic Funds Transfer (EFT) Brochure";
+			itemToOrderElement=option_ship_brochureField_EFT;			
+		} else if (option.contains("Premium Payment Envelopes")) {
+			itemType="Premium Payment Envelopes";
+			itemToOrderElement=option_premiumPayment;			
+		} else if (option.contains("Medicare Select Hospital Directory")) {
+			itemType="Medicare Select Hospital Directory";
+			itemToOrderElement=option_ship_hospitalDirectory;			
+		} else if (option.contains("Coupon Book")) {
+			itemType="Coupon Book";
+			itemToOrderElement=option_ship_couponBook;			
+		} else if (option.contains("Claims Envelope")) {
+			itemType="Claims Envelope";
+			itemToOrderElement=option_ship_claimsEnvelope;			
+		} else if (option.contains("Certificate of Insurance")) {
+			itemType="Certificate of Insurance";
+			itemToOrderElement=option_ship_certificateInsurance;			
+		} else if (option.contains("None")){
+			System.out.println("validate error case where no option is selected followed by clicking submit button");
+		} else {
+			Assert.assertTrue("PROBLEM - option '"+option+"' is not an expected available option", false);
 		}
 
-		if (option.contains("Coupon Book")) {
-			System.out.println("*************Selecting Coupon Book Radio***************");
-			couponBook.click();
-			if(!couponBook.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Coupon Book Radio***************");
-			}
-		}
-		
+		String result="";
 		if (option.contains("None")) {
 			System.out.println("No option for order material selected");
-		}
-		
-
-		/*
-		 * if (option.contains("Medicare Select Hospital Directory")){
-		 * medicareHospital.click(); shipDocumentStateCodeId.click();
-		 * shipDocumentStateCodeId.sendKeys(statecode); }
-		 */
-		if (option.contains("Claims Envelope")) {
-			System.out.println("*************Selecting Claims Envelope Radio***************");
-			claimsEnvelope.click();
-			if(!claimsEnvelope.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Claims Envelope Radio***************");
+		} else {
+			System.out.println("************* Selecting "+itemType+" Radio***************");
+			itemToOrderElement.click();
+			if (!itemToOrderElement.isEnabled()) {
+				System.out.println("************* NOT ABLE to SELECT "+itemType+" Radio***************");
 			}
-
-		}
-
-		if (option.contains("Certificate of Insurance")) {
-			System.out.println("*************Selecting Certificate of Insurance Radio***************");
-			certificateInsurance.click();
-			if(!certificateInsurance.isEnabled()){
-				System.out.println("*************NOT ABLE to SELECT Certificate of Insurance Radio***************");
+			if (option.contains("Medicare Select Hospital Directory")) {
+				//note: extra checking for this option
+				Assert.assertTrue("PROBLEM - unable to locate the state dropdown element", validate(option_ship_hospitalDirectory_stateDropdown));
+				Select ship_hopspitalStateDropdown = new Select(option_ship_hospitalDirectory_stateDropdown);
+				Assert.assertTrue("PROBLEM - there should be total of 58 options from dropdown.  Actual="+ship_hopspitalStateDropdown.getOptions().size(), ship_hopspitalStateDropdown.getOptions().size()==58);
 			}
-
+			result=itemToOrderElement.getText();
 		}
-		
+
 		CommonUtility.waitForPageLoad(driver, submitButton, 5);
-		//tbd-remove Thread.sleep(5000);
-
-		//submitButton.submit();
 		if(validate(submitButton)){
-			
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeScript("arguments[0].click();", submitButton); 
 			System.out.println("****** Submit Button Clicked ********");
 		}
 
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		CommonUtility.checkPageIsReady(driver);
-		if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
+		CommonUtility.waitForPageLoad(driver, addOrderMaterialLink_OrderConfirmation, 10);
+		if (validate(header_OrderConfirmation) || validate(addOrderMaterialLink_OrderConfirmation)) {
 			System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
-			return new OrderPlanMaterialConfirmationPage(driver);
-		}
-		
-		/* note: try this when working data is available
-		int x=0;
-		while(x<5) {
-			try {
-				Thread.sleep(1000);
-			} catch (Exception e) {	e.printStackTrace(); }
-			if (validate(OrderConfirmationHeader) || validate(OrderConfirmation_addordermaterialLink)) {
-				System.out.println("@@@@ Opder Plan Material COnfirmation Page is Displayed @@@@");
-				return new OrderPlanMaterialConfirmationPage(driver);
+			if (result.contains("VIEW")) {
+				String[] tmp=result.split("VIEW");
+				result=tmp[0].trim();
 			}
-			x=x+1;
-			System.out.println("waited x seconds for either OrderConfirmationHeader or OrderConfirmation_addordermaterialLink to show");
+			return result;
 		}
-		*/
-			return null;
-	}
-	/**
-	* @throws InterruptedException 
-	 * @todo : Verify help component in order materials page
-	*/
-
-	public OrderMaterialsPage verifyneedHelpcomponent() throws InterruptedException{
-		boolean present;
-		try{
-			validate(needhelpcomponent);
-			present=true;
-		}catch(NoSuchElementException e)
-		{
-			present=false;
-		}
-		if(present){
-			System.out.println("Able to find needhelp component");
-			return new OrderMaterialsPage(driver);
-		}
-		
-		System.out.println("No needhelp component is displayed");
 		return null;
 	}
 
-	
-	public String getOrderPlanMaterialsContent() {
-		return OrderPlanMaterialsSection.getText();
+	/**
+	 * Validate Need Help section content
+	 * @param planType
+	 * @param memberType
+	 * @return
+	 */
+	public String validateNeedHelpSection(String planType, String memberType) {
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			System.out.println("Proceed to validate the Need Help section header");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,needHelp_TechicalSupport_wkEndHrs);
+
+			validateSection="Need Help - General Questions";
+			validateNeedHelpSectionContent(validateSection, needHelp_GeneralQuestionsSection, needHelp_GeneralQuestions_img, needHelp_GeneralQuestions_phone, needHelp_GeneralQuestions_tty, needHelp_GeneralQuestions_wkDayHrs,needHelp_GeneralQuestions_wkEndHrs);
+
+			validateSection="Need Help - Claims Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_ClaimsSupportSection, needHelp_ClaimsSupport_img, needHelp_ClaimsSupport_phone, needHelp_ClaimsSupport_tty, needHelp_ClaimsSupport_wkDayHrs,needHelp_ClaimsSupport_wkEndHrs);
+
+			System.out.println("Proceed to validate the Need Help - See More Ways section content");
+			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",validate(needHelp_seeMoreWaysTo));
+			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",validate(needHelp_contactUsLink));
+			String originalUrl=driver.getCurrentUrl();
+			needHelp_contactUsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			handleComboTabIfComboUser(planType, memberType);
+			String expContactUsTitle="Help & Contact Us";
+			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
+			System.out.println("New window URL = "+driver.getCurrentUrl()+"| New window title = "+driver.getTitle());
+			Assert.assertTrue("PROBLEM - not getting expected contact us URL. Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expContactUsUrl));
+			Assert.assertTrue("PROBLEM - not getting expected contact us Title. Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", driver.getTitle().contains(expContactUsTitle));
+			goBackToPriorPageViaBack(planType, memberType, originalUrl);
+		} else {
+			System.out.println("Proceed to validate the Need Help section header");
+			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",validate(needHelp_SectionHeader));
+
+			String validateSection="Need Help - Technical Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, needHelp_TechicalSupport_tty, needHelp_TechicalSupport_wkDayHrs,null);
+
+			validateSection="Need Help - Plan Support";
+			validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, needHelp_PlanSupport_wkDayHrs, null);
+		}
+		System.out.println("Main window = "+driver.getTitle());
+		return driver.getCurrentUrl();
 	}
 
-	public void logOut() {
-		logOut.click();
-
+	/**
+	 * Validate order material functionality
+	 * Will order each available item one at a time, will click on order additional material to order next item
+	 * @param planType
+	 * @param memberType
+	 * @throws InterruptedException
+	 */
+	public void validateOrderAllItemsIndvidually(String planType, String memberType, boolean skipIdCheck) throws InterruptedException {
+		List<String> listOfItems=new ArrayList<String>();
+		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			listOfItems.add("Member ID Card");
+			listOfItems.add("Electronic Funds Transfer (EFT) Brochure");
+			listOfItems.add("Medicare Select Hospital Directory");
+			listOfItems.add("Coupon Book");
+			listOfItems.add("Claims Envelope");
+			listOfItems.add("Certificate of Insurance");
+		} else {
+			listOfItems.add("Member Materials");
+			listOfItems.add("Replacement ID card");
+		}
+		boolean result=true;
+		for (String item: listOfItems) {
+			System.out.println("Proceed to order item="+item+"...");
+			handleComboTabIfComboUser(planType, memberType);
+			validateOrderOneItem(planType, memberType, item, skipIdCheck);
+		}
+		Assert.assertTrue("PROBLEM - unable to order all available materials individually", result);
 	}
 
-	@Override
-	public void openAndValidate() {
+	/**
+	 * Validate the success message element and content
+	 * If applicable, will validate the view ID link that shows up in success message box
+	 * note: to simplify matter, if testing from testharness will validate element contains the right URL only.
+	 * note: UHC user's ID card link will redirect to 'systest3.myhc.com' instead on testharness access
+	 * @param planType
+	 * @param memberType
+	 * @param expectedOrderedItem
+	 * @throws InterruptedException
+	 */
+	public void validateSuccessmessage(String planType, String memberType, String expectedOrderedItem, boolean skipIdCheck) throws InterruptedException {
+		Assert.assertTrue("PROBLEM - unable to locate the successful message box element for confirmation",validate(SuccessMsgbox));
+		Assert.assertTrue("PROBLEM - unable to locate the successful message text element for confirmation",validate(SuccessMsgText));
+		//note: jenkins run doesn't like the dash '-' in the string so use regex pattern matches instead
+		String expectedSuccessPattern="Your order has been submitted. You should be receiving the following plan materials by mail in about 7 (.*) 10 business days.";
+		String actualSuccessMsg=SuccessMsgText.getText();
+		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to match '"+expectedSuccessPattern+"' pattern \nActual msg='"+actualSuccessMsg+"'",actualSuccessMsg.matches(expectedSuccessPattern));
+		if (validate(orderedItem_idCard)) {
+			Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_idCard));
+			Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_idCard.getText()+"'",expectedOrderedItem.equals(orderedItem_idCard.getText()));
+			Assert.assertTrue("PROBLEM - unable to locate the VIEW MEMEBR ID CARD element for confirmation",validate(viewIdCard));
 
-		validate(memberMaterialsfield);
-		validate(logOut);
+			if (skipIdCheck) {
+				System.out.println("This test will skip ID validation");
+			} else {
+				validateIDCard("confirmPage",planType,viewIdCard);
+			}
+		} else {
+			if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_ship));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_ship.getText()+"'",expectedOrderedItem.equals(orderedItem_ship.getText()));
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem.getText()+"'",expectedOrderedItem.equals(orderedItem.getText()));
+			}
+		}
 	}
 
-	
+	public String validateOrderOneItem(String planType, String memberType, String option, boolean skipIdCheck) throws InterruptedException {
+		String orderedItem = selectOption(option);
+		if (orderedItem==null) {
+			if ((planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP"))) {
+				if (memberType.toUpperCase().contains("EFT")) {
+					Assert.assertTrue("PROBLEM - for SHIP user with 'EFT' setup should have gotten error message when attempting to order 'coupon book'",
+							validate(errorMsg_serviceFail));
+					System.out.println("Expected - NOT able to order item="+option);
+				} else if (!memberType.toUpperCase().contains("MEDSELECTPLAN")) {
+					Assert.assertTrue("PROBLEM - for SHIP user without 'MEDICARE_SELECT_PLAN' setup should have gotten error message when attempting to order 'Medicare Select Hospital Directory'",
+							validate(errorMsg_serviceFail));
+					System.out.println("Expected - NOT able to order item="+option);
+				}
+				//note: no need to click order additional material link because would still be on order page
+			} else if (!planType.equalsIgnoreCase("PDP") && validate(option_fed_memberMaterialsfield_WelcomeKit)) { //note: only PDP can order Welcome Guide
+				Assert.assertTrue("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'",
+						validate(errorMsg_serviceFail));
+				System.out.println("Expected - NOT able to order item="+option);
+			} else {
+				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
+			}
+		} else {
+			System.out.println("Expected - ABLE to order item="+option);
+			validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
+			if (orderedItem.contains("Replacement ID card") || orderedItem.contains("Member ID Card")) {
+				System.out.println("After validating success result for Replacement ID card, would be landing back on the order page instead, so no need to look for order additional item link in this case");
+			} else {
+				navigateToOrderMore();
+			}
+		}
+		return orderedItem;
+	}
 }
