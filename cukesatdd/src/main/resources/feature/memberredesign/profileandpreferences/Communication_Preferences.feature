@@ -52,3 +52,22 @@ Feature: C1.2To test Profile and Preferences page
     Examples: 
       | FID    | planType         |
       | 220921 | SHIP_ProfilePref |
+      
+  @F276629
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents and Welcome kit for SHIP
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    Then the user navigates to Communication Preferences page
+    Then the user validates that Communication Preferences section for Ship
+      | Plan Name | <planName> |
+    And the user select "electronic delivery" for "Plan Documents"
+
+    #And the user click Terms and Conditions check box
+    #And the user click on the Save Preferences button
+    #Then a popup is displayed and validate the popup
+    #And select Yes and Validate the success message
+    Examples: 
+      | FID    | planType | memberType          | planName                  |
+      | 276629 | Medsupp  | SHIPAccountSettings | AARP MEDICARE SELECT PLAN |      

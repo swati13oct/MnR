@@ -150,6 +150,13 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * } }
 	 */
 
+	@Then("^the user navigates to Communication Preferences page$")
+	public void user_navigate_toCommunicationPreferencespage() throws InterruptedException {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		CommunicationPreferencePage communicationPreferencePage = profilePreferencesPage.navigateToCommunicationPreferencePage();
+		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
+	}
+	
 	/**
 	 * @toDo : The user validates the Account information of the logged in
 	 *       member
@@ -1142,6 +1149,19 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateCommunicationPreferencesForShip();
 	}
+	
+	@Then("^the user validates that Communication Preferences section for Ship$")
+	public void userValidatescommunicationpreferncesForShip(DataTable givenAttributes) {
+		/* Reading the given attribute from feature file */
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+		CommunicationPreferencePage communicationPreferencePage = (CommunicationPreferencePage) getLoginScenario().getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+		communicationPreferencePage.validateCommunicationPreferencesForShip(planName);
+	}
 
 	@Then("^the user validates the Go Green page for a ship member$")
 	public void userValidatesGoGreenSectionForShip() {
@@ -1212,4 +1232,11 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateMailingAddressSectionWithoutEditAllowed();
 	}
 
+	@And("^the user select (.*?) for (.*?)$")
+	public void user_select_electronic_delivery_for_Plan_Documents(String delivery,String preference) {
+		CommunicationPreferencePage communicationPreferencePage = (CommunicationPreferencePage) getLoginScenario().
+				getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+		communicationPreferencePage = communicationPreferencePage.selectPreferences(delivery, preference);
+		getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
+	}
 }

@@ -691,7 +691,7 @@ public class DashboardFormsnResourcesStepDefinition {
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
 		Thread.sleep(2000);
-		if (formsAndResourcesPage.getANOCSection().get(2).isDisplayed()) {
+		if (formsAndResourcesPage.getANOCSection().get(1).isDisplayed()) {
 			Assert.assertTrue(true);
 			System.out.println("anoc section is present");
 
