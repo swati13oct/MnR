@@ -1,5 +1,4 @@
 package pages.regression.claims;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -857,7 +856,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, backButton, 5);
 		backButton.click();
 		System.out.println("Clicked claims summary back button...");
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println("current url="+driver.getCurrentUrl());		//note: only do the following for non-ship and non-custom search case to make sure it gets back to the right search period
 		if (!planType.equalsIgnoreCase("ship")) {
 			if (driver.getCurrentUrl().contains("overview")) {
@@ -936,15 +935,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
 		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText)+" | validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
-		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)|| validate(viewPDF)) {
-			if (validate(pageContainsPdfDocText)) {
-				Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
-			} else {
-				System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
-				invokeBypass_INC11365785_conatinsPdfDocText=true;
-			}
+		if (validate(pageContainsPdfDocText)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
+			System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
+			invokeBypass_INC11365785_conatinsPdfDocText=true;
 		}
 		return invokeBypass_INC11365785_conatinsPdfDocText;
 	}
@@ -976,7 +971,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
-		DecimalFormat df = new DecimalFormat("0.00");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
 			double totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");

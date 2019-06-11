@@ -17,8 +17,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -520,7 +518,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @throws InterruptedException 
 	 */
 	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
-		Assert.assertTrue("PROBLEM - unable to locate 'Custom Search' option from dropdown",validate(customSearch));
+		Assert.assertTrue("PROBLEM - unable to locate 'Custom search' option from dropdown",validate(customSearch));
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(customSearch.getText()));
 		customSearch.click();
 		System.out.println("!!! Validating the drop down to select the claims !!!");
@@ -694,7 +692,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page 
 	 */
 	public String validateYouHavemessage(String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Driver is ready...Proceed to wait and see if any claim table will show up, max wait is 15 sec");
 		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimTable, 15);
 		String claimResult="none";
@@ -1138,9 +1136,9 @@ public class ClaimSummarypage extends UhcDriver{
 	 * @return
 	 */
 	public int getNumClaims(String range, String claimType) {
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimTable, 20);
-		/* tbd-remove
+		/* keep for now, will remove after testing is stable that we don't need this sleep to get correct claims#
 		// note: do not modify this check - critical to wait
 		int extra=2000;
 		int x=0;
@@ -1746,27 +1744,52 @@ public class ClaimSummarypage extends UhcDriver{
 		return totalRow;
 	}
 
+	@FindBy(xpath="//div[@class='claim-results']//p[contains(text(),'View your current prescription drug cost summary at')]//a[text()='OptumRx.com']")
+	private WebElement optumRxLink_noClaims;
+
+	@FindBy(xpath="//div[contains(@class,'tablenavigationarea')]//a[contains(text(),'VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM')]")
+	private WebElement optumRxLink_hasClaims;
+	
+	@FindBy(xpath="//h1[contains(text(),'Benefits Information')]")
+	private WebElement optumRxPageHeader;
 	/**
 	 * Validate text content for the claims table section.
 	 * TODO: need to find out PDP user behavior
 	 * @param numClaims
 	 */
-	public void validateClaimsTableSectionText(int numClaims) {
-		//note: DO NOT REMOVE THIS METHOD, need to confirm behavior then code this
+	public void validateClaimsTableSectionOptumRxText(int numClaims) {
+		String winHandleBefore = "";
+		String noteToTester="NOTE: user needs to have valid entry in optum rx site and should be eligible in HSID site to pass this validation";
 		if (numClaims==0) {
-			/* TODO - need to turn on the validation once confirm the behavior for drug option with this link
-					Assert.assertTrue("PROBLEM - for PDP group user, unable to locate the 'View your current prescription drug cost summary at OPTUMRX.COM' text", validate(viewCurrentDrugCostText));
-					viewCurrentDrugCostLink.click();
-					switchToNewTab();
-					System.out.println("TEST - optumrx.com -  Driver.getURL="+driver.getCurrentUrl());
-					String expectedURL="https://chp-stage.optumrx.com/public/sso-landing";
-					//TODO - need to assert this after confirming URL, the curent URL  on stage is not working
-					ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-					driver.switchTo().window(tabs.get(0)); //switch back to original tab
-			 */
+			Assert.assertTrue("PROBLEM - unable to locate 'View your current prescription drug cost summary at OPTUMRX.COM' text/link. \n"+noteToTester, validate(optumRxLink_noClaims));
+			winHandleBefore = driver.getWindowHandle();
+			optumRxLink_noClaims.click();
 		} else {
-			//TODO - on offline user has a different link when there is claims, need to confirm behavior then code the assert here
+			Assert.assertTrue("PROBLEM - unable to locate 'VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM' text/link. \n"+noteToTester, validate(optumRxLink_hasClaims));
+			winHandleBefore = driver.getWindowHandle();
+			optumRxLink_hasClaims.click();
 		}
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();					
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, optumRxPageHeader, 10);
+		
+		String expectedTitle="Benefits Information | OptumRx"; //note: validate title
+		String actualTitle=driver.getTitle(); 
+		System.out.println("New tab actual title = "+actualTitle);
+		Assert.assertTrue("PROBLEM - Title is not as expected.  Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,actualTitle.contains(expectedTitle));
+		
+		String expectedURL="https://chp-stage.optumrx.com/secure/benefits-and-claims/benefits-information"; //note: validate url
+		String actualURL=driver.getCurrentUrl(); 
+		System.out.println("New tab actual URL ="+actualURL);
+		Assert.assertTrue("PROBLEM - URL didn't contain expected portion.  Expected to contains '"+expectedURL+"' \nActual URL='"+actualURL+"' \n"+noteToTester,actualURL.contains(expectedURL));
+		driver.close();
+
+		driver.switchTo().window(winHandleBefore);
+		expectedTitle="Claims Summary";	//note: validate able to go back to claims summary page for further validation
+		actualTitle=driver.getTitle(); 
+		Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,actualTitle.contains(expectedTitle));
 	}
 
 	/**
@@ -1780,7 +1803,7 @@ public class ClaimSummarypage extends UhcDriver{
 	 * Validate combo tabs on claims summary page
 	 */
 	public void validateComboTabs(){
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		Assert.assertTrue("PROBLEM - this user doesn't have combo tabs, this test is intended for combo testing, please select user that has combo plans", comboTabsOnclaimsPage.size()>1);
 	}
 
@@ -1876,7 +1899,7 @@ public class ClaimSummarypage extends UhcDriver{
 		}
 		//now click cancel and validate any element on page
 		cancelButtonDownloadPopUp.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		if (!driver.getTitle().contains("Claims")) {
 			System.out.println("PROBLEM - Cancel button on DownloadPopUp is not working");
 			return false;
@@ -1918,16 +1941,11 @@ public class ClaimSummarypage extends UhcDriver{
 	public boolean validatePageContainsPdfDocText() {
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
-		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText));
-		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)) {
-			if (validate(pageContainsPdfDocText)) {
-				Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
-			} else {
-				System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
-				invokeBypass_INC11365785_conatinsPdfDocText=true;
-			}
+		if (validate(pageContainsPdfDocText)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
+			System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
+			invokeBypass_INC11365785_conatinsPdfDocText=true;
 		}
 		return invokeBypass_INC11365785_conatinsPdfDocText;
 	}
