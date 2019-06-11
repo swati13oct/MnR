@@ -375,6 +375,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")
 	private WebElement editPreferencesLink;
 
+
 	@FindBy(className = "atdd-go-green-img")
 	private WebElement gogreenleaf;
 

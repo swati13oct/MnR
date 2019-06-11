@@ -480,10 +480,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
 				.navigateToCommunicationPreferencePage();
 		if (communicationPrefPage != null) {
-			if (!communicationPrefPage.validatePage())
-				Assert.fail("Error in validating communication preferences page");
-			else
 				getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
+		}
+		else {
+			Assert.fail("Preference page is not loaded");
 		}
 	}
 	
@@ -1104,4 +1104,26 @@ public class ProfileandPreferencesUMSStepDefinition {
 		communicationPreferencePage = communicationPreferencePage.selectPreferences(delivery, preference);
 		getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
 	}
+	
+	@Then("^the user validates that Communication Preferences section for Ship$")
+	public void userValidatescommunicationpreferncesForShip(DataTable givenAttributes) {
+		/* Reading the given attribute from feature file */
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+		CommunicationPreferencePage communicationPreferencePage = (CommunicationPreferencePage) getLoginScenario().getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
+		communicationPreferencePage.validateCommunicationPreferencesForShip(planName);
+	}
+	
+	@Then("^the user navigates to Communication Preferences page$")
+	public void user_navigate_toCommunicationPreferencespage() throws InterruptedException {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		CommunicationPreferencePage communicationPreferencePage = profilePreferencesPage.navigateToCommunicationPreferencePage();
+		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
+	}
+	
+
 }

@@ -69,7 +69,17 @@ public class PreferencesStepDefinition {
 
 	}
 
+	@Then("the user validates the presence of Plan Name on Communication Preferences Page for Ship ")
+	public void UserValidatesPlanNameForShip() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+
+		String planName=(String) getLoginScenario().getBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE);
+		communicationPrefPage.validatePlanNameForShip(planName);
+
+	}
 	
+
 	/**
 	 * @toDo : Validates the Go green button in Communication Preferences
 	 *       section

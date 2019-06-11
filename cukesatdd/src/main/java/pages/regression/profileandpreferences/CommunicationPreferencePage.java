@@ -45,13 +45,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "IPerceptionsEmbed")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(xpath = "//img[@alt='Go Green']")
+	@FindBy(className = "atdd-go-green-img")
 	private WebElement gogreenleaf;
 
 	@FindBy(className = "atdd-goGreenHeader")
 	private WebElement goggreenheader;
 
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//label[@for='requiredplan']")
+	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']")
 	private WebElement iHavereadCheckbox;
 
 	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[1]")
@@ -66,7 +66,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
 	private WebElement mailLabel;
 
-	@FindBy(xpath = "//*[@id='mail-preferences-selector-SHIP']//h3")
+	@FindBy(xpath = "//*[@id='preferenceEPMP']//h3")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "h4 margin-none atdd-section-heading")
@@ -77,8 +77,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
-
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//button[@class='btn save-prefs-btn']")
+	
+	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
 	private WebElement savePreferencesButton;
 	
 	@FindBy(id="PlanBenefits0")
@@ -294,7 +294,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	public void validateheader() {
 		
-		CommonUtility.waitForPageLoad(driver, gogreenleaf, 15);
+	
+		CommonUtility.waitForPageLoad(driver, gogreenleaf, 7);
 		validateNew(gogreenleaf);
 		validateNew(goggreenheader);
 
@@ -304,8 +305,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	 * 
 	 */
 	public void validatePlanName(String planName) {
-		
-
+	
 		String planNameOnProfilePage=planName;
 		validateNew(planNameGoGreen);
         String planNameOnPreferencesPage=planNameGoGreen.getText();
@@ -313,6 +313,14 @@ public class CommunicationPreferencePage extends UhcDriver {
  
 	}
 	
+	public void validatePlanNameForShip(String planName) {
+		
+		String planNameOnProfilePage=planName;
+		validateNew(shipPlanName);
+        String planNameOnPreferencesPage=shipPlanName.getText();
+         Assert.assertTrue(planNameOnProfilePage.equalsIgnoreCase(planNameOnPreferencesPage));
+ 
+	}
 	/**
 	 * @toDo : Validates the Go green button in Communication Preferences
 	 *       section

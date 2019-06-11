@@ -50,7 +50,7 @@ Feature: C1.2To test Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section
     Then the user validates Communication Preferences section
     Then the user clicks on edit preferences link page for ship
-    Then the user validates the presence of Plan Name on Communication Preferences Page  
+    Then the user validates the presence of Plan Name on Communication Preferences Page for Ship  
     Then the user validates the headers and labels of the communication preferences section for SHIP
 
     Examples: 
