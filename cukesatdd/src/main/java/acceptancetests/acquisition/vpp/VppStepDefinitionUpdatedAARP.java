@@ -1573,8 +1573,8 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		//Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	}
 	
-	@Then("^the user click on Plan costs tab and validates$")
-	public void the_user_click_on_Plan_costs_tab_and_validates(DataTable givenAttributes) throws Throwable {
+	@Then("^the user click on Plan costs tab and validates in AARP site$")
+	public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1592,8 +1592,8 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
 	
-	@Then("^the user click on Optional Services tab and add the rider$")
-	public void the_user_click_on_Optional_Services_tab_and_add_the_rider(DataTable givenAttributes) throws Throwable {
+	@Then("^the user click on Optional Services tab and add the rider in AARP site$")
+	public void the_user_click_on_Optional_Services_tab_and_add_the_rider_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1610,8 +1610,8 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(optionalRider);
 	}
 	
-	@Then("^the user click on Plan costs tab and validate riders monthly and yearly premium$")
-	public void the_user_click_on_Plan_costs_tab_and_validate_riders_monthly_and_yearly_premium(DataTable givenAttributes) throws Throwable {
+	@Then("^the user click on Plan costs tab and validate riders monthly and yearly premium in AARP site$")
+	public void the_user_click_on_Plan_costs_tab_and_validate_riders_monthly_and_yearly_premium_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
