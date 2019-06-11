@@ -45,7 +45,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+   public String planName;
 	/**
 	 * @toDo : The user logs in to the member Redesign Portal
 	 */
@@ -150,19 +150,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * } }
 	 */
 
-	@Then("^the user navigates to Communication Preferences page$")
-	public void user_navigate_toCommunicationPreferencespage() throws InterruptedException {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
-		CommunicationPreferencePage communicationPreferencePage = profilePreferencesPage.navigateToCommunicationPreferencePage();
-		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
-	}
-	
 	/**
 	 * @toDo : The user validates the Account information of the logged in
 	 *       member
 	 */
 
-	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
+	@And("^the user validates the Plan Name, Member name, Member ID and account section")
 	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
@@ -170,7 +163,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		if (profilePreferencesPage == null) {
 			System.out.println("Profile and Preferences page variable is Null");
 		}
-		profilePreferencesPage.validatePlanNameMemberidNameAccountProfile();
+		planName=profilePreferencesPage.validatePlanNameMemberidNameAccountProfile();
+		getLoginScenario().saveBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE, planName);
+
 
 	}
 
@@ -472,17 +467,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validatecommunicationpreferences();
 	}
 
-	/**
-	 * @toDo : Validates the Go green button in Communication Preferences
-	 *       section
-	 */
-	@Then("^the user validates Go paperless button and on clicking button go green page should come")
-	public void uservalidatesgogreenpagerouting() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validategogreenbutton();
-	}
 
 	/**
 	 * @toDo : Clicks on Edit Preferences link under Communication Preferences
@@ -522,17 +506,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 
-	@Then("^the user changes the online preference and saves the change")
-	public void userChangesOnlinePref() {
-		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
-				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-
-		if (communicationPrefPage.changeAndVerifyOnlinePreference()) {
-			System.out.println("Communication preference online preference changed and verified");
-			getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
-		} else
-			Assert.fail("Error in changing and saving online preference");
-	}
+	
 
 	@Then("^the user clicks on profile & preferences link to go back to Account settings page")
 	public void navigateBackToAccountSettingsPage() {
@@ -544,17 +518,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 
-	/**
-	 * @toDo : Validates the headers on Go green page
-	 */
-	@Then("^the user validates headers on green page")
-	public void uservalidatesgogreenheader() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateheader();
-	}
-
+	
 	/**
 	 * @throws InterruptedException
 	 * @toDo : Validates the back Link functionality from Go green page to
@@ -719,18 +683,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 
 	/**
-	 * @toDo : Validates the plan name on the Go Green page
-	 */
-	@Then("^the user validates the presence of Plan Name")
-	public void UserValidatePlanName() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validatePlanName();
-
-	}
-
-	/**
 	 * @toDo : Validates the headers of the communication preferences section
 	 */
 
@@ -743,33 +695,8 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 	
-	/**
-	 * @toDo : Validates the headers and labels of the communication preferences section for SHIP
-	 */
 
-	@Then("^the user validates the headers and labels of the communication preferences section for SHIP")
-	public void the_user_validates_headers_and_labels_of_the_communication_preferences_section_for_SHIP() {
-		
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
-				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		
-		communicationPreferencesPage.validateGoGreenSectionForShip();
-
-	}
-
-	/**
-	 * @toDo : Validates the presence of Back to Profile and Preferences links
-	 *       on Go green page
-	 */
-	@Then("^the user validates the presence of Back to Profile and Preferences links")
-	public void UserValidatesBacktoPNPlink() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateBacktoPNPlink();
-
-	}
-
+	
 	/**
 	 * @toDo : Validates the Note section on Go green page
 	 */
@@ -782,29 +709,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	/**
-	 * @toDo : Validates the I have read checkbox on Go green page
-	 */
-	@Then("^the user validates the I have read checkbox and check it")
-	public void UserValidatesCheckbox() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateCheckbox();
-
-	}
-
-	/**
-	 * @toDo : Validates the save preferences functionality on Go green page
-	 */
-	@Then("^the user validates the Save Preferences Button")
-	public void UserValidatesSavePreferences() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateSavePreferences();
-
-	}
 
 	/**
 	 * @toDo : Validates the Go green header on Go green page
@@ -1149,19 +1053,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateCommunicationPreferencesForShip();
 	}
-	
-	@Then("^the user validates that Communication Preferences section for Ship$")
-	public void userValidatescommunicationpreferncesForShip(DataTable givenAttributes) {
-		/* Reading the given attribute from feature file */
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		String planName = memberAttributesMap.get("Plan Name");
-		CommunicationPreferencePage communicationPreferencePage = (CommunicationPreferencePage) getLoginScenario().getBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE);
-		communicationPreferencePage.validateCommunicationPreferencesForShip(planName);
-	}
 
 	@Then("^the user validates the Go Green page for a ship member$")
 	public void userValidatesGoGreenSectionForShip() {
@@ -1184,32 +1075,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateComboTabForAccountProfile();
 	}
 
-	@And("^I should see the combo tabs on Preferences page and user validates the elements on individual tabs$")
-	public void iShouldSeeTheComboTabsOnPreferencesPageAndUserValidatesTheElementsOnIndividualTabs() {
-
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
-				.navigateToCommunicationPreferencePage();
-		if (communicationPrefPage != null) {
-			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
-				communicationPrefPage.validateGoGreenSectionForShip();
-			} else {
-				communicationPrefPage.switchToFrameOnPreferences();
-				communicationPrefPage.changeAndVerifyOnlinePreference();
-			}
-			communicationPrefPage.switchTabForComboMember();
-			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
-				communicationPrefPage.validateGoGreenSectionForShip();
-			} else {
-				communicationPrefPage.switchToFrameOnPreferences();
-				communicationPrefPage.changeAndVerifyOnlinePreference();
-			}
-
-		}
-
-	}
 	
 	@And("^the user should not be able to edit the Phone numbers$")
 	public void userValidatesThePhoneSectionWithoutEditsAllowed() {

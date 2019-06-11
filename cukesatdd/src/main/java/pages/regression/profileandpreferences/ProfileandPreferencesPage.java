@@ -61,6 +61,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='atdd-editpreferences ng-scope']")
 	private WebElement editPrefLink;
 
+
 	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/h3")
 	private WebElement planName;
 
@@ -785,16 +786,18 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		js.executeScript("arguments[0].click();", element);
 	}
 
-	public void validatePlanNameMemberidNameAccountProfile() {
+	public String validatePlanNameMemberidNameAccountProfile() {
 
 		validateNew(planName);
 
 		System.out.println("Plan name is " + planName.getText());
 		validateNew(memberId);
 		validateNew(memberName);
-		// validateNewAccount Profile
+	
+	        return planName.getText();
+		}
 
-	}
+	
 
 	/**
 	 * @toDo : The user checks the email section
@@ -1231,50 +1234,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validateNew(editPreferencesLink);
 	}
 
-	/**
-	 * @toDo : Validates the Go green button in Communication Preferences
-	 *       section
-	 */
 
-	public GoGreenPage validategogreenbutton() {
-
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.switchTo().frame(0);
-		if (gopaperlessbutton.isSelected()) {
-				mailButton.click();
-				savePreferencesButton.click();
-				gopaperlessbutton.click();
-				savePreferencesButton.click();
-		} else {
-			gopaperlessbutton.click();
-			savePreferencesButton.click();
-			
-		}
-
-		System.out.println("Title is " + driver.getTitle());
-		if (getTitle().equalsIgnoreCase("Preferences")) {
-			return new GoGreenPage(driver);
-		}
-		return null;
-	}
-
-	/**
-	 * @toDo : Validates the headers on Go green page
-	 */
-
-	public void validateheader() {
-		editPrefLink.click();
-		CommonUtility.waitForPageLoad(driver, gogreenleaf, 7);
-		validateNew(gogreenleaf);
-		validateNew(goggreenheader);
-
-	}
-
+	
 	/**
 	 * @throws InterruptedException
 	 * @toDo : Validates the back Link functionality from Go green page to
@@ -1500,22 +1461,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	}
 
 	/**
-	 * @toDo : Validates the plan name on the Go Green page
-	 */
-
-	public void validatePlanName() {
-
-		try {
-			Thread.sleep(15000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validateNew(planNameGoGreen);
-
-	}
-
-	/**
 	 * @toDo : Validates the headers of the communication preferences section
 	 */
 
@@ -1531,17 +1476,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	/**
-	 * @toDo : Validates the presence of Back to Profile and Preferences links
-	 *       on Go green page
-	 */
-
-	public void validateBacktoPNPlink() {
-		
-		driver.switchTo().defaultContent();
-		validateNew(backLink1);
-
-	}
+	
 
 	/**
 	 * @toDo : Validates the Note section on Go green page
@@ -1555,37 +1490,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	/**
-	 * @toDo : Validates the I have read checkbox on Go green page
-	 */
-	public void validateCheckbox() {
-		// TODO Auto-generated method stub
+	
 
-		if (iHavereadCheckbox.isDisplayed()) {
-			iHavereadCheckbox.click();
-		}
-	}
-
-	/**
-	 * @toDo : Validates the save preferences functionality on Go green page
-	 */
-	public void validateSavePreferences() {
-		// TODO Auto-generated method stub
-		validateNew(savePreferencesButton);
-		if (iHavereadCheckbox.isSelected()) {
-			savePreferencesButton.click();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Assert.assertTrue(EditPreferenceButton.isDisplayed());
-
-		}
-
-	}
 
 	/**
 	 * @toDo : Validates the Go green header on Go green page
@@ -1770,7 +1676,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public CommunicationPreferencePage navigateToCommunicationPreferencePage() {
 		if (editPreferencesLink.isDisplayed())
 			editPreferencesLink.click();
-		if (driver.getTitle().contains("Preferences")) {
+		if (driver.getCurrentUrl().contains("preferences")) {
 			return new CommunicationPreferencePage(driver);
 		}
 		return null;
@@ -2255,6 +2161,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			Assert.assertFalse("Communication preferences section should  be coming for a ship member", true);
 
 		}
+
 	}
 
 	public void validateCommunicationPreferencesForPcpMedica() {
@@ -2460,4 +2367,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		}
 	}
+	
+	
+	
+
 }

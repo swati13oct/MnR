@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.memberrdesignVBF.GoGreenPage;
+
 
 public class CommunicationPreferencePage extends UhcDriver {
 
@@ -43,7 +45,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id = "IPerceptionsEmbed")
 	private WebElement iPerceptionPopUp;
 
-	@FindBy(className = "atdd-go-green-img")
+	@FindBy(xpath = "//img[@alt='Go Green']")
 	private WebElement gogreenleaf;
 
 	@FindBy(className = "atdd-goGreenHeader")
@@ -64,7 +66,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
 	private WebElement mailLabel;
 
-	@FindBy(className = "atdd-plan-name")
+	@FindBy(xpath = "//*[@id='mail-preferences-selector-SHIP']//h3")
 	private WebElement planNameGoGreen;
 
 	@FindBy(className = "h4 margin-none atdd-section-heading")
@@ -102,7 +104,19 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Plan Documents']")
 	private WebElement planDocumentsLabel;
+    
+	@FindBy(xpath = "//a[@class='atdd-editpreferences ng-scope']")
+	private WebElement editPrefLink;
+	
+	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
+	private WebElement gopaperlessbutton;
 
+	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[2]/fieldset/label/div")
+	private WebElement mailButton;
+	
+	@FindBy(xpath = ".//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a")
+	private WebElement editPreferencesLink;
+	
 	@FindBy(xpath = "//*[@id='communicationAddressCardHeight' or @id='communicationAddress']")
 	private List<WebElement> communicationPreferncessection;
 	
@@ -117,7 +131,6 @@ public class CommunicationPreferencePage extends UhcDriver {
 	
 	@FindBy(css="div#savePreferencesPopUpContent input#savepreferyes")
 	private WebElement welcomeKitYES;
-	
 	
 	
 	public CommunicationPreferencePage(WebDriver driver) {
@@ -200,6 +213,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 		} else
 			return false;
 	}
+	
+	
 
 	/**
 	 * Validate the communications page for ship members
@@ -217,7 +232,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 		validateNew(iHavereadCheckbox);
 		iHavereadCheckbox.click();
 		savePrefButtonSHIP.click();
-		waitforElementVisibilityInTime(EditPreferenceButton, 10);
+		waitforElementVisibilityInTime(EditPreferenceButton, 20);
 		validateNew(backToAccountProfile);
 		//Reverting the preferneces saved
 		EditPreferenceButton.click();
@@ -261,8 +276,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 	}
-
-	/**
+/**
 	 * @author bnaveen4
 	 * Validates the preferences for the SHIP members
 	 */
@@ -273,6 +287,110 @@ public class CommunicationPreferencePage extends UhcDriver {
 		Assert.assertEquals(planName, shipPlanName.getText().trim());
 		
 	}
+
+	/**
+	 * @toDo : Validates the headers on Go green page
+	 */
+
+	public void validateheader() {
+		
+		CommonUtility.waitForPageLoad(driver, gogreenleaf, 15);
+		validateNew(gogreenleaf);
+		validateNew(goggreenheader);
+
+	}
+	
+	/***
+	 * 
+	 */
+	public void validatePlanName(String planName) {
+		
+
+		String planNameOnProfilePage=planName;
+		validateNew(planNameGoGreen);
+        String planNameOnPreferencesPage=planNameGoGreen.getText();
+         Assert.assertTrue(planNameOnProfilePage.equalsIgnoreCase(planNameOnPreferencesPage));
+ 
+	}
+	
+	/**
+	 * @toDo : Validates the Go green button in Communication Preferences
+	 *       section
+	 */
+
+	public GoGreenPage validategogreenbutton() {
+
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.switchTo().frame(0);
+		if (gopaperlessbutton.isSelected()) {
+				mailButton.click();
+				savePreferencesButton.click();
+				gopaperlessbutton.click();
+				savePreferencesButton.click();
+		} else {
+			gopaperlessbutton.click();
+			savePreferencesButton.click();
+			
+		}
+
+		System.out.println("Title is " + driver.getTitle());
+		if (getTitle().equalsIgnoreCase("Preferences")) {
+			return new GoGreenPage(driver);
+		}
+		return null;
+	}
+
+
+	/**
+	 * @toDo : Validates the I have read checkbox on Go green page
+	 */
+	public void validateCheckbox() {
+		// TODO Auto-generated method stub
+
+		if (iHavereadCheckbox.isDisplayed()) {
+			iHavereadCheckbox.click();
+		}
+	}
+
+	/**
+	 * @toDo : Validates the save preferences functionality on Go green page
+	 */
+	public void validateSavePreferences() {
+		// TODO Auto-generated method stub
+		validateNew(savePreferencesButton);
+		if (iHavereadCheckbox.isSelected()) {
+			savePreferencesButton.click();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Assert.assertTrue(EditPreferenceButton.isDisplayed());
+
+		}
+
+	}
+	
+	/**
+	 * @toDo : Validates the presence of Back to Profile and Preferences links
+	 *       on Go green page
+	 */
+
+	public void validateBacktoPNPlink() {
+		
+		driver.switchTo().defaultContent();
+		validateNew(backLink1);
+
+	}
+	
+	
 	
 	public CommunicationPreferencePage selectPreferences(String delivery,String preference) {
 		
@@ -290,4 +408,5 @@ public class CommunicationPreferencePage extends UhcDriver {
 		return new CommunicationPreferencePage(driver);
 		}
 }
+	
 
