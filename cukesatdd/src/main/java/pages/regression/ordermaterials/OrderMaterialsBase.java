@@ -68,6 +68,13 @@ public class OrderMaterialsBase extends UhcDriver  {
 	public void openAndValidate() throws InterruptedException {
 	}
 
+	/**
+	 * Help method to click on ID card link (if applicable) and validate landing URL
+	 * @param testFor
+	 * @param planType
+	 * @param x
+	 * @throws InterruptedException
+	 */
 	public void validateIDCard(String testFor, String planType, WebElement x) throws InterruptedException {
 		WebElement idCard=idCardLinkOrderConfirmedPage;
 		if (testFor.equalsIgnoreCase("orderPage")) {
@@ -133,6 +140,11 @@ public class OrderMaterialsBase extends UhcDriver  {
 		CommonUtility.checkPageIsReady(driver);
 	}
 
+	/**
+	 * Helper method to click on the target test plan on combo tab
+	 * @param planType
+	 * @param memberType
+	 */
 	public void handleComboTabIfComboUser(String planType, String memberType) {
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, select the tab accordingly");
@@ -228,6 +240,10 @@ public class OrderMaterialsBase extends UhcDriver  {
 
 	}
 
+	/**
+	 * Helper method to click on the link for ordering additional materials.
+	 * @return
+	 */
 	public boolean navigateToOrderMore() {
 		CommonUtility.waitForPageLoadNew(driver, addOrderMaterialLink_OrderConfirmation, 60);
 		addOrderMaterialLink_OrderConfirmation.click();

@@ -1,21 +1,6 @@
 @orderPlanMaterials @thePredators
 Feature:P1.5 To test order materials in Redesign site
 
-#-------------------------
-# note: order materials ALM cases
-# TID: 15281 - TC_01_E2E_Combo member_ Order Plan Materials
-# TID: 15285 - TC_02_E2E_Medica_Order Plan Materials
-# TID: 15286 - TC_03_E2E_PCP_Order Plan Materials
-# TID: 15284 - TC_04_Terminate member flow_Order Plan Materials
-# TID: 15287 - TC_05_E2E_AARP MA COSMOS_Individual_Order Plan Materials
-# TID: 15288 - TC_06_E2E_UHC_MAPD NICE_Individual_Order Plan Materials
-# TID: 15289 - TC_07_E2E_Group MA NICE_Order Plan Materials
-# TID: 15290 - TC_08_E2E_Group PDP_Order Plan Materials
-# TID: 15291 - TC_09_E2E_Sr. Supp_Order Plan Materials
-# TID: 15292 - TC_10_E2E_AARP PDP_Order Plan Materials
-# TID: 15293 - TC_11_E2E_Ship Only_Order Plan Materials
-#-------------------------
-
   #----- beginning of VBF scenarios section ------------------   
   @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness
   Scenario Outline: Verify order materials confirmation page on member site
@@ -56,6 +41,21 @@ Feature:P1.5 To test order materials in Redesign site
 	  
   #----- end of VBF scenarios section ------------------   
 
+#-------------------------
+# note: order materials ALM cases
+# TID: 15281 - TC_01_E2E_Combo member_ Order Plan Materials
+# TID: 15285 - TC_02_E2E_Medica_Order Plan Materials
+# TID: 15286 - TC_03_E2E_PCP_Order Plan Materials
+# TID: 15284 - TC_04_Terminate member flow_Order Plan Materials
+# TID: 15287 - TC_05_E2E_AARP MA COSMOS_Individual_Order Plan Materials
+# TID: 15288 - TC_06_E2E_UHC_MAPD NICE_Individual_Order Plan Materials
+# TID: 15289 - TC_07_E2E_Group MA NICE_Order Plan Materials
+# TID: 15290 - TC_08_E2E_Group PDP_Order Plan Materials
+# TID: 15291 - TC_09_E2E_Sr. Supp_Order Plan Materials
+# TID: 15292 - TC_10_E2E_AARP PDP_Order Plan Materials
+# TID: 15293 - TC_11_E2E_Ship Only_Order Plan Materials
+#-------------------------
+
   #####################################################
   # note: This scenario validate the content and functionality of the order plan material page
   # note: It will attempt to order each available items one by one (via order additional material link)
@@ -65,6 +65,7 @@ Feature:P1.5 To test order materials in Redesign site
   # note:   initial will start with Order Material link on dashboard body, after closing view ID card will then use the top menu navigation
   # note: for ship user with EFT payment option setup will get expected error when ordering coupon book
   # note: for ship user without Medicare Select Plan will get expected error when ordering Medicare Select Hospital Directory
+  # note: for SSUP user is group only and the group has to be setup in GPS to accept online request for welcome kit
   # note: 
   #####################################################
   @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember
@@ -102,13 +103,14 @@ Feature:P1.5 To test order materials in Redesign site
       | 15289 | MAPD     | UHC_Group_order       |
       | 15290 | PDP      | UHC_Group_order       |
 
+   # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
    @ValidateHeaderComboTabs
     Examples: 
       | TID   | planType | memberType            | 
       | 15281 | MAPD	 | COMBO_order           |
       | 15281 | MEDSUPP	 | COMBO_order           |
       | 15291 | PDP      | COMBO_order	         |
-   #bad   | 15291 | SSUP     | COMBO_order	         |
+    # | 15291 | SSUP     | COMBO_order	         |
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 

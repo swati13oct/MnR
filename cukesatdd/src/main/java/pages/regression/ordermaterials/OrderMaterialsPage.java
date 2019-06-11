@@ -51,7 +51,6 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	@FindBy(xpath = "//*[contains(text(),'Plan Materials Order Confirmation')]")
 	private WebElement header_OrderConfirmation;
 
-
 	@FindBy(className = "orderplanmaterials")
 	private WebElement orderPlanMaterialsSection;
 
@@ -78,12 +77,6 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 
 	@FindBy(xpath="//*[@id = 'member-materials']/..//div[contains(@class,'group') and not(contains(@class,'ng-hide'))]")
 	private WebElement option_fed_memberMaterialsfield_WelcomeKit;
-	
-	//@FindBy(xpath="//*[@id = 'member-materials']/..//div[not(contains(@class,'ng-hide'))]//p[contains(text(),'Welcome Guide')]")
-	//private WebElement option_fed_memberMaterialsfield_WelcomeGuide;
-
-	//@FindBy(xpath="//*[@id = 'member-materials']/..//div[not(contains(@class,'ng-hide'))]//p[contains(text(),'Membership Materials')]")
-	//private WebElement option_fed_memberMaterialsfield_MembershipMaterials;
 
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	private WebElement option_fed_memberMaterialsfield;
@@ -222,7 +215,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 
 	@FindBy(xpath="//div[@class='card-body']//a[contains(text(),'PLAN DOCUMENTS & RESOURCES')]")
 	private WebElement printableDocLink;
-	
+
 	@FindBy(xpath="//a[contains(text(),'CARD')]")
 	private WebElement viewIdCard;
 
@@ -398,7 +391,6 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	 * @throws InterruptedException
 	 */
 	public String selectOption(String option) throws InterruptedException {
-		//takeCareiPerceptionPopUp();
 		CommonUtility.checkPageIsReady(driver);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", common_subSectionHeader);
 		String itemType="";
@@ -450,8 +442,6 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 				Assert.assertTrue("PROBLEM - unable to locate the state dropdown element", validate(option_ship_hospitalDirectory_stateDropdown));
 				Select ship_hopspitalStateDropdown = new Select(option_ship_hospitalDirectory_stateDropdown);
 				Assert.assertTrue("PROBLEM - there should be total of 58 options from dropdown.  Actual="+ship_hopspitalStateDropdown.getOptions().size(), ship_hopspitalStateDropdown.getOptions().size()==58);
-				//for(int i=0; i<ship_hopspitalStateDropdown.getOptions().size(); i++)
-				//	System.out.println("Located dropdown option ==> "+ship_hopspitalStateDropdown.getOptions().get(i).getText());
 			}
 			result=itemToOrderElement.getText();
 		}
@@ -607,11 +597,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			} else if (!planType.equalsIgnoreCase("PDP") && validate(option_fed_memberMaterialsfield_WelcomeKit)) { //note: only PDP can order Welcome Guide
 				Assert.assertTrue("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'",
 						validate(errorMsg_serviceFail));
-					System.out.println("Expected - NOT able to order item="+option);
-			//} else if ((!planType.equalsIgnoreCase("MA") && !planType.equalsIgnoreCase("MAPD"))&& validate(option_fed_memberMaterialsfield_MembershipMaterials)) {
-		//		Assert.assertTrue("PROBLEM - for non-MA or non-MAPD user should have gotten error message when attempting to order 'Membership Materials'",
-		//				validate(errorMsg_serviceFail));
-		//			System.out.println("Expected - NOT able to order item="+option);
+				System.out.println("Expected - NOT able to order item="+option);
 			} else {
 				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
 			}
