@@ -166,7 +166,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement changeLocationLink;
 
 
-	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion0']")
+	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(id = "js-ole-zip-search")
