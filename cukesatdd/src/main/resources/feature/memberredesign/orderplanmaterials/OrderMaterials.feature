@@ -1,5 +1,5 @@
 @orderPlanMaterials @thePredators
-Feature:P1.5 To test order materials in Redesign site
+Feature:P1.5 To test order materials in member site
 
   #----- beginning of VBF scenarios section ------------------   
   @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness
@@ -72,10 +72,10 @@ Feature:P1.5 To test order materials in Redesign site
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-	  | Member Type | <memberType> |
+      | Member Type | <memberType> |
     When user navigates to order plan materials page
       | Plan Type | <planType> |
-	  | Member Type | <memberType> |
+      | Member Type | <memberType> |
     Then user validates header section of page content on order materials page
     And user validates selection section of page content on order materials page
     And user validates printable documentations section of page content on order materials page
@@ -85,15 +85,12 @@ Feature:P1.5 To test order materials in Redesign site
     
     Examples: 
       | TID   | planType | memberType            | 
-      | 15287 | MA	     | AARP_Individual_order |  
+      | 15287 | MA	 | AARP_Individual_order |  
       | 15288 | MAPD     | AARP_Individual_order |
       | 15292 | PDP      | AARP_Individual_order |
       | 15288 | MAPD     | UHC_Individual_order  |
       | 15286 | PCP      | Individual_order      |
       | 15285 | MEDICA   | Individual_order      |
-    
-    Examples: 
-      | TID   | planType | memberType            | 
       | 15293 | SHIP     | MEDSUPP_order         | 
 
     @GroupMemberOrderSelectionandConfirmation 
@@ -125,7 +122,7 @@ Feature:P1.5 To test order materials in Redesign site
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Terminated members cannot access Order Plan materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-	  | Member Type | <memberType> |
+      | Member Type | <memberType> |
     Then user should not see Order Materials Link for terminated member
     Then user validates header navigation is not available for Terminated member
 
