@@ -14,6 +14,6 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=2, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunFeatureATDDAcquisitionAgentFlow.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunFeatureATDDAcquisitionAgentFlow")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/agentflow" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunFeatureATDDAcquisitionAgentFlow.json" }, tags = { "@agentAppointmentUlayerSmoke, @agentAppointmentBlayerSmoke" })
-public class RunFeatureATDDAcquisitionAgentFlow {
+public class RunFeatureATDDAcquisitionAgentFlowVBF {
 
 }
