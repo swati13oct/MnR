@@ -165,7 +165,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate claims table displayed based on the selection on claims summary page
     And I can validate the EOB section based on claims system on claims summary page
     And I validate the Need Help section content on claims summary page
-    Then I validate Claim Details page content value and Learn More and EOB and tooltops
+    Then I validate Claim Details page content value and Learn More and EOB and tooltips
     Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Final Test claims number makes sense from search periods --------------
     And I can validate the numbers of claims from all search periods
@@ -328,7 +328,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate claims table displayed based on the selection on claims summary page
     And I can validate the EOB section based on claims system on claims summary page
     And I validate the Need Help section content on claims summary page
-    Then I validate Claim Details page content value and Learn More and EOB and tooltops
+    Then I validate Claim Details page content value and Learn More and EOB and tooltips
     Then I perform extensive validation for values between claims summary and claim details page
 
     Examples: 
