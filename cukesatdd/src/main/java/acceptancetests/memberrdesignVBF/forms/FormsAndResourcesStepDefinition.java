@@ -230,7 +230,7 @@ public class FormsAndResourcesStepDefinition {
 	
 	@Then("^search by type of document or view all documents$")
 	public void search_by_type_of_document_or_view_all_documents(DataTable documenttype) throws Throwable {
-		List<DataTableRow> memberAttributesRow = documenttype.getGherkinRows();
+		List<DataTableRow> memberAttributesRow = documenttype.getGherkinRows(); 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++){
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));

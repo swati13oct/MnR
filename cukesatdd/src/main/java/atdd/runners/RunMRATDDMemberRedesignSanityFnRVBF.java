@@ -15,6 +15,6 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF" }, features = { "src/main/resources/feature/member-redesign-vbf/forms-and-resources" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignSanityFnRVBF.json" }, tags = { "@smokeTest_FNR_Document,@smokeTest_FNR" },monochrome = true)
 
-public class RunMRATDDMemberRedesignSanityFnRVBF {
+public class RunMRATDDMemberRedesignSanityFnRVBF{
 
 }

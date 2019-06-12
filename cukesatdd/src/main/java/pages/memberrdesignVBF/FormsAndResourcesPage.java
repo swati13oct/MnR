@@ -352,7 +352,6 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement geteobmapdsection() {
 		validateNew(eobSectionHeader);
 		return eobSectionHeader;
-
 	}
 
 	/**
