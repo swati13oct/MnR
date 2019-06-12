@@ -60,4 +60,4 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
 
     Examples: 
       | memberType                 | friendname | favcolor | phonenumber | documenttype | viewdocumentsfrom |
-      | IndAARPPre-EffectivePDPFnR | name1      | color1   | number1     | All          | Last 24 Months    |
+      | MyDocumentMapdInd          | name1      | color1   | number1     | All          | Last 24 Months    |

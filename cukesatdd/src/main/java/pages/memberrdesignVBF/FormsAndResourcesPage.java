@@ -135,7 +135,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id = "healthwellness_3")
 	private List<WebElement> healthWellness;
 
-	@FindBy(xpath = "//*[contains(text(), 'You can search by type')]")
+	@FindBy(xpath = "//p[contains(text(),'type of document')]")
 	private WebElement validateDocumentTypePage;
 	
 	@FindBy(id="doc-type")
@@ -144,14 +144,15 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id="document-date")
 	private WebElement planType;
 	
-	@FindBy(xpath = "//*[text()='Document Type:']")
-	private List<WebElement> DocumentType;
-	
-	@FindBy(xpath = "//*[@id='myDocuments']/div[2]/div[2]/div/table")
+	@FindBy(tagName = "table")
 	private WebElement validateTable;
 	
-	@FindBy(xpath = "//*[@class='link link--icon-left link--icon-circled']")
+	@FindBy(xpath = "//a[contains(text(),'View/Download')]")
+	private WebElement validateViewDownload;
+	
+	@FindBy(xpath = "//a[contains(@class,'link link--icon-left link--')]")
 	private WebElement returnToPrevious;
+	
 	String category = null;
 
 	public FormsAndResourcesPage(WebDriver driver) {
@@ -363,49 +364,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 		validateNew(FormsnResourcesLinkPdf);
 	}
 	
-	
-	@FindBy(xpath = "//*[contains(text(),'There are no documents available')]")
-	private WebElement validateNoTable;
-	
 	public FormsAndResourcesPage selectDateRange(String documentTypeData, String planTypeData){
 		selectFromDropDownByText(driver,documentType,documentTypeData);
 		selectFromDropDownByText(driver,planType,planTypeData);	
 		waitforElementVisibilityInTime(validateTable,60);
-		if(validateTable.isDisplayed())	{
-				validateNew(validateTable);
-				System.out.println("Plan document view/download table is visible.");		
-		}else if(validateNoTable.isDisplayed()){
-			System.out.println("There are no documents available for the time period entered. Select a new date range.");
-		}
-		else{
+		if(validateTable.isDisplayed())	{			
+			validateNew(validateViewDownload);
+			System.out.println("Plan document view/download table is visible.");		
+		}else{
 			Assert.fail("Plan document view/download table is not visible.");
 		}
 		returnToPrevious.click();
 		validateNew(FormsnResourcesLinks);
  		return new FormsAndResourcesPage(driver);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
