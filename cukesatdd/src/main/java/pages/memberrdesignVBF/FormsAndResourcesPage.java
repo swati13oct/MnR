@@ -14,6 +14,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
+import pages.regression.explanationofbenefits.EOBPage;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
@@ -134,6 +135,23 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id = "healthwellness_3")
 	private List<WebElement> healthWellness;
 
+	@FindBy(xpath = "//*[contains(text(), 'You can search by type')]")
+	private WebElement validateDocumentTypePage;
+	
+	@FindBy(id="doc-type")
+	private WebElement documentType;
+	
+	@FindBy(id="document-date")
+	private WebElement planType;
+	
+	@FindBy(xpath = "//*[text()='Document Type:']")
+	private List<WebElement> DocumentType;
+	
+	@FindBy(xpath = "//*[@id='myDocuments']/div[2]/div[2]/div/table")
+	private WebElement validateTable;
+	
+	@FindBy(xpath = "//*[@class='link link--icon-left link--icon-circled']")
+	private WebElement returnToPrevious;
 	String category = null;
 
 	public FormsAndResourcesPage(WebDriver driver) {
@@ -166,6 +184,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 		}
 	}
 
+	/**
+	 * @toDo : Document Type text
+	 */
+	public WebElement getvalidateDocumentTypePage() {
+		validateNew(validateDocumentTypePage);
+		return validateDocumentTypePage;
+	}
+	
 	/**
 	 * @toDo : EOB medical button
 	 */
@@ -336,4 +362,50 @@ public class FormsAndResourcesPage extends UhcDriver {
 		FormsnResourcesLinks.click();
 		validateNew(FormsnResourcesLinkPdf);
 	}
+	
+	
+	@FindBy(xpath = "//*[contains(text(),'There are no documents available')]")
+	private WebElement validateNoTable;
+	
+	public FormsAndResourcesPage selectDateRange(String documentTypeData, String planTypeData){
+		selectFromDropDownByText(driver,documentType,documentTypeData);
+		selectFromDropDownByText(driver,planType,planTypeData);	
+		waitforElementVisibilityInTime(validateTable,60);
+		if(validateTable.isDisplayed())	{
+				validateNew(validateTable);
+				System.out.println("Plan document view/download table is visible.");		
+		}else if(validateNoTable.isDisplayed()){
+			System.out.println("There are no documents available for the time period entered. Select a new date range.");
+		}
+		else{
+			Assert.fail("Plan document view/download table is not visible.");
+		}
+		returnToPrevious.click();
+		validateNew(FormsnResourcesLinks);
+ 		return new FormsAndResourcesPage(driver);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
