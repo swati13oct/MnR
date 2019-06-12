@@ -1,89 +1,132 @@
-@orderPlanMaterials @thePredators @redesignOrderMaterials
-Feature:P1.5 To test order materials in Redesign site
+@orderPlanMaterials @thePredators
+Feature:P1.5 To test order materials in member site
 
-  @orderPlanMaterials1 @ConfirmationPage @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify order materials confirmation page in Redesign site
+  #----- beginning of VBF scenarios section ------------------   
+  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness
+  Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    Then user validates all Order material Options for the plantype
-      | Combo Plans | <planType> |
-    And the user verify need help component in Redesign site
-    And the user selects an option from the orderp list in Redesign site
-      | Option    | <option>   |
+    When user navigates to order plan materials page
+      | Plan Type   | <planType>   |
+	  | Member Type | <memberType> |
+    And user validates header section of page content on order materials page
+    And user validates ability to submit order for item
       | Plan Type | <planType> |
+      | Option    | <option>   |
     And the user validate order additional material and click to add other order additional material in Order Confirmation Page
+
+    Examples: 
+	  | planType | memberType       | option              | 
+	  | MAPD     | UhcMapdInd       | Replacement ID card |
+	#  | MAPD     | AARPMapdInd      | Replacement ID card |
+	#  | MAPD     | GroupRetireeMapd | Replacement ID card |
+	#  | MA       | UhcIndMA         | Member Materials    |
+	#  | PDP      | AARPIndPDP       | Welcome Guide       |
+	#  | SHIP     | Ship             | Member ID Card      |
  
-    Examples: 
-      | TID   | planType | memberType              | option              |
-      | 15287 | MA       | AARP_Individual_order   | Replacement ID card |
-      | 15288 | MAPD     | AARP_Individual_order   | Replacement ID card |
-      | 15286 | PCP      | Individual_order        | Replacement ID card |
-      | 15285 | MEDICA   | Individual_order        | Replacement ID card | 
-      | 15292 | PDP      | AARP_Individual_order   | Welcome Guide       |
-      | 15293 | SHIP     | EFT_MedSelectPlan_order | Claims Envelope     |
-
-  #note: for SHIP user to get this error, user must have signed up for EFT i.e. recurring payments
-  @orderPlanMaterials2 @ValidateSHIPErrorMessage @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify SHIP Invalid selection Order Materials Page Error Message
-     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-	  | Member Type   | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    And the user click Submit without any selection
-    Then the user validates error message in Order Materials page
-    And the user selects an option from the orderp list in Redesign site
-      | Option    | <option>   |
-      | Plan Type | <planType> |
-    Then the user validates error message for SHIP invalid selection in Order Materials page
-
-    Examples: 
-      | TID   | planType | memberType              | option      | 
-      | 15293 | SHIP     | EFT_MedSelectPlan_order | Coupon Book | 
-
-  @orderPlanMaterials3 @GroupMemberOrderSelectionandConfirmation @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -option <option> - Verify order plan materials in Redesign site for radio button validation and Order Confirmation for UHC plan Members
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-	  | Member Type   | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    And the user selects an option from the orderp list in Redesign site
-      | Option    | <option>   |
-      | Plan Type | <planType> |
-    And the user validate order additional material and click to add other order additional material in Order Confirmation Page
-
-    Examples: 
-      | TID   | planType | memberType           | option              |
-      | 15289 | MA       | UHC_Group_order      | Replacement ID card |
-      | 15290 | PDP      | UHC_Group_order      | Welcome Guide       |
-      | 15289 | MAPD     | UHC_Group_order      | Replacement ID card |
-
- #note: in comboPlans column, the order of the planTypes should follow the same as tabs order in the order plan materials page 	
- @orderPlanMaterials4 @ValidateHeaderComboTabs @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Aarp Order Materials Page Header - All Combo Plan Types
+  @smokeTest @MemberVBF @peformanceTest_OrderPlanMaterial
+  Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-    When the user views order materials in Member Redesign Order Materials page
-    Then user navigates to Order Materials page for all Plans
-      | Combo Plans | <comboPlans> |
-  
-    And user Validates Page Header and Sub-Header text
+    When user navigates to order plan materials page
+      | Plan Type   | <planType>   |
+	  | Member Type | <memberType> |
+    And user validates header section of page content on order materials page
+    
     Examples: 
-    | TID   | planType | memberType            | comboPlans   |
-    | 15281 | MEDSUPP	   | COMBO_order | MedSupp,MAPD | 
-    | 15291 | SSUP     | COMBO_order	   | PDP,SSUP	  |
+	  | planType | memberType            |
+	  | MAPD     | UhcMapdIndPerformance |  
+	  
+  #----- end of VBF scenarios section ------------------   
 
- @orderPlanMaterials5 @TerminatedMemberNegativeScenario @regressionMember
+#-------------------------
+# note: order materials ALM cases
+# TID: 15281 - TC_01_E2E_Combo member_ Order Plan Materials
+# TID: 15285 - TC_02_E2E_Medica_Order Plan Materials
+# TID: 15286 - TC_03_E2E_PCP_Order Plan Materials
+# TID: 15284 - TC_04_Terminate member flow_Order Plan Materials
+# TID: 15287 - TC_05_E2E_AARP MA COSMOS_Individual_Order Plan Materials
+# TID: 15288 - TC_06_E2E_UHC_MAPD NICE_Individual_Order Plan Materials
+# TID: 15289 - TC_07_E2E_Group MA NICE_Order Plan Materials
+# TID: 15290 - TC_08_E2E_Group PDP_Order Plan Materials
+# TID: 15291 - TC_09_E2E_Sr. Supp_Order Plan Materials
+# TID: 15292 - TC_10_E2E_AARP PDP_Order Plan Materials
+# TID: 15293 - TC_11_E2E_Ship Only_Order Plan Materials
+#-------------------------
+
+  #####################################################
+  # note: This scenario validate the content and functionality of the order plan material page
+  # note: It will attempt to order each available items one by one (via order additional material link)
+  # note  It will validate successful response or expected failure
+  # note: It applicable, View ID link, Printable Documents, Contact Us links will be validated
+  # note: Will also validate different ways to navigate to order plan material 
+  # note:   initial will start with Order Material link on dashboard body, after closing view ID card will then use the top menu navigation
+  # note: for ship user with EFT payment option setup will get expected error when ordering coupon book
+  # note: for ship user without Medicare Select Plan will get expected error when ordering Medicare Select Hospital Directory
+  # note: for SSUP user is group only and the group has to be setup in GPS to accept online request for welcome kit
+  # note: 
+  #####################################################
+  @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to order plan materials page
+      | Plan Type | <planType> |
+      | Member Type | <memberType> |
+    Then user validates header section of page content on order materials page
+    And user validates selection section of page content on order materials page
+    And user validates printable documentations section of page content on order materials page
+    And user validates need help section of page content on order materials page
+    And user validates error message when submit without any selection
+    Then user validates ability to submit order for each item individually for all available items
+    
+    Examples: 
+      | TID   | planType | memberType            | 
+      | 15287 | MA	 | AARP_Individual_order |  
+      | 15288 | MAPD     | AARP_Individual_order |
+      | 15292 | PDP      | AARP_Individual_order |
+      | 15288 | MAPD     | UHC_Individual_order  |
+      | 15286 | PCP      | Individual_order      |
+      | 15285 | MEDICA   | Individual_order      |
+      | 15293 | SHIP     | MEDSUPP_order         | 
+
+    @GroupMemberOrderSelectionandConfirmation 
+    Examples: 
+      | TID   | planType | memberType            | 
+      | 15289 | MA       | UHC_Group_order       |
+      | 15289 | MAPD     | UHC_Group_order       |
+      | 15290 | PDP      | UHC_Group_order       |
+
+   # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
+   @ValidateHeaderComboTabs
+    Examples: 
+      | TID   | planType | memberType            | 
+      | 15281 | MAPD	 | COMBO_order           |
+      | 15281 | MEDSUPP	 | COMBO_order           |
+      | 15291 | PDP      | COMBO_order	         |
+    # | 15291 | SSUP     | COMBO_order	         |
+
+    @ValidateSHIPCouponBookErrorMessage
+    Examples: 
+      | TID   | planType | memberType               | 
+      | 15293 | SHIP     | EFT_MedSelectPlan_order  | 
+
+  #####################################################
+  # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
+  # note: This test is applicable to test via rally login only, validation will be skipped if access through testharness
+  # note:
+  @orderPlanMaterials02 @TerminatedMemberNegativeScenario @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Terminated members cannot access Order Plan materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-	  | Member Type | <memberType> |
-    Then the user should not see Order Materials Link for terminated member
+      | Member Type | <memberType> |
+    Then user should not see Order Materials Link for terminated member
     Then user validates header navigation is not available for Terminated member
 
     Examples: 
-    | TID   | planType | memberType                 |
-    | 15284 | MAPD     | AARP_Terminatedmember_order|
-           
+      | TID   | planType | memberType                  |
+      | 15284 | MAPD     | AARP_Terminatedmember_order |
+    
