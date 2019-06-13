@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,6 +54,9 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']")
 	private WebElement iHavereadCheckbox;
+	
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//label[@for='requiredplan']")
+	private WebElement iHavereadCheckboxForShip;
 
 	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[1]")
 	private WebElement onlineDeliveryRadioButton;
@@ -72,8 +76,11 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(className = "h4 margin-none atdd-section-heading")
 	private WebElement communicationPreferences;
 
-	@FindBy(className = "atdd-banklink-prefernce")
+	@FindBy(xpath = "//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
 	private WebElement backLink1;
+
+	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
+	private WebElement backLink2;
 
 	@FindBy(className = "atdd-notes")
 	private WebElement NoteSection;
@@ -131,6 +138,19 @@ public class CommunicationPreferencePage extends UhcDriver {
 	
 	@FindBy(css="div#savePreferencesPopUpContent input#savepreferyes")
 	private WebElement welcomeKitYES;
+	
+	@FindBy(xpath = "//div[@class='otherPages SHIP']//button[@class='btn save-prefs-btn']")
+	private WebElement savePreferencesButtonShip;
+	
+	@FindBy(className="savePreferModal")
+	private List<WebElement> modalPopupWindow;
+	
+	@FindBy(id="savepreferyes")
+	private WebElement modalPopupWindowYesButton;
+	
+	@FindBy(xpath="//[@id='savePreferencesPopUpContent']//button[1]")
+	private WebElement modalPopupWindowSubmitButton;
+	
 	
 	
 	public CommunicationPreferencePage(WebDriver driver) {
@@ -228,23 +248,12 @@ public class CommunicationPreferencePage extends UhcDriver {
 		validateNew(claimsLabel);
 		validateNew(planDocumentsLabel);
 		validateNew(savePrefButtonSHIP);
-		jsClickNew(onlineDeliveryPlanDocuments);
-		validateNew(iHavereadCheckbox);
-		iHavereadCheckbox.click();
-		savePrefButtonSHIP.click();
-		waitforElementVisibilityInTime(EditPreferenceButton, 20);
-		validateNew(backToAccountProfile);
-		//Reverting the preferneces saved
-		EditPreferenceButton.click();
-		waitforElementVisibilityInTime(savePrefButtonSHIP, 10);
-		jsClickNew(mailDeliveryPlanDocuments);
-		validateNew(iHavereadCheckbox);
-		iHavereadCheckbox.click();
-		savePreferencesButton.click();
-		waitforElementVisibilityInTime(EditPreferenceButton, 10);
-		validateNew(EditPreferenceButton);
-		validateNew(backLink1);
+		validateNew(iHavereadCheckboxForShip);
+		
 	}
+	
+	
+	
 
 	public boolean validateifEPMPIframeIsPresent() {
 
@@ -387,15 +396,26 @@ public class CommunicationPreferencePage extends UhcDriver {
 	}
 	
 	/**
+	 * @return 
 	 * @toDo : Validates the presence of Back to Profile and Preferences links
 	 *       on Go green page
 	 */
 
-	public void validateBacktoPNPlink() {
-		
+	public ProfileandPreferencesPage validateBacktoPNPlink() {
 		driver.switchTo().defaultContent();
 		validateNew(backLink1);
+		///validating back link on the top
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
+		System.out.println("scrolling down");
+		validateNew(backLink2);
+		backLink2.click();
 
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new ProfileandPreferencesPage(driver);
+		} 
+		return null;
+	
 	}
 	
 	
@@ -415,6 +435,55 @@ public class CommunicationPreferencePage extends UhcDriver {
 		
 		return new CommunicationPreferencePage(driver);
 		}
+
+	public ProfileandPreferencesPage validateBacktoPNPlinkForShip() {
+		//validating back link on the top
+		validateNew(backLink1);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
+		System.out.println("scrolling down");
+		//validating back link at the bottom
+		validateNew(backLink2);
+		backLink2.click();
+
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new ProfileandPreferencesPage(driver);
+		} 
+		return null;
+	}
+
+	public void validateUpdatePreferencesForShip() {
+		
+        jsClickNew(onlineDeliveryPlanDocuments);
+		
+		iHavereadCheckboxForShip.click();
+		savePrefButtonSHIP.click();
+		if(modalPopupWindow.size()>0)
+		{
+			boolean isYesSelected=modalPopupWindowYesButton.isSelected();
+			if(isYesSelected)
+			{
+				modalPopupWindowSubmitButton.click();
+			}
+			else
+			{
+				modalPopupWindowYesButton.click();
+				modalPopupWindowSubmitButton.click();
+			}
+		}
+			
+		waitforElementVisibilityInTime(EditPreferenceButton, 30);
+		//Reverting the prefereneces saved
+		EditPreferenceButton.click();
+		waitforElementVisibilityInTime(savePrefButtonSHIP, 10);
+		jsClickNew(mailDeliveryPlanDocuments);
+		validateNew(iHavereadCheckboxForShip);
+		iHavereadCheckboxForShip.click();
+		savePreferencesButtonShip.click();
+		waitforElementVisibilityInTime(EditPreferenceButton, 20);
+		validateNew(EditPreferenceButton);
+		
+	}
 }
 	
 

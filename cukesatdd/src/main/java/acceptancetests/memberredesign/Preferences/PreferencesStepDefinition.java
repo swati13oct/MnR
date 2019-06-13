@@ -22,6 +22,7 @@ import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -69,7 +70,7 @@ public class PreferencesStepDefinition {
 
 	}
 
-	@Then("the user validates the presence of Plan Name on Communication Preferences Page for Ship ")
+	@Then("^the user validate the presence of Plan Name on Communication Preferences Page for Ship$")
 	public void UserValidatesPlanNameForShip() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -115,14 +116,32 @@ public class PreferencesStepDefinition {
 	 * @toDo : Validates the presence of Back to Profile and Preferences links
 	 *       on Go green page
 	 */
-	@Then("^the user validates the presence of Back to Profile and Preferences links")
+	@Then("^the user validates the presence of Back links on Preferences page$")
 	public void UserValidatesBacktoPNPlink() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		communicationPrefPage.validateBacktoPNPlink();
-
+		ProfileandPreferencesPage profilePage=communicationPrefPage.validateBacktoPNPlink();
+		if (profilePage == null) {
+			Assert.fail("Back link to Profile page is not working");
+		}
 	}
 
+	/**
+	 * @toDo : Validates the presence of Back link to Profile page from
+	 *       on Go green page
+	 */
+	@Then("^the user validates the presence of Back links on ship Preferences page$")
+	public void UserValidatesBacktoProfilePagelinkForShip() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+		ProfileandPreferencesPage profilePage=communicationPrefPage.validateBacktoPNPlinkForShip();
+		if (profilePage == null) {
+			Assert.fail("Back link to Profile page is not working");
+		}
+	}
+	
+
+	 
 	@Then("^the user changes the online preference and saves the change")
 	public void userChangesOnlinePref() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
@@ -131,8 +150,6 @@ public class PreferencesStepDefinition {
 		Assert.assertTrue("Communication preference online preference changed and verified",
 				communicationPrefPage.changeAndVerifyOnlinePreference());
 	}
-
-
 
 	/**
 	 * @toDo : Validates the headers and labels of the communication preferences section for SHIP
@@ -147,6 +164,22 @@ public class PreferencesStepDefinition {
 		communicationPreferencesPage.validateGoGreenSectionForShip();
 
 	}
+	
+	
+	/**
+	 * @toDo : Validates the ship preferences update functionality
+	 */
+
+	@Then("^the user validates the update preferences functionality for ship")
+	public void validate_update_preferences_functionality_for_ship() {
+		
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+		
+		communicationPreferencesPage.validateUpdatePreferencesForShip();
+
+	}
+	
 
 	
 	@And("^I should see the combo tabs on Preferences page and user validates the elements on individual tabs$")

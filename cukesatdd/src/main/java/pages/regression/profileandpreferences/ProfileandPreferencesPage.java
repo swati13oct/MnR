@@ -1677,7 +1677,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public CommunicationPreferencePage navigateToCommunicationPreferencePage() {
 		if (editPreferencesLink.isDisplayed())
 			editPreferencesLink.click();
-		if (driver.getCurrentUrl().contains("preferences")) {
+		if (driver.getCurrentUrl().contains("preferences"))
+		{
 			return new CommunicationPreferencePage(driver);
 		}
 		return null;
