@@ -4,6 +4,7 @@
 package pages.acquisition.isdecisionguide;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -229,6 +230,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	public boolean invalidFieldValidation() {
 
 		boolean flag = true;
+		FirstNameTxt.clear();
 		FirstNameTxt.sendKeys("-abc351351*&^*^&");
 		NextBtn.click();
 		if(validate(FirstNameError) && FirstNameError.isDisplayed()){
@@ -243,6 +245,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("First Name Invalid Error field is not displayed");
 
 		}
+		FirstNameTxt.clear();
 		FirstNameTxt.sendKeys("- ' abc");
 		NextBtn.click();
 		if(validate(FirstNameError) && FirstNameError.isDisplayed()){
@@ -257,7 +260,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("First Name InvalidError field is not displayed");
 
 		}
-
+		LastNameTxt.clear();
 		LastNameTxt.sendKeys("-abc351351*&^*^&");
 		NextBtn.click();
 		if(validate(LastNameError) && LastNameError.isDisplayed()){
@@ -272,6 +275,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("Last Name Error field is not displayed");
 
 		}
+		LastNameTxt.clear();
 		LastNameTxt.sendKeys("- ' abc");
 		NextBtn.click();
 		if(validate(LastNameError) && LastNameError.isDisplayed()){
@@ -286,7 +290,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("Last Name Error field is not displayed");
 
 		}
-
+		EmailTxt.clear();
 		EmailTxt.sendKeys("(*^*_asb@t.c");
 		NextBtn.click();
 		if(validate(EmailError) && EmailError.isDisplayed()){
@@ -301,7 +305,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("Email Invalid Error field is not displayed");
 
 		}
-
+		HomeAddressTxt.clear();
 		HomeAddressTxt.sendKeys("[*(abc");
 		NextBtn.click();
 		if(validate(HomeAddressError) && HomeAddressError.isDisplayed()){
@@ -316,6 +320,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("Address Invalid Error field is not displayed");
 
 		}
+		CityTxt.clear();
 		CityTxt.sendKeys("[*(abc%&&*(&^ 123");
 		NextBtn.click();
 		if(validate(CityError) && CityError.isDisplayed()){
@@ -329,7 +334,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			System.out.println("City Error field is not displayed");
 
 		}
-		
+		ZipTxt.clear();
 		ZipTxt.sendKeys("12");
 		NextBtn.click();
 		if(validate(ZipError)) {
@@ -342,8 +347,43 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		else{
 			System.out.println("Zip code invalid error field is not displayed");
 		}
+		WebElement StateSelect = driver.findElement(By.xpath("//*[@id='agent-appointment-form-state']//option[text()='Select a state']"));
+
 
 		return flag;
+	}
+
+	public boolean NextBtn_invalidAddressValidation() {
+		boolean flag = true;
+
+		FirstNameTxt.clear();
+		FirstNameTxt.sendKeys("Test");
+		LastNameTxt.clear();
+		LastNameTxt.sendKeys("Text");
+		MailOptionSelection.click();
+		HomeAddressTxt.clear();
+		HomeAddressTxt.sendKeys("12 test street");
+		CityTxt.clear();
+		CityTxt.sendKeys("Test City");
+		ZipTxt.clear();
+		ZipTxt.sendKeys("80210");
+		WebElement StateSelect = driver.findElement(By.xpath("//*[@id='agent-appointment-form-state']//option[text()='CA']"));
+		StateSelect.click();
+		NextBtn.click();
+		if(validate(HomeAddressError)) {
+		  if(!HomeAddressError.getText().contains("Home Address (Apt/Suite/Unit number if applicable. Please note: P.O. Box/PMB cannot be accepted as a home address.") && 
+				  !HomeAddressError.getText().contains("Address not found. If you believe this address is valid, call 1-888-378-0254, TTY 711, for help in requesting information.")){
+			  System.out.println("Address Not Found Error is not displayed : "+HomeAddressError.getText());
+			  flag=false;
+		  }
+		  System.out.println("Address Not Found Error : "+HomeAddressError.getText());
+		}
+		else{
+			System.out.println("Address Not Found error field is not displayed");
+		}
+
+		return flag;
+	
 	}
 
 }

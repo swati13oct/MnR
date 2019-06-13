@@ -18,8 +18,9 @@ Feature: Med Supp Plans (IS) Decision Guide flow in AARP site
 		| FirstName | <firstname> |
 		| LastName | <lastname> |
 	  | DistributionMethod | <distributionmethod> |
+	  | Email | <email> |
 	  Then the user validates address autocomplete on Step1
 	  
     Examples: 
-      | UID | zipcode | isMultutiCounty | county             | plantype |
-      |     |   90210 | NO              | Los Angeles County | MS       |
+      | UID | zipcode | isMultutiCounty | county             | plantype | firstname | lastname | distributionmethod | email |
+      |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail |  |

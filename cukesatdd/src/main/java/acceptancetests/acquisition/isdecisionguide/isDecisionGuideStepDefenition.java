@@ -44,7 +44,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 /**
  * @author sdwaraka
- * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
+ * Functionality:IS - Med Supp Decision Guide for both AAPR and UHC acquisition sites
  */
 public class isDecisionGuideStepDefenition {
 
@@ -97,11 +97,20 @@ public class isDecisionGuideStepDefenition {
 		if(!Validation_Flag){
 			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
 		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
 	}
 
 	@Then("^the user validated invalid address error message for next button on Step(\\d+)$")
 	public void the_user_validated_invalid_address_error_message_for_next_button_on_Step(int arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.NextBtn_invalidAddressValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
 	}
 
 	@Then("^the user enters valid information for the following fields$")
