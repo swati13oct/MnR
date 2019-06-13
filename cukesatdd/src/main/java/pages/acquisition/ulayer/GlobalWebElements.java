@@ -85,7 +85,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(linkText = "Back to Top")
 	 public static WebElement footerNavigationBackToTopLink;
 	
-	@FindBy(linkText = "View all disclaimer information")
+	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
 	@FindBy(linkText = "Hide disclaimer information")

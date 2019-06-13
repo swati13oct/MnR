@@ -83,7 +83,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='block-body']")
-	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div[2]/div[1]//a)[7]")
+	@FindBy(xpath = "(//*[@id='eobsection']/div[2]/div[1]/div/div/a)[6]")
 	private WebElement btnEobMedicalButton;
 
 	@FindBy(xpath = "//*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
@@ -93,7 +93,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='col-md-4 block border-left']")
-	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div//div[2]//a)[2]")
+	@FindBy(xpath = "(//*[@id='eobsection']/div[2]/div[2]/div/div/a)[1]")
 	private WebElement btneobDrugButton;
 
 	/** Medical button in Eob section for mapd group */
@@ -108,7 +108,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement eobDrugButtonPDP;
 
 	/** Renew Magazine Section - Forms And Resources page */
-	@FindBy(xpath = "//*[@class='otherPages renewmagazine_UHC_GROUP_MA_MAPD']//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2")
+	@FindBy(xpath = "(//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2)[1]")
 	private WebElement renewMagazineSectionMAPDAARP;
 
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_AARP_PDP']")
@@ -466,10 +466,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
 
+/*<<<<<<< theATeam
+	@FindBy(xpath = "(//*[@id='eobsection']/div[1]/div/h2)[6]")
+	private WebElement btnEobSectionall;
+	
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
+=======*/
 	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//a[contains(@class,'btn btn--secondary') and contains(text(),'EOB HISTORY')]")
 	private WebElement btnEobSectionall;
 
 	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//h3[contains(text(),'EOB')]")
+
 	private WebElement eobSectionall;
 	
 	@FindBy(xpath = "//*[@class='otherPages UHC_IND_MAPD']//ul/li[3]/a")

@@ -1,6 +1,67 @@
 @formsAndResources @dashBoardFormsAndResources @gladiators
 Feature: G1.1 To validate forms and resources page in dashboard site
 
+		# Regression Runner devided into 2 runs with 2 runner, One runner with @Regression Member, next one with @Part2of2Regression, it devided the scenarios 17 each
+
+	@smokeTest_FNR @FormsandResources 
+   Scenario Outline: VBF- Forms and Resources
+   Given login with following details logins in the member portal and validate elements
+	  | Plan Type      | <planType>      |
+	  | Member Type    | <memberType>    |
+    And user clicks on the view document and resources link and navigate to forms and resource page
+	  | Plan Type      | <planType>      |
+	  | Member Type    | <memberType>    |
+	Then validate that the plan material section is displayed
+	  | Member Type | <memberType> |
+	And validate that english is default language in the dropdown
+	  | Member Type | <memberType> |
+	And then user verifies that the correct pdfs are coming in the plan material section
+      | Benefit Highlights            			 | <benefithighlight>       |
+      | Summary of Benefits          			 | <summaryofbenefits>      |
+      | Evidence of Coverage         			 | <evidenceofcoverage>     |
+      | Comprehensive Formulary                  | <FormularyDrugListComprehensive> |
+      | Alternative Drug List        		 |<additionaldrugcoverage>  |
+      | Prior Authorization Criteria 			 | <priorauth>              |
+      | Step Therapy Criteria         			 | <steptherapy>            |
+      | Formulary Additions         		     | <formularyadd>           |
+      | Formulary Deletions         		     | <formularydel>           |
+    And validate for active member Temporary Id Card and Plan Order Material links are displayed 
+      | Member Type | <memberType> |
+    And validate that the view temporary id card link is displayed
+      | Member Type | <memberType> |
+    Then validate that the AnocSection is displayed for MAPD
+	Then validate that annual directory section is displayed
+      | Member Type | <memberType> |
+    And both Pharmacy and provider search links are displayed
+      | Member Type | <memberType> |
+    Then validate that My Document section is displayed
+    Then validate that the EOB Section is displayed
+    And both the drug and medical EOB links are displayed
+    Then validate that the forms & resources section is displayed
+    Then validate that the renew magazine section is displayed for MAPD
+    
+    Examples: 
+         | planType  | memberType                | language | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | certificateofcoverage   |FormularyDrugListComprehensive     | additionaldrugcoverage | priorauth           | steptherapy  | formularyadd        | formularydel        |
+         | MAPD      | Individual_FormsResources | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Comprehensive Formulary           | Alternative Drug List  | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | 
+	
+		 
+@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
+ Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Rider: <rider>-To verify quicklinks for a MAPD member
+   	Given login with following details logins in the member portal and validate elements
+   	  | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | identifier     | <Identifier>    |
+      | Rider          | <rider>         |
+	And user clicks on the view document and resources link and navigate to forms and resource page
+	| Plan Type   | <planType>   |
+	| Member Type    | <memberType>    |
+	Then user verifies presence of jump links on F&R page
+      | Plan Type | <planType> |
+      |Rider|<rider>|
+      |MemberType|<memberType>|
+      |identifier|<Identifier>|
+=======
+
   # Regression Runner devided into 2 runs with 2 runner, One runner with @Regression Member, next one with @Part2of2Regression, it devided the scenarios 17 each
   @formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Rider: <rider>-To verify quicklinks for a MAPD member
@@ -17,6 +78,7 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | Rider      | <rider>      |
       | MemberType | <memberType> |
       | identifier | <Identifier> |
+
     And user clicks on the jump links and checks respective sections on F&R page
       | Plan Type  | <planType>   |
       | Rider      | <rider>      |
