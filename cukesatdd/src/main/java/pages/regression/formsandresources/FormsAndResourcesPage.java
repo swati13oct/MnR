@@ -18,8 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
-import pages.regression.claims.ClaimSummarypage;
-
+import pages.regression.claims.ClaimsSummaryPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -1692,7 +1691,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		System.out.println("Assert condition on title of forms and resources page was passed");
 	}
 
-	public ClaimSummarypage clickonClaimsTab() throws InterruptedException {
+	public ClaimsSummaryPage clickonClaimsTab() throws InterruptedException {
 		System.out.println("Now clicking on Claims Tab on Forms and Resources Page");
 		driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
 		System.out.println("Now waiting for 10 seconds");
@@ -1704,7 +1703,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 		}
 		String title = driver.getTitle();
 		System.out.println("Now user is on this page:" + title);
-		return new ClaimSummarypage(driver);
+		return new ClaimsSummaryPage(driver);
 	}
 
 	public void pdfValidationOfAllTypes(FormsAndResourcesPage formsAndResourcesPage, DataTable givenAttributes,

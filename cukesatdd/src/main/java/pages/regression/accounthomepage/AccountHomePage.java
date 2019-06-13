@@ -36,8 +36,7 @@ import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
-import pages.regression.claims.ClaimSummarypage;
-//import pages.regression.claims.ClaimSummarypage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -1382,7 +1381,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Dashboard page cologo assert condition is passed");
 	}
 
-	public ClaimSummarypage navigateToClaimsSummaryPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
@@ -1392,7 +1391,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			System.out.println("user is on '"+MRScenario.environmentMedicare+"' login page");
 			if (driver.getCurrentUrl().contains("/dashboard"))
@@ -1426,7 +1425,7 @@ public class AccountHomePage extends UhcDriver {
 			else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("claims");
 			}
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 
 		} else {
 			System.out.println(
