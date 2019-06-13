@@ -194,7 +194,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	WebElement pharmacyBodyContentSpanish;
 	
-	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ä½¿ç”¨ç¶²ä¸Šå��å†Šæ�œå°‹è—¥æˆ¿å’Œè—¥æˆ¿ä½�ç½®ã€‚')]")
+	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'Ã¤Â½Â¿Ã§âÂ¨Ã§Â¶Â²Ã¤Â¸Å Ã¥ï¿½ï¿½Ã¥â Å Ã¦ï¿½ÅÃ¥Â°â¹Ã¨âÂ¥Ã¦ËÂ¿Ã¥âÅÃ¨âÂ¥Ã¦ËÂ¿Ã¤Â½ï¿½Ã§Â½Â®Ã£â¬â')]")
 	WebElement pharmacyBodyContentChinese;
 
 	@FindBy(id = "distance")
@@ -204,6 +204,15 @@ public class PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
+	
+	@FindBy(id="indian-tribal-label")
+	private WebElement indian_tribal_label_filter;
+	
+	@FindBy (id= "noResultsFoundErrorMessage")
+	private WebElement noPharmaciesErrorMessage;
+	
+	@FindBy (xpath = "//*[@id='modifyYourSearchId']//li")
+	private WebElement zipcodeErrorMessage;
 
 	
 	public PharmacySearchPage(WebDriver driver) {
@@ -283,13 +292,12 @@ public class PharmacySearchPage extends UhcDriver {
 
 	
 	public boolean selectPharmacyandServices(String pharmacytype) {
-		int PharmacyTypeSelectedCount = driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
-				+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).size();
+		int PharmacyTypeSelectedCount = driver.findElements(By.xpath("//label[contains(text(),'"+ pharmacytype+"')]")).size();
 		System.out.println("PharmacyTypeSelectedCount" + PharmacyTypeSelectedCount);
 		boolean isTypeSelected = false;
 		for (WebElement webElement : pharmacyTypesandServices) {
 			System.out.println(webElement.getText());
-			if (webElement.getText().contains(pharmacytype) && PharmacyTypeSelectedCount == 0) {
+			if (webElement.getText().contains(pharmacytype) ) {
 				System.out.println(webElement.getText());
 				webElement.click();
 				try {
@@ -609,6 +617,7 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 	}
 	
 	public boolean validateLanguageChanges(String language) {
+		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 45);
 		if (("es").equalsIgnoreCase(language)) {
 			String headingText = pharmacylocatorheader.getText();
 			if (!headingText.contains("Farmacia"))
@@ -622,12 +631,13 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 
 		} else if (("zh").equalsIgnoreCase(language)) {
 			Assert.fail("Temporarily commented Chinese code. Please select Spanish or English");
-			/*String headingText = pharmacylocatorheader.getText();
-			if (!headingText.contains("å°‹æ‰¾è—¥æˆ¿"))
+			//If we Enable Chinese Language we will get the selenium.StaleElementReferenceException
+		/*	String headingText = pharmacylocatorheader.getText();
+			if (!headingText.contains("尋找藥房"))
 				return false;
 			if (!pharmacyBodyContentChinese.isDisplayed())
 				return false;
-			if (!btnContinue.getText().contains("ç¹¼çºŒ"))
+			if (!btnContinue.getText().contains("繼續"))
 				return false;*/
 		} else {
 			Assert.fail("Please select a valid language!!!");
@@ -690,5 +700,19 @@ public PharmacyResultPage ValidateShowOnMapResult() {
 		}
 		return ValidationFlag;
 	}
+	public boolean validateNoPharmaciesErrorMessage(){
+		indian_tribal_label_filter.click();
+				CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 30);
+				validateNew(noPharmaciesErrorMessage);
+		return true;
 	
+	}
+
+	public void validateNoresultsZipcodeError() {
+		zipcodeField.sendKeys("11111");
+		searchbtn.click();
+		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 20);
+		validateNew(zipcodeErrorMessage);
+		
+	}
 }

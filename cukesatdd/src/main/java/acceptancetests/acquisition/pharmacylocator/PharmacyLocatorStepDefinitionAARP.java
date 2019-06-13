@@ -379,4 +379,24 @@ public class PharmacyLocatorStepDefinitionAARP {
 		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
 
 	}
+	@Then("^the user validates the no pharmacies display error message$")
+	public void the_user_validates_the_no_pharmacies_error_message(){
+		
+		//String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells().get(0);
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		boolean isPharmacySelected;
+		isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
+
+		if (!isPharmacySelected) {
+			Assert.fail("Error in selecting pharmacy type!!!");
+		}
+		
+	}
+	@And("^the user enters the invalid zipcode and validates the no results error message$")
+	public void the_invalid_zipcode_error_message_validation(){
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validateNoresultsZipcodeError();
+	}
 }
