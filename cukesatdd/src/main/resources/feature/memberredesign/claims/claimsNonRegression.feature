@@ -109,7 +109,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
 
-    @claims00_01 @claims00_C_M_p1 
+    @claims00_01 @claims00_C_M_p1
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
       | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | Yes                |
@@ -126,6 +126,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     @claims00_03 @claims00_C_M_p3
     Examples: 
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
       | 03_1  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | Yes                |
       | 03_2  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | No                 |
       | 03_3  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | Yes                |
@@ -138,8 +139,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 04_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | No                 |
       | 04_4  | 1041 | MAPD     | GROUP                      | COSMOS_CLAIMS   | Prescription drug | No                 |
 
-    @claims00_05 @claims00_C_D_p2 
+    @claims00_05 @claims00_C_D_p2
     Examples: 
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
       | 05_1  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | No                 |
       | 05_2  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | Yes                |
 
@@ -167,6 +169,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     @claims00_09 @claims00_S_p1
     Examples: 
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
       | 09_01 | 1041 | SHIP     | Individual                 | COMPASS_CLAIMS  | NA                | Yes                |
       | 09_02 | 1041 | SHIP     | COMBO                      | COMPASS_CLAIMS  | NA                | Yes                |
 
