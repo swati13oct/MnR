@@ -14,6 +14,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
+import pages.regression.explanationofbenefits.EOBPage;
 
 @SuppressWarnings("deprecation")
 public class FormsAndResourcesPage extends UhcDriver {
@@ -134,6 +135,24 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(id = "healthwellness_3")
 	private List<WebElement> healthWellness;
 
+	@FindBy(xpath = "//p[contains(text(),'type of document')]")
+	private WebElement validateDocumentTypePage;
+	
+	@FindBy(id="doc-type")
+	private WebElement documentType;
+	
+	@FindBy(id="document-date")
+	private WebElement planType;
+	
+	@FindBy(tagName = "table")
+	private WebElement validateTable;
+	
+	@FindBy(xpath = "//a[contains(text(),'View/Download')]")
+	private WebElement validateViewDownload;
+	
+	@FindBy(xpath = "//a[contains(@class,'link link--icon-left link--')]")
+	private WebElement returnToPrevious;
+	
 	String category = null;
 
 	public FormsAndResourcesPage(WebDriver driver) {
@@ -166,6 +185,14 @@ public class FormsAndResourcesPage extends UhcDriver {
 		}
 	}
 
+	/**
+	 * @toDo : Document Type text
+	 */
+	public WebElement getvalidateDocumentTypePage() {
+		validateNew(validateDocumentTypePage);
+		return validateDocumentTypePage;
+	}
+	
 	/**
 	 * @toDo : EOB medical button
 	 */
@@ -325,7 +352,6 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement geteobmapdsection() {
 		validateNew(eobSectionHeader);
 		return eobSectionHeader;
-
 	}
 
 	/**
@@ -335,5 +361,20 @@ public class FormsAndResourcesPage extends UhcDriver {
 		validateNew(FormsnResourcesLinks);
 		FormsnResourcesLinks.click();
 		validateNew(FormsnResourcesLinkPdf);
+	}
+	
+	public FormsAndResourcesPage selectDateRange(String documentTypeData, String planTypeData){
+		selectFromDropDownByText(driver,documentType,documentTypeData);
+		selectFromDropDownByText(driver,planType,planTypeData);	
+		waitforElementVisibilityInTime(validateTable,60);
+		if(validateTable.isDisplayed())	{			
+			validateNew(validateViewDownload);
+			System.out.println("Plan document view/download table is visible.");		
+		}else{
+			Assert.fail("Plan document view/download table is not visible.");
+		}
+		returnToPrevious.click();
+		validateNew(FormsnResourcesLinks);
+ 		return new FormsAndResourcesPage(driver);
 	}
 }
