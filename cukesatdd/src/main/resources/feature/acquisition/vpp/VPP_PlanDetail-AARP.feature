@@ -4,11 +4,11 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
   @vppPlanDetailsRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
@@ -41,11 +41,11 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
   @vppPlanDetailsRegressionMedical
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Medical Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
@@ -76,11 +76,11 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
   @vppPlanDetailsRegressionPlanCosts
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
@@ -97,18 +97,18 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
   @vppPlanDetailsRegressionOptionalRiders
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user click on Optional Services tab and add the rider in AARP site
       | Optional Rider  | <optionalRider>  |
       | Monthly Premium | <monthlyPremium> |
-    Then the user click on Plan costs tab and validate riders monthly and yearly premium  in AARP site
+    Then the user click on Plan costs tab and validate riders monthly and yearly premium in AARP site
       | Optional Rider  | <optionalRider>  |
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
