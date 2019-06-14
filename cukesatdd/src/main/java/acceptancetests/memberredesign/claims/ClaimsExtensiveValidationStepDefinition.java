@@ -167,12 +167,17 @@ public class ClaimsExtensiveValidationStepDefinition {
 			//note: this can be updated handle more than 1 page of claims, 
 			//note: for now just handle 1st page of claims if there are more than 1 page
 			//note: gather data on summary page for validation on detail page
-			System.out.println("Determine number of data rows on table");
 			int totalDataRows=claimsSummaryPage.getTableTotalDataRows(claimType);
-			int total=(totalDataRows+2); //note: cap at max =5 to cut down test time
-			if (total>5) {
-				total=5;
-				System.out.println("Total claims='"+totalDataRows+"', will validate the first 3 rows for detail to shorten test time");
+			System.out.println("Determine number of data rows on table="+totalDataRows);
+			int total=0;
+			if (totalDataRows < 4) {
+				total=totalDataRows+1;
+			} else {
+				total=(totalDataRows+2); //note: cap at max =5 to cut down test time
+				if (total>5) {
+					total=5;
+					System.out.println("Total claims='"+totalDataRows+"', will validate the first 3 rows for detail to shorten test time");
+				}
 			}
 			//KEEP- for (int x=2; x<(totalDataRows+2); x++) {		//note: use this instead if want to validate all entries
 			for (int x=2; x<total; x++) { //note: look at row index 2, 3, 4

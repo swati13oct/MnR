@@ -250,7 +250,7 @@ public class ClaimDetailsPageStepDefinition {
 			System.out.println("Proceed to validate basic content for claims detail page only for the first summary row visit");
 
 			System.out.println("Proceed to validate header section content on detail page");
-			newClaimDetailsPage.validateHeaderSection(planType);
+			newClaimDetailsPage.validateHeaderSection(planType, memberType);
 			newClaimDetailsPage.validateClaimsTbl(planType);
 
 			System.out.println("Proceed to validate 'Learn More...' link");
