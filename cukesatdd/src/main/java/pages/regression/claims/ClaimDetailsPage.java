@@ -305,7 +305,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	public boolean validateSearchEobHistory(String claimSystem, String plantype){
 		boolean bypass_INC11365785_searchEOBHistory=false;
 		if (!plantype.equals("SHIP")) {
-			if ((plantype.equals("MA") || plantype.equals("MAPD") || plantype.equals("SSUP")) && (claimSystem.toUpperCase().contains("NICE"))) {
+			if (((plantype.equals("MA") || plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE")) 
+				|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS")))
+			{
 				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)", 
 						!validate(detl_medicalEob));
