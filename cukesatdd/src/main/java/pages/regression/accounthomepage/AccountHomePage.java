@@ -1205,7 +1205,7 @@ public class AccountHomePage extends UhcDriver {
 						linkContactUs.click();
 					} else {
 						System.out.println("Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
-						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(2) > div:nth-child(2) > ul > li:nth-child(1) > a");	
+						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(2) > div:nth-child(2) > ul > li:nth-child(1) > a", true);	
 					}
 				}
 			}
@@ -2824,6 +2824,11 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		boolean doScroll=false;
+		locateAndClickElementWithinShadowRoot(shadowRootElement, inputCssSelector, doScroll);
+	}
+
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector, boolean doScroll) {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
@@ -2832,9 +2837,11 @@ public class AccountHomePage extends UhcDriver {
 				Assert.assertTrue("Dashboard Shadow Root Elemnt is not accessible", validate(element));
 				System.out.println("element is located, click it...");
 				System.out.println("We are looking for: "+element.getText()+" and we got it.");
+				if (doScroll) { //for contact us at bottom page, need to scroll so it's clickable
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("window.scrollBy(0,10000)");
 				Thread.sleep(5000);
+				}
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
 			} catch (Exception e) {
