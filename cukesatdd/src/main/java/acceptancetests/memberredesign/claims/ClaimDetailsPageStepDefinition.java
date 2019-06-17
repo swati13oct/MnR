@@ -80,11 +80,11 @@ public class ClaimDetailsPageStepDefinition {
 					+ "skip this step to validate top claims summary link on claims detail page");
 			return;
 		} 
-		ClaimDetailsPage claimDetailsPage = (ClaimDetailsPage) getLoginScenario()
+		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		ClaimsSummaryPage claimsSummaryPage =claimDetailsPage.validateTopBckToClaimsSummLnk(planType);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateTopBckToClaimsSummLnk(planType);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -102,11 +102,11 @@ public class ClaimDetailsPageStepDefinition {
 					+ "skip this step to validate bottom claims summary link on claims detail page");
 			return;
 		} 
-		ClaimDetailsPage claimDetailsPage = (ClaimDetailsPage) getLoginScenario()
+		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
-		ClaimsSummaryPage claimsSummaryPage =claimDetailsPage.validateBtmBckToClaimsSummLnk();
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateBtmBckToClaimsSummLnk();
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	} 
 
 	/**
@@ -118,9 +118,9 @@ public class ClaimDetailsPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String claimSystem = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
-		ClaimDetailsPage claimDetailsPage = (ClaimDetailsPage) getLoginScenario()
+		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailsPage.validateMedicalEobPdf(claimSystem,planType);
+		claimDetlPg.validateMedicalEobPdf(claimSystem,planType);
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class ClaimDetailsPageStepDefinition {
 					+ "skip this step for claims total validation on claims detail page");
 			return;
 		} 
-		ClaimDetailsPage claimDetailsPage = (ClaimDetailsPage) getLoginScenario()
+		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetailsPage.validateClaimsTotalSection();
+		claimDetlPg.validateClaimsTotSection();
 	}
 	
 	/**
@@ -219,7 +219,7 @@ public class ClaimDetailsPageStepDefinition {
 	public void validate_claims_detail_page_content(String planType, String memberType, 
 			String claimPeriod, String claimType, String claimSystem, boolean flagZeroUserNow) 
 					throws InterruptedException { 
-		List<String> recordInvokedBypass = (List<String>) getLoginScenario()
+		List<String> recordBypass = (List<String>) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
 		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_")) {
 			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, "
@@ -227,59 +227,60 @@ public class ClaimDetailsPageStepDefinition {
 			return;
 		} else {  //note: this test is assume prior test steps passed so user has claims
 			System.out.println("Proceed to Claims Summary page");
-			ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
+			ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 			if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
 				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
-				claimSummarypage.goToSpecificComboTab(planType); //note: click the target tab for testing
+				claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 			}
-			claimSummarypage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
-			if (!claimSummarypage.validateClaimsTableExists(flagZeroUserNow)) {
+			claimsSummPg.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
+			if (!claimsSummPg.validateClaimsTableExists(flagZeroUserNow)) {
 				System.out.println("Claim Period '"+claimPeriod+"' has no claims, skipping claims detail validation step...");
 				return;
 			}
-			claimSummarypage.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
+			claimsSummPg.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
 
 			//note: use the first claim data for validation
-			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPgByClaimRow(2);
-			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",newClaimDetailsPage != null);
-			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
+			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
+			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
+					claimDetlPg != null);
+			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, claimDetlPg);
 			System.out.println("Proceed to validate claims table");
-			newClaimDetailsPage.validateClaimsTbl(planType);
+			claimDetlPg.validateClaimsTbl(planType);
 
 			System.out.println("Proceed to validate basic content for claims detail page only for the first summary row visit");
 
 			System.out.println("Proceed to validate header section content on detail page");
-			newClaimDetailsPage.validateHeaderSection(planType, memberType);
-			newClaimDetailsPage.validateClaimsTbl(planType);
+			claimDetlPg.validateHeaderSection(planType, memberType);
+			claimDetlPg.validateClaimsTbl(planType);
 
 			System.out.println("Proceed to validate 'Learn More...' link");
-			newClaimDetailsPage.validateLearnMoreCostLink();
+			claimDetlPg.validateLrnMoreCostLnk();
 
 			System.out.println("Proceed to validate 'This page contains PDF documents...' text on detail page");
-			boolean invokeBypass_INC11365785_containsPdfDocText=newClaimDetailsPage.validateAdobePdfDocText();
-			if (invokeBypass_INC11365785_containsPdfDocText) {
+			boolean bypass_INC11365785_adobePdfDocTxt=claimDetlPg.validateAdobePdfDocText();
+			if (bypass_INC11365785_adobePdfDocTxt) {
 				System.out.println("Encountered issue for INC11365785_containsPdfDocText  on detail page");
-				recordInvokedBypass.add("invokeBypass_INC11365785_containsPdfDocText_detailPage");
+				recordBypass.add("invokeBypass_INC11365785_containsPdfDocText_detailPage");
 			}
 
 			System.out.println("Proceed to validate 'EOB' links on detail page");
-			boolean invokeBypass_INC11365785_searchEOBHistory=newClaimDetailsPage.validateSearchEobHistory(claimSystem,planType);
-			if (invokeBypass_INC11365785_searchEOBHistory) {
+			boolean bypass_INC11365785_srchEobHist=claimDetlPg.validateDetlPgSrchEobHist(claimSystem,planType);
+			if (bypass_INC11365785_srchEobHist) {
 				System.out.println("Encountered issue for INC11365785_searchEOBHistory on detail page");
-				recordInvokedBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
+				recordBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 			}
 
 			System.out.println("Proceed to validate 'Need Help' section on detail page");
-			String currentURL=newClaimDetailsPage.validateSectionInNeedHelp(planType,memberType);
+			String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
 
 			//note: if all goes well, go back to summary page to prep for next step
 			//note: if combo plan, after NeedHelp validation should land back on claims summary page.
 			//note: but for non combo case, need to go back to claims summary page 
 			if (!currentURL.contains("member/claims.html#/overview")) {
-				claimSummarypage= newClaimDetailsPage.navigateBackToClaimSummPg(planType, claimPeriod);
+				claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
 			} 
 		}
-		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordInvokedBypass);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordBypass);
 	}
 }

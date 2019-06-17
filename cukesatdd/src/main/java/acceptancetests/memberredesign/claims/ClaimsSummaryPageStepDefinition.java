@@ -35,9 +35,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@Then("^I validate the claims displayed based on the selection on claims summary page$") 
 	public void vbf_validate_claims_table() { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.vbf_validateClaimsTable();
+		claimsSummPg.vbf_validateClaimsTable();
 	}	
 
 	/**
@@ -53,11 +53,11 @@ public class ClaimsSummaryPageStepDefinition {
 		String toDate = memberAttributesMap.get(ClaimsCommonConstants.CLAIMS_TO_DATE);
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -70,15 +70,15 @@ public class ClaimsSummaryPageStepDefinition {
 		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
 		String planType = memberAttributesMap.get("Plan Type");
 		String memberType = memberAttributesMap.get("Member Type");
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
-			claimsSummaryPage.validateComboTabs();
-			claimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
+			claimsSummPg.validateComboTabs();
+			claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 		}
-		claimsSummaryPage.validateClaimsSummaryHeaderSection(planType,memberType);	
-		claimsSummaryPage.validateSystemErrorMsgNotExist();
+		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
+		claimsSummPg.validateSystemErrorMsgNotExist();
 	}
 	
 	
@@ -91,28 +91,20 @@ public class ClaimsSummaryPageStepDefinition {
 	 * @throws Throwable
 	 */
 	@And("^I can validate the learn more and print and download option and DownloadMyData section on claims summary page$")
+	@SuppressWarnings("unchecked")
 	public void validate_print_and_download_option_in_claims_table() throws Throwable { 
 		String claimPeriod = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		@SuppressWarnings("unchecked")
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
 		.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
-		ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (numClaims <=0) {
-			Assert.assertTrue("PROBLEM - Print and Download will only show up if more than 0 claims.  "
-					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					claimSummarypage.verifyDnldMyDataAndLrnMoreAndPrtAndDnldOpt(numClaims, planType));
-		} else {
-			Assert.assertTrue("PROBLEM - Print and Download should show up if more than 0 claims.  "
-					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					claimSummarypage.verifyDnldMyDataAndLrnMoreAndPrtAndDnldOpt(numClaims, planType));
-		}
+		claimsSummPg.verifyDnldMyDataAndLrnMoreAndPrtAndDnldOpt(numClaims, planType);
 	}
 
 	/**
@@ -122,9 +114,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@When("^Explanation of benefits sub navigation under Claims tab is not displayed$")
 	public void validate_ExplanationOfBenefits_SubNavigation_UnderClaimsTab() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateExpOfBenSubNavNotDispForSsup();
+		claimsSummPg.validateExpOfBenSubNavNotDispForSsup();
 	}	
 
 	/**
@@ -134,9 +126,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@When("^Validate Explanation of benefits Page for group SSUP$")
 	public void validate_EOB_Tab_underClaims() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateExpOfBenSubNavDispForGroupSsup();
+		claimsSummPg.validateExpOfBenSubNavDispForGroupSsup();
 	}
 
 	/**
@@ -146,9 +138,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@When("^Explanation of benefits deep link is invoked and validate the Page$")
 	public void validate_ExplanationOfBenefits_DeepLink() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.invokeEobDeepLink();
+		claimsSummPg.invokeEobDeepLink();
 	}
 
 	/**
@@ -158,9 +150,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@When("^I validate the error message for a PHIP Member on the screen$")
 	public void validate_PHIP_error() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validatePHIPErrorMessage();
+		claimsSummPg.validatePHIPErrorMessage();
 	}
 
 	/**
@@ -183,11 +175,11 @@ public class ClaimsSummaryPageStepDefinition {
 		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
 		System.out.println("2 yrs and 1 day ago date="+fromDate);
 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -197,9 +189,9 @@ public class ClaimsSummaryPageStepDefinition {
 	@Then("^I should be able to see the error message when no to and from dates being entered$")
 	public void validateEmptyDatesErrorMessage(){ 
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateEmptyDatesError(planType);
+		claimsSummPg.validateEmptyDatesError(planType);
 	}
 
 	/**
@@ -209,9 +201,9 @@ public class ClaimsSummaryPageStepDefinition {
 	@Then("^I should be able to see the from date is greater than the to date error message being displayed$")
 	public void validateToDateInvalidErrorMessage(){ 
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validatefromDateLaterThanToDateError(planType);
+		claimsSummPg.validatefromDateLaterThanToDateError(planType);
 	}
 	
 	/**
@@ -221,10 +213,10 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@And("^I validate the pagination on the claims summary page$")
 	public void validate_pagination() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		Assert.assertTrue("PROBLEM - not getting expected pagination.  "
-				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummaryPage.verifyPagination());
+				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination());
 	}
 
 	/**
@@ -251,9 +243,9 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@And("^I can see the learn more and print and download option on claims summary table section$")
 	public void i_can_see_print_and_download_option_in_claims_table() throws Throwable { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue(claimsSummaryPage.validateClickLrnMoreAndPrtAndDnldOpt());
+		claimsSummPg.validateClickLrnMoreAndPrtAndDnldOpt();
 	}
 
 	/**
@@ -262,12 +254,12 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@Then("^I can see the claims displayed based on the selection on claims summary page$")
 	public void validate_claims_table() { 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean flagZeroClaimUser=true;
-		claimsSummaryPage.validateClaimsTableExists(flagZeroClaimUser);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/** 
@@ -281,11 +273,11 @@ public class ClaimsSummaryPageStepDefinition {
 		String claimSystem = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateSearchEobHisotry(claimSystem, planType);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		claimsSummPg.validateSummPgSrchEobHistory(claimSystem, planType);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -294,11 +286,13 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@And("^I validate the DownloadMyData section on claims summary page$")
 	public void validates_DownloadMyData(){ 
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateDnldMyData();
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		claimsSummPg.validateClickMyDnldMyDataBtn(planType); 
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}	
 
 	/**
@@ -312,17 +306,18 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
-		if (numClaims <=0) {
+		if (numClaims <=0) 
 			Assert.assertTrue("PROBLEM - Pagination will only show up if more than 0 claims.  "
-					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,!claimsSummaryPage.verifyPagination());
-		} else {
+					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
+					!claimsSummPg.verifyPagination());
+		else 
 			Assert.assertTrue("PROBLEM - Pagination should show up if more than 0 claims.  "
-					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,claimsSummaryPage.verifyPagination());
-		}
+					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
+					claimsSummPg.verifyPagination());
 	}
 
 	/**
@@ -339,16 +334,16 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
 			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		int numClaims=claimsSummaryPage.getNumClaims(claimPeriod, claimType);
+		int numClaims=claimsSummPg.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
 		allClaims.put(claimPeriod, numClaims);
 		if (claimType.equalsIgnoreCase("Prescription drug") && memberType.toUpperCase().contains("SSO")) {
-			claimsSummaryPage.validateClaimsTableSectionOptumRxText(numClaims);
+			claimsSummPg.validateClaimsTableSectionOptumRxText(numClaims);
 		}
-		claimsSummaryPage.validateSystemErrorMsgNotExist();
-		claimsSummaryPage.printListOfClaimsResult(allClaims);
+		claimsSummPg.validateSystemErrorMsgNotExist();
+		claimsSummPg.printListOfClaimsResult(allClaims);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ALLCLAIMS, allClaims);
 	}
 	
@@ -363,9 +358,9 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
 			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateGreaterThanTwoYearError(planType);
+		claimsSummPg.validateGreaterThanTwoYearError(planType);
 
 		//note: assume this is the last step in the test, print out a summary of the claims for logging purpose
 		if (allClaims==null) {
@@ -398,9 +393,8 @@ public class ClaimsSummaryPageStepDefinition {
 			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 
 		boolean hasYourShare=true;
-		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) {
+		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) 
 			hasYourShare=false;
-		}
 		int numClaims=allClaims.get(claimPeriod);
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
@@ -421,22 +415,22 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		List<String> recordInvokedBypass = (List<String>) getLoginScenario()
 			.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
-		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		boolean invokeBypass_INC11365785_searchEOBHistory=claimsSummaryPage.validateSummPgSearchEobHistory(claimSystem, planType);
-		if (invokeBypass_INC11365785_searchEOBHistory) {
+		boolean bypass_INC11365785_srchEobHist=claimsSummPg.validateSummPgSrchEobHistory(claimSystem, planType);
+		if (bypass_INC11365785_srchEobHist) {
 			System.out.println("Encountered issue for INC11365785_searchEOBHistory on summary page");
-			recordInvokedBypass.add("invokeBypass_INC11365785_searchEOBHistory_summaryPage");
+			recordInvokedBypass.add("bypass_INC11365785_searchEOBHistory_summaryPage");
 		}
 
 		System.out.println("Proceed to validate 'This page contains PDF documents...' text on summary page");
-		boolean invokeBypass_INC11365785_containsPdfDocText=claimsSummaryPage.validateAdobePdfDocText();
-		if (invokeBypass_INC11365785_containsPdfDocText) {
+		boolean bypass_INC11365785_adobePdfDocTxt=claimsSummPg.validateAdobePdfDocText();
+		if (bypass_INC11365785_adobePdfDocTxt) {
 			System.out.println("Encountered issue for INC11365785_containsPdfDocText on summary page");
-			recordInvokedBypass.add("invokeBypass_INC11365785_containsPdfDocText_summaryPage");
+			recordInvokedBypass.add("bypass_INC11365785_containsPdfDocText_summaryPage");
 		}
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordInvokedBypass);
-		if(claimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 }
