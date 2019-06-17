@@ -136,7 +136,15 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		validatePreEff.verifyExpOfBenSubNavNotDispForPreEffMem();
 	}
 
-	/** this method validates 'Search EOB History' */
+	/** this method validates 'Search EOB History' 
+	 * 
+	 * */
+	/**
+	 * This method validates 'Search EOB History'
+	 * @param claimSystem The type of claims system The type of claims system
+	 * @param plantype The type of plan
+	 * @return true/false whether search eob history is displayed
+	 */
 	public boolean validateSearchEobHisotry(String claimSystem, String plantype){
 		if(plantype.equals("PCP")) {
 			plantype = "MAPD";
@@ -239,7 +247,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	/**
 	 * Validate DownloadMyData on claims summary page
-	 * @return
+	 * @return true/false whether validation for DownloadMyData is successful
 	 */
 	public boolean validateDnldMyData(){
 		if (!validate(dnldMyDataBtn)) {
@@ -297,12 +305,12 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	/**
 	 * Validate 'Search EOB History' on claims summary page
-	 * @param claimSystem
-	 * @param plantype
-	 * @return
+	 * @param claimSystem The type of claims system
+	 * @param plantype The type of plan
+	 * @return true/false for validatoin result
 	 */
 	public boolean validateSummPgSearchEobHistory(String claimSystem, String plantype){
-		boolean invokeBypass_INC11365785_searchEOBHistory=false;
+		boolean bypass_INC11365785_srchEobHist=false;
 		if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
 				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE"))) {
 			Assert.assertTrue("PROBLEM - unable to locate Medical EOB link on summary page", 
@@ -326,7 +334,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			Assert.assertTrue("PROBLEM - should NOT be able to locate Prescription EOB link on summary page", 
 					!validate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical or precription drug EOB's are displayed");
-			invokeBypass_INC11365785_searchEOBHistory=true;
+			bypass_INC11365785_srchEobHist=true;
 		}
 		else if (plantype.equals("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate Medical EOB link on summary page", 
@@ -353,15 +361,15 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 					+" and domain="+claimSystem+" EOB expectation", 
 					false);
 		}
-		return invokeBypass_INC11365785_searchEOBHistory;
+		return bypass_INC11365785_srchEobHist;
 	}
 
 	/**
 	 * Validate 'DownloadMyData', 'Learn More...', 'Print', 'Download' on claims summary page
 	 * Determine true/false and return the result back for further validation
-	 * @param numClaims
-	 * @param planType
-	 * @return
+	 * @param numClaims The number of claims for specific search option
+	 * @param plantype The type of plan The plan type for testing
+	 * @return The true/false result of the validation
 	 */
 	public boolean verifyDnldMyDataAndLrnMoreAndPrtAndDnldOpt(int numClaims, String planType) {
 		CommonUtility.waitForPageLoad(driver, claimsSummPg,60);
@@ -406,7 +414,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	/**
 	 * Validate 'Learn More...', 'Print', and 'Download' options are functional
-	 * @return
+	 * @return true/false of validation result for clicking Learn More, Print, and Download option
 	 */
 	public boolean validateClickLrnMoreAndPrtAndDnldOpt() {
 		if (validate(lrnMoreAbtClaimsTog) && validate(claimsSummPrntBtn) && validate(claimsSummDnldBtn)) {
