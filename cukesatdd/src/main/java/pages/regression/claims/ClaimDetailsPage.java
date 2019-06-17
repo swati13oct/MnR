@@ -27,7 +27,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	 * Validate tooltips on claims detail page
 	 * @param planType This is the plan type for testing
 	 */
-	public void validateTooltips(String planType, String memberType) {
+	public void validateTooltips(String planType, String memberType, String claimSystem) {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			int sixYearsPrior = Calendar.getInstance().get(Calendar.YEAR)-6;
 
@@ -66,6 +66,10 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", 
 					validate(tooltipsElemTxt));
 			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
+			//if has pdf then use this
+			if (validate(viewPdf)) {
+				expEobTooltipsText="The Medical Explanation of Benefits (EOB) is a summary of the claims UnitedHealthcare receives from your doctors each month. Your EOB shows the claims we received , what we paid and what you owe. If you do not have any claims , you wont receive an EOB for that month.";
+			}
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
 					+ "\nExpected='"+expEobTooltipsText+"' \nActual='"+tooltipsElemTxt.getText()+"'", 
 					tooltipsElemTxt.getText().equals(expEobTooltipsText));
@@ -114,7 +118,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	 * Validate header section content on claims detail page
 	 * @param planType This is the plan type for testing
 	 */
-	public void validateHeaderSection(String planType, String memberType) {
+	public void validateHeaderSection(String planType, String memberType, String claimSystem) {
 		//note: validate URL
 		if (driver.getCurrentUrl().contains("member/claims.html#/details")) {
 			Assert.assertTrue("PROBLEM - claims detail page URL is not as expected. "
@@ -155,7 +159,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		}
 
 		//note: validate tooltips
-		validateTooltips(planType, memberType);
+		validateTooltips(planType, memberType, claimSystem);
 
 		String testItem="";
 		String assertText="PROBLEM - unable to locate "+testItem+" element on claims detail page";
