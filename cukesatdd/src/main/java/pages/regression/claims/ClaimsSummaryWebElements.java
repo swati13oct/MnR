@@ -15,10 +15,10 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@Override
 	public void openAndValidate() throws InterruptedException {
 	}
-	
+
 	@FindBy(id="claimsummaryC1")
 	protected WebElement claimsTabTopMenu;
-	
+
 	@FindBy(xpath="//a[contains(text(),'Premium Payments')]")
 	protected WebElement pymtTabTopMenu;
 
@@ -222,7 +222,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath="//div[contains(@class,'GeneralContentSHIP')]//p")
 	protected WebElement ship_clamsSummCpTxt;
-	
+
 	@FindBy(xpath="//button[@id='all-claims-download-btn']")
 	protected WebElement claimsSummDnldBtn;
 

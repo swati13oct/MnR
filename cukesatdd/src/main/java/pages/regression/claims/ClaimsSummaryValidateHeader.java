@@ -21,7 +21,7 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 	@Override
 	public void openAndValidate() { 
 	}
-	
+
 	/**
 	 * Validate claims summary header section content
 	 */

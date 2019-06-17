@@ -264,7 +264,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		}
 		Assert.assertTrue("PROBLEM - not getting expected 'DownloadMyData' button behavior", validateClickMyDnldMyDataBtn(planType));
 	}
-	
+
 
 	/**
 	 * Validate 'Learn More...', 'Print', and 'Download' options are functional
@@ -278,23 +278,32 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		System.out.println("Has claim(s), Got the expected behavior, "
 				+ "able to locate 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
 	}
-	
+
 	/**
 	 * Validate 'Learn More...', will click and validate content exits
+	 * 'Learn More...' content is author driven so not all plans will have content.
+	 * Will only validate if exception while clicking the toggle
 	 * @return true/false of validation result
 	 */
 	public boolean validateClickLrnMore() {
 		if (validate(lrnMoreAbtClaimsTog)) {
-			lrnMoreAbtClaimsTog.click();
-				Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", 
-						validate(lrnMoreAbtClaimsContent));
-				System.out.println("This planType doesn't have any additional Learn More content.  "
-						+ "Author driven content, will not flag this.");
-				return true;
+			try {
+				lrnMoreAbtClaimsTog.click();
+				//Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", validate(lrnMoreAbtClaimsContent));
+				if (validate(lrnMoreAbtClaimsContent)) {
+					System.out.println("This planType has Learn More content");
+				} else {
+					System.out.println("This planType doesn't have any additional Learn More content.  "
+							+ "Author driven content, will not flag this.");
+				}
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - got exception when clicking 'Learn More...' toggle. \nException: "+e, false);
+			}
+			return true;
 		} else 
 			return false;
 	}
-	
+
 	/**
 	 * Validate 'Print' button, will click and validate landing title
 	 * @return true/false of validation result
@@ -324,7 +333,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		} else
 			return false;
 	}
-	
+
 	/**
 	 * Validate 'Download' button, will click but won't validate downloaded file
 	 * @return true/false of validation result
@@ -340,7 +349,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		} else
 			return false;
 	}
-	
+
 	/**
 	 * Validate 'DownloadMyData' button, 
 	 * Note: ship user doesn't have DownloadMyData button 
@@ -362,7 +371,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			}
 			System.out.println("Blue Button-DownLoad my Data Button is displayed");
 			dnldMyDataBtn.click();
-			
+
 			//note: validate cancel button function
 			if (!validate(dnldPopup_cancelBtn)) {
 				System.out.println("PROBLEM - not getting expected cancelButtonDownloadPopUp");

@@ -43,7 +43,7 @@ public class ClaimDetailsPageStepDefinition {
 			System.out.println("Skipping Claim Details validation!!!");
 		}
 	}
-	
+
 	/**
 	 * This step is for VBF.
 	 * This step performs validation for claims table on claims detail page via method used by VBF case
@@ -143,7 +143,7 @@ public class ClaimDetailsPageStepDefinition {
 				.getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimDetlPg.validateClaimsTotSection();
 	}
-	
+
 	/**
 	 * This step will do validation for the claims detail page content (will not fail for user with no claims):
 	 * It will validate the following on detail page
@@ -204,7 +204,7 @@ public class ClaimDetailsPageStepDefinition {
 		boolean flagZeroUserNow=true; //note: want to fail the test in this step if user has zero user
 		validate_claims_detail_page_content(planType, memberType, claimPeriod, claimType, claimSystem, flagZeroUserNow);
 	}
-	
+
 	/**
 	 * Helper method - use the flagZeroUserNow to determine whether to fail the step if user has no claims, therefore, no claim table
 	 * @param planType

@@ -28,7 +28,7 @@ public class ClaimsSummaryPageStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	/**
 	 * This step is for VBF.
 	 * This step performs claims table on claims summary page via method used by VBF case
@@ -80,8 +80,8 @@ public class ClaimsSummaryPageStepDefinition {
 		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
 		claimsSummPg.validateSystemErrorMsgNotExist();
 	}
-	
-	
+
+
 	/**
 	 * This step validate the followings on claims summary page
 	 * - 'Learn More...' link
@@ -98,7 +98,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
-		.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
+				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 
 		int numClaims=allClaims.get(claimPeriod);
 		System.out.println("There are "+numClaims+" number of claims for claim period opion="+claimPeriod);
@@ -205,7 +205,7 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.validatefromDateLaterThanToDateError(planType);
 	}
-	
+
 	/**
 	 * This step (used by E2E) validates pagination on the claims summary page.
 	 * Assumption: user has claims
@@ -232,7 +232,7 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
 	}
-	
+
 	/**
 	 * This step validates the following items on claims summary page.
 	 * - 'Learn more...' link
@@ -333,7 +333,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String memberType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
-			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
+				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimsSummPg.getNumClaims(claimPeriod, claimType);
@@ -346,7 +346,7 @@ public class ClaimsSummaryPageStepDefinition {
 		claimsSummPg.printListOfClaimsResult(allClaims);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ALLCLAIMS, allClaims);
 	}
-	
+
 	/**
 	 * This step validates the custom search expected error message when search range exceed 24 months. 
 	 * @param memberAttributes
@@ -357,7 +357,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
-			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
+				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.validateGreaterThanTwoYearError(planType);
@@ -374,7 +374,7 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("========================================");
 		}
 	}
-	
+
 	/**
 	 * This step performs validation for the claims table on claims summary page based on the input search period
 	 */
@@ -390,7 +390,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String claimType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
-			.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
+				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
 
 		boolean hasYourShare=true;
 		if (planType.equalsIgnoreCase("ship") || planType.equalsIgnoreCase("pdp")) 
@@ -414,7 +414,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String claimSystem = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		List<String> recordInvokedBypass = (List<String>) getLoginScenario()
-			.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
+				.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean bypass_INC11365785_srchEobHist=claimsSummPg.validateSummPgSrchEobHistory(claimSystem, planType);
