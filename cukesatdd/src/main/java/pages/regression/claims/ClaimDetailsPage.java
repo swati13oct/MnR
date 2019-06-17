@@ -25,7 +25,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/**
 	 * Validate tooltips on claims detail page
-	 * @param planType
+	 * @param planType This is the plan type for testing
 	 */
 	public void validateTooltips(String planType, String memberType) {
 		if (planType.equalsIgnoreCase("SHIP")) {
@@ -60,11 +60,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			eobTooltipsBtn.click();
 			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", validate(tooltipsElemTxt));
 			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
-			if (memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("UHC")) {
-				expEobTooltipsText="The Medical Explanation of Benefits (EOB) is a summary of the claims UnitedHealthcare receives from your doctors each month. Your EOB shows the claims we received , what we paid and what you owe. If you do not have any claims , you wont receive an EOB for that month.";
-			}
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
-					+ "Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElemTxt.getText()+"'", 
+					+ "\nExpected='"+expEobTooltipsText+"' \nActual='"+tooltipsElemTxt.getText()+"'", 
 					tooltipsElemTxt.getText().equals(expEobTooltipsText));
 			tooltipsElemTxt.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, "
@@ -73,7 +70,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	}
 
 	/**
-	 * this method validates EOB for different domain 
+	 * This method validates EOB for different domain 
 	 */
 	public void validateMedicalEobPdf(String claimSystem, String planType){
 		if (claimSystem.toUpperCase().contains("COSMOS")&& planType.equals("MAPD")) {
@@ -104,7 +101,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/**
 	 * Validate header section content on claims detail page
-	 * @param planType
+	 * @param planType This is the plan type for testing
 	 */
 	public void validateHeaderSection(String planType, String memberType) {
 		//note: validate URL
@@ -230,7 +227,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	}
 
 	/**
-	 * this method validates Claims total table on claims detail page
+	 * This method validates Claims total table on claims detail page
 	 */
 	public void validateClaimsTotalSection() {
 		CommonUtility.waitForPageLoadNew(driver, claimsTotTbl, 5);
@@ -251,7 +248,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/** 
 	 * Validate 'Claims Summary' link display on top of claims detail page
-	 * @param planType
+	 * @param planType This is the plan type for testing
 	 * @return
 	 */
 	public ClaimsSummaryPage validateTopBckToClaimsSummLnk(String planType){
@@ -279,7 +276,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/** 
 	 * Validate 'Claims Summary' link display on bottom of claims detail page
-	 * @param planType
+	 * @param planType This is the plan type for testing
 	 * @return
 	 */
 	public ClaimsSummaryPage validateBtmBckToClaimsSummLnk(){
@@ -298,8 +295,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/** 
 	 * Validate 'Search EOB History' links on claims detail page
-	 * @param claimSystem
-	 * @param plantype
+	 * @param claimSystem This is the claims system type ofr testing
+	 * @param plantype This is the plan type for testing
 	 * @return
 	 */
 	public boolean validateSearchEobHistory(String claimSystem, String plantype){
@@ -356,8 +353,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 	/**
 	 * Validate values in claims total row is accurate
-	 * @param invokedBypass
-	 * @param planType
+	 * @param invokedBypass If true (due to known defect/ticket) then it will not flag the mismatch 
+	 * @param planType This is the plan for testing
 	 */
 	public void validateClaimsTotalAccurate(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
