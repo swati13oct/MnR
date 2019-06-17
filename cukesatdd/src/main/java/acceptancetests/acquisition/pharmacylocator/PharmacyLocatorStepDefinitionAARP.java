@@ -58,7 +58,7 @@ public class PharmacyLocatorStepDefinitionAARP {
 	/**
 	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
 	 */
-	@When("^the user hovers to Our Plans and select Request More Help and Information for following plan type in AARP Site$")
+	@When("^the user hovers to shop for a Plan and select Request More Help and Information for following plan type in AARP Site$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(DataTable planAttributes){
 		
 		String planType = planAttributes.getGherkinRows().get(0).getCells()
