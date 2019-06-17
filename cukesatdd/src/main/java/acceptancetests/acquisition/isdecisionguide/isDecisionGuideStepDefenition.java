@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -107,25 +108,76 @@ public class isDecisionGuideStepDefenition {
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		boolean Validation_Flag = DecisionGuideStep1Page.NextBtn_invalidAddressValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
+			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Address Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
 	}
 
 	@Then("^the user enters valid information for the following fields$")
-	public void the_user_enters_valid_information_for_the_following_fields(DataTable arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
-		// E,K,V must be a scalar (String, Integer, Date, enum etc)
+	public void the_user_enters_valid_information_for_the_following_fields(DataTable givenAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		DecisionGuideStep1Page.enterUserInfoStep1(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
 	}
 
 	@Then("^the user validates address autocomplete on Step(\\d+)$")
 	public void the_user_validates_address_autocomplete_on_Step(int arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.Validate_addressAutoComplete();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Address Aut Complete Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
 	}
 
+	@Then("^user clicks Next to Navigate to Second Step$")
+	public void user_clicks_Next_to_Navigate_to_Step2() throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		IsDecisionGuideStep2 DecisionGuideStep2Page = DecisionGuideStep1Page.NavigateNext_DGRStep2();
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
+	
+	@Then("^the user validates all the required fields for blank validation on Second Step$")
+	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Step2() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page  =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		boolean Validation_Flag = DecisionGuideStep2Page.blankFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep2Page);
+
+	}
+
+	@Then("^the user validated all fields for invalid validation on Second Step$")
+	public void the_user_validated_all_fields_for_invalid_validation_on_Step2() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		boolean Validation_Flag = DecisionGuideStep2Page.invalidFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep2Page);
+
+	}
 } 
 
 

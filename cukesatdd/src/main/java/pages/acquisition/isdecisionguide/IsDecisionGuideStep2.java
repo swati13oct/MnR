@@ -148,7 +148,15 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 	
 	public boolean invalidFieldValidation() {
 		boolean flag = true;
-		PhoneNumber.sendKeys("876-555-0987");
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assert.assertTrue("Phone Number Field is Not Displayed", validate(PhoneNumber));
+		PhoneNumber.sendKeys("8765550987");
 		SubmitBtn.click();
 		if(validate(PhoneNumberError)){
 			if(!PhoneNumberError.getText().contains("You have entered an invalid number (555 prefix). Please enter a valid phone number.")){
