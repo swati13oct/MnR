@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppUlayer
 Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
-  @vppUlayerSmoke @vbfGate
+  @vppUlayerSmoke @vbfGate @F000000
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -21,7 +21,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @vppPlanDetailsAarp
+  @vppPlanDetailsAarp @F000000
   Scenario Outline: Verify plan details in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
