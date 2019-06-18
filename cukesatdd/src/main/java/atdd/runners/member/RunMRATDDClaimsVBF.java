@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.member;
 
 import org.junit.runner.RunWith;
 
@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDSanityClaims.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityClaims")
+jsonReport = "target/cucumber-RunMRATDDClaimsVBF.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDClaimsVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityClaims.json" }, tags = { "@smokeTest_Claims" })
-public class RunMRATDDSanityClaims {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDClaimsVBF.json" }, tags = { "@smokeTest_Claims" })
+public class RunMRATDDClaimsVBF {
 
 }
