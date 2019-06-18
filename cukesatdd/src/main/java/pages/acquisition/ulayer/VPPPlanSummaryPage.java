@@ -599,7 +599,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+			sleepBySec(20);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {

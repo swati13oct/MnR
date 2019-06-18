@@ -202,3 +202,41 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | TID   | zipcode | distance | county       | planName                                          | planYear | pharmacytype                      | servicetype   | languageName |
       | 15583 |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy         | Open 24 hours | Spanish      |
       | 15582 |   90210 | 15 miles | none         | AARP MedicareRx Walgreens (PDP)                   |     2019 | Preferred Retail Pharmacy Network | E-Prescribing | Spanish      |
+@vppPlanDetailsAarpPlE2E
+  Scenario Outline: Verify plan details in AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    When the user navigates to Pharmacy locator page from VPP plan details page
+    #And the user enters following details for pharmacy search in AARP Site
+      #| Zip Code    | <zipcode>  |
+      #| Distance    | <distance> |
+      #| County Name | <county>   |
+    And the user chooses a plan from dropdown in AARP Site
+      | Plan Name | <planName> |
+      | planyear  | <planYear> |
+    Then the user validates the available pharmacies page in AARP site
+    Then the user chooses the Pharmacy Type
+      | <pharmacytype> |
+    Then the user chooses the Pharmacy Type
+      | <servicetype> |
+    Then the user validates the available pharmacies page in AARP site
+    Then the user validates the no pharmacies display error message
+    When the user selects a language from dropdown in AARP Site
+      | <languageName> |
+    And the user validates language changes in AARP site
+    And the user chooses a plan from dropdown in AARP Site
+      | Plan Name | <planName> |
+      | planyear  | <planYear> |
+    Then the user validates the available pharmacies page in AARP site
+    
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                          |distance  |planYear|pharmacytype|servicetype|languageName|
+      |   80002 | Yes             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |25 miles  | 2019   |Standard Network Pharmacy |Open 24 hours|Spanish|
+      

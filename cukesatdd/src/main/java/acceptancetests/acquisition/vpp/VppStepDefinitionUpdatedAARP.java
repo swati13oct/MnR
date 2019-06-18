@@ -26,6 +26,7 @@ import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
+import pages.acquisition.ulayer.PharmacySearchPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
@@ -1629,5 +1630,17 @@ public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
-
+	@When("^the user navigates to Pharmacy locator page from VPP plan details page$")
+	public void the_user_navigates_to_pl_page_through_vpp(){
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String county =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String ismulticounty = (String) getLoginScenario().getBean(VPPCommonConstants.IS_MULTICOUNTY);
+		PharmacySearchPage pharmacySearchPage = vppPlanDetailsPage.navigateToPharmacySearchPage(county,ismulticounty);
+		if (pharmacySearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+		
+	}
 }

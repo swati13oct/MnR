@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -165,6 +167,17 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement riderYearlyPremium;
 	
+	@FindBy (xpath = "//a[contains(text(),'Online pharmacy directory')]")
+	private WebElement vppPlanDetailsPlLink;
+	
+	@FindBy(id = "distance")
+	WebElement distanceDropownID;
+	
+	@FindBy(id = "selectmultycounty_box")
+	private WebElement countyPopOut;
+	
+	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
+	private List<WebElement> countyList;
 	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
@@ -833,7 +846,42 @@ public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,Strin
 		bValidation = false;
 	return bValidation;
 }
-    
+ public PharmacySearchPage navigateToPharmacySearchPage(String county,String isMultutiCounty ){
+	 CommonUtility.waitForPageLoad(driver, vppPlanDetailsPlLink, 45);
+	 switchToNewTabNew(vppPlanDetailsPlLink);
+	 
+	 if (!isMultutiCounty.equalsIgnoreCase("No")) {
+		 CommonUtility.waitForPageLoad(driver, countyPopOut, 50);
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+							countylink.click();
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
 
-
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assert.fail("Exception!!! County does not exists");
+			}
+	 
+	 CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
+	 
+	 if(validateNew(distanceDropownID)){
+	System.out.println("Pharmacy locator page got loaded");	
+	return  new PharmacySearchPage(driver);
+	 }else
+	 {
+		 System.out.println("Pharmacy locator page not loaded"); 
+	 }
+	return null;
+	 
+	 }
+	// null;
+	return null;
+ }
+ 
 }
