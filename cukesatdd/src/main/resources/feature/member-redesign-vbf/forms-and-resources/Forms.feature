@@ -1,7 +1,7 @@
 @smokeTest @MemberVBF
 Feature: 1.16-VBF-MemRedesign-To test FnR functionality
 
- @smokeTest_FNR @rallyDashboard @testharness
+  @smokeTest_FNR @rallyDashboard @testharness
   Scenario Outline: 
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -14,16 +14,15 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
     Then validate that the plan materials section is displayed
     And validate that english is default language in dropdown
     And the user verifies that the correct pdfs are coming in the plan material section
-     | BENEFIT-HIGHLIGHT | <benefithighlight> |
-     | SUMMARY-OF-BENEFIT |  <summaryofbenefits> |
-     | EVIDENCE OF COVERAGE |  <evidenceofcoverage> |
+      | BENEFIT-HIGHLIGHT    | <benefithighlight>   |
+      | SUMMARY-OF-BENEFIT   | <summaryofbenefits>  |
+      | EVIDENCE OF COVERAGE | <evidenceofcoverage> |
     # |  UNITED HEALTH PASSPORT PROGRAM | <unitedhealthpassportprogram>  |
     # |  COMPREHENSIVE FORMULARY | <comprehensiveformulary> |
     # |  PRIOR AUTHORIZATION | <priorauth> |
     # |   STEP THERAPY |  <steptherapy> |
     # |  FORMULARY ADDITIONS| <formularyadd> |
     # |   FORMULARY DELETIONS| <formularydel> |
-   
     And for active member Temporary Id Card and Plan Order Material links are displayed
     And validates the view temporary id card link
     Then validate that the Anoc Section is displayed
@@ -36,7 +35,29 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
     Then validate that the renew magazine section is displayed
 
     Examples: 
-	| memberType | friendname | favcolor | phonenumber |benefithighlight | summaryofbenefits | evidenceofcoverage | unitedhealthpassportprogram | comprehensiveformulary| priorauth |  steptherapy  |  formularyadd |  formularydel |
-	| AARPMapdInd |name1      | color1   | number1     | Benefit Highlights  |Summary of Benefits |Evidence of Coverage |  UnitedHealth Passport Program  |  Comprehensive Formulary | Prior Authorization | Step Therapy  | Formulary Additions | Formulary Deletions |
-      
-#q1_aarp_apr194/Password@1
+      | memberType  | friendname | favcolor | phonenumber | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | unitedhealthpassportprogram   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |
+      | AARPMapdInd | name1      | color1   | number1     | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
+
+  #q1_aarp_apr194/Password@1
+  
+  
+   @smokeTest_FNR_Document @rallyDashboard @testharness
+  Scenario Outline: To validate the My Document
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Member Type | <memberType> |
+    When the above plantype user logs in member redesign for Direct Login
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+    Then member should navigate to Home page
+    And the user navigates to Forms and Resources Page
+    Then validate that My document section is displayed
+    And click on search documents button
+    Then Validate user navigated to my document page
+    And search by type of document or view all documents
+      | Document Type       | <documenttype>      |
+      | View Documents From | <viewdocumentsfrom> |
+
+    Examples: 
+      | memberType                 | friendname | favcolor | phonenumber | documenttype | viewdocumentsfrom |
+      | MyDocumentMapdInd          | name1      | color1   | number1     | All          | Last 24 Months    |

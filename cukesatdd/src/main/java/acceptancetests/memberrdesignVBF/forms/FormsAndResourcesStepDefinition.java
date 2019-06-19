@@ -3,6 +3,7 @@ package acceptancetests.memberrdesignVBF.forms;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.TestHarness;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.memberrdesignVBF.FormsAndResourcesPage;
 import atdd.framework.*;
 import acceptancetests.data.PageConstants;
@@ -148,8 +150,7 @@ public class FormsAndResourcesStepDefinition {
 		}
 	}
 	
-	
-	
+
 	/*@Then("^validate that the anoc section is displayed$")
 	public void anocsec() throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
@@ -197,7 +198,51 @@ public class FormsAndResourcesStepDefinition {
 		}
 
 	}
-
+		
+	/**
+	 * @throws InterruptedException
+	 * @toDo : Clicks on search button on my documents section 
+	 */
+	@Then("^click on search documents button$")
+	public void click_on_search_documents_button() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		if (formsAndResourcesPage.getSearchDocument().isDisplayed())
+		{
+			System.out.println("Search documents button exists.");
+			formsAndResourcesPage.getSearchDocument().click();
+		}else{
+			Assert.fail("Search documents button doesn't exists.");
+		}
+	   
+	}
+	
+	@Then("^Validate user navigated to my document page$")
+	public void validate_user_navigated_to_my_document_page() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario().getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		if (formsAndResourcesPage.getvalidateDocumentTypePage().isDisplayed())
+		{
+			System.out.println("User navigated to my documents page.");
+		}else{
+			Assert.fail("User navigated to my documents page.");
+		}
+	}
+	
+	
+	@Then("^search by type of document or view all documents$")
+	public void search_by_type_of_document_or_view_all_documents(DataTable documenttype) throws Throwable {
+		List<DataTableRow> memberAttributesRow = documenttype.getGherkinRows(); 
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++){
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+		String documentType = memberAttributesMap.get("Document Type");
+		String viewDocumentsFrom  = memberAttributesMap.get("View Documents From");
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.selectDateRange(documentType, viewDocumentsFrom);
+	}
+	
+	
 	/**
 	 * @toDo : clicks order plan materials and view temporary id card links
 	 */
