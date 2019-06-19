@@ -85,13 +85,25 @@ public class PreferencesStepDefinition {
 	 * @toDo : Validates the Go green button in Communication Preferences
 	 *       section
 	 */
-	@Then("^the user validates Go paperless button and on clicking button go green page should come")
+	@Then("^the user validates the iframe on Communication Preferences Page")
 	public void uservalidatesgogreenpagerouting() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 
 		communicationPrefPage.validategogreenbutton();
 	}
+	
+	
+	@Then("^the user validates that the iframe is not present for a ship member")
+	public void uservalidatesIframeForAShipMember() {
+		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+
+		communicationPrefPage.validateIframeForAShipMember();
+	}
+	
+	
+	
 	/**
 	 * @toDo : Validates the I have read checkbox on Go green page
 	 */
@@ -149,6 +161,15 @@ public class PreferencesStepDefinition {
 
 		Assert.assertTrue("Communication preference online preference changed and verified",
 				communicationPrefPage.changeAndVerifyOnlinePreference());
+	}
+	
+	 
+	@Then("^the user validates the functionality of updating the email on the iframe")
+	public void userChangesEmailOnTheIframs() {
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+
+		communicationPreferencesPage.validateEmailUpdateOnIframe();
 	}
 
 	/**
@@ -211,6 +232,16 @@ public class PreferencesStepDefinition {
 
 	}
 	
+	/**
+	 * @toDo : Validates the Note section on Go green page
+	 */
+	@Then("^the user validates the Note Section on Preferences Page")
+	public void UserValidatesNoteSection() {
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+		
+		communicationPreferencesPage.validateNoteSection();
 
+	}
 
 }

@@ -1479,18 +1479,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	
 
-	/**
-	 * @toDo : Validates the Note section on Go green page
-	 */
-	public void validateNoteSection() {
-
-		validateNew(NoteSection);
-		String noteContentActual = NoteSection.getText();
-		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account. ";
-		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
-
-	}
-
+	
 	
 
 
@@ -2368,6 +2357,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			}
 
 		}
+	}
+
+	public void validateCommunicationPreferencesForSsupUser() {
+		// TODO Auto-generated method stub
+		
+    Assert.assertFalse("Communication preferences section should not be coming for Ssup members", communicationPreferncessection.size() > 0);
+		
+
 	}
 	
 	

@@ -1,6 +1,7 @@
 package pages.regression.profileandpreferences;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -32,11 +35,11 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[1]//div[@class='control__indicator input-options']")
 	//@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[1]/fieldset/label/div")
-	@FindBy(xpath = "//*[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
+	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[1]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement paperlessRadioBtn;
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']/div[3]//div[@class='row']/div[2]//div[@class='control__indicator input-options']")
-	@FindBy(xpath = "/html/body/div[2]/div/div/div/div/div/div/ui-view/div/div/div/div[2]/div/div/div[3]/fieldset/div[2]/div/div[2]/fieldset/label/div")
+	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[2]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
 	private WebElement mailRadioBtn;
 
 	//@FindBy(xpath = "//div[@class='tile-block paperless']//div[@class='row consent-row']//div[@class='control__indicator red-color-status']")
@@ -82,7 +85,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
 	private WebElement backLink2;
 
-	@FindBy(className = "atdd-notes")
+	@FindBy(css = "div.col-md-8.atdd-notes")
 	private WebElement NoteSection;
 	
 	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
@@ -148,11 +151,39 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id="savepreferyes")
 	private WebElement modalPopupWindowYesButton;
 	
-	@FindBy(xpath="//[@id='savePreferencesPopUpContent']//button[1]")
+	@FindBy(xpath="//*[@id='savePreferencesPopUpContent']/div/div[5]/button[1][contains(text(),'Submit')]")
 	private WebElement modalPopupWindowSubmitButton;
 	
+	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='US MAIL']/ancestor::div[1]/input[@type='radio'][@id='Claims10']")
+	private WebElement  claimsMailDelivery;
 	
+	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='EMAIL']/ancestor::div[1]/input[@type='radio'][@id='Claims0']")
+	private WebElement claimsOnlineDelivery ;
 	
+	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Plan Documents']/following::input[@value='US MAIL']/ancestor::div[1]/input[@type='radio'][@id='PlanBenefits10']")
+	private WebElement planDocumentsMailDelivery;
+	
+	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='EMAIL']/ancestor::div[1]/input[@type='radio'][@id='PlanBenefits0']")
+	private WebElement planDocumentsOnlineDelivery;
+	
+	@FindBy(id="preferenceIfram")
+	private WebElement iframeForFederalMembers;
+	
+	@FindBy(id="glyphicon-pencil-email-Paperless_Settings")
+	private WebElement emailEditButtonOnIframe;
+	
+	@FindBy(id="primaryEmail_0")
+	private WebElement newEmailTextfield;
+	
+	@FindBy(id="updatedisable")
+	private WebElement saveButtonOnEmailUpdatePopup;
+	
+	@FindBy(id="cancelUpdateEmailBtn_P")
+	private WebElement cancelButtonOnEmailUpdatePopup;
+	
+	@FindBy(xpath="//div[2]/div[2]/p")
+	private WebElement updatedEmailAfterSave;
+
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -183,27 +214,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 
 	}
 
-	public boolean validatePage() {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
-		System.out.println("validating frame");
-		validateNew(iframeEPMP);
-		System.out.println("frame validated");
-		driver.switchTo().frame(iframeEPMP);
-		System.out.println("switched to frame");
-
-		if (validateNew(savePrefButton))
-			return true;
-		else
-			return false;
-	}
+	
+	
 	
 	public boolean validatePageForShip() {
 		CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
@@ -216,6 +228,14 @@ public class CommunicationPreferencePage extends UhcDriver {
 	}
 
 	public boolean changeAndVerifyOnlinePreference() {
+
+		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
+		System.out.println("validating frame");
+		validateNew(iframeEPMP);
+		System.out.println("frame validated");
+		driver.switchTo().frame(iframeEPMP);
+		System.out.println("switched to frame");
+		
 		if (validateNew(paperlessRadioBtn) && !(paperlessRadioBtn.isSelected())) {
 			paperlessRadioBtn.click();
 			if (validateNew(agreeCheckBox)) {
@@ -233,6 +253,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 		} else
 			return false;
 	}
+	
+	
 	
 	
 
@@ -343,6 +365,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//validating the Iframe 
+		validateNew(iframeForFederalMembers);
 		driver.switchTo().frame(0);
 		if (gopaperlessbutton.isSelected()) {
 				mailButton.click();
@@ -453,16 +477,42 @@ public class CommunicationPreferencePage extends UhcDriver {
 	}
 
 	public void validateUpdatePreferencesForShip() {
-		
-        jsClickNew(onlineDeliveryPlanDocuments);
-		
-		iHavereadCheckboxForShip.click();
-		savePrefButtonSHIP.click();
+       
+        boolean claimsOnlineDeliverySelected =false;
+        boolean planDocumentsOnlineDeliverySelected=false;
+      //Validating for Claims  
+        System.out.println(claimsMailDelivery.isSelected());
+        
+      if(claimsMailDelivery.isSelected()){
+    	  System.out.println("Mail delivery was selected for claims, selecting Online delivery now");
+    	  jsClickNew(claimsOnlineDelivery);
+    	  claimsOnlineDeliverySelected=true;
+      }
+      else
+      {
+    	  System.out.println("Online delivery was selected for claims, selecting Mail now");
+    	  jsClickNew(claimsMailDelivery);
+      }
+      //validating for Plan Documents
+      if(planDocumentsMailDelivery.isSelected()){
+    	  System.out.println("Mail delivery was selected for plan Documents, selecting Online delivery now");
+    	  jsClickNew(planDocumentsOnlineDelivery);
+    	  planDocumentsOnlineDeliverySelected=true;
+      }
+      else
+      {
+    	  System.out.println("Online delivery was selected for Plan Documents, selecting Mail now");
+    	  jsClickNew(planDocumentsMailDelivery);
+      }
+       // jsClickNew(onlineDeliveryPlanDocuments);
+        jsClickNew(iHavereadCheckboxForShip);
+		jsClickNew(savePrefButtonSHIP);
 		if(modalPopupWindow.size()>0)
 		{
 			boolean isYesSelected=modalPopupWindowYesButton.isSelected();
 			if(isYesSelected)
 			{
+				validateNew(modalPopupWindowSubmitButton);
 				modalPopupWindowSubmitButton.click();
 			}
 			else
@@ -473,17 +523,72 @@ public class CommunicationPreferencePage extends UhcDriver {
 		}
 			
 		waitforElementVisibilityInTime(EditPreferenceButton, 30);
-		//Reverting the prefereneces saved
+		//Checking the preferences saved
 		EditPreferenceButton.click();
 		waitforElementVisibilityInTime(savePrefButtonSHIP, 10);
-		jsClickNew(mailDeliveryPlanDocuments);
-		validateNew(iHavereadCheckboxForShip);
-		iHavereadCheckboxForShip.click();
-		savePreferencesButtonShip.click();
-		waitforElementVisibilityInTime(EditPreferenceButton, 20);
-		validateNew(EditPreferenceButton);
+		//validating the saved preferences
+		Assert.assertTrue((claimsOnlineDelivery.isSelected())==(claimsOnlineDeliverySelected) && (planDocumentsOnlineDelivery.isSelected())==(planDocumentsOnlineDeliverySelected));
+	
+		//jsClickNew(mailDeliveryPlanDocuments);
+		//validateNew(iHavereadCheckboxForShip);
+		//iHavereadCheckboxForShip.click();
+		//savePreferencesButtonShip.click();
+		//waitforElementVisibilityInTime(EditPreferenceButton, 20);
+		//validateNew(EditPreferenceButton);
 		
 	}
+
+	public void validateIframeForAShipMember() {
+		// TODO Auto-generated method stub
+	Assert.assertFalse(iframeEPMPCheck.size()>0);
+		
+	}
+
+	public void validateEmailUpdateOnIframe() {
+		// TODO Auto-generated method stub
+		Random rand = new Random();
+		int randomNumber = rand.nextInt(50);
+		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
+		validateNew(emailEditButtonOnIframe);
+	    WebDriverWait wait = new WebDriverWait(driver, 15);
+	    wait.until(ExpectedConditions.elementToBeClickable(emailEditButtonOnIframe));
+
+		emailEditButtonOnIframe.click();
+		validateNew(newEmailTextfield);
+		newEmailTextfield.clear();
+		validateNew(saveButtonOnEmailUpdatePopup);
+		validateNew(cancelButtonOnEmailUpdatePopup);
+		newEmailTextfield.sendKeys(emailAddress);
+		saveButtonOnEmailUpdatePopup.click();
+		//to close the popup
+		cancelButtonOnEmailUpdatePopup.click();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validateNew(updatedEmailAfterSave);
+	    Assert.assertTrue(updatedEmailAfterSave.getText().contains(emailAddress));
+		
+		
+		
+	}
+	
+	/**
+	 * @toDo : Validates the Note section on Go green page
+	 */
+	public void validateNoteSection() {
+
+		validateNew(NoteSection);
+		String noteContentActual = NoteSection.getText();
+		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account. ";
+		Assert.assertTrue(noteContentActual.equalsIgnoreCase(noteContentExpected));
+
+	}
+
+	
 }
 	
 

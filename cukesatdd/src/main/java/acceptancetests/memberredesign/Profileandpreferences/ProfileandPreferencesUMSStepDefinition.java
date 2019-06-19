@@ -472,7 +472,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : Clicks on Edit Preferences link under Communication Preferences
 	 *       section
 	 */
-	@Then("^the user clicks on edit preferences link and validates the page")
+	@Then("^the user clicks on edit preferences link")
 	public void userClicksOnEditPrefLink() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
@@ -484,7 +484,9 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 		else {
 			Assert.fail("Preference page is not loaded");
-		}
+	}
+		
+		
 	}
 	
 	/**
@@ -519,19 +521,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 
 	
-	/**
-	 * @throws InterruptedException
-	 * @toDo : Validates the back Link functionality from Go green page to
-	 *       Profile page
-	 */
-
-	@Then("^the user validates on clicking Profilenpreferences arrow user should route to Profile and Preferences page")
-	public void uservalidatespnplinkatthetop() throws InterruptedException {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validatepnparrowlink();
-	}
 
 	/**
 	 * @toDo : Validates the elements of Phone section
@@ -695,33 +684,6 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 	
-
-	
-	/**
-	 * @toDo : Validates the Note section on Go green page
-	 */
-	@Then("^the user validates the Note section")
-	public void UserValidatesNoteSection() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateNoteSection();
-
-	}
-
-
-	/**
-	 * @toDo : Validates the Go green header on Go green page
-	 */
-
-	@Then("^the user validates the Go Green Header")
-	public void UserValidatesGoGreenHeader() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validateGoGreenHeader();
-
-	}
 
 	/**
 	 * @toDo : Validates the Need help section for ship member
@@ -1045,6 +1007,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateCommunicationPreferencesForPcpMedica();
+	}
+	
+	
+	@Then("^the user validates that  Communication Preferences section doesn't come for SSUP member$")
+	public void userValidatescommunicationpreferncesSectionForSsupUser() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateCommunicationPreferencesForSsupUser();
 	}
 
 	@Then("^the user validates that  Communication Preferences section comes up for Ship Member$")
