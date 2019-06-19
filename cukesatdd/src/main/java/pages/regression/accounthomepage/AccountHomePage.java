@@ -621,7 +621,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
-		System.out.println("waitning for profile page");
+		System.out.println("waiting for profile page");
 		// Testing through Test Harness Page
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
 			System.out.println("testing through test harness page");
@@ -652,9 +652,13 @@ public class AccountHomePage extends UhcDriver {
 					acctProfile.click();
 					acctSetting.click();
 				} else {
-					//check to see if link is inside shadow-root element
-					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
-					System.out.println("clicked header menu");
+					//note: check to see if account setting dropdown link is inside shadow-root element
+					try {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
+					} catch (NoSuchElementException e) { //note: try one more selector before giving up
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-0 > span > span:nth-child(2)");	
+					}
+					System.out.println("clicked account setting dropdown");
 
 					if (validate(accountLabel) && 
 							(accountLabel.getText().toLowerCase().contains("supplement") 
@@ -2828,7 +2832,7 @@ public class AccountHomePage extends UhcDriver {
 		locateAndClickElementWithinShadowRoot(shadowRootElement, inputCssSelector, doScroll);
 	}
 
-	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector, boolean doScroll) {
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector, boolean doScroll) throws NoSuchElementException {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
@@ -2844,6 +2848,9 @@ public class AccountHomePage extends UhcDriver {
 				}
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
+			} catch (NoSuchElementException ne) {
+				throw ne;
+				//new NoSuchElementException("Unable to locate css select '"+inputCssSelector+"' in shadow-root");
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);

@@ -193,7 +193,8 @@ public class NeedHelpStepDefinition {
 	public void navigateToPharmacyLocatorPage() throws InterruptedException {
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String memberType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-		if (memberType.toUpperCase().contains("INDIVIDUAL") && planType.toUpperCase().equals("SHIP")) {
+		if (memberType.toUpperCase().contains("INDIVIDUAL") && planType.toUpperCase().equals("SHIP")
+				|| planType.toUpperCase().equals("MA")) {
 			System.out.println("Pharamcy locator doesn't show up for SHIP user, skip this test");
 			return;
 		}
@@ -231,10 +232,11 @@ public class NeedHelpStepDefinition {
 		if (memberType.toUpperCase().contains("COMBO") && planType.toUpperCase().equals("SHIP")) {
 			System.out.println("This is COMBO plan, pharamcy locator need help section should behave like NON-SHIP");
 			planType="NONSHIP";
-		} else if (memberType.toUpperCase().contains("INDIVIDUAL") && planType.toUpperCase().equals("SHIP")) {
-			System.out.println("Pharamcy locator doesn't show up for SHIP user, skip this test");
+		} else if ((memberType.toUpperCase().contains("INDIVIDUAL") && planType.toUpperCase().equals("SHIP")) 
+			|| planType.toUpperCase().equals("MA")) {
+			System.out.println("Pharamcy locator doesn't show up for SHIP Individual or MA user, skip this test");
 			return;
-		}
+		} 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PHARMACY_SEARCH_PAGE);
 		Assert.assertTrue("PROBLEM - unable to reach Order Plan Materials page", (pharmacySearchPage != null));
