@@ -18,10 +18,6 @@ Feature: To validate the Need Help section on the member site
     And I validate Need Help section on Pharmacy Locator page
     Then I navigate to the Preference page
     And I validate Need Help section on Preference page
-    @test
-    Examples: 
-      | TID   | planType | memberType               |
-      | xxxxx | MA       | AARP_Individual_needHelp |
 
     Examples: 
       | TID   | planType | memberType               |
