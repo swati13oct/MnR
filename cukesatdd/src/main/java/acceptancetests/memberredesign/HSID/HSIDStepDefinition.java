@@ -631,7 +631,7 @@ public class HSIDStepDefinition {
 		if 	(type.contains("claims") ||type.contains("reward")
 				||type.contains("contactus")||type.contains("profilepref")
 				||type.contains("order") ||type.contains("header")
-				||type.contains("pharmacylocator")
+				||type.contains("pharmacylocator") ||type.contains("needhelp")
 				) {	//for now only doing workaround for the above features
 			String forType="claims";
 			if (type.contains("contactus")) {
