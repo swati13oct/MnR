@@ -655,21 +655,30 @@ public class AccountHomePage extends UhcDriver {
 					//note: check to see if account setting dropdown link is inside shadow-root element
 					try {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-2 > span > span:nth-child(2)");	
+						System.out.println("clicked account setting dropdown");
+						if (validate(accountLabel) && 
+								(accountLabel.getText().toLowerCase().contains("supplement") 
+								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(2) > span");	
+						} else {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(3) > span");	
+						}
+						System.out.println("clicked account setting options within account setting dropdown button");
 					} catch (NoSuchElementException e) { //note: try one more selector before giving up
+						System.out.println("TEST - cauth NoSuchElement exception - now try next thing ");
 						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-0 > span > span:nth-child(2)");	
+						System.out.println("clicked account setting dropdown");
+						if (validate(accountLabel) && 
+								(accountLabel.getText().toLowerCase().contains("supplement") 
+								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-0 > a:nth-child(2) > span");	
+						} else {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-0 > a:nth-child(3) > span");	
+						}
+						System.out.println("clicked account setting options within account setting dropdown button");
 					}
-					System.out.println("clicked account setting dropdown");
-
-					if (validate(accountLabel) && 
-							(accountLabel.getText().toLowerCase().contains("supplement") 
-							|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(2) > span");	
-					} else {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-2 > a:nth-child(3) > span");	
-					}
-					System.out.println("clicked header button");
 				}
-				Thread.sleep(6000);	   
+				//Thread.sleep(6000);	   
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				if (driver.getCurrentUrl().contains("profile")) {
@@ -2849,6 +2858,7 @@ public class AccountHomePage extends UhcDriver {
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
 			} catch (NoSuchElementException ne) {
+				System.out.println("TEST - can't find it, rethrowing the exception for next level to handle");
 				throw ne;
 				//new NoSuchElementException("Unable to locate css select '"+inputCssSelector+"' in shadow-root");
 			} catch (Exception e) {
