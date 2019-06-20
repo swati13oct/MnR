@@ -121,7 +121,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//table[@id='colhowdoesthiswork_dce']//div[@itemprop='significantLink']/a[contains(@class,'cta-button')]")
 	public WebElement getStarted;
 
-	@FindBy(xpath = ".//*[@id='collapse2heading_article_mededaccordion0']")
+	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -227,7 +227,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
     @FindBy(xpath=".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
-
+    
+    @FindBy(id="state-select")
+    private WebElement stateDropDown;
+    
+    @FindBy(id="dupIconFlyOut")
+    private WebElement shoppingCartIcon;
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -1244,6 +1249,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public void selectState(String state) {
+		selectFromDropDownByValue(stateDropDown, state);
+	}
+	/**
+	 * This method used to navigate to visitor profile dashboard
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 	
 }
