@@ -72,7 +72,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       |AARP MedicareComplete SecureHorizons Essential (HMO)|
 
-  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer
+  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageUlayerSmoke
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
