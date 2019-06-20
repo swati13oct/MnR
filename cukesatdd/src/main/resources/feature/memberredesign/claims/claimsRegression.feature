@@ -2,7 +2,7 @@
 Feature: T1.1To validate the claims Summary page and claims Details page on the member site
 
   #----- beginning of VBF claims scenarios section ------------------------
-  # note: runner for sanity is RunMRATDDSanityClaims
+  # note: runner for sanity is RunMRATDDClaimsVBF
   # note: need to have these user entries in MemberRedesign-VBF.csv (users may need to be updated)
   # note:   q2_may_shipUAT001/Password@1,SHIP,SHIPCLAIMS,ShipInd
   # note:   q2_jun_uhc0004/Password@1,MAPD,UhcMapdInd
