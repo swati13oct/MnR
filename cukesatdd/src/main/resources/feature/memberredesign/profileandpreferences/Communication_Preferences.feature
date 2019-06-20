@@ -1,5 +1,5 @@
 @accountPreferences @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page
+Feature: C1.2To test Preferences page
 
   @accountPreferences1 @CommunicationPreferences
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
@@ -62,7 +62,7 @@ Feature: C1.2To test Profile and Preferences page
       | 220921 | SHIP_ProfilePref |
 
   @accountPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
-  Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
+  Scenario Outline: plan: <planType> - memberType: <EPMPEnabled_ProfilePref> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -71,11 +71,11 @@ Feature: C1.2To test Profile and Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | planType | memberType |
-      | Combo    | EPMPEnabled |
+      | planType | memberType              |
+      | Combo    | EPMPEnabled_ProfilePref |
       
-    @accountPreferences5 @EPMPpreferencesForSSUPOnProfile @regressionMember
-  Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
+  @accountPreferences5 @EPMPpreferencesForSSUPOnProfile @regressionMember
+  Scenario Outline: plan: <planType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -83,25 +83,30 @@ Feature: C1.2To test Profile and Preferences page
     And the user validates that  Communication Preferences section doesn't come for SSUP member
 
     Examples: 
-      | planType |
-      | SSUP_ProfilePref |
+      | planType               |
+      | SSUP_ProfilePref       |
+      | Terminated_ProfilePref |
+      | PCP_ProfilePref        |
+      | MEDICA_ProfilePref     |
       
-      
-  @F276629
+  @accountPreferences6  @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents and Welcome kit for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
     Then the user validates that Communication Preferences section for Ship
       | Plan Name | <planName> |
+    And the user select "US MAIL" for "Plan Documents"
+    And the user click Terms and Conditions check box
+    And the user click on the Save Preferences button
+    And the user validate the success message
+    And the user edit preference again
     And the user select "electronic delivery" for "Plan Documents"
-
-    #And the user click Terms and Conditions check box
-    #And the user click on the Save Preferences button
-    #Then a popup is displayed and validate the popup
-    #And select Yes and Validate the success message
+    And the user click Terms and Conditions check box
+    And the user click on the Save Preferences button
+    Then a popup is displayed and validate the popup select Yes and submit
+    And the user validate the success message
     Examples: 
-      | FID    | planType | memberType          | planName                  |
-      | 276629 | Medsupp  | SHIPAccountSettings | AARP MEDICARE SELECT PLAN |
+      | FID    | planType |  planName                  |
+      | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SELECT PLAN |

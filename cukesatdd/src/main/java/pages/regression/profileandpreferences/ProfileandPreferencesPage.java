@@ -1663,9 +1663,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath="//h1[contains(@class,'atdd-section-heading') and contains(text(),'Communication Preferences')]")
+	private WebElement prefPgHeader;
 	public CommunicationPreferencePage navigateToCommunicationPreferencePage() {
 		if (editPreferencesLink.isDisplayed())
 			editPreferencesLink.click();
+		//CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, prefPgHeader, 10);
 		if (driver.getCurrentUrl().contains("preferences"))
 		{
 			return new CommunicationPreferencePage(driver);

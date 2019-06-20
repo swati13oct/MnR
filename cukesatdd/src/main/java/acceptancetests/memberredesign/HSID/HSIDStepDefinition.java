@@ -631,7 +631,7 @@ public class HSIDStepDefinition {
 		if 	(type.contains("claims") ||type.contains("reward")
 				||type.contains("contactus")||type.contains("profilepref")
 				||type.contains("order") ||type.contains("header")
-				||type.contains("pharmacylocator")
+				||type.contains("pharmacylocator") ||type.contains("needhelp")
 				) {	//for now only doing workaround for the above features
 			String forType="claims";
 			if (type.contains("contactus")) {
@@ -646,8 +646,9 @@ public class HSIDStepDefinition {
 				forType="reward";
 			} else if (type.contains("pharmacylocator")) {
 				forType="pharmacylocator";
-			}
-			System.out.println("*** bypassSorry is set to yes ***");
+			} else if (type.contains("needhelp")) { //note: if for needhelp validation, just set it as claims
+				forType="claims";
+			}			System.out.println("*** bypassSorry is set to yes ***");
 			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
 			
 			if (planType==null) {
