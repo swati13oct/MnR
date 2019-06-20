@@ -76,7 +76,7 @@ Feature: C1.2To test Preferences page
       | 220921 | SHIP_ProfilePref |
 
   @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
-  Scenario Outline: plan: <planType> - memberType: <EPMPEnabled_ProfilePref> - To test end to end regression preferences scenario for combo member
+  Scenario Outline: plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
