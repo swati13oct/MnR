@@ -42,7 +42,7 @@ Feature: C1.2To test Preferences page
     Then the user changes the online preference and saves the change
     Then the user validates the functionality of updating the email on the iframe
 
-    @smokeTest_GoGreenEPMP @rallyDashboard @testharness
+    @smokeTest @MemberVBF @smokeTest_GoGreenEPMP @rallyDashboard @testharness
     Examples: 
       | TID   | planType                       |
       | 15311 | MAPD_AARP_GOGreen_Profilepref  |
