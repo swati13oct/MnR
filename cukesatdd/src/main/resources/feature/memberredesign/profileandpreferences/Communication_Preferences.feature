@@ -121,5 +121,5 @@ Feature: C1.2To test Preferences page
     Then a popup is displayed and validate the popup select Yes and submit
     And the user validate the success message
     Examples: 
-      | FID    | planType                 |  planName                 |
+      | FID    | planType                 | planName                  |
       | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SELECT PLAN |
