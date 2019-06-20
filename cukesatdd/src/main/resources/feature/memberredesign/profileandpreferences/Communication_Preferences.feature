@@ -76,7 +76,7 @@ Feature: C1.2To test Preferences page
       | 220921 | SHIP_ProfilePref |
 
   @accountPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
-  Scenario Outline: plan: <planType> - memberType: <EPMPEnabled_ProfilePref> - To test end to end regression scenario for account profile and preferences for a combo member
+  Scenario Outline: plan: <planType> - memberType: <EPMPEnabled_ProfilePref> - To test end to end regression preferences scenario for combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -88,13 +88,12 @@ Feature: C1.2To test Preferences page
       | planType | memberType              |
       | Combo    | EPMPEnabled_ProfilePref |
       
-  @accountPreferences5 @EPMPpreferencesForSSUPOnProfile @regressionMember
-  Scenario Outline: plan: <planType> - To test end to end regression scenario for account profile and preferences for a combo member
-    #Removed from Regression as EPMP is still in the pipeline for development
+  @accountPreferences5 @NoEPMPpreferences @regressionMember
+  Scenario Outline: plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page
-    And the user validates that  Communication Preferences section doesn't come for SSUP member
+    And the user validates that Communication Preferences section doesn't come
 
     Examples: 
       | planType               |
@@ -104,7 +103,7 @@ Feature: C1.2To test Preferences page
       | MEDICA_ProfilePref     |
       
   @accountPreferences6 @regressionMember @F276629
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents and Welcome kit for SHIP
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page
