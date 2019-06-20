@@ -10,9 +10,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-/**
- * Functionality: Profile And Preferences page
- */
+/** Functionality: Profile And Preferences page */
 public class PreferencesStepDefinition {
 
 	@Autowired
@@ -33,7 +31,7 @@ public class PreferencesStepDefinition {
 	public void UserValidatesPlanName() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		String planName=(String) getLoginScenario().getBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE);
+		String planName = (String) getLoginScenario().getBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE);
 		communicationPrefPage.validatePlanName(planName);
 	}
 
@@ -41,7 +39,7 @@ public class PreferencesStepDefinition {
 	public void UserValidatesPlanNameForShip() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		String planName=(String) getLoginScenario().getBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE);
+		String planName = (String) getLoginScenario().getBean(CommonConstants.PLAN_NAME_ON_PROFILE_PAGE);
 		communicationPrefPage.validatePlanNameForShip(planName);
 	}
 
@@ -77,7 +75,7 @@ public class PreferencesStepDefinition {
 	public void UserValidatesBacktoPNPlink() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		ProfileandPreferencesPage profilePage=communicationPrefPage.validateBacktoPNPlink();
+		ProfileandPreferencesPage profilePage = communicationPrefPage.validateBacktoPNPlink();
 		Assert.assertTrue("PROBLEM - Back link to Profile page is not working", profilePage != null);
 	}
 
@@ -85,7 +83,7 @@ public class PreferencesStepDefinition {
 	public void UserValidatesBacktoProfilePagelinkForShip() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		ProfileandPreferencesPage profilePage=communicationPrefPage.validateBacktoPNPlinkForShip();
+		ProfileandPreferencesPage profilePage = communicationPrefPage.validateBacktoPNPlinkForShip();
 		Assert.assertTrue("PROBLEM - Back link to Profile page is not working", profilePage != null);
 	}
 
@@ -99,21 +97,21 @@ public class PreferencesStepDefinition {
 
 	@Then("^the user validates the functionality of updating the email on the iframe")
 	public void userChangesEmailOnTheIframs() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateEmailUpdateOnIframe();
 	}
 
 	@Then("^the user validates the headers and labels of the communication preferences section for SHIP")
 	public void the_user_validates_headers_and_labels_of_the_communication_preferences_section_for_SHIP() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateGoGreenSectionForShip();
 	}
 
 	@Then("^the user validates the update preferences functionality for ship")
 	public void validate_update_preferences_functionality_for_ship() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateUpdatePreferencesForShip();
 	}
@@ -145,43 +143,43 @@ public class PreferencesStepDefinition {
 
 	@Then("^the user validates the Note Section on Preferences Page")
 	public void UserValidatesNoteSection() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateNoteSection();
 	}
-	
+
 	@And("^the user click Terms and Conditions check box$")
 	public void userClickCheckBox() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.clickCheckBoxShip();
 	}
-	
+
 	@And("^the user click on the Save Preferences button")
 	public void userClickSave() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.clickSaveBtnShip();
 	}
-	
+
 	@And("^the user edit preference again")
 	public void editPrefAgain() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.editPrefAgain();
 	}
-	
+
 	@Then("^a popup is displayed and validate the popup select Yes and submit")
 	public void validatePopup() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		communicationPreferencesPage.validatePopUp();	
-		}
-	
-    @And("^the user validate the success message")
-    public void validateSuccessMsg() {
-		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage)getLoginScenario()
+		communicationPreferencesPage.validatePopUp();
+	}
+
+	@And("^the user validate the success message")
+	public void validateSuccessMsg() {
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		communicationPreferencesPage.validateSuccessText();	
-    }
+		communicationPreferencesPage.validateSuccessText();
+	}
 }

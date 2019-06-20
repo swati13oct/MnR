@@ -1,7 +1,16 @@
-@accountPreferences @thePredators @regressionMember
+@accountPreferences @thePredators 
 Feature: C1.2To test Preferences page
 
-  @accountPreferences1 @CommunicationPreferences
+  #----- beginning of VBF preferences scenarios section ------------------
+  # note: member-redesign-vbf/profile-and-preference/ProfileAndPreferences.feature 
+  # note: @smokeTest_GoGreenEPMP only this one is for preference
+  # note: it's similar to the existing regression so just adding the tag to the case below
+  # note: When ready to switch runner, need to make sure this user entry is in MemberRedesign-VBF.csv for stage run
+  # note:   q2_jun_aarp0062/Password@1,MAPD_AARP_GOGreen_Profilepref,
+  # note: Runner is RunMRATDDPreferencesVBF
+  #----- end of VBF preferences scenarios section ------------------
+  
+  @accountPreferences1 @CommunicationPreferences @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -33,6 +42,11 @@ Feature: C1.2To test Preferences page
     Then the user changes the online preference and saves the change
     Then the user validates the functionality of updating the email on the iframe
 
+    @smokeTest_GoGreenEPMP @rallyDashboard @testharness
+    Examples: 
+      | TID   | planType                       |
+      | 15311 | MAPD_AARP_GOGreen_Profilepref  |
+
     Examples: 
       | TID   | planType                       |
       | 15311 | MAPD_AARP_GOGreen_Profilepref  |
@@ -43,7 +57,7 @@ Feature: C1.2To test Preferences page
       | 15316 | MAPD_GROUP_GOGreen_Profilepref |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
-  @accountPreferences3 @F220921 @CommunicationPreferences
+  @accountPreferences3 @F220921 @CommunicationPreferences @regressionMember
   Scenario Outline: FID: <FID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -89,7 +103,7 @@ Feature: C1.2To test Preferences page
       | PCP_ProfilePref        |
       | MEDICA_ProfilePref     |
       
-  @accountPreferences6  @regressionMember @F276629
+  @accountPreferences6 @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents and Welcome kit for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -108,5 +122,5 @@ Feature: C1.2To test Preferences page
     Then a popup is displayed and validate the popup select Yes and submit
     And the user validate the success message
     Examples: 
-      | FID    | planType |  planName                  |
+      | FID    | planType                 |  planName                 |
       | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SELECT PLAN |
