@@ -40,7 +40,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(xpath = "//input[contains(@id,'phoneNumberField')]")
 	private WebElement phoneField;
 
-	@FindBy(xpath = "//button[@class=\"c-button\"]")
+	@FindBy(xpath = "//button[contains(@class,'c-button')]")
 	private WebElement requestAppointmentButton;
 
 	@FindBy(xpath = "//a[contains(text(),'Find plans')]")
@@ -123,11 +123,8 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	}
 
 	public boolean validateErrorMessages() {
-		CommonUtility.waitForPageLoadNew(driver, errorMessageHeading, 60);
 
-		validateNew(errorMessageFN);
-		if (validate(errorMessageLN) && validate(errorMessageAddress) && validate(errorMessageCity)
-				&& validate(errorMessageState) && validate(errorMessageZip) && validate(errorMessagePhone)) {
+		if (validateNew(errorMessageHeading) ) {
 			return true;
 		}
 		return false;
