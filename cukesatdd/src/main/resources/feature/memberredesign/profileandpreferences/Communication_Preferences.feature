@@ -1,4 +1,4 @@
-@accountPreferences @thePredators 
+@CommunicationPreferences @thePredators 
 Feature: C1.2To test Preferences page
 
   #----- beginning of VBF preferences scenarios section ------------------
@@ -10,7 +10,7 @@ Feature: C1.2To test Preferences page
   # note: Runner is RunMRATDDPreferencesVBF
   #----- end of VBF preferences scenarios section ------------------
   
-  @accountPreferences1 @CommunicationPreferences @regressionMember
+  @CommunicationPreferences1 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -33,7 +33,7 @@ Feature: C1.2To test Preferences page
       | 15312 | MA_AARP_GOGreen_Profilepref   |
       | 15313 | PDP_AARP_GOGreen_Profilepref  |
 
-  @accountPreferences2 @goGreen @regressionMember
+  @CommunicationPreferences2 @goGreen @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -57,7 +57,7 @@ Feature: C1.2To test Preferences page
       | 15316 | MAPD_GROUP_GOGreen_Profilepref |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
-  @accountPreferences3 @F220921 @CommunicationPreferences @regressionMember
+  @CommunicationPreferences3 @F220921 @regressionMember
   Scenario Outline: FID: <FID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -75,7 +75,7 @@ Feature: C1.2To test Preferences page
       | FID    | planType         |
       | 220921 | SHIP_ProfilePref |
 
-  @accountPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
+  @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: plan: <planType> - memberType: <EPMPEnabled_ProfilePref> - To test end to end regression preferences scenario for combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -88,7 +88,7 @@ Feature: C1.2To test Preferences page
       | planType | memberType              |
       | Combo    | EPMPEnabled_ProfilePref |
       
-  @accountPreferences5 @NoEPMPpreferences @regressionMember
+  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
   Scenario Outline: plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -102,7 +102,7 @@ Feature: C1.2To test Preferences page
       | PCP_ProfilePref        |
       | MEDICA_ProfilePref     |
       
-  @accountPreferences6 @regressionMember @F276629
+  @CommunicationPreferences6 @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
