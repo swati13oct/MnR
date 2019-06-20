@@ -149,7 +149,7 @@ public class RequestAgentApptStepDefinitionUHC {
 		if(breadcrumb){
 			Assert.assertTrue(breadcrumb);
 		}else{
-			Assert.fail("Error in loading error messages");
+			Assert.fail("Error with the breadcrumb text displayed");
 		}
 	}
 	

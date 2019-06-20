@@ -144,6 +144,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
 	
 	public static final String REQUEST_MAILED_INFORMATION_UHC = "RequestmailedinformationUHC";
+	
+	public static final String VISITOR_PROFILE_PAGE = "VisitorProfilePage";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
 
