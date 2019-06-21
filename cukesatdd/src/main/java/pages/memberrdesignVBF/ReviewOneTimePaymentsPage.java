@@ -3,7 +3,6 @@
  */
 package pages.memberrdesignVBF;
 
-import junit.framework.Assert;
 import pages.memberrdesignVBF.ConfirmOneTimePaymentPage;
 
 import java.util.List;
@@ -18,6 +17,7 @@ import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import junit.framework.Assert;
 
 /**
  * @author saduri

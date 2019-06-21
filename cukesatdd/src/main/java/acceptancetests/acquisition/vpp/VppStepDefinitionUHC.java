@@ -1529,6 +1529,82 @@ public class VppStepDefinitionUHC {
 			}
 		}
 		
+		@Then("^the user validates the following Additional Benefits of Plan for the plan in UMS$")
+		public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_UMS(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
+		}
+		
+
+		@Then("^the user validates the following Medical Benefits of Plan for the plan in UMS$")
+		public void the_user_validates_the_following_Medical_Benefits_of_Plan_for_the_plan_in_UMS(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> medicalBenefits = givenAttributes.getGherkinRows();
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(medicalBenefits);
+			//Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
+		}
+		
+		@Then("^the user click on Plan costs tab and validates$")
+		public void the_user_click_on_Plan_costs_tab_and_validates(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+			String yearlyPremium = memberAttributesMap.get("Yearly Premium");
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium,yearlyPremium);
+			Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
+		}
+		
+		@Then("^the user click on Optional Services tab and add the rider$")
+		public void the_user_click_on_Optional_Services_tab_and_add_the_rider(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String optionalRider = memberAttributesMap.get("Optional Rider");
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			
+			String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(optionalRider);
+		}
+		
+		@Then("^the user click on Plan costs tab and validate riders monthly and yearly premium$")
+		public void the_user_click_on_Plan_costs_tab_and_validate_riders_monthly_and_yearly_premium(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+			String yearlyPremium = memberAttributesMap.get("Yearly Premium");
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			
+			boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,yearlyPremium);
+			Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
+		}
 		
 }
 		

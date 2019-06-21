@@ -189,8 +189,8 @@ public class MedSuppOLEPage extends UhcDriver {
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
 		nextButton.click();
 		waitforElementVisibilityInTime(firstName,30);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		sendkeysNew(firstName,FirstName);
+		sendkeysNew(lastName,LastName);
 		nextButton.click();
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
@@ -201,6 +201,8 @@ public class MedSuppOLEPage extends UhcDriver {
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
 		nextButton.click();
+		
+		waitTillElementClickableInTime(medSuppOleHospitalPartA,30);
 		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
 		nextButton.click();

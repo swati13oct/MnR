@@ -398,22 +398,25 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.scroll();
 
 		List<List<String>> data = attributes.raw();
-
-	if (data.get(1).get(2).contains("Group")) {
+		for(String s: data.get(0)) {
+			System.out.println("Tamzid - s="+s);
+		}
+		
+		if (data.get(0).get(1).contains("Group")) {
 			if (formsAndResourcesPage.getLnkPharmacyLocatorLinkMAPDGroup().isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("pharmacy locator link is present");
 			} else {
-				
+
 				if(data.get(0).get(1).contains("UHCGroupFnR")&&formsAndResourcesPage.getLnkPharmacyLocatorLinkPDPUHCGroupFnR().isDisplayed()) {
 					Assert.assertTrue(true);
-				System.out.println("pharmacy locator link is present");
+					System.out.println("pharmacy locator link is present");
 				}
 				else
-				Assert.fail("pharmacy locator link is not present");
+					Assert.fail("pharmacy locator link is not present");
 			}
-			
-			
+
+
 
 		} else {
 
@@ -669,6 +672,21 @@ public class DashboardFormsnResourcesStepDefinition {
 
 	@Then("^validate that the AnocSection is displayed$")
 	public void validate_that_the_Anoc_Section_is_displayed() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Thread.sleep(2000);
+		if (formsAndResourcesPage.getANOCSection().get(1).isDisplayed()) {
+			Assert.assertTrue(true);
+			System.out.println("anoc section is present");
+
+		} else {
+			Assert.fail("anoc section is not present");
+		}
+	}
+	
+	@Then("^validate that the AnocSection is displayed for MAPD$")
+	public void validate_that_the_Anoc_Section_is_displayed_MAPD() throws Throwable {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		formsAndResourcesPage.scroll();
@@ -1198,8 +1216,8 @@ public class DashboardFormsnResourcesStepDefinition {
 	public void validatemembershipmaterials(DataTable givenAttributes) throws InterruptedException {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
-		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
+		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "memberShip");
+		//formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 
 	}
 
@@ -1249,6 +1267,7 @@ public class DashboardFormsnResourcesStepDefinition {
 		formsAndResourcesPage.pdfValidationOfAllTypes(formsAndResourcesPage, givenAttributes, "annualDirectory");
 			
 	}
+	
 	
 	@Then("^validate that the renew magazine section is displayed$")
 	public void validate_that_the_renew_magazine_section_is_displayed() throws Throwable {
@@ -1414,10 +1433,89 @@ public class DashboardFormsnResourcesStepDefinition {
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
 		
-		formsAndResourcesPage.validateFindCareUrl();
-		
-		
-		
-		
+		formsAndResourcesPage.validateFindCareUrl();	
+	}
+	
+	@Then("^verifies Ship EOB field is displayed for effecitve plan$")
+	public void verifies_Ship_EOB_field_is_displayed_for_effecitve_plan() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+
+		if (formsAndResourcesPage.getShipEobHeader().isDisplayed()) {
+			System.out.println("the ShipEOB is present for Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("ShipEOB Header is not coming");
+	}
+
+	@Then("^verify Preeffective plan name and Coverage Date for preeffective plan$")
+	public void verify_Preeffective_plan_name_and_Coverage_Date_for_preeffective_plan(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifyPreeffectiveshipPlan(memberAttributesMap);
+
+	}
+	
+	@Then("^verify Preeffective plan name and Coverage Date for preeffective plan for Combo$")
+	public void verify_Preeffective_plan_name_and_Coverage_Date_for_preeffective_plan_for_Combo(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifyPreeffectiveshipPlanforCombo(memberAttributesMap);
+
+	}
+
+	@Then("^verify orderPlan Material link is not displayed preeffective plan$")
+	public void verify_orderPlan_Material_link_is_not_displayed_preeffective_plan() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifypreEffShipOderplanNotDisplay();
+
+	}
+
+	@Then("^verify orderPlan Material link is not displayed preeffective plan for Combo$")
+	public void verify_orderPlan_Material_link_is_not_displayed_preeffective_plan_for_Combo() throws Throwable {
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.verifypreEffShipOderplanNotDisplayforCombo();
+
+	}
+
+	@Given("^user is on the forms and resources page for Selected plan tab$")
+	public void user_is_on_the_forms_and_resources_page_for_Selected_plan_tab(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TabName = memberAttributesMap.get("PlanName");
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		formsAndResourcesPage.scroll();
+		Thread.sleep(10000);
+		if (formsAndResourcesPage.getplantabTobeSelected(TabName).isDisplayed()) {
+			formsAndResourcesPage.getplantabTobeSelected(TabName).click();
+			Thread.sleep(20000);
+			System.out.println("user is present on fnr page for the plan : " + TabName);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(TabName + " plan tab is missing");
 	}
 }

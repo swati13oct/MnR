@@ -910,6 +910,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttable();
 	}
+	
+	@And("the user MAPD LIS should see drug cost table for Lis members")
+	public void user_validate_drugcosttableMapdLIS() throws InterruptedException {
+		System.out.println("***the user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttableMapdLIS();
+	}
+	
+	
 	@And("the Group PDP LIS1 user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_LIS1_Group() {
 		System.out.println("***the Group PDP LIS1 user should see drug cost table for Lis members***");
@@ -941,7 +951,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatedrugcosttableMAPDLIS4();
 	}
-	
+	@And("the PDP individual user should see drug cost table for Lis members")
+	public void user_validate_drugcosttablePdpIndi() {
+		System.out.println("***the MAPD group user should see drug cost table for Lis members***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatedrugcosttablePDPLIS3();
+	}
 	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup_NONLIS() {
 		System.out.println("***the MAPD NON-LIS group user should see drug cost table for Lis members***");
@@ -969,6 +985,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePlanOverviewgroup();
+	}
+	
+	/** 
+	 * @toDo : Validates the  Plan overview section for  a Non lis member individual 
+	 */
+	@And("the user validates plan overview section for individual")
+	public void user_validate_planOverviewIndi() {
+		System.out.println("***the user validates plan overview section for group***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePlanOverviewNonLISIndi();
 	}
 	
 	@And("the NON LIS user validates plan overview section for group")
@@ -1781,7 +1808,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
-	public void user_validate_MailOrderCostSharing_Drugtable() {
+	public void user_validate_MailOrderCostSharing_Drugtable() throws InterruptedException {
 		System.out.println("***the user verifies the Mail Order Cost sharing table***");
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -1900,8 +1927,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validatesRemoveRider();
-
+			planBenefitsCoverage.validatesRemoveRider();
 	}
 
 	@Then("^verify ancillary benefit section is not displayed$")

@@ -1,5 +1,5 @@
 package pages.regression.claims;
-import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -404,19 +405,36 @@ public class ClaimDetailsPage extends UhcDriver{
 	/**
 	 * this method validates EOB for different domain 
 	 */
-	public boolean validateMedicalEOBfordifferentClaimssystem(String claimSystem, String plantype){
+	public void validateMedicalEOBfordifferentClaimssystem(String claimSystem, String planType){
 		//keep for EOB story
-		if (claimSystem.toUpperCase().contains("COSMOS")&& plantype.equals("MAPD")) {
+		if (claimSystem.toUpperCase().contains("COSMOS")&& planType.equals("MAPD")) {
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for MAPD COSMOS EOB's are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
-			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
-		}else if((plantype.equals("MA")||(plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE"))){
+			Assert.assertTrue("PROBLEM - not getting expected EOB", medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed());
+		} else if((planType.equals("MA")||(planType.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE"))){
 			System.out.println("validateMedicalEOBfordifferentDomainType");
 			System.out.println("for NICE view as pdf link are displayed===> "+ (medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed()));
-			return medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed();
+			Assert.assertTrue("PROBLEM - not getting expected EOB", medicalEOBLabel.isDisplayed() && viewPDF.isDisplayed());
+		} else {
+			Assert.assertTrue("PROBLEM - need to code to handle planType='"+planType+"' and claimSystem='"+claimSystem+"' EOB validation", false);
 		}
-		Assert.fail();
-		return false;
+		String winHandleBefore = driver.getWindowHandle();
+		viewPDF.click();
+		
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();					
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("New window for print = "+driver.getTitle());
+
+		String currentURL=driver.getCurrentUrl();
+		String expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/niceMedicalEob.pdf";
+		Assert.assertTrue("PROBLEM - URL not getting expected portion.  \nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				currentURL.contains(expectedURL));
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		System.out.println("Main window = "+driver.getTitle());	
 	}
 
 	/**
@@ -838,7 +856,7 @@ public class ClaimDetailsPage extends UhcDriver{
 		CommonUtility.waitForPageLoad(driver, backButton, 5);
 		backButton.click();
 		System.out.println("Clicked claims summary back button...");
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println("current url="+driver.getCurrentUrl());		//note: only do the following for non-ship and non-custom search case to make sure it gets back to the right search period
 		if (!planType.equalsIgnoreCase("ship")) {
 			if (driver.getCurrentUrl().contains("overview")) {
@@ -917,15 +935,11 @@ public class ClaimDetailsPage extends UhcDriver{
 		boolean invokeBypass_INC11365785_conatinsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
 		System.out.println("validate(searchAnyEobHistoryText)="+validate(searchAnyEobHistoryText)+" | validate(medicalEobNotAvaText)="+validate(medicalEobNotAvaText));
-		if (validate(searchAnyEobHistoryText) || validate(searchEobStatementsText)|| validate(viewPDF)) {
-			if (validate(pageContainsPdfDocText)) {
-				Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
-			} else {
-				System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
-				invokeBypass_INC11365785_conatinsPdfDocText=true;
-			}
+		if (validate(pageContainsPdfDocText)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(pageContainsPdfDocText));
 		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate the Adobe PDF section because there is no PDF avaialbe on this detail page",!validate(pageContainsPdfDocText));
+			System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  TODO: When fixed, take out this else portion");
+			invokeBypass_INC11365785_conatinsPdfDocText=true;
 		}
 		return invokeBypass_INC11365785_conatinsPdfDocText;
 	}
@@ -957,7 +971,6 @@ public class ClaimDetailsPage extends UhcDriver{
 	 */
 	public void validateClaimsTotalAccurateInDetailsPage(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
-		DecimalFormat df = new DecimalFormat("0.00");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
 			double totalAmountCharged=findValue(xpath1+"[1]//p[contains(@class,'h5')]");
@@ -1031,10 +1044,8 @@ public class ClaimDetailsPage extends UhcDriver{
 				rowsTotalAmountBilled=format(rowsTotalAmountBilled+value);
 
 				value=findValue(xpath1+"[2]/p");
-				System.out.println("TEST MATH - rowsTotalAdjustment="+rowsTotalAdjustment+"+"+value);
 				rowsTotalAdjustment=format(rowsTotalAdjustment+value);
 				System.out.println("rows Adjustment value="+value);
-System.out.println("TEST NOW - rowsTotalAdjustment="+rowsTotalAdjustment);
 				value=findValue(xpath1+"[4]/p");
 				rowsTotalPlanShare=format(rowsTotalPlanShare+value);
 				System.out.println("rows PlanShare value="+value);

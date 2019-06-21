@@ -383,7 +383,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath ="//*[@id='atddUhcPagination']/li[3]/a")
 	private WebElement paginationRightArrow;
 	
-	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a")
+	@FindBy(xpath ="//*[@id='moreInfoLinkAtdd2']/a") //tbd
 	private WebElement specificclaimlinkforeob;
 	
 	@FindBy(tagName="arcade-header")
@@ -1168,6 +1168,16 @@ public class AccountHomePage extends UhcDriver {
 
 		return new pages.regression.payments.PaymentHistoryPage(driver);
 	}
+	
+	public ContactUsPage navigateToContactUsPageTemporarySolution() {
+		
+		driver.navigate().to("https://stage-medicare.uhc.com/medicare/member/contact-us/overview.html#/contact-us-two");
+		CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
+		if (driver.getTitle().contains("contact-us")) {
+			return new ContactUsPage(driver);
+		}
+		return null;
+	}
 
 	public ContactUsPage navigateToContactUsPage() {
 
@@ -1196,7 +1206,7 @@ public class AccountHomePage extends UhcDriver {
 						linkContactUs.click();
 					} else {
 						System.out.println("Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
-						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(1) > ul > li:nth-child(1) > a");	
+						locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(2) > div:nth-child(2) > ul > li:nth-child(1) > a", true);	
 					}
 				}
 			}
@@ -1207,6 +1217,30 @@ public class AccountHomePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public WebElement expandRootElement1(WebElement element) {
+		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
+	.executeScript("return arguments[0].shadowRoot", element);
+		return ele;
+	}
+	
+	public ContactUsPage navigateToContactUsPage2() throws InterruptedException {
+			
+			WebElement premiumpaymentLink = driver.findElement(By.cssSelector("#main-nav > div > div > div > a:nth-child(5)"));
+			WebElement shadowRootpaymentLink = expandRootElement(premiumpaymentLink);
+			shadowRootpaymentLink.click();
+			Thread.sleep(5000);
+			if(driver.findElement(By.xpath("//*[@id='needhelpsectioncontactus']/section/div/div[1]/div/h2")).isDisplayed()){
+				driver.findElement(By.xpath("/html/body/div[2]/div/footer/div/div/div[2]/div/div[1]/div[1]/div/div[1]/div/ul/li[1]/a")).click();
+			}
+			
+			 CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
+			if (driver.getTitle().contains("Contact Us")) {
+				return new ContactUsPage(driver);
+			}
+		
 		return null;
 	}
 
@@ -1750,19 +1784,15 @@ public class AccountHomePage extends UhcDriver {
 		//tbd return new PaymentHistoryPage(driver);
 	}
 
-	/*
-	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link
-	 * in Rally Dashboard
-	 * 
+	/**
+	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on link on Rally Dashboard mid section
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
-
 		CommonUtility.checkPageIsReady(driver);
 		if (validate(OrderMaterial_Dashboard)) {
 			System.out.println("Order Materials link found on dashboard");
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", OrderMaterial_Dashboard);
-			// OrderMaterial_Dashboard.click();
 		} else {
 			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("order");
@@ -1775,25 +1805,64 @@ public class AccountHomePage extends UhcDriver {
 					Page_URL = "https://" + MRScenario.environment
 							+ "-medicare."+MRScenario.domain+"//member/order-plan-materials.html";
 				}
-				
-				// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 				driver.navigate().to(Page_URL);
 				System.out.println("Navigated to Order materials Page URL : " + Page_URL);
 			}
-			
 		}
-		try {
+		/* tbd try {
 			Thread.sleep(3000);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 		CommonUtility.checkPageIsReady(driver);
-		// CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
-		if (orderplanHeadertxt.isDisplayed()) {
+		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		if (validate(orderplanHeadertxt)) {
 			return new OrderMaterialsPage(driver);
 		}
 		return null;
+	}
+
+	/**
+	 * To Navigate to Order plan Materials page by clicking on top menu sub link under BnC on rally page
+	 */
+	public OrderMaterialsPage navigateToOrderPlanMaterialsPageFromTopMenu() throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		try {
+			WebElement topMenuBnCLink=driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]"));
+			if (validate(topMenuBnCLink)) {
+				topMenuBnCLink.click();
+			} else {
+				String linkName=locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(4)").getText();
+				if (linkName.equalsIgnoreCase("COVERAGE & BENEFITS")) {
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(4)");
+				} else {
+					//note: user likely doesn't have Find Cost & Care so link shifted
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(3)");
+				}
+			}
+		} catch (Exception e) {
+			String linkName=locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(4)").getText();
+			if (linkName.equalsIgnoreCase("COVERAGE & BENEFITS")) {
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(4)");
+			} else {
+				//note: user likely doesn't have Find Cost & Care so link shifted
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a:nth-child(3)");
+			}
+		}
+		try {
+			WebElement topMenuOrderPlanMaterialLink=driver.findElement(By.xpath("//a[@id='ordermaterials']"));
+			Assert.assertTrue("PROBLEM - unable to locate the order plan materials sub link from Coverage & Benefits link on top menu", validate(topMenuOrderPlanMaterialLink));
+			topMenuOrderPlanMaterialLink.click();
+		} catch (Exception e) {
+			Assert.assertTrue("PROBLEM - unable to locate the order plan materials sub link from Coverage & Benefits link on top menu", false);
+		}
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
+		if (validate(orderplanHeadertxt)) {
+			return new OrderMaterialsPage(driver);
+		}
+		return null;
+
 	}
 
 	public EOBPage navigateDirectToEOBPag() {
@@ -2443,7 +2512,6 @@ public class AccountHomePage extends UhcDriver {
 			}
 		}
 		else if (MRScenario.environmentMedicare.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))){
-			System.out.println("TEST - stage testharness page="+ PAGE_URL + "content/medicare/member/benefits/overview.html");
 			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
 			if (driver.getTitle().contains("Benefits")) {
@@ -2640,7 +2708,11 @@ public class AccountHomePage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("int.uhc.com/internal-error")) {
 			//in this case, there will be no userType identifier in URL, do one more step
 			//first click the account settings link on footer, get the URL for additional parsing
-			locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(3) > ul:nth-child(2) > li > a");
+			//tbd locateAndClickElementWithinShadowRoot(shadowRootFooter, "div > span > footer > div:nth-child(1) > div:nth-child(3) > ul:nth-child(2) > li > a");
+
+			locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-toggle-3");
+			locateAndClickElementWithinShadowRoot(shadowRootHeader, "#dropdown-options-3 > a:nth-child(1)");
+		
 		}
 
 		//assumption this is the sorry error url, parse the URL to determine which URL to use
@@ -2695,21 +2767,28 @@ public class AccountHomePage extends UhcDriver {
 	}
 	//^^^ note: added for 'sorry' login error workaround	
 
-	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink() {
+	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink(int pageNum, int rowNum) {
 
 		try {
 			validateNew(claimstablemoreinfolink);
-            paginationRightArrow.click();
-            paginationRightArrow.click();
-            paginationRightArrow.click();
+			//note: start with page1, every click increment 1 page
+			for (int i=0; i<pageNum-1; i++) {
+				paginationRightArrow.click();
+			}
 			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(2000); //keep, sometimes detail takes longer to load
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", specificclaimlinkforeob);
+			try {
+				//note: rowIndex is rowNum-1
+				WebElement targetRowMoreInfo=driver.findElement(By.xpath("//*[@id='moreInfoLinkAtdd"+(rowNum-1)+"']/a"));
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", targetRowMoreInfo);
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate the More Info link element that is expected to have EOB", false);
+			}
 			System.out.println(driver.getTitle());
 			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
 				System.out.println("*** Claims Details Page ***");
@@ -2746,13 +2825,24 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		boolean doScroll=false;
+		locateAndClickElementWithinShadowRoot(shadowRootElement, inputCssSelector, doScroll);
+	}
+
+	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector, boolean doScroll) {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
 			try {
 				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
-				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				Assert.assertTrue("Dashboard Shadow Root Elemnt is not accessible", validate(element));
 				System.out.println("element is located, click it...");
+				System.out.println("We are looking for: "+element.getText()+" and we got it.");
+				if (doScroll) { //for contact us at bottom page, need to scroll so it's clickable
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scrollBy(0,10000)");
+				Thread.sleep(5000);
+				}
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
 			} catch (Exception e) {
