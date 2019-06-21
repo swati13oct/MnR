@@ -9,7 +9,21 @@ Feature: C1.2To test Preferences page
   # note:   q2_jun_aarp0062/Password@1,MAPD_AARP_GOGreen_Profilepref,
   # note: Runner is RunMRATDDPreferencesVBF
   #----- end of VBF preferences scenarios section ------------------
-  
+ 
+  #----- beginning of Regression preferences scenarios section ------------------------
+  #-------------------------
+  # note: preferences ALM cases
+  # TID: 15311 - TC01_AARP _MAPD_Go_Green
+  # TID: 15312 - TC02_AARP_MA_Go_Green
+  # TID: 15313 - TC03_AARP_PDP_Go_Green
+  # TID: 15314 - TC04_UHC_MAPD_Go_Green
+  # TID: 15315 - TC05_UHC_MA_Go_Green
+  # TID: 15316 - TC06_UHC_Group_MA_GoGreen
+  # TID: 15308 - TC7_PCP_Medica_SSUP_GoGreen should not come
+  # TID: 15310 - TC8_PDP_PDP+SSUP_GoGreen should come
+  # TID: 15309 - TC9_Ship_GoGreen should come
+  # TID: 15376 - TC10_Terminated view member
+  #-------------------------  
   @CommunicationPreferences1 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
@@ -76,7 +90,7 @@ Feature: C1.2To test Preferences page
       | 220921 | SHIP_ProfilePref |
 
   @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
-  Scenario Outline: plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
+  Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -85,22 +99,22 @@ Feature: C1.2To test Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | planType | memberType              |
-      | Combo    | EPMPEnabled_ProfilePref |
+      | TID   | planType | memberType              |
+      | 15310 | Combo    | EPMPEnabled_ProfilePref |
       
-  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember @abc
-  Scenario Outline: plan: <planType> - Verify use doesn't have Communication Preferences section
+  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
+  Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page
     And the user validates that Communication Preferences section does not display
 
     Examples: 
-      | planType               |
-      | SSUP_ProfilePref       |
-      | Terminated_ProfilePref |
-      | PCP_ProfilePref        |
-      | MEDICA_ProfilePref     |
+      | TID   | planType               |
+      | 15310 | SSUP_ProfilePref       |
+      | 15376 | Terminated_ProfilePref |
+      | 15308 | PCP_ProfilePref        |
+      | 15308 | MEDICA_ProfilePref     |
       
   @CommunicationPreferences6 @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents for SHIP
