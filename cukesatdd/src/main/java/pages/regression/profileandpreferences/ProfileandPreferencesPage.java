@@ -1869,7 +1869,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		int counter = 0;
 		do {
 
-			System.out.println("current value of conter: " + counter);
+			System.out.println("checkModelPopup - current value of conter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
 
 			if (IPerceptionsFrame.isEmpty()) {
@@ -2371,7 +2371,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 	
-	
-	
-
+	public void validateNoCommunicationPreferences() {
+		Assert.assertTrue("PROBLEM - Communication Preferences section should not show up",!validate(communicationpreferncessection));
+		Assert.assertTrue("PROBLEM - Edit Preferenecs Link should not show up",!validate(editPreferencesLink));
+	}
 }

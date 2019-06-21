@@ -88,12 +88,12 @@ Feature: C1.2To test Preferences page
       | planType | memberType              |
       | Combo    | EPMPEnabled_ProfilePref |
       
-  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
+  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember @abc
   Scenario Outline: plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page
-    And the user validates that Communication Preferences section doesn't come
+    And the user validates that Communication Preferences section does not display
 
     Examples: 
       | planType               |

@@ -20,14 +20,14 @@ public class PreferencesStepDefinition {
 		return loginScenario;
 	}
 
-	@Then("^the user validates headers on Preferences page")
+	@Then("^the user validates headers on Preferences page$")
 	public void uservalidatesgogreenheader() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPrefPage.validateheader();
 	}
 
-	@Then("^the user validates the presence of Plan Name on Communication Preferences Page")
+	@Then("^the user validates the presence of Plan Name on Communication Preferences Page$")
 	public void UserValidatesPlanName() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -43,28 +43,28 @@ public class PreferencesStepDefinition {
 		communicationPrefPage.validatePlanNameForShip(planName);
 	}
 
-	@Then("^the user validates the iframe on Communication Preferences Page")
+	@Then("^the user validates the iframe on Communication Preferences Page$")
 	public void uservalidatesgogreenpagerouting() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPrefPage.validategogreenbutton();
 	}
 
-	@Then("^the user validates that the iframe is not present for a ship member")
+	@Then("^the user validates that the iframe is not present for a ship member$")
 	public void uservalidatesIframeForAShipMember() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPrefPage.validateIframeForAShipMember();
 	}
 
-	@Then("^the user validates the I have read checkbox and check it")
+	@Then("^the user validates the I have read checkbox and check it$")
 	public void UserValidatesCheckbox() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPrefPage.validateCheckbox();
 	}
 
-	@Then("^the user validates the Save Preferences Button")
+	@Then("^the user validates the Save Preferences Button$")
 	public void UserValidatesSavePreferences() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -87,7 +87,7 @@ public class PreferencesStepDefinition {
 		Assert.assertTrue("PROBLEM - Back link to Profile page is not working", profilePage != null);
 	}
 
-	@Then("^the user changes the online preference and saves the change")
+	@Then("^the user changes the online preference and saves the change$")
 	public void userChangesOnlinePref() {
 		CommunicationPreferencePage communicationPrefPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -95,7 +95,7 @@ public class PreferencesStepDefinition {
 				communicationPrefPage.changeAndVerifyOnlinePreference());
 	}
 
-	@Then("^the user validates the functionality of updating the email on the iframe")
+	@Then("^the user validates the functionality of updating the email on the iframe$")
 	public void userChangesEmailOnTheIframs() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -109,7 +109,7 @@ public class PreferencesStepDefinition {
 		communicationPreferencesPage.validateGoGreenSectionForShip();
 	}
 
-	@Then("^the user validates the update preferences functionality for ship")
+	@Then("^the user validates the update preferences functionality for ship$")
 	public void validate_update_preferences_functionality_for_ship() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -141,7 +141,7 @@ public class PreferencesStepDefinition {
 		}
 	}
 
-	@Then("^the user validates the Note Section on Preferences Page")
+	@Then("^the user validates the Note Section on Preferences Page$")
 	public void UserValidatesNoteSection() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
@@ -155,28 +155,28 @@ public class PreferencesStepDefinition {
 		communicationPreferencesPage.clickCheckBoxShip();
 	}
 
-	@And("^the user click on the Save Preferences button")
+	@And("^the user click on the Save Preferences button$")
 	public void userClickSave() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.clickSaveBtnShip();
 	}
 
-	@And("^the user edit preference again")
+	@And("^the user edit preference again$")
 	public void editPrefAgain() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.editPrefAgain();
 	}
 
-	@Then("^a popup is displayed and validate the popup select Yes and submit")
+	@Then("^a popup is displayed and validate the popup select Yes and submit$")
 	public void validatePopup() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validatePopUp();
 	}
 
-	@And("^the user validate the success message")
+	@And("^the user validate the success message$")
 	public void validateSuccessMsg() {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);

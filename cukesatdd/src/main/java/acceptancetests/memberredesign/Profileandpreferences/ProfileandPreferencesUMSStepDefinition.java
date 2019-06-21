@@ -1095,6 +1095,11 @@ public class ProfileandPreferencesUMSStepDefinition {
 		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
 	}
 	
-
+	@And("^the user validates that Communication Preferences section does not display")
+	public void uservalidateNocommunicationPreferncesSection() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateNoCommunicationPreferences();
+	}
 
 }
