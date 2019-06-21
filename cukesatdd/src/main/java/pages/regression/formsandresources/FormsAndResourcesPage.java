@@ -83,7 +83,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='block-body']")
-	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div[2]/div[1]//a)[7]")
+	@FindBy(xpath = "(//*[@id='eobsection']/div[2]/div[1]/div/div/a)[6]")
 	private WebElement btnEobMedicalButton;
 
 	@FindBy(xpath = "//*[@class='otherPages EOB_MA_COSMOS']//*[contains(text(),'SEARCH EOB HISTORY')]")
@@ -93,7 +93,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	// @FindBy(xpath = "//*[@class='otherPages
 	// EOBComponentforMAPDNICE_2018']//*[@class='explanationbenefits parbase
 	// section']//*[@class='col-md-4 block border-left']")
-	@FindBy(xpath = "(//*[@id=\"eobsection\"]/div//div[2]//a)[2]")
+	@FindBy(xpath = "(//*[@id='eobsection']/div[2]/div[2]/div/div/a)[1]")
 	private WebElement btneobDrugButton;
 
 	/** Medical button in Eob section for mapd group */
@@ -108,7 +108,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement eobDrugButtonPDP;
 
 	/** Renew Magazine Section - Forms And Resources page */
-	@FindBy(css = ".customsegments:nth-child(19) .med-heading")
+	@FindBy(xpath = "(//*[@id='renew_magazine']/div/div/div/div[1]/div/div/div[2]/h2)[1]")
 	private WebElement renewMagazineSectionMAPDAARP;
 
 	@FindBy(xpath = "//*[@class='otherPages renewmagazine_AARP_PDP']")
@@ -128,7 +128,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[10]/div/div/div/section//*[@id='myDocHeader']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@id='myDocHeader']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -298,7 +298,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	/* Pharmacy Locator Link for PDP */
 	// @FindBy(xpath = "//*[@class='otherPages
 	// PharmacyLocatorCallout_AD']//*[text()='Pharmacy Locator']")
-	@FindBy(xpath = "(//*[contains(@href,'pharmacy-locator')])[3]")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[9]/div/div/div/div/section/div/div[2]/div/div[1]/div[2]/div/div/div/div/div/div/div/ul/li/a")
 	private WebElement PharmacyLocatorLinkPDP;
 
 	@FindBy(xpath = "(//*[contains(text(),'Pharmacy Locator')])[4]")
@@ -364,6 +364,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id=\"resources\"]/div/div[2]/div/div/div[13]/div/div/div/ul/li[1]/a")
 	private WebElement eftpdfforship;
+	
+	@FindBy(xpath = "//div[@id='eobsection']//h3[text()='SHIP EOB']")
+	private WebElement shipEOBHeader;
 
 	/** i perception pop up objects */
 	@FindBy(id = "IPerceptionsEmbed")
@@ -463,10 +466,18 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div[3]/div[12]//section/div/div[2]//a")
+/*<<<<<<< theATeam
+	@FindBy(xpath = "(//*[@id='eobsection']/div[1]/div/h2)[6]")
+	private WebElement btnEobSectionall;
+	
+	
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
+=======*/
+	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//a[contains(@class,'btn btn--secondary') and contains(text(),'EOB HISTORY')]")
 	private WebElement btnEobSectionall;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div[3]/div[17]/div/div/div/section/div")
+	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segments') and not (contains(@class,'ng-hide'))]//h3[contains(text(),'EOB')]")
+
 	private WebElement eobSectionall;
 	
 	@FindBy(xpath = "//*[@class='otherPages UHC_IND_MAPD']//ul/li[3]/a")
@@ -474,6 +485,24 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='otherPages calloutBoth_2019_PCP_Medica']//*[text()='Provider Search']")
 	private WebElement ProviderSearchLinkPCPMedica;
+	
+	@FindBy(xpath = "//div[contains(@class,'preeffectiveShip')]//h4")
+	private WebElement preEffecShipPlanName;
+	
+	@FindBy(xpath = "//h4")
+	private WebElement preEffecShipPlanNameCombo;
+	
+	
+	@FindBy(xpath = "//h4//parent::div[@ng-show='showshiplist']//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']")
+	private WebElement preEffectiveCoverageDate;
+	
+	@FindBy(xpath = "//h4//parent::div[contains(@ng-if,'shipPlanProfileList')]//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']")
+	private WebElement preEffectiveComboCoverageDate;
+	
+	//h4//parent::div[contains(@ng-if,'shipPlanProfileList')]//following-sibling::div[@class='ng-scope']//following-sibling::div[@class='ng-binding']
+	
+	@FindBy(xpath = "//div[@id='plan_material_fnr']//a[contains(@href,'order-materials')]")
+	private WebElement preEffecShipOrderPlan;
 
 	public WebElement getEobSectionall() {
 		return eobSectionall;
@@ -1485,6 +1514,13 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return FirstTab;
 
 	}
+	
+	public WebElement getplantabTobeSelected(String PlanName) {
+		WebElement PlanTabToSelect = driver.findElement(
+				By.xpath("//a[contains(@class,'tab-change') and normalize-space(text())='" + PlanName + "']"));
+		return PlanTabToSelect;
+
+	}
 
 	public WebElement getsecondplantab() {
 		return SecondTab;
@@ -1512,6 +1548,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 		return eftpdfforship;
 	}
 
+	public WebElement getShipEobHeader() {
+		return shipEOBHeader;
+	}
+	
 	public void checkshipdocuments() {
 		java.util.List<WebElement> pdfs = driver.findElements(By.xpath(
 				"(//*[@class='source-content-configurations_plan-material_jcr-content_overview_formsandresourcescon_formsAndResourcesParsys_customsegments_segmentContainer_planbenefitdocuments'])[1]/div/ul/li"));
@@ -1965,7 +2005,9 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(1,targetPlanType,targetMemberType,targetIdentifier); //note: first parameter is the jumplink index
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
+			Thread.sleep(5000);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateEOB(1,targetPlanType,targetMemberType,targetIdentifier);  // its 1 for the no rider index,
@@ -1986,7 +2028,9 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(2,targetPlanType,targetMemberType,targetIdentifier); 
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
+			Thread.sleep(5000);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateEOB(1,targetPlanType,targetMemberType,targetIdentifier);  // its 1 for the no rider index,
@@ -2006,6 +2050,7 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 			validatePlanMaterial(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
 			validateAnocDocument(2,targetPlanType,targetMemberType,targetIdentifier); //note: first parameter is the jumplink index
+			Thread.sleep(5000);
 			validateProviderDirectory(1,targetPlanType,targetMemberType,targetIdentifier);
 			validateMyDocument(targetPlanType,targetMemberType,targetIdentifier);
 			Thread.sleep(5000);
@@ -2042,7 +2087,7 @@ public void clicksOnJumpLinksAndCheckRespectiveSectionsMA(String rider,String pl
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType,
-			String identifier) {
+			String identifier) throws InterruptedException {
 System.out.println("Tamzid - 1");
 System.out.println("Tamzid - 11 getDirectorySection(planType, memberType, identifier).get(0)="+getDirectorySection(planType, memberType, identifier).get(0));
 		if (planType.equalsIgnoreCase("MedSupp")) {
@@ -2057,6 +2102,7 @@ System.out.println("Tamzid - 11 getDirectorySection(planType, memberType, identi
 		
 		
 System.out.println("Tamzid - 2");
+		Thread.sleep(5000);
 		clicksOnLinkAndBackToTop(getDirectorySection(planType, memberType, identifier).get(1),
 				getEobHeaderSection().get(2));
 		System.out.println("Tamzid - 3");
@@ -2362,5 +2408,46 @@ System.out.println(memberType);
 		}
 		return null;
 	}
+	
+	public void verifyPreeffectiveshipPlan(Map<String, String> memberAttributesMap) {
+
+		String PlanName = memberAttributesMap.get("ShipPreEffe PlanName");
+		String CovDate = memberAttributesMap.get("Coverge Date");
+		System.out.println("Ship Pre effective Plan name is : " + preEffecShipPlanName.getText());
+		Assert.assertEquals(preEffecShipPlanName.getText().trim(), PlanName);
+		System.out.println("Ship Pre Effective Plan name is Displayed : " + PlanName);
+		System.out.println("Coverage Date is : " + preEffectiveCoverageDate.getText().trim());
+		Assert.assertEquals(preEffectiveCoverageDate.getText().trim(), CovDate);
+		System.out.println("Ship Pre Effective Coverage Date is : " + preEffectiveCoverageDate.getText().trim());
+	}
+
+	public void verifyPreeffectiveshipPlanforCombo(Map<String, String> memberAttributesMap) {
+
+		String PlanName = memberAttributesMap.get("ShipPreEffe PlanName");
+		String CovDate = memberAttributesMap.get("Coverge Date");
+		System.out.println("Ship Pre effective Plan name is : " + preEffecShipPlanNameCombo.getText());
+		Assert.assertEquals(preEffecShipPlanNameCombo.getText().trim(), PlanName);
+		System.out.println("Ship Pre Effective Plan name is Displayed : " + PlanName);
+		System.out.println("Coverage Date is : " + preEffectiveComboCoverageDate.getText().trim());
+		Assert.assertEquals(preEffectiveComboCoverageDate.getText().trim(), CovDate);
+		System.out.println("Ship Pre Effective Coverage Date is : " + preEffectiveComboCoverageDate.getText().trim());
+	}
+
+	public void verifypreEffShipOderplanNotDisplay() {
+		if (!(preEffecShipOrderPlan.isDisplayed())) {
+			System.out.println("OrderPlan Materials is not displayed for pre Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
+	}
+
+	public void verifypreEffShipOderplanNotDisplayforCombo() {
+		if (!(preEffecShipOrderPlan.isDisplayed())) {
+			System.out.println("OrderPlan Materials is not displayed for pre Effective ship Plan");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
+	}
+	
 
 }

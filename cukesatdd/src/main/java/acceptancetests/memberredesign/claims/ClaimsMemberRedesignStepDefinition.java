@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import cucumber.api.Scenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -82,7 +83,7 @@ public class ClaimsMemberRedesignStepDefinition {
 
 	/**
 	 * This step performs search using input search period (non-custom-search). 
-	 * @param timeAttributes
+	 * @param memberAttributes
 	 * @throws InterruptedException
 	 */
 	@And("^I can search claims for the following claim period on claims summary page$") 
@@ -101,7 +102,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		System.out.println("claim period = "+claimPeriod);
 
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if(claimPeriod.equals("custom-search")){
+		if(claimPeriod.equals("Custom search")){
 			System.out.println("custom search");
 			newClaimsSummaryPage.searchClaimsbyCustomDate(planType,claimPeriod);
 		} else{
@@ -111,7 +112,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		String resultNumOfClaims=newClaimsSummaryPage.validateYouHavemessage(planType);
 
 		List<String> noteList=new ArrayList<String>();
-		noteList.add("================================================================");
+		noteList.add("\n\n================================================================");
 		noteList.add("===== TEST NOTE ================================================");
 		noteList.add("Plan Type        = "+planType);
 		noteList.add("Member Type      = "+memberType);
@@ -340,13 +341,14 @@ public class ClaimsMemberRedesignStepDefinition {
 	public void getClaimsNumber() {
 		String claimPeriod = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD);
 		String claimType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		String memberType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 
 		ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		int numClaims=claimSummarypage.getNumClaims(claimPeriod, claimType);
 		System.out.println("Number of Claims="+numClaims);
 		allClaims.put(claimPeriod, numClaims);
-		if (claimType.equalsIgnoreCase("Prescription drug")) {
-			claimSummarypage.validateClaimsTableSectionText(numClaims);
+		if (claimType.equalsIgnoreCase("Prescription drug") && memberType.toUpperCase().contains("SSO")) {
+			claimSummarypage.validateClaimsTableSectionOptumRxText(numClaims);
 		}
 		claimSummarypage.validateSystemErrorMsgNotExist();
 		claimSummarypage.printListOfClaimsResult(allClaims);
@@ -394,7 +396,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		//note: store the test note to display later if needed
 		List<String> noteList=new ArrayList<String>();
 		//note: display any of the issues encountered that are currently bypassed
-		noteList.add("================================================================");
+		noteList.add("\n\n================================================================");
 		noteList.add("===== TEST NOTE ================================================");
 		noteList.add("Plan Type    = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE));
 		noteList.add("Member Type  = "+(String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE));
@@ -405,7 +407,7 @@ public class ClaimsMemberRedesignStepDefinition {
 		if (recordInvokedBypass.size()==0) {
 			noteList.add("Did not encounter any existing known issues");
 		} else {
-			noteList.add("Encounted existing known issues:");
+			noteList.add("Encountered existing known issues:");
 			for (String s: recordInvokedBypass) {
 				noteList.add("  issue: "+s);
 			}
@@ -424,8 +426,6 @@ public class ClaimsMemberRedesignStepDefinition {
 
 		@SuppressWarnings("unchecked")
 		List<String> result_testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
-
-		System.out.println("\n\nPrint out result note:");
 		for (String s: result_testNote) {
 			System.out.println(s);
 		}
@@ -576,7 +576,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - 'Need Help' section
 	 * @throws InterruptedException
 	 */
-	@When("^I validate Claim Details page content value and Learn More and EOB and tooltops$")
+	@When("^I validate Claim Details page content value and Learn More and EOB and tooltips$")
 	public void validate_claim_details_regardless_claims_value() throws InterruptedException {
 		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
@@ -604,7 +604,7 @@ public class ClaimsMemberRedesignStepDefinition {
 	 * - 'Need Help' section
 	 * @throws InterruptedException
 	 */
-	@When("^I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltops$")
+	@When("^I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips$")
 	public void validate_claim_details_expect_non_zero_claims() throws InterruptedException {
 		//note: only validate for medical case, skip for prescription drug case because that one doesn't have 'More Info'
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
@@ -723,10 +723,32 @@ public class ClaimsMemberRedesignStepDefinition {
 	@And("^I custom search claims for the specific time interval on claims summary page$")
 	public void custom_search_claims_redesigned_site() throws InterruptedException{
 		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
+		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+	}
+
+	/**
+	 * This step performs claims search using custom search option.
+	 * It searches claims that goes back to 6 years
+	 * Note: custom search range max is 24 months between from - to date. BUT the date of the claims can go back to 6 years
+	 * @throws InterruptedException
+	 */
+	@And("^I custom search claims for ship users for 6 years claims on claims summary page$")
+	public void custom_search_claims_last6years() throws InterruptedException{
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+
+		System.out.println("Starting to execute the SHIP greater than last 24 months which is last 6 years claims");
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(55).toDate());
+		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(43).toDate());
+		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
 		ClaimSummarypage newClaimsSummaryPage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
@@ -885,7 +907,6 @@ public class ClaimsMemberRedesignStepDefinition {
 		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
-
 		ClaimDetailsPage claimsdetailspage = (ClaimDetailsPage )getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
 		claimsdetailspage.validateMedicalEOBfordifferentClaimssystem(claimSystem,planType);
 		System.out.println("claims-============"+claimsdetailspage);
@@ -894,17 +915,21 @@ public class ClaimsMemberRedesignStepDefinition {
 	/**
 	 * This step performs navigation from claims summary page to claims detail page using specific claims row on claims summary page
 	 * This test is targeting a specific user data setup at the moment.  
-	 * TODO - make this more flexible when we have more user data with EOB in the future
 	 */
 	@When("^I navigate to the Claim details page to see eob link on details page$")	
-	public void i_navigate_to_the_eobclaims_detailspage(){
+	public void i_navigate_to_the_eobclaims_detailspage(DataTable memberAttributes){
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		int pageNum=Integer.valueOf(memberAttributesMap.get("Page Number").trim());
+		int rowNum=Integer.valueOf(memberAttributesMap.get("Row Number").trim());
+
 		ClaimDetailsPage newClaimDetailsPage;
+		
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			ClaimSummarypage claimSummarypage = (ClaimSummarypage) getLoginScenario().getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink();
+			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPagetoseeeobpdflink(pageNum, rowNum);
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink();
+			newClaimDetailsPage = accountHomePage.navigateToClaimDetailsPagetoseeeobpdflink(pageNum, rowNum);
 		}
 		System.out.println("claims details page -============"+newClaimDetailsPage);
 		if(newClaimDetailsPage != null)
@@ -1000,5 +1025,17 @@ public class ClaimsMemberRedesignStepDefinition {
 		}
 	}
 	//^^^ note:	added for VBF	
-
+	
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) {
+		if(null!=getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario().getBean(ClaimsCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
 }

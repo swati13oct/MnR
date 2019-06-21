@@ -42,6 +42,12 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
 	private WebElement staticTFN; 
 	
+	@FindBy(xpath = "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[1]/div[1]/div/div[1]/div/ul/li[1]/a")
+	private WebElement contactUsLink2; 
+	
+	@FindBy(xpath = "//*[@id='coveragebenefits_2']")
+	private WebElement benefitAndCovergae;
+	
 	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
 	private WebElement preEffectiveTechSupportNumber;
 		
@@ -616,9 +622,12 @@ public class ContactUsPage extends UhcDriver{
 		}
 		String newEmailId = memberAttributesMap.get("New Email");
 		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
+		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
+		
+		
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 			
 		if(EmailForm.isDisplayed()){
 			System.out.println("Get Started Button not visible, So using email Form Link!!!");
