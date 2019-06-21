@@ -1059,7 +1059,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @toDo : The user validates the headers in Need help section
 	 */
 
-	@Then("^the user validates Needhelp header")
+	@Then("^the user validates Need help header")
 	public void validateneedhelpheaderPDP() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -1084,7 +1084,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	@Then("^the user validates Needhelp header and disclaimer link$")
 	public void validateneedhelpheader() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateNeedhelpheader();
 	}
 	/** 
@@ -2173,5 +2173,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_provider_search_link();
 	}
 
+	@And("the user just validates the fields in Primarycare Provider section")
+	public void validatePrimaryCareProviderSection() {
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePrimaryCareProviderSection();
+	}
 
 }//end of class
