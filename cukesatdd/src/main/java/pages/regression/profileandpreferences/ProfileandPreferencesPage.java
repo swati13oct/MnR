@@ -2375,4 +2375,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - Communication Preferences section should not show up",!validate(communicationpreferncessection));
 		Assert.assertTrue("PROBLEM - Edit Preferenecs Link should not show up",!validate(editPreferencesLink));
 	}
+	
+	public String getComboTabPlanType(int tabNum) {
+		return tabsForComboMember.get(tabNum).getText();
+	}
+	
+	public int getNumPlanTabComboPlans() {
+		return tabsForComboMember.size();
+	}
 }

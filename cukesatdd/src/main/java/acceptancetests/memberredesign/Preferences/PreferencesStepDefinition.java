@@ -120,25 +120,32 @@ public class PreferencesStepDefinition {
 	public void iShouldSeeTheComboTabsOnPreferencesPageAndUserValidatesTheElementsOnIndividualTabs() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
-				.navigateToCommunicationPreferencePage();
-		if (communicationPrefPage != null) {
-			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
-				communicationPrefPage.validateGoGreenSectionForShip();
-				communicationPrefPage.validateUpdatePreferencesForShip();
-				//communicationPrefPage.validateBacktoPNPlink();
-			} else {
-				communicationPrefPage.switchToFrameOnPreferences();
-				communicationPrefPage.changeAndVerifyOnlinePreference();
+		Assert.assertTrue("PROLEM - expect more than one plan for combo user, please check test data", profilePreferencesPage.getNumPlanTabComboPlans()>1);
+		for (int x=0; x<profilePreferencesPage.getNumPlanTabComboPlans(); x++) {
+			String planName=profilePreferencesPage.getComboTabPlanType(x);
+			if (planName.toUpperCase().contains("SENIOR SUPPLEMENT PLAN")) {
+				System.out.println("This tab is for SSUP plan, proceed to validate no preferences");
+				profilePreferencesPage.validateNoCommunicationPreferences();
+				return;
 			}
-			//communicationPrefPage.validateBacktoPNPlink();
-			communicationPrefPage.switchTabForComboMember();
-			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
-				communicationPrefPage.validateGoGreenSectionForShip();
-				communicationPrefPage.validateUpdatePreferencesForShip();
-			} else {
-				communicationPrefPage.switchToFrameOnPreferences();
-				communicationPrefPage.changeAndVerifyOnlinePreference();
+			System.out.println("This tab is for plan='"+planName+"', proceed to validate preferences");
+			CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
+					.navigateToCommunicationPreferencePage();
+			if (communicationPrefPage != null) {
+				if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
+					communicationPrefPage.validateGoGreenSectionForShip();
+					communicationPrefPage.validateBacktoPNPlink();
+				} else {
+					communicationPrefPage.switchToFrameOnPreferences();
+					communicationPrefPage.changeAndVerifyOnlinePreference();
+				}
+				communicationPrefPage.validateBacktoPNPlink();
+				if ((x+1) == profilePreferencesPage.getNumPlanTabComboPlans())
+					System.out.println("This tab is the last tab, testing is done");
+				else {
+					System.out.println("Click next tab to get ready for next plan validation");
+					communicationPrefPage.switchTabForComboMember(x+1);
+				} 
 			}
 		}
 	}

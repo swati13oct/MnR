@@ -259,9 +259,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 		System.out.println("switched to frame");
 	}
 
-	public void switchTabForComboMember() {
+	public void switchTabForComboMember(int index) {
 		driver.switchTo().defaultContent();
-		tabsForComboMember.get(1).click();
+		tabsForComboMember.get(index).click();
+	}
+	
+	public String getComboTabPlanType(int tabNum) {
+		return tabsForComboMember.get(tabNum).getText();
 	}
 
 	/** Validates the preferences for the SHIP members */

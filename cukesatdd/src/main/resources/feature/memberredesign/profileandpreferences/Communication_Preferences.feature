@@ -72,7 +72,7 @@ Feature: C1.2To test Preferences page
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @CommunicationPreferences3 @F220921 @regressionMember
-  Scenario Outline: FID: <FID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
+  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -86,8 +86,8 @@ Feature: C1.2To test Preferences page
     Then the user validates the presence of Back links on ship Preferences page 
 
     Examples: 
-      | FID    | planType         |
-      | 220921 | SHIP_ProfilePref |
+      | TID    | planType         |
+      | 15309  | SHIP_ProfilePref |
 
   @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
@@ -99,8 +99,9 @@ Feature: C1.2To test Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | TID   | planType | memberType              |
-      | 15310 | Combo    | EPMPEnabled_ProfilePref |
+      | TID   | planType       | memberType              |
+   #  | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
