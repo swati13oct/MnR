@@ -24,9 +24,9 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | zipcode | distance | county       | planName                                          | plantype |
-      |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |
+      | 80002   | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |
+   #  | 80002   | 15 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |
 
-  #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |
   @availablePharmAARP
   Scenario Outline: To verify available pharmacies with language in AARP site
     #TDB when I add @regression tag to the e2e Test case
@@ -48,10 +48,10 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | zipcode | distance | county       | planName                                          | plantype | languageName |
-      |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | Spanish      |
-
-  #	| 80002       | 15 miles     | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  | MA |Spanish |
-  #	| 90210       | 2        |      | AARP MedicareRx Preferred (PDP)                    | PDP |
+      | 80002   | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | Spanish      |
+   #  | 80002   | 15 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | Spanish      |
+   #  | 90210   | 2        |              | AARP MedicareRx Preferred (PDP)                   | PDP      |              |
+   
   @pharmaciesServicesAARP
   Scenario Outline: To verify available pharmacies and Services in AARP site
     #TDB when I add @regression tag to the e2e Test case
@@ -97,10 +97,10 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     And the user clicks on SearchAgain and navigates to pharmacies search page in the AARP site
 
     Examples: 
-      | zipcode | distance | county | planName | pharmacytype | plantype |
+      | zipcode | distance | county       | planName                                          | pharmacytype                             | plantype |
+   #  | 80002   | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy,Long-term care | MA       |
+   #  | 90210   | 2 miles  | None         | AARP MedicareRx Preferred (PDP)                   | Standard Network Pharmacy 				 | PDP      |
 
-  #	| 80002       | 25 miles   | Adams County      | AARP MedicareComplete SecureHorizons Plan 1 (HMO)  |  Standard Network Pharmacy,Long-term care|MA|
-  # 	| 90210       | 2 miles     | None      | AARP MedicareRx Preferred (PDP)                    |    Standard Network Pharmacy 				|PDP|
   @errorMessageNoPharamcyAARP
   Scenario Outline: To verify error message for no results found for pharmacy type in UMS site
     Given the user is on the AARP Medicare Site landing page
@@ -118,9 +118,9 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | <pharmacytype> |
 
     Examples: 
-      | zipcode | distance | county | planName | pharmacytype | plantype |
+      | zipcode | distance | county | planName                        | pharmacytype        | plantype |
+    # | 90210   |  2 miles | None   | AARP MedicareRx Preferred (PDP) | Mail Order Pharmacy	| PDP      |
 
-  #| 90210       |  2 miles      | None   | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
   @pharmacyLocatorUlayerSmoke
   Scenario Outline: To verify available pharmacies in AARP site for zipcode <zipcode> and county <county>
     Given the user is on AARP medicare acquisition site landing page
@@ -148,8 +148,8 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | zipcode | distance | county       | planName                                          | planYear | pharmacytype              | servicetype   | languageName |
-      |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours | Spanish      |
-      |   90210 | 25 miles | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours | Spanish      |
+      | 80002   | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 2019     | Standard Network Pharmacy | Open 24 hours | Spanish      |
+      | 90210   | 25 miles | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 2019     | Standard Network Pharmacy | Open 24 hours | Spanish      |
 
   @F250062 @PharmacySearchMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on PharmacySearch Page
@@ -169,7 +169,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | zipcode | languageName1 | languageName2 |
-      |   80002 | Chinese       | Spanish       |
+      | 80002   | Chinese       | Spanish       |
 
   @pharmacyLocatorUlayerEndToEndTC
   Scenario Outline: TID: <TID> : To verify Pharmacy Locator in AARP site for zipcode <zipcode> and county <county>
@@ -200,9 +200,10 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | TID   | zipcode | distance | county       | planName                                          | planYear | pharmacytype                      | servicetype   | languageName |
-      | 15583 |   80002 | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy         | Open 24 hours | Spanish      |
-      | 15582 |   90210 | 15 miles | none         | AARP MedicareRx Walgreens (PDP)                   |     2019 | Preferred Retail Pharmacy Network | E-Prescribing | Spanish      |
-@vppPlanDetailsAarpPlE2E
+      | 15583 | 80002   | 25 miles | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | 2019     | Standard Network Pharmacy         | Open 24 hours | Spanish      |
+      | 15582 | 90210   | 15 miles | none         | AARP MedicareRx Walgreens (PDP)                   | 2019     | Preferred Retail Pharmacy Network | E-Prescribing | Spanish      |
+
+  @vppPlanDetailsAarpPlE2E
   Scenario Outline: TID: <TID> : To verify the Pharmacy Locator page from the VPP plan details page navigation
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -233,7 +234,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     Then the user validates the available pharmacies page in AARP site
     
     Examples: 
-    |TID  | zipcode | isMultutiCounty | county       | plantype | planName                                          |distance  |planYear|pharmacytype|servicetype|languageName|
-    |15584|   80002 | Yes             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |25 miles  | 2019   |Standard Network Pharmacy |Open 24 hours|Spanish|
-    |15585|   80002 | Yes             | Jefferson County | PDP  | AARP MedicareRx Walgreens (PDP)                   |15 miles  | 2019   |Standard Network Pharmacy |Open 24 hours|Spanish|
+    |TID   | zipcode | isMultutiCounty | county           | plantype | planName                                          | distance  | planYear | pharmacytype              | servicetype   | languageName |
+    |15584 | 80002   | Yes             | Adams County     | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | 25 miles  | 2019     | Standard Network Pharmacy | Open 24 hours | Spanish      |
+    |15585 | 80002   | Yes             | Jefferson County | PDP      | AARP MedicareRx Walgreens (PDP)                   | 15 miles  | 2019     | Standard Network Pharmacy | Open 24 hours | Spanish      |
       

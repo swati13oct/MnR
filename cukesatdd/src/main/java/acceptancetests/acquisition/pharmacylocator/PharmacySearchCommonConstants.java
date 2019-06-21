@@ -1,6 +1,3 @@
-/**
- * 
- */
 package acceptancetests.acquisition.pharmacylocator;
 
 /**
