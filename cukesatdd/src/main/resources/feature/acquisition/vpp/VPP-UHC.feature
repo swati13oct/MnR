@@ -88,8 +88,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @emailandprintplancompareuhc @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline: Verify email plan compare plan details in UHC site
+   @emailandprintplancompare @predatorsdecrelease2018 @RegressionPredators
+  Scenario Outline:TID: <TID>- Verify email plan compare plan details in UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
       | Zip Code | <zipcode> |
@@ -100,11 +100,11 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Then the user clicks on back to all plans link and validates all three plans are selected
 
     Examples: 
-      | zipcode |
-      |   90210 |
+    |  TID   | zipcode |
+    | 15519  |   90210 |
 
-  @emailAndPrintPlanDetailsuhc @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
+   @emailandprintplanDetails @predatorsdecrelease2018 @RegressionPredators
+  Scenario Outline:TID: <TID>- TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
       | Zip Code | <zipcode> |
@@ -116,8 +116,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
 
     Examples: 
-      | zipcode | planName                                           | plantype |
-      |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
+   |  TID    | zipcode | planName                                           | plantype |
+   | 15533   |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
