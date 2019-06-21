@@ -125,15 +125,17 @@ public class PreferencesStepDefinition {
 		if (communicationPrefPage != null) {
 			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
 				communicationPrefPage.validateGoGreenSectionForShip();
-				communicationPrefPage.validateBacktoPNPlink();
+				communicationPrefPage.validateUpdatePreferencesForShip();
+				//communicationPrefPage.validateBacktoPNPlink();
 			} else {
 				communicationPrefPage.switchToFrameOnPreferences();
 				communicationPrefPage.changeAndVerifyOnlinePreference();
 			}
-			communicationPrefPage.validateBacktoPNPlink();
+			//communicationPrefPage.validateBacktoPNPlink();
 			communicationPrefPage.switchTabForComboMember();
 			if (!communicationPrefPage.validateifEPMPIframeIsPresent()) {
 				communicationPrefPage.validateGoGreenSectionForShip();
+				communicationPrefPage.validateUpdatePreferencesForShip();
 			} else {
 				communicationPrefPage.switchToFrameOnPreferences();
 				communicationPrefPage.changeAndVerifyOnlinePreference();
