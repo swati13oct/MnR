@@ -433,6 +433,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		HomeAddressTxt.sendKeys("12");
 		Actions action = new Actions(driver);
 		action.sendKeys(Keys.DOWN).perform(); 
+		String AutoCompleteAddress = HomeAddressTxt.getAttribute("value");
 		action.sendKeys(Keys.TAB).perform(); 
 		action.sendKeys(Keys.TAB).perform(); 
 		action.sendKeys(Keys.TAB).perform(); 
@@ -443,46 +444,26 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return true;
-		
-		final String script = "return arguments[0].getAttribute('innerHTML')";
-
-		String CityEntered = (String) ((JavascriptExecutor) driver).executeScript(script, CityTxt);
-		
-/*		
- * 
- * Trying JS executor methods.
- * 
- * Tried - text(), val(), innerHTML.. All Returning null.
- * 
- * 
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		String CityEntered = (String) executor.executeScript("return arguments[0].innertext();", CityTxt);*/
+		String CityEntered = CityTxt.getAttribute("value");
 		System.out.println("CityEntereed : "+CityEntered);
 
-		//String CityEntered = driver.('#agent-appointment-form-last_name').val()
+
+		String State = StateDropDown.getAttribute("value");
 		
-		
-				
-				//Shadow-root (user-agent) elements cannot be identified
-		
-/*		String CityEntered = locateElementWithinShadowRoot(CityTxt, ":first-child").getText();
-		System.out.println("CityEntereed : "+CityEntered);
-//		String State = driver.findElement(By.xpath("//*[@id='agent-appointment-form-state']//option[@selected]")).getText();
-		String AddressEntered = locateElementWithinShadowRoot(HomeAddressTxt, ":first-child").getText();
+		String AddressEntered = HomeAddressTxt.getAttribute("value");
 		System.out.println("AddressEntered : "+AddressEntered);
-		String ZipEntered = locateElementWithinShadowRoot(ZipTxt, ":first-child").getText();
+		String ZipEntered = ZipTxt.getAttribute("value");
 		System.out.println("ZipEntered : "+ZipEntered);
-*/
-/*		if(!CityEntered.isEmpty() && !AddressEntered.isEmpty() && !ZipEntered.isEmpty()){
+
+		if(!CityEntered.isEmpty() && !AddressEntered.isEmpty() && !ZipEntered.isEmpty()){
 			System.out.println("Auto Complete Address : "+AddressEntered+" - "+CityEntered+" - "+ZipEntered);
 			return true;
 		}
 		System.out.println(" Address : "+AddressEntered+" - "+CityEntered+" - "+ZipEntered);
-*/
-		//return false;
+
+		return false;
 		
-		return true;
+
 		
 	}
 	public WebElement expandRootElement(WebElement element) {
