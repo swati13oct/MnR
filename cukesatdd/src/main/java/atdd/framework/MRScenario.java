@@ -1066,7 +1066,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "52.0");
+					capabilities.setCapability("version", "66.0");
 					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);
