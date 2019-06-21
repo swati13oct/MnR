@@ -121,7 +121,7 @@ public class HSIDStepDefinition {
 
 		}
 
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
