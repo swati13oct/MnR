@@ -81,11 +81,23 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	public WebElement iPerceptionclosebtn;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
+	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
 	private WebElement requestACall;
 	
 	@FindBy(id = "call-submit")
 	private WebElement requestCall;
+	
+	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
+	private WebElement emailUsContinueBtn;
+	
+	@FindBy(id = "message-send")
+	private WebElement sendMessageBtn;
+	
+	@FindBy(id = "//*[contains(@class,'modal-content')]")
+	private WebElement modalPopup;
+	
+	@FindBy(id=  "confirmationWidget")
+	private WebElement emailConfirmationWidget;
 	
 	@FindBy(id = "call-cancel")
 	private WebElement requestCall_Cancel;
@@ -93,13 +105,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="call-question-about")
 	private WebElement callQuestionAbout;
 	
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
+	@FindBy(xpath="//*[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 	
 	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
 	private WebElement reqACallPhoneNumber;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
+	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
 	@FindBy(xpath="//h1")
@@ -407,16 +419,16 @@ public class ContactUsPage extends UhcDriver{
 		String phoneNumber = memberAttributesMap.get("Phone Number");
 		try {
 			requestACall.click();
-			Thread.sleep(5000);
+			
 			new Select(callQuestionAbout);
-			Thread.sleep(5000);
 			requestACallPhoneNumber.sendKeys(phoneNumber);
 			requestCall.click();
-			Thread.sleep(5000);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		waitforElement(reqConfirmation);
+		CommonUtility.waitForPageLoadNew(driver, reqConfirmation, 40);
+		
 	}
 	
 	/**
@@ -639,18 +651,16 @@ public class ContactUsPage extends UhcDriver{
 			
 		else {
 			getStartedButton.click();
-			Thread.sleep(2000);
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
-			Thread.sleep(5000);
 			newemailId.sendKeys(newEmailId);
 			confirmemailId.sendKeys(newConfirmEmailId);
-			//waitforElement(cancelLink);
-			//Thread.sleep(5000);
 			System.out.println(cancelLink);
 			System.out.println("found cancel link");
-			cancelLink.click();
-			Thread.sleep(2000);
+			emailUsContinueBtn.click();
+			validateNew(emailConfirmationWidget);
+			validateNew(sendMessageBtn);
+			
 				
 				
 			}
