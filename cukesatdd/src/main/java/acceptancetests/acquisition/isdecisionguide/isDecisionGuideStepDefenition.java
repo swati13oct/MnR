@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
 import pages.acquisition.ole.AuthorizationPage;
@@ -163,7 +164,7 @@ public class isDecisionGuideStepDefenition {
 			Assert.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep2Page);
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 
 	}
 
@@ -175,9 +176,46 @@ public class isDecisionGuideStepDefenition {
 			Assert.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
 		}
 		else
-			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep2Page);
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 
 	}
+
+
+	@Then("^the user provides all valid information for Second Step$")
+	public void the_user_provides_all_valid_information_for_Step(DataTable givenAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DecisionGuideStep2Page.enterUserInfoStep2(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+
+	}
+
+	@Then("^the user clicks Submit to submit Decision Guide on AARP site$")
+	public void the_user_clicks_Submit_to_submit_Decision_Guide_on_AARP_site() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DGR_ThankYouPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_DGRthankYouPage();
+		if (dgrThankYouPage != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
+
+	@Then("^the user validates Thank You Page$")
+	public void the_user_validates_Thank_You_Page() throws Throwable {
+		
+	}
+
 } 
 
 

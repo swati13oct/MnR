@@ -22,9 +22,19 @@ Feature: Med Supp Plans (IS) Decision Guide flow in AARP site
     Then the user validates address autocomplete on Step1
     Then user clicks Next to Navigate to Second Step
     Then the user validates all the required fields for blank validation on Second Step
-    Then the user validated all fields for invalid validation on Second Step
+    #Then the user validated all fields for invalid validation on Second Step
+    Then the user provides all valid information for Second Step
+      | DOB        | dob        |
+      | PartBMonth | partBmonth |
+      | PartBYear  | partByear  |
+      | StartDate  | startDate  |
+      | AARPno     | aarpNo     |
+      | PhNo       | phNo       |
+      | MobileFlag | mobileFlag |
+    Then the user clicks Submit to submit Decision Guide on AARP site
+    Then the user validates Thank You Page
 
     Examples: 
-      | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         |
-      |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               |
-      |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | eamil              | test@test.com |
+      | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob      | partBmonth | partByear | aarpNo     | phNo       | mobileFlag |
+      |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01011945 | January    |      2020 | 0321323215 | 3216549871 | N          |
+      |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | eamil              | test@test.com | 01011945 | January    |      2020 | 0321323215 | 3216549871 | N          |

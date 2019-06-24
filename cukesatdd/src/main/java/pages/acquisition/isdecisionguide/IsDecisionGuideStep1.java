@@ -431,6 +431,12 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		ZipTxt.clear();
 		HomeAddressTxt.clear();
 		HomeAddressTxt.sendKeys("12");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Actions action = new Actions(driver);
 		action.sendKeys(Keys.DOWN).perform(); 
 		String AutoCompleteAddress = HomeAddressTxt.getAttribute("value");
