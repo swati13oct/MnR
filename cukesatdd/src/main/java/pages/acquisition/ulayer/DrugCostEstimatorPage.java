@@ -440,6 +440,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
+	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	private WebElement btnReturnToProfile;
+	
 		
 	public WebElement getImgLoadingIndicator() {
 		return imgLoadingIndicator;
@@ -1983,7 +1986,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return DrugName;
 	}
 	
-
-
-	
+	public VisitorProfilePage retrunToProfile() {
+		btnReturnToProfile.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

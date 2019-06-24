@@ -99,22 +99,22 @@ public class ContactusRedesignStepDefinition {
 	 */
 	@When("^the user navigates to contact us page in UHC site$")
 	public void validates_contactUs_Redesign_Page() {
-		ContactUsPage contactUsPage;
+		/*ContactUsPage contactUsPage;
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		contactUsPage = accountHomePage.navigateToContactUsPageTemporarySolution();
+		contactUsPage = accountHomePage.navigateToContactUsPageTemporarySolution();*/
 		
 		// Put the following code back when Rally  Dashboard Contact Us Footer link is working and take out the above code
-//		ContactUsPage contactUsPage;
-//		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-//			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-//			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
-//		} else {
-//			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-//			contactUsPage = accountHomePage.navigateToContactUsPage();
-//		}
-//		if(contactUsPage != null)				
-//			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-//					contactUsPage);
+		ContactUsPage contactUsPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			contactUsPage  = testHarness.navigateToContactUsPageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			contactUsPage = accountHomePage.navigateToContactUsPage();
+		}
+		if(contactUsPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactUsPage);
 	}
 
 	/**  DIANE

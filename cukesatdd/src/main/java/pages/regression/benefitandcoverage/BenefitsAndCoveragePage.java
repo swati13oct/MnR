@@ -300,14 +300,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement memberID1;
 
 	// @FindBy(className = "atdd-benefitsoverview-effectivedatelabel")
-	@FindBy(xpath = ".//*[@class='bold atdd-benefitsoverview-effectivedatelabel']")
+	@FindBy(xpath = ".//*[contains(@class,'bold atdd-benefitsoverview-effectivedatelabel')]")
 	private WebElement effective_Date;
 
 	@FindBy(xpath = "//*[@class='bold atdd-benefitsoverview-effectivedatelabel']//..//..//div[2]")
 	private WebElement effectivedateValueBNC;
 
 
-	@FindBy(className = "atdd-benefitsoverview-groupidlabel")
+	@FindBy(xpath = ".//*[contains(@class, 'atdd-benefitsoverview-groupidlabel')]")
 	private WebElement GroupId;
 
 	@FindBy(xpath = ".//*[@class='bold atdd-benefitsoverview-extrahelplevel-ma-label ng-binding']")
@@ -364,7 +364,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "individualPcpHeaderText")
 	private WebElement PrimaryCareProviderHeaderInd;
 
-	@FindBy(className = "atdd-bncsummary-primarycareprvdrheader")
+	@FindBy(xpath = "//*[contains(@class, 'atdd-bncsummary-primarycareprvdrheader')]")
 	private WebElement PrimaryCareProviderHeaderHMO;
 
 	@FindBy(id = "groupMapdPpoText")
@@ -624,16 +624,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "needhelpsectioncontactus")
 	private WebElement needHelpSection;
 
-	@FindBy(className = "atdd-benefitsoverview-plantitle")
+	@FindBy(xpath= "//*[contains(@class, 'h2 margin-none overview-heading atdd-benefitsoverview-plantitle ng-binding')]")
 	private WebElement planName;
 
-	@FindBy(className = "atdd-benefitsoverview-membernamelabel")
+	@FindBy(xpath = "//*[contains(@class, 'bold atdd-benefitsoverview-membernamelabel')]")
 	private WebElement nameLabel;
 
 	@FindBy(xpath = "//span[@class='bold atdd-benefitsoverview-membernamelabel']//..//..//div[2]")
 	private WebElement memberNameValueBNC;
 
-	@FindBy(className = "atdd-benefitsoverview-memberidlabel")
+	@FindBy(xpath = "//*[contains(@class, 'bold atdd-benefitsoverview-memberidlabel')]")
 	private WebElement memberID;
 
 	@FindBy(xpath = "//span[@class='bold atdd-benefitsoverview-memberidlabel']//..//..//div[2]")
@@ -672,7 +672,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
 	private WebElement cologoImage;
 
-	@FindBy(className = "atdd-bnc-standrdretailpharmcytable")
+	@FindBy(xpath = "//*[contains(@class, 'table-white atdd-bnc-standrdretailpharmcytable')]")
 	private WebElement drugTableNonLisMember;
 
 	@FindBy(id = "standard_ads-header")
@@ -2241,7 +2241,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validatePlanOverviewgroupNONLIS() {
-
+		CommonUtility.waitForPageLoadNew(driver, planName, 30);
 		validateWithValue("Plan name", planName);
 		validateWithValue("Name label", nameLabel);
 		validateWithValue("Member ID label", memberID);
@@ -2357,7 +2357,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo Validate Plan overview for PDP Individual Members
 	 */
 	public void validatePlanOverviewSectionForMembers() {
-		validateWithValue("Paln name", planName2);
+		validateWithValue("Plan name", planName2);
 		validateWithValue("Member Name: label", nameLabel1);
 		validateWithValue("Member ID: label", memberID1);
 		validateWithValue("Effective Date: label",effective_Date1);
@@ -2540,22 +2540,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
+		validateNew(SearchProvider);
 		validateWithValue("Provider Search", SearchProvider);
 		validateWithValue("Search For Provider",StartSearch);
 		StartSearch.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		switchToNewTab();
 		System.out.println(driver.getCurrentUrl());
 
@@ -3694,9 +3684,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validateCopayCoinsuranceInDrugTable() {
 		//note: Dec2018 - wait for the element to show up before validation
-		CommonUtility.waitForPageLoad(driver, drugTableNonLisMember, 5);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTableNonLisMember);
-
+		
 		validateNew(drugTableNonLisMember);
 
 		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0
@@ -5284,6 +5272,16 @@ public void validatedrugcosttableMapdLIS() throws InterruptedException{
 	}
 }
 
+public void validatePrimaryCareProviderSection() {
+
+	validateNew(PrimaryCareProviderHeaderInd);
+	validateNew(YourPrimaryCareProvider);
+	validateNew(ChangeYourPcpButton);
+	validateNew(SearchProvider);
+	validateNew(StartSearch);
+	
+
+}
 
 }
 
