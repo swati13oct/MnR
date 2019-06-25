@@ -12,6 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -43,7 +46,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 /**
  * @author sdwaraka
- * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
+ * Functionality:IS - Med Supp Decision Guide for both AAPR and UHC acquisition sites
  */
 public class isDecisionGuideStepDefenition {
 
@@ -55,81 +58,164 @@ public class isDecisionGuideStepDefenition {
 	}
 
 
-
 	/**
 	 * @author sdwaraka
-	 * To start Enroll Now and land on Welcome Page from Plan Summary Page of VPP
+	 * Steps for IS Decision Guide ATDDs
 	 * @param planAttributes
 	 * @throws Throwable
-	 *//*
-	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow$")
-	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+	 */
+	
+	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
+	@Then("^the user clicks on Request a Free Decision Guide on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on AARP site$")
+	public void the_user_clicks_on_Request_a_Free_Decision_Guide_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_AARP_site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		IsDecisionGuideStep1 DecisionGuideStep1Page = plansummaryPage.clickOnRequestADecisionGuide();
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
+		if (DecisionGuideStep1Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 1 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
 		}
-		String PlanName = givenAttributesMap.get("Plan Name");
-		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-
-		String PlanYear = "2019"; 
-		String PlanPremium;
-		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		String TFN;
-		String SiteName;
-		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
-		WelcomePage welcomePage;
-		if(SiteName.contains("UHC_ACQ")){
-			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
-
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
-
-		}
-		else{
-			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
-
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
-
-		}
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
-		System.out.println("Plan Name is : "+PlanName);
-		System.out.println("Plan Type is : "+PlanType);
-		System.out.println("Plan Zip Code is : "+ZipCode);
-		System.out.println("Plan County Name is : "+County);
-		System.out.println("Plan Plan Premium is : "+PlanPremium);
-		System.out.println("TFN for Plan Type is : "+TFN);
-		System.out.println("Plan Year is : "+PlanYear);
-		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
-
-		if (welcomePage != null) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
-					welcomePage);
-			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
-		}
-		else
-			Assert.fail("Error in validating the OLE Welcome Page");
 	}
 
-*/
+
+	@Then("^the user validates all the required fields for blank validation on Step(\\d+)$")
+	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Step(int arg1) throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.blankFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Blank Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
+	}
+
+	@Then("^the user validated all fields for invalid validation on Step(\\d+)$")
+	public void the_user_validated_all_fields_for_invalid_validation_on_Step(int arg1) throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.invalidFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
+	}
+
+	@Then("^the user validated invalid address error message for next button on Step(\\d+)$")
+	public void the_user_validated_invalid_address_error_message_for_next_button_on_Step(int arg1) throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.NextBtn_invalidAddressValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Address Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+	}
+
+	@Then("^the user enters valid information for the following fields$")
+	public void the_user_enters_valid_information_for_the_following_fields(DataTable givenAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		DecisionGuideStep1Page.enterUserInfoStep1(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
+	}
+
+	@Then("^the user validates address autocomplete on Step(\\d+)$")
+	public void the_user_validates_address_autocomplete_on_Step(int arg1) throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		boolean Validation_Flag = DecisionGuideStep1Page.Validate_addressAutoComplete();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 1 Page Address Aut Complete Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+	}
+
+	@Then("^user clicks Next to Navigate to Second Step$")
+	public void user_clicks_Next_to_Navigate_to_Step2() throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		IsDecisionGuideStep2 DecisionGuideStep2Page = DecisionGuideStep1Page.NavigateNext_DGRStep2();
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
+	
+	@Then("^the user validates all the required fields for blank validation on Second Step$")
+	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Step2() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page  =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		boolean Validation_Flag = DecisionGuideStep2Page.blankFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+
+	}
+
+	@Then("^the user validated all fields for invalid validation on Second Step$")
+	public void the_user_validated_all_fields_for_invalid_validation_on_Step2() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		boolean Validation_Flag = DecisionGuideStep2Page.invalidFieldValidation();
+		if(!Validation_Flag){
+			Assert.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
+		}
+		else
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+
+	}
+
+
+	@Then("^the user provides all valid information for Second Step$")
+	public void the_user_provides_all_valid_information_for_Step(DataTable givenAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DecisionGuideStep2Page.enterUserInfoStep2(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+
+	}
+
+	@Then("^the user clicks Submit to submit Decision Guide on AARP site$")
+	public void the_user_clicks_Submit_to_submit_Decision_Guide_on_AARP_site() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DGR_ThankYouPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_DGRthankYouPage();
+		if (dgrThankYouPage != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
+
+	@Then("^the user validates Thank You Page$")
+	public void the_user_validates_Thank_You_Page() throws Throwable {
+		
+	}
+
 } 
 
 

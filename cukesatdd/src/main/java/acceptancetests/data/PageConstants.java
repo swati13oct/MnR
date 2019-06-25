@@ -144,7 +144,7 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 	public static final String REQUEST_MAILED_INFORMATION = "Requestmailedinformation";
 	
 	public static final String REQUEST_MAILED_INFORMATION_UHC = "RequestmailedinformationUHC";
-	
+
 	public static final String VISITOR_PROFILE_PAGE = "VisitorProfilePage";
 
 	public static final String MA_VPP_PAGE = "maViewPlansAndPricingPage";
@@ -663,8 +663,9 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String ENROLLMENT_BASICS_PAGE = "enrollmentBasicsPage";
 	
 	//Agency Feature - IS Decision Guide Page Constants
-	public static final String IS_DECISION_GUIDE_PAGE1 ="isDecisionGuideStep1Page"; 
-	public static final String IS_DECISION_GUIDE_PAGE2 ="isDecisionGuideStep2Page"; 
+	
+	public static final String IS_DECISION_GUIDE_PAGE1 = "isDecisionGuideStep1Page"; 
+	public static final String IS_DECISION_GUIDE_PAGE2 = "isDecisionGuideStep2Page"; 
 	public static final String STAGE_SSO_TESTHANESS_URL_bswift = "cqloginpage";
 
 }
