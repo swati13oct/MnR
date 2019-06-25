@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppUlayer
 Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
-  @vppUlayerSmoke
+  @vppUlayerSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -21,7 +21,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @vppPlanDetailsAarp
+  @vppPlanDetailsAarp 
   Scenario Outline: Verify plan details in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -88,7 +88,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
   @emailandprintplancompare @predators @RegressionPredators
-  Scenario Outline: Verify print and email for <plantype> plan compare page in AARP site
+  Scenario Outline:TID: <TID>- Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
@@ -101,13 +101,13 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
     #Then I click back to all plans button and verify that all 3 plans are still selected
     Examples: 
-      | zipcode | plantype          |isMultiCounty |planName                                           |
-      |   90210 | MedicareAdvantage |NO            |AARP MedicareComplete SecureHorizons Essential (HMO) |
+     |  TID     | zipcode | plantype          |isMultiCounty |planName                                           |
+     |15523     |   90210 | MedicareAdvantage |NO            |AARP MedicareComplete SecureHorizons Essential (HMO) |
 
 
 
   @emailandprintplanDetails @predators @decRelease2018 @RegressionPredators
-  Scenario Outline: Verify email and Print plan functionalities on Plan Details page in AARP site
+  Scenario Outline:TID: <TID>-  Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code | <zipcode> |
@@ -122,8 +122,8 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Then the user validates the functionality of email and print buttons on the plan Details Page
 
     Examples: 
-      | zipcode | plantype | planName                                           | isMultutiCounty |
-      |   90210 | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |  No              |
+    |  TID   | zipcode | plantype | planName                                           | isMultutiCounty |
+     | 15531 |   90210 | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |  No              |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Eyewear Credit Benefits in Plan Details for provided plan
@@ -441,7 +441,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
 
   @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @RegressionPredators
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on AARP site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

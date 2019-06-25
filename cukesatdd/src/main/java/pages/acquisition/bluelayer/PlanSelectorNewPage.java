@@ -225,6 +225,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 	}
 
 	public boolean JumpLink() throws InterruptedException {
+		validateNew(NonePreference);
 		NonePreference.click();
 		NextQuestionButton2.click();
 		for (int i = 3; i <= 7; i++) {
