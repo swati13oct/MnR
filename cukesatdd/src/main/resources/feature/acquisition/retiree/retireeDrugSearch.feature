@@ -17,4 +17,10 @@ Feature: To test the RETIREE drug search flow
       | CalPERS |
       | Georgia State Health Benefit Plan |
       | North Carolina State Health Plan |
-      
+ 
+  @retireedrugsearch_Smoke
+     Examples: 
+      | groupname |
+      | ASRS and PSPRS |
+
+           
