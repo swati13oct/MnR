@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanSummaryBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVppPlanSummaryBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanSummaryBlayer.json" }, tags = { "@vppPlanCardsRegressionBlayer, @rightRailRegressionBlayer" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanSummaryBlayer.json" }, tags = { "@vppPlanCardsRegressionBlayer, @rightRailRegressionBlayer,@vppFavoritePlanRegressionBlayer, @vppPrintRegressionBlayer " })
 public class RunMRATDDAcquisitionVppPlanSummaryBlayer { 
  
 }
