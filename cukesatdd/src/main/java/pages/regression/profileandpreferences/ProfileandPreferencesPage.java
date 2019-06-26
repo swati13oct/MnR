@@ -2387,7 +2387,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public int getNumPlanTabComboPlans() {
 		return tabsForComboMember.size();
 	}
-}
+
 
 	public void validateHealthSafeIdLinks() {
 

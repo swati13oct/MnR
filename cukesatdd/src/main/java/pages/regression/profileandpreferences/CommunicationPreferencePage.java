@@ -71,12 +71,17 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'atdd-plan-name')]")
 	private WebElement planNameGoGreen;
 
-@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
+	@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
 	private WebElement communicationPreferences;
 
-	@FindBy(xpath = "//*[contains(@class,'atdd-banklink-prefernce')]")	private WebElement backLink1;
+	@FindBy(xpath = "//*[contains(@class,'atdd-banklink-prefernce')]")	
+	private WebElement backLink1;
+	
+	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
+	private WebElement backLink2;
 
-@FindBy(xpath = "//*[contains(@class,'atdd-notes')]")	private WebElement NoteSection;
+	@FindBy(xpath = "//*[contains(@class,'atdd-notes')]")	
+	private WebElement NoteSection;
 
 	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
 	private WebElement savePreferencesButton;
