@@ -648,7 +648,8 @@ public class HSIDStepDefinition {
 				forType="pharmacylocator";
 			} else if (type.contains("needhelp")) { //note: if for needhelp validation, just set it as claims
 				forType="claims";
-			}			System.out.println("*** bypassSorry is set to yes ***");
+			}
+			System.out.println("*** bypassSorry is set to yes ***");
 			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
 			
 			if (planType==null) {

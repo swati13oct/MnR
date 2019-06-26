@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.claims.ClaimSummarypage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 //import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;

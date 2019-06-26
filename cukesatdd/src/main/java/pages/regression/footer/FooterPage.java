@@ -11,7 +11,6 @@ import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
-import pages.regression.claims.ClaimSummarypage;
 
 public class FooterPage extends UhcDriver {
 

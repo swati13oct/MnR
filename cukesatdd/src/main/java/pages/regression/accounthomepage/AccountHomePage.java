@@ -36,8 +36,7 @@ import pages.member_deprecated.ulayer.TestHarness;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimDetailsPage;
-import pages.regression.claims.ClaimSummarypage;
-//import pages.regression.claims.ClaimSummarypage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -641,7 +640,7 @@ public class AccountHomePage extends UhcDriver {
 
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
-		System.out.println("waitning for profile page");
+		System.out.println("waiting for profile page");
 		// Testing through Test Harness Page
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			System.out.println("testing through test harness page");
@@ -672,6 +671,7 @@ public class AccountHomePage extends UhcDriver {
 					acctProfile.click();
 					acctSetting.click();
 				} else {
+
 					// note: check to see if account setting dropdown link is
 					// inside shadow-root element
 					try {
@@ -1425,7 +1425,7 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println("Dashboard page cologo assert condition is passed");
 	}
 
-	public ClaimSummarypage navigateToClaimsSummaryPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
@@ -1435,7 +1435,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
@@ -1470,7 +1470,7 @@ public class AccountHomePage extends UhcDriver {
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("claims");
 			}
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 
 		} else {
 			System.out.println(
@@ -2933,6 +2933,10 @@ public class AccountHomePage extends UhcDriver {
 				}
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
+			} catch (NoSuchElementException ne) {
+				System.out.println("TEST - can't find it, rethrowing the exception for next level to handle");
+				throw ne;
+				//new NoSuchElementException("Unable to locate css select '"+inputCssSelector+"' in shadow-root");
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e=" + e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);

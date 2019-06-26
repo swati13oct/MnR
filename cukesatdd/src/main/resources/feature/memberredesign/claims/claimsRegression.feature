@@ -1,6 +1,83 @@
 @claims @thePredetors
 Feature: T1.1To validate the claims Summary page and claims Details page on the member site
 
+  #----- beginning of VBF claims scenarios section ------------------------
+  # note: runner for sanity is RunMRATDDClaimsVBF
+  # note: need to have these user entries in MemberRedesign-VBF.csv (users may need to be updated)
+  # note:   q2_may_shipUAT001/Password@1,SHIP,SHIPCLAIMS,ShipInd
+  # note:   q2_jun_uhc0004/Password@1,MAPD,UhcMapdInd
+  # note:   q2_jun_aarp0028/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
+  # note:   q2_jun_aarp0210/Password@1,PDP,RxCLAIMS,ULayerInd
+  # note:   q2_jun_grp0050/Password@1,PDP,RX_CLAIMS,grpPerf
+  # note: 
+  #----- beginning of VBF claims scenarios section ------------------
+  @smokeTest @MemberVBF @rallyDashboard @testharness
+  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Claim System | <claimSystem> |
+      | Member Type  | <memberType>  |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    And I can search claims for the following claim period on claims summary page
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+      | Claim System | <claimSystem> |
+      | Member Type  | <memberType>  |
+    Then I validate the claims displayed based on the selection on claims summary page
+    And I validate the EOB section based on claims system on claims summary page
+    And I validate the DownloadMyData section on claims summary page
+    And I can navigate to the Claim Details page from claims summary page
+    And I can validate the Claims Table on claims details page
+    And I can validate the Claims Total on claims details page
+
+    @smokeTest_Claims
+    Examples: 
+      | memberType | planType | claimPeriod    | claimSystem  |
+      | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
+      | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
+      | ULayerInd  | MAPD     | Last 24 months | NICECLAIMS   |
+      | ULayerInd  | PDP      | Last 24 months | RxCLAIMS     |
+    #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
+    #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
+    #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   |
+    #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS |
+    #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
+    #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
+
+    @gatingTest_Claims
+    Examples: 
+      | memberType | planType | claimPeriod    | claimSystem  |
+      | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
+      | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
+    #  | ULayerInd	  | MAPD     | Last 24 months | NICECLAIMS   |
+    #  | ULayerInd    | MAPD     | Last 24 months | RxCLAIMS     |
+    #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
+    #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
+    #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   |
+    #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS |
+    #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
+    #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
+    
+  @smokeTest @MemberVBF @claims_Performance
+  Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Claim System | <claimSystem> |
+      | Member Type  | <memberType>  |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    And I can search claims for the following claim period on claims summary page
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim Period | <claimPeriod> |
+      | Claim System | <claimSystem> |
+    Then I validate the claims displayed based on the selection on claims summary page
+
+    Examples: 
+      | memberType | planType | claimPeriod    | claimSystem |
+      | grpPerf    | PDP      | Last 24 months | RxCLAIMS    |
+  #----- end of VBF claims scenarios section ------------------------
+
+  #----- beginning of Regression claims scenarios section ------------------------
   #-------------------------
   # note: claims ALM cases
   # TID: 15227 - TC01_FED AARP Individual - MA Only (NICE) - Medical Claims
@@ -123,7 +200,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
   @claims06 @SHIP7yearsClaims @regressionMember
-  Scenario Outline: To validate SHIP 6years back claims using Custom Search
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -153,3 +230,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType          | memberType | claimType | claimSystem          |
       | 15259 | SHIP              | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
+      
+  #----- end of Regression claims scenarios section ------------------------
+      
