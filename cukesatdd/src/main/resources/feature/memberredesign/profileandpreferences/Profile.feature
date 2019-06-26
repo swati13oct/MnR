@@ -226,7 +226,6 @@ Feature: C1.2To test Profile and Preferences page
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
-    And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
       | planType | memberType |
