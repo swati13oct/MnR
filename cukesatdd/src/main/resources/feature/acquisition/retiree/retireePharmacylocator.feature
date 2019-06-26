@@ -1,7 +1,7 @@
 @retiree
 Feature: To test the Retiree Pharamacy locator flow
 
-@retireePharmacylocator
+@retireePharmacylocator  @retireePharmacylocator_Smoke
 Scenario Outline:To verify the pharmacy locator flow in Retiree site
 Given The user is on Retiree Home page 
 When the user navigates to pharmacy search page in Retiree Site

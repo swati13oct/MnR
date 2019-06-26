@@ -2,7 +2,7 @@
 Feature: To test the RETIREE Provider search flow
   
 
-  @retireeProviderSearch
+  @retireeProviderSearch @retireeProviderSearch_Smoke
   Scenario Outline: This Scenario is to verify the Provider search on Retiree site from landing page
   Given The user is on Retiree Home page 
   When the user clicks on Provider Search on the Retiree Home Page
