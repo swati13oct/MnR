@@ -70,4 +70,28 @@ Feature: C1.2To test Profile and Preferences page
     #And select Yes and Validate the success message
     Examples: 
       | FID    | planType | memberType          | planName                  |
-      | 276629 | Medsupp  | SHIPAccountSettings | AARP MEDICARE SELECT PLAN |      
+      | 276629 | Medsupp  | SHIPAccountSettings | AARP MEDICARE SELECT PLAN |     
+      
+     @vbfGate
+    Scenario Outline:Plan Type: <planType> -To verify Edit preferences section for Go Green
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates preferences page for non epmp
+
+    Examples: 
+     | memberType          |
+     | AARPMapdNonEPMP  | 
+     
+      @vbfGate
+    Scenario Outline:Plan Type: <planType> -To verify Plan Name, Member name, Member ID and account section
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    And I validate the healthsafe ID links
+    And I should see the communication prefernces section
+    
+      Examples: 
+     | memberType          |
+     | AARPMapdNonEPMP  | 

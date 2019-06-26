@@ -503,6 +503,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 	}
 	
+	@Then("^the user validates preferences page for non epmp")
+	public void userValidatesNonEPMPPrefPage() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		CommunicationPreferencePage communicationPrefPage = profilePreferencesPage
+				.navigateToCommunicationPreferencePage();
+		if (communicationPrefPage != null) {
+			if (!communicationPrefPage.validatePageNonEPMP())
+				Assert.fail("Error in validating communication preferences page");
+			else
+				getLoginScenario().saveBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE, communicationPrefPage);
+		}
+	}
+	
 	/**
 	 * @toDo : Clicks on Edit Preferences link under Communication Preferences for ship
 	 *       section
@@ -968,20 +983,18 @@ public class ProfileandPreferencesUMSStepDefinition {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validateHealthSafeIdLink();
+		profilePreferencesPage.clickHealthSafeIdLink();
 		profilePreferencesPage.validateEditPasswordLinkBox();
 	}
 	
-	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password$")
-	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link_2() throws InterruptedException {
-
+	@When("^I validate the healthsafe ID links$")
+	public void clickHealthSafeIdLinks() throws InterruptedException{
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validateHealthSafeIdLink();
-		profilePreferencesPage.validateEditPasswordLinkBox();
+		profilePreferencesPage.validateHealthSafeIdLinks();
 	}
-
+	
 //	@Then ("^the user clicks on save button without filling current and new password and the red mandatory message should come$")
 //	public void empty_value_password_field() throws InterruptedException {
 //
@@ -1041,7 +1054,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	}
 
-	@And("^I should see the communicationpreferncessection$")
+	@And("^I should see the communication prefernces section$")
 	public void i_should_see_the_communicationpreferncessection() {
 		// Write code here that turns the phrase above into concrete actions
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()

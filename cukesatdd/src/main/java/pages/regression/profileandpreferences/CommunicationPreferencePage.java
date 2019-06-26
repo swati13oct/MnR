@@ -64,16 +64,16 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
 	private WebElement mailLabel;
 
-	@FindBy(className = "atdd-plan-name")
+	@FindBy(xpath = "//*[contains(@class,'atdd-plan-name')]")
 	private WebElement planNameGoGreen;
 
-	@FindBy(className = "h4 margin-none atdd-section-heading")
+	@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
 	private WebElement communicationPreferences;
 
-	@FindBy(className = "atdd-banklink-prefernce")
+	@FindBy(xpath = "//*[contains(@class,'atdd-banklink-prefernce')]")
 	private WebElement backLink1;
 
-	@FindBy(className = "atdd-notes")
+	@FindBy(xpath = "//*[contains(@class,'atdd-notes')]")
 	private WebElement NoteSection;
 
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//button[@class='btn save-prefs-btn']")
@@ -118,7 +118,11 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(css="div#savePreferencesPopUpContent input#savepreferyes")
 	private WebElement welcomeKitYES;
 	
-	
+	@FindBy(xpath = "//h2[contains(@class,'atdd-goGreenHeader')]")
+	private WebElement GoGreenHeader;
+
+	@FindBy(xpath = "//p[@class='atdd-goGreensubHeader']/following-sibling::p[text()][1]")
+	private WebElement GoGreenText;
 	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
@@ -167,6 +171,16 @@ public class CommunicationPreferencePage extends UhcDriver {
 		System.out.println("switched to frame");
 
 		if (validateNew(savePrefButton))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean validatePageNonEPMP() {
+		
+		CommonUtility.waitForPageLoadNew(driver, planNameGoGreen, 40);
+		if (validateNew(planNameGoGreen) && validateNew(communicationPreferences)&&validateNew(backLink1)&&validateNew(NoteSection)&&validateNew(GoGreenHeader)&&
+		validateNew(GoGreenText))
 			return true;
 		else
 			return false;
