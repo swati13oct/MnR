@@ -156,7 +156,7 @@ Feature: C1.2To test Preferences page
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
-    And the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    And the user validates the Plan Name, Member name, Member ID and account section
     And I validate the healthsafe ID links
     And I should see the communication prefernces section
     
