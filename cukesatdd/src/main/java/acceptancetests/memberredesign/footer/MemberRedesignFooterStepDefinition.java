@@ -26,7 +26,7 @@ import pages.regression.footer.FooterPage;
 import pages.dashboard_deprecated.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.claims.ClaimSummarypage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.payments.PaymentHistoryPage;
 
 /**
@@ -34,7 +34,7 @@ import pages.regression.payments.PaymentHistoryPage;
  */
 public class MemberRedesignFooterStepDefinition {
 
-	private static final ClaimSummarypage PaymentHistoryPage = null;
+	private static final ClaimsSummaryPage PaymentHistoryPage = null;
 	@Autowired
 	MRScenario loginScenario;
 

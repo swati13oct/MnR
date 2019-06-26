@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.claims.ClaimSummarypage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstants;

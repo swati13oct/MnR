@@ -371,19 +371,19 @@ public class TestHarness extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public ClaimSummarypage navigateToClaimsSummaryPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(claimsPageLink);
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Claims")) {
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 		}
 		return null;
 	}
 
-	public ClaimSummarypage navigateToClaimsSummaryFromTestHarnessPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryFromTestHarnessPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		testHarnessClaimsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -394,7 +394,7 @@ public class TestHarness extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		return new ClaimSummarypage(driver);
+		return new ClaimsSummaryPage(driver);
 		
 	}
 		
