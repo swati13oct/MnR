@@ -2,7 +2,7 @@
 Feature:P1.5 To test order materials in member site
 
   #----- beginning of VBF scenarios section ------------------   
-  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness
+  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate
   Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

@@ -105,7 +105,7 @@ Examples:
 	#| 90210       | 2 miles      |      | AARP MedicareRx Preferred (PDP)                    |   Mail Order Pharmacy				|PDP|
 	
 	
-@pharmacyLocatorBlayerSmoke
+@pharmacyLocatorBlayerSmoke @vbfGate
 Scenario Outline:To verify available pharmacies in UMS site for zipcode <zipcode> and county <county>
 Given the user is on the uhcmedicaresolutions site landing page
 When the user hovers to Our Plans and select pharmacy search for following plan type in uhc site

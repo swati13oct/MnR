@@ -18,7 +18,6 @@ import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.testharness.TestHarness;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
-import pages.regression.claims.ClaimSummarypage;
 import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;

@@ -4,6 +4,25 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   #-------------------------
   # note: need to fix the VBF to run on stage also
   #----- beginning of VBF member pharmacy locator scenarios section ------------------------
+  @vbfGate
+  Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
+	Given login with following details logins in the member portal and validate elements
+		| Plan Type     | <planType>   	 |
+		| Member Type   | <memberType> 	 |
+	When the user navigates to pharmacy search page on member site
+	And the user enters distance details on member site
+		| Distance 	    | <distance> 	 |
+	And the user selects Pharmacy Types to Filter on member site
+		| Pharmacy Type | <pharmacyType> |
+	Then the user validates the pharmacies available on member site
+	And the user Validates show on map link on member Site
+	And the user validate more information content based on plan type on member site
+	  
+    Examples: 
+	  | planType | memberType | distance | pharmacyType  |
+	  | MAPD     | UhcMapdInd | 25       | Open 24 hours |
+
+
   @smokeTest @MemberVBF @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
   Scenario Outline: VBF -plan: <planType> -memberType: <memberType> - Verify all available pharmacies for default zipcode in member site
 	Given login with following details logins in the member portal and validate elements
@@ -56,15 +75,15 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	When the user navigates to pharmacy search page on member site
 	And the user validate tooltips on filters
 		| Plan Type     | <planType>   	 |
-#	And the user enters distance details on member site
-#		| Distance 	    | <distance> 	 |
-#	And the user selects Pharmacy Types to Filter on member site
-#		| Pharmacy Type | <pharmacyType> |
-#	Then the user validates the pharmacies available on member site
-#	And the user Validates show on map link on member Site
-#	And the user validate more information content based on plan type on member site
-#	And the user Validates view search PDF link on member site
-@abc
+	And the user enters distance details on member site
+		| Distance 	    | <distance> 	 |
+	And the user selects Pharmacy Types to Filter on member site
+		| Pharmacy Type | <pharmacyType> |
+	Then the user validates the pharmacies available on member site
+	And the user Validates show on map link on member Site
+	And the user validate more information content based on plan type on member site
+	And the user Validates view search PDF link on member site
+
 	Examples: 
 		| TID 	| planType | memberType         		 | distance | pharmacyType                |
 		| 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 25       | Open 24 hours               |
@@ -140,3 +159,5 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | 15272 | MA       | IndAARPMA_Pharmacylocator |
 	  | 15272 | SHIP     | IndSHIP_Pharmacylocator   |
 	  | 15272 | MA       | IndUHCMA_Pharmacylocator  |
+
+  
