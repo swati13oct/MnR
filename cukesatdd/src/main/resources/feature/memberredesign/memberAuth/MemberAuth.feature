@@ -144,7 +144,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
     And user clicks on member to select
-    When the user navigates to pharmacy search page in Redesign site
+    When the user navigates to pharmacy search page on member site
     And the user enters distance details in Redesign site
       | Distance | <distance> |
     And the user selects Pharmacy Types to Filter in Redesign Site
@@ -167,7 +167,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
     And user clicks on member to select
-    When the user navigates to pharmacy search page in Redesign site
+    When the user navigates to pharmacy search page on member site
     Then the user validates the pharmacies available in Redesign site
     When the user Selects Chinese Language in Redesign Site
     Then the user searches multi lang for pharmacy search results available in Redesign site

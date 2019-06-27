@@ -1481,6 +1481,8 @@ public class AccountHomePage extends UhcDriver {
 
 		return new ClaimDetailsPage(driver);
 	}
+	@FindBy(className = "loading-block")
+	private WebElement loadingImage;
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 		//tbd waitForHomePage(helloPerson);
@@ -1512,13 +1514,14 @@ public class AccountHomePage extends UhcDriver {
 				if (driver.getCurrentUrl().contains("/dashboard")) {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 					pharmacySearchLink.click();
-					try {
+					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+					/* tbd try {
 						Thread.sleep(10000);
 
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} */
 				}
 			}
 		}
