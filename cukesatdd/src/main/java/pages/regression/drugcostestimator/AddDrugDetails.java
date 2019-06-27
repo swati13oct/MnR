@@ -89,10 +89,10 @@ public class AddDrugDetails extends UhcDriver {
 	//	Thread.sleep(20000);
 		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
 		WebElement element_label = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		CommonUtility.waitForPageLoad(driver, element_label, 20);
+		CommonUtility.waitForPageLoadNew(driver, element_label, 20);
 		if(!element.isSelected()){
 			element_label.click();
-		Thread.sleep(2000);
+		
 		}
 		
 		Assert.assertTrue("Expected Dosage not selected ", element.isSelected());
@@ -104,7 +104,7 @@ public class AddDrugDetails extends UhcDriver {
 	 */
 	public AddDrugDetails selectQnty(String qnty){
 		//waitforElement(quantityField);
-		CommonUtility.waitForPageLoad(driver, quantityField, 20);
+		CommonUtility.waitForPageLoadNew(driver, quantityField, 20);
 		sendkeys(quantityField, qnty);
 		return new AddDrugDetails(driver);
 	}
@@ -130,7 +130,7 @@ public class AddDrugDetails extends UhcDriver {
 	 * returns new SavingsOppurtunity
 	 */
 	public SavingsOppurtunity continueAddDrugDetailsBranded() throws InterruptedException{
-		    CommonUtility.waitForPageLoad(driver, continueButton, 20);
+		    CommonUtility.waitForPageLoadNew(driver, continueButton, 20);
 			continueButton.click();
 			return new SavingsOppurtunity(driver);
 		}

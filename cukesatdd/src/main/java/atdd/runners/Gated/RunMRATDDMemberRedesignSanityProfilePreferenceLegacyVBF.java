@@ -11,9 +11,9 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for entire member redesign Sanity suite
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberrdesignVBF" }, features = { "src/main/resources/feature/member-redesign-vbf/profile-and-preference" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF.json" }, tags = { "@smokeTest_ProfileAndPreference, @smokeTest_GoGreen" },monochrome = true)
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, features = { "src/main/resources/feature/memberredesign/profileandpreferences" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF.json" }, tags = { "@vbfGate" },monochrome = true)
 
 public class RunMRATDDMemberRedesignSanityProfilePreferenceLegacyVBF {
 

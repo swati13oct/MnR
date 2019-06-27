@@ -201,7 +201,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
+		//waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
 		nextButton.click();

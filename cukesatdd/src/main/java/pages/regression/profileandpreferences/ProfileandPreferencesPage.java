@@ -22,6 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.member_deprecated.bluelayer.GoGreenPage;
 
@@ -61,14 +62,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='atdd-editpreferences ng-scope']")
 	private WebElement editPrefLink;
 
-
-	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/h3")
+	@FindBy(xpath = "//*[@id='tab-1']//*[contains(@ng-bind-html, 'activeProfile.planName')]")
 	private WebElement planName;
 
-	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[1]/span")
+	@FindBy(xpath = "//*[@id='tab-1']//*[contains(@class,'bold atdd-profile-membername')]")
 	private WebElement memberName;
-
-	@FindBy(xpath = "//*[@id='tab-1']/div[1]/div/p[2]")
+	
+	@FindBy(xpath = "//*[@id='tab-1']//*[contains(@class,'bold atdd-profile-membernumber')]")
 	private WebElement memberId;
 
 	//@FindBy(xpath = "//*[@class='account_settings form__content']/div/flex/flex/flex-content[2]/p")
@@ -1585,15 +1585,15 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	public boolean validateHealthSafeIdLink() throws InterruptedException {
+	public boolean clickHealthSafeIdLink() throws InterruptedException {
 		validateNew(hsidPasswordLink);
 		hsidPasswordLink.click();
 
-		Thread.sleep(6000);
+		
 		System.out.println("PageTitle " + driver.getTitle());
 		Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
-		Thread.sleep(3000);
-		if (validateNew(usernameText) && validateNew(passwordEditLink))
+		CommonUtility.waitForPageLoadNew(driver, usernameText, 30);
+		if (validateNew(passwordEditLink))
 			return true;
 		return false;
 	}
@@ -1633,12 +1633,16 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		// TODO Auto-generated method stub
 
 		validateNew(breadCrumbToNavigateBack);
+		
 
 	}
 
 	public ProfileandPreferencesPage validateBreadCrumbClick() {
 		// TODO Auto-generated method stub
-		breadCrumbToNavigateBack.click();
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			driver.navigate().back();
+		}else
+			breadCrumbToNavigateBack.click();
 		CommonUtility.waitForPageLoad(driver, hsidPasswordLink, 10);
 		if (driver.getCurrentUrl().contains("profile"))
 			return new ProfileandPreferencesPage(driver);
@@ -2382,5 +2386,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	
 	public int getNumPlanTabComboPlans() {
 		return tabsForComboMember.size();
+	}
+
+
+	public void validateHealthSafeIdLinks() {
+
+		validateNew(hsidAccountLink);
+		validateNew(hsidPasswordLink);
+		
 	}
 }

@@ -62,16 +62,25 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[2]")
 	private WebElement mailRadioButton;
 
-	@FindBy(xpath = "//*[@id='preferenceEPMP']//h3")
+	@FindBy(xpath = "//*[@id='Claims2']/following-sibling::label")
+	private WebElement onlineDelivery;
+
+	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
+	private WebElement mailLabel;
+
+	@FindBy(xpath = "//*[contains(@class,'atdd-plan-name')]")
 	private WebElement planNameGoGreen;
 
-	@FindBy(xpath = "//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
-	private WebElement backLink1;
+	@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
+	private WebElement communicationPreferences;
 
+	@FindBy(xpath = "//*[contains(@class,'atdd-banklink-prefernce')]")	
+	private WebElement backLink1;
+	
 	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
 	private WebElement backLink2;
 
-	@FindBy(xpath = "//div[contains(@class,'atdd-notes')]")
+	@FindBy(xpath = "//*[contains(@class,'atdd-notes')]")	
 	private WebElement NoteSection;
 
 	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
@@ -110,6 +119,11 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath="//input[@id='savepreferyes']/../label")
 	private WebElement welcomeKitYES;
 	
+	@FindBy(xpath = "//h2[contains(@class,'atdd-goGreenHeader')]")
+	private WebElement GoGreenHeader;
+
+	@FindBy(xpath = "//p[@class='atdd-goGreensubHeader']/following-sibling::p[text()][1]")
+	private WebElement GoGreenText;
 	@FindBy(xpath="//input[@id='savepreferno']/../label")
 	private WebElement welcomeKitNo;
 
@@ -184,6 +198,16 @@ public class CommunicationPreferencePage extends UhcDriver {
 		return null;
 	}
 
+	public boolean validatePageNonEPMP() {
+		
+		CommonUtility.waitForPageLoadNew(driver, planNameGoGreen, 40);
+		if (validateNew(planNameGoGreen) && validateNew(communicationPreferences)&&validateNew(backLink1)&&validateNew(NoteSection)&&validateNew(GoGreenHeader)&&
+		validateNew(GoGreenText))
+			return true;
+		else
+			return false;
+	}
+	
 	public boolean validatePageForShip() {
 		CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
 		validate(claimsLabel);

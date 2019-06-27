@@ -138,3 +138,28 @@ Feature: C1.2To test Preferences page
     Examples: 
       | FID    | planType                 | planName                  |
       | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SELECT PLAN |
+
+      
+     @vbfGate
+    Scenario Outline:Plan Type: <planType> -To verify Edit preferences section for Go Green
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates preferences page for non epmp
+
+    Examples: 
+     | memberType          |
+     | AARPMapdNonEPMP  | 
+     
+      @vbfGate
+    Scenario Outline:Plan Type: <planType> -To verify Plan Name, Member name, Member ID and account section
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates the Plan Name, Member name, Member ID and account section
+    And I validate the healthsafe ID links
+    And I should see the communication prefernces section
+    
+      Examples: 
+     | memberType          |
+     | AARPMapdNonEPMP  | 

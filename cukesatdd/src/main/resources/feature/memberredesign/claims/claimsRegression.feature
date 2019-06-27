@@ -11,7 +11,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   q2_jun_grp0050/Password@1,PDP,RX_CLAIMS,grpPerf
   # note: 
   #----- beginning of VBF claims scenarios section ------------------
-  @smokeTest @MemberVBF @rallyDashboard @testharness
+  @smokeTest @MemberVBF @rallyDashboard @testharness @vbfGate
   Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -33,7 +33,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @smokeTest_Claims
     Examples: 
       | memberType | planType | claimPeriod    | claimSystem  |
-      | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
+     # | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
       | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
       | ULayerInd  | MAPD     | Last 24 months | NICECLAIMS   |
       | ULayerInd  | PDP      | Last 24 months | RxCLAIMS     |
@@ -44,20 +44,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
     #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
 
-    @gatingTest_Claims
-    Examples: 
-      | memberType | planType | claimPeriod    | claimSystem  |
-      | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
-      | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
-    #  | ULayerInd	  | MAPD     | Last 24 months | NICECLAIMS   |
-    #  | ULayerInd    | MAPD     | Last 24 months | RxCLAIMS     |
-    #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
-    #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
-    #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   |
-    #  | GroupRetiree | MAPD     | Last 24 months | COSMOSCLAIMS |
-    #  | GroupRetiree | MAPD     | Last 24 months | NICECLAIMS   |
-    #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
-    
   @smokeTest @MemberVBF @claims_Performance
   Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
     Given login with following details logins in the member portal and validate elements
