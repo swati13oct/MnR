@@ -356,4 +356,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
 	protected List<WebElement> vbf_shipTblRow;
+	
+	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
+	protected WebElement eobPageHeader;
 }

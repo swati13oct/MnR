@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.GoGreenPage;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class CommunicationPreferencePage extends UhcDriver {
 
@@ -74,7 +75,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
 	private WebElement communicationPreferences;
 
-	@FindBy(xpath = "//*[contains(@class,'atdd-banklink-prefernce')]")	
+	@FindBy(xpath = "//*[contains(@class,'link link--icon-left link--icon-circled atdd-page-header atdd-banklink-prefernce')]")	
 	private WebElement backLink1;
 	
 	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
@@ -171,6 +172,12 @@ public class CommunicationPreferencePage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
 	private WebElement shipSuccMsg;
+	
+	@FindBy(id="claims_1")
+	private WebElement claimsTab;
+	
+	@FindBy(xpath="//h1[contains(text(),'Claims Summary')]")
+	private WebElement claimsHeader;
 	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
@@ -533,6 +540,19 @@ public class CommunicationPreferencePage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Save' button", validate(btnSavePrefSHIP));
 		btnSavePrefSHIP.click();
 		Assert.assertTrue("PROBLEM - unable to locate success message after submit", validate(shipSuccMsg));		
+	}
+	
+	public void validatePreferencesPage(){
+		validateNew(iframeForFederalMembers);
+		validateNew(backLink1);
+	}
+	
+	public ClaimsSummaryPage navigateToClaimsPage(){
+		claimsTab.click();
+		
+		if(validateNew(claimsHeader))
+			return new ClaimsSummaryPage(driver);
+		return null;
 	}
 }
 
