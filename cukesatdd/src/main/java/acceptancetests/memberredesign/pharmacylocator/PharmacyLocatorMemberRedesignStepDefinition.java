@@ -43,7 +43,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 	
 	/** Navigate to pharmacy tool from dashboard */
-	@When("^the user navigates to pharmacy search page on member site$")
+	@When("^the user navigates to pharmacy search page$")
 	public void navigateToPharmacyLocatorPage() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -61,8 +61,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	/** Changing the distance in pharmacy locator */
-	@And("^the user enters distance details on member site$")
-	public void enterDistance(DataTable zipAttributes) {
+	@And("^the user enters distance details$")
+	public void enterDistance(DataTable zipAttributes) { //TODO - maybe trash
 		Map<String, String> zipAttributesMap=parseInputArguments(zipAttributes);
 		String distance = zipAttributesMap.get("Distance");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE,	distance);
@@ -76,40 +76,50 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	/** Verify the pharmacies as per the filter criteria */
-	@Then("^the user validates the pharmacies available on member site$")
-	public void validatesPharmaciesAvailable() {
+	@Then("^the user validates the pharmacies available$")
+	public void validatesPharmaciesAvailable(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String language = inputAttributesMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.searchesPharmacy();
-		Assert.assertTrue("PROBLEM - Pharmacy Results Not Displayed",
-				pharmacySearchPage != null);
+		pharmacySearchPage = pharmacySearchPage.searchesPharmacy(language);
+//KEEP		Assert.assertTrue("PROBLEM - Pharmacy Results Not Displayed",
+//KEEP				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,pharmacySearchPage);
 	}
 
 	/** Choosing the different set of combination in Pharmacy filter */
-	@When("^the user selects Pharmacy Types to Filter on member site$")
+	@When("^the user selects Pharmacy Types to Filter$")
 	public void selectsPharmacyTypesfilter(DataTable pharmacyAttributes) {
 		Map<String, String> PharmacyAttributesMap=parseInputArguments(pharmacyAttributes);
 		String pharmacyType = PharmacyAttributesMap.get("Pharmacy Type");
+		String language = PharmacyAttributesMap.get("Language");
 		System.out.println("Filter Type to Select : "+pharmacyType);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.Select_PlanType_Filter(pharmacyType);
+		pharmacySearchPage = pharmacySearchPage.Select_PlanType_Filter(pharmacyType, language);
 		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page",
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,	pharmacySearchPage);
 	}
 
 	/** Filter criteria verification in pharmacy tool page */
-	@And("^the user enters following details for pharmacy search on member Site$")
+	@And("^the user enters following details for pharmacy search$")
 	public void enterZipCodeForNewSearch(DataTable zipAttributes) {
 		Map<String, String> zipAttributesMap=parseInputArguments(zipAttributes);
 		String zipcode = zipAttributesMap.get("Zip Code");
 		String distance = zipAttributesMap.get("Distance");
+		String county = zipAttributesMap.get("County");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY, county);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		System.out.println("Zip Code is '"+zipcode+"' | Distance is '"+distance+"'");
+		System.out.println("Zip Code is '"+zipcode+"' | Distance is '"+distance+"' | County is '"+county+"'");
+		if (county==null) {
+			System.out.println("TEST - no county");
+		} else {
+			System.out.println("TEST - has county");
+		}
 		pharmacySearchPage = pharmacySearchPage.enterDistanceZipDetails(distance, zipcode);
 		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page",
 				pharmacySearchPage != null);
@@ -117,11 +127,22 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	/** Verifying show on map link clickable for pharmacies appearing in the search results */
-	@Then("^the user Validates show on map link on member Site$")
+	@Then("^the user validates show on map link$")
 	public void viewsShowOnMapResult() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.ValidateShowOnMapLinks();
+		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
+		Assert.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
+				pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+	}
+	
+
+	@Then("^the user validates get direction link$")
+	public void getDirectionResult() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage = pharmacySearchPage.validateGetDirectionLinks();
 		Assert.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
@@ -130,7 +151,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	/**
 	 * Verify Create a PDF in pharmacy search page
 	 */
-	@Then("^the user Validates view search PDF link on member site$")
+	@Then("^the user validates view search PDF link$")
 	public void viewsSearchResultPdf() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -142,7 +163,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 
 	/** Verify search results based on plan type */
-	@And("^the user validate more information content based on plan type on member site$")
+	@And("^the user validates more information content based on plan type$")
 	public void validateMoreInformationContent() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -153,53 +174,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		System.out.println("More Info Disclaimer is Displayed");
 	}
 
-	/**
-	 * Verifying more information content appearing based on plan type 
-	 * --TODO NOTE: this method is not in use, keep or delete??
-	 */
-	@And("^the user validates more information content for Limited Access Disclaimer$")
-	public void validateLimitedAccessDisclaimer(DataTable zipAttributes) {
-		Map<String, String> zipAttributesMap=parseInputArguments(zipAttributes);
-		String DisclaimerText = zipAttributesMap.get("Disclaimer Text");
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.validateLimitedAccessDisclaimer(DisclaimerText);
-		Assert.assertTrue("PROBLEM - Limited Access Disclaimer is NOT Displayed",
-				pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-		System.out.println("Limited Access Disclaimer is Displayed");
-	}
-
-	/** Verifying chat widget 
-	 * --TODO NOTE: this method is not in use, keep or delete??
-	 */	
-	@And("^the user validate chat widget in Redesign Site$")
-	public void validateChatWidget() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.validateChatWidget();
-		Assert.assertTrue("PROBLEM - Chat Widget is NOT Displayed",
-				pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-		System.out.println("Chat Widget is Displayed");
-	}
-
-	/** Verifying TFN widget 
-	 * --TODO NOTE: this method is not in use, keep or delete?? 
-	 */	
-	@And("^the user validate TFN widget in Redesign Site$")
-	public void validateTfnWidget() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.validateTfnWidget();
-		Assert.assertTrue("PROBLEM - TFN Widget is NOT Displayed",
-				pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-		System.out.println("TFN Widget is Displayed");
-	} 
-
 	/** Verifying the pharmacy search tool in Chinese languages */	
-	@Then("^the user Selects Chinese Language on member Site$")
+	@Then("^the user selects Chinese Language$")
 	public void selectChinese() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -208,7 +184,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 	
 	/** Verifying the pharmacy search tool in Spanish language */	
-	@Then("^the user Selects Spanish Language on member site$")
+	@Then("^the user selects Spanish Language$")
 	public void selectSpanish() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -219,7 +195,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 	
 	/** Verifying the pharmacy search tool in different languages */	
-	@And("^the user searches multi lang for pharmacy search results available on member site$")
+	@And("^the user searches multi lang for pharmacy search results available$")
 	public void viewsMultiLangPharmacySearch() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
@@ -231,13 +207,12 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 	
 	/** Verifying the error message in pharmacy search tool */	
-	@And("^the user verify error messages in pharmacy locator page on member site$")
+	@And("^the user verify error messages in pharmacy locator page$")
 	public void verifyPharmacyErrorMessages() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.verifyPharmacyErrormessages();
-		Assert.assertTrue("PROBLEM - Error Messages not Displayed for Invalid Zipcode entered",
-				pharmacySearchPage != null);
+		String inputZip=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
+		pharmacySearchPage = pharmacySearchPage.verifyPharmacyErrormessages(inputZip);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 
@@ -255,12 +230,39 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	}
 	
 	/** Verify tooltips on the filters */
-	@Then("^the user validate tooltips on filters$")
+	@And("^the user validates tooltips on filters$")
 	public void verifyTooltips(DataTable inputData) {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
+		String planType = inputDataMap.get("Plan Type");
+		String language = inputDataMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		String planType = inputDataMap.get("Plan Type");
-		pharmacySearchPage.validateAllTooltips(planType);
+		pharmacySearchPage.validateAllTooltips(planType, language);
 	}
+	
+	@And("^the user validates header section content$")
+	public void verifyHeaderSection(DataTable inputData) {
+		Map<String, String> inputDataMap=parseInputArguments(inputData);
+		String planType = inputDataMap.get("Plan Type");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validateHeaderSection(planType);
+	}
+
+	@And("^the user validates map section content$")
+	public void verifyMapSectionContent() {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validateMapSectionContent();
+	}
+
+	@Then("^the user validates pharmacy widgets$")
+	public void verifyPharmacyWidgets(DataTable inputData) { 
+		Map<String, String> inputDataMap=parseInputArguments(inputData);
+		String planType = inputDataMap.get("Plan Type");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validatePharmacyWidgets(planType);
+	}
+	
 }

@@ -1,39 +1,36 @@
 @pharmacylocator @gladiators
 Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 
-  #-------------------------
-  # note: need to fix the VBF to run on stage also
   #----- beginning of VBF member pharmacy locator scenarios section ------------------------
   @vbfGate
   Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
 	Given login with following details logins in the member portal and validate elements
-		| Plan Type     | <planType>   	 |
-		| Member Type   | <memberType> 	 |
-	When the user navigates to pharmacy search page on member site
-	And the user enters distance details on member site
-		| Distance 	    | <distance> 	 |
-	And the user selects Pharmacy Types to Filter on member site
-		| Pharmacy Type | <pharmacyType> |
-	Then the user validates the pharmacies available on member site
-	And the user Validates show on map link on member Site
-	And the user validate more information content based on plan type on member site
+	  | Plan Type     | <planType>   	 |
+	  | Member Type   | <memberType> 	 |
+	When the user navigates to pharmacy search page
+	And the user enters distance details
+	  | Distance 	    | <distance> 	 |
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	Then the user validates the pharmacies available
+	And the user validates show on map link
+	And the user validates more information content based on plan type
 	  
     Examples: 
 	  | planType | memberType | distance | pharmacyType  |
 	  | MAPD     | UhcMapdInd | 25       | Open 24 hours |
 
-
   @smokeTest @MemberVBF @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
   Scenario Outline: VBF -plan: <planType> -memberType: <memberType> - Verify all available pharmacies for default zipcode in member site
 	Given login with following details logins in the member portal and validate elements
-		| Plan Type     | <planType>   	 |
-		| Member Type   | <memberType> 	 |
-	When the user navigates to pharmacy search page on member site
-	And the user enters following details for pharmacy search on member Site
-		| Zip Code 	  |	<zipcode> 	 |
-		| Distance 	  |	<distance> 	 |
-    Then the user Validates show on map link on member Site
-    Then the user validate more information content based on plan type on member site
+	  | Plan Type     | <planType>   	 |
+	  | Member Type   | <memberType> 	 |
+	When the user navigates to pharmacy search page
+	And the user enters following details for pharmacy search
+	  | Zip Code 	  |	<zipcode> 	 |
+	  | Distance 	  |	<distance> 	 |
+    Then the user validates show on map link
+    Then the user validates more information content based on plan type
 
     Examples: 
   	  | planType | memberType       | distance | zipcode |
@@ -46,14 +43,14 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Given login with following details logins in the member portal and validate elements
 		| Plan Type     | <planType>   	 |
 		| Member Type   | <memberType> 	 |
-	When the user navigates to pharmacy search page on member site
-	And the user enters following details for pharmacy search on member Site
+	When the user navigates to pharmacy search page
+	And the user enters following details for pharmacy search
 		| Zip Code 	  |	<zipcode> 	 |
 		| Distance 	  |	<distance> 	 |
 
     Examples: 
-	  | planType | memberType | distance | zipcode |
-	  | PDP        | grpPerf  | 25       | 90210   |
+	    | planType | memberType | distance | zipcode |
+	    | PDP        | grpPerf  | 25       | 90210   |
   #----- end of VBF member pharmacy locator scenarios section ------------------------
 
   #-------------------------
@@ -67,87 +64,139 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   # TID: 15295 - TC07_AARP PDP_E2E Scenario_Pharmacy locator
   # TID: 15296 - TC08_Group MAPD_E2E Scenario_Pharmacy locator
   #-------------------------
-  @pharmacylocator1 @PharmacyDistanceDefaultZip @regressionMember
+  @pharmacylocator1 @E2E @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify for default zipcode, filters, Show on map, View PDF, More Info in member site
 	Given login with following details logins in the member portal and validate elements
-		| Plan Type     | <planType>   	 |
-		| Member Type   | <memberType> 	 |
-	When the user navigates to pharmacy search page on member site
-	And the user validate tooltips on filters
-		| Plan Type     | <planType>   	 |
-	And the user enters distance details on member site
-		| Distance 	    | <distance> 	 |
-	And the user selects Pharmacy Types to Filter on member site
-		| Pharmacy Type | <pharmacyType> |
-	Then the user validates the pharmacies available on member site
-	And the user Validates show on map link on member Site
-	And the user validate more information content based on plan type on member site
-	And the user Validates view search PDF link on member site
+	  | Plan Type     | <planType>     |
+	  | Member Type   | <memberType>   |
+	When the user navigates to pharmacy search page
+    #------ english -----------------------------------
+	And the user validates header section content
+	  | Plan Type     | <planType>     |
+	And the user validates pharmacy widgets
+	And the user validates tooltips on filters
+	  | Plan Type     | <planType>     |
+	  | Language      | Spanish        |
+	When the user enters following details for pharmacy search
+	  | Zip Code 	  |	<badZip1>      |
+	  | Distance 	  |	<distance>     |
+	Then the user verify error messages in pharmacy locator page
+	When the user enters following details for pharmacy search
+	  | Zip Code 	  |	<badZip2>      |
+	  | Distance 	  |	<distance>     |
+	Then the user verify error messages in pharmacy locator page
+	And the user enters following details for pharmacy search
+	  | Zip Code 	  | <zipcode>      |
+	  | Distance 	  | <distance>     |
+	Then the user validates the pharmacies available
+	  | Language      | English        |
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	  | Language      | English        |
+	Then the user validates the pharmacies available
+	  | Language      | English        |
+	And the user validates map section content
+	And the user validates show on map link
+   And the user validates get direction link
+	And the user validates more information content based on plan type
+	And the user validates view search PDF link
+    And the user validates pharmacy widgets
+	  | Plan Type     | <planType>     |
+    #------ chinese -----------------------------------
+	When the user selects Chinese Language
+	Then the user searches multi lang for pharmacy search results available
+	Then the user validates the pharmacies available
+	  | Language      | Chinese        |
+	And the user validates header section content
+	  | Plan Type     | <planType>     |
+	And the user validates pharmacy widgets
+	And the user validates tooltips on filters
+	  | Plan Type     | <planType>     |
+	  | Language      | Spanish        |
+	And the user validates show on map link
+	And the user validates more information content based on plan type
+	And the user validates view search PDF link
+    #------ spanish -----------------------------------
+	When the user selects Spanish Language
+	Then the user searches multi lang for pharmacy search results available
+	Then the user validates the pharmacies available
+	  | Language      | Spanish          |
+	And the user validates header section content
+	  | Plan Type     | <planType>     |
+	And the user validates pharmacy widgets
+	And the user validates tooltips on filters
+	  | Plan Type     | <planType>     |
+	  | Language      | Spanish        |
+	And the user validates show on map link
+	And the user validates more information content based on plan type
+	And the user validates view search PDF link
 
 	Examples: 
-		| TID 	| planType | memberType         		 | distance | pharmacyType                |
-		| 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 25       | Open 24 hours               |
-		| 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 25       | E-Prescribing               |
-		| 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 25       | Long-term care              |
-		| 15279	| MAPD     | Medica_Pharmacylocator		 | 25       | Home Infusion and Specialty |
-		| 15280	| MAPD     | PCP_Pharmacylocator		 | 25       | Retail Pharmacy (90-day)    |
-		| 15274	| PDP      | TexasRx_Pharmacylocator	 | 25       | Long-term care              |
-		| 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 25       | E-Prescribing               |
+	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | badZip1 | badZip2 |
+	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               |         | 9999    |
+	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 10980   | 15       | E-Prescribing               |         | 9999    |
+	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 61443   | 10       | Long-term care              |         | 9999    |
+	  | 15279	| MEDICA   | Medica_Pharmacylocator		 | 33321   | 10       | Home Infusion and Specialty |         | 9999    |
+	  | 15280	| PCP      | PCP_Pharmacylocator		 | 33174   | 10       | Retail Pharmacy (90-day)    |         | 9999    |
+	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 14867   | 25       | Long-term care              |         | 9999    |
+	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 29148   | 10       | E-Prescribing               |         | 9999    |
 
-  @pharmacylocator2 @ValidateLanguageandZIPcode @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in member site
-	Given login with following details logins in the member portal and validate elements
-		| Plan Type   | <planType>   |
-		| Member Type |	<memberType> |
-	When the user navigates to pharmacy search page on member site
-	And the user enters following details for pharmacy search on member Site
-		| Zip Code 	  |	<zipcode> 	 |
-		| Distance 	  |	<distance> 	 |
-	Then the user validates the pharmacies available on member site
-	When the user Selects Chinese Language on member Site
-	Then the user searches multi lang for pharmacy search results available on member site
-	When the user Selects Spanish Language on member site
-	Then the user searches multi lang for pharmacy search results available on member site
+####-- to be deleted
+#  @pharmacylocator2 @ValidateLanguageandZIPcode @regressionMember
+#  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -zipcode: <zipcode> -county: <county>- To verify pharmacy Locator ZIP code entry and for Chinese and Spanish Language in member site
+#	Given login with following details logins in the member portal and validate elements
+#	  | Plan Type   | <planType>   |
+#	  | Member Type | <memberType> |
+#	When the user navigates to pharmacy search page
+#	And the user enters following details for pharmacy search
+#	  | Zip Code 	| <zipcode>    |
+#	  | Distance 	| <distance>   |
+#	Then the user validates the pharmacies available
+#	When the user selects Chinese Language
+#	Then the user searches multi lang for pharmacy search results available
+#	When the user selects Spanish Language
+#	Then the user searches multi lang for pharmacy search results available
+#
+#	Examples: 
+#	  | TID	  | planType | memberType        		   | zipcode | distance |
+#	  | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator | 10980   | 10       |
+#	  | 15295 | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 10       |
+#	  | 15296 | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 10       |
+#	  | 15279 | MAPD     | Medica_Pharmacylocator  	   | 33321   | 10       |
+#	  | 15280 | MAPD     | PCP_Pharmacylocator     	   | 33174   | 10       |
+#	  | 15274 | PDP      | TexasRx_Pharmacylocator 	   | 14867   | 25       |
+#	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | 
 
-	Examples: 
-		| TID	| planType | memberType        			 | zipcode | distance |
-		| 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 10980   | 10       |
-		| 15295	| PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 10       |
-		| 15296	| MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 10       |
-		| 15279	| MAPD     | Medica_Pharmacylocator  	 | 33321   | 10       |
-		| 15280	| MAPD     | PCP_Pharmacylocator     	 | 33174   | 10       |
-		| 15274	| PDP      | TexasRx_Pharmacylocator 	 | 14867   | 25       |
-		| 15294	| MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       |
+####-- to be deleted
+#  @pharmacylocator4 @ZipCodeErrorMessages @regressionMember
+#  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -zipcode: <zipcode> - To verify error messages for invalid Zipcode in pharmacy locator page in member site
+#	Given login with following details logins in the member portal and validate elements
+#	  | Plan Type   |	<planType>   |
+#	  | Member Type |	<memberType> |
+#	When the user navigates to pharmacy search page
+#	When the user enters following details for pharmacy search
+#	  | Zip Code 	  |	<zipcode>    |
+#	  | Distance 	  |	<distance>   |
+#	Then the user verify error messages in pharmacy locator page
+#
+#	Examples: 
+#	  | TID	  | planType | memberType        			| zipcode | distance |
+#	  | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator	|         | 5        |
+#	  | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator 	| 9999    | 10       |
+#	  | 15295 | PDP      | IndAARPPDP_Pharmacylocator	|         | 5        |
+#	  | 15295 | PDP      | IndAARPPDP_Pharmacylocator 	| 9999    | 10       |
+#	  | 15296 | MAPD     | GroupMAPD_Pharmacylocator   	|         | 5        |
+#	  | 15296 | MAPD     | GroupMAPD_Pharmacylocator  	| 9999    | 10       |
+#	  | 15279 | MAPD     | Medica_Pharmacylocator  		|         | 5        |
+#	  | 15279 | MAPD     | Medica_Pharmacylocator 		| 9999    | 10       |
+#	  | 15280 | MAPD     | PCP_Pharmacylocator     		|         | 5        |
+#	  | 15280 | MAPD     | PCP_Pharmacylocator    		| 9999    | 10       |
+#	  | 15274 | PDP      | TexasRx_Pharmacylocator 		|         | 5        |
+#	  | 15274 | PDP      | TexasRx_Pharmacylocator 		| 9999    | 10       |
+#	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   |         | 5        |
+#	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   | 9999    | 10       |
 
-  @pharmacylocator3 @ZipCodeErrorMessages @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -zipcode: <zipcode> - To verify error messages for invalid Zipcode in pharmacy locator page in member site
-	Given login with following details logins in the member portal and validate elements
-		| Plan Type   |	<planType>   |
-		| Member Type |	<memberType> |
-	When the user navigates to pharmacy search page on member site
-	When the user enters following details for pharmacy search on member Site
-		| Zip Code 	  |	<zipcode>    |
-		| Distance 	  |	<distance>   |
-	Then the user verify error messages in pharmacy locator page on member site
-
-	Examples: 
-	  | TID	  | planType | memberType        			| zipcode | distance |
-	  | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator	|         | 5        |
-	  | 15273 | MAPD     | IndAARPMAPD_Pharmacylocator 	| 9999    | 10       |
-	  | 15295 | PDP      | IndAARPPDP_Pharmacylocator	|         | 5        |
-	  | 15295 | PDP      | IndAARPPDP_Pharmacylocator 	| 9999    | 10       |
-	  | 15296 | MAPD     | GroupMAPD_Pharmacylocator   	|         | 5        |
-	  | 15296 | MAPD     | GroupMAPD_Pharmacylocator  	| 9999    | 10       |
-	  | 15279 | MAPD     | Medica_Pharmacylocator  		|         | 5        |
-	  | 15279 | MAPD     | Medica_Pharmacylocator 		| 9999    | 10       |
-	  | 15280 | MAPD     | PCP_Pharmacylocator     		|         | 5        |
-	  | 15280 | MAPD     | PCP_Pharmacylocator    		| 9999    | 10       |
-	  | 15274 | PDP      | TexasRx_Pharmacylocator 		|         | 5        |
-	  | 15274 | PDP      | TexasRx_Pharmacylocator 		| 9999    | 10       |
-	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   |         | 5        |
-	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   | 9999    | 10       |
-
-  @pharmacylocator4 @NegativeScenario @regressionMember
+  @pharmacylocator2 @NegativeScenario @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify pharmacy link is not displayed to MA/SHIP member in member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |
