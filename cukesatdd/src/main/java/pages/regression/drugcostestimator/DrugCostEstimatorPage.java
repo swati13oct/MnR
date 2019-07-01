@@ -322,7 +322,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void feebackpopupClose() throws InterruptedException
 	{ //waitForloader(driver,overlay, 20);
-		Thread.sleep(20000);
+	CommonUtility.waitForPageLoad(driver, iPerceptionframe, 20);
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);
@@ -1096,12 +1096,11 @@ try {
 		waitForloader(driver,overlay,20);
 
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
-			CommonUtility.waitForPageLoad(driver, first_delete_link, 20);
-			Thread.sleep(10000);
+			CommonUtility.waitForPageLoadNew(driver, first_delete_link, 20);
 			first_delete_link.click();
-			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
+			CommonUtility.waitForPageLoadNew(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
-			Thread.sleep(4000);
+			
 			waitForloader(driver, overlay, 30);
 		}
 	}
@@ -1662,11 +1661,6 @@ try {
 			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
 			addNewDrugModal.typeDrugName(drug);
 			addNewDrugModal.submit();
-
-			//addNewDrugModal.selectDrug(drug);
-
-			//	addNewDrugModal.continueAddNewDrugModal();
-			//Thread.sleep(5000);
 			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
 			addDrugDetails.selectDosage(dosage);
 			addDrugDetails.selectQnty(quantity);
@@ -1674,11 +1668,9 @@ try {
 
 			addDrugDetails.continueAddDrugDetailsBranded();
 
-			// if(addDrugDetails.continueAddDrugDetails()!=null){
 			SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
 			savings_oppurtunity.savedrugbutton();
-			// }
-			//Thread.sleep(20000);
+		
 
 
 		}

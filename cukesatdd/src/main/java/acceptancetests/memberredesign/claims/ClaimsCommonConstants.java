@@ -1,14 +1,7 @@
-
-
-
-/**
- * 
- */
 package acceptancetests.memberredesign.claims;
 
 /**
  * @author pperugu
- *
  */
 public class ClaimsCommonConstants {
 
@@ -38,6 +31,7 @@ public class ClaimsCommonConstants {
 	public static final String TEST_INPUT_CLAIM_SYSTEM = "input_claimSystem";
 	public static final String TEST_RESULT_NOTE = "result_claimsNote";
 	
-	
-	
+	public static final String TEST_ALLCLAIMS = "allClaims";
+	public static final String TEST_RECORDINVOKEDBYPASS = "recordInvokedBypass";
+	public static final String TEST_ALLCLAIMSDATA = "allClaimsData";
 }

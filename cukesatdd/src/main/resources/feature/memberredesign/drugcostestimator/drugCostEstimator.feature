@@ -150,7 +150,28 @@ Examples:
 | TID    | planType | memberType  |drug|dosage|quantity|frequency| 
 | 15325    | MAPD     |Individualwithoutpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
 
+@vbfGate 
+Scenario Outline:plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
+Given login with following details logins in the member portal and validate elements
+	| Plan Type   | <planType>   |
+	| Member Type	  | <memberType> |
+When I navigate to drug look up page
+When I delete all added drugs
+When I add branded drug
+	| Drug      | <drug>     |
+	| Dosage    | <dosage>   |
+	| Quantity  | <quantity> |
+	| Frequency	| <frequency>|
+And I have selected pharmacy
+Then I should be presented the option to switch to the generic option
+And I will see a SWITCH NOW link in the drug tile with a pharmacy savings cost value
+And I will see a modal appear upon clicking on SWITCH NOW 
+And when I click on the button to accept the generic
+Then the drug name will automatically update within the Drug List
+And any cost savings will be applied to my total cost savings in Step3
 
-
+Examples:
+   | planType | memberType  |drug|dosage|quantity|frequency| 
+   | MAPD     |UhcMapdInd |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
  
  

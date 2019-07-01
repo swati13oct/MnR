@@ -22,7 +22,7 @@ import pages.regression.benefitandcoverage.*;
 import pages.regression.formsandresources.*;
 import pages.regression.claims.*;
 import pages.regression.contactus.ContactUsPage;
-import pages.memberrdesignVBF.DrugCostEstimatorPage;
+import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
 
 import pages.regression.healthandwellness.*;
@@ -303,10 +303,10 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
-	public PaymentsOverview navigateToTeamCPaymentOverview() {
+	public PaymentHistoryPage navigateToTeamCPaymentOverview() {
 		if (TeamCPaymentPage.isEnabled()) {
 			TeamCPaymentPage.click();
-			return new PaymentsOverview(driver);
+			return new PaymentHistoryPage(driver);
 		}
 		return null;
 	}
@@ -371,19 +371,19 @@ public class TestHarness extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public ClaimSummarypage navigateToClaimsSummaryPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(claimsPageLink);
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Claims")) {
-			return new ClaimSummarypage(driver);
+			return new ClaimsSummaryPage(driver);
 		}
 		return null;
 	}
 
-	public ClaimSummarypage navigateToClaimsSummaryFromTestHarnessPage() {
+	public ClaimsSummaryPage navigateToClaimsSummaryFromTestHarnessPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		testHarnessClaimsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -394,7 +394,7 @@ public class TestHarness extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		return new ClaimSummarypage(driver);
+		return new ClaimsSummaryPage(driver);
 		
 	}
 		
@@ -932,4 +932,5 @@ public class TestHarness extends UhcDriver {
         Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
         System.out.println("Test Harness page co logo assert condition is passed");
 }
+        
 }
