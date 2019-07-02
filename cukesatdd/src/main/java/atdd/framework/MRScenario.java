@@ -215,7 +215,7 @@ public class MRScenario {
 				String tagName=it.next();
 				
 				
-				  if  (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci")){
+				  if  (tagName.equalsIgnoreCase("@vbfGate") && environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
 				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
@@ -1066,7 +1066,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "52.0");
+					capabilities.setCapability("version", "66.0");
 					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);

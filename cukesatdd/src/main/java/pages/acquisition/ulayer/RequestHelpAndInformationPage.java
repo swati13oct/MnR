@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	
-	@FindBy(xpath =".//*[@id='article_mededaccordion0']//*[contains(text(),'Request an Appointment')]")
+	@FindBy(xpath =".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
 	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
@@ -79,17 +79,17 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(pdpInquityDropdown);
+		//validateNew(pdpInquityDropdown);
 		validateNew(zipCodeMedEd);
 		validateNew(lookUpZipLink);
 
 	}
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest() {
-		if (requestAgentApptDropdown.getAttribute("class").contains("collapsed")) {
+		/*if (requestAgentApptDropdown.getAttribute("class").contains("collapsed")) {
 			requestAgentApptDropdown.click();
-		}
-		validateNew(ma_requestAgentAppointmentLink);
+		}*/
+		
 		ma_requestAgentAppointmentLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("agentebrc")) {

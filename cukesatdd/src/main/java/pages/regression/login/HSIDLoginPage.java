@@ -195,6 +195,8 @@ public class HSIDLoginPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			emailAddressRequiredWorkaround();
 		}
 		/* tbd try {
 			Thread.sleep(35000);
@@ -203,8 +205,7 @@ public class HSIDLoginPage extends UhcDriver {
 			e.printStackTrace();
 		} */
 
-		if (driver.getCurrentUrl().contains(
-				"=securityQuestion")) {
+		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
 
 			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
@@ -232,51 +233,7 @@ public class HSIDLoginPage extends UhcDriver {
 				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
-			if (driver.getCurrentUrl().contains("login/no-email.html")) {
-				System.out.println("User encounted no-email page, will enter email address to proceed");
-				try {
-					String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
-					WebElement newEmail=driver.findElement(By.xpath("//input[@ng-model='newEmail']")); 
-					newEmail.sendKeys(workAroundEmail);
-					WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
-					confirmEmail.sendKeys(workAroundEmail);
-					WebElement continueButton=driver.findElement(By.xpath("//button//span[contains(text(),'Continue')]")); 
-					continueButton.click();
-
-					System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					WebElement goToHomepage=driver.findElement(By.xpath("//button[@ng-click='goToHomePage()']"));
-					try {
-						System.out.println("'Go To Homepage' button showed up, click it");
-						goToHomepage.isDisplayed();
-						goToHomepage.click();
-					} catch (Exception e1) {
-						System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
-					}
-
-					//note: do not remove wait, need to give it enough time for the dashboard or error page to load
-					System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
-					CommonUtility.checkPageIsReadyNew(driver);
-					waitToReachDashboard();  //note: after page is completed state, still need this wait for the page to finish loading
-
-					if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
-						Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
-					}
-					/* tbd try {
-						Thread.sleep(20000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
-				} catch (Exception e) {
-					System.out.println("Unable to resolve no-email page encounter. "+e);
-				}
-			}  
+			emailAddressRequiredWorkaround();
 		}
 		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
@@ -607,6 +564,48 @@ public class HSIDLoginPage extends UhcDriver {
 				//e.printStackTrace();
 			}
 		} 
+	}
+	
+	public void emailAddressRequiredWorkaround() {
+		if (driver.getCurrentUrl().contains("login/no-email.html")) {
+			System.out.println("User encounted no-email page, will enter email address to proceed");
+			try {
+				String workAroundEmail="UHCMNRPORTALS@GMAIL.COM";
+				WebElement newEmail=driver.findElement(By.xpath("//input[@ng-model='newEmail']")); 
+				newEmail.sendKeys(workAroundEmail);
+				WebElement confirmEmail=driver.findElement(By.xpath("//input[@ng-model='confirmEmail']")); 
+				confirmEmail.sendKeys(workAroundEmail);
+				WebElement continueButton=driver.findElement(By.xpath("//button//span[contains(text(),'Continue')]")); 
+				continueButton.click();
+
+				System.out.println("Clicked Continue button, wait and see if the 'Go To Homepage' button shows up");
+				try {
+					Thread.sleep(5000); //note: need the wait
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				WebElement goToHomepage=driver.findElement(By.xpath("//button[@ng-click='goToHomePage()']"));
+				try {
+					System.out.println("'Go To Homepage' button showed up, click it");
+					goToHomepage.isDisplayed();
+					goToHomepage.click();
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage' System error message, moving on. "+e1);
+				}
+
+				//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+				System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+				CommonUtility.checkPageIsReadyNew(driver);
+				waitToReachDashboard();  //note: after page is completed state, still need this wait for the page to finish loading
+
+				if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+				}
+			} catch (Exception e) {
+				System.out.println("Unable to resolve no-email page encounter. "+e);
+			}
+		}  
+
 	}
 
 }

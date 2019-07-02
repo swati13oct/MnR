@@ -42,6 +42,12 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//a[@href = 'tel:1-800-721-0627']")
 	private WebElement staticTFN; 
 	
+	@FindBy(xpath = "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[1]/div[1]/div/div[1]/div/ul/li[1]/a")
+	private WebElement contactUsLink2; 
+	
+	@FindBy(xpath = "//*[@id='coveragebenefits_2']")
+	private WebElement benefitAndCovergae;
+	
 	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
 	private WebElement preEffectiveTechSupportNumber;
 		
@@ -75,11 +81,23 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id = "closeButton")
 	public WebElement iPerceptionclosebtn;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
+	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//a[@class='btn btn--primary call-btn']")
 	private WebElement requestACall;
 	
 	@FindBy(id = "call-submit")
 	private WebElement requestCall;
+	
+	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
+	private WebElement emailUsContinueBtn;
+	
+	@FindBy(id = "message-send")
+	private WebElement sendMessageBtn;
+	
+	@FindBy(id = "//*[contains(@class,'modal-content')]")
+	private WebElement modalPopup;
+	
+	@FindBy(id=  "confirmationWidget")
+	private WebElement emailConfirmationWidget;
 	
 	@FindBy(id = "call-cancel")
 	private WebElement requestCall_Cancel;
@@ -87,13 +105,13 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="call-question-about")
 	private WebElement callQuestionAbout;
 	
-	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//input[@id='call-number']")
+	@FindBy(xpath="//*[@id='call-number']")
 	private WebElement requestACallPhoneNumber;
 	
 	@FindBy(xpath="//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block-body']//p[4]")
 	private WebElement reqACallPhoneNumber;
 	
-	@FindBy(xpath = "//div[contains(@class,'click-to-call')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
+	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
 	@FindBy(xpath="//h1")
@@ -401,16 +419,16 @@ public class ContactUsPage extends UhcDriver{
 		String phoneNumber = memberAttributesMap.get("Phone Number");
 		try {
 			requestACall.click();
-			Thread.sleep(5000);
+			
 			new Select(callQuestionAbout);
-			Thread.sleep(5000);
 			requestACallPhoneNumber.sendKeys(phoneNumber);
 			requestCall.click();
-			Thread.sleep(5000);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		waitforElement(reqConfirmation);
+		CommonUtility.waitForPageLoadNew(driver, reqConfirmation, 40);
+		
 	}
 	
 	/**
@@ -616,9 +634,12 @@ public class ContactUsPage extends UhcDriver{
 		}
 		String newEmailId = memberAttributesMap.get("New Email");
 		String newConfirmEmailId = memberAttributesMap.get("NewConfirm Email");
+		// the following 3 lines are added as a go around the contact us link from home page, as it was not working.
+		
+		
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 			
 		if(EmailForm.isDisplayed()){
 			System.out.println("Get Started Button not visible, So using email Form Link!!!");
@@ -630,18 +651,16 @@ public class ContactUsPage extends UhcDriver{
 			
 		else {
 			getStartedButton.click();
-			Thread.sleep(2000);
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
-			Thread.sleep(5000);
 			newemailId.sendKeys(newEmailId);
 			confirmemailId.sendKeys(newConfirmEmailId);
-			//waitforElement(cancelLink);
-			//Thread.sleep(5000);
 			System.out.println(cancelLink);
 			System.out.println("found cancel link");
-			cancelLink.click();
-			Thread.sleep(2000);
+			emailUsContinueBtn.click();
+			validateNew(emailConfirmationWidget);
+			validateNew(sendMessageBtn);
+			
 				
 				
 			}

@@ -12,7 +12,6 @@ import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import pages.regression.claims.ClaimSummarypage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.testharness.TestHarness;
 /**

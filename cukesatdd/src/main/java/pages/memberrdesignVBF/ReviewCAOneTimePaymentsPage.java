@@ -88,6 +88,9 @@ public class ReviewCAOneTimePaymentsPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'payments')]//div[contains(@class,'intro_text')][contains(@style,'color:red;')]//*[string-length(normalize-space(text()))>1]")
 	private WebElement errorMessage;
+	
+	@FindBy(xpath = "//div[contains(@class,'confirmationText')]//*[contains(@class,'confirmation__number')][string-length(text())=9]")
+	private WebElement confirmationNumber;
 
 	// @FindBy(xpath
 	// ="//*[@id='consent']/following-sibling::label[contains(text(),'I have
@@ -238,7 +241,8 @@ public class ReviewCAOneTimePaymentsPage extends UhcDriver {
 
 		waitforElementDisapper(By.xpath("//div[contains(@class,'loading-block')]"), 60);
 		CommonUtility.checkPageIsReadyNew(driver);
-
+		CommonUtility.waitForPageLoadNew(driver, confirmationNumber, 30);
+		
 		if (driver.getTitle().contains("One-Time Payment Submitted")) {
 			System.out.println("User is on Confirmation Page for One time payment");
 			return new ConfirmOneTimePaymentPage(driver);

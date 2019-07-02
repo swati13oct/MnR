@@ -26,10 +26,10 @@ public class SavingsOppurtunity extends UhcDriver{
 	@FindBy(xpath=".//*[@id='popup4']/header/span[contains(text(),' SAVINGS OPPORTUNITY')]")
 	public WebElement SwitchGenericPage;
 	
-	@FindBy(xpath="//div[@id='popup4']//span[contains(@class,'subtitle')]")
+	@FindBy(xpath="//div[@id='popup4']//*[contains(@class,'subtitle')]")
 	public WebElement SwitchGenericPageHeading;
 	
-	@FindBy(xpath="//div[@id='popup4']//section[contains(@class,'add-drug-slide-body')]//h1[contains(@class,'drug-name')]")
+	@FindBy(xpath="//div[@id='popup4']//section[contains(@class,'add-drug-slide-body')]//h2[contains(@class,'drug-name')]")
 	public WebElement drugHeading;
 	
 	@FindBy(id="drug-name-sr-only")
