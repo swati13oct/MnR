@@ -92,7 +92,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Language      | English        |
 	And the user validates map section content
 	And the user validates show on map link
-   And the user validates get direction link
+    And the user validates get direction link
 	And the user validates more information content based on plan type
 	And the user validates view search PDF link
     And the user validates pharmacy widgets
@@ -145,6 +145,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 14867   | 25       | Long-term care              | False             | False        | False            |
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 29148   | 10       | E-Prescribing               | False             | False        | False            |
 	  | xxxxx	| MAPD     | Peehip_Pharmacylocator  	 | 29148   | 15       | E-Prescribing               | False             | False        | False            |
+	  | xxxxx	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False             | True         | True            |
 
   @pharmacylocator2 @NegativeScenario @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify pharmacy link is not displayed to MA/SHIP member in member site
@@ -214,6 +215,3 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 #	  | 15274 | PDP      | TexasRx_Pharmacylocator 		| 9999    | 10       |
 #	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   |         | 5        |
 #	  | 15294 | MAPD     | IndMAPDUHC_Pharmacylocator   | 9999    | 10       |
-
-
-  

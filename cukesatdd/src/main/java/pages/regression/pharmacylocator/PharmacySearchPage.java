@@ -525,6 +525,9 @@ public class PharmacySearchPage extends PharmacySearchWebElements {
 		action.moveToElement(moveAwayFromTooltip).build().perform(); //note: move away
 	}
 
+	@FindBy(xpath="//div[@class='pharmacy-locator']//div[@class='table-body responsive']/div[not(contains(@class,'ng-hide'))]/div/label[@id='plan-year-label']")
+	protected WebElement planYearLabel;
+	
 	public void validateHeaderSection(String memberType) {
 		Assert.assertTrue("PROBLEM - unable to locate the header text element", validate(PharmacyLocatorPageHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the input section", validate(inputSection));
@@ -557,6 +560,13 @@ public class PharmacySearchPage extends PharmacySearchWebElements {
 		}
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", validate(zipcodeField));
 		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
+
+		//note: plan year dropdown only shows during AEP time frame - Sept - Dec (server time)
+		//note: only validate field if plan year label is showing
+		if (validate(planYearLabel)) {
+			//TODO - validate the dropdown and selection options are as expected
+			Assert.assertTrue("PROBLEM - purposely failing this, code the behavior when planYear dropdown show up", false);
+		}
 	}
 
 	/**
@@ -577,15 +587,13 @@ public class PharmacySearchPage extends PharmacySearchWebElements {
 		String testWidget="";
 		String expUrl="";
 		if (hasPrefRetailPharmacyWidget) {
-
 			testWidget="Preferred Retail Pharmacy Network";
 			Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", validate(widget_preferredRetailPharmacyNetwork));
 			expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
-			if (memberType.toUpperCase().contains("GROUP")) {
+			if (memberType.toUpperCase().contains("GROUP")) 
 				validateLearnMoreInWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts_grp, expUrl);
-			} else {
+			else
 				validateLearnMoreInWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts_ind, expUrl);
-			}
 			testWidget="Walgreens – Preferred Retail Pharmacy";
 			Assert.assertTrue("PROBLEM - PDP user should not see '"+testWidget+"' widget", !validate(widget_walgreens));
 		}
@@ -607,12 +615,14 @@ public class PharmacySearchPage extends PharmacySearchWebElements {
 		}
 
 		if (hasWalgreensWidget) {	
+			testWidget="Walgreens – Preferred Retail Pharmacy";
 			Select select = new Select(PlanNameDropDown);           
 			List <WebElement> planList = select.getOptions();
 			for(int i =0; i<planList.size() ; i++){
 				String planName = planList.get(i).getText();
-				if (planName.toUpperCase().contains("WALGREENS")) {
-					Assert.assertTrue("PROBLEM - user has Walgreens plan, the 'Walgreens – Preferred Retail Pharmacy' widget should have been displayed", validate(widget_walgreens));
+				if (planName.contains("AARP MedicareRx Walgreens")) {
+					Assert.assertTrue("PROBLEM - user has Walgreens plan, the '"+testWidget+"' widget should have been displayed", validate(widget_walgreens));
+					Assert.assertTrue("PROBLEM - user with 'AARP MedicareRx Walgreens' should not see 'Preferred Retail Pharmacy Network' widget", !validate(widget_preferredRetailPharmacyNetwork));
 				}
 			}
 		}
