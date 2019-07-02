@@ -75,17 +75,18 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,	pharmacySearchPage);
 	}
 
-	/** Verify the pharmacies as per the filter criteria */
+	/** Verify the pharmacies as per the filter criteria 
+	 * @throws InterruptedException */
 	@Then("^the user validates the pharmacies available$")
-	public void validatesPharmaciesAvailable(DataTable inputAttributes) {
+	public void validatesPharmaciesAvailable(DataTable inputAttributes) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.searchesPharmacy(language);
-//KEEP		Assert.assertTrue("PROBLEM - Pharmacy Results Not Displayed",
-//KEEP				pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,pharmacySearchPage);
+		pharmacySearchPage.searchesPharmacy(language);
+	//tbd 	Assert.assertTrue("PROBLEM - Pharmacy Results Not Displayed",
+		//tbd 			pharmacySearchPage != null);
+		//tbd 	getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,pharmacySearchPage);
 	}
 
 	/** Choosing the different set of combination in Pharmacy filter */
@@ -97,9 +98,9 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		System.out.println("Filter Type to Select : "+pharmacyType);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.Select_PlanType_Filter(pharmacyType, language);
-		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page",
-				pharmacySearchPage != null);
+		pharmacySearchPage.Select_PlanType_Filter(pharmacyType, language);
+//tbd 		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page",
+		//tbd 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,	pharmacySearchPage);
 	}
 
@@ -150,9 +151,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 
 	/**
 	 * Verify Create a PDF in pharmacy search page
+	 * @throws InterruptedException 
 	 */
 	@Then("^the user validates view search PDF link$")
-	public void viewsSearchResultPdf() {
+	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResult();
@@ -167,9 +169,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void validateMoreInformationContent() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.validateMoreInfoContent();
-		Assert.assertTrue("PROBLEM - More Info Disclaimer is NOT Displayed",
-				pharmacySearchPage != null);
+		pharmacySearchPage.validateMoreInfoContent();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
 	}
@@ -233,20 +233,24 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	@And("^the user validates tooltips on filters$")
 	public void verifyTooltips(DataTable inputData) {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
-		String planType = inputDataMap.get("Plan Type");
+		String memberType = inputDataMap.get("Member Type");
 		String language = inputDataMap.get("Language");
+		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network").trim();
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network Widget' should be True or False. Actual='"+tmp+"'", 
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.validateAllTooltips(planType, language);
+		pharmacySearchPage.validateAllTooltips(memberType, language, hasPrefRetailPharmacy);
 	}
 	
 	@And("^the user validates header section content$")
 	public void verifyHeaderSection(DataTable inputData) {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
-		String planType = inputDataMap.get("Plan Type");
+		String memberType = inputDataMap.get("Member Type");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.validateHeaderSection(planType);
+		pharmacySearchPage.validateHeaderSection(memberType);
 	}
 
 	@And("^the user validates map section content$")
@@ -260,9 +264,26 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void verifyPharmacyWidgets(DataTable inputData) { 
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
 		String planType = inputDataMap.get("Plan Type");
+		String memberType = inputDataMap.get("Member Type");
+		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network").trim();
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network Widget' should be True or False. Actual='"+tmp+"'", 
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
+	
+		tmp=inputDataMap.get("Has Walgreens").trim();
+		Assert.assertTrue("PROBLEM - input 'Has Walgreens Widget' should be True or False. Actual='"+tmp+"'", 
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasWalgreens = Boolean.parseBoolean(tmp);
+
+		tmp=inputDataMap.get("Has Preferred Mail Service Pharmacy").trim();
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy Widget' should be True or False. Actual='"+tmp+"'", 
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
+		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.validatePharmacyWidgets(planType);
+		pharmacySearchPage.validatePharmacyWidgets(planType, memberType, 
+				hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ);
 	}
 	
 }
