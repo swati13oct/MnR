@@ -1,4 +1,4 @@
-@pharmacylocator @regressionMember @gladiators
+@pharmacylocator @regressionMember @gladiators @regressionMember_Testharness
 Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
 @pharmacylocator1 @PharmacyDistanceDefaultZip

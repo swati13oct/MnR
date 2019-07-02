@@ -68,7 +68,7 @@ Feature:P1.5 To test order materials in member site
   # note: for SSUP user is group only and the group has to be setup in GPS to accept online request for welcome kit
   # note: 
   #####################################################
-  @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember
+  @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -118,7 +118,7 @@ Feature:P1.5 To test order materials in member site
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
   # note: This test is applicable to test via rally login only, validation will be skipped if access through testharness
   # note:
-  @orderPlanMaterials02 @TerminatedMemberNegativeScenario @regressionMember
+  @orderPlanMaterials02 @TerminatedMemberNegativeScenario @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Terminated members cannot access Order Plan materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
