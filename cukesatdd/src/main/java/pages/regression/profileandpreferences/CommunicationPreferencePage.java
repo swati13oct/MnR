@@ -172,6 +172,9 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
 	private WebElement shipSuccMsg;
 	
+	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	private WebElement headingTxt;
+	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -400,6 +403,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 		System.out.println("scrolling down");
 		validateNew(backLink2);  //validating back link at the bottom
 		backLink2.click();
+		CommonUtility.waitForPageLoad(driver, headingTxt, 5);
 		if (driver.getCurrentUrl().contains("profile"))
 			return new ProfileandPreferencesPage(driver);
 		return null;

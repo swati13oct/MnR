@@ -64,7 +64,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   # TID: 15295 - TC07_AARP PDP_E2E Scenario_Pharmacy locator
   # TID: 15296 - TC08_Group MAPD_E2E Scenario_Pharmacy locator
   #-------------------------
-  @pharmacylocator1 @E2E @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember
+  @pharmacylocator1 @E2E @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator page on member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type     | <planType>     |
@@ -147,7 +147,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | xxxxx	| MAPD     | Peehip_Pharmacylocator  	 | 29148   | 15       | E-Prescribing               | False             | False        | False            |
 	  | xxxxx	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False             | True         | True            |
 
-  @pharmacylocator2 @NegativeScenario @regressionMember
+  @pharmacylocator2 @NegativeScenario @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify pharmacy link is not displayed to MA/SHIP member in member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |
