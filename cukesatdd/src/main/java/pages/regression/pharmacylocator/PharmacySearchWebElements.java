@@ -139,6 +139,18 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//div[@class='pharmacySearchResults section']")
 	protected WebElement map_resultSection;
 
+	@FindBy(xpath="//div[@id='standardNetworkText']//p")
+	protected WebElement map_legendStdNetTxt;
+
+	@FindBy(xpath="//img[@alt='Standard Network']")
+	protected WebElement map_legendStdNetImg;
+
+	@FindBy(xpath="//div[contains(@ng-if,'preferredNetwork')]")
+	protected WebElement map_legendPrefNetTxt;
+
+	@FindBy(xpath="//img[@alt='PreferredNetwork']")
+	protected WebElement map_legendPrefNetImg;
+
 	@FindBy(xpath="//div[contains(@class,'pharmacy-locator')]")
 	protected WebElement inputSection;
 
@@ -183,21 +195,30 @@ public class PharmacySearchWebElements extends UhcDriver{
 
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Retail Pharmacy Network')]/../../..//div[contains(@ng-show,'evaluateAEM_Segments') and not(contains(@class,'ng-hide'))]//a[contains(@href,'sso')]")
 	protected WebElement widget_prefRetPhaNet_estYurDrugCosts_grp;
-	
+
+	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens')]/../../..//div[contains(@ng-show,'evaluateAEM_Segments') and not(contains(@class,'ng-hide'))]//a[contains(@href,'member')]")
+	protected WebElement widget_walgreens_estYurDrugCosts_ind;
+
+	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens')]/../../..//div[contains(@ng-show,'evaluateAEM_Segments') and not(contains(@class,'ng-hide'))]//a[contains(@href,'sso')]")
+	protected WebElement widget_walgreens_estYurDrugCosts_grp;
+
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'/content/medicare/member/documents/mail-benefit-pdp.html')]")
+	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'mail-benefit-pdp.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_pdp;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'/content/medicare/member/documents/mail-benefit-mapd.html')]")
+	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Mail Service Pharmacy')]/../../..//p/a[contains(@href,'mail-benefit-mapd.html')]")
 	protected WebElement widget_prefMailServPhar_learnMore_mapd;
 
 	@FindBy(xpath="//a[contains(@ng-click,'backtoPrevious')]")
 	protected WebElement widget_learnMore_previousPage;
-	
+
 	@FindBy(xpath="//div[@id='noResultsFoundErrorMessage']")
 	protected WebElement noResultMsg;
+
+	@FindBy(xpath="//h2[@class='atdd-need-help']")
+	protected WebElement needHelpHeader;
 
 	public PharmacySearchWebElements(WebDriver driver) {
 		super(driver);
@@ -207,7 +228,7 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 	}
-	
+
 }
 
 

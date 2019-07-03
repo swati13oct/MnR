@@ -1553,14 +1553,16 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println("URL for testing: " + Page_URL);
 			driver.navigate().to(Page_URL);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("pharmacylocator");
 			} else {
 				waitForHomePage(helloPerson);
 				if (driver.getCurrentUrl().contains("/dashboard")) {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					CommonUtility.waitForPageLoad(driver, pharmacySearchLink, 5);
 					pharmacySearchLink.click();
+					System.out.println("Clicked pharmacy Search Link...");
 					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 					/* tbd try {
 						Thread.sleep(10000);
