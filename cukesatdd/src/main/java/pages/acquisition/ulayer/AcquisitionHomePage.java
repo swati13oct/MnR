@@ -318,27 +318,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if ("BLayer".equalsIgnoreCase(site)) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
-			} else if (MRScenario.environment.equals("prod")) {
+			}else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew
-																				// as
-																				// we're not trying to fail the test if
-																				// it
-																				// isn't found
-			try {
-				if (proactiveChatExitBtn.isDisplayed())
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
 					jsClickNew(proactiveChatExitBtn);
-			} catch (Exception e) {
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+		}
+		}
+		else
+		{
+			if (MRScenario.environment.equals("offline")) {
+				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			}
+			else if (MRScenario.environment.equals("prod")) {
+				start(AARP_ACQISITION_PROD_PAGE_URL);
+			}else {
+				start(AARP_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver);
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
 				System.out.println("Proactive chat popup not displayed");
 			}
-		} else {
-			Assert.fail("**********Please specify site as BLayer*********");
 		}
 	}
 	@SuppressWarnings("deprecation")
@@ -1269,4 +1285,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 	
-}
+	
+	}
