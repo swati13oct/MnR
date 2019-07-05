@@ -231,7 +231,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 	Examples: 
 	  | TID 	| planType | planName         		                                          | zipcode |   distance   | countyName |pharmacyType                | hasPrefRetailPhar | hasWalgreens | hasPrefdMailServ|planYear   |siteName|
-	 # | 15583	| PDP      | AARP MedicareRx Walgreens (PDP)                                | 85215   |      15      | None       | Open 24 hours               | False             | True         | True            | 2019     | Ulayer |
+	  | 15583	| PDP      | AARP MedicareRx Walgreens (PDP)                                | 85215   |      15      | None       | Open 24 hours               | False             | True         | True            | 2019     | Ulayer |
 	  | 15582	| PDP      | AARP MedicareRx Preferred (PDP)                                | 10980   |     15       | None       | E-Prescribing               | True              | False        | True            | 2019     | Blayer |
 	  | 15296	| MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | 80002   |     10       |Adams County| Long-term care              | False             | False        | True            | 2019     | Ulayer |
 	  | 15279	| Medica   | Medica HealthCare Plans MedicareMax (HMO)                      | 33321   |     10       |   None     | Home Infusion and Specialty | False             | False        | True            | 2019     | Blayer |
