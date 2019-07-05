@@ -457,6 +457,45 @@ public class oleStepDefinition {
 			Assert.fail();
 		}
 	}
+	@Then("^the user enters following required Medicare Informations$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_pages(DataTable planAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String CardType = MedicareDetailsMap.get("Card Type");
+		
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n)+"C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+			
+	
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
+		if (isInformationFilled) {
+
+			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
+			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Medicare Info data entry failed");
+	}
 	@Then("^the user enters following required Medicare Information$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -684,6 +723,41 @@ public class oleStepDefinition {
 		
 	}
 
+	
+	@Then("^the user validates requierd fields for Preliminary Questions Pages$")
+	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Pages(DataTable Flags) throws Throwable {
+
+
+		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+		
+			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			String plantype = PreliminaryFlagsMap.get("plan_type");
+
+			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
+			boolean Validation_Status = prelimineryQuestionsPage.validate_Required_Fields(PlanType, MedicaidNumber);
+			if(Validation_Status){
+				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "+Validation_Status);
+				Assert.fail();
+			}
+		
+	}
+	
+	
+	
+	
+	
 	@Then("^the user validates requierd fields for Preliminary Questions Page$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Page(DataTable Flags) throws Throwable {
 
