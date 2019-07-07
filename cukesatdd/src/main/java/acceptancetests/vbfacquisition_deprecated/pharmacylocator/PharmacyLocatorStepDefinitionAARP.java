@@ -18,8 +18,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PharmacyResultPage;
-import pages.acquisition.ulayer.PharmacySearchPage;
+import pages.acquisition.ulayer.Deprecated_PharmacyResultPage;
+import pages.acquisition.ulayer.Deprecated_PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -42,9 +42,8 @@ public class PharmacyLocatorStepDefinitionAARP {
 		return loginScenario;
 	}
 
-	/**
-	 * @toDo: user is on the AARP Medicare Site landing page
-	 */
+	/*tbd
+
 	@Given("^the user is on the AARP Medicare Site landing page$")
 	public void registered_member_located_pharmacy_aarp() {
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -58,74 +57,8 @@ public class PharmacyLocatorStepDefinitionAARP {
 					acqusitionHomePage);
 			Assert.assertTrue(true);
 		}
-		
-		
-		
-		
-		
-			
-
-	     /*   BufferedReader br = null;
-Date obj= new Date();
-		System.out.println("date==="+obj);
-	        try {
-
-	            URL url=null;
-	            String dateDCEServer=null;
-				try {
-					url = new URL("http://apsrt0197:9083/DCERestWAR/dcerest/timeAdmin");
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            try {
-					br = new BufferedReader(new InputStreamReader(url.openStream()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-	            String line;
-
-	            StringBuilder sb = new StringBuilder();
-
-	            try {
-					while ((line = br.readLine()) != null) {
-						
-						//System.out.println("date find===="+line);
-						
-						if(line.contains("systemTime")){
-						
-							dateDCEServer=line;
-							break;
-						}
-					    sb.append(line);
-					    sb.append(System.lineSeparator());
-					}
-					System.out.println("dateDCEServer=="+dateDCEServer);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-//	            System.out.println(sb);
-	        } finally {
-
-	            if (br != null) {
-	                try {
-						br.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	            }
-	        }*/
-		
-	}
+	} 
 	
-	/**
-	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
-	 */
 	@When("^the user hovers to Our Plans and select pharmacy search for following plan type in AARP Site$")
 	public void user_hovers_to_our_plans_and_select_request_more_help_and_information_aarp(){
 		
@@ -135,9 +68,6 @@ Date obj= new Date();
  		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,pharmacySearchPage);
 	}
 
-	/**
-	 * @toDo: user navigates to pharmacy search page
-	 */
 	@When("^the user navigates to pharmacy search page in AARP Site$")
 	public void user_views_pharmacy_locator_aarp(DataTable planAttributes) {
 		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
@@ -165,9 +95,6 @@ Date obj= new Date();
 
 	}
 
-	/**
-	 * @toDo:user enters following details for pharmacy search
-	 */
 	@And("^the user enters following details for pharmacy search in AARP Site$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable zipAttributes) {
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
@@ -193,9 +120,6 @@ Date obj= new Date();
 			pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
 		} 
 	
-	/**
-	 * @toDo:user selects a language from dropdown 
-	 */
 	@And("^the user selects a language from dropdown in AARP Site$")
 	public void user_selects_language_aarp(DataTable languageAttributes) {
 
@@ -212,9 +136,6 @@ Date obj= new Date();
 		pharmacySearchPage.selectLanguage(langName);
 	}
 	
-	/**
-	 * @toDo:user chooses a plan from dropdown
-	 */
 	@And("^the user chooses a plan from dropdown in AARP Site$")
 	public void user_chooses_plan_dropdown_aarp(DataTable planAttributes) {
 		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
@@ -239,9 +160,6 @@ Date obj= new Date();
 	}
 	
 	
-	/**
-	 * @toDo:user chooses a plan from dropdown
-	 */
 	@And("^the user chooses year from planyear in AARP Site$")
 	public void user_chooses_year_dropdown_aarp(DataTable planAttributes) {
 
@@ -254,19 +172,8 @@ Date obj= new Date();
 		System.out.println("plan===year"+year);
 		pharmacySearchPage.selectsPlanYear(year);
 
-		/*if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}*/
-
 	}
 	
-	/**
-	 * @toDo:user chooses the Pharmacy Type
-	 */
 	@Then("^the user chooses the Pharmacy Type$")
 	public void the_user_chooses_the_pharmacy_type(DataTable pharmacyTypeAttribute){
 		String PharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells().get(0);
@@ -280,9 +187,6 @@ Date obj= new Date();
 		}
 	}
 	
-	/**
-	 * @toDo:user chooses the Service Type
-	 */
 	@Then("^the user chooses the Service Type$")
 	public void the_user_chooses_the_service_type(DataTable serviceTypeAttribute){
 		
@@ -296,9 +200,6 @@ Date obj= new Date();
 		}
 	}
 	
-	/**
-	 * @toDo:user searches available pharmacies by selecting 
-	 */
 	@And("^the user searches available pharmacies by selecting \"Show pharmacies for ALL types\" in AARP site$")
 	public void user_selects_show_pharmacy_for_all_pharmacy_types_aarp() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -312,7 +213,6 @@ Date obj= new Date();
 					pharmacyResultPage);
 
 			
-			/* Get actual data */
 			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
@@ -323,9 +223,6 @@ Date obj= new Date();
 
 	}
 
-	/**
-	 * @toDo:user searches available pharmacies by selecting
-	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\" in AARP site$")
 	public void  user_searches_pharmacies_by_choosing_pharmacy_types_aarp(DataTable pharmacyTypeAttributes)
 	{
@@ -340,9 +237,6 @@ Date obj= new Date();
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
 					pharmacyResultPage);
 
-			
-
-			/* Get actual data */
 			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
@@ -354,9 +248,6 @@ Date obj= new Date();
 		
 	}
 	
-	/**
-	 * @toDo:user validates the error message for no pharmacies found for below pharmacy
-	 */
 	@Then("^the user validates the error message for no pharmacies found for below pharmacy in the AARP Site$")
 	public void validates_error_msg_for_no_pharmacies_found_aarp(DataTable pharmacyTypeAttributes){
 		String[] pharmacyTypeArray = pharmacyTypeAttributes.getGherkinRows().get(0).getCells().get(0).split(",");
@@ -366,9 +257,6 @@ Date obj= new Date();
 		pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
 	}
 	
-	/**
-	 * @toDo:user clicks on SearchAgain and navigates to pharmacies search page
-	 */
 	@Then("^the user clicks on SearchAgain and navigates to pharmacies search page in the AARP site$")
 	public void clicks_searchAgain_navigates_to_pharmaacies_search_page_aarp(){
 		PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
@@ -383,9 +271,6 @@ Date obj= new Date();
 		}
 	}
 	
-	/**
-	 * @toDo:user should see county popup
-	 */
 	@Then("^the user should see county popup in AARP site$")
 	public void user_should_see_county_popup_aarp() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -397,9 +282,6 @@ Date obj= new Date();
 		}
 	}
 	
-	/**
-	 * @toDo:user selects the county
-	 */
 	@When("^the user selects the county in AARP site$")
 	public void user_selects_county_aarp(DataTable countyAttributes){
 		String countyName = countyAttributes.getGherkinRows().get(0).getCells()
@@ -409,9 +291,6 @@ Date obj= new Date();
 		pharmacySearchPage.selectCounty(countyName);
 	}
 	
-	/**
-	 * @toDo:user should see choose a plan
-	 */
 	@Then("^the user should see choose a plan in AARP site$")
 	public void user_should_see_choose_plan_aarp(){
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -419,9 +298,6 @@ Date obj= new Date();
 		pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
 	}
 	
-	/**
-	 * @toDo:user validates the available pharmacies page
-	 */
 	@Then("^the user validates the available pharmacies page in AARP site$")
 	public void user_validates_available_pharmacies_aarp() {
 		
@@ -434,5 +310,5 @@ Date obj= new Date();
 		}
 		
 
-	}
+	} */
 	}

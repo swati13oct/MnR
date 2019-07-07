@@ -16,15 +16,19 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.ulayer.PharmacySearchPage;
+import pages.acquisition.ulayer.Deprecated_PharmacySearchPage;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
+ * NOTE: deprecating this one, use the ones in cukesatdd/src/main/java/pages/acquisition/pharmacyLocator/
+ */
+
+/**
  * @author pagarwa5
  */
-public class PharmacySearchPage extends UhcDriver {
+public class Deprecated_PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
@@ -398,7 +402,7 @@ public class PharmacySearchPage extends UhcDriver {
 	private WebElement callUnitedHealthCareText;
 
 	
-	public PharmacySearchPage(WebDriver driver) {
+	public Deprecated_PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -512,17 +516,17 @@ public class PharmacySearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 	}
 
-	public PharmacyResultPage searchesPharmacy() {
+	public Deprecated_PharmacyResultPage searchesPharmacy() {
 		searchPharmaciesButton.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 
-	public PharmacyResultPage showAllPharmacies() {
+	public Deprecated_PharmacyResultPage showAllPharmacies() {
 		allPharmacies.click();
 		searchPharmaciesButton.click();
 		for(int i=0;i<10;i++){
@@ -536,23 +540,23 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 
 
-	public PharmacySearchPage showParticularService() {
+	public Deprecated_PharmacySearchPage showParticularService() {
 		particularServices.click();
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 
-	public PharmacyResultPage clickOnContinue() {
+	public Deprecated_PharmacyResultPage clickOnContinue() {
 		btnContinue.click();
-		return new PharmacyResultPage(driver);
+		return new Deprecated_PharmacyResultPage(driver);
 	}
 
-	public PharmacyResultPage selectAPlan(String planName) {
+	public Deprecated_PharmacyResultPage selectAPlan(String planName) {
 		Select selectPlan = new Select(drpPlan);
 		selectPlan.selectByVisibleText(planName);
 		try {
@@ -560,7 +564,7 @@ public class PharmacySearchPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new PharmacyResultPage(driver);
+		return new Deprecated_PharmacyResultPage(driver);
 	}
 
 	public void selectAYear(String year) {
@@ -581,7 +585,7 @@ public class PharmacySearchPage extends UhcDriver {
 		selectState(state);
 	}
 
-	public PharmacyResultPage searchSelectingPharmacyTypes(String[] pharmacyTypeArray) {
+	public Deprecated_PharmacyResultPage searchSelectingPharmacyTypes(String[] pharmacyTypeArray) {
 		pharmacyTypeSelectionRadioButton.click();
 		for (String pharmacyType : pharmacyTypeArray) {
 			for (WebElement checkBox : pharmacyTypesCheckboxes) {
@@ -605,35 +609,35 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 
-	public PharmacyResultPage ValidateShowOnMapResult() {
+	public Deprecated_PharmacyResultPage ValidateShowOnMapResult() {
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		((WebElement) showonmap).click();
 		if (driver.getTitle().equalsIgnoreCase(
 				PageTitleConstants.ULAYER_MEMBER_CLAIMS)) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 	
-	public PharmacyResultPage ValidateSearchPdfResult() {
+	public Deprecated_PharmacyResultPage ValidateSearchPdfResult() {
 		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		if (viewsearchpdf.isDisplayed()) {
 			viewsearchpdf.click();
 		}
 		if (driver.getTitle().equalsIgnoreCase("pharmacyDirectory.pdf")) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 	
 	/** Verify PDF results 
 	 * @throws InterruptedException */
-	public PharmacySearchPage ValidateSearchPdfResults() throws InterruptedException{
+	public Deprecated_PharmacySearchPage ValidateSearchPdfResults() throws InterruptedException{
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 10);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", validate(viewsearchpdf));
@@ -652,11 +656,11 @@ public class PharmacySearchPage extends UhcDriver {
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getTitle().contains("Locate a Pharmacy")) 
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		return null;
 	}
 
-	public PharmacySearchPage ValidateSearchResultMapd() {
+	public Deprecated_PharmacySearchPage ValidateSearchResultMapd() {
 		driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/medicare-enrollment.html");
 		return null;
 	}
@@ -983,7 +987,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 	/** Enter Zip code and distance */
-	public PharmacySearchPage enterDistanceZipCountyDetails(String distance, String zipcode, String county) {
+	public Deprecated_PharmacySearchPage enterDistanceZipCountyDetails(String distance, String zipcode, String county) {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.waitForPageLoad(driver, zipcodeField, 60);
@@ -1014,11 +1018,11 @@ public class PharmacySearchPage extends UhcDriver {
 			}
 		}
 		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		return null;
 	}
 	/** Verify error messages in pharmacy page */
-	public PharmacySearchPage verifyPharmacyErrormessages(String inputZip) {
+	public Deprecated_PharmacySearchPage verifyPharmacyErrormessages(String inputZip) {
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
@@ -1047,7 +1051,7 @@ public class PharmacySearchPage extends UhcDriver {
 						exp_noPlanForZipErrTxt.equals(act_noPlanForZipErrTxt));
 			} //note: may need to code for a case when zip result in no result but don't know of a zip that has that behavior yet
 		}
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 	
 	public void searchesPharmacy(String language, String planName) throws InterruptedException {
@@ -1176,7 +1180,7 @@ public class PharmacySearchPage extends UhcDriver {
 }
 	
 	/** Validate show on map link appearance for search results */
-	public PharmacySearchPage validateShowOnMapLinks() {
+	public Deprecated_PharmacySearchPage validateShowOnMapLinks() {
 		CommonUtility.checkPageIsReady(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
@@ -1186,7 +1190,7 @@ public class PharmacySearchPage extends UhcDriver {
 		System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
 		if(showonmapCount==PharmacyCount){
 			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		}
 		return null;
 	}
@@ -1202,35 +1206,35 @@ public class PharmacySearchPage extends UhcDriver {
 	}
 
 	/** Verify page load in chinese language */
-	public PharmacySearchPage clickChinese() {
+	public Deprecated_PharmacySearchPage clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
 		chineseLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");   
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 
 	/** Verify page load in spanish language */
-	public PharmacySearchPage selectspanLanguage() {
+	public Deprecated_PharmacySearchPage selectspanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
 		SpanishLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Spanish language selected"); 
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 
 	/** Verify in multi language selection */
-	public PharmacySearchPage multilangPharmacySearchResult() {
+	public Deprecated_PharmacySearchPage multilangPharmacySearchResult() {
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Filter text is :*******"+filterLink.getText());
 		if (filterLink.getText().contains("FILTRAR")){
 			System.out.println("Spanish Language Filter displayed");
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		} else if(!filterLink.getText().contains("Filter")){
 			System.out.println("Chinese Language Filter displayed");
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		}
 		return null;
 	}
@@ -1329,7 +1333,7 @@ public class PharmacySearchPage extends UhcDriver {
 			
 			@FindBy(xpath="//a[@dtmname='pharmacy locator:get directions']")
 			private List<WebElement> getDirectionLnk;
-			public PharmacySearchPage validateGetDirectionLinks() {
+			public Deprecated_PharmacySearchPage validateGetDirectionLinks() {
 				CommonUtility.checkPageIsReady(driver);
 				int getDirectionCount = getDirectionLnk.size();
 				int PharmacyCount = PharmacyResultList.size();
@@ -1337,7 +1341,7 @@ public class PharmacySearchPage extends UhcDriver {
 				System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
 				if(getDirectionCount==PharmacyCount){
 					System.out.println("Get Direction Links are Displayed for all Displayed Pharmacy Results");
-					return new PharmacySearchPage(driver);
+					return new Deprecated_PharmacySearchPage(driver);
 				}
 				return null;
 			}	

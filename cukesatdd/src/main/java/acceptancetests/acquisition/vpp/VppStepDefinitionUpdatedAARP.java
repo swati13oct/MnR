@@ -26,7 +26,7 @@ import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.MultiCountyModalPage;
-import pages.acquisition.ulayer.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;

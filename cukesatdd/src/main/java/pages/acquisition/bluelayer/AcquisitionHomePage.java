@@ -30,6 +30,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
@@ -514,7 +515,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		validate(GlobalWebElements.hideDiscliamerInformation);
 		GlobalWebElements.hideDiscliamerInformation.click();
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
@@ -727,7 +728,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareAdvantagePlansLink);
 		headerMedicareAdvantagePlansLink.click();
 		validate(headerMedicareAdvantagePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcareï¿½")) {
 			return new MedicareAdvantagePlansuhcPage(driver);
 		}
 		return null;
@@ -771,7 +772,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareSpecialNeedPlansLink);
 		headerMedicareSpecialNeedPlansLink.click();
 		validate(headerMedicareSpecialNeedPlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcareï¿½")) {
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
 		return null;

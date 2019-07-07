@@ -26,6 +26,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
@@ -471,7 +472,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(hideDiscliamerInformation);
 		hideDiscliamerInformation.click();
 
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
@@ -525,7 +526,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(navigationSectionHomeLink);
 		navigationSectionHomeLink.click();
 		validateNew(navigationSectionHomeLink);
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 
@@ -605,7 +606,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(FindPlansButton1);
 		FindPlansButton1.click();
 		validateNew(FindPlansButton1);
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 
@@ -1027,7 +1028,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage navigateToPrescriptionDrug() {
 		enterYourDrugListButton.click();
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new GetStartedPage(driver);
 		} else {
 			return null;

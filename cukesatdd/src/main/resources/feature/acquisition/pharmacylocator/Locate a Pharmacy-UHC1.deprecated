@@ -2,6 +2,8 @@
 @pharmacylocatorblayer
 Feature:1.18-VBF-Acq-To test Locate a Pharmacy in acqusition flow UMS site
 
+#NOTE: deprecating this one, use the one in /cukesatdd/src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-AARP.feature
+
   @PharmacyLocatorBlayerSmoke @pharmacyLocatorPerformanceBlayer
   Scenario Outline:To verify available pharmacies in UMS site
     Given the user is on the uhcmedicaresolutions site landing page

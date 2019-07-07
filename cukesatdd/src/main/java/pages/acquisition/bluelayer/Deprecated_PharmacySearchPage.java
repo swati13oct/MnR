@@ -20,9 +20,13 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
+ * NOTE: deprecating this one, use the ones in cukesatdd/src/main/java/pages/acquisition/pharmacyLocator/
+ */
+
+/**
  * @author pagarwa5
  */
-public class PharmacySearchPage extends UhcDriver {
+public class Deprecated_PharmacySearchPage extends UhcDriver {
 
 	@FindBy(id = "zipcodeTxt")
 	private WebElement zipcodeField;
@@ -194,7 +198,7 @@ public class PharmacySearchPage extends UhcDriver {
 	@FindBy(id = "multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
 
-	public PharmacySearchPage(WebDriver driver) {
+	public Deprecated_PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -265,17 +269,17 @@ public class PharmacySearchPage extends UhcDriver {
 		selectFromDropDownByText(driver, drpYear, planYear);
 	}
 
-	public PharmacyResultPage searchesPharmacy() {
+	public Deprecated_PharmacyResultPage searchesPharmacy() {
 		searchPharmaciesButton.click();
 		CommonUtility.checkPageIsReady(driver);
 		if (pharmacyResultHeader.getText().equalsIgnoreCase(
 				"Pharmacies Available in Your Area")) {
-			return new PharmacyResultPage(driver);
+			return new Deprecated_PharmacyResultPage(driver);
 		}
 		return null;
 	}
 
-	public PharmacyResultPage showAllPharmacies() {
+	public Deprecated_PharmacyResultPage showAllPharmacies() {
 		//tbd-remove allPharmacies.click();
 		//tbd-remove searchPharmaciesButton.click();
 		for(int i=0;i<10;i++) {
@@ -285,7 +289,7 @@ public class PharmacySearchPage extends UhcDriver {
 				e.printStackTrace();
 			}
 			if(pharmacyResultHeader.isDisplayed()) {
-				return new PharmacyResultPage(driver);
+				return new Deprecated_PharmacyResultPage(driver);
 			}
 			//tbd-remove break;			
 		}
@@ -296,9 +300,9 @@ public class PharmacySearchPage extends UhcDriver {
 		return null;
 	}
 
-	public PharmacySearchPage showParticularService() {
+	public Deprecated_PharmacySearchPage showParticularService() {
 		particularServices.click();
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 
 	public boolean selectPharmacyandServices(String pharmacytype) {
@@ -337,7 +341,7 @@ public class PharmacySearchPage extends UhcDriver {
 
 
 
-	public PharmacyResultPage searchSelectingPharmacyTypes(
+	public Deprecated_PharmacyResultPage searchSelectingPharmacyTypes(
 			String[] pharmacyTypeArray) {
 		/* tbd-remove - clean up*/
 		//pharmacyTypeSelectionRadioButton.click();
@@ -366,7 +370,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}*/
 		//if(pharmacyResultHeader.isDisplayed())
 		//{
-		return new PharmacyResultPage(driver);
+		return new Deprecated_PharmacyResultPage(driver);
 		//}
 		//return null;
 	}
@@ -399,7 +403,7 @@ public class PharmacySearchPage extends UhcDriver {
 		}
 	}
 
-	public PharmacySearchPage searchPharmacies(String pharmacyType, String distance) {
+	public Deprecated_PharmacySearchPage searchPharmacies(String pharmacyType, String distance) {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -423,7 +427,7 @@ public class PharmacySearchPage extends UhcDriver {
 				distanceOption.click();
 			}
 		}
-		return new PharmacySearchPage(driver);
+		return new Deprecated_PharmacySearchPage(driver);
 	}
 
 	public void validateDefaultChooseaPlanSection(String planName){

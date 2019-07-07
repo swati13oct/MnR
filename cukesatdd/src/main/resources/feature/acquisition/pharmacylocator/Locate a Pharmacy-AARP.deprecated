@@ -1,6 +1,7 @@
 @fixedTestCaseTest @pharmacylocatorulayer
 Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
+#NOTE: deprecating this one, use the one in /cukesatdd/src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-AARP.feature
   #-------------------------
   # note: Acq ALM Pharmacy Locator Test cases located in OP regression
   # TID	: 15582 - TC_001_Locate a pharmacy_header nav PDP

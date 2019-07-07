@@ -6,6 +6,7 @@ package acceptancetests.acquisition.pharmacylocator;
  */
 public class PharmacySearchCommonConstants {
 
+	public static final String PHARMACY_LOCATOR_PAGE = "pharmacyLocatorPage";
 	public static final String PHARMACY_SEARCH = "pharmacysearch";
 	public static final String PHARMACY_RESULT_ACTUAL = "pharmcayResultActualJson";
 	public static final String PHARMACY_RESULT_EXPECTED = "pharmcayResultExpectedJson";
@@ -18,4 +19,6 @@ public class PharmacySearchCommonConstants {
 	public static final String PLAN_TYPE="plantype";
 	public static final String LANGUAGE="language";
 
+	
+	public static final String FIND_A_PHARMACY_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE ="findPharmacyMedicarePlans";
 }

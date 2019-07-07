@@ -1,6 +1,8 @@
 @pharmacylocatorUHC
 Feature:1.19-To test Locate a Pharmacy in acqusition flow UMS site TEST1
 
+#NOTE: deprecating this one, use the one in /cukesatdd/src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-AARP.feature
+
   @pharmacySearch
   Scenario Outline:To verify available pharmacies in UMS site
     Given the user is on the UMS Medicare Site landing page
