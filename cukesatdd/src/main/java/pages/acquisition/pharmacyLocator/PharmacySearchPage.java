@@ -101,7 +101,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		targetTooltipName="E-Prescribing";
 		testXpath="//input[@id='ePrescribing']/../span";
 		expTxt1="E-Prescribing";
-		expTxt2="Some of our network pharmacies use electronic prescribing, or e-prescribing. The pharmacy receives your prescriptions electronically, directly from your doctor. Your prescription may be sent before you even leave your doctor’s office.";
+		expTxt2="Some of our network pharmacies use electronic prescribing, or e-prescribing. The pharmacy receives your prescriptions electronically, directly from your doctor. Your prescription may be sent before you even leave your doctor's office.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 
 		targetTooltipName="Open 24 hours";
@@ -158,9 +158,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "\nExpected='"+expTxt1+"'"
 					+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 			if (targetTooltipName.equalsIgnoreCase("E-Prescribing")) { //note: jenkins run didn't like the ' in the text
-				String[] tmp=expTxt2.split("'");
+				String[] tmp=expTxt2.split("\'");
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "\nExpected='"+expTxt2+"'"
+						+ "\nExpected to contain '"+expTxt2+"'"
 						+ "\nActual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
 			} else {
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
