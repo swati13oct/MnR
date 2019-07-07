@@ -67,7 +67,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # TID : 15585 - TC_004_Locate a pharmacy_VPP_ PDP
   #-------------------------
   @pharmacylocatorulayer01 @shopPlan @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -plan: <planType>  - To verify end-to-end behavior for pharmacy locator page on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name 	  |	<siteName>     |   
     #------ English -----------------------------------

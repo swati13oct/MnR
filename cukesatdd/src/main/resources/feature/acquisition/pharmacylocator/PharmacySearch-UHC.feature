@@ -67,7 +67,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # TID : 15589 - TC_004_Locate a pharmacy_VPP_ PDP
   #-------------------------
   @pharmacylocatorblayer01 @shopPlan @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -plan: <planType>  - To verify end-to-end behavior for pharmacy locator page on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name 	  |	<siteName>     |   
     #------ English -----------------------------------
@@ -207,7 +207,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 
   @pharmacylocatorblayer02 @onlinePharmacyDir @regression
-  Scenario Outline: UserStory: <UID> - plan type: <plantype> - Verify Ambulatory Surgical Centre Benefit on Plan Details Page for the provided plan on UHC
+  Scenario Outline: TID: <TID> -plan: <planType> - To verify navigation to pharmacy search page from VPP page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -225,4 +225,4 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | TID 	| planType | zipcode | isMultutiCounty | county           | 
 	  | 15584	| MA       | 80002   | Yes             | Adams County     | 
 	  | 15585	| PDP      | 80001   | No              | Jefferson County | 
-	  | xxxxx	| SNP      | 80001   | 10        | No              | Jefferson County | 
+	  | xxxxx	| SNP      | 80001   | No              | Jefferson County | 
