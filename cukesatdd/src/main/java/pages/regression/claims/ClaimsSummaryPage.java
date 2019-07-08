@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import pages.regression.explanationofbenefits.EOBPage;
 
 /**
  * Functionality : validations for claims summary page
@@ -419,5 +420,14 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			System.out.println("Main window = "+driver.getTitle());	
 			return true;
 		}
+	}
+	
+	public EOBPage navigateToEOBPage(){
+		medicalEob_MAPD.click();
+		
+		if(validateNew(eobPageHeader))
+			return new EOBPage(driver);
+		return null;
+		
 	}
 }

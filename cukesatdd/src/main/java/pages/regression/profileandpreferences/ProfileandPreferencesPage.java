@@ -1667,8 +1667,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath="//h1[contains(@class,'atdd-section-heading') and contains(text(),'Communication Preferences')]")
+	@FindBy(xpath="//h1[contains(text(),'Communication Preferences')]")
 	private WebElement prefPgHeader;
+
+	
 	public CommunicationPreferencePage navigateToCommunicationPreferencePage() {
 		if (editPreferencesLink.isDisplayed())
 			editPreferencesLink.click();
@@ -2393,6 +2395,15 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 		validateNew(hsidAccountLink);
 		validateNew(hsidPasswordLink);
+		
+	}
+
+	public void validateProfilePage() {
+		
+		validateNew(EPMPContactInfoHeader);
+		validateNew(EPMPEmailAddress);
+		validateNew(EPMPPhoneNumbersSection);
+		validatePlanNameMemberidNameAccountProfile();
 		
 	}
 }
