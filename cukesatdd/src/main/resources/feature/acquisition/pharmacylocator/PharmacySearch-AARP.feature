@@ -65,6 +65,10 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # TID	: 15583 - TC_002_Locate a pharmacy_header nav MAPD
   # TID	: 15584 - TC_003_Locate a pharmacy_VPP_ MAPD
   # TID : 15585 - TC_004_Locate a pharmacy_VPP_ PDP
+  #
+  # Current offline known issues that are being bypassed in test right now:
+  # 1) multi-county popup will only show up for the very first time, subsequence zipcode search will not trigger multi-county popup to show again - pending open ticket
+  # 2) Walgreen widget is not showing for Chinese and Spanish page - pending open ticket
   #-------------------------
   @pharmacylocatorulayer01 @shopPlan @pharmacylocatorAcquisitionE2E @regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
