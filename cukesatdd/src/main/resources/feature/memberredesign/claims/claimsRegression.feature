@@ -36,7 +36,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
      # | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
       | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
       | ULayerInd  | MAPD     | Last 24 months | NICECLAIMS   |
-      | ULayerInd  | PDP      | Last 24 months | RxCLAIMS     |
+    #  | ULayerInd  | PDP      | Last 24 months | RxCLAIMS     |
     #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
     #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
     #  | BlueLayerInd | MAPD     | Last 24 months | NICECLAIMS   |
