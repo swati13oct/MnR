@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionNewBlayerOLEVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionNewBlayerOLEVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionNewBlayerOLEVBF.json" }, tags = { "@oleVppBlayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionNewBlayerOLEVBF.json" }, tags = { "@oleVppBlayerSmoke_VBF" })
 public class RunMRATDDAcquisitionNewBlayerOLEVBF {
 
 }
