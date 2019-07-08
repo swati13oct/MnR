@@ -77,11 +77,10 @@ public class SavingsOppurtunity extends UhcDriver{
 	 *  Clicks on save drug button 
 	 */
 	public void savedrugbutton() throws InterruptedException {
-//		Thread.sleep(10000);
-//		waitforElement(savedrugbutton);
-		CommonUtility.waitForPageLoad(driver, savedrugbutton, 20);
+
+		CommonUtility.waitForPageLoadNew(driver, savedrugbutton, 20);
 		savedrugbutton.click();
-//		Thread.sleep(15000);
+
 		// TODO Auto-generated method stub
 		
 	}

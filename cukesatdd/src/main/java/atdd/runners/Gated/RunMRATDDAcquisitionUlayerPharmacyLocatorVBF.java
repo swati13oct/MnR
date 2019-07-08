@@ -11,9 +11,9 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionUlayerPharmacyLocatorVBF
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionUlayerPharmacyLocatorVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionUlayerPharmacyLocatorVBF")
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionUlayerPharmacyLocatorVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionUlayerPharmacyLocatorVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionUlayerPharmacyLocatorVBF.json" }, tags = { "@pharmacyLocatorUlayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionUlayerPharmacyLocatorVBF.json" }, tags = { "@vbfGate" })
 public class RunMRATDDAcquisitionUlayerPharmacyLocatorVBF {
 
 }

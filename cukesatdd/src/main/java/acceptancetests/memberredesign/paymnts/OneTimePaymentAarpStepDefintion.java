@@ -28,7 +28,7 @@ import pages.member_deprecated.ulayer.RallyDashboard;
 import pages.member_deprecated.ulayer.ReviewOneTimePaymentsPage;
 import pages.member_deprecated.ulayer.TeamCLoginUlayerPayments;
 import pages.member_deprecated.ulayer.TeamHLoginUlayer;
-import pages.member_deprecated.ulayer.TestHarness;
+import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
@@ -934,11 +934,11 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 
 	@And("^the user navigates to PaymentOverview Page$")
-	public void user_navigates_to_PaymentOverview_Page() {
+	public void user_navigates_to_PaymentOverview_Page() throws InterruptedException {
 		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-		PaymentsOverview paymentsOverview = testHarness.navigateToPaymentOverview();
-		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
+		PaymentHistoryPage paymentsHistoryPage = testHarness.navigateToPaymentOverview();
+		if (paymentsHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE, paymentsHistoryPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");
@@ -987,9 +987,9 @@ public class OneTimePaymentAarpStepDefintion {
 	@And("^the user navigates to TeamCPaymentOverview Page$")
 	public void user_navigates_to_TeamCPaymentOverview_Page() {
 		TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-		PaymentsOverview paymentsOverview = testHarness.navigateToTeamCPaymentOverview();
-		if (paymentsOverview != null) {
-			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_OVERVIEW, paymentsOverview);
+		PaymentHistoryPage paymentHistoryPage = testHarness.navigateToTeamCPaymentOverview();
+		if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE, paymentHistoryPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Payment Overview page not found");

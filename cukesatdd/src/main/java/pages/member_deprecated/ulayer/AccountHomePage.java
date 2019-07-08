@@ -20,7 +20,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.member_deprecated.redesign.ContactUsPage;
-import pages.regression.claims.ClaimSummarypage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
@@ -951,7 +951,7 @@ driver.switchTo().window(mainwindow);
 		return flag;
 	}
 	
-public pages.regression.claims.ClaimSummarypage navigateToClaimsSummaryPage() {
+public pages.regression.claims.ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h") || MRScenario.environmentMedicare.equalsIgnoreCase("test-a") || (MRScenario.environmentMedicare.equalsIgnoreCase("team-t") || MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "+driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
@@ -982,8 +982,8 @@ public pages.regression.claims.ClaimSummarypage navigateToClaimsSummaryPage() {
 		if (driver.getTitle().equalsIgnoreCase("Claims")) {
 			try {
 				Thread.sleep(10000);
-				ClaimSummarypage comboTab = new ClaimSummarypage(driver).comboTabSelection();
-                comboTab.comboTabSelection();
+				ClaimsSummaryPage comboTab = new ClaimsSummaryPage(driver).validateComboTabSelection();
+                comboTab.validateComboTabSelection();
                 
 			} catch (InterruptedException e) {
 				
@@ -991,7 +991,7 @@ public pages.regression.claims.ClaimSummarypage navigateToClaimsSummaryPage() {
 			}	
 
 }
-		return new ClaimSummarypage(driver);
+		return new ClaimsSummaryPage(driver);
 }
 
 public pages.regression.claims.ClaimDetailsPage navigateToClaimDetailsPage() {
