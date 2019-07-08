@@ -88,16 +88,14 @@ public class MemberAuthPage extends UhcDriver {
         * @todo : Login to app
        */
        public MemberAuthPage navigateToLoginURL(){
+    	   if(MRScenario.environment.equalsIgnoreCase("prod"))
+    		   MEMBER_AUTH =  MRConstants.ONLINE_PROD_MEMBER_AUTH;
+    	   
               start(MEMBER_AUTH);
               System.out.println("Member Auth URL - "+MEMBER_AUTH);
               //driver.get("https://www.team-c-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin");
               CommonUtility.waitForPageLoad(driver, username, 60);
-              try {
-                     Thread.sleep(10000);
-              } catch (InterruptedException e) {
-                     // TODO Auto-generated catch block
-                     e.printStackTrace();
-              }
+           
               
               if(driver.getTitle().equals("memberauth")){
                      return new MemberAuthPage(driver);
@@ -244,10 +242,10 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
               Thread.sleep(2000);
               MemberPopUpLogin.click();  
               System.out.println("popup login button clicked");
-              Thread.sleep(20000);
+         
               switchToNewTab();
               System.out.println("Switched to new tab");
-              if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")){
+              if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")){
             	  waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
             		  System.out.println("CSR Dashboard Page is displayed for the Member");      

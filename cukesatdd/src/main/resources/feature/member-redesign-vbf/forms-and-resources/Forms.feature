@@ -35,8 +35,8 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
     Then validate that the renew magazine section is displayed
 
     Examples: 
-      | memberType  | friendname | favcolor | phonenumber | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | unitedhealthpassportprogram   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |
-      | AARPMapdInd | name1      | color1   | number1     | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
+      | memberType     | friendname | favcolor | phonenumber | benefithighlight   | summaryofbenefits   | evidenceofcoverage   | unitedhealthpassportprogram   | comprehensiveformulary  | priorauth           | steptherapy  | formularyadd        | formularydel        |
+      | IndAARPANOCFnR | name1      | color1   | number1     | Benefit Highlights | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions |
 
   #q1_aarp_apr194/Password@1
   
@@ -60,4 +60,4 @@ Feature: 1.16-VBF-MemRedesign-To test FnR functionality
 
     Examples: 
       | memberType                 | friendname | favcolor | phonenumber | documenttype | viewdocumentsfrom |
-      | MyDocumentMapdInd          | name1      | color1   | number1     | All          | Last 24 Months    |
+      | MyDocumentMapdInd          | name1      | color1   | number1     | All          | 24-months         |

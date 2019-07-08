@@ -725,9 +725,9 @@ public class AccountHomePage extends UhcDriver {
 
 		} else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
 				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")
-				|| MRScenario.environment.equals("stage")) {
+				|| MRScenario.environment.equalsIgnoreCase("prod") ) {
 
-			driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
+			driver.navigate().to(driver.getCurrentUrl() + "/medicare/member/account/profile.html");
 
 			System.out.println("title is " + driver.getTitle());
 			System.out.println("Current Url is " + driver.getCurrentUrl());
