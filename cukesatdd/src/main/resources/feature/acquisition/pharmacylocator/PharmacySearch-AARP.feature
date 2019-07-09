@@ -70,7 +70,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
   @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name 	  |	<siteName>     |   
     #------ English -----------------------------------
@@ -127,7 +127,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 
   @pharmacylocatorulayer02 @shopPlan @Spanish @Chinese @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese and Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name 	  |	<siteName>     |   
     #------ Chinese -----------------------------------
@@ -176,16 +176,6 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	When the user selects Spanish Language
 	And the user validates header section content
 	And the user validates default zip is not null
-	When the user enters following details for pharmacy search
-	  | Zip Code 	  |	               |
-	  | Distance 	  |	<distance>     |
-	Then the user verify error messages in pharmacy locator page
-	  | Language      | Spanish        |
-	When the user enters following details for pharmacy search
-	  | Zip Code 	  |	9999           |
-	  | Distance 	  |	<distance>     |
-	Then the user verify error messages in pharmacy locator page
-	  | Language      | Spanish        |
 	And the user enters following details for pharmacy search
 	  | Zip Code 	  | <zipcode>      |
 	  | Distance 	  | <distance>     |
@@ -214,6 +204,16 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | Language      | Spanish        |
 	Then the user validates error message displayed when filter results in no match
 	Then the user validates the question widget
+	When the user enters following details for pharmacy search
+	  | Zip Code 	  |	               |
+	  | Distance 	  |	<distance>     |
+	Then the user verify error messages in pharmacy locator page
+	  | Language      | Spanish        |
+	When the user enters following details for pharmacy search
+	  | Zip Code 	  |	9999           |
+	  | Distance 	  |	<distance>     |
+	Then the user verify error messages in pharmacy locator page
+	  | Language      | Spanish        |
 
 	Examples: 
 	  | TID 	| planName         		                                         | zipcode | distance  | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan| planYear | siteName |

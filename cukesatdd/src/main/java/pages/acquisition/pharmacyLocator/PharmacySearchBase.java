@@ -47,7 +47,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
 						!validate(countyModal));
 			} else {
-				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode)) {
+				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
 							validate(countyModal));
@@ -324,12 +324,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			Assert.assertTrue("PROBLEM - test zip expects multi-county but multi-county selection popup is NOT showing when switching to pharmacy locator page", 
 					validate(countyModal));
-
-	//tbd		if (validate(countyModal)) {
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
-				//tbd		}
 		}
 		String expectedURL="Pharmacy-Search-English";
 		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '"+expectedURL
