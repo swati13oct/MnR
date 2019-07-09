@@ -18,6 +18,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.sun.xml.internal.txw2.output.TXWResult;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -165,13 +167,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
+	
+	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
+	public WebElement btnGO;
 
 	/*
 	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
 	 */
 
 	@FindBy(id = "zipcode")
-	private WebElement zipCodeF;
+	private WebElement zipCode;
 
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
@@ -233,6 +238,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
+    
+    
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -281,6 +288,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, int visitorProfile) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(visitorProfile);
 	}
 	
 	public AcquisitionHomePage(WebDriver driver, String site) {
@@ -349,6 +362,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+		}
+	}
+	
+	public void openAndValidate(int visitorProfile) {
+		if (visitorProfile>0) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);
@@ -778,6 +811,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public VPPPlanSummaryPage addPlansForVisitorProfile(String zipcode) {
+		
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+		sendkeys(zipCode, zipcode);
+
+		btnGO.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
@@ -1267,6 +1313,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+	
+	public VPPPlanSummaryPage findPlans(String txtZipCode){
+		
+		zipCode.sendKeys(txtZipCode);
+		
+		
+		return new VPPPlanSummaryPage(driver);
 	}
 	
 }
