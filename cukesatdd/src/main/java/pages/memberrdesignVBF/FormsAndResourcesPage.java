@@ -365,7 +365,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	
 	public FormsAndResourcesPage selectDateRange(String documentTypeData, String planTypeData){
 		selectFromDropDownByText(driver,documentType,documentTypeData);
-		selectFromDropDownByText(driver,planType,planTypeData);	
+		selectFromDropDownByValue(planType,planTypeData);	
 		waitforElementVisibilityInTime(validateTable,60);
 		if(validateTable.isDisplayed())	{			
 			validateNew(validateViewDownload);

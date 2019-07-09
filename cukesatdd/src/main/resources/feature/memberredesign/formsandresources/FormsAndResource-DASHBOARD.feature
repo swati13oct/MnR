@@ -60,7 +60,6 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       |Rider|<rider>|
       |MemberType|<memberType>|
       |identifier|<Identifier>|
-=======
 
   # Regression Runner devided into 2 runs with 2 runner, One runner with @Regression Member, next one with @Part2of2Regression, it devided the scenarios 17 each
   @formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember

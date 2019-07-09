@@ -1,4 +1,4 @@
-@pharmacylocator @regressionMember @gladiators
+@pharmacylocator @regressionMember @gladiators @regressionMember_Testharness
 Feature: P1.6To test Locate a Pharmacy tool in Redesign site
 
 @pharmacylocator1 @PharmacyDistanceDefaultZip
@@ -87,3 +87,20 @@ Examples:
   | 15272 | MA        | IndAARPMA_Pharmacylocator		|
   | 15272 | SHIP      | IndSHIP_Pharmacylocator     |
   | 15272 | MA        | IndUHCMA_Pharmacylocator 		|
+  
+@vbfGate
+Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
+Given login with following details logins in the member portal and validate elements
+	| Plan Type  	  	 | 			<planType>   						|
+	| Member Type 	   | 			<memberType> 	    			|
+When the user navigates to pharmacy search page in Redesign site
+And the user enters distance details in Redesign site
+	| Distance 	  	   | 		    <distance> 						|
+And the user selects Pharmacy Types to Filter in Redesign Site
+	| Pharmacy Type    | 			<pharmacyType>   				|
+Then the user validates the pharmacies available in Redesign site
+And the user Validates show on map link in Redesign Site
+And the user validate more information content based on plan type in Redesign Site
+Examples: 
+	| planType | memberType  | distance | pharmacyType                |
+    | MAPD     | UhcMapdInd	 |       25 | Open 24 hours               |

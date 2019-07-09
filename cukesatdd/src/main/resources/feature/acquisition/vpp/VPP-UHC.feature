@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
 Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
-  @planDetailsUMS @vppBlayerSmoke
+  @planDetailsUMS @vppBlayerSmoke @vbfGate
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -88,8 +88,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @emailandprintplancompareuhc @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline: Verify email plan compare plan details in UHC site
+   @emailandprintplancompare @predatorsdecrelease2018 @RegressionPredators
+  Scenario Outline:TID: <TID>- Verify email plan compare plan details in UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
       | Zip Code | <zipcode> |
@@ -100,11 +100,11 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Then the user clicks on back to all plans link and validates all three plans are selected
 
     Examples: 
-      | zipcode |
-      |   90210 |
+    |  TID   | zipcode |
+    | 15519  |   90210 |
 
-  @emailAndPrintPlanDetailsuhc @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
+   @emailandprintplanDetails @predatorsdecrelease2018 @RegressionPredators
+  Scenario Outline:TID: <TID>- TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
       | Zip Code | <zipcode> |
@@ -116,8 +116,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
 
     Examples: 
-      | zipcode | planName                                           | plantype |
-      |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
+   |  TID    | zipcode | planName                                           | plantype |
+   | 15533   |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
@@ -381,7 +381,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -428,7 +428,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1603378 @vppPrintRegression @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019  @RegressionPredators
+  @feature-F265872 @us1603378 @vppPrintRegressionBlayer @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019  @RegressionPredators
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
     Given the user is on the uhcmedicaresolutions site landing page

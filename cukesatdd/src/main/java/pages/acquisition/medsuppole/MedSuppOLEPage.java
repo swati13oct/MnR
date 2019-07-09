@@ -91,7 +91,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 		private WebElement medSuppOleDobHeading;
 		
-		@FindBy(id = "MPAED")
+		@FindBy(xpath = "//input[@name='MPAED']")
 		private WebElement medSuppOleHospitalPartA;
 		
 		@FindBy(xpath = "//input[@id='Gender_1']/following-sibling::label[text()='Male']")
@@ -201,8 +201,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		
-		waitTillElementClickableInTime(medSuppOleHospitalPartA,30);
+		//waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
 		nextButton.click();

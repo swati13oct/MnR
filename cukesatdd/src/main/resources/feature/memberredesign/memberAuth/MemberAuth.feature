@@ -402,3 +402,26 @@ Feature: S1.1 To test Member Auth Dashboard page.
     Examples: 
       | UID     | username  | password  | planType | memberType                   | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | csrError              |
       | F243897 | qavgogine | qavgogine | SHIP     | SHIP_IndividualSHIPPaymentsUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | are not authorized to |
+
+    @memAuthProd
+    Scenario Outline: Plan Type: <planType>, Member Type: <memberType> - To validate SHIP Update Recurring Paymnet EFT Submission Error for Member Auth
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+   	  | MemUsername | <memUserName> |
+   	And user clicks on member to select
+   	And the user navigates to profile and preference page
+   	And the user validates the profile page and the preference page and navigates to claims page in prod
+    And the user validates the claims page and navigates to eob page in prod
+       |Plan Type | <planType> |
+       |Claim Period | <claimPeriod> |
+    And the user validates the EOB page and navigates to benefits and coverage page in prod
+      	| Date Range | <dateRange> |
+      	| Plan Type | <planType> |
+      	
+      	
+      Examples:
+      | UID     | username  | password  | memUserName | planType | claimPeriod |
+      | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months|

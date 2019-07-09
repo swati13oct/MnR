@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.regression.testharness.*;
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 //import pages.memberredesign.bluelayer.LoginPage;
@@ -1207,11 +1208,23 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@When("^I navigate to drug look up page$")
 	public void i_navigate_to_drug_look_up_page() throws Throwable {
-		AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		DrugCostEstimatorPage dcePage = null;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
-		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
-
+			 dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
+			
+		} else {
+		
+			AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+	
+			 dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
+			
+		}
+		if(dcePage==null){
+			System.out.println("Error in navigating to DCE page");
+		}else
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 	}
 
 	@When("^I delete all added drugs$")
