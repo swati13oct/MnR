@@ -304,7 +304,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Language      | English        |
 	Then the user validates the pharmacies available
 	  | Language      | English        |
-@abc
+
 	Examples: 
 	  | TID   | username | password | MemUserName | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | xxxx  | yourUsr  | yourPwd  | offlineUsr  | PDP      | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | True             | True        | True            |
