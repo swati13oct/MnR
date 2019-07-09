@@ -66,11 +66,10 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # TID	: 15584 - TC_003_Locate a pharmacy_VPP_ MAPD
   # TID : 15585 - TC_004_Locate a pharmacy_VPP_ PDP
   #
-  # Current offline known issues that are being bypassed in test right now:
-  # 1) multi-county popup will only show up for the very first time, subsequence zipcode search will not trigger multi-county popup to show again - pending open ticket
-  # 2) Walgreen widget is not showing for Chinese and Spanish page - pending open ticket
+  # BYPASS KNOWN ISSUES
+  # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
-  @pharmacylocatorulayer01 @shopPlan @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name 	  |	<siteName>     |   
@@ -115,7 +114,23 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | Language      | English        |
 	Then the user validates the no pharmacies display error message
 	Then the user validates the question widget
-   #------ Chinese -----------------------------------
+
+	Examples: 
+	  | TID 	| planName         		                                         | zipcode | distance  | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
+	  | 15582	| AARP MedicareRx Preferred (PDP)                                | 10980   | 15        | None           | E-Prescribing               | True                  | False            | True                 | 2019     | Ulayer   |
+	  | 15582	| AARP MedicareRx Walgreens (PDP)                                | 85215   | 15        | None           | Open 24 hours               | True                  | True             | True                 | 2019     | Ulayer   |
+	  | 15582	| AARP MedicareRx Walgreens (PDP)                                | 78006   | 15        | Kendall County | Open 24 hours               | True                  | True             | True                 | 2019     | Ulayer   |
+	  | 15583	| AARP MedicareComplete Choice Plan 1 (PPO)                      | 78006   | 10        | Comal County   | Retail Pharmacy             | False                 | False            | True                 | 2019     | Ulayer   |
+	  | 15583	| AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | 80002   | 10        | Adams County   | Long-term care              | False                 | False            | True                 | 2019     | Ulayer   |
+	  | 15583	| UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) | 14867   | 25        | None           | Long-term care              | False                 | False            | True                 | 2019     | Ulayer   |     
+	  | 15583	| Medica HealthCare Plans MedicareMax (HMO)                      | 33321   | 10        | None           | Home Infusion and Specialty | False                 | False            | True                 | 2019     | Ulayer   |
+
+
+  @pharmacylocatorulayer02 @shopPlan @Spanish @Chinese @pharmacylocatorAcquisitionE2E @regression
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page on acquisition site
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name 	  |	<siteName>     |   
+    #------ Chinese -----------------------------------
 	When the user selects Chinese Language
 	And the user validates header section content
 	And the user validates default zip is not null
@@ -197,20 +212,17 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | Language      | Spanish        |
 	Then the user validates the pharmacies available
 	  | Language      | Spanish        |
-	Then the user validates the no pharmacies display error message
+	Then the user validates error message displayed when filter results in no match
 	Then the user validates the question widget
 
 	Examples: 
-	  | TID 	| planName         		                                         | zipcode | distance  | countyName   | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan| planYear | siteName |
-	  | 15582	| AARP MedicareRx Preferred (PDP)                                | 10980   | 15        | None         | E-Prescribing               | True              | False        | True            | 2019     | Ulayer   |
-	  | 15582	| AARP MedicareRx Walgreens (PDP)                                | 85215   | 15        | None         | Open 24 hours               | True             | True         | True            | 2019     | Ulayer   |
-	  | 15583	| AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | 80002   | 10        | Adams County | Long-term care              | False             | False        | True            | 2019     | Ulayer   |
-	  | 15583	| UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) | 14867   | 25        | None         | Long-term care              | False             | False        | True            | 2019     | Ulayer   |     
-	  | 15583	| Medica HealthCare Plans MedicareMax (HMO)                      | 33321   | 10        | None         | Home Infusion and Specialty | False             | False        | True            | 2019     | Ulayer   |
-	  | 15583	| Preferred Choice Dade (HMO)	                                 | 33174   | 10        | None         | Retail Pharmacy             | False             | False        | True            | 2019     | Ulayer   |
+	  | TID 	| planName         		                                         | zipcode | distance  | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan| planYear | siteName |
+	  | 15582	| AARP MedicareRx Preferred (PDP)                                | 10980   | 15        | None           | E-Prescribing               | True                  | False            | True                | 2019     | Ulayer   |
+	  | 15582	| AARP MedicareRx Walgreens (PDP)                                | 78006   | 15        | Kendall County | Open 24 hours               | True                  | True             | True                | 2019     | Ulayer   |
+	  | 15583	| AARP MedicareComplete Choice Plan 1 (PPO)                      | 78006   | 10        | Comal County   | Retail Pharmacy             | False                 | False            | True                | 2019     | Ulayer   |
 
 
-  @pharmacylocatorulayer02 @onlinePharmacyDir @regression
+  @pharmacylocatorulayer03 @onlinePharmacyDir @regression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -230,5 +242,5 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | TID 	| planType | zipcode | isMultutiCounty | county           | 
 	  | 15584	| MA       | 80002   | Yes             | Adams County     | 
 	  | 15585	| PDP      | 80001   | No              | Jefferson County | 
-	  | xxxxx	| SNP      | 80001   | No              | Jefferson County | 
+	  | xxxxx	| SNP      | 78006   | Yes             | Comal County     | 
 

@@ -233,12 +233,11 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
 	}
 	
-	@Then("^the user validates the no pharmacies display error message$")
+	@Then("^the user validates error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message(){
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		boolean isPharmacySelected;
-		isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
+		boolean isPharmacySelected= pharmacySearchPage.validateNoPharmaciesErrorMessage();
 		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!",isPharmacySelected);
 	}
 	

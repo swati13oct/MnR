@@ -29,7 +29,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
-
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
@@ -39,20 +38,27 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		else
 			distance=distance+" miles";
 		selectFromDropDownByText(driver, distanceDropownID, distance);
+		String initialZipVal=zipcodeField.getAttribute("value");
 		sendkeysNew(zipcodeField, zipcode);
 		searchbtn.click();
-		//note: if zip is not right format, don't bother to wait for multicounty popup
 		if (matcher.matches()) {
-			if (!county.equalsIgnoreCase("None")) {
-				CommonUtility.waitForPageLoad(driver, countyModal, 15);
-				if (validate(countyModal)) {
-				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
-				CommonUtility.checkPageIsReady(driver);
-				CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
+			CommonUtility.waitForPageLoad(driver, countyModal, 15);
+			if (county.equalsIgnoreCase("None")) { 
+				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
+						!validate(countyModal));
+			} else {
+				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode)) {
+					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
+					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
+							validate(countyModal));
+					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
-					System.out.println("multi county pop up not showing again...move on...");
+					Assert.assertTrue("PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup", 
+							!validate(countyModal));
 				}
-				}
+			}
 			System.out.println("*****Zipcode, distance and County details are entered******");
 		} else {
 			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
@@ -106,7 +112,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					validate(pharmaciesAvailable));
 			if (total >10) {
-				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
 						validate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
 				Thread.sleep(2000); //note: keep this for the page to load
@@ -137,8 +144,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Other.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '"+expectedURL
-						+"' \nActual URL='"+currentURL+"'", 
+				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
+						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -158,8 +165,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '"+expectedURL
-						+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
+				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
+						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				currentURL=driver.getCurrentUrl();
@@ -168,9 +176,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 
 				moveMouseToElement(contactUnitedHealthCare);
-				Assert.assertTrue("PROBLEM - unable to locate the pagination element", validate(pagination));
-				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", validate(leftArrow));
-				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", validate(rightArrow));
+				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
+						validate(pagination));
+				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
+						validate(leftArrow));
+				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
+						validate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -181,9 +192,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				}
 
 			} else {
-				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",!validate(pagination));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",!validate(leftArrow));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",!validate(rightArrow));
+				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!validate(pagination));
+				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!validate(leftArrow));
+				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!validate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
@@ -285,10 +299,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 	}
 
+	/**
+	 * Click online directory link from the plan detail page to access the pharmacy locator page
+	 * note: multicounty popup will only show during initial search if zip remains the same
+	 * note: enterZipDistanceDetails already validate multicounty popup if zipcode change
+	 * note: in this method will just handle the multicounty popup if it shows
+	 * @param isMultiCounty
+	 * @param countyName
+	 */
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
 		moveMouseToElement(vppDetailSectionHeader);
-		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",validate(vpp_onlinePharmacyDirectoryLnk));
+		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
+				validate(vpp_onlinePharmacyDirectoryLnk));
 		vpp_onlinePharmacyDirectoryLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		//	Thread.sleep(2000); //note: keep this for the page to load
@@ -299,14 +322,18 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String currentURL=driver.getCurrentUrl();
 		if (("Yes").equalsIgnoreCase(isMultiCounty.trim())) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
-		}
-		String expectedURL="member/pharmacy-locator";
-		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, URL should not contain '"+expectedURL
-				+"' \nActual URL='"+currentURL+"'", !currentURL.contains(expectedURL));
-	}
+			Assert.assertTrue("PROBLEM - test zip expects multi-county but multi-county selection popup is NOT showing when switching to pharmacy locator page", 
+					validate(countyModal));
 
+	//tbd		if (validate(countyModal)) {
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
+				//tbd		}
+		}
+		String expectedURL="Pharmacy-Search-English";
+		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '"+expectedURL
+				+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
+	}
 }
 
