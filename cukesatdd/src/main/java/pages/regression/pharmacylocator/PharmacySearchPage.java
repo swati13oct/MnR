@@ -170,6 +170,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		}
 	}
 
+	/**
+	 * Validate widget content
+	 *   existing issue INC12081977 - walgreen widget DCE link point to different links (page not found) for Chinese and Spanish; works fine for English
+	 * @param language
+	 * @param linkType
+	 * @param widgetName
+	 * @param learnMoreElement
+	 * @param expUrl
+	 */
 	public void validateWidget(String language, String linkType, String widgetName, WebElement learnMoreElement, String expUrl) {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
@@ -186,7 +195,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
 					actUrl.contains(expUrl));
 		} else {
-			System.out.println("BYPASS for now - known issue - Walgreen widget DCE link is not pointing to correct place for Chinese and Spanish");
+			System.out.println("BYPASS for now - known issue INC12081977 - Walgreen widget DCE link is not pointing to correct place for Chinese and Spanish");
 		}
 		if (linkType.equalsIgnoreCase("LearnMore")) 
 			widget_learnMore_previousPage.click(); //note: click link to go back to pharmacy locator page

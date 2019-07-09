@@ -65,7 +65,8 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   # TID: 15295 - TC07_AARP PDP_E2E Scenario_Pharmacy locator
   # TID: 15296 - TC08_Group MAPD_E2E Scenario_Pharmacy locator
   #
-  # BYPASS Known issues - walgreens widget dce link is pointing to wrong place for Chinese and Spanish page on offline env - pending open ticket
+  # BYPASS Known issues ticket# INC12081977 
+  # walgreens widget dce link is pointing to wrong place for Chinese and Spanish page on offline env
   #-------------------------
   @pharmacylocator1 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator page on member site
@@ -303,7 +304,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Language      | English        |
 	Then the user validates the pharmacies available
 	  | Language      | English        |
-
+@abc
 	Examples: 
 	  | TID   | username | password | MemUserName | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | xxxx  | yourUsr  | yourPwd  | offlineUsr  | PDP      | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | True             | True        | True            |
