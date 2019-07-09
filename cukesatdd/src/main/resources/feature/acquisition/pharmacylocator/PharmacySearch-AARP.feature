@@ -112,7 +112,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | Language      | English        |
 	Then the user validates the pharmacies available
 	  | Language      | English        |
-	Then the user validates the no pharmacies display error message
+	Then the user validates error message displayed when filter results in no match
 	Then the user validates the question widget
 
 	Examples: 
@@ -170,7 +170,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 	  | Language      | Chinese        |
 	Then the user validates the pharmacies available
 	  | Language      | Chinese        |
-	Then the user validates the no pharmacies display error message
+	Then the user validates error message displayed when filter results in no match
 	Then the user validates the question widget
     #------ Spanish -----------------------------------
 	When the user selects Spanish Language
