@@ -8,10 +8,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import atdd.framework.UhcDriver;
 
-/**
- * @author sdwaraka
- */
 public class PharmacySearchWebElements extends UhcDriver{
+	@FindBy(xpath="//div[@class='pharmacy-locator']//div[@class='table-body responsive']/div[not(contains(@class,'ng-hide'))]/div/label[@id='plan-year-label']")
+	protected WebElement planYearLabel;
+
+	@FindBy(xpath="//a[@dtmid='Dtmid MapDirections']")
+	protected List<WebElement> getDirectionLnk;
+
+	@FindBy(xpath="//a[contains(@href,'contact-us.html')]")
+	protected WebElement contactUnitedHealthCare;
+
+	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
+	protected WebElement pdf_otherPlans;
+
+	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
+	protected WebElement pdf_WalgreenPlans;
 
 	@FindBy(xpath="//div[contains(@id,'modifyYourSearchId')]//li")
 	protected WebElement modifyZipErr;
@@ -103,6 +114,12 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//ul[contains(@class,'pagination')]")
 	protected WebElement pagination;
 
+	@FindBy(xpath="//div[contains(@class,'alert-message')]")
+	protected WebElement offlineEnvPinkBanner;
+	
+	@FindBy(xpath="//label[@id='mail-order-label']")
+	protected WebElement mailOrderFilter;
+	
 	@FindBy(xpath="//a[contains(@aria-label,'Previous')]")
 	protected WebElement leftArrow;
 

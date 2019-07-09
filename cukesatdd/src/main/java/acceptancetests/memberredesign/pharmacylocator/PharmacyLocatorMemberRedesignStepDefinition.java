@@ -21,7 +21,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * @author sdwaraka
  * Functionality: Pharmacy locator in New Member redesign
  */
 public class PharmacyLocatorMemberRedesignStepDefinition {
@@ -152,7 +151,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResult();
+		pharmacySearchPage = pharmacySearchPage.validateSearchPdfResult();
 		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
@@ -175,7 +174,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.clickChinese();
-		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",pharmacySearchPage != null);
+		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",
+				pharmacySearchPage != null);
 	}
 
 	/** Verifying the pharmacy search tool in Spanish language */	
@@ -207,7 +207,7 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String inputZip=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
-		pharmacySearchPage = pharmacySearchPage.validateErrormessages(inputZip);
+		pharmacySearchPage = pharmacySearchPage.validateErrorMessages(inputZip);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 
@@ -231,7 +231,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		String memberType = inputDataMap.get("Member Type");
 		String language = inputDataMap.get("Language");
 		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. Actual='"+tmp+"'", 
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. "
+				+ "Actual='"+tmp+"'", 
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -252,7 +253,8 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 	public void verifyMapSectionContent(DataTable inputData) {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
 		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. Actual='"+tmp+"'", 
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. "
+				+ "Actual='"+tmp+"'", 
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
@@ -265,8 +267,10 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
 		String planType = inputDataMap.get("Plan Type");
 		String memberType = inputDataMap.get("Member Type");
+		String language = inputDataMap.get("Language");
 		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. Actual='"+tmp+"'", 
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. "
+				+ "Actual='"+tmp+"'", 
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 
@@ -276,13 +280,14 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		boolean hasWalgreens = Boolean.parseBoolean(tmp);
 
 		tmp=inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='"+tmp+"'", 
+		Assert.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. "
+				+ "Actual='"+tmp+"'", 
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage.validatePharmacyWidgets(planType, memberType, 
+		pharmacySearchPage.validatePharmacyWidgets(language, planType, memberType, 
 				hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ);
 	}
 
