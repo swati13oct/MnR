@@ -22,7 +22,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
      #| Ulayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
 
   @pharmacyLocatorUlayerSmoke
-  Scenario Outline: To verify available pharmacies page for zipcode <zipcode> and county <county>
+  Scenario Outline: To verify available pharmacies page for zipcode <zipcode> and county <countyName>
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     And the user enters following details for pharmacy search
@@ -74,7 +74,6 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Site Name | <siteName> |
     #------ English -----------------------------------
     And the user validates header section content
-    And the user validates default zip is not null
     When the user enters following details for pharmacy search
       | Zip Code |            |
       | Distance | <distance> |
@@ -131,7 +130,6 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
     And the user validates header section content
-    And the user validates default zip is not null
     When the user enters following details for pharmacy search
       | Zip Code |            |
       | Distance | <distance> |
@@ -173,7 +171,6 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user validates header section content
-    And the user validates default zip is not null
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
@@ -240,3 +237,17 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15584 | MA       |   80002 | Yes             | Adams County     |
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
+
+  @pharmacylocatorulayer04 @geoTargeting
+  Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
+    Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
+      | Site Name | <siteName> |
+      | State     | <state>    |
+    #------ English -----------------------------------
+    And the user validates header section content
+
+    Examples: 
+      | TID   | state     | siteName |
+      | xxxxx | Ohio      |   Ulayer |
+      | xxxxx | Minnesota |   Ulayer |
+    

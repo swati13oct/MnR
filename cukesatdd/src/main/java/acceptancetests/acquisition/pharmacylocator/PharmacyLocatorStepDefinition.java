@@ -52,6 +52,28 @@ public class PharmacyLocatorStepDefinition {
 		String siteName = inputAttributesMap.get("Site Name");
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
+		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+		aquisitionhomepage.navigateToPharmacyLocator();
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);
+
+	}
+	
+	/** user is on the AARP Medicare Site landing page and select state */
+	@Given("^the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page$")
+	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch_state(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String state = inputAttributesMap.get("State");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
+		aquisitionhomepage.selectState(state); 
+		System.out.println("Selected state '"+state+"' on home page");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
