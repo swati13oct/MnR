@@ -2,24 +2,23 @@
 Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 
   #----- beginning of VBF member pharmacy locator scenarios section ------------------------
-  @vbfGate
+  @vbfGate @MemberVBF
   Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
-	Given login with following details logins in the member portal and validate elements
-	  | Plan Type     | <planType>   	 |
-	  | Member Type   | <memberType> 	 |
-	When the user navigates to pharmacy search page
-	And the user enters distance details
-	  | Distance 	    | <distance> 	 |
-	And the user selects Pharmacy Types to Filter
-	  | Pharmacy Type | <pharmacyType> |
-	Then the user validates the pharmacies available
-	  | Language      | English        |
-	And the user validates show on map link
-	And the user validates more information content based on plan type
-	  
+    Given login with following details logins in the member portal and validate elements
+  	  | Plan Type  	  	 | 			<planType>   						|
+	  | Member Type 	   | 			<memberType> 	    			|
+      When the user navigates to pharmacy search page in Redesign site
+    And the user enters distance details in Redesign site
+  	  | Distance 	  	   | 		    <distance> 						|
+    And the user selects Pharmacy Types to Filter in Redesign Site
+  	  | Pharmacy Type    | 			<pharmacyType>   				|
+    Then the user validates the pharmacies available in Redesign site
+    And the user Validates show on map link in Redesign Site
+    And the user validate more information content based on plan type in Redesign Site
+
     Examples: 
-	  | planType | memberType | distance | pharmacyType  |
-	  | MAPD     | UhcMapdInd | 25       | Open 24 hours |
+	    | planType | memberType  | distance | pharmacyType                |
+        | MAPD     | UhcMapdInd	 |       25 | Open 24 hours               |
 
   @smokeTest @MemberVBF @smokeTest_PharmacyLocatorMem @rallyDashboard @testharness
   Scenario Outline: VBF -plan: <planType> -memberType: <memberType> - Verify all available pharmacies for default zipcode in member site
@@ -49,6 +48,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 		| Zip Code 	  |	<zipcode> 	 |
 		| Distance 	  |	<distance> 	 |
 
+<<<<<<< HEAD
     Examples: 
 	    | planType | memberType | distance | zipcode |
 	    | PDP        | grpPerf  | 25       | 90210   |

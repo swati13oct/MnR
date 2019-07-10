@@ -16,10 +16,14 @@ import org.openqa.selenium.support.PageFactory;
 import atdd.framework.UhcDriver;
 
 /**
+ * NOTE: deprecating this one, use the ones in cukesatdd/src/main/java/pages/acquisition/pharmacyLocator/
+ */
+
+/**
  * @author pagarwa5
  *
  */
-public class PharmacyResultPage extends UhcDriver{
+public class Deprecated_PharmacyResultPage extends UhcDriver{
 	
 	
 	@FindBy(xpath = "//h1")
@@ -48,7 +52,7 @@ public class PharmacyResultPage extends UhcDriver{
 	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
 	private WebElement searchAgainButton;
 	
-	public PharmacyResultPage(WebDriver driver){
+	public Deprecated_PharmacyResultPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -159,7 +163,7 @@ public class PharmacyResultPage extends UhcDriver{
 		return flag;
 	}
 	
-	public PharmacySearchPage navigateTopharmacySearch(){
+	public Deprecated_PharmacySearchPage navigateTopharmacySearch(){
 
 		searchAgainButton.click();
 		try {
@@ -171,7 +175,7 @@ public class PharmacyResultPage extends UhcDriver{
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
 				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
-			return new PharmacySearchPage(driver);
+			return new Deprecated_PharmacySearchPage(driver);
 		}
 		return null;
 		

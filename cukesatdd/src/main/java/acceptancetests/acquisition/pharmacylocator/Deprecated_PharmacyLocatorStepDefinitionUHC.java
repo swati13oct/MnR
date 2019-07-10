@@ -10,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PharmacyResultPage;
-import pages.acquisition.bluelayer.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -25,9 +23,9 @@ import cucumber.api.java.en.When;
 
 /**
  * Functionality: PharmacyLocator
+ * NOTE: deprecating this one, use the one in cukesatdd/src/main/java/acceptancetests/acquisition/pharmacylocator/PharmacyLocatorStepDefinition.java
  */
-
-public class PharmacyLocatorStepDefinitionUHC {
+public class Deprecated_PharmacyLocatorStepDefinitionUHC {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -36,11 +34,8 @@ public class PharmacyLocatorStepDefinitionUHC {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-	/**
-	 * @toDo:user is on the UMS Medicare Site landing page
-	 */
-	@Given("^the user is on the UMS Medicare Site landing page$")
+/* tbd
+	@Given("^ORIG_the user is on the UMS Medicare Site landing page$")
 	public void registered_member_located_pharmacy_UMS() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -48,55 +43,32 @@ public class PharmacyLocatorStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
 
-	/**
-	 * @toDo:user hovers to Our Plans and select Request More Help and Information for following plan type
-	 */
-	@When("^the user hovers to Our Plans and select pharmacy search for following plan type in uhc site$")
+	@When("^ORIG_the user hovers to Our Plans and select pharmacy search for following plan type in uhc site$")
 	public void user_hovers_to_our_plans_and_select_pharmacy_search_uhc() {
 
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage.navigateToPharmacyLocator();
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
-			Assert.assertTrue(true);
-
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
+		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page", pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 
-	/**
-	 * @toDo:user navigates to pharmacy search page in UMS Site
-	 */
-	@When("^the user navigates to pharmacy search page in UMS Site$")
+	@When("^ORIG_the user navigates to pharmacy search page in UMS Site$")
 	public void user_views_pharmacy_locator_UMS() {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String planType = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_TYPE);
 		PharmacySearchPage pharmacySearchPage = acqusitionHomePage
 				.navigateToPharmacyLocator();
-
-		if (pharmacySearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
-					pharmacySearchPage);
-			Assert.assertTrue(true);
-			//pharmacySearchPage.validateDefaultChooseaPlanSection();
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
-
+		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page", pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE,
+				pharmacySearchPage);
 	}
 
-	/**
-	 * @toDo: user enters following details for pharmacy search
-	 */
-	@And("^the user enters following details for pharmacy search in UMS Site$")
+	@And("^ORIG_the user enters following details for pharmacy search in UMS Site$")
 	public void user_enters_zipcode_distance_details_UMS(DataTable zipAttributes) {
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < zipAttributesRow.size(); i++) {
-
 			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
 					zipAttributesRow.get(i).getCells().get(1));
 		}
@@ -109,22 +81,16 @@ public class PharmacyLocatorStepDefinitionUHC {
 		String county = zipAttributesMap.get("County Name");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY,
 				county);
-
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 	}
 
-	/**
-	 * @toDo:user chooses a plan from dropdown 
-	 */
-	@And("^the user chooses a plan from dropdown in UMS Site$")
+	@And("^ORIG_the user chooses a plan from dropdown in UMS Site$")
 	public void user_chooses_plan_dropdown_UMS(DataTable planAttributes) {
-
 		List<DataTableRow> zipAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < zipAttributesRow.size(); i++) {
-
 			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0), zipAttributesRow.get(i).getCells().get(1));
 		}
 		String planName = zipAttributesMap.get("Plan Name");
@@ -140,10 +106,7 @@ public class PharmacyLocatorStepDefinitionUHC {
 		pharmacySearchPage.selectsPlanName(planName);
 	}
 
-	/**
-	 * @toDo: user chooses the Pharmacy Type
-	 */
-	@Then("^the user chooses the Pharmacy Type blayer$")
+	@Then("^ORIG_the user chooses the Pharmacy Type blayer$")
 	public void the_user_chooses_the_pharmacy_type_blayer(DataTable pharmacyTypeAttribute){
 		
 		String pharmacyType = pharmacyTypeAttribute.getGherkinRows().get(0).getCells()
@@ -152,60 +115,34 @@ public class PharmacyLocatorStepDefinitionUHC {
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		boolean isPharmacySelected;
 		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(pharmacyType);
-
-		if (!isPharmacySelected) {
-			Assert.fail("Error in selecting pharmacy type!!!");
-		}
+		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!",isPharmacySelected);
 	}
 	
-	/**
-	 * @toDo: user chooses the Service Type blayer
-	 */
-	@Then("^the user chooses the Service Type blayer$")
+	@Then("^ORIG_the user chooses the Service Type blayer$")
 	public void the_user_chooses_the_service_type_blayer(DataTable serviceTypeAttribute){
-		
-		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells()
-				.get(0);
+		String serviceType = serviceTypeAttribute.getGherkinRows().get(0).getCells().get(0);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		boolean isServicesSelected;
 		isServicesSelected = pharmacySearchPage.selectPharmacyandServices(serviceType);
-		if (!isServicesSelected) {
-			Assert.fail("Error in selecting service type!!!");
-		}
+		Assert.assertTrue("PROBLEM - Error in selecting service type!!!",isServicesSelected);
 	}
 	
-	/**
-	 * @toDo: user searches available pharmacies by selecting Show pharmacies for ALL types
-	 */
-	@And("^the user searches available pharmacies by selecting \"Show pharmacies for ALL types\"$")
+	@And("^ORIG_the user searches available pharmacies by selecting \"Show pharmacies for ALL types\"$")
 	public void user_selects_show_pharmacy_for_all_pharmacy_types_ums() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		
 		PharmacyResultPage pharmacyResultPage = pharmacySearchPage
 				.showAllPharmacies();
-
-		if (pharmacyResultPage != null) {
-			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
-					pharmacyResultPage);
-
-		
-			/* Get actual data */
-			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
-			getLoginScenario().saveBean(
-					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
-					pharmacyResultActualJson);
-
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
-
+		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page", pharmacyResultPage != null);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE, pharmacyResultPage);
+		// Get actual data
+		JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
+		getLoginScenario().saveBean(
+				PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
+				pharmacyResultActualJson);
 	}
 
-	/**
-	 * @toDo:user searches available pharmacies by selecting 
-	 */
 	@And("the user searches available pharmacies by selecting \"Show pharmacies for these services.\"$")
 	public void  user_searches_pharmacies_by_choosing_pharmacy_types_ums(DataTable pharmacyTypeAttributes)
 	{
@@ -219,8 +156,6 @@ public class PharmacyLocatorStepDefinitionUHC {
 		if (pharmacyResultPage != null) {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_RESULTS_PAGE,
 					pharmacyResultPage);
-
-			/* Get actual data */
 			JSONObject pharmacyResultActualJson = pharmacyResultPage.pharmacyResultJson;
 			getLoginScenario().saveBean(
 					PharmacySearchCommonConstants.PHARMACY_RESULT_ACTUAL,
@@ -232,82 +167,42 @@ public class PharmacyLocatorStepDefinitionUHC {
 
 	}
 
-	/**
-	 * @toDo: user validates the error message for no pharmacies found for below pharmacy
-	 */
-	@Then("^the user validates the error message for no pharmacies found for below pharmacy$")
+	@Then("^ORIG_the user validates the error message for no pharmacies found for below pharmacy$")
 	public void validates_error_msg_for_no_pharmacies_found(DataTable pharmacyTypeAttributes){
-		
-
 		 getLoginScenario().getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		//jchen118 remove the non existing btn start
-		//pharmacySearchPage.validateNoPharmacyErrormsg(pharmacyTypeArray);
-		//jchen118 remove the non existing btn end
 	}
 
-	/**
-	 * @toDo:user clicks on SearchAgain and navigates to pharmacies search
-	 */
-	@Then("^the user clicks on SearchAgain and navigates to pharmacies search page$")
+	@Then("^ORIG_the user clicks on SearchAgain and navigates to pharmacies search page$")
 	public void clicks_searchAgain_navigates_to_pharmaacies_search_page(){
 		PharmacyResultPage pharmacyResultPage = (PharmacyResultPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_RESULTS_PAGE);
-
-		if(pharmacyResultPage.navigateTopharmacySearch()){
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Failed to load Pharmacy search page");
-		}
-
+		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page", pharmacyResultPage.navigateTopharmacySearch());
 	}
 
-	/**
-	 * @toDo:user validates the available pharmacies page 
-	 */
-	@Then("^the user validates the available pharmacies page in UMS site$")
+	@Then("^ORIG_the user validates the available pharmacies page in UMS site$")
 	public void user_validates_available_pharmacies_UMS() {
-	
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		if(pharmacySearchPage.validatePharmacyResults()){
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error in validating Pharmacy Results ");
-		}
-		
-
+		Assert.assertTrue("PROBLEM - Error in validating Pharmacy Results", pharmacySearchPage.validatePharmacyResults());
 	}
 
-	/**
-	 * @toDo:user validates the right rail widget and logo slider
-	 */
-	@Then("^the user validates the right rail widget and logo slider$")
+	@Then("^ORIG_the user validates the right rail widget and logo slider$")
 	public void validates_Right_Rail_Widget_And_Logo_UMS(){
-		
+		//TODO - keep or delete??
 	}
 
-	/**
-	 * @toDo:user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member
-	 */
-	@Then("^the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan$")
+	@Then("^ORIG_the user validates Pharmacy Locator tool plan dropdown menu for the Medica and PCP member plan$")
 	public void validates_Pharmacy_Locator_Tool_Plan_UMS(){
-	
+		//TODO - keep or delete??
 	}
 	
-	/**
-	 * @toDo: user validates Search checkbox displayed dynamically related to the pharmacy network
-	 */
-	@Then("^the user validates Search checkbox displayed dynamically related to the pharmacy network$")
+	@Then("^ORIG_the user validates Search checkbox displayed dynamically related to the pharmacy network$")
 	public void validates_Pharmacy_Network_Displayed_Dynamically_UMS(){
-		}
+		//TODO - keep or delete??
+	}
 	
-	/**
-	 * @toDo:the user selects a language from dropdown in UMS Site
-	 */
-	@And("^the user selects a language from dropdown in UMS Site$")
+	@And("^ORIG_the user selects a language from dropdown in UMS Site$")
 	public void user_selects_language_ums(DataTable languageAttributes) {
-
-
 		langName = languageAttributes.getGherkinRows().get(0).getCells().get(0);
 		if (("Spanish").equalsIgnoreCase(langName)) {
 			langName = "es";
@@ -321,24 +216,14 @@ public class PharmacyLocatorStepDefinitionUHC {
 		pharmacySearchPage.selectLanguage(langName);
 	}
 	
-	/**
-	 * @toDo:the user should see county popup
-	 */
-	@Then("^the user should see county popup in UMS site$")
+	@Then("^ORIG_the user should see county popup in UMS site$")
 	public void user_should_see_county_popup_ums() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		if(pharmacySearchPage.validateCountypopoup()){
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("County Pop up did not appear");
-		}
+		Assert.assertTrue("PROBLEM - County Pop up did not appear",pharmacySearchPage.validateCountypopoup());
 	}
 	
-	/**
-	 * @toDo:the user selects the county
-	 */
-	@When("^the user selects the county in UMS site$")
+	@When("^ORIG_the user selects the county in UMS site$")
 	public void user_selects_county_ums(DataTable countyAttributes){
 		String countyName = countyAttributes.getGherkinRows().get(0).getCells()
 				.get(0);
@@ -347,45 +232,37 @@ public class PharmacyLocatorStepDefinitionUHC {
 		pharmacySearchPage.selectCounty(countyName);
 	}
 	
-	/**
-	 * @toDo:the user should see choose a plan
-	 */
-	@Then("^the user should see choose a plan in UMS site$")
+	@Then("^ORIG_the user should see choose a plan in UMS site$")
 	public void user_should_see_choose_plan_ums(){
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateChoosePlanSectionAfterzipcodeSearch();
 	}
 	
-	/**
-	 * @toDo:user validates the available pharmacies page
-	 */
-	@Then("^the user validates language changes in UMS site$")
+	@Then("^ORIG_the user validates language changes in UMS site$")
 	public void user_validates_language_changes_uhc() {
 
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		Assert.assertTrue("Changes to language is not successful",
+		Assert.assertTrue("PROBLEM - Changes to language is not successful",
 				pharmacySearchPage.validateLanguageChanges(langName));
 	}
-	@And("^the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site$")
+	
+	@And("^ORIG_the user enters following Multi County details and  validates the Cancel button for Multi COunty Pop-up clears the Zip code text fields in pharmacy search in UMS Site$")
 	public void user_enters_MultiCounty_zip_to_validate(DataTable zipAttributes) {
 		List<DataTableRow> zipAttributesRow = zipAttributes.getGherkinRows();
 		Map<String, String> zipAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < zipAttributesRow.size(); i++) {
-
 			zipAttributesMap.put(zipAttributesRow.get(i).getCells().get(0),
 					zipAttributesRow.get(i).getCells().get(1));
 		}
 		String zipcode = zipAttributesMap.get("Zip Code");
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,
-				zipcode);
-
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE, zipcode);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.enterZipCode(zipcode);
 		boolean Validation_Flag = pharmacySearchPage.validate_MultiCounty_CancelBtn();
-		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
-
-	}
+		Assert.assertTrue("PROBLEM - Cancel button Validation for Multi County Pop-up Failed ",Validation_Flag);
+	} 
+	*/
 }

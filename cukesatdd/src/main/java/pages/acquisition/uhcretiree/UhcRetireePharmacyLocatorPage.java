@@ -16,8 +16,6 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import junit.framework.Assert;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PharmacyResultPage;
-import pages.acquisition.ulayer.PharmacySearchPage;
 
 public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 
