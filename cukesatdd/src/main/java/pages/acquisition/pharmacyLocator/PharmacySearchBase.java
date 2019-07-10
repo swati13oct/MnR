@@ -68,7 +68,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void selectsPlanName(String planName) {
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(By.className("loading-block"), 60);
+			waitforElementDisapper(By.className("loading-block"), 90);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
 	}
 

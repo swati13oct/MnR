@@ -269,12 +269,6 @@ public class PharmacyLocatorStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateQuestionsWidget();
 	}
-	@Then("^the user validates default zip is not null$")
-	public void validateDefautlZipNotNull() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validateQuestionsWidget();
-	}
 
 	/** Verifying the pharmacy search tool in Spanish language */	
 	@Then("^the user selects Spanish Language$")
