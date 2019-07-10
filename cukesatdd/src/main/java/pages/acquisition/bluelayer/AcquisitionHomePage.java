@@ -380,22 +380,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-	}
-	}
-	
-	
-	public void openAndValidate(String Ulayer) {
-		if (MRScenario.environment.equals("offline")) {
-			startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		}else if (MRScenario.environment.equals("prod")) {
-			startNew(AARP_ACQISITION_PROD_PAGE_URL);
-		} else {
-			startNew(AARP_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
+	
+	
+	public void openAndValidate(String site) {
+		if ("ULayer".equalsIgnoreCase(site)) {
+
+			if (MRScenario.environment.equals("offline")) {
+				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			}else if (MRScenario.environment.equals("prod")) {
+				startNew(AARP_ACQISITION_PROD_PAGE_URL);
+			} else {
+				startNew(AARP_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else {
+			openAndValidate();
+		}
 	}
 	
 	

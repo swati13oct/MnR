@@ -166,13 +166,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement viewPlansButton;
+	
+	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
+	public WebElement btnGO;
 
 	/*
 	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
 	 */
 
 	@FindBy(id = "zipcode")
-	private WebElement zipCodeF;
+	private WebElement zipCode;
 
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
@@ -284,6 +287,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate(alreadyOnSite);
 	}
 	
+	public AcquisitionHomePage(WebDriver driver, int visitorProfile) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(visitorProfile);
+	}
+	
 	public AcquisitionHomePage(WebDriver driver, String site) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -292,8 +301,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-	
-		
+
+
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 		}
@@ -308,8 +317,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
-		if(proactiveChatExitBtn.isDisplayed())
-			jsClickNew(proactiveChatExitBtn);
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
@@ -319,31 +328,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if ("BLayer".equalsIgnoreCase(site)) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
-			}else if (MRScenario.environment.equals("prod")) {
+			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
-			}
-			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-			try{
-				if(proactiveChatExitBtn.isDisplayed())
-					jsClickNew(proactiveChatExitBtn);
-			}catch(Exception e){
-				System.out.println("Proactive chat popup not displayed");
-		}
-		}
-		else
-		{
-			if (MRScenario.environment.equals("offline")) {
-				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
-			}
-			else if (MRScenario.environment.equals("prod")) {
-				start(AARP_ACQISITION_PROD_PAGE_URL);
-			}else {
-				start(AARP_ACQISITION_PAGE_URL);
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
@@ -351,13 +339,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 			try{
-			if(proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
 			}catch(Exception e){
 				System.out.println("Proactive chat popup not displayed");
 			}
+		} else {
+			openAndValidate();
 		}
 	}
+	
 	@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
@@ -366,6 +357,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+		}
+	}
+	
+	public void openAndValidate(int visitorProfile) {
+		if (visitorProfile>0) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);
@@ -795,6 +806,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public VPPPlanSummaryPage addPlansForVisitorProfile(String zipcode) {
+		
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+		sendkeys(zipCode, zipcode);
+
+		btnGO.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
@@ -1284,6 +1308,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+	
+	public VPPPlanSummaryPage findPlans(String txtZipCode){
+		
+		zipCode.sendKeys(txtZipCode);
+		
+		
+		return new VPPPlanSummaryPage(driver);
 	}
 	
 	
