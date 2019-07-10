@@ -20,6 +20,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | siteName | zipcode | distance | countyName   | planName                                          | plantype | planYear |
       | Blayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |     2019 |
    #  | Blayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
+
   @pharmacylocatorBlayerSmoke
   Scenario Outline: To verify available pharmacies page for zipcode <zipcode> and county <county>
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
