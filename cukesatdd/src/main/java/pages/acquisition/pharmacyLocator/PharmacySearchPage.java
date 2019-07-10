@@ -36,7 +36,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	 * @throws InterruptedException */
 	public PharmacySearchPage ValidateSearchPdfResults() throws InterruptedException{
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 10);
+		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", 
 				validate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
@@ -60,7 +60,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 	
 	public void validateLanguageChanges(String language) {
-		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10);
+		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 15);
 		if (("English").equalsIgnoreCase(language)) {
 			Assert.assertTrue("PROBLEM - page should be in English after selecting English", 
 					validate(pgInEnglish));
@@ -227,8 +227,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					validate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt=noZipcode.getText();
-				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "
-						+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
+				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
 						exp_noZipTxt.equals(act_noZipTxt));
 			}
 		} else {
