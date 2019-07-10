@@ -516,6 +516,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
+		@FindBy(css="a#pop-btn-1")
+		private WebElement createProfileBtn;
+		
+		@FindBy(css="a#pop-btn-2")
+		private WebElement continueAsGuest;
+		
+		@FindBy(css="a#popupClose")
+		private WebElement btnClose;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -644,7 +652,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
 		switchToNewTabNew(ProviderSearchLink);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
@@ -657,7 +665,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
 		//switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
@@ -1619,7 +1627,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
 		if(planType.equalsIgnoreCase("PDP")){
 			validateNonPresenceOfElement(ProviderSearchLink);
 		}
@@ -2705,6 +2713,28 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 	}
 
+	/**
+	 * Validate Create Profile Prompt
+	 */
+	public void validateCreateProfilePrompt() {
+		Assert.assertTrue(validateNew(btnClose));
+		Assert.assertTrue(validateNew(createProfileBtn));
+		Assert.assertTrue(validateNew(continueAsGuest));
+	}
 	
-	
+	/**
+	 * Click on Continue as guest link on create profile prompt
+	 * @return
+	 */
+	public VisitorProfilePage continueAsGuest(){
+		continueAsGuest.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
+
+

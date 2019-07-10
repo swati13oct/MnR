@@ -31,6 +31,7 @@ import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VisitorProfilePage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -94,6 +95,41 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = null;
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@When("^the user adds plan from plan search using following information in the AARP site$")
+	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.addPlansForVisitorProfile(zipcode);
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
@@ -953,6 +989,44 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+	}
+	
+	@Then("^user saves two plans as favorite on AARP site$")
+	public void user_saves_two_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+
+		//----- MA plan type ----------------------------
+		String planType="MA";
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
+
+	}
+	
+	@Then("^user gets a create profile prompt on AARP site$")
+	public void user_saves_two_plans_as_favorite_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.validateCreateProfilePrompt();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		
+	}
+	
+	@And("^user click on continue as guest button on AARP site$")
+	public void user_click_on_continue_as_guest_button_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site$")
