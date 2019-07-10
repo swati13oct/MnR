@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -22,7 +24,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
+
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -232,8 +237,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
-    
-    
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -298,8 +301,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-	
-		
+
+
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 		}
@@ -314,8 +317,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
-		if(proactiveChatExitBtn.isDisplayed())
-			jsClickNew(proactiveChatExitBtn);
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
@@ -331,23 +334,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(UMS_ACQISITION_PAGE_URL);
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew
-																				// as
-																				// we're not trying to fail the test if
-																				// it
-																				// isn't found
-			try {
-				if (proactiveChatExitBtn.isDisplayed())
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
 					jsClickNew(proactiveChatExitBtn);
-			} catch (Exception e) {
+			}catch(Exception e){
 				System.out.println("Proactive chat popup not displayed");
 			}
 		} else {
-			Assert.fail("**********Please specify site as BLayer*********");
+			openAndValidate();
 		}
 	}
+	
 	@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
@@ -482,7 +483,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(hideDiscliamerInformation);
 		hideDiscliamerInformation.click();
 
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
@@ -536,7 +537,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(navigationSectionHomeLink);
 		navigationSectionHomeLink.click();
 		validateNew(navigationSectionHomeLink);
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 
@@ -616,7 +617,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(FindPlansButton1);
 		FindPlansButton1.click();
 		validateNew(FindPlansButton1);
-		if (getTitle().equalsIgnoreCase("Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Medicare Plans | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 
@@ -1051,7 +1052,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage navigateToPrescriptionDrug() {
 		enterYourDrugListButton.click();
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½")) {
 			return new GetStartedPage(driver);
 		} else {
 			return null;
@@ -1317,4 +1318,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new VPPPlanSummaryPage(driver);
 	}
 	
-}
+	
+	}
