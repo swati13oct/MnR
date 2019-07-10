@@ -88,7 +88,7 @@ Examples:
   | 15272 | SHIP      | IndSHIP_Pharmacylocator     |
   | 15272 | MA        | IndUHCMA_Pharmacylocator 		|
   
-@vbfGate
+@vbfGate @MemberVBF
 Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
 Given login with following details logins in the member portal and validate elements
 	| Plan Type  	  	 | 			<planType>   						|
