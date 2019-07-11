@@ -122,9 +122,9 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
 	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 61443   | 10       | Long-term care              | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 33321   | 10       | Home Infusion and Specialty | False                 | False            | False                |
-	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 33174   | 10       | Retail Pharmacy             | False                 | False            | False                |
+	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
 	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 14867   | 25       | Long-term care              | False                 | False            | False                |
-	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 29148   | 10       | E-Prescribing               | False                 | False            | False                |
+	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
@@ -241,7 +241,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 
 
   #-------------------------
-  # note: this one below is for local run only - offline env
+  # note: scenario below is for local run only for offline env
   # note: update following input and set env for offline
   # yourUsr = your unix username for member auth access offline
   # yourPwd = your unix password for member auth access offline 

@@ -148,7 +148,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					validateWidget(language, "DCE", testWidget, widget_walgreens_estYurDrugCosts_ind, expUrl);
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - test input not expect to see '"+testWidget+"' widget", 
+			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
 					!validate(widget_walgreens));
 		}
 
@@ -165,7 +165,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validateWidget(language, "LearnMore", testWidget, widget_prefMailServPhar_learnMore_mapd, expUrl);
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
+			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
 					!validate(widget_preferredMailServicePharmacy));
 		}
 	}
