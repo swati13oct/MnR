@@ -24,12 +24,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
+import pages.regression.payments.PaymentHistoryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
@@ -96,10 +99,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "contactUsAtdd")
 	private WebElement contactUslink;
 
-	@FindBy(xpath = ".//*[@id='needhelpsectioncontactus']/section[2]/div/div[3]/div/p")
+	@FindBy(xpath = ".//*[@id='seeMoreWaysAtdd']")
 	private WebElement Seemorewaystext;
 
-	@FindBy(className = "atdd-need-help")
+	@FindBy(xpath = ".//*[contains(@class,'atdd-need-help')]")
 	private WebElement NeedHelpHeader;
 
 	@FindBy(id = "needhelpsectioncontactus")
@@ -107,7 +110,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	// private WebElement Contactussection;
 
-	@FindBy(className = "atdd-needhelp-disclaimer-text")
+	@FindBy(xpath = ".//*[contains(@class,'atdd-needhelp-disclaimer-text')]")
 	private WebElement disclaimersLink;
 
 	@FindBy(xpath = "//a[contains(text(),'MORE INFORMATION')]")
@@ -117,7 +120,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement moreinformationArea;
 
 
-	@FindBy(xpath = ".//*[@id='plan_benefit_documents']/section/div/div[1]/div")
+	@FindBy(xpath = ".//*[contains(@class,'planBenefitDocumentsContainer section')]//*[contains(@class,'planBenefitDocumentsContainer')]")
 	private WebElement planBenefitsDocuments;
 
 	@FindBy(id = "lang-select-2")
@@ -349,7 +352,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'YOUR PRIMARY CARE PROVIDER')]")
 	private WebElement YourPrimaryCareProvider;
 
-	@FindBy(xpath = "//button[@class='btn btn--primary changepcp-atdd']")
+	@FindBy(xpath = "//button[contains(@class,'btn btn--primary changepcp-atdd')]")
 	private WebElement ChangeYourPcpButton;
 
 	@FindBy(xpath = "//a[contains(text(),'SEARCH FOR PROVIDERS')]")
@@ -522,11 +525,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "outPatientTileAtdd")
 	private WebElement OutpatientSurgeryCenterSection;
 
-	@FindBy(xpath = "//div[@class='col-md-8 margin-small']//div[@class='benefitsSummary parbase']")
+	@FindBy(id = "outOfPocketTile")
 	private WebElement outOfPocketSection;
 
-	@FindBy(className = "atdd-innetwrk-title")
-	private WebElement inNetworkSeection;
+	@FindBy(id = "IN-NETWORK-1")
+	private WebElement inNetworkSection;
 
 	@FindBy(id = "OUT-OF-NETWORK-1")
 	private WebElement outOfNetworkSection;
@@ -579,6 +582,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "rxcustomgroup_ccs-header")
 	private List<WebElement> catastrophicCoverageStageColumn;
 
+	@FindBy(xpath = "//h1[contains(text(),'Plan Documents & Resources')]")
+	private WebElement docsAndResourcesHeader;
+	
+	@FindBy(xpath ="//*[contains(@class,'plan_benefit_documents_forms_amd_resources')]//li[contains(@class,' updateSessionLoopContent else clearfix MAPD_govt_false_71710697_2019')]")
+	private List<WebElement> pdfLinks;
+	
 	@FindBy(xpath = ".//*[@id='standard_ads-header']/span/p")
 	private WebElement annualDeductibleColumnheader;
 
@@ -590,6 +599,21 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='standard_ccs-header']/span/p")
 	private WebElement catastrophicCoverageStageColumnheader;
+	
+	@FindBy(id = "submit-order-materials")
+	private WebElement submitOrderBtn;
+	
+	@FindBy(id = "notShipRadio")
+	private WebElement radioBtnsSection;
+	
+	@FindBy(id = "premiumpayment_3")
+	private WebElement paymentsTab;
+	
+	@FindBy(xpath= "//h1[contains(text(), 'Premium Payments')]")
+	private WebElement paymentsHeader;
+	
+	@FindBy(xpath= "//*[contains(@dtmid,'cta_ordermaterials')]")
+	private WebElement planDocsAndResourcesBtn;
 
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-rx187grptable']/tbody/tr[2]/td[3]/div[1]")
 	private WebElement PeehipTier1ValueIC;
@@ -615,10 +639,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "lang-select-2")
 	private WebElement planDocumentsLangDropdown;
-	@FindBy(className = "document-list-new")
+	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]")
 	private WebElement otherDocuments;
 
-	@FindBy(className = "benefitsSummary")
+	@FindBy(id = "benefitsSummary")
 	private WebElement benefitsSummarySection;
 
 	@FindBy(id = "needhelpsectioncontactus")
@@ -852,6 +876,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='primary-care-provider-atdd']")
 	private WebElement primaryCareProviderSectionHeaderGroup;
+	
+	@FindBy(xpath = "//*[contains(text(),'VIEW OTHER DOCUMENTS AND RESOURCES')]")
+	private WebElement viewDocsAndResourcesLink;
+	
+	@FindBy(xpath = "//*[@id='ordermaterials']")
+	private WebElement orderMaterialsTab;
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/*//div/div[8]/div/div/div/div/ul/li")
 	private List<WebElement> directorySectionMAPDGroup;
@@ -930,10 +960,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id= "outPatientTileAtdd")
 	private WebElement outPatientSection;
 
-
-	@FindBy(xpath= "(//div[@class='outofpocketdme parbase section'])[1]")
-	private WebElement inNetworkSection;
-
 	@FindBy(xpath= "(//div[@class='outofpocketdme parbase section'])[2]")
 	private WebElement outNetworkSection;
 
@@ -942,6 +968,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	
 	@FindBy(xpath= "(//a[contains(text(),'View all benefits')])[1]")
 	private WebElement ViewAllBenefitsLinkONRally;
+	
+	@FindBy(xpath= "(//*[contains(@class,'planBenefitDocumentsContainer')]/div[2]//*[contains(@class,'PlanPdf section')][1]//li[2]/a")
+	private WebElement pdfLink1;
+	
+	@FindBy(xpath= "(//*[contains(@class,'planBenefitDocumentsContainer')]/div[2]//*[contains(@class,'PlanPdf section')][2]//li[2]/a")
+	private WebElement pdfLink2;
 
 
 	public WebElement getLinkBackToTop_copy() {
@@ -2773,13 +2805,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 *       members in Need help section
 	 */
 	public void validateContactUsNeedHelp() {
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(Seemorewaystext);
+		
+		validateNew(needHelpSection);
+		validateNew(Seemorewaystext);
 
 	}
 
@@ -3643,17 +3671,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		// benefits summary section
 		validateNew(benefitsSummarySection);
-		validateNew(OfficeVisits);
+		validateNew(officeVisitSection);
 		validateNew(hospitalVisitsSection);
 		validateNew(OutpatientSurgeryCenterSection);
 
 		// out of pocket maximum section
 
 		validateNew(outOfPocketSection);
-		validateNew(inNetworkSeection);
+		validateNew(inNetworkSection);
 		validateNew(outOfNetworkSection);
-		validate(INNETWORKTEXT);
-		validate(OUTOFNETWORKTEXT);
+		
 
 		// Primary care provider section
 		if (planType.equalsIgnoreCase("SSUP")) {
@@ -5279,8 +5306,48 @@ public void validatePrimaryCareProviderSection() {
 	validateNew(ChangeYourPcpButton);
 	validateNew(SearchProvider);
 	validateNew(StartSearch);
-	
+}
 
+public void validatePdfLinks(){
+	
+	for(WebElement pdf : pdfLinks ){
+		int i =1;
+		try
+		    {
+		        WebDriverWait wait = new WebDriverWait(driver, 5);
+		        wait.until(ExpectedConditions.elementToBeClickable(pdf));     
+		    }
+		    catch (Exception e)
+		    {
+		        Assert.fail("The PDF links are not clickable");
+		        System.out.println("Link "+i+ " is not clickable");
+		    }
+		i++;
+	}
+}
+
+public void navigateToDocumentsAndResourcesPage(){
+	viewDocsAndResourcesLink.click();
+	if(!validateNew(docsAndResourcesHeader))
+		Assert.fail("Error in loading the documents and resources page");		
+}
+
+public void navigateToOrderPlanMaterialsPage(){
+	orderMaterialsTab.click();
+}
+
+public void validateOrderPlanMaterialsPage(){
+	validateNew(submitOrderBtn);
+	validateNew(radioBtnsSection);
+	validateNew(planDocsAndResourcesBtn);
+}
+
+public PaymentHistoryPage navigateToPaymentsPage(){
+	paymentsTab.click();
+	
+	if(validateNew(paymentsHeader))
+		return new PaymentHistoryPage(driver);
+	return null;
 }
 
 }

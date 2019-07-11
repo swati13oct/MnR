@@ -111,8 +111,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "editAutomaticPaymentButton")
 	private WebElement AutoPayButton;
 
-	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
-	private WebElement SetUpAutoPayButton;
+	@FindBy(xpath = "//a[not (contains(@class,'ng-hide')) and contains(text(),'Set Up Automatic Payments')]")
+	private WebElement setUpAutoPayButton;
 
 	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
 	private WebElement SetUpAutoPayButtonCC;
@@ -509,6 +509,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		validateNew(paymentHistoryApp);
 		validateNew(oneTimePaymentBtn);
+		validateNew(setUpAutoPayButton);
 
 	}
 
@@ -600,8 +601,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 
 		try {
-			if (SetUpAutoPayButton.isDisplayed()) {
-				SetUpAutoPayButton.click();
+			if (setUpAutoPayButton.isDisplayed()) {
+				setUpAutoPayButton.click();
 				System.out.println("clicked on Setup New Payment button");
 				try {
 					Thread.sleep(2000);
@@ -649,8 +650,8 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println("iPerception Pop Up is not Present");
 		}
 		try {
-			if (SetUpAutoPayButton.isDisplayed()) {
-				SetUpAutoPayButton.click();
+			if (setUpAutoPayButton.isDisplayed()) {
+				setUpAutoPayButton.click();
 				System.out.println("clicked on Setup New Payment button");
 				try {
 					Thread.sleep(2000);

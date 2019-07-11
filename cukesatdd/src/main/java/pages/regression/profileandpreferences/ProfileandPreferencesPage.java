@@ -2400,9 +2400,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateProfilePage() {
 		
-		validateNew(EPMPContactInfoHeader);
-		validateNew(EPMPEmailAddress);
-		validateNew(EPMPPhoneNumbersSection);
 		validatePlanNameMemberidNameAccountProfile();
 		
 	}
