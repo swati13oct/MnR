@@ -136,7 +136,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					!validate(widget_preferredRetailPharmacyNetwork));
 		}
 
-		testWidget="Walgreens – Preferred Retail Pharmacy";
+		testWidget="Walgreens - Preferred Retail Pharmacy";
 		if (expectWalgreensPlan) {	
 			if (hasWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - user has Walgreens plan should see '"+testWidget+"' widget", 
@@ -166,7 +166,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					validate(widget_preferredMailServicePharmacy));
+					!validate(widget_preferredMailServicePharmacy));
 		}
 	}
 

@@ -48,7 +48,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 		| Zip Code 	  |	<zipcode> 	 |
 		| Distance 	  |	<distance> 	 |
 
-<<<<<<< HEAD
     Examples: 
 	    | planType | memberType | distance | zipcode |
 	    | PDP        | grpPerf  | 25       | 90210   |
