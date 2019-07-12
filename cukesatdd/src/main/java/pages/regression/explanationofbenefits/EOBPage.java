@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 public class EOBPage extends UhcDriver{
 
@@ -88,7 +89,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className=" btn btn—primary")
 	private WebElement customSearchButton;
 	
-	@FindBy(xpath="//*[@class='bold number-title ng-binding']")
+	@FindBy(xpath="//*[contains(@class,'bold number-title ng-binding')]")
 	private WebElement eobCount;
 		
 	@FindBy(className="rightarrow")
@@ -96,6 +97,12 @@ public class EOBPage extends UhcDriver{
 	
 	@FindBy(id="eoblist0")
 	private WebElement eobFirst;
+	
+	@FindBy(id="coveragebenefits_2")
+	private WebElement bncTab;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Plan Benefits Summary')]")
+	private WebElement bncPageHeader;
 	
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
@@ -699,6 +706,23 @@ public class EOBPage extends UhcDriver{
 	
 	public void validatePHIPErorrMessage(){
 		
+	}
+	
+	public void validateEOBsDisplayed(){
+		int eobCountInt = Integer.parseInt(eobCount.getText());System.out.println("EOB Count is: "+eobCount.getText());
+		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
+		if(eobCountInt == listOfEOBs.size()){
+			System.out.println("Validated EOBs are displayed");
+			
+		}else
+			System.out.println("No EOBs are displayed");
+	}
+	
+	public BenefitsAndCoveragePage navigateToBncPage(){
+		bncTab.click();
+		if(validateNew(bncPageHeader))
+			return new BenefitsAndCoveragePage(driver);
+		return null;
 	}
  }
 

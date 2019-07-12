@@ -420,8 +420,13 @@ Feature: S1.1 To test Member Auth Dashboard page.
     And the user validates the EOB page and navigates to benefits and coverage page in prod
       	| Date Range | <dateRange> |
       	| Plan Type | <planType> |
+     And the user validates the benefits and coverage page in prod
+       | Plan Type | <planType> |
+     And the user navigates to the documents and resources page and validates PDFs in prod
+     And the user navigates to the order plan materials page and validates in prod
+     And the user navigates to payments page and validates in prod
       	
       	
       Examples:
-      | UID     | username  | password  | memUserName | planType | claimPeriod |
-      | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months|
+      | UID     | username  | password  | memUserName | planType | claimPeriod | dateRange |
+      | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |

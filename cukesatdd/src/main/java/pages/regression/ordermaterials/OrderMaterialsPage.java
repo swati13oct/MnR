@@ -237,6 +237,9 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	@FindBy(xpath="//h2[contains(text(), 'Confirmation')]")
 	private WebElement confirmationPageSubHeader;
 
+	@FindBy(xpath="//a[@id='ordermaterials']")
+	private WebElement benefitPgOrderPlnMaterialLnk;
+
 	public OrderMaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -353,6 +356,8 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Printable Documents' link element on Order Plan Materials",validate(printableDocLink));
 		String originalUrl=driver.getCurrentUrl();
 		printableDocLink.click();
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, benefitPgOrderPlnMaterialLnk, 10);
 		String expectedUrl="member/documents/overview.html";
 		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
 		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
@@ -598,6 +603,9 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 				Assert.assertTrue("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'",
 						validate(errorMsg_serviceFail));
 				System.out.println("Expected - NOT able to order item="+option);
+			} else if (planType.equalsIgnoreCase("MEDICA") && option.equalsIgnoreCase("Member Materials")) { //note: only PDP can order Welcome Guide
+				Assert.assertTrue("PROBLEM - for MEDICA user should have gotten error message when attempting to order 'Membership Materials'",
+						validate(errorMsg_serviceFail));
 			} else {
 				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
 			}

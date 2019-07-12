@@ -663,7 +663,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("test is through stage");
 		} // Testing through Stage
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);

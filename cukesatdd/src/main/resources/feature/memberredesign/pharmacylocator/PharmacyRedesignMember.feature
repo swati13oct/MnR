@@ -4,17 +4,19 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   #----- beginning of VBF member pharmacy locator scenarios section ------------------------
   @vbfGate @MemberVBF
   Scenario Outline:plan: <planType> -memberType: <memberType> -To verify for default zipcode, filters, Show on map, View PDF, More Info in Redesign site
-    Given login with following details logins in the member portal and validate elements
-  	  | Plan Type  	  	 | 			<planType>   						|
-	  | Member Type 	   | 			<memberType> 	    			|
-      When the user navigates to pharmacy search page in Redesign site
-    And the user enters distance details in Redesign site
+	Given login with following details logins in the member portal and validate elements
+	  | Plan Type     | <planType>     |
+	  | Member Type   | <memberType>   |
+	When the user navigates to pharmacy search page
+    And the user validates default zip is used when page first load
   	  | Distance 	  	   | 		    <distance> 						|
-    And the user selects Pharmacy Types to Filter in Redesign Site
-  	  | Pharmacy Type    | 			<pharmacyType>   				|
-    Then the user validates the pharmacies available in Redesign site
-    And the user Validates show on map link in Redesign Site
-    And the user validate more information content based on plan type in Redesign Site
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	  | Language      | English        |
+	Then the user validates the pharmacies available
+	  | Language      | English        |
+	And the user validates show on map link
+	And the user validates more information content based on plan type
 
     Examples: 
 	    | planType | memberType  | distance | pharmacyType                |

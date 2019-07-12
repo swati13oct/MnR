@@ -63,7 +63,6 @@ Feature: C1.2To test Preferences page
 
     Examples: 
       | TID   | planType                       |
-      | 15311 | MAPD_AARP_GOGreen_Profilepref  |
       | 15312 | MA_AARP_GOGreen_Profilepref    |
       | 15313 | PDP_AARP_GOGreen_Profilepref   |
       | 15314 | MAPD_UHC_GOGreen_Profilepref   |
