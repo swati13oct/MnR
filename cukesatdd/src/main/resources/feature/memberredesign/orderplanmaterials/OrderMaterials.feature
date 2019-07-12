@@ -85,7 +85,7 @@ Feature:P1.5 To test order materials in member site
     
     Examples: 
       | TID   | planType | memberType            | 
-      | 15287 | MA	 | AARP_Individual_order |  
+      | 15287 | MA	     | AARP_Individual_order |  
       | 15288 | MAPD     | AARP_Individual_order |
       | 15292 | PDP      | AARP_Individual_order |
       | 15288 | MAPD     | UHC_Individual_order  |
