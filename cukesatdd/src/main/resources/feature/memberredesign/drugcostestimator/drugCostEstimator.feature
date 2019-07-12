@@ -150,7 +150,7 @@ Examples:
 | TID    | planType | memberType  |drug|dosage|quantity|frequency| 
 | 15325    | MAPD     |Individualwithoutpharmacy_DCE |Lipitor|Lipitor TAB 10MG|31|Every 1 month|
 
-@vbfGate 
+@vbfGate @MemberVBF
 Scenario Outline:plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
 Given login with following details logins in the member portal and validate elements
 	| Plan Type   | <planType>   |

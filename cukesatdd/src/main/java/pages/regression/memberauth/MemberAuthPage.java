@@ -242,7 +242,7 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
               Thread.sleep(2000);
               MemberPopUpLogin.click();  
               System.out.println("popup login button clicked");
-         
+              Thread.sleep(2000);        
               switchToNewTab();
               System.out.println("Switched to new tab");
               if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")){
