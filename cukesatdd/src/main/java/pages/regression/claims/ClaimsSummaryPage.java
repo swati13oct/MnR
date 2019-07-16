@@ -27,8 +27,13 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummaryValidatePreEff validatePreEff=new ClaimsSummaryValidatePreEff(driver);
 	ClaimsSummaryValidateTable validateTable=new ClaimsSummaryValidateTable(driver);
 	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
+	ClaimsSummaryValidateSegmentId validateSegmentId=new ClaimsSummaryValidateSegmentId(driver);
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
 
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+	}
+	
 	public void searchClaimsByTimePeriodClaimType(String planType, String claimPeriod, String claimType) 
 			throws InterruptedException {
 		searchClaims.searchClaimsByTimePeriodClaimType(planType, claimPeriod, claimType);

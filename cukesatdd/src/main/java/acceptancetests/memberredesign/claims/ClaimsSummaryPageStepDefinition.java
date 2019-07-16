@@ -433,4 +433,17 @@ public class ClaimsSummaryPageStepDefinition {
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
+	
+	@Then("^I can validate the segment ID value in localStorage$")
+	public void validates_segmentid(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+	}
 }

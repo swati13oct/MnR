@@ -365,7 +365,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
-
 	}
 }
 

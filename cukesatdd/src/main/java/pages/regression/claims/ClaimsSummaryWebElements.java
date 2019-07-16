@@ -94,7 +94,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy (xpath="//*[@id='custom_to_date_fed']")
 	protected WebElement fedTo;
 
-	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
+	@FindBy(xpath = "//div[contains(@class,'preeffeciveParsys')]//p")
 	protected WebElement preEffMsg;
 
 	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
@@ -118,9 +118,9 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//div[contains(@class,'LearnMoreAboutYour') and not(contains(@class,'ng-hide'))]") 
 	protected WebElement lrnMoreAbtClaimsContent;
 
-	@FindBy(xpath="//*[@id='atddUhcPagination']/li[1]/p")	
-	protected WebElement uhc_summPgPagination;
-
+	@FindBy(xpath="//div[@class='pgno_pgnation_wrap']")	
+	protected WebElement summPgPagination;
+	
 	@FindBy (xpath ="//div[@ng-hide='phipError']//div[@class='customsegments parbase section'][1]//p[contains(text(), 'Medical EOB')]")
 	protected WebElement medicalEobTxt;
 
@@ -201,9 +201,6 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath=".//*[@id='atddPagination']/p")
 	protected WebElement claimSummPaginationTxt;
-
-	//@FindBy(xpath=".//*[@id='learnmoresummarytoggle']")
-	//protected WebElement learmore;
 
 	@FindBy(id="numDays1")
 	protected WebElement youHave1;

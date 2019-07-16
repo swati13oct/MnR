@@ -18,7 +18,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
   @claims00 @def1041 @thePredators
-  Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
+  Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -segmentId: <segmentId> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -28,6 +28,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage
+      | Segment ID   | <segmentId>   |
     #----------------- Test Custom search error cases --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -109,63 +111,64 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     @claims00_01 @claims00_C_M_p1
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | Yes                |
-      | 01_2  | 1041 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | Yes                |
-      | 01_3  | 1041 | MAPD     | UHC_Individual             | M_COSMOS_CLAIMS | Medical           | Yes                |
-      | 01_4  | 1041 | MAPD     | GROUP                      | COSMOS_CLAIMS   | Medical           | Yes                |
-      | 01_5  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | Yes                |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_2  | 1041 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
+      | 01_3  | 1041 | MAPD     | UHC_Individual             | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
+      | 01_4  | 1041 | MAPD     | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_5  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @claims00_02 @claims00_C_M_p2
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 02_1  | 1041 | MA       | AARP_Individual            | COSMOS_CLAIMS   | Medical           | Yes                |
-      | 02_2  | 1041 | MA       | UHC_Individual             | COSMOS_CLAIMS   | Medical           | Yes                |
-      | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | No                 |
-      | 02_4  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | Yes                |
-      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | No                 |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 02_1  | 1041 | MA       | AARP_Individual            | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_2  | 1041 | MA       | UHC_Individual             | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | No                 |
+      | 02_4  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | No                 |
 
     @claims00_03 @claims00_C_D_p1 
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 03_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Prescription drug | No                 |
-      | 03_2  | 1041 | MAPD     | AARP_Individual            | D_COSMOS_CLAIMS | Prescription drug | No                 |
-      | 03_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | No                 |
-      | 03_4  | 1041 | MAPD     | GROUP                      | COSMOS_CLAIMS   | Prescription drug | No                 |
-      | 03_5  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | No                 |
-      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | Yes                |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 03_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
+      | 03_2  | 1041 | MAPD     | AARP_Individual            | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                |
+      | 03_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | 000       | No                 |
+      | 03_4  | 1041 | MAPD     | GROUP                      | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
+      | 03_5  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
+      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | 001       | Yes                |
 
     @claims00_04 @claims00_N_M_p1
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 04_1  | 1041 | MA       | AARP_Individual            | NICE_CLAIMS     | Medical           | Yes                |
-      | 04_2  | 1041 | MAPD     | AARP_Individual            | M_NICE_CLAIMS   | Medical           | Yes                |
-      | 04_3  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | Yes                |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 04_1  | 1041 | MA       | AARP_Individual            | NICE_000_CLAIMS | Medical           | 000       | Yes                |
+      | 04_2  | 1041 | MA       | AARP_Individual            | NICE_001_CLAIMS | Medical           | 001       | Yes                |
+      | 04_3  | 1041 | MAPD     | AARP_Individual            | M_NICE_CLAIMS   | Medical           | 000       | Yes                |
+      | 04_4  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | 000       | Yes                |
 
     @claims00_05 @claims00_N_D_p1
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 05_1  | 1041 | MAPD     | AARP_Individual            | D_NICE_CLAIMS   | Prescription drug | Yes                |
-      | 05_2  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Prescription drug | Yes                |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 05_1  | 1041 | MAPD     | AARP_Individual            | D_NICE_CLAIMS   | Prescription drug | 000       | Yes                |
+      | 05_2  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Prescription drug | 000       | Yes                |
 
     # note: if memberType contains SSO then will perform additional validation for the optumrx.com link in claim table section
     # note: user needs to have valid entry in optumrx site and should be eligible in HSID site to pass the optumrx related validation
     @claims00_06 @claims00_R_p1
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 06_01 | 1041 | PDP      | SSO_Individual             | RX_CLAIMS       | Prescription drug | Yes                |
-      | 06_02 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | No                 |
-      | 06_03 | 1041 | PDP      | GROUP                      | RX_CLAIMS       | Prescription drug | No                 |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 06_01 | 1041 | PDP      | SSO_Individual             | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_02 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | 000       | No                 |
+      | 06_03 | 1041 | PDP      | GROUP                      | RX_CLAIMS       | Prescription drug | 000       | No                 |
 
     @claims00_07 @claims00_S_p1
     Examples: 
-      | index | DID  | planType | memberType                 | claimSystem     | claimType         | flagZeroClaimsUser |
-      | 07_01 | 1041 | SHIP     | Individual                 | COMPASS_CLAIMS  | NA                | No                 |
-      | 07_02 | 1041 | SHIP     | COMBO                      | COMPASS_CLAIMS  | NA                | Yes                |
+      | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 07_01 | 1041 | SHIP     | Individual                 | COMPASS_CLAIMS  | NA                | 000       | No                 |
+      | 07_02 | 1041 | SHIP     | COMBO                      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
 
     #note: these will be in team-a env only
-	#  |xx     | 1041 | MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Medical           | No                |
-	#  |xx     | 1041 | MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Prescription drug | No                |
+	#  |xx     | 1041 | MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Medical           | 000       | No                |
+	#  |xx     | 1041 | MAPD     | t_diffGrpsDiffYrs_Individual | COSMOS_CLAIMS  | Prescription drug | 000       | No                |
 	#----- end of claims00 ---------------------------------------------------------------
 
   #----- beginning of claims test for offline prod - local run only ------------------
@@ -185,7 +188,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   claimType = e.g. Prescription drug / Medical / NA (for ship)
   # note:   flagZeroClaimsUser = Yes / No (do you want to fail the test if user has 0 claims)
   @forLocalTestOnly
-  Scenario Outline: To validate via member authorization access
+  Scenario Outline: To validate via member authorization access for claims
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -197,6 +200,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage
+      | Segment ID   | <segmentId>   |
     #----------------- Test for Last 24 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>     |
@@ -214,7 +219,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I perform extensive validation for values between claims summary and claim details page
 
     Examples: 
-      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | flagZeroClaimsUser |
-      |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | Yes                |
+      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
+      |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 
 	

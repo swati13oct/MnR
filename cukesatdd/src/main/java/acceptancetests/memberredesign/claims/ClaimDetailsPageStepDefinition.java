@@ -233,13 +233,14 @@ public class ClaimDetailsPageStepDefinition {
 				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 				claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 			}
+			//note: prior step would have navigated back to claims summary page, so need to search again 
 			claimsSummPg.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
 			if (!claimsSummPg.validateClaimsTableExists(flagZeroUserNow)) {
 				System.out.println("Claim Period '"+claimPeriod+"' has no claims, skipping claims detail validation step...");
 				return;
-			}
+			} 
 			claimsSummPg.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
-
+			
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
@@ -252,7 +253,6 @@ public class ClaimDetailsPageStepDefinition {
 
 			System.out.println("Proceed to validate header section content on detail page");
 			claimDetlPg.validateHeaderSection(planType, memberType,claimSystem);
-			claimDetlPg.validateClaimsTbl(planType);
 
 			System.out.println("Proceed to validate 'Learn More...' link");
 			claimDetlPg.validateLrnMoreCostLnk();

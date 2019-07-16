@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -39,7 +40,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			String expEobTooltipsText="EOB statements created prior to December "+sixYearsPrior+" are not posted to this site. In addition, although recent claims may be available for viewing, the corresponding EOB statement has not yet been processed and posted to this site for viewing.";
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
 					+ "Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().equals(expEobTooltipsText));
+					tooltipsElemTxt.getText().contains(expEobTooltipsText));
 			tooltipsElemTxt.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, "
 					+ "eob tooltips text should have disappeared after clicking something", 
@@ -52,8 +53,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					validate(tooltipsElemTxt));
 			String expClaimsStatTooltipsTxt="This information tells you whether or not your claim is pending payment, paid or denied. A status of adjusted means that the original payment amount has changed.";
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
-					+ "Expected='' | Actual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().equals(expClaimsStatTooltipsTxt));
+					+ "Expected='"+expClaimsStatTooltipsTxt+"' | Actual='"+tooltipsElemTxt.getText()+"'", 
+					tooltipsElemTxt.getText().contains(expClaimsStatTooltipsTxt));
 
 			tooltipsElemTxt.click();
 			Assert.assertTrue("PROBLEM - locate claims status tooltips after clicking again, "
@@ -72,7 +73,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			}
 			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
 					+ "\nExpected='"+expEobTooltipsText+"' \nActual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().equals(expEobTooltipsText));
+					tooltipsElemTxt.getText().contains(expEobTooltipsText));
 			tooltipsElemTxt.click();
 			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, "
 					+ "eob tooltips text should have disappeared after clicking something", 
@@ -162,51 +163,87 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		validateTooltips(planType, memberType, claimSystem);
 
 		String testItem="";
-		String assertText="PROBLEM - unable to locate "+testItem+" element on claims detail page";
 		//note: validate header section body content
 		if (planType.equalsIgnoreCase("SHIP")) {
-			Assert.assertTrue(assertText, validate(ship_detl_claimsNumLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_detl_claimsNumLbl));
 			testItem="ship_dateRangeLabel";
-			Assert.assertTrue(assertText, validate(ship_dateRngLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_dateRngLbl));
 			testItem="ship_dateRangeValue";
-			Assert.assertTrue(assertText, validate(ship_dateRngVal));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_dateRngVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_dateRngVal.getText().equals(""));
 			testItem="ship_claimNumLabel";
-			Assert.assertTrue(assertText, validate(ship_claimsNumLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsNumLbl));
 			testItem="ship_claimNumValue";
-			Assert.assertTrue(assertText, validate(ship_claimsNumVal));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsNumVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_claimsNumVal.getText().equals(""));
 			testItem="ship_claimTypeLabel";
-			Assert.assertTrue(assertText, validate(ship_claimsTypLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsTypLbl));
 			testItem="ship_claimTypeValue";
-			Assert.assertTrue(assertText, validate(ship_claimsTypVal));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsTypVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_claimsTypVal.getText().equals(""));
 			testItem="ship_eobLabel";
-			Assert.assertTrue(assertText, validate(ship_eobLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobLbl));
 			testItem="ship_eobValue";
-			Assert.assertTrue(assertText, validate(ship_eobVal));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_eobVal.getText().equals(""));
 			testItem="ship_eobStatementText";
-			Assert.assertTrue(assertText, validate(ship_eobStmtTxt));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobStmtTxt));
 			testItem="ship_paidToYou";
-			Assert.assertTrue(assertText, validate(ship_paidToYou));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_paidToYou));
 			testItem="ship_paidToProvider";
-			Assert.assertTrue(assertText, validate(ship_paidToProvider));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_paidToProvider));
 		} else {
 			testItem="claimNumberLabel";
-			Assert.assertTrue(assertText, validate(claimsNumLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsNumLbl));
 			testItem="dateRange";
-			Assert.assertTrue(assertText, validate(dateRng));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(dateRng));
 			testItem="providerName";
-			Assert.assertTrue(assertText, validate(providerName));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(providerName));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!providerName.getText().equals(""));
 			testItem="claimNum value";
-			Assert.assertTrue(assertText, validate(claimsNumDyn));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsNumDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsNumDyn.getText().equals(""));
 			testItem="claimTypeLabel";
-			Assert.assertTrue(assertText, validate(claimsTypLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsTypLbl));
 			testItem="claimsType value";
-			Assert.assertTrue(assertText, validate(claimsTypDyn));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsTypDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsTypDyn.getText().equals(""));
 			testItem="claimStatusLabel";
-			Assert.assertTrue(assertText, validate(claimsStatLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsStatLbl));
 			testItem="claimStatus value";
-			Assert.assertTrue(assertText, validate(claimsStatDyn));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsStatDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsStatDyn.getText().equals(""));
 			testItem="medicalEOBLabel";
-			Assert.assertTrue(assertText, validate(medicalEobLbl));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(medicalEobLbl));
 			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field value is not as expected, "
 					+ "should either be 'Not Available (Pending)' or 'view PDF'", 
 					(validate(medicalEobNotAvaTxt) || validate(medicalEobViewPdf)));

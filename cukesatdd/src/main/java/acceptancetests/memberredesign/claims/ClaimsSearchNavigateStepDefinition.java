@@ -53,7 +53,6 @@ public class ClaimsSearchNavigateStepDefinition {
 	 * This step is for VBF.
 	 * This step performs navigation from claims summary page to claims detail page via method used by VBF case
 	 */
-	//tbd public static String vbf_claimType;
 	@And("^I can navigate to the Claim Details page from claims summary page$")
 	public void vbf_navigate_to_claim_details_page() throws InterruptedException { 
 		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
@@ -202,6 +201,8 @@ public class ClaimsSearchNavigateStepDefinition {
 	public void i_navigate_to_claim_details() throws InterruptedException { 
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		String claimSystem = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
