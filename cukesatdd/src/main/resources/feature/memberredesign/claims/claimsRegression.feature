@@ -87,13 +87,13 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage
+      | Segment ID   | <segmentId>   |
     And I can search claims for the following claim period on claims summary page
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim Period | <claimPeriod> |
       | Claim System | <claimSystem> |
-    Then I can validate the segment ID value in localStorage
-      | Segment ID   | <segmentId>   |
     Then I can see the claims displayed based on the selection on claims summary page
     And I validate the pagination on the claims summary page
     And I can see the learn more and print and download option on claims summary table section

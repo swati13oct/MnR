@@ -79,6 +79,8 @@ public class ClaimsSummaryPageStepDefinition {
 		}
 		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
 		claimsSummPg.validateSystemErrorMsgNotExist();
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
 	}
 
 
