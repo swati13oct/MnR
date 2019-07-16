@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ulayer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -832,6 +833,62 @@ public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,Strin
 	else
 		bValidation = false;
 	return bValidation;
+}
+
+
+public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+	WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+	String PdfHref = PDFlink.getAttribute("href");
+	System.out.println("href for the PDF is : "+PdfHref);
+	if(PdfHref.contains(documentCode)){
+		System.out.println("Expected Document code :"+documentCode+"-  is mathing the PDF link :  "+PdfHref);
+		return true;
+	}
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+	WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+	
+	String parentHandle = driver.getWindowHandle();
+	int initialCount = driver.getWindowHandles().size();
+
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
+	executor.executeScript("arguments[0].click();", PDFlink);
+
+	//PDFlink.click();
+
+	waitForCountIncrement(initialCount);
+	ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+	String currentHandle = null;
+	for (int i = 0; i < initialCount + 1; i++) {
+		System.out.println("Switching Window");
+		driver.switchTo().window(tabs.get(i));
+		currentHandle = driver.getWindowHandle();
+		if (!currentHandle.contentEquals(parentHandle)){
+			System.out.println("In Parent Window : FAILED");
+			break;
+
+		}
+	}
+	System.out.println("Switched to new window : Passed");
+
+	try {
+		driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
+	} catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	if(driver.getCurrentUrl().contains(documentCode))	{
+		System.out.println("PDF url has the correct document code.. : "+documentCode);
+		System.out.println("PDF url : "+driver.getCurrentUrl());
+		return true;
+	}
+	return false;
 }
     
 

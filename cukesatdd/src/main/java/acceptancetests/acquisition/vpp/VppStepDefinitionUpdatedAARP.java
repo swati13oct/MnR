@@ -1616,5 +1616,46 @@ public class VppStepDefinitionUpdatedAARP {
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
+	
+
+@Then("^the user validates following PDF link is displayes with correct document code$")
+public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String PDFtype = memberAttributesMap.get("PDF type");
+	String DocumentCode = memberAttributesMap.get("DocumentCode");
+	
+	PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	
+	boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
+	Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+
+}
+
+@Then("^the user click on PDF link and validates document code in URL$")
+public void the_user_click_on_PDF_link_and_validates_document_code_in_URL(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+String PDFtype = memberAttributesMap.get("PDF type");
+
+	String DocumentCode = memberAttributesMap.get("DocumentCode");
+	boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
+	Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+
+}
 
 }
