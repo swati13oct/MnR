@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -384,18 +385,19 @@ public class TestHarness extends UhcDriver {
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryFromTestHarnessPage() {
-		CommonUtility.checkPageIsReadyNew(driver);
-		testHarnessClaimsLink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		try{
+			testHarnessClaimsLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessClaimsLink.click();
 		}
-		
-		return new ClaimsSummaryPage(driver);
-		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		if (driver.getTitle().contains("Claims")) {
+			return new ClaimsSummaryPage(driver);
+		}
+		return null;
 	}
 		
 
@@ -542,7 +544,13 @@ public class TestHarness extends UhcDriver {
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPageFromTestHarnessPage() throws InterruptedException {
 		CommonUtility.checkPageIsReadyNew(driver);
-		testHarnessOrderPlanPageLink.click();
+		try{
+			testHarnessOrderPlanPageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessOrderPlanPageLink.click();
+		}		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, orderHeader, 30);
 		if (driver.getTitle().contains("Order")) {
@@ -581,7 +589,13 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, testHarnessPharmacyPageLink, 30);
 		validateNew(testHarnessPharmacyPageLink);
-		testHarnessPharmacyPageLink.click();
+		try{
+			testHarnessPharmacyPageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessPharmacyPageLink.click();
+		}		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, zipcode, 60);
 		if (driver.getTitle().contains("Pharmacy")) {
@@ -617,7 +631,13 @@ public class TestHarness extends UhcDriver {
 		System.out.println(driver.getTitle());
 		CommonUtility.waitForPageLoad(driver, profilePageLink, 30);
 		validateNew(testHarnessProfilePageLink);
-		profilePageLink.click();
+		try{
+			profilePageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			profilePageLink.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 
@@ -932,5 +952,30 @@ public class TestHarness extends UhcDriver {
         Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
         System.out.println("Test Harness page co logo assert condition is passed");
 }
+        
+    	/**
+    	 * For iPerception Model
+    	 * @param driver
+    	 */
+    	public static void checkForIPerceptionModel(WebDriver driver) {
+    		int counter = 0;
+    		do {
+    			System.out.println("current value of counter: " + counter);
+    			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+    			if (IPerceptionsFrame.isEmpty()) {
+    				try {
+    					Thread.sleep(5000);
+    				} catch (InterruptedException e) {
+    					System.out.println(e.getMessage());
+    				}
+    			} else {
+    				driver.switchTo().frame(IPerceptionsFrame.get(0));
+    				driver.findElement(By.className("btn-no")).click();
+    				driver.switchTo().defaultContent();
+    			}
+    			counter++;
+    		} while (counter < 2);
+    	}
         
 }

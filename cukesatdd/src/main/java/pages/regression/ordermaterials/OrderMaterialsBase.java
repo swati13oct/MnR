@@ -194,7 +194,7 @@ public class OrderMaterialsBase extends UhcDriver  {
 			System.out.println("TEST - testXpath="+testXpath);
 			//tbd WebElement orderPlanMaterialsLink=driver.findElement(By.xpath("//div[contains(@class,'PlanDocumentsActiveCallouts') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]"));
 			WebElement orderPlanMaterialsLink=driver.findElement(By.xpath(testXpath));
-			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 20);
+			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 120);
 			orderPlanMaterialsLink.click(); //note: this will navigate back to order page
 			CommonUtility.checkPageIsReady(driver);
 			handleComboTabIfComboUser(planType, memberType);
