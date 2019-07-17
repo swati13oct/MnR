@@ -545,7 +545,13 @@ public class TestHarness extends UhcDriver {
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPageFromTestHarnessPage() throws InterruptedException {
 		CommonUtility.checkPageIsReadyNew(driver);
-		testHarnessOrderPlanPageLink.click();
+		try{
+			testHarnessOrderPlanPageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessOrderPlanPageLink.click();
+		}		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, orderHeader, 30);
 		if (driver.getTitle().contains("Order")) {
@@ -584,7 +590,13 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, testHarnessPharmacyPageLink, 30);
 		validateNew(testHarnessPharmacyPageLink);
-		testHarnessPharmacyPageLink.click();
+		try{
+			testHarnessPharmacyPageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessPharmacyPageLink.click();
+		}		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, zipcode, 60);
 		if (driver.getTitle().contains("Pharmacy")) {
@@ -620,7 +632,13 @@ public class TestHarness extends UhcDriver {
 		System.out.println(driver.getTitle());
 		CommonUtility.waitForPageLoad(driver, profilePageLink, 30);
 		validateNew(testHarnessProfilePageLink);
-		profilePageLink.click();
+		try{
+			profilePageLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
+			profilePageLink.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_30);
 

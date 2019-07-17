@@ -120,7 +120,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath="//div[@class='pgno_pgnation_wrap']")	
 	protected WebElement summPgPagination;
-	
+
 	@FindBy (xpath ="//div[@ng-hide='phipError']//div[@class='customsegments parbase section'][1]//p[contains(text(), 'Medical EOB')]")
 	protected WebElement medicalEobTxt;
 

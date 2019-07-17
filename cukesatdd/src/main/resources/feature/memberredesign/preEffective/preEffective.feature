@@ -35,16 +35,16 @@ Feature: To test pre-effective functionality
       | Member Type | <memberType> |
 
     Examples: 
-      | planType		| memberType            | copayCategory |technicalTFN  | segmentId |
-      | IndMA           | preeffectiveIndMA     | NON LIS       |1-888-980-8125| 000       |
-      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125| 000       |
-      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125| 002       |
-      | IndPDP          | preeffectiveIndPDP    | NON LIS       |1-888-980-8125| 000       |
-      | GroupMA         | preeffectiveGroupMA   | NON LIS       |1-888-980-8125| 000       |
-      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |1-888-980-8125| 000       |
-      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |1-888-980-8125| 000       |
-      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |1-888-980-8125| 000       |
-      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |1-866-254-3132| 000       |
+      | planType		| memberType                | copayCategory | technicalTFN  | segmentId |
+      | IndMA           | preeffectiveIndMA         | NON LIS       | 1-888-980-8125| 000       |
+      | IndMAPD         | preeffectiveIndMAPD       | NON LIS       | 1-888-980-8125| 000       |
+      | IndPDP          | preeffectiveIndPDP        | NON LIS       | 1-888-980-8125| 000       |
+      | GroupMA         | preeffectiveGroupMA       | NON LIS       | 1-888-980-8125| 000       |
+      | GroupMAPD       | preeffectiveGroupMAPD     | NON LIS       | 1-888-980-8125| 000       |
+      | GroupSSUP       | preeffectiveGroupSSUP     | NON LIS       | 1-888-980-8125| 000       |
+      | GroupPDP        | preeffectiveGroupPDP      | NON LIS       | 1-888-980-8125| 000       |
+      | SHIPPreffective | preeffectiveSHIPOnly      | NON LIS       | 1-866-254-3132| 000       |
+      | IndMAPD         | preeffectiveIndMAPD_002   | NON LIS       | 1-888-980-8125| 002       |
       
       
       
