@@ -655,7 +655,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
 
 
-  @oleVppBlayerSmoke_VBF
+  @oleVppBlayerSmoke_VBF @vbfGate
   Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

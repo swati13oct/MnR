@@ -215,7 +215,7 @@ public class MRScenario {
 				String tagName=it.next();
 				
 				
-				  if  (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("team-ci")){
+				  if  (environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
 				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
@@ -763,7 +763,7 @@ public class MRScenario {
 		capabilities.setCapability("tunnelIdentifier",
 sauceLabsTunnelIdentifier);		
 		//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
-		capabilities.setCapability("tunnelIdentifier", "Optum-Prd");	
+		//capabilities.setCapability("tunnelIdentifier", "Optum-Prd");	
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
