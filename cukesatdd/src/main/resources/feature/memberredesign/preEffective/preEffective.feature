@@ -38,6 +38,7 @@ Feature: To test pre-effective functionality
       | planType		| memberType            | copayCategory |technicalTFN  | segmentId |
       | IndMA           | preeffectiveIndMA     | NON LIS       |1-888-980-8125| 000       |
       | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125| 000       |
+      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125| 002       |
       | IndPDP          | preeffectiveIndPDP    | NON LIS       |1-888-980-8125| 000       |
       | GroupMA         | preeffectiveGroupMA   | NON LIS       |1-888-980-8125| 000       |
       | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |1-888-980-8125| 000       |
