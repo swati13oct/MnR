@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -181,7 +182,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(partialLinkText = "Language Assistance | Non-Discrimination Notice")
 	private WebElement languageAssistanceEnglish;
 
-	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminación (PDF)")
+	@FindBy(partialLinkText = "Asistencia de Idiomas | Aviso de no Discriminaciï¿½n (PDF)")
 	private WebElement languageAssistanceSpanish;
 
 	@FindBy(xpath = "//h1[@id='pageHeader']")
@@ -385,7 +386,12 @@ public class TestHarness extends UhcDriver {
 
 	public ClaimsSummaryPage navigateToClaimsSummaryFromTestHarnessPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		testHarnessClaimsLink.click();
+		try{
+			testHarnessClaimsLink.click();
+		} catch (WebDriverException e) {
+			checkForIPerceptionModel(driver);
+
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			Thread.sleep(5000);
@@ -932,5 +938,29 @@ public class TestHarness extends UhcDriver {
         Assert.assertTrue(cologo_src.contains(cologoToBeDisplayedOnSecondaryPage));
         System.out.println("Test Harness page co logo assert condition is passed");
 }
-        
+    	/**
+    	 * For iPerception Model
+    	 * @param driver
+    	 */
+    	public static void checkForIPerceptionModel(WebDriver driver) {
+    		int counter = 0;
+    		do {
+    			System.out.println("current value of counter: " + counter);
+    			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+    			if (IPerceptionsFrame.isEmpty()) {
+    				try {
+    					Thread.sleep(5000);
+    				} catch (InterruptedException e) {
+    					System.out.println(e.getMessage());
+    				}
+    			} else {
+    				driver.switchTo().frame(IPerceptionsFrame.get(0));
+    				driver.findElement(By.className("btn-no")).click();
+    				driver.switchTo().defaultContent();
+    			}
+    			counter++;
+    		} while (counter < 2);
+    	}
+
 }
