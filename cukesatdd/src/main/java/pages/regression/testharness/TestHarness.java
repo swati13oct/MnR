@@ -390,18 +390,15 @@ public class TestHarness extends UhcDriver {
 			testHarnessClaimsLink.click();
 		} catch (WebDriverException e) {
 			checkForIPerceptionModel(driver);
-
+			CommonUtility.checkPageIsReadyNew(driver);
+			testHarnessClaimsLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		if (driver.getTitle().contains("Claims")) {
+			return new ClaimsSummaryPage(driver);
 		}
-		
-		return new ClaimsSummaryPage(driver);
-		
+		return null;
 	}
 		
 
