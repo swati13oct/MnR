@@ -123,7 +123,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 02_1  | 1041 | MA       | AARP_Individual            | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_2  | 1041 | MA       | UHC_Individual             | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | No                 |
+      | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_4  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | No                 |
 

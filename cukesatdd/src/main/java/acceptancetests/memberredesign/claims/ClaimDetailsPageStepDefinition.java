@@ -166,9 +166,12 @@ public class ClaimDetailsPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		String memberType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-		String claimType="Medical";
-		if (claimSystem.toUpperCase().contains("D_")) {
-			claimType="Prescription drug";
+		String claimType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		if (claimType==null) {
+			claimType="Medical";
+			if (claimSystem.toUpperCase().contains("D_"))
+				claimType="Prescription drug";
 		} 
 		boolean flagZeroUserNow=false; //note: don't want to fail the test in this step if user has no claims
 		validate_claims_detail_page_content(planType, memberType, claimPeriod, claimType, claimSystem, flagZeroUserNow);
