@@ -111,7 +111,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
       | 15227 | MA       | AARP_Individual | Last 24 months | NICE_000_CLAIMS | 000       |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS | 000       |
-      #see note1 | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
+      | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
       | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 000       |
       #see note1 | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 000       |
       | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       |
