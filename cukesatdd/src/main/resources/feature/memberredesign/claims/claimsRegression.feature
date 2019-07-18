@@ -123,10 +123,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | AARP_Individual | Last 24 months | NICE_001_CLAIMS | 001       |
-@abc
-    Examples: 
-      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
-      | 15227 | MA       | AARP_Individual | Last 24 months | NICE_000_CLAIMS | 000       |
+
 
   @claims02 @TC_09claimsPHIP @regressionMember
   Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
