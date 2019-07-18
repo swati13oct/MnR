@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -31,7 +33,13 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
 
 	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
-		validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+	    String browserName = cap.getBrowserName().toLowerCase();
+	    if (browserName.equalsIgnoreCase("CHROME")) 
+			validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+	    else 
+	    	System.out.println("TODO - need to figure out how to handle the other browsers");
+
 	}
 	
 	public void searchClaimsByTimePeriodClaimType(String planType, String claimPeriod, String claimType) 

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -446,6 +448,6 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		String memberType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-		claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+    	claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
 }
