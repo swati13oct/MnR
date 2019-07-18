@@ -224,8 +224,8 @@ public class ClaimDetailsPageStepDefinition {
 					throws InterruptedException { 
 		List<String> recordBypass = (List<String>) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
-		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_")) {
-			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, "
+		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_") || claimType.equalsIgnoreCase("Prescription drug")) {
+			System.out.println("Drug case doesn't have 'MORE INFO', skip this step validation for content, learn more, "
 					+ "and EOB on claims detail page");
 			return;
 		} else {  //note: this test is assume prior test steps passed so user has claims

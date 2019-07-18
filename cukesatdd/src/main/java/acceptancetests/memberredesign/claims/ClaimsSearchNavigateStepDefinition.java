@@ -234,8 +234,8 @@ public class ClaimsSearchNavigateStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		}
-		if (newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		Assert.assertTrue("PROBLEM - unable to go to claims summary page", newClaimsSummaryPage!=null);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 		//note: initialize some variables that will be used by other steps later
 		HashMap<String, Integer> allClaims = new HashMap<String, Integer>();
