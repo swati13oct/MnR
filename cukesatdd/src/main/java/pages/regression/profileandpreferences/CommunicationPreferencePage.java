@@ -102,10 +102,10 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Plan Documents']")
 	private WebElement planDocumentsLabel;
 
-	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[1]/label/div")
+	@FindBy(xpath = "//div[@id='Required_documents']//label[@for='Required_documents_EM']")
 	private WebElement gopaperlessbutton;
 
-	@FindBy(xpath = "//div[@id='Required_documents']/fieldset/div[2]/div/div[2]/fieldset/label/div")
+	@FindBy(xpath = "//div[@id='Required_documents']//label[@for='Required_documents_PM']")
 	private WebElement mailButton;
 
 	@FindBy(css="div#mail-preferences-selector-SHIP h3")
