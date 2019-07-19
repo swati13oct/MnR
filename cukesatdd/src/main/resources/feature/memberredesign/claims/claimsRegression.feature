@@ -77,8 +77,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # TID: 15268 - TC11_PCP OR MEDICA claims
   # TID: 15258 - TC09_SHIP Only - PHIP - Link will be available on rally and an error on secondary page
   #-------------------------
-  @claims01 @E2EClaimstcase @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the claims Summary and details page E2E Scenario
+  @claims01 @E2EClaimsMedicalCase @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the MEDICAL claims Summary and details page E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -111,21 +111,48 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
       | 15227 | MA       | AARP_Individual | Last 24 months | NICE_000_CLAIMS | 000       |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS | 000       |
-      | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
       | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 000       |
       #see note1 | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 000       |
-      | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       |
-      | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       |
       | 15236 | SHIP     | Individual      | Last 24 Months | COMPASS_CLAIMS  | 000       |
-      | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       |
       | 15259 | SHIP     | COMBO           | Last 24 months | COMPASS_CLAIMS  | 000       |
       | 15268 | PCP      | Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | AARP_Individual | Last 24 months | NICE_001_CLAIMS | 001       |
 
+  @claims02 @E2EClaimsDrugCase @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim System | <claimSystem> |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    Then I can validate the claims summary header on claims summary page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage
+      | Segment ID   | <segmentId>   |
+    And I can search claims for the following claim period on claims summary page
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim Period | <claimPeriod> |
+      | Claim System | <claimSystem> |
+    Then I can see the claims displayed based on the selection on claims summary page
+    And I validate the pagination on the claims summary page
+    And I can see the learn more and print and download option on claims summary table section
+    And I validate the EOB section based on claims system on claims summary page
+    And I validate the DownloadMyData section on claims summary page
 
-  @claims02 @TC_09claimsPHIP @regressionMember
+    #note1 - need to locate user with claims and update csv
+    Examples: 
+      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
+      | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
+      | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       |
+      | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       |
+      | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       |
+
+
+  @claims03 @TC_09claimsPHIP @regressionMember
   Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
       | Plan Type     | <planType>     |
@@ -140,7 +167,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
   # note: pageNum is the claims page where the EOB pdf is located
   # note: rowNum is the data row where EOB pdf is located - only count the data row, exclude header row
-  @claims03 @claimsEOB @US1268210 @F244667 @regressionMember
+  @claims04 @claimsEOB @US1268210 @F244667 @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -162,7 +189,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | FID    | planType | memberType     | claimPeriod    | claimSystem | pageNum | rowNum |
       | 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS |       2 |      4 |
 
-  @claims04 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+  @claims05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -176,7 +203,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | FID    | planType | memberType              | claimSystem   |
       | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
 
-  @claims05 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+  @claims06 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -189,7 +216,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | FID    | planType | memberType | claimSystem   |
       | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
-  @claims06 @SHIP7yearsClaims @regressionMember
+  @claims07 @SHIP7yearsClaims @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |

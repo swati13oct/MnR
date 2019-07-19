@@ -377,6 +377,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(claimsPageLink);
 		claimsPageLink.click();
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Claims")) {
 			return new ClaimsSummaryPage(driver);
@@ -395,6 +396,7 @@ public class TestHarness extends UhcDriver {
 			testHarnessClaimsLink.click();
 		}
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Claims")) {
 			return new ClaimsSummaryPage(driver);
@@ -530,6 +532,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(orderPlanPageLink);
 		orderPlanPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Order")) {
 			return new OrderMaterialsPage(driver);
@@ -555,6 +558,7 @@ public class TestHarness extends UhcDriver {
 			testHarnessOrderPlanPageLink.click();
 		}		
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, orderHeader, 90);
 		if (driver.getTitle().contains("Order")) {
 			return new OrderMaterialsPage(driver);
@@ -575,6 +579,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(pharmacyPageLink);
 		pharmacyPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, zipcode, 60);
 		if (driver.getTitle().contains("Pharmacy")) {
 			return new PharmacySearchPage(driver);
@@ -600,6 +605,7 @@ public class TestHarness extends UhcDriver {
 			testHarnessPharmacyPageLink.click();
 		}		
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, zipcode, 60);
 		if (driver.getTitle().contains("Pharmacy")) {
 			return new PharmacySearchPage(driver);
@@ -617,6 +623,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(profilePageLink);
 		profilePageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
 
 		if (driver.getTitle().contains("Profile")) {
@@ -642,6 +649,7 @@ public class TestHarness extends UhcDriver {
 			profilePageLink.click();
 		}
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
 
 		if (driver.getTitle().contains("Profile")) {
@@ -967,7 +975,7 @@ public class TestHarness extends UhcDriver {
 
     			if (IPerceptionsFrame.isEmpty()) {
     				try {
-    					Thread.sleep(5000);
+    					Thread.sleep(3000);
     				} catch (InterruptedException e) {
     					System.out.println(e.getMessage());
     				}
