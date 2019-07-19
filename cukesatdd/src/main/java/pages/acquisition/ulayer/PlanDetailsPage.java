@@ -938,28 +938,26 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Clipboard clipboard = toolkit.getSystemClipboard();
 
 		// odd: the Object param of getContents is not currently used
-		Transferable contents = clipboard.getContents(null);
-		StringSelection stringSelection = new StringSelection("");
-		clipboard.setContents(stringSelection, null);
-		boolean hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
 		Dimension window = driver.manage().window().getSize();
 		new Actions(driver).moveByOffset(window.getHeight() / 2, window.getWidth() / 2).click().build().perform();
+		System.out.println("Clicked on center of PDF window");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
 
 		Robot robotaction = new Robot();
 		robotaction.keyPress(KeyEvent.VK_CONTROL);
 		robotaction.keyPress(KeyEvent.VK_A);
 		robotaction.keyRelease(KeyEvent.VK_A);
-
+		robotaction.keyRelease(KeyEvent.VK_CONTROL);
+		
+		System.out.println("PDF - Select all text");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
@@ -967,12 +965,12 @@ public class PlanDetailsPage extends UhcDriver {
 			e1.printStackTrace();
 		}
 
-
+		robotaction.keyPress(KeyEvent.VK_CONTROL);
 		robotaction.keyPress(KeyEvent.VK_C);
 		robotaction.keyRelease(KeyEvent.VK_C);
 		robotaction.keyRelease(KeyEvent.VK_CONTROL);
 
-
+		System.out.println("PDF - Copy all text");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
@@ -980,11 +978,12 @@ public class PlanDetailsPage extends UhcDriver {
 			e1.printStackTrace();
 		}
 		String PDFText = "";
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-		clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		contents = clipboard.getContents(null);
+		Clipboard clipboard = toolkit.getSystemClipboard();
+		Transferable contents = clipboard.getContents(null);
 		//hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
-        hasTransferableText = contents.isDataFlavorSupported(DataFlavor.stringFlavor );
+		boolean hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor );
 		if (hasTransferableText) {
 			try {
 				PDFText = (String) clipboard.getData(DataFlavor.stringFlavor );
