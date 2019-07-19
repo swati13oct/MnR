@@ -975,7 +975,7 @@ public class TestHarness extends UhcDriver {
 
     			if (IPerceptionsFrame.isEmpty()) {
     				try {
-    					Thread.sleep(3000);
+    					Thread.sleep(1500);
     				} catch (InterruptedException e) {
     					System.out.println(e.getMessage());
     				}

@@ -1,12 +1,19 @@
 package acceptancetests.memberredesign.Preferences;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -190,5 +197,19 @@ public class PreferencesStepDefinition {
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateSuccessText();
+	}
+	
+	@Then("^I can validate the segment ID value in localStorage on preference page$")
+	public void validates_segmentid(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String planMemType = memberAttributesMap.get("Plan Type");
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		String[] tmp=planMemType.split("_");
+		Assert.assertTrue("PROBLEM - planType formation is not as expected.  Exepct <planType>_<AARP/UHC>__GOGreen_Profilepref", tmp.length>1);
+		String planType=tmp[0];
+		String memberType=tmp[1];
+		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
+				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
+		communicationPreferencesPage.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
 }

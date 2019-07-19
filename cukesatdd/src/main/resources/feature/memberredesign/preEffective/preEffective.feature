@@ -2,7 +2,7 @@
 Feature: To test pre-effective functionality
 
   @preEffective1 @regressionMember @codetransformers
-  Scenario Outline: -planType: <planType> -segmentId: <segmentId> - Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
+  Scenario Outline: -planType: <planType> -Segment ID: <segmentId> - Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |

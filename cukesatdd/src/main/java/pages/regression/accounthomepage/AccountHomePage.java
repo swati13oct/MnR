@@ -2748,7 +2748,7 @@ public class AccountHomePage extends UhcDriver {
 
 			if (IPerceptionsFrame.isEmpty()) {
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(1500);
 				} catch (InterruptedException e) {
 					System.out.println(e.getMessage());
 				}

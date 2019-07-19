@@ -1,190 +1,28 @@
 package pages.regression.profileandpreferences;
 
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.GoGreenPage;
 import pages.regression.claims.ClaimsSummaryPage;
 
-public class CommunicationPreferencePage extends UhcDriver {
+public class CommunicationPreferencePage extends CommunicationPreferenceWebElements {
 
-	@FindBy(xpath = ".//*[@class='page-header']//a[contains(text(),'Profile & Preferences')]")
-	private WebElement profAndPrefLink;
-
-	@FindBy(id = "savePaperlessSettings")
-	private WebElement savePrefButton;
-
-	@FindBy(id="save-prefs-btn-SHIP")
-	private WebElement savePrefButtonSHIP;
-
-	@FindBy(xpath = ".//iframe[@class='preferences']")  
-	private WebElement iframeEPMP;
-
-	@FindBy(xpath = "//input[@type='checkbox' and @name='paperlessConsent']/../div[2]")
-	private WebElement agreeCheckBox;
-
-	@FindBy(id = "IPerceptionsEmbed")
-	private WebElement iPerceptionPopUp;
-
-	@FindBy(className = "atdd-go-green-img")
-	private WebElement gogreenleaf;
-
-	@FindBy(className = "atdd-goGreenHeader")
-	private WebElement goggreenheader;
-
-	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']")
-	private WebElement iHavereadCheckbox;
-
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//label[@for='requiredplan']")
-	private WebElement iHavereadCheckboxForShip;
-
-	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[1]")
-	private WebElement onlineDeliveryRadioButton;
-
-	@FindBy(xpath ="//div[@class='otherPages SHIP']//legend[text()='Claims']/following::input[2]")
-	private WebElement mailRadioButton;
-
-	@FindBy(xpath = "//*[@id='Claims2']/following-sibling::label")
-	private WebElement onlineDelivery;
-
-	@FindBy(xpath = "//*[@id='Claims12']/following-sibling::label")
-	private WebElement mailLabel;
-
-	@FindBy(xpath = "//*[contains(@class,'atdd-plan-name')]")
-	private WebElement planNameGoGreen;
-
-	@FindBy(xpath = "//*[contains(@class,'main-heading margin-none atdd-section-heading')]")
-	private WebElement communicationPreferences;
-
-	@FindBy(xpath = "//*[contains(@class,'link link--icon-left link--icon-circled atdd-page-header atdd-banklink-prefernce')]")	
-	private WebElement backLink1;
-	
-	@FindBy(xpath = "//*[@id='preferenceEPMP']//div[2]//a[contains(text(),'Profile & Preferences')]")
-	private WebElement backLink2;
-
-	@FindBy(xpath = "//*[contains(@class,'atdd-notes')]")	
-	private WebElement NoteSection;
-
-	@FindBy(xpath = "//*[@id='savePaperlessSettings']")
-	private WebElement savePreferencesButton;
-
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//a[text()='Edit Preferences']")
-	private WebElement EditPreferenceButton;
-
-	@FindBy(xpath = "//*[@class='nav nav-tabs']/li")
-	private List<WebElement> tabsForComboMember;
-
-	@FindBy(xpath = "//iframe[@class='preferences']")
-	private List<WebElement> iframeEPMPCheck;
-
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Claims']")
-	private WebElement claimsLabel;
-
-	@FindBy(xpath = "//div[@class='otherPages SHIP']//legend[text()='Plan Documents']")
-	private WebElement planDocumentsLabel;
-
-	@FindBy(xpath = "//div[@id='Required_documents']//label[@for='Required_documents_EM']")
-	private WebElement gopaperlessbutton;
-
-	@FindBy(xpath = "//div[@id='Required_documents']//label[@for='Required_documents_PM']")
-	private WebElement mailButton;
-
-	@FindBy(css="div#mail-preferences-selector-SHIP h3")
-	private WebElement shipPlanName;
-
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//input[@id='requiredplan']/../label")
-	private WebElement agreeRequiredNoticeCheckBox;
-
-	@FindBy(id="save-prefs-btn-SHIP")
-	private WebElement btnSavePrefSHIP;
-
-	@FindBy(xpath="//input[@id='savepreferyes']/../label")
-	private WebElement welcomeKitYES;
-	
-	@FindBy(xpath = "//h2[contains(@class,'atdd-goGreenHeader')]")
-	private WebElement GoGreenHeader;
-
-	@FindBy(xpath = "//p[@class='atdd-goGreensubHeader']/following-sibling::p[text()][1]")
-	private WebElement GoGreenText;
-	@FindBy(xpath="//input[@id='savepreferno']/../label")
-	private WebElement welcomeKitNo;
-
-	@FindBy(xpath = "//button[not(contains(@class,'ng-hide')) and @ng-click='savePreferSubmitRadio();']")
-	private WebElement submitBtnForWelcomeKitYES;
-
-	@FindBy(className="savePreferModal")
-	private List<WebElement> modalPopupWindow;
-
-	@FindBy(id="savepreferyes")
-	private WebElement modalPopupWindowYesButton;
-
-	@FindBy(xpath="//*[@id='savePreferencesPopUpContent']/div/div[5]/button[1][contains(text(),'Submit')]")
-	private WebElement modalPopupWindowSubmitButton;
-
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='US MAIL']/ancestor::div[1]/input[@type='radio'][@id='Claims10']")
-	private WebElement claimsMailDelivery;
-
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='EMAIL']/ancestor::div[1]/input[@type='radio'][@id='Claims0']")
-	private WebElement claimsOnlineDelivery ;
-
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Plan Documents']/following::input[@value='US MAIL']/ancestor::div[1]/input[@type='radio'][@id='PlanBenefits10']")
-	private WebElement planDocumentsMailDelivery;
-
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//legend[text()='Claims']/following::input[@value='EMAIL']/ancestor::div[1]/input[@type='radio'][@id='PlanBenefits0']")
-	private WebElement planDocumentsOnlineDelivery;
-
-	@FindBy(id="preferenceIfram")
-	private WebElement iframeForFederalMembers;
-
-	@FindBy(xpath="//span[@class='edit-remove-underline']")
-	private WebElement emailEditButtonOnIframe;
-
-	@FindBy(id="primaryEmail_0")
-	private WebElement newEmailTextfield;
-
-	@FindBy(id="updatedisable")
-	private WebElement saveButtonOnEmailUpdatePopup;
-
-	@FindBy(id="cancelUpdateEmailBtn_P")
-	private WebElement cancelButtonOnEmailUpdatePopup;
-
-	@FindBy(xpath="//div[2]/div[2]/p")
-	private WebElement updatedEmailAfterSave;
-	
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
-	private WebElement shipSuccMsg;
-	
-	@FindBy(id="claims_1")
-	private WebElement claimsTab;
-	
-	@FindBy(xpath="//h1[contains(text(),'Claims Summary')]")
-	private WebElement claimsHeader;
-	
-	@FindBy(xpath="//h1[contains(@class,'heading')]")
-	private WebElement headingTxt;
-	
-	@FindBy(xpath="//*[@class='green-status' and contains(text(),'Success')]/../span[contains(text(),'your email was updated')]")
-	private WebElement emailUpdateSuccTxt;
-
-	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]/../../span[contains(@class,'active')]")
-	private WebElement paperlessOptionActive;
-
-	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]")
-	private WebElement paperlessOptionInactive;
-	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -212,15 +50,15 @@ public class CommunicationPreferencePage extends UhcDriver {
 	}
 
 	public boolean validatePageNonEPMP() {
-		
+
 		CommonUtility.waitForPageLoadNew(driver, planNameGoGreen, 40);
 		if (validateNew(planNameGoGreen) && validateNew(communicationPreferences)&&validateNew(backLink1)&&validateNew(NoteSection)&&validateNew(GoGreenHeader)&&
-		validateNew(GoGreenText))
+				validateNew(GoGreenText))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public boolean validatePageForShip() {
 		CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
 		validate(claimsLabel);
@@ -275,20 +113,20 @@ public class CommunicationPreferencePage extends UhcDriver {
 	}
 
 	public boolean validateifEPMPIframeIsPresent() {
-        int count = 1;
-        while (count < 10) {
-            System.out.println("Count is: " + count);
-            if (iframeEPMPCheck.size() > 0)
-            	break;
-            else {
-            	try {
+		int count = 1;
+		while (count < 10) {
+			System.out.println("Count is: " + count);
+			if (iframeEPMPCheck.size() > 0)
+				break;
+			else {
+				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-            }
-            count++;
-        }
+			}
+			count++;
+		}
 		if (iframeEPMPCheck.size() > 0)
 			return true;
 		else
@@ -304,7 +142,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 		driver.switchTo().defaultContent();
 		tabsForComboMember.get(index).click();
 	}
-	
+
 	public String getComboTabPlanType(int tabNum) {
 		return tabsForComboMember.get(tabNum).getText();
 	}
@@ -343,13 +181,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 				+ "Profie='"+planNameOnProfilePage+"' | Preference='"+planNameOnPreferencesPage+"'", 
 				planNameOnProfilePage.equalsIgnoreCase(planNameOnPreferencesPage));
 	}
-	
+
 	/** Validates the Go green button in Communication Preferences section */
 	public GoGreenPage validategogreenbutton() {
 		CommonUtility.waitForPageLoad(driver, iframeForFederalMembers, 20);
 		validateNew(iframeForFederalMembers);
 		driver.switchTo().frame(0);
-		
+
 		//note: if options are collapsed, need to expand first
 		if (!validate(paperlessOptionActive)) {
 			paperlessOptionInactive.click();
@@ -517,13 +355,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 				validate(agreeRequiredNoticeCheckBox));
 		agreeRequiredNoticeCheckBox.click();
 	}
-	
+
 	public void clickSaveBtnShip() {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Save' button", 
 				validate(btnSavePrefSHIP));
 		btnSavePrefSHIP.click();
 	}
-	
+
 	public void validatePopUp() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, submitBtnForWelcomeKitYES, 5);
@@ -536,17 +374,17 @@ public class CommunicationPreferencePage extends UhcDriver {
 				validate(submitBtnForWelcomeKitYES));
 		submitBtnForWelcomeKitYES.click();
 	}
-	
+
 	public void validateSuccessText() {
 		CommonUtility.waitForPageLoad(driver, shipSuccMsg, 5);
 		Assert.assertTrue("PROBLEM - unable to locate success message after submit", validate(shipSuccMsg));		
 	}
-	
+
 	public void editPrefAgain() {
 		Assert.assertTrue("PROBLEM - unable to locate the 'EDIT PREFERENCES' link", validate(EditPreferenceButton));
 		EditPreferenceButton.click();
 	}
-	
+
 	public void resetToMail() {
 		selectPreferences("US MAIL","Plan Documents");
 		Assert.assertTrue("PROBLEM - unable to locate the 'Yes, I want online delivery of my plan documents.' checkbox", 
@@ -556,18 +394,71 @@ public class CommunicationPreferencePage extends UhcDriver {
 		btnSavePrefSHIP.click();
 		Assert.assertTrue("PROBLEM - unable to locate success message after submit", validate(shipSuccMsg));		
 	}
-	
+
 	public void validatePreferencesPage(){
 		validateNew(iframeForFederalMembers);
 		validateNew(backLink1);
 	}
-	
+
 	public ClaimsSummaryPage navigateToClaimsPage(){
 		claimsTab.click();
-		
+
 		if(validateNew(claimsHeader))
 			return new ClaimsSummaryPage(driver);
 		return null;
+	}
+
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		String lookForPlanCategory="";
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+		if (planType.equalsIgnoreCase("SHIP"))
+			lookForPlanCategory="MEDICARE SUPPLEMENT";
+		else if (planType.equalsIgnoreCase("SSUP")) 
+			lookForPlanCategory="SSP";
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+			lookForPlanCategory="MAPD";
+		else 
+			lookForPlanCategory=planType;
+
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
+				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
+				expectedSegmentId.equals(actualSegmentId));
+	}
+
+	public String getConsumerDetailsFromlocalStorage() {
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+
+	public String getSegmentIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		String actualSegmentId=null;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			JSONArray arr =jsonObj.getJSONArray("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", arr.length()>1);
+			for (int i = 0; i < arr.length(); i++) {
+				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				//note: need to locate the right plan for segmentId validation
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
+					actualSegmentId!=null);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualSegmentId;
 	}
 }
 

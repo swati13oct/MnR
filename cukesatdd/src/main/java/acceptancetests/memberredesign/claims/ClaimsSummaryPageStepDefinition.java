@@ -438,7 +438,7 @@ public class ClaimsSummaryPageStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 	
-	@Then("^I can validate the segment ID value in localStorage$")
+	@Then("^I can validate the segment ID value in localStorage on claims summary page$")
 	public void validates_segmentid(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
 		String expectedSegmentId = memberAttributesMap.get("Segment ID");

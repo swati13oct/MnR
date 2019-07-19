@@ -78,7 +78,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # TID: 15258 - TC09_SHIP Only - PHIP - Link will be available on rally and an error on secondary page
   #-------------------------
   @claims01 @E2EClaimsMedicalCase @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -87,7 +87,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage
+    Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
     And I can search claims for the following claim period on claims summary page
       | Plan Type    | <planType>    |
@@ -106,19 +106,18 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
-    #note1 - need to locate user with claims and update csv
     Examples: 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
       | 15227 | MA       | AARP_Individual | Last 24 months | NICE_000_CLAIMS | 000       |
+      | xxxxx | MA       | AARP_Individual | Last 24 months | NICE_001_CLAIMS | 001       |
+      | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 000       |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS | 000       |
       | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 000       |
-      #see note1 | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 000       |
-      | 15236 | SHIP     | Individual      | Last 24 Months | COMPASS_CLAIMS  | 000       |
-      | 15259 | SHIP     | COMBO           | Last 24 months | COMPASS_CLAIMS  | 000       |
       | 15268 | PCP      | Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MA       | AARP_Individual | Last 24 months | NICE_001_CLAIMS | 001       |
+      | 15236 | SHIP     | Individual      | Last 24 Months | COMPASS_CLAIMS  | 000       |
+      | 15259 | SHIP     | COMBO           | Last 24 months | COMPASS_CLAIMS  | 000       |
 
   @claims02 @E2EClaimsDrugCase @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
@@ -248,23 +247,3 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15259 | SHIP              | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
       
   #----- end of Regression claims scenarios section ------------------------
-
-
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims Summary and details page E2E Scenario
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-      | Claim System | <claimSystem> |
-    When I navigate to the claims Summary page from dashboard or testharness page
-    And I can search claims for the following claim period on claims summary page
-      | Plan Type    | <planType>    |
-      | Claim Period | <claimPeriod> |
-      | Claim System | <claimSystem> |
-      | Member Type  | <memberType>  |
-    Then I can validate the segment ID value in localStorage
-      | Segment ID   | <segmentId>   |
-
-    Examples: 
-      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
-      | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 000       |
-      

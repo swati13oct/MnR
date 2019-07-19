@@ -18,7 +18,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
   @claims00 @def1041 @thePredators
-  Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -segmentId: <segmentId> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
+  Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -28,7 +28,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage
+    Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
     #----------------- Test Custom search error cases --------------------------
     And I can search claims for claim period and claim type on claim summary page
@@ -198,7 +198,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage
+    Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
     #----------------- Test for Last 24 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
