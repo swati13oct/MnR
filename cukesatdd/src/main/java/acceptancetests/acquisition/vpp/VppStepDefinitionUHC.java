@@ -211,6 +211,14 @@ public class VppStepDefinitionUHC {
 			} else
 				Assert.fail("Error in validating the Plan Details Page");
 		}
+	
+	@When("^the user validates the pdf section for uhc$")
+	public void userValidatesPDFSection() {
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatePdfSection(planType);
+	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {

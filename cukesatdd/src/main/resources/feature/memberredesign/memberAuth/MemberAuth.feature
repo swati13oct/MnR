@@ -414,6 +414,7 @@ Feature: S1.1 To test Member Auth Dashboard page.
    	And user clicks on member to select
    	And the user navigates to profile and preference page
    	And the user validates the profile page and the preference page and navigates to claims page in prod
+   		|Plan Type | <planType> |
     And the user validates the claims page and navigates to eob page in prod
        |Plan Type | <planType> |
        |Claim Period | <claimPeriod> |
@@ -423,10 +424,14 @@ Feature: S1.1 To test Member Auth Dashboard page.
      And the user validates the benefits and coverage page in prod
        | Plan Type | <planType> |
      And the user navigates to the documents and resources page and validates PDFs in prod
+    	 | Plan Type | <planType> |
      And the user navigates to the order plan materials page and validates in prod
+     	| Plan Type | <planType> |
      And the user navigates to payments page and validates in prod
-      	
+      	| Plan Type | <planType> |
       	
       Examples:
       | UID     | username  | password  | memUserName | planType | claimPeriod | dateRange |
-      | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |
+     | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |
+      | F243897 | ashah120 | Life1628 |  TARA9 |PDP| Last 24 months| Last 18 months |
+       | F243897 | ashah120 | Life1628 |  TARA9 |SHIP| Last 24 months| Last 12-18 months |
