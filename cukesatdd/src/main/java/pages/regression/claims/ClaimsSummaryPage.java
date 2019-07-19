@@ -33,13 +33,12 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
 
 	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
-		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-	    String browserName = cap.getBrowserName().toLowerCase();
-	    if (browserName.equalsIgnoreCase("CHROME")) 
-			validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
-	    else 
-	    	System.out.println("TODO - need to figure out how to handle the other browsers");
-
+		//keep Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		//keep String browserName = cap.getBrowserName().toLowerCase();
+		//keep if (browserName.equalsIgnoreCase("CHROME")) 
+		validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+		//keep else 
+		//keep System.out.println("TODO - need to figure out how to handle the other browsers");
 	}
 	
 	public void searchClaimsByTimePeriodClaimType(String planType, String claimPeriod, String claimType) 
