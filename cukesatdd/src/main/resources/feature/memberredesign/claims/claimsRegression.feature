@@ -78,7 +78,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # TID: 15258 - TC09_SHIP Only - PHIP - Link will be available on rally and an error on secondary page
   #-------------------------
   @claims01 @E2EClaimsMedicalCase @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the MEDICAL claims Summary and details page E2E Scenario
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -143,7 +143,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the EOB section based on claims system on claims summary page
     And I validate the DownloadMyData section on claims summary page
 
-    #note1 - need to locate user with claims and update csv
     Examples: 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
