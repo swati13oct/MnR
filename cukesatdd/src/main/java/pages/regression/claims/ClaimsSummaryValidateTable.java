@@ -446,18 +446,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 
 	/** this method validates pagination */
 	public boolean verifyPagination(){
-		try {
-			if(validate (uhc_summPgPagination)){
-				System.out.println("Pagination is seen ===>"+uhc_summPgPagination.getText());
-				return true;
-			}else{
-				System.out.println("Pagination is not displayed as records are less");
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		return validate(summPgPagination);
 	}
 
 	/** Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page */
