@@ -33,12 +33,6 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(xpath = ".//iframe[@class='preferences']")  
 	private WebElement iframeEPMP;
 
-	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[1]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
-	private WebElement paperlessRadioBtn;
-
-	@FindBy(xpath = "//div[contains(@class,'paperless')]/div[3]//div[@class='row']/div[2]//div[contains(@class,'control__indicator') and contains(@class,'input-options')]")
-	private WebElement mailRadioBtn;
-
 	@FindBy(xpath = "//input[@type='checkbox' and @name='paperlessConsent']/../div[2]")
 	private WebElement agreeCheckBox;
 
@@ -155,7 +149,7 @@ public class CommunicationPreferencePage extends UhcDriver {
 	@FindBy(id="preferenceIfram")
 	private WebElement iframeForFederalMembers;
 
-	@FindBy(id="glyphicon-pencil-email-Paperless_Settings")
+	@FindBy(xpath="//span[@class='edit-remove-underline']")
 	private WebElement emailEditButtonOnIframe;
 
 	@FindBy(id="primaryEmail_0")
@@ -181,6 +175,15 @@ public class CommunicationPreferencePage extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(@class,'heading')]")
 	private WebElement headingTxt;
+	
+	@FindBy(xpath="//*[@class='green-status' and contains(text(),'Success')]/../span[contains(text(),'your email was updated')]")
+	private WebElement emailUpdateSuccTxt;
+
+	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]/../../span[contains(@class,'active')]")
+	private WebElement paperlessOptionActive;
+
+	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]")
+	private WebElement paperlessOptionInactive;
 	
 	public CommunicationPreferencePage(WebDriver driver) {
 		super(driver);
@@ -236,9 +239,13 @@ public class CommunicationPreferencePage extends UhcDriver {
 		System.out.println("frame validated");
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
+		if (!validate(paperlessOptionActive)) {
+			paperlessOptionInactive.click();
+			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
+		}
 
-		if (validateNew(paperlessRadioBtn) && !(paperlessRadioBtn.isSelected())) {
-			paperlessRadioBtn.click();
+		if (validateNew(gopaperlessbutton) && !(gopaperlessbutton.isSelected())) {
+			gopaperlessbutton.click();
 			if (validateNew(agreeCheckBox)) {
 				agreeCheckBox.click();
 				System.out.println("agree button verified and clicked");
@@ -246,8 +253,8 @@ public class CommunicationPreferencePage extends UhcDriver {
 			savePrefButton.click();
 			System.out.println("paperless button clicked and saved");
 			return true;
-		} else if (validateNew(mailRadioBtn) && !(mailRadioBtn.isSelected())) {
-			mailRadioBtn.click();
+		} else if (validateNew(mailButton) && !(mailButton.isSelected())) {
+			mailButton.click();
 			savePrefButton.click();
 			System.out.println("mail button clicked and saved");
 			return true;
@@ -342,6 +349,12 @@ public class CommunicationPreferencePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, iframeForFederalMembers, 20);
 		validateNew(iframeForFederalMembers);
 		driver.switchTo().frame(0);
+		
+		//note: if options are collapsed, need to expand first
+		if (!validate(paperlessOptionActive)) {
+			paperlessOptionInactive.click();
+			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
+		}
 		if (gopaperlessbutton.isSelected()) {
 			mailButton.click();
 			savePreferencesButton.click();
@@ -465,8 +478,6 @@ public class CommunicationPreferencePage extends UhcDriver {
 		Assert.assertFalse(iframeEPMPCheck.size()>0);
 	}
 
-	@FindBy(xpath="//*[@class='green-status' and contains(text(),'Success')]/../span[contains(text(),'your email was updated')]")
-	private WebElement emailUpdateSuccTxt;
 	public void validateEmailUpdateOnIframe() {
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(50);
