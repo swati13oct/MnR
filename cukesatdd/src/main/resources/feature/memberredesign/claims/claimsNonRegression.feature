@@ -98,12 +98,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate claims table displayed based on the selection on claims summary page
     And I can validate the EOB section based on claims system on claims summary page
     And I validate the Need Help section content on claims summary page
+    #----------
+    # note: These two steps below only applicable to SHIP and MEDICAL claims, NOTHING will be done for DRUG case
     Then I validate Claim Details page content value and Learn More and EOB and tooltips
-    """This step only applicable to SHIP and MEDICAL claims
-    """NOTHING will be done for DRUG case
     Then I perform extensive validation for values between claims summary and claim details page
-    """This step only applicable to SHIP and MEDICAL claims
-    """NOTHING will be done for DRUG case
+    #----------
     #----------------- Final Test claims number makes sense from search periods --------------
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
@@ -214,12 +213,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate claims table displayed based on the selection on claims summary page
     And I can validate the EOB section based on claims system on claims summary page
     And I validate the Need Help section content on claims summary page
+    #----------
+    # note: These two steps below only applicable to SHIP and MEDICAL claims, NOTHING will be done for DRUG case
     Then I validate Claim Details page content value and Learn More and EOB and tooltips
-    """This step only applicable to SHIP and MEDICAL claims
-    """NOTHING will be done for DRUG case
     Then I perform extensive validation for values between claims summary and claim details page
-    """This step only applicable to SHIP and MEDICAL claims
-    """NOTHING will be done for DRUG case
+    #----------
 
     Examples: 
       | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
