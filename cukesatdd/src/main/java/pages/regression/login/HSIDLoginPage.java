@@ -559,7 +559,7 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** ser: "+MRScenario.USERNAME+" Got Alert error");
 			} catch (Exception e) { 
 				//e.printStackTrace();
 			}

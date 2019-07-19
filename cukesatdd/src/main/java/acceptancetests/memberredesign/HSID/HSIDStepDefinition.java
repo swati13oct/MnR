@@ -136,7 +136,7 @@ public class HSIDStepDefinition {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
 				} catch (UnhandledAlertException ae) {
 					System.out.println("Exception: "+ae);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** user: "+MRScenario.USERNAME+" Got Alert error");
 				}
 				if (testHarnessPage != null) {
 					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
@@ -150,7 +150,7 @@ public class HSIDStepDefinition {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			} catch (UnhandledAlertException ae) {
 				System.out.println("Exception: "+ae);
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** ser: "+MRScenario.USERNAME+" Got Alert error");
 			}
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
