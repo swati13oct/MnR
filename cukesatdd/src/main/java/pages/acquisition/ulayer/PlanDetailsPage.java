@@ -958,7 +958,7 @@ public class PlanDetailsPage extends UhcDriver {
 		Robot robotaction = new Robot();
 		robotaction.keyPress(KeyEvent.VK_CONTROL);
 		robotaction.keyPress(KeyEvent.VK_A);
-		robotaction.keyRelease(KeyEvent.VK_CONTROL);
+		robotaction.keyRelease(KeyEvent.VK_A);
 
 		try {
 			Thread.sleep(2000);
@@ -968,8 +968,8 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 
 
-		robotaction.keyPress(KeyEvent.VK_CONTROL);
 		robotaction.keyPress(KeyEvent.VK_C);
+		robotaction.keyRelease(KeyEvent.VK_C);
 		robotaction.keyRelease(KeyEvent.VK_CONTROL);
 
 
