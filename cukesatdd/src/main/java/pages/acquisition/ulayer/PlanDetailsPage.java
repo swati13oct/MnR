@@ -993,11 +993,11 @@ public class PlanDetailsPage extends UhcDriver {
 					System.out.println("PDF text contains expected Document code : "+documentCode);
 					return true;
 				}
-
-
-			} catch (UnsupportedFlavorException | IOException ex) {
-				System.out.println(ex);
-				ex.printStackTrace();
+			} catch (UnsupportedFlavorException exp) {
+				System.out.println(exp);
+				exp.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		System.out.println("****************Copy and validate document code failed*************");
