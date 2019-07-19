@@ -135,6 +135,30 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement editProviderButton;
+	
+	@FindBy(id = "mapd_gi_div_eng")
+	WebElement mapdGeneralPlanPDfs;
+	
+	@FindBy(id = "mapd_mp_div_eng")
+	WebElement mapdMedicalProvidersPDfs;
+	
+	@FindBy(id = "mapd_pdc_div_eng")
+	WebElement mapdDrugCoveragePDfs;
+	
+	@FindBy(id = "mapd_pharmacydirectory_div_eng")
+	WebElement mapdPharmacyDirectoryPDfs;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdGeneralPlanPDfsOtherLang;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdMedicalProvidersPDfsOtherLang;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdDrugCoveragePDfsOtherLang;
+	
+	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
+	WebElement mapdPharmacyDirectoryPDfsOtherLang;
 
 	private PageData vppPlanDetails;
 
@@ -971,4 +995,22 @@ public class PlanDetailsPage extends UhcDriver {
 			bValidation = false;
 		return bValidation;
 	}
+	
+	public void validatePdfSection(String planType){
+		 
+		 if(planType.contains("MAPD")){
+			 //validate English PDFs
+			validateNew(mapdGeneralPlanPDfs);
+			validateNew(mapdMedicalProvidersPDfs);
+			validateNew(mapdDrugCoveragePDfs);
+			validateNew(mapdPharmacyDirectoryPDfs);
+			
+			// validate Other lang PDFs
+			validateNew(mapdGeneralPlanPDfsOtherLang);
+			validateNew(mapdMedicalProvidersPDfsOtherLang);
+			validateNew(mapdDrugCoveragePDfsOtherLang);
+			validateNew(mapdPharmacyDirectoryPDfsOtherLang);
+		 }
+			
+	 }
 }

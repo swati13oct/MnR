@@ -13,6 +13,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
+    And the user validates the pdf section for uhc
     Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
     Then User click on add to compare checkbox and click on view details link on UMS
     Then I uncheck and go back to the vpp page to validate

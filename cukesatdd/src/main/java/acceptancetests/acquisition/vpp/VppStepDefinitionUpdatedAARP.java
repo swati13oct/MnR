@@ -271,6 +271,14 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 	}
+	
+	@When("^the user validates the pdf section$")
+	public void userValidatesPDFSection() {
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatePdfSection(planType);
+	}
 
 	/**
 	 * @toDo:user validates the available plans for selected plan types

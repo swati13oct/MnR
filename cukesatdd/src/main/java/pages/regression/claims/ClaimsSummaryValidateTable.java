@@ -122,7 +122,6 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL fail test if user has no claim table");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
-		CommonUtility.waitForPageLoad(driver, claimsSummPg,60);
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
 				!validate(systemErrorMsg));
 		if (validate(medicalClaimsTbl))

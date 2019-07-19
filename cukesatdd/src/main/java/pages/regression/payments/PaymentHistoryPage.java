@@ -382,6 +382,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'VIEW PLAN DOCUMENTS')]")
 	private WebElement planDocumentsBtn;
 	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -509,7 +518,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		validateNew(paymentHistoryApp);
 		validateNew(oneTimePaymentBtn);
-		validateNew(setUpAutoPayButton);
+		
 
 	}
 
@@ -1653,4 +1662,22 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 
 	}
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if(planType.equalsIgnoreCase("SHIP")||planType.equalsIgnoreCase("MEDSUPP")){
+			if(validate(medsuppNavTab))
+			medsuppNavTab.click();
+		}	
+		
+		validateNew(paymentHistoryApp);
+		validateNew(oneTimePaymentBtn);
+	}
+	
+	
+	
 }
