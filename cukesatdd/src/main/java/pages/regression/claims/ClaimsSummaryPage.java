@@ -434,12 +434,34 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		}
 	}
 	
-	public EOBPage navigateToEOBPage(){
-		medicalEob_MAPD.click();
-		
+	public EOBPage navigateToEOBPage(String planType){
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			validateNew(medicalEob_MAPD);
+			medicalEob_MAPD.click();
+		}else if(planType.equalsIgnoreCase("PDP")){
+			validateNew(drugEob_PDP);
+			drugEob_PDP.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			validateNew(ship_eob);
+			 ship_eob.click();
+		}
 		if(validateNew(eobPageHeader))
 			return new EOBPage(driver);
 		return null;
 		
+	}
+	
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTab.click();
+		}	
+			
 	}
 }

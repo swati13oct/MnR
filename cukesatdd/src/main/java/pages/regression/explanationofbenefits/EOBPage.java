@@ -104,6 +104,15 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath = "//h1[contains(text(),'Plan Benefits Summary')]")
 	private WebElement bncPageHeader;
 	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
+	
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
 	
@@ -709,6 +718,7 @@ public class EOBPage extends UhcDriver{
 	}
 	
 	public void validateEOBsDisplayed(){
+		validateNew(eobCount);
 		int eobCountInt = Integer.parseInt(eobCount.getText());System.out.println("EOB Count is: "+eobCount.getText());
 		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
 		if(eobCountInt == listOfEOBs.size()){
@@ -723,6 +733,20 @@ public class EOBPage extends UhcDriver{
 		if(validateNew(bncPageHeader))
 			return new BenefitsAndCoveragePage(driver);
 		return null;
+	}
+	
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTab.click();
+		}	
+			
 	}
  }
 

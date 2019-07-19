@@ -356,4 +356,13 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
 	protected WebElement eobPageHeader;
+	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
 }

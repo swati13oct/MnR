@@ -68,6 +68,15 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tab-1']//*[contains(@class,'bold atdd-profile-membername')]")
 	private WebElement memberName;
 	
+	@FindBy(xpath = "//*[@id='49144037']")
+	private WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	private WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	private WebElement mapdNavTab;
+	
 	@FindBy(xpath = "//*[@id='tab-1']//*[contains(@class,'bold atdd-profile-membernumber')]")
 	private WebElement memberId;
 
@@ -798,7 +807,20 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	        return planName.getText();
 		}
 
-	
+	public void validatePlanNavTabs(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+			mapdNavTab.click();
+		}else if(planType.equalsIgnoreCase("PDP")){
+			if(validate(pdpNavTab))
+			pdpNavTab.click();
+		}else if(planType.equalsIgnoreCase("MEDSUPP")){
+			if(validate(medsuppNavTab))
+			medsuppNavTab.click();
+		}
+			
+	}
 
 	/**
 	 * @toDo : The user checks the email section
