@@ -129,7 +129,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage
+    Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
     And I can search claims for the following claim period on claims summary page
       | Plan Type    | <planType>    |
