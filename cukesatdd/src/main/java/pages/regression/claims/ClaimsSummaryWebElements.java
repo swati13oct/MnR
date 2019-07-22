@@ -118,8 +118,8 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//div[contains(@class,'LearnMoreAboutYour') and not(contains(@class,'ng-hide'))]") 
 	protected WebElement lrnMoreAbtClaimsContent;
 
-	@FindBy(xpath="//*[@id='atddUhcPagination']/li[1]/p")	
-	protected WebElement uhc_summPgPagination;
+	@FindBy(xpath="//div[@class='pgno_pgnation_wrap']")	
+	protected WebElement summPgPagination;
 
 	@FindBy (xpath ="//div[@ng-hide='phipError']//div[@class='customsegments parbase section'][1]//p[contains(text(), 'Medical EOB')]")
 	protected WebElement medicalEobTxt;
@@ -359,4 +359,13 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
 	protected WebElement eobPageHeader;
+	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
 }

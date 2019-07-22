@@ -122,7 +122,6 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL fail test if user has no claim table");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
-		CommonUtility.waitForPageLoad(driver, claimsSummPg,60);
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
 				!validate(systemErrorMsg));
 		if (validate(medicalClaimsTbl))
@@ -447,18 +446,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 
 	/** this method validates pagination */
 	public boolean verifyPagination(){
-		try {
-			if(validate (uhc_summPgPagination)){
-				System.out.println("Pagination is seen ===>"+uhc_summPgPagination.getText());
-				return true;
-			}else{
-				System.out.println("Pagination is not displayed as records are less");
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		return validate(summPgPagination);
 	}
 
 	/** Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page */

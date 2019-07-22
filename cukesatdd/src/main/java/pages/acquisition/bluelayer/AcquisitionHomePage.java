@@ -24,6 +24,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 
@@ -381,22 +382,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-	}
-	}
-	
-	
-	public void openAndValidate(String Ulayer) {
-		if (MRScenario.environment.equals("offline")) {
-			startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		}else if (MRScenario.environment.equals("prod")) {
-			startNew(AARP_ACQISITION_PROD_PAGE_URL);
-		} else {
-			startNew(AARP_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	}
+	
+	
+	public void openAndValidate(String site) {
+		if ("ULayer".equalsIgnoreCase(site)) {
+
+			if (MRScenario.environment.equals("offline")) {
+				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			}else if (MRScenario.environment.equals("prod")) {
+				startNew(AARP_ACQISITION_PROD_PAGE_URL);
+			} else {
+				startNew(AARP_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else {
+			openAndValidate();
+		}
 	}
 	
 	public void openAndValidate(int visitorProfile) {
@@ -536,7 +548,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		validate(GlobalWebElements.hideDiscliamerInformation);
 		GlobalWebElements.hideDiscliamerInformation.click();
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
@@ -749,7 +761,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareAdvantagePlansLink);
 		headerMedicareAdvantagePlansLink.click();
 		validate(headerMedicareAdvantagePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcareï¿½")) {
 			return new MedicareAdvantagePlansuhcPage(driver);
 		}
 		return null;
@@ -793,7 +805,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareSpecialNeedPlansLink);
 		headerMedicareSpecialNeedPlansLink.click();
 		validate(headerMedicareSpecialNeedPlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcareï¿½")) {
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
 		return null;

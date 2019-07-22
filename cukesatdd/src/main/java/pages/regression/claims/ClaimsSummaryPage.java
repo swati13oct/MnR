@@ -163,6 +163,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -177,6 +178,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		System.out.println("Now checking for Explanation of benefits page for SSUP plan");
 		claimsPgLnk.click();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
@@ -186,6 +188,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			System.out.println("SSUP plan has been selected");
 			eob_claims.click();
 			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, msgEob_PDP, 5);
 			validateNew(msgEob_PDP);
 			System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link "
 					+ "under Claims was displayed as PDP Plan, Test step is passed due to it");
@@ -419,12 +422,34 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		}
 	}
 	
-	public EOBPage navigateToEOBPage(){
-		medicalEob_MAPD.click();
-		
+	public EOBPage navigateToEOBPage(String planType){
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			validateNew(medicalEob_MAPD);
+			medicalEob_MAPD.click();
+		}else if(planType.equalsIgnoreCase("PDP")){
+			validateNew(drugEob_PDP);
+			drugEob_PDP.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			validateNew(ship_eob);
+			 ship_eob.click();
+		}
 		if(validateNew(eobPageHeader))
 			return new EOBPage(driver);
 		return null;
 		
+	}
+	
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTab.click();
+		}	
+			
 	}
 }

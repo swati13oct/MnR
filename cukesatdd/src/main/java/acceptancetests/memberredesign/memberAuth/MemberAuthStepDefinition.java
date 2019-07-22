@@ -27,6 +27,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.dashboard_deprecated.memberAuth.MemberAuthLoginPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -34,6 +35,7 @@ import pages.regression.memberauth.MemberAuthPage;
 import pages.regression.memberauth.MemberInformationPage;
 import pages.regression.memberauth.MemberSearchPage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.payments.ReviewAutomaticPage;
 import pages.regression.payments.ReviewOneTimePaymentPage;
 import pages.regression.payments.UpdateReviewPage;
@@ -316,9 +318,20 @@ public class MemberAuthStepDefinition{
 	
 
 	@Then("^the user validates the profile page and the preference page and navigates to claims page in prod$")
-	public void the_user_validates_profile_and_preference_page() throws Throwable {
+	public void the_user_validates_profile_and_preference_page(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		ProfileandPreferencesPage profilePreferencePage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.ProfilePreferencesPage);
-		profilePreferencePage.validateProfilePage();
+		profilePreferencePage.validatePlanNavTabs(planType);
+		profilePreferencePage.validatePlanNameMemberidNameAccountProfile();
 		CommunicationPreferencePage communicationPreferencePage = profilePreferencePage.navigateToCommunicationPreferencePage();
 		ClaimsSummaryPage claimsSummaryPage = communicationPreferencePage.navigateToClaimsPage();
 		getLoginScenario().saveBean(PageConstants.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
@@ -553,11 +566,12 @@ public class MemberAuthStepDefinition{
 		String planType = memberAttributesMap.get("Plan Type");
 		
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstants.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validatePlanNavTab(planType);
 		claimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod,claimSystem);
 		claimsSummaryPage.validateClaimsTableExists(false);
 		claimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod,claimSystem2);
 		claimsSummaryPage.validateClaimsTableExists(false);
-		EOBPage eobPage = claimsSummaryPage.navigateToEOBPage();
+		EOBPage eobPage = claimsSummaryPage.navigateToEOBPage(planType);
 		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
   	}
 	
@@ -575,6 +589,82 @@ public class MemberAuthStepDefinition{
 		String eobTypeData = "Medical";
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType = memberAttributesMap.get("Plan Type");
+		eobPage.validatePlanNavTab(planType);
 		eobPage.selectDateRange(dateRange, planType, eobTypeData); 
+		eobPage.validateEOBsDisplayed();
+		BenefitsAndCoveragePage bncPage = eobPage.navigateToBncPage();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 	}
+	
+	@Then("^the user validates the benefits and coverage page in prod$")
+	public void the_user_validates_bnc_page(DataTable  data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		bncPage.validatePlanNavTab(planType);
+		bncPage.validateBncPageSections(planType);
+
+	}
+	
+	@Then("^the user navigates to the documents and resources page and validates PDFs in prod$")
+	public void the_user_validates_docs_resources_page(DataTable  data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		bncPage.navigateToDocumentsAndResourcesPage(planType);
+		bncPage.validatePlanNavTabOrderMaterialsPage(planType);
+		bncPage.validatePdfLinks(planType);
+	}
+	
+	@Then("^the user navigates to the order plan materials page and validates in prod$")
+	public void the_user_validates_order_materials_page(DataTable  data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		bncPage.navigateToOrderPlanMaterialsPage();
+		bncPage.validatePlanNavTab(planType);
+		bncPage.validateOrderPlanMaterialsPage(planType);
+	}
+	
+	@Then("^the user navigates to payments page and validates in prod$")
+	public void the_user_validates_payments_page(DataTable  data) throws Throwable {
+		List<DataTableRow> memberAttributesRow = data
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		PaymentHistoryPage paymentsHistoryPage = bncPage.navigateToPaymentsPage();
+		paymentsHistoryPage.validatePlanNavTab(planType);
+		
+		getLoginScenario().saveBean(PageConstants.PAYMENT_HISTORY_PAGE, paymentsHistoryPage);
+	
+	}
+	
 }

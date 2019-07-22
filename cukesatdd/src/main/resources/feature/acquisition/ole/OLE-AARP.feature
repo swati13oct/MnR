@@ -666,7 +666,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | yes          | true      |
 
  
-  @oleVppUlayerSmoke_VBF
+  @oleVppUlayerSmoke_VBF @vbfGate
   Scenario Outline: OLE Landing from VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

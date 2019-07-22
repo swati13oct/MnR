@@ -663,7 +663,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("test is through stage");
 		} // Testing through Stage
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
@@ -1528,6 +1528,8 @@ public class AccountHomePage extends UhcDriver {
 
 		return new ClaimDetailsPage(driver);
 	}
+	@FindBy(className = "loading-block")
+	private WebElement loadingImage;
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 		// tbd waitForHomePage(helloPerson);
@@ -1551,21 +1553,24 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println("URL for testing: " + Page_URL);
 			driver.navigate().to(Page_URL);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("pharmacylocator");
 			} else {
 				waitForHomePage(helloPerson);
 				if (driver.getCurrentUrl().contains("/dashboard")) {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					CommonUtility.waitForPageLoad(driver, pharmacySearchLink, 5);
 					pharmacySearchLink.click();
-					try {
+					System.out.println("Clicked pharmacy Search Link...");
+					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+					/* tbd try {
 						Thread.sleep(10000);
 
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} */
 				}
 			}
 		}

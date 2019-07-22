@@ -252,7 +252,6 @@ public class ClaimDetailsPageStepDefinition {
 
 			System.out.println("Proceed to validate header section content on detail page");
 			claimDetlPg.validateHeaderSection(planType, memberType,claimSystem);
-			claimDetlPg.validateClaimsTbl(planType);
 
 			System.out.println("Proceed to validate 'Learn More...' link");
 			claimDetlPg.validateLrnMoreCostLnk();

@@ -187,8 +187,14 @@ public class OrderMaterialsBase extends UhcDriver  {
 	public void goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(String planType, String memberType,String originalUrl, String onPage) {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		try {
-			WebElement orderPlanMaterialsLink=driver.findElement(By.xpath("//div[contains(@class,'PlanDocumentsActiveCallouts"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]"));
-			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 20);
+			String testXpath="//div[contains(@class,'Callouts"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
+			if (planType.toUpperCase().contains("MEDICA")) {
+				testXpath="//div[contains(@class,'Callouts_Medica_PCP_"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
+			} 
+			System.out.println("TEST - testXpath="+testXpath);
+			//tbd WebElement orderPlanMaterialsLink=driver.findElement(By.xpath("//div[contains(@class,'PlanDocumentsActiveCallouts') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]"));
+			WebElement orderPlanMaterialsLink=driver.findElement(By.xpath(testXpath));
+			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 120);
 			orderPlanMaterialsLink.click(); //note: this will navigate back to order page
 			CommonUtility.checkPageIsReady(driver);
 			handleComboTabIfComboUser(planType, memberType);

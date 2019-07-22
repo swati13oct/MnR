@@ -85,17 +85,19 @@ public class HSIDStepDefinition {
 		}
 		// note: for the team-a env, it needs a different URL for PCP and Medica users
 		boolean teamSpecialCase=false;
+		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
+		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 			if (planType != null) {
 				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			}
 			if (category != null) {
 				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				} 
 			}
 		}
@@ -196,6 +198,8 @@ public class HSIDStepDefinition {
 		} else {
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				LoginPage loginPage=null;
+				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
+				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
 				} 
