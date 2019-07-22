@@ -7,16 +7,24 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.pdfbox.io.RandomAccessRead;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -939,7 +947,29 @@ public class PlanDetailsPage extends UhcDriver {
 			e1.printStackTrace();
 		}
 
-		// odd: the Object param of getContents is not currently used
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			System.out.println("PDF text : "+PDFText);
+
+			if(PDFText.contains(documentCode)){
+				System.out.println("PDF text contains expected Document code : "+documentCode);
+				return true;
+			}
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+/*		// odd: the Object param of getContents is not currently used
 		Dimension window = driver.manage().window().getSize();
 		new Actions(driver).moveByOffset(window.getHeight() / 2, window.getWidth() / 2).click().build().perform();
 		System.out.println("Clicked on center of PDF window");
@@ -950,13 +980,25 @@ public class PlanDetailsPage extends UhcDriver {
 			e1.printStackTrace();
 		}
 
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Clipboard clipboard = toolkit.getSystemClipboard();
+		ClipboardOwner currentowner;
+		// odd: the Object param of getContents is not currently used
+		StringSelection stringSelection = new StringSelection("");
+		clipboard.setContents(stringSelection, null);
 
 		Robot robotaction = new Robot();
 		robotaction.keyPress(KeyEvent.VK_CONTROL);
 		robotaction.keyPress(KeyEvent.VK_A);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		robotaction.keyRelease(KeyEvent.VK_A);
 		robotaction.keyRelease(KeyEvent.VK_CONTROL);
-		
+
 		System.out.println("PDF - Select all text");
 		try {
 			Thread.sleep(2000);
@@ -964,11 +1006,22 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		new Actions(driver).moveByOffset(window.getHeight() / 2, window.getWidth() / 2).contextClick().keyDown(Keys.ARROW_DOWN).click().build().perform();
 
-		robotaction.keyPress(KeyEvent.VK_CONTROL);
-		robotaction.keyPress(KeyEvent.VK_C);
-		robotaction.keyRelease(KeyEvent.VK_C);
-		robotaction.keyRelease(KeyEvent.VK_CONTROL);
+
+		Robot robotaction2 = new Robot();
+
+		
+		robotaction2.keyPress(KeyEvent.VK_CONTROL);
+		robotaction2.keyPress(KeyEvent.VK_C);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		robotaction2.keyRelease(KeyEvent.VK_C);
+		robotaction2.keyRelease(KeyEvent.VK_CONTROL);
 
 		System.out.println("PDF - Copy all text");
 		try {
@@ -978,27 +1031,42 @@ public class PlanDetailsPage extends UhcDriver {
 			e1.printStackTrace();
 		}
 		String PDFText = "";
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Toolkit toolkit1 = Toolkit.getDefaultToolkit();
 
-		Clipboard clipboard = toolkit.getSystemClipboard();
-		Transferable contents = clipboard.getContents(null);
+		Clipboard clipboard1 = toolkit1.getSystemClipboard();
+		try {
+			String Temp1 = (String) clipboard1.getData(DataFlavor.stringFlavor);
+			System.out.println("String from Clipboard:" + Temp1);
+
+		} catch (UnsupportedFlavorException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		Transferable contents1 = clipboard1.getContents(null);
 		//hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
-		boolean hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor );
+		boolean hasTransferableText = (contents1 != null) && contents1.isDataFlavorSupported(DataFlavor.stringFlavor );
 		if (hasTransferableText) {
 			try {
-				PDFText = (String) clipboard.getData(DataFlavor.stringFlavor );
+			//contents1 = (Transferable) clipboard1.getData(DataFlavor.stringFlavor);
+				PDFText = (String) contents1.getTransferData(DataFlavor.stringFlavor);
+				
 				System.out.println("String from Clipboard:" + PDFText);
 				if(PDFText.contains(documentCode)){
 					System.out.println("PDF text contains expected Document code : "+documentCode);
 					return true;
 				}
-			} catch (UnsupportedFlavorException exp) {
+			} 
+				catch (UnsupportedFlavorException exp) {
 				System.out.println(exp);
 				exp.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		System.out.println("****************Copy and validate document code failed*************");
 
 		return false;
