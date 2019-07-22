@@ -1,43 +1,31 @@
 package pages.acquisition.bluelayer;
 
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-
-/*@author pagarwa5*/
-
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import junit.framework.Assert;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+/*@author pagarwa5*/
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
-
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
@@ -200,6 +188,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeF;
+	
+	@FindBy(id = "zipcode")
+	private WebElement zipCode;
 
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
@@ -262,7 +253,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
 	private WebElement providerSearchFromHomeScreen;
 
-
+	  @FindBy(id="state-select")
+	  private WebElement stateDropDown;
+    
+	  @FindBy(id="dupIconFlyOut")
+	  private WebElement shoppingCartIcon;
+	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -305,6 +301,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, int visitorProfile) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(visitorProfile);
 	}
 
 	public AcquisitionHomePage(WebDriver driver, String string) {
@@ -406,6 +408,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		} else {
 			openAndValidate();
+		}
+	}
+	
+	public void openAndValidate(int visitorProfile) {
+		if (visitorProfile>0) {
+			
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);
+			
+			else 
+				Assert.fail("Please check booleanvalue");
+			
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
 		}
 	}
 	
@@ -1525,5 +1547,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public void selectState(String state) {
+		selectFromDropDownByValue(stateDropDown, state);
+	}
+	/**
+	 * This method used to navigate to visitor profile dashboard
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public VPPPlanSummaryPage findPlans(String txtZipCode){
+		
+		zipCode.sendKeys(txtZipCode);
+		
+		
+		return new VPPPlanSummaryPage(driver);
 	}
 }

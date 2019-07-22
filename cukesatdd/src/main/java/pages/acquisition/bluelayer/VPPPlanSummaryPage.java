@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -23,21 +24,18 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.ulayer.PageTitleConstants;
-//import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
 /**
  * @author pagarwa5
@@ -514,7 +512,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
 		
+		@FindBy(css="a#pop-btn-1")
+		private WebElement createProfileBtn;
 		
+		@FindBy(css="a#pop-btn-2")
+		private WebElement continueAsGuest;
+		
+		@FindBy(css="a#popupClose")
+		private WebElement btnClose;
 		
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
@@ -3020,5 +3025,28 @@ catch (Exception e) {
 	Assert.assertFalse("Application has not been retrived successfully", false);
 }
 }
+
+	/**
+	 * Validate Create Profile Prompt
+	 */
+	public void validateCreateProfilePrompt() {
+		Assert.assertTrue(validateNew(btnClose));
+		Assert.assertTrue(validateNew(createProfileBtn));
+		Assert.assertTrue(validateNew(continueAsGuest));
+	}
+	
+	/**
+	 * Click on Continue as guest link on create profile prompt
+	 * @return
+	 */
+	public VisitorProfilePage continueAsGuest(){
+		continueAsGuest.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 
 }

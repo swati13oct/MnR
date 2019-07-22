@@ -14,12 +14,13 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
  */
-public class VisitorProfileStepDefinition {
+public class VisitorProfileStepDefinition_AARP {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -110,11 +111,26 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 	
-	@And("^the user clicks on the shopping cart icon on DCE page$")
-	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page() {
+	@And("^the user clicks on the shopping cart icon on DCE page in AARP$")
+	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		VisitorProfilePage visitorProfilePage = dce.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@And("^user clicks on plan name in AARP$")
+	public void user_clicks_on_plan_name_in_AARP(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = givenAttributesMap.get("MA Test Plans");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		PlanDetailsPage planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
 	}
 } 
 
