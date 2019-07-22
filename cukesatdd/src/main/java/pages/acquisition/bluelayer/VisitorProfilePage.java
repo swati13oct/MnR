@@ -1,4 +1,4 @@
-package pages.acquisition.ulayer;
+package pages.acquisition.bluelayer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +65,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public AcquisitionHomePage addPlan() {
 		addPlans.click();
 		if(driver.getTitle().contains("Find Medicare Plans"))
-			return new AcquisitionHomePage(driver,1);
+			return new AcquisitionHomePage(driver, 1);
 		return null;
 	}
 	

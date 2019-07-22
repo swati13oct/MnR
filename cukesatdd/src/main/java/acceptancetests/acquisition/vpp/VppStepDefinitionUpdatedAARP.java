@@ -1012,8 +1012,6 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
-
 	}
 	
 	@Then("^user gets a create profile prompt on AARP site$")
