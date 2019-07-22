@@ -212,9 +212,8 @@ public class ClaimsBase extends UhcDriver  {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numClaimsDrugCustSrch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (validate(numClaimsMedlCustSrch)) {
+				if (validate(numClaimsMedlCustSrch)) 
 					numClaimsElement=numClaimsMedlCustSrch;
-				} 
 			} else {
 				numClaimsElement=numClaimsShipCustSrch;
 			}

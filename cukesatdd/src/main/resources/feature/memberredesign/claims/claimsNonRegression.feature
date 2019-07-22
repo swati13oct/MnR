@@ -28,15 +28,14 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage on claims summary page
-      | Segment ID   | <segmentId>   |
-    #----------------- Test Custom search error cases --------------------------
+    #----------------- Test Custom calendar and search error cases --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim Type   | <claimType>   |
       | Claim System | <claimSystem> |
       | Claim Period | Custom search |
+	Then I can validate the calendar will show up for custom search when click on From and To calendars    
     And I should be able to see the error message when no to and from dates being entered
     And I custom search claims for the following invalid time interval on claims summary page
       | Claims From Date | 01/02/2019 |
@@ -53,6 +52,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim Period | Custom search |
     And I custom search claims for the specific time interval on claims summary page
     Then I can see the number of claims
+    Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Test for- Last 30 days --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -61,6 +61,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System | <claimSystem> |
       | Claim Period | Last 30 days  |
     Then I can see the number of claims
+    Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Test for Last 90 days --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -69,6 +70,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System | <claimSystem> |
       | Claim Period | Last 90 days  |
     Then I can see the number of claims
+    Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Test for Last 6 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -77,6 +79,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System | <claimSystem> |
       | Claim Period | Last 6 months |
     Then I can see the number of claims
+    Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Test for Last 12 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>     |
@@ -85,6 +88,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System | <claimSystem>  |
       | Claim Period | Last 12 months |
     Then I can see the number of claims
+    Then I perform extensive validation for values between claims summary and claim details page
     #----------------- Test for Last 24 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>     |
@@ -138,8 +142,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @claims00_04 @claims00_N_M_p1
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 04_1  | 1041 | MA       | AARP_Individual            | NICE_000_CLAIMS | Medical           | 000       | Yes                |
-      | 04_2  | 1041 | MA       | AARP_Individual            | NICE_001_CLAIMS | Medical           | 001       | Yes                |
+      | 04_1  | 1041 | MA       | AARP_Individual_000        | NICE_CLAIMS     | Medical           | 000       | Yes                |
+      | 04_2  | 1041 | MA       | AARP_Individual_001        | NICE_CLAIMS     | Medical           | 001       | Yes                |
       | 04_3  | 1041 | MAPD     | AARP_Individual            | M_NICE_CLAIMS   | Medical           | 000       | Yes                |
       | 04_4  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | 000       | Yes                |
 
@@ -223,4 +227,39 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
       |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 
+	
+
+	
+	
+  Scenario Outline: To validate via member authorization access for claims
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    When I navigate to the claims Summary page from dashboard or testharness page
+    Then I can validate the claims summary header on claims summary page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage on claims summary page
+      | Segment ID   | <segmentId>   |
+    And I can search claims for claim period and claim type on claim summary page
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim Type   | <claimType>   |
+      | Claim System | <claimSystem> |
+      | Claim Period | Custom search |
+
+    Then I can validate the calendar will show up for custom search when click on From and To fields
+
+
+	
+
+    Examples: 
+      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
+      |    01 | 000 | lchoi2 | Zxcv1234 | SALOMA91402 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
+	
+	
 	

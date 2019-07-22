@@ -470,6 +470,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 				claimResult="ship claims (custom search) - Member Has ===> "+ ":"+ (numClaimsShipCustSrch.getText())+ " Claims"; 
 			Assert.assertTrue("PROBLEM - unable to locate any type of number of claims value", !claimResult.equals("none"));
 		} catch (Exception e) {
+			System.out.println("...got exception. e:"+e);
 		} 
 		WebElement e=youHave3;
 		if (planType.equalsIgnoreCase("SHIP")) {

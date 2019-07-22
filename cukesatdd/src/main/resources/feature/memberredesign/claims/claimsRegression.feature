@@ -29,7 +29,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can navigate to the Claim Details page from claims summary page
     And I can validate the Claims Table on claims details page
     And I can validate the Claims Total on claims details page
-
+    
     @smokeTest_Claims
     Examples: 
       | memberType | planType | claimPeriod    | claimSystem  |
@@ -89,6 +89,31 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Member Type | <memberType> |
     Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
+    #----------------- Test Custom calendar and search error cases --------------------------
+    And I can search claims for claim period and claim type on claim summary page
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim Type   | <claimType>   |
+      | Claim System | <claimSystem> |
+      | Claim Period | Custom search |
+	Then I can validate the calendar will show up for custom search when click on From and To calendars    
+    And I should be able to see the error message when no to and from dates being entered
+    And I custom search claims for the following invalid time interval on claims summary page
+      | Claims From Date | 01/02/2019 |
+      | Claims To Date   | 01/02/2018 |
+    Then I should be able to see the from date is greater than the to date error message being displayed
+    And I custom search claims for over two years time interval from current date on claims summary page
+    Then I should be able to see the search range is greater than two years error
+	#----------------- Test for Custom search --------------------------
+    And I can search claims for claim period and claim type on claim summary page
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim Type   | <claimType>   |
+      | Claim System | <claimSystem> |
+      | Claim Period | Custom search |
+    And I custom search claims for the specific time interval on claims summary page
+    Then I can see the number of claims
+    #----------------- Test for input specific claim period  --------------------------
     And I can search claims for the following claim period on claims summary page
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -107,17 +132,17 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
     Examples: 
-      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
-      | 15227 | MA       | AARP_Individual | Last 24 months | NICE_000_CLAIMS | 000       |
-      | xxxxx | MA       | AARP_Individual | Last 24 months | NICE_001_CLAIMS | 001       |
-      | 15235 | MAPD     | UHC_Individual  | Last 24 months | M_NICE_CLAIMS   | 000       |
-      | 15230 | MAPD     | AARP_Individual | Last 24 months | M_COSMOS_CLAIMS | 000       |
-      | 15234 | MA       | UHC_Individual  | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | 15268 | PCP      | Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MAPD     | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MA       | GROUP           | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | 15236 | SHIP     | Individual      | Last 24 Months | COMPASS_CLAIMS  | 000       |
-      | 15259 | SHIP     | COMBO           | Last 24 months | COMPASS_CLAIMS  | 000       |
+      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId |
+      | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       |
+      | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       |
+      | 15235 | MAPD     | UHC_Individual      | Last 24 months | M_NICE_CLAIMS   | 000       |
+      | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       |
+      | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
+      | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       |
+      | xxxxx | MAPD     | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       |
+      | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       |
+      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       |
+      | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       |
 
   @claims02 @E2EClaimsDrugCase @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
@@ -163,8 +188,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | planCategory | claimSystem    |
       | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS |
 
-  # note: pageNum is the claims page where the EOB pdf is located
-  # note: rowNum is the data row where EOB pdf is located - only count the data row, exclude header row
+  ### note: pageNum is the claims page where the EOB pdf is located
+  ### note: rowNum is the data row where EOB pdf is located - only count the data row, exclude header row
   @claims04 @claimsEOB @US1268210 @F244667 @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
     Given login with following details logins in the member portal and validate elements
@@ -245,5 +270,5 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType          | memberType | claimType | claimSystem          |
       | 15259 | SHIP              | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
-      
+
   #----- end of Regression claims scenarios section ------------------------

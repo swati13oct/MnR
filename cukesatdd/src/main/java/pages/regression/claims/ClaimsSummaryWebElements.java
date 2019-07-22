@@ -365,4 +365,29 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
+	
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_from_date_fed')]")
+	protected WebElement fromCalendarIconBtn_fed;
+
+	@FindBy(xpath="//ul[@ng-model='date'][1]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement fromCalendarDatePicker_today_fed;
+
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_to_date_fed')]")
+	protected WebElement toCalendarIconBtn_fed;
+
+	@FindBy(xpath="//ul[@ng-model='date'][2]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement toCalendarDatePicker_today_fed;
+	
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_from_date_ship')]")
+	protected WebElement fromCalendarIconBtn_ship;
+
+	@FindBy(xpath="//ul[@ng-model='date'][3]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement fromCalendarDatePicker_today_ship;
+
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_to_date_ship')]")
+	protected WebElement toCalendarIconBtn_ship;
+
+
+	@FindBy(xpath="//ul[@ng-model='date'][4]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement toCalendarDatePicker_today_ship;
 }

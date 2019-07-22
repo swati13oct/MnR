@@ -1,6 +1,11 @@
 package pages.regression.claims;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -11,6 +16,8 @@ import acceptancetests.util.CommonUtility;
  * Functionality : methods for Claims Summary search
  */
 public class ClaimsSummarySearch extends ClaimsSummaryBase {
+
+	private WebElement toTxtField;
 
 	public ClaimsSummarySearch(WebDriver driver) {
 		super(driver);
@@ -190,6 +197,57 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				srchBtn.click();
 			}
 			System.out.println("Clicked search button");
+		}
+	}
+	
+	public void customSearchCalendar(String planType, String fromDate, String toDate) {
+		System.out.println("Perform custom search with 'From' date='"+fromDate+"' and 'To' date='"+toDate+"' for planType="+planType);
+		
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		String todayDate=dateFormat.format(date); 
+		
+		if(driver.getTitle().contains("Claims Summary")){
+			WebElement fromCalendarIconBtn=fromCalendarIconBtn_fed;
+			WebElement fromCalendarDatePicker_today=fromCalendarDatePicker_today_fed;
+			WebElement toCalendarIconBtn=toCalendarIconBtn_fed;
+			WebElement toCalendarDatePicker_today=toCalendarDatePicker_today_fed;
+			WebElement fromTxtField=fedFrom;
+			WebElement toTxtField=fedTo;
+			if (planType.equalsIgnoreCase("SHIP")) {
+				//note: ship has different xpath
+				fromCalendarIconBtn=fromCalendarIconBtn_ship;
+				fromCalendarDatePicker_today=fromCalendarDatePicker_today_ship;
+				toCalendarIconBtn=toCalendarIconBtn_ship;
+				toCalendarDatePicker_today=toCalendarDatePicker_today_ship;
+				fromTxtField=shipFrom;
+				toTxtField=shipTo;
+			}
+
+			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", validate(fromCalendarIconBtn));
+			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", validate(toCalendarIconBtn));
+
+			System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
+			fromCalendarIconBtn.click();
+			CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);
+			Assert.assertTrue("PROBLEM - date picker for 'From' calendar button should have been shown today's date clicked", validate(fromCalendarDatePicker_today));
+			fromCalendarDatePicker_today.click();
+
+			System.out.println("Proceed to validate 'To' date calendar will hide and show accordingly");
+			toCalendarIconBtn.click();
+			CommonUtility.waitForPageLoad(driver, toCalendarDatePicker_today, 5);
+			Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", validate(toCalendarDatePicker_today));
+			toCalendarDatePicker_today.click();
+			
+			String actualFromTxt=fromTxtField.getAttribute("value");
+			String actualToTxt=toTxtField.getAttribute("value");
+			Assert.assertTrue("PROBLEM - 'From' text not as expected.  Should have been today's date.  "
+					+ "Expected='"+todayDate+"' | Actual='"+actualFromTxt+"'", 
+					actualFromTxt.equals(todayDate));
+			Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
+					+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
+					actualToTxt.equals(todayDate));
+
 		}
 	}
 }

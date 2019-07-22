@@ -49,6 +49,10 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	public void customSearchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
 		searchClaims.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 	}
+	
+	public void customSearchCalendar(String planType, String fromDate, String toDate) {
+		searchClaims.customSearchCalendar(planType, fromDate,toDate);
+	}
 
 	public void searchClaimsbyCustomDate(String planType, String claimPeriod) 
 			throws InterruptedException {
