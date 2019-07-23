@@ -139,7 +139,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       |
       | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
       | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MAPD     | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       |
+      | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       |
       | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       |
       | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       |

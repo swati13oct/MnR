@@ -95,7 +95,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		String expectedTitle="Benefits Information | OptumRx"; //note: validate title
 		String actualTitle=driver.getTitle(); 
 		System.out.println("New tab actual title = "+actualTitle);
-		Assert.assertTrue("PROBLEM - Title is not as expected.  "
+		Assert.assertTrue("PROBLEM - clicked OPTUMRX.COM under pagenation but open page title is not as expected.  "
 				+ "Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,
 				actualTitle.contains(expectedTitle));
 

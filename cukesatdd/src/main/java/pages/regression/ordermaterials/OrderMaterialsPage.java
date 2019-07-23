@@ -364,7 +364,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		String originalUrl=driver.getCurrentUrl();
 		printableDocLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitPgOrderPlnMaterialLnk, 10);
+		CommonUtility.waitForPageLoad(driver, benefitPgOrderPlnMaterialLnk, 120);
 		String expectedUrl="member/documents/overview.html";
 		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
 		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
