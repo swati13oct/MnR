@@ -223,9 +223,9 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <planType> |
+    Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user selects the first plan to view plan detail
       | Plan Type | <planType> |
     And the user navigates to pharmacy locator page using Online pharmacy directory link
@@ -238,7 +238,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorulayer04 @geoTargeting
+  @pharmacylocatorulayer04 @geoTargeting  @regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

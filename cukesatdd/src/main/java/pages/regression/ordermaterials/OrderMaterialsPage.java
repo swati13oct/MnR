@@ -633,7 +633,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		boolean isComboUser=false;
 		if (memberType.toUpperCase().contains("COMBO"))
 			isComboUser=true;
-		if (planType.equalsIgnoreCase("SHIP"))
+		if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP"))
 			lookForPlanCategory="MEDICARE SUPPLEMENT";
 		else if (planType.equalsIgnoreCase("SSUP")) 
 			lookForPlanCategory="SSP";

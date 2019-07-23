@@ -66,10 +66,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - unable to locate distance option '10 miles'", validate(distanceOption_10miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '15 miles'", validate(distanceOption_15miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", validate(distanceOption_25miles));
-		if (memberType.toUpperCase().contains("MEDICA")) {
-			Assert.assertTrue("PROBLEM - MEDICA itself is a plan, there should be no plan name dropdown element", 
-					!validate(PlanNameDropDown));
-		} else {
+		//tbd if (memberType.toUpperCase().contains("MEDICA")) {
+		//tbd 	Assert.assertTrue("PROBLEM - MEDICA itself is a plan, there should be no plan name dropdown element", 
+		//tbd			!validate(PlanNameDropDown));
+		//tbd } else {
 			Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
 					validate(PlanNameDropDown));
 			select = new Select(PlanNameDropDown);           
@@ -80,7 +80,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - number of options for plans dropdown is not as expected.  "
 					+ "Expected: Actual>=1 | Actual='"+distanceOptions.size()+"'", 
 					planListOptions.size()>=1);
-		}
+		//tbd }
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", validate(zipcodeField));
 		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
 

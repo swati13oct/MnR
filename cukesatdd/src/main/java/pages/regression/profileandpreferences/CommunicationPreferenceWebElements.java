@@ -169,10 +169,10 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@class='green-status' and contains(text(),'Success')]/../span[contains(text(),'your email was updated')]")
 	protected WebElement emailUpdateSuccTxt;
 
-	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]/../../span[contains(@class,'active')]")
+	@FindBy(xpath="//div[@id='Paperless_Settings']//h2/../../span[contains(@class,'active')]")
 	protected WebElement paperlessOptionActive;
 
-	@FindBy(xpath="//div[contains(@class,'accordion-heading-text')]//h2[contains(text(),'Paperless')]")
+	@FindBy(xpath="//div[@id='Paperless_Settings']//h2")
 	protected WebElement paperlessOptionInactive;
 
 	public CommunicationPreferenceWebElements(WebDriver driver) {
