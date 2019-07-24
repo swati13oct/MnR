@@ -87,6 +87,7 @@ Feature:P1.5 To test order materials in member site
     And user validates error message when submit without any selection
     Then user validates ability to submit order for each item individually for all available items
     
+    @Individual
     Examples: 
       | TID   | planType | memberType            | segmentId |  
       | 15287 | MA	     | AARP_Individual_order | 000       |
