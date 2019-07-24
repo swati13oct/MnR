@@ -52,12 +52,12 @@ Feature: C1.2To test Preferences page
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-    Then I can validate the segment ID value in localStorage on preference page
-      | Plan Type  | <planType>  |
-      | Segment ID | <segmentId> |
     And the user clicks on edit preferences link
     Then the user changes the online preference and saves the change
     Then the user validates the functionality of updating the email on the iframe
+    Then I can validate the segment ID value in localStorage on preference page
+      | Plan Type  | <planType>  |
+      | Segment ID | <segmentId> |
 
     @smokeTest @MemberVBF @smokeTest_GoGreenEPMP @rallyDashboard @testharness
     Examples: 
