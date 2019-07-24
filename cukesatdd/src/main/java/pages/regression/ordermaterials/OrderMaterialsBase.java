@@ -5,60 +5,11 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import pages.regression.accounthomepage.AccountHomePage;
 
-public class OrderMaterialsBase extends UhcDriver  {
-	@FindBy(xpath = "//*[@id='PoweredByiPerceptions']")
-	private WebElement iPerceptionPopUp;
-
-	@FindBy(xpath = "//*[@id = 'closeButton']")
-	private WebElement iPerceptionClose;
-
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
-	private WebElement OPM_comboTab_MAPD;
-
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
-	private WebElement OPM_comboTab_SHIP;
-
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
-	private WebElement OPM_comboTab_PDP;
-
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
-	private WebElement OPM_comboTab_SSUP;
-
-	@FindBy(xpath="//label[@for='replacement-id']//a[text()='VIEW MEMBER ID CARD']")
-	private WebElement link_fed_memberIDcardLink;
-
-	@FindBy(xpath="//label[@for='member-id-card']//a[text()='VIEW HEALTH INSURANCE CARD']")
-	private WebElement link_ship_memberIDcardLink;
-
-	@FindBy(xpath="//a[contains(text(),'CARD')]")
-	private WebElement viewIdCard;
-
-	@FindBy(xpath="//h1[@id='modal-header']")
-	private WebElement memberIdCardsPageHeader;
-
-	@FindBy(xpath="//button[@class='modal-close-btn']")
-	private WebElement idCardCloseButton;
-
-	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
-	private WebElement orderMaterial_Dashboard;
-
-	@FindBy(xpath="//div[@id='notShipRadio']//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
-	private WebElement nonship_idCardLinkOrderPage;
-
-	@FindBy(xpath="//div[@id='shipRadio']//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
-	private WebElement ship_idCardLinkOrderPage;
-
-	@FindBy(xpath="//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
-	private WebElement idCardLinkOrderConfirmedPage;
-	
-	@FindBy(id="additionalMaterialsText")
-	public WebElement addOrderMaterialLink_OrderConfirmation;
+public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 
 	public OrderMaterialsBase(WebDriver driver) {
 		super(driver);
@@ -187,16 +138,20 @@ public class OrderMaterialsBase extends UhcDriver  {
 	public void goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(String planType, String memberType,String originalUrl, String onPage) {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		try {
-			String testXpath="//div[contains(@class,'Callouts"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
-			if (planType.toUpperCase().contains("MEDICA")) {
-				testXpath="//div[contains(@class,'Callouts_Medica_PCP_"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
-			} 
-			System.out.println("TEST - testXpath="+testXpath);
-			//tbd WebElement orderPlanMaterialsLink=driver.findElement(By.xpath("//div[contains(@class,'PlanDocumentsActiveCallouts') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]"));
-			WebElement orderPlanMaterialsLink=driver.findElement(By.xpath(testXpath));
-			CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 120);
-			orderPlanMaterialsLink.click(); //note: this will navigate back to order page
+			if(onPage.equalsIgnoreCase("formsAndResourcesPage")) {
+				driver.navigate().back();
+			} else {
+				String testXpath="//div[contains(@class,'Callouts"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
+				if (planType.toUpperCase().contains("MEDICA")) {
+					testXpath="//div[contains(@class,'Callouts_Medica_PCP_"+year+"') and not(contains(@class,'ng-hide'))]//a[@class='callout_chk' and contains(text(),'ORDER PLAN MATERIALS')]";
+				} 
+				System.out.println("TEST - testXpath="+testXpath);
+				WebElement orderPlanMaterialsLink=driver.findElement(By.xpath(testXpath));
+				CommonUtility.waitForPageLoad(driver, orderPlanMaterialsLink, 120);
+				orderPlanMaterialsLink.click(); //note: this will navigate back to order page
+			}
 			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, orderPlanPgHeader, 15);
 			handleComboTabIfComboUser(planType, memberType);
 		} catch(Exception e) {
 			Assert.assertTrue("PROBLEM - unable to go back to Order Plan Materials page via 'Plan Documents & Resources' page's 'ORDER PLAN MATERIALS' link", false);
@@ -226,9 +181,7 @@ public class OrderMaterialsBase extends UhcDriver  {
 		}
 	}
 
-	/**
-	 * Helper method - handle the iPerception PopUp if any
-	 */
+	/** Helper method - handle the iPerception PopUp if any */
 	public void takeCareiPerceptionPopUp() {
 		try{
 			CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 5);

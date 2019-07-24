@@ -409,6 +409,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		CommonUtility.waitForPageLoad(driver, headingTxt, 10);
 		String lookForPlanCategory="";
 		boolean isComboUser=false;
 		if (memberType.toUpperCase().contains("COMBO"))

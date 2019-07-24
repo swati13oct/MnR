@@ -104,8 +104,8 @@ Feature:P1.5 To test order materials in member site
       | 15289 | MAPD     | UHC_Group_order       | 000       |
       | 15290 | PDP      | UHC_Group_order       | 000       |
 
-   # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
-   @ValidateHeaderComboTabs
+    # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
+    @ValidateHeaderComboTabs
     Examples: 
       | TID   | planType | memberType            | segmentId | 
       | 15281 | MAPD	 | COMBO_order           | 000       |
@@ -115,8 +115,8 @@ Feature:P1.5 To test order materials in member site
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 
-      | TID   | planType | memberType               | segmentId |  
-      | 15293 | SHIP     | EFT_MedSelectPlan_order  | 000       |
+      | TID   | planType | memberType              | segmentId |  
+      | 15293 | SHIP     | EFT_MedSelectPlan_order | 000       |
 
   #####################################################
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible

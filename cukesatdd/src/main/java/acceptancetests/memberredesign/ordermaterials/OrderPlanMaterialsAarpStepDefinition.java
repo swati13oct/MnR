@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
-import pages.regression.profileandpreferences.CommunicationPreferencePage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
