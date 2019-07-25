@@ -231,7 +231,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateAllTooltips(String memberType, String language, boolean hasPrefRetailPharmacyWidget) {
-		moveMouseToElement(map_showHideMapLnk);
+		//note: need this to shift things into view for validation
+		if (validate(noResultMsg)) {
+			moveMouseToElement(noResultMsg);
+		} else {
+			moveMouseToElement(map_showHideMapLnk);
+		}
+		
 		String targetTooltipName="Standard Network Pharmacy";
 		String testXpath="//input[@id='pharmacy-standard']/../span";
 		String expTxt1="Standard Network Pharmacy";
