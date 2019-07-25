@@ -12,6 +12,9 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//div[@class='pharmacy-locator']//div[@class='table-body responsive']/div[not(contains(@class,'ng-hide'))]/div/label[@id='plan-year-label']")
 	protected WebElement planYearLabel;
 
+	@FindBy(xpath="//select[@id='plan-year']")
+	protected WebElement planYearDropDown;
+	
 	@FindBy(xpath="//a[@dtmid='Dtmid MapDirections']")
 	protected List<WebElement> getDirectionLnk;
 

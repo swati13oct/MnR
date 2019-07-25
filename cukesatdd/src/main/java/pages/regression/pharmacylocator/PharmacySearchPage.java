@@ -1,6 +1,7 @@
 package pages.regression.pharmacylocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -87,8 +88,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		//note: plan year dropdown only shows during AEP time frame - Sept - Dec (server time)
 		//note: only validate field if plan year label is showing
 		if (validate(planYearLabel)) {
-			//TODO - validate the dropdown and selection options are as expected
-			Assert.assertTrue("PROBLEM - purposely failing this, code the behavior when planYear dropdown show up", false);
+			select = new Select(planYearDropDown);           
+			List <WebElement> yearList = select.getOptions();
+			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
+					yearList.size()>0);
+			String actualYear = select.getFirstSelectedOption().getText().trim();
+			String expectedYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			Assert.assertTrue("PROBLEM - default year should be current year.  "
+					+ "Expected='"+expectedYear+"' | Actual='"+actualYear+"'", 
+					expectedYear.equalsIgnoreCase(actualYear));
 		}
 	}
 
