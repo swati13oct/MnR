@@ -196,6 +196,12 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		//note: validate tooltips
 		validateTooltips(planType, memberType, claimSystem);
 
+		try {
+			Thread.sleep(1000); //note: sometimes detail take longer to load
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		String testItem="";
 		//note: validate header section body content
 		if (planType.equalsIgnoreCase("SHIP")) {

@@ -28,6 +28,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage on claims summary page
+      | Segment ID   | <segmentId>   |
     #----------------- Test Custom calendar and search error cases --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -117,7 +119,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 01_2  | 1041 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
       | 01_3  | 1041 | MAPD     | UHC_Individual             | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
-      | 01_4  | 1041 | MAPD     | COMBO_GROUP                 | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_4  | 1041 | MAPD     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 01_5  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @claims00_02 @claims00_C_M_p2
