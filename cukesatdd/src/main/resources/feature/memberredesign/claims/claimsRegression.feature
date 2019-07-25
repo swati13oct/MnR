@@ -12,7 +12,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note: 
   #----- beginning of VBF claims scenarios section ------------------
   @smokeTest @MemberVBF @rallyDashboard @testharness @vbfGate
-  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimSystem>
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Claim System | <claimSystem> |
@@ -29,8 +29,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can navigate to the Claim Details page from claims summary page
     And I can validate the Claims Table on claims details page
     And I can validate the Claims Total on claims details page
-    Then I can validate the segment ID value in localStorage on claims summary page
-      | Segment ID   | <segmentId>   |
     
     @smokeTest_Claims
     Examples: 
@@ -47,7 +45,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
 
   @smokeTest @MemberVBF @claims_Performance
-  Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
+  Scenario Outline: To validate that segment ID is present on claims summary page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Claim System | <claimSystem> |
@@ -69,7 +67,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note: Step is already merged into E2E scenario, this scenario is purely for gating purposes.  
   # note: Can be remove later on for consolidation purposes
   @F279237
-  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimSystem>
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Claim System | <claimSystem> |
