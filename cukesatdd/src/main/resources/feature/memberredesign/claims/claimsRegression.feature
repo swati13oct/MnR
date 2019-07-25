@@ -132,17 +132,17 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
     Examples: 
-      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId |
-      | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       |
-      | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       |
-      | 15235 | MAPD     | UHC_Individual      | Last 24 months | M_NICE_CLAIMS   | 000       |
-      | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       |
-      | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       |
-      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       |
-      | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       |
+      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
+      | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
+      | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
+      | 15235 | MAPD     | UHC_Individual      | Last 24 months | M_NICE_CLAIMS   | 000       | Medical           |
+      | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       | Medical           |
+      | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | Medical           |
+      | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | Medical           |
 
   @claims02 @E2EClaimsDrugCase @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
@@ -168,11 +168,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the DownloadMyData section on claims summary page
 
     Examples: 
-      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId |
-      | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       |
-      | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       |
-      | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       |
-      | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       |
+      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId | claimType         |
+      | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       | Prescription drug |
+      | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       | Prescription drug |
+      | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
+      | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
 
 
   @claims03 @TC_09claimsPHIP @regressionMember
