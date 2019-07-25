@@ -45,7 +45,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #  | GroupRetiree | MAPD     | Last 24 months | RxCLAIMS     |
 
   @smokeTest @MemberVBF @claims_Performance
-  Scenario Outline: To validate that segment ID is present on claims summary page
+  Scenario Outline: To validate that claims are present on claims summary page for performance ATDD
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Claim System | <claimSystem> |
@@ -67,7 +67,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note: Step is already merged into E2E scenario, this scenario is purely for gating purposes.  
   # note: Can be remove later on for consolidation purposes
   @F279237
-  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimSystem>
+  Scenario Outline: To validate that segment ID present on claims summary page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Claim System | <claimSystem> |
