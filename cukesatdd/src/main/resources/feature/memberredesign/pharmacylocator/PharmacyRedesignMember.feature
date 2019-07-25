@@ -70,11 +70,15 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
   # walgreens widget dce link is pointing to wrong place for Chinese and Spanish page on offline env
   #-------------------------
   @pharmacylocator1 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator page on member site
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -Segment ID: <segmentId> - To verify end-to-end behavior for pharmacy locator English page on member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type     | <planType>     |
 	  | Member Type   | <memberType>   |
 	When the user navigates to pharmacy search page
+    Then I can validate the segment ID value in localStorage for pharmacy locator page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Segment ID  | <segmentId>  |
     #------ English -----------------------------------
 	And the user validates header section content
 	  | Member Type   | <memberType>   |
@@ -118,20 +122,26 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Then the user validates the pharmacies available
 	  | Language      | English        |
 
+	@pharmacylocator1a
 	Examples: 
-	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
-	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
-	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 61443   | 10       | Long-term care              | False                 | False            | False                |
-	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 33321   | 10       | Home Infusion and Specialty | False                 | False            | False                |
-	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
-	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 14867   | 25       | Long-term care              | False                 | False            | False                |
-	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
-	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+	  | 15272	| MA       | IndAARPMA_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | False                 | False            | False                |
+	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
+	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 10       | Long-term care              | False                 | False            | False                |
+	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
+	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 000       | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 
-  @pharmacylocator2 @E2E @Chinese @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator page on member site
+	@pharmacylocator1b
+	Examples: 
+	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
+	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | Long-term care              | False                 | False            | False                |
+	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 000       | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+
+  @pharmacylocator2 @E2E @Chinese @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator Chinese page on member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type     | <planType>     |
 	  | Member Type   | <memberType>   |
@@ -179,6 +189,18 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Language      | Chinese        |
 	Then the user validates the pharmacies available
 	  | Language      | Chinese        |
+
+	Examples: 
+	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
+	  | 15295	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+
+  @pharmacylocator3 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify end-to-end behavior for pharmacy locator Spanish page on member site
+	Given login with following details logins in the member portal and validate elements
+	  | Plan Type     | <planType>     |
+	  | Member Type   | <memberType>   |
+	When the user navigates to pharmacy search page
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
 	And the user validates header section content
@@ -228,7 +250,8 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
 	  | 15295	| PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
-  @pharmacylocator3 @NegativeScenario @regressionMember @regressionMember_Testharness
+
+  @pharmacylocator4 @NegativeScenario @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To verify pharmacy link is not displayed to MA/SHIP member in member site
 	Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |

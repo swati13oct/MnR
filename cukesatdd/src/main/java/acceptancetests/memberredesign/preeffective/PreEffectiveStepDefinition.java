@@ -19,6 +19,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -359,6 +361,39 @@ public void verifyCorrectPreEffectiveMessageIsDisplayedOnClaimsPage() throws Thr
 	newclaimsSummarypage.verifyCorrectMessageForPreEffectiveMembers();
 	
                
+}
+
+@Then("^verify segment ID on claims page$")
+public void verifySegmentId(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
+			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+	String planType = memberAttributesMap.get("Plan Type");
+	String memberType = memberAttributesMap.get("Member Type");
+	String expectedSegmentId = memberAttributesMap.get("Segment ID");
+	//note: fix up the planType value first before sending it over to the claims method
+	if (planType.contains("MA")) {
+		if (planType.contains("MAPD")) 
+			planType="MAPD";
+		else 
+			planType="MA";
+	} else if(planType.contains("SSUP")) {
+		planType="SSUP";
+	} else if(planType.contains("PDP")) {
+		planType="PDP";
+	} else if(planType.contains("SHIP")) {
+		planType="SHIP";
+	}
+	newclaimsSummarypage.validateSegmentId(planType, memberType, expectedSegmentId);	
+
 }
 
 

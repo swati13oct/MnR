@@ -53,7 +53,6 @@ public class ClaimsSearchNavigateStepDefinition {
 	 * This step is for VBF.
 	 * This step performs navigation from claims summary page to claims detail page via method used by VBF case
 	 */
-	//tbd public static String vbf_claimType;
 	@And("^I can navigate to the Claim Details page from claims summary page$")
 	public void vbf_navigate_to_claim_details_page() throws InterruptedException { 
 		String claimSystem = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
@@ -96,10 +95,17 @@ public class ClaimsSearchNavigateStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
 
+		//determine claim type
+		String claimType="medical";
+		if (claimSystem.contains("D_") || claimSystem.contains("RX_")) 
+			claimType="prescription drug";
+		System.out.println("This test will validate for claimType='"+claimType+"'");
+		
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_PERIOD, claimPeriod);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM, claimSystem);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE, claimType);
 
 		System.out.println("claim period = "+claimPeriod);
 
@@ -121,6 +127,7 @@ public class ClaimsSearchNavigateStepDefinition {
 		noteList.add("Member Type      = "+memberType);
 		noteList.add("Claim System     = "+claimSystem);
 		noteList.add("Claim Period     = "+claimPeriod);
+		noteList.add("Claim Type       = "+claimType);
 		noteList.add("Number of Claims = "+resultNumOfClaims);
 		noteList.add("================================================================");
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RESULT_NOTE, noteList);
@@ -152,6 +159,13 @@ public class ClaimsSearchNavigateStepDefinition {
 		String memberType = memberAttributesMap.get("Member Type");
 		String claimType = memberAttributesMap.get("Claim Type");
 		String claimSystem = memberAttributesMap.get("Claim System");
+		if (claimType.equals("<claimType>")) {
+			if (claimSystem.contains("D_") || claimSystem.contains("RX_")) 
+				claimType="prescription drug";
+			else 
+				claimType="medical";
+		}
+		System.out.println("This test will validate for claimType='"+claimType+"'");
 
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
@@ -202,6 +216,8 @@ public class ClaimsSearchNavigateStepDefinition {
 	public void i_navigate_to_claim_details() throws InterruptedException { 
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		String claimSystem = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 
@@ -233,8 +249,8 @@ public class ClaimsSearchNavigateStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			newClaimsSummaryPage = accountHomePage.navigateToClaimsSummaryPage();
 		}
-		if (newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		Assert.assertTrue("PROBLEM - unable to go to claims summary page", newClaimsSummaryPage!=null);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 
 		//note: initialize some variables that will be used by other steps later
 		HashMap<String, Integer> allClaims = new HashMap<String, Integer>();
@@ -328,5 +344,18 @@ public class ClaimsSearchNavigateStepDefinition {
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
 	}
 
+	@And("^I can validate the calendar will show up for custom search when click on From and To calendars$")
+	public void custom_search_calendar() throws InterruptedException{ 
+		//note: today is the 'to' date | go back 18 months will be the from day  01/02/2018
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
+		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
+		ClaimsSummaryPage newClaimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		newClaimsSummaryPage.customSearchCalendar(planType, fromDate,toDate);
+		if(newClaimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);	}
 
 }

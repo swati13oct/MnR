@@ -1,15 +1,22 @@
 package pages.regression.pharmacylocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
@@ -60,10 +67,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - unable to locate distance option '10 miles'", validate(distanceOption_10miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '15 miles'", validate(distanceOption_15miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", validate(distanceOption_25miles));
-		if (memberType.toUpperCase().contains("MEDICA")) {
-			Assert.assertTrue("PROBLEM - MEDICA itself is a plan, there should be no plan name dropdown element", 
-					!validate(PlanNameDropDown));
-		} else {
+		//tbd if (memberType.toUpperCase().contains("MEDICA")) {
+		//tbd 	Assert.assertTrue("PROBLEM - MEDICA itself is a plan, there should be no plan name dropdown element", 
+		//tbd			!validate(PlanNameDropDown));
+		//tbd } else {
 			Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
 					validate(PlanNameDropDown));
 			select = new Select(PlanNameDropDown);           
@@ -74,15 +81,28 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - number of options for plans dropdown is not as expected.  "
 					+ "Expected: Actual>=1 | Actual='"+distanceOptions.size()+"'", 
 					planListOptions.size()>=1);
-		}
+		//tbd }
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", validate(zipcodeField));
 		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
 
 		//note: plan year dropdown only shows during AEP time frame - Sept - Dec (server time)
 		//note: only validate field if plan year label is showing
 		if (validate(planYearLabel)) {
-			//TODO - validate the dropdown and selection options are as expected
-			Assert.assertTrue("PROBLEM - purposely failing this, code the behavior when planYear dropdown show up", false);
+			select = new Select(planYearDropDown);           
+			List <WebElement> yearList = select.getOptions();
+			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
+					yearList.size()>0);
+			String expectedYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			boolean containCurrentYr=false;
+			for(int i =0; i<yearList.size() ; i++){
+				String planName = yearList.get(i).getText();
+				if (planName.contains(expectedYear)) {
+					containCurrentYr=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - list of year options should contain current year as option.",
+					containCurrentYr);
 		}
 	}
 
@@ -211,7 +231,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateAllTooltips(String memberType, String language, boolean hasPrefRetailPharmacyWidget) {
-		moveMouseToElement(map_showHideMapLnk);
+		//note: need this to shift things into view for validation
+		if (validate(noResultMsg)) {
+			moveMouseToElement(noResultMsg);
+		} else {
+			moveMouseToElement(map_showHideMapLnk);
+		}
+		
 		String targetTooltipName="Standard Network Pharmacy";
 		String testXpath="//input[@id='pharmacy-standard']/../span";
 		String expTxt1="Standard Network Pharmacy";
@@ -447,6 +473,59 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
+	}
+	
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		String lookForPlanCategory="";
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+		if (planType.equalsIgnoreCase("SHIP"))
+			lookForPlanCategory="MEDICARE SUPPLEMENT";
+		else if (planType.equalsIgnoreCase("SSUP")) 
+			lookForPlanCategory="SSP";
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+			lookForPlanCategory="MAPD";
+		else 
+			lookForPlanCategory=planType;
+
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
+				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
+				expectedSegmentId.equals(actualSegmentId));
+	}
+	
+	public String getConsumerDetailsFromlocalStorage() {
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+	
+	public String getSegmentIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		String actualSegmentId=null;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			JSONArray arr =jsonObj.getJSONArray("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", arr.length()>1);
+			for (int i = 0; i < arr.length(); i++) {
+				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				//note: need to locate the right plan for segmentId validation
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
+					actualSegmentId!=null);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualSegmentId;
 	}
 }
 

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -27,8 +29,18 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummaryValidatePreEff validatePreEff=new ClaimsSummaryValidatePreEff(driver);
 	ClaimsSummaryValidateTable validateTable=new ClaimsSummaryValidateTable(driver);
 	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
+	ClaimsSummaryValidateSegmentId validateSegmentId=new ClaimsSummaryValidateSegmentId(driver);
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
 
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		//keep Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		//keep String browserName = cap.getBrowserName().toLowerCase();
+		//keep if (browserName.equalsIgnoreCase("CHROME")) 
+		validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+		//keep else 
+		//keep System.out.println("TODO - need to figure out how to handle the other browsers");
+	}
+	
 	public void searchClaimsByTimePeriodClaimType(String planType, String claimPeriod, String claimType) 
 			throws InterruptedException {
 		searchClaims.searchClaimsByTimePeriodClaimType(planType, claimPeriod, claimType);
@@ -36,6 +48,10 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	public void customSearchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
 		searchClaims.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+	}
+	
+	public void customSearchCalendar(String planType, String fromDate, String toDate) {
+		searchClaims.customSearchCalendar(planType, fromDate,toDate);
 	}
 
 	public void searchClaimsbyCustomDate(String planType, String claimPeriod) 
