@@ -29,6 +29,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can navigate to the Claim Details page from claims summary page
     And I can validate the Claims Table on claims details page
     And I can validate the Claims Total on claims details page
+    Then I can validate the segment ID value in localStorage on claims summary page
+      | Segment ID   | <segmentId>   |
     
     @smokeTest_Claims
     Examples: 
@@ -63,6 +65,30 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | grpPerf    | PDP      | Last 24 months | RxCLAIMS    |
   #----- end of VBF claims scenarios section ------------------------
 
+  #----- beginning of Feature Gating scenarios section ------------------------
+  # note: Step is already merged into E2E scenario, this scenario is purely for gating purposes.  
+  # note: Can be remove later on for consolidation purposes
+  @F279237
+  Scenario Outline: To validate that claims are present on claims summary page and claims details page for <claimssystem>
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Claim System | <claimSystem> |
+      | Member Type  | <memberType>  |
+    When I navigate to the claims Summary page from dashboard or testharness page
+    And I can search claims for the following claim period on claims summary page
+      | Plan Type    | <planType>    |
+      | Claim Period | <claimPeriod> |
+      | Claim System | <claimSystem> |
+      | Member Type  | <memberType>  |
+    Then I validate the claims displayed based on the selection on claims summary page
+    Then I can validate the segment ID value in localStorage on claims summary page
+      | Segment ID   | <segmentId>   |
+
+    Examples: 
+      | memberType | planType | claimPeriod    | claimSystem  | segmentId |
+      | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS | 000       |
+  #----- end of Feature Gating scenarios section ------------------------
+
   #----- beginning of Regression claims scenarios section ------------------------
   #-------------------------
   # note: claims ALM cases
@@ -77,7 +103,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # TID: 15268 - TC11_PCP OR MEDICA claims
   # TID: 15258 - TC09_SHIP Only - PHIP - Link will be available on rally and an error on secondary page
   #-------------------------
-  @claims01 @E2EClaimsMedicalCase @regressionMember
+  @claims01 @E2EClaimsMedicalCase @segmentId @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -144,7 +170,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | Medical           |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | Medical           |
 
-  @claims02 @E2EClaimsDrugCase @regressionMember
+  @claims02 @E2EClaimsDrugCase @segmentId @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -272,3 +298,4 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15259 | SHIP              | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
 
   #----- end of Regression claims scenarios section ------------------------
+
