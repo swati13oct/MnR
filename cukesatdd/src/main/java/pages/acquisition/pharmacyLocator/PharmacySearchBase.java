@@ -1,6 +1,7 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +42,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String initialZipVal=zipcodeField.getAttribute("value");
 		sendkeysNew(zipcodeField, zipcode);
 		searchbtn.click();
+		//note: if year dropdown is available, handle it with current year
+		if (isPlanYear()) {
+			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			selectsPlanYear(currentYear);
+		}
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 15);
 			if (county.equalsIgnoreCase("None")) { 
@@ -80,11 +86,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
-		selectFromDropDownByText(driver, drpYear, planYear);
+		Select yearList=new Select(yearDropdown);
+		yearList.selectByVisibleText(planYear);
+		System.out.println("Selected year='"+planYear+"' from year dropdown");
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
-		Select selectPlan = new Select(drpYear);
+		Select selectPlan = new Select(yearDropdown);
 		if(year.equals("2019")){
 			selectPlan.selectByValue("1");
 		}

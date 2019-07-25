@@ -1,6 +1,7 @@
 package pages.regression.pharmacylocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -300,11 +301,29 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		searchbtn.click();
+		//note: if year dropdown is available, handle it with current year
+		if (isPlanYear()) {
+			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			selectsPlanYear(currentYear);
+		}
+
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("*****Zipcode entered******"+zipcode);
 		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
 			return new PharmacySearchPage(driver);
 		return null;
+	}
+	
+	public boolean isPlanYear() {
+		if (!planYearList.isEmpty()) 
+			return planYearDropDown.isDisplayed();
+		return false;
+	}
+
+	public void selectsPlanYear(String planYear) {
+		Select yearList=new Select(planYearDropDown);
+		yearList.selectByVisibleText(planYear);
+		System.out.println("Selected year='"+planYear+"' from year dropdown");
 	}
 
 	/** Verify page load in chinese language */

@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import atdd.framework.UhcDriver;
 
@@ -14,7 +15,10 @@ public class PharmacySearchWebElements extends UhcDriver{
 
 	@FindBy(xpath="//select[@id='plan-year']")
 	protected WebElement planYearDropDown;
-	
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
+	protected List<WebElement> planYearList;
+
 	@FindBy(xpath="//a[@dtmid='Dtmid MapDirections']")
 	protected List<WebElement> getDirectionLnk;
 

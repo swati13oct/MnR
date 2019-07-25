@@ -92,11 +92,17 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			List <WebElement> yearList = select.getOptions();
 			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
 					yearList.size()>0);
-			String actualYear = select.getFirstSelectedOption().getText().trim();
 			String expectedYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-			Assert.assertTrue("PROBLEM - default year should be current year.  "
-					+ "Expected='"+expectedYear+"' | Actual='"+actualYear+"'", 
-					expectedYear.equalsIgnoreCase(actualYear));
+			boolean containCurrentYr=false;
+			for(int i =0; i<yearList.size() ; i++){
+				String planName = yearList.get(i).getText();
+				if (planName.contains(expectedYear)) {
+					containCurrentYr=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - list of year options should contain current year as option.",
+					containCurrentYr);
 		}
 	}
 
