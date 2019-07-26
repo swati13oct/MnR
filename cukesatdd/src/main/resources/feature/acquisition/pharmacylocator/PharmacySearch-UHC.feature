@@ -183,6 +183,16 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user validates header section content
+    When the user enters following details for pharmacy search
+      | Zip Code |            |
+      | Distance | <distance> |
+    Then the user verify error messages in pharmacy locator page
+      | Language | Spanish |
+    When the user enters following details for pharmacy search
+      | Zip Code |       9999 |
+      | Distance | <distance> |
+    Then the user verify error messages in pharmacy locator page
+      | Language | Spanish |
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |

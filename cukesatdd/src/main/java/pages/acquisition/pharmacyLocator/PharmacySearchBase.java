@@ -79,16 +79,17 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public boolean isPlanYear() {
-		if (!planYearList.isEmpty()) {
-			return drpYear.isDisplayed();
-		}
-		return false;
+		return validate(yearDropdown);
 	}
 
 	public void selectsPlanYear(String planYear) {
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
-		System.out.println("Selected year='"+planYear+"' from year dropdown");
+		String selectedValue = yearList.getFirstSelectedOption().getText();
+		System.out.println("Selected year='"+selectedValue+"' from year dropdown");
+		//Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
+		//		+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
+		//		selectedValue.equals(planYear));
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
