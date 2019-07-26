@@ -123,8 +123,7 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, planYear);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		Boolean isplanyear = pharmacySearchPage.isPlanYear();
-		if (isplanyear)
+		if (pharmacySearchPage.isPlanYear())
 			pharmacySearchPage.selectsPlanYear(planYear);
 		pharmacySearchPage.selectsPlanName(planName);
 	}	
