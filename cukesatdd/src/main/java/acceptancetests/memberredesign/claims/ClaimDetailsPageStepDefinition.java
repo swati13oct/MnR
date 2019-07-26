@@ -166,9 +166,12 @@ public class ClaimDetailsPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_SYSTEM);
 		String memberType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-		String claimType="Medical";
-		if (claimSystem.toUpperCase().contains("D_")) {
-			claimType="Prescription drug";
+		String claimType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE);
+		if (claimType==null) {
+			claimType="Medical";
+			if (claimSystem.toUpperCase().contains("D_"))
+				claimType="Prescription drug";
 		} 
 		boolean flagZeroUserNow=false; //note: don't want to fail the test in this step if user has no claims
 		validate_claims_detail_page_content(planType, memberType, claimPeriod, claimType, claimSystem, flagZeroUserNow);
@@ -221,8 +224,8 @@ public class ClaimDetailsPageStepDefinition {
 					throws InterruptedException { 
 		List<String> recordBypass = (List<String>) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS);
-		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_")) {
-			System.out.println("PDP case doesn't have 'MORE INFO', skip this step validation for content, learn more, "
+		if (planType.equalsIgnoreCase("PDP") || claimSystem.toUpperCase().contains("D_") || claimType.equalsIgnoreCase("Prescription drug")) {
+			System.out.println("Drug case doesn't have 'MORE INFO', skip this step validation for content, learn more, "
 					+ "and EOB on claims detail page");
 			return;
 		} else {  //note: this test is assume prior test steps passed so user has claims
@@ -233,13 +236,14 @@ public class ClaimDetailsPageStepDefinition {
 				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 				claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 			}
+			//note: prior step would have navigated back to claims summary page, so need to search again 
 			claimsSummPg.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
 			if (!claimsSummPg.validateClaimsTableExists(flagZeroUserNow)) {
 				System.out.println("Claim Period '"+claimPeriod+"' has no claims, skipping claims detail validation step...");
 				return;
-			}
+			} 
 			claimsSummPg.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
-
+			
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",

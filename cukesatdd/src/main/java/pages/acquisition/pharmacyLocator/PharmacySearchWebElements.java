@@ -33,7 +33,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(id = "city")
 	protected WebElement txtCity;
 
-	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
+	@FindBys(value = {@FindBy(xpath = "//select[@id='plan-year']/option")})
 	protected List<WebElement> planYearList;
 
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
@@ -77,6 +77,9 @@ public class PharmacySearchWebElements extends UhcDriver {
 
 	@FindBy(id = "plan-year")
 	protected WebElement drpYear;
+	
+	@FindBy(xpath="//select[@id='plan-year']")
+	protected WebElement yearDropdown;
 
 	@FindBy(css = "#zipcode-button>span")
 	protected WebElement btnContinue;

@@ -1,7 +1,9 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.junit.Assert;
@@ -211,7 +213,21 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(zipcodeField));
 		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
 		if (validate(drpYear)) {
-			Assert.assertTrue("TODO - Plan year drop down box showing up, time to code the validation", false);
+			select = new Select(drpYear);           
+			List <WebElement> yearList = select.getOptions();
+			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
+					yearList.size()>0);
+			String expectedYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			boolean containCurrentYr=false;
+			for(int i =0; i<yearList.size() ; i++){
+				String planName = yearList.get(i).getText();
+				if (planName.contains(expectedYear)) {
+					containCurrentYr=true;
+					break;
+				}
+			}
+			Assert.assertTrue("PROBLEM - list of year options should contain current year as option.",
+					containCurrentYr);
 		}
 	}
 

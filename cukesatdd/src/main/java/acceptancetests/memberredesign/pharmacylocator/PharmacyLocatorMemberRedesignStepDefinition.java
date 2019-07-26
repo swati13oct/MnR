@@ -10,10 +10,12 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -298,6 +300,17 @@ public class PharmacyLocatorMemberRedesignStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.useDefaultZipEnterDistance(distance);
+	}
+	
+	@Then("^I can validate the segment ID value in localStorage for pharmacy locator page$")
+	public void validates_segmentid(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+		pharmacySearchPage.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
 
 }

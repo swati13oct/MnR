@@ -10,6 +10,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -165,5 +166,16 @@ public class OrderPlanMaterialsAarpStepDefinition {
 	public void validate_add_order_additional_material_vbf() throws InterruptedException {
 		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario().getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
 		Assert.assertTrue("PROBLEM - Navigation back to order plan material page failed", orderPlanMaterialsPage.navigateToOrderMore());
+	}
+	
+	@Then("^I can validate the segment ID value in localStorage for order materials page$")
+	public void validates_segmentid(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		OrderMaterialsPage orderPlanMaterialsPage = (OrderMaterialsPage) getLoginScenario()
+				.getBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE);
+		orderPlanMaterialsPage.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
 }

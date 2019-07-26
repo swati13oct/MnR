@@ -1,6 +1,5 @@
 package pages.regression.claims;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.regex.Pattern;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -28,55 +27,91 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	 * @param planType This is the plan type for testing
 	 */
 	public void validateTooltips(String planType, String memberType, String claimSystem) {
+		String testItem="";
+		//note: validate header section body content
 		if (planType.equalsIgnoreCase("SHIP")) {
-			int sixYearsPrior = Calendar.getInstance().get(Calendar.YEAR)-6;
-
-			Assert.assertTrue("PROBLEM - unable to locate EOB tooltips button=",
-					validate(ship_eobTooltipsBtn));
-			ship_eobTooltipsBtn.click();
-			Assert.assertTrue("PROBLEM - unable to locate EOB tooltips text after clicking",
-					validate(tooltipsElemTxt));
-			String expEobTooltipsText="EOB statements created prior to December "+sixYearsPrior+" are not posted to this site. In addition, although recent claims may be available for viewing, the corresponding EOB statement has not yet been processed and posted to this site for viewing.";
-			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
-					+ "Expected='"+expEobTooltipsText+"' | Actual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().contains(expEobTooltipsText));
-			tooltipsElemTxt.click();
-			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, "
-					+ "eob tooltips text should have disappeared after clicking something", 
-					!validate(tooltipsElemTxt));
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_detl_claimsNumLbl));
+			testItem="ship_dateRangeLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_dateRngLbl));
+			testItem="ship_dateRangeValue";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_dateRngVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_dateRngVal.getText().equals(""));
+			testItem="ship_claimNumLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsNumLbl));
+			testItem="ship_claimNumValue";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsNumVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_claimsNumVal.getText().equals(""));
+			testItem="ship_claimTypeLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsTypLbl));
+			testItem="ship_claimTypeValue";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_claimsTypVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_claimsTypVal.getText().equals(""));
+			testItem="ship_eobLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobLbl));
+			testItem="ship_eobValue";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobVal));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!ship_eobVal.getText().equals(""));
+			testItem="ship_eobStatementText";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_eobStmtTxt));
+			testItem="ship_paidToYou";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_paidToYou));
+			testItem="ship_paidToProvider";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(ship_paidToProvider));
 		} else {
-			Assert.assertTrue("PROBLEM - unable to locate claims status tooltips button=",
-					validate(claimsStatTooltipsBtn));
-			claimsStatTooltipsBtn.click();
-			Assert.assertTrue("PROBLEM - unable to locate claims status tooltips text after clicking", 
-					validate(tooltipsElemTxt));
-			String expClaimsStatTooltipsTxt="This information tells you whether or not your claim is pending payment, paid or denied. A status of adjusted means that the original payment amount has changed.";
-			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
-					+ "Expected='' | Actual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().contains(expClaimsStatTooltipsTxt));
-
-			tooltipsElemTxt.click();
-			Assert.assertTrue("PROBLEM - locate claims status tooltips after clicking again, "
-					+ "claims status tooltips text should have disappeared after clicking something", 
-					!validate(tooltipsElemTxt));
-
-			Assert.assertTrue("PROBLEM - unable to locate EOB tooltips button=",
-					validate(eobTooltipsBtn));
-			eobTooltipsBtn.click();
-			Assert.assertTrue("PROBLEM - unable to locate eob tooltips text after clicking", 
-					validate(tooltipsElemTxt));
-			String expEobTooltipsText="The Medical Explanation of Benefits (EOB) that includes the details for this claim is not yet available. It could take up to 10 days from the end of the previous month for this EOB to be available on the website.";
-			//if has pdf then use this
-			if (validate(viewPdf)) {
-				expEobTooltipsText="The Medical Explanation of Benefits (EOB) is a summary of the claims UnitedHealthcare receives from your doctors each month. Your EOB shows the claims we received , what we paid and what you owe. If you do not have any claims , you wont receive an EOB for that month.";
-			}
-			Assert.assertTrue("PROBLEM - claims status tooltips text is not as expected.  "
-					+ "\nExpected='"+expEobTooltipsText+"' \nActual='"+tooltipsElemTxt.getText()+"'", 
-					tooltipsElemTxt.getText().contains(expEobTooltipsText));
-			tooltipsElemTxt.click();
-			Assert.assertTrue("PROBLEM - locate eob tooltips after clicking again, "
-					+ "eob tooltips text should have disappeared after clicking something", 
-					!validate(tooltipsElemTxt));
+			testItem="claimNumberLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsNumLbl));
+			testItem="dateRange";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(dateRng));
+			testItem="providerName";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(providerName));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!providerName.getText().equals(""));
+			testItem="claimNum value";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsNumDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsNumDyn.getText().equals(""));
+			testItem="claimTypeLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsTypLbl));
+			testItem="claimsType value";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsTypDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsTypDyn.getText().equals(""));
+			testItem="claimStatusLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsStatLbl));
+			testItem="claimStatus value";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(claimsStatDyn));
+			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+					!claimsStatDyn.getText().equals(""));
+			testItem="medicalEOBLabel";
+			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+					validate(medicalEobLbl));
+			Assert.assertTrue("PROBLEM - 'Medical Explanation of Benefits (EOB):' field value is not as expected, "
+					+ "should either be 'Not Available (Pending)' or 'view PDF'", 
+					(validate(medicalEobNotAvaTxt) || validate(medicalEobViewPdf)));
 		}
 	}
 
@@ -160,6 +195,12 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 
 		//note: validate tooltips
 		validateTooltips(planType, memberType, claimSystem);
+
+		try {
+			Thread.sleep(1000); //note: sometimes detail take longer to load
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		String testItem="";
 		//note: validate header section body content

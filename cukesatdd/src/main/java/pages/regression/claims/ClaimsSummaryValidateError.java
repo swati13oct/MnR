@@ -1,5 +1,6 @@
 package pages.regression.claims;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -74,6 +75,20 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 * Validate error message for custom search case when input 'from' and 'to' dates are empty
 	 */
 	public void  validateEmptyDatesErr(String planType) {
+		WebElement fromTxtField=fedFrom;
+		WebElement toTxtField=fedTo;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			//note: ship has different xpath
+			fromTxtField=shipFrom;
+			toTxtField=shipTo;
+		}
+
+		//note: clear the From and To text fields to prep for next testing
+		fromTxtField.sendKeys(Keys.CONTROL + "a");
+		fromTxtField.sendKeys(Keys.DELETE);
+		toTxtField.sendKeys(Keys.CONTROL + "a");
+		toTxtField.sendKeys(Keys.DELETE);
+
 		if (planType.equalsIgnoreCase("SHIP")) {
 			ship_custSrchBtn.click();
 			Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", 

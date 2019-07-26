@@ -2146,14 +2146,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - 'Save Plan' icon should have disappeared after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 			
 			System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
-			String appeared_savedPlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class,'savedPlan') and contains(@style,'')]"+savedPlanImgXpath;
+			String appeared_savedPlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+savedPlanImgXpath;
 			//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 			List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 			expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 			System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
-			String appeared_savedTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class,'savedPlan') and contains(@style,'')]"+"/span[contains(text(),'Saved')]";
+			String appeared_savedTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//span[contains(text(),'Saved')]";
 			//System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 			List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
 			expMatch=1;
@@ -2175,7 +2175,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		
 		System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+"//button[contains(@class,'savedPlan') and not(contains(@style,'none'))]"+savedPlanImgXpath;
+		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+savedPlanImgXpath;
 		//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch=listOfTestPlans.size();

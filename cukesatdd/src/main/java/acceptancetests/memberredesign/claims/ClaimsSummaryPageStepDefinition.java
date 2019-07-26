@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -79,6 +81,8 @@ public class ClaimsSummaryPageStepDefinition {
 		}
 		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
 		claimsSummPg.validateSystemErrorMsgNotExist();
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
 	}
 
 
@@ -432,5 +436,18 @@ public class ClaimsSummaryPageStepDefinition {
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordInvokedBypass);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+	}
+	
+	@Then("^I can validate the segment ID value in localStorage on claims summary page$")
+	public void validates_segmentid(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+    	claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
 }

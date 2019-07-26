@@ -2,7 +2,7 @@
 Feature: To test pre-effective functionality
 
   @preEffective1 @regressionMember @codetransformers
-  Scenario Outline: Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
+  Scenario Outline: -planType: <planType> -Segment ID: <segmentId> - Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -23,6 +23,10 @@ Feature: To test pre-effective functionality
     And verify that subnavigation is supressed on the claims page
       | Member Type | <memberType> |
     And verify that correct preeffective message is displayed on claims page
+    And verify segment ID on claims page
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Segment ID     | <segmentId>    |
     And verify that correct phone number is displayed in technical support section of claims page
      | Technical TFN | <technicalTFN> |
     And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page
@@ -31,15 +35,16 @@ Feature: To test pre-effective functionality
       | Member Type | <memberType> |
 
     Examples: 
-      | planType			  | memberType            | copayCategory |technicalTFN  |
-      | IndMA           | preeffectiveIndMA     | NON LIS       |1-888-980-8125|
-      | IndMAPD         | preeffectiveIndMAPD   | NON LIS       |1-888-980-8125|
-      | IndPDP          | preeffectiveIndPDP    | NON LIS       |1-888-980-8125|
-      | GroupMA         | preeffectiveGroupMA   | NON LIS       |1-888-980-8125|
-      | GroupMAPD       | preeffectiveGroupMAPD | NON LIS       |1-888-980-8125|
-      | GroupSSUP       | preeffectiveGroupSSUP | NON LIS       |1-888-980-8125|
-      | GroupPDP        | preeffectiveGroupPDP  | NON LIS       |1-888-980-8125|
-      | SHIPPreffective | preeffectiveSHIPOnly  | NON LIS       |1-866-254-3132|
+      | planType		| memberType                | copayCategory | technicalTFN  | segmentId |
+      | IndMA           | preeffectiveIndMA         | NON LIS       | 1-888-980-8125| 000       |
+      | IndMAPD         | preeffectiveIndMAPD       | NON LIS       | 1-888-980-8125| 000       |
+      | IndPDP          | preeffectiveIndPDP        | NON LIS       | 1-888-980-8125| 000       |
+      | GroupMA         | preeffectiveGroupMA       | NON LIS       | 1-888-980-8125| 000       |
+      | GroupMAPD       | preeffectiveGroupMAPD     | NON LIS       | 1-888-980-8125| 000       |
+      | GroupSSUP       | preeffectiveGroupSSUP     | NON LIS       | 1-888-980-8125| 000       |
+      | GroupPDP        | preeffectiveGroupPDP      | NON LIS       | 1-888-980-8125| 000       |
+      | SHIPPreffective | preeffectiveSHIPOnly      | NON LIS       | 1-866-254-3132| 000       |
+      | IndMAPD         | preeffectiveIndMAPD_002   | NON LIS       | 1-888-980-8125| 002       |
       
       
       

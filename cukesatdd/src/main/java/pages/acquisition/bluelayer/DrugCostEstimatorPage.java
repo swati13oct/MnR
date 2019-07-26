@@ -3,7 +3,6 @@ package pages.acquisition.bluelayer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -22,9 +21,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AddDrugDetails;
-import pages.acquisition.bluelayer.AddNewDrugModal;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -456,6 +452,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
+	
+	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	private WebElement btnReturnToProfile;
+	
+	@FindBy(id="dupIconFlyOut")
+    private WebElement shoppingCartIcon;
 	
 		
 	public WebElement getImgLoadingIndicator() {
@@ -2017,7 +2019,25 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		
 	}
 	
+	public VisitorProfilePage retrunToProfile() {
+		btnReturnToProfile.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 	
+	public VisitorProfilePage clickOnShoppingCart() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 
 
 	

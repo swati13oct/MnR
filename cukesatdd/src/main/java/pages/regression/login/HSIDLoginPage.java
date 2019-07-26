@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.testharness.TestHarness;
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -559,7 +560,7 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
 			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
