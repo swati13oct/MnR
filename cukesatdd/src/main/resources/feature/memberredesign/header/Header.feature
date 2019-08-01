@@ -79,7 +79,7 @@ Feature: I1.3Header/Navigation for Member Site Redesign
     Examples: 
       | TID   | planType | memberType        |
       | 15251 | SHIP     | Individual_header |
-      | 15251 | SSUP     | SSUP_ProfilePref  |
+      | 15251 |          | SSUP_ProfilePref  |
 
   @header6 @Terminated_view @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user

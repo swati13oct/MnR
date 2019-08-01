@@ -11,27 +11,25 @@ Feature: I1.3DCE for Member Site Redesign
     Examples: 
       | TID   | planType | memberType              |
       | 15326 | Medsup   | EFT_MedSelectPlan_order |
-      | 15327 | SSUP     | SSUP_ProfilePref        |
+      | 15327 |          | SSUP_ProfilePref        |
       | 15337 | MA       | q1_uhc_feb0021          |
 
   @drugCostEstimator2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When I navigate to drug look up page
     Then I should see the Pharmacy search tab as a clickable element within the DCE tool
     And I should be able to move forward or backward in the tool flow
 
     Examples: 
-      | TID   | planType | memberType                    |
-      | 15325 | MAPD     | MAPD_AARP_GOGreen_Profilepref |
+      | TID   |  memberType                    |
+      | 15325 |  MAPD_AARP_GOGreen_Profilepref |
 
   @drugCostEstimator3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When I navigate to drug look up page
     And I navigate to step2 page
     And we search the pharmacy within miles zipcode and pharmacy type
@@ -42,14 +40,13 @@ Feature: I1.3DCE for Member Site Redesign
     And I should see pharmacy saver pharmacies in results
 
     Examples: 
-      | TID   | planType | memberType                    | zipcode | radius   | pharmacytype   |
-      | 15325 | MAPD     | MAPD_AARP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |
+      | TID   |  memberType                    | zipcode | radius   | pharmacytype   |
+      | 15325 |  MAPD_AARP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |
 
   @drugCostEstimator4
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When I navigate to drug look up page
     When I delete all added drugs
     When I add branded drug
@@ -78,8 +75,8 @@ Feature: I1.3DCE for Member Site Redesign
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
     Examples: 
-      | TID   | planType | memberType                    | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
-      | 15325 | MAPD     | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | TID   | memberType                    | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
+      | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
 
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
@@ -106,8 +103,7 @@ Feature: I1.3DCE for Member Site Redesign
   @drugCostEstimator7 @switch_to_generic_case_1
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that  pharmacy is selected and it suggests the user with an appropriate save money message.
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When I navigate to drug look up page
     When I delete all added drugs
     When I add branded drug
@@ -124,14 +120,13 @@ Feature: I1.3DCE for Member Site Redesign
     And any cost savings will be applied to my total cost savings in Step3
 
     Examples: 
-      | TID   | planType | memberType                    | drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD     | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | TID   | memberType                    | drug    | dosage           | quantity | frequency     |
+      | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @drugCostEstimator8 @switch_to_generic_case_2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is not selected and it suggests the user with an appropriate save money message and cost savings are also updated
     Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+      | Plan Type | <planType> |
     When I navigate to drug look up page
     When I delete all added drugs
     When I add branded drug
@@ -147,8 +142,8 @@ Feature: I1.3DCE for Member Site Redesign
     Then the drug name will automatically update within the Drug List
 
     Examples: 
-      | TID   | planType | memberType                    | drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD     | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | TID   | memberType                    | drug    | dosage           | quantity | frequency     |
+      | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @vbfGate @MemberVBF
   Scenario Outline: plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
