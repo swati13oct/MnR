@@ -270,7 +270,7 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy(css = ".container .primary-logo")
+	@FindBy(css = ".primary-logo")
 	private WebElement logoImage;
 
 	@FindBy(css = ".container .secondary-logo")
