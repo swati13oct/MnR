@@ -29,8 +29,6 @@ import pages.acquisition.ulayer.PageTitleConstants;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
-	
-	
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
@@ -334,7 +332,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
 		getStarted.click();
-
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -383,8 +380,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
-	}
-	
+	}	
 	
 	public void openAndValidate(String site) {
 		if ("ULayer".equalsIgnoreCase(site)) {
@@ -412,26 +408,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void openAndValidate(int visitorProfile) {
-		if (visitorProfile>0) {
-			
+		if (visitorProfile>0) {		
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
 			if(proactiveChatExitBtn!=null)
-			jsClickNew(proactiveChatExitBtn);
-			
+			jsClickNew(proactiveChatExitBtn);			
 			else 
-				Assert.fail("Please check booleanvalue");
-			
+				Assert.fail("Please check booleanvalue");		
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
 		}
 	}
-	
-	
 
 	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);

@@ -27,6 +27,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		CommonUtility.checkPageIsReadyNew(driver);
 		openAndValidate();
 	
 	}
@@ -526,7 +527,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		
+		AcquisitionHomePage.checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
 		validateNew(addDrug);
 		validateNew(step1);
