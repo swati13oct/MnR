@@ -168,6 +168,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		AcquisitionHomePage.checkModelPopup(driver);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 
