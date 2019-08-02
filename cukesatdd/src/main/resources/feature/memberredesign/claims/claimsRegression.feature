@@ -165,8 +165,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | Medical           |
-      | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | Medical           |
+      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | NA                |
+      | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
   @claims02 @E2EClaimsDrugCase @segmentId @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
