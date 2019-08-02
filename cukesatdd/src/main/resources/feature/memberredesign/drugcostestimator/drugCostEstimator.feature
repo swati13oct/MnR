@@ -23,7 +23,7 @@ Feature: I1.3DCE for Member Site Redesign
     And I should be able to move forward or backward in the tool flow
 
     Examples: 
-      | TID   |  memberType                    |
+      | TID   |  planType                    |
       | 15325 |  MAPD_AARP_GOGreen_Profilepref |
 
   @drugCostEstimator3
@@ -40,7 +40,7 @@ Feature: I1.3DCE for Member Site Redesign
     And I should see pharmacy saver pharmacies in results
 
     Examples: 
-      | TID   |  memberType                    | zipcode | radius   | pharmacytype   |
+      | TID   |  planType                    | zipcode | radius   | pharmacytype   |
       | 15325 |  MAPD_AARP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |
 
   @drugCostEstimator4
@@ -75,7 +75,7 @@ Feature: I1.3DCE for Member Site Redesign
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
     Examples: 
-      | TID   | memberType                    | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
+      | TID   | planType                    | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
       | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
 
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
@@ -120,7 +120,7 @@ Feature: I1.3DCE for Member Site Redesign
     And any cost savings will be applied to my total cost savings in Step3
 
     Examples: 
-      | TID   | memberType                    | drug    | dosage           | quantity | frequency     |
+      | TID   | planType                    | drug    | dosage           | quantity | frequency     |
       | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @drugCostEstimator8 @switch_to_generic_case_2
@@ -142,7 +142,7 @@ Feature: I1.3DCE for Member Site Redesign
     Then the drug name will automatically update within the Drug List
 
     Examples: 
-      | TID   | memberType                    | drug    | dosage           | quantity | frequency     |
+      | TID   | planType                    | drug    | dosage           | quantity | frequency     |
       | 15325 | MAPD_AARP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @vbfGate @MemberVBF
