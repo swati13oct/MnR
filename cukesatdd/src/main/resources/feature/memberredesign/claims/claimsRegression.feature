@@ -168,6 +168,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | NA                |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
+  ### note: keep PDP SSO_Individual case but comment out b/c it's hard to find a member that has SSO enabled
   @claims02 @E2EClaimsDrugCase @segmentId @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem>  -segmentId: <segmentId> - To validate the DRUG claims Summary E2E Scenario
     Given login with following details logins in the member portal and validate elements
@@ -195,7 +196,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       | Prescription drug |
       | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       | Prescription drug |
-      | 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
+     #| 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
+      | 15299 | PDP      | Individual      | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
       | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
 
 
