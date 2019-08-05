@@ -77,9 +77,9 @@ Feature: I1.3Header/Navigation for Member Site Redesign
     Then I should not be able to see the Find Care & Costs tab Header
 
     Examples: 
-      | TID   | planType | memberType        |
-      | 15251 | SHIP     | Individual_header |
-      | 15251 |          | SSUP_ProfilePref  |
+      | TID   | planType | memberType              |
+      | 15251 | SHIP     | EFT_MedSelectPlan_order |
+      | 15251 |          | SSUP_ProfilePref        |
 
   @header6 @Terminated_view @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
@@ -89,6 +89,6 @@ Feature: I1.3Header/Navigation for Member Site Redesign
     Then I should be able to see and use the Home tab on Dashboard
 
     Examples: 
-      | TID   | planType | memberType                  |
-      | 15162 | MAPD     | AARPTerminatedmember_header |
-      | 15162 | MA       | UHCTerminatedmember_header  |
+      | TID   | planType | memberType                             |
+      | 15162 | MAPD     | Terminated_Group_MAPD_COSMOS_ContactUs |
+      | 15162 | MA       | UHCTerminatedmember_header             |
