@@ -57,8 +57,8 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-		aquisitionhomepage.navigateToPharmacyLocator();
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPage pharmacySearchPage= aquisitionhomepage.navigateToPharmacyLocator();
+		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
 
@@ -123,8 +123,8 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, planYear);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		if (pharmacySearchPage.isPlanYear())
-			pharmacySearchPage.selectsPlanYear(planYear);
+		/*if (pharmacySearchPage.isPlanYear())
+			pharmacySearchPage.selectsPlanYear(planYear);*/
 		pharmacySearchPage.selectsPlanName(planName);
 	}	
 	
@@ -138,6 +138,22 @@ public class PharmacyLocatorStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		pharmacySearchPage.searchesPharmacy(language,planName);
+	}
+	
+	/** Verify the pharmacies as per the filter criteria 
+	 * @throws InterruptedException */
+	@Then("^the user validates the pharmacies results$")
+	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String language = inputAttributesMap.get("Language");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		if(pharmacySearchPage.searchesPharmacyResults(language, planName)){
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in validating Pharmacy Results ");
+		}
 	}
 	
 	/** Verify tooltips on the filters */
