@@ -26,3 +26,5 @@ Feature: F1.2Footer validation
     Examples: 
       | TID   | planType | memberType                 |
       | 15347 | MAPD     | IndMAPDUHC_Pharmacylocator |
+      | 15347 | SHIP     | EFT_MedSelectPlan_order    |
+      | 15347 | MAPD     | CALPERSGroup_ContactUs     |
