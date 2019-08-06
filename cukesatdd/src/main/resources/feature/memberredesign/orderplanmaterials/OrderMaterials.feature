@@ -90,7 +90,7 @@ Feature:P1.5 To test order materials in member site
     @Individual
     Examples: 
       | TID   | planType | memberType            | segmentId |  
-      | 15287 | MA	     | AARP_Individual_order | 000       |
+      | 15287 | MA	     | AARP_Individual_order | 001       |
       | 15288 | MAPD     | AARP_Individual_order | 000       |
       | 15292 | PDP      | AARP_Individual_order | 000       |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
@@ -116,8 +116,8 @@ Feature:P1.5 To test order materials in member site
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 
-      | TID   | planType | memberType              | segmentId |  
-      | 15293 | SHIP     | EFT_MedSelectPlan_order | 000       |
+      | TID   | planType | memberType                    | segmentId |  
+      | 15293 | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
 
   #####################################################
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible

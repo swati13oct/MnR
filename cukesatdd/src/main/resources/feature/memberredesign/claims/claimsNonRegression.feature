@@ -155,14 +155,16 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 05_1  | 1041 | MAPD     | AARP_Individual            | D_NICE_CLAIMS   | Prescription drug | 000       | Yes                |
       | 05_2  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Prescription drug | 000       | Yes                |
 
+    # note: keep but comment out PDP SSO_Individual case - hard to find working user with exact condition
     # note: if memberType contains SSO then will perform additional validation for the optumrx.com link in claim table section
     # note: user needs to have valid entry in optumrx site and should be eligible in HSID site to pass the optumrx related validation
     @claims00_06 @claims00_R_p1
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 06_01 | 1041 | PDP      | SSO_Individual             | RX_CLAIMS       | Prescription drug | 000       | Yes                |
-      | 06_02 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | 000       | No                 |
-      | 06_03 | 1041 | PDP      | GROUP                      | RX_CLAIMS       | Prescription drug | 000       | No                 |
+     #| 06_01 | 1041 | PDP      | SSO_Individual             | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_02 | 1041 | PDP      | Individual                 | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_03 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | 000       | No                 |
+      | 06_04 | 1041 | PDP      | GROUP                      | RX_CLAIMS       | Prescription drug | 000       | No                 |
 
     @claims00_07 @claims00_S_p1
     Examples: 
