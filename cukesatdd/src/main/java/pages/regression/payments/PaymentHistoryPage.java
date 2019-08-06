@@ -111,8 +111,8 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(id = "editAutomaticPaymentButton")
 	private WebElement AutoPayButton;
 
-	@FindBy(xpath = "//*[@class='payment-method-btn'][2]/a")
-	private WebElement SetUpAutoPayButton;
+	@FindBy(xpath = "//a[not (contains(@class,'ng-hide')) and contains(text(),'Set Up Automatic Payments')]")
+	private WebElement setUpAutoPayButton;
 
 	@FindBy(xpath = "((//*[@class='container--base'])[2]//div[@class='margin-small']//span[@class='payment-method-btn'])[2]/a")
 	private WebElement SetUpAutoPayButtonCC;
@@ -382,6 +382,15 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'VIEW PLAN DOCUMENTS')]")
 	private WebElement planDocumentsBtn;
 	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
+	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -509,6 +518,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		validateNew(paymentHistoryApp);
 		validateNew(oneTimePaymentBtn);
+		
 
 	}
 
@@ -600,8 +610,8 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 
 		try {
-			if (SetUpAutoPayButton.isDisplayed()) {
-				SetUpAutoPayButton.click();
+			if (setUpAutoPayButton.isDisplayed()) {
+				setUpAutoPayButton.click();
 				System.out.println("clicked on Setup New Payment button");
 				try {
 					Thread.sleep(2000);
@@ -649,8 +659,8 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println("iPerception Pop Up is not Present");
 		}
 		try {
-			if (SetUpAutoPayButton.isDisplayed()) {
-				SetUpAutoPayButton.click();
+			if (setUpAutoPayButton.isDisplayed()) {
+				setUpAutoPayButton.click();
 				System.out.println("clicked on Setup New Payment button");
 				try {
 					Thread.sleep(2000);
@@ -1652,4 +1662,22 @@ public class PaymentHistoryPage extends UhcDriver {
 		}
 
 	}
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if(planType.equalsIgnoreCase("SHIP")||planType.equalsIgnoreCase("MEDSUPP")){
+			if(validate(medsuppNavTab))
+			medsuppNavTab.click();
+		}	
+		
+		validateNew(paymentHistoryApp);
+		validateNew(oneTimePaymentBtn);
+	}
+	
+	
+	
 }

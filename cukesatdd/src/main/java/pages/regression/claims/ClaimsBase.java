@@ -41,7 +41,10 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//span[@id='numClaims5']")	
 	protected WebElement numClaimsShip;
-
+	
+	@FindBy(xpath="//p[contains(text(),'There are no claims available')]")
+	protected WebElement noClaimsRedTxt;
+	
 	//note: need help section
 	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
 	protected WebElement needHelp_SectionHeader;
@@ -212,9 +215,8 @@ public class ClaimsBase extends UhcDriver  {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numClaimsDrugCustSrch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (validate(numClaimsMedlCustSrch)) {
+				if (validate(numClaimsMedlCustSrch)) 
 					numClaimsElement=numClaimsMedlCustSrch;
-				} 
 			} else {
 				numClaimsElement=numClaimsShipCustSrch;
 			}
@@ -232,6 +234,8 @@ public class ClaimsBase extends UhcDriver  {
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
+			if (numClaims>0)
+				Assert.assertTrue("PROBLEM - 'There are no claims..' message should not show when number of claims >0",!validate(noClaimsRedTxt));
 			return numClaims;
 		} catch (Exception e) {
 			System.out.println("Exception e: "+e);

@@ -270,7 +270,7 @@ public class AccountHomePage extends UhcDriver {
 	// @FindBy(css = "img.primary-logo")
 	// private WebElement logoImage;
 
-	@FindBy(css = ".container .primary-logo")
+	@FindBy(css = ".primary-logo")
 	private WebElement logoImage;
 
 	@FindBy(css = ".container .secondary-logo")
@@ -656,6 +656,7 @@ public class AccountHomePage extends UhcDriver {
 				driver.findElement(By.xpath("//*[@id='home_2']")).click();
 				Thread.sleep(6000);
 			}
+			checkForIPerceptionModel(driver);
 			if (driver.getCurrentUrl().contains("profile")) {
 				System.out.println("Navigating to Profile Page");
 				return new ProfileandPreferencesPage(driver);
@@ -663,7 +664,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("test is through stage");
 		} // Testing through Stage
-		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
@@ -708,6 +709,7 @@ public class AccountHomePage extends UhcDriver {
 				}
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
+				checkForIPerceptionModel(driver);
 				if (driver.getCurrentUrl().contains("profile")) {
 					return new ProfileandPreferencesPage(driver);
 				}
@@ -717,6 +719,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 			// Thread.sleep(6000);
 			// CommonUtility.waitForPageLoad(driver, heading, 10);
+			checkForIPerceptionModel(driver);
 
 			if (driver.getCurrentUrl().contains("profile")) {
 				return new ProfileandPreferencesPage(driver);
@@ -725,9 +728,9 @@ public class AccountHomePage extends UhcDriver {
 
 		} else if (MRScenario.environment.equals("team-ci1") || MRScenario.environment.equals("team-h")
 				|| MRScenario.environment.equals("test-a") || MRScenario.environment.equals("team-e")
-				|| MRScenario.environment.equals("stage")) {
+				|| MRScenario.environment.equalsIgnoreCase("prod") ) {
 
-			driver.navigate().to(PAGE_URL + "medicare/member/account/profile.html");
+			driver.navigate().to(driver.getCurrentUrl() + "/medicare/member/account/profile.html");
 
 			System.out.println("title is " + driver.getTitle());
 			System.out.println("Current Url is " + driver.getCurrentUrl());
@@ -739,6 +742,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Current Url is " + driver.getCurrentUrl());
 
 		}
+		checkForIPerceptionModel(driver);
 		if (driver.getTitle().contains("Profile")) {
 			return new ProfileandPreferencesPage(driver);
 		}
@@ -924,6 +928,7 @@ public class AccountHomePage extends UhcDriver {
 					// TODO Auto generated catch block
 					e.printStackTrace();
 				}
+				checkForIPerceptionModel(driver);
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				try {
@@ -964,6 +969,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			profilenpreferenceslink.click();
 		}
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, 5);
 		if (driver.getTitle().contains("Profile")) {
 			System.out.println("here");
@@ -1435,6 +1441,7 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("Go to claims link is present "
 					+ driver.findElement(By.xpath("//a[text()='Go to Claims page']")).isDisplayed());
 			driver.findElement(By.xpath("//a[text()='Go to Claims page']")).click();
+			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
 		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
@@ -1461,6 +1468,7 @@ public class AccountHomePage extends UhcDriver {
 					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
+				checkForIPerceptionModel(driver);
 				/*
 				 * tbd try { Thread.sleep(10000);
 				 * 
@@ -1470,6 +1478,7 @@ public class AccountHomePage extends UhcDriver {
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("claims");
 			}
+			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
 
 		} else {
@@ -1502,16 +1511,18 @@ public class AccountHomePage extends UhcDriver {
 			// CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink,
 			// 60);
 			// Thread.sleep(20);
-			validate(claimstablemoreinfolink);
+			CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 10);
+			Assert.assertTrue("PROBLEM - unable to locate the 'More info' link on page", validate(claimstablemoreinfolink));
 			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
-			try {
+			/* tbd-remove try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			} */
 
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", claimstablemoreinfolink);
+			checkForIPerceptionModel(driver);
 
 			// claimstablemoreinfolinkCombo.click();
 			// CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
@@ -1528,6 +1539,8 @@ public class AccountHomePage extends UhcDriver {
 
 		return new ClaimDetailsPage(driver);
 	}
+	@FindBy(className = "loading-block")
+	private WebElement loadingImage;
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
 		// tbd waitForHomePage(helloPerson);
@@ -1551,21 +1564,24 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println("URL for testing: " + Page_URL);
 			driver.navigate().to(Page_URL);
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("pharmacylocator");
 			} else {
 				waitForHomePage(helloPerson);
 				if (driver.getCurrentUrl().contains("/dashboard")) {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					CommonUtility.waitForPageLoad(driver, pharmacySearchLink, 5);
 					pharmacySearchLink.click();
-					try {
+					System.out.println("Clicked pharmacy Search Link...");
+					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+					/* tbd try {
 						Thread.sleep(10000);
 
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} */
 				}
 			}
 		}
@@ -1845,6 +1861,7 @@ public class AccountHomePage extends UhcDriver {
 	 */
 	public OrderMaterialsPage navigateToOrderPlanMaterialsPage() throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, OrderMaterial_Dashboard, 10);
 		if (validate(OrderMaterial_Dashboard)) {
 			System.out.println("Order Materials link found on dashboard");
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -1870,6 +1887,7 @@ public class AccountHomePage extends UhcDriver {
 		 * e.printStackTrace(); }
 		 */
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
 		if (validate(orderplanHeadertxt)) {
 			return new OrderMaterialsPage(driver);
@@ -1923,6 +1941,7 @@ public class AccountHomePage extends UhcDriver {
 					false);
 		}
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoadNew(driver, orderplanHeadertxt, 30);
 		if (validate(orderplanHeadertxt)) {
 			return new OrderMaterialsPage(driver);
@@ -2532,13 +2551,14 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
-		try {
+		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolinkCombo, 10);
+		/* tbd-remove try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		validate(claimstablemoreinfolinkCombo);
+		} */
+		validateNew(claimstablemoreinfolinkCombo);
 		System.out.println("more info link is seen for combo member ===>" + claimstablemoreinfolinkCombo.isDisplayed());
 		try {
 			Thread.sleep(2000);
@@ -2548,6 +2568,7 @@ public class AccountHomePage extends UhcDriver {
 
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
+		checkForIPerceptionModel(driver);
 
 		// claimstablemoreinfolinkCombo.click();
 		CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
@@ -2727,7 +2748,7 @@ public class AccountHomePage extends UhcDriver {
 
 			if (IPerceptionsFrame.isEmpty()) {
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(1500);
 				} catch (InterruptedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -2851,7 +2872,7 @@ public class AccountHomePage extends UhcDriver {
 	// ^^^ note: added for 'sorry' login error workaround
 
 	public ClaimDetailsPage navigateToClaimDetailsPagetoseeeobpdflink(int pageNum, int rowNum) {
-
+		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 10);
 		try {
 			validateNew(claimstablemoreinfolink);
 			// note: start with page1, every click increment 1 page
@@ -2875,6 +2896,7 @@ public class AccountHomePage extends UhcDriver {
 				Assert.assertTrue("PROBLEM - unable to locate the More Info link element that is expected to have EOB",
 						false);
 			}
+			checkForIPerceptionModel(driver);
 			System.out.println(driver.getTitle());
 			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
 				System.out.println("*** Claims Details Page ***");
@@ -2948,10 +2970,12 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void navigateToClaimsPageByViewYorClaimsLinkThenBackToHome() {
+		CommonUtility.waitForPageLoad(driver, viewYourClaimsLink, 10);
 		Assert.assertTrue("PROBLEM - unable to locate 'VIEW YOUR CLAIMS' link on dashboard page",
 				validate(viewYourClaimsLink));
 		viewYourClaimsLink.click();
 		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 		String expUrl = "member/claims/overview.html";
 		Assert.assertTrue("PROBLEM - not getting expected claims page. Expected URL contains '" + expUrl
 				+ "' | Actual URL='" + driver.getCurrentUrl() + "'", driver.getCurrentUrl().contains(expUrl));
@@ -2965,7 +2989,7 @@ public class AccountHomePage extends UhcDriver {
 			locateElementWithinShadowRoot(shadowRootHeader, "#home_2");
 		}
 		CommonUtility.checkPageIsReady(driver);
-
+		checkForIPerceptionModel(driver);
 	}
 
 	// This method validates login for bswift SSO

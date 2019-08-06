@@ -1,47 +1,34 @@
 package pages.acquisition.bluelayer;
 
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-
-/*@author pagarwa5*/
-
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import junit.framework.Assert;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+/*@author pagarwa5*/
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
-
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
-	
-	
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
@@ -199,6 +186,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeF;
+	
+	@FindBy(id = "zipcode")
+	private WebElement zipCode;
 
 	@FindBy(className = "textalign")
 	private WebElement countyModal1;
@@ -261,7 +251,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
 	private WebElement providerSearchFromHomeScreen;
 
-
+	  @FindBy(id="state-select")
+	  private WebElement stateDropDown;
+    
+	  @FindBy(id="dupIconFlyOut")
+	  private WebElement shoppingCartIcon;
+	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
 
@@ -305,6 +300,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
 	}
+	
+	public AcquisitionHomePage(WebDriver driver, int visitorProfile) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(visitorProfile);
+	}
 
 	public AcquisitionHomePage(WebDriver driver, String string) {
 		super(driver);
@@ -331,7 +332,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
 		getStarted.click();
-
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -379,25 +379,50 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-	}
-	}
-	
-	
-	public void openAndValidate(String Ulayer) {
-		if (MRScenario.environment.equals("offline")) {
-			startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		}else if (MRScenario.environment.equals("prod")) {
-			startNew(AARP_ACQISITION_PROD_PAGE_URL);
-		} else {
-			startNew(AARP_ACQISITION_PAGE_URL);
 		}
+	}	
+	
+	public void openAndValidate(String site) {
+		if ("ULayer".equalsIgnoreCase(site)) {
+
+			if (MRScenario.environment.equals("offline")) {
+				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			}else if (MRScenario.environment.equals("prod")) {
+				startNew(AARP_ACQISITION_PROD_PAGE_URL);
+			} else {
+				startNew(AARP_ACQISITION_PAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else {
+			openAndValidate();
+		}
+	}
+	
+	public void openAndValidate(int visitorProfile) {
+		if (visitorProfile>0) {		
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+		try{
+			if(proactiveChatExitBtn!=null)
+			jsClickNew(proactiveChatExitBtn);			
+			else 
+				Assert.fail("Please check booleanvalue");		
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+		}
 	}
-	
-	
 
 	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
@@ -514,7 +539,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		validate(GlobalWebElements.hideDiscliamerInformation);
 		GlobalWebElements.hideDiscliamerInformation.click();
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcareï¿½")) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
@@ -727,7 +752,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareAdvantagePlansLink);
 		headerMedicareAdvantagePlansLink.click();
 		validate(headerMedicareAdvantagePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Advantage Plans | UnitedHealthcareï¿½")) {
 			return new MedicareAdvantagePlansuhcPage(driver);
 		}
 		return null;
@@ -771,7 +796,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(headerMedicareSpecialNeedPlansLink);
 		headerMedicareSpecialNeedPlansLink.click();
 		validate(headerMedicareSpecialNeedPlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase("Medicare Special Needs Plans | UnitedHealthcareï¿½")) {
 			return new MedicareSpecialNeedsPlansuhcPage(driver);
 		}
 		return null;
@@ -1513,5 +1538,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public void selectState(String state) {
+		selectFromDropDownByValue(stateDropDown, state);
+	}
+	/**
+	 * This method used to navigate to visitor profile dashboard
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public VPPPlanSummaryPage findPlans(String txtZipCode){
+		
+		zipCode.sendKeys(txtZipCode);
+		
+		
+		return new VPPPlanSummaryPage(driver);
 	}
 }

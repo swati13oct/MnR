@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.io.RandomAccessRead;
@@ -37,10 +38,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -188,7 +191,42 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement riderYearlyPremium;
 
+	@FindBy (xpath = "//a[contains(text(),'Online pharmacy directory')]")
+	private WebElement vppPlanDetailsPlLink;
 
+	@FindBy(id = "distance")
+	WebElement distanceDropownID;
+	
+	@FindBy(id = "mapd_gi_div_eng")
+	WebElement mapdGeneralPlanPDfs;
+	
+	@FindBy(id = "mapd_mp_div_eng")
+	WebElement mapdMedicalProvidersPDfs;
+	
+	@FindBy(id = "mapd_pdc_div_eng")
+	WebElement mapdDrugCoveragePDfs;
+	
+	@FindBy(id = "mapd_pharmacydirectory_div_eng")
+	WebElement mapdPharmacyDirectoryPDfs;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdGeneralPlanPDfsOtherLang;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdMedicalProvidersPDfsOtherLang;
+	
+	@FindBy(id = "mapd_gi_div_otherlang")
+	WebElement mapdDrugCoveragePDfsOtherLang;
+	
+	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
+	WebElement mapdPharmacyDirectoryPDfsOtherLang;
+	
+	@FindBy(id = "selectmultycounty_box")
+	private WebElement countyPopOut;
+	
+	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
+	private List<WebElement> countyList;
+	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
 	}
@@ -856,9 +894,86 @@ public class PlanDetailsPage extends UhcDriver {
 			bValidation = false;
 		return bValidation;
 	}
+ public PharmacySearchPage navigateToPharmacySearchPage(String county,String isMultutiCounty ){
+	 CommonUtility.waitForPageLoad(driver, vppPlanDetailsPlLink, 45);
+	 switchToNewTabNew(vppPlanDetailsPlLink);
+	 
+	 if (!isMultutiCounty.equalsIgnoreCase("No")) {
+		 CommonUtility.waitForPageLoad(driver, countyPopOut, 50);
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+							countylink.click();
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assert.fail("Exception!!! County does not exists");
+			}
 
 
-	public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+
+
+
+
+
+
+	 
+	 CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
+	 
+	 if(validateNew(distanceDropownID)){
+	System.out.println("Pharmacy locator page got loaded");	
+	return  new PharmacySearchPage(driver);
+	 }else
+	 {
+		 System.out.println("Pharmacy locator page not loaded"); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 }
+
+	return null;
+	 
+	 }
+	// null;
+	return null;
+ }
+ 
+ public void validatePdfSection(String planType){
+	 
+	 if(planType.contains("MAPD")){
+		 //validate English PDFs
+		validateNew(mapdGeneralPlanPDfs);
+		validateNew(mapdMedicalProvidersPDfs);
+		validateNew(mapdDrugCoveragePDfs);
+		validateNew(mapdPharmacyDirectoryPDfs);
+		
+		// validate Other lang PDFs
+		validateNew(mapdGeneralPlanPDfsOtherLang);
+		validateNew(mapdMedicalProvidersPDfsOtherLang);
+		validateNew(mapdDrugCoveragePDfsOtherLang);
+		validateNew(mapdPharmacyDirectoryPDfsOtherLang);
+	 }
+		
+ }public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 		String PdfHref = PDFlink.getAttribute("href");
 		System.out.println("href for the PDF is : "+PdfHref);
@@ -895,6 +1010,7 @@ public class PlanDetailsPage extends UhcDriver {
 				break;
 
 			}
+
 		}
 		System.out.println("Switched to new window : Passed");
 

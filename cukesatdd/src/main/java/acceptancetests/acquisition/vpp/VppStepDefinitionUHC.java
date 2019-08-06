@@ -1,8 +1,5 @@
 package acceptancetests.acquisition.vpp;
 
-import gherkin.formatter.model.DataTableRow;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,21 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.FindCarePage;
-import pages.acquisition.bluelayer.MultiCountyModalPage;
-import pages.acquisition.bluelayer.OurPlansPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
@@ -38,6 +21,18 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.FindCarePage;
+import pages.acquisition.bluelayer.MultiCountyModalPage;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.ole.WelcomePage;
 
 /**
  * Functionality: VPP UHC site
@@ -211,6 +206,14 @@ public class VppStepDefinitionUHC {
 			} else
 				Assert.fail("Error in validating the Plan Details Page");
 		}
+	
+	@When("^the user validates the pdf section for uhc$")
+	public void userValidatesPDFSection() {
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatePdfSection(planType);
+	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
@@ -917,6 +920,42 @@ public class VppStepDefinitionUHC {
 			plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		}
 
+		@Then("^user saves two plans as favorite on UHC site$")
+		public void user_saves_two_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+			String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+
+			//----- MA plan type ----------------------------
+			String planType="MA";
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		}
+		
+		@Then("^user gets a create profile prompt on UHC site$")
+		public void user_saves_two_plans_as_favorite_on_UHC_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			plansummaryPage.validateCreateProfilePrompt();
+			
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			
+		}
+		
+		@And("^user click on continue as guest button on UHC site$")
+		public void user_click_on_continue_as_guest_button_on_UHC_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
+			
+			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+			
+		}
+		
 		@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site$")
 		public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()

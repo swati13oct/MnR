@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import pages.regression.explanationofbenefits.EOBPage;
 
 /**
  * Functionality : validations for claims summary page
@@ -26,8 +29,18 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummaryValidatePreEff validatePreEff=new ClaimsSummaryValidatePreEff(driver);
 	ClaimsSummaryValidateTable validateTable=new ClaimsSummaryValidateTable(driver);
 	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
+	ClaimsSummaryValidateSegmentId validateSegmentId=new ClaimsSummaryValidateSegmentId(driver);
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
 
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		//keep Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		//keep String browserName = cap.getBrowserName().toLowerCase();
+		//keep if (browserName.equalsIgnoreCase("CHROME")) 
+		validateSegmentId.validateSegmentId(planType, memberType, expectedSegmentId);
+		//keep else 
+		//keep System.out.println("TODO - need to figure out how to handle the other browsers");
+	}
+	
 	public void searchClaimsByTimePeriodClaimType(String planType, String claimPeriod, String claimType) 
 			throws InterruptedException {
 		searchClaims.searchClaimsByTimePeriodClaimType(planType, claimPeriod, claimType);
@@ -35,6 +48,10 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	public void customSearchClaimsByTimeInterval(String planType, String fromDate, String toDate) {
 		searchClaims.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+	}
+	
+	public void customSearchCalendar(String planType, String fromDate, String toDate) {
+		searchClaims.customSearchCalendar(planType, fromDate,toDate);
 	}
 
 	public void searchClaimsbyCustomDate(String planType, String claimPeriod) 
@@ -162,6 +179,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -176,6 +194,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		System.out.println("Now checking for Explanation of benefits page for SSUP plan");
 		claimsPgLnk.click();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
@@ -185,6 +204,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			System.out.println("SSUP plan has been selected");
 			eob_claims.click();
 			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, msgEob_PDP, 5);
 			validateNew(msgEob_PDP);
 			System.out.println("Explanation of Benefits page for SSUP plan through Sub Navigation Link "
 					+ "under Claims was displayed as PDP Plan, Test step is passed due to it");
@@ -416,5 +436,36 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			System.out.println("Main window = "+driver.getTitle());	
 			return true;
 		}
+	}
+	
+	public EOBPage navigateToEOBPage(String planType){
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			validateNew(medicalEob_MAPD);
+			medicalEob_MAPD.click();
+		}else if(planType.equalsIgnoreCase("PDP")){
+			validateNew(drugEob_PDP);
+			drugEob_PDP.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			validateNew(ship_eob);
+			 ship_eob.click();
+		}
+		if(validateNew(eobPageHeader))
+			return new EOBPage(driver);
+		return null;
+		
+	}
+	
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTab.click();
+		}	
+			
 	}
 }

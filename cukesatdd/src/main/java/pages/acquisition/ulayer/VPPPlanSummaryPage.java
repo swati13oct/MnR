@@ -516,6 +516,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
+		@FindBy(css="a#pop-btn-1")
+		private WebElement createProfileBtn;
+		
+		@FindBy(css="a#pop-btn-2")
+		private WebElement continueAsGuest;
+		
+		@FindBy(css="a#popupClose")
+		private WebElement btnClose;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -1619,7 +1627,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
 		if(planType.equalsIgnoreCase("PDP")){
 			validateNonPresenceOfElement(ProviderSearchLink);
 		}
@@ -2138,14 +2146,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - 'Save Plan' icon should have disappeared after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 			
 			System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
-			String appeared_savedPlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class,'savedPlan') and contains(@style,'')]"+savedPlanImgXpath;
+			String appeared_savedPlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+savedPlanImgXpath;
 			//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 			List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 			expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 			System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
-			String appeared_savedTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//button[contains(@class,'savedPlan') and contains(@style,'')]"+"/span[contains(text(),'Saved')]";
+			String appeared_savedTextXpath=headerPath+"[contains(text(),'"+plan+"')]"+subPath+"//span[contains(text(),'Saved')]";
 			//System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 			List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
 			expMatch=1;
@@ -2167,7 +2175,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		
 		System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+"//button[contains(@class,'savedPlan') and not(contains(@style,'none'))]"+savedPlanImgXpath;
+		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+savedPlanImgXpath;
 		//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch=listOfTestPlans.size();
@@ -2705,6 +2713,28 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 	}
 
+	/**
+	 * Validate Create Profile Prompt
+	 */
+	public void validateCreateProfilePrompt() {
+		Assert.assertTrue(validateNew(btnClose));
+		Assert.assertTrue(validateNew(createProfileBtn));
+		Assert.assertTrue(validateNew(continueAsGuest));
+	}
 	
-	
+	/**
+	 * Click on Continue as guest link on create profile prompt
+	 * @return
+	 */
+	public VisitorProfilePage continueAsGuest(){
+		continueAsGuest.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
+
+

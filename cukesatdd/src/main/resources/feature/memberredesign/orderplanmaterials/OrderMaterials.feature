@@ -69,13 +69,17 @@ Feature:P1.5 To test order materials in member site
   # note: 
   #####################################################
   @orderPlanMaterials01 @E2EOrderPlantcase @ConfirmationPage @regressionMember @regressionMember_Testharness
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -Segment ID: <segmentId> - Verify order plan material functionality for different type of users
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to order plan materials page
       | Plan Type | <planType> |
       | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage for order materials page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Segment ID  | <segmentId>  |
     Then user validates header section of page content on order materials page
     And user validates selection section of page content on order materials page
     And user validates printable documentations section of page content on order materials page
@@ -83,36 +87,37 @@ Feature:P1.5 To test order materials in member site
     And user validates error message when submit without any selection
     Then user validates ability to submit order for each item individually for all available items
     
+    @Individual
     Examples: 
-      | TID   | planType | memberType            | 
-      | 15287 | MA	 | AARP_Individual_order |  
-      | 15288 | MAPD     | AARP_Individual_order |
-      | 15292 | PDP      | AARP_Individual_order |
-      | 15288 | MAPD     | UHC_Individual_order  |
-      | 15286 | PCP      | Individual_order      |
-      | 15285 | MEDICA   | Individual_order      |
-      | 15293 | SHIP     | MEDSUPP_order         | 
+      | TID   | planType | memberType            | segmentId |  
+      | 15287 | MA	     | AARP_Individual_order | 001       |
+      | 15288 | MAPD     | AARP_Individual_order | 000       |
+      | 15292 | PDP      | AARP_Individual_order | 000       |
+      | 15288 | MAPD     | UHC_Individual_order  | 000       |
+      | 15286 | PCP      | Individual_order      | 000       |
+      | 15285 | MEDICA   | Individual_order      | 001       |
+      | 15293 | SHIP     | MEDSUPP_order         | 000       |
 
     @GroupMemberOrderSelectionandConfirmation 
     Examples: 
-      | TID   | planType | memberType            | 
-      | 15289 | MA       | UHC_Group_order       |
-      | 15289 | MAPD     | UHC_Group_order       |
-      | 15290 | PDP      | UHC_Group_order       |
+      | TID   | planType | memberType            | segmentId | 
+      | 15289 | MA       | UHC_Group_order       | 000       |
+      | 15289 | MAPD     | UHC_Group_order       | 000       |
+      | 15290 | PDP      | UHC_Group_order       | 000       |
 
-   # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
-   @ValidateHeaderComboTabs
+    # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
+    @ValidateHeaderComboTabs
     Examples: 
-      | TID   | planType | memberType            | 
-      | 15281 | MAPD	 | COMBO_order           |
-      | 15281 | MEDSUPP	 | COMBO_order           |
-      | 15291 | PDP      | COMBO_order	         |
-    # | 15291 | SSUP     | COMBO_order	         |
+      | TID   | planType | memberType            | segmentId | 
+      | 15281 | MAPD	 | COMBO_order           | 000       |
+      | 15281 | MEDSUPP	 | COMBO_order           | 000       |
+      | 15291 | PDP      | COMBO_order	         | 000       |
+    # | 15291 | SSUP     | COMBO_order	         | 000       |
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 
-      | TID   | planType | memberType               | 
-      | 15293 | SHIP     | EFT_MedSelectPlan_order  | 
+      | TID   | planType | memberType                    | segmentId |  
+      | 15293 | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
 
   #####################################################
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
@@ -129,4 +134,7 @@ Feature:P1.5 To test order materials in member site
     Examples: 
       | TID   | planType | memberType                  |
       | 15284 | MAPD     | AARP_Terminatedmember_order |
+    
+
+
     

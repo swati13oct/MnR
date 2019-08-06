@@ -297,7 +297,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		jsClickNew(SubmitApplicationBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
-		waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
+		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
 		/*WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
 		if(driver.getCurrentUrl().contains("confirmation")){

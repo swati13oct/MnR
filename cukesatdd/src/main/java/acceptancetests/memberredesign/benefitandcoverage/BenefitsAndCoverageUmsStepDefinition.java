@@ -34,6 +34,7 @@ import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
+import pages.regression.benefitandcoverage.*;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -408,7 +409,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the user validates Default drug cost drop down value***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validate_drugCostdropdown_select();
+		benefitsCoveragePage.validate_drugCostDropdown_select();
 
 	}
 	
@@ -417,7 +418,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the Individual user validates Default drug cost drop down value***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validate_drugCostdropdownzIndividualMAPD_select();
+		benefitsCoveragePage.validate_drugCostDropdownzIndividualMAPD_select();
 
 	}
 	
@@ -801,7 +802,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.validate_drugcostdropdownoptions();
+		benefitsCoveragePage.validate_drugCostDropdownoptions();
 	}
 
 
@@ -1887,7 +1888,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		//planBenefitsCoverage.ValidateMAsection();
-		planBenefitsCoverage.ValidateMAsection(data.get(0).get(1));
+		planBenefitsCoverage.validateBncPageSections(data.get(0).get(1));
 
 	}
 

@@ -95,7 +95,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		String expectedTitle="Benefits Information | OptumRx"; //note: validate title
 		String actualTitle=driver.getTitle(); 
 		System.out.println("New tab actual title = "+actualTitle);
-		Assert.assertTrue("PROBLEM - Title is not as expected.  "
+		Assert.assertTrue("PROBLEM - clicked OPTUMRX.COM under pagenation but open page title is not as expected.  "
 				+ "Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,
 				actualTitle.contains(expectedTitle));
 
@@ -122,7 +122,6 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL fail test if user has no claim table");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
-		CommonUtility.waitForPageLoad(driver, claimsSummPg,60);
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
 				!validate(systemErrorMsg));
 		if (validate(medicalClaimsTbl))
@@ -447,18 +446,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 
 	/** this method validates pagination */
 	public boolean verifyPagination(){
-		try {
-			if(validate (uhc_summPgPagination)){
-				System.out.println("Pagination is seen ===>"+uhc_summPgPagination.getText());
-				return true;
-			}else{
-				System.out.println("Pagination is not displayed as records are less");
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		return validate(summPgPagination);
 	}
 
 	/** Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page */
@@ -482,6 +470,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 				claimResult="ship claims (custom search) - Member Has ===> "+ ":"+ (numClaimsShipCustSrch.getText())+ " Claims"; 
 			Assert.assertTrue("PROBLEM - unable to locate any type of number of claims value", !claimResult.equals("none"));
 		} catch (Exception e) {
+			System.out.println("...got exception. e:"+e);
 		} 
 		WebElement e=youHave3;
 		if (planType.equalsIgnoreCase("SHIP")) {

@@ -1,12 +1,16 @@
 package pages.acquisition.ulayer;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -19,7 +23,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(css = "div.dashboardCard.plans a")
+	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
 	private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
@@ -36,7 +40,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(css="li.pharmacy>div>span.address:last-child")
 	private WebElement pharmacyAddress;
-
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -58,9 +62,40 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	public AcquisitionHomePage addPlan() {
+		addPlans.click();
+		if(driver.getTitle().contains("Find Medicare Plans"))
+			return new AcquisitionHomePage(driver,1);
+		return null;
+	}
+	
 	public void validateAddedDrugAndPharmacy(String drug) {
 		expandDrugBlock.click();
+		
 		Assert.assertEquals(drug, drugName.getText().trim());
 		Assert.assertTrue(pharmacyAddress.isDisplayed());
+	}
+	
+	public void validateAddedPlans(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::div[@class='provider-list'][1]/a")).isDisplayed());
+		}
+	}
+	
+	public PlanDetailsPage navigateToPlanDetails(String planName) {
+		try {
+			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
+			Thread.sleep(20000);
+			if (driver.getCurrentUrl().contains("#/details")) {	
+				return new PlanDetailsPage(driver);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

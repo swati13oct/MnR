@@ -40,6 +40,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			System.out.println("Running with testharness, go to secondary page like claims then go ot H&W tab");
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarness.navigateToClaimsSummaryFromTestHarnessPage();
+			TestHarness.checkForIPerceptionModel(testHarness.driver);
 		}
 		// Express the Regexp above with the code you wish you had
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);

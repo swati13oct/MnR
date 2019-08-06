@@ -94,7 +94,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy (xpath="//*[@id='custom_to_date_fed']")
 	protected WebElement fedTo;
 
-	@FindBy(xpath = ".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div/div/p")
+	@FindBy(xpath = "//div[contains(@class,'preeffeciveParsys')]//p")
 	protected WebElement preEffMsg;
 
 	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
@@ -118,8 +118,8 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//div[contains(@class,'LearnMoreAboutYour') and not(contains(@class,'ng-hide'))]") 
 	protected WebElement lrnMoreAbtClaimsContent;
 
-	@FindBy(xpath="//*[@id='atddUhcPagination']/li[1]/p")	
-	protected WebElement uhc_summPgPagination;
+	@FindBy(xpath="//div[@class='pgno_pgnation_wrap']")	
+	protected WebElement summPgPagination;
 
 	@FindBy (xpath ="//div[@ng-hide='phipError']//div[@class='customsegments parbase section'][1]//p[contains(text(), 'Medical EOB')]")
 	protected WebElement medicalEobTxt;
@@ -201,9 +201,6 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath=".//*[@id='atddPagination']/p")
 	protected WebElement claimSummPaginationTxt;
-
-	//@FindBy(xpath=".//*[@id='learnmoresummarytoggle']")
-	//protected WebElement learmore;
 
 	@FindBy(id="numDays1")
 	protected WebElement youHave1;
@@ -356,4 +353,41 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(xpath = "//table[@id='ship']/tbody/tr[2]/td[not (contains(@class,'hidden-lg'))]")
 	protected List<WebElement> vbf_shipTblRow;
+	
+	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
+	protected WebElement eobPageHeader;
+	
+	@FindBy(xpath = "//*[@id='49144037']")
+	protected WebElement pdpNavTab;
+	
+	@FindBy(xpath = "//*[@id='15825500']")
+	protected WebElement medsuppNavTab;
+	
+	@FindBy(xpath = "//*[@id='71710697']")
+	protected WebElement mapdNavTab;
+	
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_from_date_fed')]")
+	protected WebElement fromCalendarIconBtn_fed;
+
+	@FindBy(xpath="//ul[@ng-model='date'][1]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement fromCalendarDatePicker_today_fed;
+
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_to_date_fed')]")
+	protected WebElement toCalendarIconBtn_fed;
+
+	@FindBy(xpath="//ul[@ng-model='date'][2]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement toCalendarDatePicker_today_fed;
+	
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_from_date_ship')]")
+	protected WebElement fromCalendarIconBtn_ship;
+
+	@FindBy(xpath="//ul[@ng-model='date'][3]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement fromCalendarDatePicker_today_ship;
+
+	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_to_date_ship')]")
+	protected WebElement toCalendarIconBtn_ship;
+
+
+	@FindBy(xpath="//ul[@ng-model='date'][4]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
+	protected WebElement toCalendarDatePicker_today_ship;
 }

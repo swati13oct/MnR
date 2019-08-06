@@ -2,11 +2,17 @@ package pages.regression.ordermaterials;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
@@ -15,228 +21,6 @@ import acceptancetests.util.CommonUtility;
  * @author rkodumur
  */
 public class OrderMaterialsPage extends OrderMaterialsBase  {
-	@FindBy(xpath = "//[contains(text(), 'Hospital Indemnity')]")
-	private WebElement planTab_HIP;
-
-	@FindBy(xpath = "//[contains(text(), 'Medicare Prescription Drug Plan')]")
-	private WebElement planTab_PDP;
-
-	@FindBy(xpath = "//[contains(text(), 'Medicare Supplement Insurance Plan')]")
-	private WebElement planTab_MedSupp;
-
-	@FindBy(xpath = "//[contains(text(), 'Senior Supplement Plan')]")
-	private WebElement planTab_SrSupp;
-
-	@FindBy(xpath = "//*[@id='order-materials-serviceFail-error']")
-	private WebElement errorMsg_serviceFail;
-
-	@FindBy(id = "order-materials-error")
-	private WebElement errorMsg_OrderMaterials;
-
-	@FindBy(xpath = "//*[@id = 'ppe-id']/..")
-	private WebElement option_premiumPayment;
-
-	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
-	private WebElement option_ship_hospitalDirectory;
-
-	@FindBy(xpath="//select[@id='state']")
-	private WebElement option_ship_hospitalDirectory_stateDropdown;
-
-	@FindBy(xpath = "//*[@class='nav nav-tabs']//a")
-	private List <WebElement> comboTabs;
-
-	@FindBy(xpath="//h3[contains(text(),'Technical Support') or contains(text(),'Plan Support')]/ancestor::div[@class='col-md-4']")
-	private WebElement needHelpComponent;
-
-	@FindBy(xpath = "//*[contains(text(),'Plan Materials Order Confirmation')]")
-	private WebElement header_OrderConfirmation;
-
-	@FindBy(className = "orderplanmaterials")
-	private WebElement orderPlanMaterialsSection;
-
-	@FindBy(id = "disclosure_link")
-	private WebElement logout_link;
-
-	@FindBy(xpath="//h1[@class='main-heading margin-none']")
-	private WebElement common_header_orderPlanMaterialsPage; 
-
-	@FindBy(xpath="//h2[@class='med-heading medium margin-large']")
-	private WebElement common_subSectionHeader;
-
-	@FindBy(xpath="//div[contains(@class,'header')]//div[contains(@class,'federal')]//p")
-	private WebElement subSectionText_fed;
-
-	@FindBy(xpath="//div[contains(@class,'header')]//div[contains(@class,'ship')]//p")
-	private WebElement subSectionText_ship;
-
-	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'federal')]//p")
-	private WebElement selectionInstruction_fed;
-
-	@FindBy(xpath="//form[@id='ordermaterial_form_id']")
-	private WebElement common_selectionSection;
-
-	@FindBy(xpath="//*[@id = 'member-materials']/..//div[contains(@class,'group') and not(contains(@class,'ng-hide'))]")
-	private WebElement option_fed_memberMaterialsfield_WelcomeKit;
-
-	@FindBy(xpath = "//*[@id = 'member-materials']/..")
-	private WebElement option_fed_memberMaterialsfield;
-
-	@FindBy(xpath = "//*[@id='replacement-id']/..")
-	private WebElement option_fed_replacementIdField;
-
-	@FindBy(xpath="//label[@for='replacement-id']//a[text()='VIEW MEMBER ID CARD']")
-	private WebElement link_fed_memberIDcardLink;
-
-	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")
-	private WebElement selectionInstruction_ship;
-
-	@FindBy(xpath = "//*[@id='member-id-card']/..")
-	private WebElement option_ship_memberIDcardField;
-
-	@FindBy(xpath="//label[@for='member-id-card']//a[text()='VIEW HEALTH INSURANCE CARD']")
-	private WebElement link_ship_memberIDcardLink;
-
-	@FindBy(xpath = "//*[@id='eft-id']/..")
-	private WebElement option_ship_brochureField_EFT;
-
-	@FindBy(xpath = "//*[@id = 'couponBook-id']/..")
-	private WebElement option_ship_couponBook;
-
-	@FindBy(xpath = "//*[@id = 'medicareHospital-id']/..")
-	private WebElement option_ship_medicareHospital;
-
-	@FindBy(xpath = "//*[@id = 'claimsEnvelope-id']/..")
-	private WebElement option_ship_claimsEnvelope;
-
-	@FindBy(xpath = "//*[@id = 'coi-id']/..")
-	private WebElement option_ship_certificateInsurance;
-
-	@FindBy(xpath="//button[@class='modal-close-btn']")
-	private WebElement idCardCloseButton;
-
-	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]")
-	private WebElement common_sectionShipAddress;
-
-	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]/../div")
-	private WebElement common_sectionShipAddressContent;
-
-	@FindBy(xpath="//h3[contains(text(),'Shipping Address')]/../div//a")
-	private WebElement common_sectionShipAddressContent_needHelpLink;
-
-	//note: need help section
-	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
-	private WebElement needHelp_SectionHeader;
-
-	//note: need help - technical section
-	@FindBy(xpath="//div[contains(@class,'technical section')]")
-	private WebElement needHelp_TechicalSupportSection;
-
-	@FindBy(xpath="//div[contains(@class,'technical section')]//p[1]//img")
-	private WebElement needHelp_TechicalSupport_img;
-
-	@FindBy(xpath="//div[contains(@class,'technical section')]/div/div/p[1]")
-	private WebElement needHelp_TechicalSupport_phone;
-
-	@FindBy(xpath="//div[contains(@class,'technical section')]//p[2]")
-	private WebElement needHelp_TechicalSupport_tty;
-
-	@FindBy(xpath="//div[contains(@class,'technical section')]//p[3]")
-	private WebElement needHelp_TechicalSupport_wkDayHrs;
-
-	@FindBy(xpath="//div[contains(@class,'technical section')]//p[4]")
-	private WebElement needHelp_TechicalSupport_wkEndHrs;
-
-	//note: need help - general section
-	@FindBy(xpath="//div[contains(@class,'general section')]")
-	private WebElement needHelp_GeneralQuestionsSection;
-
-	@FindBy(xpath="//div[contains(@class,'general section')]//p[1]//img")
-	private WebElement needHelp_GeneralQuestions_img;
-
-	@FindBy(xpath="//div[contains(@class,'general section')]/div/div/p[1]")
-	private WebElement needHelp_GeneralQuestions_phone;
-
-	@FindBy(xpath="//div[contains(@class,'general section')]//p[2]")
-	private WebElement needHelp_GeneralQuestions_tty;
-
-	@FindBy(xpath="//div[contains(@class,'general section')]//p[3]")
-	private WebElement needHelp_GeneralQuestions_wkDayHrs;
-
-	@FindBy(xpath="//div[contains(@class,'general section')]//p[4]")
-	private WebElement needHelp_GeneralQuestions_wkEndHrs;
-
-	//note: need help - claims section
-	@FindBy(xpath="//div[contains(@class,'claims section')]")
-	private WebElement needHelp_ClaimsSupportSection;
-
-	@FindBy(xpath="//div[contains(@class,'claims section')]//p[1]//img")
-	private WebElement needHelp_ClaimsSupport_img;
-
-	@FindBy(xpath="//div[contains(@class,'claims section')]/div/div/div/p[1]")
-	private WebElement needHelp_ClaimsSupport_phone;
-
-	@FindBy(xpath="//div[contains(@class,'claims section')]//p[2]")
-	private WebElement needHelp_ClaimsSupport_tty;
-
-	@FindBy(xpath="//div[contains(@class,'claims section')]//p[3]")
-	private WebElement needHelp_ClaimsSupport_wkDayHrs;
-
-	@FindBy(xpath="//div[contains(@class,'claims section')]//p[4]")
-	private WebElement needHelp_ClaimsSupport_wkEndHrs;
-
-	//note: need help - plan support
-	@FindBy(xpath="//div[contains(@class,'plan section')]")
-	private WebElement needHelp_PlanSupportSection;
-
-	@FindBy(xpath="//div[contains(@class,'plan section')]//p[1]//img")
-	private WebElement needHelp_PlanSupport_img;
-
-	@FindBy(xpath="//div[contains(@class,'plan section')]/div/div/p[1]")
-	private WebElement needHelp_PlanSupport_phone;
-
-	@FindBy(xpath="//div[contains(@class,'plan section')]//p[2]")
-	private WebElement needHelp_PlanSupport_tty;
-
-	@FindBy(xpath="//div[contains(@class,'plan section')]//p[3]")
-	private WebElement needHelp_PlanSupport_wkDayHrs;
-
-	//note: need help - more ways
-	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')][contains(text(),'See more ways to')]")
-	private WebElement needHelp_seeMoreWaysTo;
-
-	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
-	private WebElement needHelp_contactUsLink;
-
-	@FindBy(id="submit-order-materials")
-	private WebElement submitButton;
-
-	@FindBy(xpath="//h2[contains(text(),'Printable Documents')]")
-	private WebElement printableDocSection;
-
-	@FindBy(xpath="//div[@class='card-body']//a[contains(text(),'PLAN DOCUMENTS & RESOURCES')]")
-	private WebElement printableDocLink;
-
-	@FindBy(xpath="//a[contains(text(),'CARD')]")
-	private WebElement viewIdCard;
-
-	@FindBy(xpath="//h2[contains(text(),'Confirmation')]/../div[contains(@class,'success')]")
-	private WebElement SuccessMsgbox;
-
-	@FindBy(xpath="//div[contains(@class,'confirmationtext')]//p")
-	private WebElement SuccessMsgText;
-
-	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//div[contains(@class,'otherPages') and not(contains(@class,'ng-hide'))]")
-	private WebElement orderedItem;
-
-	@FindBy(xpath="//div[contains(@class,'orderplanmaterials')]//li")
-	private WebElement orderedItem_ship;
-
-	@FindBy(xpath="//span[contains(text(),'card') or contains(text(),'Card')]")
-	private WebElement orderedItem_idCard;
-
-	@FindBy(xpath="//h2[contains(text(), 'Confirmation')]")
-	private WebElement confirmationPageSubHeader;
-
 	public OrderMaterialsPage(WebDriver driver) throws InterruptedException {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -346,16 +130,23 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	 * Will validate clicking of the link
 	 * @param planType
 	 * @param memberType
+	 * @throws InterruptedException 
 	 */
-	public void validatePrintableDocSection(String planType, String memberType) {
-		//"member/documents/overview.html"
+	public void validatePrintableDocSection(String planType, String memberType) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Printable Documents' section header element on Order Plan Materials",validate(printableDocSection));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Printable Documents' link element on Order Plan Materials",validate(printableDocLink));
-		String originalUrl=driver.getCurrentUrl();
-		printableDocLink.click();
 		String expectedUrl="member/documents/overview.html";
-		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
-		goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
+		String actualUrl=printableDocLink.getAttribute("href");
+		Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  "
+				+ "Expected URL to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", 
+				actualUrl.contains(expectedUrl));
+		//note: keep the below steps, if 'plan documents & resources" page load faster in reality then below steps would work
+		//String originalUrl=driver.getCurrentUrl();
+		//printableDocLink.click();
+		//CommonUtility.checkPageIsReady(driver);
+		//String expectedUrl="member/documents/overview.html";
+		//Assert.assertTrue("PROBOEM - not getting expected URL after clicking '' link.  Expected URL to contain '"+expectedUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", driver.getCurrentUrl().contains(expectedUrl));
+		//goBackToPriorPageViaPlanMaterialsOrderPlanMaterials(planType, memberType, originalUrl, "formsAndResourcesPage");
 	}
 
 	/**
@@ -598,6 +389,9 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 				Assert.assertTrue("PROBLEM - for non-PDP user should have gotten error message when attempting to order 'Welcome kit'",
 						validate(errorMsg_serviceFail));
 				System.out.println("Expected - NOT able to order item="+option);
+			} else if (planType.equalsIgnoreCase("MEDICA") && option.equalsIgnoreCase("Member Materials")) { //note: only PDP can order Welcome Guide
+				Assert.assertTrue("PROBLEM - for MEDICA user should have gotten error message when attempting to order 'Membership Materials'",
+						validate(errorMsg_serviceFail));
 			} else {
 				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
 			}
@@ -611,5 +405,59 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			}
 		}
 		return orderedItem;
+	}
+	
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		String lookForPlanCategory="";
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+		if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP"))
+			lookForPlanCategory="MEDICARE SUPPLEMENT";
+		else if (planType.equalsIgnoreCase("SSUP")) 
+			lookForPlanCategory="SSP";
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+			lookForPlanCategory="MAPD";
+		else 
+			lookForPlanCategory=planType;
+
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
+				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
+				expectedSegmentId.equals(actualSegmentId));
+	}
+	
+	public String getConsumerDetailsFromlocalStorage() {
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+	
+	public String getSegmentIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		String actualSegmentId=null;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			JSONArray arr =jsonObj.getJSONArray("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", arr.length()>1);
+			for (int i = 0; i < arr.length(); i++) {
+				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				//note: need to locate the right plan for segmentId validation
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails, "
+					+ "please double check input data planType matches user's actual planType", 
+					actualSegmentId!=null);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualSegmentId;
 	}
 }

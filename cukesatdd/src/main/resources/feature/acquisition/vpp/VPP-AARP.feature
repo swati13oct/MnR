@@ -16,6 +16,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | Plan Name | <planName> |
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
+    And the user validates the pdf section
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |

@@ -25,7 +25,7 @@ Feature: C1.2To test Preferences page
   # TID: 15376 - TC10_Terminated view member
   #-------------------------  
   @CommunicationPreferences1 @regressionMember
-  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Segment ID: <segmentId> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -34,6 +34,9 @@ Feature: C1.2To test Preferences page
     Then the user validates the presence of Communication preferences header
     And the user clicks on edit preferences link
     Then the user validates headers on Preferences page
+    Then I can validate the segment ID value in localStorage on preference page
+      | Plan Type  | <planType>  |
+      | Segment ID | <segmentId> |
     Then the user validates the presence of Plan Name on Communication Preferences Page
     And the user validates the iframe on Communication Preferences Page
     Then the user validates the I have read checkbox and check it
@@ -42,13 +45,14 @@ Feature: C1.2To test Preferences page
     Then the user validates the presence of Back links on Preferences page
 
     Examples: 
-      | TID   | planType                      |
-      | 15311 | MAPD_AARP_GOGreen_Profilepref |
-      | 15312 | MA_AARP_GOGreen_Profilepref   |
-      | 15313 | PDP_AARP_GOGreen_Profilepref  |
-
+      | TID   | planType                         | segmentId |  
+      | 15311 | MAPD_AARP_GOGreen_Profilepref    | 000       |
+      | 15312 | MA_AARP_GOGreen_Profilepref      | 000       |
+      | 15313 | PDP_AARP_GOGreen_Profilepref     | 000       |
+      | xxxxx | MA_001_AARP_GOGreen_Profilepref  | 001       |
+      
   @CommunicationPreferences2 @goGreen @regressionMember
-  Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Segment ID: <segmentId> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -58,17 +62,16 @@ Feature: C1.2To test Preferences page
 
     @smokeTest @MemberVBF @smokeTest_GoGreenEPMP @rallyDashboard @testharness
     Examples: 
-      | TID   | planType                       |
-      | 15311 | MAPD_AARP_GOGreen_Profilepref  |
+      | TID   | planType                        | 
+      | 15311 | MAPD_AARP_GOGreen_Profilepref   |
 
     Examples: 
-      | TID   | planType                       |
-      | 15311 | MAPD_AARP_GOGreen_Profilepref  |
-      | 15312 | MA_AARP_GOGreen_Profilepref    |
-      | 15313 | PDP_AARP_GOGreen_Profilepref   |
-      | 15314 | MAPD_UHC_GOGreen_Profilepref   |
-      | 15315 | MA_UHC_GOGreen_Profilepref     |
-      | 15316 | MAPD_GROUP_GOGreen_Profilepref |
+      | TID   | planType                        |
+      | 15312 | MA_AARP_GOGreen_Profilepref     | 
+      | 15313 | PDP_AARP_GOGreen_Profilepref    |
+      | 15314 | MAPD_UHC_GOGreen_Profilepref    |
+      | 15315 | MA_UHC_GOGreen_Profilepref      |
+      | 15316 | MAPD_GROUP_GOGreen_Profilepref  |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @CommunicationPreferences3 @F220921 @regressionMember

@@ -85,17 +85,19 @@ public class HSIDStepDefinition {
 		}
 		// note: for the team-a env, it needs a different URL for PCP and Medica users
 		boolean teamSpecialCase=false;
+		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
+		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 			if (planType != null) {
 				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			}
 			if (category != null) {
 				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on team-a env");
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				} 
 			}
 		}
@@ -134,7 +136,7 @@ public class HSIDStepDefinition {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
 				} catch (UnhandledAlertException ae) {
 					System.out.println("Exception: "+ae);
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
 				}
 				if (testHarnessPage != null) {
 					getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
@@ -148,7 +150,7 @@ public class HSIDStepDefinition {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 			} catch (UnhandledAlertException ae) {
 				System.out.println("Exception: "+ae);
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
 			}
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
@@ -196,6 +198,8 @@ public class HSIDStepDefinition {
 		} else {
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				LoginPage loginPage=null;
+				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
+				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
 				} 
