@@ -652,7 +652,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
 		switchToNewTabNew(ProviderSearchLink);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
@@ -665,7 +665,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my provider covered')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
 		//switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();

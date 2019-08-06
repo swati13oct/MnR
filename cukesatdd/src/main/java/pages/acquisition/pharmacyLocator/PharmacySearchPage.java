@@ -25,8 +25,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10);
 	}
 
 	public boolean validateCountypopoup(){
