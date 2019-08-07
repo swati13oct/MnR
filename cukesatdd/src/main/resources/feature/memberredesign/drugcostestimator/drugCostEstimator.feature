@@ -166,5 +166,5 @@ Feature: I1.3DCE for Member Site Redesign
     And any cost savings will be applied to my total cost savings in Step3
 
     Examples: 
-      | planType | memberType                 | drug    | dosage           | quantity | frequency     |
-      | MAPD     | IndMAPDUHC_Pharmacylocator | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | planType | memberType | drug    | dosage           | quantity | frequency     |
+      | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
