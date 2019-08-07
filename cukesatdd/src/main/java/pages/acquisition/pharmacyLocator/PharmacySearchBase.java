@@ -58,8 +58,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
 							validate(countyModal));
 					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
-					CommonUtility.checkPageIsReady(driver);
-					CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
+					CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
 					Assert.assertTrue("PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup", 
 							!validate(countyModal));
@@ -73,6 +73,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void selectsPlanName(String planName) {
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
@@ -106,7 +112,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void searchesPharmacy(String language, String planName) throws InterruptedException {
 		int total=0;
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
 		if (!validate(noResultMsg)) {
@@ -126,14 +132,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						validate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
 				Thread.sleep(2000); //note: keep this for the page to load
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
 						+ "\nExpect to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 				currentURL=driver.getCurrentUrl();
 				//System.out.println(currentURL);
@@ -341,5 +347,69 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '"+expectedURL
 				+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
 	}
+	
+	public boolean searchesPharmacyResults(String language, String planName) throws InterruptedException {
+		int total=0;
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		int PharmacyCount = 0;
+		if (!validate(noResultMsg)) {
+			PharmacyCount = PharmacyResultList.size();
+		}		
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
+					validate(pharmaciesAvailable));
+			if (total >10) {
+				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
+						validate(contactUnitedHealthCare));
+				
+
+			} else {
+				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!validate(pagination));
+				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!validate(leftArrow));
+				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!validate(rightArrow));
+			}
+		} else {
+			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!validate(contactUnitedHealthCare));
+			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
+					!validate(pdf_otherPlans));
+			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
+					!validate(pdf_WalgreenPlans));
+			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
+		}
+		if (!mapToggleElement.isDisplayed())
+			return false;
+		if (!pharmacyList.isDisplayed())
+			return false;
+		if (mapView.getAttribute("class").contains("ng-hide"))
+			return false;
+		if (!(pharmacyListItems.size() > 1))
+			return false;
+		if (!resultAsPDF.isDisplayed())
+			return false;
+		if (!(standardNetworkMarker.size() == 1 || PreferredNetworkMarker.size() == 1))
+			return false;
+		if (!showOnMapLink.isDisplayed())
+			return false;
+		if (!getDirectionLink.isDisplayed())
+			return false;
+		if (!pharmacyNameLink.isDisplayed())
+			return false;
+		if (!questionsRightRailWidget.isDisplayed())
+			return false;
+		return true;
+	}
+	
 }
 

@@ -524,11 +524,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
+		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
-		checkProactiveChatPopup();
+		
 	}
 	
 	public void checkProactiveChatPopup(){
