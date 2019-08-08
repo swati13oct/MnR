@@ -279,7 +279,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "switchToGenericBtnId")
 	public WebElement btnSwitchUpd;
 
-	@FindBy(xpath = "//div[@id='drugModal']//h3[2]")
+	@FindBy(xpath = "//div[@id='switchdesc_id']//h3")
 	public WebElement genericDrugText;
 
 	@FindBy(xpath = "//*[@id='IPEinvL']/map/area[3]")
@@ -321,8 +321,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
-	{ //waitForloader(driver,overlay, 20);
-	CommonUtility.waitForPageLoad(driver, iPerceptionframe, 20);
+	{ 
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);
@@ -1101,7 +1100,7 @@ try {
 			CommonUtility.waitForPageLoadNew(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
 			
-			waitForloader(driver, overlay, 30);
+			//waitForloader(driver, overlay, 30);
 		}
 	}
 

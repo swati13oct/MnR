@@ -13,7 +13,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
     And the user chooses a plan from dropdown
       | Plan Name | <planName> |
       | planyear  | <planYear> |
-    Then the user validates the pharmacies available
+    Then the user validates the pharmacies results
       | Language | English |
 
     Examples: 
