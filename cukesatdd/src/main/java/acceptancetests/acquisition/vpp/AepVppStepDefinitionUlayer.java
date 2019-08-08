@@ -75,8 +75,8 @@ public class AepVppStepDefinitionUlayer {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
-		String CurrentYear = "2018";
-		String NextYear = "2019";
+		String CurrentYear = "2019";
+		String NextYear = "2020";
 		
 		System.out.println("Next Year : "+NextYear);
 		System.out.println("Current Year : "+CurrentYear);
@@ -99,8 +99,8 @@ public class AepVppStepDefinitionUlayer {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
-		String CurrentYear = "2018";
-		String NextYear = "2019";
+		String CurrentYear = "2019";
+		String NextYear = "2020";
 		
 		System.out.println("Next Year : "+NextYear);
 		System.out.println("Current Year : "+CurrentYear);
