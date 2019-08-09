@@ -42,7 +42,7 @@ public class FooterPage extends UhcDriver {
 
 
 
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[1]")
+	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']")
 	private WebElement UnitedHealthcare;
 	
 	@FindBy(xpath= "//*[@id='termsofuseID']")

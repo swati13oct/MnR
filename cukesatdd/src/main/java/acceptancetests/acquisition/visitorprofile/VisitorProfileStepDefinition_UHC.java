@@ -117,7 +117,7 @@ public class VisitorProfileStepDefinition_UHC {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
-	@And("^user clicks on plan name$")
+	@And("^user clicks on plan name of UHC site$")
 	public void user_clicks_on_plan_name(DataTable planNames) {
 		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

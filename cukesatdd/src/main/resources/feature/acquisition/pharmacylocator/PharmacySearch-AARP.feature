@@ -18,7 +18,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
     Examples: 
       | siteName | zipcode | distance | countyName   | planName                                          | plantype | planYear |
-      | Ulayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |     2019 |
+      | Ulayer   | 80002   | 25       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
      #| Ulayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
 
   @pharmacyLocatorUlayerSmoke
@@ -59,6 +59,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   #------------------------- END OF ACQUISITION SMOKE TESTS----
   #-------------------------
   # note: Acq ALM Pharmacy Locator Test cases located in OP regression
+  # note: each of the language E2E cases are split into two scenarios to keep the run time shorter so sauce lab won't timeout
   # Ulayer
   # TID	: 15582 - TC_001_Locate a pharmacy_header nav PDP
   # TID	: 15583 - TC_002_Locate a pharmacy_header nav MAPD
@@ -101,6 +102,31 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     And the user validates get direction link
     And the user validates more information content based on plan type
     And the user validates view search PDF link
+
+    Examples: 
+      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
+      | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
+
+
+  @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    #------ English -----------------------------------
+    And the user validates header section content
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Plan Name | <planName> |
+      | planyear  | <planYear> |
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -123,7 +149,8 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
       | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
 
-  @pharmacylocatorulayer02 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+
+  @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -175,7 +202,39 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
 
-  @pharmacylocatorulayer03 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    #------ Chinese -----------------------------------
+    When the user selects Chinese Language
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Plan Name | <planName> |
+      | planyear  | <planYear> |
+    And the user validates pharmacy widgets
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+    And the user selects Pharmacy Types to Filter
+      | Pharmacy Type | <pharmacyType> |
+      | Language      | Chinese        |
+    Then the user validates the pharmacies available
+      | Language | Chinese |
+    Then the user validates error message displayed when filter results in no match
+    Then the user validates the question widget
+
+    Examples: 
+      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
+      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+
+
+  @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -209,6 +268,19 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     And the user validates get direction link
     And the user validates more information content based on plan type
     And the user validates view search PDF link
+
+    Examples: 
+      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
+      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+
+  @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    #------ Spanish -----------------------------------
+    When the user selects Spanish Language
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -220,16 +292,6 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Language | Spanish |
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
-    When the user enters following details for pharmacy search
-      | Zip Code |            |
-      | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
-    When the user enters following details for pharmacy search
-      | Zip Code |       9999 |
-      | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
 
     Examples: 
       | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
@@ -238,7 +300,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
 
 
-  @pharmacylocatorulayer04 @onlinePharmacyDir @regression
+  @pharmacylocatorulayer07 @onlinePharmacyDir @regression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -261,7 +323,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
 
-  @pharmacylocatorulayer05 @geoTargeting  @regression
+  @pharmacylocatorulayer08 @geoTargeting  @regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

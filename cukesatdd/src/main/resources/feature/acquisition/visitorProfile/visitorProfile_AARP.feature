@@ -120,7 +120,7 @@ Feature: Visitor profile
     Then user click on continue as guest button on AARP site
     And user validates the added plans on visitor profile page of AARP site
       | MA Test Plans | <MA_testPlans> |
-    And user clicks on plan name
+    And user clicks on plan name in AARP
       | MA Test Plans | <MA_testPlans> |
     Then the user validates the following Additional Benefits of Plan for the plan in AARP
       | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |
