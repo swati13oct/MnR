@@ -1,14 +1,15 @@
 @AEP_VPP @AEP_VPP_Ulayer
 Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenarios
 
-  @Ulayer10_01
+  @10_01_Ulayer
   Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/01 pre-AEP period
-    Given the user is on team-f dce date change url and changes DCE server date to following date
-          | DCE Date | <dcedate> |
+    #Given the user is on team-f dce date change url and changes DCE server date to following date
+    #      | DCE Date | <dcedate> |
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code    | <zipcode> |
-      | County Name | <county>  |
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user validates Current year and next year links in VPP
@@ -22,17 +23,18 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
     Then the user validates Current year Plan Details Page for pre-AEP
 
     Examples: 
-      | dcedate    | zipcode | county             | plantype | planName                                          |
-      | 10/01/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      | 10/01/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-  @Ulayer10_15
+  @10_15_Ulayer
   Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/01 pre-AEP period
-    Given the user is on team-f dce date change url and changes DCE server date to following date
-      | DCE Date | <dcedate> |
+    #Given the user is on team-f dce date change url and changes DCE server date to following date
+    #  | DCE Date | <dcedate> |
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code    | <zipcode> |
-      | County Name | <county>  |
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user validates Current year and next year links in VPP
@@ -46,17 +48,18 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
     Then the user validates Current year Plan Details Page for AEP enrollment period
 
     Examples: 
-      | dcedate    | zipcode | county             | plantype | planName                                          |
-      | 10/15/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-      
-   @Ulayer12_01
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      | 10/15/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+
+  @Ulayer12_01
   Scenario Outline: Verify plan summary and Plan Details in AARP site for server date 10/01 pre-AEP period
-    Given the user is on team-f dce date change url and changes DCE server date to following date
-      | DCE Date | <dcedate> |
+    #Given the user is on team-f dce date change url and changes DCE server date to following date
+    #  | DCE Date | <dcedate> |
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
-      | Zip Code    | <zipcode> |
-      | County Name | <county>  |
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then the user validates Current year and next year links in VPP
@@ -70,15 +73,14 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
     Then the user validates Current year Plan Details Page for Non enrollment period
 
     Examples: 
-      | dcedate    | zipcode | county             | plantype | planName                                          |
-      | 12/01/2018 |   90210 | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-      
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      | 12/01/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+
   @teamF_DCEdateChange
   Scenario Outline: To change DCE server date for Team-F for AEP testing
     Given the user is on team-f dce date change url and changes DCE server date to following date
       | DCE Date | <dcedate> |
 
-   Examples: 
-     | dcedate    |
-     | reset 			|
-
+    Examples: 
+      | dcedate |
+      | reset   |
