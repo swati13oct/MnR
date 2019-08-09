@@ -58,6 +58,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		// Express the Regexp above with the code you wish you had
 		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		healthnWellnessPage.clickHealthnWellnessTab();
+		HealthAndWellnessPage.checkForIPerceptionModel(healthnWellnessPage.driver);
 	}
 
 	/**

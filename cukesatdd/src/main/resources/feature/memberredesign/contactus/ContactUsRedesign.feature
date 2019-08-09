@@ -1,27 +1,25 @@
 @contactUs @velocityDashers
 Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
 
-  @smokeTest  @ContactUs
+  @smokeTest @ContactUs
   Scenario Outline: VBF - Verify Click to Call and email Widget section on contact us page for Federal member
-  Given login with following details logins in the member portal and validate elements
-   | Plan Type   | <plantype>   |
-   | Member Type | <memberType> |
-  When the user navigates to contact us page in UHC site
-  Then user validates clickToCallButton display on contactUS redesign page
-  And user clicks on Request Confirmation Click
-   | Phone Number | <phoneNumber> |
-  Then user validates cancel click on secure email widget in redesign contact us page
-   | New Email        | <newEmail>        |
-   | NewConfirm Email | <newConfirmEmail> |
-   		
-   Examples: 
-	     | plantype | memberType     | newEmail       | newConfirmEmail | phoneNumber |
-	     | MAPD     | Ind_ContactUs  | test@optum.com | test@optum.com  |  9999999999 |
-	     | MAPD     | Grp_ContactUs  | test@optum.com | test@optum.com  |  9999999999 | 
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then user validates clickToCallButton display on contactUS redesign page
+    And user clicks on Request Confirmation Click
+      | Phone Number | <phoneNumber> |
+    Then user validates cancel click on secure email widget in redesign contact us page
+      | New Email        | <newEmail>        |
+      | NewConfirm Email | <newConfirmEmail> |
 
- 
+    Examples: 
+      | plantype | memberType    | newEmail       | newConfirmEmail | phoneNumber |
+      | MAPD     | Ind_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
+      | MAPD     | Grp_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
 
-@contactUs1 @secureEmailWidgetCancel @regressionMember
+  @contactUs1 @secureEmailWidgetCancel @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Widget section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -32,12 +30,12 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | NewConfirm Email | <newConfirmEmail> |
 
     Examples: 
-      | TID    | plantype | memberType     | newEmail       | newConfirmEmail |
-      | 15220  | PDP      | ContactUs      | test@optum.com | test@optum.com  |
-      | 15221  | MAPD     | Ind_ContactUs  | test@optum.com | test@optum.com  |
+      | TID   | plantype | memberType                 | newEmail       | newConfirmEmail |
+      | 15220 | PDP      | IndAARPPDP_Pharmacylocator | test@optum.com | test@optum.com  |
+      | 15221 | MAPD     | Ind_ContactUs              | test@optum.com | test@optum.com  |
 
-#Below scenario @contactUs2  and @contactUs3 for CalPERs, Texas ERS and GA DCH are obsolete. Replaced with @contactUs10 and @contactUs11
-  @contactUs2 @GroupEmailConfirmMessage @regressionMember
+  #Below scenario @contactUs2  and @contactUs3 for CalPERs, Texas ERS and GA DCH are obsolete. Replaced with @contactUs10 and @contactUs11
+  @contactUs2 @GroupEmailConfirmMessage
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -53,12 +51,12 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
       | Expected Message | <expectedMessage> |
 
     Examples: 
-      | TID   | plantype | memberType                         | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
+      | TID   | plantype | memberType              | enquiryType                 | alternativeEmailId | confirmAlternativeEmailId | alternativePhoneNumber | confirmAlternativePhoneNumber | expectedMessage                                                                                                                                                                 |
       | 15323 | MAPD     | CALPERSGroup_ContactUs  | Payment Information         | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
       | 15324 | MAPD     | GEORGIAGroup_ContactUs  | Finding a Pharmacy          | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
       | 15218 | MAPD     | TEXASERSGroup_ContactUs | Updating Member information | test@optum.com     | test@optum.com            |             9999999999 |                    9999999999 | Thank you for your inquiry. We value your input, and would be happy to answer your questions. A Customer Service Advocate will review your question and respond to you shortly. |
 
-  @contactUs3 @GroupEmailAQuestionFiledValidations @regressionMember
+  @contactUs3 @GroupEmailAQuestionFiledValidations
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Group Email Widget Confirm Request in contact us redesign page with error messages
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -157,8 +155,8 @@ Feature: V1.1To test Send us a question Widget and Click to call functionality i
     Then user validates PDP page display in redesign contact us page
 
     Examples: 
-      | TID   | plantype | memberType |
-      | 15219 | PDP      | ContactUs  |
+      | TID   | plantype | memberType                 |
+      | 15219 | PDP      | IndAARPPDP_Pharmacylocator |
 
   @contactUs9 @regressionContactUsForTerminatedMembers @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify terminated members view on contact us redesign page

@@ -1,5 +1,7 @@
 package pages.regression.pharmacylocator;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -167,6 +169,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
+		Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, test expects input data to have search result for remaining validation steps, please check user data input or env to see if everything is ok", !validate(noResultMsg));
 	}
 
 	/** Selection of Pharmacy filter type */
@@ -193,6 +196,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void Select_PlanType_Filter(String pharmacyType, String language) {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		//tbd int totalBefore=Integer.parseInt(PharmacyFoundCount.getText().trim());
+		Assert.assertTrue("PROBLEM - search yield no result, test expects input data to have search result, please check user data input or env to see if everything is ok", !validate(noResultMsg));
 		int totalBefore=0;
 		if (language.equals("Chinese")) {
 			String[] tmp=PharmacyFoundCount.getText().trim().split(" ");

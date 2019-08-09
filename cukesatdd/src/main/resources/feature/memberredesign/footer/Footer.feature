@@ -1,10 +1,11 @@
 @footer @member_redesign_footer @regressionMember
 Feature: F1.2Footer validation
+
   @footer1 @IncrediblesFooter
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
-  # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
-  # note: if system is in future date, payment page may not show for user and this test will end up failing
-  # note: this scenario covers multiple testcases: TID 15347,15348,15349,15350,15351
+    # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
+    # note: if system is in future date, payment page may not show for user and this test will end up failing
+    # note: this scenario covers multiple testcases: TID 15347,15348,15349,15350,15351
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -23,5 +24,7 @@ Feature: F1.2Footer validation
     And the user validates the footer section in Benefits page
 
     Examples: 
-      | TID   | planType | memberType|
-      | 15347 | MAPD     | withRider_footer |
+      | TID   | planType | memberType                 |
+      | 15347 | MAPD     | IndMAPDUHC_Pharmacylocator |
+      | 15347 | SHIP     | EFT_MedSelectPlan_order    |
+      | 15347 | MAPD     | CALPERSGroup_ContactUs     |

@@ -121,7 +121,7 @@ Feature: Visitor profile
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
       | MA Test Plans | <MA_testPlans> |
-    And user clicks on plan name
+    And user clicks on plan name of UHC site
       | MA Test Plans | <MA_testPlans> |
     Then the user validates the following Additional Benefits of Plan for the plan in UMS
       | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |

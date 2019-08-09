@@ -1,5 +1,7 @@
 package pages.regression.healthandwellness;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -289,5 +291,31 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("Dashboard header is not displayed", false);
 		}
 	}
+	
+	/**
+	 * For iPerception Model
+	 * @param driver
+	 */
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}
+
 
 }
