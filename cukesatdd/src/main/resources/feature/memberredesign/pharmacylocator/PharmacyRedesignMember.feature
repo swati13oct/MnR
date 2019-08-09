@@ -111,7 +111,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	And the user validates more information content based on plan type
 	And the user validates view search PDF link
 
-	@pharmacylocator1a
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
@@ -151,7 +150,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Then the user validates the pharmacies available
 	  | Language      | English        |
 
-	@pharmacylocator1b
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
