@@ -11,6 +11,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Then user validates plan count for all plan types on plan summary page in the UMS site
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     And the user validates the pdf section for uhc

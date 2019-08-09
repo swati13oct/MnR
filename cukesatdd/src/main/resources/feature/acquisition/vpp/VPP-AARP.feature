@@ -8,6 +8,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |

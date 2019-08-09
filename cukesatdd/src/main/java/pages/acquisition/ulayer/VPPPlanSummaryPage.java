@@ -2737,8 +2737,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 
 
-
-
 	public void CheckClick_CurrentYear_Plans() {
 		try {
 			WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '2019')]"));

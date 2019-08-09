@@ -1644,6 +1644,9 @@ public class VppStepDefinitionUHC {
 			boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,yearlyPremium);
 			Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 		}
+		
+		
+		
 		@When("^the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC$")
 		public void the_user_views_currentyearlink_clicksLink() throws Throwable {
 

@@ -1769,4 +1769,13 @@ public class VppStepDefinitionUpdatedAARP {
 		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
 
 	}
+	
+	@When("^the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP$")
+	public void the_user_views_currentyearlink_clicksLink() throws Throwable {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+	}
 }		

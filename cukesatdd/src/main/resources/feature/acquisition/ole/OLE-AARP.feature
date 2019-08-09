@@ -10,8 +10,8 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user validates the available plans for selected plan types in the AARP site
     Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -114,6 +114,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <PlanType> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -203,6 +204,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -676,6 +678,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
