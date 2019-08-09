@@ -10,6 +10,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE

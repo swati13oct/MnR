@@ -3049,4 +3049,17 @@ catch (Exception e) {
 		}
 	}
 
+	public void CheckClick_CurrentYear_Plans() {
+		try {
+			WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '2019')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearLink.getText());
+			System.out.println("*****CLICKING ON CURRENT YEAR LINK*****");
+			CurrentYearLink.click();
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle link is NOT displayed on VPP Page : ");
+
+			e.printStackTrace();
+		}			
+	}
+
 }
