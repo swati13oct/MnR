@@ -114,7 +114,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	@pharmacylocator1a
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15272	| MA       | IndAARPMA_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
 	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 10       | Long-term care              | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
@@ -155,7 +154,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	@pharmacylocator1b
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15272	| MA       | IndAARPMA_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
 	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 10       | Long-term care              | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
@@ -324,8 +322,8 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Examples: 
 	  | TID   | planType | memberType        		 |
 	  | 15272 | MA       | IndAARPMA_Pharmacylocator |
-	  | 15272 | SHIP     | IndSHIP_Pharmacylocator   |
 	  | 15272 | MA       | IndUHCMA_Pharmacylocator  |
+	  | 15272 | SHIP     | IndSHIP_Pharmacylocator   |
 
 
   #-------------------------
