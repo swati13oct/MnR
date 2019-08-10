@@ -4,6 +4,7 @@
 package pages.regression.contactus;
 
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -257,17 +258,18 @@ public class ContactUsPage extends UhcDriver{
 		super(driver);
 		try {
 			PageFactory.initElements(driver, this);
-			feebackpopupClose();
-			CommonUtility.waitForPageLoad(driver, headingContactUs, CommonConstants.TIMEOUT_30);
+			AccountHomePage.checkForIPerceptionModel(driver);
+			//feebackpopupClose();
+			CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_30);
 			openAndValidate();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(headingContactUs);
+		validateNew(headingContactUs);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -833,12 +835,13 @@ public class ContactUsPage extends UhcDriver{
    	 else{
    		 Assert.assertTrue("Send A message Button not displayed", false);
    	 }
-		try {
+		/*try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+   	 	waitforElementVisibilityInTime(EmailUsModalbtnContinue, 30);
 		if(validate(EmailUsModal) && validate(EmailUsModalbtnContinue)){
 	   		 System.out.println("Email Us Moal and COntinue Button are displayed");  		 
 	   	 }
