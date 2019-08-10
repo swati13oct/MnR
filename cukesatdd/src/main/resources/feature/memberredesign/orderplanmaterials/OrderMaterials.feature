@@ -90,7 +90,7 @@ Feature:P1.5 To test order materials in member site
     @Individual
     Examples: 
       | TID   | planType | memberType            | segmentId |  
-      | 15287 | MA	     | AARP_Individual_order | 001       |
+      | 15287 | MA	     | AARP_Individual_order | 000       |
       | 15288 | MAPD     | AARP_Individual_order | 000       |
       | 15292 | PDP      | AARP_Individual_order | 000       |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
