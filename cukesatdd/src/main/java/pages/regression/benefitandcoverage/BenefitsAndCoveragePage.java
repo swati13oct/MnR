@@ -170,6 +170,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//h2[@class='atdd-bnc-drgcopaysdiscounts-title']")
 	private WebElement lisDrugCopayHeader;
+	
+	@FindBy(xpath = "//p[contains(text(),'Your plan premium is calculated based on the plan')]")
+	private WebElement lisDrugCopayHeadertext;
 
 	@FindBy(xpath = "//div[@class='drugCopaysAndDiscounts section'][1]//div[@class='drugCopayHeaderParsys parsys section']//p[@class='atdd-bnc-drgcopaysdiscounts-info']")
 	private WebElement lisDrugCopayText;
@@ -528,7 +531,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "outOfPocketTile")
 	private WebElement outOfPocketSection;
 
-	@FindBy(id = "IN-NETWORK-1")
+	//@FindBy(id = "IN-NETWORK-1")
+	@FindBy(xpath = "(//div[@class='outofpocketdme parbase section'])[1]")
 	private WebElement inNetworkSection;
 
 	@FindBy(id = "OUT-OF-NETWORK-1")
@@ -945,21 +949,32 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]")
 	private WebElement PreferredRetailPharmacyDrugCostsText;
 
-	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]//..//p[3]")
+	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]//..//p[2]")
 	private WebElement PreferredRetailPharmacyDrugCostsTextLine;
-
+	
+	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]//..//p[2]")
+	private WebElement PreferredRetailPharmacyDrugCostsTextLinePDP;
+	
 	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]")
 	private WebElement PreferredMailServicePharmacyDrugCostsText;
 
-	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]//..//p[3]")
+	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]//..//p[2]")
 	private WebElement PreferredMailServicePharmacyDrugCostsTextLine;
 
+	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]//..//p[2]")
+	private WebElement PreferredMailServicePharmacyDrugCostsTextLinePDP;
+	
 	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]")
 	private WebElement StandardNetworkPharmacyRetailDrugCostsText;
 
-	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[3]")
+	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[2]")
 	private WebElement StandardNetworkPharmacyRetailDrugCostsTextLine;
+	
+	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[2]")
+	private WebElement StandardNetworkPharmacyRetailDrugCostsTextLinePDP;
 
+	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[2]")
+	private WebElement StandardNetworkPharmacyRetailDrugCostsTextLineVellage;
 
 	@FindBy(id= "officeVisitTileAtdd")
 	private WebElement officeVisitSection;
@@ -2179,29 +2194,26 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 */
 
 	public void validate_lisdrugcopayheaderntext() {
-		validateWithValue("Header-Drug Copays & Discounts", lisDrugCopayHeader);
+		validateWithValue("LIS header", lisDrugCopayHeader);
+		validateWithValue("LIS header text", lisDrugCopayHeadertext);
 		//tbd validateWithValue("Text-Drug Copays & Discounts", lisDrugCopayText);
 
-		boolean checkText=true;
-		try {
-			lisDrugCopayText.isDisplayed();
-			System.out.println("located the lisDrugCopayText element via the xpath for non-PDP user");
-		} catch (Exception e) {
-			checkText=false;
-			System.out.println("Unable to locate the lisDrugCopayText element via the xpath for non-PDP user");
-		}
-		if (!checkText) {
-			try {
-				pdp_lisDrugCopayText.isDisplayed();
-				checkText=true;
-				System.out.println("located the lisDrugCopayText element via the xpath for PDP user");
-			} catch (Exception e2) {
-				System.out.println("Unable to locate the lisDrugCopayText element via the xpath for PDP user either");
-			} 
-		}
-		Assert.assertTrue("Element lisDrugCopayText expected but not found!!!!", checkText);
+		/*
+		 * boolean checkText=true; try { lisDrugCopayText.isDisplayed(); System.out.
+		 * println("located the lisDrugCopayText element via the xpath for non-PDP user"
+		 * ); } catch (Exception e) { checkText=false; System.out.
+		 * println("Unable to locate the lisDrugCopayText element via the xpath for non-PDP user"
+		 * ); } if (!checkText) { try { pdp_lisDrugCopayText.isDisplayed();
+		 * checkText=true; System.out.
+		 * println("located the lisDrugCopayText element via the xpath for PDP user"); }
+		 * catch (Exception e2) { System.out.
+		 * println("Unable to locate the lisDrugCopayText element via the xpath for PDP user either"
+		 * ); } }
+		 * Assert.assertTrue("Element lisDrugCopayText expected but not found!!!!",
+		 * checkText);
+		 */
 
-		System.out.println(" ***********Drug Copay & discount  is validated ***********");
+		System.out.println(" ***********LIS header and text is validated***********");
 	}
 
 	/**
@@ -4753,7 +4765,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
 		validateWithValue("Preferred Retail Pharmacy Drug Costs Text", PreferredRetailPharmacyDrugCostsText);
-		validateWithValue("Preferred Retail Pharmacy DrugCosts Text Line", PreferredRetailPharmacyDrugCostsTextLine);
+		validateWithValue("Preferred Retail Pharmacy DrugCosts Text Line", PreferredRetailPharmacyDrugCostsTextLinePDP);
 	}
 	public void preferredMailBenefitTableIndipdp() throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
@@ -4801,7 +4813,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
 		validateWithValue("Preferred Mail Service Pharmacy Drug Costs", PreferredMailServicePharmacyDrugCostsText);
-		validateWithValue("Preferred Mail Service Pharmacy Drug Costs Text Line", PreferredMailServicePharmacyDrugCostsTextLine);
+		validateWithValue("Preferred Mail Service Pharmacy Drug Costs Text Line", PreferredMailServicePharmacyDrugCostsTextLinePDP);
 
 	}
 	public void standardRetailBenefitTableIndipdp3() throws InterruptedException{
@@ -4846,7 +4858,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
 		validateWithValue("Standard Network Pharmacy Retail Drug Text", StandardNetworkPharmacyRetailDrugCostsText);
-		validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLine);
+		validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLinePDP);
 	}
 
 	public void validatevillagetabletext() throws InterruptedException{
@@ -4890,7 +4902,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
 		validateWithValue("Standard Network Pharmacy Retail Drug Text", StandardNetworkPharmacyRetailDrugCostsText);
-		validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLine);
+		validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLineVellage);
 	}
 
 	public void validatevillageCopaySection() throws InterruptedException{
