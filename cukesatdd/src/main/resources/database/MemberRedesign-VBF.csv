@@ -37,10 +37,10 @@ q2_june_VBF_030/Password@1,MAPD,NICECLAIMS,GroupRetiree
 q2_june_VBF_002/Password@1,MA,eobPerf,Medical
 q2_may_shipUAT007/Password@1,Ship
 q2_may_shipUAT007/Password@1,SHIP,SHIPCLAIMS,ShipInd
-q2_may_shipUAT010/Password@1,Medsupp,Ship,ShipEOB
+q2_jun_grp0031/Password@2,Medsupp,Ship,ShipEOB
 q2_apr_aarp0250/Password@1,MAPD,COSMOSCLAIMS,BlueLayerInd
 q2_jun_grp0154/Password@1,MAPD,COSMOSCLAIMS,GroupRetiree
 q2_jun_aarp0028/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
-q2_jun_aarp0057/Password@12,MAPD,AARPIndividualNiceEOB,Medical
+q2_jun_uhc00080/Password@1,MAPD,AARPIndividualNiceEOB,Medical
 q2_june_VBF_011/Password@1,UhcMapdIndContactUs,MAPD
 q2_apr_uhc0045/Password@1,MAPD,MakeOneTimeCCOther_Payments
