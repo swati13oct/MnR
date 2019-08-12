@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.KeywordSearch;
 //import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
@@ -20,9 +21,15 @@ import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.keywordSearchAARP;
+import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.contactus.ContactUsPage;
+//import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -951,4 +958,42 @@ public class VppPlanSummaryStepDefinitionAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	  plansummaryPage.validatePlanSelectorPageInRightRail();
   }
-} 
+  /**
+	 * @toDo:user is on AARP medicare acquisition site landing page
+	 */
+	@Given("^the member is on AARP medicare acquisition site landing page$")
+	public void the_user_on_aarp_medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);		
+	}
+	@When("^the member validates the search engine$")
+	public void I_validate_search_box() throws InterruptedException {
+
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acquisitionHomePage.searchfield();
+		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		getLoginScenario().saveBean(PageConstants.Keyword_Search,newkeywordsearchpage);
+	}
+	
+	
+	@Then("^the member lands on the result pag$")
+	public void I_land_on_result_page(){		{
+			
+			keywordSearchAARP newkeywordsearchpage= (keywordSearchAARP)loginScenario.getBean(PageConstants.Keyword_Search);
+			newkeywordsearchpage.url();
+			if(newkeywordsearchpage != null)				
+				getLoginScenario().saveBean(PageConstants.Keyword_Search,
+						newkeywordsearchpage);		
+			
+
+		}
+			
+	}
+}
+		
+	
+	

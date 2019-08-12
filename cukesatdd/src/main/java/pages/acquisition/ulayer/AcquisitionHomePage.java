@@ -24,7 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
-
+import pages.acquisition.bluelayer.KeywordSearch;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -234,6 +234,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
     @FindBy(id="state-select")
     private WebElement stateDropDown;
+    
+    @FindBy(css=".icon-search")
+	private WebElement searchbutton;
+    
+	@FindBy(id= "search-field")
+	private static WebElement searchfield;
     
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
@@ -1062,7 +1068,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
 		getStarted.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -1317,6 +1323,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		return new VPPPlanSummaryPage(driver);
 	}
-	
+	public  keywordSearchAARP searchfield() {
+		validate (searchfield);		
+		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
+		validate (searchbutton);
+		System.out.println("search button is seen on AARP site ==>"  + searchbutton.isDisplayed());
+		searchfield.clear();		
+		searchfield.sendKeys("medicare");
+		searchbutton.click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
+		return new  keywordSearchAARP(driver);
+		return null;	
+	}
 	
 	}
