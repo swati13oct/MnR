@@ -223,7 +223,7 @@ public class LoginPage extends UhcDriver {
 			} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness")) || (driver.getTitle().contains("No Email"))));
 			
 			if(currentUrl().contains("login/no-email.html")){
-				driver.get("https://"+MRScenario.environment+"-medicare.ose-elr-core.optum.com/content/medicare/member/testharness.html");
+				driver.get("https://"+MRScenario.environment+"-medicare.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/testharness.html");
 			}
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {

@@ -20,6 +20,10 @@ public class VPPCommonConstants {
 
 	public static final String PLAN_NAME = "planName";
 
+	public static final String CURRENTYEAR_PLAN_NAME = "currentYearplanName";
+
+	public static final String NEXTYEAR_PLAN_NAME = "nextYearplanName";
+
 	public static final String PLAN_TYPE = "planType";
 
 	public static final String VPP_PLAN_DETAIL_ACTUAL = "planDetailsActualJson";
