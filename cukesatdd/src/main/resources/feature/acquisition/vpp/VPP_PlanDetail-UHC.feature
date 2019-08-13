@@ -10,6 +10,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user validates the following Additional Benefits of Plan for the plan in UMS
@@ -47,6 +48,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user validates the following Medical Benefits of Plan for the plan in UMS
@@ -82,6 +84,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user click on Plan costs tab and validates
@@ -103,6 +106,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     Then the user click on Optional Services tab and add the rider

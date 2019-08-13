@@ -3,17 +3,40 @@
  */
 package pages.acquisition.ulayer;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.pdfbox.io.RandomAccessRead;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -144,33 +167,33 @@ public class PlanDetailsPage extends UhcDriver {
 	/*prescription drug tab*/
 	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valPrescritionDrugEstimatedTotalAnnualCost;
-	
+
 	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedTotalAnnualCost;
-	
+
 	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
 	private WebElement editProviderButtonOnPlanDetails;
-	
+
 	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement planMonthlyPremium;
 	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement planYearlyPremium;
-	
+
 	@FindBy(xpath="//div[@id='planCosts']//td//b[contains(text(),'Estimated Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
 	private WebElement estimateAnnualCost;
-	
+
 	@FindBy(id="optionalservices")
 	private WebElement optionalServicesTab;
-	
+
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement riderMonthlyPremium;
-	
+
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement riderYearlyPremium;
-	
+
 	@FindBy (xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
-	
+
 	@FindBy(id = "distance")
 	WebElement distanceDropownID;
 	
@@ -210,10 +233,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
-	
-	
-	
-	
+
+
+
+
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
 	}
@@ -440,19 +463,19 @@ public class PlanDetailsPage extends UhcDriver {
 			return new DrugCostEstimatorPage(driver);
 		return null;
 	}
-	
+
 	/*extracting cost from prescription tab*/
 	public String costComparisonPrescriptionDrugFromDCE() {
-		
+
 		CommonUtility.waitForPageLoad(driver, getValPrescritionDrugEstimatedTotalAnnualCost(), 30);
 		scrollToView(getValPrescritionDrugEstimatedTotalAnnualCost());
 		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
 
 	}
-	
+
 	/*extracting cost from cost tab*/
 	public String costComparisonCostTabFromDCE() {
-		
+
 		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
 		scrollToView(getValCostTabEstimatedTotalAnnualCost());
 		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
@@ -738,78 +761,78 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean providerinfo() {
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
 		String editProviderButtonText=editProviderButtonOnPlanDetails.getText();
-        System.out.println(editProviderButtonText);
+		System.out.println(editProviderButtonText);
 		if (editProviderButtonText.contains("Edit Provider")) {
 			return true;
 		}
 		return false;
-		
+
 	}
 
 
- 
-public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
-        
-	getLnkBackToAllPlans().click();
-        CommonUtility.checkPageIsReadyNew(driver);
-        if (driver.getCurrentUrl().contains("plan-summary")) {
-                        return new VPPPlanSummaryPage(driver);
 
-        }
-        return null;
-}
-    
-/**
- * @author bnaveen4
- * @param additionalBenefits --> Data table which has the different benefit types
- * To validate all the additional benefits given in the feature file
- */
-public void validatingAdditionalBenefitTextInPlanDetails(List<DataTableRow> additionalBenefits) {
-	
-	//boolean validationFlag = true;
-	WebElement AdditionalBenefitType;
-	WebElement ActualTextforBenefit;
-	String displayedText;
-	
-	for(int i=0;i<additionalBenefits.size();i=i+2) {
-		if(additionalBenefits.get(i).getCells().get(1).contains("Fitness")) {
-			AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-			System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-			ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
-			displayedText = ActualTextforBenefit.getText();
-			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
-			System.out.println(displayedText);
-			Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
-		}else {
-			AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-			System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-			ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
-			displayedText = ActualTextforBenefit.getText();
-			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
-			System.out.println(displayedText);
-			Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
+
+		getLnkBackToAllPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
 		}
-		
+		return null;
 	}
-}
 
-/**
- * @author bnaveen4
- * @param medicalBenefits --> Data table which has the different benefit types
- * To validate all the medical benefits given in the feature file
- */
-public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medicalBenefits) {
-	
-	WebElement medicalBenefitType;
-	WebElement ActualTextforBenefit;
-	String displayedText;
-	
-	for(int i=0;i<medicalBenefits.size();i=i+2) {
+	/**
+	 * @author bnaveen4
+	 * @param additionalBenefits --> Data table which has the different benefit types
+	 * To validate all the additional benefits given in the feature file
+	 */
+	public void validatingAdditionalBenefitTextInPlanDetails(List<DataTableRow> additionalBenefits) {
+
+		//boolean validationFlag = true;
+		WebElement AdditionalBenefitType;
+		WebElement ActualTextforBenefit;
+		String displayedText;
+
+		for(int i=0;i<additionalBenefits.size();i=i+2) {
+			if(additionalBenefits.get(i).getCells().get(1).contains("Fitness")) {
+				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
+				ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
+				displayedText = ActualTextforBenefit.getText();
+				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+				System.out.println(displayedText);
+				Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+			}else {
+				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
+				ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+				displayedText = ActualTextforBenefit.getText();
+				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+				System.out.println(displayedText);
+				Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+			}
+
+		}
+	}
+
+	/**
+	 * @author bnaveen4
+	 * @param medicalBenefits --> Data table which has the different benefit types
+	 * To validate all the medical benefits given in the feature file
+	 */
+	public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medicalBenefits) {
+
+		WebElement medicalBenefitType;
+		WebElement ActualTextforBenefit;
+		String displayedText;
+
+		for(int i=0;i<medicalBenefits.size();i=i+2) {
 			medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 			System.out.println("The additional Benefit to Valuidate : "+medicalBenefitType.getText());
 			ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
@@ -817,60 +840,60 @@ public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medical
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 			System.out.println(displayedText);
 			Assert.assertEquals(displayedText, medicalBenefits.get(i+1).getCells().get(1));
+		}
 	}
-}
-/**
- * @author bnaveen4
- * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
- * @param monthlyPremium
- * @param yearlyPremium
- * @return
- */
-public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
-	boolean bValidation = false;
-	planCostsTab.click();
-	if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
-		bValidation = true;
-	else
-		bValidation = false;
-	return bValidation;
-}
-/**
- * @author bnaveen4
- * Add the optional rider
- * @param optionalRider
- * @return
- */
-public String addOptionalRider(String optionalRider) {
-	optionalServicesTab.click();
-	WebElement rider = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//label"));
-	//rider.click();
-	jsClickNew(rider);
-	String optionalRiderPremium = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//b")).getText().trim();
-	return optionalRiderPremium;
-}
+	/**
+	 * @author bnaveen4
+	 * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
+	 * @param monthlyPremium
+	 * @param yearlyPremium
+	 * @return
+	 */
+	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
+		boolean bValidation = false;
+		planCostsTab.click();
+		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
+			bValidation = true;
+		else
+			bValidation = false;
+		return bValidation;
+	}
+	/**
+	 * @author bnaveen4
+	 * Add the optional rider
+	 * @param optionalRider
+	 * @return
+	 */
+	public String addOptionalRider(String optionalRider) {
+		optionalServicesTab.click();
+		WebElement rider = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//label"));
+		//rider.click();
+		jsClickNew(rider);
+		String optionalRiderPremium = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//b")).getText().trim();
+		return optionalRiderPremium;
+	}
 
-/**
- * @author bnaveen4
- * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
- * @param monthlyPremium
- * @param yearlyPremium
- * @return
- */
-public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,String yearlyPremium) {
-	boolean bValidation = false;
-	planCostsTab.click();
-	try {
-		Thread.sleep(5000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+	/**
+	 * @author bnaveen4
+	 * Navigates to Plan costs tab and validates the Plan premium both monthly and yearly.
+	 * @param monthlyPremium
+	 * @param yearlyPremium
+	 * @return
+	 */
+	public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,String yearlyPremium) {
+		boolean bValidation = false;
+		planCostsTab.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(monthlyPremium.equals(riderMonthlyPremium.getText().trim()) && yearlyPremium.equals(riderYearlyPremium.getText().trim()))	
+			bValidation = true;
+		else
+			bValidation = false;
+		return bValidation;
 	}
-	if(monthlyPremium.equals(riderMonthlyPremium.getText().trim()) && yearlyPremium.equals(riderYearlyPremium.getText().trim()))	
-		bValidation = true;
-	else
-		bValidation = false;
-	return bValidation;
-}
  public PharmacySearchPage navigateToPharmacySearchPage(String county,String isMultutiCounty ){
 	 CommonUtility.waitForPageLoad(driver, vppPlanDetailsPlLink, 45);
 	 switchToNewTabNew(vppPlanDetailsPlLink);
@@ -892,6 +915,14 @@ public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,Strin
 				System.out.println("Exception!!! County does not exists." + e.getMessage());
 				Assert.fail("Exception!!! County does not exists");
 			}
+
+
+
+
+
+
+
+
 	 
 	 CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
 	 
@@ -901,7 +932,24 @@ public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,Strin
 	 }else
 	 {
 		 System.out.println("Pharmacy locator page not loaded"); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	 }
+
 	return null;
 	 
 	 }
@@ -925,6 +973,122 @@ public boolean clickAndValidateOptionalRiderPremiums(String monthlyPremium,Strin
 		validateNew(mapdPharmacyDirectoryPDfsOtherLang);
 	 }
 		
- }
- 
+ }public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+		String PdfHref = PDFlink.getAttribute("href");
+		System.out.println("href for the PDF is : "+PdfHref);
+		if(PdfHref.contains(documentCode)){
+			System.out.println("Expected Document code :"+documentCode+"-  is mathing the PDF link :  "+PdfHref);
+			return true;
+		}
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+
+		String parentHandle = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
+		executor.executeScript("arguments[0].click();", PDFlink);
+
+		//PDFlink.click();
+
+		waitForCountIncrement(initialCount);
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			System.out.println("Switching Window");
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(parentHandle)){
+				System.out.println("In Parent Window : FAILED");
+				break;
+
+			}
+
+		}
+		System.out.println("Switched to new window : Passed");
+
+		try {
+			driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if(driver.getCurrentUrl().contains(documentCode))	{
+			System.out.println("PDF url has the correct document code.. : "+documentCode);
+			System.out.println("PDF url : "+driver.getCurrentUrl());
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean ClickValidatePDFText_ForDocCode(String pDFtype, String documentCode) throws AWTException {
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+
+		String parentHandle = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
+		executor.executeScript("arguments[0].click();", PDFlink);
+
+		//PDFlink.click();
+
+		waitForCountIncrement(initialCount);
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			System.out.println("Switching Window");
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(parentHandle)){
+				System.out.println("In Parent Window : FAILED");
+				break;
+
+			}
+		}
+		System.out.println("Switched to new window : Passed");
+		try {
+			driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			System.out.println("PDF text : "+PDFText);
+
+			if(PDFText.contains(documentCode)){
+				System.out.println("PDF text contains expected Document code : "+documentCode);
+				return true;
+			}
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		System.out.println("****************Copy and validate document code failed*************");
+
+		return false;
+	}
+
 }

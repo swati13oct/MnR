@@ -10,6 +10,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -113,6 +114,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <PlanType> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -202,6 +204,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -675,6 +678,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -687,6 +691,9 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | PartA Date      | <partadate>      |
       | PartB Date      | <partbdate>      |
       | Card Type       | <cardtype>       |
+      | Email Confirmation| <emailConfirmation> |
+      | Go Green	    | <goGreen>		   |
+      | Email                    | <email>  |
     Then the user navigates to Preliminary Questions Page
     Then the user validates requierd fields for Preliminary Questions Pages
       | MedicaidNumber | <medicaidnumber> |
@@ -719,7 +726,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user navigates to Review and Submit Page
     And the user clicks on Submit Enrollment to complete enrollment
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO     | NO          | true      |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO     | NO          | true      |	NO					| NO	  |
  
  
