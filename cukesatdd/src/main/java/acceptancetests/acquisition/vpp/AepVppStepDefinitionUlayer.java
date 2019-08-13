@@ -38,8 +38,8 @@ public class AepVppStepDefinitionUlayer {
 		return loginScenario;
 	}
 
-	public static final String CurrentYear = "2018";
-	public static final String NextYear = "2019";
+	public static final String CurrentYear = "2019";
+	public static final String NextYear = "2020";
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
