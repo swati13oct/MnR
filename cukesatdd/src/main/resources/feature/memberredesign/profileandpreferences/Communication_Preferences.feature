@@ -2,13 +2,31 @@
 Feature: C1.2To test Preferences page
 
   #----- beginning of VBF preferences scenarios section ------------------
-  # note: member-redesign-vbf/profile-and-preference/ProfileAndPreferences.feature 
-  # note: @smokeTest_GoGreenEPMP only this one is for preference
-  # note: it's similar to the existing regression so just adding the tag to the case below
-  # note: When ready to switch runner, need to make sure this user entry is in MemberRedesign-VBF.csv for stage run
-  # note:   q2_jun_aarp0062/Password@1,MAPD_AARP_GOGreen_Profilepref,
-  # note: Runner is RunMRATDDPreferencesVBF
-  #----- end of VBF preferences scenarios section ------------------
+  @vbfGate
+  Scenario Outline:Plan Type: <planType> -To verify Edit preferences section for Go Green
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates preferences page for non epmp
+
+    Examples: 
+      | memberType      |
+      | AARPMapdNonEPMP | 
+     
+  @vbfGate
+  Scenario Outline:Plan Type: <planType> -To verify Plan Name, Member name, Member ID and account section
+    Given login with following details logins in the member portal and validate elements
+      | Member Type | <memberType> |
+    When the user navigates to Profile and Preferences page
+    And the user validates the Plan Name, Member name, Member ID and account section
+    And I validate the healthsafe ID links
+    And I should see the communication prefernces section
+    
+    Examples: 
+     | memberType      |
+     | AARPMapdNonEPMP |
+        
+   #----- end of VBF preferences scenarios section ------------------
  
   #----- beginning of Regression preferences scenarios section ------------------------
   #-------------------------
@@ -141,28 +159,3 @@ Feature: C1.2To test Preferences page
     Examples: 
       | FID    | planType                 | planName                  |
       | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SELECT PLAN |
-
-      
-     @vbfGate
-    Scenario Outline:Plan Type: <planType> -To verify Edit preferences section for Go Green
-    Given login with following details logins in the member portal and validate elements
-      | Member Type | <memberType> |
-    When the user navigates to Profile and Preferences page
-    And the user validates preferences page for non epmp
-
-    Examples: 
-     | memberType          |
-     | AARPMapdNonEPMP  | 
-     
-      @vbfGate
-    Scenario Outline:Plan Type: <planType> -To verify Plan Name, Member name, Member ID and account section
-    Given login with following details logins in the member portal and validate elements
-      | Member Type | <memberType> |
-    When the user navigates to Profile and Preferences page
-    And the user validates the Plan Name, Member name, Member ID and account section
-    And I validate the healthsafe ID links
-    And I should see the communication prefernces section
-    
-      Examples: 
-     | memberType          |
-     | AARPMapdNonEPMP  | 
