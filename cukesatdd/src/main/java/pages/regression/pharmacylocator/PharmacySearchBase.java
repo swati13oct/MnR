@@ -9,12 +9,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
@@ -169,7 +172,35 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
-		Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, test expects input data to have search result for remaining validation steps, please check user data input or env to see if everything is ok", !validate(noResultMsg));
+		if (!validate(noResultMsg)) {
+			if ((MRScenario.environmentMedicare.equals("stage"))) {
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String winHandleBefore = driver.getWindowHandle();
+
+				System.out.println("Proceed to open a new blank tab to check the system time");
+				//open new tab
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+				for(String winHandle : driver.getWindowHandles()){
+				    driver.switchTo().window(winHandle);
+				}
+				WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+				String currentSysTime=currentSysTimeElement.getText();
+				System.out.println("TEST - currentSysTime="+currentSysTime);
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
+				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. "
+						+ "\n current system time is '"+currentSysTime+"'", 
+						!validate(noResultMsg));
+			} else {
+				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. ", 
+						!validate(noResultMsg));
+			}
+		}
 	}
 
 	/** Selection of Pharmacy filter type */
