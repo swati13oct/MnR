@@ -12,6 +12,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user validates plan summary for the below plan in the AARP site
       | Plan Name | <planName> |
