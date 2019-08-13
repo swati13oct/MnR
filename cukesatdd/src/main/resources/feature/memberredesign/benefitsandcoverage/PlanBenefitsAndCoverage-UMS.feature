@@ -219,7 +219,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | TID   | planType | memberType     |
       | 15096 | MA       | Individual_BnC |
-      | 15096 | SSUP     | Group_BnC      |
+      | 15098 | SSUP     | Group_BnC      |
 
   #TC14_Benefits_for_PCPMember
   @benefitsAndCoverage14_2 @CMFedDrugNonLis @regressionMember
@@ -476,7 +476,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     And the user validates static links
       | Plan Type | <planType> |
     And the user validates spanish and chinese should not display in dropdown
-    And the user validates Needhelp header
+    And the user validates Needhelp section
     And the drugcost dropdown should not display
     And the user validates view and document label
     And the user clicks on More Information link
@@ -695,7 +695,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealth Passport Program | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | UnitedHealth Passport ProgramSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | UnitedHealth Passport ProgramChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15377 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+      | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
   
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @benefitsAndCoverage15 @CMFedPDPNonLis @regressionMember
