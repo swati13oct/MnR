@@ -32,10 +32,12 @@ import atdd.framework.UhcDriver;
  */
 public class AepVppPlanSummaryPage extends UhcDriver {
 
-	
-	@FindBy(xpath=".//*[@id='togglenextYear']/a")
+	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
 	private WebElement CurrentYearLink;
-	
+
+	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+	private WebElement NextYearLink;
+
 	
 	
 	public AepVppPlanSummaryPage(WebDriver driver) {
