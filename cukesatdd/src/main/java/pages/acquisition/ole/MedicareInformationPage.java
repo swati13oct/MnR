@@ -84,11 +84,26 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
 	
+	@FindBy(id = "emailAddress")
+	private WebElement emailAddressField;
+	
 	@FindBy(id = "medicareClaimNumber")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "SSN")
 	private WebElement SSNField;
+	
+	@FindBy(id = "goGreenYes")
+	private WebElement goGreenYesBtn;
+	
+	@FindBy(id = "goGreenNo")
+	private WebElement goGreenNoBtn;
+	
+	@FindBy(id = "emailConfirmationNo")
+	private WebElement emailConfirmationNoBtn;
+	
+	@FindBy(id = "emailConfirmationYes")
+	private WebElement emailConfirmationYesBtn;
 	
 	@FindBy(xpath = "//*[@id='partAEffectiveDate' or @id='partAdate']")
 	private WebElement partAStartDateField;
@@ -166,6 +181,9 @@ public class MedicareInformationPage extends UhcDriver{
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String emailConfirmation = MedicareDetailsMap.get("Email Confirmation");
+		String goGreen = MedicareDetailsMap.get("Go Green");
+		String email = MedicareDetailsMap.get("Email");
 		if(CardType.contains("HICN") || CardType.contains("RRID")){
 			SelectCardA.click();
 			validateNew(MedicareNumberLabel);
@@ -256,7 +274,20 @@ public class MedicareInformationPage extends UhcDriver{
 			System.out.println("Part B Effective Date field is not displayed");
 			return null;
 		}*/
-
+		
+		if(emailConfirmation.equalsIgnoreCase("YES")){
+			emailConfirmationYesBtn.click();
+		}else
+			emailConfirmationNoBtn.click();
+		
+		if(goGreen.equalsIgnoreCase("YES")){
+			goGreenYesBtn.click();
+		}else
+			goGreenNoBtn.click();
+		
+		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
+			sendkeysNew(emailAddressField, email);
+		
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
