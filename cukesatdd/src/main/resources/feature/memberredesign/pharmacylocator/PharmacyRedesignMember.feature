@@ -111,12 +111,17 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	And the user validates more information content based on plan type
 	And the user validates view search PDF link
 
+	@pharmacylocator1a
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
 	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 10       | Long-term care              | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
 	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 000       | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+
+	@pharmacylocator1b
+	Examples: 
+	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
@@ -150,12 +155,17 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Then the user validates the pharmacies available
 	  | Language      | English        |
 
+	@pharmacylocator2a
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
 	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 10       | Long-term care              | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | False                |
 	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 000       | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+
+	@pharmacylocator2b
+	Examples: 
+	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
