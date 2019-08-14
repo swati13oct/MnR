@@ -10,6 +10,7 @@ Feature: To test VPP Plan Summary Page in UMS Site
       | Is Multi County | <isMultutiCounty> |
     And user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
+    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     And the user validates plan summary for the below plan in UMS site
       | Plan Name | <planName> |
     Then the user validates and clicks Add to compare checkbox for the above selected plan in the UMS site for MA, MAPD , PDP Plans

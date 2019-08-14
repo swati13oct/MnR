@@ -487,6 +487,33 @@ public class TestHarness extends UhcDriver {
 			return new EOBPage(driver);
 		}
 	}
+	
+	
+
+	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
+	private WebElement iPerceptionPopUp;
+
+	@FindBy(xpath = "//*[contains(@id,'row2link')]/td[2]/a[contains(text(), 'EOB')]")
+	private WebElement eobTestharnessLink;
+
+	public pages.regression.explanationofbenefits.EOBPage navigateDirectToEOBPag() {
+		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			driver.findElement(By.xpath("//a[text()='Eob']")).click();
+
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+
+			if (MRScenario.isTestHarness.equals("YES")) {
+//				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				eobTestharnessLink.click();
+			}
+		} else {
+			System.out.println(
+					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+		}
+
+		return new pages.regression.explanationofbenefits.EOBPage(driver);
+	}
+
 
 	/***
 	 * 

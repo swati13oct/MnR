@@ -107,10 +107,10 @@ Then the user validates EOB count
  
            Examples:
       |TID   | planType    | memberType    |dateRange  | eobType |  eobCount |
-      |15140   | MAPD        | NICE_EOB_R      | Last 12 months |Medical  |     1     |
+      |15140   | MAPD        | NICE_EOB_R      | Last 18 months |Medical  |     1     |
 #     |15120    | MA          | COSMOS_EOB_R      | Last 18 months |Medical  |     16     |
 #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
-      |15165   | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |
+#      |15165   | SHIP_ACTIVE  | SHIP_EOB      | Last 12-18 months |Medical  |     1     |
 #     |15166    | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
 #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
        

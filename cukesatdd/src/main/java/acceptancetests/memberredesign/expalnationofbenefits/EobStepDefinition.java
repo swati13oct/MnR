@@ -2,6 +2,8 @@ package acceptancetests.memberredesign.expalnationofbenefits;
 
 import gherkin.formatter.model.DataTableRow;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.explanationofbenefits.EOBPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -337,19 +340,23 @@ public class EobStepDefinition {
     @Then("^the user navigates to EOB page_hsid$")
     public void user_views_EOBpagehsid() throws InterruptedException {   
     	System.out.println("****the user navigates to EOB page_hsid****");
-                    AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-                    //AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-                    pages.regression.explanationofbenefits.EOBPage eobPage = accountHomePage.navigateDirectToEOBPag();
-                                                                    
-                    //PaymentHistoryPage paymenthistory = PaymentHis
-                    
-                    
-                    
-if (eobPage!=null){
-                      getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-                                    System.out.println("user is on the EOB page"); 
-}        
+    	pages.regression.explanationofbenefits.EOBPage eobPage;
+    	if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+    		TestHarness testHarness = (TestHarness) getLoginScenario()
+    				.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+    		eobPage = testHarness.navigateDirectToEOBPag();
+    	} else {
+    		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+    				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+    		eobPage = accountHomePage.navigateDirectToEOBPag();
+    	}
 
+    	if (eobPage!=null){
+    		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+    		System.out.println("user is on the EOB page"); 
+    	}     
+    	else
+    		Assert.assertTrue("Issue : EOB Page is not Displayed", eobPage!=null);
     }
 
     @And("^the user gets the error message for PHIP member$")

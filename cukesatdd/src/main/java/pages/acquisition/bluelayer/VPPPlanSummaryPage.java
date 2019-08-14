@@ -1698,14 +1698,25 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 		}
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
-		System.out.println("Next Year : " + nextYear);
-		System.out.println("Current Year : " + currentYear);
 
-		WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '"+currentYear+"')]"));
+		WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
+		WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+		WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+		System.out.println("Next Year Displayed in AEP Year Selection Modal : " + NextYearRadio.getText());
+		System.out.println("Current Year Displayed in AEP Year Selection Modal : " + CurrentYearRadio.getText());
+
+//		System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
+		System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+		NextYearRadio.click();
+		System.out.println("*****CLICKING ON Year Toggle Go button*****");
+
+		SelectYearGoBtn.click();
+		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
+		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
 		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
 
-		List <WebElement> NextYearHeadings = driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]"));
-		if( validate(CurrentYearLink) && NextYearHeadings.size()>0){
+		//List <WebElement> NextYearHeadings = driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]"));
+		if( validate(CurrentYearLink) && validate(NextYearLink)){
 			System.out.println("Current and Next year toggle displayed for AEP");
 			return new AepVppPlanSummaryPage(driver);
 		} else {
@@ -3046,6 +3057,38 @@ catch (Exception e) {
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
+		}
+	}
+
+	public void CheckClick_CurrentYear_Plans() {
+		try {
+			WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '2019')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearLink.getText());
+			System.out.println("*****CLICKING ON CURRENT YEAR LINK*****");
+			CurrentYearLink.click();
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle link is NOT displayed on VPP Page : ");
+
+			e.printStackTrace();
+		}
+		try {
+			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
+			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
+			CurrentYearRadio.click();
+			System.out.println("*****CLICKING ON Year Toggle Go button*****");
+
+			SelectYearGoBtn.click();
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

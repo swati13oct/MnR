@@ -261,7 +261,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='row2link6']/td[2]/a")
 	private WebElement dceTestharnessLink;
 
-	@FindBy(xpath = "//*[@id='row2link10']/td[2]/a")
+	@FindBy(xpath = "//*[contains(@id,'row2link')]/td[2]/a[contains(text(), 'EOB')]")
 	private WebElement eobTestharnessLink;
 
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
@@ -1957,6 +1957,7 @@ public class AccountHomePage extends UhcDriver {
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
 			if (MRScenario.isTestHarness.equals("YES")) {
+//				startNew("https://stage-medicare.uhc.com/member/eob.html");
 				eobTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
 				try {

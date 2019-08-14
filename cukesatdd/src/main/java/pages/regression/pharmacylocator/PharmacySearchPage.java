@@ -70,17 +70,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (!memberType.toUpperCase().contains("MEDICA")) { //note: medica sometimes shows plan name sometimes don't depending on user data
 			Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
 					validate(PlanNameDropDown));
+			select = new Select(PlanNameDropDown);           
+			String actualSelectedPlan = select.getFirstSelectedOption().getText();
+			Assert.assertTrue("PROBLEM - default selected plan name should not be null. "
+					+ "Actual='"+actualSelectedPlan+"'", 
+					!actualSelectedPlan.contains("null"));
+			Assert.assertTrue("PROBLEM - number of options for plans dropdown is not as expected.  "
+					+ "Expected: Actual>=1 | Actual='"+planListOptions.size()+"'", 
+					planListOptions.size()>=1);
 		}
-		Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
-				validate(PlanNameDropDown));
-		select = new Select(PlanNameDropDown);           
-		String actualSelectedPlan = select.getFirstSelectedOption().getText();
-		Assert.assertTrue("PROBLEM - default selected plan name should not be null. "
-				+ "Actual='"+actualSelectedPlan+"'", 
-				!actualSelectedPlan.contains("null"));
-		Assert.assertTrue("PROBLEM - number of options for plans dropdown is not as expected.  "
-				+ "Expected: Actual>=1 | Actual='"+distanceOptions.size()+"'", 
-				planListOptions.size()>=1);
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", validate(zipcodeField));
 		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
 
