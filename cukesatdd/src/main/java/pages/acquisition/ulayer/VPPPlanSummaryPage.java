@@ -1420,7 +1420,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
-		System.out.println("Next Year : "+nextYear);
+
+		WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
+		WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+		WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+		System.out.println("Next Year Displayed in AEP Year Selection Modal : " + NextYearRadio.getText());
+		System.out.println("Current Year Displayed in AEP Year Selection Modal : " + CurrentYearRadio.getText());
+
+//		System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
+		System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+		NextYearRadio.click();
+		System.out.println("*****CLICKING ON Year Toggle Go button*****");
+
+		SelectYearGoBtn.click();
+		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
+		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
+		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
+
+		if( validate(CurrentYearLink) && validate(NextYearLink)){
+			System.out.println("Current and Next year toggle displayed for AEP");
+			return new AepVppPlanSummaryPage(driver);
+		} else {
+			System.out.println("Current and Next year toggle NOT displayed for AEP");
+		}
+
+		// TODO Auto-generated method stub
+		return null;
+		
+/*		System.out.println("Next Year : "+nextYear);
 		System.out.println("Current Year : "+currentYear);
 
 
@@ -1437,7 +1464,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 		// TODO Auto-generated method stub
-		return null;
+		return null;*/
 	}
 
 	public void checkAllPDPlans(){
