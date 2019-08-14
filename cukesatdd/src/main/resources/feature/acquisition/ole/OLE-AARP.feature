@@ -17,7 +17,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details on OLE
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
@@ -216,7 +216,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
@@ -449,7 +449,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details on OLE
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
@@ -507,7 +507,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
@@ -542,7 +542,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Is Multi County | <isMultutiCounty> |
     Then the user validates the Plan details on OLE
     Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
-    Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page

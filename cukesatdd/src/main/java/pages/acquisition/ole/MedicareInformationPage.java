@@ -275,7 +275,7 @@ public class MedicareInformationPage extends UhcDriver{
 			return null;
 		}*/
 		
-		if(emailConfirmation.equalsIgnoreCase("YES")){
+/*		if(emailConfirmation.equalsIgnoreCase("YES")){
 			emailConfirmationYesBtn.click();
 		}else
 			emailConfirmationNoBtn.click();
@@ -287,7 +287,7 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
 			sendkeysNew(emailAddressField, email);
-		
+		*/
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
