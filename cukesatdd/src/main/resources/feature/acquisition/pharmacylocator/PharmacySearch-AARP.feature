@@ -281,6 +281,13 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Plan Name | <planName> |
+      | planyear  | <planYear> |
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -323,7 +330,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
 
-  @pharmacylocatorulayer08 @geoTargeting  @regression
+  @pharmacylocatorulayer08 @geoTargeting @regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

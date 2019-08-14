@@ -348,6 +348,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
 	}
 	
+	
 	public boolean searchesPharmacyResults(String language, String planName) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
