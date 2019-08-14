@@ -213,6 +213,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		learnMoreElement.click();
 		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		String actUrl=driver.getCurrentUrl();
 		if (language.equalsIgnoreCase("English")) {
 			Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
