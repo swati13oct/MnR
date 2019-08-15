@@ -1853,8 +1853,8 @@ public class VppStepDefinitionUpdatedAARP {
 				//Get input data Row
 				Row row = sheet.getRow(i);
 				double zipcodeint = row.getCell(0).getNumericCellValue();
-				
-				String zipcode = String.valueOf(zipcodeint);
+				String zipcode = String.valueOf(Math.round(zipcodeint));
+				System.out.println(zipcode);
 				String isMultiCounty = row.getCell(1).getStringCellValue().trim();
 				String county = row.getCell(2).getStringCellValue().trim();
 				String plantype = row.getCell(3).getStringCellValue().trim();
