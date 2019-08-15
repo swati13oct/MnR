@@ -116,11 +116,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @claims00_01 @claims00_C_M_p1
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Medical           | 000       | No                 |
       | 01_2  | 1041 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
       | 01_3  | 1041 | MAPD     | UHC_Individual             | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
       | 01_4  | 1041 | MAPD     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 01_5  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_5  | 1041 | SSUP     | COMBO_GROUP                | COSMOS_CLAIMS   | Medical           | 000       | No                 |
 
     @claims00_02 @claims00_C_M_p2
     Examples: 
@@ -129,7 +129,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 02_2  | 1041 | MA       | UHC_Individual             | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_4  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | No                 |
+      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 001       | No                 |
 
     @claims00_03 @claims00_C_D_p1 
     Examples: 
