@@ -328,7 +328,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorblayer08 @geoTargeting @regression
+  @pharmacylocatorblayer08 @geoTargeting
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

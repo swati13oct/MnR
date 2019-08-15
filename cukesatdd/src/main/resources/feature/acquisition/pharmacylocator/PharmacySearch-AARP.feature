@@ -340,7 +340,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
 
-  @pharmacylocatorulayer08 @geoTargeting @regression
+  @pharmacylocatorulayer08 @geoTargeting
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |
