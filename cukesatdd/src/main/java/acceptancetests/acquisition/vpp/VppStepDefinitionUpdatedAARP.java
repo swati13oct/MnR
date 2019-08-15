@@ -1827,7 +1827,7 @@ public class VppStepDefinitionUpdatedAARP {
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String OutputFilePath = parentDirectory+"/target/PlanDocsResults_"+SheetName+"_"+DateCreated+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+SheetName+"_"+DateCreated+".xls";
 		//Reading Excel.xls file
 		File InputFile = new File(InputFilePath);
 		FileInputStream inputStream = new FileInputStream(InputFile);
