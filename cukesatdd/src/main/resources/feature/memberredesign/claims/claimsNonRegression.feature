@@ -147,7 +147,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 04_1  | 1041 | MA       | AARP_Individual_000        | NICE_CLAIMS     | Medical           | 000       | Yes                |
       | 04_2  | 1041 | MA       | AARP_Individual_001        | NICE_CLAIMS     | Medical           | 001       | Yes                |
       | 04_3  | 1041 | MAPD     | AARP_Individual            | M_NICE_CLAIMS   | Medical           | 000       | Yes                |
-      | 04_4  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | 000       | Yes                |
+      | 04_4  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | 000       | No                 |
 
     @claims00_05 @claims00_N_D_p1
     Examples: 
