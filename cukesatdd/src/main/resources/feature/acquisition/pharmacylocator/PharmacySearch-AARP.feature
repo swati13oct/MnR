@@ -70,7 +70,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
   @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
@@ -120,7 +120,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 
   @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
@@ -161,7 +161,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 
   @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -213,7 +213,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
 
   @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -245,7 +245,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
 
   @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
@@ -286,7 +286,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
 
   @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
