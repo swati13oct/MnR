@@ -275,19 +275,19 @@ public class MedicareInformationPage extends UhcDriver{
 			return null;
 		}*/
 		
-		if(emailConfirmation.equalsIgnoreCase("YES")){
-			emailConfirmationYesBtn.click();
-		}else
-			emailConfirmationNoBtn.click();
-		
-		if(goGreen.equalsIgnoreCase("YES")){
-			goGreenYesBtn.click();
-		}else
-			goGreenNoBtn.click();
-		
-		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
-			sendkeysNew(emailAddressField, email);
-		
+//		if(emailConfirmation.equalsIgnoreCase("YES")){
+//			emailConfirmationYesBtn.click();
+//		}else
+//			emailConfirmationNoBtn.click();
+//		
+//		if(goGreen.equalsIgnoreCase("YES")){
+//			goGreenYesBtn.click();
+//		}else
+//			goGreenNoBtn.click();
+//		
+//		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
+//			sendkeysNew(emailAddressField, email);
+//		
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
