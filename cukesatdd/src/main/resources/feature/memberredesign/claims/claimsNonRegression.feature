@@ -136,11 +136,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 03_1  | 1041 | MAPD     | diffGrpsDiffYrs_Individual | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
-#      | 03_2  | 1041 | MAPD     | AARP_Individual            | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                |
-#      | 03_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | 000       | No                 |
-#      | 03_4  | 1041 | MAPD     | COMBO_GROUP                | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
-#      | 03_5  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
-#      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | 001       | Yes                |
+      | 03_2  | 1041 | MAPD     | AARP_Individual            | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                |
+      | 03_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | 000       | No                 |
+      | 03_4  | 1041 | MAPD     | COMBO_GROUP                | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
+      | 03_5  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
+      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | 001       | Yes                |
 
     @claims00_04 @claims00_N_M_p1
     Examples: 
