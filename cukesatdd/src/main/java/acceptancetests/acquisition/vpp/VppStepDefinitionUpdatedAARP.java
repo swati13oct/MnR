@@ -107,7 +107,7 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@When("^the user adds plan from plan search using following information in the AARP site$")
 	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
 		
@@ -271,7 +271,7 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 	}
-	
+
 	@When("^the user validates the pdf section$")
 	public void userValidatesPDFSection() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -999,7 +999,7 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
-	
+
 	@Then("^user saves two plans as favorite on AARP site$")
 	public void user_saves_two_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1620,27 +1620,27 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 
-	
+
 	@Then("^the user validates the following Additional Benefits of Plan for the plan in AARP$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
-		
+
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
 	}
-	
+
 
 	@Then("^the user validates the following Medical Benefits of Plan for the plan in AARP$")
 	public void the_user_validates_the_following_Medical_Benefits_of_Plan_for_the_plan_in_AARP(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> medicalBenefits = givenAttributes.getGherkinRows();
-		
+
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(medicalBenefits);
 		//Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
 	}
-	
+
 	@Then("^the user click on Plan costs tab and validates in AARP site$")
 	public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1653,13 +1653,13 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
-		
+
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium,yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
-	
+
 	@Then("^the user click on Optional Services tab and add the rider in AARP site$")
 	public void the_user_click_on_Optional_Services_tab_and_add_the_rider_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1671,13 +1671,13 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String optionalRider = memberAttributesMap.get("Optional Rider");
-		
+
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		
+
 		String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(optionalRider);
 	}
-	
+
 	@Then("^the user click on Plan costs tab and validate riders monthly and yearly premium in AARP site$")
 	public void the_user_click_on_Plan_costs_tab_and_validate_riders_monthly_and_yearly_premium_in_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1690,10 +1690,10 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
-		
+
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		
+
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
@@ -1708,6 +1708,74 @@ public class VppStepDefinitionUpdatedAARP {
 			getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 		} else
 			Assert.fail("Error in loading the compare plans page");
-		
 	}
-}
+
+
+	@Then("^the user validates following PDF link is displayes with correct document code$")
+	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String PDFtype = memberAttributesMap.get("PDF type");
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
+		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+
+	}
+
+	@Then("^the user click on PDF link and validates document code in URL$")
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_URL(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String PDFtype = memberAttributesMap.get("PDF type");
+
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
+
+	}
+
+	@Then("^the user validates the document code is present in the PDF$")
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_PDF(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String PDFtype = memberAttributesMap.get("PDF type");
+
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFText_ForDocCode(PDFtype, DocumentCode);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
+
+	}
+	
+	@When("^the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP$")
+	public void the_user_views_currentyearlink_clicksLink() throws Throwable {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+	}
+}		

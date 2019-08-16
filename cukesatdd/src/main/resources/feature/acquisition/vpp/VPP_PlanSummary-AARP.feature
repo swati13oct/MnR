@@ -10,6 +10,7 @@ Feature: To test VPP Plan Summary Page in AARP Site
       | County Name     | <county>          |
     And the user views plans of the below plan type in AARP site
       | Plan Type | <plantype> |
+   Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates available plans for selected plan types in the AARP site 
     And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
