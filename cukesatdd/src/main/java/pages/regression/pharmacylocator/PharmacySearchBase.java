@@ -64,7 +64,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg)) {
+		if (!validate(noResultMsg) && !validate(noResultMsgTopPink)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -169,7 +169,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
-		if (!validate(noResultMsg)) {
+		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String winHandleBefore = driver.getWindowHandle();
@@ -190,12 +190,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "\n current system time is '"+currentSysTime+"'", 
-						!validate(noResultMsg));
+						!validate(noResultMsg) && !validate(noResultMsgTopPink));
 			} else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
-						!validate(noResultMsg));
+						!validate(noResultMsg) && !validate(noResultMsgTopPink));
 			}
 		}
 	}
@@ -224,7 +224,40 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void Select_PlanType_Filter(String pharmacyType, String language) {
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		//tbd int totalBefore=Integer.parseInt(PharmacyFoundCount.getText().trim());
-		Assert.assertTrue("PROBLEM - search yield no result, test expects input data to have search result, please check user data input or env to see if everything is ok", !validate(noResultMsg));
+		//tbd Assert.assertTrue("PROBLEM - search yield no result, test expects input data to have search result, "
+		//tbd		+ "please check user data input or env to see if everything is ok", 
+		//tbd		!validate(noResultMsg) && !validate(noResultMsgTopPink));
+		//note: test assume valid search will yield search result
+		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
+			if ((MRScenario.environmentMedicare.equals("stage"))) {
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String winHandleBefore = driver.getWindowHandle();
+
+				System.out.println("Proceed to open a new blank tab to check the system time");
+				//open new tab
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+				for(String winHandle : driver.getWindowHandles()){
+				    driver.switchTo().window(winHandle);
+				}
+				WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+				String currentSysTime=currentSysTimeElement.getText();
+				System.out.println("TEST - currentSysTime="+currentSysTime);
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
+				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. "
+						+ "\n current system time is '"+currentSysTime+"'", 
+						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+			} else {
+				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. ", 
+						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+			}
+		}
+		
 		int totalBefore=0;
 		if (language.equals("Chinese")) {
 			String[] tmp=PharmacyFoundCount.getText().trim().split(" ");
@@ -329,6 +362,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 		Select select = new Select(distanceDropDownField);           
 		String DistanceSelection = distance+" miles";
+		if (distance.equals("1")) {
+			DistanceSelection = distance+" mile";
+		}
 		select.selectByVisibleText(DistanceSelection);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);

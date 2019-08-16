@@ -241,6 +241,9 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//div[@id='noResultsFoundErrorMessage']")
 	protected WebElement noResultMsg;
 
+	@FindBy(xpath="//div[@class='errorRedColorZip']")
+	protected WebElement noResultMsgTopPink;
+	
 	@FindBy(xpath="//h2[@class='atdd-need-help']")
 	protected WebElement needHelpHeader;
 

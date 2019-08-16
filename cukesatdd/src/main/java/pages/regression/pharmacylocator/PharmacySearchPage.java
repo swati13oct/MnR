@@ -243,6 +243,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		//note: need this to shift things into view for validation
 		if (validate(noResultMsg)) {
 			moveMouseToElement(noResultMsg);
+		} else if (validate(noResultMsgTopPink)) {
+			moveMouseToElement(noResultMsgTopPink);
 		} else {
 			moveMouseToElement(map_showHideMapLnk);
 		}

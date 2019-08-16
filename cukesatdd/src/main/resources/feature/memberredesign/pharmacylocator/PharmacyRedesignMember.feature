@@ -227,6 +227,11 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	And the user enters following details for pharmacy search
 	  | Zip Code 	  | <zipcode>      |
 	  | Distance 	  | <distance>     |
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	  | Language      | Chinese        |
+	Then the user validates the pharmacies available
+	  | Language      | Chinese        |
     And the user validates pharmacy widgets
 	  | Language      | Chinese        |
 	  | Plan Type     | <planType>     |
@@ -234,12 +239,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> | 
 	  | Has Walgreens plan                         | <hasWalgreensPlan>      |
 	  | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-	And the user selects Pharmacy Types to Filter
-	  | Pharmacy Type | <pharmacyType> |
-	  | Language      | Chinese        |
-	Then the user validates the pharmacies available
-	  | Language      | Chinese        |
-
 	Examples: 
 	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
@@ -298,6 +297,11 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	When the user navigates to pharmacy search page
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	  | Language      | Spanish        |
+	Then the user validates the pharmacies available
+	  | Language      | Spanish        |
 	And the user enters following details for pharmacy search
 	  | Zip Code 	  | <zipcode>      |
 	  | Distance 	  | <distance>     |
@@ -308,11 +312,6 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> | 
 	  | Has Walgreens plan                         | <hasWalgreensPlan>      |
 	  | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-	And the user selects Pharmacy Types to Filter
-	  | Pharmacy Type | <pharmacyType> |
-	  | Language      | Spanish        |
-	Then the user validates the pharmacies available
-	  | Language      | Spanish        |
 
 	Examples: 
 	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
