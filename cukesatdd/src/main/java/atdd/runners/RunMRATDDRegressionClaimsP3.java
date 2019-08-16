@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionClaimsP3.json",detailedReport =
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsP3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsP3.json" }, tags = { "@regressionMember","@claims03,@claims04,@claims05,@claims06,@claims07" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsP3.json" }, tags = { "@regressionMember","@claims02" })
 public class RunMRATDDRegressionClaimsP3 {
 
 }
