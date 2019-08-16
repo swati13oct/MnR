@@ -560,7 +560,7 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
-				if (getLoginScenario().getBean(LoginCommonConstants.USERNAME)==null)
+				if (getLoginScenario()==null)
 					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
 				else 
 					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");

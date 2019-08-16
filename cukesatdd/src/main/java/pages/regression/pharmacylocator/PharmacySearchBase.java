@@ -189,7 +189,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
-						+ "\n current system time is '"+currentSysTime+"'", 
+						+ "Current system time is '"+currentSysTime+"'", 
 						!validate(noResultMsg) && !validate(noResultMsgTopPink));
 			} else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
@@ -248,7 +248,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
-						+ "\n current system time is '"+currentSysTime+"'", 
+						+ "Current system time is '"+currentSysTime+"'", 
 						!validate(noResultMsg) && !validate(noResultMsgTopPink));
 			} else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
