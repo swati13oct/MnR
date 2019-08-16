@@ -100,14 +100,16 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System | <claimSystem>  |
       | Claim Period | Last 24 months |
     Then I can see the number of claims
-    And I validate the pagination on the claims summary page for given range
-    Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
+    #note: covered by E2E also - skip on jenkins run to keep run time within 30 min
+    ##And I validate the pagination on the claims summary page for given range
+    ##Then I can validate the learn more and print and download option and DownloadMyData section on claims summary page
     Then I can validate claims table displayed based on the selection on claims summary page
     And I can validate the EOB section based on claims system on claims summary page
     And I validate the Need Help section content on claims summary page
     #----------
     # note: These two steps below only applicable to SHIP and MEDICAL claims, NOTHING will be done for DRUG case
-    Then I validate Claim Details page content value and Learn More and EOB and tooltips
+    ##note: covered by E2E also - skip on jenkins run to keep run time within 30 min
+    ##Then I validate Claim Details page content value and Learn More and EOB and tooltips
     Then I perform extensive validation for values between claims summary and claim details page
     #----------
     #----------------- Final Test claims number makes sense from search periods --------------
