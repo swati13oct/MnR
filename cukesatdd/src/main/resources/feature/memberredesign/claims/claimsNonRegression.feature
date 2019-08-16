@@ -31,20 +31,21 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
     #----------------- Test Custom calendar and search error cases --------------------------
-    And I can search claims for claim period and claim type on claim summary page
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-      | Claim Type   | <claimType>   |
-      | Claim System | <claimSystem> |
-      | Claim Period | Custom search |
-	Then I can validate the calendar will show up for custom search when click on From and To calendars    
-    And I should be able to see the error message when no to and from dates being entered
-    And I custom search claims for the following invalid time interval on claims summary page
-      | Claims From Date | 01/02/2019 |
-      | Claims To Date   | 01/02/2018 |
-    Then I should be able to see the from date is greater than the to date error message being displayed
-    And I custom search claims for over two years time interval from current date on claims summary page
-    Then I should be able to see the search range is greater than two years error
+    ## note: covered in E2E, keep in case want to test here also
+    ##And I can search claims for claim period and claim type on claim summary page
+    ##  | Plan Type    | <planType>    |
+    ##  | Member Type  | <memberType>  |
+    ##  | Claim Type   | <claimType>   |
+    ##  | Claim System | <claimSystem> |
+    ##  | Claim Period | Custom search |
+	##Then I can validate the calendar will show up for custom search when click on From and To calendars    
+    ##And I should be able to see the error message when no to and from dates being entered
+    ##And I custom search claims for the following invalid time interval on claims summary page
+    ##  | Claims From Date | 01/02/2019 |
+    ##  | Claims To Date   | 01/02/2018 |
+    ##Then I should be able to see the from date is greater than the to date error message being displayed
+    ##And I custom search claims for over two years time interval from current date on claims summary page
+    ##Then I should be able to see the search range is greater than two years error
     #----------------- Test for Custom search --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -231,39 +232,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
       |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 
-	
-
-	
-	
-  Scenario Outline: To validate via member authorization access for claims
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    When I navigate to the claims Summary page from dashboard or testharness page
-    Then I can validate the claims summary header on claims summary page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage on claims summary page
-      | Segment ID   | <segmentId>   |
-    And I can search claims for claim period and claim type on claim summary page
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-      | Claim Type   | <claimType>   |
-      | Claim System | <claimSystem> |
-      | Claim Period | Custom search |
-
-    Then I can validate the calendar will show up for custom search when click on From and To fields
-
-
-	
-
-    Examples: 
-      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
-      |    01 | 000 | lchoi2 | Zxcv1234 | SALOMA91402 | MAPD     | AARP_Individual            | M_COSMOS_CLAIMS | Medical           | 000       | Yes                |
 	
 	
 	
