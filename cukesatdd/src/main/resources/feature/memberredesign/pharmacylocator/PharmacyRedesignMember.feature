@@ -115,7 +115,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
-	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 15       | Long-term care              | False                 | False            | False                |
+	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
 	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 000       | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
 
@@ -142,6 +142,11 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	And the user enters following details for pharmacy search
 	  | Zip Code 	  | <zipcode>      |
 	  | Distance 	  | <distance>     |
+	And the user selects Pharmacy Types to Filter
+	  | Pharmacy Type | <pharmacyType> |
+	  | Language      | English        |
+	Then the user validates the pharmacies available
+	  | Language      | English        |
     And the user validates pharmacy widgets
 	  | Language      | English        |
 	  | Plan Type     | <planType>     |
@@ -149,17 +154,12 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> | 
 	  | Has Walgreens plan                         | <hasWalgreensPlan>      |
 	  | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-	And the user selects Pharmacy Types to Filter
-	  | Pharmacy Type | <pharmacyType> |
-	  | Language      | English        |
-	Then the user validates the pharmacies available
-	  | Language      | English        |
 
 	@pharmacylocator2a
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 000       | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
-	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 15       | Long-term care              | False                 | False            | False                |
+	  | 15296	| MAPD     | GroupMAPD_Pharmacylocator	 | 000       | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15279	| MAPD     | Medica_Pharmacylocator		 | 001       | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
 	  | 15280	| MAPD     | PCP_Pharmacylocator		 | 000       | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
 
@@ -239,6 +239,7 @@ Feature: P1.6To test Locate a Pharmacy Locator tool on member site
 	  | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> | 
 	  | Has Walgreens plan                         | <hasWalgreensPlan>      |
 	  | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+
 	Examples: 
 	  | TID 	| planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15273	| MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | False                |
