@@ -67,8 +67,9 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	/**
 	 * Helper method to go to a specific combo tab based on given planType on Order Plan page
 	 * @param planType
+	 * @throws InterruptedException 
 	 */
-	public void goToSpecificComboTabOnOrderPlanPage(String planType) {
+	public void goToSpecificComboTabOnOrderPlanPage(String planType) throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		WebElement targetTab=null;
 		if (planType.equalsIgnoreCase("MAPD")) {
@@ -89,14 +90,16 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		targetTab.click();
 		targetTab.click();
 		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(1000); //note: keep to give it a sec to stable
 	}
 
 	/**
 	 * Helper method to click on the target test plan on combo tab
 	 * @param planType
 	 * @param memberType
+	 * @throws InterruptedException 
 	 */
-	public void handleComboTabIfComboUser(String planType, String memberType) {
+	public void handleComboTabIfComboUser(String planType, String memberType) throws InterruptedException {
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, select the tab accordingly");
 			goToSpecificComboTabOnOrderPlanPage(planType);
@@ -109,8 +112,9 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	 * @param planType
 	 * @param memberType
 	 * @param originalUrl
+	 * @throws InterruptedException 
 	 */
-	public void goBackToPriorPageViaBack(String planType, String memberType,String originalUrl) {
+	public void goBackToPriorPageViaBack(String planType, String memberType,String originalUrl) throws InterruptedException {
 		if (memberType.toLowerCase().contains("combo")) {
 			driver.get(originalUrl);
 			goToSpecificComboTabOnOrderPlanPage(planType); 
