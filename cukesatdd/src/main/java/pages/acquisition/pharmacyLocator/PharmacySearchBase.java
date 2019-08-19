@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
@@ -82,6 +84,36 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
+		if (!validate(pharmacyCount)) {
+			if ((MRScenario.environmentMedicare.equals("stage"))) {
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String winHandleBefore = driver.getWindowHandle();
+
+				System.out.println("Proceed to open a new blank tab to check the system time");
+				//open new tab
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+				for(String winHandle : driver.getWindowHandles()){
+				    driver.switchTo().window(winHandle);
+				}
+				WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+				String currentSysTime=currentSysTimeElement.getText();
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
+				Assert.assertTrue("PROBLEM - Search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. "
+						+ "Current system time is '"+currentSysTime+"'", 
+						validate(pharmacyCount));
+			} else {
+				Assert.assertTrue("PROBLEM - Search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. ", 
+						validate(pharmacyCount));
+			}
+		}
+
+		
 	}
 
 	public boolean isPlanYear() {
