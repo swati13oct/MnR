@@ -197,7 +197,7 @@ public class HSIDLoginPage extends UhcDriver {
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
-			emailAddressRequiredWorkaround();
+			emailAddressRequiredWorkaround(username);
 		}
 		/* tbd try {
 			Thread.sleep(35000);
@@ -228,13 +228,13 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
 				CommonUtility.checkPageIsReadyNew(driver);
 			}
-			waitToReachDashboard();	//note: after page is completed state, still need this wait for the page to finish loading
+			waitToReachDashboard(username);	//note: after page is completed state, still need this wait for the page to finish loading
 
 			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
-			emailAddressRequiredWorkaround();
+			emailAddressRequiredWorkaround(username);
 		}
 		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
@@ -545,7 +545,7 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 	
 	//note: do not remove this wait time
-	public void waitToReachDashboard() {
+	public void waitToReachDashboard(String username) {
 		int y=0;
 		while (y < 20) {
 			try {
@@ -560,17 +560,14 @@ public class HSIDLoginPage extends UhcDriver {
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
 				System.out.println("Exception: "+ae); 
-				if (getLoginScenario()==null)
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** Got Alert error");
-				else 
-					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert error");
 			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
 		} 
 	}
 	
-	public void emailAddressRequiredWorkaround() {
+	public void emailAddressRequiredWorkaround(String username) {
 		if (driver.getCurrentUrl().contains("login/no-email.html")) {
 			System.out.println("User encounted no-email page, will enter email address to proceed");
 			try {
@@ -600,7 +597,7 @@ public class HSIDLoginPage extends UhcDriver {
 				//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 				System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 				CommonUtility.checkPageIsReadyNew(driver);
-				waitToReachDashboard();  //note: after page is completed state, still need this wait for the page to finish loading
+				waitToReachDashboard(username);  //note: after page is completed state, still need this wait for the page to finish loading
 
 				if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
 					Assert.fail("***** Error in loading  Redesign Account Landing Page ***** got redirect back to login page after answered security question");
