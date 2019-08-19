@@ -121,7 +121,7 @@ public class ClaimsExtensiveValidationStepDefinition {
 	 * This step will do comprehensive validation (used by the long case) for the following:
 	 * It takes the values rows claims from claims summary page and validate them against the info display on detail page
 	 * It has potential to loop through all rows that are displaying at the time on claims summary page, 
-	 * current setup will validate the first 5 rows only to speed up test time
+	 * current setup will validate the first 2 rows only to speed up test time
 	 * It will validate the following on detail page
 	 * - header section content
 	 * - 'Learn More...' link
@@ -170,17 +170,17 @@ public class ClaimsExtensiveValidationStepDefinition {
 			int totalDataRows=claimsSummaryPage.getTableTotalDataRows(claimType);
 			System.out.println("Determine number of data rows on table="+totalDataRows);
 			int total=0;
-			if (totalDataRows < 4) {
+			if (totalDataRows < 3) {
 				total=totalDataRows+1;
 			} else {
-				total=(totalDataRows+2); //note: cap at max =5 to cut down test time
-				if (total>5) {
-					total=5;
-					System.out.println("Total claims='"+totalDataRows+"', will validate the first 3 rows for detail to shorten test time");
+				total=(totalDataRows+2); //note: cap at max =4 to cut down test time including header
+				if (total>4) {
+					total=4;
+					System.out.println("Total claims='"+totalDataRows+"', will validate the first 2 rows for detail to shorten test time");
 				}
 			}
 			//KEEP- for (int x=2; x<(totalDataRows+2); x++) {		//note: use this instead if want to validate all entries
-			for (int x=2; x<total; x++) { //note: look at row index 2, 3, 4
+			for (int x=2; x<total; x++) { //note: look at row index 2, 3
 				System.out.println("========================================================================");
 				System.out.println("Proceed to validate data row index="+x+" ===============================");
 

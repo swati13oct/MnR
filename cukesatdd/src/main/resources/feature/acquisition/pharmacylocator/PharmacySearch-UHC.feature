@@ -70,7 +70,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
   @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
@@ -103,11 +103,16 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
     And the user validates more information content based on plan type
     And the user validates view search PDF link
 
+    @pharmacylocatorblayer01a
     Examples: 
       | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Blayer   |
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Blayer   |
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Blayer   |
+
+    @pharmacylocatorblayer01b
+    Examples: 
+      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Blayer   |
       | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Blayer   |
       | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Blayer   |
@@ -115,7 +120,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
 
 
   @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
@@ -138,11 +143,16 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
+    @pharmacylocatorblayer02a
     Examples: 
       | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Blayer   |
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Blayer   |
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Blayer   |
+
+    @pharmacylocatorblayer02b
+    Examples: 
+      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Blayer   |
       | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Blayer   |
       | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Blayer   |
@@ -150,7 +160,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
 
 
   @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -192,7 +202,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
 
 
   @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -224,7 +234,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
 
 
   @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
@@ -266,7 +276,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
 
 
   @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
@@ -318,7 +328,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorblayer08 @geoTargeting
+  @pharmacylocatorblayer08 @geoTargeting @regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

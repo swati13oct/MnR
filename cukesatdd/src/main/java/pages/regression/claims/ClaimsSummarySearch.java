@@ -112,6 +112,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			throws InterruptedException {
 		//note: MA - Medical; MAPID | PCP - Medical & Prescription drug 
 		//note: PDP - Prescription drug; SHIP - no Medical or Prescription drug
+		checkForIPerceptionModel(driver);
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
 			Select dropdown=new Select (ship_claimsDropdown);	
