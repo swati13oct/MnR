@@ -1807,7 +1807,7 @@ public class VppStepDefinitionUpdatedAARP {
 		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text or URL ",validationFlag);
 	}
 	
-	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
+	@Given("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

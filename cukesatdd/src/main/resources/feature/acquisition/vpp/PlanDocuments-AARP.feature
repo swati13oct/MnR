@@ -1,6 +1,5 @@
 @PlanDetails_PlanDocumentsAARP
 Feature: test Plan Documents PDFs on Plan Deatils Page
-
   @PlanDocs_PDF_URLvalidation
   Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
     Given the user is on AARP medicare acquisition site landing page
