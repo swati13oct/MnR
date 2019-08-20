@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.ole;
 
 import java.util.Map;

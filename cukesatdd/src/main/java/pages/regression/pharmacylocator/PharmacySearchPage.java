@@ -121,22 +121,24 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String testWidget="";
 		String expUrl="";
 		boolean hasWalgreensPlan=false;
-		Select select = new Select(PlanNameDropDown);      
+		/* below code is if you want to use plan dropdown to determine if walgreens widget should show up 
+		Select select = new Select(PlanNameDropDown);  
 		String planName= select.getFirstSelectedOption().getText();
-		/*List <WebElement> planList = select.getOptions();
+		List <WebElement> planList = select.getOptions();
 		for(int i =0; i<planList.size() ; i++){
 			String planName = planList.get(i).getText();
 			if (planName.contains("AARP MedicareRx Walgreens")) {
 				hasWalgreensPlan=true;
 				break;
 			}
-		}*/
-		    
-		    if (planName.contains("AARP MedicareRx Walgreens")) {
-				hasWalgreensPlan=true;
-		    }
+		}
+		if (planName.contains("AARP MedicareRx Walgreens")) {
+			hasWalgreensPlan=true;
+		}
 		Assert.assertTrue("PROBLEM - test input expects no walgreens plan but user has walgreens plan", 
 				expectWalgreensPlan==hasWalgreensPlan);
+		*/
+		//note: use user input from feature file to determine what widget(s) to expect
 		testWidget="Preferred Retail Pharmacy Network";
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (expectWalgreensPlan) {
@@ -211,6 +213,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		learnMoreElement.click();
 		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		String actUrl=driver.getCurrentUrl();
 		if (language.equalsIgnoreCase("English")) {
 			Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
@@ -236,6 +243,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		//note: need this to shift things into view for validation
 		if (validate(noResultMsg)) {
 			moveMouseToElement(noResultMsg);
+		} else if (validate(noResultMsgTopPink)) {
+			moveMouseToElement(noResultMsgTopPink);
 		} else {
 			moveMouseToElement(map_showHideMapLnk);
 		}

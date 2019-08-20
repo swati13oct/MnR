@@ -141,6 +141,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		System.out.println("New window for print = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/niceMedicalEob.pdf";
+		if (claimSystem.toUpperCase().contains("COSMOS")) {
+			expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/cosmosMedicalEob.pdf";
+		}
 		Assert.assertTrue("PROBLEM - URL not getting expected portion.  "
 				+ "\nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
 				currentURL.contains(expectedURL));

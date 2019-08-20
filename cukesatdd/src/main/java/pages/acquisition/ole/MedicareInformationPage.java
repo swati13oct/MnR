@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.ole;
 
 import java.util.List;
@@ -274,7 +272,6 @@ public class MedicareInformationPage extends UhcDriver{
 			System.out.println("Part B Effective Date field is not displayed");
 			return null;
 		}*/
-		
 /*		if(emailConfirmation.equalsIgnoreCase("YES")){
 			emailConfirmationYesBtn.click();
 		}else
@@ -288,6 +285,21 @@ public class MedicareInformationPage extends UhcDriver{
 		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
 			sendkeysNew(emailAddressField, email);
 		*/
+
+//		if(emailConfirmation.equalsIgnoreCase("YES")){
+//			emailConfirmationYesBtn.click();
+//		}else
+//			emailConfirmationNoBtn.click();
+//		
+//		if(goGreen.equalsIgnoreCase("YES")){
+//			goGreenYesBtn.click();
+//		}else
+//			goGreenNoBtn.click();
+//		
+//		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
+//			sendkeysNew(emailAddressField, email);
+//		
+
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
