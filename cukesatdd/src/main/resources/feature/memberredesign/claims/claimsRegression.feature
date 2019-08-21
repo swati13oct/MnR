@@ -220,7 +220,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
 
   @claims03 @TC_09claimsPHIP @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+  Scenario Outline: TID: <TID> -plan: <planCategory> -planCategory: <planCategory> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
       | Plan Type     | <planType>     |
       | Plan Category | <planCategory> |
