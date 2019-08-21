@@ -68,7 +68,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement contactUsPageLink;
 
 	// @FindBy(css = ".view-id-link")
-	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
+	@FindBy(xpath = "(//span[contains(text(),'View & print member ID cards')])[1]")
 	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
