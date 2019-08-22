@@ -195,9 +195,11 @@ public class VppStepDefinitionUpdatedAARP {
 		String plantype = givenAttributesMap.get("plan type");
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.checkAllPDPlans();
 		}
 
