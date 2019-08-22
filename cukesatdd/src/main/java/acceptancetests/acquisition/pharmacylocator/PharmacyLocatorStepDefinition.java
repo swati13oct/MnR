@@ -52,7 +52,7 @@ public class PharmacyLocatorStepDefinition {
 		String siteName = inputAttributesMap.get("Site Name");
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
-		//aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,

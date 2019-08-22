@@ -155,16 +155,29 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
+    @claims01a
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
       | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
+      | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+
+    @claims01b
+    Examples: 
+      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
+      | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+
+    @claims01c
+    Examples: 
+      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15235 | MAPD     | UHC_Individual      | Last 24 months | M_NICE_CLAIMS   | 000       | Medical           |
       | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       | Medical           |
-      | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+
+    @claims01d
+    Examples: 
+      | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | NA                |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
@@ -192,17 +205,22 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the EOB section based on claims system on claims summary page
     And I validate the DownloadMyData section on claims summary page
 
+    @claims02a
     Examples: 
       | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15230 | MAPD     | AARP_Individual | Last 24 months | D_COSMOS_CLAIMS | 000       | Prescription drug |
       | 15235 | MAPD     | UHC_Individual  | Last 24 months | D_NICE_CLAIMS   | 000       | Prescription drug |
+
+    @claims02b
+    Examples: 
+      | TID   | planType | memberType      | claimPeriod    | claimSystem     | segmentId | claimType         |
      #| 15299 | PDP      | SSO_Individual  | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
       | 15299 | PDP      | Individual      | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
       | 15300 | PDP      | GROUP           | Last 24 months | RX_CLAIMS       | 000       | Prescription drug |
 
 
   @claims03 @TC_09claimsPHIP @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planCategory> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+  Scenario Outline: TID: <TID> -plan: <planCategory> -planCategory: <planCategory> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements
       | Plan Type     | <planType>     |
       | Plan Category | <planCategory> |
@@ -238,7 +256,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | FID    | planType | memberType     | claimPeriod    | claimSystem   | pageNum | rowNum |
      #| 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS   |       2 |      4 |
-      | 244667 | MA       | EOB_Individual | Last 24 months | COSMOS_CLAIMS |       1 |      4 |
+      | 244667 | MA       | EOB_Individual | Last 24 months | COSMOS_CLAIMS |       1 |      1 |
 
   @claims05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link

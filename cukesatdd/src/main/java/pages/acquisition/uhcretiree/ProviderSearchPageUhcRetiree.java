@@ -1,8 +1,10 @@
 package pages.acquisition.uhcretiree;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -98,7 +100,8 @@ public class ProviderSearchPageUhcRetiree extends UhcDriver{
 		//CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 	}
 
-	
+	@FindBy(xpath="//a[contains(@ng-click,'ChoosePlanYearCtrl')]")
+	private List<WebElement> planYearSelections;
 
 	public void entersZipcodeAndSelectsPlanName(String zipcode,String planName) {
 
@@ -106,10 +109,18 @@ public class ProviderSearchPageUhcRetiree extends UhcDriver{
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
 		continueButton.click();
+		//note if year button shows up, select current year
+		if (planYearSelections.size()>0) {
+			try {
+				int year = Calendar.getInstance().get(Calendar.YEAR);
+				WebElement yearBtn=driver.findElement(By.xpath("//a[contains(@ng-click,'ChoosePlanYearCtrl')]//*[text()='"+year+"']"));
+				yearBtn.click();
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - Page is showing year selection but unable to locate current year button", false);
+			}
+		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));
 		planNameToBeSelected.click();
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void selectProviderFromHomePage() {

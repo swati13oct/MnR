@@ -3091,5 +3091,26 @@ catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+	private WebElement planYearPopup;
+	
+	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+	private WebElement currentYearSelection;
+	
+	@FindBy(xpath="//button[@id='lisGoBtn']")
+	private WebElement planYearPopupGoButton;
+	
+	public void handlePlanYearSelectionPopup() {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if (validate(planYearPopup)) {
+			if (validate(currentYearSelection)) {
+				currentYearSelection.click();
+				planYearPopupGoButton.click();
+				CommonUtility.checkPageIsReady(driver);
+			}
+		} 
+	}
 
 }
