@@ -166,7 +166,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
      #| 06_01 | 1041 | PDP      | SSO_Individual             | RX_CLAIMS       | Prescription drug | 000       | Yes                |
       | 06_02 | 1041 | PDP      | Individual                 | RX_CLAIMS       | Prescription drug | 000       | Yes                |
-      | 06_03 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | 000       | No                 |
+      | 06_03 | 1041 | PDP      | COMBO_GROUP                | RX_CLAIMS       | Prescription drug | 000       | Yes                |
       | 06_04 | 1041 | PDP      | GROUP                      | RX_CLAIMS       | Prescription drug | 000       | No                 |
 
     @claims00_07 @claims00_S_p1

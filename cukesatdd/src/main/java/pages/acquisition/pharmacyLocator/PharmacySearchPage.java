@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PharmacySearchPage extends PharmacySearchBase {
 
@@ -44,8 +45,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
 		Thread.sleep(2000); //note: keep this for the page to load
+		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		System.out.println("TEST - afterClicked_numTabs="+afterClicked_numTabs);
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
@@ -56,7 +60,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().contains("Locate a Pharmacy")) 
+		System.out.println("TEST - driver.getTitle()="+driver.getTitle());
+		if (driver.getTitle().toLowerCase().contains("locate a pharmacy")) 
 			return new PharmacySearchPage(driver);
 		return null;
 	}
