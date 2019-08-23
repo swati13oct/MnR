@@ -266,6 +266,7 @@ public class VppStepDefinitionUHC {
 		AcquisitionHomePage acqhomepage = (AcquisitionHomePage) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage vppplansummarypage = acqhomepage.navigateToVpp(zipcode);
+System.out.println("TEST - 1");
 		if (vppplansummarypage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppplansummarypage);
 

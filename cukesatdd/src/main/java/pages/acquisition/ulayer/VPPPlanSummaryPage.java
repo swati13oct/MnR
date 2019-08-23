@@ -525,12 +525,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(css="a#popupClose")
 		private WebElement btnClose;
 		
+		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+		public static WebElement proactiveChatExitBtn;
+
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
 		}
-
-		
 		
 		
 	public VPPPlanSummaryPage(WebDriver driver) {
@@ -573,14 +574,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		handleChatPopup();
+
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
 		validateNew(snpPlansCount);
 	}
-
-
-
+	
 	public boolean validateTimeoutPopup()
 	{
 		boolean validatePopup=false;
@@ -957,7 +958,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public boolean validateVPPPlanSummaryPage() {
-		driver.navigate().refresh(); //rectified page load issue on stage
+		//note: this refresh line is causign the plan year selection popup not able to click Go, so comment it out for now
+		//driver.navigate().refresh(); //rectified page load issue on stage
 		CommonUtility.waitForPageLoad(driver, vppTop, 30);
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
@@ -2808,15 +2810,32 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
+		//handleChatPopup();
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
 			if (validate(currentYearSelection)) {
 				currentYearSelection.click();
 				planYearPopupGoButton.click();
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		} 
 	}
-
+	
+	public void handleChatPopup() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed()) {
+				jsClickNew(proactiveChatExitBtn);
+				System.out.println("Clicked Exit button on chat");
+			}
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
 }
 
 
