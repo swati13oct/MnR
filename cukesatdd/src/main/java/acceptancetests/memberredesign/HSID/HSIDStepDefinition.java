@@ -636,6 +636,7 @@ public class HSIDStepDefinition {
 				||type.contains("contactus")||type.contains("profilepref")
 				||type.contains("order") ||type.contains("header")
 				||type.contains("pharmacylocator") ||type.contains("needhelp")
+				||type.contains("pnp")
 				) {	//for now only doing workaround for the above features
 			String forType="claims";
 			if (type.contains("contactus")) {
@@ -650,6 +651,8 @@ public class HSIDStepDefinition {
 				forType="reward";
 			} else if (type.contains("pharmacylocator")) {
 				forType="pharmacylocator";
+			} else if (type.contains("pnp")) {
+				forType="pnp";
 			} else if (type.contains("needhelp")) { //note: if for needhelp validation, just set it as claims
 				forType="claims";
 			}

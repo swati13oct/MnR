@@ -43,6 +43,7 @@ import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
 //import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
@@ -2855,6 +2856,8 @@ public class AccountHomePage extends UhcDriver {
 			part3 = "/member/pharmacy-locator/overview.html";
 		} else if (page.equals("dce")) {
 			part3 = "/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else if (page.equals("pnp")) {
+			part3 = "/member/pharmacy/overview.html";
 		} else { // note: shouldn't have gotten here, but just in case
 			Assert.assertTrue("Sorry, testType '" + attemptSorryWorkaround.get("testType")
 					+ "' is not covered by this workaround yet, abort this test now", false);
@@ -3012,4 +3015,40 @@ public class AccountHomePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	//----- begin PnP code
+	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
+	private WebElement pharPresDashboardLink;
+	
+	//note: need to fix H&W menu link once this is push to stage
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+				if (validate(pharPresDashboardLink)) {
+					pharPresDashboardLink.click();
+				} else {
+					System.out.println("Check for shadow-root before giving up");
+
+					WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
+							"#main-nav > div > div > div > a:nth-child(5)");
+					if (tmp.getText().toLowerCase().contains("pharmacies")) {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(5)");
+					} else {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(6)");
+					} 
+				}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+			workaroundAttempt("pnp"); 
+		}
+		//note: need to pick up changes from HSIDStepDefinition - workaroundSorryErrorPage
+		//note: need to pick up changes from method workaroundAttempt
+		if (driver.getTitle().toLowerCase().contains("pharmacies")) {
+			return new PharmaciesAndPrescriptionsPage(driver);
+		}
+		return null;
+	}	
 }

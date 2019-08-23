@@ -34,6 +34,7 @@ import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
 
 public class TestHarness extends UhcDriver {
@@ -1013,6 +1014,35 @@ public class TestHarness extends UhcDriver {
     			}
     			counter++;
     		} while (counter < 2);
+    	}
+    	
+       	//----- begin PnP code
+        @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and Prescriptions page')]")
+        private WebElement testHarnessPharPresLink;
+
+    	@FindBy(xpath="//a[@id='pharmacies_5']")
+    	private WebElement testHarnessTopMenuPhaPresLink;
+    	
+    	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromTestHarnessPage() {
+    		CommonUtility.checkPageIsReady(driver);
+    		try{
+    			if (validate(testHarnessPharPresLink)) 
+    				testHarnessPharPresLink.click();
+    			else 
+    				testHarnessTopMenuPhaPresLink.click();
+    		} catch (WebDriverException e) {
+    			checkForIPerceptionModel(driver);
+    			CommonUtility.checkPageIsReady(driver);
+    			testHarnessPharPresLink.click();
+    		}
+    		CommonUtility.checkPageIsReady(driver);
+    		checkForIPerceptionModel(driver);
+    		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+    		if (driver.getTitle().toLowerCase().contains("pharmacies")) {
+    			return new PharmaciesAndPrescriptionsPage(driver);
+    		}
+    		return null;
+    		
     	}
 
 }
