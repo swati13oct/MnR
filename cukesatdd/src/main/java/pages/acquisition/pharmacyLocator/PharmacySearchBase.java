@@ -56,7 +56,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			CommonUtility.waitForPageLoad(driver, countyModal, 15);
 			if (county.equalsIgnoreCase("None")) { 
 				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
-						!validate(countyModal));
+						!pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
@@ -67,7 +67,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
 					Assert.assertTrue("PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup", 
-							!validate(countyModal));
+							!pharmacyValidate(countyModal));
 				}
 			}
 			System.out.println("*****Zipcode, distance and County details are entered******");
@@ -87,7 +87,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
-		if (!validate(pharmacyCount)) {
+		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String winHandleBefore = driver.getWindowHandle();
@@ -150,7 +150,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -243,19 +243,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
@@ -389,7 +389,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -408,19 +408,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
