@@ -43,10 +43,10 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//span[@id='numClaims5']")	
 	protected WebElement numClaimsShip;
-	
+
 	@FindBy(xpath="//p[contains(text(),'There are no claims available')]")
 	protected WebElement noClaimsRedTxt;
-	
+
 	//note: need help section
 	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
 	protected WebElement needHelp_SectionHeader;
@@ -432,7 +432,7 @@ public class ClaimsBase extends UhcDriver  {
 		int timeoutInSec=2;
 		return claimsValidate(element, timeoutInSec);
 	}
-	
+
 	/**
 	 * to validate whether element exists with input timeout value control
 	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
@@ -441,19 +441,19 @@ public class ClaimsBase extends UhcDriver  {
 	 * @return
 	 */
 	public boolean claimsValidate(WebElement element, int timeoutInSec) {
-	    	try {
-	    		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-	    		wait.until(ExpectedConditions.visibilityOf(element));
-				if (element.isDisplayed()) {
-					System.out.println("Element found!!!!");
-					return true;
-				} else {
-					System.out.println("Element not found/not visible");
-				}
-			} catch (Exception e) {
-				System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
 			}
-			return false;
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
 	}
 }

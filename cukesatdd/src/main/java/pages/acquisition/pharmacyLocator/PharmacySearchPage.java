@@ -285,7 +285,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!validate(map_mapImg));
+				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
 				validate(map_mapImg));
@@ -329,7 +329,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!validate(moreInfoText_show));
+				!pharmacyValidate(moreInfoText_show));
 	}
 
 	/** Verify page load in chinese language */
@@ -439,18 +439,18 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (hasWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!validate(widget_preferredRetailPharmacyNetwork));
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						validate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
-						!validate(widget_walgreens));
+						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap);
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredRetailPharmacyNetwork));
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
 		testWidget="Walgreens – Preferred Retail Pharmacy";
 		if (expectWalgreensPlan) {	
@@ -466,7 +466,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - test input not expect to see '"+testWidget+"' widget", 
-					!validate(widget_walgreens));
+					!pharmacyValidate(widget_walgreens));
 		}
 	}
 	
@@ -498,7 +498,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount=0;
-		if (!validate(noResultMsg))
+		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if(PharmacyCount>0) {
 			int totalAfter=Integer.parseInt(PharmacyFoundCount.getText().trim());
@@ -545,11 +545,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		}
 	}

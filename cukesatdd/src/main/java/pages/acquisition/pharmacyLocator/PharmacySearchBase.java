@@ -13,7 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -443,6 +446,40 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element) {
+		int timeoutInSec=2;
+		return pharmacyValidate(element, timeoutInSec);
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
+	}	
 	
 }
 

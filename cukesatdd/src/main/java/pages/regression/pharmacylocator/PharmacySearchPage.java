@@ -143,12 +143,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (expectWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!validate(widget_preferredRetailPharmacyNetwork));
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						validate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
-						!validate(widget_walgreens));
+						!pharmacyValidate(widget_walgreens));
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
 				if (memberType.toUpperCase().contains("GROUP")) 
 					validateWidget(language, "DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts_grp, expUrl);
@@ -157,7 +157,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredRetailPharmacyNetwork));
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
 
 		testWidget="Walgreens - Preferred Retail Pharmacy";
@@ -173,7 +173,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_walgreens));
+					!pharmacyValidate(widget_walgreens));
 		}
 
 		testWidget="Preferred Mail Service Pharmacy";
@@ -190,7 +190,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredMailServicePharmacy));
+					!pharmacyValidate(widget_preferredMailServicePharmacy));
 		}
 	}
 
@@ -416,7 +416,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!validate(moreInfoText_show));
+				!pharmacyValidate(moreInfoText_show));
 	}
 
 	public void validateMapSectionContent(boolean hasPrefRetailPharmacy) {
@@ -448,9 +448,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					validate(map_legendPrefNetTxt));
 		} else {
 			Assert.assertTrue("PROBLEM - should not see 'Preferred Network Pharmacy' legend img element", 
-					!validate(map_legendPrefNetImg));
+					!pharmacyValidate(map_legendPrefNetImg));
 			Assert.assertTrue("PROBLEM - should not see 'Preferred Network Pharmacy' legend text element", 
-					!validate(map_legendPrefNetTxt));
+					!pharmacyValidate(map_legendPrefNetTxt));
 		}
 		int bannderHight = 0;
 		if (validate(offlineEnvPinkBanner)) {
@@ -466,7 +466,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!validate(map_mapImg));
+				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
 				validate(map_mapImg));
