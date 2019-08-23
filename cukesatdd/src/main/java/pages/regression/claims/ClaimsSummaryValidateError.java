@@ -112,7 +112,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 * Validate whether 'System error' message exists on claims summary page
 	 */
 	public void validateNoSystemErr() {
-		Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg));
+		Assert.assertTrue("PROBLEM - located System Error",!claimsValidate(systemErrorMsg, 5));
 	}
 
 	/**

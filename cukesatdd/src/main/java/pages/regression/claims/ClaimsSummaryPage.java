@@ -234,23 +234,23 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" and "+pLink+" are displayed");
 		} else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("COSMOS")) {
 			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, validate(medicalEob_MA));
-			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !validate(drugEob_MA));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !claimsValidate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
 		} else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("NICE")) {
 			//note: not expected behavior but existing behavior, there is an existing defect in prod
 			Assert.assertTrue("PROBLEM - existing behavior should not be able to locate"+mLink+onPage
-					+ " (NOTE: this is not the right behavior- bypassIssue2)", !validate(medicalEob_MA));
-			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !validate(drugEob_MA));
+					+ " (NOTE: this is not the right behavior- bypassIssue2)", !claimsValidate(medicalEob_MA));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !claimsValidate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - no "+mLink+" or "+pLink+" is displayed");
 			bypass_INC11365785_srchEobHist=true;
 		} else if (plantype.equals("PDP")) {
-			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !validate(medicalEob_PDP));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_PDP));
 			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, validate(drugEob_PDP));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
 		} else if (plantype.equals("SSUP")) {
 			//note: F267688
-			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !validate(medicalEob_MA));
-			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !validate(drugEob_MA));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_MA));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !claimsValidate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - no "+mLink+" or "+pLink+" is displayed");
 		} else if (plantype.equals("SHIP")){
 			Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(ship_eob));
@@ -379,7 +379,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickMyDnldMyDataBtn(String planType) {
 		if (planType.equalsIgnoreCase("SHIP")) { //note: ship user doesn't have DownloadMyData button
-			if (!validate(dnldMyDataBtn)) {
+			if (!claimsValidate(dnldMyDataBtn)) {
 				System.out.println("Got the expected behavior where 'DownloadMyData' button not exist for SHIP user ");
 				return true;
 			} else {
@@ -387,7 +387,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				return false;
 			}
 		} else { //note: all other users should have DownloadMyData button
-			if (!validate(dnldMyDataBtn)) {
+			if (!claimsValidate(dnldMyDataBtn)) {
 				System.out.println("PROBLEM - non SHIP user should have 'DownloadMyData' button");
 				return false;
 			}
@@ -395,7 +395,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			dnldMyDataBtn.click();
 
 			//note: validate cancel button function
-			if (!validate(dnldPopup_cancelBtn)) {
+			if (!claimsValidate(dnldPopup_cancelBtn)) {
 				System.out.println("PROBLEM - not getting expected cancelButtonDownloadPopUp");
 				return false;
 			}
@@ -411,7 +411,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			//note: validate proceed button function
 			dnldMyDataBtn.click();
 			waitforElement(dnldPopup_leavingSite);
-			if (!validate(dnldPopup_leavingSite)) {
+			if (!claimsValidate(dnldPopup_leavingSite)) {
 				System.out.println("PROBLEM - not getting expected leavingsitepopup");
 				return false;
 			}

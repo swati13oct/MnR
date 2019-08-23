@@ -398,7 +398,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
 				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)", 
-						!validate(detl_medicalEob));
+						!claimsValidate(detl_medicalEob));
 				System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical EOB is displayed - "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)");
 				bypass_INC11365785_searchEOBHistory=true;
