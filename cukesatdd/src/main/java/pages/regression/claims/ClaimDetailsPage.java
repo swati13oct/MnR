@@ -145,7 +145,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/cosmosMedicalEob.pdf";
 		}
 		Assert.assertTrue("PROBLEM - URL not getting expected portion.  "
-				+ "\nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				+ "Expected to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 				currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);

@@ -528,6 +528,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 		public static WebElement proactiveChatExitBtn;
 
+		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+		private WebElement planYearPopup;
+		
+		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+		private WebElement currentYearSelection;
+		
+		@FindBy(xpath="//button[@id='lisGoBtn']")
+		private WebElement planYearPopupGoButton;
+		
+
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
@@ -2511,7 +2521,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  \nBefore='"+originalPageTitle+"' \nAfter='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 	
 	public void closeOriginalTabAndOpenNewTab() {
@@ -2799,32 +2809,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 	
-	@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
-	private WebElement planYearPopup;
-	
-	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
-	private WebElement currentYearSelection;
-	
-	@FindBy(xpath="//button[id='lisGoBtn']")
-	private WebElement planYearPopupGoButton;
-	
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
-		//handleChatPopup();
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
 			if (validate(currentYearSelection)) {
 				currentYearSelection.click();
-				planYearPopupGoButton.click();
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
+					planYearPopupGoButton.click();
+					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		} 
 	}
-	
+
 	public void handleChatPopup() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{

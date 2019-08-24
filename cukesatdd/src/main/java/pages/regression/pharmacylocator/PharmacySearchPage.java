@@ -221,7 +221,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String actUrl=driver.getCurrentUrl();
 		if (language.equalsIgnoreCase("English")) {
 			Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
-					+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+					+ "Expected url contains '"+expUrl+"' | Actual URL='"+actUrl+"'", 
 					actUrl.contains(expUrl));
 		} else {
 			System.out.println("BYPASS for now - known issue INC12081977 - Walgreen widget DCE link is not pointing to correct place for Chinese and Spanish");
@@ -235,7 +235,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - Unable to get back to pharmacy locator page for further validation. "
-				+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' | Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 	}
 
@@ -324,11 +324,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			String actualTxtXpath2=testXpath+"/span/p[2]";
 			String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt1+"'"
-					+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+					+ "Expected='"+expTxt1+"' | "
+					+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt2+"'"
-					+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+					+ "Expected='"+expTxt2+"' | "
+					+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 		}
 		moveMouseToElement(moveAwayFromTooltip);//note: move away
 	}
@@ -398,7 +398,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, URL should not contain '"+expectedURL
-				+"' \nActual URL='"+currentURL+"'", !currentURL.contains(expectedURL));
+				+"' | Actual URL='"+currentURL+"'", !currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReady(driver);

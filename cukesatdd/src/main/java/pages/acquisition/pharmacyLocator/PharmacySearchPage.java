@@ -55,7 +55,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, "
-				+ "URL should not contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				+ "URL should not contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 				!currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -167,17 +167,17 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			String actualTxtXpath2=testXpath+"/span/p[2]";
 			String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt1+"'"
-					+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+					+ "Expected='"+expTxt1+"' | "
+					+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 			if (targetTooltipName.equalsIgnoreCase("E-Prescribing")) { //note: jenkins run didn't like the ' in the text
 				String[] tmp=expTxt2.split("\'");
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "\nExpected to contain '"+expTxt2+"'"
-						+ "\nActual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
+						+ "Expected to contain '"+expTxt2+"' | "
+						+ "Actual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
 			} else {
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "\nExpected='"+expTxt2+"'"
-						+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+						+ "Expected='"+expTxt2+"' | "
+						+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 			}
 
 		}
@@ -349,7 +349,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		System.out.println(" No of GetDirection Links displayed : "+getDirectionCount);
 		System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
 		Assert.assertTrue("PROBLEM - Get Direction Links are NOT Displayed for all Displayed Pharmacy Results. "
-				+ "\nTotal result='"+PharmacyCount+"' | GetDirection result='"+getDirectionCount+"'", 
+				+ "Total result='"+PharmacyCount+"' | GetDirection result='"+getDirectionCount+"'", 
 				getDirectionCount==PharmacyCount);
 	}	
 
@@ -365,7 +365,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
-				+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		//tbd Thread.sleep(2000); //note: keep for timing issue
@@ -373,7 +373,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		expUrl="/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - Unable to get back to pharmacy locator page for further validation. "
-				+ "Expected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
 		selectsPlanName(planName);
@@ -536,11 +536,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					String actualTxtXpath2="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
 					String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt1+"'"
-							+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+							+ "Expected='"+expTxt1+"' | "
+							+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt2+"'"
-							+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+							+ "Expected='"+expTxt2+"' | "
+							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 				}
 				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {

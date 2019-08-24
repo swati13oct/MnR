@@ -40,19 +40,19 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 			Assert.assertTrue(ship_errGrThan24mon + "is not beind dsiplayed", 
 					validate(ship_errGrThan24mon));
 			Assert.assertTrue("error text is not as expected. "
-					+ "\nExpected="+errorTextContent1+" \nActual="+ship_errGrThan24mon.getText(), 
+					+ "Expected="+errorTextContent1+" | Actual="+ship_errGrThan24mon.getText(), 
 					ship_errGrThan24mon.getText().contains(errorTextContent1));
 		} else {
 			Assert.assertTrue(errGrThan24mon + "is not beind dsiplayed", 
 					validate(errGrThan24mon));
 			Assert.assertTrue("error text is not as expected. "
-					+ "\nExpected="+errorTextContent1+" \nActual="+errGrThan24mon.getText(), 
+					+ "Expected="+errorTextContent1+" | Actual="+errGrThan24mon.getText(), 
 					errGrThan24mon.getText().contains(errorTextContent1));
 
 			Assert.assertTrue(errGrThanTwoYrs + "is not beind dsiplayed", 
 					validate(errGrThanTwoYrs));
 			Assert.assertTrue("error text is not as expected. "
-					+ "\nExpected="+errorTextContent2+" \nActual="+errGrThanTwoYrs.getText(), 
+					+ "Expected="+errorTextContent2+" | Actual="+errGrThanTwoYrs.getText(), 
 					errGrThanTwoYrs.getText().contains(errorTextContent2));
 		}
 	}

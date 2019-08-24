@@ -171,7 +171,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
-						+ "\nExpect to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'",
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -195,7 +195,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Other.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -216,7 +216,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -380,7 +380,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		String expectedURL="Pharmacy-Search-English";
 		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '"+expectedURL
-				+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
+				+"' | Actual URL='"+currentURL+"'", currentURL.contains(expectedURL));
 	}
 	
 	
