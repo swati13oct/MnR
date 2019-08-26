@@ -163,7 +163,6 @@ public class ClaimsExtensiveValidationStepDefinition {
 			ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
 			claimsSummaryPage.validateSystemErrorMsgNotExist();  //note: don't bother if getting system error already
-
 			//note: this can be updated handle more than 1 page of claims, 
 			//note: for now just handle 1st page of claims if there are more than 1 page
 			//note: gather data on summary page for validation on detail page
@@ -186,7 +185,6 @@ public class ClaimsExtensiveValidationStepDefinition {
 
 				HashMap<String, String> dataMapSummary=claimsSummaryPage.gatherDataFromSummaryPage(claimType, x, claimSystem, hasYourShare);
 				claimsDataForSearchPeriod.add(dataMapSummary); //note: save the info for later overall validation
-
 				if (claimType.equalsIgnoreCase("prescription drug")) {
 					System.out.println("Prescription drug doesn't have more info for claims, skip claims detail validation");
 				} else {
@@ -203,6 +201,7 @@ public class ClaimsExtensiveValidationStepDefinition {
 						System.out.println("Encountered issue for INC10332773_YourShareMissmatched_detailPage on detail page");
 						recordInvokedBypass.add("invokedBypass_INC10332773_YourShareMissmatched_detailPage");
 					}
+
 					System.out.println("Proceed to validate claims total - if encounter INC10332773 then ignore the failure for now");
 					newClaimDetailsPage.validateClaimsTotalAccurate(invokedBypass_INC10332773_YourShareMissmatched, planType);
 

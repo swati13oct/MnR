@@ -143,12 +143,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (expectWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!validate(widget_preferredRetailPharmacyNetwork));
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						validate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
-						!validate(widget_walgreens));
+						!pharmacyValidate(widget_walgreens));
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
 				if (memberType.toUpperCase().contains("GROUP")) 
 					validateWidget(language, "DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts_grp, expUrl);
@@ -157,7 +157,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredRetailPharmacyNetwork));
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
 
 		testWidget="Walgreens - Preferred Retail Pharmacy";
@@ -173,7 +173,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_walgreens));
+					!pharmacyValidate(widget_walgreens));
 		}
 
 		testWidget="Preferred Mail Service Pharmacy";
@@ -190,7 +190,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredMailServicePharmacy));
+					!pharmacyValidate(widget_preferredMailServicePharmacy));
 		}
 	}
 
@@ -221,7 +221,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String actUrl=driver.getCurrentUrl();
 		if (language.equalsIgnoreCase("English")) {
 			Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
-					+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+					+ "Expected url contains '"+expUrl+"' | Actual URL='"+actUrl+"'", 
 					actUrl.contains(expUrl));
 		} else {
 			System.out.println("BYPASS for now - known issue INC12081977 - Walgreen widget DCE link is not pointing to correct place for Chinese and Spanish");
@@ -235,7 +235,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - Unable to get back to pharmacy locator page for further validation. "
-				+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' | Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 	}
 
@@ -324,11 +324,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			String actualTxtXpath2=testXpath+"/span/p[2]";
 			String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt1+"'"
-					+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+					+ "Expected='"+expTxt1+"' | "
+					+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt2+"'"
-					+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+					+ "Expected='"+expTxt2+"' | "
+					+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 		}
 		moveMouseToElement(moveAwayFromTooltip);//note: move away
 	}
@@ -398,7 +398,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, URL should not contain '"+expectedURL
-				+"' \nActual URL='"+currentURL+"'", !currentURL.contains(expectedURL));
+				+"' | Actual URL='"+currentURL+"'", !currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReady(driver);
@@ -416,7 +416,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!validate(moreInfoText_show));
+				!pharmacyValidate(moreInfoText_show));
 	}
 
 	public void validateMapSectionContent(boolean hasPrefRetailPharmacy) {
@@ -448,9 +448,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					validate(map_legendPrefNetTxt));
 		} else {
 			Assert.assertTrue("PROBLEM - should not see 'Preferred Network Pharmacy' legend img element", 
-					!validate(map_legendPrefNetImg));
+					!pharmacyValidate(map_legendPrefNetImg));
 			Assert.assertTrue("PROBLEM - should not see 'Preferred Network Pharmacy' legend text element", 
-					!validate(map_legendPrefNetTxt));
+					!pharmacyValidate(map_legendPrefNetTxt));
 		}
 		int bannderHight = 0;
 		if (validate(offlineEnvPinkBanner)) {
@@ -466,7 +466,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!validate(map_mapImg));
+				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
 				validate(map_mapImg));

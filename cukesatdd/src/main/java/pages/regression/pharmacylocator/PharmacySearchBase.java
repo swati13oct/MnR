@@ -12,7 +12,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -64,7 +67,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg) && !validate(noResultMsgTopPink)) {
+		if (!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -101,7 +104,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
-						+ "\nExpect to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'",
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReady(driver);
@@ -123,7 +126,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Other.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '"+expectedURL
-						+"' \nActual URL='"+currentURL+"'", 
+						+"' | Actual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -144,7 +147,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '"+expectedURL
-						+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
+						+"' | Actual URL='"+currentURL+"'", currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				currentURL=driver.getCurrentUrl();
@@ -153,19 +156,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
@@ -190,12 +193,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			} else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
-						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			}
 		}
 	}
@@ -226,7 +229,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		//tbd int totalBefore=Integer.parseInt(PharmacyFoundCount.getText().trim());
 		//tbd Assert.assertTrue("PROBLEM - search yield no result, test expects input data to have search result, "
 		//tbd		+ "please check user data input or env to see if everything is ok", 
-		//tbd		!validate(noResultMsg) && !validate(noResultMsgTopPink));
+		//tbd		!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 		//note: test assume valid search will yield search result
 		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
@@ -249,12 +252,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			} else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
-						!validate(noResultMsg) && !validate(noResultMsgTopPink));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			}
 		}
 		
@@ -289,7 +292,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount=0;
-		if (!validate(noResultMsg)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}
 		if(PharmacyCount>0) {
@@ -334,20 +337,20 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					String actualTxtXpath2="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
 					String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt1+"'"
-							+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+							+ "Expected='"+expTxt1+"' | "
+							+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt2+"'"
-							+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+							+ "Expected='"+expTxt2+"' | "
+							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 				}
 				moveMouseToElement(moveAwayFromTooltip); //note: move away
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		}
 	}
@@ -452,6 +455,40 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
+	}
+	
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element) {
+		int timeoutInSec=2;
+		return pharmacyValidate(element, timeoutInSec);
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
 	}
 }
 

@@ -521,6 +521,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(css="a#popupClose")
 		private WebElement btnClose;
 		
+		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+		public static WebElement proactiveChatExitBtn;
+
+		@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+		private WebElement planYearPopup;
+		
+		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+		private WebElement currentYearSelection;
+		
+		@FindBy(xpath="//button[@id='lisGoBtn']")
+		private WebElement planYearPopupGoButton;
+		
+
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
 		}
@@ -856,6 +869,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
 
@@ -1348,7 +1362,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean validateVPPPlanSummaryPage() {
 		//CommonUtility.waitForElementToDisappear(driver,getLoadingIndicator(),CommonConstants.TIMEOUT_40);
-		driver.navigate().refresh(); //rectified page load issue on stage
+		//note: this refresh line is causign the plan year selection popup not able to click Go, so comment it out for now
+		//driver.navigate().refresh(); //rectified page load issue on stage
 		
 		CommonUtility.waitForPageLoad(driver, vppTop, 30);
 		validateNonPresenceOfElement(getLoadingIndicator());
@@ -2866,7 +2881,7 @@ public void validatePrintOption(String planType) {
 	
 	//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 	String pageTitleAfterClosingPrintPreview=driver.getTitle();
-	Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  \nBefore='"+originalPageTitle+"' \nAfter='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+	Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 }
 
 public void closeOriginalTabAndOpenNewTab() {
@@ -3092,25 +3107,33 @@ catch (Exception e) {
 		}
 	}
 	
-	@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
-	private WebElement planYearPopup;
-	
-	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
-	private WebElement currentYearSelection;
-	
-	@FindBy(xpath="//button[@id='lisGoBtn']")
-	private WebElement planYearPopupGoButton;
-	
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
 			if (validate(currentYearSelection)) {
 				currentYearSelection.click();
-				planYearPopupGoButton.click();
-				CommonUtility.checkPageIsReady(driver);
+				try {
+					Thread.sleep(1000);
+					planYearPopupGoButton.click();
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		} 
+	}	
+	public void handleChatPopup() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed()) {
+				jsClickNew(proactiveChatExitBtn);
+				System.out.println("Clicked Exit button on chat");
+			}
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
+
 
 }

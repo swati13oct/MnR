@@ -690,10 +690,8 @@ public class AccountHomePage extends UhcDriver {
 									"#dropdown-options-2 > a:nth-child(3) > span");
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
-					} catch (NoSuchElementException e) { // note: try one more
-															// selector before
-															// giving up
-						System.out.println("TEST - cauth NoSuchElement exception - now try next thing ");
+					} catch (NoSuchElementException e) { // note: try one more selector before giving up
+						System.out.println("TEST - got NoSuchElement exception - now try next thing ");
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-0 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");

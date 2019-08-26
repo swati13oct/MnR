@@ -96,7 +96,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		String actualTitle=driver.getTitle(); 
 		System.out.println("New tab actual title = "+actualTitle);
 		Assert.assertTrue("PROBLEM - clicked OPTUMRX.COM under pagenation but open page title is not as expected.  "
-				+ "Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,
+				+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
 				actualTitle.contains(expectedTitle));
 
 		//note: validate url
@@ -104,7 +104,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		String actualURL=driver.getCurrentUrl(); 
 		System.out.println("New tab actual URL ="+actualURL);
 		Assert.assertTrue("PROBLEM - URL didn't contain expected portion.  "
-				+ "Expected to contains '"+expectedURL+"' \nActual URL='"+actualURL+"' \n"+noteToTester,
+				+ "Expected to contains '"+expectedURL+"' | Actual URL='"+actualURL+"' | "+noteToTester,
 				actualURL.contains(expectedURL));
 		driver.close();
 
@@ -112,7 +112,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		expectedTitle="Claims Summary";	//note: validate able to go back to claims summary page for further validation
 		actualTitle=driver.getTitle(); 
 		Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  "
-				+ "Expected to contains '"+expectedTitle+"' \nActual URL='"+actualTitle+"' \n"+noteToTester,
+				+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
 				actualTitle.contains(expectedTitle));
 	}
 
@@ -123,7 +123,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
-				!validate(systemErrorMsg));
+				!claimsValidate(systemErrorMsg));
 		if (validate(medicalClaimsTbl))
 			System.out.println("!!! Claims Table is seen on the Claims Summary page!!!");
 		if (validate(claimsTblMoreInfoLnk))
