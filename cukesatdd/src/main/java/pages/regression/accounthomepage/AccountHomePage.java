@@ -3018,9 +3018,13 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
 	private WebElement pharPresDashboardLink;
 	
+	@FindBy(xpath = "//a[@id='pharmacies_5']")
+	private WebElement pharPresDashboardLinkAlternative;
+	
 	//note: need to fix H&W menu link once this is push to stage
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 				if (validate(pharPresDashboardLink)) {
@@ -3029,22 +3033,80 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("Check for shadow-root before giving up");
 
 					WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
-							"#main-nav > div > div > div > a:nth-child(5)");
-					if (tmp.getText().toLowerCase().contains("pharmacies")) {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader,
-								"#main-nav > div > div > div > a:nth-child(5)");
-					} else {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+							"#main-nav > div > div > div > a:nth-child(2)");
+					String targetLnk="";
+					if (tmp.getText().contains("FIND CARE")) {
+						tmp = locateElementWithinShadowRoot(shadowRootHeader,
 								"#main-nav > div > div > div > a:nth-child(6)");
-					} 
+						targetLnk=tmp.getText();
+						if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,
+									"#main-nav > div > div > div > a:nth-child(6)");
+						}
+					} else if (tmp.getText().contains("CLAIMS")) {
+
+						tmp = locateElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(5)");
+						targetLnk=tmp.getText();
+						if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,
+									"#main-nav > div > div > div > a:nth-child(5)");
+						}
+					}
 				}
 			CommonUtility.checkPageIsReadyNew(driver);
 		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 			workaroundAttempt("pnp"); 
 		}
-		//note: need to pick up changes from HSIDStepDefinition - workaroundSorryErrorPage
-		//note: need to pick up changes from method workaroundAttempt
-		if (driver.getTitle().toLowerCase().contains("pharmacies")) {
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+			return new PharmaciesAndPrescriptionsPage(driver);
+		}
+		return null;
+	}	
+	
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsViaSecondaryPg() {
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
+			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
+			if (validate(pharPresDashboardLink)) {
+				pharPresDashboardLink.click();
+			} else if (validate(pharPresDashboardLinkAlternative)) {
+				pharPresDashboardLinkAlternative.click();
+			} else {
+				System.out.println("Check for shadow-root before giving up");
+
+				WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
+						"#main-nav > div > div > div > a:nth-child(2)");
+				String targetLnk="";
+				if (tmp.getText().contains("FIND CARE")) {
+					tmp = locateElementWithinShadowRoot(shadowRootHeader,
+							"#main-nav > div > div > div > a:nth-child(6)");
+					targetLnk=tmp.getText();
+					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(6)");
+					}
+				} else if (tmp.getText().contains("CLAIMS")) {
+
+					tmp = locateElementWithinShadowRoot(shadowRootHeader,
+							"#main-nav > div > div > div > a:nth-child(5)");
+					targetLnk=tmp.getText();
+					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(5)");
+					}
+				}
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+			workaroundAttempt("pnp"); 
+		}
+																					
+															   
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
 			return new PharmaciesAndPrescriptionsPage(driver);
 		}
 		return null;

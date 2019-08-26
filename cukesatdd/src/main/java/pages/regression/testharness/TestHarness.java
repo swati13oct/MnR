@@ -1023,8 +1023,9 @@ public class TestHarness extends UhcDriver {
     	@FindBy(xpath="//a[@id='pharmacies_5']")
     	private WebElement testHarnessTopMenuPhaPresLink;
     	
-    	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromTestHarnessPage() {
+    	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
+			checkForIPerceptionModel(driver);
     		try{
     			if (validate(testHarnessPharPresLink)) 
     				testHarnessPharPresLink.click();
@@ -1037,12 +1038,10 @@ public class TestHarness extends UhcDriver {
     		}
     		CommonUtility.checkPageIsReady(driver);
     		checkForIPerceptionModel(driver);
-    		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
-    		if (driver.getTitle().toLowerCase().contains("pharmacies")) {
+    		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
     		return null;
-    		
     	}
 
 }

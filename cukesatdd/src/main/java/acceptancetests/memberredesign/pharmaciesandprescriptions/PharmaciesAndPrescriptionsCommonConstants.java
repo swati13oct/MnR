@@ -3,5 +3,7 @@ package acceptancetests.memberredesign.pharmaciesandprescriptions;
 public class PharmaciesAndPrescriptionsCommonConstants {
 
 	public static final String PHARMACIES_AND_PRESCRIPTIONS_PAGE = "pharmacies_and_prescriptions_page";
+	public static final String TEST_PLAN_TYPE = "test_plan_type";
+	public static final String TEST_MEMBER_TYPE = "test_member_type";
 
 }
