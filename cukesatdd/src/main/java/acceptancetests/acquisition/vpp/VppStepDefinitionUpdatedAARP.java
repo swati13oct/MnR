@@ -175,6 +175,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
+		plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
 	/**
@@ -1373,15 +1374,18 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validatePrintOptionExistOnPage(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.validatePrintOptionExistOnPage(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validatePrintOptionExistOnPage(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 
 	@Then("^user validates email functionality with invalid and valid email address on AARP site$")

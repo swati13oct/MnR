@@ -1071,19 +1071,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage navigateToVpp(String zipcode) {
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 3000);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}

@@ -158,6 +158,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
@@ -1303,14 +1304,17 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 
