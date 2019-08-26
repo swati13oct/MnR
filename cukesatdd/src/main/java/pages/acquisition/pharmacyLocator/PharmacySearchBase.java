@@ -13,7 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -53,7 +56,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			CommonUtility.waitForPageLoad(driver, countyModal, 15);
 			if (county.equalsIgnoreCase("None")) { 
 				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
-						!validate(countyModal));
+						!pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
@@ -64,7 +67,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
 					Assert.assertTrue("PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup", 
-							!validate(countyModal));
+							!pharmacyValidate(countyModal));
 				}
 			}
 			System.out.println("*****Zipcode, distance and County details are entered******");
@@ -84,7 +87,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
-		if (!validate(pharmacyCount)) {
+		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String winHandleBefore = driver.getWindowHandle();
@@ -147,7 +150,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -168,7 +171,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";
 				Assert.assertTrue("PROBLEM - unable to go to contact us page. "
-						+ "\nExpect to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'",
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -192,7 +195,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Other.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -213,7 +216,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL=driver.getCurrentUrl();
 				expectedURL="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 						currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
@@ -240,19 +243,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
@@ -377,7 +380,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		String expectedURL="Pharmacy-Search-English";
 		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '"+expectedURL
-				+"' \nActual URL='"+currentURL+"'", currentURL.contains(expectedURL));
+				+"' | Actual URL='"+currentURL+"'", currentURL.contains(expectedURL));
 	}
 	
 	
@@ -386,7 +389,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -405,19 +408,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
@@ -443,6 +446,40 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element) {
+		int timeoutInSec=2;
+		return pharmacyValidate(element, timeoutInSec);
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
+	}	
 	
 }
 

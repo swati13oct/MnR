@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -41,10 +43,10 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//span[@id='numClaims5']")	
 	protected WebElement numClaimsShip;
-	
+
 	@FindBy(xpath="//p[contains(text(),'There are no claims available')]")
 	protected WebElement noClaimsRedTxt;
-	
+
 	//note: need help section
 	@FindBy(xpath="//h2[contains(@class,'atdd-need-help')]")
 	protected WebElement needHelp_SectionHeader;
@@ -191,7 +193,7 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public int getNumClaims(String range, String claimType) {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 20);
+		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
 		/* keep for now, will remove after testing is stable that we don't need this sleep to get correct claims#
 		// note: do not modify this check - critical to wait
 		int extra=2000;
@@ -235,7 +237,7 @@ public class ClaimsBase extends UhcDriver  {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
 			if (numClaims>0)
-				Assert.assertTrue("PROBLEM - 'There are no claims..' message should not show when number of claims >0",!validate(noClaimsRedTxt));
+				Assert.assertTrue("PROBLEM - 'There are no claims..' message should not show when number of claims >0",!claimsValidate(noClaimsRedTxt));
 			return numClaims;
 		} catch (Exception e) {
 			System.out.println("Exception e: "+e);
@@ -419,5 +421,39 @@ public class ClaimsBase extends UhcDriver  {
 			}
 			counter++;
 		} while (counter < 2);
+	}
+
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean claimsValidate(WebElement element) {
+		int timeoutInSec=2;
+		return claimsValidate(element, timeoutInSec);
+	}
+
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean claimsValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
 	}
 }

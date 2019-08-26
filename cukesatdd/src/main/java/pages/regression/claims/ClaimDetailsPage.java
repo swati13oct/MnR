@@ -145,7 +145,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			expectedURL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/MRRestWAR/rest/pdfdownload/claims/eob/cosmosMedicalEob.pdf";
 		}
 		Assert.assertTrue("PROBLEM - URL not getting expected portion.  "
-				+ "\nExpected to contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				+ "Expected to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 				currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -398,7 +398,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
 				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)", 
-						!validate(detl_medicalEob));
+						!claimsValidate(detl_medicalEob));
 				System.out.println("for '"+plantype+" and "+claimSystem+"' - no medical EOB is displayed - "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)");
 				bypass_INC11365785_searchEOBHistory=true;
