@@ -100,7 +100,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 				}
 				element=driver.findElement(By.xpath(xpath));
 				Assert.assertTrue("PROBLEM - should not have 'Your Share' value showing on detail page", 
-						!validate(element));
+						!claimsValidate(element));
 				value="$0.00";
 				dataMap.put(key, value);
 			}

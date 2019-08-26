@@ -945,7 +945,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		//validateNew(footerRequestforAssistancelink);
 		validateNew(footerAccessibilitylink);
-		validateNew(aarpOrgLink);
+		//validateNew(aarpOrgLink);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);

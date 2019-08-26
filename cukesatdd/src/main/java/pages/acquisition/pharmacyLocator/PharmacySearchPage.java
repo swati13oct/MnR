@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PharmacySearchPage extends PharmacySearchBase {
 
@@ -44,19 +45,23 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
 		Thread.sleep(2000); //note: keep this for the page to load
+		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		System.out.println("TEST - afterClicked_numTabs="+afterClicked_numTabs);
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL="member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, "
-				+ "URL should not contain '"+expectedURL+"' \nActual URL='"+currentURL+"'", 
+				+ "URL should not contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 				!currentURL.contains(expectedURL));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReady(driver);
-		if (driver.getTitle().contains("Locate a Pharmacy")) 
+		System.out.println("TEST - driver.getTitle()="+driver.getTitle());
+		if (driver.getTitle().toLowerCase().contains("locate a pharmacy")) 
 			return new PharmacySearchPage(driver);
 		return null;
 	}
@@ -162,17 +167,17 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			String actualTxtXpath2=testXpath+"/span/p[2]";
 			String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "\nExpected='"+expTxt1+"'"
-					+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+					+ "Expected='"+expTxt1+"' | "
+					+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 			if (targetTooltipName.equalsIgnoreCase("E-Prescribing")) { //note: jenkins run didn't like the ' in the text
 				String[] tmp=expTxt2.split("\'");
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "\nExpected to contain '"+expTxt2+"'"
-						+ "\nActual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
+						+ "Expected to contain '"+expTxt2+"' | "
+						+ "Actual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
 			} else {
 				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "\nExpected='"+expTxt2+"'"
-						+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+						+ "Expected='"+expTxt2+"' | "
+						+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 			}
 
 		}
@@ -280,7 +285,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!validate(map_mapImg));
+				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
 				validate(map_mapImg));
@@ -324,7 +329,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				validate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!validate(moreInfoText_show));
+				!pharmacyValidate(moreInfoText_show));
 	}
 
 	/** Verify page load in chinese language */
@@ -344,7 +349,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		System.out.println(" No of GetDirection Links displayed : "+getDirectionCount);
 		System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
 		Assert.assertTrue("PROBLEM - Get Direction Links are NOT Displayed for all Displayed Pharmacy Results. "
-				+ "\nTotal result='"+PharmacyCount+"' | GetDirection result='"+getDirectionCount+"'", 
+				+ "Total result='"+PharmacyCount+"' | GetDirection result='"+getDirectionCount+"'", 
 				getDirectionCount==PharmacyCount);
 	}	
 
@@ -360,7 +365,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
-				+ "\nExpected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		//tbd Thread.sleep(2000); //note: keep for timing issue
@@ -368,7 +373,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		expUrl="/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - Unable to get back to pharmacy locator page for further validation. "
-				+ "Expected url contains '"+expUrl+"' \nActual URL='"+actUrl+"'", 
+				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
 		selectsPlanName(planName);
@@ -434,18 +439,18 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (hasWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!validate(widget_preferredRetailPharmacyNetwork));
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						validate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
-						!validate(widget_walgreens));
+						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap);
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredRetailPharmacyNetwork));
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
 		testWidget="Walgreens – Preferred Retail Pharmacy";
 		if (expectWalgreensPlan) {	
@@ -461,7 +466,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - test input not expect to see '"+testWidget+"' widget", 
-					!validate(widget_walgreens));
+					!pharmacyValidate(widget_walgreens));
 		}
 	}
 	
@@ -493,7 +498,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount=0;
-		if (!validate(noResultMsg))
+		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if(PharmacyCount>0) {
 			int totalAfter=Integer.parseInt(PharmacyFoundCount.getText().trim());
@@ -531,20 +536,20 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					String actualTxtXpath2="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
 					String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt1+"'"
-							+ "\nActual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
+							+ "Expected='"+expTxt1+"' | "
+							+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
 					Assert.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "\nExpected='"+expTxt2+"'"
-							+ "\nActual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
+							+ "Expected='"+expTxt2+"' | "
+							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 				}
 				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow));
+						!pharmacyValidate(rightArrow));
 			}
 		}
 	}

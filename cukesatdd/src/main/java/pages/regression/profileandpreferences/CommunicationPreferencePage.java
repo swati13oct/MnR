@@ -77,7 +77,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		System.out.println("frame validated");
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
-		if (!validate(paperlessOptionActive)) {
+		if (!prefValidate(paperlessOptionActive)) {
 			paperlessOptionInactive.click();
 			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
 		}
@@ -189,7 +189,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		driver.switchTo().frame(0);
 
 		//note: if options are collapsed, need to expand first
-		if (!validate(paperlessOptionActive)) {
+		if (!prefValidate(paperlessOptionActive)) {
 			paperlessOptionInactive.click();
 			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
 		}
@@ -461,6 +461,40 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		}
 		return actualSegmentId;
 	}
+	
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean prefValidate(WebElement element) {
+		int timeoutInSec=2;
+		return prefValidate(element, timeoutInSec);
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean prefValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
+	}	
 }
 
 

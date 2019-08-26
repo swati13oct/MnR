@@ -354,7 +354,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		Assert.assertTrue("PROBLEM - sucess message is not as expected.  \nExpected to match '"+expectedSuccessPattern+"' pattern \nActual msg='"+actualSuccessMsg+"'",actualSuccessMsg.matches(expectedSuccessPattern));
 		if (validate(orderedItem_idCard)) {
 			Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_idCard));
-			Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_idCard.getText()+"'",expectedOrderedItem.equals(orderedItem_idCard.getText()));
+			Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' | Actual='"+orderedItem_idCard.getText()+"'",expectedOrderedItem.equals(orderedItem_idCard.getText()));
 			Assert.assertTrue("PROBLEM - unable to locate the VIEW MEMEBR ID CARD element for confirmation",validate(viewIdCard));
 
 			if (skipIdCheck) {
@@ -365,10 +365,10 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		} else {
 			if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem_ship));
-				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem_ship.getText()+"'",expectedOrderedItem.equals(orderedItem_ship.getText()));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' | Actual='"+orderedItem_ship.getText()+"'",expectedOrderedItem.equals(orderedItem_ship.getText()));
 			} else {
 				Assert.assertTrue("PROBLEM - unable to locate the ordered item element for confirmation",validate(orderedItem));
-				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' \nActual='"+orderedItem.getText()+"'",expectedOrderedItem.equals(orderedItem.getText()));
+				Assert.assertTrue("PROBLEM - ordered item is not as expected in success message.  \nExpected='"+expectedOrderedItem+"' | Actual='"+orderedItem.getText()+"'",expectedOrderedItem.equals(orderedItem.getText()));
 			}
 		}
 	}
