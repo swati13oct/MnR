@@ -76,7 +76,7 @@ public class oleStepDefinition {
 		String County = givenAttributesMap.get("County Name");
 		String ZipCode = givenAttributesMap.get("Zip Code");
 		String PlanType = givenAttributesMap.get("Plan Type");
-		String PlanYear = "2018"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		String SiteName =  "AARP_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -124,7 +124,7 @@ public class oleStepDefinition {
 		String PlanName = givenAttributesMap.get("Plan Name");
 		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String PlanYear = "2019"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		String PlanPremium = "";
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
@@ -187,7 +187,8 @@ public class oleStepDefinition {
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		String PlanYear = "2019"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+ 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);

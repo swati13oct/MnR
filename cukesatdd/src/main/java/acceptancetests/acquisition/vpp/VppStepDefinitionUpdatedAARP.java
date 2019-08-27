@@ -175,7 +175,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		//plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
 	/**
@@ -1781,8 +1781,8 @@ public class VppStepDefinitionUpdatedAARP {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
 		plansummaryPage.CheckClick_CurrentYear_Plans();
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2019");
 	}
 	
 	@When("^the user checks for AEP CUrrent year plans link and clicks to view next year plans on AARP$")
@@ -1792,6 +1792,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.CheckClick_NextYear_Plans();
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2020");
 	}
 	
 }		
