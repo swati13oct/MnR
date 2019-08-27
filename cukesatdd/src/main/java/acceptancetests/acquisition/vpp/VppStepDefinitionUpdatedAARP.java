@@ -1784,4 +1784,14 @@ public class VppStepDefinitionUpdatedAARP {
 
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 	}
+	
+	@When("^the user checks for AEP CUrrent year plans link and clicks to view next year plans on AARP$")
+	public void the_user_views_nextyearlink_clicksLink() throws Throwable {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.CheckClick_NextYear_Plans();
+	}
+	
 }		

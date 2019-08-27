@@ -1289,7 +1289,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 		System.out.println("Plan Name is : "+PlanName);
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')])[1]"));
 		CommonUtility.waitForPageLoadNew(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 
@@ -2794,6 +2794,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
+			System.out.println("*****CLICKING ON Year Toggle Go button*****");
+
+			SelectYearGoBtn.click();
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void CheckClick_NextYear_Plans() {
+
+		try {
+			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
+			System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+			NextYearRadio.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
 			SelectYearGoBtn.click();
