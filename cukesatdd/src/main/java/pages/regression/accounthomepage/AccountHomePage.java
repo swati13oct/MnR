@@ -409,6 +409,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'home')]")
 	private WebElement HomeTopMenuButton;
 
+	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
+	private WebElement pharPresDashboardLink;
+
+	@FindBy(xpath = "//a[@id='pharmacies_5']")
+	private WebElement pharPresDashboardLinkAlternative;
+
 	private PageData myAccountHome;
 
 	public JSONObject accountHomeJson;
@@ -2933,6 +2939,26 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public boolean findElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootElement);
+			try {
+				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+				if (validate(element)) 
+					return true;
+				else
+					return false;
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e=" + e);
+				return false;
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+			return false;
+		}
+	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
 		boolean doScroll = false;
@@ -3014,24 +3040,18 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
-	//----- begin PnP code
-	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
-	private WebElement pharPresDashboardLink;
-	
-	@FindBy(xpath = "//a[@id='pharmacies_5']")
-	private WebElement pharPresDashboardLinkAlternative;
-	
-	//note: need to fix H&W menu link once this is push to stage
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				if (validate(pharPresDashboardLink)) {
-					pharPresDashboardLink.click();
-				} else {
+			if (validate(pharPresDashboardLink)) {
+				pharPresDashboardLink.click();
+			}  else if (validate(pharPresDashboardLinkAlternative)) {
+				pharPresDashboardLinkAlternative.click();
+			} else {
+				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
-
 					WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
 							"#main-nav > div > div > div > a:nth-child(2)");
 					String targetLnk="";
@@ -3044,7 +3064,6 @@ public class AccountHomePage extends UhcDriver {
 									"#main-nav > div > div > div > a:nth-child(6)");
 						}
 					} else if (tmp.getText().contains("CLAIMS")) {
-
 						tmp = locateElementWithinShadowRoot(shadowRootHeader,
 								"#main-nav > div > div > div > a:nth-child(5)");
 						targetLnk=tmp.getText();
@@ -3052,10 +3071,14 @@ public class AccountHomePage extends UhcDriver {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,
 									"#main-nav > div > div > div > a:nth-child(5)");
 						}
-					}
+					} 
+				} else {
+					System.out.println("There is no shadow-root menu");
 				}
+			}
 			CommonUtility.checkPageIsReadyNew(driver);
 		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+			//System.out.println("don't bother to work around the sorry error, page displays won't look right");
 			workaroundAttempt("pnp"); 
 		}
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
@@ -3063,8 +3086,8 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}	
-	
-	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsViaSecondaryPg() {
+
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
@@ -3076,8 +3099,61 @@ public class AccountHomePage extends UhcDriver {
 			} else if (validate(pharPresDashboardLinkAlternative)) {
 				pharPresDashboardLinkAlternative.click();
 			} else {
+				if (validate(shadowRootHeader)) {
+					System.out.println("Check for shadow-root before giving up");
+					WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
+							"#main-nav > div > div > div > a:nth-child(2)");
+					String targetLnk="";
+					if (tmp.getText().contains("FIND CARE")) {
+						tmp = locateElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(6)");
+						targetLnk=tmp.getText();
+						if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,
+									"#main-nav > div > div > div > a:nth-child(6)");
+						}
+					} else if (tmp.getText().contains("CLAIMS")) {
+						tmp = locateElementWithinShadowRoot(shadowRootHeader,
+								"#main-nav > div > div > div > a:nth-child(5)");
+						targetLnk=tmp.getText();
+						if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,
+									"#main-nav > div > div > div > a:nth-child(5)");
+						}
+					} 
+				} else {
+					System.out.println("There is no shadow-root menu");
+				}
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+			//System.out.println("don't bother to work around the sorry error, page displays won't look right");
+			workaroundAttempt("pnp"); 
+		}
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+			return new PharmaciesAndPrescriptionsPage(driver);
+		}
+		return null;
+	}	
+	
+	public boolean findPnPLinksExistOnSecondaryPg() {
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
+			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
+		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
+			workaroundAttempt("claims"); 
+		}		
+		System.out.println("now on secondary page...proceed validate if pnp link exists");
+		if (validate(pharPresDashboardLink)) {
+			return true;
+		} else if (validate(pharPresDashboardLinkAlternative)) {
+			return true;
+		} else {
+			if (validate(shadowRootHeader)) {
 				System.out.println("Check for shadow-root before giving up");
-
 				WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
 						"#main-nav > div > div > div > a:nth-child(2)");
 				String targetLnk="";
@@ -3086,8 +3162,7 @@ public class AccountHomePage extends UhcDriver {
 							"#main-nav > div > div > div > a:nth-child(6)");
 					targetLnk=tmp.getText();
 					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader,
-								"#main-nav > div > div > div > a:nth-child(6)");
+						return true;
 					}
 				} else if (tmp.getText().contains("CLAIMS")) {
 
@@ -3095,20 +3170,13 @@ public class AccountHomePage extends UhcDriver {
 							"#main-nav > div > div > div > a:nth-child(5)");
 					targetLnk=tmp.getText();
 					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
-						locateAndClickElementWithinShadowRoot(shadowRootHeader,
-								"#main-nav > div > div > div > a:nth-child(5)");
+						return true;
 					}
 				}
+			} else {
+				System.out.println("There is no shadow-root menu");
 			}
-			CommonUtility.checkPageIsReadyNew(driver);
-		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-			workaroundAttempt("pnp"); 
 		}
-																					
-															   
-		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
-			return new PharmaciesAndPrescriptionsPage(driver);
-		}
-		return null;
+		return false;
 	}	
 }

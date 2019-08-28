@@ -3,10 +3,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -196,7 +202,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 		System.out.println("Main window = "+driver.getTitle());
 		return driver.getCurrentUrl();
 	}
-	
+
 	/**
 	 * Helper method for validating Need Help section
 	 * @param section
@@ -239,7 +245,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 			goToSpecificComboTabOnOrderPlanPage(planType);
 		}
 	}
-	
+
 	/**
 	 * Helper method to go back to prior page via browser back, 
 	 * also handles the case if combo tab is involved
@@ -250,16 +256,16 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 	 */
 	public void goBackToPriorPnPpgViaBack(String planType, String memberType) 
 			throws InterruptedException {
-			driver.navigate().back();
-			CommonUtility.checkPageIsReady(driver);
-			String expUrl="/member/pharmacy/overview.html";
-			String actUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - unable to go back to PnP page. "
-					+ "Expect URL contain '"+expUrl+"' | Actual URL='"+actUrl+"'", 
-					actUrl.contains(expUrl));
-			handleComboTabIfComboUser(planType, memberType);
+		driver.navigate().back();
+		CommonUtility.checkPageIsReady(driver);
+		String expUrl="/member/pharmacy/overview.html";
+		String actUrl=driver.getCurrentUrl();
+		Assert.assertTrue("PROBLEM - unable to go back to PnP page. "
+				+ "Expect URL contain '"+expUrl+"' | Actual URL='"+actUrl+"'", 
+				actUrl.contains(expUrl));
+		handleComboTabIfComboUser(planType, memberType);
 	}
-	
+
 	/**
 	 * Helper method to go to a specific combo tab based on given planType on PnP page
 	 * @param planType
@@ -295,23 +301,23 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 		CommonUtility.checkPageIsReady(driver);
 		Thread.sleep(1000); //note: keep to give it a sec to stable
 	}
-	
+
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies & Prescriptions for')]")
 	protected WebElement pgHeader;
-	
-	@FindBy(xpath="//div[@class='pharmaciesText']/p")
+
+	@FindBy(xpath="//div[@class='pharmaciesText']")
 	protected WebElement pharmaciesText;
-	
+
 	//note: Compare drug pricing
-	@FindBy(xpath="//div[contains(@class,'DRUGPRICINGTILE')]//div[@class='pharmaciesTileHead']")
+	@FindBy(xpath="//div[(contains(@class,'DRUGPRICINGTILE') or contains(@class,'DRUG_PRICING_TILE_Group'))and not(contains(@class,'ng-hide'))]//div[@class='pharmaciesTileHead']")
 	protected WebElement pTile_compDrugPricingHeaderTxt;
-	
-	@FindBy(xpath="//div[contains(@class,'DRUGPRICINGTILE')]//img")
+
+	@FindBy(xpath="//div[(contains(@class,'DRUGPRICINGTILE') or contains(@class,'DRUG_PRICING_TILE_Group'))and not(contains(@class,'ng-hide'))]//img")
 	protected WebElement pTile_compDrugPricingImg;
-	
-	@FindBy(xpath="//div[contains(@class,'DRUGPRICINGTILE')]//div[@class='pharmacyTileLink']")
+
+	@FindBy(xpath="//div[(contains(@class,'DRUGPRICINGTILE') or contains(@class,'DRUG_PRICING_TILE_Group'))and not(contains(@class,'ng-hide'))]//div[@class='pharmacyTileLink']")
 	protected WebElement pTile_compDrugPricingLnk;
-	
+
 	//note: Find a network pharmacy
 	@FindBy(xpath="//div[contains(@id,'idName2')]//div[@class='pharmaciesTileHead']")
 	protected WebElement pTile_findNtkPharmacyHeaderTxt;
@@ -321,7 +327,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@id,'idName2')]//div[@class='pharmacyTileLink']")
 	protected WebElement pTile_findNtkPharmacyLnk;
-	
+
 	//note: Order prescription refills
 	@FindBy(xpath="//div[contains(@class,'MEDICINE_CABINET_TILE')]//div[@class='pharmaciesTileHead']")
 	protected WebElement pTile_orderPresRefillsHeaderTxt;
@@ -331,7 +337,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'MEDICINE_CABINET_TILE')]//div[@class='pharmacyTileLink']")
 	protected WebElement pTile_orderPresRefillsLnk;
-	
+
 	//note: Check home delivery order status
 	@FindBy(xpath="//div[contains(@class,'ORDER_STATUS_TILE')]//div[@class='pharmaciesTileHead']")
 	protected WebElement pTile_chkHomeDeliOrderStatusHeaderTxt;
@@ -341,7 +347,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'ORDER_STATUS_TILE')]//div[@class='pharmacyTileLink']")
 	protected WebElement pTile_chkHomeDeliOrderStatusLnk;
-	
+
 	//note: Prescription Benefits Information
 	@FindBy(xpath="//div[contains(@class,'BENEFITS_INFORMATION')]//div[@class='pharmaciesTileHead']")
 	protected WebElement pTile_presBenfitInfoHeaderTxt;
@@ -351,28 +357,35 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'BENEFITS_INFORMATION')]//div[@class='pharmacyTileLink']")
 	protected WebElement pTile_presBenfitInfoLnk;
-	
+
 	@FindBy(xpath="//div[contains(@class,'planmaterials')]//img")
 	protected WebElement viewPlanMaterialsImg;
 
 	@FindBy(xpath="//div[contains(@class,'planmaterials')]//a")
 	protected WebElement viewPlanMaterialsLnk;
 
-	public void validateHeaderSectionContent() {
+	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
 				validate(pgHeader));
+		String expTxt="Pharmacies & Prescriptions for "+firstname+" "+lastName;
+		String actTxt=pgHeader.getText();
+		Assert.assertTrue("PROBLEM - header text is not as expected. "
+				+ "Expected='"+expTxt+"' | Actual='"+actTxt+"'", 
+				expTxt.equals(actTxt));
 	}
-	
+
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
 				validate(pharmaciesText));
-		String expectedTxt="UnitedHealthcare partners with OptumRx to provide your pharmacy services.  OptumRx helps make it easy to order prescription refills, get drug cost estimates, and find ways to save on your medications.";
+		String expectedTxt1="Get the most out of your prescription drug benefits.";
+		//String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Search for national and local pharmacies in your plan’s network to fill your prescriptions.";
+		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Or, search for national and local pharmacies in your plan’s network to fill your prescriptions.";
 		String actualTxt=pharmaciesText.getText();
 		Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
-				+ "Expected='"+expectedTxt+"' | Actual='"+actualTxt+"'", 
-				expectedTxt.equals(actualTxt));
+				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"' | Actual='"+actualTxt+"'", 
+				actualTxt.contains(expectedTxt1) && actualTxt.contains(expectedTxt2));
 	}
-	
+
 	public void validateTileContent(String exp_TileHeaderTxt, String exp_TileLinkTxt, 
 			WebElement exp_pTile_Txt, WebElement exp_pTile_img, WebElement exp_pTile_Lnk) {
 		Assert.assertTrue("PROBLEM - unable to locate '"+exp_TileHeaderTxt+"' tile header element", 
@@ -382,143 +395,144 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - unable to locate '"+exp_TileHeaderTxt+"' tile link element", 
 				validate(exp_pTile_Lnk));
 
-		String act_TileHeaderTxt=exp_pTile_Txt.getText();
+		String act_TileHeaderTxt=exp_pTile_Txt.getText().trim();
 		Assert.assertTrue("PROBLEM - '"+exp_TileHeaderTxt+"' tile text not as expected. "
 				+ "Expected='"+exp_TileHeaderTxt+"' | Actual='"+act_TileHeaderTxt+"'", 
 				exp_TileHeaderTxt.equals(act_TileHeaderTxt));
 
-		String act_TileLnkTxt=exp_pTile_Lnk.getText();
+		String act_TileLnkTxt=exp_pTile_Lnk.getText().trim();
 		Assert.assertTrue("PROBLEM - '"+exp_TileHeaderTxt+"' tile text not as expected. "
 				+ "Expected='"+exp_TileLinkTxt+"' | Actual='"+act_TileLnkTxt+"'",
 				exp_TileLinkTxt.equals(act_TileLnkTxt));
 
 	}
-	
-	public void validatePharmaciesTilesSection() {
-		String exp_TileHeaderTxt="Compare drug pricing";
-		String exp_TileLinkTxt="DRUG PRICING";
+
+	public void validateTileNotExist(String exp_TileHeaderTxt,  
+			WebElement exp_pTile_Txt, WebElement exp_pTile_img, WebElement exp_pTile_Lnk) {
+		Assert.assertTrue("PROBLEM - for PEEHIP member user should not see '"+exp_TileHeaderTxt+"' related elements", 
+				!pnpValidate(exp_pTile_Txt, 3)
+				&& !pnpValidate(exp_pTile_img, 3)
+				&& !pnpValidate(exp_pTile_Lnk, 3)
+				);
+	}
+
+	//note from Rohit: TBD - for 2020 MAPD walgreens plan will have a different pharmacy locator page and content
+	public void validatePharmaciesTilesSection(boolean tileDrug, boolean tilePharmacy,	
+			boolean tilePrescription, boolean tileDelivery, boolean tileBenefit) {
+
+		String exp_TileHeaderTxt="Look up covered drugs and estimate costs";
+		//String exp_TileLinkTxt="DRUG LOOKUP";
+		String exp_TileLinkTxt="LOOK UP DRUGS";
 		WebElement exp_tileHeaderElement=pTile_compDrugPricingHeaderTxt;
 		WebElement exp_tileImg=pTile_compDrugPricingImg;
 		WebElement exp_tileLnk=pTile_compDrugPricingLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-		
+		if (tileDrug) {
+			validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		} else {
+			validateTileNotExist(exp_TileHeaderTxt,  
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		}
+
 		exp_TileHeaderTxt="Find a network pharmacy";
 		exp_TileLinkTxt="FIND A PHARMACY";
 		exp_tileHeaderElement=pTile_findNtkPharmacyHeaderTxt;
 		exp_tileImg=pTile_findNtkPharmacyImg;
 		exp_tileLnk=pTile_findNtkPharmacyLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		if (tilePharmacy) {
+			validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		} else {
+			validateTileNotExist(exp_TileHeaderTxt,  
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		}
 
-		exp_TileHeaderTxt="Order prescription refills";
+		exp_TileHeaderTxt="Refill home delivery prescriptions";
 		exp_TileLinkTxt="ORDER PRESCRIPTIONS";
 		exp_tileHeaderElement=pTile_orderPresRefillsHeaderTxt;
 		exp_tileImg=pTile_orderPresRefillsImg;
 		exp_tileLnk=pTile_orderPresRefillsLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		if (tilePrescription) {
+			validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		} else {
+			validateTileNotExist(exp_TileHeaderTxt,  
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		}
 
 		exp_TileHeaderTxt="Check home delivery order status";
 		exp_TileLinkTxt="CHECK DELIVERY STATUS";
 		exp_tileHeaderElement=pTile_chkHomeDeliOrderStatusHeaderTxt;
 		exp_tileImg=pTile_chkHomeDeliOrderStatusImg;
 		exp_tileLnk=pTile_chkHomeDeliOrderStatusLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-		
-		exp_TileHeaderTxt="Prescription Benefits Information";
-		exp_TileLinkTxt="BENEFITS INFORMATION";
-		exp_tileHeaderElement=pTile_presBenfitInfoHeaderTxt;
-		exp_tileImg=pTile_presBenfitInfoImg;
-		exp_tileLnk=pTile_presBenfitInfoLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-	}
-	
-	public void validatePharmaciesLimitedTilesSection() {
-		String exp_TileHeaderTxt="Compare drug pricing";
-		String exp_TileLinkTxt="DRUG PRICING";
-		WebElement exp_tileHeaderElement=pTile_compDrugPricingHeaderTxt;
-		WebElement exp_tileImg=pTile_compDrugPricingImg;
-		WebElement exp_tileLnk=pTile_compDrugPricingLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-		
-		exp_TileHeaderTxt="Find a network pharmacy";
-		exp_TileLinkTxt="FIND A PHARMACY";
-		exp_tileHeaderElement=pTile_findNtkPharmacyHeaderTxt;
-		exp_tileImg=pTile_findNtkPharmacyImg;
-		exp_tileLnk=pTile_findNtkPharmacyLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		if (tileDelivery) {
+			validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		} else {
+			validateTileNotExist(exp_TileHeaderTxt,  
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		}
 
-		exp_TileHeaderTxt="Order prescription refills";
-		exp_tileHeaderElement=pTile_orderPresRefillsHeaderTxt;
-		exp_tileImg=pTile_orderPresRefillsImg;
-		exp_tileLnk=pTile_orderPresRefillsLnk;
-		Assert.assertTrue("PROBLEM - for PEEHIP member user should not see '"+exp_TileHeaderTxt+"' related elements", 
-				!pnpValidate(pTile_orderPresRefillsHeaderTxt, 3)
-				&& !pnpValidate(pTile_orderPresRefillsImg, 3)
-				&& !pnpValidate(pTile_orderPresRefillsLnk, 3)
-				);
-	
-		exp_TileHeaderTxt="Check home delivery order status";
-		exp_tileHeaderElement=pTile_chkHomeDeliOrderStatusHeaderTxt;
-		exp_tileImg=pTile_chkHomeDeliOrderStatusImg;
-		exp_tileLnk=pTile_chkHomeDeliOrderStatusLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-		Assert.assertTrue("PROBLEM - for PEEHIP member user should not see '"+exp_TileHeaderTxt+"' related elements", 
-				!pnpValidate(pTile_chkHomeDeliOrderStatusHeaderTxt, 3)
-				&& !pnpValidate(pTile_chkHomeDeliOrderStatusImg, 3)
-				&& !pnpValidate(pTile_chkHomeDeliOrderStatusLnk, 3)
-				);
-		
-		exp_TileHeaderTxt="Prescription Benefits Information";
-		exp_TileLinkTxt="BENEFITS INFORMATION";
+		exp_TileHeaderTxt="View your costs and plan benefits";
+		exp_TileLinkTxt="VIEW PRESCRIPTION DRUG COST SUMMARY";
 		exp_tileHeaderElement=pTile_presBenfitInfoHeaderTxt;
 		exp_tileImg=pTile_presBenfitInfoImg;
 		exp_tileLnk=pTile_presBenfitInfoLnk;
-		validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
-				exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
-		
-		
+		if (tileBenefit) {
+			validateTileContent(exp_TileHeaderTxt, exp_TileLinkTxt, 
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		} else {
+			validateTileNotExist(exp_TileHeaderTxt,  
+					exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
+		}
 	}
-	
+
 	public void validateTileLnkDestination(String planType, String memberType, String tile) 
 			throws InterruptedException { //note: if arrives here, already validated link existent
-		WebElement linkElement=null;
-		String expUrl="";
-		if (tile.equals("Compare drug pricing")) {
-			linkElement=pTile_compDrugPricingLnk;
-			expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
-		} else if (tile.equals("Find a network pharmacy")) {
-			linkElement=pTile_findNtkPharmacyLnk;
-			expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
-		} else if (tile.equals("Order prescription refills")) {
-			linkElement=pTile_orderPresRefillsLnk;
-			expUrl="/sso";
-		} else if (tile.equals("Check home delivery order status")) {
-			linkElement=pTile_chkHomeDeliOrderStatusLnk;
-			expUrl="/sso";
-		} else if (tile.equals("Prescription Benefits Information")) {
-			linkElement=pTile_presBenfitInfoLnk;
-			expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=benefitsinformation";
-		}		
-		Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
-				linkElement !=null);
-		
-		linkElement.click();
-		CommonUtility.checkPageIsReady(driver);
-		String actUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-				+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", 
-				actUrl.contains(expUrl));
-		goBackToPriorPnPpgViaBack(planType, memberType);
-		 
+		if (tile.equals("Order prescription refills") ||
+				tile.equals("Check home delivery order status") ||
+				tile.equals("Prescription Benefits Information") ||
+				(tile.equals("Compare drug pricing") && memberType.toUpperCase().contains("GROUP"))
+				) {
+			System.out.println("Dev code not ready for "+tile+" link validation yet, skipping...");
+			return;
+		} else {
+
+			WebElement linkElement=null;
+			String expUrl="";
+			if (tile.equals("Compare drug pricing")) {
+				linkElement=pTile_compDrugPricingLnk;
+				if (memberType.toUpperCase().contains("GROUP")) {
+					expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
+				} else {
+					expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
+				}
+			} else if (tile.equals("Find a network pharmacy")) {
+				linkElement=pTile_findNtkPharmacyLnk;
+				expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+			} else if (tile.equals("Order prescription refills")) {
+				linkElement=pTile_orderPresRefillsLnk;
+				expUrl="/sso";
+			} else if (tile.equals("Check home delivery order status")) {
+				linkElement=pTile_chkHomeDeliOrderStatusLnk;
+				expUrl="/sso";
+			} else if (tile.equals("Prescription Benefits Information")) {
+				linkElement=pTile_presBenfitInfoLnk;
+				expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=benefitsinformation";
+			}		
+			Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
+					linkElement !=null);
+
+			linkElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", 
+					actUrl.contains(expUrl));
+			goBackToPriorPnPpgViaBack(planType, memberType);
+		}
 	}
-	
+
 	public void validatePlanMaterialsLink() { //note: FnR page takes long time to load, only validate URL is correct
 		Assert.assertTrue("PROBLEM - unable to locate Plan Materials icon element", 
 				validate(viewPlanMaterialsImg));
@@ -530,7 +544,7 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 				+ "Expect='"+exp_lnk+"' | Actual='"+act_lnk+"'", 
 				act_lnk.contains(exp_lnk));
 	}
-	
+
 	/**
 	 * to validate whether element exists with input timeout value control
 	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
@@ -553,6 +567,64 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 
 		}
 		return false;
+	}
+
+	public String getConsumerDetailsFromlocalStorage() {
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+
+	public String getInfoInConsumerDetails(String planType, String memberType, String infoType) {
+		String lookForPlanCategory="";
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+		if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP"))
+			lookForPlanCategory="MEDICARE SUPPLEMENT";
+		else if (planType.equalsIgnoreCase("SSUP")) 
+			lookForPlanCategory="SSP";
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+			lookForPlanCategory="MAPD";
+		else 
+			lookForPlanCategory=planType;
+
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		//note: if first / last name, no need to go into planProfiles - infoType: firstName | lastName 
+		//note: LIS and segmentID needs to get within planProfiles - infoType: segmentId | planCategoryId 
+		Assert.assertTrue("PROBLEM - code only support locating the following info "
+				+ "at the moment: firstName, lastName, segmentId, planCategoryId | Actual='"+infoType+"'", 
+				infoType.equals("firstName") || infoType.equals("lastName") 
+				|| infoType.equals("segmentId") || infoType.equals("planCategoryId"));
+		String resultInfo=null;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			if (infoType.equals("firstName") || infoType.equals("lastName") ) {
+				resultInfo=jsonObj.getString(infoType);
+			}
+			if (infoType.equals("segmentId") || infoType.equals("planCategoryId")) {
+				JSONArray arr =jsonObj.getJSONArray("planProfiles");
+				if (isComboUser) 
+					Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+							+ "but the localStorage.consumerDetails has only one planProfiles.  "
+							+ "Please double check and correct test data", arr.length()>1);
+				for (int i = 0; i < arr.length(); i++) {
+					String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+					//note: need to locate the right plan for plan related info
+					if (lookForPlanCategory.equals(actualPlanCategory)) {
+						resultInfo = arr.getJSONObject(i).getString(infoType);
+					}
+				}
+			} 
+			Assert.assertTrue("PROBLEM - unable to locate "+infoType+" from localStorage.consumerDetails, "
+					+ "please double check input data planType matches user's actual planType", 
+					resultInfo!=null);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return resultInfo;
 	}
 
 }

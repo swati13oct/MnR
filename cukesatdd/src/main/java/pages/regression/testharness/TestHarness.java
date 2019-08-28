@@ -1017,7 +1017,7 @@ public class TestHarness extends UhcDriver {
     	}
     	
        	//----- begin PnP code
-        @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and Prescriptions page')]")
+        @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and prescriptions page') or contains(text(),'Go to Pharmacies & prescriptions page')]")
         private WebElement testHarnessPharPresLink;
 
     	@FindBy(xpath="//a[@id='pharmacies_5']")
