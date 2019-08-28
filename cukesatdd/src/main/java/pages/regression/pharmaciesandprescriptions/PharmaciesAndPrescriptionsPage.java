@@ -378,12 +378,12 @@ public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
 				validate(pharmaciesText));
 		String expectedTxt1="Get the most out of your prescription drug benefits.";
-		//String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Search for national and local pharmacies in your plan’s network to fill your prescriptions.";
-		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Or, search for national and local pharmacies in your plan’s network to fill your prescriptions.";
+		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Or, search for national and local pharmacies in your plan";
+		String expectedTxt3="s network to fill your prescriptions.";
 		String actualTxt=pharmaciesText.getText();
 		Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
-				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"' | Actual='"+actualTxt+"'", 
-				actualTxt.contains(expectedTxt1) && actualTxt.contains(expectedTxt2));
+				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"'"+expectedTxt3+"' | Actual='"+actualTxt+"'", 
+				actualTxt.contains(expectedTxt1) && actualTxt.contains(expectedTxt2) && actualTxt.contains(expectedTxt3));
 	}
 
 	public void validateTileContent(String exp_TileHeaderTxt, String exp_TileLinkTxt, 
