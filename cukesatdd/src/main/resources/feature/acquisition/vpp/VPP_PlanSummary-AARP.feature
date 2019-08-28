@@ -8,10 +8,9 @@ Feature: To test VPP Plan Summary Page in AARP Site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    And the user views plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-   Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
-    And the user validates available plans for selected plan types in the AARP site 
+#    And the user validates available plans for selected plan types in the AARP site 
     And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
      Then the user validates marketing bullets of the plan in AARP site
@@ -56,7 +55,7 @@ Feature: To test VPP Plan Summary Page in AARP Site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
     Then the user validates the right rail in AARP Site
     Then the user validates the Need Help Section in the right rail in aarp Site

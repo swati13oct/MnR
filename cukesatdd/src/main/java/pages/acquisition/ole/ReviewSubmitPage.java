@@ -118,6 +118,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'default-ul']")
 	private WebElement Enrollment_Disclaimer_Text;
 	
+	@FindBy(xpath = "//*[@id = 'ole-form-submitted']")
+	private WebElement Form_Sumbitted_ConfirmationPage;
+	
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -295,6 +298,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
+		CommonUtility.waitForPageLoadNew(driver,Form_Sumbitted_ConfirmationPage, 30);
+
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
