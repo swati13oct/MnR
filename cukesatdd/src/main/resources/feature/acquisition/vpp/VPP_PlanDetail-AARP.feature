@@ -122,3 +122,25 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
       | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
       | 15661 |   53910 | No              | Adams County  | MAPD     | UnitedHealthcare MedicareComplete Assist (PPO SNP)                | Dental Platinum | $32            | $384          |
+
+  @OTC_HealthCatalog @F338035
+  Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify OTC - health product catalog Benefits in Plan Details for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user validates the following Additional Benefits Plan details for the plan
+      | Benefit Type  | <benefitType>  |
+      | Expected Text | <expectedText> |
+
+    Examples: 
+      | UID                 | zipcode | isMultutiCounty | county         | plantype | planName                                   | benefitType                        | expectedText                                           |
+      | F338035 - MAPD-AARP |   35616 | No              | Colbert County | MAPD     | AARP Medicare Advantage Plan 1 (HMO)       | Health & Wellness Products Catalog | credit per quarter to use on approved health products  |
+      | F338035 - SNP-AARP  |   38603 | Yes             | Benton County  | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Health & Wellness Products Card    | credit per quarter to use on approved health products  |
+      | F338035 - MA-AARP   |   99001 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)    | Health & Wellness Products Catalog | credit per quarter to use on approved health products. |
