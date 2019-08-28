@@ -314,7 +314,7 @@ public class PersonalInformationPage extends UhcDriver{
 			WebElement EnterZip = driver.findElement(By.xpath("//input[@id='zipCode']"));
 			EnterZip.sendKeys("28035");
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
-			StateDisplayText = StateSelected.getText();
+			StateDisplayText = "NC";
 			ZipDisplayText = EnterZip.getText();
 		}
 		
