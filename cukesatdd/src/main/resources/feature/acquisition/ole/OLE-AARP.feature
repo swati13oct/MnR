@@ -8,9 +8,8 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -107,15 +106,14 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | 15574 | PCP-DSNP-MBI     |   33143 | NO              | Miami-Dade County  | SNP      | Preferred Medicare Assist (HMO SNP)                  | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018         | yes     | no           | false     | true       | true       | true        | true        | NO                | NO      |
 
   @2020Plans_OLE_AARP
-  Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
+  Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary for 2020 Plans
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
+		Then the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view next year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
@@ -313,9 +311,8 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
   @CampaignURL_OLE_Ulayer @acquisitionRegression @FastnFurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |

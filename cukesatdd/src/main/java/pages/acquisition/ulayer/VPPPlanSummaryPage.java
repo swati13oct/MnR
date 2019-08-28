@@ -2777,19 +2777,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void CheckClick_CurrentYear_Plans() {
-		try {
-			WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '2019')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearLink.getText());
-			System.out.println("*****CLICKING ON CURRENT YEAR LINK*****");
-			CurrentYearLink.click();
-		} catch (Exception e) {
-			System.out.println("AEP Year Toggle link is NOT displayed on VPP Page : ");
-
-			e.printStackTrace();
-		}	
 		
 		try {
-			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
