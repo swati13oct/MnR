@@ -6,7 +6,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
 ### TODO: combo MAPD and ship tab behavior validation
 
   @pharmaciesandprescriptions01 @regressionMember
-  Scenario Outline: FID: <TID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   |	<planType>   |
 	  | Member Type |	<memberType> |
@@ -28,12 +28,12 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Examples: 
 	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | AARP_Individual_PnP |
-	  | 313410 | MAPD     | UHC_Individual_PnP  |
-	  | 313410 | PDP      | Individual_PnP	    |
-	  | 313410 | MEDICA   | Individual_PnP	    |
-	  | 313410 | PCP      | Individual_PnP	    |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
-	  | 313410 | MAPD     | COMBO_PnP	        |
+#	  | 313410 | MAPD     | UHC_Individual_PnP  |
+#	  | 313410 | PDP      | Individual_PnP	    |
+#	  | 313410 | MEDICA   | Individual_PnP	    |
+#	  | 313410 | PCP      | Individual_PnP	    |
+#	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
+#	  | 313410 | MAPD     | COMBO_PnP	        |
 
 
   #####################################################
@@ -41,7 +41,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
   # note: This test is applicable to test via rally login only, validation will be skipped if access through testharness
   # note:
   @pharmaciesandprescriptions02 @NegativeScenario @regressionMember @regressionMember_Testharness
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
