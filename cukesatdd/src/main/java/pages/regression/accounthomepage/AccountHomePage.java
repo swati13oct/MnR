@@ -2927,15 +2927,15 @@ public class AccountHomePage extends UhcDriver {
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-				Assert.assertTrue("Dashboard header is not displayed", validate(element));
+				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", validate(element));
 				return element;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e=" + e);
-				Assert.assertTrue("Dashboard header not functioning as expected", false);
+				Assert.assertTrue("Got exception. Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", false);
 			}
 		} else {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
-			Assert.assertTrue("Dashboard header is not displayed", false);
+			Assert.assertTrue("No shadowRoot element on Dashboard", false);
 		}
 		return null;
 	}
@@ -2951,7 +2951,7 @@ public class AccountHomePage extends UhcDriver {
 				else
 					return false;
 			} catch (Exception e) {
-				System.out.println("can't locate element. Exception e=" + e);
+				System.out.println("Got exception. can't locate element. Exception e=" + e);
 				return false;
 			}
 		} else {
@@ -2984,16 +2984,16 @@ public class AccountHomePage extends UhcDriver {
 				element.click();
 				CommonUtility.checkPageIsReady(driver);
 			} catch (NoSuchElementException ne) {
-				System.out.println("TEST - can't find it, rethrowing the exception for next level to handle");
+				System.out.println("Can't locate shadowRoot element with css selector '"+inputCssSelector+" on dashboad', rethrowing the exception for next level to handle");
 				throw ne;
 				//new NoSuchElementException("Unable to locate css select '"+inputCssSelector+"' in shadow-root");
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e=" + e);
-				Assert.assertTrue("Dashboard header not functioning as expected", false);
+				Assert.assertTrue("Got exception. Can't locate shadowRoot element with css selector '"+inputCssSelector+" on dashboad", false);
 			}
 		} else {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
-			Assert.assertTrue("Dashboard header is not displayed", false);
+			Assert.assertTrue("No shadowRoot eleemnt on dashboard header", false);
 		}
 	}
 
