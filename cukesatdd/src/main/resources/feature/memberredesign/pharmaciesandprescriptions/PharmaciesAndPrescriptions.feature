@@ -28,12 +28,12 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Examples: 
 	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | AARP_Individual_PnP |
-#	  | 313410 | MAPD     | UHC_Individual_PnP  |
-#	  | 313410 | PDP      | Individual_PnP	    |
-#	  | 313410 | MEDICA   | Individual_PnP	    |
-#	  | 313410 | PCP      | Individual_PnP	    |
-#	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
-#	  | 313410 | MAPD     | COMBO_PnP	        |
+	  | 313410 | MAPD     | UHC_Individual_PnP  |
+	  | 313410 | PDP      | Individual_PnP	    |
+	  | 313410 | MEDICA   | Individual_PnP	    |
+	  | 313410 | PCP      | Individual_PnP	    |
+	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
+	  | 313410 | MAPD     | COMBO_PnP	        |
 
 
   #####################################################
