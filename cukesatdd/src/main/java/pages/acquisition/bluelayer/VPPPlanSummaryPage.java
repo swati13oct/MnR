@@ -1556,7 +1556,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Plan Name is : "+PlanName);
 		
 		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-				+ "')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(),'Monthly Premium')]//*[contains(text(),'$')]"));
+				+ "')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li[1]//*[contains(text(),'$')]"));
 		CommonUtility.waitForPageLoadNew(driver, PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 
