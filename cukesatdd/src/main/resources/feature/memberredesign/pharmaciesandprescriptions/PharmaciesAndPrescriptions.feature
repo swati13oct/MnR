@@ -24,7 +24,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
     Then user validates Need Help section content
-    Then user validates the footer section
+    #Then user validates the footer section
 
     Examples: 
 	  | FID    | planType | memberType          |
