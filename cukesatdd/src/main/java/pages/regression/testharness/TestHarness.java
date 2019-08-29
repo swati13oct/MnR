@@ -219,6 +219,12 @@ public class TestHarness extends UhcDriver {
 	 @FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
      private WebElement cologoImage;
 	
+     @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and prescriptions page') or contains(text(),'Go to Pharmacies & prescriptions page')]")
+     private WebElement testHarnessPharPresLink;
+
+ 	@FindBy(xpath="//a[@id='pharmacies_5']")
+ 	private WebElement testHarnessTopMenuPhaPresLink;
+ 	
 
 	String category = null;
 
@@ -1015,13 +1021,6 @@ public class TestHarness extends UhcDriver {
     			counter++;
     		} while (counter < 2);
     	}
-    	
-       	//----- begin PnP code
-        @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and prescriptions page') or contains(text(),'Go to Pharmacies & prescriptions page')]")
-        private WebElement testHarnessPharPresLink;
-
-    	@FindBy(xpath="//a[@id='pharmacies_5']")
-    	private WebElement testHarnessTopMenuPhaPresLink;
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);

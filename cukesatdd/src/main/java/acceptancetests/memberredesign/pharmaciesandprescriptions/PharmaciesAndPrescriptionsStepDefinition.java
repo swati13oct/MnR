@@ -20,7 +20,7 @@ import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPag
 import pages.regression.testharness.TestHarness;
 
 /**
- Functionality : Helper steps for validating the Pharmacies & Prescriptions Page on the member site.
+ Functionality : validate the Pharmacies & Prescriptions Page content on the member site.
  */
 public class PharmaciesAndPrescriptionsStepDefinition {
 	@Autowired
@@ -61,7 +61,6 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally data not yet sync up so dashboard will not have pnp link, just go through secondary page
 			//pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
-			
 			//if (pnpPg==null) //note: try secondary page before giving up
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
 		}
@@ -74,18 +73,12 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String userPlanCategoryId=pnpPg.getInfoInConsumerDetails(planType, memberType, "planCategoryId");
 		
 		System.out.println("TEST - userFirstName="+userFirstName+" | userLastName="+userLastName+" | userPlanCategoryId="+userPlanCategoryId);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE,
-				planType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE,
-				memberType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME,
-				userFirstName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME,
-				userLastName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID,
-				userPlanCategoryId);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE, memberType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME, userFirstName);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME, userLastName);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID, userPlanCategoryId);
 	}
 	
 	@Then("^user validates header section content$")
@@ -97,8 +90,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String lastName=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_LASTNAME);
 		pnpPg.validateHeaderSectionContent(firstName, lastName);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 	@Then("^user validates pharmacies text content$")
@@ -106,8 +98,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePharmaciesText();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 	@Then("^user validates pharmacies tiles section content$")
@@ -134,8 +125,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		}
 		
 		pnpPg.validatePharmaciesTilesSection(tileDrug, tilePharmacy, tilePrescription,tileDelivery,tileBenefit);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 
@@ -149,8 +139,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Compare drug pricing";
 		pnpPg.validateTileLnkDestination(planType, memberType, tile);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 
 	@Then("^user validates pharmacies tile Find a network pharmacy page$")
@@ -163,8 +152,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Find a network pharmacy";
 		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 
 	@Then("^user validates pharmacies tile Order prescription refills page$")
@@ -191,8 +179,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Check home delivery order status";
 		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 	
 	@Then("^user validates pharmacies tile Prescription Benefits Information page$")
@@ -205,8 +192,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Prescription Benefits Information";
 		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 	
 	@Then("^user validates Plan Materials link$")
@@ -214,8 +200,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validatePlanMaterialsLink();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 	@Then("^user validates Need Help section content$")
@@ -227,8 +212,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateNeedHelpSection(planType, memberType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,
-				pnpPg);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
 	@Then("^user should not see Pharmacies and Prescription link on dashboard$")
@@ -257,8 +241,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);
 		String planType = givenAttributesMap.get("Plan Type");
 		String memberType = givenAttributesMap.get("Member Type");
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		boolean result=accountHomePage.findPnPLinksExistOnSecondaryPg();
 
 		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should not have Pharmacies & Prescriptions link on dashboard", !result);

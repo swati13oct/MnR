@@ -4,6 +4,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
 ### TODO: last 3 tiles - link validation to sso
 ### TODO: drug lookup tile for group - link validation to sso
 ### TODO: combo MAPD and ship tab behavior validation
+### TBD:  page header text sometimes not showing first and last name, maybe prod issue?
 
   @pharmaciesandprescriptions01 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page

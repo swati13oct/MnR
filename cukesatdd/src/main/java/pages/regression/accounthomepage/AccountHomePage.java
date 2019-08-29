@@ -1437,7 +1437,6 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
@@ -1460,99 +1459,54 @@ public class AccountHomePage extends UhcDriver {
 						claimsDashboardLink.click();
 					} else {
 						System.out.println("Check for shadow-root before giving up");
-
+						String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+						String thirdTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(3)";
 						WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
-								"#main-nav > div > div > div > a:nth-child(2)");
+								secondTopMenuItemCssStr);
 						if (tmp.getText().equalsIgnoreCase("Claims")) {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#main-nav > div > div > div > a:nth-child(2)");
+							locateAndClickElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
 						} else {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#main-nav > div > div > div > a:nth-child(3)");
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,	thirdTopMenuItemCssStr);
 						}
 					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				checkForIPerceptionModel(driver);
-				/*
-				 * tbd try { Thread.sleep(10000);
-				 * 
-				 * } catch (InterruptedException e) { // TODO Auto-generated
-				 * catch block e.printStackTrace(); }
-				 */
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("claims");
 			}
 			checkForIPerceptionModel(driver);
 			return new ClaimsSummaryPage(driver);
-
 		} else {
 			System.out.println(
 					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
 		}
 		System.out.println(driver.getTitle());
-
-		// tbd if (driver.getTitle().equalsIgnoreCase("Claims")) {
-		// tbd try {
-		// tbd Thread.sleep(10000);
-		// tbd ClaimSummarypage comboTab = new
-		// ClaimSummarypage(driver).comboTabSelection();
-		// tbd comboTab.comboTabSelection();
-
-		// tbd } catch (InterruptedException e) {
-
-		// tbd e.printStackTrace();
-		// tbd }
-
-		// tbd }
 		return null;
 	}
 
 	public ClaimDetailsPage navigateToClaimDetailsPage() {
-
 		try {
-			// feebackpopupClose();
-			// driver.switchTo().defaultContent();
-			// CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink,
-			// 60);
-			// Thread.sleep(20);
 			CommonUtility.waitForPageLoad(driver, claimstablemoreinfolink, 10);
 			Assert.assertTrue("PROBLEM - unable to locate the 'More info' link on page", validate(claimstablemoreinfolink));
 			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
-			/* tbd-remove try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} */
-
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", claimstablemoreinfolink);
 			checkForIPerceptionModel(driver);
-
-			// claimstablemoreinfolinkCombo.click();
-			// CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
 			System.out.println(driver.getTitle());
-			// System.out.println("*** Combo Member is on Claims Details Page
-			// ***");
 			if (driver.getTitle().equalsIgnoreCase("Claims Summary")) {
 				System.out.println("*** Claims Details Page ***");
-
 			}
 		} catch (Exception ex) {
 			return null;
 		}
-
 		return new ClaimDetailsPage(driver);
 	}
+
 	@FindBy(className = "loading-block")
 	private WebElement loadingImage;
 
 	public PharmacySearchPage navigateToRedesignPharmacyLocaterPage() {
-		// tbd waitForHomePage(helloPerson);
-		/*
-		 * if (validate(iPerceptionAutoPopUp)) { iPerceptionAutoPopUp.click(); }
-		 * else { System.out.println("iPerception Pop Up not displayed"); }
-		 */
 		checkForIPerceptionModel(driver);
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
@@ -1580,13 +1534,6 @@ public class AccountHomePage extends UhcDriver {
 					pharmacySearchLink.click();
 					System.out.println("Clicked pharmacy Search Link...");
 					CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-					/* tbd try {
-						Thread.sleep(10000);
-
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
 				}
 			}
 		}
@@ -1820,10 +1767,6 @@ public class AccountHomePage extends UhcDriver {
 			TestHarnesspaymentsLink.click();
 			return new PaymentHistoryPage(driver);
 		} else {
-			// tbd System.out.println("payment link is not displayed on the
-			// header"); // when in future date
-			// tbd coverageBenefits.click();
-
 			// NOTE:
 			// work-around, when Home, data maintained by Rally, is out of sync,
 			// payment tab may not show
@@ -1847,17 +1790,6 @@ public class AccountHomePage extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 
 		}
-
-		// tbd else{ CoverageAndBenefits.click();
-		// tbd
-		// tbd WebDriverWait wait = new WebDriverWait(driver, 30);
-		// tbd
-		// wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
-		// tbd
-		// tbd validate(paymentslink); paymentslink.click(); return new
-		// tbd PaymentHistoryPage(driver); }
-		// tbd
-		// tbd return new PaymentHistoryPage(driver);
 	}
 
 	/**
@@ -2558,12 +2490,6 @@ public class AccountHomePage extends UhcDriver {
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
 		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolinkCombo, 10);
-		/* tbd-remove try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 		validateNew(claimstablemoreinfolinkCombo);
 		System.out.println("more info link is seen for combo member ===>" + claimstablemoreinfolinkCombo.isDisplayed());
 		try {
@@ -2571,18 +2497,13 @@ public class AccountHomePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", claimstablemoreinfolinkCombo);
 		checkForIPerceptionModel(driver);
-
-		// claimstablemoreinfolinkCombo.click();
 		CommonUtility.waitForPageLoad(driver, claimtotalcomb, 30);
 		System.out.println(driver.getTitle());
-		// System.out.println("*** Combo Member is on Claims Details Page ***");
 		if (driver.getTitle().equalsIgnoreCase("/details")) {
 			System.out.println("*** Combo Member is on Claims Details Page ***");
-
 		}
 		return new ClaimDetailsPage(driver);
 	}
@@ -2889,8 +2810,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println("more info link is seen for  ===>" + claimstablemoreinfolink.isDisplayed());
 			try {
-				Thread.sleep(2000); // keep, sometimes detail takes longer to
-				// load
+				Thread.sleep(2000); // keep, sometimes detail takes longer to load
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -3045,32 +2965,14 @@ public class AccountHomePage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-			if (validate(pharPresDashboardLink)) {
+			if (validate(pharPresDashboardLink))
 				pharPresDashboardLink.click();
-			}  else if (validate(pharPresDashboardLinkAlternative)) {
+			 else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
-			} else {
+			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
-					//note: use the 2nd menu link as the base and determine which one I really need
-					// if 2 is FIND CARE then 6 is PnP
-					// if 2 is CARE then 5 is PnP
-					String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-					WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader,
-							secondTopMenuItemCssStr);
-					if (secondTopMenuItem.getText().contains("FIND CARE")) {
-						String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-						WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
-								pnpTopMenuItemCssStr);
-						if (isPnpLink(pnpTopMenuLink.getText())) 
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,	pnpTopMenuItemCssStr);
-					} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
-						String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-						WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
-								pnpTopMenuItemCssStr);
-						if (isPnpLink(pnpTopMenuLink.getText()))
-							locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-					} 
+					attemptShadowRootTopMenuLinkNavigationForPnP();
 				} else {
 					System.out.println("There is no shadow-root menu");
 				}
@@ -3080,46 +2982,48 @@ public class AccountHomePage extends UhcDriver {
 			//System.out.println("don't bother to work around the sorry error, page displays won't look right");
 			workaroundAttempt("pnp"); 
 		}
-		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
-		}
 		return null;
 	}	
 
-
+	public void attemptShadowRootTopMenuLinkNavigationForPnP() {
+		//note: use the 2nd menu link as the base and determine which one I really need
+		// if 2 is FIND CARE then 6 is PnP
+		// if 2 is CARE then 5 is PnP
+		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+		WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader,
+				secondTopMenuItemCssStr);
+		if (secondTopMenuItem.getText().contains("FIND CARE")) {
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (isPnpLink(pnpTopMenuLink.getText())) 
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+		} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (isPnpLink(pnpTopMenuLink.getText())) 
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+		} 
+	}
+	
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
-		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt secondary page navigaton to reach PnP page");
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
 			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
-			if (validate(pharPresDashboardLink)) {
+			if (validate(pharPresDashboardLink)) 
 				pharPresDashboardLink.click();
-			} else if (validate(pharPresDashboardLinkAlternative)) {
+			else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
-			} else {
+			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
-					//note: use the 2nd menu link as the base and determine which one I really need
-					// if 2 is FIND CARE then 6 is PnP
-					// if 2 is CARE then 5 is PnP
-					String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-					WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader,
-							secondTopMenuItemCssStr);
-					if (secondTopMenuItem.getText().contains("FIND CARE")) {
-						String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-						WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
-								pnpTopMenuItemCssStr);
-						if (isPnpLink(pnpTopMenuLink.getText())) 
-							locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-					} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
-						String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-						WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
-								pnpTopMenuItemCssStr);
-						if (isPnpLink(pnpTopMenuLink.getText())) 
-							locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-					} 
+					attemptShadowRootTopMenuLinkNavigationForPnP();
 				} else {
 					System.out.println("There is no shadow-root menu");
 				}
@@ -3129,9 +3033,8 @@ public class AccountHomePage extends UhcDriver {
 			//System.out.println("don't bother to work around the sorry error, page displays won't look right");
 			workaroundAttempt("pnp"); 
 		}
-		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
-		}
 		return null;
 	}	
 	
@@ -3141,8 +3044,9 @@ public class AccountHomePage extends UhcDriver {
 		else 
 			return false;
 	}
+	
 	public boolean findPnPLinksExistOnSecondaryPg() {
-		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
@@ -3159,24 +3063,16 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			if (validate(shadowRootHeader)) {
 				System.out.println("Check for shadow-root before giving up");
-				WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
-						"#main-nav > div > div > div > a:nth-child(2)");
-				String targetLnk="";
-				if (tmp.getText().contains("FIND CARE")) {
-					tmp = locateElementWithinShadowRoot(shadowRootHeader,
-							"#main-nav > div > div > div > a:nth-child(6)");
-					targetLnk=tmp.getText();
-					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
-						return true;
-					}
-				} else if (tmp.getText().contains("CLAIMS")) {
-
-					tmp = locateElementWithinShadowRoot(shadowRootHeader,
-							"#main-nav > div > div > div > a:nth-child(5)");
-					targetLnk=tmp.getText();
-					if (targetLnk.equals("PHARMACIES") && targetLnk.equals("PRESCRIPTIONS")) {
-						return true;
-					}
+				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+				WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
+				if (secondTopMenuItem.getText().contains("FIND CARE")) {
+					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+					return isPnpLink(pnpTopMenuItem.getText());
+				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+					return isPnpLink(pnpTopMenuItem.getText());
 				}
 			} else {
 				System.out.println("There is no shadow-root menu");
