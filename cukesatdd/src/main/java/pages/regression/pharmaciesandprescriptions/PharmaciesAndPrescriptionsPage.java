@@ -1,13 +1,9 @@
 package pages.regression.pharmaciesandprescriptions;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
@@ -19,12 +15,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member_deprecated.bluelayer.AccountHomePage;
 
 /**
- * Functionality : validations for claims summary page
+ * Functionality : validations for Pharmacies & Prescriptions  page
  */
 public class PharmaciesAndPrescriptionsPage extends UhcDriver{
 	//note: need help section

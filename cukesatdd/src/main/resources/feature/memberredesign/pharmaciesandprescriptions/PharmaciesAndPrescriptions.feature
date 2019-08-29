@@ -54,7 +54,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
       | Member Type | <memberType> |
  
     Examples: 
-      | TID    | planType | memberType     |
+      | FID    | planType | memberType     |
       | 313410 | MAPD     | Terminated_PnP |
       | 313410 | MAPD     | PreEff_PnP     |
       | 313410 | MA       | Individual_PnP |

@@ -4,16 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.html5.LocalStorage;
-import org.openqa.selenium.html5.WebStorage;
-import org.openqa.selenium.remote.Augmenter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -66,9 +59,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
+			//note: rally data not yet sync up so dashboard will not have pnp link, just go through secondary page
+			//pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
 			
-			if (pnpPg==null) //note: try secondary page before giving up
+			//if (pnpPg==null) //note: try secondary page before giving up
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
 		}
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", 
@@ -79,12 +73,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String userLastName=pnpPg.getInfoInConsumerDetails(planType, memberType, "lastName");
 		String userPlanCategoryId=pnpPg.getInfoInConsumerDetails(planType, memberType, "planCategoryId");
 		
-		System.out.println("TEST - userFirstName="+userFirstName);
-		System.out.println("TEST - userLastName="+userLastName);
-		System.out.println("TEST - userPlanCategoryId="+userPlanCategoryId);
+		System.out.println("TEST - userFirstName="+userFirstName+" | userLastName="+userLastName+" | userPlanCategoryId="+userPlanCategoryId);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
 				pnpPg);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, 
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE,
 				planType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE,
 				memberType);
