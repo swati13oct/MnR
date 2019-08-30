@@ -305,7 +305,7 @@ public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttribute
 	{
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 		newclaimsSummarypage.validateExpOfBenSubNavNotDispForSsup();
 	}
@@ -315,7 +315,7 @@ public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttribute
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
 		//write code for handling iperception pop-up
 		//newclaimsSummarypage.feebackpopupClose();
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 		newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
 	}
@@ -341,7 +341,7 @@ public void validateClaimSupportIsNOTDisplayedOnClaimsPageForSHIPPreffective(Dat
 	
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
 		newclaimsSummarypage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
 	}
@@ -357,7 +357,7 @@ public void verifyCorrectPreEffectiveMessageIsDisplayedOnClaimsPage() throws Thr
 	
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	newclaimsSummarypage.verifyCorrectMessageForPreEffectiveMembers();
 	
                
@@ -413,7 +413,7 @@ public void verifyCorrectTechnicalSupportPhoneNumberIsDisplayedOnClaimsPage(Data
 	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	newclaimsSummarypage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 	
                
@@ -438,7 +438,7 @@ public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)th
 	
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.verifyPaymentTabIsDisplayedForPreEffectiveMembers();
 	}
 	
@@ -603,7 +603,7 @@ public void user_clicks_on_the_Contact_Us_link_in_Need_help_Section_of_Claims_Pa
     // User navigates to Contact Us page by clicking on "contact us" link in CLaims Page
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	ContactUsPage contactUsPage = newclaimsSummarypage.navigateToContactUsPage();
 	getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);                      
 
