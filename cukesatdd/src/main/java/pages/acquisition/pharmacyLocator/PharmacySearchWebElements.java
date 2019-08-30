@@ -180,9 +180,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//p[contains(text(),'see the pharmacy')]")
 	protected WebElement areaUnderArrow;
 
-	@FindBy(xpath="//a[contains(@href,'contact-us.html')]")
+	@FindBy(xpath="//div[contains(@ng-show,'pharmacyModel') and not(contains(@class,'ng-hide'))]//a[contains(@href,'contact-us.html')]")
 	protected WebElement contactUnitedHealthCare;
 
+	@FindBy(xpath="//ol[@class='pharmacy-list']//a[contains(@href,'contact-us.html')]")
+	protected WebElement contactUnitedHealthCare_ol;
+	
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
 	protected WebElement pdf_otherPlans;
 
