@@ -5,8 +5,10 @@ import java.util.Date;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -195,6 +197,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				sendkeys(fedFrom,fromDate);
 				sendkeys(fedTo,toDate);
 				CommonUtility.waitForPageLoad(driver, srchBtn,60);
+				handleHowIsYourVisit();
 				srchBtn.click();
 			}
 			System.out.println("Clicked search button");

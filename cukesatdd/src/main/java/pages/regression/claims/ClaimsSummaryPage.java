@@ -197,6 +197,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		checkForIPerceptionModel(driver);
+		//tbd handleHowIsYourVisit();
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
