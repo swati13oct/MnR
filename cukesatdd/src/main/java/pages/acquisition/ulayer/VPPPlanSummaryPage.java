@@ -1307,7 +1307,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 		System.out.println("Plan Name is : "+PlanName);
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(), '"+PlanName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//li[1]//span[contains(text(),'$')])[1]"));
 		CommonUtility.waitForPageLoadNew(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 
@@ -2710,41 +2710,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 	
-	public MedSuppOLEPage StartApplication(String DateOfBirth) throws InterruptedException {
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 30);
-		Start_ApplicationBtn.click();
-
-		System.out.println("Start application button is clicked on application page");
-		waitforElementVisibilityInTime(DOB, 45);
-		sendkeysNew(DOB, DateOfBirth);
-		System.out.println("Date of birth is entered");
-
-		/*//monthDrpDwn.click();
-		jsClickNew(monthDrpDwn);
-		monthDrpDwnOption.click();
-		Thread.sleep(2000);
-		System.out.println("Effective date- month value selected");
-		
-		yearDrpDwn.click();
-		Thread.sleep(2000);
-		yearDrpDwnOption.click();
-		
-		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
-		startDrpDwn.click();
-		Thread.sleep(2000);
-		startDrpDwnOption.click();*/
-		
-		System.out.println("Plan to start date selected");
-
-		Start_ApplicationBtn.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
-			return new MedSuppOLEPage(driver);
-		else
-			return null;
-	}
-	
 	
 	public String estimatedAnnualDrugCostVPP(String planName) {
 		
@@ -2796,25 +2761,38 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void CheckClick_CurrentYear_Plans() {
-		try {
-			WebElement CurrentYearLink = driver.findElement(By.xpath("//a[contains(text(), '2019')]"));
-			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearLink.getText());
-			System.out.println("*****CLICKING ON CURRENT YEAR LINK*****");
-			CurrentYearLink.click();
-		} catch (Exception e) {
-			System.out.println("AEP Year Toggle link is NOT displayed on VPP Page : ");
-
-			e.printStackTrace();
-		}	
 		
 		try {
-			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
+			SelectYearGoBtn.click();
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void CheckClick_NextYear_Plans() {
+
+		try {
+			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
+			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
+			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
+			System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+			NextYearRadio.click();
+			System.out.println("*****CLICKING ON Year Toggle Go button*****");
+			
 			SelectYearGoBtn.click();
 		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
@@ -2902,5 +2880,3 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 	}
 }
-
-
