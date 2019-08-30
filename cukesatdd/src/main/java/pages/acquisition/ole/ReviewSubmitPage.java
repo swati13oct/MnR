@@ -296,10 +296,9 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	public OLEconfirmationPage submitEnrollment() {
 		
+
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
-		CommonUtility.waitForPageLoadNew(driver,Form_Sumbitted_ConfirmationPage, 30);
-
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
@@ -309,7 +308,8 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}
-		return null;	}
+		return null;	
+		}
 
 
 
