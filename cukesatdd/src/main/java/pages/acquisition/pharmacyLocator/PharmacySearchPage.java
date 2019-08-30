@@ -508,7 +508,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					validate(pharmaciesAvailable));
 			if (totalAfter >10) {
-				moveMouseToElement(contactUnitedHealthCare);
+				WebElement contactUsLink=contactUnitedHealthCare;
+				if (!validate(contactUnitedHealthCare)) 
+					contactUsLink=contactUnitedHealthCare_ol;
+				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						validate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
