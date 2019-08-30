@@ -118,6 +118,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'default-ul']")
 	private WebElement Enrollment_Disclaimer_Text;
 	
+	@FindBy(xpath = "//*[@id = 'ole-form-submitted']")
+	private WebElement Form_Sumbitted_ConfirmationPage;
+	
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -293,6 +296,7 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	public OLEconfirmationPage submitEnrollment() {
 		
+
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -304,7 +308,8 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}
-		return null;	}
+		return null;	
+		}
 
 
 

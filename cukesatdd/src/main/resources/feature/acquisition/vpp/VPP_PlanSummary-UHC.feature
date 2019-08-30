@@ -8,9 +8,8 @@ Feature: To test VPP Plan Summary Page in UMS Site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     And the user validates plan summary for the below plan in UMS site
       | Plan Name | <planName> |
     Then the user validates and clicks Add to compare checkbox for the above selected plan in the UMS site for MA, MAPD , PDP Plans
@@ -54,7 +53,7 @@ Feature: To test VPP Plan Summary Page in UMS Site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    And user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
     Then the user validates the right rail in UMS Site
     Then the user validates the Need Help Section in the right rail in ums Site
