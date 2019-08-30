@@ -103,6 +103,9 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PlanEffIn6OfEligible_1']/following-sibling::label")
 		private WebElement medSuppOlePlanEffIn6OfEligibleYesRadioBtn;
 		
+		@FindBy(xpath = "//input[@id='GI30dayBday_1']/following-sibling::label")
+		private WebElement medSuppOleGI30dayBdayYesRadioBtn;
+				
 		@FindBy(xpath = "//div[@id='ole-form-content']//a[contains(@href,'www.insurance.ca.gov')]")
 		private WebElement medSuppOleInsuranceLink;
 		
@@ -139,7 +142,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='MedicalReleaseAuthSignatureInd']/following-sibling::label")
 		private WebElement OleMS_MedRelAuthSignCheckBox;
 		
-		@FindBy(xpath = "//input[@id='MedicalReleaseClaimSignatureInd']/following-sibling::label")
+		@FindBy(xpath = "//input[@id='MedicalReleaseClaimsSignatureInd']/following-sibling::label")
 		private WebElement OleMS_MedRelClaimSigCheckBox;
 		
 		@FindBy(xpath = "//button[text()='Submit application']")
@@ -208,6 +211,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		validateNew(medSuppOlePartABYesRadioBtn);
 		nextButton.click();
 		validateNew(medSuppOlePlanEffIn6OfEligibleYesRadioBtn);
+		medSuppOleGI30dayBdayYesRadioBtn.click();
 		nextButton.click();
 		validateNew(medSuppOleInsuranceLink);
 		nextButton.click();

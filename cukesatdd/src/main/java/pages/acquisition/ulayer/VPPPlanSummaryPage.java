@@ -359,22 +359,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpbed-monthSelectBoxIt")
-		private WebElement monthDrpDwn;
+		@FindBy(id = "mpaed-month")
+		private WebElement monthDrpDwnPartA;
 
-		@FindBy(xpath = "//ul[@id='mpbed-monthSelectBoxItOptions']//li[2]")
-		private WebElement monthDrpDwnOption;
+		@FindBy(xpath = "//select[@id='mpaed-month']//option[2]")
+		private WebElement monthDrpDwnOptionPartA;
 
-		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
-		private WebElement yearDrpDwn;
+		@FindBy(id = "mpaed-year")
+		private WebElement yearDrpDwnPartA;
 
-		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li/a[contains(text(),'2019')]")
-		private WebElement yearDrpDwnOption;
+		@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
+		private WebElement yearDrpDwnOptionPartA;
+		
+		@FindBy(id = "mpbed-month")
+		private WebElement monthDrpDwnPartB;
 
-		@FindBy(id = "msVppdpsdSelectBoxItText")
+		@FindBy(xpath = "//select[@id='mpbed-month']//option[2]")
+		private WebElement monthDrpDwnOptionPartB;
+
+		@FindBy(id = "mpbed-year")
+		private WebElement yearDrpDwnPartB;
+
+		@FindBy(xpath = "//select[@id='mpbed-year']//option[contains(text(),'2019')]")
+		private WebElement yearDrpDwnOptionPartB;
+
+		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
 
-		@FindBy(xpath = "//ul[@id='msVppdpsdSelectBoxItOptions']//li[2]")
+		@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
 		private WebElement startDrpDwnOption;
 
 		@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
@@ -537,7 +549,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//button[@id='lisGoBtn']")
 		private WebElement planYearPopupGoButton;
 		
-
+		@FindBy(id="msVppZipCode")
+		private WebElement medSuppZipCode;
+		
+		@FindBy(xpath="//button[contains(@class,'viewPlans')]")
+		private WebElement viewPlansBtnMedSupp;
+		
+		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			return valEstimatedAnnualDrugCostValue;
@@ -584,8 +602,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		AcquisitionHomePage.checkModelPopup(driver);
 		handleChatPopup();
-
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
 		validateNew(pdpPlansCount);
@@ -625,7 +643,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
 			msPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList, 30);
+			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 		} else if (planType.equalsIgnoreCase("SNP")) {
@@ -723,10 +741,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'providers covered')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'roviders covered')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if(mproviderinfo.contains("1 providers covered"))
+		if(mproviderinfo.toLowerCase().contains("providers covered"))
 		{
 			return true;
 		}
@@ -2570,7 +2588,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		try {
-			
+		/*	
 			CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
 			  JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -2581,7 +2599,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("Effective date- month value selected");
 			yearDrpDwn.click();
 			Thread.sleep(2000);
-			yearDrpDwnOption.click();
+			yearDrpDwnOption.click();*/
 			System.out.println("Effective date- year value selected");
 			Thread.sleep(2000);
 			startDrpDwn.click();
@@ -2701,7 +2719,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
-		//monthDrpDwn.click();
+		/*//monthDrpDwn.click();
 		jsClickNew(monthDrpDwn);
 		monthDrpDwnOption.click();
 		Thread.sleep(2000);
@@ -2715,7 +2733,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(2000);
 		startDrpDwn.click();
 		Thread.sleep(2000);
-		startDrpDwnOption.click();
+		startDrpDwnOption.click();*/
 		
 		System.out.println("Plan to start date selected");
 
@@ -2726,6 +2744,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		else
 			return null;
 	}
+	
 	
 	public String estimatedAnnualDrugCostVPP(String planName) {
 		
@@ -2809,8 +2828,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 	
-	public void handlePlanYearSelectionPopup() {
-		CommonUtility.checkPageIsReady(driver);
+	public void handlePlanYearSelectionPopup(String planType) {
+		if (!(planType.equalsIgnoreCase("MS"))) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
 			if (validate(currentYearSelection)) {
@@ -2823,7 +2843,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 					e.printStackTrace();
 				}
 			}
-		} 
+		}
+		}
 	}
 
 	public void handleChatPopup() {
@@ -2836,6 +2857,49 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
+	}
+	
+	public MedSuppOLEPage fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
+		sendkeys(medSuppZipCode,zipCode); 
+		sendkeys(DOB, DateOfBirth);
+		System.out.println("Date of birth is entered");
+
+		//monthDrpDwn.click();
+		jsClickNew(monthDrpDwnPartA);
+		monthDrpDwnOptionPartA.click();
+		Thread.sleep(2000);
+		System.out.println("Effective date- month value selected");
+		medSuppOleMaleCheckbox.click();
+		yearDrpDwnPartA.click();
+		Thread.sleep(2000);
+		yearDrpDwnOptionPartA.click();
+
+		jsClickNew(monthDrpDwnPartB);
+		monthDrpDwnOptionPartB.click();
+		Thread.sleep(2000);
+		System.out.println("Effective date- month value selected");
+		
+		yearDrpDwnPartB.click();
+		Thread.sleep(2000);
+		yearDrpDwnOptionPartB.click();
+		
+		System.out.println("Effective date- year value selected");
+		Thread.sleep(2000);
+		startDrpDwn.click();
+		Thread.sleep(2000);
+		startDrpDwnOption.click();
+		
+		System.out.println("Plan to start date selected");
+
+		viewPlansBtnMedSupp.click();
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		Start_ApplicationBtn.click();
+		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
+			return new MedSuppOLEPage(driver);
+		else
+			return null;
 	}
 }
 
