@@ -359,6 +359,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
+		@FindBy(id = "mpbed-monthSelectBoxIt")
+		private WebElement monthDrpDwn;
+
+		@FindBy(xpath = "//ul[@id='mpbed-monthSelectBoxItOptions']//li[2]")
+		private WebElement monthDrpDwnOption;
+
+		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
+		private WebElement yearDrpDwn;
+
+		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li/a[contains(text(),'2019')]")
+		private WebElement yearDrpDwnOption;
+		
 		@FindBy(id = "mpaed-month")
 		private WebElement monthDrpDwnPartA;
 
@@ -2588,7 +2600,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		try {
-		/*	
+	
 			CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
 			  JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -2599,7 +2611,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("Effective date- month value selected");
 			yearDrpDwn.click();
 			Thread.sleep(2000);
-			yearDrpDwnOption.click();*/
+			yearDrpDwnOption.click();
 			System.out.println("Effective date- year value selected");
 			Thread.sleep(2000);
 			startDrpDwn.click();
