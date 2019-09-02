@@ -57,7 +57,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
 	private WebElement popUpcloseLink;
 
-	@FindBy(xpath = "//div[@class='modal-title']")
+	@FindBy(xpath = "//div[contains(@class,'popup-modal')][contains(@class,'active')]/div[@class='modal-title']")
 	private WebElement countyModal;
 
 	@FindBy(id = "ipeL")
@@ -242,7 +242,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(css=".icon-search")
 	private WebElement searchbutton;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	@FindBy(xpath="//button[contains(@class,'proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
 	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
@@ -372,14 +372,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
+		/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-		}
+		}*/
 	}	
 	
 	public void openAndValidate(String site) {
@@ -394,14 +396,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			
+			/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 			try{
 				if(proactiveChatExitBtn.isDisplayed())
 					jsClickNew(proactiveChatExitBtn);
 			}catch(Exception e){
 				System.out.println("Proactive chat popup not displayed");
-			}
+			}*/
+			clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 		} else {
 			openAndValidate();
 		}
@@ -413,14 +418,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
-		try{
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
+		/*try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);			
 			else 
 				Assert.fail("Please check booleanvalue");		
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-		}
+		}*/
 		}
 	}
 
@@ -1556,4 +1562,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		return new VPPPlanSummaryPage(driver);
 	}
+	
 }

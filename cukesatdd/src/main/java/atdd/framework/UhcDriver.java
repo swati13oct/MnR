@@ -662,4 +662,18 @@ try {
 
 	}
 	
+	public static void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
+		System.out.println("Waiting for element to load...");
+		CommonUtility.waitForPageLoad(driver, element, timeInSec);
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element is displayed. Clicking on element...");
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
+			}
+		} catch (Exception e) {
+			System.out.println("Element is not displayed");
+		}
+	}
+	
 }
