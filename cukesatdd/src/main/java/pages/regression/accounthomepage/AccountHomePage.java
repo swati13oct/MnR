@@ -72,7 +72,7 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement contactUsPageLink;
 
 	// @FindBy(css = ".view-id-link")
-	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
+	@FindBy(xpath = "(//span[contains(text(),'View & print member ID cards')])[1]")
 	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
@@ -2539,7 +2539,7 @@ public class AccountHomePage extends UhcDriver {
 	 * iPerception popup
 	 */
 
-	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
+	/*public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
 																	// 20);
 		Thread.sleep(20000);
 		if (validate(iPerceptionframe)) {
@@ -2551,7 +2551,30 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-	}
+	}*/
+
+			public void feebackpopupClose() throws InterruptedException { 
+				int counter = 0;
+				do {
+
+					System.out.println("current value of counter: " + counter);
+					List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+					if (IPerceptionsFrame.isEmpty()) {
+						try {
+							Thread.sleep(1500);
+						} catch (InterruptedException e) {
+							System.out.println(e.getMessage());
+						}
+
+					} else {
+						driver.switchTo().frame(IPerceptionsFrame.get(0));
+						driver.findElement(By.className("btn-no")).click();
+						driver.switchTo().defaultContent();
+					}
+					counter++;
+				} while (counter < 2);
+		}
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
 		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolinkCombo, 10);
@@ -2596,14 +2619,15 @@ public class AccountHomePage extends UhcDriver {
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
 				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-				try {
+				CommonUtility.checkPageIsReadyNew(driver);
+				/*try {
 					Thread.sleep(20000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
+				CommonUtility.waitForPageLoadNew(driver, heading, 45);
 				if (driver.getTitle().contains("Benefits")) {
 					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
@@ -3082,5 +3106,4 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
-	
 }
