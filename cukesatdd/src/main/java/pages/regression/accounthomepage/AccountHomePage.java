@@ -1630,8 +1630,8 @@ public class AccountHomePage extends UhcDriver {
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "
-					+ driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).isDisplayed());
-			driver.findElement(By.xpath("//a[text()='Go to Pharmacy Locator page']")).click();
+					+ driver.findElement(By.xpath("//a[text()='Go to FORMS AND RESOURCE page']")).isDisplayed());
+			driver.findElement(By.xpath("//a[text()='Go to FORMS AND RESOURCE page']")).click();
 		}
 
 		else if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
@@ -3106,5 +3106,4 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
-	
 }

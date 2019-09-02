@@ -224,6 +224,7 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.CheckClick_NextYear_Plans();
 	}
 
+
 	/**
 	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
 	 */
@@ -1831,7 +1832,7 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2019");
 	}
 	
-		@When("^the user checks for AEP CUrrent year plans link and clicks to view next year plans on AARP$")
+	@When("^the user checks for AEP CUrrent year plans link and clicks to view next year plans on AARP$")
 	public void the_user_views_nextyearlink_clicksLink() throws Throwable {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()

@@ -3114,7 +3114,6 @@ catch (Exception e) {
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
-
 			SelectYearGoBtn.click();
 		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
