@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.login.HSIDLoginPage;
 
 /** methods used by either of both Claims Summary and Claim Details page */
 public class ClaimsBase extends UhcDriver  {
@@ -172,18 +171,18 @@ public class ClaimsBase extends UhcDriver  {
 			WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
 		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",
-				validate(SectionElement));
+				claimsValidate(SectionElement));
 		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",
-				validate(imgElement));
+				claimsValidate(imgElement));
 		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",
-				validate(phoneElement));
+				claimsValidate(phoneElement));
 		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",
-				validate(ttyElement));
+				claimsValidate(ttyElement));
 		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",
-				validate(hrsOperationElement1));
+				claimsValidate(hrsOperationElement1));
 		if (hrsOperationElement2!=null) {
 			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",
-					validate(hrsOperationElement2));
+					claimsValidate(hrsOperationElement2));
 		}
 	}
 
@@ -203,7 +202,7 @@ public class ClaimsBase extends UhcDriver  {
 		while(x<15) {
 			try {
 				Thread.sleep(1000);
-				if (validate(verifyClaimSummaryAndPagination)) {
+				if (claimsValidate(verifyClaimSummaryAndPagination)) {
 					Thread.sleep(extra); //give it more time to settle the page
 					System.out.println("sleep for another 2 sec for the page to settle down...");
 					System.out.println("there is some indication of claims...let's check it out");
@@ -219,7 +218,7 @@ public class ClaimsBase extends UhcDriver  {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numClaimsDrugCustSrch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (validate(numClaimsMedlCustSrch)) 
+				if (claimsValidate(numClaimsMedlCustSrch)) 
 					numClaimsElement=numClaimsMedlCustSrch;
 			} else {
 				numClaimsElement=numClaimsShipCustSrch;
@@ -234,7 +233,7 @@ public class ClaimsBase extends UhcDriver  {
 			}
 		}
 		Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
-				validate(numClaimsElement));
+				claimsValidate(numClaimsElement));
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
@@ -274,7 +273,7 @@ public class ClaimsBase extends UhcDriver  {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					claimsValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSection(validateSection, needHelp_TechSupp, 
@@ -296,9 +295,9 @@ public class ClaimsBase extends UhcDriver  {
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",
-					validate(needHelp_seeMoreWaysTo));
+					claimsValidate(needHelp_seeMoreWaysTo));
 			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",
-					validate(needHelp_contactUsLink));
+					claimsValidate(needHelp_contactUsLink));
 			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -325,7 +324,7 @@ public class ClaimsBase extends UhcDriver  {
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					claimsValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSection(validateSection, needHelp_TechSupp, needHelp_TechSupp_img, 
@@ -345,16 +344,16 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public void goToSpecificComboTab(String planType) {
 		if (planType.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
 			comboTab_MAPD.click();
 		} else if (planType.equalsIgnoreCase("ship")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
 			comboTab_SHIP.click();
 		} else if (planType.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
 			comboTab_PDP.click();
 		} else if (planType.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
 			comboTab_SSUP.click();
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
@@ -369,8 +368,8 @@ public class ClaimsBase extends UhcDriver  {
 	public boolean validateAdobePdfDocText() {
 		boolean bypass_INC11365785_containsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
-		if (validate(adobePdfDocText)) {
-			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(adobePdfDocText));
+		if (claimsValidate(adobePdfDocText)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",claimsValidate(adobePdfDocText));
 		} else {
 			System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  "
 					+ "TODO: When fixed, take out this else portion");
