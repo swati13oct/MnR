@@ -401,11 +401,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					validate(pharmaciesAvailable));
 			if (total >10) {
+				WebElement contacUstLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contacUstLink)) 
+					contacUstLink=contactUnitedHealthCare_ol;
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare));
-				
-
+						validate(contacUstLink));
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));
