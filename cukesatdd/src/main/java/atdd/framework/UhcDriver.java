@@ -46,7 +46,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 5000L);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -660,6 +660,20 @@ try {
 		actions.click().build().perform();
 		CommonUtility.checkPageIsReadyNew(driver);
 
+	}
+	
+	public static void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
+		System.out.println("Waiting for element to load...");
+		CommonUtility.waitForPageLoad(driver, element, timeInSec);
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element is displayed. Clicking on element...");
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
+			}
+		} catch (Exception e) {
+			System.out.println("Element is not displayed");
+		}
 	}
 	
 }

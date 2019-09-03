@@ -162,10 +162,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					validate(pharmaciesAvailable));
 			if (total >10) {
+				WebElement contactUsLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contactUsLink)) {
+					contactUsLink=contactUnitedHealthCare_ol;
+				}
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare));
-				contactUnitedHealthCare.click();
+						validate(contactUsLink));
+				contactUsLink.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReadyNew(driver);
 				String currentURL=driver.getCurrentUrl();
@@ -225,7 +229,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
 
-				moveMouseToElement(contactUnitedHealthCare);
+				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						validate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
@@ -250,8 +254,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						!pharmacyValidate(rightArrow));
 			}
 		} else {
+			WebElement contactUsLink=contactUnitedHealthCare;
+			if (!validate(contactUnitedHealthCare)) 
+				contactUsLink=contactUnitedHealthCare_ol;
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!pharmacyValidate(contactUnitedHealthCare));
+					!pharmacyValidate(contactUsLink));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
 					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
@@ -401,11 +408,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					validate(pharmaciesAvailable));
 			if (total >10) {
+				WebElement contacUstLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contacUstLink)) 
+					contacUstLink=contactUnitedHealthCare_ol;
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare));
-				
-
+						validate(contacUstLink));
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));
@@ -415,8 +423,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						!pharmacyValidate(rightArrow));
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!pharmacyValidate(contactUnitedHealthCare));
+			WebElement contacUstLink=contactUnitedHealthCare;
+			if (!pharmacyValidate(contacUstLink)) 
+				contacUstLink=contactUnitedHealthCare_ol;
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!pharmacyValidate(contacUstLink));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
 					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 

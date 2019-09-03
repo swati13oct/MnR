@@ -928,6 +928,7 @@ sauceLabsTunnelIdentifier);
 	}
 
 	public static void returnLoginCredentials() {
+		loginCreds.clear();
 		for (Entry<String, String> currEntry : returnMemberAttributeMap().entrySet()) {
 			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
 				if (currEntry.getValue().contains("/")) {
@@ -938,7 +939,7 @@ sauceLabsTunnelIdentifier);
 					loginCreds.put("user", currEntry.getValue());
 					loginCreds.put("pwd", "Password@1");
 				}
-
+				break;
 			}
 		}
 	}

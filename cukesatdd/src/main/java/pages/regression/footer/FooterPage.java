@@ -1,14 +1,10 @@
 package pages.regression.footer;
 
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.itextpdf.text.log.SysoCounter;
-
 import acceptancetests.data.PageData;
 import atdd.framework.UhcDriver;
 
@@ -28,8 +24,6 @@ public class FooterPage extends UhcDriver {
 	@FindBy(linkText= "Legal Notices & Disclosures")
 	private WebElement LegalNoticesAndDisclosures;
 
-
-
 	@FindBy(linkText= "Saved")
 	private WebElement Saved;
 
@@ -39,36 +33,21 @@ public class FooterPage extends UhcDriver {
 	@FindBy(linkText= "Logout")
 	private WebElement Logout;
 
-
-
-
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']")
 	private WebElement UnitedHealthcare;
-	
+
 	@FindBy(xpath= "//*[@id='termsofuseID']")
 	private WebElement TearmsOfUse;
-	
-	//@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']//p[2]")
-	//private WebElement LastUpdate;
-	
+
 	@FindBy(xpath = "//div[@class='row footerLinks']//*[@id='lastupdated']")
 	private WebElement LastUpdate;
 
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
 	private WebElement LanguageAssistance;
-	//note: comment this to use the one above
-	//@FindBy(xpath= "//div[2]/div/ul/li/a/span")
-	//private WebElement LanguageAssistance;
 
 	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
 	private WebElement Asistencia;
-	//note: comment this to use the one above
-	//@FindBy(xpath= "//li[2]/a/span")
-	//private WebElement Asistencia;
 
-	//@FindBy(xpath= "//a[contains(@href, '/content/dam/UCP/Individual/Non-Discrimination_Form_Chinese.pdf')]")
-	//private WebElement OtherLanguageLink;
-	//note: comment this to use the one below
 	@FindBy(xpath ="//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]")
 	private WebElement OtherLanguageLink;
 
@@ -102,10 +81,9 @@ public class FooterPage extends UhcDriver {
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofile;
 
-
-	@FindBy(id = "ACCdropdown_1_3")
+	@FindBy(id = "ACCdropdown_0_3")
 	private WebElement accountSettingOption;
-	
+
 	@FindBy(id = "closeButton")
 	public WebElement iPerceptionclosebtn;
 
@@ -119,14 +97,10 @@ public class FooterPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		// TODO Auto-generated constructor stub
 	}
-
-
 	@Override
 	public void openAndValidate(){
 		// TODO Auto-generated method stub
-
 	}
-
 	public void feebackpopupClose() throws InterruptedException
 	{ //waitForloader(driver,overlay, 20);
 		Thread.sleep(20000);
@@ -142,32 +116,21 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public Object validateFooterLinks() throws InterruptedException{
-
-
-
 		Thread.sleep(10000);
-
 		feebackpopupClose();
-
-
 		if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
 				&& LegalNoticesAndDisclosures.isDisplayed() 
 				&& Accessibility.isDisplayed() 
-				&& Saved.isDisplayed() &&
-				Logout.isDisplayed()){
-
+				&& Logout.isDisplayed()){
+			//  Saved.isDisplayed() is not displayed for every page.
 			System.out.println("======================Member support and Quick links are displayed =========================");
-
 		}
 		else {
 			Assert.assertFalse(false);
 		}
-
-
 		if (OtherLanguageLink.isDisplayed() && Asistencia.isDisplayed() 
 				&& LanguageAssistance.isDisplayed() && LastUpdate.isDisplayed() && TearmsOfUse.isDisplayed() &&
 				UnitedHealthcare.isDisplayed()){
-
 			System.out.println("====================== Bottom links are displayed =========================");
 			return true;
 		}
@@ -175,22 +138,16 @@ public class FooterPage extends UhcDriver {
 			Assert.assertFalse(false);
 		}
 		return null;}
-
-
+	
 	public FooterPage NavigateToClaimsPage(){
 		validate(claimsLink);
 		if(claimsLink.isDisplayed()){
 			System.out.println("Claims link is displayed");
 			claimsLink.click();
 			System.out.println("Claims link is clicked");
-
-
 		}
-
-
 		return null;
 	}	
-
 
 	public FooterPage NavigateToEOBPage(){
 		validate(EOBLink);
@@ -198,9 +155,7 @@ public class FooterPage extends UhcDriver {
 			System.out.println("EOB link is displayed");
 			EOBLink.click();
 			System.out.println("EOB link is clicked");
-
 		}
-
 		return null;
 	}
 
@@ -210,9 +165,7 @@ public class FooterPage extends UhcDriver {
 			System.out.println("contactUSLink link is displayed");
 			HelpandContactUs.click();
 			System.out.println("contactUS link is clicked");
-
 		}
-
 		return null;
 	}
 
@@ -222,9 +175,7 @@ public class FooterPage extends UhcDriver {
 			System.out.println("Benefits link is displayed");
 			benefits.click();
 			System.out.println("Benefits link is clicked");
-
 		}
-
 		return null;
 	}
 
@@ -234,14 +185,12 @@ public class FooterPage extends UhcDriver {
 			System.out.println("Home button is displayed");
 			homeBtn.click();
 			System.out.println("Home button is clicked");
-
 			waitforElement(LocateAPharmacy);
 			if(LocateAPharmacy.isDisplayed()){
 				System.out.println("Pharmacy link is displayed");
 				LocateAPharmacy.click();
 				System.out.println("pharmacy link is displayed");
 			}
-
 		}
 		return null;
 	}
@@ -252,14 +201,12 @@ public class FooterPage extends UhcDriver {
 			System.out.println("Home button is displayed");
 			homeBtn.click();
 			System.out.println("Home button is clicked");
-
 			waitforElement(LookUpDrug);
 			if(LookUpDrug.isDisplayed()){
 				System.out.println("DCE link is displayed");
 				LookUpDrug.click();
 				System.out.println("DCE link is displayed");
 			}
-
 		}
 		return null;
 	}
@@ -274,23 +221,12 @@ public class FooterPage extends UhcDriver {
 			accountSettingOption.click();
 			System.out.println("Profile and referance link is clicked");
 		}
-
 		return null;
-
 	}
-
-
-
-
-
 
 	public FooterPage validatePageFooter(){
-
-
 		return new FooterPage(driver);
 	}
-
-
 
 }
 

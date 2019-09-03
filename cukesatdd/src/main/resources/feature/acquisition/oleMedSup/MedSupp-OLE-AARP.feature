@@ -66,6 +66,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
      Then user clicks on Start Application Button proceed to next pages
+     | Zip Code        | <zipcode>         |
        | DOB           | <DOB>         |
       When user fill medsupp form details and proceed to next pages  
        | Firstname     | <Firstname>   |
@@ -86,6 +87,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
      Then user clicks on Start Application Button proceed to next pages
+      | Zip Code        | <zipcode>         |
        | DOB           | <DOB>         |
       When user fill medsupp form details and proceed to next pages  
        | Firstname     | <Firstname>   |

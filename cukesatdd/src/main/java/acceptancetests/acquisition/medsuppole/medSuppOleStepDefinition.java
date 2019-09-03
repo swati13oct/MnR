@@ -40,9 +40,10 @@ public class medSuppOleStepDefinition {
 		}
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		MedSuppOLEPage medSuppOLEPage = plansummaryPage.StartApplication(DateOfBirth);
+		MedSuppOLEPage medSuppOLEPage = plansummaryPage.fillDetails(zipCode,DateOfBirth);
 		if (null != medSuppOLEPage) {
 
 			getLoginScenario().saveBean(PageConstants.MEDSUPP_OLE_PAGE, medSuppOLEPage);
