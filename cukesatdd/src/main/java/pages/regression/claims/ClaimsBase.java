@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -469,9 +470,15 @@ public class ClaimsBase extends UhcDriver  {
 					System.out.println(e.getMessage());
 				}
 			} else {
-				System.out.println("iperception smiley survey was displayed, close it");
+				System.out.println("iperception smiley survey was displayed, check to see if need to close it");
 				driver.switchTo().frame("artEXPOiFrame");
-				driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']")).click();
+				WebElement closeBtn=driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']"));
+				try {
+					closeBtn.click();
+					System.out.println("closed the iperception smiley survey");
+				} catch (WebDriverException e) {
+					System.out.println("nothing need to click for iperception smiley survey");
+				}
 				driver.switchTo().defaultContent();
 				break;
 			}

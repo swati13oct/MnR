@@ -555,6 +555,9 @@ public class HSIDLoginPage extends UhcDriver {
 					Thread.sleep(2000); //just in case, let page settle down
 					break;
 				}
+				if (driver.getTitle().equals("Authentication Error")) {
+					Assert.assertTrue("Located Authentication Error, fail test now",false);
+				}
 				Thread.sleep(1000);
 				y=y+1;
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
