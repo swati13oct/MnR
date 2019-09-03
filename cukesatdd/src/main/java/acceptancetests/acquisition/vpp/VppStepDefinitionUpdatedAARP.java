@@ -175,7 +175,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(plantype);
 	}
 
 
@@ -224,6 +224,7 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.CheckClick_NextYear_Plans();
 	}
 
+
 	/**
 	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
 	 */
@@ -242,11 +243,11 @@ public class VppStepDefinitionUpdatedAARP {
 		String plantype = givenAttributesMap.get("plan type");
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
 			plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
 			plansummaryPage.checkAllPDPlans();
 		}
 
@@ -1420,17 +1421,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 			plansummaryPage.validatePrintOptionExistOnPage(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 			plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 

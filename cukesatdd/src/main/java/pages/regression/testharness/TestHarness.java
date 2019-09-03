@@ -21,6 +21,7 @@ import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.*;
 import pages.regression.formsandresources.*;
 import pages.regression.claims.*;
@@ -242,6 +243,7 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
@@ -437,11 +439,11 @@ public class TestHarness extends UhcDriver {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
+		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}

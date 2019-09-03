@@ -27,6 +27,9 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 
 	/**
 	 * Validate Need Help section content
+	 * note: Tab structure is Suppressed if the information provided on both the tabs is exactly similar. 
+	 * note: So in this case we not show the P&P page in case of a standalone ship member 
+	 * note: and will show the P&P page without any Plan Tabs in case of a combo member
 	 * @param planType
 	 * @param memberType
 	 * @return
@@ -34,7 +37,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	 */
 	public String validateNeedHelpSection(String planType, String memberType) 
 			throws InterruptedException {
-		handleComboTabIfComboUser(planType, memberType);
+		//tbd handleComboTabIfComboUser(planType, memberType);
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
@@ -65,7 +68,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 					validate(needHelp_contactUsLink));
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
-			handleComboTabIfComboUser(planType, memberType);
+			//tbd handleComboTabIfComboUser(planType, memberType);
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
 			System.out.println("New window URL = "+driver.getCurrentUrl()+"| New window title = "+driver.getTitle());
@@ -135,6 +138,9 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	/**
 	 * Helper method to go back to prior page via browser back, 
 	 * also handles the case if combo tab is involved
+	 * note: Tab structure is Suppressed if the information provided on both the tabs is exactly similar. 
+	 * note: So in this case we not show the P&P page in case of a standalone ship member 
+	 * note: and will show the P&P page without any Plan Tabs in case of a combo member
 	 * @param planType
 	 * @param memberType
 	 * @param originalUrl
@@ -148,7 +154,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		String actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - unable to go back to PnP page. "
 				+ "Expect URL contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-		handleComboTabIfComboUser(planType, memberType);
+		//tbd handleComboTabIfComboUser(planType, memberType);
 	}
 
 	/**

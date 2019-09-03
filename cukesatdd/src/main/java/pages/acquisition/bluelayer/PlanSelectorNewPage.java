@@ -124,7 +124,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 	
-	@FindBy(xpath = "//div[@class='modal-title']")
+	@FindBy(xpath = "//div[contains(@class,'popup-modal')][contains(@class,'active')]/div[@class='modal-title']")
 	private List<WebElement> countyModal1;
 
 	@FindBy(xpath = "//*[@class='PlanPreferenceCollection']//div[@class='planPreferenceQuestion ']//h1")
@@ -157,6 +157,9 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@FindBy(xpath = "(//table[contains(@class,'plan-detail-table')]/tbody/tr/td[string-length(text())>1][not (contains(@class,'ng-hide'))])[1]")
 	private WebElement planDetailsMedicalBenefitsTableCol;
 
+	@FindBy(xpath = "//a[contains(@class,'genericBtn')]")
+	private WebElement addDosageInformation;
+	
 	public String planNameExpected = null;
 
 	public PlanSelectorNewPage(WebDriver driver) {
@@ -169,6 +172,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		AcquisitionHomePage.checkModelPopup(driver);
+		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 
@@ -178,6 +182,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 		// switchToNewIframe(iframePst);
 		// waitTillElementClickableInTime(getStartedBtn, 30);
+		//AcquisitionHomePage.clickIfElementPresentInTime(driver, proactiveChatExitBtn,5);
 		getStartedBtn.click();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
@@ -229,8 +234,10 @@ public class PlanSelectorNewPage extends UhcDriver {
 		validateNew(NonePreference);
 		NonePreference.click();
 		NextQuestionButton2.click();
+		String thirdQuestion = "(//div[contains(@class,'planPreferenceQuestion')][not (contains(@class,'disabled'))]//span[starts-with(@id,QuestionsCounter_2)])[1]";
+		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath(thirdQuestion)), 30);
 		for (int i = 3; i <= 7; i++) {
-			Thread.sleep(8000);
+
 			System.out.println("Question #" + i);
 			if (validateNonPresenceOfElement(MandatoryQuestion)
 					&& QuestionsCounter.getText().contains(String.valueOf(i))) {
@@ -240,7 +247,11 @@ public class PlanSelectorNewPage extends UhcDriver {
 				System.out.println("Mandatory question exits!!! Please fill appropriate response.");
 				Assert.fail("Mandatory question exits!!! Please fill appropriate response.");
 			}
-
+			if (i != 7) {
+				String nextQuestionXpath = "(//div[contains(@class,'planPreferenceQuestion')][not (contains(@class,'disabled'))]//span[starts-with(@id,QuestionsCounter_"
+						+ i + ")])[1]";
+				CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath(nextQuestionXpath)), 30);
+			}
 		}
 		CommonUtility.waitForPageLoadNew(driver, PrescriptionBox_1, 30);
 		sendkeys(PrescriptionBox_1, "Adci");
@@ -253,6 +264,12 @@ public class PlanSelectorNewPage extends UhcDriver {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", PrescriptionAutoResultsOld);
 			System.out.println("second one worked");
+		}
+		try {
+			waitforElementVisibilityInTime(addDosageInformation, 45);
+			addDosageInformation.click();
+		} catch (Exception e) {
+			System.out.println("Drug is not generic.");
 		}
 		waitforElementVisibilityInTime(AddDrugPSTButton, 45);
 		AddDrugPSTButton.click();

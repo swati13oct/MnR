@@ -2476,7 +2476,7 @@ public class AccountHomePage extends UhcDriver {
 	 * iPerception popup
 	 */
 
-	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
+	/* public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
 		// 20);
 		Thread.sleep(20000);
 		if (validate(iPerceptionframe)) {
@@ -2488,7 +2488,30 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-	}
+	} */
+	
+				public void feebackpopupClose() throws InterruptedException { 
+				int counter = 0;
+				do {
+
+					System.out.println("current value of counter: " + counter);
+					List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+					if (IPerceptionsFrame.isEmpty()) {
+						try {
+							Thread.sleep(1500);
+						} catch (InterruptedException e) {
+							System.out.println(e.getMessage());
+						}
+
+					} else {
+						driver.switchTo().frame(IPerceptionsFrame.get(0));
+						driver.findElement(By.className("btn-no")).click();
+						driver.switchTo().defaultContent();
+					}
+					counter++;
+				} while (counter < 2);
+		}
 
 	public ClaimDetailsPage navigateToClaimDetailsPageCombo() {
 		CommonUtility.waitForPageLoad(driver, claimstablemoreinfolinkCombo, 10);

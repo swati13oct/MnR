@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPSTVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPSTVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/PlanSelector" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPSTVBF.json" }, tags = { "@pstULayerSmoke,@pstBLayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPSTVBF.json" }, tags = { "@pstBLayerSmoke" })
 public class RunMRATDDAcquisitionPSTVBF { 
  
 }
