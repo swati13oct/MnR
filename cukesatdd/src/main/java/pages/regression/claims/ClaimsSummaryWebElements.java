@@ -387,7 +387,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//button[@aria-label='Calendar' and contains(@class,'custom_to_date_ship')]")
 	protected WebElement toCalendarIconBtn_ship;
 
-
 	@FindBy(xpath="//ul[@ng-model='date'][4]//button[contains(@class,'btn-sm') and contains(@class,'active')]")
 	protected WebElement toCalendarDatePicker_today_ship;
+	
 }

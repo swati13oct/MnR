@@ -158,7 +158,7 @@ public class RallyDashboardPage extends UhcDriver {
 	@FindBy(linkText = "Logout")
 	private WebElement logout;
 
-	@FindBy(linkText = "About UnitedHealthcare")
+	@FindBy(id = "copyrightUHC")
 	private WebElement aboutUHC;
 
 	@FindBy(linkText = "Legal Entity Disclosure")

@@ -127,7 +127,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Logout")
 	private WebElement logout;
 
-	@FindBy(linkText = "About UnitedHealthcare")
+	@FindBy(id = "copyrightUHC")
 	private WebElement aboutUHC;
 
 	@FindBy(linkText = "Legal Entity Disclosure")
@@ -162,6 +162,21 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
+	
+	@FindBy(className = "atdd-need-help")
+	private WebElement neepHelp;
+	
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'atdd-tech-header')]")
+	private WebElement technicalSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'atdd-plan-header')]")
+	private WebElement planSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
+	private WebElement techSupportTelephone;
+	
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
+	private WebElement planSupportTelephone;
 	
 	String category = null;
 
@@ -681,6 +696,19 @@ public class TestHarness extends UhcDriver {
 
 	public void validatePremiumPaymentTabIsDisplayed() {
 		validateNew(premPaymentsTab);
+		
+	}
+	public void validateNeedHelpSection(){
+		scrollToView(neepHelp);
+		Assert.assertTrue("neepHelp is not displayed", neepHelp.isDisplayed());
+		scrollToView(technicalSupportHeading);
+		Assert.assertTrue("technicalSupportHeading is not displayed", technicalSupportHeading.isDisplayed());
+		scrollToView(planSupportHeading);
+		Assert.assertTrue("planSupportHeading is not displayed", planSupportHeading.isDisplayed());
+		scrollToView(techSupportTelephone);
+		Assert.assertTrue("techSupportTelephone is not displayed", techSupportTelephone.isDisplayed());
+		scrollToView(planSupportTelephone);
+		Assert.assertTrue("neepHelp is not displayed", planSupportTelephone.isDisplayed());
 		
 	}
 }

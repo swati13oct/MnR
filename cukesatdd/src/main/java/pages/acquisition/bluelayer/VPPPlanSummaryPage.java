@@ -869,6 +869,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		pages.acquisition.ulayer.AcquisitionHomePage.checkModelPopup(driver);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
@@ -1213,10 +1214,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public boolean providerinfo(String planName) {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'providers covered')]"));
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]/descendant::span[contains(text(),'roviders covered')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
         System.out.println(mproviderinfo);
-		if (mproviderinfo.contains("1 providers covered")) {
+		if (mproviderinfo.toLowerCase().contains("providers covered")) {
 			return true;
 		}
 		return false;
@@ -3113,7 +3114,6 @@ catch (Exception e) {
 			System.out.println("*****CLICKING ON CURRENT YEAR Radio*****");
 			CurrentYearRadio.click();
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
-
 			SelectYearGoBtn.click();
 		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");

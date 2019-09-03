@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.login.HSIDLoginPage;
 
 /** methods used by either of both Claims Summary and Claim Details page */
 public class ClaimsBase extends UhcDriver  {
@@ -231,7 +232,7 @@ public class ClaimsBase extends UhcDriver  {
 				numClaimsElement=numClaimsShip;
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to lcoate the element for number of claims for range="+range, 
+		Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
 				validate(numClaimsElement));
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
@@ -402,12 +403,11 @@ public class ClaimsBase extends UhcDriver  {
 	 * For iPerception Model
 	 * @param driver
 	 */
-	public static void checkForIPerceptionModel(WebDriver driver) {
+	public void checkForIPerceptionModel(WebDriver driver) {
 		int counter = 0;
 		do {
 			System.out.println("current value of counter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
 			if (IPerceptionsFrame.isEmpty()) {
 				try {
 					Thread.sleep(5000);
@@ -455,5 +455,27 @@ public class ClaimsBase extends UhcDriver  {
 
 		}
 		return false;
+	}
+
+	public void handleHowIsYourVisit() {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsSmileySurveyFrame = driver.findElements(By.id("artEXPOiFrame"));
+			if (IPerceptionsSmileySurveyFrame.isEmpty()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				System.out.println("iperception smiley survey was displayed, close it");
+				driver.switchTo().frame("artEXPOiFrame");
+				driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']")).click();
+				driver.switchTo().defaultContent();
+				break;
+			}
+			counter++;
+		} while (counter < 2);
 	}
 }
