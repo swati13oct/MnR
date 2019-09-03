@@ -7,10 +7,8 @@ q2_june_VBF_005/Password@1,AARPIndMAPDPayments
 q2_june_VBF_005/Password@1,BncnonlisAARPIndividual
 q2_june_VBF_005/Password@1,BncnonlisAARPIndividual,MAPD
 q2_june_VBF_031/Password@1,GroupRetireeMapd
-q2_june_VBF_031/Password@1,GroupRetireeMapd
-q2_june_VBF_031/Password@1,MAPD,BncnonlisGroupRetiree
+q2_june_VBF_031/Password@1,BncnonlisGroupRetiree,MAPD
 q2_june_VBF_031/Password@1,MAPD,GroupRetireeCosmosEOB,Medical
-q2_june_VBF_031/Password@1,MAPD,GrpRetireeOrderPlan
 q2_june_VBF_031/Password@1,MAPD,GrpRetireeOrderPlan
 q2_june_VB`F_007/Password@1,MAPD,AARPIndividualCosmosEOB,Medical
 q2_june_VBF_007/Password@1,MAPD,AARPIndividualEOB,Prescription Drug
@@ -33,18 +31,16 @@ Mobilecombo001/Password@12,MAPD,UHCIndividualCosmosEOB,Medical
 q2_june_VBF_017/Password@1,IndividualUHCPayments
 q2_june_VBF_017/Password@1,AARPMapdNonEPMP
 q2_june_VBF_002/Password@1,PDP,grpPerf
-q2_june_VBF_002/Password@1,PDP,grpPerf
 q2_jun_aarp0071/Password@1,TerminatedFedAARP
-q2_june_VBF_030/Test2day,GroupRetireeMapdContactUs
-q2_june_VBF_030/Test2day,MAPD,NICECLAIMS,GroupRetiree
-q2_june_VBF_002/Password@1,MA,eobPerf,Medical
+q2_jun_grp0086/Password@1,GroupRetireeMapdContactUs,MAPD
+q2_june_VBF_030/Password@1,MAPD,NICECLAIMS,GroupRetiree
 q2_june_VBF_002/Password@1,MA,eobPerf,Medical
 q2_may_shipUAT007/Password@1,Ship
-q2_may_shipUAT007/Password@1,SHIP,SHIPCLAIMS,ShipInd
-q2_may_shipUAT010/Password@1,Medsupp,Ship,ShipEOB
+q2_may_UAT_Combo002/Password@1,SHIP,SHIPCLAIMS,ShipInd
+q2_jun_grp0032/Password@2,Medsupp,Ship,ShipEOB
 q2_apr_aarp0250/Password@1,MAPD,COSMOSCLAIMS,BlueLayerInd
 q2_jun_grp0154/Password@1,MAPD,COSMOSCLAIMS,GroupRetiree
 q2_jun_aarp0028/Password@1,MAPD,COSMOSCLAIMS,ULayerInd
-q2_jun_aarp0057/Password@12,MAPD,AARPIndividualNiceEOB,Medical
-q2_june_VBF_011/Test2day,UhcMapdIndContactUs
+q2_jun_uhc00080/Password@1,MAPD,AARPIndividualNiceEOB,Medical
+q2_june_VBF_011/Password@1,UhcMapdIndContactUs,MAPD
 q2_apr_uhc0045/Password@1,MAPD,MakeOneTimeCCOther_Payments
