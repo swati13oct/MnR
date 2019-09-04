@@ -77,12 +77,12 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		String hasClaimsText="VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM";
 		if (numClaims==0) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+noClaimsText+"' text/link. \n"+noteToTester, 
-					validate(optumRxLnkTxt_noClaims));
+					claimsValidate(optumRxLnkTxt_noClaims));
 			winHandleBefore = driver.getWindowHandle();
 			optumRxLnkTxt_noClaims.click();
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate '"+hasClaimsText+"' text/link. \n"+noteToTester, 
-					validate(optumRxLnkTxt_hasClaims));
+					claimsValidate(optumRxLnkTxt_hasClaims));
 			winHandleBefore = driver.getWindowHandle();
 			optumRxLnkTxt_hasClaims.click();
 		}
@@ -124,9 +124,9 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL NOT fail test if user has no claim table");
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
 				!claimsValidate(systemErrorMsg));
-		if (validate(medicalClaimsTbl))
+		if (claimsValidate(medicalClaimsTbl))
 			System.out.println("!!! Claims Table is seen on the Claims Summary page!!!");
-		if (validate(claimsTblMoreInfoLnk))
+		if (claimsValidate(claimsTblMoreInfoLnk))
 			System.out.println("'More info' link is seen on claims table on claim summary page ==>" 
 					+claimsTblMoreInfoLnk);
 		if(medicalClaimsTbl.isDisplayed() || drugClaimsTbl.isDisplayed() || ship_claimsTbl.isDisplayed()){
@@ -340,10 +340,10 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 				}
 			} else {
 				if (claimSystem.contains("NICE")) {
-					boolean result=validate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[6]")));
+					boolean result=claimsValidate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[6]")));
 					Assert.assertTrue("PROBLEM - 'Your Share' column is showing up unexpectedly on summary page", !result);
 				} else {
-					boolean result=validate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")));
+					boolean result=claimsValidate(driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")));
 					Assert.assertTrue("PROBLEM - 'Your Share' column is showing up unexpectedly on summary page", !result);
 				}
 			}
@@ -446,7 +446,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 
 	/** this method validates pagination */
 	public boolean verifyPagination(){
-		return validate(summPgPagination);
+		return claimsValidate(summPgPagination);
 	}
 
 	/** Validate 'You have XX medical/RX claims from the Last XX days' text on claims summary page */
@@ -456,17 +456,17 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
 		String claimResult="none";
 		try { 
-			if (validate(medicalClaimsNum)) 
+			if (claimsValidate(medicalClaimsNum)) 
 				claimResult="medical claims - Member Has ===> "+ ":"+ (medicalClaimsNum.getText())+ " Claims";
-			if (validate(rxClaimsNum)) 
+			if (claimsValidate(rxClaimsNum)) 
 				claimResult="rx claims - Member Has ===> "+ ":"+ (rxClaimsNum.getText())+ " Claims"; 
-			if (validate(numClaimsShip)) 
+			if (claimsValidate(numClaimsShip)) 
 				claimResult="ship claims - Member Has ===> "+ ":"+ (numClaimsShip.getText())+ " Claims"; 
-			if (validate(numClaimsMedlCustSrch)) 
+			if (claimsValidate(numClaimsMedlCustSrch)) 
 				claimResult="medical claims (custom search) - Member Has ===> "+ ":"+ (numClaimsMedlCustSrch.getText())+ " Claims"; 
-			if (validate(numClaimsDrugCustSrch)) 
+			if (claimsValidate(numClaimsDrugCustSrch)) 
 				claimResult="rx claims (custom search) - Member Has ===> "+ ":"+ (numClaimsDrugCustSrch.getText())+ " Claims"; 
-			if (validate(numClaimsShipCustSrch)) 
+			if (claimsValidate(numClaimsShipCustSrch)) 
 				claimResult="ship claims (custom search) - Member Has ===> "+ ":"+ (numClaimsShipCustSrch.getText())+ " Claims"; 
 			Assert.assertTrue("PROBLEM - unable to locate any type of number of claims value", !claimResult.equals("none"));
 		} catch (Exception e) {
@@ -474,12 +474,12 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		} 
 		WebElement e=youHave3;
 		if (planType.equalsIgnoreCase("SHIP")) {
-			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", validate(e));
+			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(e));
 		} else {
-			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", validate(youHave1) || validate(youHave2));
-			if(validate(youHave1)) {
+			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(youHave1) || claimsValidate(youHave2));
+			if(claimsValidate(youHave1)) {
 				e=youHave1;
-			} else if (validate(youHave2)) {
+			} else if (claimsValidate(youHave2)) {
 				e=youHave2;
 			}
 		}

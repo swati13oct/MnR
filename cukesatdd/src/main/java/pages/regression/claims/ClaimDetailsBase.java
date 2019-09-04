@@ -148,7 +148,7 @@ public class ClaimDetailsBase extends ClaimDetailsWebElements{
 			System.out.println("This is ship case");
 			backButton=ship_claimsSummBkBtn;
 		}
-		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", validate(backButton));
+		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", claimsValidate(backButton));
 		CommonUtility.waitForPageLoad(driver, backButton, 5);
 		backButton.click();
 		System.out.println("Clicked claims summary back button...");
@@ -189,7 +189,7 @@ public class ClaimDetailsBase extends ClaimDetailsWebElements{
 			CommonUtility.waitForPageLoadNew(driver, med_providerName, 15);
 			String key="med_dateOfService";
 			WebElement element=med_dateOfService;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 
 			String value=element.getText().trim();
 			String[] tmp=value.split("to");
@@ -219,31 +219,31 @@ public class ClaimDetailsBase extends ClaimDetailsWebElements{
 
 			key="med_providerName";
 			element=med_providerName;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="med_providerType";
 			element=med_providerType;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="med_amountBilled";
 			element=med_amountBilled;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="med_claimStatus";
 			element=med_claimStatus;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			element=med_yourShare;
 			key="med_yourShare";
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		} else if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -251,80 +251,80 @@ public class ClaimDetailsBase extends ClaimDetailsWebElements{
 			String key="drug_dateFilled";
 			key="drug_medication";
 			WebElement element=drug_medication;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			String value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="drug_rxNumber";
 			element=drug_rxNumber;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="drug_pharmacy";
 			element=drug_pharmacy;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="drug_planPaid";
 			element=drug_planPaid;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="drug_youPaid";
 			element=drug_youPaid;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="drug_otherPayments";
 			element=drug_otherPayments;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, ship_provider, 10);
 			String key="ship_dateOfService";
 			WebElement element=ship_dateOfService;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			String value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_provider";
 			element=ship_provider;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_claimType";
 			element=ship_claimType;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_charged";
 			element=ship_charged;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_paidToYou";
 			element=ship_paidToYou;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_paidToProvider";
 			element=ship_paidToProvider;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
 			key="ship_processedDate";
 			element=ship_processedDate;
-			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", validate(element));
+			Assert.assertTrue("PROBLEM - unable to locate "+key+" +element in claims table", claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		}

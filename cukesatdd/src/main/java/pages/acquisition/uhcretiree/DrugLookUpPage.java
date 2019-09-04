@@ -5,10 +5,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -95,8 +98,12 @@ public class DrugLookUpPage extends UhcDriver {
 	}
 
 	public void selectTheDrugFromSearchResults() {
+		try {
 		drugLink.click();
 		impliciWait(formularyDrugTable, 10);
+		} catch (TimeoutException e) {
+			Assert.assertTrue("PROBLEM - unable to locate the formularyDrugTable element", false);
+		}
 	}
 
 	public void validateDrugResults() {
@@ -117,5 +124,12 @@ public class DrugLookUpPage extends UhcDriver {
 		validateNew(backToNewSearch);
 		backToSearchResults.click();
 		validateNew(formularyDrugListTable);
+	}
+	
+	@Override
+	public void waitforElement(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, 5L);
+		wait.until(ExpectedConditions.visibilityOf(element));
+
 	}
 }
