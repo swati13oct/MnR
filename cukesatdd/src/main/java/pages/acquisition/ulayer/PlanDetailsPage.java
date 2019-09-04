@@ -692,10 +692,10 @@ public class PlanDetailsPage extends UhcDriver {
 		String displayedText;
 
 		AdditionalBenefitType = driver.findElement(By.xpath(
-				"//p[contains(text(), '" + benefitType + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-		System.out.println("The additional Benefit to Valuidate : " + benefitType);
-		ActualTextforBenefit = driver.findElement(By.xpath("//p[contains(text(), '" + benefitType
-				+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+				"//*[contains(text(), '" + benefitType + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+		System.out.println("The additional Benefit to Validate : " + benefitType);
+		ActualTextforBenefit = driver.findElement(By.xpath("(//*[contains(text(), '" + benefitType
+				+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]//parent::tr//child::strong[not(contains(@class,'ng-hide'))])[1]"));
 		displayedText = ActualTextforBenefit.getText();
 		System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 		System.out.println(displayedText);
