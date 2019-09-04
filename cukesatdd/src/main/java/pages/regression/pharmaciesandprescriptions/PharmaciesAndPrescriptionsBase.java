@@ -30,6 +30,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	 * note: Tab structure is Suppressed if the information provided on both the tabs is exactly similar. 
 	 * note: So in this case we not show the P&P page in case of a standalone ship member 
 	 * note: and will show the P&P page without any Plan Tabs in case of a combo member
+	 * note: COMBO user with SHIP plan will have SHIP's need help content
 	 * @param planType
 	 * @param memberType
 	 * @return

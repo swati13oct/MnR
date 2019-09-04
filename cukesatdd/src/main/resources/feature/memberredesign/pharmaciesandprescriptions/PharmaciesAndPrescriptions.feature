@@ -4,7 +4,6 @@ Feature: To test Pharamcies And Prescriptions on Member site
 ### TODO: last 3 tiles - link validation to sso
 ### TODO: drug lookup tile for group - link validation to sso
 ### TODO: combo MAPD and ship tab behavior validation
-### TBD:  page header text sometimes not showing first and last name, maybe prod issue?
 
   @pharmaciesandprescriptions01 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
@@ -24,7 +23,6 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
     Then user validates Need Help section content
-    #Then user validates the footer section
 
     Examples: 
 	  | FID    | planType | memberType          |
@@ -35,6 +33,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
 	  | 313410 | PCP      | Individual_PnP	    |
 	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
 	  | 313410 | MAPD     | COMBO_PnP	        |
+	  | 313410 | PDP      | COMBO_PnP	        |
 
 
   #####################################################
@@ -53,7 +52,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user should not see Pharmacies and Prescription link on secondary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
- 
+
     Examples: 
       | FID    | planType | memberType     |
       | 313410 | MAPD     | Terminated_PnP |

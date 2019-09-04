@@ -3147,7 +3147,7 @@ public class AccountHomePage extends UhcDriver {
 			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
 		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 			workaroundAttempt("claims"); 
-		}		
+		} 
 		System.out.println("now on secondary page...proceed validate if pnp link exists");
 		if (validate(pharPresDashboardLink)) {
 			return true;

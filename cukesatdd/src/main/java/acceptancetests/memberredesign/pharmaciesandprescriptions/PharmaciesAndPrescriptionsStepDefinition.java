@@ -190,8 +190,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		String  planCategoryId=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID);
 		String tile="Prescription Benefits Information";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, planCategoryId);		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 	
