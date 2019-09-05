@@ -452,7 +452,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
 					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
-		testWidget="Walgreens – Preferred Retail Pharmacy";
+		testWidget="Walgreens - Preferred Retail Pharmacy";
 		if (expectWalgreensPlan) {	
 			if (hasWalgreensPlan) {
 				if (language.equalsIgnoreCase("English")) {
