@@ -454,7 +454,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
-	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 	
 	@FindBy(id="dupIconFlyOut")
