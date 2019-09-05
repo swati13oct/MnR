@@ -21,7 +21,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box

@@ -22,7 +22,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @vppPlanDetailsAarp
   Scenario Outline: Verify plan details in AARP site
