@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -32,7 +33,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
 	
-	@FindBy(xpath="//div[@class='drug-list-accordion open']/a")
+	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
 	
 	@FindBy(css="div.drug-info-container>div>span.name")
@@ -50,7 +51,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		validate(shoppingCartIcon);
+		validateNew(shoppingCartIcon);
 
 	}
 	
@@ -64,8 +65,11 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public AcquisitionHomePage addPlan() {
 		addPlans.click();
-		if(driver.getTitle().contains("Find Medicare Plans"))
-			return new AcquisitionHomePage(driver, 1);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("zipcode"))	{
+			String page = "health-plans";
+			return new AcquisitionHomePage(driver,page);
+		}
 		return null;
 	}
 	

@@ -3,7 +3,7 @@
 @Test @AARPvisitorprofile
 Feature: Visitor profile
 
-  @addDrugs
+  @addDrugs @addDrugsULayerSmoke
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -64,14 +64,14 @@ Feature: Visitor profile
       | state   | Drugname         | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
       | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
-  @addPlans
+  @addPlans @addPlansULayerSmoke
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
     And the user clicks on the add plans button in the guest profile in AARP site
-    When the user adds plan from plan search using following information in the AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -85,7 +85,7 @@ Feature: Visitor profile
 
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO)_Test,AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
