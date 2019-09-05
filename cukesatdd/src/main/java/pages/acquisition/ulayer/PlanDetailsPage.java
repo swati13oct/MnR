@@ -174,12 +174,12 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
-	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
+	@FindBy(xpath="//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement planMonthlyPremium;
-	@FindBy(xpath="//div[@id='planCosts']//td//b[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
+	@FindBy(xpath="//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement planYearlyPremium;
 
-	@FindBy(xpath="//div[@id='planCosts']//td//b[contains(text(),'Estimated Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
+	@FindBy(xpath="//div[@id='planCosts']//td//strong[contains(text(),'Estimate Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
 	private WebElement estimateAnnualCost;
 
 	@FindBy(id="optionalservices")
