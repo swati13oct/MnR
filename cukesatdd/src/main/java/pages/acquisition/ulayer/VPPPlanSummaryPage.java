@@ -359,18 +359,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpbed-monthSelectBoxIt")
-		private WebElement monthDrpDwn;
-
-		@FindBy(xpath = "//ul[@id='mpbed-monthSelectBoxItOptions']//li[2]")
-		private WebElement monthDrpDwnOption;
-
-		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
-		private WebElement yearDrpDwn;
-
-		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li/a[contains(text(),'2019')]")
-		private WebElement yearDrpDwnOption;
-		
 		@FindBy(id = "mpaed-month")
 		private WebElement monthDrpDwnPartA;
 
@@ -431,7 +419,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "//a[contains(text(),'Cancel Application')]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
 		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
@@ -566,6 +554,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath="//button[contains(@class,'viewPlans')]")
 		private WebElement viewPlansBtnMedSupp;
+		
+		@FindBy(id = "mpaed-month")
+		private WebElement part_A_monthDrpDwn;
+
+		@FindBy(id = "mpaed-year")
+		private WebElement part_A_yearDrpDwn;
+	
+		@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+		private WebElement Part_A_monthDrpDwnOption;
+		
+		@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
+		private WebElement Part_A_yearDrpDwnOption;
+		
+		@FindBy(id = "mpbed-month")
+		private WebElement part_B_monthDrpDwn;
+		
+		@FindBy(id = "mpbed-year")
+		private WebElement part_B_yearDrpDwn;
+		
+		@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
+		private WebElement Part_B_monthDrpDwnOption;
+		
+		@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
+		private WebElement Part_B_yearDrpDwnOption;
+		
+		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		WebElement ViewPlanMedSupPage;
+
+		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
+		private WebElement MaleGender;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -2589,41 +2607,41 @@ for (int i = 0; i < initialCount + 1; i++) {
 	 }
 	//^^^ note: added for US1598162	
 	
-	public String StartApplicationButton(String DateOfBirth, String FirstName, String LastName) throws InterruptedException {
+	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+		System.out.println("MedSup page form is displayed");
+		DOB.click();
+		DOB.sendKeys(DateOfBirth);
+		System.out.println("Date of birth is entered");
+		MaleGender.click();
+		part_A_monthDrpDwn.click();
+		Part_A_monthDrpDwnOption.click();
+		Thread.sleep(2000);
+		System.out.println("Effective date- month value selected");
+		part_A_yearDrpDwn.click();
+		Part_A_yearDrpDwnOption.click();
+		System.out.println("Effective date- year value selected");
+		Thread.sleep(2000);
+		part_B_monthDrpDwn.click();
+		Part_B_monthDrpDwnOption.click();
+		Thread.sleep(2000);
+		part_B_yearDrpDwn.click();
+		Part_B_yearDrpDwnOption.click();
+		Thread.sleep(2000);
+		startDrpDwn.click();
+		Thread.sleep(2000);
+		startDrpDwnOption.click();
+		System.out.println("Plan to start date selected");
+		ViewPlanMedSupPage.click();
+	}
+	
+	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 		Start_ApplicationBtn.click();
 		System.out.println("Start application button is clicked on application page");
-		Thread.sleep(8000);
-		DOB.click();
-
-		DOB.sendKeys(DateOfBirth);
-		System.out.println("Date of birth is entered");
-		try {
-	
-			CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
-			  JavascriptExecutor js = (JavascriptExecutor)driver;
-			js.executeScript("arguments[0].click();", monthDrpDwn);
-			//monthDrpDwn.click();
-			monthDrpDwnOption.click();
-			Thread.sleep(2000);
-			System.out.println("Effective date- month value selected");
-			yearDrpDwn.click();
-			Thread.sleep(2000);
-			yearDrpDwnOption.click();
-			System.out.println("Effective date- year value selected");
-			Thread.sleep(2000);
-			startDrpDwn.click();
-			Thread.sleep(2000);
-			startDrpDwnOption.click();
-			System.out.println("Plan to start date selected");
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-			System.out.println("Effective date-values not selected");
-		}
-		Start_ApplicationBtn.click();
+		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
 		insuredStatus.click();
 		Thread.sleep(2000);
@@ -2642,7 +2660,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
-
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
@@ -2650,9 +2667,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		nextButton.click();
 		Thread.sleep(2000);
 		String ResumeKey= resumeKey.getText();
-
 		System.out.println("The return to the application code is- "+ResumeKey);
-
 		cancelButton.click();
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
 		cancelButtonPopUp.click();
@@ -2661,7 +2676,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 
 	public void ResumeApplicationButton() throws InterruptedException{
-		Thread.sleep(10000);
+		Thread.sleep(5000);
+		String DateOfBirth ="11031950";
+		MedSupFormValidation(DateOfBirth);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
