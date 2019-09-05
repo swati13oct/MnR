@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
@@ -36,7 +38,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
 			start(UHCRETIREE_ACQISITION_PAGE_URL);
 		} else {
 			start(TEAM_UHCRETIREE_ACQISITION_PAGE_URL);
@@ -230,5 +232,12 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 		}
 		return null;
+	}
+	
+	@Override
+	public void waitforElement(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, 5L);
+		wait.until(ExpectedConditions.visibilityOf(element));
+
 	}
 }

@@ -1,7 +1,7 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
 Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
 
-  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression
+  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression 
  Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site

@@ -229,11 +229,11 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		boolean bypass_INC11365785_srchEobHist=false;
 		if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
 				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE"))) {
-			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, validate(medicalEob_MAPD));
-			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, validate(drugEob_MAPD));
+			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, claimsValidate(medicalEob_MAPD));
+			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_MAPD));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" and "+pLink+" are displayed");
 		} else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("COSMOS")) {
-			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, validate(medicalEob_MA));
+			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, claimsValidate(medicalEob_MA));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !claimsValidate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
 		} else if (plantype.equals("MA") && claimSystem.toUpperCase().contains("NICE")) {
@@ -245,7 +245,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			bypass_INC11365785_srchEobHist=true;
 		} else if (plantype.equals("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_PDP));
-			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, validate(drugEob_PDP));
+			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_PDP));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
 		} else if (plantype.equals("SSUP")) {
 			//note: F267688
@@ -253,7 +253,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+pLink+onPage, !claimsValidate(drugEob_MA));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - no "+mLink+" or "+pLink+" is displayed");
 		} else if (plantype.equals("SHIP")){
-			Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", validate(ship_eob));
+			Assert.assertTrue("PROBLEM - unable to locate EOB link on summary page for SHIP user", claimsValidate(ship_eob));
 			System.out.println("for SHIP Eob is diplayed");
 		} else {
 			Assert.assertTrue("PROBLEM - need to code the condition for planType="+plantype
@@ -308,11 +308,11 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 * @return true/false of validation result
 	 */
 	public boolean validateClickLrnMore() {
-		if (validate(lrnMoreAbtClaimsTog)) {
+		if (claimsValidate(lrnMoreAbtClaimsTog)) {
 			try {
 				lrnMoreAbtClaimsTog.click();
-				//Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", validate(lrnMoreAbtClaimsContent));
-				if (validate(lrnMoreAbtClaimsContent)) {
+				//Assert.assertTrue("PROBLEM - unable to locate the 'Learn More..' content after clicking link", claimsValidate(lrnMoreAbtClaimsContent));
+				if (claimsValidate(lrnMoreAbtClaimsContent)) {
 					System.out.println("This planType has Learn More content");
 				} else {
 					System.out.println("This planType doesn't have any additional Learn More content.  "
@@ -331,7 +331,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 * @return true/false of validation result
 	 */
 	public boolean validateClickPrintBtn() {
-		if (validate(claimsSummPrntBtn)) {
+		if (claimsValidate(claimsSummPrntBtn)) {
 			String winHandleBefore = driver.getWindowHandle();
 			claimsSummPrntBtn.click();
 			try {
@@ -361,7 +361,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 * @return true/false of validation result
 	 */
 	public boolean validateClickDnldBtn() {
-		if (validate(claimsSummPrntBtn)) {
+		if (claimsValidate(claimsSummPrntBtn)) {
 			try {
 				claimsSummDnldBtn.click();
 			} catch(Exception e) {
@@ -460,12 +460,12 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	public void validatePlanNavTab(String planType) {
 
 		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
-			if(validate(mapdNavTab))
+			if(claimsValidate(mapdNavTab))
 				mapdNavTab.click();	
-		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+		}else if(planType.equalsIgnoreCase("PDP")&&claimsValidate(pdpNavTab)){
 			pdpNavTab.click();
 		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
-			if(validate(medsuppNavTab))
+			if(claimsValidate(medsuppNavTab))
 				medsuppNavTab.click();
 		}	
 			
