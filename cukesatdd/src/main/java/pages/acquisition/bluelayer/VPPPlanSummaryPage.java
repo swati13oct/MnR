@@ -530,6 +530,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
 		private WebElement currentYearSelection;
 		
+		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+		private WebElement nextYearSelection;
+		
 		@FindBy(xpath="//button[@id='lisGoBtn']")
 		private WebElement planYearPopupGoButton;
 		
@@ -3081,15 +3084,11 @@ catch (Exception e) {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
-			if (validate(currentYearSelection)) {
-				currentYearSelection.click();
-				try {
-					Thread.sleep(1000);
-					planYearPopupGoButton.click();
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+				
 			}
 		} 
 	}	
