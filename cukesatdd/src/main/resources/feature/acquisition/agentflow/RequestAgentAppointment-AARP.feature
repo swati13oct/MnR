@@ -20,22 +20,28 @@ Feature: 1.06-VBF-Acq-To test request an appointment with an agent flow in AARP 
 #| firstName | lastName | city | address      | state      | zipcode | phone      |
 #| TEST -MR-Firstname     | TEST -MR-Lastname      | Test | 100 Test way | New Jersey |   08854 | 7324567890 |
 
-@agentAppointmentUlayerSmoke
-Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow in AARP site
+@agentAppointmentByZipUlayerSmoke
+Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for zipcode in AARP site
 Given the user is on AARP medicare acquisition site landing page
 When the user navigates to request more help and information in AARP site
 When the user navigates to request appointment with an agent in AARP site and validates page is loaded
-Then user validates the breadcrumb title on the request appointment page
-Then user validates error messages on submitting blank form on aarp site
+Then the user fills the form out and submits the agent appointment application
+| Zipcode    | <zipcode>   |
+
+Examples: 
+| TCID    | zipcode    | 
+| F266872 |  90002     |  
+
+@agentAppointmentAgentUlayerSmoke
+Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for Agent name in AARP site
+Given the user is on AARP medicare acquisition site landing page
+When the user navigates to request more help and information in AARP site
+When the user navigates to request appointment with an agent in AARP site and validates page is loaded
 Then the user fills the form out and submits the agent appointment application
 | First Name | <firstName> |
 | Last Name  | <lastName>  |
-| Address    | <address>   |
-| City       | <city>      |
-| State      | <state>     |
-| Zipcode    | <zipcode>   |
-| Phone      | <phone>     |
+| State  	 | <state>  |
 
 Examples: 
-| TCID    | firstName | lastName | city | address      | state | zipcode | phone        |
-| F266872 | TEST -MR-Firstname      | TEST -MR-Lastname      | Test | 100 Test way | NJ    |   08854 | 732-456-7890 |
+| TCID    | firstName 	   | lastName | state |
+| F266872 | CHRISTINE      | LEE      | CA    | 

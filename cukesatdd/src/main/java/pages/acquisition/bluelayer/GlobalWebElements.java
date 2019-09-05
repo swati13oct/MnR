@@ -48,10 +48,10 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement footerAgentsnBrokersLink;
 	
 	/** Request for assistance link **/
-	@FindBy(id="gf_lnk_9")
+	@FindBy(id="gf_lnk_10")
 	public static WebElement footerRequestforAssistancelink;
 	
-	@FindBy(id="gf_lnk_10")
+	@FindBy(id="gf_lnk_9")
 	public static WebElement footerAccessibilitylink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
