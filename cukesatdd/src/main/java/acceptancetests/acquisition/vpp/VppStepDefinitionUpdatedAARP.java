@@ -108,7 +108,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	@When("^the user adds plan from plan search using following information in the AARP site$")
+	/*@When("^the user adds plan from plan search using following information in the AARP site$")
 	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
 		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -130,7 +130,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.addPlansForVisitorProfile(zipcode);
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
@@ -141,7 +141,7 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-	}
+	}*/
 
 	/**
 	 * @toDo:user validates plan count for all plan types on plan summary page
@@ -1559,7 +1559,8 @@ public class VppStepDefinitionUpdatedAARP {
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String resumeKey = plansummaryPage.StartApplicationButton(DateOfBirth,FirstName, LastName);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
