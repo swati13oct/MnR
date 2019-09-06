@@ -771,6 +771,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(id = "mailingAddress")
 	private List<WebElement> mailingAddressSectionPresent;
+	
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+	protected WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
+	protected WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	protected WebElement comboTab_PDP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
+	protected WebElement comboTab_SSUP;
+
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -2425,4 +2438,21 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validatePlanNameMemberidNameAccountProfile();
 		
 	}
+	
+	public void clickCombTab(String plan) {
+		if (plan.equalsIgnoreCase("mapd")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			comboTab_MAPD.click();
+		} else if (plan.equalsIgnoreCase("ship")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			comboTab_SHIP.click();
+		} else if (plan.equalsIgnoreCase("pdp")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			comboTab_PDP.click();
+		} else if (plan.equalsIgnoreCase("ssup")) {
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			comboTab_SSUP.click();
+		} 
+	}
+
 }
