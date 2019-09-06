@@ -2452,9 +2452,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		} else if (plan.equalsIgnoreCase("ssup")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
 			comboTab_SSUP.click();
-		} else {
-			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+plan+"' for combo testing", false);
-		}
+		} 
 	}
 
 }

@@ -95,7 +95,7 @@ Feature:P1.5 To test order materials in member site
       | 15292 | PDP      | AARP_Individual_order | 000       |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
       | 15286 | PCP      | Individual_order      | 000       |
-      | 15285 | MEDICA   | Individual_order      | 000       |
+      | 15285 | MEDICA   | Individual_order      | 001       |
       | 15293 | SHIP     | MEDSUPP_order         | 000       |
 
     @GroupMemberOrderSelectionandConfirmation 
