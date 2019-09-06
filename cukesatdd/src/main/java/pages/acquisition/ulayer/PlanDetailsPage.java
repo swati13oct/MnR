@@ -866,10 +866,10 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public String addOptionalRider(String optionalRider) {
 		optionalServicesTab.click();
-		WebElement rider = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//label"));
+		WebElement rider = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/following::label[1]"));
 		//rider.click();
 		jsClickNew(rider);
-		String optionalRiderPremium = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//b")).getText().trim();
+		String optionalRiderPremium = driver.findElement(By.xpath("//h3[text()='"+optionalRider+"']/ancestor::div[1]//strong")).getText().trim();
 		return optionalRiderPremium;
 	}
 

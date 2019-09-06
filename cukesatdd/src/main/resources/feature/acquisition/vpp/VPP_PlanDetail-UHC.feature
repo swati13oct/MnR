@@ -88,9 +88,9 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                     | monthlyPremium | yearlyPremium |
-      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare MedicareComplete Open (PPO) | $11.80         | $141.60       |
+      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare MedicareComplete Open (PPO) | $44            | $528          |
       | 15640 |   99210 | No              | Spokane County | MA       | AARP MedicareComplete Essential (HMO)        | $0             | $0            |
-      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)     | $0             | $0            |
+      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)     | $28            | $336          |
 
   @vppPlanDetailsRegressionOptionalRiders
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
