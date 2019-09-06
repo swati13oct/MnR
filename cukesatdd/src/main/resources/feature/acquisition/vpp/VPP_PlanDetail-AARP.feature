@@ -116,7 +116,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                          | optionalRider   | monthlyPremium | yearlyPremium |
       | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15661 |   53910 | No              | Adams County  | MAPD     | UnitedHealthcare MedicareComplete Assist (PPO SNP)                | Dental Platinum | $32            | $384          |
+      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare MedicareComplete Assist (PPO SNP)                | Dental Platinum | $32            | $384          |
 
   @OTC_HealthCatalog @F338035
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify OTC - health product catalog Benefits in Plan Details for provided plan
