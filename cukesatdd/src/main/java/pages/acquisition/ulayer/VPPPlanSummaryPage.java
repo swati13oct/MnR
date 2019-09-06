@@ -371,6 +371,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
 		private WebElement yearDrpDwnOptionPartA;
 		
+		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+		private WebElement nextYearSelection;
+		
 		@FindBy(id = "mpbed-month")
 		private WebElement monthDrpDwnPartB;
 
@@ -2840,15 +2843,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
-			if (validate(currentYearSelection)) {
-				currentYearSelection.click();
-				try {
-					Thread.sleep(1000);
-					planYearPopupGoButton.click();
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
 			}
 		}
 		}

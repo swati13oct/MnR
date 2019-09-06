@@ -3,7 +3,7 @@
 @Test @UHCvisitorprofile
 Feature: Visitor profile
 
-  @UHCvisitorprofile @addDrugs
+  @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -65,9 +65,9 @@ Feature: Visitor profile
       | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
 
-  @addPlans
+  @addPlans @addPlansBLayerSmoke
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
-    Given the user is on UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
       | State | <state> |
     And the user clicks on the shopping cart icon in UHC site
@@ -86,11 +86,11 @@ Feature: Visitor profile
 
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | UHC MedicareComplete SecureHorizons Essential (HMO)_Test,UHC MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
-    Given the user is on UHC medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
