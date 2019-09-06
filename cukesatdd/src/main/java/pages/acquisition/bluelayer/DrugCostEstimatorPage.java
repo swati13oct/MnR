@@ -409,6 +409,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "map")
 	public WebElement map;
 	
+	@FindBy(id = "showhideMapId")
+	public WebElement displayMapToggle;
+	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 	
@@ -644,7 +647,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 options.selectByVisibleText(radius);
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);	
-		validateNew(map);
+		validateNew(displayMapToggle);
 
 	}
 

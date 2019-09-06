@@ -392,6 +392,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "map")
 	public WebElement map;
 	
+	@FindBy(id = "showhideMapId")
+	public WebElement mapToggle;
+	
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
@@ -668,7 +671,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 options.selectByVisibleText(radius);
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);	
-		validateNew(map);
+		validateNew(mapToggle);
 	}
 
 	public boolean validatemesgmoredrugsothertext(String otherscount) {
