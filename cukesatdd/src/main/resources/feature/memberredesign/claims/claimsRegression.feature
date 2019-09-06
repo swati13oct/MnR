@@ -178,7 +178,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @claims01d
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | NA                |
+      | 15236 | SHIP     | Individual          | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
   ### note: keep PDP SSO_Individual case but comment out b/c it's hard to find a member that has SSO enabled
