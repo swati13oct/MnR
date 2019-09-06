@@ -1187,6 +1187,6 @@ Feature: G1.1 To validate forms and resources page in dashboard site
       | 318679 | PDP      | IndEff_AARP_FnR | 000          | true                | true                 | PDEX----4285627_002 | AAEX----4284884_004 | PDEX----4310622_011 | true                 | PDEX----4511899_000 | PDEX----4511875_000 | PDEX----4540649_000 |
       | 318679 | SHIP     | IndEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
       | 318679 | MAPD     | PreEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
-      | 318679 | MA       | Terminated_FnR  | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+      | 318679 | MAPD     | Terminated_FnR  | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
   #----- end segmentID and pdf code related validation
       
