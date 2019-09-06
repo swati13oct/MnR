@@ -236,16 +236,17 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 
 	@Then("^user should not see Pharmacies and Prescription link on secondary page$")
 	public void validateNoPnPLinkOnSecondaryPage(DataTable givenAttributes) {
-		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("This step should be run on NON-testharness environment...skipping");
-			return;
-		}
 		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);
 		String planType = givenAttributesMap.get("Plan Type");
 		String memberType = givenAttributesMap.get("Member Type");
+		boolean result=false;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testharnessPg = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			result=testharnessPg.findPnPLinksExistOnSecondaryPg();
+		} else {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		boolean result=accountHomePage.findPnPLinksExistOnSecondaryPg();
-
+			result=accountHomePage.findPnPLinksExistOnSecondaryPg();
+		}
 		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should not have Pharmacies & Prescriptions link on dashboard", !result);
 	}
 	

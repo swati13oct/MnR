@@ -228,6 +228,9 @@ public class TestHarness extends UhcDriver {
  	@FindBy(xpath="//a[@id='pharmacies_5']")
  	private WebElement testHarnessTopMenuPhaPresLink;
  	
+	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
+	private WebElement pharPresDashboardLink;
+
 
 	String category = null;
 
@@ -1081,5 +1084,69 @@ public class TestHarness extends UhcDriver {
     		}
     		return null;
     	}
+    	
+    	@FindBy(tagName = "arcade-header")
+    	private WebElement shadowRootHeader;
 
+    	public boolean findPnPLinksExistOnSecondaryPg() {
+    		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
+    		checkForIPerceptionModel(driver);
+    		navigateToClaimsSummaryFromTestHarnessPage();
+    		System.out.println("now on secondary page...proceed validate if pnp link exists");
+    		if (validate(pharPresDashboardLink)) {
+    			return true;
+    		} else if (validate(testHarnessTopMenuPhaPresLink)) {
+    			return true;
+    		} else {
+    			if (validate(shadowRootHeader)) {
+    				System.out.println("Check for shadow-root before giving up");
+    				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+    				WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem.getText().contains("FIND CARE")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+    					return isPnpLink(pnpTopMenuItem.getText());
+    				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+    					return isPnpLink(pnpTopMenuItem.getText());
+    				}
+    			} else {
+    				System.out.println("There is no shadow-root menu");
+    			}
+    		}
+    		return false;
+    	}
+ 
+    	public boolean isPnpLink(String targetLnkTxt) {
+    		if (targetLnkTxt.equals("PHARMACIES") && targetLnkTxt.equals("PRESCRIPTIONS"))
+    			return true;
+    		else 
+    			return false;
+    	}
+
+    	public WebElement expandRootElement(WebElement element) {
+    		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+    				element);
+    		return ele;
+    	}
+
+    	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+    		if (validate(shadowRootElement)) {
+    			System.out.println("located shadow-root element, attempt to process further...");
+    			WebElement root1 = expandRootElement(shadowRootElement);
+    			try {
+    				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", validate(element));
+    				return element;
+    			} catch (Exception e) {
+    				System.out.println("can't locate element. Exception e=" + e);
+    				Assert.assertTrue("Got exception. Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", false);
+    			}
+    		} else {
+    			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+    			Assert.assertTrue("No shadowRoot element on Dashboard", false);
+    		}
+    		return null;
+    	}
 }
