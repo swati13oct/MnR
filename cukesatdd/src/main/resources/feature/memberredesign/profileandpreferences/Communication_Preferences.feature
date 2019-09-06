@@ -67,7 +67,7 @@ Feature: C1.2To test Preferences page
       | 15311 | MAPD_AARP_GOGreen_Profilepref    | 000       |
       | 15312 | MA_AARP_GOGreen_Profilepref      | 000       |
       | 15313 | PDP_AARP_GOGreen_Profilepref     | 000       |
-     #note: need user data with segment id non-000 for below case
+     #note: need user data with segment id non-000 AND EPMP enabled for below case
      #| xxxxx | MA_001_AARP_GOGreen_Profilepref  | 001       |
       
   @CommunicationPreferences2 @goGreen @regressionMember
