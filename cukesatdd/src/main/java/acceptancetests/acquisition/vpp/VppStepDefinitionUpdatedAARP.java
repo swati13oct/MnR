@@ -19,6 +19,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -226,9 +227,9 @@ public class VppStepDefinitionUpdatedAARP {
 
 
 	/**
-	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
+	 * @toDo:select multiple plans to compare in MA and click on compare plan link
 	 */
-	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
+	@And("^I select multiple plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -241,16 +242,17 @@ public class VppStepDefinitionUpdatedAARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = givenAttributesMap.get("plan type");
+		int plansForCompare=0;
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
 			plansummaryPage.handlePlanYearSelectionPopup(plantype);
-			plansummaryPage.checkAllMAPlans();
+			plansForCompare=plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.handlePlanYearSelectionPopup(plantype);
-			plansummaryPage.checkAllPDPlans();
+			plansForCompare=plansummaryPage.checkAllPDPlans();
 		}
-
+		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
@@ -282,15 +284,17 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:click back to all plans button and verify that all 3 plans are
+	 * @toDo:click back to all plans button and verify that all plans are
 	 *             still selected
 	 */
-	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
+	@Then("^I click back to all plans button and verify that all plans are still selected$")
 	public void verifyAllPlansStillSelected() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
-		if (plansummaryPage.validateAllPlansChecked()) {
+		String plansForCompare=(String) getLoginScenario().getBean(PageConstants.plansForCompare);
+
+		plansummaryPage.clickonBackToAllPlans();
+		if (plansummaryPage.validateAllPlansChecked(plansForCompare)) {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating all plans are still selected");
@@ -1403,14 +1407,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 
@@ -1843,4 +1850,12 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2020");
 	}
 	
+	@When("^the user validate thank you message in plan compare in AARP site$")
+	public void user_validate_thank_you_message_in_plan_compare() {
+
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+	}
+
 }		

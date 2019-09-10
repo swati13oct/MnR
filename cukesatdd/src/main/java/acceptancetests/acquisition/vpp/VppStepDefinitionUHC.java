@@ -1342,14 +1342,17 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 

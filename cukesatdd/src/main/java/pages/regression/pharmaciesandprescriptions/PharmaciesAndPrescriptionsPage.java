@@ -38,7 +38,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validate(pharmaciesText));
 		String expectedTxt1="Get the most out of your prescription drug benefits.";
 		//note: it's having trouble matching the apostrophe in jenkins job run, that's why i break it into 2 pieces
-		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Or, search for national and local pharmacies in your plan";
+		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Search for national and local pharmacies in your plan";
 		String expectedTxt3="s network to fill your prescriptions.";
 		String actualTxt=pharmaciesText.getText();
 		Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "

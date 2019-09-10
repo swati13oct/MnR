@@ -146,7 +146,7 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
-		if(plansummaryPage.validateAllPlansChecked()){
+		if(plansummaryPage.validateAllPlansChecked("3")){
 			Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in validating all plans are still selected");
