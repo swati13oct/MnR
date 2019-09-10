@@ -1,6 +1,7 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -36,14 +37,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
 				validate(pharmaciesText));
-		String expectedTxt1="Get the most out of your prescription drug benefits.";
-		//note: it's having trouble matching the apostrophe in jenkins job run, that's why i break it into 2 pieces
-		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Search for national and local pharmacies in your plan";
-		String expectedTxt3="s network to fill your prescriptions.";
+		Pattern expectedTxt1=Pattern.compile("Get the most out of your prescription drug benefits\\.");
+		Pattern expectedTxt2=Pattern.compile("You can make sure your drugs are covered, estimate costs and find ways to save money\\. .*earch for national and local pharmacies in your plan.s network to fill your prescriptions\\.");
 		String actualTxt=pharmaciesText.getText();
 		Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
-				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"'"+expectedTxt3+"' | Actual='"+actualTxt+"'", 
-				actualTxt.contains(expectedTxt1) && actualTxt.contains(expectedTxt2) && actualTxt.contains(expectedTxt3));
+				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"' | Actual='"+actualTxt+"'", 
+				expectedTxt1.matcher(actualTxt).find() && expectedTxt2.matcher(actualTxt).find());
 	}
 
 	public void validateTileContent(String exp_TileHeaderTxt, String exp_TileLinkTxt, 
