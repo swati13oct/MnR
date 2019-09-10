@@ -158,63 +158,60 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			//note: prior step validation would have been done already to get to this point, so just print msg
 			System.out.println("Prescription Benefits Information link will not exist if LIS=0, skip this validation");
 			return;
-		}
-		if (tile.equals("Compare drug pricing") 
-				&& planType.toUpperCase().equals("MAPD") 
-				&& memberType.toUpperCase().contains("GROUP")){
-			System.out.println("Dev code not ready for "+tile+" link validation yet, skipping...");
+		} else if (memberType.toUpperCase().contains("PEEHIP") &&
+				(tile.equals("Check home delivery order status") || tile.equals("Order prescription refills"))) {
+			System.out.println("Order prescription refills and Check home delivery order status tile will not exist for PEEHIP group user, skip this validation");
 			return;
-		} 
-			boolean switchTab=false;
-			WebElement linkElement=null;
-			String expUrl="";
-			if (tile.equals("Compare drug pricing")) {
-				linkElement=pTile_compDrugPricingLnk;
-				if (memberType.toUpperCase().contains("GROUP")) {
-					expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
-					switchTab=true;
-				} else
-					expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
-			} else if (tile.equals("Find a network pharmacy")) {
-				linkElement=pTile_findNtkPharmacyLnk;
-				expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
-			} else if (tile.equals("Order prescription refills")) {
-				linkElement=pTile_orderPresRefillsLnk;
-				expUrl="services/rx-refill-reminder/";
+		}
+		boolean switchTab=false;
+		WebElement linkElement=null;
+		String expUrl="";
+		if (tile.equals("Compare drug pricing")) {
+			linkElement=pTile_compDrugPricingLnk;
+			if (memberType.toUpperCase().contains("GROUP")) {
+				expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
 				switchTab=true;
-			} else if (tile.equals("Check home delivery order status")) {
-				linkElement=pTile_chkHomeDeliOrderStatusLnk;
-				expUrl="/sso";
-				switchTab=true;
-			} else if (tile.equals("Prescription Benefits Information")) {
-				linkElement=pTile_presBenfitInfoLnk;
-				expUrl="https://chp-stage.optumrx.com/public/sso-landing";
-				switchTab=true;
-			}		
-			Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
-					linkElement !=null);
+			} else
+				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else if (tile.equals("Find a network pharmacy")) {
+			linkElement=pTile_findNtkPharmacyLnk;
+			expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+		} else if (tile.equals("Order prescription refills")) {
+			linkElement=pTile_orderPresRefillsLnk;
+			expUrl="services/rx-refill-reminder/";
+			switchTab=true;
+		} else if (tile.equals("Check home delivery order status")) {
+			linkElement=pTile_chkHomeDeliOrderStatusLnk;
+			expUrl="/sso";
+			switchTab=true;
+		} else if (tile.equals("Prescription Benefits Information")) {
+			linkElement=pTile_presBenfitInfoLnk;
+			expUrl="https://chp-stage.optumrx.com/public/sso-landing";
+			switchTab=true;
+		}		
+		Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
+				linkElement !=null);
 
-			if (switchTab) {
-				String winHandleBefore = driver.getWindowHandle();
-				linkElement.click();
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				CommonUtility.checkPageIsReady(driver);
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-			} else {
-				linkElement.click();
-				CommonUtility.checkPageIsReady(driver);
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-				goBackToPriorPnPpgViaBack(planType, memberType);
-			}
-		
+		if (switchTab) {
+			String winHandleBefore = driver.getWindowHandle();
+			linkElement.click();
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();					
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+		} else {
+			linkElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			goBackToPriorPnPpgViaBack(planType, memberType);
+		}
 	}
 
 	/**
