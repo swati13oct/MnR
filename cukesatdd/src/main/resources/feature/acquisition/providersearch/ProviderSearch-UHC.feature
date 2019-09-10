@@ -1,14 +1,14 @@
 @fixedTestCaseTest
 Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
 
-  @ProviderSearchBlayerSmoke
+  @ProviderSearchBlayerSmoke @ProviderSearchBlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planname> |
@@ -19,6 +19,25 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      
+       @ProviderSearchBlayerNextYrSmoke
+  Scenario Outline: Verify Provider Search  in UMS site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    When user Click on Is my Provider covered link ums
+      | PlanName | <planname> |
+    When user selects a provider and retuns to VPP page in ums
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+      | PlanName | <planname> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planname                                          |
+      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
@@ -42,11 +61,12 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     Then the user enters the zipcode and select a plan on the Rally tool on UHC Site
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
+       | 	Year  | <year>	   |
     When user selects a provider and saves it on UHC Site
 
     Examples: 
-      | zipcode | planname                                          |
-      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | planname                                          | year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |currentYear |
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
@@ -96,8 +116,23 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
     Then the user enters the zipcode and select a plan on the Rally tool on UHC Site
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
+      | 	Year  | <year>	   |
     When user selects a provider and saves it on UHC Site
 
     Examples: 
-      | zipcode | planname                                          |
-      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | planname                                          |  year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | currentYear |
+      
+      @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
+  Scenario Outline: Verify Provider Search  in UHC site from Home Page
+     Given the user is on the uhcmedicaresolutions site landing page
+    When the user clicks on Provider Search on the Home Page on UHC Site
+    Then the user enters the zipcode and select a plan on the Rally tool on UHC Site
+      | Zip Code  | <zipcode>  |
+      | Plan Name | <planname> |
+      | 	Year  | <year>	   |
+    When user selects a provider and saves it on UHC Site
+
+    Examples: 
+      | zipcode | planname                                          |  year		  |
+      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | nextYear |

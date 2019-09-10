@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.sanity.member;
 
 import org.junit.runner.RunWith;
 
