@@ -219,11 +219,12 @@ public class ProviderSearchStepDefinitionAARP {
 
 			String zipcode = memberAttributesMap.get("Zip Code");
 			String planName = memberAttributesMap.get("Plan Name");
+			String year = memberAttributesMap.get("Year");
 
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			 providerSearchPage.entersZipcodeAndSelectPlanName(zipcode,planName);
+			 providerSearchPage.entersZipcodeAndSelectPlanName(zipcode,planName,year);
 			
 
 		}
