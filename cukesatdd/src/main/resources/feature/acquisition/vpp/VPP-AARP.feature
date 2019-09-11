@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppUlayer
 Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
-  @vppUlayerSmoke @vbfGate 
+  @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -22,9 +22,9 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-
+      
    @vppUlayerCurrentYrSmoke 
-   Scenario Outline: Verify plan summary in AARP site
+  Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -44,8 +44,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-  
-  
+
   @vppPlanDetailsAarp
   Scenario Outline: Verify plan details in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -484,6 +483,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
 
 
   @F322478 @us1603378 @UlayerSAMCall 

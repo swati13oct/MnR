@@ -9,8 +9,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    #When user views plans of the below plan type in UMS site
-     When user views plans of the below plan type in UMS site for next year
+   # When user views plans of the below plan type in UMS site
+   When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
@@ -22,8 +22,8 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
- 
- @vppBlayerCurrentYrSmoke 
+      
+   @vppBlayerCurrentYrSmoke 
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -44,7 +44,6 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |   
-
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -472,6 +471,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
+
 
   @F322478 @us1603378 @BlayerSAMCall
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
