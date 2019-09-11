@@ -464,3 +464,24 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
+  @F322478 @us1603378 @UlayerSAMCall 
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Call SAM icon is visible or not
+ 		And  verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
+		Then user verify the popup and content   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @UlayerSAMChat 
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Chat SAM icon is visible or not
+ 		And  verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
