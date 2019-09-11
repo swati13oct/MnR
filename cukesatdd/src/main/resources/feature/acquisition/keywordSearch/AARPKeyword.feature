@@ -1,22 +1,22 @@
-@Community_Meeting_AARP, @Keywordsearch_AARP
+@CT @Keywordsearch_AARP
 Feature: AARP_Acquistion Features community search, keyword search 
   
 
-  @KeywordSearch_AARP
+  @KeywordSearch_AARP @acquisitionRegression
     Scenario Outline: Validating the search field on the AARP site 
-    Given the user is on AARP medicare acquisition site landing page
-    When the member validates the search box 
-    Then the member lands on the result page    
+    Given the potential user is on AARP medicare acquisition site landing page
+    When the member validates the search engine
+    Then the member lands on the result pag   
     Examples:
 	| placeholder | 
 	| none   |
 	
-	@Community_Meeting_AARP
-	Scenario Outline: Verify attend community meeting flow in AARP site
-  Given the user is on AARP medicare acquisition site landing page
-  When the user navigates to request more help and information page in AARP site and validates
-  Then the user navigates to community meeting page on AARP site and validates
-  Then the user validates elements on the page  
+	# @Community_Meeting_AARP_obsulete_functionality_not_avaliable_any_more
+	# Scenario Outline: Verify attend community meeting flow in AARP site
+  # Given the user is on AARP medicare acquisition site landing page
+  # When the user navigates to request more help and information page in AARP site and validates
+  # Then the user navigates to community meeting page on AARP site and validates
+  # Then the user validates elements on the page  
   Examples:
 	| placeholder | 
 	| none      |
