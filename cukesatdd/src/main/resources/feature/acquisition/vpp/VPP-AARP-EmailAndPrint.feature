@@ -34,7 +34,7 @@ Feature: Acq-To test print and email on VPP page on AARP site
     Then the user view plan details of the first plan in the given plan type in AARP site and validates
     Then the user validate the print and email links on the plan Details Page
     Then the user validates the functionality of email and print buttons on the plan Details Page
-@abc
+
     Examples: 
     |  TID  | zipcode | plantype | isMultutiCounty |
     | 15531 |   90210 | MA       | No              |

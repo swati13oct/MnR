@@ -27,7 +27,7 @@ Feature: Acq-To test print and email on VPP page on UHC site
     And the user view plan details of the first plan in the given plan type in UMS site vpp
     Then the user validate the print and email links on the plan Details Page on uhc site
     Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
-@abc
+
     Examples: 
    |  TID    | zipcode | plantype |
    | 15533   |   33012 | MAPD     |
