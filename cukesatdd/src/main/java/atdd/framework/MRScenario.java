@@ -758,10 +758,11 @@ public class MRScenario {
 
 		capabilities.setCapability("platform", "Windows 7");
 		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("screenResolution", "1920x1080");
 		//capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("parent-tunnel", "optumtest");
 		capabilities.setCapability("tunnelIdentifier",
-sauceLabsTunnelIdentifier);		
+sauceLabsTunnelIdentifier);				
 		//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");		//capabilities.setCapability("name", "MRATDD-TestSuite");
 		//capabilities.setCapability("tunnelIdentifier", "Optum-Prd");	
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
@@ -1068,6 +1069,7 @@ sauceLabsTunnelIdentifier);
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "66.0");
+					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 				}
 				capabilities.setCapability("autoAcceptsAlerts", true);

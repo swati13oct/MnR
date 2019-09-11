@@ -73,6 +73,12 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	public boolean validate_proposed_effective_date_options(){
 		boolean validation_Flag = true;
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int count = ProposedEffectiveDateOptions.size();
 		if(count>0){
 			validation_Flag = true;

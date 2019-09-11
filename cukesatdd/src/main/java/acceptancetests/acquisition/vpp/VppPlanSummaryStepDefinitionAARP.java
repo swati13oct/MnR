@@ -961,7 +961,7 @@ public class VppPlanSummaryStepDefinitionAARP {
   /**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the member is on AARP medicare acquisition site landing page$")
+	@Given("^the potential user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
