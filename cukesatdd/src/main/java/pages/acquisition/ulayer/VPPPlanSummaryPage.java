@@ -355,6 +355,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
+		@FindBy(className = "loading-dialog")
+		public List<WebElement> loadingBlock;
 
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
@@ -684,6 +686,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
@@ -1684,12 +1693,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if (planType.equalsIgnoreCase("SNP")) {
 			//WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
+			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//*[contains(@id, 'snplinkcontainer')][2]//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal']"));
 			validateNew(learnMoreAboutExtraHelp);
 			learnMoreAboutExtraHelp.click();
 		}
 		if (planType.equalsIgnoreCase("PDP")) {
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
+			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[2]//a[contains(@class, 'inline-edit-link modal-link vpp-monthly-premium-modal')]"));
 			validateNew(learnMoreAboutExtraHelp);
 			learnMoreAboutExtraHelp.click();
 		}
@@ -1728,7 +1737,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validatePlanPremium (String planName , String monthlyPremium){
-		WebElement premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
+		
+		WebElement premiumForPlan = null;
+		if(planName.contains("SNP")){
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
+		}else if(planName.contains("PDP")){
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
+		}else
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
+		
 		validateNew(premiumForPlan);
 		/*String PlanPremium = PremiumForPlan.getText();
 		if(PlanPremium.equals(monthlyPremium)){
@@ -1740,7 +1757,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validatePrimaryCarePhysicianBenefit (String planType ,String planName , String primaryCarePhysician){
-		WebElement PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')]"));
+		WebElement PrimaryCarePhysicianForPlan = null;
+		
+		
+		if(planName.contains("SNP")){
+			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+		}else if(planName.contains("PDP")){
+			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+		}else
+			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+
+		
 		validateNew(PrimaryCarePhysicianForPlan);
 	/*	if(!planType.equals("SNP")){
 			String PrimaryCare = PrimaryCarePhysicianForPlan.getText();	
@@ -1763,7 +1790,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	}
 	public void validateSpecialistBenefit (String planType , String planName , String specialist) {
-		WebElement specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Specialist')]"));
+		WebElement specialistForPlan = null;
+		
+		
+		if(planName.contains("SNP")){
+			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Specialist')]"));
+		}else if(planName.contains("PDP")){
+			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Specialist')]"));
+		}else
+			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Specialist')]"));
+
+		
+		
 		validateNew(specialistForPlan);
 		/*if(!planType.equals("SNP")){
 			String SpecialistBenefit = SpecialistForPlan.getText();
@@ -1787,7 +1825,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public void validateReferrralRequiredBenefit (String planName , String referralRequired) {
-		WebElement referralRequiredForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Referral')]"));
+		WebElement referralRequiredForPlan = null;
+		
+		
+		if(planName.contains("SNP")){
+			referralRequiredForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Referral')])"));
+		}else if(planName.contains("PDP")){
+			referralRequiredForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Referral')])"));
+		}else
+			referralRequiredForPlan =driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Referral')]"));
+
 		validateNew(referralRequiredForPlan);
 		/*String ReferRequired = ReferralRequiredForPlan.getText();
 		if(ReferRequired.equals(referralRequired)){
@@ -1799,7 +1846,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validatesOutOfPocketMaximum (String planName , String outOfPocketMaximum) {
-		WebElement outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+		WebElement outOfPocketForPlan = null;
+		
+		if(planName.contains("SNP")){
+			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li//*[contains(text(),'Out Of Pocket')])"));
+		}else if(planName.contains("PDP")){
+			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+		}else
+			outOfPocketForPlan =driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*String OOPMax = OOPForPlan.getText();
 		if(OOPMax.equals(outOfPocketMaximum)){
@@ -1810,9 +1864,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Assert.fail("Out of Pocket Maximum Benefit for the plan is incorrect : "+planName);*/
 	}
 
-	public void validatePrescriptionDrugsTier1(String planName , String prescriptionDrugsTier1) {
-		WebElement drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
-		validateNew(drugsForPlan);
+	public void validatePrescriptionDrugsTier1(String planName ,String planType, String prescriptionDrugsTier1) {
+		WebElement drugsForPlan = null;
+		
+		if(planType.equalsIgnoreCase("SNP")){
+			drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
+		}else if(planType.equalsIgnoreCase("PDP")){
+			drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Prescription Drugs')])"));
+		}else if(planType.equalsIgnoreCase("MAPD")){
+			drugsForPlan =driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
+		}else
+			drugsForPlan =driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Prescription Drugs')]"));
+
+			validateNew(drugsForPlan);
 		/*String PrescriptionDrugs = DrugsForPlan.getText();
 		if(PrescriptionDrugs.equals(prescriptionDrugsTier1)){
 			System.out.println("PrescriptionDrugs for the plan is " + PrescriptionDrugs);      
@@ -1903,7 +1967,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(@dtmid, 'cta_acq_plans_landing')]"));
+		WebElement DCELink = null;
+		
+		if(planName.contains("SNP")){
+			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//li[contains(@id, 'linkforsnp')]//*[contains(@id,'snpDrugCostEstimatorLink')])"));
+		}else if(planName.contains("PDP")){
+			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')])"));
+		}else
+			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(@dtmid, 'cta_acq_plans_landing')])"));
+
+
 		Actions action = new Actions(driver);
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();

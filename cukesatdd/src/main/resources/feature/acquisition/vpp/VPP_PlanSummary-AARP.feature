@@ -25,6 +25,7 @@ Feature: To test VPP Plan Summary Page in AARP Site
        | Referral Required | <referralRequired> |
        | Out Of Pocket Maximum | <outOfPocketMaximum> |
        | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+       |Plan Type | <plantype> |
     Then the user validates below plan benefit values for the above selected plan in AARP site for PDP  Plans
       | Monthly Premium | <monthlyPremium> |
       | Annual Deductible | <annualDeductible> |
@@ -42,8 +43,8 @@ Feature: To test VPP Plan Summary Page in AARP Site
 
     Examples: 
        |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                         | annualDeductible                                       |
-       | 15545  |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
-       | 15546  |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0              | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                        |        
+#       | 15545  |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
+#       | 15546  |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0              | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                        |        
        | 15551  |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              | $4,900.00          |  No drug coverage                            |                                                        | 
        | 15552  |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  | 
                                                                                                                                                                                                                                                                          

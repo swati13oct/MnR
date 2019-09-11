@@ -818,7 +818,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		plansummaryPage.validateSpecialistBenefit(planType ,planName , specialist);
 		plansummaryPage.validateReferrralRequiredBenefit(planName ,referralRequired);
 		plansummaryPage.validatesOutOfPocketMaximum(planName , outOfPocketMaximum);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);	
+		plansummaryPage.validatePrescriptionDrugsTier1(planName ,planType,prescriptionDrugsTier1);	
 	  }
 	  else
 		 System.out.println("Benefits are not applicable for PDP Plans"); 
