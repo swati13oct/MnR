@@ -40,8 +40,8 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(id = "addheadDetails_id")
 	public WebElement addDrugDetailsPageHeading;
 	
-	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")
-	public WebElement firstDosageOption;
+	@FindBy(xpath = ".//*[@id='dosage-radios']//select")
+	public WebElement dosageDropdown;
 	
 	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
 	public WebElement btndrugName;
@@ -57,7 +57,7 @@ public class AddDrugDetails extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
 		validateNew(selectYourFrequencyDropdown);
 		validateNew(quantityField);
-		validateNew(firstDosageOption);
+		validateNew(dosageDropdown);
 	}
 
 	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -68,8 +68,8 @@ public class AddDrugDetails extends UhcDriver {
 	}*/
 	public void selectDosage(String dosage){
 	
-		WebElement drugDosage = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		drugDosage.click();
+		//WebElement drugDosage = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
+		selectFromDropDownByText(driver, dosageDropdown, dosage);
 	}
 	
 	public void selectDosageAttribute(String dosage) throws InterruptedException{

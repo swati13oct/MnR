@@ -67,10 +67,11 @@ Feature: C1.2To test Preferences page
       | 15311 | MAPD_AARP_GOGreen_Profilepref    | 000       |
       | 15312 | MA_AARP_GOGreen_Profilepref      | 000       |
       | 15313 | PDP_AARP_GOGreen_Profilepref     | 000       |
-      | xxxxx | MA_001_AARP_GOGreen_Profilepref  | 001       |
+     #note: need user data with segment id non-000 AND EPMP enabled for below case
+     #| xxxxx | MA_001_AARP_GOGreen_Profilepref  | 001       |
       
   @CommunicationPreferences2 @goGreen @regressionMember
-  Scenario Outline: TID: <TID> -Plan Type: <planType> -Segment ID: <segmentId> -To verify Edit preferences section for Go Green
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
@@ -130,6 +131,7 @@ Feature: C1.2To test Preferences page
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page
     And the user validates that Communication Preferences section does not display
+      | Plan Type   | <planType>   |
 
     Examples: 
       | TID   | planType               |
@@ -139,7 +141,7 @@ Feature: C1.2To test Preferences page
       | 15308 | MEDICA_ProfilePref     |
       
   @CommunicationPreferences6 @regressionMember @F276629
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Plan documents for SHIP
+  Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
     When the user navigates to Profile and Preferences page

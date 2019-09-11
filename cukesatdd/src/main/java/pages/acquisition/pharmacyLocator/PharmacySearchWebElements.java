@@ -303,7 +303,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath="//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]")
+	@FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segment') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]")
 	protected WebElement widget_walgreens;
 
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Retail Pharmacy Network')]")
@@ -327,7 +327,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-show,'preferredretail') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Retail')]/../../../div[2]//a")
 	protected WebElement widget_prefRetPhaNet_estYurDrugCosts;
 
-	@FindBy(xpath="//div[contains(@ng-show,'walgreen')]//h2[contains(text(),'Walgreens')]/../../..//a")
+	@FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segment') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]/../../../div[2]//a")
 	protected WebElement widget_walgreens_estYurDrugCosts;
 
 	@FindBy(xpath="//a[@dtmname='pharmacy locator:get directions']")

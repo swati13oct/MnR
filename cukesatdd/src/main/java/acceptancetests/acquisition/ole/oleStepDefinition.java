@@ -147,7 +147,7 @@ public class oleStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
 
 		}

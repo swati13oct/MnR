@@ -409,6 +409,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "map")
 	public WebElement map;
 	
+	@FindBy(id = "showhideMapId")
+	public WebElement displayMapToggle;
+	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
 	
@@ -454,7 +457,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
-	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 	
 	@FindBy(id="dupIconFlyOut")
@@ -644,7 +647,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 options.selectByVisibleText(radius);
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);	
-		validateNew(map);
+		validateNew(displayMapToggle);
 
 	}
 

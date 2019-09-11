@@ -19,7 +19,6 @@ import acceptancetests.util.CommonUtility;
  */
 public class ClaimsSummarySearch extends ClaimsSummaryBase {
 
-	private WebElement toTxtField;
 
 	public ClaimsSummarySearch(WebDriver driver) {
 		super(driver);
@@ -35,7 +34,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 	 * @throws InterruptedException 
 	 */
 	public void searchClaimsbyCustomDate(String planType,String claimPeriod) throws InterruptedException {
-		Assert.assertTrue("PROBLEM - unable to locate 'Custom search' option from dropdown",validate(custSrch));
+		Assert.assertTrue("PROBLEM - unable to locate 'Custom search' option from dropdown",claimsValidate(custSrch));
 		System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"+(custSrch.getText()));
 		custSrch.click();
 		System.out.println("!!! Validating the drop down to select the claims !!!");
@@ -58,7 +57,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			dropdown.selectByVisibleText("Last 24 months");
 			System.out.println("Clicked 24 months option");
 			Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
-					validate(pdp_drug));
+					claimsValidate(pdp_drug));
 		} else if (planType.contains("MAPD") || planType.contains("MA")
 				||planType.contains("PCP") || planType.contains("MEDICA")){
 			System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
@@ -68,22 +67,22 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			+(last24months.getText()));
 			if (!planType.contains("MA")) { //note: MA doesn't have selection
 				Assert.assertTrue("PROBLEM - unable to locate 'Medical' for claims type for '"+planType+"' user",
-						validate(medical));
+						claimsValidate(medical));
 			}
 			System.out.println("!!! Claim type Medical is validated!!! ");
 			if (planType.contains("MAPD") || planType.contains("PCP")) {
 				Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
-						validate(PrescriptionDrug));
+						claimsValidate(PrescriptionDrug));
 				System.out.println("!!!Claim type PDP is validated !!!");
 				PrescriptionDrug.click();
 				System.out.println("!!! Claim Type PDP is clicked !!!");
 				//note: this validation will only work if user also has drug claims, 
 				//note: comment out for now b/c hard to find a user with both type of claims
 				//Assert.assertTrue("PROBLEM - unable to locate Prescription Drug claims table for claims type for '"+planType+"' user",
-				//	validate(claimsTablePrescriptionDrug));
+				//	claimsValidate(claimsTablePrescriptionDrug));
 				//System.out.println("!!! Claims Table PDP is seen on the Claims Summary page!!!");
 				//Assert.assertTrue("PROBLEM - unable to locate Rx Number in claims table for claims type for '"+planType+"' user",
-				//	validate(RxNumberinthecalimstable));
+				//	claimsValidate(RxNumberinthecalimstable));
 				//System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
 				System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
 				medical.click();
@@ -96,7 +95,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate Custom Search option for '"+planType+"' user",
-					validate(custSrch));
+					claimsValidate(custSrch));
 			System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"
 					+(custSrch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
@@ -117,13 +116,14 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 		checkForIPerceptionModel(driver);
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
+			moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);
 			System.out.println("Clicked '"+claimPeriod+"' option");
 		} else if (planType.contains("PDP")) {
 			System.out.println("!!!Claim type PDP is validated !!!");
 			Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the prescription drug option",
-					validate(pdp_drugClaimsTypTxt));
+					claimsValidate(pdp_drugClaimsTypTxt));
 			Select dropdown=new Select (fed_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);
 			System.out.println("Clicked '"+claimPeriod+"' option");
@@ -150,27 +150,27 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 
 			if (planType.equals("MA") || planType.equals("SSUP")) {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",
-						validate(ma_medicalClaimsTypTxt));
+						claimsValidate(ma_medicalClaimsTypTxt));
 			}
 
 			System.out.println("!! Claim type Medical is validated!!! ");
 			if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("prescription drug")) {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the prescription drug option",
-						validate(PrescriptionDrug));
+						claimsValidate(PrescriptionDrug));
 				System.out.println("!!!Claim type PrescriptionDrug is validated !!!");
 				PrescriptionDrug.click();
 				System.out.println("!!! Claim Type PrescriptionDrug is clicked !!!");
 			} else if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("medical")) {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",
-						validate(medical));
+						claimsValidate(medical));
 				// note: MAPD has both medical and prescription drug options
 				// for MA case there will be just medical so there won't be a need for click
 				medical.click();
 			}
 		} else{
-			Assert.assertTrue("PROBLEM: Unable to locate customSearch element",validate(custSrch));
+			Assert.assertTrue("PROBLEM: Unable to locate customSearch element",claimsValidate(custSrch));
 			System.out.println("!!! Custom search is seen in the view Claims From drop down ===>"
 			+(custSrch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
@@ -228,19 +228,19 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				toTxtField=shipTo;
 			}
 
-			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", validate(fromCalendarIconBtn));
-			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", validate(toCalendarIconBtn));
+			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", claimsValidate(fromCalendarIconBtn));
+			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", claimsValidate(toCalendarIconBtn));
 
 			System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
 			fromCalendarIconBtn.click();
 			CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);
-			Assert.assertTrue("PROBLEM - date picker for 'From' calendar button should have been shown today's date clicked", validate(fromCalendarDatePicker_today));
+			Assert.assertTrue("PROBLEM - date picker for 'From' calendar button should have been shown today's date clicked", claimsValidate(fromCalendarDatePicker_today));
 			fromCalendarDatePicker_today.click();
 
 			System.out.println("Proceed to validate 'To' date calendar will hide and show accordingly");
 			toCalendarIconBtn.click();
 			CommonUtility.waitForPageLoad(driver, toCalendarDatePicker_today, 5);
-			Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", validate(toCalendarDatePicker_today));
+			Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", claimsValidate(toCalendarDatePicker_today));
 			toCalendarDatePicker_today.click();
 			
 			String actualFromTxt=fromTxtField.getAttribute("value");

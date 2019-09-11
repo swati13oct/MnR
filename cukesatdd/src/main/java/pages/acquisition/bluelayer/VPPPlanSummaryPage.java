@@ -433,24 +433,42 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpbed-monthSelectBoxIt")
+		@FindBy(id = "mpaed-month")
 		private WebElement monthDrpDwn;
-
-		@FindBy(xpath = "//ul[@id='mpbed-monthSelectBoxItOptions']//li[2]")
-		private WebElement monthDrpDwnOption;
-
-		@FindBy(xpath = "//span[@id='mpbed-yearSelectBoxIt']")
+		
+		@FindBy(id = "mpaed-year")
 		private WebElement yearDrpDwn;
+		
+		@FindBy(id = "mpbed-month")
+		private WebElement monthBDrpDwn;
+		
+		@FindBy(id = "mpbed-year")
+		private WebElement yearBDrpDwn;
 
-		@FindBy(xpath = "//ul[@id='mpbed-yearSelectBoxItOptions']//li[2]")
+		@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+		private WebElement monthDrpDwnOption;
+		
+		@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
 		private WebElement yearDrpDwnOption;
+		
+		@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
+		private WebElement monthBDrpDwnOption;
+		
+		@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
+		private WebElement yearBDrpDwnOption;
 
-		@FindBy(id = "msVppdpsdSelectBoxItText")
+		@FindBy(id = "msVppdpsd")
 		private WebElement startDrpDwn;
 
-		@FindBy(xpath = "//ul[@id='msVppdpsdSelectBoxItOptions']//li[2]")
+		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
 		private WebElement startDrpDwnOption;
+		
+		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		WebElement ViewPlanMedSupPage;
 
+		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
+		private WebElement MaleGender;
+		
 		@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
 		private WebElement insuredStatus;
 
@@ -481,7 +499,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "//a[contains(text(),'Cancel Application')]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
 		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
@@ -529,6 +547,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
 		private WebElement currentYearSelection;
+		
+		@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+		private WebElement nextYearSelection;
 		
 		@FindBy(xpath="//button[@id='lisGoBtn']")
 		private WebElement planYearPopupGoButton;
@@ -858,7 +879,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
                             msPlansViewLink.click();
-                            CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
+                           // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
 			sleepBySec(5);
         	            CommonUtility.checkPageIsReady(driver);
@@ -1126,6 +1147,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'Is my')][contains(text(),'covered?')]"));
+		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
@@ -2920,41 +2942,41 @@ public void closeOriginalTabAndOpenNewTab() {
 }
 //^^^ note: added for US1598162	
 
-public String StartApplicationButton(String DateOfBirth, String FirstName, String LastName) throws InterruptedException {
+public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+	Thread.sleep(4000);
+	CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+	System.out.println("MedSup page form is displayed");
+	DOB.click();
+	DOB.sendKeys(DateOfBirth);
+	System.out.println("Date of birth is entered");
+	MaleGender.click();
+	monthDrpDwn.click();
+	monthDrpDwnOption.click();
+	Thread.sleep(2000);
+	System.out.println("Effective date- month value selected");
+	yearDrpDwn.click();
+	yearDrpDwnOption.click();
+	System.out.println("Effective date- year value selected");
+	Thread.sleep(2000);
+	monthBDrpDwn.click();
+	monthBDrpDwnOption.click();
+	Thread.sleep(2000);
+	yearBDrpDwn.click();
+	yearBDrpDwnOption.click();
+	Thread.sleep(2000);
+	startDrpDwn.click();
+	Thread.sleep(2000);
+	startDrpDwnOption.click();
+	System.out.println("Plan to start date selected");
+	ViewPlanMedSupPage.click();
+}
+
+public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 	Thread.sleep(4000);
 	CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 	Start_ApplicationBtn.click();
 	System.out.println("Start application button is clicked on application page");
 	Thread.sleep(8000);
-	DOB.click();
-	
-	DOB.sendKeys(DateOfBirth);
-	System.out.println("Date of birth is entered");
-	try {
-	CommonUtility.waitForPageLoad(driver, monthDrpDwn, 5);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", monthDrpDwn);
-			  JavascriptExecutor js = (JavascriptExecutor)driver;
-			js.executeScript("arguments[0].click();", monthDrpDwn);
-	
-	//	monthDrpDwn.click();
-		monthDrpDwnOption.click();
-		Thread.sleep(2000);
-		System.out.println("Effective date- month value selected");
-		yearDrpDwn.click();
-		Thread.sleep(2000);
-		yearDrpDwnOption.click();
-		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
-		startDrpDwn.click();
-		Thread.sleep(2000);
-		startDrpDwnOption.click();
-		System.out.println("Plan to start date selected");
-	}
-	catch (InterruptedException e) {
-		e.printStackTrace();
-		System.out.println("Effective date-values not selected");
-	}
-	Start_ApplicationBtn.click();
 	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
 	insuredStatus.click();
 	Thread.sleep(2000);
@@ -2973,7 +2995,6 @@ public String StartApplicationButton(String DateOfBirth, String FirstName, Strin
 	address1.sendKeys("TestAddress1");
 	cityName.sendKeys("TestCity");
 	alternatemailingAddressBtn.click();
-
 	emailAddress.sendKeys("John_Kerry@test.com");
 	phoneNumber.sendKeys("1234567890");
 	nextButton.click();
@@ -2981,9 +3002,7 @@ public String StartApplicationButton(String DateOfBirth, String FirstName, Strin
 	nextButton.click();
 	Thread.sleep(2000);
 	String ResumeKey= resumeKey.getText();
-	
 	System.out.println("The return to the application code is- "+ResumeKey);
-	
 	cancelButton.click();
 	CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
 	cancelButtonPopUp.click();
@@ -2992,7 +3011,7 @@ public String StartApplicationButton(String DateOfBirth, String FirstName, Strin
 }
 
 public void ResumeApplicationButton() throws InterruptedException{
-	Thread.sleep(10000);
+	Thread.sleep(5000);
 	CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 	resumeApplication.click();
 	System.out.println("Resume application link clicked successfully");
@@ -3081,15 +3100,11 @@ catch (Exception e) {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
 		if (validate(planYearPopup)) {
-			if (validate(currentYearSelection)) {
-				currentYearSelection.click();
-				try {
-					Thread.sleep(1000);
-					planYearPopupGoButton.click();
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+				
 			}
 		} 
 	}	
@@ -3129,7 +3144,7 @@ catch (Exception e) {
 	
 	public void CheckClick_NextYear_Plans() {
 
-		try {
+		//try {
 			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
@@ -3138,7 +3153,8 @@ catch (Exception e) {
 			System.out.println("*****CLICKING ON Year Toggle Go button*****");
 			
 			SelectYearGoBtn.click();
-		} catch (Exception e) {
+			CommonUtility.checkPageIsReadyNew(driver);
+		/*} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
 			e.printStackTrace();
 		}
@@ -3147,7 +3163,7 @@ catch (Exception e) {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 

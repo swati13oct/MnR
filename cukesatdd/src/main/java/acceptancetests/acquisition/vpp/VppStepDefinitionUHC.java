@@ -179,12 +179,12 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		try {
+		/*try {
 			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		plansummaryPage.viewPlanSummary(plantype);
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
@@ -206,12 +206,12 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		try {
+		/*try {
 			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		plansummaryPage.viewPlanSummary(plantype);
 		plansummaryPage.CheckClick_NextYear_Plans();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
@@ -1462,19 +1462,41 @@ public class VppStepDefinitionUHC {
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String resumeKey = plansummaryPage.StartApplicationButton(DateOfBirth, FirstName, LastName);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
 
 	@Then("^the user clicks on resume application button")
-	public void click_resume_application() throws Throwable {
+	public void click_resume_application()throws Throwable {
+		
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
+	
+	@Then("^the user navigates to next page to locate resume application button")
+	public void click_resume_application(DataTable givenAttributes)throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		System.out.println("***the user clicks on resume application button***");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		plansummaryPage.ResumeApplicationButton();
+
+	}
+
 
 	@Then("^the user enters data to resume the application")
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
@@ -1732,4 +1754,63 @@ public class VppStepDefinitionUHC {
 
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 	}
-}
+	@When("^verify Call sticky action menu icon is visible or not$")
+	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+	}
+		
+	@Then("^user verify the popup and content in popup$")
+	public void user_verify_the_popup_and_content_in_popup() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallpopup();
+		
+	}
+	
+	@When("^verify Chat sticky action menu icon is visible or not$")
+	public void verify_Chat_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+		
+	}
+	
+	@Then("^user verify the Chat at its original state$")
+	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSam();
+	}
+} 

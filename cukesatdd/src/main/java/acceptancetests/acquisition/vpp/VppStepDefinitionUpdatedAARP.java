@@ -108,7 +108,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	@When("^the user adds plan from plan search using following information in the AARP site$")
+	/*@When("^the user adds plan from plan search using following information in the AARP site$")
 	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
 		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -130,7 +130,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.addPlansForVisitorProfile(zipcode);
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
@@ -141,7 +141,7 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-	}
+	}*/
 
 	/**
 	 * @toDo:user validates plan count for all plan types on plan summary page
@@ -1559,7 +1559,8 @@ public class VppStepDefinitionUpdatedAARP {
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String resumeKey = plansummaryPage.StartApplicationButton(DateOfBirth,FirstName, LastName);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
@@ -1842,4 +1843,69 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2020");
 	}
 	
-}		
+	
+	@When("^verify Call SAM icon is visible or not$")
+	public void verify_Call_SAM_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the popup and content$")
+	public void user_verify_the_popup_and_content() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallpopup();	
+	}
+	
+	@When("^verify Chat SAM icon is visible or not$")
+	public void verify_Chat_SAM_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateChatSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the Chat original state$")
+	public void user_verify_the_Chat_original_state() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSam();
+		
+		
+	}
+}

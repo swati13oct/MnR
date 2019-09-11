@@ -52,7 +52,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath="//div[contains(@class,'exportSavedProviders')]//button[contains(@class,'action-btn')]")
+	@FindBy(xpath="(//div[contains(@class,'export-saved-providers')]//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -86,6 +86,14 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(className="saved-provider-button")
 	private WebElement SaveBtn2;
 	
+	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
+	private WebElement providerNameText;
+	
+	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
+	private WebElement nextYrTile;
+	
+	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
+	private WebElement currentYrTile;
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -160,23 +168,33 @@ public class ProviderSearchPage extends UhcDriver {
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	Viewsavebtn.click();
-
+	validateNew(providerNameText);
 	validateNew(Checkcoverage);
-	
-	Checkcoverage.click();
+	jsClickNew(Checkcoverage);
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 	return new VPPPlanSummaryPage(driver);
 	}
 	
-	public void entersZipcodeAndSelectPlanName(String zipcode,String planName) {
+	public void entersZipcodeAndSelectPlanName(String zipcode,String planName, String year) {
 
 		validateNew(zipCodeTextfield);	
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
 		continueButton.click();
+		if (year.contains("current")) {
+			if (validate(currentYrTile)) {
+				currentYrTile.click();
+			} else {
+				System.out.println("Current year tile is not present");
+			}
+		} else if (year.contains("next")) {
+			validateNew(nextYrTile);
+			nextYrTile.click();
+		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));
+		validateNew(planNameToBeSelected);
 		planNameToBeSelected.click();
 		// TODO Auto-generated method stub
 		
@@ -201,6 +219,7 @@ public class ProviderSearchPage extends UhcDriver {
 		SaveBtn2.click();
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 		Viewsavebtn.click();
+		validateNew(providerNameText);
 		validateNew(PrintEmailBtn);
 		
 		

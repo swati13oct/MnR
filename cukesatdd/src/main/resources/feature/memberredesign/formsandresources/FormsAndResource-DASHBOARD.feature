@@ -1182,11 +1182,11 @@ Feature: G1.1 To validate forms and resources page in dashboard site
 
     Examples: 
       | FID    | planType | memberType      | segmentId    | expectWholeAnocSect | cy_expectAnocSubSect | cy_anocPdfCode      | cy_eocPdfCode       | cy_cfPdfCode        | ny_expectAnocSubSect | ny_anocPdfCode      | ny_eocPdfCode       | ny_cfPdfCode        | 
-      | 318679 | MAPD     | IndEff_AARP_FnR | 000          | true                | true                 | AAPA19HM4283769_001 | AAPA19HM4283717_003 | AAEX19HM4310605_012 | true                 | AAPA20HM4515155_000 | AAPA20HM4536734_000 | AAEX20HM4540614_000 |
-      | 318679 | MAPD     | IndEff_UHC_FnR  | 000          | true                | true                 | AAFL19RP4284175_001 | AAFL19RP4284870_003 | AAEX19PP4310531_012 | true                 | AAFL20RP4515715_000 | AAFL20RP4537629_000 | AAEX20PP4540533_000 |
-      | 318679 | PDP      | IndEff_AARP_FnR | 000          | true                | true                 | PDEX----4285627_002 | AAEX----4284884_004 | PDEX----4310622_012 | true                 | PDEX----4511899_000 | PDEX----4511875_000 | PDEX----4540649_000 |
+      | 318679 | MAPD     | IndEff_AARP_FnR | 000          | true                | true                 | AAPA19HM4283769_001 | AAPA19HM4283717_003 | AAEX19HM4310605_011 | true                 | AAPA20HM4515155_000 | AAPA20HM4536734_000 | AAEX20HM4540614_000 |
+      | 318679 | MAPD     | IndEff_UHC_FnR  | 000          | true                | true                 | AAFL19RP4284175_001 | AAFL19RP4284870_003 | AAEX19PP4310531_011 | true                 | AAFL20RP4515715_000 | AAFL20RP4537629_000 | AAEX20PP4540533_000 |
+      | 318679 | PDP      | IndEff_AARP_FnR | 000          | true                | true                 | PDEX----4285627_002 | AAEX----4284884_004 | PDEX----4310622_011 | true                 | PDEX----4511899_000 | PDEX----4511875_000 | PDEX----4540649_000 |
       | 318679 | SHIP     | IndEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
       | 318679 | MAPD     | PreEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
-      | 318679 | MA       | Terminated_FnR  | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+      | 318679 | MAPD     | Terminated_FnR  | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
   #----- end segmentID and pdf code related validation
       

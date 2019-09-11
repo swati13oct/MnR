@@ -1108,9 +1108,19 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	
 	@And("^the user validates that Communication Preferences section does not display")
-	public void uservalidateNocommunicationPreferncesSection() {
+	public void uservalidateNocommunicationPreferncesSection(DataTable givenAttributes) {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		//note: for SSUP case, check to see if combo tab then go to SSUP tab
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		if (planType.toUpperCase().contains("SSUP")) {
+			profilePreferencesPage.clickCombTab("SSUP");
+		}
 		profilePreferencesPage.validateNoCommunicationPreferences();
 	}
 
