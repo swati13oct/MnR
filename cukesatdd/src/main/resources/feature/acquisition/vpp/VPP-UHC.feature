@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
 Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
-  @planDetailsUMS @vppBlayerSmoke @vbfGate
+  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke @vbfGate
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -9,9 +9,9 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    When user views plans of the below plan type in UMS site
+   # When user views plans of the below plan type in UMS site
+   When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     And the user validates the pdf section for uhc
@@ -22,6 +22,28 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      
+   @vppBlayerCurrentYrSmoke 
+  Scenario Outline: Verify plan details in UMS site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the UMS site
+   # When user views plans of the below plan type in UMS site
+   When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    And the user validates the pdf section for uhc
+    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
+    Then User click on add to compare checkbox and click on view details link on UMS
+    Then I uncheck and go back to the vpp page to validate
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
+      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |   
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -379,4 +401,26 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
+
+  @F322478 @us1603378 @BlayerSAMCall
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Call sticky action menu icon is visible or not
+ 		And  verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the popup and content in popup   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @BlayerSAMChat
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Chat sticky action menu icon is visible or not
+ 		And  verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat at its original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
 

@@ -1,14 +1,15 @@
 @fixedTestCaseTest
 Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
 
-  @ProviderSearchUlayerSmoke
+  @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    #And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
@@ -19,6 +20,27 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      
+      @ProviderSearchUlayerNextYrSmoke
+  Scenario Outline: Verify Provider Search  in AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+   # And the user views the plans of the below plan type in AARP site
+   Then the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    When the user Click on Is my Provider covered link Ulayer
+      | PlanName | <planname> |
+    When user selects a provider and retuns to VPP page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planname                                          |
+      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      
 
   @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
@@ -27,11 +49,12 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
     Then the user enters the zipcode and select a plan on the Rally tool
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
+        | 	Year  | <year>	   |
     When user selects a provider and saves it
 
     Examples: 
-      | zipcode | planname                                          |
-      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | planname                                          |year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |currentYear  |
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
@@ -79,12 +102,27 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
     Then the user enters the zipcode and select a plan on the Rally tool
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
+       | 	Year  | <year>	   |
     When user selects a provider and saves it
 
     Examples: 
-      | zipcode | planname                                          |
-      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      | zipcode | planname                                          | year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |currentYear  |
+      
+ @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
+  Scenario Outline: Verify Provider Search  in AARP site from Home Page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user clicks on Provider Search on the Home Page
+    Then the user enters the zipcode and select a plan on the Rally tool
+      | Zip Code  | <zipcode>  |
+      | Plan Name | <planname> |
+       | 	Year  | <year>	   |
+    When user selects a provider and saves it
 
+    Examples: 
+      | zipcode | planname                                          | year		  |
+      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear	  |
+      
   @PlancompareProviderSearchAARP @AcqRegressionProviderSearchUlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
      Given the user is on AARP medicare acquisition site landing page

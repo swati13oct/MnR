@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.sanity.acquisition;
 
 import org.junit.runner.RunWith;
 
@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchHomeVBF.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProviderSearchHomeVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/providersearch" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchHomeVBF.json" }, tags = { "@ProviderSearchFromHomePageBlayerSmoke,@ProviderSearchFromHomePageUlayerSmoke" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchHomeVBF.json" }, tags = { "@ProviderSearchFromHomePageUlayerSmoke,@ProviderSearchFromHomePageNextYrUlayerSmoke" })
 public class RunMRATDDAcquisitionProviderSearchHomeVBF {
 
 }

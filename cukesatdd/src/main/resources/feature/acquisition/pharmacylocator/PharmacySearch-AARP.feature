@@ -2,7 +2,7 @@
 Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
-  @pharmacyLocatorUlayerSmoke @pharmacyLocatorPerformanceUlayer @vbfGate
+  @pharmacyLocatorPerformanceUlayer @vbfGate
   Scenario Outline: To verify available pharmacies
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
