@@ -292,6 +292,20 @@ public class VppStepDefinitionUHC {
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
 	}
+	
+	@Then("^the user view plan details of the first plan in the given plan type in UMS site vpp$")
+	public void the_user_view_plan_details_of_the_first_plan_in_UMS_site_vpp() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+	}
+
 
 	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection$")
 	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection()

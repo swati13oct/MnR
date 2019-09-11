@@ -24,14 +24,13 @@ Feature: Acq-To test print and email on VPP page on UHC site
       | Zip Code | <zipcode> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-    And the user view plan details of the above selected plan in UMS site vpp
-      | Plan Name | <planName> |
+    And the user view plan details of the first plan in the given plan type in UMS site vpp
     Then the user validate the print and email links on the plan Details Page on uhc site
     Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
-
+@abc
     Examples: 
-   |  TID    | zipcode | planName                                             | plantype |
-   | 15533   |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
+   |  TID    | zipcode | plantype |
+   | 15533   |   33012 | MAPD     |
 
 
   @emailAndPrint_UHC3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 

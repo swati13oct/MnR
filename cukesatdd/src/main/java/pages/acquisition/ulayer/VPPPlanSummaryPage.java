@@ -1141,6 +1141,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]")
+	private WebElement firstPlanDetailsLink;
+	public PlanDetailsPage navigateToFirstPlanForPlanDetails(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		firstPlanDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("#/details")) {	
+					return new PlanDetailsPage(driver,planType);
+				}
+				return null;
+	}
+
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -1172,6 +1186,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	
 	public void clickonViewPlans() {
 		try {
 			Thread.sleep(5000);

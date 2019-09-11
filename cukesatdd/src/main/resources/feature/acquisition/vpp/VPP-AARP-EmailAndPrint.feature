@@ -31,14 +31,13 @@ Feature: Acq-To test print and email on VPP page on AARP site
     And the user views the plans of the below plan type in AARP site
       | Plan Type       | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
-    Then the user view plan details of the above selected plan in AARP site and validates
-      | Plan Name | <planName> |
+    Then the user view plan details of the first plan in the given plan type in AARP site and validates
     Then the user validate the print and email links on the plan Details Page
     Then the user validates the functionality of email and print buttons on the plan Details Page
-
+@abc
     Examples: 
-    |  TID  | zipcode | plantype | planName                                           | isMultutiCounty |
-    | 15531 |   90210 | MA       | AARP Medicare Advantage SecureHorizons Focus (HMO) | No              |
+    |  TID  | zipcode | plantype | isMultutiCounty |
+    | 15531 |   90210 | MA       | No              |
 
 
   @emailAndPrint_AARP3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 

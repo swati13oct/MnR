@@ -323,6 +323,20 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 	}
+	
+	@Then("^the user view plan details of the first plan in the given plan type in AARP site and validates$")
+	public void user_views_plandetails_selected_plantype_aarp() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
 
 	@When("^the user validates the pdf section$")
 	public void userValidatesPDFSection() {
