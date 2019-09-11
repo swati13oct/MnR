@@ -183,7 +183,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	//Right Rail Element - TFN
-	@FindBy(xpath="//*[@class='tel ng-binding']")
+	@FindBy(xpath="//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id="backToPlanSummaryTop")
@@ -230,10 +230,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(.//*[@id='globalContentIdForSkipLink']//div[contains(@class,'module module-aside no-med-supp rigntrailwidget')])[2]")
 	private WebElement promoWidject;
 
-	@FindBy(xpath="//div[@class='col-md-3']")
+	@FindBy(xpath="//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]")
 	public WebElement RightRailSection;
 
-	@FindBy(xpath="//*[contains(text() , 'Need Help?')]/ancestor::div[contains(@class,'rightrail')]//div[contains(@class,'uhc-container')]")
+	@FindBy(xpath="//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]//*[contains(@class,'module module-aside rigntrailwidget')]//*[contains(text(),'Need Help')]")
 	public WebElement needHelpRightRail;
 
 	@FindBy(xpath="//*[contains(text(),'Find an agent in your area')]")
@@ -263,13 +263,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="lisBackBtn")
 	private WebElement backButtonInLearnMoreModal; 
 
-	@FindBy(xpath="//input[@name='firstname']")
+	@FindBy(xpath="//input[@id='updates-first-name']")
 	public WebElement firstNameField;
 
-	@FindBy(xpath="//input[@placeholder='Email Address']")
+	@FindBy(xpath="//*[contains(@id, 'updates-form')]//input[@id='updates-email']")
 	public WebElement emailField;
 
-	@FindBy(xpath="//input[@name='lastname']")
+	@FindBy(xpath="//input[@id='updates-last-name']")
 	public WebElement lastNameField;
 
 	@FindBy(xpath="//button[@id='signUp']")
@@ -1700,7 +1700,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			learnMoreAboutExtraHelp.click();
 		}
 		if (planType.equalsIgnoreCase("PDP")) {
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[2]//a[contains(@class, 'inline-edit-link modal-link vpp-monthly-premium-modal')]"));
+			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[1]//a[contains(@id, 'S5921413000Link')]"));
 			validateNew(learnMoreAboutExtraHelp);
 			learnMoreAboutExtraHelp.click();
 		}
@@ -1802,8 +1802,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}else
 			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Specialist')]"));
 
-		
-		
 		validateNew(specialistForPlan);
 		/*if(!planType.equals("SNP")){
 			String SpecialistBenefit = SpecialistForPlan.getText();

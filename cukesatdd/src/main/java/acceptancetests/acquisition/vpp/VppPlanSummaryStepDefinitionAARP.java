@@ -843,7 +843,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.validatePlanPremium(planName ,monthlyPremium);
 		plansummaryPage.validateAnnualDeductible(planName ,annualDeductible);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);
+		plansummaryPage.validatePrescriptionDrugsTier1(planName ,planType,prescriptionDrugsTier1);
 	  }
 	  else
 		  System.out.println("Benefits are not applicable for MA, MAPD and DSNP Plans");
