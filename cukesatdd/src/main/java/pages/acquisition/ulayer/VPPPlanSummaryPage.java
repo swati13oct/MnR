@@ -1361,6 +1361,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in plan')]"));
 		validateNew(EnrollForPlan);
+		Thread.sleep(9000);
 		EnrollForPlan.click();
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
