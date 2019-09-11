@@ -473,3 +473,24 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
+  @F322478 @us1603378 @BlayerSAMCall
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Call sticky action menu icon is visible or not
+ 		And  verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the popup and content in popup   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @BlayerSAMChat
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Chat sticky action menu icon is visible or not
+ 		And  verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat at its original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |

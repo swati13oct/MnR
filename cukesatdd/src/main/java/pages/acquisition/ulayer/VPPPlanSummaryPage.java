@@ -1485,20 +1485,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public AepVppPlanSummaryPage validate_aepPlanYearLinks(String currentYear, String nextYear) {
-     // Commenting below lines of code as it is being covered by step - When user views plans of the below plan type in UMS site
-		
-		/*WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
+
+		WebElement CurrentYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'current_Year')]"));
 		WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
 		WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 		System.out.println("Next Year Displayed in AEP Year Selection Modal : " + NextYearRadio.getText());
-		System.out.println("Current Year Displayed in AEP Year Selection Modal : " + CurrentYearRadio.getText());*/
+		System.out.println("Current Year Displayed in AEP Year Selection Modal : " + CurrentYearRadio.getText());
 
 //		System.out.println("AEP Year Toggle link is displayed on VPP Page : "+CurrentYearRadio.getText());
-		/*System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+		System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
 		NextYearRadio.click();
 		System.out.println("*****CLICKING ON Year Toggle Go button*****");
 
-		SelectYearGoBtn.click();*/
+		SelectYearGoBtn.click();
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
 		System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText());
@@ -2908,5 +2907,4 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		
 	}
-
 }
