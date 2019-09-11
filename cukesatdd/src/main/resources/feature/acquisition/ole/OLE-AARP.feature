@@ -1,7 +1,7 @@
 @fastandfurious @OLE @OLE_Ulayer
-Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
+Feature: 1.12.0-VBF-ACQ-To test OLE common tool flow in AARP site
 
-  @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
+ @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
