@@ -393,7 +393,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
 	private WebElement planOverviewFindPlanButton;
 
-    private String savePlanLinkTextXpath= "//span[text()='Save plan']";
+    private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
@@ -2582,12 +2582,12 @@ public void validateDefaultNoSavedPlan(String planType) {
 	//System.out.println("TEST - listOfPlans xpath="+testXpath+plansXpath);
 	//System.out.println("TEST - Number of Available Plan for planType='"+planType+"'="+numOfAvaliablePlans);
 
-	List<WebElement> listOfUnsavedPlans=driver.findElements(By.xpath(testXpath+savePlanXpath));
+	List<WebElement> listOfUnsavedPlans=driver.findElements(By.xpath(testXpath+"//*[contains(@class,'module-plan-overview module swiper-slide ng-scope')]"+savePlanXpath));
 	int numOfUnsavedPlans=listOfUnsavedPlans.size();
 	//System.out.println("TEST - listOfUnsavedPlans xpath="+testXpath+unsavePlanXpath);
 	//System.out.println("TEST - Number of unsave plan link for planType='"+planType+"'="+numOfUnsavedPlans);
 
-	List<WebElement> listOfUnfilledIcons=driver.findElements(By.xpath(testXpath+unfilledIconXpath));
+	List<WebElement> listOfUnfilledIcons=driver.findElements(By.xpath(testXpath+"//*[contains(@class,'module-plan-overview module swiper-slide ng-scope')]"+unfilledIconXpath));
 	int numOfUnfilledIcons=listOfUnfilledIcons.size();
 	//System.out.println("TEST - listOfUnfilledIcons xpath="+testXpath+unfilledIconXpath);
 	//System.out.println("TEST - Number of unsave plan icon for planType='"+planType+"'="+numOfUnfilledIcons);
