@@ -1020,18 +1020,21 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);

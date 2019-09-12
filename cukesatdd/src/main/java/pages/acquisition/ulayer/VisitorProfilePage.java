@@ -15,7 +15,7 @@ import atdd.framework.UhcDriver;
 
 public class VisitorProfilePage extends UhcDriver {
 
-	@FindBy(css = "a#dupIconFlyOut")
+	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
 	@FindBy(css = "div.signupCTA a:first-child")

@@ -34,8 +34,7 @@ Then user validates drug added on prescription drug benefits tab in AARP
 |Drug|<drug>| 
 Examples:
 |     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-#| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Plan 1 (HMO)|15 miles|
-| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP MedicareComplete SecureHorizons Focus (HMO)|15 miles|
+| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Plan 1 (HMO)|15 miles|
 
 
 @switchNowStep3 @dceVBF

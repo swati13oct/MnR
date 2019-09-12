@@ -16,6 +16,6 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, features = { "src/main/resources/feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetails.json" }, tags = { "@emailAndPrint" })
 public class RunMRATDDAcquisitionEmailAndPrintPlanDetails {
-
+//@emailandprintplanDetails,@emailandprintplancompare,@vppFavoritePlanRegressionBlayer,@vppPrintRegressionBlayer,@vppPrintRegressionUlayer,@vppFavoritePlanRegressionUlayer
 }
 
