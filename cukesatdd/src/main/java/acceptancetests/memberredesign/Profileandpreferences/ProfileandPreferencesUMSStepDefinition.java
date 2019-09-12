@@ -1123,5 +1123,40 @@ public class ProfileandPreferencesUMSStepDefinition {
 		}
 		profilePreferencesPage.validateNoCommunicationPreferences();
 	}
+	/**
+	 * Profile page CT Regression 
+	 */
+	
+	/**
+	 * @toDo : The user checks the email section
+	 */
+	@Then("^the email address section should be verified$")
+	public void able_to_view_emailaddress_section() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatemailsect1();		
+	}
+	@Then("^the Phone Numbers section should be validated & all links clicked$")
+	public void able_to_validate_Phone_section() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validatePhonelinksforfederalmembers();
+	}
+	@Then("^the user verifies the Temporary Address Link on the Account settings page$")
+	public void validateTemporaryAddressSection() throws Throwable {
+		ProfileandPreferencesPage  profilePrefPage = (	ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+		profilePrefPage.validateTemporaryAddressSection();
+		profilePrefPage.validateMailingAddressSection();
+	}
+	/**
+	 * @toDo : Validates the Sign Up Today in Communication Preferences section
+	 */
+	@Then("^the user validates sign up today link$")
+	public void uservalidatessignuptoday() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateSIGNUp();
+	}
 
 }
