@@ -39,9 +39,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	@Override
 	public void openAndValidate() {
-		validate(zipcodeField);
-		validate(distanceDropDownField);
-		validate(continueField);
+		pharmacyValidate(zipcodeField);
+		pharmacyValidate(distanceDropDownField);
+		pharmacyValidate(continueField);
 	}
 
 	/** Select the distance from drop down, assuming default zip is used */
@@ -80,14 +80,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				total=Integer.parseInt(PharmacyFoundCount.getText().trim());
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (total >10) {
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element",
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -97,7 +97,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare));
+						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
@@ -115,7 +115,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						validate(pdf_otherPlans));
+						pharmacyValidate(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_otherPlans.click();
@@ -136,7 +136,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans", 
-						validate(pdf_WalgreenPlans));
+						pharmacyValidate(pdf_WalgreenPlans));
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
@@ -172,7 +172,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
-		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String winHandleBefore = driver.getWindowHandle();
@@ -231,7 +231,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		//tbd		+ "please check user data input or env to see if everything is ok", 
 		//tbd		!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 		//note: test assume valid search will yield search result
-		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String winHandleBefore = driver.getWindowHandle();
@@ -309,15 +309,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
 					totalBefore>=totalAfter);
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (totalAfter >10) {
 				moveMouseToElement(moreInfoLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					leftArrow.click();
@@ -325,10 +325,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						validate(resultNavTooltip));
+						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						validate(tooltip));
+						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2="Change the pharmacy type you selected.";
