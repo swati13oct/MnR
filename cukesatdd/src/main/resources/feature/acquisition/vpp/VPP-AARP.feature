@@ -1,18 +1,17 @@
 @fixedTestCaseTest @vppUlayer
 Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
 
-  @vppUlayerSmoke @vbfGate 
+  @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
+    #And the user views the plans of the below plan type in AARP site
+    Then the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user validates the available plans for selected plan types in the AARP site
     Then the user validates plan summary for the below plan in the AARP site
       | Plan Name | <planName> |
@@ -23,6 +22,28 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      
+   @vppUlayerCurrentYrSmoke 
+  Scenario Outline: Verify plan summary in AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the AARP site
+    #And the user views the plans of the below plan type in AARP site
+    Then the user views the plans of the below plan type in AARP site and select Current year
+      | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user validates plan summary for the below plan in the AARP site
+      | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    And the user validates the pdf section
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
+      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @vppPlanDetailsAarp
   Scenario Outline: Verify plan details in AARP site
@@ -464,3 +485,25 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
+
+  @F322478 @us1603378 @UlayerSAMCall 
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Call SAM icon is visible or not
+ 		And  verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
+		Then user verify the popup and content   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @UlayerSAMChat 
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Chat SAM icon is visible or not
+ 		And  verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |

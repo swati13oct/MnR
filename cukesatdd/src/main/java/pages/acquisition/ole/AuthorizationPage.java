@@ -55,7 +55,8 @@ public class AuthorizationPage extends UhcDriver{
 
 	//Relationship to the applicant listed Question
 	
-	@FindBy(id = "auhtorizedCheckI am the applicant listed on this enrollment application.")
+	@FindBy(xpath = "//*[contains(@id,'auhtorizedCheckI am the applicant listed on this enrollment application.')]")
+	//@FindBy(css = ".ng-untouched > .field > .field:nth-child(1)")
 	private WebElement ApplicantRadio;
 
 	@FindBy(xpath = "//*[contains(text(), 'I am the authorized representative of the applicant')]/preceding-sibling::input")
@@ -117,7 +118,7 @@ public class AuthorizationPage extends UhcDriver{
 			
 	}
 
-	public boolean validate_required_field() {
+	public boolean validate_required_field() throws InterruptedException {
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Disabled : Required fields present");
@@ -148,7 +149,9 @@ public class AuthorizationPage extends UhcDriver{
 				System.out.println("Next Button is enabled : Required Field Validation Failed");
 				validation_Flag = false;
 			}
-			ApplicantRadio.click();
+			CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
+			Thread.sleep(6000);
+			jsClickNew(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
