@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -1689,20 +1690,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateAndClickLearnMoreAboutExtraHelpInAARP(String planType , String planName) throws InterruptedException {
 		if (planType.equalsIgnoreCase("MAPD")) {
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
-			validateNew(learnMoreAboutExtraHelp);            
-			learnMoreAboutExtraHelp.click();
+			int attempts = 0;
+		    while(attempts < 2) {
+		        try {
+					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'vpp-monthly-premium-modal')]"));
+					validateNew(learnMoreAboutExtraHelp);            
+					learnMoreAboutExtraHelp.click();
+					break;
+		        } catch(StaleElementReferenceException e) {
+		        }
+		        attempts++;
+		    }
 		}
 		if (planType.equalsIgnoreCase("SNP")) {
 			//WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("(//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal'])[1]"));
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//*[contains(@id, 'snplinkcontainer')][2]//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal']"));
-			validateNew(learnMoreAboutExtraHelp);
-			learnMoreAboutExtraHelp.click();
+			int attempts = 0;
+		    while(attempts < 2) {
+		        try {
+					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[4]//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal']"));
+					validateNew(learnMoreAboutExtraHelp);
+					learnMoreAboutExtraHelp.click();
+					break;
+		        } catch(StaleElementReferenceException e) {
+		        }
+		        attempts++;
+		    }
 		}
 		if (planType.equalsIgnoreCase("PDP")) {
-			WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[1]//a[contains(@id, 'S5921413000Link')]"));
-			validateNew(learnMoreAboutExtraHelp);
-			learnMoreAboutExtraHelp.click();
+			int attempts = 0;
+		    while(attempts < 2) {
+		        try {
+					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[1]//a[contains(@id, 'S5921413000Link')]"));
+					validateNew(learnMoreAboutExtraHelp);
+					learnMoreAboutExtraHelp.click();
+					break;
+		        } catch(StaleElementReferenceException e) {
+		        }
+		        attempts++;
+		    }
 		}
 		if(planType.equalsIgnoreCase("MA")){
 			try{

@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1957,20 +1958,44 @@ backButtonInLearnMoreModal.click();
 }
 public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , String planName) throws InterruptedException {
     if (planType.equalsIgnoreCase("MAPD")) {
-	    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'inline-edit-link modal-link vpp-monthly-premium-modal')]"));
-	    validateNew(learnMoreAboutExtraHelp);            
-	    learnMoreAboutExtraHelp.click();
+    	int attempts = 0;
+	    while(attempts < 2) { //this code is used to prevent staleelement exception
+	        try {
+		    	WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//a[contains(@class, 'inline-edit-link modal-link vpp-monthly-premium-modal')]"));
+			    validateNew(learnMoreAboutExtraHelp);            
+			    learnMoreAboutExtraHelp.click();
+			    break;
+	         } catch(StaleElementReferenceException e) {
+	         }
+	        attempts++;
+	    }
     }
     if (planType.equalsIgnoreCase("SNP")) {
-                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//*[contains(@id, 'snplinkcontainer')][2]//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal']"));
+    	int attempts = 0;
+	    while(attempts < 2) {
+	        try {
+                    WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[4]//a[@class='inline-edit-link modal-link vpp-monthly-premium-modal']"));
                     CommonUtility.waitForPageLoadNew(driver,learnMoreAboutExtraHelp, 30);
                     validateNew(learnMoreAboutExtraHelp);
                     learnMoreAboutExtraHelp.click();
+                    break;
+	         } catch(StaleElementReferenceException e) {
+	         }
+	        attempts++;
+	    }
                     }
     if (planType.equalsIgnoreCase("PDP")) {
+    	int attempts = 0;
+	    while(attempts < 2) {
+	        try {
                     WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[1]//a[contains(@id, 'S5921413000Link')]"));
                     validateNew(learnMoreAboutExtraHelp);
                     learnMoreAboutExtraHelp.click();
+                    break;
+	        } catch(StaleElementReferenceException e) {
+	        }
+	        	attempts++;
+	    }
                     }
     if(planType.equalsIgnoreCase("MA")){
     	try{
