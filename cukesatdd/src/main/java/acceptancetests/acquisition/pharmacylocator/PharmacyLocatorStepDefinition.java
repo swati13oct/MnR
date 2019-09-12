@@ -117,7 +117,6 @@ public class PharmacyLocatorStepDefinition {
 	
 		List<String> noteList=new ArrayList<String>();
 		noteList.add("");
-		noteList.add("================================================================");
 		noteList.add("===== TEST NOTE ================================================");
 		if ((MRScenario.environmentMedicare.equals("stage"))) {
 			String currentStageTime=pharmacySearchPage.getStageSysTime();

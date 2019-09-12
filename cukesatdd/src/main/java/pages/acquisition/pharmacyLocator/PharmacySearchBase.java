@@ -64,7 +64,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
-							validate(countyModal));
+							pharmacyValidate(countyModal));
 					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
@@ -121,7 +121,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
-		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
+		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				/* tbd
@@ -146,12 +146,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						validate(pharmacyCount));
+						pharmacyValidate(pharmacyCount));
 			} else {
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
-						validate(pharmacyCount));
+						pharmacyValidate(pharmacyCount));
 			}
 		}
 
@@ -159,7 +159,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public boolean isPlanYear() {
-		return validate(yearDropdown);
+		return pharmacyValidate(yearDropdown);
 	}
 
 	public void selectsPlanYear(String planYear) {
@@ -199,7 +199,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
 
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (total >10) {
 				WebElement contactUsLink=contactUnitedHealthCare;
 				if (!pharmacyValidate(contactUsLink)) {
@@ -207,7 +207,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUsLink));
+						pharmacyValidate(contactUsLink));
 				contactUsLink.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -227,7 +227,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				selectsPlanName(planName);
 				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						validate(pdf_otherPlans));
+						pharmacyValidate(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_otherPlans.click();
@@ -248,7 +248,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans", 
-						validate(pdf_WalgreenPlans));
+						pharmacyValidate(pdf_WalgreenPlans));
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
@@ -270,11 +270,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -294,7 +294,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			}
 		} else {
 			WebElement contactUsLink=contactUnitedHealthCare;
-			if (!validate(contactUnitedHealthCare)) 
+			if (!pharmacyValidate(contactUnitedHealthCare)) 
 				contactUsLink=contactUnitedHealthCare_ol;
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
 					!pharmacyValidate(contactUsLink));
@@ -407,7 +407,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
 		moveMouseToElement(vppDetailSectionHeader);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
-				validate(vpp_onlinePharmacyDirectoryLnk));
+				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
 		vpp_onlinePharmacyDirectoryLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		//	Thread.sleep(2000); //note: keep this for the page to load
@@ -419,7 +419,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (("Yes").equalsIgnoreCase(isMultiCounty.trim())) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			Assert.assertTrue("PROBLEM - test zip expects multi-county but multi-county selection popup is NOT showing when switching to pharmacy locator page", 
-					validate(countyModal));
+					pharmacyValidate(countyModal));
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
@@ -445,14 +445,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
 
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (total >10) {
 				WebElement contacUstLink=contactUnitedHealthCare;
 				if (!pharmacyValidate(contacUstLink)) 
 					contacUstLink=contactUnitedHealthCare_ol;
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contacUstLink));
+						pharmacyValidate(contacUstLink));
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));

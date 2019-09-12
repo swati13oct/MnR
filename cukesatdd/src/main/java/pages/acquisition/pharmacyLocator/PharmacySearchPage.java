@@ -41,7 +41,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", 
-				validate(viewsearchpdf));
+				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
 		Thread.sleep(2000); //note: keep this for the page to load
@@ -70,13 +70,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 15);
 		if (("English").equalsIgnoreCase(language)) {
 			Assert.assertTrue("PROBLEM - page should be in English after selecting English", 
-					validate(pgInEnglish));
+					pharmacyValidate(pgInEnglish));
 		} else if (("Chinese").equalsIgnoreCase(language)) {
 			Assert.assertTrue("PROBLEM - page should be in Chinese after selecting Chinese", 
-					validate(pgInChinese));
+					pharmacyValidate(pgInChinese));
 		} else if (("Spanish").equalsIgnoreCase(language)) { 
 			Assert.assertTrue("PROBLEM - page should be in Spanish after selecting Spanish", 
-					validate(pgInSpanish));
+					pharmacyValidate(pgInSpanish));
 		} else {
 			Assert.assertTrue("PROBLEM - language '"+language+"' is not supported, check test input", false);
 		}
@@ -178,10 +178,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	//tbd public void validateOneTooltip(String language, String targetTooltipName, String testXpath, String expTxt1, String expTxt2) {
 		WebElement testTooltip=driver.findElement(By.xpath(testXpath));
 		Assert.assertTrue("PROBLEM - unable to locate "+targetTooltipName+" tooltip element", 
-				validate(testTooltip));
+				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		moveMouseToElement(testTooltip);//note: then move mouse over to target element
-		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", validate(tooltip));
+		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt=Pattern.compile(expTxt);
 			String actualTxtXpath="//div[@id='tooltip' and contains(text(),'"+targetTooltipName+"')]";
@@ -214,14 +214,14 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public void validateHeaderSection() {
 		Assert.assertTrue("PROBLEM - unable to locate the header text element", 
-				validate(PharmacyLocatorPageHeader));
+				pharmacyValidate(PharmacyLocatorPageHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the input section", 
-				validate(inputSection));
+				pharmacyValidate(inputSection));
 		Assert.assertTrue("PROBLEM - unable to locate the input instruction", 
-				validate(inputInstruction));
+				pharmacyValidate(inputInstruction));
 
 		Assert.assertTrue("PROBLEM - unable to locate the distance dropdown element", 
-				validate(distanceDropDownField));
+				pharmacyValidate(distanceDropDownField));
 		Assert.assertTrue("PROBLEM - number of options for distance dropdown is not as expected.  "
 				+ "Expected='6' | Actual='"+distanceOptions.size()+"'", distanceOptions.size()==6);
 		Select select = new Select(distanceDropDownField);           
@@ -231,21 +231,21 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected='"+expectedSelectedDistance+"' | Actual='"+actualSelectedDistance+"'", 
 				expectedSelectedDistance.equals(actualSelectedDistance));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '1 mile'", 
-				validate(distanceOption_1mile));
+				pharmacyValidate(distanceOption_1mile));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '2 miles'", 
-				validate(distanceOption_2miles));
+				pharmacyValidate(distanceOption_2miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '5 miles'", 
-				validate(distanceOption_5miles));
+				pharmacyValidate(distanceOption_5miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '10 miles'", 
-				validate(distanceOption_10miles));
+				pharmacyValidate(distanceOption_10miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '15 miles'", 
-				validate(distanceOption_15miles));
+				pharmacyValidate(distanceOption_15miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", 
-				validate(distanceOption_25miles));
+				pharmacyValidate(distanceOption_25miles));
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", 
-				validate(zipcodeField));
-		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn));
-		if (validate(drpYear)) {
+				pharmacyValidate(zipcodeField));
+		Assert.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
+		if (pharmacyValidate(drpYear)) {
 			select = new Select(drpYear);           
 			List <WebElement> yearList = select.getOptions();
 			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
@@ -273,7 +273,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
 			String exp_noZipTxt="A ZIP code is required to locate a pharmacy. Please enter a ZIP code.";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
-					validate(noZipcode));
+					pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt=noZipcode.getText();
 				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
@@ -283,7 +283,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
 				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this: 12345.";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
-						validate(invalidZip));
+						pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt=invalidZip.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
@@ -293,7 +293,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			} else { //note: if format is right then going to assume u r getting this error
 				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria may help you get a different result.";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
-						validate(modifyZipErr));
+						pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt=modifyZipErr.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
@@ -308,27 +308,27 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateMapSectionContent() {
 		moveMouseToElement(map_resultSection);
 		Assert.assertTrue("PROBLEM - unable to locate the map", 
-				validate(map_mapImg));
+				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
-				validate(map_showHideMapLnk));
+				pharmacyValidate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
 				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
-				validate(map_mapImg));
+				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", 
-				validate(map_mapBtn));
+				pharmacyValidate(map_mapBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map", 
-				validate(map_satelliteBtn));
+				pharmacyValidate(map_satelliteBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
-				validate(map_fullScreenViewBtn));
+				pharmacyValidate(map_fullScreenViewBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the zoom in button on the map", 
-				validate(map_zoomIn));
+				pharmacyValidate(map_zoomIn));
 		Assert.assertTrue("PROBLEM - unable to locate the zoom out button on the map", 
-				validate(map_zoomOut));
+				pharmacyValidate(map_zoomOut));
 		Assert.assertTrue("PROBLEM - unable to locate the open street view button on the map", 
-				validate(map_openStreetView));
+				pharmacyValidate(map_openStreetView));
 
 	}
 
@@ -354,7 +354,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link", 
-				validate(moreInfoText_show));
+				pharmacyValidate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
 				!pharmacyValidate(moreInfoText_show));
@@ -388,7 +388,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String distance=inputMap.get("distance");
 		String county=inputMap.get("county");
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link should show for '"+widgetName+"' widget", 
-				validate(learnMoreElement));
+				pharmacyValidate(learnMoreElement));
 		learnMoreElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
@@ -410,11 +410,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public void validateQuestionsWidget() {
 		Assert.assertTrue("PROBLEM -Question Widget is not displayed", 
-				validate(questionsRightRailWidget));
+				pharmacyValidate(questionsRightRailWidget));
 		Assert.assertTrue("PROBLEM -Call us icon is not displayed", 
-				validate(callUsIcon));
+				pharmacyValidate(callUsIcon));
 		Assert.assertTrue("PROBLEM -Call United Health care is not displayed", 
-				validate(callUnitedHealthCareText));
+				pharmacyValidate(callUnitedHealthCareText));
 	}
 
 	public void validateDefaultZip() {
@@ -455,12 +455,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		testWidget="Preferred Mail Service Pharmacy";
 		if (expectPrefMailServPlan) {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					validate(widget_preferredMailServicePharmacy));
+					pharmacyValidate(widget_preferredMailServicePharmacy));
 			expUrl="health-plans/resources/mail-order-pharmacy.html";
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					validate(widget_preferredMailServicePharmacy));
+					pharmacyValidate(widget_preferredMailServicePharmacy));
 		}
 
 		testWidget="Preferred Retail Pharmacy Network";
@@ -470,7 +470,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
-						validate(widget_preferredRetailPharmacyNetwork));
+						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
 						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
@@ -485,7 +485,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			if (hasWalgreensPlan) {
 				if (language.equalsIgnoreCase("English")) {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '"+testWidget+"' widget", 
-							validate(widget_walgreens));
+							pharmacyValidate(widget_walgreens));
 					expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap);
 				} else {
@@ -534,18 +534,18 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
 					totalBefore>=totalAfter);
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (totalAfter >10) {
 				WebElement contactUsLink=contactUnitedHealthCare;
-				if (!validate(contactUnitedHealthCare)) 
+				if (!pharmacyValidate(contactUnitedHealthCare)) 
 					contactUsLink=contactUnitedHealthCare_ol;
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -555,10 +555,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						validate(resultNavTooltip));
+						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						validate(tooltip));
+						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2="Change the pharmacy type you selected.";
@@ -585,232 +585,5 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		}
 	}
 
-	//--------------------- things to be deleted from this line and on
-	/* tbd 
-	public void selectLanguage(String langName) {
-		validateNew(langDropdown);
-		selectFromDropDownByValue(langDropdown, langName);
-		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-	} */
-/* tbd -remove 
-	public void searchesPharmacy() {
-		searchPharmaciesButton.click();
-		CommonUtility.checkPageIsReady(driver);
-		Assert.assertTrue("PROBLEM - unable to see result",pharmacyResultHeader.getText().equalsIgnoreCase(
-				"Pharmacies Available in Your Area"));
-	} */
-/* tbd-remove
-	public void fillFieldsToFindZipCode(String address, String city, String state) {
-		txtAddress.sendKeys(address);
-		txtCity.sendKeys(city);
-		selectState(state);
-	}*/
-
-	/* tbd-remove
-	public void ValidateSearchPdfResult() {
-		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-		if (viewsearchpdf.isDisplayed()) {
-			viewsearchpdf.click();
-		}
-		Assert.assertTrue("PROBLEM - unable to view PDF", driver.getTitle().equalsIgnoreCase("pharmacyDirectory.pdf"));
-	} */
-
-
-	/* tbd-remove
-	public PharmacySearchPage ValidateSearchResultMapd() {
-		driver.navigate().to("https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/medicare-enrollment.html");
-		return null;
-	} */
-
-	/* tbd-remove
-	public void validateDefaultChooseaPlanSection(String planName){
-		int[] expectedDropdownmiles ={1,2,5,10,15,25};
-		for(int i=0;(i<distanceDropDown.size());i++){
-			System.out.println(distanceDropDown.get(i).getText());
-			Assert.assertTrue("Expected dropdown miles is not available",Integer.parseInt(distanceDropDown.get(i).getText().split(" ")[0])==expectedDropdownmiles[i]);
-		}
-		for (WebElement planOptions : selectPlandropdown) {
-			if (planOptions.getText().equalsIgnoreCase(planName)) {
-				planOptions.click();
-			}
-		}
-	} */
-
-	/* tbd-remove
-	public void validateNoPharmacyErrormsg(String[] pharmacyTypeArray){
-		pharmacyTypeSelectionRadioButton.click();
-		for (String pharmacyType : pharmacyTypeArray) {
-			for (WebElement checkBox : pharmacyTypesCheckboxes) {
-				if (checkBox.getText().equalsIgnoreCase(pharmacyType)) {
-					ElementData elementData = new ElementData("id",
-							"pharmacyTypesCheckboxes");
-					findChildElement(elementData, checkBox).click();
-				}
-			}
-		}
-		searchPharmaciesButton.click();
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String expectedErrormsg="There were errors in the information you submitted.\nPlease correct the errors in the following fields:"
-				+ "There were no results found for the requested search. Broadening your search criteria may help you get a different result.";
-		System.out.println(errorHeader.getText() + errorPoints.getText());
-		Assert.assertTrue("Incorrect error message displayed",expectedErrormsg.equals(errorHeader.getText() + errorPoints.getText()));
-	} */
-
-	/* tbd-remove
-	public void validatePharmaciesSectionAfterplanSelection() {
-		Assert.assertTrue("Preferred Pharmacy is selected by default", !preferredPharmacy.isSelected());
-	} */
-
-	/* tbd 
-	public boolean validatePharmacyResults() {
-		System.out.println(pharmacyCount.getText());
-		if (pharmacyCount.getText().equals("") || Integer.parseInt(pharmacyCount.getText()) == 0)
-			return false;
-
-		if (pharmacyResults.getAttribute("class").toString().contains("ng-hide"))
-			return false;
-		else {
-			if (!mapToggleElement.isDisplayed())
-				return false;
-			if (!pharmacyList.isDisplayed())
-				return false;
-			if (mapView.getAttribute("class").contains("ng-hide"))
-				return false;
-			if (!(pharmacyListItems.size() > 1))
-				return false;
-			if (!resultAsPDF.isDisplayed())
-				return false;
-			if (!(standardNetworkMarker.size() == 1 || PreferredNetworkMarker.size() == 1))
-				return false;
-			if (!showOnMapLink.isDisplayed())
-				return false;
-			if (!getDirectionLink.isDisplayed())
-				return false;
-			if (!pharmacyNameLink.isDisplayed())
-				return false;
-			if (!questionsRightRailWidget.isDisplayed())
-				return false;
-		}
-		return true;
-	} */
-
-	/* tbd-remove
-	public void selectCounty(String county){
-		try {
-			if (countyPopOut.isDisplayed()) {
-				for (WebElement webElement : countyList) {
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					if (webElement.getText().contains(county)) {
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
-						countylink.click();
-						break;
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	} */
-
-	/* tbd-remove
-	public void enterZipCode(String zipCode) {
-		//tbd-remove		txtZipCode.clear();
-		validate(txtZipCode);
-		txtZipCode.sendKeys(zipCode);
-		driver.manage().window().maximize();
-		System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		try {
-			if(validate(ProactiveChat_Exit)){
-				System.out.println("Proactive chat is displayed");
-				jsClickNew(ProactiveChat_Exit);
-				System.out.println("Proactive chat exit button is clicked");
-				if(validate(ProactiveChat_Exit)){
-					System.out.println("Proactive chat is Still displayed");
-				}
-			}
-		} catch (Exception e1) {
-			System.out.println("Proactive chat not displayed");
-			e1.printStackTrace();
-		}
-		searchbtn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	} */
-
-	/* tbd-remove
-	public boolean validate_MultiCounty_CancelBtn() {
-		validate(countyModal);
-		boolean ValidationFlag = true;
-		if(validate(MultiCOunty_CancelBtn)){
-			MultiCOunty_CancelBtn.click();
-			if(currentUrl().contains("Pharmacy-Search") && txtZipCode.getText().isEmpty()){
-				ValidationFlag = (!ValidationFlag)?false:true;
-			} else{
-				System.out.println("Zip code entry page is not displayed with Zip code field blank");
-				ValidationFlag = false;
-			}
-		} else{
-			System.out.print("Cancel Button is not dispalyed in the Multy COunty Pop-up");
-			ValidationFlag = false;
-		}
-		return ValidationFlag;
-	} */
-
-	/** Enter Zip code and distance */
-	/* tbd-remove 
-	public PharmacySearchPage enterDistanceZipCountyDetails(String distance, String zipcode, String county) {
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-		CommonUtility.waitForPageLoad(driver, zipcodeField, 60);
-		sendkeys(zipcodeField, zipcode);
-
-		Select select = new Select(distanceDropDownField);           
-		String DistanceSelection = distance+" miles";
-		select.selectByVisibleText(DistanceSelection);
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-		searchbtn.click();
-		CommonUtility.checkPageIsReady(driver);
-		System.out.println("*****Zipcode entered******"+zipcode);
-		if (!county.equalsIgnoreCase("None")) {
-			try {
-				if (validateNew(countyPopOut)) {
-					for (WebElement webElement : countyList) {
-						if (webElement.getText().contains(county)) {
-							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
-							countylink.click();
-							break;
-						}
-					}
-				}
-			} catch (Exception e) {
-				Assert.fail("Exception!!! County does not exists. Exception: "+e.getMessage());
-			}
-		}
-		if(distanceDropDownField.getText().contains(distance) || zipcodeField.getText().contains(zipcode))
-			return new PharmacySearchPage(driver);
-		return null;
-	}*/
 }
 

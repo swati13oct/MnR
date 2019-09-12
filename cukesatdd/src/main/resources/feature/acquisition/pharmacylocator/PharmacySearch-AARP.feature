@@ -92,23 +92,23 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     And the user chooses a plan from dropdown
       | Plan Name | <planName> |
       | planyear  | <planYear> |
-#    Then the user validates the pharmacies available
-#      | Language | English |
-#    And the user validates tooltips on filters
-#      | Language                                   | English                 |
-#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-#    And the user validates map section content
-#    And the user validates show on map link
-#    And the user validates get direction link
-#    And the user validates more information content based on plan type
-#    And the user validates view search PDF link
+    Then the user validates the pharmacies available
+      | Language | English |
+    And the user validates tooltips on filters
+      | Language                                   | English                 |
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+    And the user validates map section content
+    And the user validates show on map link
+    And the user validates get direction link
+    And the user validates more information content based on plan type
+    And the user validates view search PDF link
 
-@abc	@pharmacylocatorulayer01a
+	@pharmacylocatorulayer01a
     Examples: 
       | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Ulayer   |
-#      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
-#      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
 
 	@pharmacylocatorulayer01b
     Examples: 
