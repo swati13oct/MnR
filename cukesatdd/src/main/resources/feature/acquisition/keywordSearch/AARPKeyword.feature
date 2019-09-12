@@ -17,7 +17,7 @@ Feature: AARP_Acquistion Features community search, keyword search
   # When the user navigates to request more help and information page in AARP site and validates
   # Then the user navigates to community meeting page on AARP site and validates
   # Then the user validates elements on the page  
-  Examples:
-	| placeholder | 
-	| none      |
+ # Examples:
+	#| placeholder | 
+#	| none      |
 	
