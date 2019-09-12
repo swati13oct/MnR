@@ -25,6 +25,7 @@ Feature: To test VPP Plan Summary Page in AARP Site
        | Referral Required | <referralRequired> |
        | Out Of Pocket Maximum | <outOfPocketMaximum> |
        | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+       |Plan Type | <plantype> |
     Then the user validates below plan benefit values for the above selected plan in AARP site for PDP  Plans
       | Monthly Premium | <monthlyPremium> |
       | Annual Deductible | <annualDeductible> |
@@ -60,7 +61,6 @@ Feature: To test VPP Plan Summary Page in AARP Site
     Then the user validates the right rail in AARP Site
     Then the user validates the Need Help Section in the right rail in aarp Site
     Then the user validates the TFN in the Need Help Section in aarp Site
-    Then the user validates and clicks on Find an agent in your area link in aarp Site
     Then the user validates Get a free medicare Guide section in the right rail in aarp Site
     Then the user enters the following information in the Get a free medicare Guide section in aarp Site
       | First Name | <firstName> |

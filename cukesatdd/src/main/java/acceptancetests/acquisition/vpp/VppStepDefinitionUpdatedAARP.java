@@ -226,9 +226,9 @@ public class VppStepDefinitionUpdatedAARP {
 
 
 	/**
-	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
+	 * @toDo:select multiple plans to compare in MA and click on compare plan link
 	 */
-	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
+	@And("^I select multiple plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -241,16 +241,17 @@ public class VppStepDefinitionUpdatedAARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = givenAttributesMap.get("plan type");
+		int plansForCompare=0;
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
 			plansummaryPage.handlePlanYearSelectionPopup(plantype);
-			plansummaryPage.checkAllMAPlans();
+			plansForCompare=plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.handlePlanYearSelectionPopup(plantype);
-			plansummaryPage.checkAllPDPlans();
+			plansForCompare=plansummaryPage.checkAllPDPlans();
 		}
-
+		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
@@ -282,19 +283,20 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:click back to all plans button and verify that all 3 plans are
-	 *             still selected
+	 * @toDo:click back to all plans button and verify that all plans are
+	 *              still selected
 	 */
-	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
+	@Then("^I click back to all plans button and verify that all plans are still selected$")
 	public void verifyAllPlansStillSelected() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
-		if (plansummaryPage.validateAllPlansChecked()) {
+		String plansForCompare=(String) getLoginScenario().getBean(PageConstants.plansForCompare);
+
+		plansummaryPage.clickonBackToAllPlans();
+		if (plansummaryPage.validateAllPlansChecked(plansForCompare)) {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating all plans are still selected");
-
 	}
 
 	/**
@@ -314,6 +316,20 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+	
+	@Then("^the user view plan details of the first plan in the given plan type in AARP site and validates$")
+	public void user_views_plandetails_selected_plantype_aarp() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);
@@ -1004,18 +1020,21 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		//plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
@@ -1403,14 +1422,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 
@@ -1843,6 +1865,13 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2020");
 	}
 	
+	@When("^the user validate thank you message in plan compare in AARP site$")
+	public void user_validate_thank_you_message_in_plan_compare() {
+
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+	}
 	
 	@When("^verify Call SAM icon is visible or not$")
 	public void verify_Call_SAM_icon_is_visible_or_not() throws InterruptedException {
@@ -1908,4 +1937,7 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		
 	}
+	
+	
 }
+
