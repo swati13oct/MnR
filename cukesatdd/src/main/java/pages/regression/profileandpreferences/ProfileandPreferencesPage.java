@@ -2454,5 +2454,171 @@ public class ProfileandPreferencesPage extends UhcDriver {
 			comboTab_SSUP.click();
 		} 
 	}
+	/**
+	 * Profile page CT Regression 
+	 */
+	
+	public void validatemailsect1() {
+		System.out.println("%%% Now validating the Email Section %%%");
+		Random rand = new Random();
+		int randomNumber = rand.nextInt(50);
+		String emailAddress = "pooja" + randomNumber + "@optum.com";
+		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
+		validateNew(emailAddressHeader);
+		validateNew(emailEditIcon);
+		emailEditIcon.click();
+		validateNew(newEmailTextfield);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		validateNew(confirmEmailTextfield);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		validateNew(saveButtonOnEmailSave);
+		validateNew(cancelButtonOnEmailSave);
+		newEmailTextfield.sendKeys(emailAddress);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		confirmEmailTextfield.sendKeys(emailAddress);
+		saveButtonOnEmailSave.click();
+
+		validateNew(updatedEmailAfterSave);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (updatedEmailAfterSave.getText().contains(emailAddress))
+			Assert.assertTrue(true);
+		else {
+			Assert.fail("Not able to validate the email update functionality for the member");
+		}
+
+}
+	@FindBy(xpath="//div[@id='phone']")
+private WebElement phoneSectionPreffective;
+
+@FindBy(xpath=" //h5[@class='subtitle semi-bold margin-none card-title atdd-phone-title']")
+private WebElement phoneNumberHeaderpre;
+
+@FindBy(xpath=" //div[@class='phoneedit parbase section']//div//div//a[@class='edit-btn'][contains(text(),'Edit')]")
+private WebElement phoneEDITlinkpre; 
+
+@FindBy(xpath="//label[contains(text(),'Daytime Phone')]")
+private WebElement dayTimePhoneTextfieldpre;
+
+@FindBy(xpath="//label[contains(text(),'Evening Phone')]")
+private WebElement eveningTimeTextfieldpre;
+
+@FindBy(xpath="//button[@class='btn--center margin-small save-btn atdd-phone-save']//span[@class='btn btn--primary'][contains(text(),'Save')]")
+private WebElement saveButtonOnPhoneSavepre;
+
+@FindBy(xpath="//a[@class='display-block align-center cancel-btn atdd-phone-bottomcancel']")
+private WebElement cancelButtonOnPhoneSavepre;
+
+ @FindBy(xpath="//input[@id='daytimePhone']")
+ private WebElement dayTimePhonefieldpre;
+
+	@FindBy(xpath="//input[@id='eveningPhone']")
+	 private WebElement eveningTimefieldpre;
+
+   public void validatePhonelinksforfederalmembers() {
+    
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	validateNew(phoneSectionPreffective);
+	validateNew(phoneNumberHeaderpre);
+	validateNew(phoneEDITlinkpre);
+	phoneEDITlinkpre.click();
+	validateNew(dayTimePhoneTextfieldpre);
+	validateNew(eveningTimeTextfieldpre);
+	validateNew(saveButtonOnPhoneSavepre);
+	validateNew(cancelButtonOnPhoneSavepre);
+	dayTimePhonefieldpre.clear();
+	dayTimePhonefieldpre.sendKeys("1234567890");
+	eveningTimefieldpre.clear();
+	eveningTimefieldpre.sendKeys("1234567890");
+	saveButtonOnPhoneSavepre.click();
+	validateNew(updatedDaytimePhoneAfterSave);
+	validateNew(updatedEvetimePhoneAfterSave);
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	System.out.println(updatedDaytimePhoneAfterSave.getText() + updatedEvetimePhoneAfterSave.getText());
+	if (updatedDaytimePhoneAfterSave.getText().contains("(123) 456-7890")
+			&& updatedEvetimePhoneAfterSave.getText().contains("(123) 456-7890"))
+		Assert.assertTrue(true);
+	else {
+		Assert.fail("Not able to validate the Phone  update functionality for  member");
+	}
+	
+	}
+   @FindBy(xpath="//div[@id='temporaryAddress']")
+   private WebElement AddTemporaryAddressblock;
+
+   public void validateTemporaryAddressSection() throws InterruptedException
+  {
+	Thread.sleep(10000);
+	validateNew(AddTemporaryAddressblock);
+		
+}
+   @FindBy(xpath=" //div[@id='mailingAddress']")
+	private WebElement AddMailingAddressblock;
+	public void validateMailingAddressSection() throws InterruptedException{
+		Thread.sleep(10000);
+		validateNew(AddMailingAddressblock);	
+		
+	}
+	/**
+	 * @toDo : Validates the Go green button in Communication Preferences
+	 *       section
+	 */
+
+	public boolean validateSIGNUp() {
+		validate(editPreferencesLink);
+		System.out.println("&&&&&&&&& Sign up Today link / Edit Prefrence link is seen &&&&&&&");
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.switchTo().frame(0);
+		editPreferencesLink.click(); {
+			System.out.println("PageTitle " + driver.getTitle());
+			Assert.assertTrue(driver.getTitle().contains("Preferences"));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//validateNew(savePreferencesButton1);
+				return true;
+		} /*else {
+			gopaperlessbutton.click();
+			savePreferencesButton.click();*/
+			
+		}
 
 }
