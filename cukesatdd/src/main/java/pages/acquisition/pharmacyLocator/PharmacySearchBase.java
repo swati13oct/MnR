@@ -2,6 +2,7 @@ package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +35,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10);
 	}
 
-	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
+	public List<String> enterZipDistanceDetails(String zipcode, String distance, String county) {
+		List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
@@ -51,6 +53,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (isPlanYear()) {
 			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			selectsPlanYear(currentYear);
+			testNote.add("plan year dropdown available - selected year="+currentYear);
 		}
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 15);
@@ -74,6 +77,39 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		} else {
 			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
 		}
+		return testNote;
+	}
+
+	/**
+	 * determine system time - only applicable for stage run
+	 * @return
+	 */
+	public String getStageSysTime() {
+		String winHandleBefore = driver.getWindowHandle();
+
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+		String currentSysTime=currentSysTimeElement.getText();
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return currentSysTime;
+	}
+	
+	public List<String> getListOfAvailablePlanNames() {
+		List<String> testNote=new ArrayList<String>();
+		Select dropdown = new Select(seletPlandropdown);
+		List<WebElement> plans=dropdown.getOptions();
+		testNote.add("available plans from plan dropdown:");
+		for(int i=1; i<plans.size(); i++) { //note: first item is 'Select a plan' so skip it
+			testNote.add("plan "+i+" is "+plans.get(i).getText());
+		}
+		return testNote;
 	}
 
 	public void selectsPlanName(String planName) {
@@ -81,7 +117,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (!loadingBlock.isEmpty())
@@ -89,7 +124,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", validate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
-				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				/* tbd
 				String winHandleBefore = driver.getWindowHandle();
 
 				System.out.println("Proceed to open a new blank tab to check the system time");
@@ -103,6 +138,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				String currentSysTime=currentSysTimeElement.getText();
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
+				*/
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String currentSysTime=getStageSysTime();
+				
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "

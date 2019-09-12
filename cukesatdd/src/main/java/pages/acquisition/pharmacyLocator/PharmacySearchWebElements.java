@@ -78,7 +78,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(id = "plan-year")
 	protected WebElement drpYear;
 	
-	@FindBy(xpath="//select[@id='plan-year']")
+	@FindBy(xpath="//select[@id='plan-year' and not(contains(@ng-hide,'showYearToggle==false'))]")
 	protected WebElement yearDropdown;
 
 	@FindBy(css = "#zipcode-button>span")

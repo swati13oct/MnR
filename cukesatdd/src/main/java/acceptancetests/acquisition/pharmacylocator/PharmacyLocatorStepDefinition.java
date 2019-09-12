@@ -2,6 +2,7 @@ package acceptancetests.acquisition.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -45,6 +47,20 @@ public class PharmacyLocatorStepDefinition {
 		return memberAttributesMap;
 	}
 
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario()
+			.getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
+	
 	/** user is on the AARP Medicare Site landing page */
 	@Given("^the user is on the Acquisition Site landing page and navigate to pharmacy search page$")
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable inputAttributes) {
@@ -98,7 +114,20 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY,county);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+	
+		List<String> noteList=new ArrayList<String>();
+		noteList.add("");
+		noteList.add("================================================================");
+		noteList.add("===== TEST NOTE ================================================");
+		if ((MRScenario.environmentMedicare.equals("stage"))) {
+			String currentStageTime=pharmacySearchPage.getStageSysTime();
+			noteList.add("test run at stage time ="+currentStageTime);
+		}
+		
+		List<String> testNote=pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
+
 	}
 
 	/** Verifying the error message in pharmacy search tool */	
@@ -114,6 +143,7 @@ public class PharmacyLocatorStepDefinition {
 	}
 
 	/** user chooses a plan from dropdown */
+	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
@@ -121,10 +151,15 @@ public class PharmacyLocatorStepDefinition {
 		String planYear = inputAttributesMap.get("planyear");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, planYear);
+		List<String> noteList=(ArrayList<String>) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
+
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		/*if (pharmacySearchPage.isPlanYear())
 			pharmacySearchPage.selectsPlanYear(planYear);*/
+		List<String> testNote=pharmacySearchPage.getListOfAvailablePlanNames();
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 		pharmacySearchPage.selectsPlanName(planName);
 	}	
 	
