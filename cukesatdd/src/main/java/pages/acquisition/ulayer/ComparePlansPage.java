@@ -57,6 +57,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
+	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	private WebElement closeButtonthankyoumessagepopup;
+
+	
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -292,6 +296,10 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 	
-
+	public void validatingthankyoumessage() {
+		// TODO Auto-generated method stub
+		closeButtonthankyoumessagepopup.click();
+		System.out.println("Thank you Message pop up is closed");
+	}
 }
 
