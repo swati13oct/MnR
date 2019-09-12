@@ -1,6 +1,7 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -36,14 +37,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
 				validate(pharmaciesText));
-		String expectedTxt1="Get the most out of your prescription drug benefits.";
-		//note: it's having trouble matching the apostrophe in jenkins job run, that's why i break it into 2 pieces
-		String expectedTxt2="You can make sure your drugs are covered, estimate costs and find ways to save money. Or, search for national and local pharmacies in your plan";
-		String expectedTxt3="s network to fill your prescriptions.";
+		Pattern expectedTxt1=Pattern.compile("Get the most out of your prescription drug benefits\\.");
+		Pattern expectedTxt2=Pattern.compile("You can make sure your drugs are covered, estimate costs and find ways to save money\\. .*earch for national and local pharmacies in your plan.s network to fill your prescriptions\\.");
 		String actualTxt=pharmaciesText.getText();
 		Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
-				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"'"+expectedTxt3+"' | Actual='"+actualTxt+"'", 
-				actualTxt.contains(expectedTxt1) && actualTxt.contains(expectedTxt2) && actualTxt.contains(expectedTxt3));
+				+ "Expected to contain '"+expectedTxt1+"' AND '"+expectedTxt2+"' | Actual='"+actualTxt+"'", 
+				expectedTxt1.matcher(actualTxt).find() && expectedTxt2.matcher(actualTxt).find());
 	}
 
 	public void validateTileContent(String exp_TileHeaderTxt, String exp_TileLinkTxt, 
@@ -159,63 +158,60 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			//note: prior step validation would have been done already to get to this point, so just print msg
 			System.out.println("Prescription Benefits Information link will not exist if LIS=0, skip this validation");
 			return;
-		}
-		if (tile.equals("Compare drug pricing") 
-				&& planType.toUpperCase().equals("MAPD") 
-				&& memberType.toUpperCase().contains("GROUP")){
-			System.out.println("Dev code not ready for "+tile+" link validation yet, skipping...");
+		} else if (memberType.toUpperCase().contains("PEEHIP") &&
+				(tile.equals("Check home delivery order status") || tile.equals("Order prescription refills"))) {
+			System.out.println("Order prescription refills and Check home delivery order status tile will not exist for PEEHIP group user, skip this validation");
 			return;
-		} 
-			boolean switchTab=false;
-			WebElement linkElement=null;
-			String expUrl="";
-			if (tile.equals("Compare drug pricing")) {
-				linkElement=pTile_compDrugPricingLnk;
-				if (memberType.toUpperCase().contains("GROUP")) {
-					expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
-					switchTab=true;
-				} else
-					expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
-			} else if (tile.equals("Find a network pharmacy")) {
-				linkElement=pTile_findNtkPharmacyLnk;
-				expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
-			} else if (tile.equals("Order prescription refills")) {
-				linkElement=pTile_orderPresRefillsLnk;
-				expUrl="services/rx-refill-reminder/";
+		}
+		boolean switchTab=false;
+		WebElement linkElement=null;
+		String expUrl="";
+		if (tile.equals("Compare drug pricing")) {
+			linkElement=pTile_compDrugPricingLnk;
+			if (memberType.toUpperCase().contains("GROUP")) {
+				expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
 				switchTab=true;
-			} else if (tile.equals("Check home delivery order status")) {
-				linkElement=pTile_chkHomeDeliOrderStatusLnk;
-				expUrl="/sso";
-				switchTab=true;
-			} else if (tile.equals("Prescription Benefits Information")) {
-				linkElement=pTile_presBenfitInfoLnk;
-				expUrl="https://chp-stage.optumrx.com/public/sso-landing";
-				switchTab=true;
-			}		
-			Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
-					linkElement !=null);
+			} else
+				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
+		} else if (tile.equals("Find a network pharmacy")) {
+			linkElement=pTile_findNtkPharmacyLnk;
+			expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+		} else if (tile.equals("Order prescription refills")) {
+			linkElement=pTile_orderPresRefillsLnk;
+			expUrl="services/rx-refill-reminder/";
+			switchTab=true;
+		} else if (tile.equals("Check home delivery order status")) {
+			linkElement=pTile_chkHomeDeliOrderStatusLnk;
+			expUrl="/sso";
+			switchTab=true;
+		} else if (tile.equals("Prescription Benefits Information")) {
+			linkElement=pTile_presBenfitInfoLnk;
+			expUrl="https://chp-stage.optumrx.com/public/sso-landing";
+			switchTab=true;
+		}		
+		Assert.assertTrue("PROBLEM - need to code to support '"+tile+"' tile content validation", 
+				linkElement !=null);
 
-			if (switchTab) {
-				String winHandleBefore = driver.getWindowHandle();
-				linkElement.click();
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				CommonUtility.checkPageIsReady(driver);
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-			} else {
-				linkElement.click();
-				CommonUtility.checkPageIsReady(driver);
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-				goBackToPriorPnPpgViaBack(planType, memberType);
-			}
-		
+		if (switchTab) {
+			String winHandleBefore = driver.getWindowHandle();
+			linkElement.click();
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();					
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+		} else {
+			linkElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			goBackToPriorPnPpgViaBack(planType, memberType);
+		}
 	}
 
 	/**

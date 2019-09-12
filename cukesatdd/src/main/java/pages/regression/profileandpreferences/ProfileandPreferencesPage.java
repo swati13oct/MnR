@@ -2439,19 +2439,25 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		
 	}
 	
+	//note: modify only if scenario is targetting specific for combo tab validation
+	//note: for now only check if combo then click the right tab, don't flag it if it doesn't have combo tab.
 	public void clickCombTab(String plan) {
 		if (plan.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
-			comboTab_MAPD.click();
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			if (validate(comboTab_MAPD)) 
+				comboTab_MAPD.click();
 		} else if (plan.equalsIgnoreCase("ship")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
-			comboTab_SHIP.click();
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			if (validate(comboTab_SHIP))
+				comboTab_SHIP.click();
 		} else if (plan.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
-			comboTab_PDP.click();
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			if (validate(comboTab_PDP))
+				comboTab_PDP.click();
 		} else if (plan.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
-			comboTab_SSUP.click();
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			if (validate(comboTab_SSUP)) 
+				comboTab_SSUP.click();
 		} 
 	}
 	/**

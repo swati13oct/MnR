@@ -348,6 +348,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//p//span[@id='emailError']")
 	private WebElement emailPlanSummaryInputErrorText;
 
+	@FindBy(xpath="//a[@id='backtoplansummarypage']")
+	private WebElement backToAllPlansLnk;
+	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	//^^^ note: added for US1598162	
 	
@@ -1148,6 +1151,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]")
+	private WebElement firstPlanDetailsLink;
+	public PlanDetailsPage navigateToFirstPlanForPlanDetails(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		firstPlanDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("#/details")) {	
+					return new PlanDetailsPage(driver,planType);
+				}
+				return null;
+	}
+
 	public PlanDetailsPage navigateToPlanDetails(String planName, String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -1179,6 +1196,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	
 	public void clickonViewPlans() {
 		try {
 			Thread.sleep(5000);
@@ -1199,6 +1217,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickonBackToAllPlans() {
+		Assert.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
+		backToAllPlansLnk.click();
+		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void clickOnPDPPlans(){
 		try {
@@ -1215,7 +1244,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
-	public void checkAllMAPlans(){
+	public int checkAllMAPlans(){
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1223,14 +1252,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));	
-
+		int plansForCompare=allMAPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare=4;
+		}
 		if(allMAPlans !=null){
-			for(int i = 0; i<allMAPlans.size(); i++){
+			for(int i = 0; i<plansForCompare; i++){
 				allMAPlans.get(i).click();
-				System.out.println("Plan added to compare");
+				System.out.println("Plan added to compare : "+i);
 			}
 		}
-
+		return plansForCompare;
 	}
 
 
@@ -1249,7 +1282,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public boolean validateAllPlansChecked() {
+	public boolean validateAllPlansChecked(String plansForCompare) {
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -1257,9 +1290,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
-		if(compareChkBoxes.get(0).getText().contains("3 plans added")&&compareChkBoxes.get(1).getText().contains("3 plans added")&&compareChkBoxes.get(2).getText().contains("3 plans added"))
-			return true;
-		return false;
+		String expectedTxt=plansForCompare+" plans added";
+		System.out.println("Validate there are "+plansForCompare+" number of plans added for compare");
+		boolean result=true;
+		for (int i=0; i<Integer.parseInt(plansForCompare); i++) {
+			if (!compareChkBoxes.get(i).getText().contains(expectedTxt)) {
+				System.out.println("PROBLEM - plan with index "+i+" doesn't contain expected text '"+expectedTxt+"'");
+				result=false;
+				break;
+			}
+		}
+		return result;
 	}
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
@@ -1542,7 +1583,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;*/
 	}
 
-	public void checkAllPDPlans(){
+	public int checkAllPDPlans(){
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1550,14 +1591,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));	
-
+		int plansForCompare=allPDPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare=4;
+		}
 		if(allPDPlans !=null){
-			for(int i = 0; i<allPDPlans.size(); i++){
+			for(int i = 0; i<plansForCompare; i++){
 				allPDPlans.get(i).click();
+				System.out.println("Plan added to compare : "+i);
 			}
 		}
-
+		return plansForCompare;
 	}
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
+
 	public ComparePlansPage clickOnCompareLinkAARP(String plantype){
 
 		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
@@ -1570,7 +1621,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
-			
+			moveMouseToElement(compareLinks.get(1));
 			compareLinks.get(1).click();	
 		}else{
 			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
@@ -3007,6 +3058,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 	}
 
+	public void handlePlanYearSelectionPopup() {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if (validate(planYearPopup)) {
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+				
+			}
+		} 
+	}	
 
 	public void validatePlanCard() {
 		

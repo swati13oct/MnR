@@ -2,7 +2,7 @@
 Feature: To test Pharamcies And Prescriptions on Member site
 
 #----- beginning of VBF scenarios section ------------------   
-  @F313410
+  @F313410 @vbfGate
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   |	<planType>   |
