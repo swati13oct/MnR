@@ -310,9 +310,15 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}
+		else if(validate(SubmitApplicationBtn)){
+			SubmitApplicationBtn.click();
+			if(driver.getCurrentUrl().contains("confirmation")){
+				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
+				return new OLEconfirmationPage(driver);
+			}
+
+		}
 		return null;	
 		}
-
-
 
 }
