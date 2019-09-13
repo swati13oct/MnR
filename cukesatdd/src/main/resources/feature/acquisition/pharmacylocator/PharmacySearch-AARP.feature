@@ -110,13 +110,13 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
       | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
 
-@abc	@pharmacylocatorulayer01b
+	@pharmacylocatorulayer01b
     Examples: 
       | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
       | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Ulayer   |
-#      | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-#      | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-#      | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
+      | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
 
 
   @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
