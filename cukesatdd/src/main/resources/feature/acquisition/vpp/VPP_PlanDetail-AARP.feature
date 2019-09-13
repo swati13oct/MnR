@@ -141,3 +141,4 @@ Feature: 1.09-Acq-To test plan details in vpp flow AARP site
       | F338035 - MA-AARP                           |   99001 | No              | Spokane County  | MA       | AARP Medicare Advantage Essential (HMO)                          | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
       | US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to specific providers using your computer or mobile device.           |
       | US1967861 -  Additional Telehealth Services |   22206 | Yes             | Alexandria city | MA       | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 Copay; Speak to specific providers using your computer or mobile device. |
+      
