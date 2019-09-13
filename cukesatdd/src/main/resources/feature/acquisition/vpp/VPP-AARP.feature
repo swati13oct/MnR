@@ -323,7 +323,6 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the AARP site 
-    Then user validates save plan option is unselected for all plans by default on AARP site
     Then user validates selected plans can be saved as favorite on AARP site
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
