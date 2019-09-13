@@ -118,7 +118,7 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
       | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare MedicareComplete Assist (PPO SNP)                | Dental Platinum | $32            | $384          |
 
-  @OTC_HealthCatalog @F338035
+  @OTC_HealthCatalog @F338035 @F303834
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -134,7 +134,9 @@ Feature: 1.09-Acq-To test plan details in vpp flow UMS site
       | Expected Text | <expectedText> |
 
     Examples: 
-      | UID                 | zipcode | isMultutiCounty | county         | plantype | planName                                   | benefitType                        | expectedText                                          |
-      | F338035 - MAPD-AARP |   35616 | No              | Colbert County | MAPD     | AARP Medicare Advantage Plan 1 (HMO)       | Health & Wellness Products Catalog | credit per quarter to use on approved health products |
-      | F338035 - SNP-AARP  |   38603 | Yes             | Benton County  | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Health & Wellness Products Card    | credit per quarter to use on approved health products |
-      | F338035 - MA-AARP   |   99001 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)    | Health & Wellness Products Catalog | credit per quarter to use on approved health products |
+      | UID                                         | zipcode | isMultutiCounty | county          | plantype | planName                                                         | benefitType                        | expectedText                                                                |
+      | F338035 - MAPD-AARP                         |   35616 | No              | Colbert County  | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                             | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
+      | F338035 - SNP-AARP                          |   38603 | Yes             | Benton County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                       | Health & Wellness Products Card    | credit per quarter to use on approved health products                       |
+      | F338035 - MA-AARP                           |   99001 | No              | Spokane County  | MA       | AARP Medicare Advantage Essential (HMO)                          | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
+      | US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to specific providers using your computer or mobile device.           |
+      | US1967861 -  Additional Telehealth Services |   22206 | Yes             | Alexandria city | MA       | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 Copay; Speak to specific providers using your computer or mobile device. |
