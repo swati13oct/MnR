@@ -25,12 +25,12 @@ Feature: To test VPP Plan Summary Page in UMS Site
       | Referral Required | <referralRequired> |
       | Out Of Pocket Maximum | <outOfPocketMaximum> |
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-    Then the user validates below plan benefit values for the above selected plan in UMS site for PDP  Plans
-      | Monthly Premium | <monthlyPremium> |
-      | Annual Deductible | <annualDeductible> |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |  
+#    Then the user validates below plan benefit values for the above selected plan in UMS site for PDP  Plans
+#      | Monthly Premium | <monthlyPremium> |
+#      | Annual Deductible | <annualDeductible> |
+#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |  
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in UMS Site  
-    Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site  
+#   Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site  
     Then the user clicks on enter drug information link in the benefits table and validates the DCE Home Page for MAPD, PDP , DSNP Plan in UMS Site
     Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in UMS Site
     Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in UMS site
@@ -58,7 +58,6 @@ Feature: To test VPP Plan Summary Page in UMS Site
     Then the user validates the right rail in UMS Site
     Then the user validates the Need Help Section in the right rail in ums Site
     Then the user validates the TFN in the Need Help Section in ums Site
-    Then the user validates and clicks on Find an agent in your area link in ums Site
     Then the user validates Get a free medicare Guide section in the right rail in ums Site
     Then the user enters the following information in the Get a free medicare Guide section in ums Site
      | First Name | <firstName> |

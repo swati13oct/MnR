@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -258,6 +259,48 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
 	private WebElement providerSearchFromHomeScreen;
 
+	
+	  @FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+			private WebElement callsam;
+			
+			@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+			private WebElement callsamtooltip;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
+			private WebElement callSamPopup;
+			
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+			private WebElement CallSamModel;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+			private WebElement CallSamTFN;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+			private WebElement CallSamTFNClose;
+			
+			String CallSam= "Call a Licensed Insurance Agent";
+			@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[2]/img")
+			private WebElement chatsam;
+			
+			@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
+			private WebElement chatsamtooltip;
+			
+			@FindBy(xpath ="//*[@id='inner-chat']")
+			private WebElement chatSamPopup;
+			
+				@FindBy(xpath ="//*[@id='agent-name']")
+			private WebElement ChatSamHead;
+			
+			@FindBy(xpath ="//*[@id='sp-close-frame']")
+			private WebElement ChatSamTFNClose;
+			
+			String ChatSamText= "Chat with a Licensed Insurance Agent";
+			
+			
+	
+	
+	
 	  @FindBy(id="state-select")
 	  private WebElement stateDropDown;
     
@@ -1607,4 +1650,100 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new VPPPlanSummaryPage(driver);
 	}
 	
-}
+	
+	public AcquisitionHomePage validateCallSam() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(callsam);
+			present = true;
+			} catch (NoSuchElementException e) {
+			present = false;
+			}
+			if (present) {
+			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			  return new AcquisitionHomePage(driver);
+			}
+		else
+			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
+	}
+	
+	public AcquisitionHomePage validateCallSamContent() throws InterruptedException {
+	
+	Actions action = new Actions(driver);
+	WebElement element = callsam;
+	action.moveToElement(element).perform();
+	String toolTipText = callsamtooltip.getText();
+	System.out.println("====================================================================");
+	System.out.println(toolTipText);
+	System.out.println("====================================================================");
+	
+	if (CallSam.equalsIgnoreCase(toolTipText)) {
+	  System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	return null;
+	}
+	
+	public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
+	//CommonUtility.checkPageIsReady(driver);
+	callsam.click();
+	System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+	driver.switchTo().activeElement();
+	System.out.println(CallSamTFN.getText());
+	CallSamTFNClose.click();
+	validateNew(callsam);		
+	return null;
+	}
+	
+	public AcquisitionHomePage validateChatSam() throws InterruptedException {
+	boolean present;
+	try {
+	validateNew(chatsam);
+	present = true;
+	} catch (NoSuchElementException e) {
+	present = false;
+	}
+	if (present) {
+	  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+	return null;
+	}
+	
+	public AcquisitionHomePage validateChatSamContent() throws InterruptedException {
+	
+	Actions action = new Actions(driver);
+	WebElement element = chatsam;
+	action.moveToElement(element).perform();
+	String ChattoolTipText = chatsamtooltip.getText();
+	System.out.println("====================================================================");
+	System.out.println(ChattoolTipText);
+	System.out.println("====================================================================");
+	
+	if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+	  System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	return null;
+	}
+	
+	public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
+	//CommonUtility.checkPageIsReady(driver);
+	chatsam.click();
+	System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
+	chatsamtooltip.click();
+	driver.switchTo().activeElement();
+	System.out.println(ChatSamHead.getText());
+	ChatSamTFNClose.click();
+	validateNew(chatsam);		
+	return null;
+	}
+	
+	}

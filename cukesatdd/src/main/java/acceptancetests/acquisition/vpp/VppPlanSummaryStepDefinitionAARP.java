@@ -818,7 +818,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		plansummaryPage.validateSpecialistBenefit(planType ,planName , specialist);
 		plansummaryPage.validateReferrralRequiredBenefit(planName ,referralRequired);
 		plansummaryPage.validatesOutOfPocketMaximum(planName , outOfPocketMaximum);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);	
+		plansummaryPage.validatePrescriptionDrugsTier1(planName ,planType,prescriptionDrugsTier1);	
 	  }
 	  else
 		 System.out.println("Benefits are not applicable for PDP Plans"); 
@@ -843,7 +843,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.validatePlanPremium(planName ,monthlyPremium);
 		plansummaryPage.validateAnnualDeductible(planName ,annualDeductible);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);
+		plansummaryPage.validatePrescriptionDrugsTier1(planName ,planType,prescriptionDrugsTier1);
 	  }
 	  else
 		  System.out.println("Benefits are not applicable for MA, MAPD and DSNP Plans");
@@ -961,7 +961,7 @@ public class VppPlanSummaryStepDefinitionAARP {
   /**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the member is on AARP medicare acquisition site landing page$")
+	@Given("^the potential user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);

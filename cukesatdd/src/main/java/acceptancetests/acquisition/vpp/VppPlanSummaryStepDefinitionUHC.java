@@ -133,8 +133,8 @@ public class VppPlanSummaryStepDefinitionUHC {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		/*String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);*/
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
@@ -831,7 +831,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		plansummaryPage.validateSpecialistBenefit(planType ,planName , specialist);
 		plansummaryPage.validateReferrralRequiredBenefit(planName ,referralRequired);
 		plansummaryPage.validatesOutOfPocketMaximum(planName , outOfPocketMaximum);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);	
+		plansummaryPage.validatePrescriptionDrugsTier1(planName,planType,prescriptionDrugsTier1);	
 	  }
 	  else
 		 System.out.println("Benefits are not applicable for PDP Plans"); 
@@ -856,7 +856,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.validatePlanPremium(planName ,monthlyPremium);
 		plansummaryPage.validateAnnualDeductible(planName ,annualDeductible);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);
+		plansummaryPage.validatePrescriptionDrugsTier1(planName,planType,prescriptionDrugsTier1);
 	  }
 	  else
 		  System.out.println("Benefits are not applicable for MA, MAPD and DSNP Plans");
@@ -983,5 +983,17 @@ public class VppPlanSummaryStepDefinitionUHC {
 	public void I_land_on_result_page(){
 		KeywordSearch kws = (KeywordSearch) getLoginScenario().getBean(PageConstants.Keyword_Search);
 		kws.url();			
+	}
+	/**
+	 * @toDo:user is on the uhcmedicaresolutions site landing page
+	 */
+	@Given("^the potential user is on the uhcmedicaresolutions site landing page$")
+	public void the_user_on_UHC_Medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 } 

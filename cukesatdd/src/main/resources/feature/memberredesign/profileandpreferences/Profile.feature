@@ -230,4 +230,51 @@ Feature: C1.2To test Profile and Preferences page
     Examples: 
       | planType | memberType |
 
-  # | Combo    | EPMPEnabled |
+  # | Combo    | EPMPEnabled | 
+  
+
+  @AccountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers
+   Scenario Outline:To test end to end regression scenario for account profile and preferences for a Federal member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+     Then the user navigates to Profile and Preferences page       
+	   Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+	   Then the email address section should be verified
+	   Then the Phone Numbers section should be validated & all links clicked
+	   Then the user validates permanent address section
+	   And the user verifies the Temporary Address Link on the Account settings page
+	   Then the user validates Communication Preferences section
+	   And the user validates sign up today link
+	   Then the user validates the presence of Back to Profile and Preferences links 	    
+	   And the user validates see more ways to contact us section                                          
+     And the user validates on clicking contact us link it should route to contact us page  
+	  
+     Examples: 
+      | planType  | memberType              | copayCategory |
+      | PDP       | PDP_AARPIndividual      | NON LIS       |
+     # | MA        | MA_UHCIndividual        | NON LIS       |
+     # | MA        | MA_UHCGroup             | NON LIS       |
+      
+         @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
+    Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
+     Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    Then the user navigates to Profile and Preferences page  
+	  Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+	  Then the email address section should be verified
+    Then the Phone Numbers section should be validated & all links clicked
+    Then the user validates permanent address section
+	  And the user verifies the Temporary Address Link on the Account settings page
+    Then the user validates that  Communication Preferences section doesn't come for PCP medica member 
+    And the user validates see more ways to contact us section                                          
+    And the user validates on clicking contact us link it should route to contact us page
+    Examples: 
+      | planType    | memberType            | copayCategory  |
+      | MA          | PCP                   | NON LIS        |
+     # | MA          | MEDICA                | NON LIS        |  
+      
+    
