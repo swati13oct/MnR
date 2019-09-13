@@ -1,7 +1,7 @@
 @fastandfurious @OLE @OLE_UHC
 Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
-  @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
+  @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
