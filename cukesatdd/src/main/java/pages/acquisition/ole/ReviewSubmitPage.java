@@ -28,7 +28,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(xpath = "//*[@class = 'cta-button confirm-button']")
+	@FindBy(xpath = "//button[contains(@class,'confirm-button')]")
 	private WebElement SubmitApplicationBtn;
 
 	@FindBy(id = "ole-form-next-button")
@@ -299,10 +299,12 @@ public class ReviewSubmitPage extends UhcDriver{
 
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
-		/*WebDriverWait wait = new WebDriverWait(driver, 30);
+/*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
 		if(driver.getCurrentUrl().contains("confirmation")){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
