@@ -49,12 +49,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String initialZipVal=zipcodeField.getAttribute("value");
 		sendkeysNew(zipcodeField, zipcode);
 		searchbtn.click();
-		//note: if year dropdown is available, handle it with current year
-		if (isPlanYear()) {
-			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-			selectsPlanYear(currentYear);
-			testNote.add("plan year dropdown available - selected year="+currentYear);
-		}
+
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 15);
 			if (county.equalsIgnoreCase("None")) { 
@@ -76,6 +71,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("*****Zipcode, distance and County details are entered******");
 		} else {
 			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
+		}
+		//note: if year dropdown is available, handle it with current year
+		if (isPlanYear()) {
+			System.out.println("Year dropdown is displayed, proceed to select current year");
+			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			selectsPlanYear(currentYear);
+			testNote.add("plan year dropdown available - selected year="+currentYear);
+		} else {
+			System.out.println("TEST - No Year dropdown");
 		}
 		return testNote;
 	}
@@ -159,14 +163,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public boolean isPlanYear() {
-		return pharmacyValidate(yearDropdown);
+		return pharmacyValidate(yearDropdownLabel);
 	}
 
 	public void selectsPlanYear(String planYear) {
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
-		String selectedValue = yearList.getFirstSelectedOption().getText();
-		System.out.println("Selected year='"+selectedValue+"' from year dropdown");
+		System.out.println("Selected year='"+yearList+"' from year dropdown");
 		//Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
 		//		+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
 		//		selectedValue.equals(planYear));
