@@ -1,5 +1,5 @@
 @pharmacylocatorulayer
-Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
+Feature: 1.11-Acq-To test Locate a Pharmacy in acqusition flow AARP site
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
   @pharmacyLocatorPerformanceUlayer @vbfGate
