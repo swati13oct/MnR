@@ -292,6 +292,20 @@ public class VppStepDefinitionUHC {
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
 	}
+	
+	@Then("^the user view plan details of the first plan in the given plan type in UMS site vpp$")
+	public void the_user_view_plan_details_of_the_first_plan_in_UMS_site_vpp() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+	}
+
 
 	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection$")
 	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection()
@@ -931,18 +945,21 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		// plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		// plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
 		// plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// plansummaryPage.validatePrintOptionExistOnPage(planType);
 		plansummaryPage.validateDefaultNoSavedPlan(planType);
@@ -1342,14 +1359,17 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 
@@ -1754,4 +1774,63 @@ public class VppStepDefinitionUHC {
 
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 	}
-}
+	@When("^verify Call sticky action menu icon is visible or not$")
+	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+	}
+		
+	@Then("^user verify the popup and content in popup$")
+	public void user_verify_the_popup_and_content_in_popup() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallpopup();
+		
+	}
+	
+	@When("^verify Chat sticky action menu icon is visible or not$")
+	public void verify_Chat_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+		
+	}
+	
+	@Then("^user verify the Chat at its original state$")
+	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSam();
+	}
+} 
