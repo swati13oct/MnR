@@ -14,13 +14,13 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | First Name         | <firstname>         |
@@ -36,12 +36,12 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user navigates to Personal Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
@@ -57,38 +57,38 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Review and Submit Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user validates Plan and Member Details on Confirmation Page
+   # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | PlanType         | zipcode | isMultutiCounty | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
@@ -118,13 +118,13 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | First Name         | <firstname>         |
@@ -140,12 +140,12 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user navigates to Personal Information Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
@@ -161,38 +161,38 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Review and Submit Page
-    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    ##Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user validates Plan and Member Details on Confirmation Page
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | PlanType         | zipcode | isMultutiCounty | county             | plantype | planName                                               | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email                       | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
@@ -225,11 +225,11 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | First Name         | <firstname>         |
@@ -245,7 +245,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage
       | plan_type      | <plantype>       |
       | MedicaidNumber | <medicaidnumber> |
@@ -268,41 +268,41 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Review and Submit Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user validates Plan and Member Details on Confirmation Page
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | PlanType | zipcode | isMultutiCounty | county       | plantype | planName                                    | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
@@ -379,8 +379,8 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user validates Plan and Member Details on Confirmation Page
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | plantype | planName                        | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
@@ -549,13 +549,13 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | First Name         | <firstname>         |
@@ -571,12 +571,12 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user navigates to Personal Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
@@ -592,26 +592,26 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then user selects Optional Rider Benfits Dental "<DentalRiderFlag>"or fitness "<FitnessRiderFlag>" Riders
@@ -643,12 +643,12 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then the user validates the Plan details on OLE
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | First Name         | <firstname>         |
@@ -663,12 +663,12 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates requierd fields for Preliminary Questions Page
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user navigates to Personal Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
@@ -684,34 +684,34 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Coverage and Health Information Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
     Then the user navigates to Proposed Effective Date Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Review and Submit Page
-    Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
+    #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user validates Plan and Member Details on Confirmation Page
@@ -851,6 +851,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       |   90210 | NO              | Los Angeles County | MAPD     |AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO      | NO           | true      | NO                | NO      |
+
 
   @oleVppUlayerCurrentYrSmoke
   Scenario Outline: OLE Landing from VPP Plan Summary
