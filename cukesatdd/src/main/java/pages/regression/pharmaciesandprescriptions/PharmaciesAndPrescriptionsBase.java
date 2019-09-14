@@ -133,6 +133,9 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, select the tab accordingly");
 			goToSpecificComboTabOnOrderPlanPage(planType);
+		} else {
+			boolean flagNonCombo=false;
+			goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
 		}
 	}
 
@@ -159,12 +162,10 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	}
 
 	/**
-	 * Helper method to go to a specific combo tab based on given planType on PnP page
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
-	 * @throws InterruptedException 
 	 */
-	public void goToSpecificComboTabOnOrderPlanPage(String planType) 
-			throws InterruptedException {
+	public void goToSpecificComboTabOnOrderPlanPage(String planType) throws InterruptedException{
 		CommonUtility.checkPageIsReady(driver);
 		WebElement targetTab=null;
 		if (planType.equalsIgnoreCase("MAPD")) {
@@ -191,7 +192,41 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		targetTab.click();
 		targetTab.click();
 		CommonUtility.checkPageIsReady(driver);
-		Thread.sleep(1000); //note: keep to give it a sec to stable
+		Thread.sleep(1000); //note: keep to give it a sec to stable	}
+	}
+	
+	/**
+	 * Helper method to go to a specific combo tab based on given planType on PnP page
+	 * @param planType
+	 * @throws InterruptedException 
+	 */
+	public void goToSpecificComboTabOnOrderPlanPage(String planType, boolean flagNonCombo) 
+			throws InterruptedException {
+		if (flagNonCombo) 
+			goToSpecificComboTabOnOrderPlanPage(planType);
+		else {
+			CommonUtility.checkPageIsReady(driver);
+			WebElement targetTab=null;
+			if (planType.equalsIgnoreCase("MAPD")) {
+				if (validate(comboTab_MAPD))
+					targetTab=comboTab_MAPD;
+			} else if (planType.equalsIgnoreCase("SHIP") 
+					|| planType.equalsIgnoreCase("MEDSUPP")) {
+				if (validate(comboTab_SHIP))
+					targetTab=comboTab_SHIP;
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				if (validate(comboTab_PDP))
+					targetTab=comboTab_PDP;
+			} else if (planType.equalsIgnoreCase("SSUP")) {
+				if (validate(comboTab_SSUP))
+					targetTab=comboTab_SSUP;
+			} else
+				return;
+			targetTab.click();
+			targetTab.click();
+			CommonUtility.checkPageIsReady(driver);
+			Thread.sleep(1000); //note: keep to give it a sec to stable
+		}
 	}
 
 	public String getConsumerDetailsFromlocalStorage() {

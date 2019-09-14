@@ -78,6 +78,10 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			claimsSummPg.validateComboTabs();
 			claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
+		} else {
+			System.out.println("TEST - maybe combo case");
+			boolean flagNonCombo=false; //note: if user has combo then select the right plan
+			claimsSummPg.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
 		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
 		claimsSummPg.validateSystemErrorMsgNotExist();

@@ -65,9 +65,8 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	}
 
 	/**
-	 * Helper method to go to a specific combo tab based on given planType on Order Plan page
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
-	 * @throws InterruptedException 
 	 */
 	public void goToSpecificComboTabOnOrderPlanPage(String planType) throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
@@ -94,6 +93,39 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	}
 
 	/**
+	 * Helper method to go to a specific combo tab based on given planType on Order Plan page
+	 * @param planType
+	 * @param flagNonCombo
+	 * @throws InterruptedException 
+	 */
+	public void goToSpecificComboTabOnOrderPlanPage(String planType, boolean flagNonCombo) throws InterruptedException {
+		if (flagNonCombo) {
+			goToSpecificComboTabOnOrderPlanPage(planType);
+		} else {
+			CommonUtility.checkPageIsReady(driver);
+			WebElement targetTab=null;
+			if (planType.equalsIgnoreCase("MAPD")) {
+				if (validate(OPM_comboTab_MAPD))
+					targetTab=OPM_comboTab_MAPD;
+			} else if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP")) {
+				if (validate(OPM_comboTab_SHIP)) 
+					targetTab=OPM_comboTab_SHIP;
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				if (validate(OPM_comboTab_PDP))
+					targetTab=OPM_comboTab_PDP;
+			} else if (planType.equalsIgnoreCase("SSUP")) {
+				if (validate(OPM_comboTab_SSUP))
+					targetTab=OPM_comboTab_SSUP;
+			} else
+				return;
+			targetTab.click();
+			targetTab.click();
+			CommonUtility.checkPageIsReady(driver);
+			Thread.sleep(1000); //note: keep to give it a sec to stable
+		}
+	}
+
+	/**
 	 * Helper method to click on the target test plan on combo tab
 	 * @param planType
 	 * @param memberType
@@ -103,6 +135,9 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, select the tab accordingly");
 			goToSpecificComboTabOnOrderPlanPage(planType);
+		} else {
+			boolean flagNonCombo=false;
+			goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
 		}
 	}
 
@@ -118,8 +153,11 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		if (memberType.toLowerCase().contains("combo")) {
 			driver.get(originalUrl);
 			goToSpecificComboTabOnOrderPlanPage(planType); 
-		} else 
+		} else {
 			driver.navigate().back();
+			boolean flagNonCombo=false;
+			goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
+		}
 	}
 
 	/**
