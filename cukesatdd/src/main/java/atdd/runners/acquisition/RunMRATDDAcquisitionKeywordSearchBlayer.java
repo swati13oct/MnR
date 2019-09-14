@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionKeywordSearchBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "RunMRATDDAcquisitionKeywordSearchBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/keywordSearch" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionKeywordSearchBlayer.json" }, tags = { "@Keywordsearch_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionKeywordSearchBlayer.json" }, tags = { "@acquisitionRegression" })
 public class RunMRATDDAcquisitionKeywordSearchBlayer { 
  
 }
