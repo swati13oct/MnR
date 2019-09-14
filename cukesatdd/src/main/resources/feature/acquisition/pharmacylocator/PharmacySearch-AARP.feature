@@ -75,16 +75,16 @@ Feature: 1.11-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Site Name | <siteName> |
     #------ English -----------------------------------
     And the user validates header section content
-#    When the user enters following details for pharmacy search
-#      | Zip Code |            |
-#      | Distance | <distance> |
-#    Then the user verify error messages in pharmacy locator page
-#      | Language | English |
-#    When the user enters following details for pharmacy search
-#      | Zip Code |       9999 |
-#      | Distance | <distance> |
-#    Then the user verify error messages in pharmacy locator page
-#      | Language | English |
+    When the user enters following details for pharmacy search
+      | Zip Code |            |
+      | Distance | <distance> |
+    Then the user verify error messages in pharmacy locator page
+      | Language | English |
+    When the user enters following details for pharmacy search
+      | Zip Code |       9999 |
+      | Distance | <distance> |
+    Then the user verify error messages in pharmacy locator page
+      | Language | English |
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |

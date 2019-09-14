@@ -78,8 +78,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			selectsPlanYear(currentYear);
 			testNote.add("plan year dropdown available - selected year="+currentYear);
-		} else {
-			System.out.println("TEST - No Year dropdown");
 		}
 		return testNote;
 	}
@@ -117,6 +115,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName) {
+		seletPlandropdown.click();
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		try {
 			Thread.sleep(2000);
@@ -128,21 +127,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
-				/* tbd
-				String winHandleBefore = driver.getWindowHandle();
-
-				System.out.println("Proceed to open a new blank tab to check the system time");
-				//open new tab
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-			    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
-				for(String winHandle : driver.getWindowHandles()){
-				    driver.switchTo().window(winHandle);
-				}
-				WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
-				String currentSysTime=currentSysTimeElement.getText();
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				*/
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String currentSysTime=getStageSysTime();
 				
@@ -158,8 +142,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						pharmacyValidate(pharmacyCount));
 			}
 		}
-
-		
+		CommonUtility.checkPageIsReady(driver);
 	}
 
 	public boolean isPlanYear() {
@@ -167,9 +150,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
+		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
-		System.out.println("Selected year='"+yearList+"' from year dropdown");
+		System.out.println("Selected year='"+planYear+"' from year dropdown");
+		CommonUtility.checkPageIsReady(driver);
 		//Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
 		//		+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
 		//		selectedValue.equals(planYear));
@@ -180,11 +165,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if(year.equals("2019")){
 			selectPlan.selectByValue("1");
 		}
+		CommonUtility.checkPageIsReady(driver);
 	}
 
 	public void selectState(String state) {
 		Select selectState = new Select(drpState);
 		selectState.selectByVisibleText(state);
+		CommonUtility.checkPageIsReady(driver);
 	}
 
 	public void searchesPharmacy(String language, String planName) throws InterruptedException {
@@ -227,6 +214,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				expectedURL="Pharmacy-Search";
 				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
+				//note: if year dropdown is available, handle it with current year
+				if (isPlanYear()) {
+					System.out.println("Year dropdown is displayed, proceed to select current year");
+					String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+					selectsPlanYear(currentYear);
+					CommonUtility.checkPageIsReady(driver);
+				}
 				selectsPlanName(planName);
 				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 

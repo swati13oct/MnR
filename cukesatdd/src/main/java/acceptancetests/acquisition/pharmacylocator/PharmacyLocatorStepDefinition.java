@@ -66,7 +66,7 @@ public class PharmacyLocatorStepDefinition {
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
 		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");

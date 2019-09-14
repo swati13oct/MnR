@@ -44,7 +44,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
-		Thread.sleep(2000); //note: keep this for the page to load
+		Thread.sleep(5000); //note: keep this for the page to load
 		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -99,83 +99,54 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
 		moveMouseToElement(mapToggleElement);
 		String targetTooltipName="Standard Network Pharmacy";
-		//tbd String testXpath="//input[@id='pharmacy-standard']/../span";
 		String testXpath="//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
-		//tbd String expTxt1="Standard Network Pharmacy";
-		//tbd String expTxt2="A pharmacy where you get the prescription drug benefits provided by your plan.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		String expTxt="Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		if (hasPrefRetailPharmacyWidget) {
 			targetTooltipName="Preferred Retail Pharmacy";
 			testXpath="//input[@id='pharmacy-preffered']/../span//*[local-name() = 'svg']";
-			//tbd expTxt1="Preferred Retail Pharmacy:";
-			//tbd expTxt2="Preferred retail pharmacies may help you save money on your prescription copays.";
-			//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 			expTxt="Preferred Retail Pharmacy: Preferred retail pharmacies may help you save money on your prescription copays.";
 			validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 		}
 		targetTooltipName="E-Prescribing";
 		testXpath="//input[@id='ePrescribing']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="E-Prescribing";
-		//tbd expTxt2="Some of our network pharmacies use electronic prescribing, or e-prescribing. The pharmacy receives your prescriptions electronically, directly from your doctor. Your prescription may be sent before you even leave your doctor's office.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="E-Prescribing Some of our network pharmacies use electronic prescribing, or e-prescribing. The pharmacy receives your prescriptions electronically, directly from your doctor. Your prescription may be sent before you even leave your doctor.s office.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName="Open 24 Hours";
 		testXpath="//input[@id='24-hours']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Open 24 Hours";
-		//tbd expTxt2="This store is open to serve your pharmacy needs 24 hours a day, 7 days a week.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Open 24 Hours This store is open to serve your pharmacy needs 24 hours a day, 7 days a week.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName="Home Infusion and Specialty";
 		testXpath="//input[@id='home-specialty']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Home Infusion and Specialty";
-		//tbd expTxt2="Medication therapies and services used to treat complex health conditions can be purchased at this location.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Home Infusion and Specialty Medication therapies and services used to treat complex health conditions can be purchased at this location.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName="Retail Pharmacy (90-day)";
 		testXpath="//input[@id='StandardNightyDays']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Retail Pharmacy (90-day)";
-		//tbd expTxt2="You can fill a 90-day supply of prescription drugs at this retail pharmacy.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Retail Pharmacy \\(90-day\\) You can fill a 90-day supply of prescription drugs at this retail pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName="Indian/Tribal/Urban";
 		testXpath="//input[@id='indian-tribal']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Indian/Tribal/Urban (I/T/U)";
-		//tbd expTxt2="This location is an Indian health service, Tribal or Urban Indian health program pharmacy.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Indian/Tribal/Urban \\(I/T/U\\) This location is an Indian health service, Tribal or Urban Indian health program pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName="Long-Term Care";
 		testXpath="//input[@id='long-term']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Long-Term Care";
-		//tbd expTxt2="Products and services for long-term care facilities are available at this location.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Long-Term Care Products and services for long-term care facilities are available at this location.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		//targetTooltipName="Preferred Mail Home Delivery through OptumRx";
 		targetTooltipName="Mail Order Pharmacy";
 		testXpath="//input[@id='mail-order']/../span//*[local-name() = 'svg']";
-		//tbd expTxt1="Mail Order Pharmacy:";
-		//tbd expTxt2="You can have at least a 3-month supply of medications you take regularly shipped directly to your home through a mail order pharmacy.";
-		//tbd validateOneTooltip(language, targetTooltipName, testXpath, expTxt1, expTxt2);
 		expTxt="Mail Order Pharmacy: You can have at least a 3-month supply of medications you take regularly shipped directly to your home through a mail order pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 	}
 
 	public void validateOneTooltip(String language, String targetTooltipName, String testXpath, String expTxt) {
-	//tbd public void validateOneTooltip(String language, String targetTooltipName, String testXpath, String expTxt1, String expTxt2) {
 		WebElement testTooltip=driver.findElement(By.xpath(testXpath));
 		Assert.assertTrue("PROBLEM - unable to locate "+targetTooltipName+" tooltip element", 
 				pharmacyValidate(testTooltip));
@@ -190,24 +161,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - pharmacies text is not as expected. "
 					+ "Expected to contain '"+expectedTxt+"' | Actual='"+actualTxt+"'", 
 					expectedTxt.matcher(actualTxt).find());
-			/* tbd
-			String actualTxtXpath1=testXpath+"/span/p[1]";
-			String actualTxt1=driver.findElement(By.xpath(actualTxtXpath1)).getText();
-			String actualTxtXpath2=testXpath+"/span/p[2]";
-			String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
-			Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-					+ "Expected='"+expTxt1+"' | "
-					+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
-			if (targetTooltipName.equalsIgnoreCase("E-Prescribing")) { //note: jenkins run didn't like the ' in the text
-				String[] tmp=expTxt2.split("\'");
-				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "Expected to contain '"+expTxt2+"' | "
-						+ "Actual-'"+actualTxt2+"'", actualTxt2.contains(tmp[0]));
-			} else {
-				Assert.assertTrue("PROBLEM - not getting expected tooltip text for "+targetTooltipName+" element.  "
-						+ "Expected='"+expTxt2+"' | "
-						+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
-			}*/
 		}
 		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
 	}
@@ -269,7 +222,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
-		//tbd CommonUtility.waitForPageLoad(driver, noZipcode, 5);
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
 			String exp_noZipTxt="A ZIP code is required to locate a pharmacy. Please enter a ZIP code.";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
