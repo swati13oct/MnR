@@ -107,15 +107,23 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 			if (planType.equalsIgnoreCase("MAPD")) {
 				if (validate(OPM_comboTab_MAPD))
 					targetTab=OPM_comboTab_MAPD;
+				else 
+					return;
 			} else if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP")) {
-				if (validate(OPM_comboTab_SHIP)) 
+				if (validate(OPM_comboTab_SHIP))
 					targetTab=OPM_comboTab_SHIP;
+				else
+					return;
 			} else if (planType.equalsIgnoreCase("PDP")) {
-				if (validate(OPM_comboTab_PDP))
+				if (validate(OPM_comboTab_PDP)) 
 					targetTab=OPM_comboTab_PDP;
+				else
+					return;
 			} else if (planType.equalsIgnoreCase("SSUP")) {
 				if (validate(OPM_comboTab_SSUP))
 					targetTab=OPM_comboTab_SSUP;
+				else
+					return;
 			} else
 				return;
 			targetTab.click();

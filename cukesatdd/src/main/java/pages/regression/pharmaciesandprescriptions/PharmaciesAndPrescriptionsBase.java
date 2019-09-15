@@ -210,16 +210,24 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			if (planType.equalsIgnoreCase("MAPD")) {
 				if (validate(comboTab_MAPD))
 					targetTab=comboTab_MAPD;
+				else
+					return;
 			} else if (planType.equalsIgnoreCase("SHIP") 
 					|| planType.equalsIgnoreCase("MEDSUPP")) {
 				if (validate(comboTab_SHIP))
 					targetTab=comboTab_SHIP;
+				else
+					return;
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				if (validate(comboTab_PDP))
 					targetTab=comboTab_PDP;
+				else
+					return;
 			} else if (planType.equalsIgnoreCase("SSUP")) {
 				if (validate(comboTab_SSUP))
 					targetTab=comboTab_SSUP;
+				else
+					return;
 			} else
 				return;
 			targetTab.click();
