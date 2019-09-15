@@ -472,7 +472,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
 
-	@FindBy(xpath="//div[contains(@class,'ANOC') and not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//h2[text()='Annual Notice of Changes Documents']")
 	private WebElement anocSection;
 	
 
