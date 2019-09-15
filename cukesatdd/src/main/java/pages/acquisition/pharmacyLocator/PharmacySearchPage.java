@@ -43,13 +43,30 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", 
 				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
-		Thread.sleep(10000); //note: keep this for the page to load
+		Thread.sleep(5000); //note: keep this for the page to load
 		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int i=0;
+		while (i<3) {
+			if (beforeClicked_tabs.size()==afterClicked_tabs.size()) {
+				System.out.println(i+" give it extra 3 seconds for pdf to load");
+				Thread.sleep(3000); //note: keep this for the page to load
+				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				i=i++;
+				i=i++;
+			} else 
+				break;
+		}
+		afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				i=i++;
 		int afterClicked_numTabs=afterClicked_tabs.size();
 		System.out.println("TEST - afterClicked_numTabs="+afterClicked_numTabs);
+		//note: no point to continue if tab for pdf didn't show
+		Assert.assertTrue("PROBLEM - expect more browser tabs after clicking pdf. "
+				+ "Before="+beforeClicked_tabs.size()+" | After="+afterClicked_numTabs,
+				beforeClicked_tabs.size()<afterClicked_numTabs);
+		
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
@@ -166,6 +183,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateHeaderSection() {
+		CommonUtility.waitForPageLoad(driver, PharmacyLocatorPageHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to locate the header text element", 
 				pharmacyValidate(PharmacyLocatorPageHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the input section", 
