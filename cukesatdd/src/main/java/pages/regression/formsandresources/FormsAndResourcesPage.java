@@ -2529,10 +2529,16 @@ System.out.println(memberType);
 		} 
 		Assert.assertTrue("PROBLEM - unable to locate Annal Notice of Changes Documents section", validate(anocSection)); 
 		
+		/* tbd
 		String targetYearAnocSectionXpath="//div[contains(@class,'ANOC') and not(contains(@class,'ng-hide'))]//div[@class='sectionWise_div_"+targetYear+"']";
 		String targetYearAnocXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Annual Notice of Changes')]//parent::li";
 		String targetYearCoeDocXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Evidence Of Coverage') or contains(text(),'Evidence of Coverage')]//parent::li";
 		String targetYearCfXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Comprehensive Formulary')]//parent::li";
+		*/
+		String targetYearAnocSectionXpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[@class='sectionWise_div_"+targetYear+"']";
+		String targetYearAnocXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Annual Notice of Changes')]//parent::li";
+		String targetYearCoeDocXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Evidence Of Coverage') or contains(text(),'Evidence of Coverage')]//parent::li";
+		String targetYearCfXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Comprehensive Formulary')]//parent::li";
 		
 		if (exptYearSubSection) {
 			try {

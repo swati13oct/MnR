@@ -44,7 +44,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
-		Thread.sleep(5000); //note: keep this for the page to load
+		Thread.sleep(10000); //note: keep this for the page to load
 		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());

@@ -417,7 +417,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		viewsearchpdf.click();
-		Thread.sleep(5000); //note: keep this for the page to load
+		Thread.sleep(10000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int afterClicked_numTabs=afterClicked_tabs.size();
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
