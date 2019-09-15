@@ -1,7 +1,7 @@
 @fastandfurious @OLE @OLE_UHC
 Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
 
-  @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
+  @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -840,3 +840,63 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO      | NO           | true      | NO                | NO      |
+
+  @oleVppBlayerCurrentYrSmoke
+  Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Summary
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+   When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
+    Then the user navigates to Medicare Information Page
+    Then the user enters following required Medicare Informations
+      | First Name         | <firstname>         |
+      | Last Name          | <lastname>          |
+      | Medicare Number    | <medicarenumber>    |
+      | SSN Flag           | <ssnflag>           |
+      | PartA Date         | <partadate>         |
+      | PartB Date         | <partbdate>         |
+      | Card Type          | <cardtype>          |
+      | Email Confirmation | <emailConfirmation> |
+      | Go Green           | <goGreen>           |
+      | Email              | <email>             |
+    Then the user navigates to Preliminary Questions Page
+    Then the user validates requierd fields for Preliminary Questions Pages
+      | MedicaidNumber | <medicaidnumber> |
+    Then the user navigates to Personal Information Page
+    Then the user enters following required information in Personal Information Page
+      | DOB                      | <dob>                    |
+      | Gender                   | <gender>                 |
+      | Perm_Street              | <permstreet>             |
+      | Perm_city                | <permcity>               |
+      | Mailing Address Question | <mailingaddressquestion> |
+      | Mailing_Street           | <mailingstreet>          |
+      | Mailing_City             | <mailingcity>            |
+      | Mailing_State            | <mailingstate>           |
+      | Mailing_Zip              | <mailingzip>             |
+      | Email                    | <email>                  |
+      | MedicaidNumber           | <medicaidnumber>         |
+    Then the user navigates to SEP Page
+    Then the user navigates to Coverage and Health Information Page
+    Then the user answers following questions in Coverage and Health Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
+    Then the user navigates to Proposed Effective Date Page
+    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+    Then the user navigates to Monthly Plan Premium Page
+    Then the user navigates to Optional Benefits Page for following plans with available Riders
+      | Rider Flag | <riderflag> |
+    Then the user navigates to Authorization Page for plan as per following rider options
+      | Rider Flag | <riderflag> |
+    Then the user validates required fields for Authorization Page
+    Then the user navigates to Review and Submit Page
+    Then the user clicks on Submit Enrollment to complete enrollment
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO      | NO           | true      | NO                | NO      |
+      

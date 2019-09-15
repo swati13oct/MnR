@@ -21,8 +21,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
       | Ulayer   | 80002   | 25       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
      #| Ulayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
 
-  @pharmacyLocatorUlayerSmoke
-  Scenario Outline: To verify available pharmacies page for zipcode <zipcode> and county <countyName>
+  Scenario Outline: To verify available pharmacies page
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     And the user enters following details for pharmacy search
@@ -32,30 +31,29 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
     And the user chooses a plan from dropdown
       | Plan Name | <planName> |
       | planyear  | <planYear> |
-    Then the user validates the pharmacies available
+    Then the user validates the pharmacies results
       | Language | English |
     Then the user chooses the Pharmacy Type
       | Filter Type | <pharmacytype> |
     Then the user chooses the Pharmacy Type
       | Filter Type | <servicetype> |
-    Then the user validates the pharmacies available
+    Then the user validates the pharmacies results
       | Language | English |
-    When the user selects Spanish Language
-    And the user enters following details for pharmacy search
-      | Zip Code    | <zipcode>    |
-      | Distance    | <distance>   |
-      | County Name | <countyName> |
-    And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
-    Then the user validates the pharmacies available
-      | Language | Spanish |
 
+  @pharmacyLocatorUlayerSmoke  @pharmacyLocatorUlayerCurrentYrSmoke
     Examples: 
       | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
       | Ulayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
-      | Ulayer   |   90210 |       25 | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
-
+   #   | Ulayer   |   90210 |       25 | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
+   
+   @pharmacyLocatorUlayerNextYrSmoke   
+   Examples: 
+      | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
+      | Ulayer   |   80002 |       25 | Adams County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
+    #  | Ulayer   |   90210 |       25 | None         | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
+      
+  
+  
   #------------------------- END OF ACQUISITION SMOKE TESTS----
   #-------------------------
   # note: Acq ALM Pharmacy Locator Test cases located in OP regression

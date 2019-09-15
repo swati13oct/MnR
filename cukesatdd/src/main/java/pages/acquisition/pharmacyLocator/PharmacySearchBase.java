@@ -47,13 +47,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String initialZipVal=zipcodeField.getAttribute("value");
 		sendkeysNew(zipcodeField, zipcode);
 		searchbtn.click();
-		//note: if year dropdown is available, handle it with current year
+/*		//note: if year dropdown is available, handle it with current year
 		if (isPlanYear()) {
 			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 			selectsPlanYear(currentYear);
-		}
+		}*/
 		if (matcher.matches()) {
-			CommonUtility.waitForPageLoad(driver, countyModal, 15);
+			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) { 
 				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
 						!pharmacyValidate(countyModal));
@@ -77,7 +77,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName) {
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+		seletPlandropdown.click();
+		WebElement optionToSelect = driver.findElement(By.xpath("//select[@id='plan-type']/option[contains(text(),'"+planName+"')]"));
+		optionToSelect.click();
+		//selectFromDropDownByText(driver, seletPlandropdown, planName);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -124,13 +128,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
+		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		String selectedValue = yearList.getFirstSelectedOption().getText();
 		System.out.println("Selected year='"+selectedValue+"' from year dropdown");
-		//Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
-		//		+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
-		//		selectedValue.equals(planYear));
+		Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
+				+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
+				selectedValue.trim().contentEquals(planYear.trim()));
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
@@ -491,6 +496,5 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		return false;
 	}	
-	
 }
 

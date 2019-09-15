@@ -2,6 +2,7 @@ package acceptancetests.acquisition.pharmacylocator;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -116,17 +117,25 @@ public class PharmacyLocatorStepDefinition {
 	/** user chooses a plan from dropdown */
 	@And("^the user chooses a plan from dropdown$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String planName = inputAttributesMap.get("Plan Name");
 		String planYear = inputAttributesMap.get("planyear");
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, planYear);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*if (pharmacySearchPage.isPlanYear())
-			pharmacySearchPage.selectsPlanYear(planYear);*/
+		String currentYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		if (Integer.parseInt(planYear) > Integer.parseInt(currentYear)) {
+			if (pharmacySearchPage.isPlanYear())
+				pharmacySearchPage.selectsPlanYear(planYear);
+			else
+				Assert.fail("Plan Year dropdown is not displayed");
+		}else{
+			if (pharmacySearchPage.isPlanYear())
+				pharmacySearchPage.selectsPlanYear(planYear);
+		}
 		pharmacySearchPage.selectsPlanName(planName);
-	}	
+	}
 	
 	/** Verify the pharmacies as per the filter criteria 
 	 * @throws InterruptedException */
@@ -334,8 +343,10 @@ public class PharmacyLocatorStepDefinition {
 	public void the_user_chooses_the_pharmacy_type(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String filterType = inputAttributesMap.get("Filter Type");
-		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(testDriver);
+		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(testDriver);*/
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		boolean isPharmacySelected;
 		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(filterType);
 		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
@@ -360,12 +371,14 @@ public class PharmacyLocatorStepDefinition {
 	public void selectFirstPlanViewDetail(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String planType = inputAttributesMap.get("Plan Type");
-		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);
+		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);*/
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.vppSelectFirstPlanViewDetail(planType);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
 	}
 
 	@Then("^the user navigates to pharmacy locator page using Online pharmacy directory link$")
@@ -373,8 +386,10 @@ public class PharmacyLocatorStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String isMultiCounty = inputAttributesMap.get("Is Multi County");
 		String countyName = inputAttributesMap.get("County Name");
-		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);
+		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);*/
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.clickDirectoryLnk(isMultiCounty, countyName);
 	}
 }

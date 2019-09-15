@@ -639,6 +639,21 @@ try {
 	}
 	
 	/***
+	 * Created By - agarg119 the method waits for mentioned seconds till
+	 * dropdown options gets visible throwing an exception
+	 * 
+	 * @param element
+	 * @param timeout
+	 */
+	public void waitTllOptionsAvailableInDropdown(WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, By.tagName("option")));
+
+	}
+	
+	
+	
+	/***
 	 * Created By - agarg119
 	 * the method waits for the iframe to be available and switch to it
 	 * throwing an exception
