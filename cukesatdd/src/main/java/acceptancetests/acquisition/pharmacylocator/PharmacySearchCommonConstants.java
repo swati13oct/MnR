@@ -15,6 +15,7 @@ public class PharmacySearchCommonConstants {
 	public static final String COUNTY = "county";
 	public static final String PLAN_NAME = "planName";
 	public static final String PLAN_YEAR = "planYear";
+	public static final String HAS_PLAN_YEAR_DROPDOWN = "planYearDropdown";
 	public static final String ALL_PHARMACIES = "allPharmcies";
 	public static final String PLAN_TYPE="plantype";
 	public static final String LANGUAGE="language";
