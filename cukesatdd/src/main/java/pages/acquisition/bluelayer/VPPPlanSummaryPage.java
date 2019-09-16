@@ -288,7 +288,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
-	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/p[contains(text(),'drugs covered')])[1]")
+	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
 	private WebElement drugCoveredInfo;
 	
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
@@ -761,21 +761,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]"));
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
             WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]"));
+                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
 			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View plan')]"));
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
@@ -1579,8 +1579,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		System.out.println("Plan Name is : "+PlanName);
 		
-		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-				+ "')]/ancestor::*[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(@class, 'mabenefittable')]//li[1]//*[contains(text(),'$')]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(), '"+PlanName+"')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 		CommonUtility.waitForPageLoadNew(driver, PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 
@@ -1598,8 +1597,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 
 		System.out.println("Enroll in Plan for Plan : " + planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[contains(text(), 'Enroll in')]"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[text()='Enroll in Plan']"));
 		validateNew(EnrollForPlan);
 		EnrollForPlan.click();
 
