@@ -1,5 +1,5 @@
 @vppPlanDetailsUlayer
-Feature: 1.09-Acq-To test plan details in vpp flow AARP site
+Feature: 1.2-ACQ-Plan details in vpp flow AARP
 
   @vppPlanDetailsRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan

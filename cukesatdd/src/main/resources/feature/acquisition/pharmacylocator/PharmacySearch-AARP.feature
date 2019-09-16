@@ -1,5 +1,5 @@
 @pharmacylocatorulayer
-Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
+Feature: 1.11. ACQ-Pharmacy Locator AARP
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
   @pharmacyLocatorPerformanceUlayer @vbfGate
@@ -67,7 +67,7 @@ Feature: 1.17-Acq-To test Locate a Pharmacy in acqusition flow AARP site
   # BYPASS KNOWN ISSUES
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
-  @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |

@@ -1,7 +1,7 @@
 @acq_drug_cost_estimator
-Feature: 1.23-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on aarp acq site
+Feature: 1.10. ACQ-DCE AARP
 
-@acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke @vbfGate
+@acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke @vbfGate @DCE_Regression
 Scenario Outline: To verify DCE flow from Ulayer home page
 Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
