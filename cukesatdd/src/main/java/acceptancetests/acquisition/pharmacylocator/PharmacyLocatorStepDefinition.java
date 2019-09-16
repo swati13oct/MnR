@@ -174,7 +174,7 @@ public class PharmacyLocatorStepDefinition {
 		List<String> testNote=pharmacySearchPage.getListOfAvailablePlanNames();
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
-		pharmacySearchPage.selectsPlanName(cy_planName);
+		pharmacySearchPage.selectsPlanName(testPlanName);
 	}
 	
 	/** Verify the pharmacies as per the filter criteria 
