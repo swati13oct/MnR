@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
+Feature: 1.7 .ACQ- Provider Search Flow in AARP
 
   @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in AARP site
