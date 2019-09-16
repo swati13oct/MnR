@@ -300,7 +300,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		validateNew(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
+		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
