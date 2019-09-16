@@ -11,8 +11,10 @@ Feature: 2.11. ACQ-Pharmacy Locator UHC
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies results
       | Language | English |
 
@@ -30,8 +32,10 @@ Feature: 2.11. ACQ-Pharmacy Locator UHC
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies results
       | Language | English |
     Then the user chooses the Pharmacy Type
