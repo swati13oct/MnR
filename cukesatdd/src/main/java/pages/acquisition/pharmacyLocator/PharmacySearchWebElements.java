@@ -383,7 +383,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 
 	@FindBy(xpath="//html[@lang='es']")
 	protected WebElement pgInSpanish;
-
+	
+	
 	public PharmacySearchWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

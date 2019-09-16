@@ -49,9 +49,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String initialZipVal=zipcodeField.getAttribute("value");
 		sendkeysNew(zipcodeField, zipcode);
 		searchbtn.click();
-
 		if (matcher.matches()) {
-			CommonUtility.waitForPageLoad(driver, countyModal, 15);
+			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) { 
 				Assert.assertTrue("PROBLEM - expects zicode '"+zipcode+"' to have multi-county but selection is showing", 
 						!pharmacyValidate(countyModal));
@@ -71,13 +70,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("*****Zipcode, distance and County details are entered******");
 		} else {
 			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
-		}
-		//note: if year dropdown is available, handle it with current year
-		if (isPlanYear()) {
-			System.out.println("Year dropdown is displayed, proceed to select current year");
-			String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-			selectsPlanYear(currentYear);
-			testNote.add("plan year dropdown available - selected year="+currentYear);
 		}
 		return testNote;
 	}
@@ -115,6 +107,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName) {
+		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		try {
@@ -150,14 +143,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
+		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='"+planYear+"' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
-		//Assert.assertTrue("PROBLEM - unable to select the planYear from dropdwon. "
-		//		+ "Exepcted='"+planYear+"' | Actual='"+selectedValue+"'", 
-		//		selectedValue.equals(planYear));
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
@@ -174,7 +165,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 	}
 
-	public void searchesPharmacy(String language, String planName) throws InterruptedException {
+	public void searchesPharmacy(String language, String planName, String testPlanYear) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
@@ -216,9 +207,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				//note: if year dropdown is available, handle it with current year
 				if (isPlanYear()) {
-					System.out.println("Year dropdown is displayed, proceed to select current year");
-					String currentYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-					selectsPlanYear(currentYear);
+					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
+					selectsPlanYear(testPlanYear);
 					CommonUtility.checkPageIsReady(driver);
 				}
 				selectsPlanName(planName);
@@ -362,7 +352,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			if (webElement.getText().contains(pharmacytype) ) {
 				System.out.println(webElement.getText());
 				webElement.click();
-				//tbd Thread.sleep(2000);
 				if (!loadingBlock.isEmpty()) {
 					System.out.println("Waiting till loading spinner gets disappear");
 					waitforElementDisapper(By.className("loading-block"), 60);
@@ -527,6 +516,5 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		return false;
 	}	
-	
 }
 

@@ -1978,8 +1978,7 @@ public class oleStepDefinition {
 					System.out.println("OLE Confirmation Page is Displayed");
 				} else {
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
-					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
-				}
+					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
 			} else {
 				System.out.println("Skipping the submit functionality in Offline-Prod environment");
 			}
