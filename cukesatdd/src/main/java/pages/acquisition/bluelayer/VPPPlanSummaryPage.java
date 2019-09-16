@@ -1826,6 +1826,7 @@ public boolean validateAllPlansChecked() {
         boolean isSpecificPlanInfoPresent = false;
         if (planName.contains("HMO SNP")) {
             //ElementData elementData = new ElementData("id", "viewDetailsMA");
+        Thread.sleep(5000);
 isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
            // element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
 }
