@@ -1,5 +1,5 @@
 @fastandfurious @OLE @MAPD_OLE_Ulayer
-Feature: 1.12.2- OLE common tool flow for MAPD users in AARP site
+Feature: 1.5.2.ACQ-OLE  common tool flow E2E MAPD AARP
 
   	@MAPD_OLE_AARP @acquisitionRegression
    @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer

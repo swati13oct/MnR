@@ -1,5 +1,5 @@
 @pharmacylocatorblayer
-Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
+Feature: 2.11. ACQ-Pharmacy Locator UHC
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
   @pharmacyLocatorPerformanceBlayer @vbfGate
@@ -17,9 +17,9 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | Language | English |
 
     Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | plantype | planYear |
-      | Blayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       |     2019 |
-   #  | Blayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | plantype |
+      | Blayer   | 80002   | 25       | Adams County | 2019        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
+     #| Blayer   | 80002   | 15       | Adams County | 2019        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
 
   
   Scenario Outline: To verify available pharmacies page
@@ -41,17 +41,17 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
     Then the user validates the pharmacies results
       | Language | English |
 
-@pharmacylocatorBlayerSmoke @pharmacyLocatorBlayerCurrentYrSmoke
+    @pharmacylocatorBlayerSmoke @pharmacyLocatorBlayerCurrentYrSmoke @pharmacyLocatorBlayerNextYrSmoke
     Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
-      | Blayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
-    #  | Blayer   |   90210 |       25 | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | pharmacytype              | servicetype   |
+      | Blayer   |   80002 |       25 | Adams County |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
+   #  | Blayer   |   90210 |       25 | None         |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
  
- @pharmacyLocatorBlayerNextYrSmoke
-  Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
-      | Blayer   |   80002 |       25 | Adams County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
-    #  | Blayer   |   90210 |       25 | None         | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
+  #tbd @pharmacyLocatorBlayerNextYrSmoke
+  #tbd Examples: 
+  #tbd     | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
+  #tbd     | Blayer   |   80002 |       25 | Adams County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
+  #tbd   #  | Blayer   |   90210 |       25 | None         | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
       
   #------------------------- END OF ACQUISITION SMOKE TESTS----
   #-------------------------
@@ -66,7 +66,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
   # BYPASS KNOWN ISSUES
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
-  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -118,7 +118,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                      |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -160,7 +160,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                      |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -204,7 +204,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -238,7 +238,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -282,7 +282,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -316,7 +316,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer07 @onlinePharmacyDir @regression
+  @pharmacylocatorblayer07 @onlinePharmacyDir @Pharmacy_regression
   Scenario Outline: TID: <TID> -plan: <planType> - To verify navigation to pharmacy search page from VPP page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -337,7 +337,7 @@ Feature: 2.11-Acq-To test Locate a Pharmacy in acqusition flow UHC site
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorblayer08 @geoTargeting @regression
+  @pharmacylocatorblayer08 @geoTargeting @Pharmacy_regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |
