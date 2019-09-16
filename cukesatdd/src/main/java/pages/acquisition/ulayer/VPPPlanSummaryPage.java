@@ -1388,7 +1388,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 		System.out.println("Plan Name is : "+PlanName);
-		WebElement PremiumForPlan = driver.findElement(By.xpath("(//*[contains(text(), '"+PlanName+"')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+		WebElement PremiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 		CommonUtility.waitForPageLoadNew(driver,PremiumForPlan, 30);
 		String PlanPremium = PremiumForPlan.getText();
 
@@ -1406,7 +1406,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[text()='Enroll in Plan']"));
+		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[contains(text(),'Enroll in Plan')][2]"));
 		validateNew(EnrollForPlan);
 		Thread.sleep(9000);
 		EnrollForPlan.click();
