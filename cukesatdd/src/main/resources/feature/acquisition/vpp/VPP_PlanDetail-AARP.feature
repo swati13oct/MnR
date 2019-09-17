@@ -8,9 +8,9 @@ Feature: 1.2-ACQ-Plan details in vpp flow AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user validates the following Additional Benefits of Plan for the plan in AARP
@@ -31,8 +31,8 @@ Feature: 1.2-ACQ-Plan details in vpp flow AARP
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                 | eyeWearBenefitType | eyeWearExpectedText                                                                          | dentalBenefitType | dentalExpectedText                                                     | transportationBenefitType | transportationExpectedText                                                       | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
-      | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP MedicareComplete Choice (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $70 for frames or $105 for contacts per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $40 copay                   | Hearing Exam           | $10 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost. |
-      | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $2,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
+     | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP MedicareComplete Choice (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $70 for frames or $105 for contacts per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $40 copay                   | Hearing Exam           | $10 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost. |
+     | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $2,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
 
   @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Medical Benefits in Plan Details for provided plan
@@ -41,9 +41,9 @@ Feature: 1.2-ACQ-Plan details in vpp flow AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user validates the following Medical Benefits of Plan for the plan in AARP
@@ -77,9 +77,9 @@ Feature: 1.2-ACQ-Plan details in vpp flow AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user click on Plan costs tab and validates in AARP site
@@ -99,9 +99,9 @@ Feature: 1.2-ACQ-Plan details in vpp flow AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user click on Optional Services tab and add the rider in AARP site

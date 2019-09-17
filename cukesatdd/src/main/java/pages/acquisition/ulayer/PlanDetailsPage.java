@@ -846,7 +846,9 @@ public class PlanDetailsPage extends UhcDriver {
 			displayedText = ActualTextforBenefit.getText();
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 			System.out.println(displayedText);
-			Assert.assertEquals(displayedText, medicalBenefits.get(i+1).getCells().get(1));
+			if(!displayedText.contains(medicalBenefits.get(i+1).getCells().get(1))){
+				Assert.fail("Proper value not found");
+			}
 		}
 	}
 	/**
