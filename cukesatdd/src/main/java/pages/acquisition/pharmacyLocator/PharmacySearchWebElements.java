@@ -78,6 +78,9 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(id = "plan-year")
 	protected WebElement drpYear;
 	
+	@FindBy(xpath="//label[@id='plan-year-label']/../../../div[contains(@ng-hide,'showYearToggle') and not(contains(@class,'ng-hide'))]")
+	protected WebElement yearDropdownLabel;
+	
 	@FindBy(xpath="//select[@id='plan-year']")
 	protected WebElement yearDropdown;
 
@@ -360,13 +363,13 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//a[text()='Online pharmacy directory']")
 	protected WebElement vpp_onlinePharmacyDirectoryLnk;
 	
-	@FindBy(xpath="//div[@ng-show='showMaPlans']//a[contains(text(),'View plan and drug coverage details')]")
+	@FindBy(xpath="//div[@ng-show='showMaPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
 	protected List<WebElement> listOfMaPlans;
 	
-	@FindBy(xpath="//div[@ng-show='showPdpPlans']//a[contains(text(),'View plan and drug coverage details')]")
+	@FindBy(xpath="//div[@ng-show='showPdpPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
 	protected List<WebElement> listOfPdpPlans;
 	
-	@FindBy(xpath="//div[@ng-show='showSnpPlans']//a[contains(text(),'View plan and drug coverage details')]")
+	@FindBy(xpath="//div[@ng-show='showSnpPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
 	protected List<WebElement> listOfSnpPlans;
 	
 	@FindBy(xpath="//div[contains(@class,'footnotes') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Footnotes')]")

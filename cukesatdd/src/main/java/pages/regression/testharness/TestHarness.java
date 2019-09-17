@@ -231,7 +231,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
 	private WebElement pharPresDashboardLink;
 
-
+	@FindBy(xpath="//h1[contains(text(),'Estimate Your Drug Costs')]")
+	private WebElement dceHeaderTxt;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -478,7 +480,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
 			return new DrugCostEstimatorPage(driver);
 		}

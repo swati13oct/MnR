@@ -60,6 +60,27 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		return null;
 	}
 
+	/**
+	 * determine system time - only applicable for stage run
+	 * @return
+	 */
+	public String getStageSysTime() {
+		String winHandleBefore = driver.getWindowHandle();
+
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+		String currentSysTime=currentSysTimeElement.getText();
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return currentSysTime;
+	}
+
 	/** Wait time for results to appear on UI 
 	 * @throws InterruptedException */
 	public void searchesPharmacy(String language) throws InterruptedException {
@@ -174,7 +195,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		}
 		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
-				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				/* tbd 
 				String winHandleBefore = driver.getWindowHandle();
 
 				System.out.println("Proceed to open a new blank tab to check the system time");
@@ -189,6 +210,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				System.out.println("TEST - currentSysTime="+currentSysTime);
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
+				*/
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String currentSysTime=getStageSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "

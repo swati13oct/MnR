@@ -11,15 +11,17 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies results
       | Language | English |
 
     Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | plantype | planYear |
-      | Ulayer   | 80002   | 25       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
-     #| Ulayer   | 80002   | 15       | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA       | 2019     |
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | plantype |
+      | Ulayer   | 80002   | 25       | Adams County | 2019        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
+     #| Ulayer   | 80002   | 15       | Adams County | 2019        | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
 
   Scenario Outline: To verify available pharmacies page
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
@@ -29,8 +31,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies results
       | Language | English |
     Then the user chooses the Pharmacy Type
@@ -40,19 +44,17 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Then the user validates the pharmacies results
       | Language | English |
 
-  @pharmacyLocatorUlayerSmoke  @pharmacyLocatorUlayerCurrentYrSmoke
+    @pharmacyLocatorUlayerSmoke  @pharmacyLocatorUlayerCurrentYrSmoke @pharmacyLocatorUlayerNextYrSmoke
     Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
-      | Ulayer   |   80002 |       25 | Adams County | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
-   #   | Ulayer   |   90210 |       25 | None         | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |     2019 | Standard Network Pharmacy | Open 24 hours |
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | pharmacytype              | servicetype   |
+      | Ulayer   |   80002 |       25 | Adams County |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
+   #  | Ulayer   |   90210 |       25 | None         |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
    
-   @pharmacyLocatorUlayerNextYrSmoke   
-   Examples: 
-      | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
-      | Ulayer   |   80002 |       25 | Adams County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
-    #  | Ulayer   |   90210 |       25 | None         | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
-      
-  
+   #tbd @pharmacyLocatorUlayerNextYrSmoke   
+   #tbd Examples: 
+   #tbd    | siteName | zipcode | distance | countyName   | planName                                          | planYear | pharmacytype              | servicetype   |
+   #tbd    | Ulayer   |   80002 |       25 | Adams County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
+   #tbd  #  | Ulayer   |   90210 |       25 | None         | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |     2020 | Standard Network Pharmacy | Open 24 hours |
   
   #------------------------- END OF ACQUISITION SMOKE TESTS----
   #-------------------------
@@ -88,8 +90,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | English |
     And the user validates tooltips on filters
@@ -103,21 +107,21 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
 
 	@pharmacylocatorulayer01a
     Examples: 
-      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear |cy_planName                                                       | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                  |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
+      | 15582 | Ulayer   |   85215 |       15 | None           |        2019 | AARP MedicareRx Walgreens (PDP)                                  |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)                                  |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
 
 	@pharmacylocatorulayer01b
     Examples: 
-      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO)                        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)      | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | Ulayer   |   80002 |       10 | Adams County   |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)                |        2020 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | Ulayer   |   14867 |       25 | None           |        2019 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO)   |        2020 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | Ulayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -128,8 +132,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -144,21 +150,21 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
 
 	@pharmacylocatorulayer02a
     Examples: 
-      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)                                |   10980 |       15 | None           | E-Prescribing               | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   85215 |       15 | None           | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)                                |   78006 |       15 | Kendall County | Open 24 hours               | True                  | True             | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
+      | 15582 | Ulayer   |   85215 |       15 | None           |        2019 | AARP MedicareRx Walgreens (PDP)                                |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)                                |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
 
 	@pharmacylocatorulayer02b
     Examples: 
-      | TID   | planName                                                       | zipcode | distance | countyName     | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO)                      |   78006 |       10 | Comal County   | Retail Pharmacy             | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |   80002 |       10 | Adams County   | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |   14867 |       25 | None           | Long-term care              | False                 | False            | True                 |     2019 | Ulayer   |
-      | 15583 | Medica HealthCare Plans MedicareMax (HMO)                      |   33321 |       10 | None           | Home Infusion and Specialty | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO)                      |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)      | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | Ulayer   |   80002 |       10 | Adams County   |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |        2020 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | Ulayer   |   14867 |       25 | None           |        2019 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | Ulayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                      |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -180,8 +186,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | Chinese |
     And the user validates tooltips on filters
@@ -205,12 +213,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Then the user validates the question widget
 
     Examples: 
-      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                            | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Ulayer   |   10980 |       15 | None           |     2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |     2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |     2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -221,8 +229,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -236,13 +246,13 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Then the user validates the question widget
 
     Examples: 
-      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName |  zipcode | distance | countyName     |cy_planYear | cy_planName                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -264,8 +274,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | Spanish |
     And the user validates tooltips on filters
@@ -278,12 +290,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     And the user validates view search PDF link
 
     Examples: 
-      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @regression
+  @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -294,8 +306,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown
-      | Plan Name | <planName> |
-      | planyear  | <planYear> |
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -309,13 +323,13 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Then the user validates the question widget
 
     Examples: 
-      | TID   | planName                                  | zipcode | distance | countyName     | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planYear | siteName |
-      | 15582 | AARP MedicareRx Preferred (PDP)           |   10980 |       15 | None           | E-Prescribing   | True                  | False            | True                 |     2019 | Ulayer   |
-      | 15582 | AARP MedicareRx Walgreens (PDP)           |   78006 |       15 | Kendall County | Open 24 hours   | True                  | True             | True                 |     2019 | Ulayer   |
-      | 15583 | AARP MedicareComplete Choice Plan 1 (PPO) |   78006 |       10 | Comal County   | Retail Pharmacy | False                 | False            | True                 |     2019 | Ulayer   |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | 
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer07 @onlinePharmacyDir @regression
+  @pharmacylocatorulayer07 @onlinePharmacyDir @Pharmacy_regression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -338,7 +352,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
 
-  @pharmacylocatorulayer08 @geoTargeting @regression
+  @pharmacylocatorulayer08 @geoTargeting @Pharmacy_regression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

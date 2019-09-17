@@ -175,16 +175,19 @@ public class ClaimsSearchNavigateStepDefinition {
 
 		System.out.println("===================================================================================================");
 		System.out.println("Proceed to test for claim period="+claimPeriod);
-		ClaimsSummaryPage newClaimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
-			newClaimsSummaryPage.validateComboTabs();
-			newClaimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
+			claimsSummaryPage.validateComboTabs();
+			claimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
+		} else {
+			boolean flagNonCombo=false; //note: if user has combo then select the right plan
+			claimsSummaryPage.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
-		newClaimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
-		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);
+		claimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
+		if(claimsSummaryPage != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
 	}	
 
 

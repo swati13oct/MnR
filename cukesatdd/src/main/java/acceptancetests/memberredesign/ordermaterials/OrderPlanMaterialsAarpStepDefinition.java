@@ -64,6 +64,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		if (memberType.toUpperCase().contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - expect user to have combo plan but unable to locate combo tab elements", orderPlanMaterialsPage.hasComboTabs());
 			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType);
+		} else {
+			boolean flagNonCombo=false;
+			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
 		}
 		getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE,orderPlanMaterialsPage);
 	}
@@ -132,6 +135,9 @@ public class OrderPlanMaterialsAarpStepDefinition {
 		if (memberType.toUpperCase().contains("COMBO")) {
 			Assert.assertTrue("PROBLEM - expect user to have combo plan but unable to locate combo tab elements", orderPlanMaterialsPage.hasComboTabs());
 			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType);
+		} else {
+			boolean flagNonCombo=false;
+			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
 		}
 		String result = orderPlanMaterialsPage.selectOption("None");
 		Assert.assertTrue("PROBLEM - user should not be able to navigate to Order Confirmation page when no option is selected", result == null);

@@ -1221,17 +1221,14 @@ public class DrugcostestimatorUhcStepDefinition {
 			 dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
 			
 		}
-		if(dcePage==null){
-			System.out.println("Error in navigating to DCE page");
-		}else
-			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		Assert.assertTrue("Error in navigating to DCE page", dcePage!=null);
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 	}
 
 	@When("^I delete all added drugs$")
 	public void I_delete_all_added_drugs() throws Throwable {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-
 		dce.feebackpopupClose();
 		dce.delete_all_drugs();
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);

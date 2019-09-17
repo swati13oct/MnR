@@ -19,5 +19,5 @@ public class PharmacySearchCommonConstants {
 	public static final String ALL_PHARMACIES = "allPharmcies";
 	public static final String PLAN_TYPE="plantype";
 	public static final String LANGUAGE="language";
-
+	public static final String TEST_RESULT_NOTE ="test_result_note";
 }
