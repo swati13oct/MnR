@@ -1,8 +1,9 @@
 @CT @KeyWordSearch_UHC
-Feature: Acquistion Features community search, keyword search 
+Feature: 2.09. ACQ-Community search, keyword search UMS
+
   
   
-   @Keywordsearch_UHC @acquisitionRegression
+   @UHC_Keywordsearch @acquisitionRegression
   Scenario Outline: Validating the search field on the UHC site 
    Given the potential user is on the uhcmedicaresolutions site landing page
    When the member validates the search box 

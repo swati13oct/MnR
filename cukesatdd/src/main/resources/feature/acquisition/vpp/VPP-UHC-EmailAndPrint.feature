@@ -1,5 +1,5 @@
 @vppBlayer @emailAndPrint @emailAndPrint_UHC
-Feature: Acq-To test print and email on VPP page on UHC site
+Feature: 2.04.ACQ-Print and email on VPP page on UMS
 
   @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline:TID: <TID>- Verify email plan compare plan details in UHC site
