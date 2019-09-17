@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppBlayer
-Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
+Feature: 2.03-ACQ-VBF-Plan summary in vpp flow UMS
 
   @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke @vbfGate
   Scenario Outline: Verify plan details in UMS site

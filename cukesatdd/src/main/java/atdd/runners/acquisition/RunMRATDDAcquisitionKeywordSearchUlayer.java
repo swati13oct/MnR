@@ -15,6 +15,7 @@ import cucumber.api.CucumberOptions;
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "RunMRATDDAcquisitionKeywordSearchUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/keywordSearch" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionKeywordSearchUlayer.json" }, tags = { "@Keywordsearch_AARP" })
+
 public class RunMRATDDAcquisitionKeywordSearchUlayer { 
  
 }

@@ -1,5 +1,5 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
-Feature: 1.6. ACQ- MedSupp OLE flow AARP
+Feature: 1.06. ACQ- MedSupp OLE flow AARP
 
   @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression 
  Scenario Outline: MedSup Resume Application with Application ID

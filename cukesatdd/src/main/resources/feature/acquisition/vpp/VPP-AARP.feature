@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppUlayer
-Feature: 1.3-VBF Plan summary in vpp flow AARP
+Feature: 1.03-VBF Plan summary in vpp flow AARP
 
   @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site

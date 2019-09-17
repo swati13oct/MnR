@@ -1,5 +1,5 @@
 @acq_dce_UHC
-Feature: 1.24-VBF-Acq-Drug Cost Estimator (DCE) - To test DCE flows on UMS acq site
+Feature: 2.10. ACQ-DCE - UMS
 
 @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate
 Scenario Outline: To verify DCE flow from Blayer home page

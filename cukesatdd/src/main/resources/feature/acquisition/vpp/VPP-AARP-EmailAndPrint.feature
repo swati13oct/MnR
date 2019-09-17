@@ -1,5 +1,5 @@
 @vppUlayer @emailAndPrint @emailAndPrint_AARP
-Feature: 1.4 -ACQ-Print and email on VPP page on AARP
+Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
   @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators
   Scenario Outline:TID: <TID> - Verify print and email for <plantype> plan compare page in AARP site
