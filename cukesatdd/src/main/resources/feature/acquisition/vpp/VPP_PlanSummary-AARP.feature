@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppPlanSummary
-Feature: 1.1. ACQ- VPP Plan Summary Page in AARP
+Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
 
   @vppPlanCardsRegressionUlayer @fastandfurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site

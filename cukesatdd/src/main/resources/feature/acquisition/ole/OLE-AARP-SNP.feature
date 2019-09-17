@@ -1,5 +1,5 @@
 @fastandfurious @OLE @SNP_OLE_Ulayer
-Feature: 1.5.4.ACQ-OLE  common tool flow E2E SNP AARP
+Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
 
   	@SNP_OLE_AARP @acquisitionRegression
    @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer

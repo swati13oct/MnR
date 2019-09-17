@@ -1,5 +1,6 @@
 @vppPlanDetailsBlayer
-Feature: 1.09-Acq-To test plan details in vpp flow UMS site
+Feature: 2.02-ACQ-Plan details in vpp flow UMS
+
 
   @vppPlanDetailsRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan

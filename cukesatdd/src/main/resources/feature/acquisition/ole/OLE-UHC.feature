@@ -1,5 +1,5 @@
 @fastandfurious @OLE @OLE_UHC
-Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
+Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
 
   @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
@@ -208,7 +208,7 @@ Feature: 1.13-VBF-ACQ-To test OLE common tool flow flow UMS site
       | 15574 | PCP-DSNP-MBI     |   33143 | NO              | Miami-Dade County  | SNP      | Preferred Medicare Assist (HMO D-SNP)                    | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018         | yes     | no           | false     | true       | true       | true        | true        | NO                | NO      |
 
 
-  @CampaignURL_OLE_Blayer @acquisitionRegression @FastnFurious
+  @Flow_From_cmp_Page @acquisitionRegression @FastnFurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from UHC Acquisition site VPP Plan Summary
     Given the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL
     When user views plans of the below plan type in UMS site for current year

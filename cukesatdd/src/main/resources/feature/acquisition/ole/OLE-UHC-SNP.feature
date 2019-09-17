@@ -1,5 +1,5 @@
 @fastandfurious @OLE @SNP_OLE_UHC
-Feature: 1.13.4-OLE common tool flow for SNP user UMS site
+Feature: 2.05.4.ACQ-OLE SNP UMS
 
   @SNP_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary
