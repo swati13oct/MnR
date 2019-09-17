@@ -110,7 +110,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
 		try {
-			Thread.sleep(500); 
+			Thread.sleep(1000); 
 			selectFromDropDownByText(driver, seletPlandropdown, planName);
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
