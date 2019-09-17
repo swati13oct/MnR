@@ -1,7 +1,7 @@
 #Author: Danthoori shiva
 #created Date:2/12/2019
 @Test @AARPvisitorprofile
-Feature: 1.8. ACQ- Visitor profile AARP
+Feature: 1.08. ACQ- Visitor profile AARP
 
   @addDrugs @addDrugsULayerSmoke
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile

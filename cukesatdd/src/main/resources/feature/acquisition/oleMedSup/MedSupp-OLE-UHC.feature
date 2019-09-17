@@ -1,5 +1,5 @@
 @CT @OLE_UHC @OLE_VPP_UHC_ResumeApplication
-Feature: VPP OLE 3.0 Flow – Resume/Retrieve  Application in progress
+Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
 
 @OLE_VPP_UHC @UHC_Resume_App_UHC @OLE_Regression
     Scenario Outline: MedSup Resume Application with Application ID

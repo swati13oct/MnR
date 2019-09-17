@@ -1,5 +1,6 @@
 @fixedTestCaseTest @vppPlanSummary
-Feature: To test VPP Plan Summary Page in UMS Site
+Feature: 2.01.ACQ-VPP Plan Summary Page in UMS 
+
 
  @vppPlanCardsRegressionBlayer @fastandfurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
