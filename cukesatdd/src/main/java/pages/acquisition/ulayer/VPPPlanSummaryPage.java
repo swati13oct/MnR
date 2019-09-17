@@ -1051,6 +1051,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}	
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
+System.out.println("TEST - allPlans="+allPlans);
+System.out.println("TEST - maPlans + msPlans + pdpPlans+snpPlans="+(maPlans + msPlans + pdpPlans+snpPlans));
 
 		if (allPlans == maPlans + msPlans + pdpPlans+snpPlans) {
 			return true;

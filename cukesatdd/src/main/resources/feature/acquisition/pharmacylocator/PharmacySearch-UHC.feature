@@ -150,14 +150,14 @@ Feature: 2.11. ACQ-Pharmacy Locator UHC
 
     @pharmacylocatorblayer02a
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
       | 15582 | Blayer   |   85215 |       15 | None           |        2019 | AARP MedicareRx Walgreens (PDP)                                |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
       | 15582 | Blayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)                                |        2020 | AARP MedicareRx Walgreens (PDP)                                | Open 24 hours               | True                  | True             | True                 |
 
     @pharmacylocatorblayer02b
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO)                      |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)      | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | Blayer   |   80002 |       10 | Adams County   |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              |        2020 | AARP MedicareComplete SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | Blayer   |   14867 |       25 | None           |        2019 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
@@ -236,7 +236,7 @@ Feature: 2.11. ACQ-Pharmacy Locator UHC
     Then the user validates the question widget
 
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName     |cy_planYear | cy_planName                               |  pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | Blayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
@@ -314,7 +314,7 @@ Feature: 2.11. ACQ-Pharmacy Locator UHC
     Then the user validates the question widget
 
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                               | ny_planYear | ny_planName                                                    |pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | Blayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |

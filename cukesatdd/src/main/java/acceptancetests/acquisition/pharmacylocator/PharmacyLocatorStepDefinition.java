@@ -401,10 +401,11 @@ public class PharmacyLocatorStepDefinition {
 	public void the_user_chooses_the_pharmacy_type(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String filterType = inputAttributesMap.get("Filter Type");
-		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(testDriver);*/
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		//note: do not remove following two lines - otherwise will get NPE
+		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(testDriver);
+		//tbd PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		//tbd 		.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		boolean isPharmacySelected;
 		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(filterType);
 		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
@@ -429,14 +430,16 @@ public class PharmacyLocatorStepDefinition {
 	public void selectFirstPlanViewDetail(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String planType = inputAttributesMap.get("Plan Type");
-		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);*/
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		//note: do not remove following two lines - otherwise will get NPE
+		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);
+		//tbd PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		//tbd 		.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.vppSelectFirstPlanViewDetail(planType);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
-		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
+		//note: do not remove following line - otherwise will get NPE
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
 	}
 
 	@Then("^the user navigates to pharmacy locator page using Online pharmacy directory link$")
@@ -444,11 +447,13 @@ public class PharmacyLocatorStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String isMultiCounty = inputAttributesMap.get("Is Multi County");
 		String countyName = inputAttributesMap.get("County Name");
-		/*WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);*/
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		//note: do not remove following two lines - otherwise will get NPE
+		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(testDriver);
+		//tbd PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		//tbd 		.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.clickDirectoryLnk(isMultiCounty, countyName);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
 	}
 }
 
