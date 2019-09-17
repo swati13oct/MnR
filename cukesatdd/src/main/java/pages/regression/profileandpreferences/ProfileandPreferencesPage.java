@@ -2627,4 +2627,17 @@ private WebElement cancelButtonOnPhoneSavepre;
 			
 		}
 
+	/**
+	 * @toDo : Validates the presence of Back to Profile and Preferences links
+	 *       on Go green page
+	 */
+
+	public void validateBacktoPNPlink() {
+		
+		driver.switchTo().defaultContent();
+		validateNew(backLink1);
+
+	}
+	
+
 }

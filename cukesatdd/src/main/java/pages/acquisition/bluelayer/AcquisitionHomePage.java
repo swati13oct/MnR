@@ -422,11 +422,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
@@ -484,10 +484,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		if (visitorProfile>0) {				
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+		//checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
-		clickIfElementPresentInTime(driver, proactiveChatExitBtn,2);
+	//	clickIfElementPresentInTime(driver, proactiveChatExitBtn,2);
 		/*try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);			

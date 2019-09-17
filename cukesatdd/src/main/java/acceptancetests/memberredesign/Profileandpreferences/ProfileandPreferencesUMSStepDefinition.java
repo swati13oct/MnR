@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
+import pages.memberrdesignVBF.ProfilePreferencesPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 //import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
@@ -1149,6 +1150,22 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePrefPage.validateTemporaryAddressSection();
 		profilePrefPage.validateMailingAddressSection();
 	}
+	
+	/**
+	 * @toDo : The user validates the Account information of the logged in
+	 *       member
+	 */
+
+	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
+	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile1() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		if (profilePreferencesPage == null) {
+			System.out.println("Profile and Preferences page variable is Null");
+		}
+		profilePreferencesPage.validatePlanNameMemberidNameAccountProfile();
+	}
 	/**
 	 * @toDo : Validates the Sign Up Today in Communication Preferences section
 	 */
@@ -1158,5 +1175,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateSIGNUp();
 	}
+	/***
+	 * 
+	 */
+	@Then("^the user validates the presence of Back to Profile and Preferences links$")
+	public void UserValidatesBacktoPNPlink() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
+		profilePreferencesPage.validateBacktoPNPlink();
+
+}
 }

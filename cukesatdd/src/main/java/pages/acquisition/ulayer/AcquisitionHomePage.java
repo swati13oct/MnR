@@ -351,9 +351,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else {
 			start(AARP_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+	//	checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{

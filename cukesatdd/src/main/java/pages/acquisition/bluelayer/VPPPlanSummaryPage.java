@@ -899,7 +899,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		pages.acquisition.ulayer.AcquisitionHomePage.checkModelPopup(driver);
+		//pages.acquisition.ulayer.AcquisitionHomePage.checkModelPopup(driver);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}

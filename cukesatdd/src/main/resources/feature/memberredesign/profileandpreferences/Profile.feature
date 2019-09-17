@@ -32,7 +32,7 @@ Feature: C1.2To test Profile and Preferences page
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    And the user validates the need help section
+ #   And the user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <planType> |
@@ -254,8 +254,8 @@ Feature: C1.2To test Profile and Preferences page
      Examples: 
       | planType  | memberType              | copayCategory |
       | PDP       | PDP_AARPIndividual      | NON LIS       |
-     # | MA        | MA_UHCIndividual        | NON LIS       |
-     # | MA        | MA_UHCGroup             | NON LIS       |
+      | MA        | MA_UHCIndividual        | NON LIS       |
+      | MA        | MA_UHCGroup             | NON LIS       |
       
          @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
     Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
@@ -275,6 +275,6 @@ Feature: C1.2To test Profile and Preferences page
     Examples: 
       | planType    | memberType            | copayCategory  |
       | MA          | PCP                   | NON LIS        |
-     # | MA          | MEDICA                | NON LIS        |  
+      | MA          | MEDICA                | NON LIS        |  
       
     
