@@ -109,8 +109,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void selectsPlanName(String planName) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		try {
+			Thread.sleep(1000); 
+			selectFromDropDownByText(driver, seletPlandropdown, planName);
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
