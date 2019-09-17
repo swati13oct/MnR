@@ -35,6 +35,9 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 		if (memberType.toLowerCase().contains("combo")) {
 			validateComboTabs();
 			goToSpecificComboTab(planType);
+		} else {
+			boolean flagNonCombo=false; //note: if user has combo then select the right plan
+			goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
 
 		//note: validate header element

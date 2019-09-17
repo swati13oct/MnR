@@ -132,7 +132,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 02_2  | 1041 | MA       | UHC_Individual             | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_3  | 1041 | MA       | GROUP                      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_4  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 001       | No                 |
+      | 02_5  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Medical           | 000       | No                 |
 
     @claims00_03 @claims00_C_D_p1 
     Examples: 
@@ -142,13 +142,14 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 03_3  | 1041 | MAPD     | UHC_Individual             | D_COSMOS_CLAIMS | Prescription drug | 000       | No                 |
       | 03_4  | 1041 | MAPD     | COMBO_GROUP                | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
       | 03_5  | 1041 | PCP      | Individual                 | COSMOS_CLAIMS   | Prescription drug | 000       | No                 |
-      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | 001       | Yes                |
+      | 03_6  | 1041 | MEDICA   | Individual                 | COSMOS_CLAIMS   | Prescription drug | 000       | Yes                |
 
     @claims00_04 @claims00_N_M_p1
     Examples: 
       | index | DID  | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 04_1  | 1041 | MA       | AARP_Individual_000        | NICE_CLAIMS     | Medical           | 000       | Yes                |
-      | 04_2  | 1041 | MA       | AARP_Individual_001        | NICE_CLAIMS     | Medical           | 001       | Yes                |
+    # note: reactive when there is non-000 segment ID data
+    # | 04_2  | 1041 | MA       | AARP_Individual_001        | NICE_CLAIMS     | Medical           | 000       | Yes                |
       | 04_3  | 1041 | MAPD     | AARP_Individual            | M_NICE_CLAIMS   | Medical           | 000       | Yes                |
       | 04_4  | 1041 | MAPD     | GROUP_UHC                  | NICE_CLAIMS     | Medical           | 000       | No                 |
 
