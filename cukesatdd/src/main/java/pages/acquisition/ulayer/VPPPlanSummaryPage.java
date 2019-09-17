@@ -1051,8 +1051,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}	
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
-System.out.println("TEST - allPlans="+allPlans);
-System.out.println("TEST - maPlans + msPlans + pdpPlans+snpPlans="+(maPlans + msPlans + pdpPlans+snpPlans));
 
 		if (allPlans == maPlans + msPlans + pdpPlans+snpPlans) {
 			return true;
@@ -1153,7 +1151,7 @@ System.out.println("TEST - maPlans + msPlans + pdpPlans+snpPlans="+(maPlans + ms
 
 	}
 
-	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]")
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;
 	public PlanDetailsPage navigateToFirstPlanForPlanDetails(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1291,7 +1289,8 @@ System.out.println("TEST - maPlans + msPlans + pdpPlans+snpPlans="+(maPlans + ms
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+		//tbd List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));	
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-add')]"));	
 		String expectedTxt=plansForCompare+" plans added";
 		System.out.println("Validate there are "+plansForCompare+" number of plans added for compare");
 		boolean result=true;

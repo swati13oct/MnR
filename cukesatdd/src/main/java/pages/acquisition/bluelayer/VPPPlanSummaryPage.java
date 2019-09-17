@@ -1803,8 +1803,8 @@ public boolean validateAllPlansChecked() {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		List<WebElement> compareChkBoxes = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
+		//tbd List<WebElement> compareChkBoxes = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]"));
+	List<WebElement> compareChkBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-add')]"));	
 		if (compareChkBoxes.get(0).getText().contains("3 plans added")
 				&& compareChkBoxes.get(1).getText().contains("3 plans added")
 				&& compareChkBoxes.get(2).getText().contains("3 plans added"))
@@ -3243,7 +3243,7 @@ catch (Exception e) {
 		}*/
 	}
 	
-	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]")
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;
 	public PlanDetailsPage navigateToFirstPlanForPlanDetails(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
