@@ -138,7 +138,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			validateTileNotExist(exp_TileHeaderTxt, exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
 	}
 
-	
+
 	public void validateTileLnkDestination(String planType, String memberType, String tile) throws InterruptedException {
 		String planCategoryId="0";
 		validateTileLnkDestination(planType, memberType, tile, planCategoryId);
@@ -169,7 +169,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (tile.equals("Compare drug pricing")) {
 			linkElement=pTile_compDrugPricingLnk;
 			if (memberType.toUpperCase().contains("GROUP")) {
-				expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
+				expUrl="https://chp-stage.optumrx.com/public/sso-landing";
 				switchTab=true;
 			} else
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
