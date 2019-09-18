@@ -302,6 +302,18 @@ public class TestHarness extends UhcDriver {
 		
 		return null;
 	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver);
+		}
+		return null;
+	}
 
 	public PaymentsOverview navigateToTeamHPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToTeamHPaymentOverview functions");
@@ -1121,6 +1133,36 @@ public class TestHarness extends UhcDriver {
     		}
     		return false;
     	}
+    	
+    	public boolean findPnPLinksExistOnPg() {
+    		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
+    		checkForIPerceptionModel(driver);
+    		if (validate(pharPresDashboardLink)) {
+    			return true;
+    		} else if (validate(testHarnessTopMenuPhaPresLink)) {
+    			return true;
+    		} else {
+    			if (validate(shadowRootHeader)) {
+    				System.out.println("Check for shadow-root before giving up");
+    				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				}
+    			} else {
+    				System.out.println("There is no shadow-root menu");
+    			}
+    		}
+    		return false;
+    	}
  
     	public boolean isPnpLink(String targetLnkTxt) {
     		if (targetLnkTxt.equals("PHARMACIES") && targetLnkTxt.equals("PRESCRIPTIONS"))
@@ -1169,5 +1211,14 @@ public class TestHarness extends UhcDriver {
     			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
     		}
     		return null;
+    	}
+    	
+    	@FindBy(xpath="//a[contains(text(),'Notices')]")
+    	private WebElement noticeAndDisclosuresLnk;
+    	public void navigateToNoticeAndDisclosuresPage() {
+    		Assert.assertTrue("PROBLEM - unable to locate the Legal Notice & Disclosures link on testhareness page", validate(noticeAndDisclosuresLnk));
+    		noticeAndDisclosuresLnk.click();
+    		CommonUtility.checkPageIsReady(driver);
+    		
     	}
 }
