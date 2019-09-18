@@ -246,6 +246,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
 	private WebElement successHeader_EmailForm;
 	
+	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
+	private WebElement commonQuestionViewQuestionsBtn;
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
@@ -870,6 +873,12 @@ public class ContactUsPage extends UhcDriver{
             } catch (Exception e) {
                    e.printStackTrace();
             }
+     }
+     
+     public void navigateToCommonQuestionsPg() {
+    	 Assert.assertTrue("PROBLEM - unable to locate the 'View Questions' button on the Contact Us page", validate(commonQuestionViewQuestionsBtn));
+    	 commonQuestionViewQuestionsBtn.click();
+    	 CommonUtility.checkPageIsReady(driver);
      }
 
 
