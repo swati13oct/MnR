@@ -26,6 +26,9 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   |	<planType>   |
 	  | Member Type |	<memberType> |
+    Then user should see Pharmacies and Prescription link on dashboard
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
  	  | Plan Type   |	<planType>   |
 	  | Member Type |	<memberType> |
@@ -61,10 +64,9 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    ### note: rally data not sync up yet, won't be seeing link on dashboard until then 
-    #Then user should not see Pharmacies and Prescription link on dashboard
-    #  | Plan Type   | <planType>   |
-    #  | Member Type | <memberType> |
+    Then user should not see Pharmacies and Prescription link on dashboard
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then user should not see Pharmacies and Prescription link on secondary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

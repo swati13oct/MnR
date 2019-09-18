@@ -2885,6 +2885,23 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
+	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
+		if (validate(shadowRootElement)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootElement);
+			try {
+				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+				if (validate(element))
+					return element;
+			} catch (Exception e) {
+				System.out.println("can't locate element. Exception e=" + e);
+			}
+		} else {
+			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+		}
+		return null;
+	}
+	
 	public boolean findElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
@@ -3102,6 +3119,29 @@ public class AccountHomePage extends UhcDriver {
 		} 
 	}
 	
+	public boolean findShadowRootTopMenuLinkForPnP() {
+		//note: use the 2nd menu link as the base and determine which one I really need
+		// if 2 is FIND CARE then 6 is PnP
+		// if 2 is CARE then 5 is PnP
+		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+				secondTopMenuItemCssStr);
+		if (secondTopMenuItem.getText().contains("FIND CARE")) {
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText())) 
+				return true;
+		} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText())) 
+				return true;
+		} 
+		return false;
+	}
+	
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt secondary page navigaton to reach PnP page");
 		checkForIPerceptionModel(driver);
@@ -3157,15 +3197,17 @@ public class AccountHomePage extends UhcDriver {
 			if (validate(shadowRootHeader)) {
 				System.out.println("Check for shadow-root before giving up");
 				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-				WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
-				if (secondTopMenuItem.getText().contains("FIND CARE")) {
+				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+				if (secondTopMenuItem !=null && secondTopMenuItem.getText().contains("FIND CARE")) {
 					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-					return isPnpLink(pnpTopMenuItem.getText());
+					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
 				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
 					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-					return isPnpLink(pnpTopMenuItem.getText());
+					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+						return true;
 				}
 			} else {
 				System.out.println("There is no shadow-root menu");
