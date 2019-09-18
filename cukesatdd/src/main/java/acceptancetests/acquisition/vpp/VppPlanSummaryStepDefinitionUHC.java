@@ -798,8 +798,9 @@ public class VppPlanSummaryStepDefinitionUHC {
   public void user_clicks_enrollInPlan_validates_welcomeOLE() throws InterruptedException{
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); 
-	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);	  
-   WelcomePage  welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName);
+	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);	
+	  String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+   WelcomePage  welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName,planType);
    if (welcomeOLEPage != null) {
 		getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 	} else {
