@@ -126,8 +126,12 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   14867 |       25 | None           |        2019 | UnitedHealthcare MedicareComplete Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
       | 15583 | Blayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                      |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
-
-
+		@pharmacyLocatorRegression
+		Examples: 
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
+			| 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO)                      |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)      | Retail Pharmacy             | False                 | False            | True                 |
+			
   @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
@@ -328,7 +332,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer07 @onlinePharmacyDir @Pharmacy_regression
+  @pharmacylocatorblayer07 @onlinePharmacyDir @Pharmacy_regression @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType> - To verify navigation to pharmacy search page from VPP page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -349,7 +353,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorblayer08 @geoTargeting @Pharmacy_regression
+  @pharmacylocatorblayer08 @geoTargeting @Pharmacy_regression @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -360,4 +364,65 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Examples: 
       | TID   | state     | siteName |
       | xxxxx | Ohio      |   Blayer |
-      | xxxxx | Minnesota |   Blayer |      
+      | xxxxx | Minnesota |   Blayer | 
+      
+    @pharmacyLocatorRegression
+    Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in all languages on acquisition site
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    #------ English -----------------------------------
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    And the user validates pharmacy widgets
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+    And the user selects Pharmacy Types to Filter
+      | Pharmacy Type | <pharmacyType> |
+      | Language      | English        |
+    Then the user validates the pharmacies available
+      | Language | English |
+    Then the user validates error message displayed when filter results in no match
+    Then the user validates the question widget
+    When the user selects Spanish Language
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates the pharmacies available
+      | Language | Spanish |
+    And the user validates tooltips on filters
+      | Language                                   | Spanish                 |
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+    When the user selects Chinese Language
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    And the user selects Pharmacy Types to Filter
+      | Pharmacy Type | <pharmacyType> |
+      | Language      | Chinese        |
+    Then the user validates the pharmacies available
+      | Language | Chinese |
+
+    Examples: 
+      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
+           
