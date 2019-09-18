@@ -1,5 +1,5 @@
 @fastandfurious @OLE @PDP_OLE_UHC
-Feature: 1.13.3-OLE common tool flow for PDP user UMS site
+Feature: 2.05.3.ACQ-OLE PDP UMS
 
   @PDP_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from UHC Acquisition site VPP Plan Summary

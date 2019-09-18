@@ -1,7 +1,7 @@
 #Author: Naveen BK
 #created Date:07/10/2019
 @Test @UHCvisitorprofile
-Feature: Visitor profile
+Feature: 2.08. ACQ-Visitor profile - UMS
 
   @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile

@@ -1,5 +1,5 @@
 @fastandfurious @OLE @OLE_Ulayer
-Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
+Feature: 1.05.-VBF-ACQ-To test OLE common tool flow in AARP site
 
   @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
@@ -308,7 +308,7 @@ Feature: 1.12-VBF-ACQ-To test OLE common tool flow in AARP site
       | TID   | PlanType | zipcode | isMultutiCounty | county       | plantype | planName                                    | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
       | 15558 | CSNP     |   78006 | YES             | Bexar County | CSNP     | UnitedHealthcare Chronic Complete (HMO SNP) | HICN     | John      | Doe      | 987456321BB    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | true       | true       | true        | true        | NO                | NO      |
 
-  @CampaignURL_OLE_Ulayer @acquisitionRegression @FastnFurious
+  @acquisitionRegression @FastnFurious @Flow_from_Cmpgn_Page
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
     And the user views the plans of the below plan type in AARP site and select Current year

@@ -1,5 +1,5 @@
 @retiree
-Feature: To test the Retiree Pharamacy locator flow
+Feature: 3.03. ACQ-Retiree Pharamacy locator flow UMS
 
 @retireePharmacylocator  @retireePharmacylocator_Smoke
 Scenario Outline:To verify the pharmacy locator flow in Retiree site

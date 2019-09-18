@@ -1,5 +1,5 @@
 @vppUlayer @emailAndPrint @emailAndPrint_AARP
-Feature: 1.4 -ACQ-Print and email on VPP page on AARP
+Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
   @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators
   Scenario Outline:TID: <TID> - Verify print and email for <plantype> plan compare page in AARP site
@@ -16,8 +16,8 @@ Feature: 1.4 -ACQ-Print and email on VPP page on AARP
     Then I click back to all plans button and verify that all plans are still selected
     
     Examples: 
-     | TID   | zipcode | plantype          | isMultiCounty | planName                                             |
-     | 15523 | 90210   | MedicareAdvantage | NO            | AARP MedicareComplete SecureHorizons Essential (HMO) |
+     | TID   | zipcode | plantype          | isMultiCounty | 
+     | 15523 | 90210   | MedicareAdvantage | NO            | 
 
 
   @emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators

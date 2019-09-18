@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppBlayer
-Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
+Feature: 2.03-ACQ-VBF-Plan summary in vpp flow UMS
 
   @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke @vbfGate
   Scenario Outline: Verify plan details in UMS site
@@ -318,7 +318,6 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
-    Then user validates save plan option is unselected for all plans by default on UHC site
     Then user validates selected plans can be saved as favorite on UHC site
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |

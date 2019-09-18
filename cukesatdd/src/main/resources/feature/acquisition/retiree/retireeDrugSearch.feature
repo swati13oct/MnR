@@ -1,5 +1,5 @@
 @retiree
-Feature: To test the RETIREE drug search flow
+Feature: 3.02.ACQ- RETIREE drug search flow UMS
   
   @retireedrugsearch
   Scenario Outline: This Scenario is to verify the drug search for different group types <groupname> from landing page

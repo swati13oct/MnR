@@ -1,5 +1,6 @@
 @fixedTestCaseTest
-Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
+Feature: 2.07. ACQ- Provider Search Flow in UMS
+
 
   @ProviderSearchBlayerSmoke @ProviderSearchBlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in UMS site

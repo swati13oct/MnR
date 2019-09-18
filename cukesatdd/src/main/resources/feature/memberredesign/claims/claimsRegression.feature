@@ -159,9 +159,10 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
-      | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
       | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+    # note: no non-000 segment ID user for time being, uncomment this when data is available
+    # | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
 
     @claims01b
     Examples: 

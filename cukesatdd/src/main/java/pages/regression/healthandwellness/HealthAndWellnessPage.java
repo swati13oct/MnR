@@ -273,6 +273,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		checkForIPerceptionModel(driver);
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
@@ -282,6 +283,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				System.out.println("element is located, click it...");
 				element.click();
 				waitforElement(titleText);
+				checkForIPerceptionModel(driver);
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);

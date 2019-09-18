@@ -1,5 +1,5 @@
 @fastandfurious @OLE @PDP_OLE_Ulayer
-Feature: 1.5.3.ACQ-OLE common tool flow E2E PDP AARP
+Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
 
   	@PDP_OLE_AARP @acquisitionRegression
    @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer

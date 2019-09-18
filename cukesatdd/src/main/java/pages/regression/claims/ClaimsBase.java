@@ -139,7 +139,7 @@ public class ClaimsBase extends UhcDriver  {
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
 	protected WebElement comboTab_SHIP;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan') and not(contains(.,'Med'))]") 
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
@@ -302,10 +302,16 @@ public class ClaimsBase extends UhcDriver  {
 			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
-			if (memberType.toLowerCase().contains("combo")) {
+			//note: handle combo tab
+			//note: if specific scenario target combo user then flag if no combo, else just select right plan and move on
+			if (memberType.toLowerCase().contains("combo")) { 
 				System.out.println("This test is for combo plans, select the tab accordingly");
 				goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
 				goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+			} else {
+				boolean flagNonCombo=false; //note: if user has combo then select the right plan
+				goToSpecificComboTab(planType, flagNonCombo); 
+				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
@@ -316,11 +322,15 @@ public class ClaimsBase extends UhcDriver  {
 			Assert.assertTrue("PROBLEM - not getting expected contact us Title. "
 					+ "Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", 
 					driver.getTitle().contains(expContactUsTitle));
+			//note: handle combo tab
+			//note: if specific scenario target combo user then flag if no combo, else just select right plan and move on
 			if (memberType.toLowerCase().contains("combo")) {
 				driver.get(originalUrl);
 				goToSpecificComboTab(planType); 
 			} else {
 				driver.navigate().back();
+				boolean flagNonCombo=false; //note: if user has combo then select the right plan
+				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
@@ -340,7 +350,7 @@ public class ClaimsBase extends UhcDriver  {
 	}
 
 	/**
-	 * Navigate to specific plan for combo user
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
 	 */
 	public void goToSpecificComboTab(String planType) {
@@ -358,6 +368,31 @@ public class ClaimsBase extends UhcDriver  {
 			comboTab_SSUP.click();
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+		}
+	}
+	
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 * @param flagNonCombo
+	 */
+	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		if (flagNonCombo)
+			goToSpecificComboTab(planType);
+		else {
+			if (planType.equalsIgnoreCase("mapd")) {
+				if (claimsValidate(comboTab_MAPD))
+					comboTab_MAPD.click();
+			} else if (planType.equalsIgnoreCase("ship")) {
+				if (claimsValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+			} else if (planType.equalsIgnoreCase("pdp")) {
+				if (claimsValidate(comboTab_PDP))
+					comboTab_PDP.click();
+			} else if (planType.equalsIgnoreCase("ssup")) {
+				if (claimsValidate(comboTab_SSUP)) 
+					comboTab_SSUP.click();
+			} 
 		}
 	}
 
