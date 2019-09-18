@@ -50,14 +50,27 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user validates Plan Materials link
     Then user validates Need Help section content
 
+    @pharmaciesandprescriptions01a
     Examples: 
 	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | AARP_Individual_PnP |
 	  | 313410 | MAPD     | UHC_Individual_PnP  |
+
+    @pharmaciesandprescriptions01b
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | PDP      | Individual_PnP	    |
 	  | 313410 | MEDICA   | Individual_PnP	    |
+
+    @pharmaciesandprescriptions01c
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | PCP      | Individual_PnP	    |
 	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
+
+    @pharmaciesandprescriptions01d
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | COMBO_PnP	        |
 	  | 313410 | PDP      | COMBO_PnP	        |
 
