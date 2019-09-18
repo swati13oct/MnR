@@ -110,8 +110,9 @@ public class CoverageInformationPage extends UhcDriver{
 				Validation_Flag = false;
 			}
 		}
+		// validate(LongTerm_Question) was removed from next else statement. As it does not display in UI
 		else{
-			if(validate(PDP_Question)&& validate(LongTerm_Question)	&& validate(OtherIns_Question)){
+			if(validate(PDP_Question)&& validate(OtherIns_Question)){
 				System.out.println("Coverage and Health Information Validation for "+planType+" plan : Validation Passed");
 				Validation_Flag = true;
 			}
