@@ -1103,15 +1103,17 @@ public class TestHarness extends UhcDriver {
     			if (validate(shadowRootHeader)) {
     				System.out.println("Check for shadow-root before giving up");
     				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-    				WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
-    				if (secondTopMenuItem.getText().contains("FIND CARE")) {
+    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
     					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-    					return isPnpLink(pnpTopMenuItem.getText());
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
     				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
     					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-    					return isPnpLink(pnpTopMenuItem.getText());
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
     				}
     			} else {
     				System.out.println("There is no shadow-root menu");
@@ -1148,6 +1150,23 @@ public class TestHarness extends UhcDriver {
     		} else {
     			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
     			Assert.assertTrue("No shadowRoot element on Dashboard", false);
+    		}
+    		return null;
+    	}
+    	
+    	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
+    		if (validate(shadowRootElement)) {
+    			System.out.println("located shadow-root element, attempt to process further...");
+    			WebElement root1 = expandRootElement(shadowRootElement);
+    			try {
+    				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+    				if (validate(element))
+    					return element;
+    			} catch (Exception e) {
+    				System.out.println("can't locate element. Exception e=" + e);
+    			}
+    		} else {
+    			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
     		}
     		return null;
     	}

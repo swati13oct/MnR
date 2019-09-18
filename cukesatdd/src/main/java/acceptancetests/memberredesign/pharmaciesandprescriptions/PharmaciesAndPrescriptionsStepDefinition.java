@@ -220,7 +220,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 	@Then("^user should not see Pharmacies and Prescription link on dashboard$")
 	public void validateNoPnPLinkOnDashboard(DataTable givenAttributes) {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("This step should be run on NON-testharness environment...skipping");
+			System.out.println("Dashboard related validation will be skipped on NON-testharness environment...skipping");
 			return;
 		}
 		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);
@@ -230,10 +230,26 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
-		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should not have Pharmacies & Prescriptions link on dashboard", pnpPg==null);
+		boolean result = accountHomePage.findShadowRootTopMenuLinkForPnP();
+		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should not have Pharmacies & Prescriptions link on dashboard", !result);
 	}
 
+	@Then("^user should see Pharmacies and Prescription link on dashboard$")
+	public void validatePnPLinkOnDashboard(DataTable givenAttributes) {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			System.out.println("Dashboard related validation will be skipped on NON-testharness environment...skipping");
+			return;
+		}
+		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);
+		String planType = givenAttributesMap.get("Plan Type");
+		String memberType = givenAttributesMap.get("Member Type");
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		boolean result = accountHomePage.findShadowRootTopMenuLinkForPnP();
+		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should have Pharmacies & Prescriptions link on dashboard", result);
+	}
 	@Then("^user should not see Pharmacies and Prescription link on secondary page$")
 	public void validateNoPnPLinkOnSecondaryPage(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = parseInputArguments(givenAttributes);

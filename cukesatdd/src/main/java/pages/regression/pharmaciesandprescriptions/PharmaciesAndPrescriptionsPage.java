@@ -178,7 +178,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
 		} else if (tile.equals("Order prescription refills")) {
 			linkElement=pTile_orderPresRefillsLnk;
-			expUrl="services/rx-refill-reminder/";
+			expUrl="https://chp-stage.optumrx.com/public/sso-landing";
 			switchTab=true;
 		} else if (tile.equals("Check home delivery order status")) {
 			linkElement=pTile_chkHomeDeliOrderStatusLnk;
