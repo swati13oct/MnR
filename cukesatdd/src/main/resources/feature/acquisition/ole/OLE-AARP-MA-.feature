@@ -1,8 +1,8 @@
 @fastandfurious @OLE @MA_OLE_Ulayer
 Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
 
-  	@MA_OLE_AARP @acquisitionRegression
-   @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer @tamzid
+   @acquisitionRegression
+   @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

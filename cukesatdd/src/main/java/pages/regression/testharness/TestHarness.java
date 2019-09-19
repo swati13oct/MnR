@@ -234,6 +234,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Estimate Your Drug Costs')]")
 	private WebElement dceHeaderTxt;
 	
+	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'payment')]")
+	private WebElement paymentTabOnTopMenu;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -300,6 +303,18 @@ public class TestHarness extends UhcDriver {
 			return new PaymentHistoryPage(driver);
 		}
 		
+		return null;
+	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver);
+		}
 		return null;
 	}
 
@@ -1095,23 +1110,55 @@ public class TestHarness extends UhcDriver {
     		checkForIPerceptionModel(driver);
     		navigateToClaimsSummaryFromTestHarnessPage();
     		System.out.println("now on secondary page...proceed validate if pnp link exists");
+    		if (fasterValidate(pharPresDashboardLink)) {
+    			return true;
+    		} else if (fasterValidate(testHarnessTopMenuPhaPresLink)) {
+    			return true;
+    		} else {
+    			if (fasterValidate(shadowRootHeader)) {
+    				System.out.println("Check for shadow-root before giving up");
+    				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				}
+    			} else {
+    				System.out.println("There is no shadow-root menu");
+    			}
+    		}
+    		return false;
+    	}
+    	
+    	public boolean findPnPLinksExistOnPg() {
+    		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
+    		checkForIPerceptionModel(driver);
     		if (validate(pharPresDashboardLink)) {
     			return true;
     		} else if (validate(testHarnessTopMenuPhaPresLink)) {
     			return true;
     		} else {
-    			if (validate(shadowRootHeader)) {
+    			if (fasterValidate(shadowRootHeader)) {
     				System.out.println("Check for shadow-root before giving up");
     				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-    				WebElement secondTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
-    				if (secondTopMenuItem.getText().contains("FIND CARE")) {
+    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
     					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-    					return isPnpLink(pnpTopMenuItem.getText());
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
     				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
     					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-    					return isPnpLink(pnpTopMenuItem.getText());
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
     				}
     			} else {
     				System.out.println("There is no shadow-root menu");
@@ -1134,12 +1181,12 @@ public class TestHarness extends UhcDriver {
     	}
 
     	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
-    		if (validate(shadowRootElement)) {
+    		if (fasterValidate(shadowRootElement)) {
     			System.out.println("located shadow-root element, attempt to process further...");
     			WebElement root1 = expandRootElement(shadowRootElement);
     			try {
     				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", validate(element));
+    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", fasterValidate(element));
     				return element;
     			} catch (Exception e) {
     				System.out.println("can't locate element. Exception e=" + e);
@@ -1150,5 +1197,50 @@ public class TestHarness extends UhcDriver {
     			Assert.assertTrue("No shadowRoot element on Dashboard", false);
     		}
     		return null;
+    	}
+    	
+    	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
+    		if (validate(shadowRootElement)) {
+    			System.out.println("located shadow-root element, attempt to process further...");
+    			WebElement root1 = expandRootElement(shadowRootElement);
+    			try {
+    				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+    				if (fasterValidate(element))
+    					return element;
+    			} catch (Exception e) {
+    				System.out.println("can't locate element. Exception e=" + e);
+    			}
+    		} else {
+    			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+    		}
+    		return null;
+    	}
+    	
+    	@FindBy(xpath="//a[contains(text(),'Notices')]")
+    	private WebElement noticeAndDisclosuresLnk;
+    	public void navigateToNoticeAndDisclosuresPage() {
+    		Assert.assertTrue("PROBLEM - unable to locate the Legal Notice & Disclosures link on testhareness page", fasterValidate(noticeAndDisclosuresLnk));
+    		noticeAndDisclosuresLnk.click();
+    		CommonUtility.checkPageIsReady(driver);
+    		
+    	}
+    	
+    	public boolean findPaymentTabOnTopMenu() {
+    		return (fasterValidate(paymentTabOnTopMenu));
+    	}
+
+    	//note: same as the UhcDriver validate but took out the waitforElementNew to speed things up
+    	//note: don't want to @override that validate in case someone actually need that wait for 30 sec...
+    	public boolean fasterValidate(WebElement element) {
+    		try {
+    			if (element.isDisplayed()) {
+    				System.out.println("Element found!!!!");
+    				return true;
+    			} else
+    				System.out.println("Element not found/not visible");
+    		} catch (Exception e) {
+    			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+    		}
+    		return false;
     	}
 }

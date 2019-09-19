@@ -46,13 +46,13 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')]/span)[1]")
+	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 	
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath="(//div[contains(@class,'export-saved-providers')]//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath="(//*[contains(text(),'Check Provider Coverage')])[2]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -68,7 +68,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 	
-	@FindBy(xpath="//button[contains(text(),'Get Started')]")
+	@FindBy(xpath="//*[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
 	@FindBy(id="location")
@@ -164,10 +164,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 	Physician.click();
 	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-	SaveBtn.click();
+	jsClickNew(SaveBtn);
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
-	Viewsavebtn.click();
+	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
 	validateNew(Checkcoverage);
 	jsClickNew(Checkcoverage);

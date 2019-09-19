@@ -139,7 +139,7 @@ public class oleStepDefinition {
 			TFN = planSummaryPage.GetTFNforPlanType();
 
 			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
 
 		}
 		else{
@@ -148,7 +148,7 @@ public class oleStepDefinition {
 			TFN = planSummaryPage.GetTFNforPlanType();
 
 			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
 
 		}
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);

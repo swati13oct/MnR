@@ -306,10 +306,10 @@ public class VppStepDefinitionUpdatedAARP {
 
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -443,7 +443,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		TFN = planSummaryPage.GetTFNforPlanType();
 
-		PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+		PlanPremium = planSummaryPage.getPlanPremium(PlanName,PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -872,7 +872,7 @@ public class VppStepDefinitionUpdatedAARP {
 	public void I_select_all_3_plans_to_compare_AARP() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
+		
 		plansummaryPage.checkAllMAPlans();
 		try {
 			Thread.sleep(3000);

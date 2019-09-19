@@ -32,10 +32,10 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Change Location']")
 	public WebElement ChangeLocationButton;
 
-	@FindBy(xpath = "//h2[text()='Places']")
+	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Places')]")
 	public WebElement PlacesButton;
 
-	@FindBy(xpath = "//h2[text()='Hospitals']")
+	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Hospitals')]")
 	public WebElement HospitalsButton;
 
 	@FindBy(xpath = "//h1[text()='Which type of place?']")
@@ -44,7 +44,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h1//span[text()='Results for ']")
 	public WebElement ResultsHeader;
 
-	@FindBy(xpath = "//a[@track='search-result-place'][1]")
+	@FindBy(xpath = "(//*[contains(@data-test-key,'provider-name-link')])[1]")
 	public WebElement FirstHospitalRecord;
 
 	@FindBy(xpath = "//Img[@alt='Facility icon']")
@@ -62,19 +62,19 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//header[@class='txtCenter step-header']")
 	public WebElement GreatHeaderText;
 
-	@FindBy(xpath = "//a[text()='View Saved']")
+	@FindBy(xpath = "//a[contains(text(),'View Saved')]")
 	public WebElement ViewSavedButton;
 
-	@FindBy(xpath = "//h1[text()='Saved']")
+	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Saved')]")
 	public WebElement SavedHeader;
 
 	@FindBy(xpath = "//h2[@class='provider-name']//a")
 	public WebElement SavedProviderName;
 
-	@FindBy(xpath = "//span[text()='Check Provider Coverage']")
+	@FindBy(xpath = "(//*[contains(text(),'Check Provider Coverage')])[1]")
 	public WebElement CheckProviderCoverageButton;
 
-	@FindBy(xpath = "//a[text()='Edit provider list']")
+	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
 	public WebElement EditproviderlistLink;
 
 	public ComparePlansPageBlayer getstarted() throws Exception {

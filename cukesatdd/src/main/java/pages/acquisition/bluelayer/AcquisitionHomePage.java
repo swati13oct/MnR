@@ -253,10 +253,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//button[contains(@class,'proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 	
-	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
 	
@@ -424,16 +424,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+	//	checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-		/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-		try{
-			if(proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		}catch(Exception e){
-			System.out.println("Proactive chat popup not displayed");
-		}*/
+	
 	}	
 	
 	public void openAndValidate(String siteOrPage) {
@@ -515,7 +509,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 		try{
 			Thread.sleep(5000);
@@ -1552,8 +1546,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public pages.acquisition.bluelayer.ProviderSearchPage clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
 
-		switchToNewTabNew(providerSearchFromHomeScreen);
-
+		//switchToNewTabNew(providerSearchFromHomeScreen);
+		providerSearchFromHomeScreen.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 

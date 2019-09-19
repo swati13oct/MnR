@@ -78,42 +78,54 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (numClaims==0) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+noClaimsText+"' text/link. \n"+noteToTester, 
 					claimsValidate(optumRxLnkTxt_noClaims));
-			winHandleBefore = driver.getWindowHandle();
-			optumRxLnkTxt_noClaims.click();
+			if (getDryRunFlag())
+				System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+			else {
+				winHandleBefore = driver.getWindowHandle();
+				optumRxLnkTxt_noClaims.click();
+			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate '"+hasClaimsText+"' text/link. \n"+noteToTester, 
-					claimsValidate(optumRxLnkTxt_hasClaims));
-			winHandleBefore = driver.getWindowHandle();
-			optumRxLnkTxt_hasClaims.click();
+			claimsValidate(optumRxLnkTxt_hasClaims));
+			if (getDryRunFlag())
+				System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+			else {
+				winHandleBefore = driver.getWindowHandle();
+				optumRxLnkTxt_hasClaims.click();
+			}
 		}
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, optumRxPgHeader, 10);
+		if (getDryRunFlag())
+			System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+		else {
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();					
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, optumRxPgHeader, 10);
 
-		String expectedTitle="Benefits Information | OptumRx"; //note: validate title
-		String actualTitle=driver.getTitle(); 
-		System.out.println("New tab actual title = "+actualTitle);
-		Assert.assertTrue("PROBLEM - clicked OPTUMRX.COM under pagenation but open page title is not as expected.  "
-				+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
-				actualTitle.contains(expectedTitle));
+			String expectedTitle="Benefits Information | OptumRx"; //note: validate title
+			String actualTitle=driver.getTitle(); 
+			System.out.println("New tab actual title = "+actualTitle);
+			Assert.assertTrue("PROBLEM - clicked OPTUMRX.COM under pagenation but open page title is not as expected.  "
+					+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
+					actualTitle.contains(expectedTitle));
 
-		//note: validate url
-		String expectedURL="https://chp-stage.optumrx.com/secure/benefits-and-claims/benefits-information"; 
-		String actualURL=driver.getCurrentUrl(); 
-		System.out.println("New tab actual URL ="+actualURL);
-		Assert.assertTrue("PROBLEM - URL didn't contain expected portion.  "
-				+ "Expected to contains '"+expectedURL+"' | Actual URL='"+actualURL+"' | "+noteToTester,
-				actualURL.contains(expectedURL));
-		driver.close();
+			//note: validate url
+			String expectedURL="https://chp-stage.optumrx.com/secure/benefits-and-claims/benefits-information"; 
+			String actualURL=driver.getCurrentUrl(); 
+			System.out.println("New tab actual URL ="+actualURL);
+			Assert.assertTrue("PROBLEM - URL didn't contain expected portion.  "
+					+ "Expected to contains '"+expectedURL+"' | Actual URL='"+actualURL+"' | "+noteToTester,
+					actualURL.contains(expectedURL));
+			driver.close();
 
-		driver.switchTo().window(winHandleBefore);
-		expectedTitle="Claims Summary";	//note: validate able to go back to claims summary page for further validation
-		actualTitle=driver.getTitle(); 
-		Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  "
-				+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
-				actualTitle.contains(expectedTitle));
+			driver.switchTo().window(winHandleBefore);
+			expectedTitle="Claims Summary";	//note: validate able to go back to claims summary page for further validation
+			actualTitle=driver.getTitle(); 
+			Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  "
+					+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
+					actualTitle.contains(expectedTitle));
+		}
 	}
 
 	/** this method validates claims table */

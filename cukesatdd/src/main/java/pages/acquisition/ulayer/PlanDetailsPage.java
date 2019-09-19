@@ -174,7 +174,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedTotalAnnualCost;
 
-	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
+	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath="//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -766,11 +766,16 @@ public class PlanDetailsPage extends UhcDriver {
 	public boolean providerinfo() {
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-100)", "");
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String editProviderButtonText=editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit Provider")) {
+		if (editProviderButtonText.contains("Edit my Doctor")) {
 			return true;
 		}
 		return false;

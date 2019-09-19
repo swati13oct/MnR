@@ -69,7 +69,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   # BYPASS KNOWN ISSUES
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
-  @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -121,7 +121,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -164,7 +164,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   33321 |       10 | None           |        2019 | Medica HealthCare Plans MedicareMax (HMO)                      |        2020 | Medica HealthCare Plans MedicareMax (HMO)                      | Home Infusion and Specialty | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -218,7 +218,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15582 | Ulayer   |   78006 |       15 | Kendall County |     2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | Ulayer   |   78006 |       10 | Comal County   |     2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -252,7 +252,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -295,7 +295,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2019 | AARP MedicareRx Walgreens (PDP)           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -329,7 +329,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorulayer07 @onlinePharmacyDir @Pharmacy_regression
+  @pharmacylocatorulayer07 @onlinePharmacyDir @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -352,7 +352,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
 
-  @pharmacylocatorulayer08 @geoTargeting @Pharmacy_regression
+  @pharmacylocatorulayer08 @geoTargeting @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |

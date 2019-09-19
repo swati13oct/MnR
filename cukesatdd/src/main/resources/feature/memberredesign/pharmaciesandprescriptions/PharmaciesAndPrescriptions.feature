@@ -21,11 +21,21 @@ Feature: To test Pharamcies And Prescriptions on Member site
 #----- end of VBF scenarios section ------------------   
 
 #----- being regression section --------------------
-  @pharmaciesandprescriptions01 @feature-F313410 @hasPnpLink @regressionMember
+  @pharmaciesandprescriptions01 @E2E @feature-F313410 @hasPnpLink @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   |	<planType>   |
 	  | Member Type |	<memberType> |
+    Then user should see Pharmacies and Prescription link on dashboard
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
+    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
+    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
+    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
+    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
+    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
     When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
  	  | Plan Type   |	<planType>   |
 	  | Member Type |	<memberType> |
@@ -40,14 +50,27 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user validates Plan Materials link
     Then user validates Need Help section content
 
+    @pharmaciesandprescriptions01a
     Examples: 
 	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | AARP_Individual_PnP |
 	  | 313410 | MAPD     | UHC_Individual_PnP  |
+
+    @pharmaciesandprescriptions01b
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | PDP      | Individual_PnP	    |
+	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
+
+    @pharmaciesandprescriptions01c
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | MEDICA   | Individual_PnP	    |
 	  | 313410 | PCP      | Individual_PnP	    |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    |
+
+    @pharmaciesandprescriptions01d
+    Examples: 
+	  | FID    | planType | memberType          |
 	  | 313410 | MAPD     | COMBO_PnP	        |
 	  | 313410 | PDP      | COMBO_PnP	        |
 
@@ -61,10 +84,9 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    ### note: rally data not sync up yet, won't be seeing link on dashboard until then 
-    #Then user should not see Pharmacies and Prescription link on dashboard
-    #  | Plan Type   | <planType>   |
-    #  | Member Type | <memberType> |
+    Then user should not see Pharmacies and Prescription link on dashboard
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then user should not see Pharmacies and Prescription link on secondary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

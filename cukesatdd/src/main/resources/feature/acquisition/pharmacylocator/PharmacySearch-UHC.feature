@@ -1,5 +1,4 @@
 @pharmacylocatorblayer
-
 Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
@@ -74,7 +73,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
   # BYPASS KNOWN ISSUES
   # ticket INC12081940 - Walgreen widget is not showing for Chinese and Spanish page
   #-------------------------
-  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -110,7 +109,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates more information content based on plan type
     And the user validates view search PDF link
 
-   # @pharmacylocatorblayer01a
+   @pharmacylocatorblayer01a
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
@@ -128,7 +127,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
-  @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -172,7 +171,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
-  @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -216,7 +215,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -250,7 +249,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -294,7 +293,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @Pharmacy_regression
+  @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -328,7 +327,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15583 | Blayer   |   78006 |       10 | Comal County   |        2019 | AARP MedicareComplete Choice Plan 1 (PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
 
-  @pharmacylocatorblayer07 @onlinePharmacyDir @Pharmacy_regression
+  @pharmacylocatorblayer07 @onlinePharmacyDir @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType> - To verify navigation to pharmacy search page from VPP page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -349,7 +348,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15585 | PDP      |   80001 | No              | Jefferson County |
       | xxxxx | SNP      |   78006 | Yes             | Comal County     |
 
-  @pharmacylocatorblayer08 @geoTargeting @Pharmacy_regression
+  @pharmacylocatorblayer08 @geoTargeting @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -state: <state> - To verify pharmacy locator page display for different state
     Given the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page
       | Site Name | <siteName> |
