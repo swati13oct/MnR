@@ -62,7 +62,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//header[@class='txtCenter step-header']")
 	public WebElement GreatHeaderText;
 
-	@FindBy(xpath = "//a[contains(text()='View Saved')]")
+	@FindBy(xpath = "//a[contains(text(),'View Saved')]")
 	public WebElement ViewSavedButton;
 
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Saved')]")
