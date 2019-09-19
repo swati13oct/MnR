@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author sdwaraka
@@ -182,6 +183,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LearnMoreModal OpenLearnMore() {
+		AcquisitionHomePage.checkModelPopup(driver);
 		validate(LearnMoreButton);
 		LearnMoreButton.click();
 		try {

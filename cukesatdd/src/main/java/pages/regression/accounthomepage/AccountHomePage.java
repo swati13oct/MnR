@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -3126,17 +3127,17 @@ public class AccountHomePage extends UhcDriver {
 		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 				secondTopMenuItemCssStr);
-		if (secondTopMenuItem.getText().contains("FIND CARE")) {
+		if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
 			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText())) 
+			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 				return true;
 		} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
 			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText())) 
+			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 				return true;
 		} 
 		return false;
@@ -3172,7 +3173,8 @@ public class AccountHomePage extends UhcDriver {
 	}	
 	
 	public boolean isPnpLink(String targetLnkTxt) {
-		if (targetLnkTxt.equals("PHARMACIES") && targetLnkTxt.equals("PRESCRIPTIONS"))
+		Pattern expectedTxt=Pattern.compile("PHARMACIES . PRESCRIPTIONS");
+		if (expectedTxt.matcher(targetLnkTxt).find())
 			return true;
 		else 
 			return false;
@@ -3215,4 +3217,39 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return false;
 	}	
+	
+	public boolean findPnPLinksExistOnPg() {
+		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
+		checkForIPerceptionModel(driver);
+		if (validate(pharPresDashboardLink)) {
+			return true;
+		} else if (validate(pharPresDashboardLinkAlternative)) {
+			return true;
+		} else {
+			if (validate(shadowRootHeader)) {
+				System.out.println("Check for shadow-root before giving up");
+				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+				if (secondTopMenuItem !=null && secondTopMenuItem.getText().contains("FIND CARE")) {
+					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+						return true;
+				}
+			} else {
+				System.out.println("There is no shadow-root menu");
+			}
+		}
+		return false;
+	}	
+	
+	public void navigateToNoticeAndDisclousuresPage() {
+		String lnkCssStr="div > span > footer > div:nth-child(2) > div:nth-child(1) > ul > li:nth-child(1) > a";
+		locateAndClickElementWithinShadowRoot(shadowRootFooter, lnkCssStr);
+	}
 }
