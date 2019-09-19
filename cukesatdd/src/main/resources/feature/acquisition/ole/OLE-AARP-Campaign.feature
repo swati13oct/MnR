@@ -2,8 +2,8 @@
 Feature: 1.05.5.ACQ- OLE  common tool flow E2E Campaign AARP
  
  
-@CampaignURL_OLE_Ulayer @junerelease2018 @september_release_2018 @december_release_2018 @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
- @acquisitionRegression @FastnFurious
+ @junerelease2018 @september_release_2018 @december_release_2018 @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
+ @CampaignURL_OLE_Ulayer @acquisitionRegression @FastnFurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
     And the user views the plans of the below plan type in AARP site and select Current year
@@ -51,7 +51,7 @@ Feature: 1.05.5.ACQ- OLE  common tool flow E2E Campaign AARP
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+   # Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -74,8 +74,8 @@ Feature: 1.05.5.ACQ- OLE  common tool flow E2E Campaign AARP
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user validates Plan and Member Details on Confirmation Page
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | plantype | planName                        | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |

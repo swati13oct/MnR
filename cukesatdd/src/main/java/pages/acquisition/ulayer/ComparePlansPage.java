@@ -39,7 +39,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//p[text()='Drug Costs from Formulary']/parent::td/following::td[1]//a")
 	private WebElement dceLink;
 
-	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[text()='Look up your doctor']")
+	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[contains(text(),'Look up')]")
 	private WebElement LookUpYourDoctorLink;
 
 	@FindBy(id = "add-drug")
