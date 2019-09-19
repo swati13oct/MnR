@@ -206,7 +206,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 						+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
 						actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
 			} else {
-			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
 					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 			}
 			driver.close();
