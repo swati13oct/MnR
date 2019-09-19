@@ -3133,12 +3133,26 @@ public class AccountHomePage extends UhcDriver {
 					pnpTopMenuItemCssStr);
 			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 				return true;
-		} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+			else { //note: maybe user has no payment tab, try this one before giving up
+				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+						pnpTopMenuItemCssStr);
+				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
+					return true;
+			}
+		} else if (secondTopMenuItem.getText().contains("CLAIMS")) { //note: user has no FIND CARE & COSTS tab
 			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 					pnpTopMenuItemCssStr);
 			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 				return true;
+			else { //note: maybe user has no payment tab, try this one before giving up
+				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
+				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
+						pnpTopMenuItemCssStr);
+				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
+					return true;
+			}
 		} 
 		return false;
 	}
@@ -3235,11 +3249,23 @@ public class AccountHomePage extends UhcDriver {
 					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
 					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
 							return true;
+					else { //note: user may not have payment tab, try this before giving up
+						pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+						pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+						if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+								return true;
+					}
 				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
 					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
 					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
 					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
 						return true;
+					else { //note: user may not have payment tab, try this before giving up
+						pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
+						pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+						if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+					}
 				}
 			} else {
 				System.out.println("There is no shadow-root menu");
@@ -3251,5 +3277,7 @@ public class AccountHomePage extends UhcDriver {
 	public void navigateToNoticeAndDisclousuresPage() {
 		String lnkCssStr="div > span > footer > div:nth-child(2) > div:nth-child(1) > ul > li:nth-child(1) > a";
 		locateAndClickElementWithinShadowRoot(shadowRootFooter, lnkCssStr);
+		CommonUtility.checkPageIsReady(driver);
+		checkForIPerceptionModel(driver);
 	}
 }

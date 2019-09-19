@@ -428,9 +428,11 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			result=accountHomePage.findPnPLinksExistOnPg();
 			Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			
-			accountHomePage.driver.navigate().back();
+			accountHomePage.driver.navigate().back(); //note: back to view questions page
 			CommonUtility.checkPageIsReady(accountHomePage.driver);
-			accountHomePage.driver.navigate().back();
+			accountHomePage.driver.navigate().back();  //note: back to contact us page
+			CommonUtility.checkPageIsReady(accountHomePage.driver);
+			accountHomePage.driver.navigate().back(); //note: back to rally dashboard page
 			CommonUtility.checkPageIsReady(accountHomePage.driver);
 		}
 	}
@@ -468,6 +470,7 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			testHarness.navigateToNoticeAndDisclosuresPage();
 			result=testHarness.findPnPLinksExistOnPg();
+			Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			testHarness.driver.navigate().back();
 			CommonUtility.checkPageIsReady(testHarness.driver);
 		} else {
@@ -478,14 +481,13 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			String winHandleBefore = testDriver.getWindowHandle();
 			accountHomePage.navigateToNoticeAndDisclousuresPage();
 			result=accountHomePage.findPnPLinksExistOnPg();
+			Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(testDriver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
 			testDriver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			testDriver.close();
 			testDriver.switchTo().window(winHandleBefore);
-	
 			CommonUtility.checkPageIsReady(accountHomePage.driver);
 		}
-		Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 	}
 }

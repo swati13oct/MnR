@@ -200,8 +200,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			CommonUtility.checkPageIsReady(driver);
 			String actUrl=driver.getCurrentUrl();
+			if (expUrl.contains("sso")) {
+				String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
+				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+						+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
+						actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
+			} else {
 			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
 					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			}
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
 		} else {
