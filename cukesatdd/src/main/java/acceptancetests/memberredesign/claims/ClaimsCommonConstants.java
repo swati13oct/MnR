@@ -34,4 +34,5 @@ public class ClaimsCommonConstants {
 	public static final String TEST_ALLCLAIMS = "allClaims";
 	public static final String TEST_RECORDINVOKEDBYPASS = "recordInvokedBypass";
 	public static final String TEST_ALLCLAIMSDATA = "allClaimsData";
+	public static final String TEST_DRYRUN = "dryrun";
 }
