@@ -220,10 +220,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
 	
-	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 	
 	@FindBy(id="ghn_lnk_2")
