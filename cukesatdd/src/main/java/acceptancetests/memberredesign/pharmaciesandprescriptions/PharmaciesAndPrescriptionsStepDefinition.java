@@ -340,21 +340,29 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
 					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			PaymentHistoryPage paymentPg=testHarness.navigateToPaymentFromTestHarnessPage();
-			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
-			result=testHarness.findPnPLinksExistOnPg();
-			Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
-			testHarness.driver.navigate().back();
-			CommonUtility.checkPageIsReady(testHarness.driver);
+			if (testHarness.findPaymentTabOnTopMenu()) {
+				PaymentHistoryPage paymentPg=testHarness.navigateToPaymentFromTestHarnessPage();
+				Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
+				result=testHarness.findPnPLinksExistOnPg();
+				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
+				testHarness.driver.navigate().back();
+				CommonUtility.checkPageIsReady(testHarness.driver);
+			} else {
+				System.out.println("User doesn't have payment option, skip this step validation");
+			}
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			PaymentHistoryPage paymentPg=accountHomePage.navigateTooPaymentHistoryPage();
-			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
-			result=accountHomePage.findPnPLinksExistOnPg();
-			Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
-			accountHomePage.driver.navigate().back();
-			CommonUtility.checkPageIsReady(accountHomePage.driver);
+			PaymentHistoryPage paymentPg=accountHomePage.navigateToPaymentPage();
+			if (paymentPg==null) {
+				System.out.println("User doesn't have payment option, skip this step validation");
+			} else {
+				Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
+				result=accountHomePage.findPnPLinksExistOnPg();
+				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
+				accountHomePage.driver.navigate().back();
+				CommonUtility.checkPageIsReady(accountHomePage.driver);
+			}
 		}
 	}
 
