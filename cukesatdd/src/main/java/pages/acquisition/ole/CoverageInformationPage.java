@@ -100,8 +100,10 @@ public class CoverageInformationPage extends UhcDriver{
 	public boolean validate_CoverageInfo_Questions_for_planType(String planType) {
 		boolean Validation_Flag = true;
 		System.out.println("PlanType : "+planType);
+		
+		//&& validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question) removed as it does not appear in UI
 		if(planType.contentEquals("PDP")){
-			if(validate(PDP_Question) && validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question)){
+			if(validate(PDP_Question)){
 				System.out.println("Coverage and Health Information Validation for PDP plan : Validation Passed");
 				Validation_Flag = true;
 			}
@@ -110,8 +112,9 @@ public class CoverageInformationPage extends UhcDriver{
 				Validation_Flag = false;
 			}
 		}
+		// validate(LongTerm_Question) was removed from next else statement. As it does not display in UI
 		else{
-			if(validate(PDP_Question)&& validate(LongTerm_Question)	&& validate(OtherIns_Question)){
+			if(validate(PDP_Question)&& validate(OtherIns_Question)){
 				System.out.println("Coverage and Health Information Validation for "+planType+" plan : Validation Passed");
 				Validation_Flag = true;
 			}
