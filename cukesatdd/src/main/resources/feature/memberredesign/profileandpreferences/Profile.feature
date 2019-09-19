@@ -229,7 +229,6 @@ Feature: C1.2To test Profile and Preferences page
 
     Examples: 
       | planType | memberType |
-
   # | Combo    | EPMPEnabled | 
   
 
@@ -254,10 +253,14 @@ Feature: C1.2To test Profile and Preferences page
      Examples: 
       | planType  | memberType              | copayCategory |
       | PDP       | PDP_AARPIndividual      | NON LIS       |
+      | GrpPDP    | PDP_Group               | NON LIS       |
       | MA        | MA_UHCIndividual        | NON LIS       |
       | MA        | MA_UHCGroup             | NON LIS       |
+      | MAPD      | MAPD_Group              | NON LIS       |
+      | MAPD      | MAPD_Individual         | NON LIS       | 
       
-         @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
+      
+    @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
     Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -277,4 +280,23 @@ Feature: C1.2To test Profile and Preferences page
       | MA          | PCP                   | NON LIS        |
       | MA          | MEDICA                | NON LIS        |  
       
+       
+     @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed
+    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    When the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    Then the email address section should be verified
+    Then the Phone Numbers section should be validated & all links clicked
+    Then the user validates permanent address section
+	  And the user verifies the Temporary Address Link on the Account settings page
+    Then the user validates that  Communication Preferences section doesn't come for terminated members
+    And the user validates see more ways to contact us section                                          
+    And the user validates on clicking contact us link it should route to contact us page
+    Examples:      
+      | planType | memberType        | copayCategory   |
+      | MAPD     | Terminated_AccPro | NON LIS |
     
