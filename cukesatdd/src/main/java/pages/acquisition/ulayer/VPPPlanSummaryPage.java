@@ -1415,11 +1415,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName,String planType) throws InterruptedException {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		if(planType.equalsIgnoreCase("PDP"))
+		if(planType.equalsIgnoreCase("PDP")) {
+			driver.navigate().refresh();
+			Thread.sleep(5000);
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
-		else
+		}else {
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[contains(text(),'Enroll in Plan')][2]"));
-		
+		}
 		if(enrollForPlan!=null){
 			validateNew(enrollForPlan);
 			enrollForPlan.click();

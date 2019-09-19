@@ -1,8 +1,8 @@
 @fastandfurious @OLE @PDP_OLE_Ulayer
 Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
 
-  	@PDP_OLE_AARP @acquisitionRegression
-   @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
+  @acquisitionRegression
+  @PDP_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -89,7 +89,7 @@ Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
    # Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     Examples: 
       | TID   | PlanType         | zipcode | isMultutiCounty | county             | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
