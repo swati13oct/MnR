@@ -112,7 +112,10 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 * Validate whether 'System error' message exists on claims summary page
 	 */
 	public void validateNoSystemErr() {
-		Assert.assertTrue("PROBLEM - located System Error",!claimsValidate(systemErrorMsg, 5));
+		if (getDryRunFlag())
+			System.out.println("DRYRUN ONLY - will not flag sytem error");
+		else
+			Assert.assertTrue("PROBLEM - located System Error",!claimsValidate(systemErrorMsg, 5));
 	}
 
 	/**
