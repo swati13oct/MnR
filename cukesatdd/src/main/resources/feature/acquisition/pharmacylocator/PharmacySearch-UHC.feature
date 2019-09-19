@@ -109,7 +109,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates more information content based on plan type
     And the user validates view search PDF link
 
-   # @pharmacylocatorblayer01a
+   @pharmacylocatorblayer01a
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
