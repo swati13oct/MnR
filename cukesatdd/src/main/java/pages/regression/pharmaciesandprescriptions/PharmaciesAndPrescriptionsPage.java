@@ -86,7 +86,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validatePharmaciesTilesSection(boolean tileDrug, boolean tilePharmacy,	
 			boolean tilePrescription, boolean tileDelivery, boolean tileBenefit) {
 		String exp_TileHeaderTxt="Look up covered drugs and estimate costs";
-		String exp_TileLinkTxt="DRUG LOOK UP";
+		String exp_TileLinkTxt="LOOK UP DRUGS";
 		WebElement exp_tileHeaderElement=pTile_compDrugPricingHeaderTxt;
 		WebElement exp_tileImg=pTile_compDrugPricingImg;
 		WebElement exp_tileLnk=pTile_compDrugPricingLnk;
