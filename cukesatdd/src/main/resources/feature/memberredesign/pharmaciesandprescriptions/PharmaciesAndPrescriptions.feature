@@ -90,13 +90,13 @@ Feature: To test Pharamcies And Prescriptions on Member site
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate no Pharamcies and Prescriptions link
-    Then user navigates to the benefit and coverage page to validate no Pharamcies and Prescriptions link
-    Then user navigates to the payment page to validate no Pharamcies and Prescriptions link
-    Then user navigates to the health and wellness page to validate no Pharamcies and Prescriptions link
-    Then user navigates to the contact us page to validate no Pharamcies and Prescriptions link
-    Then user navigates to the account setting to validate no Pharamcies and Prescriptions link
-    Then user navigates to the Notices and Disclosures to validate no Pharamcies and Prescriptions link
+    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
+    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
+    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
+    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
+    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
+    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
  
    Examples: 
       | FID    | planType | memberType     | expectLink | 
