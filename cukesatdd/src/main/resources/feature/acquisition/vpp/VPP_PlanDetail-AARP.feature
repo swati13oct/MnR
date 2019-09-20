@@ -1,5 +1,5 @@
 @vppPlanDetailsUlayer
-Feature: 1.02-ACQ-Plan details in vpp flow AARP
+Feature: 1.03-ACQ-Plan details in vpp flow AARP
 
   @vppPlanDetailsRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
@@ -139,5 +139,5 @@ Feature: 1.02-ACQ-Plan details in vpp flow AARP
       | F338035 - MAPD-AARP                         |   35616 | No              | Colbert County  | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                             | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
       | F338035 - SNP-AARP                          |   38603 | Yes             | Benton County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                       | Health & Wellness Products Card    | credit per quarter to use on approved health products                       |
       | F338035 - MA-AARP                           |   99001 | No              | Spokane County  | MA       | AARP Medicare Advantage Essential (HMO)                          | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
-     | F303834 - US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to specific providers using your computer or mobile device.           |
-      |F303834- US1967861 -  Additional Telehealth Services |   22206 | Yes             | Alexandria city | MA       | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 Copay; Speak to specific providers using your computer or mobile device. |
+     | F303834 - US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to network telehealth providers using your computer or mobile device          |
+      |F303834- US1967861 -  Additional Telehealth Services |   22206 | Yes             | Alexandria city | MA       | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 copay ; Speak to network telehealth providers using your computer or mobile device |

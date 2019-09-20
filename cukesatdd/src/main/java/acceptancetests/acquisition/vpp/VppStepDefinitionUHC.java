@@ -977,8 +977,8 @@ public class VppStepDefinitionUHC {
 		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
 
 		// ----- MA plan type ----------------------------
-		String planType = "MA";
-		plansummaryPage.viewPlanSummary(planType);
+		String planType = memberAttributesMap.get("Plan Type");
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 	}
 

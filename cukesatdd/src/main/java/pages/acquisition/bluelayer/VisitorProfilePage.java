@@ -24,7 +24,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+	@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
 	private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
@@ -101,5 +101,15 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		
 		return null;
+	}
+
+	public void validateAndChoosePlanYear(String planYear) {
+		WebElement planYearBtn = driver.findElement(By.xpath("//button[contains(@dtmname,'"+planYear+"')]"));
+		if(validate(planYearBtn)){
+			planYearBtn.click();
+		}else
+			System.out.println("No plan year buttons were present");
+
+		
 	}
 }
