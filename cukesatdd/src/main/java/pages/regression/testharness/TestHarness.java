@@ -448,7 +448,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -463,7 +463,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoadNew(driver, panelHome, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -1046,7 +1046,7 @@ public class TestHarness extends UhcDriver {
     		} while (counter < 2);
     	}
     	
-    	    	public FormsAndResourcesPage navigateDirectToFnRPageWithTimeout() throws InterruptedException {
+    	public FormsAndResourcesPage navigateDirectToFnRPageWithTimeout() throws InterruptedException {
     		checkForIPerceptionModel(driver);
     		StopWatch pageLoad = new StopWatch();
     		pageLoad.start();
@@ -1085,7 +1085,7 @@ public class TestHarness extends UhcDriver {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
     		try{
-    			if (validate(testHarnessPharPresLink)) 
+    			if (noWaitValidate(testHarnessPharPresLink)) 
     				testHarnessPharPresLink.click();
     			else 
     				testHarnessTopMenuPhaPresLink.click();
@@ -1105,47 +1105,15 @@ public class TestHarness extends UhcDriver {
     	@FindBy(tagName = "arcade-header")
     	private WebElement shadowRootHeader;
 
-    	public boolean findPnPLinksExistOnSecondaryPg() {
-    		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-    		checkForIPerceptionModel(driver);
-    		navigateToClaimsSummaryFromTestHarnessPage();
-    		System.out.println("now on secondary page...proceed validate if pnp link exists");
-    		if (fasterValidate(pharPresDashboardLink)) {
-    			return true;
-    		} else if (fasterValidate(testHarnessTopMenuPhaPresLink)) {
-    			return true;
-    		} else {
-    			if (fasterValidate(shadowRootHeader)) {
-    				System.out.println("Check for shadow-root before giving up");
-    				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
-    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
-    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
-    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
-							return true;
-    				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
-    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
-    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
-							return true;
-    				}
-    			} else {
-    				System.out.println("There is no shadow-root menu");
-    			}
-    		}
-    		return false;
-    	}
-    	
     	public boolean findPnPLinksExistOnPg() {
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
     		checkForIPerceptionModel(driver);
-    		if (validate(pharPresDashboardLink)) {
+    		if (noWaitValidate(pharPresDashboardLink)) {
     			return true;
-    		} else if (validate(testHarnessTopMenuPhaPresLink)) {
+    		} else if (noWaitValidate(testHarnessTopMenuPhaPresLink)) {
     			return true;
     		} else {
-    			if (fasterValidate(shadowRootHeader)) {
+    			if (noWaitValidate(shadowRootHeader)) {
     				System.out.println("Check for shadow-root before giving up");
     				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
     				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
@@ -1181,12 +1149,12 @@ public class TestHarness extends UhcDriver {
     	}
 
     	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
-    		if (fasterValidate(shadowRootElement)) {
+    		if (noWaitValidate(shadowRootElement)) {
     			System.out.println("located shadow-root element, attempt to process further...");
     			WebElement root1 = expandRootElement(shadowRootElement);
     			try {
     				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", fasterValidate(element));
+    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", noWaitValidate(element));
     				return element;
     			} catch (Exception e) {
     				System.out.println("can't locate element. Exception e=" + e);
@@ -1200,12 +1168,12 @@ public class TestHarness extends UhcDriver {
     	}
     	
     	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
-    		if (validate(shadowRootElement)) {
+    		if (noWaitValidate(shadowRootElement)) {
     			System.out.println("located shadow-root element, attempt to process further...");
     			WebElement root1 = expandRootElement(shadowRootElement);
     			try {
     				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-    				if (fasterValidate(element))
+    				if (noWaitValidate(element))
     					return element;
     			} catch (Exception e) {
     				System.out.println("can't locate element. Exception e=" + e);
@@ -1219,19 +1187,19 @@ public class TestHarness extends UhcDriver {
     	@FindBy(xpath="//a[contains(text(),'Notices')]")
     	private WebElement noticeAndDisclosuresLnk;
     	public void navigateToNoticeAndDisclosuresPage() {
-    		Assert.assertTrue("PROBLEM - unable to locate the Legal Notice & Disclosures link on testhareness page", fasterValidate(noticeAndDisclosuresLnk));
+    		Assert.assertTrue("PROBLEM - unable to locate the Legal Notice & Disclosures link on testhareness page", noWaitValidate(noticeAndDisclosuresLnk));
     		noticeAndDisclosuresLnk.click();
     		CommonUtility.checkPageIsReady(driver);
     		
     	}
     	
     	public boolean findPaymentTabOnTopMenu() {
-    		return (fasterValidate(paymentTabOnTopMenu));
+    		return (noWaitValidate(paymentTabOnTopMenu));
     	}
 
     	//note: same as the UhcDriver validate but took out the waitforElementNew to speed things up
     	//note: don't want to @override that validate in case someone actually need that wait for 30 sec...
-    	public boolean fasterValidate(WebElement element) {
+    	public boolean noWaitValidate(WebElement element) {
     		try {
     			if (element.isDisplayed()) {
     				System.out.println("Element found!!!!");
@@ -1242,5 +1210,12 @@ public class TestHarness extends UhcDriver {
     			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
     		}
     		return false;
+    	}
+    	
+    	@FindBy(xpath="//table[contains(@class,'testhatnessMemberTable')]")
+    	private WebElement testharnessTable;
+    	
+    	public void waitForTestharnessTableToShow() {
+    		CommonUtility.waitForPageLoad(driver, testharnessTable, 5);
     	}
 }

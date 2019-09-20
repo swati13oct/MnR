@@ -1807,7 +1807,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReady(driver);
 
-		if (fasterValidate(paymentsLink)) {
+		if (noWaitValidate(paymentsLink)) {
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
 			return new PaymentHistoryPage(driver);
@@ -2899,7 +2899,7 @@ public class AccountHomePage extends UhcDriver {
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", fasterValidate(element));
+				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", noWaitValidate(element));
 				return element;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e=" + e);
@@ -2918,7 +2918,7 @@ public class AccountHomePage extends UhcDriver {
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-				if (fasterValidate(element))
+				if (noWaitValidate(element))
 					return element;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e=" + e);
@@ -2930,12 +2930,12 @@ public class AccountHomePage extends UhcDriver {
 	}
 	
 	public boolean findElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
-		if (fasterValidate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputSelector));
-				if (fasterValidate(element)) 
+				if (noWaitValidate(element)) 
 					return true;
 				else
 					return false;
@@ -2956,12 +2956,12 @@ public class AccountHomePage extends UhcDriver {
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector,
 			boolean doScroll) {
-		if (fasterValidate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
 				WebElement element = root1.findElement(By.cssSelector(inputCssSelector));
-				Assert.assertTrue("Dashboard Shadow Root Elemnt is not accessible", fasterValidate(element));
+				Assert.assertTrue("Dashboard Shadow Root Elemnt is not accessible", noWaitValidate(element));
 				System.out.println("element is located, click it...");
 				System.out.println("We are looking for: " + element.getText() + " and we got it.");
 				if (doScroll) { // for contact us at bottom page, need to scroll
@@ -3220,53 +3220,15 @@ public class AccountHomePage extends UhcDriver {
 			return false;
 	}
 	
-	public boolean findPnPLinksExistOnSecondaryPg() {
-		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-		checkForIPerceptionModel(driver);
-		if (driver.getCurrentUrl().contains("/dashboard")) {
-			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
-			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
-		} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-			workaroundAttempt("claims"); 
-		} 
-		System.out.println("now on secondary page...proceed validate if pnp link exists");
-		if (fasterValidate(pharPresDashboardLink)) {
-			return true;
-		} else if (fasterValidate(pharPresDashboardLinkAlternative)) {
-			return true;
-		} else {
-			if (fasterValidate(shadowRootHeader)) {
-				System.out.println("Check for shadow-root before giving up");
-				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
-				if (secondTopMenuItem !=null && secondTopMenuItem.getText().contains("FIND CARE")) {
-					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
-					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
-							return true;
-				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
-					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
-					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
-						return true;
-				}
-			} else {
-				System.out.println("There is no shadow-root menu");
-			}
-		}
-		return false;
-	}	
-	
 	public boolean findPnPLinksExistOnPg() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
 		checkForIPerceptionModel(driver);
-		if (fasterValidate(pharPresDashboardLink)) {
+		if (noWaitValidate(pharPresDashboardLink)) {
 			return true;
-		} else if (fasterValidate(pharPresDashboardLinkAlternative)) {
+		} else if (noWaitValidate(pharPresDashboardLinkAlternative)) {
 			return true;
 		} else {
-			if (fasterValidate(shadowRootHeader)) {
+			if (noWaitValidate(shadowRootHeader)) {
 				System.out.println("Check for shadow-root before giving up");
 				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
@@ -3309,7 +3271,7 @@ public class AccountHomePage extends UhcDriver {
 	
 	//note: same as the UhcDriver validate but took out the waitforElementNew to speed things up
 	//note: don't want to @override that validate in case someone actually need that wait for 30 sec...
-	public boolean fasterValidate(WebElement element) {
+	public boolean noWaitValidate(WebElement element) {
     	try {
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
