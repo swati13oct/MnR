@@ -148,7 +148,6 @@ public class ClaimsBase extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
 
-
 	public ClaimsBase(WebDriver driver) {
 		super(driver);
 	}
@@ -157,6 +156,16 @@ public class ClaimsBase extends UhcDriver  {
 	public void openAndValidate() throws InterruptedException {
 	}
 
+	boolean dryRun=false;
+	
+	public void setDryRunFlag(boolean input) {
+		dryRun=input;
+	}
+
+	public boolean getDryRunFlag() {
+		return dryRun;
+	}
+	
 	/**
 	 * helper method to validate Need Help section content bases on input
 	 * @param section
