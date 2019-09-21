@@ -409,6 +409,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//span[contains(@class,'account-info-label')]/../../inactive-coverage//span[@translate='COVERAGE_ENDED']")
 	private WebElement coverageEnded;
 
+	@FindBy(xpath="//span[contains(@class,'account-info-label')]/../../inactive-coverage//span[@translate='COVERAGE_STARTS']")
+	private WebElement coverageStarted;
+	
 	@FindBy(xpath = "//*[contains(@id,'home')]")
 	private WebElement HomeTopMenuButton;
 
@@ -691,7 +694,7 @@ public class AccountHomePage extends UhcDriver {
 						System.out.println("clicked account setting dropdown");
 						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
-								|| validate(coverageEnded)) {
+								|| validate(coverageEnded) || validate(coverageStarted)) {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,
 									"#dropdown-options-2 > a:nth-child(2) > span");
 						} else {
@@ -700,12 +703,13 @@ public class AccountHomePage extends UhcDriver {
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					} catch (NoSuchElementException e) { // note: try one more selector before giving up
-						System.out.println("TEST - got NoSuchElement exception - now try next thing ");
+						System.out.println("got NoSuchElement exception - now try next thing ");
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-0 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
 						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
-								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))) {
+								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug")
+								|| validate(coverageEnded) || validate(coverageStarted))) {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,
 									"#dropdown-options-0 > a:nth-child(2) > span");
 						} else {
