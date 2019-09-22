@@ -144,7 +144,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			WebDriver testDriver=accountHomePage.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			BenefitsAndCoveragePage bncPg=accountHomePage.navigateDirectToBnCPag();
+			BenefitsAndCoveragePage bncPg=accountHomePage.navigateToBenefitAndCoveragePage();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, bncPg!=null);
 			result=accountHomePage.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 

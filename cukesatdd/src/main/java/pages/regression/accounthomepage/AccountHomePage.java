@@ -175,6 +175,7 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
 	private WebElement headingContactUs;
+	
 	// @FindBy(xpath="//*[@id='phr_widget_3_box']/div[233]/p[2]/a")
 	// private WebElement providerSearchinPHPage1;
 
@@ -677,7 +678,7 @@ public class AccountHomePage extends UhcDriver {
 		} else {
 			System.out.println("test is through stage");
 		} // Testing through Stage
-		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			System.out.println("user is on Stage login page");
 			if (driver.getCurrentUrl().contains("/dashboard")) {
 				CommonUtility.waitForPageLoad(driver, acctProfile, 9);
@@ -2564,6 +2565,40 @@ public class AccountHomePage extends UhcDriver {
 		return new ClaimDetailsPage(driver);
 	}
 
+	/**
+	 * Navigate to BnC page via the top menu link element instead of hard code URL
+	 * @return
+	 */
+	public BenefitsAndCoveragePage navigateToBenefitAndCoveragePage() {
+		if ((MRScenario.environmentMedicare.equalsIgnoreCase("stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline"))
+				&& ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			if (validate(coverageBenefits))
+				coverageBenefits.click();
+			else {
+				System.out.println("Check for shadow-root before giving up");
+				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+				String thirdTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(3)";
+				String forthTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
+				WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
+						secondTopMenuItemCssStr);
+				if (tmp.getText().equalsIgnoreCase("Claims")) {
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, thirdTopMenuItemCssStr);
+				} else {
+					locateAndClickElementWithinShadowRoot(shadowRootHeader,	forthTopMenuItemCssStr);
+				}
+			}
+			System.out.println(driver.getCurrentUrl());
+			CommonUtility.waitForPageLoad(driver, heading, 30);
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
+		} else {
+			Assert.assertTrue("Haven't code yet for the navigation to BnC from env="+MRScenario.environmentMedicare, false);
+		}
+		return null;
+	}
+	
 	public BenefitsAndCoveragePage navigateDirectToBnCPag() {
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
