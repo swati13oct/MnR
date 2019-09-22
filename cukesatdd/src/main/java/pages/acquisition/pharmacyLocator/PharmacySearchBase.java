@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -80,11 +83,41 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 */
 	public String getStageSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
-
 		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		if (MRScenario.environment.contains("team-ci"))
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+	    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		String timeStr = "";
+		
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj;
+		try {
+			jsonObj = (JSONObject) parser.parse(currentSysTimeStr);
+			JSONObject sysTimeJsonObj = (JSONObject) jsonObj; 
+			
+			timeStr = (String) sysTimeJsonObj.get("systemtime"); 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return timeStr;
+		
+		
+		/* tbd 
+		//open new tab
+		String urlGetSysTime="http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
 		for(String winHandle : driver.getWindowHandles()){
 		    driver.switchTo().window(winHandle);
 		}
@@ -92,14 +125,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		String currentSysTime=currentSysTimeElement.getText();
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
-		return currentSysTime;
+		return currentSysTime; */
 	}
 	
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote=new ArrayList<String>();
 		Select dropdown = new Select(seletPlandropdown);
 		List<WebElement> plans=dropdown.getOptions();
-		testNote.add("available plans from plan dropdown:");
+		testNote.add("available plans from plan dropdown on current test env:");
 		for(int i=1; i<plans.size(); i++) { //note: first item is 'Select a plan' so skip it
 			testNote.add("plan "+i+" is "+plans.get(i).getText());
 		}
