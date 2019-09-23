@@ -189,7 +189,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Assert.assertTrue("PROBLEM - unable to locate the link for pdf for "+pdfType, 
 				pharmacyValidate(pdfLink));
 		Assert.assertTrue("PROBLEM - unable to locate expected year on the link text for pdf for "+pdfType+". "
-				+ "Expected year='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
+				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
 				pdfLink.getText().contains(testPlanYear));
 		String winHandleBefore = driver.getWindowHandle();
 		CommonUtility.checkPageIsReady(driver);

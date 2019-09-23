@@ -125,7 +125,7 @@ public class PharmacyLocatorStepDefinition {
 		String[] tmp=currentEnvTime.split(" ");
 		String envTimeYear=tmp[tmp.length-1];
 		System.out.println("TEST - sysTimeYear="+envTimeYear);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, currentEnvTime);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 		
 		List<String> testNote=pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 		noteList.addAll(testNote);
@@ -165,7 +165,8 @@ public class PharmacyLocatorStepDefinition {
 		List<String> noteList=(ArrayList<String>) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
 
 		String envTimeYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
-		//TODO get the system year TEST_SYSTEM_YEAR and determine which plan to use for testing
+		int envTimeYearValue=Integer.valueOf(envTimeYear);
+		int actualYearValue = Calendar.getInstance().get(Calendar.YEAR); 
 		//note: if plan year dropdown is showing, select next year
 		//note: if no plan year dropdown but env has year in next year, select next year
 		//note: all else then assume plans are current year
@@ -177,10 +178,10 @@ public class PharmacyLocatorStepDefinition {
 			pharmacySearchPage.selectsPlanYear(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year="+testPlanYear+" and plan name="+testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
-		} else if (!pharmacySearchPage.isPlanYear() && envTimeYear.equals(ny_planYear)){
+		} else if (!pharmacySearchPage.isPlanYear() && envTimeYearValue>actualYearValue){
 			testPlanYear=ny_planYear;
 			testPlanName=ny_planName;
-			noteList.add("Has NO plan year dropdown and env date is on next year, will test with next year plan name, testing for year="+testPlanYear+" and plan name="+testPlanName);
+			noteList.add("Has NO plan year dropdown and env date is on next year. \nActual Year='"+actualYearValue+"' | Env Year='"+envTimeYearValue+"'. \nWill test with next year plan name, testing for year="+testPlanYear+" and plan name="+testPlanName+"\n");
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, false);
 		} else { //note: no plan year drop down but env year is next year
 			noteList.add("Has NO plan year dropdown and env date is on current year, will test with current year plan name, testing for year="+testPlanYear+" and plan name="+testPlanName);
