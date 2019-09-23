@@ -175,7 +175,7 @@ public class WelcomePage extends UhcDriver{
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("online-application.html/welcome")){
+		if(driver.getCurrentUrl().contains("online-application.html/steps/medicare-information")){
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
