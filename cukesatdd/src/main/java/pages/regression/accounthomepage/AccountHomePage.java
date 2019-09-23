@@ -696,11 +696,23 @@ public class AccountHomePage extends UhcDriver {
 						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
 								|| validate(coverageEnded) || validate(coverageStarted)) {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#dropdown-options-2 > a:nth-child(2) > span");
+							int index=2;
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
+									menuItemCssStr);
+							if (link.getText().equalsIgnoreCase("logout"))
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
+
 						} else {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#dropdown-options-2 > a:nth-child(3) > span");
+							int index=3;
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
+									menuItemCssStr);
+							if (link.getText().equalsIgnoreCase("logout"))
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
+
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					} catch (NoSuchElementException e) { // note: try one more selector before giving up
@@ -711,15 +723,25 @@ public class AccountHomePage extends UhcDriver {
 						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug")
 								|| validate(coverageEnded) || validate(coverageStarted))) {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#dropdown-options-0 > a:nth-child(2) > span");
+							int index=2;
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
+									menuItemCssStr);
+							if (link.getText().equalsIgnoreCase("logout"))
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						} else {
-							locateAndClickElementWithinShadowRoot(shadowRootHeader,
-									"#dropdown-options-0 > a:nth-child(3) > span");
+							int index=3;
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
+									menuItemCssStr);
+							if (link.getText().equalsIgnoreCase("logout"))
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					}
-				}
+				} 
 				System.out.println("title is " + driver.getTitle());
 				System.out.println("Current Url is " + driver.getCurrentUrl());
 				checkForIPerceptionModel(driver);

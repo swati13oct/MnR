@@ -44,7 +44,7 @@ Feature: To test Pharamcies And Prescriptions on Member site
     Then user validates header section content
     Then user validates pharmacies text content
     Then user validates pharmacies tiles section content
-    Then user validates pharmacies tile Compare drug pricing page
+#    Then user validates pharmacies tile Compare drug pricing page
     Then user validates pharmacies tile Find a network pharmacy page
     Then user validates pharmacies tile Order prescription refills page
     Then user validates pharmacies tile Check home delivery order status page
