@@ -184,6 +184,36 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 	}
 
+	public void validateLtcPdfDoc(String pdfType, String testPlanYear, WebElement pdfLink) throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, pdfLink, 15);
+		Assert.assertTrue("PROBLEM - unable to locate the link for pdf for "+pdfType, 
+				pharmacyValidate(pdfLink));
+		Assert.assertTrue("PROBLEM - unable to year on the link text for pdf for "+pdfType+". "
+				+ "Expected year='"+testPlanYear+"' | LinkText='"+pdfLink.getText()+"'", 
+				pdfLink.getText().contains(testPlanYear));
+		String winHandleBefore = driver.getWindowHandle();
+		CommonUtility.checkPageIsReady(driver);
+		pdfLink.click();
+		Thread.sleep(2000); //note: keep this for the page to load
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();					
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		String currentURL=driver.getCurrentUrl();
+		String expectedURL=pdfType;
+		Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
+				+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
+				currentURL.contains(expectedURL));
+		Assert.assertTrue("PROBLEM - URL should contains the year, "
+				+ "URL should contain year '"+testPlanYear+"' | Actual URL='"+currentURL+"'", 
+				currentURL.contains(testPlanYear));
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		currentURL=driver.getCurrentUrl();
+		expectedURL="Pharmacy-Search";
+		Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+				currentURL.contains(expectedURL));
+	}
+	
 	public void searchesPharmacy(String language, String planName, String testPlanYear) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -231,49 +261,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					CommonUtility.checkPageIsReady(driver);
 				}
 				selectsPlanName(planName);
-				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
-				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						pharmacyValidate(pdf_otherPlans));
-				String winHandleBefore = driver.getWindowHandle();
-				CommonUtility.checkPageIsReady(driver);
-				pdf_otherPlans.click();
-				Thread.sleep(2000); //note: keep this for the page to load
-				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				int afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				currentURL=driver.getCurrentUrl();
-				expectedURL="LTC_HI_ITU_Pharmacies_Other.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
-						currentURL.contains(expectedURL));
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				currentURL=driver.getCurrentUrl();
-				expectedURL="Pharmacy-Search";
-				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
-						currentURL.contains(expectedURL));
-				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
-				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans", 
-						pharmacyValidate(pdf_WalgreenPlans));
-				winHandleBefore = driver.getWindowHandle();
-				CommonUtility.checkPageIsReady(driver);
-				pdf_WalgreenPlans.click();
-				Thread.sleep(2000); //note: keep this for the page to load
-				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				afterClicked_numTabs=afterClicked_tabs.size();					
-				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-				currentURL=driver.getCurrentUrl();
-				expectedURL="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
-						+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
-						currentURL.contains(expectedURL));
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-				currentURL=driver.getCurrentUrl();
-				expectedURL="Pharmacy-Search";
-				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
-						currentURL.contains(expectedURL));
-
+				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
+				WebElement pdfElement=pdf_otherPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement);
+				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
+				pdfElement=pdf_WalgreenPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement);
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
