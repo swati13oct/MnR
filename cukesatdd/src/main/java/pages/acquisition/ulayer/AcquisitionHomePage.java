@@ -946,6 +946,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
