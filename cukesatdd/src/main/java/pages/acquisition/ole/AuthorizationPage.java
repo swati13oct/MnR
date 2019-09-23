@@ -175,7 +175,7 @@ public class AuthorizationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
-		if(driver.getCurrentUrl().contains("review")){
+		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
 			return new ReviewSubmitPage(driver);
 		}
 		else{

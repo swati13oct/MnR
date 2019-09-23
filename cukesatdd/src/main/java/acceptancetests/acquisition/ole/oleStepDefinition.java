@@ -138,7 +138,7 @@ public class oleStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
 
 		}
@@ -433,6 +433,21 @@ public class oleStepDefinition {
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		if (medicareInfoPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Medicare Information Page is NOT Displayed");
+	}
+	
+	@Then("^the user navigates to Medicare Information Page for PDP$")
+	public void the_user_navigates_to_Medicare_Information_Page_PDP() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page_PDP();
 		if (medicareInfoPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,

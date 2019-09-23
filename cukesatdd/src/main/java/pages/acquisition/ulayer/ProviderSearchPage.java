@@ -244,7 +244,7 @@ public class ProviderSearchPage extends UhcDriver {
 			SaveBtn.click();
 			CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
-			Viewsavebtn.click();
+			jsClickNew(Viewsavebtn);
 
 			validateNew(Checkcoverage);
 			

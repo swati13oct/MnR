@@ -80,7 +80,7 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("authorization")){
+		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
 			return new AuthorizationPage(driver);
 		}
