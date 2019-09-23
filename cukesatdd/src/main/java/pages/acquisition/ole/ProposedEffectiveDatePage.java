@@ -112,7 +112,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 			}
 		}
 		else{
-			if (driver.getCurrentUrl().contains("provider-search")){
+			if (driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
 				return new PrimaryCarePhysicianPage(driver);
 			}
