@@ -1546,8 +1546,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public pages.acquisition.bluelayer.ProviderSearchPage clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
 
-		//switchToNewTabNew(providerSearchFromHomeScreen);
-		providerSearchFromHomeScreen.click();
+		switchToNewTabNew(providerSearchFromHomeScreen);
+		//providerSearchFromHomeScreen.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
