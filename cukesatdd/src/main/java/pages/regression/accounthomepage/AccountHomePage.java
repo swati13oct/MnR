@@ -2611,7 +2611,7 @@ public class AccountHomePage extends UhcDriver {
 			}
 			System.out.println(driver.getCurrentUrl());
 			CommonUtility.waitForPageLoad(driver, heading, 30);
-			if (driver.getTitle().contains("Benefits")) {
+			if (driver.getTitle().contains("Benefits") || driver.getTitle().contains("Documents")) { //note: for case of terminated user on stage - title is Plan Documents & Resources
 				System.out.println(driver.getTitle());
 				return new BenefitsAndCoveragePage(driver);
 			}

@@ -108,6 +108,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "home_2")
 	private WebElement panelHome;
 
+	@FindBy(xpath="//title[contains(text(),'Contact Us')]")
+	private WebElement contactUsTitleElement;
+	
 	@FindBy(id = "claims_1")
 	private WebElement panelClaims;
 
@@ -463,10 +466,12 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, panelHome, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
+		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
+		System.out.println("TEST - 2");
 		return null;
 	}
 
