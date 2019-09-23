@@ -447,6 +447,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		checkModelPopup(driver);
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
@@ -865,6 +866,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		checkModelPopup(driver);
 		if(isHealthPlan){
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);

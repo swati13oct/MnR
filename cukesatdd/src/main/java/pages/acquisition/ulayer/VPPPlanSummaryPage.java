@@ -666,6 +666,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public void viewPlanSummary(String planType) {
+		checkModelPopup(driver);
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
@@ -3069,4 +3070,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		
 	}
+
+	public static void checkModelPopup(WebDriver driver) {
+		int counter = 0;
+		do {
+
+
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
+	}	
+
 }
