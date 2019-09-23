@@ -209,7 +209,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(driver.getCurrentUrl().contains("online-application.html/steps/preliminary-questions")){
 			System.out.println("OLE Personal Information Page is Displayed");
 			return new PersonalInformationPage(driver);
 		}
