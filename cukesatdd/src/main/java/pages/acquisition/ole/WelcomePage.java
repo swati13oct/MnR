@@ -181,6 +181,18 @@ public class WelcomePage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	public MedicareInformationPage navigate_to_medicare_info_page_PDP() {
+		
+		validateNew(NextBtn);
+		NextBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("medicare-prescription-drug-plans-online-application.html/welcome")){
+			System.out.println("OLE Medicare Information Page is Displayed");
+			return new MedicareInformationPage(driver);
+		}
+		return null;
+	}
 
 	public LearnMoreModal OpenLearnMore() {
 		AcquisitionHomePage.checkModelPopup(driver);

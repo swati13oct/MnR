@@ -132,6 +132,10 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id="hasEndStateRenalDiseaseNo")
 	private WebElement ESRD;
 	
+	@FindBy(xpath = "//*[contains(text(),'Preliminary Questions')]")
+	private WebElement Preliminary_Questions;
+	
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -306,7 +310,7 @@ public class MedicareInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(Preliminary_Questions.isDisplayed()){
 			System.out.println("OLE Preliminary Questions page is Displayed");
 			return new PrelimineryQuestionsPage(driver);
 		}
