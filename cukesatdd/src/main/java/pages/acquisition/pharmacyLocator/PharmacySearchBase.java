@@ -111,21 +111,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return timeStr;
-		
-		
-		/* tbd 
-		//open new tab
-		String urlGetSysTime="http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
-		}
-		WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
-		String currentSysTime=currentSysTimeElement.getText();
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		return currentSysTime; */
 	}
 	
 	public List<String> getListOfAvailablePlanNames() {

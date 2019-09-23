@@ -385,7 +385,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
-	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1")
+	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1[contains(text(),'Drug')]")
 	public WebElement pageHeading;
 
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]")
