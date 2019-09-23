@@ -226,9 +226,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		} else {
 			System.out.println("BYPASS for now - known issue INC12081977 - Walgreen widget DCE link is not pointing to correct place for Chinese and Spanish");
 		}
-		if (linkType.equalsIgnoreCase("LearnMore")) 
+		if (linkType.equalsIgnoreCase("LearnMore")) {
+			Assert.assertTrue("PROBLEM - unable to locate the 'Return to previous page' link to go back to previous page", pharmacyValidate(widget_learnMore_previousPage));
 			widget_learnMore_previousPage.click(); //note: click link to go back to pharmacy locator page
-		else 
+		} else 
 			driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
