@@ -289,6 +289,7 @@ Feature: C1.2To test Profile and Preferences page
       | Copay Category | <copayCategory> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    And I validate the healthsafe ID links
     Then the email address section should be verified
     Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section
@@ -300,3 +301,23 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType        | copayCategory   |
       | MAPD     | Terminated_AccPro | NON LIS |
     
+     @HsidLogin @regressionMember @codetransformers
+   Scenario Outline:Verify HSID login functionality.
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+      
+   Examples:
+   | planType  |  memberType  | copayCategory | 
+   | MA        |  Individual  |  NON LIS      |
+   | PDP       |  Individual  |  NON LIS      |
+   | MAPD      |  Individual  |  NON LIS      |
+   | PCP       |  Individual  |  NON LIS      |
+   | Medica    |  Individual  |  NON LIS      |  
+   | MAGroup   |  Group       |  NON LIS      |
+   | MAPDGroup |  Group       |  NON LIS      | 
+   | PDPGroup  |  Group       |  NON LIS      | 
+   | SHIP      |  ShipOnly    |  NON LIS      | 
+   | COMBO     | FedShip      |  NON LIS      |
+   | SSUPGroup |Group         |  NON LIS      |
