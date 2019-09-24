@@ -103,7 +103,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(planType.contentEquals("PDP")){
-			if(driver.getCurrentUrl().contains("monthly-premium")){
+			if(driver.findElement(By.xpath("//h1[contains(text(),'Paying Your Monthly Plan Premium')]")).isDisplayed()){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");
 				return new PlanPremiumPage(driver);
 			}

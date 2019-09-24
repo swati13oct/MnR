@@ -299,7 +299,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
 				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
 				 && validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)
-				&& validateNonPresenceOfElement(Both_Medicare_Medicaid) && validateNonPresenceOfElement(ExtraHelp_PrescriptionDrug)){// && validateNonPresenceOfElement(LoSS_LIS)
+				&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)){// && validateNonPresenceOfElement(LoSS_LIS)
 			
 			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
