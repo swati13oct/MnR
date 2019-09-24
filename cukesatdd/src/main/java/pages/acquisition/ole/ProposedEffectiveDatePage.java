@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -112,7 +113,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 			}
 		}
 		else{
-			if (driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+			if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
 				return new PrimaryCarePhysicianPage(driver);
 			}

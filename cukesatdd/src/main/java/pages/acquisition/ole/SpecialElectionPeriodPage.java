@@ -332,7 +332,7 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	executor.executeScript("arguments[0].click();", NextBtn);
 */
 	
-	if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Coverage')]")))){
 		System.out.println("OLE Coverage and Health Information page is Displayed");
 		return new CoverageInformationPage(driver);
 	}
