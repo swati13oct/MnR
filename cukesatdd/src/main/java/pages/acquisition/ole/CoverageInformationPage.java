@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -133,7 +134,7 @@ public class CoverageInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Effective Date')]")))){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
 		}
