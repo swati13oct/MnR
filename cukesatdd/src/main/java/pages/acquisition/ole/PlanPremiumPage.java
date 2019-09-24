@@ -98,7 +98,7 @@ public class PlanPremiumPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Authorization')]")))){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPage(driver);
 		}
