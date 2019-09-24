@@ -245,10 +245,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(text() , 'Need More Information?')]/ancestor::div[@class='rightrail']//div[@class='uhc-container']//a[contains(text(),'Choose a video ')]")
 	public WebElement ChooseAVideo;
 
-	@FindBy(xpath="//*[contains(text() , 'Plan Selector Tool')]/ancestor::div[contains (@class ,'uhc-container')]")
+	@FindBy(xpath="//*[contains (@class ,'rightrail')]//*[contains(@class,'uhc-container')]//*[contains(@dtmname,'Plan Selector')]")
 	public WebElement PlanSelectorToolRightRail; 
 
-	@FindBy(xpath="//*[contains(text() , 'Start Plan Selector')]")
+	@FindBy(xpath="//*[contains(@id , 'selector')]")
 	public WebElement StartPlanSelector; 
 
 	@FindBy(xpath = "//input[@id='compare-plan-2']")
@@ -1247,7 +1247,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public int checkAllMAPlans(){
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1769,7 +1769,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			int attempts = 0;
 		    while(attempts < 2) {
 		        try {
-					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class,'benefits-table')]//li//*[contains(@class,'inline-edit-link modal-link vpp-monthly-premium-modal')]"));
+					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class,'benefits-table')]//li//*[contains(@class,'inline-edit-link')]"));
 					validateNew(learnMoreAboutExtraHelp);
 					learnMoreAboutExtraHelp.click();
 					break;

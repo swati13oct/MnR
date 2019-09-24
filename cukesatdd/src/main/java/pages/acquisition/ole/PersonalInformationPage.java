@@ -282,7 +282,7 @@ public class PersonalInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("special-election-period")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
 			System.out.println("OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 		}

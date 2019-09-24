@@ -64,7 +64,7 @@ public class MedicareInformationPage extends UhcDriver{
 
 	//Page Header
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
-	private WebElement MedicalInfoPageHeader;
+	public WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B
 	
@@ -131,6 +131,10 @@ public class MedicareInformationPage extends UhcDriver{
 	
 	@FindBy(id="hasEndStateRenalDiseaseNo")
 	private WebElement ESRD;
+	
+	@FindBy(xpath = "//*[contains(text(),'Preliminary Questions')]")
+	private WebElement Preliminary_Questions;
+	
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
@@ -306,7 +310,7 @@ public class MedicareInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 
-		if(driver.getCurrentUrl().contains("preliminary-questions")){
+		if(Preliminary_Questions.isDisplayed()){
 			System.out.println("OLE Preliminary Questions page is Displayed");
 			return new PrelimineryQuestionsPage(driver);
 		}
