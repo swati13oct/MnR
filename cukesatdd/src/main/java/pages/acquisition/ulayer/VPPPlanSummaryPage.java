@@ -248,7 +248,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains (@class ,'rightrail')]//*[contains(@class,'uhc-container')]//*[contains(@dtmname,'Plan Selector')]")
 	public WebElement PlanSelectorToolRightRail; 
 
-	@FindBy(xpath="//*[contains(text() , 'Start Plan Selector')]")
+	@FindBy(xpath="//*[contains(@id , 'selector')]")
 	public WebElement StartPlanSelector; 
 
 	@FindBy(xpath = "//input[@id='compare-plan-2']")
