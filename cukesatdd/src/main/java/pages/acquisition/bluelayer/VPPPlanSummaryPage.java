@@ -2665,18 +2665,19 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		CommonUtility.checkPageIsReady(driver);
 		
 		//clicking the saved heart to validate it goes back to unsaved
-		String afterSavePlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//img[contains(@src,'ic_favorite-unfilled.png')]";
+		/*String afterSavePlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//img[contains(@src,'ic_favorite-unfilled.png')]";
 		listOfSavePlanIcons=driver.findElements(By.xpath(afterSavePlanIconXpath));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
 		
 		//validating that the saved heart doesn't show up after clicking on it
+		driver.navigate().refresh();
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.navigate().refresh();
+		
 		System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
 		System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 		expMatch=0;
@@ -2684,7 +2685,7 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		
 		//clicking the save heart option again and validate it was saved
 		listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));*/
 		System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
 		String appeared_savedPlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
@@ -2715,8 +2716,8 @@ public void validatePlansAreSaved(String savePlanNames, String planType) {
 	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 	
 	System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-	String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+savedPlanImgXpath;
-	//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 	int expMatch=listOfTestPlans.size();
 	Assert.assertTrue("PROBLEM - total saved plan icons not as expected.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
