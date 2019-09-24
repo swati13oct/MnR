@@ -134,7 +134,7 @@ public class CoverageInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Effective Date')]")))){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Proposed Effective Date')]")))){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
 		}
