@@ -133,7 +133,7 @@ public class CoverageInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("effective-date")){
+		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
 		}

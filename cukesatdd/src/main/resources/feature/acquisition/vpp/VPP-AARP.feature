@@ -1,5 +1,5 @@
 @fixedTestCaseTest @vppUlayer
-Feature: 1.03-VBF Plan summary in vpp flow AARP
+Feature: 1.02-Plan summary in vpp flow AARP
 
   @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site
@@ -379,7 +379,7 @@ Feature: 1.03-VBF Plan summary in vpp flow AARP
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

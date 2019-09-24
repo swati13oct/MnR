@@ -271,7 +271,7 @@ public class VppStepDefinitionUHC {
 	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
-	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
+	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
@@ -977,8 +977,8 @@ public class VppStepDefinitionUHC {
 		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
 
 		// ----- MA plan type ----------------------------
-		String planType = "MA";
-		plansummaryPage.viewPlanSummary(planType);
+		String planType = memberAttributesMap.get("Plan Type");
+		//plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 	}
 

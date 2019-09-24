@@ -317,7 +317,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
-		if(driver.getCurrentUrl().contains("monthly-premium")){
+		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
 			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}
