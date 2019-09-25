@@ -464,16 +464,36 @@ public void userClicksOn_Account_settings_from_claims_page() throws Throwable {
 	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,profileAndPrefPage);	
 }
 
-@Given("^user is navigated to Account Settings page$")
+@Given("^preuser is navigated to Account Settings page$")
 public void userlands_on_Account_Settings_Page() throws Throwable {
-	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);      
-	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
-	ppp.validateprefrencepageURL();
-	
+		ProfileandPreferencesPage profilePreferencesPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			profilePreferencesPage = testHarness.navigateDirectToProfilePageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
+		}
+		if (profilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
+		} else {
+			Assert.fail("Profile preference page not loaded");
+		}	
+}	
+
+@And("^the preuser validates the Plan Name, Member name, Member ID and account section in UMS site")
+public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
+	ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+	if (profilePreferencesPage == null) {
+		System.out.println("Profile and Preferences page variable is Null");
+	}
+	profilePreferencesPage.validatePlanNameMemberidNameAcountProfilepre();
 }
 @Given("^verify that the pre effecctive member can access the account settings page to view security and sign-in preferences$")
 public void verify_preffectiev_member_can_access_the_page() throws Throwable {
-	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
 	ppp.validatepermanentaddress();
 	ppp.validatePhonepreffective();
@@ -628,6 +648,5 @@ public void verity_that_correct_phone_number_is_displayed_in_Technical_Support_s
 	
                
 }
-
 
 }

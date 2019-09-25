@@ -218,7 +218,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Terminated |
 
-  @accountProfile12 @EPMPpreferencesForComboOnProfile @regressionMember
+  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -228,8 +228,8 @@ Feature: C1.2To test Profile and Preferences page
     And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
 
     Examples: 
-      | planType | memberType |
-  # | Combo    | EPMPEnabled | 
+      | planType       | memberType             |
+      | Combo_PDP_SSUP | PDP_SSUPcombo          |
   
 
   @AccountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers
@@ -238,7 +238,8 @@ Feature: C1.2To test Profile and Preferences page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Copay Category | <copayCategory> |
-     Then the user navigates to Profile and Preferences page       
+     Then the user navigates to Profile and Preferences page     
+     Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
 	   Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
 	   Then the email address section should be verified
 	   Then the Phone Numbers section should be validated & all links clicked
