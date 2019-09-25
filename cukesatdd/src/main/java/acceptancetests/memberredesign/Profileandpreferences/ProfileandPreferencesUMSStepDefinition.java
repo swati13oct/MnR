@@ -1217,4 +1217,33 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateHealthSafeIdbothLinks();
 	}
+	/**
+	 * 
+	 */
+	@Then("^I validate that login is successfull$")
+	public void verifyloginOnDashboardHomePage() throws Throwable {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))	
+		{			
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+			System.out.println("Now validating login on Dashboard");
+			accountHomePage.validateLoginonDashboard();	
+			System.out.println(" !!! Member is on Dashboard !!!");
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		
+		else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+		{
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			System.out.println("Now validating login on test-harness page");
+			testHarnessPage.validateLoginonTestharness();	
+			System.out.println(" !!! Member is on the Testharness page !!!");
+		    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+		}
+		else {
+			System.out.println("Not verifying that preeffective message is displayed as the environment is not set to team-h or Stage");
+		}
+		}
+		
 }
