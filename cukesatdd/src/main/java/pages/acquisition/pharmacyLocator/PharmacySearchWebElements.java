@@ -318,7 +318,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath = "//img[@alt='callus']")
 	protected WebElement callUsIcon;
 
-	@FindBy(xpath = "//p[contains(text(),'Call UnitedHealthcare toll-free at:')]")
+	@FindBy(xpath = "//p[contains(text(),'Call UnitedHealthcare toll-free at')]")
 	protected WebElement callUnitedHealthCareText;
 
 	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
