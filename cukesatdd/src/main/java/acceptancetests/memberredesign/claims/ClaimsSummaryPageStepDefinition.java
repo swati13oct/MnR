@@ -172,8 +172,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getDryRunFlag())
-			System.out.println("DRYRUN ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
 		else {
 			String planType = (String) getLoginScenario()
 					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
@@ -202,8 +202,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateEmptyDatesErrorMessage(){
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getDryRunFlag())
-			System.out.println("DRYRUN ONLY - will not validate custom search error for no to and from dates being entered");
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
 		else {
 			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 			claimsSummPg.validateEmptyDatesError(planType);
@@ -218,8 +218,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateToDateInvalidErrorMessage(){ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getDryRunFlag())
-			System.out.println("DRYRUN ONLY - will not validate custom search error for the from date is greater than the to date error message");
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not validate custom search error for the from date is greater than the to date error message");
 		else {
 			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 			claimsSummPg.validatefromDateLaterThanToDateError(planType);
@@ -376,8 +376,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateGreaterThanTwoYearsMessage() { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getDryRunFlag()) 
-			System.out.println("DRYRUN ONLY - will not validate search range is greater than two years error");
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
 		else {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
@@ -462,8 +462,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validates_segmentid(DataTable memberAttributes) {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getDryRunFlag()) 
-			System.out.println("DRYRUN ONLY - will not validate segment ID");
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not validate segment ID");
 		else {		
 			Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
 			String expectedSegmentId = memberAttributesMap.get("Segment ID");
@@ -476,10 +476,10 @@ public class ClaimsSummaryPageStepDefinition {
 	}
 	
 	@When("^I am validating UI only$")
-	public void dryRun() {
+	public void onlyTestUi() {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummPg.setDryRunFlag(true);
-		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_DRYRUN, true);
+		claimsSummPg.setOnlyTestUiFlag(true);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG, true);
 	}
 }

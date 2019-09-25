@@ -384,6 +384,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//html[@lang='es']")
 	protected WebElement pgInSpanish;
 	
+	@FindBy(xpath="//body")
+	protected WebElement timeJson;
 	
 	public PharmacySearchWebElements(WebDriver driver) {
 		super(driver);
