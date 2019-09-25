@@ -882,7 +882,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
                             CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			sleepBySec(2);
-                            maPlansViewLink.click();
+							jsClickNew(maPlansViewLink);
+                           // maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
             	driver.navigate().refresh();
@@ -1613,6 +1614,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		driver.navigate().refresh();
 		Thread.sleep(6000);
+		if(planType.equalsIgnoreCase("PDP"))
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
+		else
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+		
+		if(enrollForPlan!=null){
+			validateNew(enrollForPlan);
+			enrollForPlan.click();
+		}
+		
+
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		if (driver.getCurrentUrl().contains("enrollment")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+	
+	public WelcomePage Enroll_OLE_Plan_campaign_uhc(String planName,String planType) throws InterruptedException {
+
+		WebElement enrollForPlan = null;
+		System.out.println("Enroll in Plan for Plan : "+planName);
+		
 		if(planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		else
