@@ -379,6 +379,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateQuestionsWidget() {
+		CommonUtility.waitForPageLoad(driver, callUnitedHealthCareText, 5);
 		Assert.assertTrue("PROBLEM -Question Widget is not displayed", 
 				pharmacyValidate(questionsRightRailWidget));
 		Assert.assertTrue("PROBLEM -Call us icon is not displayed", 

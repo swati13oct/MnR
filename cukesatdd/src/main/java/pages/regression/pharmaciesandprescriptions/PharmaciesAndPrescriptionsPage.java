@@ -77,14 +77,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	/**
 	 * to validate the pharmacies tiles section, determine what tiles should show up or not
-	 * TODO - maybe more changes for 2020 MAPD walgreens plan will have a different pharmacy locator page and content
 	 * @param tileDrug
 	 * @param tilePharmacy
 	 * @param tilePrescription
 	 * @param tileDelivery
 	 * @param tileBenefit
 	 */
-	//
 	public void validatePharmaciesTilesSection(boolean tileDrug, boolean tilePharmacy,	
 			boolean tilePrescription, boolean tileDelivery, boolean tileBenefit) {
 		String exp_TileHeaderTxt="Look up covered drugs and estimate costs";

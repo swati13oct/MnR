@@ -78,8 +78,8 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (numClaims==0) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+noClaimsText+"' text/link. \n"+noteToTester, 
 					claimsValidate(optumRxLnkTxt_noClaims));
-			if (getDryRunFlag())
-				System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+			if (getOnlyTestUiFlag())
+				System.out.println("TEST UI ONLY - will not validate Rx link destination");
 			else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_noClaims.click();
@@ -87,15 +87,15 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate '"+hasClaimsText+"' text/link. \n"+noteToTester, 
 			claimsValidate(optumRxLnkTxt_hasClaims));
-			if (getDryRunFlag())
-				System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+			if (getOnlyTestUiFlag())
+				System.out.println("TEST UI ONLY - will not validate Rx link destination");
 			else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_hasClaims.click();
 			}
 		}
-		if (getDryRunFlag())
-			System.out.println("DRYRUN ONLY - will not validate Rx link destination");
+		if (getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not validate Rx link destination");
 		else {
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
