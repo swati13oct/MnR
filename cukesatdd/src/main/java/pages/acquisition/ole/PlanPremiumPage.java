@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ole;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -75,7 +76,7 @@ public class PlanPremiumPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Supplemental')]")))){
 			System.out.println("OLE Supplemental Benefits page is Displayed");
 			return new SupplementalBenefitsPage(driver);
 		}
@@ -97,7 +98,7 @@ public class PlanPremiumPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Authorization')]")))){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPage(driver);
 		}
