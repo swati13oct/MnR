@@ -2633,14 +2633,14 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 	for (String plan: listOfTestPlans) {
 		System.out.println("Proceed to locate plan="+plan);
 
-		String testPlanXpath=headerPath+"//*[contains(text(),'"+plan+"')]";
-		//System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
+		String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+		System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 		List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 		int expMatch=1;
 		Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
 		
 		System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
-		String initial_savePlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]"+savePlanImgXpath;
+		String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 		System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 	
 		List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
@@ -2648,7 +2648,7 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 
 		System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
-		String savedPlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+		String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
 		System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
 		List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
 		expMatch=0;
@@ -2669,15 +2669,6 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		listOfSavePlanIcons=driver.findElements(By.xpath(afterSavePlanIconXpath));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
 		
-		//validating that the saved heart doesn't show up after clicking on it
-		driver.navigate().refresh();
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
 		System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 		expMatch=0;
@@ -2687,14 +2678,26 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));*/
 		System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
-		String appeared_savedPlanIconXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+		String appeared_savedPlanIconXpath="";
+		
+		if(planType.equalsIgnoreCase("PDP"))
+			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
+		else
+			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+		
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 		expMatch=1;
 		Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 		System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
-		String appeared_savedTextXpath=headerPath+"//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//span[contains(text(),'Saved')]";
+		String appeared_savedTextXpath="";
+		
+		if(planType.equalsIgnoreCase("PDP"))
+			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
+		else
+			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//span[contains(text(),'Saved')]";
+		
 		System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 		List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
 		expMatch=1;

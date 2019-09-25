@@ -119,7 +119,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']/h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = "//table[@id='colhowdoesthiswork_dce']//div[@itemprop='significantLink']/a[contains(@class,'cta-button')]")
+	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
