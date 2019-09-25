@@ -248,7 +248,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[contains (@class ,'rightrail')]//*[contains(@class,'uhc-container')]//*[contains(@dtmname,'Plan Selector')]")
 	public WebElement PlanSelectorToolRightRail; 
 
-	@FindBy(xpath="//*[contains(text() , 'Start Plan Selector')]")
+	@FindBy(xpath="//*[contains(@id , 'selector')]")
 	public WebElement StartPlanSelector; 
 
 	@FindBy(xpath = "//input[@id='compare-plan-2']")
@@ -1416,7 +1416,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		if(planType.equalsIgnoreCase("PDP")) {
-			driver.navigate().refresh();
+			//driver.navigate().refresh();
 			Thread.sleep(5000);
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		}else {

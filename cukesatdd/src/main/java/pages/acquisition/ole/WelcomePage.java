@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -175,7 +176,7 @@ public class WelcomePage extends UhcDriver{
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("united-healthcare-medicare-advantage-online-application.html/welcome")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
