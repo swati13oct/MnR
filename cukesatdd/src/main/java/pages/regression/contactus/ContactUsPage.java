@@ -120,7 +120,10 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
 	private WebElement headingContactUs;
-	
+
+	@FindBy(xpath="//div[@class='deskHeaderContainer']")
+	private WebElement topHeaderContactUs;
+
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 
@@ -263,7 +266,10 @@ public class ContactUsPage extends UhcDriver{
 			PageFactory.initElements(driver, this);
 			AccountHomePage.checkForIPerceptionModel(driver);
 			//feebackpopupClose();
-			CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_30);
+			if ((MRScenario.environment).toLowerCase().contains("offline"))
+				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
+			else 
+				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_30);
 			openAndValidate();
 		} catch (Exception e) {
 			e.printStackTrace();

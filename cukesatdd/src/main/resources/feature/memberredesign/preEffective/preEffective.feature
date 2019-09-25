@@ -54,18 +54,26 @@ Feature: To test pre-effective functionality
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    And verify that preeffective message is displayed on the home page or test harness page   
-    And user clicks on the benefits and coverage tab on the dashboard home page or test harness page   
-    And user is navigated to Account Settings page
-    And verify that the pre effecctive member can access the account settings page to view security and sign-in preferences
-
+    And verify that preeffective message is displayed on the home page or test harness page  
+    And preuser is navigated to Account Settings page    
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
+    Then the email address section should be verified
+    Then the Phone Numbers section should be validated & all links clicked
+	   Then the user validates permanent address section
+	   And the user verifies the Temporary Address Link on the Account settings page
+	  Then the user validates Communication Preferences section
+	   And the user validates sign up today link
+	   Then the user validates the presence of Back to Profile and Preferences links 	    
+	   And the user validates see more ways to contact us section                                          
+     And the user validates on clicking contact us link it should route to contact us page 
     Examples: 
       | planType  | memberType          | copayCategory |
-      | IndMA    | preeffectiveIndMA    | NON LIS       |
-      | IndMAPD  | preeffectiveIndMAPD  | NON LIS       |
-      | IndPDP   | preeffectiveIndPDP   | NON LIS       |
-      | GroupPDP | preeffectiveGroupPDP | NON LIS       |
-      | GroupSSUP | preeffectiveGroupSSUP | NON LIS     |
+      | PDPind    | preeffectiveIndPDP  | NON LIS       |
+    #  | MAGrp  | preeffectiveGrpMA  | NON LIS       |
+     # | IndPDP   | preeffectiveIndPDP   | NON LIS       |
+    #  | GroupPDP | preeffectiveGroupPDP | NON LIS       |
+   #   | GroupSSUP | preeffectiveGroupSSUP | NON LIS     |
 
   @preEffective3 @preffectiveRegistration
   Scenario Outline: Verify HSID registration.
@@ -102,7 +110,7 @@ Feature: To test pre-effective functionality
 
     Examples: 
       | planType | memberType | copayCategory | firstname | lastname | dob        | memberid    | zipcode | userName      | password   | email                      | question1 | question2 | question3 |
-      | PDP      | Individual | NON LIS       | EFDDC     | ECDFA    | 12/11/1952 | 019413414-1 |   14618 | q1_feb_uhc042 | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
+      | PDP      | Individual | NON LIS       | LEDFORD       | MUZZY     | 11/05/1940 | 917036696-1  |   85080 | q1_feb_uhc042 | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
 
   # | PDP     |  Individual  |  NON LIS      | FBDDE     | BCCDF           | 11/05/1948          | 018948860-1 | 01702	 |q1_feb_uhc042        | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |
   # | SHIP    |  Individual  |  NON LIS      | EQNBXLQQ  | BNSXXZJU        | 02/01/1939          | 373488822-11| 89125	 |q2_jun_ship0084      | Password@1 | codetransformers@gmail.com      | number1   | name1     | color1    |

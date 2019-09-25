@@ -330,18 +330,17 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   #TC16Part-2(SHIP)_Ancilliary Benefits for Group member(PDP and other than Group members)
   @benefitsAndCoverage32_2 @ancillarybenefitnegativescenarioscodemonkeysPart2 @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers(SHIP)
     Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
     Then verify ancillary benefit section is not displayed
 
     Examples: 
       | TID | planType | memberType | 
-			| 15094 | HIP   | SHIP_BnC |
+			| 15099 | HIP   | SHIP_BnC |
   
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
   @benefitsAndCoverage5 @WaystoSaveforPdp @regression @regressionMember
@@ -355,8 +354,8 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     Examples: 
       | TID   | planType | memberType             |
       | 15242 | PDP      | Wallgreens_BnC         |
-      | 15242 | PDP      | MailOrderPharamacy_BnC |
-      | 15242 | MAPD     | withoutWaysToSave_BnC  |
+      | 15243 | PDP      | MailOrderPharamacy_BnC |
+      | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
     #TC20_Rider for Fed MA,MAPD plans only  
         # note: Due to timing that it takes for GPS to do the update (add or remove),

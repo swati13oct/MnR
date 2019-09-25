@@ -332,8 +332,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickPrintBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getDryRunFlag()) {
-				System.out.println("DRYRUN ONLY - will not validate behavior after clicking print button");
+			if (getOnlyTestUiFlag()) {
+				System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
 				return true;
 			} else {
 				String winHandleBefore = driver.getWindowHandle();
@@ -368,8 +368,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickDnldBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getDryRunFlag()) {
-				System.out.println("DRYRUN ONLY - will not validate behavior after clicking download button");
+			if (getOnlyTestUiFlag()) {
+				System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
 				return true;
 			} else {
 				try {
@@ -402,8 +402,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				System.out.println("PROBLEM - non SHIP user should have 'DownloadMyData' button");
 				return false;
 			}
-			if (getDryRunFlag()) {
-				System.out.println("DRYRUN ONLY - will not validate behavior after clicking DownloadMyData button");
+			if (getOnlyTestUiFlag()) {
+				System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
 				return true;
 			} else {
 				System.out.println("Blue Button-DownLoad my Data Button is displayed");
