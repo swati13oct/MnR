@@ -2311,16 +2311,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validatePlanOverviewgroupNONLIS() {
 		CommonUtility.waitForPageLoadNew(driver, planName, 30);
-/*		validateWithValue("Plan name", planName);
+		validateWithValue("Plan name", planName);
 		validateWithValue("Name label", nameLabel);
 		validateWithValue("Member ID label", memberID);
 		validateWithValue("Group id label",GroupId);
-		validateWithValue("Effective date label", effective_Date);*/
-		validateNew(planName);
-		validateNew(nameLabel);
-		validateNew(memberID);
-		validateNew(GroupId);
-		validateNew(effective_Date);
+		validateWithValue("Effective date label", effective_Date);
 		//below verifies values of the lavel
 
 		if(!memberNameValueBNC.getText().equalsIgnoreCase("") && !memberIdValueBNC.getText().equalsIgnoreCase("") 
@@ -3732,8 +3727,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(YourPrimaryCareProvider);
 			validateNew(ChangeYourPcpButton);
 			validateNew(StartSearch);
-			validateNew(drugCostDropdown);
-			validateNew(drugCopaysAndDiscountSection);
+			//validateNew(drugCostDropdown);
+			//validateNew(drugCopaysAndDiscountSection);
+			
+			System.out.println();
 			
 		} else if(planType.equalsIgnoreCase("PDP")){
 			if(validate(pdpNavTab))

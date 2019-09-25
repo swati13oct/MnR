@@ -2232,7 +2232,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateComboTabForAccountProfile() {
 		int numberOfTabsForCombo;
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
+	
 		numberOfTabsForCombo = tabsForComboMember.size();
 		System.out.println("size for combo1" + tabsForComboMember.size());
 		if (numberOfTabsForCombo > 1) {
@@ -2250,7 +2251,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 				validateTempAddressSectionForShip();
 
 			} else {
-				validateEpmpIframe();
+				System.out.println("User is on fed plan");
+				//validateEpmpIframe();
 				validateEmailaddressSection();
 				validateEmailEditUpdates();
 				validatePhoneSection();
@@ -2631,13 +2633,38 @@ private WebElement cancelButtonOnPhoneSavepre;
 	 * @toDo : Validates the presence of Back to Profile and Preferences links
 	 *       on Go green page
 	 */
-
-	public void validateBacktoPNPlink() {
-		
+	public void validateBacktoPNPlink() {		
 		driver.switchTo().defaultContent();
 		validateNew(backLink1);
-
 	}
-	
+	/**
+	 * @toDo : Validates Plan name on Account Settings page for Pre-effective users
+	 *       
+	 */	
+	public String validatePlanNameMemberidNameAcountProfilepre() {
+		validateNew(planName);
+		System.out.println("Plan name is " + planName.getText());
+		validateNew(memberId);
+		validateNew(memberName);	
+	        return planName.getText();
+		}
 
+	public void switchTabForComboMember(int index) {
+		driver.switchTo().defaultContent();
+		tabsForComboMember.get(index).click();
+	}
+	/**
+	 * @toDo : Validate HSID Password & Account Recovery Link on Account Settings Page
+	 *       
+	 */
+	public void validateHealthSafeIdbothLinks() {
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)
+				&& (!(MRScenario.environment).toLowerCase().contains("team-ci"))
+				&& (!(MRScenario.environment).toLowerCase().contains("offline"))
+				&& (!(MRScenario.environment).toLowerCase().contains("prod"))) {
+		Assert.assertFalse("HSIDLink should be seen",!validateNew(hsidPasswordLink));
+		Assert.assertFalse("HSID Account Recovery link should be seen",!validateNew(hsidAccountLink));
+	}
+
+}
 }

@@ -156,14 +156,14 @@ public class ClaimsBase extends UhcDriver  {
 	public void openAndValidate() throws InterruptedException {
 	}
 
-	boolean dryRun=false;
+	boolean onlyTestUiFlag=false;
 	
-	public void setDryRunFlag(boolean input) {
-		dryRun=input;
+	public void setOnlyTestUiFlag(boolean input) {
+		onlyTestUiFlag=input;
 	}
 
-	public boolean getDryRunFlag() {
-		return dryRun;
+	public boolean getOnlyTestUiFlag() {
+		return onlyTestUiFlag;
 	}
 	
 	/**

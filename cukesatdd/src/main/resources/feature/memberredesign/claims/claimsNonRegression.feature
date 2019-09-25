@@ -235,7 +235,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
       |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 
-  @claimsDryRun	
+  @claimsOnlyTestUI	
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - DRY RUN - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -290,26 +290,26 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
-    @claimsDryRunP1
+    @claimsOnlyTestUI_P1
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
       | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
-    @claimsDryRunP2
+    @claimsOnlyTestUI_P2
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
-    @claimsDryRunCP3
+    @claimsOnlyTestUI_P3
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15235 | MAPD     | UHC_Individual      | Last 24 months | M_NICE_CLAIMS   | 000       | Medical           |
       | 15230 | MAPD     | AARP_Individual     | Last 24 months | M_COSMOS_CLAIMS | 000       | Medical           |
       | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
-    @claimsDryRunP4
+    @claimsOnlyTestUI_P4
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15236 | SHIP     | Individual          | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |

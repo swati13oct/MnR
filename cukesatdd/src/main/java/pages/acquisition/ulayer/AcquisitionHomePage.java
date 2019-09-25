@@ -447,6 +447,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		checkModelPopup(driver);
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
@@ -865,6 +866,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+		checkModelPopup(driver);
 		if(isHealthPlan){
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
@@ -946,6 +948,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
