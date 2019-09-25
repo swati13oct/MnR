@@ -1050,15 +1050,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateCommunicationPreferencesForTerminated();
 	}
-
-	@Then("^I should see the combo tabs on Account Profile page and user validates the elements on individual tabs$")
-	public void userValidatesComboTabsOnProfilePage() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-		profilePreferencesPage.validateComboTabForAccountProfile();
-	}
-
-	
+		
 	@And("^the user should not be able to edit the Phone numbers$")
 	public void userValidatesThePhoneSectionWithoutEditsAllowed() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
@@ -1186,4 +1178,43 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validateBacktoPNPlink();
 
 }
+	/***
+	 * Validate Combo tab on Account Settings Page 
+	 */
+		@Then("^I should see the combo tabs on Account Profile page and user validates the elements on individual tabs$")
+	public void userValidatesComboTabsOnProfilePage() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+			boolean Var = profilePreferencesPage.getNumPlanTabComboPlans()>1;
+		for (int x=0; x<profilePreferencesPage.getNumPlanTabComboPlans(); x++) {
+			String planName=profilePreferencesPage.getComboTabPlanType(x);
+			if (planName.toUpperCase().contains("SENIOR SUPPLEMENT PLAN")) {
+				System.out.println("This tab is for SSUP plan, proceed to validate no preferences");
+				profilePreferencesPage.validateNoCommunicationPreferences();
+				return;
+			}
+			System.out.println("This tab is for plan='"+planName+"', proceed to validate account settings page ");
+			try {
+				profilePreferencesPage.verifyAccountSettingsPreffectivemember();
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if ((x+1) == profilePreferencesPage.getNumPlanTabComboPlans())
+				System.out.println("This tab is the last tab, testing is done");
+			else {
+				System.out.println("Click next tab to get ready for next plan validation");
+				profilePreferencesPage.switchTabForComboMember(x+1);}
+		}
+			
+	}	
+	/***
+	 * Validate HSID links on Account Settings Page 
+	 */
+	@Then("^the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links$")
+	public void user_Validates_bothHSID_Links() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateHealthSafeIdbothLinks();
+	}
 }
