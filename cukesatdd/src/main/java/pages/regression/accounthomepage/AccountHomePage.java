@@ -3344,5 +3344,22 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return false;
 	}
-
+	
+	@FindBy(xpath ="//span[@id='hello-person']")
+	private WebElement memName;
+	
+	@FindBy(xpath="//span[@class='hide-mobile ng-scope']")
+	private WebElement viewRecomend;
+	
+	/*
+	 * This method validates login on Dashboard
+	 */
+	public void validateLoginonDashboard() throws InterruptedException {
+		Thread.sleep(2000);
+		String memberName = memName.getAttribute("innerText");
+		System.out.println("Name displayed on Dashboard for this member is:" + memberName);
+		String idCard = viewRecomend.getAttribute("innerText");
+		Assert.assertTrue(idCard.contains("VIEW & PRINT MEMBER ID CARDS"));
+		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
+	}
 }

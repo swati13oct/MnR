@@ -1223,4 +1223,12 @@ public class TestHarness extends UhcDriver {
     	public void waitForTestharnessTableToShow() {
     		CommonUtility.waitForPageLoad(driver, testharnessTable, 5);
     	}
+    	/*
+    	 * Validates Login on TestHarness Page 
+    	 */
+    	public void validateLoginonTestharness() throws InterruptedException {
+    		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
+    		String Message_text = testHarnessHeader.getText();
+    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    	}
 }

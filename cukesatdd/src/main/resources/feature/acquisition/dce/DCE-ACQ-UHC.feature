@@ -1,7 +1,7 @@
 @acq_dce_UHC
 Feature: 2.10. ACQ-DCE - UMS
 
-@acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate
+@acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer
 Scenario Outline: To verify DCE flow from Blayer home page
 Given the user is on the uhcmedicaresolutions site landing page
 When I access the acquisition DCE tool from home page on ums site
@@ -25,7 +25,6 @@ Then user enters zipcode on step3 and validate plan summary page in uhc
 |Zip|<zipcode>|
 And user views plans of the below plan type in UMS site
 | Plan Type | <plantype> |
-#Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
 Then user validates drug cost in medical benefit section in the UMS site
 | Plan Name | <planName> |
 Then the user view plan details of the above selected plan in UMS site and validates
