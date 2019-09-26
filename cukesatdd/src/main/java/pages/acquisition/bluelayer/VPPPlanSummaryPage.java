@@ -438,7 +438,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 		
-
+		@FindBy(id = "msVppZipCode")
+		private WebElement medSupZipcode;
+		
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
@@ -508,7 +510,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
+		@FindBy(xpath = "(//*[contains(@id,'ole-cancel-confirm')]//a[contains(text(),'Cancel Application')]")
 		private WebElement cancelButtonPopUp;
 
 		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
@@ -3077,31 +3079,33 @@ public void closeOriginalTabAndOpenNewTab() {
 }
 //^^^ note: added for US1598162	
 
-public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
 	Thread.sleep(4000);
 	CommonUtility.waitForPageLoadNew(driver, DOB, 20);
 	System.out.println("MedSup page form is displayed");
+	medSupZipcode.sendKeys(zipcode);
 	DOB.click();
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	MaleGender.click();
 	monthDrpDwn.click();
 	monthDrpDwnOption.click();
-	Thread.sleep(2000);
+	//Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	startDrpDwnOption.click();
+	Thread.sleep(3000);
 	System.out.println("Plan to start date selected");
 	ViewPlanMedSupPage.click();
 }
@@ -3140,7 +3144,7 @@ public String StartApplicationButton(String FirstName, String LastName) throws I
 	System.out.println("The return to the application code is- "+ResumeKey);
 	cancelButton.click();
 	CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
-	cancelButtonPopUp.click();
+	jsClickNew(cancelButtonPopUp);
 	System.out.println("Cancel application has been clicked on the pop up");
 	return ResumeKey;
 }
