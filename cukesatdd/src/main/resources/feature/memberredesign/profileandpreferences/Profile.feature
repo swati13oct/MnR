@@ -288,7 +288,7 @@ Feature: C1.2To test Profile and Preferences page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Copay Category | <copayCategory> |
-    When the user navigates to Profile and Preferences page
+    Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
     And I validate the healthsafe ID links
     Then the email address section should be verified
@@ -308,7 +308,7 @@ Feature: C1.2To test Profile and Preferences page
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
-      
+    Then I validate that login is successfull  
    Examples:
    | planType  |  memberType  | copayCategory | 
    | MA        |  Individual  |  NON LIS      |
