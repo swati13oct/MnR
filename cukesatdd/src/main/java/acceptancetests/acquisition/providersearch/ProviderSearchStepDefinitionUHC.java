@@ -261,7 +261,9 @@ public class ProviderSearchStepDefinitionUHC {
 		public void verify_providers_covered_blayer_planDetails() {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
+			if(!vppPlanDetailsPage.providerinfo()){
+				Assert.fail("Failed in validating the provider link on plan details page");
+			}
 		}
 	
 }

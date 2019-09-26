@@ -1,5 +1,6 @@
 @fixedTestCaseTest
-Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
+Feature: 2.07. ACQ- Provider Search Flow in UMS
+
 
   @ProviderSearchBlayerSmoke @ProviderSearchBlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in UMS site
@@ -42,16 +43,20 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
   @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+ 	When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
     And I select all 3 plans to compare and click on compare plan link in UHC
     And I Click on Look up your doctor link on Plan compare
     And I click on Get Started on and Add Provider from find care page
     Then Verify provider is count is updated on plan compare page
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             |
-      | 15488 |   90210 | NO              | Los Angeles County |
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 15488 |   90210 | NO              | Los Angeles County | MAPD	|
       
       
      @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer
@@ -70,12 +75,12 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
-       Given the user is on the uhcmedicaresolutions site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
@@ -96,7 +101,7 @@ Feature: 1.15-VBF-Acq-To test Provider Search Flow  in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |

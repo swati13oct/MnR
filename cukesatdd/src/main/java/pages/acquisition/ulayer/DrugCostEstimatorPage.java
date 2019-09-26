@@ -31,7 +31,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	@FindBy(id = "add-drug")
+	@FindBy(id= "add-drug")
 	public WebElement addDrug;
 
 	@FindBy(id = "pharmacyTabId")
@@ -377,7 +377,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
 	public List<WebElement> loadingBlock;
 	
-	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1")
+	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1[contains(text(),'Drug')]")
 	public WebElement pageHeading;
 	
 	@FindBy(id = "drugDosageStrengthId")
@@ -526,7 +526,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
+		//CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
 		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);

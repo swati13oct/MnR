@@ -148,7 +148,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
 	private WebElement takeTheQuizBtn;
 
-	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
@@ -253,10 +253,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//button[contains(@class,'proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 	
-	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
 	
@@ -422,18 +422,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+	//	checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-		/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-		try{
-			if(proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		}catch(Exception e){
-			System.out.println("Proactive chat popup not displayed");
-		}*/
+	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	
 	}	
 	
 	public void openAndValidate(String siteOrPage) {
@@ -484,10 +478,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		if (visitorProfile>0) {				
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+		//checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
-		clickIfElementPresentInTime(driver, proactiveChatExitBtn,2);
+	//	clickIfElementPresentInTime(driver, proactiveChatExitBtn,2);
 		/*try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);			
@@ -515,7 +509,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 		try{
 			Thread.sleep(5000);
@@ -865,6 +859,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -1553,7 +1548,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
-
+		//providerSearchFromHomeScreen.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 

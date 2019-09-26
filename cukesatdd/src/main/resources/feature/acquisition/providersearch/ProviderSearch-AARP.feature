@@ -1,5 +1,5 @@
 @fixedTestCaseTest
-Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
+Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
   @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke
   Scenario Outline: Verify Provider Search  in AARP site
@@ -63,7 +63,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
@@ -82,7 +82,7 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    When the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
     Then the user navigates to the plan Details page
       | Plan Name | <planName> |
@@ -130,11 +130,13 @@ Feature: 1.16-VBF-Acq-To test Provider Search Flow  in AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Current year
+      | Plan Type | <plantype> |
     And I select all 3 plans to compare and click on compare plan link in AARP
     And I Click on Look up your doctor link on Plan compare in AARP
     And I click on Get Started on and Add Provider from find care page in AARP
     Then Verify provider is count is updated on plan compare page in AARP
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             |
-      | 15489 |   90210 | NO              | Los Angeles County |
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 15489 |   90210 | NO              | Los Angeles County |	MAPD	|

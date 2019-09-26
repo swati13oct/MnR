@@ -174,7 +174,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedTotalAnnualCost;
 
-	@FindBy(xpath = "//div[@id='additionalBenefits']//a[contains(text(),'Edit Provider')]")
+	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath="//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -766,11 +766,16 @@ public class PlanDetailsPage extends UhcDriver {
 	public boolean providerinfo() {
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-100)", "");
+		driver.navigate().refresh();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String editProviderButtonText=editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit Provider")) {
+		if (editProviderButtonText.contains("Edit my Doctor")) {
 			return true;
 		}
 		return false;
@@ -810,7 +815,9 @@ public class PlanDetailsPage extends UhcDriver {
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
+					Assert.fail("Proper value not found");
+				}
 			}else {
 				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
@@ -818,7 +825,9 @@ public class PlanDetailsPage extends UhcDriver {
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				Assert.assertEquals(displayedText, additionalBenefits.get(i+1).getCells().get(1));
+				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
+					Assert.fail("Proper value not found");
+				}
 			}
 
 		}
@@ -842,7 +851,9 @@ public class PlanDetailsPage extends UhcDriver {
 			displayedText = ActualTextforBenefit.getText();
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 			System.out.println(displayedText);
-			Assert.assertEquals(displayedText, medicalBenefits.get(i+1).getCells().get(1));
+			if(!displayedText.contains(medicalBenefits.get(i+1).getCells().get(1))){
+				Assert.fail("Proper value not found");
+			}
 		}
 	}
 	/**

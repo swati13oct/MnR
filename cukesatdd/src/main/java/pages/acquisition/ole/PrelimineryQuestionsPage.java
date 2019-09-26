@@ -209,7 +209,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("personal-information")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal Information')]")))){
 			System.out.println("OLE Personal Information Page is Displayed");
 			return new PersonalInformationPage(driver);
 		}

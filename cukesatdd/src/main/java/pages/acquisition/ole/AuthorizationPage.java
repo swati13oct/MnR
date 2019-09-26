@@ -4,6 +4,7 @@
 package pages.acquisition.ole;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -175,7 +176,7 @@ public class AuthorizationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
-		if(driver.getCurrentUrl().contains("review")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
 			return new ReviewSubmitPage(driver);
 		}
 		else{

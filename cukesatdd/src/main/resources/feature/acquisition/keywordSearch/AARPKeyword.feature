@@ -1,5 +1,5 @@
 @CT @Keywordsearch_AARP
-Feature: AARP_Acquistion Features community search, keyword search 
+Feature: 1.09. ACQ- Community search, keyword search AARP
   
 
   @KeywordSearch_AARP @acquisitionRegression

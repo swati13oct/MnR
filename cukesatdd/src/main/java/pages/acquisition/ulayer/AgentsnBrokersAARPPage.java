@@ -31,8 +31,8 @@ public class AgentsnBrokersAARPPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, header, 30);
-		validateNew(medicareOverviewTableTitle);
+		//CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(header);
 		
 	}
 

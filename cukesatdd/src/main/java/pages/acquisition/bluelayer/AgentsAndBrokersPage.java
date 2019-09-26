@@ -30,8 +30,8 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//div[contains(@class,'mededoverviewcontainer')]//div[contains(@class,'meded-medicare-overview__title')]")
-	public static WebElement medicareOverviewTableTitle;
+	@FindBy(xpath = "//h1//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement brokerAgentHeader;
 
 
 	public AgentsAndBrokersPage(WebDriver driver) {
@@ -43,7 +43,7 @@ public class AgentsAndBrokersPage extends GlobalWebElements{
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, header, 30);
-		validateNew(medicareOverviewTableTitle);
+		validateNew(brokerAgentHeader);
 		}
 
 	public AcquisitionHomePage homeFooterClick() {

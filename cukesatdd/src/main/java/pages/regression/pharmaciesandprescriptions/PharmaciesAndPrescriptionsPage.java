@@ -77,14 +77,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	/**
 	 * to validate the pharmacies tiles section, determine what tiles should show up or not
-	 * TODO - maybe more changes for 2020 MAPD walgreens plan will have a different pharmacy locator page and content
 	 * @param tileDrug
 	 * @param tilePharmacy
 	 * @param tilePrescription
 	 * @param tileDelivery
 	 * @param tileBenefit
 	 */
-	//
 	public void validatePharmaciesTilesSection(boolean tileDrug, boolean tilePharmacy,	
 			boolean tilePrescription, boolean tileDelivery, boolean tileBenefit) {
 		String exp_TileHeaderTxt="Look up covered drugs and estimate costs";
@@ -138,7 +136,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			validateTileNotExist(exp_TileHeaderTxt, exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
 	}
 
-	
+
 	public void validateTileLnkDestination(String planType, String memberType, String tile) throws InterruptedException {
 		String planCategoryId="0";
 		validateTileLnkDestination(planType, memberType, tile, planCategoryId);
@@ -169,7 +167,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		if (tile.equals("Compare drug pricing")) {
 			linkElement=pTile_compDrugPricingLnk;
 			if (memberType.toUpperCase().contains("GROUP")) {
-				expUrl="/sso/outbound?outboundTo=optumrx&amp;deepLink=rxpricingtool";
+				expUrl="https://chp-stage.optumrx.com/public/sso-landing";
 				switchTab=true;
 			} else
 				expUrl="/member/drug-lookup/overview.html#/drug-cost-estimator";
@@ -178,7 +176,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			expUrl="/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
 		} else if (tile.equals("Order prescription refills")) {
 			linkElement=pTile_orderPresRefillsLnk;
-			expUrl="services/rx-refill-reminder/";
+			expUrl="https://chp-stage.optumrx.com/public/sso-landing";
 			switchTab=true;
 		} else if (tile.equals("Check home delivery order status")) {
 			linkElement=pTile_chkHomeDeliOrderStatusLnk;
@@ -200,8 +198,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			CommonUtility.checkPageIsReady(driver);
 			String actUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+			if (expUrl.contains("sso")) {
+				String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
+				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+						+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
+						actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
+			} else {
+				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
 					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			}
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
 		} else {

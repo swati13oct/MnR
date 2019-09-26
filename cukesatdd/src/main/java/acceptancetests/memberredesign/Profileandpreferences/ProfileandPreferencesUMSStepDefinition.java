@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
+import pages.memberrdesignVBF.ProfilePreferencesPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 //import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
@@ -1049,15 +1050,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateCommunicationPreferencesForTerminated();
 	}
-
-	@Then("^I should see the combo tabs on Account Profile page and user validates the elements on individual tabs$")
-	public void userValidatesComboTabsOnProfilePage() {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-		profilePreferencesPage.validateComboTabForAccountProfile();
-	}
-
-	
+		
 	@And("^the user should not be able to edit the Phone numbers$")
 	public void userValidatesThePhoneSectionWithoutEditsAllowed() {
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
@@ -1149,6 +1142,22 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePrefPage.validateTemporaryAddressSection();
 		profilePrefPage.validateMailingAddressSection();
 	}
+	
+	/**
+	 * @toDo : The user validates the Account information of the logged in
+	 *       member
+	 */
+
+	@And("^the user validates the Plan Name, Member name, Member ID and account section in UMS site")
+	public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile1() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		if (profilePreferencesPage == null) {
+			System.out.println("Profile and Preferences page variable is Null");
+		}
+		profilePreferencesPage.validatePlanNameMemberidNameAccountProfile();
+	}
 	/**
 	 * @toDo : Validates the Sign Up Today in Communication Preferences section
 	 */
@@ -1158,5 +1167,83 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validateSIGNUp();
 	}
+	/***
+	 * 
+	 */
+	@Then("^the user validates the presence of Back to Profile and Preferences links$")
+	public void UserValidatesBacktoPNPlink() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
+		profilePreferencesPage.validateBacktoPNPlink();
+
+}
+	/***
+	 * Validate Combo tab on Account Settings Page 
+	 */
+		@Then("^I should see the combo tabs on Account Profile page and user validates the elements on individual tabs$")
+	public void userValidatesComboTabsOnProfilePage() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+			boolean Var = profilePreferencesPage.getNumPlanTabComboPlans()>1;
+		for (int x=0; x<profilePreferencesPage.getNumPlanTabComboPlans(); x++) {
+			String planName=profilePreferencesPage.getComboTabPlanType(x);
+			if (planName.toUpperCase().contains("SENIOR SUPPLEMENT PLAN")) {
+				System.out.println("This tab is for SSUP plan, proceed to validate no preferences");
+				profilePreferencesPage.validateNoCommunicationPreferences();
+				return;
+			}
+			System.out.println("This tab is for plan='"+planName+"', proceed to validate account settings page ");
+			try {
+				profilePreferencesPage.verifyAccountSettingsPreffectivemember();
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if ((x+1) == profilePreferencesPage.getNumPlanTabComboPlans())
+				System.out.println("This tab is the last tab, testing is done");
+			else {
+				System.out.println("Click next tab to get ready for next plan validation");
+				profilePreferencesPage.switchTabForComboMember(x+1);}
+		}
+			
+	}	
+	/***
+	 * Validate HSID links on Account Settings Page 
+	 */
+	@Then("^the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links$")
+	public void user_Validates_bothHSID_Links() {
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+		profilePreferencesPage.validateHealthSafeIdbothLinks();
+	}
+	/**
+	 * 
+	 */
+	@Then("^I validate that login is successfull$")
+	public void verifyloginOnDashboardHomePage() throws Throwable {
+		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))	
+		{			
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
+			System.out.println("Now validating login on Dashboard");
+			accountHomePage.validateLoginonDashboard();	
+			System.out.println(" !!! Member is on Dashboard !!!");
+			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
+		}
+		
+		else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+		{
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			System.out.println("Now validating login on test-harness page");
+			testHarnessPage.validateLoginonTestharness();	
+			System.out.println(" !!! Member is on the Testharness page !!!");
+		    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+		}
+		else {
+			System.out.println("Not verifying that preeffective message is displayed as the environment is not set to team-h or Stage");
+		}
+		}
+		
 }

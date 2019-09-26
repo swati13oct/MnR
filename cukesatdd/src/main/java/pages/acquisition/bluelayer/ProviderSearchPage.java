@@ -44,13 +44,13 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')]/span)[1]")
+	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 	
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath="(//div[contains(@class,'export-saved-providers')]//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath="(//*[contains(text(),'Check Provider Coverage')])[2]")
 	private WebElement Checkcoverage;
 	
 	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
@@ -66,7 +66,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
 	
-	@FindBy(xpath="//button[contains(text(),'Get Started')]")
+	@FindBy(xpath="//*[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 	
 	@FindBy(id="location")
@@ -75,13 +75,13 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='mainContent']//button")
 	private WebElement continueButton;
 	
-	@FindBy(xpath="//div[contains(@class,'searchData')]/h2/div/a[1]")
+	@FindBy(xpath="(//*[contains(@data-test-key,'provider-name-link')])[1]")
 	private WebElement PrimaryCarePhysician;
 	
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(className="saved-provider-button")
+	@FindBy(xpath="//button[contains(@class,'cta-header-button')]//span[text()='Save']")
 	private WebElement SaveBtn2;
 	
 	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
@@ -159,12 +159,12 @@ public class ProviderSearchPage extends UhcDriver {
 
 	CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
-	Physician.click();
+	jsClickNew(Physician);
 	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-	SaveBtn.click();
+	jsClickNew(SaveBtn);
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
-	Viewsavebtn.click();
+	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
 	validateNew(Checkcoverage);
 	jsClickNew(Checkcoverage);
@@ -240,14 +240,14 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-		SaveBtn.click();
+		jsClickNew(SaveBtn);
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
-		Viewsavebtn.click();
+		jsClickNew(Viewsavebtn);
 
 		validateNew(Checkcoverage);
 		
-		Checkcoverage.click();
+		jsClickNew(Checkcoverage);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
