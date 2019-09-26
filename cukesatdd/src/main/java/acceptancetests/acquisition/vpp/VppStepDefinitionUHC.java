@@ -1487,9 +1487,10 @@ public class VppStepDefinitionUHC {
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
+		String zipcode = memberAttributesMap.get("Zipcode");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		plansummaryPage.MedSupFormValidation(DateOfBirth,zipcode);
 		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
@@ -1516,10 +1517,11 @@ public class VppStepDefinitionUHC {
 		}
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zipcode");
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
