@@ -448,6 +448,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink;
 	
+	@FindBy(xpath="//p[contains(text(),'The state and ZIP code combination entered is not')]")
+	private WebElement passwordEditLink1;
+	
 	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink_2;
 
@@ -2667,4 +2670,77 @@ private WebElement cancelButtonOnPhoneSavepre;
 	}
 
 }
+	public void validatesAddressSectioning() {
+	 
+		{
+		validateNew(permanentAddressSection);
+		validateNew(tempAddressSection);
+		validatetempaddressEditElements1(); // clicks on edit temporary //
+											// address and validated fields
+		//validateMailingAddressFields(); // validates the fields under
+										// mailing address
+
+	
+		//validateNew(addressSectionUhc);
+		//addressSectionUhc.click();
+		//validateMailingAddressUhc();
+		//validateTemporaryAddressUhc();
+		//addressGoBackBtnUhc.click();
+	}
+}
+	/**
+	 * @toDo : Validates the elements that appear on clicking the edit button of
+	 *       the temp address section
+	 */
+	public void validatetempaddressEditElements1() {
+		// TODO Auto-generated method stub'
+
+		scrollToView(editTempAddressLink);
+		if (validate(editTempAddressLink))
+			editTempAddressLink.click();
+		else if (validate(addTempAddressLink))
+			addTempAddressLink.click();
+
+		validateNew(StreetAddress2);
+		StreetAddress2.sendKeys("131 morristown rd");
+		validateNew(City);
+		City.sendKeys("Basking Ridge");
+		validateNew(State);
+		State.sendKeys("New Jersey");
+		validateNew(Zip);
+		Zip.sendKeys("07920");
+		//public boolean validateSavebuttonclick() {
+			//CommonUtility.waitForPageLoad(driver, passwordEditLink, 10);
+			if(passwordEditLink1.isDisplayed()){
+				System.out.println("zipcode error message is dispaley");
+			}
+		//	passwordEditLink.click();
+		//	newPasswordFeild.sendKeys("");
+			//saveButton.click();
+			//saveButton.click();
+		String Message_text = passwordEditLink1.getText();
+		Assert.assertTrue(((List<WebElement>) passwordEditLink1).contains("The state and ZIP code combination entered is not"));   
+			/*System.out.println(passwordEditLink1.getText());
+			if (passwordEditLink1.getText().contains("The state and ZIP code combination entered is not")){
+				cancelPasswordButton.click();
+				return true;
+			} else {
+				Assert.fail("The element " + (passwordErrormssg.getText() + "is not found"));
+			}
+			return false;
+		}
+*/
+		
+		validateNew(startDateMM);
+		startDateMM.sendKeys("10");
+		//validateNew(startDate);
+		validateNew(startDateYr);
+		startDateYr.sendKeys("2019");
+		validateNew(endDateMM);
+		validateNew(endDateYYYY);
+		validateNew(SaveButtontempAddress);
+		validateNew(CancelButtontempAddress);
+		validateNew(CancelButtontoptempAddress);
+
+	}
 }
