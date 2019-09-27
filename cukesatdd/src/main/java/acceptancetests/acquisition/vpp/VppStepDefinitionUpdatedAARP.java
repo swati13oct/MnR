@@ -69,10 +69,11 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
 	 */
 	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1052,7 +1053,8 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 	
 	@Then("^user gets a create profile prompt on AARP site$")
@@ -1078,7 +1080,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site$")
-	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) {
+	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -1263,7 +1265,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change from Home on AARP site$")
-	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) {
+	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);

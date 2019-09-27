@@ -64,10 +64,11 @@ public class VppPlanSummaryStepDefinitionAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
 	 */
 	@When("^the user does plan search using the following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
