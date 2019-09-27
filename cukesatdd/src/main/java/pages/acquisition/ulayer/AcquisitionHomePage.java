@@ -865,7 +865,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
+	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 		checkModelPopup(driver);
 		if(isHealthPlan){
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
@@ -873,18 +873,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			btnGO.click();
 		}else{
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-		sendkeys(zipCodeField, zipcode);
-
-		viewPlansButton.click();
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+			sendkeys(zipCodeField, zipcode);
+			viewPlansButton.click();
 		}
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		Thread.sleep(4000);
+		if(vppTop.isDisplayed())
+			if (driver.getCurrentUrl().contains("health-plans")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			else
+				driver.navigate().refresh();
+		Thread.sleep(5000);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
-	
+
 	public VPPPlanSummaryPage addPlansForVisitorProfile(String zipcode) {
 		
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
