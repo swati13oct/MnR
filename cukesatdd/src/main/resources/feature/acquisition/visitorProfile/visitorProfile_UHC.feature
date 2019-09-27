@@ -3,7 +3,7 @@
 @Test @UHCvisitorprofile
 Feature: 2.08. ACQ-Visitor profile - UMS
 
-  @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke
+  @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -65,7 +65,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
 
-  @addPlans @addPlansBLayerSmoke
+  @addPlans @addPlansBLayerSmoke @visitorProfileRegressionUHC
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -79,8 +79,6 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    When user views plans of the below plan type in UMS site for current year
-      | Plan Type | <plantype> |
     Then user saves two plans as favorite on UHC site
       | MA Test Plans | <MA_testPlans> |
       | Plan Type | <plantype> |
@@ -91,9 +89,9 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                         	|plantype| planYear|
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MA	| 2019 |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA	| 2020 |
 
-  @addPlansVPP
+  @addPlansVPP 
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -112,7 +110,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | UHC MedicareComplete SecureHorizons Essential (HMO)_Test,UHC MedicareComplete SecureHorizons Plan 1 (HMO) |
       
-  @addPlansPlanDetail
+  @addPlansPlanDetail @visitorProfileRegressionUHC
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -121,6 +119,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
+    	|Plan Type | <plantype> |
       | MA Test Plans | <MA_testPlans> |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
@@ -141,6 +140,6 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                        | eyeWearBenefitType | eyeWearExpectedText                                  | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
-      | Alabama | US1770330 |   53503 | NO            | Jefferson County | UnitedHealthcare MedicareComplete Open (PPO),UnitedHealthcare MedicareComplete Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per year | Eye Exam           | $20 copay 1         | Foot Care - Routine        | $50 copay 1                 | Hearing Exam           | $15 copay 1             | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | state   | UID       | zipcode | isMultiCounty | plantype | county           | MA_testPlans                                                                                        | eyeWearBenefitType | eyeWearExpectedText                                  | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
+      | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare MedicareComplete Open (PPO),UnitedHealthcare MedicareComplete Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per year | Eye Exam           | $20 copay        | Foot Care - Routine        | $50 copay                 | Hearing Exam           | $15 copay           | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
       
