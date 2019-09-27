@@ -322,3 +322,18 @@ Feature: C1.2To test Profile and Preferences page
    | SHIP      |  ShipOnly    |  NON LIS      | 
    | COMBO     | FedShip      |  NON LIS      |
    | SSUPGroup |Group         |  NON LIS      |
+   
+    @accountProfile16 
+    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    Then the user navigates to Profile and Preferences page
+   # Then the user validates permanent address section
+	 # And the user verifies the Temporary Address Link on the Account settings page
+	  And the user validates the address sectioning
+     
+	    Examples:      
+      | planType | memberType        | copayCategory   |
+      | GOVT     | AP_ADDRESS | NON LIS |
