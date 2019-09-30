@@ -978,8 +978,9 @@ public class VppStepDefinitionUHC {
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		//plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 
 	@Then("^user gets a create profile prompt on UHC site$")
