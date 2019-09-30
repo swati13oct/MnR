@@ -2680,7 +2680,14 @@ public void validateDefaultNoSavedPlan(String planType) {
 	
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
+			 System.out.println("TEST - initial save plan xpath : "+ initial_savePlanIconXpath);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
 	
 		}
