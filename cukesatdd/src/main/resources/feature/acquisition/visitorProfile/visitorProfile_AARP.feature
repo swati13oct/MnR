@@ -109,7 +109,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
   @addPlansPlanDetail  @visitorProfileRegressionAARP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
