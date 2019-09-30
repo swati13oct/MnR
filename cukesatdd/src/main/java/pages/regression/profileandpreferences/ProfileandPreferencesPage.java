@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -2692,6 +2693,12 @@ private WebElement cancelButtonOnPhoneSavepre;
 	 * @toDo : Validates the elements that appear on clicking the edit button of
 	 *       the temp address section
 	 */
+	
+	@FindBy(xpath=" //p[contains(text(),'The state and ZIP code combination entered is not')]")
+	private WebElement claimsTabTopMenu1;
+	
+	
+	
 	public void validatetempaddressEditElements1() {
 		// TODO Auto-generated method stub'
 
@@ -2708,39 +2715,34 @@ private WebElement cancelButtonOnPhoneSavepre;
 		validateNew(State);
 		State.sendKeys("New Jersey");
 		validateNew(Zip);
-		Zip.sendKeys("07920");
-		//public boolean validateSavebuttonclick() {
-			//CommonUtility.waitForPageLoad(driver, passwordEditLink, 10);
-			if(passwordEditLink1.isDisplayed()){
-				System.out.println("zipcode error message is dispaley");
-			}
-		//	passwordEditLink.click();
-		//	newPasswordFeild.sendKeys("");
-			//saveButton.click();
-			//saveButton.click();
-		String Message_text = passwordEditLink1.getText();
-		Assert.assertTrue(((List<WebElement>) passwordEditLink1).contains("The state and ZIP code combination entered is not"));   
-			/*System.out.println(passwordEditLink1.getText());
-			if (passwordEditLink1.getText().contains("The state and ZIP code combination entered is not")){
-				cancelPasswordButton.click();
-				return true;
+		Zip.sendKeys("07920");		
+		/*if(passwordEditLink1.isDisplayed()){
+			System.out.println("zipcode error message is dispaley");
+			}	
+			System.out.println("Now checking for claims summary sub navigation of Claims");
+			Dimension size = claimsTabTopMenu1.getSize();
+			System.out.println(size);
+			int height = size.getHeight();
+			System.out.println("Height is "+height);
+			int width = size.getWidth();
+			System.out.println("Width is "+width);
+			if (height == 0) {
+				System.out.println("Incorrect zip code Error message is not displayed");
 			} else {
-				Assert.fail("The element " + (passwordErrormssg.getText() + "is not found"));
-			}
-			return false;
-		}
-*/
-		
+				System.out.println("Error message for incorrect zipcode is displayed, Test step is failed due to it");
+				Assert.fail("assert Error message for incorrect zipcode is displayed, Test step is failed due to it");	
+			}*/			
 		validateNew(startDateMM);
 		startDateMM.sendKeys("10");
-		//validateNew(startDate);
+		validateNew(startDateDD);
 		validateNew(startDateYr);
 		startDateYr.sendKeys("2019");
 		validateNew(endDateMM);
+		endDateMM.sendKeys("12");
 		validateNew(endDateYYYY);
+		endDateYYYY.sendKeys("2019");
 		validateNew(SaveButtontempAddress);
 		validateNew(CancelButtontempAddress);
 		validateNew(CancelButtontoptempAddress);
-
 	}
-}
+	}
