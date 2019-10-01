@@ -430,7 +430,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
 		private WebElement resumeApplication;
 
 
@@ -2868,6 +2868,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		String DateOfBirth ="11031950";
 		MedSupFormValidation(DateOfBirth);
+		Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
