@@ -35,7 +35,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(className = "fd_myPlans")
@@ -164,7 +164,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
@@ -867,16 +867,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 		checkModelPopup(driver);
-		if(isHealthPlan){
+		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
+		/*if(isHealthPlan){
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
 
 			btnGO.click();
-		}else{
+		}else{*/
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
-		}
+	//	}
 		Thread.sleep(4000);
 		if(vppTop.isDisplayed())
 			if (driver.getCurrentUrl().contains("health-plans")) {
