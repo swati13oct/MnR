@@ -444,11 +444,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpaed-month")
-		private WebElement monthDrpDwn;
+		@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
+		private WebElement monthDrpDwn_PartA;
 		
 		@FindBy(id = "mpaed-year")
-		private WebElement yearDrpDwn;
+		private WebElement yearDrpDwn_PartA;
 		
 		@FindBy(id = "mpbed-month")
 		private WebElement monthBDrpDwn;
@@ -510,10 +510,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//*[contains(@id,'ole-cancel-confirm')]//a[contains(text(),'Cancel Application')]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
 		private WebElement resumeApplication;
 		
 		
@@ -3123,18 +3123,49 @@ public void closeOriginalTabAndOpenNewTab() {
 
 public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
 	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
 	System.out.println("MedSup page form is displayed");
 	medSupZipcode.sendKeys(zipcode);
 	DOB.click();
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
-	MaleGender.click();
-	monthDrpDwn.click();
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
 	//Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
-	yearDrpDwn.click();
+	yearDrpDwn_PartA.click();
+	yearDrpDwnOption.click();
+	System.out.println("Effective date- year value selected");
+//	Thread.sleep(2000);
+	monthBDrpDwn.click();
+	monthBDrpDwnOption.click();
+//	Thread.sleep(2000);
+	yearBDrpDwn.click();
+	yearBDrpDwnOption.click();
+	Thread.sleep(2000);
+	startDrpDwn.click();
+//	Thread.sleep(2000);
+	startDrpDwnOption.click();
+	Thread.sleep(3000);
+	System.out.println("Plan to start date selected");
+	ViewPlanMedSupPage.click();
+}
+
+public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
+	Thread.sleep(4000);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+	System.out.println("MedSup page form is displayed");
+	//medSupZipcode.sendKeys(zipcode);
+	DOB.click();
+	DOB.sendKeys(DateOfBirth);
+	System.out.println("Date of birth is entered");
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
+	monthDrpDwnOption.click();
+	//Thread.sleep(2000);
+	System.out.println("Effective date- month value selected");
+	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
 //	Thread.sleep(2000);
@@ -3193,6 +3224,7 @@ public String StartApplicationButton(String FirstName, String LastName) throws I
 
 public void ResumeApplicationButton() throws InterruptedException{
 	Thread.sleep(5000);
+	Start_ApplicationBtn.click();
 	CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 	resumeApplication.click();
 	System.out.println("Resume application link clicked successfully");
@@ -3203,7 +3235,9 @@ public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode
 	
 	applicationID.sendKeys(ApplicationID);
 	ResumeDOB.sendKeys(DOB);
-	ResumeZipCode.sendKeys(zipcode);
+	ResumeZipCode.click();
+	Thread.sleep(2000);
+	ResumeZipCode.sendKeys("90210");
 	resumeApplicationBtn.click();
 	
 	System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");
