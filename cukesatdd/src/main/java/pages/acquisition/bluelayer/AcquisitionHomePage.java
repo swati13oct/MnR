@@ -49,13 +49,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(xpath= "//*[contains(@id,'cta-zipcode') or contains(@id,'zipcode')]")
 	private WebElement zipCodeField;
 	
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeHealthPlans;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
@@ -1198,20 +1198,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
-		if(isHealthPlan){
-			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
-			sendkeys(zipCodeHealthPlans, zipcode);
+		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
+				/*if(isHealthPlan){
+					CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+					sendkeys(zipCode, zipcode);
 
-			GoBtnHealthPlans.click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-
-		}else{
+					btnGO.click();
+				}else{*/
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-		}
+	//	}
 		/*
 		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
 		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
