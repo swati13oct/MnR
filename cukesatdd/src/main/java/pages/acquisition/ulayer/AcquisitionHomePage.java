@@ -35,7 +35,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath= "//*[contains(@id,'cta-zipcode') or contains(@id,'zipcode')]")
+	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(className = "fd_myPlans")
