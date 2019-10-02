@@ -1873,7 +1873,7 @@ public boolean validateAllPlansChecked() {
 
     public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
         boolean isSpecificPlanInfoPresent = false;
-        if (planName.contains("HMO SNP")) {
+        if (planName.contains("SNP")) {
             //ElementData elementData = new ElementData("id", "viewDetailsMA");
         Thread.sleep(5000);
 isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);

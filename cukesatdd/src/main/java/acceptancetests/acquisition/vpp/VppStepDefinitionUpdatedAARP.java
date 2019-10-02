@@ -1023,23 +1023,23 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- PDP plan type ---------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- SNP plan type ---------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 	}
 
 	@Then("^user saves two plans as favorite on AARP site$")
