@@ -54,9 +54,10 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     #  | SNP Test Plans  | <SNP_testPlans> |
     Then user validates email option on AARP site
 	Then user validates email functionality with invalid and valid email address on AARP site
+
     Examples: 
-      | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166_1 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
 
   @emailAndPrint_AARP4 @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @predators @Apr_release_2019 @RegressionPredators
@@ -76,7 +77,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 	Then user validates print functionality on AARP site
 
     Examples: 
-      | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166_2 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
+      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
 
