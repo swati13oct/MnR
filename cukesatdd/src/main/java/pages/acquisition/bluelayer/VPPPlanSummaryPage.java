@@ -438,15 +438,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 		
-
+		@FindBy(id = "msVppZipCode")
+		private WebElement medSupZipcode;
+		
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpaed-month")
-		private WebElement monthDrpDwn;
+		@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
+		private WebElement monthDrpDwn_PartA;
 		
 		@FindBy(id = "mpaed-year")
-		private WebElement yearDrpDwn;
+		private WebElement yearDrpDwn_PartA;
 		
 		@FindBy(id = "mpbed-month")
 		private WebElement monthBDrpDwn;
@@ -511,7 +513,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
 		private WebElement resumeApplication;
 		
 		
@@ -539,13 +541,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
 		
-		@FindBy(css="a#pop-btn-1")
+		@FindBy(id="pop-btn-1")
 		private WebElement createProfileBtn;
 		
-		@FindBy(css="a#pop-btn-2")
+		@FindBy(id="pop-btn-2")
 		private WebElement continueAsGuest;
 		
-		@FindBy(css="a#popupClose")
+		@FindBy(id="popupClose")
 		private WebElement btnClose;
 		
 		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -2648,6 +2650,48 @@ public void validateDefaultNoSavedPlan(String planType) {
 	Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of unfilled icons.  Actual numOfUnfilledIcons='"+numOfUnfilledIcons+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfUnfilledIcons==numOfUnsavedPlans);
 }
 
+	public void savePlans(String savePlanNames, String planType){
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+	
+		for (String plan: listOfTestPlans) {
+			System.out.println("Proceed to locate plan="+plan);
+	
+			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+			
+			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
+			String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
+		
+			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+	
+			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
+			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
+			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
+			expMatch=0;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
+	
+			//----------------------------------------
+			System.out.println("Proceed to click to save plan");
+			 System.out.println("TEST - initial save plan xpath : "+ initial_savePlanIconXpath);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+	
+		}
+	}
 public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 	String subPath=determineSubpath(planType);
 	String headerPath=determineHeaderPath(planType);
@@ -2986,7 +3030,7 @@ public void validateEmailOption(String planType) {
 	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 	emailPlanSummarySendButton.click();
-	CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 10);
+	CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 15);
 	Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
 	String expectedSuccess1="Thank you!";
 	String expectedSuccess2="The email with your information will arrive shortly.";
@@ -3077,31 +3121,64 @@ public void closeOriginalTabAndOpenNewTab() {
 }
 //^^^ note: added for US1598162	
 
-public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
+public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
 	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
 	System.out.println("MedSup page form is displayed");
+	medSupZipcode.sendKeys(zipcode);
 	DOB.click();
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
-	MaleGender.click();
-	monthDrpDwn.click();
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	Thread.sleep(2000);
+	//Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
-	yearDrpDwn.click();
+	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-	Thread.sleep(2000);
+//	Thread.sleep(2000);
 	startDrpDwnOption.click();
+	Thread.sleep(3000);
+	System.out.println("Plan to start date selected");
+	ViewPlanMedSupPage.click();
+}
+
+public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
+	Thread.sleep(4000);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+	System.out.println("MedSup page form is displayed");
+	//medSupZipcode.sendKeys(zipcode);
+	DOB.click();
+	DOB.sendKeys(DateOfBirth);
+	System.out.println("Date of birth is entered");
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
+	monthDrpDwnOption.click();
+	//Thread.sleep(2000);
+	System.out.println("Effective date- month value selected");
+	yearDrpDwn_PartA.click();
+	yearDrpDwnOption.click();
+	System.out.println("Effective date- year value selected");
+//	Thread.sleep(2000);
+	monthBDrpDwn.click();
+	monthBDrpDwnOption.click();
+//	Thread.sleep(2000);
+	yearBDrpDwn.click();
+	yearBDrpDwnOption.click();
+	Thread.sleep(2000);
+	startDrpDwn.click();
+//	Thread.sleep(2000);
+	startDrpDwnOption.click();
+	Thread.sleep(3000);
 	System.out.println("Plan to start date selected");
 	ViewPlanMedSupPage.click();
 }
@@ -3140,13 +3217,14 @@ public String StartApplicationButton(String FirstName, String LastName) throws I
 	System.out.println("The return to the application code is- "+ResumeKey);
 	cancelButton.click();
 	CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
-	cancelButtonPopUp.click();
+	jsClickNew(cancelButtonPopUp);
 	System.out.println("Cancel application has been clicked on the pop up");
 	return ResumeKey;
 }
 
 public void ResumeApplicationButton() throws InterruptedException{
 	Thread.sleep(5000);
+	Start_ApplicationBtn.click();
 	CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 	resumeApplication.click();
 	System.out.println("Resume application link clicked successfully");
@@ -3157,7 +3235,9 @@ public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode
 	
 	applicationID.sendKeys(ApplicationID);
 	ResumeDOB.sendKeys(DOB);
-	ResumeZipCode.sendKeys(zipcode);
+	ResumeZipCode.click();
+	Thread.sleep(2000);
+	ResumeZipCode.sendKeys("90210");
 	resumeApplicationBtn.click();
 	
 	System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");

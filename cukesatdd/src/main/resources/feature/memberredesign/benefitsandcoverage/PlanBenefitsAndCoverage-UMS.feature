@@ -117,6 +117,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Member Type | <memberType> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
+     Then verify ancillary benefit section is not displayed
     And the user validates plan overview and summary on Bnc page for ship members
     And the user validates hand image under discount and services section
     And the user validates the Vas section on benefits and coverage page
@@ -156,13 +157,13 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Plan Type       | <planType>       |
     And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
-    And the user validates the Out of Pocket Max section
-    And the user view the Drug Copays & Discounts header
+   And the user validates the Out of Pocket Max section
+   And the user view the Drug Copays & Discounts header
     And the Individual user validates Default drug cost drop down value
     And the Medica user able to see drug table and values in it
     And the Medica user able to see drug table and values in it
     And the user validates the Learn More section for stage and tier
-    And the user validates dropdown selection functionality
+   And the user validates dropdown selection functionality
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
@@ -204,7 +205,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2    |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
+       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @regressionMember @tamzid
@@ -294,7 +295,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | Copay Category | <copayCategory> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
-    Then user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link
+    Then user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link
     Then user validates and clicks on Disclaimers link under Exclusive hearing
     Then the user validates Header section
     Then the user validates Hearing section
@@ -328,20 +329,6 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15239 | PDP      | Group_BnC      | NON LIS       |
       | 15238 | MAPD     | Individual_BnC | NON LIS       |
 
-  #TC16Part-2(SHIP)_Ancilliary Benefits for Group member(PDP and other than Group members)
-  @benefitsAndCoverage32_2 @ancillarybenefitnegativescenarioscodemonkeysPart2 @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers(SHIP)
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    Then verify ancillary benefit section is not displayed
-
-    Examples: 
-      | TID | planType | memberType | 
-			| 15099 | HIP   | SHIP_BnC |
-  
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
   @benefitsAndCoverage5 @WaystoSaveforPdp @regression @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member

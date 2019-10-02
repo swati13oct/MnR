@@ -978,8 +978,9 @@ public class VppStepDefinitionUHC {
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		//plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 
 	@Then("^user gets a create profile prompt on UHC site$")
@@ -1487,9 +1488,10 @@ public class VppStepDefinitionUHC {
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
+		String zipcode = memberAttributesMap.get("Zipcode");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		plansummaryPage.MedSupFormValidation(DateOfBirth,zipcode);
 		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
@@ -1516,14 +1518,34 @@ public class VppStepDefinitionUHC {
 		}
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zipcode");
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
 
+	@Then("^the user will navigate to locate resume application button")
+	public void click_resume_application_3(DataTable givenAttributes)throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zipcode");
+		System.out.println("***the user clicks on resume application button***");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+		plansummaryPage.ResumeApplicationButton();
+
+	}
 
 	@Then("^the user enters data to resume the application")
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
