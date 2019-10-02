@@ -1072,6 +1072,13 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 				}
+				 else if (browserName.equalsIgnoreCase("edge")) {
+					System.out.println("Inside Edge");
+					capabilities = DesiredCapabilities.edge();
+					capabilities.setCapability("platform", "Windows 10");
+					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("screenResolution", "1920x1080");
+				 }
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				//capabilities.setCapability("parent-tunnel", "sauce_admin");		
 				capabilities.setCapability("parent-tunnel", "optumtest");						
