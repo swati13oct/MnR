@@ -55,6 +55,7 @@ public class VisitorProfileStepDefinition_UHC {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
+	
 	@And("^the user clicks on the add drugs button in the guest profile in UHC site$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_guest_profile_in_UHC_site() {
 		

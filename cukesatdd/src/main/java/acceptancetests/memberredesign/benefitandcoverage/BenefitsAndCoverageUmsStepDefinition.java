@@ -568,7 +568,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
 
-	@And("^user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link$")
+	@And("^user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link$")
 	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
 		System.out.println("***user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()

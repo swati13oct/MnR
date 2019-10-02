@@ -316,9 +316,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement closeProfilePopup;
 	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
-	private String savePlanImgXpath="//a[not(contains(@class,'added')) and not(contains(@id,'_favourite'))]//img[contains(@src,'ic_favorite-unfilled.png')]";
+	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
     private String savedPlanLinkTextXpath= "//span[text()='Saved']";
-	private String savedPlanImgXpath="//a[contains(@class,'added') and not(contains(@id,'_favourite'))]//img[contains(@src,'ic_favorite-filled.png')]";
+	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -430,7 +430,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
 		private WebElement resumeApplication;
 
 
@@ -536,13 +536,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 		private WebElement OleMS_ViewPDPPlanBtn;
 		
-		@FindBy(css="a#pop-btn-1")
+		@FindBy(id="pop-btn-1")
 		private WebElement createProfileBtn;
 		
-		@FindBy(css="a#pop-btn-2")
+		@FindBy(id="pop-btn-2")
 		private WebElement continueAsGuest;
 		
-		@FindBy(css="a#popupClose")
+		@FindBy(id="popupClose")
 		private WebElement btnClose;
 		
 		@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -2331,6 +2331,48 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of avaliable plans.  Actual numOfAvaliablePlans='"+numOfAvaliablePlans+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfAvaliablePlans==numOfUnsavedPlans);
 		Assert.assertTrue("PROBLEM: Total number of unsaved plans should equal to total number of unfilled icons.  Actual numOfUnfilledIcons='"+numOfUnfilledIcons+"' | Actual numOfUnsavedPlans='"+numOfUnsavedPlans+"'",numOfUnfilledIcons==numOfUnsavedPlans);
 	}
+	
+	public void savePlans(String savePlanNames, String planType){
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+
+		for (String plan: listOfTestPlans) {
+			System.out.println("Proceed to locate plan="+plan);
+
+			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+			
+			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
+			String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
+		
+			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
+			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
+			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
+			expMatch=0;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
+
+			//----------------------------------------
+			System.out.println("Proceed to click to save plan");
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+
+		}
+	}
 
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		String subPath=determineSubpath(planType);
@@ -2826,6 +2868,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		String DateOfBirth ="11031950";
 		MedSupFormValidation(DateOfBirth);
+		Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -2916,9 +2959,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 	 * Validate Create Profile Prompt
 	 */
 	public void validateCreateProfilePrompt() {
-		Assert.assertTrue(validateNew(btnClose));
-		Assert.assertTrue(validateNew(createProfileBtn));
-		Assert.assertTrue(validateNew(continueAsGuest));
+		validateNew(btnClose);
+		validateNew(createProfileBtn);
+		validateNew(continueAsGuest);
 	}
 	
 	/**

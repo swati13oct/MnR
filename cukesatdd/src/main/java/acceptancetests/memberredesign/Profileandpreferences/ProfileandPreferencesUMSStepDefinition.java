@@ -1245,5 +1245,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 			System.out.println("Not verifying that preeffective message is displayed as the environment is not set to team-h or Stage");
 		}
 		}
-		
+	@Then("^the user validates the address sectioning$")
+	public void uservalidatestheaddresssectioning() {
+		//List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+	//	String memberType = memberAttributesRow.get(0).getCells().get(1);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validatesAddressSectioning();
+
+	}
 }
