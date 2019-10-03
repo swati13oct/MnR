@@ -153,7 +153,7 @@ q2_may_SHIP_001/Password@1,SHIP,Individual_header,
 q2_dec_grp0282/Password@1,SSUP,UHCGroup_header
 q2_jun_grp0434/Password@1,MAPD,IndividualGroup_header,
 IndiGroup01/Password@1,PDP_SSP,comboAll100Subsidy_header,
-PDPSSUPCrossCombo2/Password@1,PDP_SSP,comboAllNot100Subsidy_header,
+IndiGroup02/Password@1,PDP_SSP,comboAllNot100Subsidy_header,
 IndiGroup03/Password@1,PDP_SSP,comboSomeHas100Subsidy_header,
 q2_jun_uhc0050/Password@1,MA,Individual_BnC,
 q2_jun_uhc0050/Password@1,MA,Individual_BnC,NON LIS,
