@@ -113,7 +113,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
     Then user saves two plans as favorite on AARP site
       | MA Test Plans | <MA_testPlans> |
     Then user gets a create profile prompt on AARP site
@@ -136,4 +137,4 @@ Feature: 1.08. ACQ- Visitor profile AARP
 
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | plantype | county           | MA_testPlans                                                                                        | eyeWearBenefitType | eyeWearExpectedText                                  | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
-      | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare MedicareComplete Open (PPO),UnitedHealthcare MedicareComplete Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per year | Eye Exam           | $20 copay         | Foot Care - Routine        | $50 copay                | Hearing Exam           | $15 copay             | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay         | Foot Care - Routine        | $50 copay                | Hearing Exam           | $0 copay             | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |

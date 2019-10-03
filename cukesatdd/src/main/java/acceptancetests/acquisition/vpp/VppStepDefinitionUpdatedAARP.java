@@ -1052,8 +1052,8 @@ public class VppStepDefinitionUpdatedAARP {
 
 		//----- MA plan type ----------------------------
 		String planType="MA";
-		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.CheckClick_CurrentYear_Plans();
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 	

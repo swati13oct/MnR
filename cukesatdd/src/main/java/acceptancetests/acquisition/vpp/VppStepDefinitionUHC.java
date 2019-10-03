@@ -978,8 +978,8 @@ public class VppStepDefinitionUHC {
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.CheckClick_CurrentYear_Plans();
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 
