@@ -8,7 +8,7 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for current year
+    When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |

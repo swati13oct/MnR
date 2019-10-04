@@ -804,7 +804,7 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String County = "St. Louis County";
 		String ZipCode = "63043";
-		String PlanYear = "2019"; 
+		String PlanYear = "2020"; 
 		String SiteName =  "AARP_ACQ";
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);

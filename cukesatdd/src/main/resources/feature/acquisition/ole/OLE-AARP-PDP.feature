@@ -9,7 +9,7 @@ Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site and select Current year
+    And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
