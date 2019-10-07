@@ -556,8 +556,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	
 	public String getConsumerDetailsFromlocalStorage() {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		Assert.assertTrue("PROBLEM - unable to obtain LocalStorage info", webStorage!=null);
 		LocalStorage localStorage = webStorage.getLocalStorage();
 		String consumerDetails=localStorage.getItem("consumerDetails");
+		Assert.assertTrue("PROBLEM - unable to obtain consumerDetails from LocalStorage", consumerDetails!=null);
 		return consumerDetails;
 	}
 	
