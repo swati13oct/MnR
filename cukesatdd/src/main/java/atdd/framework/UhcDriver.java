@@ -34,7 +34,8 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-
+	private long defaultTimeoutInSec=30;
+	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -106,8 +107,21 @@ public abstract class UhcDriver {
 			}
 		}
 	}
+	
+	public boolean validate(WebElement element) {  
+		return validate(element, defaultTimeoutInSec);
+	}
 
-	public boolean validate(WebElement element) {
+	public boolean validateNew(WebElement element) { 
+		return validateNew(element, defaultTimeoutInSec);
+	}
+
+	public void waitforElementNew(WebElement element) {
+		waitforElementNew(element, defaultTimeoutInSec);
+	}
+
+
+	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
 	    	waitforElementNew(element);
 			if (element.isDisplayed()) {
@@ -443,8 +457,8 @@ try {
 	 * 
 	 * @param element
 	 */
-	public void waitforElementNew(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public void waitforElementNew(WebElement element,long timeoutInSec) {
+		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -512,7 +526,7 @@ try {
 	 * @param element
 	 * @return : boolean
 	 */
-	public boolean validateNew(WebElement element) {
+	public boolean validateNew(WebElement element, long timeoutInSec) {
 		scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
