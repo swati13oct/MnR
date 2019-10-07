@@ -41,7 +41,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", 
-				validate(viewsearchpdf, defaultPharmacySearchTimeout));
+				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
@@ -87,13 +87,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 15);
 		if (("English").equalsIgnoreCase(language)) {
 			Assert.assertTrue("PROBLEM - page should be in English after selecting English", 
-					validate(pgInEnglish, defaultPharmacySearchTimeout));
+					pharmacyValidate(pgInEnglish));
 		} else if (("Chinese").equalsIgnoreCase(language)) {
 			Assert.assertTrue("PROBLEM - page should be in Chinese after selecting Chinese", 
-					validate(pgInChinese, defaultPharmacySearchTimeout));
+					pharmacyValidate(pgInChinese));
 		} else if (("Spanish").equalsIgnoreCase(language)) { 
 			Assert.assertTrue("PROBLEM - page should be in Spanish after selecting Spanish", 
-					validate(pgInSpanish, defaultPharmacySearchTimeout));
+					pharmacyValidate(pgInSpanish));
 		} else {
 			Assert.assertTrue("PROBLEM - language '"+language+"' is not supported, check test input", false);
 		}
@@ -166,10 +166,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateOneTooltip(String language, String targetTooltipName, String testXpath, String expTxt) {
 		WebElement testTooltip=driver.findElement(By.xpath(testXpath));
 		Assert.assertTrue("PROBLEM - unable to locate "+targetTooltipName+" tooltip element", 
-				validate(testTooltip, defaultPharmacySearchTimeout));
+				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		moveMouseToElement(testTooltip);//note: then move mouse over to target element
-		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", validate(tooltip, defaultPharmacySearchTimeout));
+		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt=Pattern.compile(expTxt);
 			String actualTxtXpath="//div[@id='tooltip' and contains(text(),'"+targetTooltipName+"')]";
@@ -185,14 +185,14 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateHeaderSection() {
 		CommonUtility.waitForPageLoad(driver, PharmacyLocatorPageHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to locate the header text element", 
-				validate(PharmacyLocatorPageHeader, defaultPharmacySearchTimeout));
+				pharmacyValidate(PharmacyLocatorPageHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the input section", 
-				validate(inputSection, defaultPharmacySearchTimeout));
+				pharmacyValidate(inputSection));
 		Assert.assertTrue("PROBLEM - unable to locate the input instruction", 
-				validate(inputInstruction, defaultPharmacySearchTimeout));
+				pharmacyValidate(inputInstruction));
 
 		Assert.assertTrue("PROBLEM - unable to locate the distance dropdown element", 
-				validate(distanceDropDownField, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceDropDownField));
 		Assert.assertTrue("PROBLEM - number of options for distance dropdown is not as expected.  "
 				+ "Expected='6' | Actual='"+distanceOptions.size()+"'", distanceOptions.size()==6);
 		Select select = new Select(distanceDropDownField);           
@@ -202,21 +202,21 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected='"+expectedSelectedDistance+"' | Actual='"+actualSelectedDistance+"'", 
 				expectedSelectedDistance.equals(actualSelectedDistance));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '1 mile'", 
-				validate(distanceOption_1mile, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_1mile));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '2 miles'", 
-				validate(distanceOption_2miles, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_2miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '5 miles'", 
-				validate(distanceOption_5miles, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_5miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '10 miles'", 
-				validate(distanceOption_10miles, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_10miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '15 miles'", 
-				validate(distanceOption_15miles, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_15miles));
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", 
-				validate(distanceOption_25miles, defaultPharmacySearchTimeout));
+				pharmacyValidate(distanceOption_25miles));
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", 
-				validate(zipcodeField, defaultPharmacySearchTimeout));
-		Assert.assertTrue("PROBLEM - unable to locate the search button", validate(searchbtn, defaultPharmacySearchTimeout));
-		if (validate(drpYear, defaultPharmacySearchTimeout)) {
+				pharmacyValidate(zipcodeField));
+		Assert.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
+		if (pharmacyValidate(drpYear)) {
 			select = new Select(drpYear);           
 			List <WebElement> yearList = select.getOptions();
 			Assert.assertTrue("PROBLEM - list of years should be >0.  Actual='"+yearList.size()+"'",
@@ -243,7 +243,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		if (inputZip==null || inputZip.equals("")) { //note: no zip value
 			String exp_noZipTxt="A ZIP code is required to locate a pharmacy. Please enter a ZIP code.";
 			Assert.assertTrue("PROBLEM - not seeing no zip error element",
-					validate(noZipcode, defaultPharmacySearchTimeout));
+					pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt=noZipcode.getText();
 				Assert.assertTrue("PROBLEM - no Zip error text is not as expected. "+ "Expected='"+exp_noZipTxt+"' | Actual='"+act_noZipTxt+"'",
@@ -253,7 +253,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
 				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this: 12345.";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
-						validate(invalidZip, defaultPharmacySearchTimeout));
+						pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt=invalidZip.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
@@ -263,7 +263,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			} else { //note: if format is right then going to assume u r getting this error
 				String exp_noPlanForZipErrTxt="There were no results found for the requested search. Broadening your search criteria may help you get a different result.";
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
-						validate(modifyZipErr, defaultPharmacySearchTimeout));
+						pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt=modifyZipErr.getText();
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
@@ -278,27 +278,27 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateMapSectionContent() {
 		moveMouseToElement(map_resultSection);
 		Assert.assertTrue("PROBLEM - unable to locate the map", 
-				validate(map_mapImg, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
-				validate(map_showHideMapLnk, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!validate(map_mapImg, defaultPharmacySearchTimeout));
+				!pharmacyValidate(map_mapImg));
 		map_showHideMapLnk.click();
 		Assert.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
-				validate(map_mapImg, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_mapImg));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", 
-				validate(map_mapBtn, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_mapBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map", 
-				validate(map_satelliteBtn, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_satelliteBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
-				validate(map_fullScreenViewBtn, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_fullScreenViewBtn));
 		Assert.assertTrue("PROBLEM - unable to locate the zoom in button on the map", 
-				validate(map_zoomIn, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_zoomIn));
 		Assert.assertTrue("PROBLEM - unable to locate the zoom out button on the map", 
-				validate(map_zoomOut, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_zoomOut));
 		Assert.assertTrue("PROBLEM - unable to locate the open street view button on the map", 
-				validate(map_openStreetView, defaultPharmacySearchTimeout));
+				pharmacyValidate(map_openStreetView));
 
 	}
 
@@ -324,10 +324,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link", 
-				validate(moreInfoText_show, defaultPharmacySearchTimeout));
+				pharmacyValidate(moreInfoText_show));
 		moreInfoLink.click();
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!validate(moreInfoText_show, defaultPharmacySearchTimeout));
+				!pharmacyValidate(moreInfoText_show));
 	}
 
 	/** Verify page load in chinese language */
@@ -358,7 +358,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String distance=inputMap.get("distance");
 		String county=inputMap.get("county");
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link should show for '"+widgetName+"' widget", 
-				validate(learnMoreElement, defaultPharmacySearchTimeout));
+				pharmacyValidate(learnMoreElement));
 		learnMoreElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
@@ -381,11 +381,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateQuestionsWidget() {
 		CommonUtility.waitForPageLoad(driver, callUnitedHealthCareText, 5);
 		Assert.assertTrue("PROBLEM -Question Widget is not displayed", 
-				validate(questionsRightRailWidget, defaultPharmacySearchTimeout));
+				pharmacyValidate(questionsRightRailWidget));
 		Assert.assertTrue("PROBLEM -Call us icon is not displayed", 
-				validate(callUsIcon, defaultPharmacySearchTimeout));
+				pharmacyValidate(callUsIcon));
 		Assert.assertTrue("PROBLEM -Call United Health care is not displayed", 
-				validate(callUnitedHealthCareText, defaultPharmacySearchTimeout));
+				pharmacyValidate(callUnitedHealthCareText));
 	}
 
 	public void validateDefaultZip() {
@@ -426,37 +426,37 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		testWidget="Preferred Mail Service Pharmacy";
 		if (expectPrefMailServPlan) {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					validate(widget_preferredMailServicePharmacy, defaultPharmacySearchTimeout));
+					pharmacyValidate(widget_preferredMailServicePharmacy));
 			expUrl="health-plans/resources/mail-order-pharmacy.html";
 			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					validate(widget_preferredMailServicePharmacy, defaultPharmacySearchTimeout));
+					pharmacyValidate(widget_preferredMailServicePharmacy));
 		}
 
 		testWidget="Preferred Retail Pharmacy Network";
 		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
 			if (hasWalgreensPlan) {
 				Assert.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!validate(widget_preferredRetailPharmacyNetwork, defaultPharmacySearchTimeout));
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
-						validate(widget_preferredRetailPharmacyNetwork, defaultPharmacySearchTimeout));
+						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
-						!validate(widget_walgreens, defaultPharmacySearchTimeout));
+						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap);
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!validate(widget_preferredRetailPharmacyNetwork, defaultPharmacySearchTimeout));
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
 		testWidget="Walgreens - Preferred Retail Pharmacy";
 		if (expectWalgreensPlan) {	
 			if (hasWalgreensPlan) {
 				if (language.equalsIgnoreCase("English")) {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '"+testWidget+"' widget", 
-							validate(widget_walgreens, defaultPharmacySearchTimeout));
+							pharmacyValidate(widget_walgreens));
 					expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap);
 				} else {
@@ -465,7 +465,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - test input not expect to see '"+testWidget+"' widget", 
-					!validate(widget_walgreens, defaultPharmacySearchTimeout));
+					!pharmacyValidate(widget_walgreens));
 		}
 	}
 	
@@ -497,7 +497,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount=0;
-		if (!validate(noResultMsg, defaultPharmacySearchTimeout))
+		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if(PharmacyCount>0) {
 			int totalAfter=Integer.parseInt(PharmacyFoundCount.getText().trim());
@@ -505,18 +505,18 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
 					totalBefore>=totalAfter);
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable, defaultPharmacySearchTimeout));
+					pharmacyValidate(pharmaciesAvailable));
 			if (totalAfter >10) {
 				WebElement contactUsLink=contactUnitedHealthCare;
-				if (!validate(contactUnitedHealthCare, defaultPharmacySearchTimeout)) 
+				if (!pharmacyValidate(contactUnitedHealthCare)) 
 					contactUsLink=contactUnitedHealthCare_ol;
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination, defaultPharmacySearchTimeout));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow, defaultPharmacySearchTimeout));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
-						validate(rightArrow, defaultPharmacySearchTimeout));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -526,10 +526,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						validate(resultNavTooltip, defaultPharmacySearchTimeout));
+						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						validate(tooltip, defaultPharmacySearchTimeout));
+						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2="Change the pharmacy type you selected.";
@@ -547,11 +547,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination, defaultPharmacySearchTimeout));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow, defaultPharmacySearchTimeout));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow, defaultPharmacySearchTimeout));
+						!pharmacyValidate(rightArrow));
 			}
 		}
 	}

@@ -44,9 +44,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	@Override
 	public void openAndValidate() {
-		validate(zipcodeField, defaultPharmacyLocatorTimeout);
-		validate(distanceDropDownField, defaultPharmacyLocatorTimeout);
-		validate(continueField, defaultPharmacyLocatorTimeout);
+		pharmacyValidate(zipcodeField);
+		pharmacyValidate(distanceDropDownField);
+		pharmacyValidate(continueField);
 	}
 
 	/** Select the distance from drop down, assuming default zip is used */
@@ -123,7 +123,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
-		if (!validate(noResultMsg, defaultPharmacyLocatorTimeout) && !validate(noResultMsgTopPink, defaultPharmacyLocatorTimeout)) {
+		if (!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink)) {
 			PharmacyCount = PharmacyResultList.size();
 		}		
 		if(PharmacyCount>0){
@@ -136,14 +136,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				total=Integer.parseInt(PharmacyFoundCount.getText().trim());
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable, defaultPharmacyLocatorTimeout));
+					pharmacyValidate(pharmaciesAvailable));
 			if (total >10) {
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element",
-						validate(pagination, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
-						validate(rightArrow, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -153,7 +153,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
@@ -171,7 +171,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						validate(pdf_otherPlans, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_otherPlans.click();
@@ -192,7 +192,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans", 
-						validate(pdf_WalgreenPlans, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(pdf_WalgreenPlans));
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
@@ -212,23 +212,23 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-					!validate(contactUnitedHealthCare, defaultPharmacyLocatorTimeout));
+					!pharmacyValidate(contactUnitedHealthCare));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
-					!validate(pdf_otherPlans, defaultPharmacyLocatorTimeout));
+					!pharmacyValidate(pdf_otherPlans));
 			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
-					!validate(pdf_WalgreenPlans, defaultPharmacyLocatorTimeout));
+					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
-		if (validate(noResultMsg, defaultPharmacyLocatorTimeout) || validate(noResultMsgTopPink, defaultPharmacyLocatorTimeout)) {
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				/* tbd 
 				String winHandleBefore = driver.getWindowHandle();
@@ -252,7 +252,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						!validate(noResultMsg, defaultPharmacyLocatorTimeout) && !validate(noResultMsgTopPink, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			/* tbd } else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
@@ -290,7 +290,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		//tbd		+ "please check user data input or env to see if everything is ok", 
 		//tbd		!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 		//note: test assume valid search will yield search result
-		if (validate(noResultMsg, defaultPharmacyLocatorTimeout) || validate(noResultMsgTopPink, defaultPharmacyLocatorTimeout)) {
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 
@@ -299,7 +299,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						!validate(noResultMsg, defaultPharmacyLocatorTimeout) && !validate(noResultMsgTopPink, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 				/* tbd
 				String winHandleBefore = driver.getWindowHandle();
 
@@ -359,7 +359,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount=0;
-		if (!validate(noResultMsg, defaultPharmacyLocatorTimeout)) {
+		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
 		}
 		if(PharmacyCount>0) {
@@ -376,15 +376,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
 					totalBefore>=totalAfter);
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable, defaultPharmacyLocatorTimeout));
+					pharmacyValidate(pharmaciesAvailable));
 			if (totalAfter >10) {
 				moveMouseToElement(moreInfoLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
-						validate(rightArrow, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					leftArrow.click();
@@ -392,10 +392,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						validate(resultNavTooltip, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						validate(tooltip, defaultPharmacyLocatorTimeout));
+						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2="Change the pharmacy type you selected.";
@@ -413,11 +413,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				moveMouseToElement(moveAwayFromTooltip); //note: move away
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!validate(pagination, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!validate(leftArrow, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!validate(rightArrow, defaultPharmacyLocatorTimeout));
+						!pharmacyValidate(rightArrow));
 			}
 		}
 	}
@@ -529,11 +529,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param element
 	 * @return
 	 */
-	/* tbd
 	public boolean pharmacyValidate(WebElement element) {
-		int timeoutInSec=2;
-		return pharmacyValidate(element, timeoutInSec);
-	} */
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
+	} 
 	
 	/**
 	 * to validate whether element exists with input timeout value control
