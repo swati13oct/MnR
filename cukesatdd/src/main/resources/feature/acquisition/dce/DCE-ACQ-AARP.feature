@@ -47,6 +47,7 @@ When the user performs plan search using following information in the AARP site
 And the user views the plans of the below plan type in AARP site and select Current year
       | Plan Type | <plantype> |
 And I access the DCE tool on aarp site
+ |Plan Type | <plantype>|
 And I have added a drug to my drug list
 	|Drug|<drug>|
 And I navigate to step2 page
