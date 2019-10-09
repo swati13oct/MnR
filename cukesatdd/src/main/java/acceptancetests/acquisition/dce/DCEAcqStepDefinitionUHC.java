@@ -97,12 +97,13 @@ public class DCEAcqStepDefinitionUHC {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickOnViewPlans(plantype);
+		//plansummaryPage.clickOnViewPlans(plantype);
 		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
+	
 	
 	/**
 	 * @toDo:access the DCE tool after adding drug
@@ -224,6 +225,12 @@ public class DCEAcqStepDefinitionUHC {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		AcquisitionHomePage acqhomepage = dce.clickOnReturnLink();
 		System.out.println(acqhomepage);
+	}
+	
+	@And("^the user clicks on return link to navigate to plan summary in UHC$")
+	public void clickOnPlanSummaryReturnLink(){
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dcePage.clickReturnToSummaryLink();
 	}
 	
 	/**

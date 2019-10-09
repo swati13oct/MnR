@@ -37,11 +37,15 @@ Examples:
 | Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
-@switchNowStep3Blayer @dceVBF
+@switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer
 Scenario Outline: To test the dce vpp flow with switch now option
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site
-| Zip Code    | <zipcode>  |
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
 And I access the DCE tool
 |Plan Type | <plantype> |
 And I have added a drug to my drug list on ums site
@@ -51,10 +55,10 @@ And I select the first pharmacy on there
 And I navigate to step3 page and validate the drug info
 |Drug|<drug>|
 Then I switch to generic drug and validate on ums site
-
+And the user clicks on return link to navigate to plan summary in UHC
 Examples:
-| zipcode  | plantype |   drug   | 
-| 90210    |  MA 	  | LIPITOR TAB 10MG|
+| zipcode  | plantype |   drug   | county | isMultutiCounty|
+| 90210    |  MA 	  | LIPITOR TAB 10MG| none | no|
 
 @defect1662 @dceVBF
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp

@@ -319,6 +319,12 @@ public class DCEAcqStepDefinitionAARP {
 		}
 	}
 	
+	@And("^the user clicks on return link to navigate to plan summary$")
+	public void clickOnReturnLink(){
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dcePage.clickReturnToSummaryLink();
+	}
+	
 	@Then("^I should be directed to the VPP Plan Summary Page Ulayer and I should see the Plan Count Overlay populated appropriately$")
 	public void should_be_directed_to_the_VPP_Plan_Summary_Page(){
 		VPPPlanSummaryPage vppPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

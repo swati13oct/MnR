@@ -1304,32 +1304,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return result;
 	}
-
+	
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			CommonUtility.waitForPageLoad(driver,viewPlans, 30);
-			if(validate(viewPlans)){
-				viewPlans.click();
+
 				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
 				//maDCELink.get(0).click();
-			}else{
-				Assert.assertTrue("This scenario is for AEP period", true);
-
-			}
 
 		}else{
-			if(validate(viewPDPPlans)){
-				viewPDPPlans.click();
-				List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
-				view2017PDPPlans.get(0).click();
-
-			}else{
-				Assert.assertTrue("This scenario is for AEP period", true);
-
-			}
-
+				List<WebElement> viewPDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+				viewPDPPlans.get(0).click();
 		}
 		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
