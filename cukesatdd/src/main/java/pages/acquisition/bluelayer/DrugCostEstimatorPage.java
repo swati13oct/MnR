@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -2041,6 +2042,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		returnLink.click();
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
 	}
 
 
