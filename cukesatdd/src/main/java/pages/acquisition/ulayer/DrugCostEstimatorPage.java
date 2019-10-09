@@ -2012,4 +2012,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			return null;
 		}
 	}
+
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		returnLink.click();
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
+	}
 }
