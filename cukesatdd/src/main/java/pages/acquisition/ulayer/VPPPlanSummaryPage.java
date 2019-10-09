@@ -2691,7 +2691,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
-		CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 10);
+		CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 15);
 		Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
 		String expectedSuccess1="Thank you!";
 		String expectedSuccess2="The email with your information will arrive shortly.";
