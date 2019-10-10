@@ -25,6 +25,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.member_deprecated.bluelayer.GoGreenPage;
+import pages.member_deprecated.bluelayer.ConfirmSecurityQuestion;
 
 /**
  * @author akapoo18
@@ -218,14 +219,14 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "html/body/div[5]/div/div/div/div/a")
 	private WebElement Disclaimerlink;
 
-	@FindBy(className = "atdd-techsupport-block")
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]")
 	private WebElement Technicalsupportsection;
 
 	//@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
 	@FindBy(css = ".atdd-plan-header")
 	private WebElement PlanSupportsection;
 	
-	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/section/div/div[2]/div/div/div[3]/div/div")
+	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[3]")
 	private WebElement GeneralQuestion;
 
 	public static final String Disclaimerlinkcontent_xpath = ".//*[@id='collapseDisclaimer']";
@@ -433,7 +434,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath ="//*[@id='hsidPwdLink']")
 	private WebElement hsidPasswordLink;
 
-	@FindBy(xpath = "//*[@id='header']/h1/a")
+	@FindBy(xpath = "//*[@id='header']//*[@class='body-text mt10']/a")
 	private WebElement breadCrumbToNavigateBack;
 
 	@FindBy(id = "hsidRecLink")
@@ -538,7 +539,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='address-temporary-form']/fieldset/div[7]/div/div/span")
 	private WebElement memberAutTempAddressErrorMessage;
 
-	@FindBy(xpath = "//iframe[@id='profileIframe']") // EPMP i frame
+	@FindBy(xpath = "//iframe[@id='iPerceptionsFrame']") // EPMP i frame
 	// @FindBy (id = .//*[@id='contact'])
 	private WebElement EPMPIframe;
 
@@ -1403,6 +1404,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateCancelElementShip() {
 		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//*[@class='phone parbase section']//*[@class='material-icons arrowIcon']")).click();
 		driver.findElement(By.xpath("//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")).click();
 		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
@@ -1610,17 +1612,30 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public boolean clickHealthSafeIdLink() throws InterruptedException {
 		validateNew(hsidPasswordLink);
 		hsidPasswordLink.click();
-
-		
+		Thread.sleep(10000);
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
+		Assert.assertTrue(driver.getTitle().contains("identity"));
+		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+		try {
+			cs.enterValidSecurityAnswer();
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("Check to see if document.readyState is ready...");
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, usernameText, 30);
 		if (validateNew(passwordEditLink))
-			return true;
+		{
+			return true;	
+		}
 		return false;
 	}
 
 	public void validateEditPasswordLinkBox() {
+		CommonUtility.waitForPageLoad(driver, passwordEditLink, 5);
 		passwordEditLink.click();
 		CommonUtility.waitForPageLoad(driver, confirmPassword, 5);
 		if(currentPassword.isDisplayed()){
@@ -1663,6 +1678,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			driver.navigate().back();
+			breadCrumbToNavigateBack.click();
 		}else
 			breadCrumbToNavigateBack.click();
 		CommonUtility.waitForPageLoad(driver, hsidPasswordLink, 10);
@@ -1675,7 +1691,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	public void validateHealthSafeAccountLink() throws InterruptedException {
 		validate(hsidAccountLink);
 		hsidAccountLink.click();
-		Thread.sleep(10000);
+		Thread.sleep(3000);
+		System.out.println("title is: "+driver.getTitle());
 		Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
 		driver.navigate().back();
 	}
