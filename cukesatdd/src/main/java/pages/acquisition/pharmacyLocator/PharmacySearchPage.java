@@ -27,6 +27,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
 		//CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10);
 	}
 

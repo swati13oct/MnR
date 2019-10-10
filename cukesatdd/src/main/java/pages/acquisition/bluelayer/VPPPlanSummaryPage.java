@@ -541,6 +541,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
 		
+		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
+		private WebElement medicareGuidePopup;
+		
 		@FindBy(id="pop-btn-1")
 		private WebElement createProfileBtn;
 		
@@ -877,33 +880,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
         public void viewPlanSummary(String planType) {
             if (planType.equalsIgnoreCase("PDP")) {
                             CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-                            pdpPlansViewLink.click();
+                            sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+                            jsClickNew(pdpPlansViewLink);
                             System.out.println("PDP Plan Type Clicked");
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
                             CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+                            sleepBySec(2);
 							jsClickNew(maPlansViewLink);
                            // maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
-            	driver.navigate().refresh();
+            			driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			sleepBySec(2);
-                            msPlansViewLink.click();
+                            sleepBySec(2);
+                            jsClickNew(msPlansViewLink);
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
+            			sleepBySec(5);
         	            CommonUtility.checkPageIsReady(driver);
-        	            snpPlansViewLink.click();
+        	            jsClickNew(snpPlansViewLink);
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-                         }
-                      	}
+            }
+          }
 
 	@Override
 	public void openAndValidate() {
-		//pages.acquisition.ulayer.AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
@@ -2480,9 +2483,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	  sendkeysNew(lastNameField, LastName);
 	  sendkeysNew(emailField, EmailAddress);
 	  validateNew(Submitbutton);
-	  Submitbutton.click();
-	  WebElement popup = driver.findElement(By.xpath("//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]"));
-	  if(validateNew(popup)){
+	  Submitbutton.click();	 
+	  if(validateNew(medicareGuidePopup)){
 		  System.out.println("Pop up message has been displayed");
 		  WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
 		  closePopUp.click();
