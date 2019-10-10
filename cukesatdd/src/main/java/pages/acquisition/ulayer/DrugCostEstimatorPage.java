@@ -1804,6 +1804,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
+		System.out.println(step3Info.getText());
 		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
 			return true;
 		return false;

@@ -329,12 +329,12 @@ public class DCEAcqStepDefinitionUHC {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
 
 		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
-		DrugDetails.selectDosage(drug);
+		DrugDetails.selectDosage(dosage);
 		DrugDetails.selectQnty(quantity);
 		DrugDetails.selectFrequency(frequency);		
 	}

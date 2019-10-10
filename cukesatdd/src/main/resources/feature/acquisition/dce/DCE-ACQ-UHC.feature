@@ -8,7 +8,7 @@ When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 |Drug|<drug>|
 And user selects drug details in ums site
-|Drug|<drug>|
+|Dosage|<dosage>|
 |Quantity|<quantity>|
 |Frequency|<frequency>|
 When user successfully adds drug in ums site
@@ -33,8 +33,8 @@ Then user validates drug added on prescription drug benefits tab in UMS
 |Drug|<drug>| 	
 
 Examples:
-|     drug        | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-| Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
+|     drug   | dosage |quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
+| LIPITOR |  TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer
@@ -47,18 +47,25 @@ When the user performs plan search using following information in UMS site
 When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
 And I access the DCE tool
-|Plan Type | <plantype> |
+		|Plan Type | <plantype> |
 And I have added a drug to my drug list on ums site
-|Drug|<drug>|
+		|Drug|<drug>|
+And user selects drug details in ums site
+		|Dosage|<dosage>|
+		|Quantity|<quantity>|
+		|Frequency|<frequency>|
+When user successfully adds drug in ums site
+		|Is Branded Drug|<branded>|	
+		|Drug|<drug>|	
 And I navigate to step2 page on ums site
 And I select the first pharmacy on there
 And I navigate to step3 page and validate the drug info
-|Drug|<drug>|
+		|Drug|<drug>|
 Then I switch to generic drug and validate on ums site
 And the user clicks on return link to navigate to plan summary in UHC
 Examples:
-| zipcode  | plantype |   drug   | county | isMultutiCounty|
-| 90210    |  MA 	  | LIPITOR TAB 10MG| none | no|
+	| zipcode  | plantype |   drug   | dosage| county | isMultutiCounty|quantity | frequency   |branded |
+	| 90210    |  MA 	  |  LIPITOR |  TAB 10MG | none | no|30 | Every 1 month| yes   |
 
 @defect1662 @dceVBF
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp

@@ -1501,8 +1501,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if (plantype.equals("MA") || plantype.equals("MAPD")) {
-			List<WebElement> maDCELink = driver.findElements(By.xpath(
-					".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
+			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
 			maDCELink.get(0).click();
 		} else {
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
@@ -1510,7 +1509,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.waitForPageLoad(driver, step1, 30);
-		if (currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+		if (currentUrl().contains("/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
 
