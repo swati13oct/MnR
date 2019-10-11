@@ -1915,8 +1915,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0] + "')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug));
 	}	
 	
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
