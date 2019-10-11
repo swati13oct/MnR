@@ -706,25 +706,20 @@ try {
 	}
 	
 	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.xpath("//*[contains(@class,'btn-no')]")).click();
+		WebElement IPerceptionsFrame = pages.acquisition.bluelayer.GlobalWebElements.IPerceptionsFrame;
+		WebElement IPerceptionsNoBtn = pages.acquisition.bluelayer.GlobalWebElements.IPerceptionNoBtn;
+		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, 15);
+		
+		try{
+			if(IPerceptionsFrame.isDisplayed())	{
+				driver.switchTo().frame(IPerceptionsFrame);
+				IPerceptionsNoBtn.click();
 				driver.switchTo().defaultContent();
 			}
-			counter++;
-		} while (counter < 2);
+		}catch(Exception e){
+			System.out.println("Iperceptions popup not found");
+		}
+
 	}
 	
 }
