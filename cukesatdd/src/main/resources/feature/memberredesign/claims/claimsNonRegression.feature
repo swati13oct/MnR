@@ -275,8 +275,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #Then I navigate to the Claim Details page from claims summary page
     #And I validate the claims summary link on claims detail top page
     #Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
-
-    @abc
+    
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MAPD     | xxxxxxxxxxxxxx      | xxxxxxxxxxxxxx | xxxxxxxxxxxxx   | xxx       | xxxxxxx           |
