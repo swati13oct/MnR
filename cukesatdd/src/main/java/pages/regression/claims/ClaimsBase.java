@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -475,7 +477,8 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public boolean claimsValidate(WebElement element) {
 		long timeoutInSec=2;
-		return validate(element, timeoutInSec);
+		return claimsValidate(element, timeoutInSec);
+		//return validate(element, timeoutInSec);
 	} 
 
 	/**
@@ -485,8 +488,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd
-	public boolean claimsValidate(WebElement element, int timeoutInSec) {
+	public boolean claimsValidate(WebElement element, long timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 			wait.until(ExpectedConditions.visibilityOf(element));
@@ -501,7 +503,7 @@ public class ClaimsBase extends UhcDriver  {
 
 		}
 		return false;
-	} */
+	} 
 
 	public void handleHowIsYourVisit() {
 		int counter = 0;
