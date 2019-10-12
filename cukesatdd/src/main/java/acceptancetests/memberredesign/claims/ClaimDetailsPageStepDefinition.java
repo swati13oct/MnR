@@ -231,7 +231,7 @@ public class ClaimDetailsPageStepDefinition {
 		} else {  //note: this test is assume prior test steps passed so user has claims
 			System.out.println("Proceed to Claims Summary page");
 			ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
 				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 				claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing

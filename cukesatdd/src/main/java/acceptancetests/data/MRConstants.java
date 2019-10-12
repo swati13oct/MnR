@@ -376,6 +376,8 @@ public class MRConstants {
   //^^^ note:
   public static final String STAGE_SSO_TESTHANESS_URL_bswift = "http://apsr9052:9080/adapterTest2/bswiftExtTestHarness.html";
   
+  public static final String MICROAPP_URL="https://www."+MRScenario.environment+"test-medicare.ocp-elr-core-nonprod.optum.com/";
+  
  }
 
 	    

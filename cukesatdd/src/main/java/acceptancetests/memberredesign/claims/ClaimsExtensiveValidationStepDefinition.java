@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
@@ -161,7 +160,7 @@ public class ClaimsExtensiveValidationStepDefinition {
 		if (numClaims > 0) {	//note: only do this if claims > 0
 			System.out.println("Proceed to Claims Summary page");
 			ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			claimsSummaryPage.validateSystemErrorMsgNotExist();  //note: don't bother if getting system error already
 			//note: this can be updated handle more than 1 page of claims, 
 			//note: for now just handle 1st page of claims if there are more than 1 page

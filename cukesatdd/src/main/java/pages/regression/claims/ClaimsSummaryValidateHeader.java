@@ -20,6 +20,7 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
+
 	}
 
 	/**
@@ -166,8 +167,11 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				} 	
 			}
 			//note: validate 'review your claims' element exists
-			Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", 
-					claimsValidate(reviewClaimsTxt));
+			if (getOnlyTestUiFlag()) 
+				System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+			else
+				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", 
+						claimsValidate(reviewClaimsTxt));
 		}
 	}	
 
@@ -179,7 +183,10 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 		WebElement testElement=fed_clamsSummCpTxt;
 		if (planType.equalsIgnoreCase("SHIP")) 
 			testElement=ship_clamsSummCpTxt;
-		Assert.assertTrue("PROBLEM - 'Review your claims search' is not displaying as expected. "
+		if (getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+		else
+			Assert.assertTrue("PROBLEM - 'Review your claims search' is not displaying as expected. "
 				+ "Expect to contain '"+expText+"' | Actual text='"+testElement.getText()+"'", 
 				testElement.getText().contains(expText));
 	}

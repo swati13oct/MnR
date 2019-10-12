@@ -82,10 +82,12 @@ public class LoginPage extends UhcDriver {
 		}
 
 		private boolean teamSpecialCase;
-		public LoginPage(WebDriver driver, boolean input_teamSpecialCase) {
+		private boolean isMicroApp;
+		public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 			teamSpecialCase=input_teamSpecialCase;
+			this.isMicroApp=isMicroApp;
 			openAndValidate();
 			
 		}
@@ -103,15 +105,24 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)|| "team-c".equalsIgnoreCase(MRScenario.environment)){
+				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					System.out.println("Running on" +MRScenario.environment + " a env, teamSpecialCase="+teamSpecialCase);
+					if (isMicroApp) { //microapp run
+						PAGE_URL=MRConstants.MICROAPP_URL;
+					} else { //non-microapp run
+						if (teamSpecialCase) {
+							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
+						} else {
+							PAGE_URL=MRConstants.OSE_NEW_URL;	
+						}
+					}
+				} else if("team-c".equalsIgnoreCase(MRScenario.environment)) {
 					if (teamSpecialCase) {
 						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
 					} else {
 						PAGE_URL=MRConstants.OSE_NEW_URL;	
 					}
-				}
-				else if("team-h".equalsIgnoreCase(MRScenario.environment)){
+				} else if("team-h".equalsIgnoreCase(MRScenario.environment)){
 					System.out.println("Running on team-h env, teamSpecialCase="+teamSpecialCase);
 					if (teamSpecialCase) {
 					PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
@@ -132,11 +143,6 @@ public class LoginPage extends UhcDriver {
 			System.out.println("URL:" + PAGE_URL);
 			startNew(PAGE_URL);
 			CommonUtility.checkPageIsReadyNew(driver);
-			/*if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
-				CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
-				//validateNew(signInButton);
-			else
-				CommonUtility.waitForPageLoadNew(driver, signInButton, 60);*/
 		}
 		
 		public void validateelements()
@@ -314,6 +320,80 @@ public class LoginPage extends UhcDriver {
 
 			System.out.println("Current URL: " + currentUrl());
 			if (currentUrl().contains("member/testharness.html")) {
+				return new TestHarness(driver);
+			} else if (currentUrl().contains("terminated-plan.html")) {
+				return new TerminatedHomePage(driver);
+			} else if (currentUrl().contains("/dashboard")) {
+				return new RallyDashboardPage(driver);
+			}
+			return null;
+		}
+		
+		
+		@FindBy(xpath="//select[@ng-model='planTypeValue']")
+		private WebElement userSelectionDropDown;
+		public Object loginWithMicroApp(String userSelection) throws InterruptedException {
+			selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
+			
+			//sendkeysNew(userNameField, username);
+			//sendkeysNew(passwordField, password);
+			signInButton.click();
+			System.out.println("Sign In clicked");
+			try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				Alert alert1 = driver.switchTo().alert();
+				alert1.accept();
+			} catch (Exception e) {
+				System.out.println("No Such alert displayed");
+			}
+			// CommonUtility.checkPageIsReady(driver);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			Alert alert;
+			int counter = 0;
+
+			do {
+				
+				try {
+					alert = wait.until(ExpectedConditions.alertIsPresent());
+					alert.accept();
+					System.out.println("Alert accepted inside 2nd try block");
+				} catch (NoAlertPresentException ex) {
+					System.out.println("NoAlertPresentException - No Aert Presernt...");
+				} catch (TimeoutException ex) {
+					System.out.println("TimeoutException - No Aert Presernt...");
+				}
+				if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
+					System.out.println("Error !!!");
+					return null;
+				}
+				if (counter < 35) {
+					if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) { //note: sometimes take longer to load page on this team env
+						Thread.sleep(3000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+					} else {
+					Thread.sleep(2000);
+					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+					}
+				} else {
+					System.out.println("TimeOut!!!");
+					return null;
+				}
+				counter++;
+			} while (!((driver.getTitle().contains("Home")) || (driver.getTitle().contains("Test Harness")) || (driver.getTitle().contains("No Email"))));
+			
+			if(currentUrl().contains("login/no-email.html")){
+				driver.get("https://"+MRScenario.environment+"-medicare.ocp-ctc-dmz-nonprod.optum.com/content/medicare/member/testharness.html");
+			}
+			System.out.println("Current URL: " + currentUrl());
+			if (currentUrl().contains("member/testharness.html")) {
+				/* tbd 
+				//vvv note: temp-workaround for team-a env for now
+				if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") || MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) {
+					return new AccountHomePage(driver);
+				}
+				//^^^ note: temp-workaround for team-a env for now
+				 */
 				return new TestHarness(driver);
 			} else if (currentUrl().contains("terminated-plan.html")) {
 				return new TerminatedHomePage(driver);

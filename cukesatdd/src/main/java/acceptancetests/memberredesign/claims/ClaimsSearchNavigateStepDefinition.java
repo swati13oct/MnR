@@ -65,7 +65,7 @@ public class ClaimsSearchNavigateStepDefinition {
 				vbf_claimType = "Medical";
 			}
 			ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPgByFirstClaim();
 			if (null != newClaimDetailsPage)
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
@@ -229,7 +229,7 @@ public class ClaimsSearchNavigateStepDefinition {
 			return;
 		} 
 		ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPgByFirstClaim();
 		Assert.assertTrue("PROBLEM - unable to go to Claims details page!!!",null != newClaimDetailsPage);
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);

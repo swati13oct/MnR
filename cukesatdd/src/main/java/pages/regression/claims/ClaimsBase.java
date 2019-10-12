@@ -148,15 +148,17 @@ public class ClaimsBase extends UhcDriver  {
 
 	public ClaimsBase(WebDriver driver) {
 		super(driver);
+		onlyTestUiFlag=false;
 	}
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
 	}
 
-	boolean onlyTestUiFlag=false;
+	boolean onlyTestUiFlag;
 	
 	public void setOnlyTestUiFlag(boolean input) {
+		System.out.println("Setting onlyTestUiFlag="+onlyTestUiFlag);
 		onlyTestUiFlag=input;
 	}
 

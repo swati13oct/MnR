@@ -38,7 +38,7 @@ public class ClaimsSummaryPageStepDefinition {
 	@Then("^I validate the claims displayed based on the selection on claims summary page$") 
 	public void vbf_validate_claims_table() { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.vbf_validateClaimsTable();
 	}	
 
@@ -73,7 +73,7 @@ public class ClaimsSummaryPageStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String memberType = memberAttributesMap.get("Member Type");
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			claimsSummPg.validateComboTabs();
@@ -277,9 +277,14 @@ public class ClaimsSummaryPageStepDefinition {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean flagZeroClaimUser=true;
-		claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
-		if(claimsSummPg != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
+		else {
+			claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
+			if(claimsSummPg != null)
+				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+
+		}
 	}
 
 	/** 
@@ -480,6 +485,8 @@ public class ClaimsSummaryPageStepDefinition {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.setOnlyTestUiFlag(true);
+		claimsSummPg.setTestOnlyUiFlagForAll(true);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG, true);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 }

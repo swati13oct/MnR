@@ -31,7 +31,16 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
 	ClaimsSummaryValidateSegmentId validateSegmentId=new ClaimsSummaryValidateSegmentId(driver);
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
-
+	
+	public void setTestOnlyUiFlagForAll(boolean b) {
+		validateHeader.setOnlyTestUiFlag(b);
+		searchClaims.setOnlyTestUiFlag(b);
+		validateSegmentId.setOnlyTestUiFlag(b);
+		validateError.setOnlyTestUiFlag(b);
+		validateTable.setOnlyTestUiFlag(b);
+		validatePreEff.setOnlyTestUiFlag(b);
+	}
+	
 	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
 		//keep Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		//keep String browserName = cap.getBrowserName().toLowerCase();
