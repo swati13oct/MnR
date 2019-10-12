@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroApp.json",detailedRe
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroApp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroApp.json" }, tags = { "RunMRATDDRegressionClaimsMicroApp.java" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroApp.json" }, tags = { "@claimsOnlyTestUI" })
 public class RunMRATDDRegressionClaimsMicroApp {
 
 }
