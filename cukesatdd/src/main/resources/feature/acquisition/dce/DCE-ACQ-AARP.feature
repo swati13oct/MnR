@@ -1,7 +1,7 @@
 @acq_drug_cost_estimator
 Feature: 1.10. ACQ-DCE AARP
 
-@acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke @vbfGate @DCE_Regression_Ulayer
+@acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke @vbfGate @DCE_Regression_Ulayer @prodRegression
 Scenario Outline: To verify DCE flow from Ulayer home page
 Given the user is on AARP medicare acquisition site landing page
 When I access the acquisition DCE tool from home page
@@ -37,7 +37,7 @@ Examples:
 |  Lipitor |  TAB 10MG |    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Plan 1 (HMO)|15 miles|
 
 
-@switchNowStep3 @dceVBF @DCE_Regression_Ulayer
+@switchNowStep3 @dceVBF @DCE_Regression_Ulayer @prodRegression
 Scenario Outline: To test the DCE flow from vpp and the switch now option in step 3
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site
@@ -67,7 +67,7 @@ Examples:
 | zipcode  |   drug   |dosage       | plantype | county | isMultutiCounty|quantity | frequency   |branded |
 | 90210    |  Lipitor|  TAB 10MG | MA| none 	| no| 30 |Every 1 month| yes    |
 
-@defect3235 @DCE_Regression_Ulayer
+@defect3235 @DCE_Regression_Ulayer @prodRegression
 Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
 Given the user is on AARP medicare acquisition site landing page
 When the user performs plan search using following information in the AARP site

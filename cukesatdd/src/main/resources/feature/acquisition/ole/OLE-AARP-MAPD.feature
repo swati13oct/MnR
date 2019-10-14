@@ -1,4 +1,4 @@
-@fastandfurious @OLE @MAPD_OLE_Ulayer
+@fastandfurious @OLE @MAPD_OLE_Ulayer @prodRegression
 Feature: 1.05.2.ACQ-OLE  common tool flow E2E MAPD AARP
 
   	@MAPD_OLE_AARP @acquisitionRegression
