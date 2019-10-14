@@ -1,5 +1,5 @@
 @claims @thePredetors
-Feature: T1.1To validate the claims Summary page and claims Details page on the member site
+Feature: 1.12 Member claims Summary page/claims Details page 
 
   #----- beginning of VBF claims scenarios section ------------------------
   # note: runner for sanity is RunMRATDDClaimsVBF

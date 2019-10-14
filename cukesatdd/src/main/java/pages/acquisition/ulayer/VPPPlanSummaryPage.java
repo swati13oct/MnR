@@ -669,7 +669,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public void viewPlanSummary(String planType) {
-		//checkModelPopup(driver);
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work

@@ -1,5 +1,5 @@
 @drugCostEstimator @regressionMember
-Feature: I1.3DCE for Member Site Redesign
+Feature: 1.07 Member DCE Page
 
   @drugCostEstimator1 @Member_dce_not
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.2 To Verify MR portal members DCE should not come for AARP federal members

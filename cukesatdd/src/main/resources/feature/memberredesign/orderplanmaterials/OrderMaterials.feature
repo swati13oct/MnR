@@ -1,5 +1,5 @@
 @orderPlanMaterials @thePredators
-Feature:P1.5 To test order materials in member site
+Feature: 1.10 Member  order materials Page
 
   #----- beginning of VBF scenarios section ------------------   
   @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate

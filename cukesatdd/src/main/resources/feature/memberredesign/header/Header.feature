@@ -1,5 +1,5 @@
 @header @theIncredibles @member_redesign
-Feature: I1.3Header/Navigation for Member Site Redesign
+Feature: 1.08 Member Header/Navigation validation
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
   @header1 @member_redesign_header @IncrediblesHeader @regressionMember

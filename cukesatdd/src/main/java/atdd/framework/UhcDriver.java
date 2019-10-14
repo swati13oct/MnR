@@ -130,7 +130,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
-	    	waitforElementNew(element);
+	    	waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -729,6 +729,7 @@ try {
 			}catch(Exception e){
 				System.out.println("Iperceptions popup not found");
 			}
+
 	}
 	
 }

@@ -15,7 +15,9 @@ import cucumber.api.CucumberOptions;
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPharmacyLocatorBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-UHC.feature" }, plugin = {
 
+
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorBlayer.json" }, tags = { "@pharmacyLocatorRegression" })
+
 
 public class RunMRATDDAcquisitionPharmacyLocatorBlayer{ 
  
