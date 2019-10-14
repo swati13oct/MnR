@@ -559,7 +559,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
 				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
-		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}
 	
 	public void validateAddedDrugNew(String drug) throws InterruptedException {

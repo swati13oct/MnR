@@ -34,7 +34,7 @@ Then user validates drug added on prescription drug benefits tab in AARP
 |Drug|<drug>| 
 Examples:
 |     drug  |dosage      | quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-|  LIPITOR |  TAB 10MG |    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Plan 1 (HMO)|15 miles|
+|  Lipitor |  TAB 10MG |    30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Plan 1 (HMO)|15 miles|
 
 
 @switchNowStep3 @dceVBF @DCE_Regression_Ulayer
@@ -65,7 +65,7 @@ Then I switch to generic drug and validate
 And the user clicks on return link to navigate to plan summary
 Examples:
 | zipcode  |   drug   |dosage       | plantype | county | isMultutiCounty|quantity | frequency   |branded |
-| 90210    |  LIPITOR |  TAB 10MG | MA| none 	| no| 30 |Every 1 month| yes    |
+| 90210    |  Lipitor|  TAB 10MG | MA| none 	| no| 30 |Every 1 month| yes    |
 
 @defect3235 @DCE_Regression_Ulayer
 Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
@@ -94,7 +94,7 @@ Then I navigate back to plan details page and verify correct message shows when 
 
 Examples:
 | zipcode  |   drug    |dosage      | planname 										| plantype | county | isMultutiCounty|quantity | frequency   |branded |
-| 33021    |  LIPITOR |  TAB 10MG |AARP MedicareComplete Choice Plan 2 (Regional PPO) | MA	| none 	| no| 30 |Every 1 month| yes    |
+| 33021    |  Lipitor |  TAB 10MG |AARP MedicareComplete Choice Plan 2 (Regional PPO) | MA	| none 	| no| 30 |Every 1 month| yes    |
 
 	
 @dceMousehoverOurPlans @aprilRelease2018
