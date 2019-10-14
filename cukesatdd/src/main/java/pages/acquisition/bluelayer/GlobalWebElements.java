@@ -227,6 +227,12 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 
+	@FindBy(id = "IPerceptionsEmbed")
+	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
+	public static WebElement IPerceptionNoBtn;
+
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
