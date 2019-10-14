@@ -107,6 +107,10 @@ public class IDCardPage extends UhcDriver{
 	 * This method is used to validate the all the fields on ID card page
 	 * @param givenAttributes
 	 */
+	
+	@FindBy(xpath="//span[@class='hide-mobile ng-scope']")
+	private WebElement viewRecomend;
+	
 	public void validateIDCardPage_Ind(DataTable givenAttributes){
 		
 		/* Reading the given attribute from feature file */
@@ -126,7 +130,8 @@ public class IDCardPage extends UhcDriver{
 		/**
 		 * Validates the details of the member
 		 */
-		try{
+		
+			try{
 			if(driver.findElement(By.xpath("(//*[contains(@class,'ng-scope ng-binding')])[1]")).getText().contains("PRESCRIPTION")){
 				//System.out.println("the Plan Name is: " + planName_PDP.getText());
 				System.out.println("the ID is: " + id_PDP.getText());
@@ -209,6 +214,14 @@ public void validateIDCardPage_grp(DataTable givenAttributes){
 	closeIDcard.click();
 }
 public void validateCoverageStatus(String coverageStatus){
+	
+	viewRecomend.click();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	Assert.assertEquals(coverageStatus, status.getText().trim());
 }
 

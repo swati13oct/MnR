@@ -72,8 +72,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement contactUsPageLink;
 
 	// @FindBy(css = ".view-id-link")
-	@FindBy(xpath = "(//*[contains(text(),'View & print member ID cards')])[1]")
-	private WebElement idCardLink;
+//	@FindBy(xpath = "(//*[contains(text(),'View & print member ID cards')])[1]")
+//	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
@@ -2116,25 +2116,34 @@ public class AccountHomePage extends UhcDriver {
 	 * 
 	 * @return
 	 */
+	
+	@FindBy(xpath = "//*[contains(@id,'home_2')]")
+	private WebElement TestHarnessPageHomeBttnround;
+	
+	@FindBy(xpath = "//*[@id='dashboard']")
+	private WebElement Dashboard;
+	
 	public IDCardPage viewIDCard() {
-		try {
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up not displayed");
-		}
 
-		if (driver.getCurrentUrl().contains("testharness")) {
-			driver.findElement(By.id("home_2")).click();
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']")), 10);
-			validate(idCardLink);
-			idCardLink.click();
+		if (driver.getCurrentUrl().contains("testharness.html")) {
+			System.out.println("The page contains test harness");
+			jsClickNew(TestHarnessPageHomeBttnround);
+			System.out.println("Home button clicked");
+			CommonUtility.waitForPageLoad(driver,Dashboard, 30);
+			System.out.println("dashboard diplayed");
+			validate(viewRecomend);
+			viewRecomend.click();
 			return new IDCardPage(driver);
 		} else {
 
-			validate(idCardLink);
-			idCardLink.click();
+			validate(viewRecomend);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//	viewRecomend.click();
 			return new IDCardPage(driver);
 		}
 	}

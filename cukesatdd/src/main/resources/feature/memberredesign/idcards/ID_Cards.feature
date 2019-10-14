@@ -1,7 +1,7 @@
 @idCards @velocityDashers
 Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
 
-  @idCards1 @regressionIDCards @regressionMember
+ @idCards1 @regressionIDCards @regressionMember
   Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -17,7 +17,7 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
       | Coverage Start  | <covergaeStart>  |
       | Coverage Status | <coverageStatus> |
       
-  # Added MAPD amd PDP user,  MA user was not provided  , also had to create a scenario for group user
+
     Examples: 
   | TID     | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName      	        | dob                         | covergaeStart | coverageStatus |
   |  15110  | PDP       | IDCardmember  | AARP MedicareRx Preferred (PDP)                                    | 0031240691    | Syreeta Glowski    	        | Subscriber - DOB 06/26/1932 | 01/01/13      | Active         |
