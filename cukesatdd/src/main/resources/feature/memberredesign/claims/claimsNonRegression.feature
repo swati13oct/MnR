@@ -236,7 +236,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 
   @claimsOnlyTestUI
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - DRY RUN - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - UI ONLY - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
