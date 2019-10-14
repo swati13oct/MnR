@@ -279,6 +279,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MAPD     | xxxxxxxxxxxxxx      | xxxxxxxxxxxxxx | xxxxxxxxxxxxx   | xxx       | xxxxxxx           |
+      | xxxxx | PDP      | xxxxxxxxxxxxxx      | xxxxxxxxxxxxxx | xxxxxxxxxxxxx   | xxx       | xxxxxxx           |
+      | xxxxx | SHIP     | xxxxxxxxxxxxxx      | xxxxxxxxxxxxxx | xxxxxxxxxxxxx   | xxx       | xxxxxxx           |
 
 
 	

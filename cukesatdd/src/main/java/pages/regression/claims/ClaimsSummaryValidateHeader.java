@@ -91,7 +91,10 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				System.out.println("Located dropdown option =>"+ship_claimTypeSelect.getOptions().get(i).getText());
 			} 	
 			//note: validate 'review your claims' element exists
-			Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", claimsValidate(ship_reviewClaimsTxt));
+			if (getOnlyTestUiFlag()) 
+				System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+			else
+				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", claimsValidate(ship_reviewClaimsTxt));
 		} else {
 			//note: validate plan name element
 			Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", claimsValidate(planName));

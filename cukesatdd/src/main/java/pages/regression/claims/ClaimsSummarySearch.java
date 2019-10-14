@@ -113,7 +113,10 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 		checkForIPerceptionModel(driver);
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
-			moveMouseToElement(ship_reviewClaimsTxt);
+			if (getOnlyTestUiFlag()) 
+				System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+			else
+				moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);
 			System.out.println("Clicked '"+claimPeriod+"' option");
