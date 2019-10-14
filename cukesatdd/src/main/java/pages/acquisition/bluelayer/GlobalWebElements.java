@@ -227,7 +227,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	
-	@FindBy(id = "IPerceptionsEmbed")
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
