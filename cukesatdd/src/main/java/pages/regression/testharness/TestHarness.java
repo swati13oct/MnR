@@ -351,7 +351,7 @@ public class TestHarness extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateTestHarnessElements(String Category) {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLink);

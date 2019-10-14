@@ -190,7 +190,7 @@ public class TestHarness extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
 			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
 			validateNew(pcpMedicaLogo);		
@@ -260,7 +260,7 @@ public class TestHarness extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateTestHarnessElements(String Category) {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLink);

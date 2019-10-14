@@ -83,7 +83,7 @@ public class EOBPage extends UhcDriver {
 	 */
 	@Override
 	public void openAndValidate() {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 	}
 
 	/***

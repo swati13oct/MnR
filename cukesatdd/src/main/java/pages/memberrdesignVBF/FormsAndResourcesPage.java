@@ -166,7 +166,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		openAndValidate();
 	}
 
