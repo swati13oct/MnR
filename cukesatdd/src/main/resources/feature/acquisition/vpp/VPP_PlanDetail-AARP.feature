@@ -1,7 +1,7 @@
 @vppPlanDetailsUlayer
 Feature: 1.03-ACQ-Plan details in vpp flow AARP
 
-  @vppPlanDetailsRegression
+  @vppPlanDetailsRegression @prodRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -34,7 +34,7 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
      | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP MedicareComplete Choice (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $70 for frames or $105 for contacts per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $40 copay                   | Hearing Exam           | $10 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost. |
      | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $2,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
 
-  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression
+  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression @prodRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Medical Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

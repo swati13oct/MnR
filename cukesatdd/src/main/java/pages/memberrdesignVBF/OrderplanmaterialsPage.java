@@ -72,7 +72,7 @@ public class OrderplanmaterialsPage extends UhcDriver {
 	public OrderplanmaterialsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		openAndValidate();
 	}
 

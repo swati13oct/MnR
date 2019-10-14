@@ -1852,7 +1852,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public boolean validateDrugOnStep3FromHomePageFlow(String drug) {
 		CommonUtility.waitForPageLoadNew(driver, step3DrugSummaryInfo, 30);
-		validateNew(step3PharmacySummaryInfo);
+		validateNew(step3DrugSummaryInfo); System.out.println(step3DrugSummaryInfo);
 		if (step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
@@ -1915,8 +1915,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0] + "')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}	
 	
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {

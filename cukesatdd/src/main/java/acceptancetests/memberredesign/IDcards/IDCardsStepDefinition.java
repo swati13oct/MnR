@@ -18,6 +18,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * 
@@ -42,8 +43,17 @@ public class IDCardsStepDefinition {
 		 */
 		@When("^the user clicks on View and Print Member ID cards link$")
 		public void the_user_clicks_on_View_and_Print_Member_ID_cards_link() {
-			
-			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			AccountHomePage accountHomePage;	
+		
+			if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+				accountHomePage = testHarness.navigateDirectToAcccntHomePage(); 
+				IDCardPage iDCardPage = accountHomePage.viewIDCard();
+				if(iDCardPage != null)				
+					getLoginScenario().saveBean(PageConstants.ID_CARD_PAGE,
+							iDCardPage);
+			} else
+				 accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			
 			IDCardPage iDCardPage = accountHomePage.viewIDCard();
 			if(iDCardPage != null)				

@@ -1,7 +1,7 @@
 @vppUlayer @emailAndPrint @emailAndPrint_AARP
 Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
-  @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators
+  @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID> - Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -20,7 +20,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
      | 15523 | 90210   | MedicareAdvantage | NO            | 
 
 
-  @emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators
+  @emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID> -  Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -39,8 +39,8 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     | 15531 |   90210 | MA       | No              |
 
 
-  @emailAndPrint_AARP3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button on view plan preview page on AARP site
+  @emailAndPrint_AARP3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 @prodRegression
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -54,6 +54,8 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     #  | SNP Test Plans  | <SNP_testPlans> |
     Then user validates email option on AARP site
 	Then user validates email functionality with invalid and valid email address on AARP site
+	 Then user validates print option on AARP site
+	Then user validates print functionality on AARP site
 
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                                                                               |
@@ -78,6 +80,6 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
+#      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
 
