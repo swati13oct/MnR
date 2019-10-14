@@ -1,5 +1,5 @@
 @accountProfile @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page
+Feature: 1.02 Member Profile page
 
   @accountProfile1 @ShipEndtoEnd
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members

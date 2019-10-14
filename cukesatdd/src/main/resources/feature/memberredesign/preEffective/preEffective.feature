@@ -1,5 +1,5 @@
 @preEffective @codetransformers
-Feature: To test pre-effective functionality
+Feature: 1.15 Member pre-effective functionality
 
   @preEffective1 @regressionMember @codetransformers
   Scenario Outline: -planType: <planType> -Segment ID: <segmentId> - Verify that correct links and messages are displayed on Dashboard and Secondary Pages for pre-effective members.

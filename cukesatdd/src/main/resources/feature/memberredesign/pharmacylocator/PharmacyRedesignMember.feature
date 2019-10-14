@@ -1,5 +1,5 @@
 @pharmacylocator @gladiators
-Feature: P1.6To test Locate a Pharmacy Locator tool on member site
+Feature: 1.11 Member Pharmacy Locator tool Page
 
   #----- beginning of VBF member pharmacy locator scenarios section ------------------------
   @vbfGate @MemberVBF
