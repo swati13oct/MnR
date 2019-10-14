@@ -48,8 +48,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public JSONObject savedrugpageJson;
 
 	//@FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	//@FindBy(id = "add-drug")
-	@FindBy(xpath="//div[@id='add-drug']//a")
+	@FindBy(id = "add-drug")
+	//@FindBy(xpath="//div[@id='add-drug']//a")
 	public WebElement addDrug;
 
 	@FindBy(xpath = "//p[contains(text(),'STEP2:')]/following-sibling::span[p[contains(text(),'PHARMACY')]]")

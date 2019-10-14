@@ -24,6 +24,8 @@ import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
+	protected long defaultPharmacyLocatorTimeout=2;
+	
 	public PharmacySearchBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -528,9 +530,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		int timeoutInSec=2;
-		return pharmacyValidate(element, timeoutInSec);
-	}
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
+	} 
 	
 	/**
 	 * to validate whether element exists with input timeout value control
@@ -539,6 +541,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd
 	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -554,7 +557,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 		}
 		return false;
-	}
+	}*/
 }
 
 
