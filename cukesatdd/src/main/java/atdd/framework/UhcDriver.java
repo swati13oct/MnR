@@ -123,7 +123,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
-	    	waitforElementNew(element);
+	    	waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -706,20 +706,26 @@ try {
 	}
 	
 	public static void checkModelPopup(WebDriver driver) {
-		
-			WebElement IPerceptionsFrame = pages.acquisition.bluelayer.GlobalWebElements.IPerceptionsFrame;
-			WebElement IPerceptionsNoBtn = pages.acquisition.bluelayer.GlobalWebElements.IPerceptionNoBtn;
-			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, 15);
-			
-			try{
-				if(IPerceptionsFrame.isDisplayed())	{
-					driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionsNoBtn.click();
-					driver.switchTo().defaultContent();
+		int counter = 0;
+		do {
+
+			System.out.println("current value of conter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
 				}
-			}catch(Exception e){
-				System.out.println("Iperceptions popup not found");
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.xpath("//*[contains(@class,'btn-no')]")).click();
+				driver.switchTo().defaultContent();
 			}
+			counter++;
+		} while (counter < 2);
+
 	}
 	
 }
