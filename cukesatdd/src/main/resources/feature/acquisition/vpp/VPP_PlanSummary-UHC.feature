@@ -3,7 +3,6 @@ Feature: 2.01.ACQ-VPP Plan Summary Page in UMS
 
 
  @vppPlanCardsRegressionBlayer @fastandfurious @prodRegression
-
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -15,17 +14,17 @@ Feature: 2.01.ACQ-VPP Plan Summary Page in UMS
     And the user validates plan summary for the below plan in UMS site
       | Plan Name | <planName> |
     Then the user validates and clicks Add to compare checkbox for the above selected plan in the UMS site for MA, MAPD , PDP Plans
-    Then the user validates Add to compare checkbox is not present for DSNP Plans in UMS
+    Then the user validates Add to compare checkbox is not present for DSNP Plans in UMS 
     Then the user validates marketing bullets of the plan in UMS Site
     Then the user view plan details of the above selected plan in UMS site and validate
-      | Plan Name | <planName> |
+     | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary in UMS site
     Then the user validates below plan benefit values for the above selected plan in UMS site for MA , DSNP and MAPD Plans
-      | Monthly Premium            | <monthlyPremium>         |
-      | Primary Care Physician     | <primaryCarePhysician>   |
-      | Specialist                 | <specialist>             |
-      | Referral Required          | <referralRequired>       |
-      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+      | Monthly Premium | <monthlyPremium> |
+      | Primary Care Physician | <primaryCarePhysician> |
+      | Specialist | <specialist> |
+      | Referral Required | <referralRequired> |
+      | Out Of Pocket Maximum | <outOfPocketMaximum> |
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
 #    Then the user validates below plan benefit values for the above selected plan in UMS site for PDP  Plans
 #      | Monthly Premium | <monthlyPremium> |
@@ -48,8 +47,7 @@ Feature: 2.01.ACQ-VPP Plan Summary Page in UMS
 #   |  15542 |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              |  $4,900.00         |  No drug coverage                            |                                                        | 
    |  15543 |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  |
       
-  
-  @rightRailRegressionBlayer @fastandfurious
+   @rightRailRegressionBlayer @fastandfurious
    Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
    Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -63,13 +61,16 @@ Feature: 2.01.ACQ-VPP Plan Summary Page in UMS
     Then the user validates the TFN in the Need Help Section in ums Site
     Then the user validates Get a free medicare Guide section in the right rail in ums Site
     Then the user enters the following information in the Get a free medicare Guide section in ums Site
-      | First Name    | <firstName>    |
-      | Last Name     | <lastName>     |
-      | Email Address | <emailAddress> |
-    Then the user validates Plan Selector Tool section in the right rail in ums Site
+     | First Name | <firstName> |
+     | Last Name | <lastName> |
+     | Email Address | <emailAddress> |
+    Then the user validates Plan Selector Tool section in the right rail in ums Site  
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
-    # Then the user validates Need More Information section in the right rail in ums Site
-    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site
+  # Then the user validates Need More Information section in the right rail in ums Site
+  # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site  
+    
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |
-      | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |
+   |   TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | 
+   |  15549  |  90210  | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | 
+    
+                              

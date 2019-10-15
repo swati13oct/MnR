@@ -13,9 +13,9 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
 #    And the user validates available plans for selected plan types in the AARP site 
     And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
-    Then the user validates marketing bullets of the plan in AARP site
-    Then the user validates and clicks Add to compare checkbox for the above selected plan in the AARP site for MA, MAPD , PDP Plans
-    Then the user view plan details of the above selected plan in AARP site and validate
+     Then the user validates marketing bullets of the plan in AARP site
+     Then the user validates and clicks Add to compare checkbox for the above selected plan in the AARP site for MA, MAPD , PDP Plans
+     Then the user view plan details of the above selected plan in AARP site and validate
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary in AARP site
     Then the user validates below plan benefit values for the above selected plan in AARP site for MA , DSNP and MAPD Plans
@@ -27,10 +27,10 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
        | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
        |Plan Type | <plantype> |
     Then the user validates below plan benefit values for the above selected plan in AARP site for PDP  Plans
-      | Monthly Premium            | <monthlyPremium>         |
-      | Annual Deductible          | <annualDeductible>       |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-    Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in AARP Site
+      | Monthly Premium | <monthlyPremium> |
+      | Annual Deductible | <annualDeductible> |
+      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |  
+    Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in AARP Site  
     Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in AARP Site
     Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
     Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
@@ -39,7 +39,8 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans
     Then the user clicks on Enroll Now for AARP site and validates the Welcome to OLE Page
-  
+      
+	  
     Examples: 
        |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                         | annualDeductible                                       |
        | 15545  |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
@@ -62,14 +63,19 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
     Then the user validates the TFN in the Need Help Section in aarp Site
     Then the user validates Get a free medicare Guide section in the right rail in aarp Site
     Then the user enters the following information in the Get a free medicare Guide section in aarp Site
-      | First Name    | <firstName>    |
-      | Last Name     | <lastName>     |
+      | First Name | <firstName> |
+      | Last Name | <lastName> |
       | Email Address | <emailAddress> |
-    # Then the user validates Need More Information section in the right rail in aarp Site
-    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
-    Then the user validates Plan Selector Tool section in the right rail in aarp Site
-    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
-
+   # Then the user validates Need More Information section in the right rail in aarp Site
+   # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site  
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site  
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site    
+    
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |
-      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |
+  |  TID     | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | 
+  |  15550   |  90210  | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | 
+  
+    
+    
+
+                              
