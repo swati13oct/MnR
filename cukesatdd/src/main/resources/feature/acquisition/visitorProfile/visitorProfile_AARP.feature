@@ -16,6 +16,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drug      | <drug>      |
       | Quantity  | <quantity>  |
       | Frequency | <frequency> |
+      |Dosage  | <dosage>|
     When user successfully adds drug
       | Is Branded Drug | <branded> |
       | Drug            | <drug>    |
@@ -31,8 +32,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drugname | <Drugname> |
 
     Examples: 
-      | state   | Drugname         | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
-      | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
+      | state   | Drugname |dosage        | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
+      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
   @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile

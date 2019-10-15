@@ -269,7 +269,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//input[@id='updates-last-name']")
 	public WebElement lastNameField;
 
-	@FindBy(xpath="//button[@id='signUp']")
+	@FindBy(xpath="//button[contains(@id,'signUp')]")
 	public WebElement Submitbutton;
 
 	//vvv note: added for US1598162
@@ -335,7 +335,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
 	private WebElement emailPlanSummaryCancelButton;
 
-	@FindBy(xpath = "//p[@id='emailSuccess']") 
+	@FindBy(xpath = "//*[@id='emailSuccess']") 
 	private WebElement emailPlanSummarySuccessText;
 	
 	@FindBy(xpath = "//button[@ng-click='closeEmailSuccessMsgSummaryPopUp()']")
@@ -2219,7 +2219,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(lastNameField, LastName);
 		sendkeysNew(emailField, EmailAddress);
 		validateNew(Submitbutton);
-		Submitbutton.click();
+		jsClickNew(Submitbutton);
 		if(validateNew(medicareGuidePopup)){
 			System.out.println("Pop up message has been displayed");
 			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
@@ -2691,15 +2691,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-		emailPlanSummarySendButton.click();
-		CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 15);
-		Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
+		jsClickNew(emailPlanSummarySendButton);
+		validateNew(emailPlanSummarySuccessText, 15);
 		String expectedSuccess1="Thank you!";
 		String expectedSuccess2="The email with your information will arrive shortly.";
 		String actualEmailSuccessText=emailPlanSummarySuccessText.getText();
 		Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected to contain '"+expectedSuccess1+"' and '"+expectedSuccess2+"' | Actual='"+actualEmailSuccessText+"'", (actualEmailSuccessText.contains(expectedSuccess1)) && (actualEmailSuccessText.contains(expectedSuccess2)));
 
-		Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessCloseButton));
+		validateNew(emailPlanSummarySuccessCloseButton);
 		System.out.println("Proceed to close the email popup screen to cleanup");
 		emailPlanSummarySuccessCloseButton.click();
 	}
