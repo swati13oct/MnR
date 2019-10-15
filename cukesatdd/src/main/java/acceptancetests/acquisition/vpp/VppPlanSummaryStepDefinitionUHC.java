@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.KeywordSearch;
@@ -653,7 +653,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	   if(!planType.equals("MA")){
 	   DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-	   drugCostEstimatorPage.navigateBackToPlanSummaryPage();
+	   drugCostEstimatorPage.clickReturnToSummaryLink();
 	   
 	   }  
    }
