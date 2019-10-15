@@ -1,5 +1,5 @@
 @idCards @velocityDashers
-Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
+Feature: 1.17 ID cards on Dashboard
 
  @idCards1 @regressionIDCards @regressionMember
   Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page
