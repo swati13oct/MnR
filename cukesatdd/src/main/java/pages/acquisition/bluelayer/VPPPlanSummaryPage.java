@@ -444,11 +444,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id = "msVppDOB")
 		private WebElement DOB;
 
-		@FindBy(id = "mpaed-month")
-		private WebElement monthDrpDwn;
+		@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
+		private WebElement monthDrpDwn_PartA;
 		
 		@FindBy(id = "mpaed-year")
-		private WebElement yearDrpDwn;
+		private WebElement yearDrpDwn_PartA;
 		
 		@FindBy(id = "mpbed-month")
 		private WebElement monthBDrpDwn;
@@ -510,10 +510,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//*[contains(@id,'ole-cancel-confirm')]//a[contains(text(),'Cancel Application')]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
+		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
 		private WebElement resumeApplication;
 		
 		
@@ -540,6 +540,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "(//*[@id='overlay'])[1]]")
 		private WebElement loadingIndicator;
+		
+		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
+		private WebElement medicareGuidePopup;
 		
 		@FindBy(id="pop-btn-1")
 		private WebElement createProfileBtn;
@@ -773,21 +776,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			MAmoreDetailsLink.click();
+			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
             WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
                     + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			PDPmoreDetailsLink.click();
+			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			SNPmoreDetailsLink.click();
+			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
 
 		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
@@ -795,7 +798,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
 					validate(MAmoreDetailsLink);
 					
-					MAmoreDetailsLink.click();
+					jsClickNew(MAmoreDetailsLink);
 					System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -877,33 +880,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
         public void viewPlanSummary(String planType) {
             if (planType.equalsIgnoreCase("PDP")) {
                             CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-                            pdpPlansViewLink.click();
+                            sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+                            jsClickNew(pdpPlansViewLink);
                             System.out.println("PDP Plan Type Clicked");
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
                             CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+                            sleepBySec(2);
 							jsClickNew(maPlansViewLink);
                            // maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
-            	driver.navigate().refresh();
+            			driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			sleepBySec(2);
-                            msPlansViewLink.click();
+                            sleepBySec(2);
+                            jsClickNew(msPlansViewLink);
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
+            			sleepBySec(5);
         	            CommonUtility.checkPageIsReady(driver);
-        	            snpPlansViewLink.click();
+        	            jsClickNew(snpPlansViewLink);
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-                         }
-                      	}
+            }
+          }
 
 	@Override
 	public void openAndValidate() {
-		//pages.acquisition.ulayer.AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
@@ -1498,8 +1501,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 		if (plantype.equals("MA") || plantype.equals("MAPD")) {
-			List<WebElement> maDCELink = driver.findElements(By.xpath(
-					".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
+			List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
 			maDCELink.get(0).click();
 		} else {
 			List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
@@ -1507,7 +1509,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 		CommonUtility.waitForPageLoad(driver, step1, 30);
-		if (currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+		if (currentUrl().contains("/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
 
@@ -1614,7 +1616,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : "+planName);
-		driver.navigate().refresh();
+	//	driver.navigate().refresh();
 		Thread.sleep(6000);
 		if(planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
@@ -2480,9 +2482,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	  sendkeysNew(lastNameField, LastName);
 	  sendkeysNew(emailField, EmailAddress);
 	  validateNew(Submitbutton);
-	  Submitbutton.click();
-	  WebElement popup = driver.findElement(By.xpath("//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]"));
-	  if(validateNew(popup)){
+	  Submitbutton.click();	 
+	  if(validateNew(medicareGuidePopup)){
 		  System.out.println("Pop up message has been displayed");
 		  WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
 		  closePopUp.click();
@@ -2680,7 +2681,14 @@ public void validateDefaultNoSavedPlan(String planType) {
 	
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
+			 System.out.println("TEST - initial save plan xpath : "+ initial_savePlanIconXpath);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
 	
 		}
@@ -3023,7 +3031,7 @@ public void validateEmailOption(String planType) {
 	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 	emailPlanSummarySendButton.click();
-	CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 10);
+	CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 15);
 	Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
 	String expectedSuccess1="Thank you!";
 	String expectedSuccess2="The email with your information will arrive shortly.";
@@ -3116,18 +3124,49 @@ public void closeOriginalTabAndOpenNewTab() {
 
 public void MedSupFormValidation(String DateOfBirth, String zipcode) throws InterruptedException {
 	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
 	System.out.println("MedSup page form is displayed");
 	medSupZipcode.sendKeys(zipcode);
 	DOB.click();
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
-	MaleGender.click();
-	monthDrpDwn.click();
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
 	//Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
-	yearDrpDwn.click();
+	yearDrpDwn_PartA.click();
+	yearDrpDwnOption.click();
+	System.out.println("Effective date- year value selected");
+//	Thread.sleep(2000);
+	monthBDrpDwn.click();
+	monthBDrpDwnOption.click();
+//	Thread.sleep(2000);
+	yearBDrpDwn.click();
+	yearBDrpDwnOption.click();
+	Thread.sleep(2000);
+	startDrpDwn.click();
+//	Thread.sleep(2000);
+	startDrpDwnOption.click();
+	Thread.sleep(3000);
+	System.out.println("Plan to start date selected");
+	ViewPlanMedSupPage.click();
+}
+
+public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
+	Thread.sleep(4000);
+	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+	System.out.println("MedSup page form is displayed");
+	//medSupZipcode.sendKeys(zipcode);
+	DOB.click();
+	DOB.sendKeys(DateOfBirth);
+	System.out.println("Date of birth is entered");
+	jsClickNew(MaleGender);
+	jsClickNew(monthDrpDwn_PartA);
+	monthDrpDwnOption.click();
+	//Thread.sleep(2000);
+	System.out.println("Effective date- month value selected");
+	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
 //	Thread.sleep(2000);
@@ -3186,6 +3225,7 @@ public String StartApplicationButton(String FirstName, String LastName) throws I
 
 public void ResumeApplicationButton() throws InterruptedException{
 	Thread.sleep(5000);
+	Start_ApplicationBtn.click();
 	CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 	resumeApplication.click();
 	System.out.println("Resume application link clicked successfully");
@@ -3196,7 +3236,9 @@ public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode
 	
 	applicationID.sendKeys(ApplicationID);
 	ResumeDOB.sendKeys(DOB);
-	ResumeZipCode.sendKeys(zipcode);
+	ResumeZipCode.click();
+	Thread.sleep(2000);
+	ResumeZipCode.sendKeys("90210");
 	resumeApplicationBtn.click();
 	
 	System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");

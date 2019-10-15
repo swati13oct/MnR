@@ -351,7 +351,7 @@ public class TestHarness extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateTestHarnessElements(String Category) {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLink);
@@ -1231,4 +1231,23 @@ public class TestHarness extends UhcDriver {
     		String Message_text = testHarnessHeader.getText();
     		Assert.assertTrue(Message_text.contains("Test Harness"));    		
     	}
+    	
+    	@FindBy(xpath = "//*[contains(@id,'home_2')]")
+    	private WebElement HomeButton;
+    	
+    	public AccountHomePage navigateDirectToAcccntHomePage() {
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		jsClickNew(HomeButton);
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+    		System.out.println(driver.getTitle());
+
+    		if(driver.getCurrentUrl().contains("dashboard"))
+    		 {  
+    			return new AccountHomePage(driver);
+    		}
+    		return null;
+    	}
+
 }

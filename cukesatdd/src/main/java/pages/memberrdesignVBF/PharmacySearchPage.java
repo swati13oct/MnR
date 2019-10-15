@@ -55,7 +55,7 @@ public class PharmacySearchPage extends UhcDriver {
 	public PharmacySearchPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 60);
 		openAndValidate();
 	}

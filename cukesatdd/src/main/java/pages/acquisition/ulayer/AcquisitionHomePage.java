@@ -35,7 +35,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(className = "fd_myPlans")
@@ -164,7 +164,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath="//button[@class='zip-button' and text()='Go']")
@@ -353,7 +353,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-	//	checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -375,7 +375,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver);
+			checkModelPopup(driver,15);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 			try{
@@ -388,7 +388,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			isHealthPlan = true;
 				CommonUtility.checkPageIsReadyNew(driver);
 				System.out.println("Current page URL: "+driver.getCurrentUrl());
-				checkModelPopup(driver);
+				checkModelPopup(driver,15);
 				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 				try{
 					if(proactiveChatExitBtn!=null)
@@ -431,7 +431,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
 			if(proactiveChatExitBtn!=null)
@@ -447,7 +447,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
-		checkModelPopup(driver);
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
@@ -866,29 +865,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
-		checkModelPopup(driver);
-		if(isHealthPlan){
+		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
+		/*if(isHealthPlan){
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
 
 			btnGO.click();
-		}else{
+		}else{*/
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
-		}
-		Thread.sleep(4000);
-		if(vppTop.isDisplayed())
+	//	}
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 20);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
 			}
 			else
-				driver.navigate().refresh();
-		Thread.sleep(5000);
-		if (driver.getCurrentUrl().contains("health-plans")) {
-			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
+				return null;
 	}
 
 	public VPPPlanSummaryPage addPlansForVisitorProfile(String zipcode) {
@@ -954,7 +947,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		checkModelPopup(driver);
+		//checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
@@ -1181,30 +1174,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
-	
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	}	
+		
 	
 	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {		
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);

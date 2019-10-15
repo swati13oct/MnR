@@ -49,13 +49,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
 	private WebElement zipCodeField;
 	
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeHealthPlans;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
@@ -424,7 +424,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-	//	checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	
@@ -511,13 +511,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
-		try{
-			Thread.sleep(5000);
-		}
-		catch(Exception e)
-		{
 			
-		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
@@ -859,7 +853,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
-		checkModelPopup(driver);
+		//checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -1198,20 +1192,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
-		if(isHealthPlan){
-			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
-			sendkeys(zipCodeHealthPlans, zipcode);
+		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
+				/*if(isHealthPlan){
+					CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+					sendkeys(zipCode, zipcode);
 
-			GoBtnHealthPlans.click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-
-		}else{
+					btnGO.click();
+				}else{*/
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-		}
+	//	}
 		/*
 		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
 		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
@@ -1365,28 +1358,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
 	}
 	
 	public AboutUsPage aboutUsClick() {

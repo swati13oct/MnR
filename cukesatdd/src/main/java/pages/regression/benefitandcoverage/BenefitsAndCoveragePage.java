@@ -3938,42 +3938,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 
 	}
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				// if
-				// (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt
-				// = 'no']")).isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-				/*
-				 * } else { System.out.println(
-				 * "FeedBack Modal Present and counter value is:" + counter);
-				 * try { Thread.sleep(2000); WebElement NoThanks =
-				 * driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")
-				 * ); JavascriptExecutor js = (JavascriptExecutor) driver;
-				 * js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-				 * js.executeScript("arguments[0].click();", NoThanks); break; }
-				 * catch (InterruptedException e) { e.printStackTrace(); }
-				 * 
-				 * }
-				 */
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	}
 
 	/*
 	 * this method checks that Plan Benefits Summary Sub Navigation Link 

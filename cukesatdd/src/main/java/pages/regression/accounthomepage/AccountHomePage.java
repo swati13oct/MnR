@@ -72,8 +72,8 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement contactUsPageLink;
 
 	// @FindBy(css = ".view-id-link")
-	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
-	private WebElement idCardLink;
+//	@FindBy(xpath = "(//*[contains(text(),'View & print member ID cards')])[1]")
+//	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
@@ -1796,29 +1796,32 @@ public class AccountHomePage extends UhcDriver {
 			System.out.println("TestHarness Page Payments Link is displayed");
 			TestHarnesspaymentsLink.click();
 			return new PaymentHistoryPage(driver);
-		} else {
+		}	else {
 			// NOTE:
 			// work-around, when Home, data maintained by Rally, is out of sync,
 			// payment tab may not show
 			// go to secondary page first then locate the payment tab.
 			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");
+			navigateDirectToBnCPag();
+			Assert.assertTrue("PROBLEM - unable to locate the payment link on secondary page", validate(paymentsLink3));
+			paymentsLink3.click();
+			/* tbd 
 			try {
 				String Page_URL = "https://" + MRScenario.environment
 						+ "-medicare.uhc.com/aarp/member/payments/overview.html";
 				// String Page_URL = driver.getCurrentUrl().split(".com")[0];
 				driver.navigate().to(Page_URL);
-			} catch (Exception e1) {
+			} catch (Exception e1) { 
 				try {
 					coverageBenefits.click();
 				} catch (NoSuchElementException e) {
-					dashboard_coverageBenefits.click();
+					dashboard_coverageBenefits.click();x
+					
 				}
 				WebDriverWait wait = new WebDriverWait(driver, 30);
-				paymentsLink3.click();
-			}
+			}*/
 			System.out.println("Navigated to Payments Overview Page URL : " + driver.getCurrentUrl());
 			return new PaymentHistoryPage(driver);
-
 		}
 	}
 
@@ -2113,25 +2116,34 @@ public class AccountHomePage extends UhcDriver {
 	 * 
 	 * @return
 	 */
+	
+	@FindBy(xpath = "//*[contains(@id,'home_2')]")
+	private WebElement TestHarnessPageHomeBttnround;
+	
+	@FindBy(xpath = "//*[@id='dashboard']")
+	private WebElement Dashboard;
+	
 	public IDCardPage viewIDCard() {
-		try {
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up not displayed");
-		}
 
-		if (driver.getCurrentUrl().contains("testharness")) {
-			driver.findElement(By.id("home_2")).click();
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']")), 10);
-			validate(idCardLink);
-			idCardLink.click();
+		if (driver.getCurrentUrl().contains("testharness.html")) {
+			System.out.println("The page contains test harness");
+			jsClickNew(TestHarnessPageHomeBttnround);
+			System.out.println("Home button clicked");
+			CommonUtility.waitForPageLoad(driver,Dashboard, 30);
+			System.out.println("dashboard diplayed");
+			validate(viewRecomend);
+			viewRecomend.click();
 			return new IDCardPage(driver);
 		} else {
 
-			validate(idCardLink);
-			idCardLink.click();
+			validate(viewRecomend);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//	viewRecomend.click();
 			return new IDCardPage(driver);
 		}
 	}

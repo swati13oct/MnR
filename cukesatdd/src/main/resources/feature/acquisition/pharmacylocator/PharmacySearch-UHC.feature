@@ -1,4 +1,5 @@
 @pharmacylocatorblayer
+
 Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
@@ -46,12 +47,14 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates the pharmacies results
       | Language | English |
 
+
     @pharmacylocatorBlayerSmoke @pharmacyLocatorBlayerCurrentYrSmoke @pharmacyLocatorBlayerNextYrSmoke
 
     Examples: 
       | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | pharmacytype              | servicetype   |
       | Blayer   |   80002 |       25 | Adams County |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
    #  | Blayer   |   90210 |       25 | None         |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
+
 
   #tbd @pharmacyLocatorBlayerNextYrSmoke
   #tbd Examples: 
@@ -127,7 +130,9 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
+
   @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
+
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -171,7 +176,9 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
+
   @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
+
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |

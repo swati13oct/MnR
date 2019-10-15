@@ -67,7 +67,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(id = "gfn_lnk_row2_4")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")

@@ -1,5 +1,5 @@
 @CommunicationPreferences @thePredators 
-Feature: C1.2To test Preferences page
+Feature: 1.03 Member Preferences page
 
   #----- beginning of VBF preferences scenarios section ------------------
   @vbfGate

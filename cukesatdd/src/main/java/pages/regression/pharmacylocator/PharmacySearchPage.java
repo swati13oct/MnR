@@ -426,12 +426,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			if (beforeClicked_tabs.size()==afterClicked_tabs.size()) {
 				System.out.println(i+" give it extra 3 seconds for pdf to load");
 				Thread.sleep(3000); //note: keep this for the page to load
-				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				i=i++;
+				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				//tbd i=i++;
 				i=i++;
 			} else 
 				break;
 		}
-		afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				i=i++;
+		afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());				//tbd i=i++;
 		int afterClicked_numTabs=afterClicked_tabs.size();
 		System.out.println("TEST - afterClicked_numTabs="+afterClicked_numTabs);
 		//note: no point to continue if tab for pdf didn't show
@@ -556,8 +556,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	
 	public String getConsumerDetailsFromlocalStorage() {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		Assert.assertTrue("PROBLEM - unable to obtain LocalStorage info", webStorage!=null);
 		LocalStorage localStorage = webStorage.getLocalStorage();
 		String consumerDetails=localStorage.getItem("consumerDetails");
+		Assert.assertTrue("PROBLEM - unable to obtain consumerDetails from LocalStorage", consumerDetails!=null);
 		return consumerDetails;
 	}
 	

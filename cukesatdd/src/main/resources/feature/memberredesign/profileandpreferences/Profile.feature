@@ -1,13 +1,13 @@
 @accountProfile @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page
+Feature: 1.02 Member Profile page
 
   @accountProfile1 @ShipEndtoEnd
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When the user navigates to Profile and Preferences page
-    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    And the ship user validates the need help section
+    And the user validates the Plan Name, Member name, Member ID and account section
+	And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <planType> |
@@ -23,8 +23,8 @@ Feature: C1.2To test Profile and Preferences page
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-      | TID   | planType         |
-      | 15103 | SHIP_ProfilePref |
+      | TID   | planType          |
+      | 15103 | SHIP_ProfilePref  |
 
   @accountProfile2 @MAPDandMAEndToEnd
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members

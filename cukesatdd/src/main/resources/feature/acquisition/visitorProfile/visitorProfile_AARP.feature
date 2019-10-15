@@ -3,7 +3,7 @@
 @Test @AARPvisitorprofile
 Feature: 1.08. ACQ- Visitor profile AARP
 
-  @addDrugs @addDrugsULayerSmoke  @visitorProfileRegressionAARP
+  @addDrugs @addDrugsULayerSmoke  @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -64,7 +64,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | Drugname         | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
       | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
-  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
+  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -106,10 +106,10 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO)_Test,AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @addPlansPlanDetail  @visitorProfileRegressionAARP
+  @addPlansPlanDetail  @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |

@@ -1522,11 +1522,30 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
 
+	@Then("^the user will navigate to locate resume application button")
+	public void click_resume_application_3(DataTable givenAttributes)throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zipcode");
+		System.out.println("***the user clicks on resume application button***");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+		plansummaryPage.ResumeApplicationButton();
+
+	}
 
 	@Then("^the user enters data to resume the application")
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
