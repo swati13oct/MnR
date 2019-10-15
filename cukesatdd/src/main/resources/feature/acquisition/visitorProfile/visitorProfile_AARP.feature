@@ -1,9 +1,9 @@
 #Author: Danthoori shiva
 #created Date:2/12/2019
 @Test @AARPvisitorprofile
-Feature: Visitor profile
+Feature: 1.08. ACQ- Visitor profile AARP
 
-  @addDrugs
+  @addDrugs @addDrugsULayerSmoke  @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -64,14 +64,14 @@ Feature: Visitor profile
       | state   | Drugname         | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
       | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
 
-  @addPlans
+  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
     And the user clicks on the add plans button in the guest profile in AARP site
-    When the user adds plan from plan search using following information in the AARP site
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -85,7 +85,7 @@ Feature: Visitor profile
 
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO)_Test,AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -106,10 +106,10 @@ Feature: Visitor profile
       | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO)_Test,AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
-  @addPlansPlanDetail
+  @addPlansPlanDetail  @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -135,5 +135,5 @@ Feature: Visitor profile
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                        | eyeWearBenefitType | eyeWearExpectedText                                  | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
-      | Alabama | US1770330 |   53503 | NO            | Jefferson County | UnitedHealthcare MedicareComplete Open (PPO),UnitedHealthcare MedicareComplete Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per year | Eye Exam           | $20 copay 1         | Foot Care - Routine        | $50 copay 1                 | Hearing Exam           | $15 copay 1             | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | state   | UID       | zipcode | isMultiCounty | plantype | county           | MA_testPlans                                                                                        | eyeWearBenefitType | eyeWearExpectedText                                  | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
+      | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare MedicareComplete Open (PPO),UnitedHealthcare MedicareComplete Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per year | Eye Exam           | $20 copay         | Foot Care - Routine        | $50 copay                | Hearing Exam           | $15 copay             | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |

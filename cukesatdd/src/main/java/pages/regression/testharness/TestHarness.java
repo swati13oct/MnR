@@ -1,7 +1,9 @@
 package pages.regression.testharness;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +21,7 @@ import acceptancetests.memberredesign.HSID.CommonStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.*;
 import pages.regression.formsandresources.*;
 import pages.regression.claims.*;
@@ -34,6 +37,7 @@ import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
 
 public class TestHarness extends UhcDriver {
@@ -104,6 +108,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "home_2")
 	private WebElement panelHome;
 
+	@FindBy(xpath="//title[contains(text(),'Contact Us')]")
+	private WebElement contactUsTitleElement;
+	
 	@FindBy(id = "claims_1")
 	private WebElement panelClaims;
 
@@ -218,7 +225,21 @@ public class TestHarness extends UhcDriver {
 	 @FindBy(xpath = "(//img[@alt='CoLogo'])[1]")
      private WebElement cologoImage;
 	
+     @FindBy(xpath="//a[contains(text(),'Go to Pharmacies and prescriptions page') or contains(text(),'Go to Pharmacies & prescriptions page')]")
+     private WebElement testHarnessPharPresLink;
 
+ 	@FindBy(xpath="//a[@id='pharmacies_5']")
+ 	private WebElement testHarnessTopMenuPhaPresLink;
+ 	
+	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
+	private WebElement pharPresDashboardLink;
+
+	@FindBy(xpath="//h1[contains(text(),'Estimate Your Drug Costs')]")
+	private WebElement dceHeaderTxt;
+	
+	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'payment')]")
+	private WebElement paymentTabOnTopMenu;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -233,6 +254,7 @@ public class TestHarness extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
@@ -286,6 +308,18 @@ public class TestHarness extends UhcDriver {
 		
 		return null;
 	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver);
+		}
+		return null;
+	}
 
 	public PaymentsOverview navigateToTeamHPaymentOverview() throws InterruptedException {
 		System.out.println("Inside navigateToTeamHPaymentOverview functions");
@@ -317,7 +351,7 @@ public class TestHarness extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateTestHarnessElements(String Category) {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLink);
@@ -417,7 +451,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(contactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
@@ -428,14 +462,16 @@ public class TestHarness extends UhcDriver {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
+		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
+		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
 			return new ContactUsPage(driver);
 		}
+		System.out.println("TEST - 2");
 		return null;
 	}
 
@@ -464,7 +500,7 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
 			return new DrugCostEstimatorPage(driver);
 		}
@@ -1013,6 +1049,205 @@ public class TestHarness extends UhcDriver {
     			}
     			counter++;
     		} while (counter < 2);
+    	}
+    	
+    	public FormsAndResourcesPage navigateDirectToFnRPageWithTimeout() throws InterruptedException {
+    		checkForIPerceptionModel(driver);
+    		StopWatch pageLoad = new StopWatch();
+    		pageLoad.start();
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		scrollToView(formsPageLink);
+    		int forceTimeoutInMin=5;
+    		try {
+    			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+    			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+    			jsClickNew(formsPageLink);
+        		CommonUtility.checkPageIsReady(driver);
+    		} catch (org.openqa.selenium.TimeoutException e) {
+    			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+    			driver.quit(); //note: force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    		} catch (WebDriverException we) {
+    			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+    			driver.quit(); //force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    		}
+    		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+    		Thread.sleep(2000); // note: give it a bit more time to settle down
+    		pageLoad.stop();
+    		long pageLoadTime_ms = pageLoad.getTime();
+    		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+    		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+    		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+    		if (driver.getTitle().contains("Documents")) {
+    			return new FormsAndResourcesPage(driver);
+    		}
+    		return null;
+    	}    
+    	
+    	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
+    		CommonUtility.checkPageIsReady(driver);
+			checkForIPerceptionModel(driver);
+    		try{
+    			if (noWaitValidate(testHarnessPharPresLink)) 
+    				testHarnessPharPresLink.click();
+    			else 
+    				testHarnessTopMenuPhaPresLink.click();
+    		} catch (WebDriverException e) {
+    			checkForIPerceptionModel(driver);
+    			CommonUtility.checkPageIsReady(driver);
+    			testHarnessPharPresLink.click();
+    		}
+    		CommonUtility.checkPageIsReady(driver);
+    		checkForIPerceptionModel(driver);
+    		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+    			return new PharmaciesAndPrescriptionsPage(driver);
+    		}
+    		return null;
+    	}
+    	
+    	@FindBy(tagName = "arcade-header")
+    	private WebElement shadowRootHeader;
+
+    	public boolean findPnPLinksExistOnPg() {
+    		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
+    		checkForIPerceptionModel(driver);
+    		if (noWaitValidate(pharPresDashboardLink)) {
+    			return true;
+    		} else if (noWaitValidate(testHarnessTopMenuPhaPresLink)) {
+    			return true;
+    		} else {
+    			if (noWaitValidate(shadowRootHeader)) {
+    				System.out.println("Check for shadow-root before giving up");
+    				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
+    				WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, secondTopMenuItemCssStr);
+    				if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				} else if (secondTopMenuItem.getText().contains("CLAIMS")) {
+    					String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
+    					WebElement pnpTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader, pnpTopMenuItemCssStr);
+    					if (pnpTopMenuItem!=null && isPnpLink(pnpTopMenuItem.getText())) 
+							return true;
+    				}
+    			} else {
+    				System.out.println("There is no shadow-root menu");
+    			}
+    		}
+    		return false;
+    	}
+ 
+    	public boolean isPnpLink(String targetLnkTxt) {
+    		if (targetLnkTxt.equals("PHARMACIES") && targetLnkTxt.equals("PRESCRIPTIONS"))
+    			return true;
+    		else 
+    			return false;
+    	}
+
+    	public WebElement expandRootElement(WebElement element) {
+    		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+    				element);
+    		return ele;
+    	}
+
+    	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
+    		if (noWaitValidate(shadowRootElement)) {
+    			System.out.println("located shadow-root element, attempt to process further...");
+    			WebElement root1 = expandRootElement(shadowRootElement);
+    			try {
+    				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+    				Assert.assertTrue("Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", noWaitValidate(element));
+    				return element;
+    			} catch (Exception e) {
+    				System.out.println("can't locate element. Exception e=" + e);
+    				Assert.assertTrue("Got exception. Unable to locate shadowRoot element css select '"+inputSelector+"' on Dashboard", false);
+    			}
+    		} else {
+    			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+    			Assert.assertTrue("No shadowRoot element on Dashboard", false);
+    		}
+    		return null;
+    	}
+    	
+    	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
+    		if (noWaitValidate(shadowRootElement)) {
+    			System.out.println("located shadow-root element, attempt to process further...");
+    			WebElement root1 = expandRootElement(shadowRootElement);
+    			try {
+    				WebElement element = root1.findElement(By.cssSelector(inputSelector));
+    				if (noWaitValidate(element))
+    					return element;
+    			} catch (Exception e) {
+    				System.out.println("can't locate element. Exception e=" + e);
+    			}
+    		} else {
+    			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
+    		}
+    		return null;
+    	}
+    	
+    	@FindBy(xpath="//a[contains(text(),'Notices')]")
+    	private WebElement noticeAndDisclosuresLnk;
+    	public void navigateToNoticeAndDisclosuresPage() {
+    		Assert.assertTrue("PROBLEM - unable to locate the Legal Notice & Disclosures link on testhareness page", noWaitValidate(noticeAndDisclosuresLnk));
+    		noticeAndDisclosuresLnk.click();
+    		CommonUtility.checkPageIsReady(driver);
+    		
+    	}
+    	
+    	public boolean findPaymentTabOnTopMenu() {
+    		return (noWaitValidate(paymentTabOnTopMenu));
+    	}
+
+    	//note: same as the UhcDriver validate but took out the waitforElementNew to speed things up
+    	//note: don't want to @override that validate in case someone actually need that wait for 30 sec...
+    	public boolean noWaitValidate(WebElement element) {
+    		try {
+    			if (element.isDisplayed()) {
+    				System.out.println("Element found!!!!");
+    				return true;
+    			} else
+    				System.out.println("Element not found/not visible");
+    		} catch (Exception e) {
+    			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+    		}
+    		return false;
+    	}
+    	
+    	@FindBy(xpath="//table[contains(@class,'testhatnessMemberTable')]")
+    	private WebElement testharnessTable;
+    	
+    	public void waitForTestharnessTableToShow() {
+    		CommonUtility.waitForPageLoad(driver, testharnessTable, 5);
+    	}
+    	/*
+    	 * Validates Login on TestHarness Page 
+    	 */
+    	public void validateLoginonTestharness() throws InterruptedException {
+    		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
+    		String Message_text = testHarnessHeader.getText();
+    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    	}
+    	
+    	@FindBy(xpath = "//*[contains(@id,'home_2')]")
+    	private WebElement HomeButton;
+    	
+    	public AccountHomePage navigateDirectToAcccntHomePage() {
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		jsClickNew(HomeButton);
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+    		System.out.println(driver.getTitle());
+
+    		if(driver.getCurrentUrl().contains("dashboard"))
+    		 {  
+    			return new AccountHomePage(driver);
+    		}
+    		return null;
     	}
 
 }

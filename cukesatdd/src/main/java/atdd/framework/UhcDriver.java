@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -34,7 +35,14 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-
+	private long defaultTimeoutInSec=30;
+	
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
+	public static WebElement IPerceptionNoBtn;
+	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -46,7 +54,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 5000L);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -106,10 +114,23 @@ public abstract class UhcDriver {
 			}
 		}
 	}
+	
+	public boolean validate(WebElement element) {  
+		return validate(element, defaultTimeoutInSec);
+	}
 
-	public boolean validate(WebElement element) {
+	public boolean validateNew(WebElement element) { 
+		return validateNew(element, defaultTimeoutInSec);
+	}
+
+	public void waitforElementNew(WebElement element) {
+		waitforElementNew(element, defaultTimeoutInSec);
+	}
+
+
+	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
-	    	waitforElementNew(element);
+	    	waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -443,8 +464,8 @@ try {
 	 * 
 	 * @param element
 	 */
-	public void waitforElementNew(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public void waitforElementNew(WebElement element,long timeoutInSec) {
+		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -512,7 +533,7 @@ try {
 	 * @param element
 	 * @return : boolean
 	 */
-	public boolean validateNew(WebElement element) {
+	public boolean validateNew(WebElement element, long timeoutInSec) {
 		scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
@@ -639,6 +660,21 @@ try {
 	}
 	
 	/***
+	 * Created By - agarg119 the method waits for mentioned seconds till
+	 * dropdown options gets visible throwing an exception
+	 * 
+	 * @param element
+	 * @param timeout
+	 */
+	public void waitTllOptionsAvailableInDropdown(WebElement element, long timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, By.tagName("option")));
+
+	}
+	
+	
+	
+	/***
 	 * Created By - agarg119
 	 * the method waits for the iframe to be available and switch to it
 	 * throwing an exception
@@ -659,6 +695,40 @@ try {
 		actions.moveToElement(menuDropListItem);
 		actions.click().build().perform();
 		CommonUtility.checkPageIsReadyNew(driver);
+
+	}
+	
+	public static void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
+		System.out.println("Waiting for element to load...");
+		CommonUtility.waitForPageLoad(driver, element, timeInSec);
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element is displayed. Clicking on element...");
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
+			}
+		} catch (Exception e) {
+			System.out.println("Element is not displayed");
+		}
+	}
+	
+	public void checkModelPopup(WebDriver driver) {
+		 checkModelPopup(driver, defaultTimeoutInSec);
+	}
+	
+	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
+
+			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+			
+			try{
+				if(IPerceptionsFrame.isDisplayed())	{
+					driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionNoBtn.click();
+					driver.switchTo().defaultContent();
+				}
+			}catch(Exception e){
+				System.out.println("Iperceptions popup not found");
+			}
 
 	}
 	

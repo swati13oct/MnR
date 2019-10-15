@@ -112,7 +112,7 @@ public class CommonUtility {
 
 		} catch (Exception e) {
 			//Assert.fail("Not able to locate this element -- " + element + " on page");
-			System.out.println(e.getMessage());
+			System.out.println("error in waiting for page load "+e.getMessage());
 		}
 
 

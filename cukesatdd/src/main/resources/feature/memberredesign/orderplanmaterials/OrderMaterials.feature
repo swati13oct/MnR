@@ -1,5 +1,5 @@
 @orderPlanMaterials @thePredators
-Feature:P1.5 To test order materials in member site
+Feature: 1.10 Member  order materials Page
 
   #----- beginning of VBF scenarios section ------------------   
   @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate
@@ -95,7 +95,7 @@ Feature:P1.5 To test order materials in member site
       | 15292 | PDP      | AARP_Individual_order | 000       |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
       | 15286 | PCP      | Individual_order      | 000       |
-      | 15285 | MEDICA   | Individual_order      | 001       |
+      | 15285 | MEDICA   | Individual_order      | 000       |
       | 15293 | SHIP     | MEDSUPP_order         | 000       |
 
     @GroupMemberOrderSelectionandConfirmation 

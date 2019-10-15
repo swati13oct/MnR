@@ -201,9 +201,15 @@ public class CommonStepDefinition {
 	@Then("^I should see Need Help section at the bottom$")
 	public void I_should_see_nned_help_section_at_botom() {
 		// Express the Regexp above with the code you wish you had
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+
+			testHarness.validateNeedHelpSection();
+		} else {
 		RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
 				.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
 		rallyDashboard.validateNeedHelpSection();
+		}
 
 	}
 }

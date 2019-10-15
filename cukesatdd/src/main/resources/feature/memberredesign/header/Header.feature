@@ -1,5 +1,5 @@
 @header @theIncredibles @member_redesign
-Feature: I1.3Header/Navigation for Member Site Redesign
+Feature: 1.08 Member Header/Navigation validation
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
   @header1 @member_redesign_header @IncrediblesHeader @regressionMember
@@ -33,25 +33,34 @@ Feature: I1.3Header/Navigation for Member Site Redesign
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    And I view the global navigation Header
     Then I should be able to see and use the Premium Payments tab Header
 
     Examples: 
       | TID   | planType | memberType              |
       | 15168 | MAPD     | IndividualMember_header |
       | 15252 | MAPD     | GroupLessSubsidy_header |
+    
+    @F287624 @US2037787 @US2037966
+    Examples: 
+      | TID       | planType    | memberType                    |
+      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
+      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
 
   @header3 @premiumpaymentsheader_100%subisdy @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    And I view the global navigation Header
     Then I should not be able to see the Premium Payments tab Header
-
+ 
     Examples: 
-      | TID   | planType | memberType | Identifier      |
-      | 15253 | MAPD     | Group_BnC  | GrpEffectiveUHC |
+      | TID   | planType | memberType | 
+      | 15253 | MAPD     | IndividualGroup_header  | 
+
+    @F287624 @US2037783 @US2037945 
+    Examples: 
+      | TID       | planType    | memberType                |
+      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
 
   @header4 @findcarecostsheader @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header

@@ -48,10 +48,10 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement footerAgentsnBrokersLink;
 	
 	/** Request for assistance link **/
-	@FindBy(id="gf_lnk_9")
+	@FindBy(id="gf_lnk_10")
 	public static WebElement footerRequestforAssistancelink;
 	
-	@FindBy(id="gf_lnk_10")
+	@FindBy(id="gf_lnk_9")
 	public static WebElement footerAccessibilitylink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
@@ -64,7 +64,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id = "gfn_lnk_row2_2")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(id = "gfn_lnk_row2_4")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -226,6 +226,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
+	
 
 	@Override
 	public void openAndValidate() {

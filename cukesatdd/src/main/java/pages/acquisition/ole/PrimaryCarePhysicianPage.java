@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -82,7 +83,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Continue')]")
 	private WebElement MedicalGrpContinueBtn;
 
-	@FindBy(xpath = "//*[contains(text(),'Add Provider')]")
+	@FindBy(xpath = "//*[contains(@class,'assign-pcp-btn')]")
 	private WebElement AddProvider;
 
 	@FindBy(xpath = "//*[@class='provider-name pcp']")
@@ -231,23 +232,17 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
-						try {
-							Thread.sleep(4000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						
+						CommonUtility.waitForPageLoadNew(driver,AssinPCPLinks.get(0), 30);
+			
 						if (AssinPCPLinks.size()>0){
 						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
 						}
 						WebElement firstPCP = AssinPCPLinks.get(0);
-						firstPCP.click();
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						scrollToView(firstPCP);
+						jsClickNew(firstPCP);
+						CommonUtility.waitForPageLoadNew(driver,SelectPCPAddress, 30);
+						//firstPCP.click();
 						SelectPCPAddress.click();
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
@@ -323,7 +318,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
-		if(driver.getCurrentUrl().contains("monthly-premium")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
 			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}

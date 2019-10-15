@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,6 +74,12 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	public boolean validate_proposed_effective_date_options(){
 		boolean validation_Flag = true;
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int count = ProposedEffectiveDateOptions.size();
 		if(count>0){
 			validation_Flag = true;
@@ -96,7 +103,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(planType.contentEquals("PDP")){
-			if(driver.getCurrentUrl().contains("monthly-premium")){
+			if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");
 				return new PlanPremiumPage(driver);
 			}
@@ -106,7 +113,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 			}
 		}
 		else{
-			if (driver.getCurrentUrl().contains("provider-search")){
+			if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
 				return new PrimaryCarePhysicianPage(driver);
 			}

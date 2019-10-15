@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -385,7 +386,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
 	
-	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1")
+	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1[contains(text(),'Drug')]")
 	public WebElement pageHeading;
 
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]")
@@ -408,6 +409,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "map")
 	public WebElement map;
+	
+	@FindBy(id = "showhideMapId")
+	public WebElement displayMapToggle;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button proactive-offer__close main-background-color second-color')]")
 	public static WebElement proactiveChatExitBtn;
@@ -454,7 +458,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
-	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 	
 	@FindBy(id="dupIconFlyOut")
@@ -527,8 +531,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		AcquisitionHomePage.checkModelPopup(driver);
-		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
+		checkModelPopup(driver);
+		//CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
 		validateNew(addDrug);
 		validateNew(step1);
 		validateNew(step2);
@@ -644,7 +648,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 options.selectByVisibleText(radius);
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);	
-		validateNew(map);
+		validateNew(displayMapToggle);
 
 	}
 
@@ -1848,7 +1852,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public boolean validateDrugOnStep3FromHomePageFlow(String drug) {
 		CommonUtility.waitForPageLoadNew(driver, step3DrugSummaryInfo, 30);
-		validateNew(step3PharmacySummaryInfo);
+		validateNew(step3DrugSummaryInfo); System.out.println(step3DrugSummaryInfo);
 		if (step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
@@ -1911,8 +1915,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0] + "')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}	
 	
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
@@ -2038,6 +2042,15 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		returnLink.click();
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
 	}
 
 

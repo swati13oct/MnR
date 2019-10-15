@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,8 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1518,4 +1520,125 @@ public class DashboardFormsnResourcesStepDefinition {
 		} else
 			Assert.fail(TabName + " plan tab is missing");
 	}
+	
+	@And("^user navigate to plan documents and resources page for segment ID validation$")
+	public void navigateToPlanAndResourcePageForSegementId(DataTable attributes) throws InterruptedException  {
+		
+		System.out.println("Proceeed to Plan Documents & Resources page");
+		FormsAndResourcesPage formsAndResourcesPage=null;
+		if (("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			TestHarness testharnessHomepage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			formsAndResourcesPage = testharnessHomepage.navigateDirectToFnRPageWithTimeout();
+		} 
+		else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			List<List<String>> data = attributes.raw();
+			String planType=data.get(0).get(1);
+			String memberType=data.get(1).get(1);
+			//formsAndResourcesPage = accountHomePage.navigatetoFormsnResources(memberType,planType);
+			formsAndResourcesPage = accountHomePage.navigatetoFormsnResourcesWithTimeout(memberType,planType);
+		}
+		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE,formsAndResourcesPage);
+	}
+	
+	@Then("^I can validate the segment ID value in localStorage on forms and resources page$")
+	public void validateSegmentId(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		Thread.sleep(1000); //note: wait for the page to stabilize before validation
+		formsAndResourcesPage.validateSegmentId(planType, memberType, expectedSegmentId);
+		getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE,formsAndResourcesPage);
+	}
+	
+	@Then("^I can validate Annual Notice of Changes Documents section content$")
+	public void validateAnocSection(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
+
+		String x = memberAttributesMap.get("Expect Whole ANOC Section");
+		Assert.assertTrue("PROBLEM - input for 'Expect Whole ANOC Section' should only be true or false.  please check. Actual value='"+x+"'", x.equalsIgnoreCase("true") || x.equalsIgnoreCase("false"));
+		boolean expectWholeAnocSection=Boolean.valueOf(x);
+
+		x = memberAttributesMap.get("Expect Current Year ANOC Section");
+		Assert.assertTrue("PROBLEM - input for 'Expect Current Year ANOC Section' should only be true or false.  please check. Actual value='"+x+"'", x.equalsIgnoreCase("true") || x.equalsIgnoreCase("false"));
+		boolean cy_expectYearAnocSection=Boolean.valueOf(x);
+		String cy_anocPdfCode = memberAttributesMap.get("Current Year ANOC PDF Code");
+		String cy_eocPdfCode = memberAttributesMap.get("Current Year EOC PDF Code");
+		String cy_cfPdfCode = memberAttributesMap.get("Current Year CF PDF Code");
+
+		x = memberAttributesMap.get("Expect Next Year ANOC Section");
+		Assert.assertTrue("PROBLEM - input for 'Expect Next Year ANOC Section' should only be true or false.  please check. Actual value='"+x+"'", x.equalsIgnoreCase("true") || x.equalsIgnoreCase("false"));
+		boolean ny_expectYearAnocSection=Boolean.valueOf(x);
+		String ny_anocPdfCode = memberAttributesMap.get("Next Year ANOC PDF Code");
+		String ny_eocPdfCode = memberAttributesMap.get("Next Year EOC PDF Code");
+		String ny_cfPdfCode = memberAttributesMap.get("Next Year CF PDF Code");
+
+		
+		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
+				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
+		
+		
+		
+		int currentYear=Integer.valueOf(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+		int nextYear=currentYear+1;
+		boolean withinAEP=false;
+
+		if (!expectWholeAnocSection || memberType.contains("Term") || memberType.contains("PreEff")  
+				|| planType.equalsIgnoreCase("SHIP")) {
+			formsAndResourcesPage.validateAnocSectionContent(planType, memberType, currentYear, expectWholeAnocSection, cy_expectYearAnocSection, cy_anocPdfCode, cy_eocPdfCode, cy_cfPdfCode);
+			return;
+		}
+
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) { //note: dynamically get the sys time
+			String winHandleBefore = formsAndResourcesPage.driver.getWindowHandle();
+
+			System.out.println("Proceed to open a new blank tab to check the system time");
+			//open new tab
+			JavascriptExecutor js = (JavascriptExecutor) formsAndResourcesPage.driver;
+		    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+			for(String winHandle : formsAndResourcesPage.driver.getWindowHandles()){
+				formsAndResourcesPage.driver.switchTo().window(winHandle);
+			}
+			WebElement currentSysTimeElement=formsAndResourcesPage.driver.findElement(By.xpath("//td[@id='systemTime']"));
+			String currentSysTime=currentSysTimeElement.getText();
+			System.out.println("TEST - currentSysTime="+currentSysTime);
+			formsAndResourcesPage.driver.close();
+			formsAndResourcesPage.driver.switchTo().window(winHandleBefore);
+			String[] tmpSysTime=currentSysTime.split(" ");
+			String dateString=tmpSysTime[0];
+			String[] tmp1=dateString.split("/");
+			
+			currentYear=Integer.valueOf(tmp1[2]);
+			nextYear=currentYear+1;
+
+			int currentMonth=Integer.valueOf(tmp1[0]);
+			int currentDay=Integer.valueOf(tmp1[1]);
+			if (((currentMonth ==10) && (currentDay >=15 || currentDay<=31)) 
+				|| (currentMonth ==11)
+				|| ((currentMonth ==12) && (currentDay <=1))) {
+				System.out.println("TEST - Within AEP range, may get two ANOC sub sections");
+				withinAEP=true;
+			}
+		} 
+
+		formsAndResourcesPage.validateAnocSectionContent(planType, memberType, currentYear, expectWholeAnocSection, cy_expectYearAnocSection, cy_anocPdfCode, cy_eocPdfCode, cy_cfPdfCode);
+		
+		formsAndResourcesPage.validateAnocSectionContent(planType, memberType, nextYear, expectWholeAnocSection, ny_expectYearAnocSection, ny_anocPdfCode, ny_eocPdfCode, ny_cfPdfCode);
+	
+	}	
 }

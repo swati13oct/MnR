@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 
 /**
  * @author sdwaraka
@@ -57,6 +59,9 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
 	private WebElement LearnMoreButton;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Medicare Insurance Information')]")
+	private WebElement welcomepageHeader;
 	
 /*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeCheckBx;
@@ -174,7 +179,19 @@ public class WelcomePage extends UhcDriver{
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-information")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+			System.out.println("OLE Medicare Information Page is Displayed");
+			return new MedicareInformationPage(driver);
+		}
+		return null;
+	}
+
+	public MedicareInformationPage navigate_to_medicare_info_page_PDP() {
+		
+		validateNew(NextBtn);
+		NextBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(validateNew(welcomepageHeader)){ 
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
@@ -182,6 +199,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LearnMoreModal OpenLearnMore() {
+		checkModelPopup(driver);
 		validate(LearnMoreButton);
 		LearnMoreButton.click();
 		try {

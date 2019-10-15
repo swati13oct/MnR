@@ -16,11 +16,11 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEMedSup.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEMedSup")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
-features = { "src/main/resources/feature/acquisition/oleMedSup" }, plugin = {
+features = { "src/main/resources/feature/acquisition/oleMedSup" },monochrome=true, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSup.json" }, tags = { "@OLE_Regression" })
 public class RunMRATDDAcquisitionOLEMedSup {
 

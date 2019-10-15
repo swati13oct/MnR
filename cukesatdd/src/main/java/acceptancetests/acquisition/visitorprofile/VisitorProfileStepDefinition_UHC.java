@@ -55,6 +55,7 @@ public class VisitorProfileStepDefinition_UHC {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
+	
 	@And("^the user clicks on the add drugs button in the guest profile in UHC site$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_guest_profile_in_UHC_site() {
 		
@@ -65,6 +66,19 @@ public class VisitorProfileStepDefinition_UHC {
 		
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 	}
+	
+	@And("^the user validates the plan year buttons are present or not and chooses the plan year in UHC$")
+	public void the_user_validates_planyear_buttons_in_the_guest_profile_in_UHC_site(DataTable givenAttributes) {
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String planYear = memberAttributesRow.get(0).getCells().get(1);
+
+		visitorProfilePage.validateAndChoosePlanYear(planYear);
+		
+	}
+	
 	
 	@And("^the user clicks on the add plans button in the guest profile in UHC site$")
 	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_UHC_site() {

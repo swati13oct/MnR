@@ -1,5 +1,5 @@
 @accountProfile @thePredators @regressionMember
-Feature: C1.2To test Profile and Preferences page
+Feature: 1.02 Member Profile page
 
   @accountProfile1 @ShipEndtoEnd
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
@@ -32,7 +32,7 @@ Feature: C1.2To test Profile and Preferences page
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    And the user validates the need help section
+ #   And the user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <planType> |
@@ -218,7 +218,7 @@ Feature: C1.2To test Profile and Preferences page
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Terminated |
 
-  @accountProfile12 @EPMPpreferencesForComboOnProfile @regressionMember
+  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers
   Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -228,6 +228,112 @@ Feature: C1.2To test Profile and Preferences page
     And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
 
     Examples: 
-      | planType | memberType |
+      | planType       | memberType             |
+      | Combo_PDP_SSUP | PDP_SSUPcombo          |
+  
 
-  # | Combo    | EPMPEnabled |
+  @AccountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers
+   Scenario Outline:To test end to end regression scenario for account profile and preferences for a Federal member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+     Then the user navigates to Profile and Preferences page     
+     Then the user validates HEALTHSAFE ID PASSWORD & HEALTHSAFE ID ACCOUNT RECOVERY & SECURITY links
+	   Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+	   Then the email address section should be verified
+	   Then the Phone Numbers section should be validated & all links clicked
+	   Then the user validates permanent address section
+	   And the user verifies the Temporary Address Link on the Account settings page
+	   Then the user validates Communication Preferences section
+	   And the user validates sign up today link
+	   Then the user validates the presence of Back to Profile and Preferences links 	    
+	   And the user validates see more ways to contact us section                                          
+     And the user validates on clicking contact us link it should route to contact us page  
+	  
+     Examples: 
+      | planType  | memberType              | copayCategory |
+      | PDP       | PDP_AARPIndividual      | NON LIS       |
+      | GrpPDP    | PDP_Group               | NON LIS       |
+      | MA        | MA_UHCIndividual        | NON LIS       |
+      | MA        | MA_UHCGroup             | NON LIS       |
+      | MAPD      | MAPD_Group              | NON LIS       |
+      | MAPD      | MAPD_Individual         | NON LIS       | 
+      
+      
+    @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
+    Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
+     Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    Then the user navigates to Profile and Preferences page  
+	  Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+	  Then the email address section should be verified
+    Then the Phone Numbers section should be validated & all links clicked
+    Then the user validates permanent address section
+	  And the user verifies the Temporary Address Link on the Account settings page
+    Then the user validates that  Communication Preferences section doesn't come for PCP medica member 
+    And the user validates see more ways to contact us section                                          
+    And the user validates on clicking contact us link it should route to contact us page
+    Examples: 
+      | planType    | memberType            | copayCategory  |
+      | MA          | PCP                   | NON LIS        |
+      | MA          | MEDICA                | NON LIS        |  
+      
+       
+     @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed
+    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    Then the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    And I validate the healthsafe ID links
+    Then the email address section should be verified
+    Then the Phone Numbers section should be validated & all links clicked
+    Then the user validates permanent address section
+	  And the user verifies the Temporary Address Link on the Account settings page
+    Then the user validates that  Communication Preferences section doesn't come for terminated members
+    And the user validates see more ways to contact us section                                          
+    And the user validates on clicking contact us link it should route to contact us page
+    Examples:      
+      | planType | memberType        | copayCategory   |
+      | MAPD     | Terminated_AccPro | NON LIS |
+    
+     @HsidLogin @regressionMember @codetransformers
+   Scenario Outline:Verify HSID login functionality.
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then I validate that login is successfull  
+   Examples:
+   | planType  |  memberType  | copayCategory | 
+   | MA        |  Individual  |  NON LIS      |
+   | PDP       |  Individual  |  NON LIS      |
+   | MAPD      |  Individual  |  NON LIS      |
+   | PCP       |  Individual  |  NON LIS      |
+   | Medica    |  Individual  |  NON LIS      |  
+   | MAGroup   |  Group       |  NON LIS      |
+   | MAPDGroup |  Group       |  NON LIS      | 
+   | PDPGroup  |  Group       |  NON LIS      | 
+   | SHIP      |  ShipOnly    |  NON LIS      | 
+   | COMBO     | FedShip      |  NON LIS      |
+   | SSUPGroup |Group         |  NON LIS      |
+   
+    @accountProfile16 
+    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Copay Category | <copayCategory> |
+    Then the user navigates to Profile and Preferences page
+   # Then the user validates permanent address section
+	 # And the user verifies the Temporary Address Link on the Account settings page
+	  And the user validates the address sectioning
+     
+	    Examples:      
+      | planType | memberType        | copayCategory   |
+      | GOVT     | AP_ADDRESS | NON LIS |

@@ -1,5 +1,5 @@
 @formsAndResources @dashBoardFormsAndResources @gladiators
-Feature: G1.1 To validate forms and resources page in dashboard site
+Feature: 1.06 Member Plans and Documents Page
 
 		# Regression Runner devided into 2 runs with 2 runner, One runner with @Regression Member, next one with @Part2of2Regression, it devided the scenarios 17 each
 
@@ -1151,3 +1151,44 @@ Feature: G1.1 To validate forms and resources page in dashboard site
     Examples: 
       | FID     | planType | memberType       | FirstPlanName                                          | SecondPlanName                     | ShipPreEffePlan               | CoverageDate               |
       | F282605 | Combo    | FedTerNewPreShip | Medicare Advantage Prescription Drug Plan (Terminated) | Medicare Supplement Insurance Plan | AARP MEDICARE SUPPLEMENT PLAN | Coverage Starts 08/01/2019 |
+
+  #----- begin segmentID and pdf code related validation
+  # note: will kill the test if page load time takes longer than 5 min to load
+  # note: example table values may need to be adjust when year changes and pdf codes change
+  @formsAndResources28 @F318679_ANOC @regressionMember @Part2of2 @Predators
+  Scenario Outline: FID: F<FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the segment ID and ANOC component code 
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    And user navigate to plan documents and resources page for segment ID validation
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then I can validate the segment ID value in localStorage on forms and resources page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Segment ID  | <segmentId>  |
+    Then I can validate Annual Notice of Changes Documents section content
+      | Plan Type                        | <planType>             |
+      | Member Type                      | <memberType>           |
+      | Expect Whole ANOC Section        | <expectWholeAnocSect>  |
+      | Expect Current Year ANOC Section | <cy_expectAnocSubSect> |
+      | Current Year ANOC PDF Code       | <cy_anocPdfCode>       |
+      | Current Year EOC PDF Code        | <cy_eocPdfCode>        |
+      | Current Year CF PDF Code         | <cy_cfPdfCode>         |
+      | Expect Next Year ANOC Section    | <ny_expectAnocSubSect> |
+      | Next Year ANOC PDF Code          | <ny_anocPdfCode>       |
+      | Next Year EOC PDF Code           | <ny_eocPdfCode>        |
+      | Next Year CF PDF Code            | <ny_cfPdfCode>         |
+
+    Examples: 
+      | FID    | planType | memberType      | segmentId    | expectWholeAnocSect | cy_expectAnocSubSect | cy_anocPdfCode      | cy_eocPdfCode       | cy_cfPdfCode        | ny_expectAnocSubSect | ny_anocPdfCode      | ny_eocPdfCode       | ny_cfPdfCode        | 
+    # note: no working data for these comment out cases yet
+    # | 318679 | MAPD     | IndEff_AARP_FnR | 000          | true                | true                 | AAPA19HM4283769_001 | AAPA19HM4283717_003 | AAEX19HM4310605_011 | true                 | AAPA20HM4515155_000 | AAPA20HM4536734_000 | AAEX20HM4540614_000 |
+    # | 318679 | MAPD     | IndEff_UHC_FnR  | 000          | true                | true                 | AAFL19RP4284175_001 | AAFL19RP4284870_003 | AAEX19PP4310531_011 | true                 | AAFL20RP4515715_000 | AAFL20RP4537629_000 | AAEX20PP4540533_000 |
+      | 318679 | PDP      | IndEff_AARP_FnR | 000          | true                | true                 | PDEX----4284318_002 | AAEX----4285044_004 | PDEX----4310625_013 | true                 | PDEX----4512102_000 | PDEX----4512066_000 | PDEX----4540654_000 |
+      | 318679 | SHIP     | IndEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+    # | 318679 | MAPD     | PreEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+      | 318679 | PDP      | PreEff_FnR      | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+      | 318679 | MAPD     | Terminated_FnR  | 000          | false               | false                | NA                  | NA                  | NA                  | false                | NA                  | NA                  | NA                  |
+  #----- end segmentID and pdf code related validation
+      

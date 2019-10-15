@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -273,6 +275,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	}
 
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		checkForIPerceptionModel(driver);
 		if (validate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
@@ -281,7 +284,10 @@ public class HealthAndWellnessPage extends UhcDriver{
 				Assert.assertTrue("Dashboard header is not displayed", validate(element));
 				System.out.println("element is located, click it...");
 				element.click();
-				waitforElement(titleText);
+				//tbd waitforElement(titleText);
+				WebDriverWait wait = new WebDriverWait(driver, 60);
+				wait.until(ExpectedConditions.visibilityOf(titleText));
+				checkForIPerceptionModel(driver);
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);

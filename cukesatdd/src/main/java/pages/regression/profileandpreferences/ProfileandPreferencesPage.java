@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -449,6 +450,9 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink;
 	
+	@FindBy(xpath="//p[contains(text(),'The state and ZIP code combination entered is not')]")
+	private WebElement passwordEditLink1;
+	
 	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink_2;
 
@@ -772,6 +776,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@FindBy(id = "mailingAddress")
 	private List<WebElement> mailingAddressSectionPresent;
+	
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+	protected WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
+	protected WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	protected WebElement comboTab_PDP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
+	protected WebElement comboTab_SSUP;
+
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
 
@@ -1910,43 +1927,6 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		}
 	}
 
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("checkModelPopup - current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				if (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt = 'no']")).isEmpty()) {
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						System.out.println(e.getMessage());
-					}
-
-				} else {
-					System.out.println("FeedBack Modal Present and counter value is:" + counter);
-					try {
-						Thread.sleep(2000);
-						WebElement NoThanks = driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]"));
-						JavascriptExecutor js = (JavascriptExecutor) driver;
-						js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-						js.executeScript("arguments[0].click();", NoThanks);
-						break;
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 1);
-	}
 
 	public void validateEmailSectionForShip() {
 
@@ -2236,7 +2216,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	public void validateComboTabForAccountProfile() {
 		int numberOfTabsForCombo;
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
+	
 		numberOfTabsForCombo = tabsForComboMember.size();
 		System.out.println("size for combo1" + tabsForComboMember.size());
 		if (numberOfTabsForCombo > 1) {
@@ -2254,7 +2235,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 				validateTempAddressSectionForShip();
 
 			} else {
-				validateEpmpIframe();
+				System.out.println("User is on fed plan");
+				//validateEpmpIframe();
 				validateEmailaddressSection();
 				validateEmailEditUpdates();
 				validatePhoneSection();
@@ -2442,4 +2424,305 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		validatePlanNameMemberidNameAccountProfile();
 		
 	}
+	
+	//note: modify only if scenario is targetting specific for combo tab validation
+	//note: for now only check if combo then click the right tab, don't flag it if it doesn't have combo tab.
+	public void clickCombTab(String plan) {
+		if (plan.equalsIgnoreCase("mapd")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			if (validate(comboTab_MAPD)) 
+				comboTab_MAPD.click();
+		} else if (plan.equalsIgnoreCase("ship")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			if (validate(comboTab_SHIP))
+				comboTab_SHIP.click();
+		} else if (plan.equalsIgnoreCase("pdp")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			if (validate(comboTab_PDP))
+				comboTab_PDP.click();
+		} else if (plan.equalsIgnoreCase("ssup")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			if (validate(comboTab_SSUP)) 
+				comboTab_SSUP.click();
+		} 
+	}
+	/**
+	 * Profile page CT Regression 
+	 */
+	
+	public void validatemailsect1() {
+		System.out.println("%%% Now validating the Email Section %%%");
+		Random rand = new Random();
+		int randomNumber = rand.nextInt(50);
+		String emailAddress = "pooja" + randomNumber + "@optum.com";
+		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
+		validateNew(emailAddressHeader);
+		validateNew(emailEditIcon);
+		emailEditIcon.click();
+		validateNew(newEmailTextfield);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		validateNew(confirmEmailTextfield);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		validateNew(saveButtonOnEmailSave);
+		validateNew(cancelButtonOnEmailSave);
+		newEmailTextfield.sendKeys(emailAddress);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		confirmEmailTextfield.sendKeys(emailAddress);
+		saveButtonOnEmailSave.click();
+
+		validateNew(updatedEmailAfterSave);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (updatedEmailAfterSave.getText().contains(emailAddress))
+			Assert.assertTrue(true);
+		else {
+			Assert.fail("Not able to validate the email update functionality for the member");
+		}
+
 }
+	@FindBy(xpath="//div[@id='phone']")
+private WebElement phoneSectionPreffective;
+
+@FindBy(xpath=" //h5[@class='subtitle semi-bold margin-none card-title atdd-phone-title']")
+private WebElement phoneNumberHeaderpre;
+
+@FindBy(xpath=" //div[@class='phoneedit parbase section']//div//div//a[@class='edit-btn'][contains(text(),'Edit')]")
+private WebElement phoneEDITlinkpre; 
+
+@FindBy(xpath="//label[contains(text(),'Daytime Phone')]")
+private WebElement dayTimePhoneTextfieldpre;
+
+@FindBy(xpath="//label[contains(text(),'Evening Phone')]")
+private WebElement eveningTimeTextfieldpre;
+
+@FindBy(xpath="//button[@class='btn--center margin-small save-btn atdd-phone-save']//span[@class='btn btn--primary'][contains(text(),'Save')]")
+private WebElement saveButtonOnPhoneSavepre;
+
+@FindBy(xpath="//a[@class='display-block align-center cancel-btn atdd-phone-bottomcancel']")
+private WebElement cancelButtonOnPhoneSavepre;
+
+ @FindBy(xpath="//input[@id='daytimePhone']")
+ private WebElement dayTimePhonefieldpre;
+
+	@FindBy(xpath="//input[@id='eveningPhone']")
+	 private WebElement eveningTimefieldpre;
+
+   public void validatePhonelinksforfederalmembers() {
+    
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	validateNew(phoneSectionPreffective);
+	validateNew(phoneNumberHeaderpre);
+	validateNew(phoneEDITlinkpre);
+	phoneEDITlinkpre.click();
+	validateNew(dayTimePhoneTextfieldpre);
+	validateNew(eveningTimeTextfieldpre);
+	validateNew(saveButtonOnPhoneSavepre);
+	validateNew(cancelButtonOnPhoneSavepre);
+	dayTimePhonefieldpre.clear();
+	dayTimePhonefieldpre.sendKeys("1234567890");
+	eveningTimefieldpre.clear();
+	eveningTimefieldpre.sendKeys("1234567890");
+	saveButtonOnPhoneSavepre.click();
+	validateNew(updatedDaytimePhoneAfterSave);
+	validateNew(updatedEvetimePhoneAfterSave);
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	System.out.println(updatedDaytimePhoneAfterSave.getText() + updatedEvetimePhoneAfterSave.getText());
+	if (updatedDaytimePhoneAfterSave.getText().contains("(123) 456-7890")
+			&& updatedEvetimePhoneAfterSave.getText().contains("(123) 456-7890"))
+		Assert.assertTrue(true);
+	else {
+		Assert.fail("Not able to validate the Phone  update functionality for  member");
+	}
+	
+	}
+   @FindBy(xpath="//div[@id='temporaryAddress']")
+   private WebElement AddTemporaryAddressblock;
+
+   public void validateTemporaryAddressSection() throws InterruptedException
+  {
+	Thread.sleep(10000);
+	validateNew(AddTemporaryAddressblock);
+		
+}
+   @FindBy(xpath=" //div[@id='mailingAddress']")
+	private WebElement AddMailingAddressblock;
+	public void validateMailingAddressSection() throws InterruptedException{
+		Thread.sleep(10000);
+		validateNew(AddMailingAddressblock);	
+		
+	}
+	/**
+	 * @toDo : Validates the Go green button in Communication Preferences
+	 *       section
+	 */
+
+	public boolean validateSIGNUp() {
+		validate(editPreferencesLink);
+		System.out.println("&&&&&&&&& Sign up Today link / Edit Prefrence link is seen &&&&&&&");
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.switchTo().frame(0);
+		editPreferencesLink.click(); {
+			System.out.println("PageTitle " + driver.getTitle());
+			Assert.assertTrue(driver.getTitle().contains("Preferences"));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//validateNew(savePreferencesButton1);
+				return true;
+		} /*else {
+			gopaperlessbutton.click();
+			savePreferencesButton.click();*/
+			
+		}
+
+	/**
+	 * @toDo : Validates the presence of Back to Profile and Preferences links
+	 *       on Go green page
+	 */
+	public void validateBacktoPNPlink() {		
+		driver.switchTo().defaultContent();
+		validateNew(backLink1);
+	}
+	/**
+	 * @toDo : Validates Plan name on Account Settings page for Pre-effective users
+	 *       
+	 */	
+	public String validatePlanNameMemberidNameAcountProfilepre() {
+		validateNew(planName);
+		System.out.println("Plan name is " + planName.getText());
+		validateNew(memberId);
+		validateNew(memberName);	
+	        return planName.getText();
+		}
+
+	public void switchTabForComboMember(int index) {
+		driver.switchTo().defaultContent();
+		tabsForComboMember.get(index).click();
+	}
+	/**
+	 * @toDo : Validate HSID Password & Account Recovery Link on Account Settings Page
+	 *       
+	 */
+	public void validateHealthSafeIdbothLinks() {
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)
+				&& (!(MRScenario.environment).toLowerCase().contains("team-ci"))
+				&& (!(MRScenario.environment).toLowerCase().contains("offline"))
+				&& (!(MRScenario.environment).toLowerCase().contains("prod"))) {
+		Assert.assertFalse("HSIDLink should be seen",!validateNew(hsidPasswordLink));
+		Assert.assertFalse("HSID Account Recovery link should be seen",!validateNew(hsidAccountLink));
+	}
+
+}
+	public void validatesAddressSectioning() {
+	 
+		{
+		validateNew(permanentAddressSection);
+		validateNew(tempAddressSection);
+		validatetempaddressEditElements1(); // clicks on edit temporary //
+											// address and validated fields
+		//validateMailingAddressFields(); // validates the fields under
+										// mailing address
+
+	
+		//validateNew(addressSectionUhc);
+		//addressSectionUhc.click();
+		//validateMailingAddressUhc();
+		//validateTemporaryAddressUhc();
+		//addressGoBackBtnUhc.click();
+	}
+}
+	/**
+	 * @toDo : Validates the elements that appear on clicking the edit button of
+	 *       the temp address section
+	 */
+	
+	@FindBy(xpath=" //p[contains(text(),'The state and ZIP code combination entered is not')]")
+	private WebElement claimsTabTopMenu1;
+	
+	
+	
+	public void validatetempaddressEditElements1() {
+		// TODO Auto-generated method stub'
+
+		scrollToView(editTempAddressLink);
+		if (validate(editTempAddressLink))
+			editTempAddressLink.click();
+		else if (validate(addTempAddressLink))
+			addTempAddressLink.click();
+
+		validateNew(StreetAddress2);
+		StreetAddress2.sendKeys("131 morristown rd");
+		validateNew(City);
+		City.sendKeys("Basking Ridge");
+		validateNew(State);
+		State.sendKeys("New Jersey");
+		validateNew(Zip);
+		Zip.sendKeys("07920");		
+		/*if(passwordEditLink1.isDisplayed()){
+			System.out.println("zipcode error message is dispaley");
+			}	
+			System.out.println("Now checking for claims summary sub navigation of Claims");
+			Dimension size = claimsTabTopMenu1.getSize();
+			System.out.println(size);
+			int height = size.getHeight();
+			System.out.println("Height is "+height);
+			int width = size.getWidth();
+			System.out.println("Width is "+width);
+			if (height == 0) {
+				System.out.println("Incorrect zip code Error message is not displayed");
+			} else {
+				System.out.println("Error message for incorrect zipcode is displayed, Test step is failed due to it");
+				Assert.fail("assert Error message for incorrect zipcode is displayed, Test step is failed due to it");	
+			}*/			
+		validateNew(startDateMM);
+		startDateMM.sendKeys("10");
+		validateNew(startDateDD);
+		validateNew(startDateYr);
+		startDateYr.sendKeys("2019");
+		validateNew(endDateMM);
+		endDateMM.sendKeys("12");
+		validateNew(endDateYYYY);
+		endDateYYYY.sendKeys("2019");
+		validateNew(SaveButtontempAddress);
+		validateNew(CancelButtontempAddress);
+		validateNew(CancelButtontoptempAddress);
+	}
+	}

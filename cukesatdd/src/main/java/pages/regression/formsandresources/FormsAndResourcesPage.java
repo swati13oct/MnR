@@ -5,11 +5,18 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.poi.util.SystemOutLogger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -464,6 +471,10 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='forms-and-resources-quickLinksParsys']/div[1]/div[1]/div[2]/div/div[10]//ul/li")
 	private List<WebElement> jumpLinksSSUP;
+
+	@FindBy(xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//h2[text()='Annual Notice of Changes Documents']")
+	private WebElement anocSection;
+	
 
 /*<<<<<<< theATeam
 	@FindBy(xpath = "(//*[@id='eobsection']/div[1]/div/h2)[6]")
@@ -2447,6 +2458,157 @@ System.out.println(memberType);
 		} else
 			Assert.fail("OrderPlan Materials is displayed for pre Effective ship Plan");
 	}
-	
 
+	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
+		String lookForPlanCategory="";
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+		if (planType.equalsIgnoreCase("SHIP"))
+			lookForPlanCategory="MEDICARE SUPPLEMENT";
+		else if (planType.equalsIgnoreCase("SSUP")) 
+			lookForPlanCategory="SSP";
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+			lookForPlanCategory="MAPD";
+		else 
+			lookForPlanCategory=planType;
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
+				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
+				expectedSegmentId.equals(actualSegmentId));
+	}
+
+	public String getConsumerDetailsFromlocalStorage() {
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+	
+	public String getSegmentIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		String actualSegmentId=null;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			JSONArray arr =jsonObj.getJSONArray("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", arr.length()>1);
+			for (int i = 0; i < arr.length(); i++) {
+				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				//note: need to locate the right plan for segmentId validation
+				//System.out.println("test is looking for plan='"+lookForPlanCategory+"' | user has planCategory="+actualPlanCategory);
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
+					actualSegmentId!=null);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualSegmentId;
+	}
+	
+	public void validateAnocSectionContent(String planType, String memberType, int targetYear, 
+			boolean expectAnocSection, boolean exptYearSubSection,
+			String expected_anocPdfCode, String expected_eocPdfCode, String expected_cfPdfCode) {
+		System.out.println("TEST - memberType="+memberType);
+		if (!expectAnocSection || memberType.contains("Term") || memberType.contains("PreEff")  
+				|| planType.equalsIgnoreCase("SHIP")) {
+			Assert.assertTrue("PROBLEM - should not be able to locate Annal Notice of Changes Documents section for Pre-effective or Terminated user", !fnrValidate(anocSection, 2));
+			return;
+		} 
+		Assert.assertTrue("PROBLEM - unable to locate Annal Notice of Changes Documents section", validate(anocSection)); 
+		
+		/* tbd
+		String targetYearAnocSectionXpath="//div[contains(@class,'ANOC') and not(contains(@class,'ng-hide'))]//div[@class='sectionWise_div_"+targetYear+"']";
+		String targetYearAnocXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Annual Notice of Changes')]//parent::li";
+		String targetYearCoeDocXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Evidence Of Coverage') or contains(text(),'Evidence of Coverage')]//parent::li";
+		String targetYearCfXpath="//div[contains(@class,'ANOC_IND_TwoYears') and not(contains(@class,'ng-hide'))]//div[contains(@class,'planbenefitdocuments_"+targetYear+"')]//a[contains(text(),'Comprehensive Formulary')]//parent::li";
+		*/
+		String targetYearAnocSectionXpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[@class='sectionWise_div_"+targetYear+"']";
+		String targetYearAnocXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Annual Notice of Changes')]//parent::li";
+		String targetYearCoeDocXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Evidence Of Coverage') or contains(text(),'Evidence of Coverage')]//parent::li";
+		String targetYearCfXpath=targetYearAnocSectionXpath+"//a[contains(text(),'Comprehensive Formulary')]//parent::li";
+		
+		if (exptYearSubSection) {
+			try {
+				WebElement exp_YrAnocSecElement=driver.findElement(By.xpath(targetYearAnocSectionXpath));
+				Assert.assertTrue("PROBLEM - unable to locate '"+targetYear+"' year ANOC section", validate(exp_YrAnocSecElement));
+			} catch (NoSuchElementException nse) {
+				Assert.assertTrue("PROBLEM - unable to locate '"+targetYear+"' year ANOC section", false);
+			}
+		} else {
+			try {
+				WebElement exp_YrAnocSecElement=driver.findElement(By.xpath(targetYearAnocSectionXpath));
+				Assert.assertTrue("PROBLEM - do not expect to locate "+targetYear+" year ANOC section", !fnrValidate(exp_YrAnocSecElement, 2));
+			} catch (NoSuchElementException nse) {
+				Assert.assertTrue("PROBLEM - do not expect to locate "+targetYear+" year ANOC section", true);
+			}
+		}
+
+		String docName="Annual Notice of Changes";
+		validatePdfCode(expected_anocPdfCode, targetYearAnocXpath, targetYear, docName);
+		
+		docName="Evidence Of Coverage";
+		validatePdfCode(expected_eocPdfCode, targetYearCoeDocXpath, targetYear, docName);
+		
+		docName="Comprehensive Formulary";
+		validatePdfCode(expected_cfPdfCode, targetYearCfXpath, targetYear, docName);
+	}
+
+	public void validatePdfCode(String expected_PdfCode, String targetYearXpath, int targetYear, String docName) {
+		if (expected_PdfCode.equals("NA")) {
+			try {
+				WebElement exp_yrDocElement=driver.findElement(By.xpath(targetYearXpath));
+				Assert.assertTrue("PROBLEM - should not be able to locate '"+targetYear+"' year "+docName+" doc", !fnrValidate(exp_yrDocElement, 2));
+			} catch (NoSuchElementException nse) {
+				Assert.assertTrue("PROBLEM - should not be able to locate '"+targetYear+"' year "+docName+" doc", true);
+			}
+		} else {
+			try {
+				WebElement exp_yrDocElement=driver.findElement(By.xpath(targetYearXpath));
+				Assert.assertTrue("PROBLEM - unable to locate '"+targetYear+"' year "+docName+" doc", validate(exp_yrDocElement));
+
+				String actual_pdfCode=exp_yrDocElement.getAttribute("id");
+				System.out.println("TEST - "+docName+" pdf="+actual_pdfCode);
+				Assert.assertTrue("PROBLEM - '"+docName+"' pdf code is not as expected. Expected='"+expected_PdfCode+"' | Actual='"+actual_pdfCode+"'", expected_PdfCode.equals(actual_pdfCode));
+			} catch (NoSuchElementException nse) {
+				Assert.assertTrue("PROBLEM - unable to locate '"+targetYear+"' year "+docName+" doc", false);
+			}
+		}
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean fnrValidate(WebElement element, int timeoutInSec) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			} else {
+				System.out.println("Element not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
+
+		}
+		return false;
+	}
 }

@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ole;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,7 +81,7 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("authorization")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Authorization')]")))){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
 			return new AuthorizationPage(driver);
 		}

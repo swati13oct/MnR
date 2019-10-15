@@ -1,5 +1,5 @@
 @footer @member_redesign_footer @regressionMember
-Feature: F1.2Footer validation
+Feature: 1.05 Member Footer validation
 
   @footer1 @IncrediblesFooter
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place

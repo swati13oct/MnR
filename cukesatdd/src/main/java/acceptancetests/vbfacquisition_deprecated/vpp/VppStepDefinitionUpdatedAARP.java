@@ -1,4 +1,5 @@
-//package acceptancetests.vbfacquisition_deprecated.vpp;
+
+package acceptancetests.vbfacquisition_deprecated.vpp;
 //
 //import gherkin.formatter.model.DataTableRow;
 //
@@ -233,3 +234,4 @@
 //	}
 //
 //}
+

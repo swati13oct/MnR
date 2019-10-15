@@ -64,22 +64,6 @@ public class RequestAgentAppttStepDefinitionAARP {
 		
 	}
 	
-	/**
-	 * @todo : user navigates to request appointment with an agent in 
-	 */
-	@Then("^user validates error messages on submitting blank form on aarp site$")
-	public void user_validates_error_messages_on_submitting_blank_form_aarp()
-	{
-		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-		requestAgentAppointmentPage.SubmitForm();
-		boolean errorMessageValidated = requestAgentAppointmentPage.validateErrorMessages();
-		if(errorMessageValidated){
-			Assert.assertTrue(errorMessageValidated);
-		}else{
-			Assert.fail("Error in loading error messages");
-		}
-		
-	}
 	
 	@Then("^the user fills the form out and submits the agent appointment application$")
 	public void fillOutAndSubmitForm(DataTable attributes) {
@@ -105,15 +89,5 @@ public class RequestAgentAppttStepDefinitionAARP {
 	}
 	
 	
-	@Then("^user validates the breadcrumb title on the request appointment page$")
-	public void user_validates_the_breadcrumb_title_on_the_request_appointment_page() throws Throwable {
-		RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario().getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
-		boolean breadcrumb = requestAgentAppointmentPage.validateBreadcrumb();
-		if(breadcrumb){
-			Assert.assertTrue(breadcrumb);
-		}else{
-			Assert.fail("Error in loading error messages");
-		}
-	}
 	
 }

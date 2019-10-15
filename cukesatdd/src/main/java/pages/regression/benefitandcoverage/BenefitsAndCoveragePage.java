@@ -406,7 +406,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-anclry-disclaimer")
 	private WebElement Exclusivedisclaimer;
 
-	@FindBy(xpath = "//a[contains(text(),'View all ancillary benefits')]")
+	@FindBy(xpath = "//a[contains(text(),'View all additional benefits')]")
 	private WebElement ViewAllAncillaryBnFtLink;
 	
 	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
@@ -571,6 +571,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//img[@alt='drugslogo']")
 	private WebElement lowTierdrugs;
 
+	@FindBy(xpath = "//strong[contains(text(),'Lower-tier Drugs')]")
+	private WebElement lowTierdrugsText;
+	 
 	@FindBy(className = "atdd-bnc-rx187grptable")
 	private WebElement PeehipTable;
 
@@ -634,6 +637,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//img[@alt=' walgreenpharmacylogo']")
 	private WebElement wallGreensWidget;
+	
+	@FindBy(xpath = "//p[contains(text(),'Walgreens Preferred Retail Pharmacy')]")
+	private WebElement wallGreensWidgetText;
+	
+	@FindBy(xpath = "//img[@alt='mailservicelogo']")
+	private WebElement PreferredMailServicePharmacyLogo;
+	
+	@FindBy(xpath = "//img[@alt='retailpharmacylogo']")
+	private WebElement retailpharmacylogo;
+	
+	
+	@FindBy(xpath = "(//p[contains(text(),'Preferred Mail Service Pharmacy')])[3]")
+	private WebElement PreferredMailServicePharmacyText;
+	
+	@FindBy(xpath = "(//p[contains(text(),' Preferred Retail Pharmacy')])[1]")
+	private WebElement PreferredRetailPharmacyText;
+	
 	@FindBy(xpath = "//img[@alt='mailservicelogo']/parent::div/following-sibling::div/p")
 	private WebElement mailOrderWidget;
 
@@ -1318,8 +1338,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
-		benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
+		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
+		//benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		try
 		{
 			openAndValidate();
@@ -1555,7 +1575,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Select langdropdwn = new Select(langdropdown);
 			int languageindex = Integer.parseInt(language);
 				langdropdwn.selectByIndex(languageindex);
-			System.out.println("Text" + langdropdwn.getFirstSelectedOption().getText());
+			System.out.println("The selected language  is " + langdropdwn.getFirstSelectedOption().getText());
 				Assert.assertTrue("The selected language  is "+langdropdwn.getFirstSelectedOption().getText(),true);
 			} else
 				Assert.fail("Issue in language selection");
@@ -3406,7 +3426,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 +"You pay 100% of costs until $50 deductible is met*\n"
 +"$20 copay\n"
 +"$30 copay\n"
-+"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n\n"
++"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
 		+"When your out-of-pocket costs reach the $5,100 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 		+"The catastrophic coverage will go toward Part D covered medications.\n"
 		+"Tier 2 :\n"
@@ -3515,19 +3535,37 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}}
 
 	public void validateWaysToSaveSection(String memberType) {
+		/*
+		  JavascriptExecutor jse = (JavascriptExecutor) driver;
+		  jse.executeScript("window.scrollBy(0,800)", "");
+		 */
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,800)", "");
-
-		// TODO Auto-generated method stub
-		if (memberType.equalsIgnoreCase("Wallgreens")) {
+		jse.executeScript("arguments[0].scrollIntoView(true);", waysToSaveSection);
+		
+		if (memberType.equalsIgnoreCase("Wallgreens_BnC")) {
+			
 			validateNew(waysToSaveSection);
-			//validateNew(lowTierdrugs);
+			validateNew(lowTierdrugs);    
+			validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
 			validateNew(wallGreensWidget);
-		} else if (memberType.equalsIgnoreCase("MailOrderPharamacy")) {
+			validateWithValue("Walgreens Preferred Retail Pharmacy", wallGreensWidgetText);             //validate Walgreens Preferred Retail Pharmacy
+			
+			validateNew(PreferredMailServicePharmacyLogo);
+			validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
+			
+			
+			
+		} else if (memberType.equalsIgnoreCase("MailOrderPharamacy_BnC")) {
 			validateNew(waysToSaveSection);
-			//validateNew(lowTierdrugs);
-			validateNew(mailOrderWidget);
-			//validateNew(wallGreensWidget);
+			validateNew(lowTierdrugs);    
+			validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
+			
+			validateNew(retailpharmacylogo);
+			validateWithValue("Preferred Retail Pharmacy", PreferredRetailPharmacyText);
+			
+			validateNew(PreferredMailServicePharmacyLogo);
+			validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
+			
 		} else if (memberType.equalsIgnoreCase("Group") || memberType.equalsIgnoreCase("withoutWaysToSave_BnC")) {
 			//note: by default there will be one id=waystosave element on the page regardless memberType, so check to see it's less than 2 instead of 1
 			if (waysToSaveSectionvalidate.size() < 2) {
@@ -3727,8 +3765,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(YourPrimaryCareProvider);
 			validateNew(ChangeYourPcpButton);
 			validateNew(StartSearch);
-			validateNew(drugCostDropdown);
-			validateNew(drugCopaysAndDiscountSection);
+			//validateNew(drugCostDropdown);
+			//validateNew(drugCopaysAndDiscountSection);
+			
+			System.out.println();
 			
 		} else if(planType.equalsIgnoreCase("PDP")){
 			if(validate(pdpNavTab))
@@ -3897,42 +3937,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		}
 
-	}
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				// if
-				// (driver.findElements(By.xpath("//area[@href='javascript:clWin()'][@alt
-				// = 'no']")).isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-				/*
-				 * } else { System.out.println(
-				 * "FeedBack Modal Present and counter value is:" + counter);
-				 * try { Thread.sleep(2000); WebElement NoThanks =
-				 * driver.findElement(By.xpath("//*[@id='IPEinvL']/map/area[3]")
-				 * ); JavascriptExecutor js = (JavascriptExecutor) driver;
-				 * js.executeScript("arguments[0].scrollIntoView();", NoThanks);
-				 * js.executeScript("arguments[0].click();", NoThanks); break; }
-				 * catch (InterruptedException e) { e.printStackTrace(); }
-				 * 
-				 * }
-				 */
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
 	}
 
 	/*

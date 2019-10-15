@@ -1,7 +1,7 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
-Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
+Feature: 1.06. ACQ- MedSupp OLE flow AARP
 
-  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression
+  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer
  Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -32,7 +32,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
       |   90210 | NO              | Los Angeles County | MS       | 11031950 | John      | Carry   |    ABCD        | Resume          |
      
   
-@UHC_Retrive_App_AARP @OLE_Regression
+@UHC_Retrive_App_AARP @OLE_Regression @oleMedSupUlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -66,6 +66,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
      Then user clicks on Start Application Button proceed to next pages
+     | Zip Code        | <zipcode>         |
        | DOB           | <DOB>         |
       When user fill medsupp form details and proceed to next pages  
        | Firstname     | <Firstname>   |
@@ -86,6 +87,7 @@ Feature: 1.12-VBF-ACQ-To test MedSupp OLE flow
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
      Then user clicks on Start Application Button proceed to next pages
+      | Zip Code        | <zipcode>         |
        | DOB           | <DOB>         |
       When user fill medsupp form details and proceed to next pages  
        | Firstname     | <Firstname>   |

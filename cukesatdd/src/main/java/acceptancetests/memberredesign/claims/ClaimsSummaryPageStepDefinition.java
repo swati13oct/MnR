@@ -78,6 +78,10 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			claimsSummPg.validateComboTabs();
 			claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
+		} else {
+			System.out.println("TEST - maybe combo case");
+			boolean flagNonCombo=false; //note: if user has combo then select the right plan
+			claimsSummPg.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
 		claimsSummPg.validateClaimsSummaryHeaderSection(planType,memberType);	
 		claimsSummPg.validateSystemErrorMsgNotExist();
@@ -166,24 +170,28 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@And("^I custom search claims for over two years time interval from current date on claims summary page$")
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
-		String planType = (String) getLoginScenario()
-				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Calendar calendar = Calendar.getInstance();
-		Date currentDate=calendar.getTime();
-		String toDate = dateFormat.format(currentDate);
-		System.out.println("current date="+toDate);
-		calendar.add(Calendar.YEAR, -2);
-		calendar.add(Calendar.DATE, -1);
-		Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
-		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
-		System.out.println("2 yrs and 1 day ago date="+fromDate);
-
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-		if(claimsSummPg != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+		else {
+			String planType = (String) getLoginScenario()
+					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			Calendar calendar = Calendar.getInstance();
+			Date currentDate=calendar.getTime();
+			String toDate = dateFormat.format(currentDate);
+			System.out.println("current date="+toDate);
+			calendar.add(Calendar.YEAR, -2);
+			calendar.add(Calendar.DATE, -1);
+			Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
+			String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
+			System.out.println("2 yrs and 1 day ago date="+fromDate);
+
+			claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+			if(claimsSummPg != null)
+				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+		}
 	}
 
 	/**
@@ -191,11 +199,15 @@ public class ClaimsSummaryPageStepDefinition {
 	 * Validate expected error message
 	 */
 	@Then("^I should be able to see the error message when no to and from dates being entered$")
-	public void validateEmptyDatesErrorMessage(){ 
-		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+	public void validateEmptyDatesErrorMessage(){
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummPg.validateEmptyDatesError(planType);
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
+		else {
+			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+			claimsSummPg.validateEmptyDatesError(planType);
+		}
 	}
 
 	/**
@@ -204,10 +216,14 @@ public class ClaimsSummaryPageStepDefinition {
 	 */
 	@Then("^I should be able to see the from date is greater than the to date error message being displayed$")
 	public void validateToDateInvalidErrorMessage(){ 
-		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummPg.validatefromDateLaterThanToDateError(planType);
+		if (claimsSummPg.getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not validate custom search error for the from date is greater than the to date error message");
+		else {
+			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+			claimsSummPg.validatefromDateLaterThanToDateError(planType);
+		}
 	}
 
 	/**
@@ -358,12 +374,15 @@ public class ClaimsSummaryPageStepDefinition {
 	@Then("^I should be able to see the search range is greater than two years error$")
 	@SuppressWarnings("unchecked")
 	public void validateGreaterThanTwoYearsMessage() { 
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
+		else {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_ALLCLAIMS);
-		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.validateGreaterThanTwoYearError(planType);
 
 		//note: assume this is the last step in the test, print out a summary of the claims for logging purpose
@@ -376,6 +395,7 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("List the number of claims in each search range");
 			System.out.println(Arrays.asList(allClaims));
 			System.out.println("========================================");
+		}
 		}
 	}
 
@@ -440,14 +460,26 @@ public class ClaimsSummaryPageStepDefinition {
 	
 	@Then("^I can validate the segment ID value in localStorage on claims summary page$")
 	public void validates_segmentid(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
-		String expectedSegmentId = memberAttributesMap.get("Segment ID");
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		String planType = (String) getLoginScenario()
-				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-		String memberType = (String) getLoginScenario()
-				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-    	claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			System.out.println("TEST UI ONLY - will not validate segment ID");
+		else {		
+			Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+			String expectedSegmentId = memberAttributesMap.get("Segment ID");
+			String planType = (String) getLoginScenario()
+					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+			String memberType = (String) getLoginScenario()
+					.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+			claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+		}
+	}
+	
+	@When("^I am validating UI only$")
+	public void onlyTestUi() {
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		claimsSummPg.setOnlyTestUiFlag(true);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG, true);
 	}
 }

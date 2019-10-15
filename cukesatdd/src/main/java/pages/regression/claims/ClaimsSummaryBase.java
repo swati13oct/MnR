@@ -44,7 +44,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			String key="med_dateOfService";
 			WebElement element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			String value=element.getText().trim();
 			dataMap.put(key, convertDateFormat(value));
 
@@ -52,7 +52,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="med_providerName";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -60,7 +60,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="med_providerType";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -68,7 +68,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="med_amountBilled";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -76,7 +76,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="med_claimStatus";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -89,7 +89,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 				}
 				element=driver.findElement(By.xpath(xpath));
 				Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-						validate(element));
+						claimsValidate(element));
 				value=element.getText().trim();
 				dataMap.put(key, value);
 			} else {
@@ -100,7 +100,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 				}
 				element=driver.findElement(By.xpath(xpath));
 				Assert.assertTrue("PROBLEM - should not have 'Your Share' value showing on detail page", 
-						!validate(element));
+						!claimsValidate(element));
 				value="$0.00";
 				dataMap.put(key, value);
 			}
@@ -109,7 +109,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			String key="drug_dateFilled";
 			WebElement element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			String value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -117,7 +117,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_medication";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -125,7 +125,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_rxNumber";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -133,7 +133,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_pharmacy";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -141,7 +141,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_planPaid";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -149,7 +149,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_youPaid";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -157,7 +157,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="drug_otherPayments";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 		} else {
@@ -165,7 +165,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			String key="ship_dateOfService";
 			WebElement element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			String value=element.getText().trim();
 			dataMap.put(key, convertDateFormat(value));
 
@@ -173,7 +173,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_provider";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -181,7 +181,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_claimType";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -189,7 +189,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_charged";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -197,7 +197,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_paidToYou";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -205,7 +205,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_paidToProvider";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, value);
 
@@ -213,7 +213,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			key="ship_processedDate";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
-					validate(element));
+					claimsValidate(element));
 			value=element.getText().trim();
 			dataMap.put(key, convertDateFormat(value));
 		}
@@ -291,7 +291,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			System.out.println("Explanation of Benefits Sub Navigation Link under Claims was NOT displayed for SSUP member");
 			String expText="EOB page with the message 'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.";
 			Assert.assertTrue("PROBLEM - unable to locate text '"+expText+"'", 
-					validate(eob_header) && validate(eob_errMsg));
+					claimsValidate(eob_header) && claimsValidate(eob_errMsg));
 		}
 	}
 

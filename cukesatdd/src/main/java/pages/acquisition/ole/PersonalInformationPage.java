@@ -3,6 +3,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -280,7 +281,7 @@ public class PersonalInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("special-election-period")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
 			System.out.println("OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 		}
@@ -295,8 +296,26 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String FirstNameDisplayText = FirstNameDisplay.getText();
 		String LastNameDisplayText = LastNameDisplay.getText();
-		String StateDisplayText = StateDisplay.getText();
-		String ZipDisplayText = ZipDisplay.getText();
+		String StateDisplayText = "";
+		String ZipDisplayText = "";
+
+		if(validate(StateDisplay) && validate(ZipDisplay)){
+			StateDisplayText = StateDisplay.getText();
+			ZipDisplayText = ZipDisplay.getText();
+
+		}
+		else{
+			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
+			StateSelected.click();
+			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='NC']"));
+		
+			StateSelectNC.click();
+			WebElement EnterZip = driver.findElement(By.xpath("//input[@id='zipCode']"));
+			EnterZip.sendKeys("28035");
+			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
+			StateDisplayText = "NC";
+			ZipDisplayText = EnterZip.getText();
+		}
 		
 		System.out.println("First Name Expected : "+FirstName+"       Displayed on page  - "+FirstNameDisplayText);
 		System.out.println("Last Name Expected : "+LastName+"       Displayed on page  - "+LastNameDisplayText);

@@ -31,7 +31,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
-	@FindBy(id = "add-drug")
+	@FindBy(id= "add-drug")
 	public WebElement addDrug;
 
 	@FindBy(id = "pharmacyTabId")
@@ -377,7 +377,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
 	public List<WebElement> loadingBlock;
 	
-	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1")
+	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1[contains(text(),'Drug')]")
 	public WebElement pageHeading;
 	
 	@FindBy(id = "drugDosageStrengthId")
@@ -391,6 +391,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(id = "map")
 	public WebElement map;
+	
+	@FindBy(id = "showhideMapId")
+	public WebElement mapToggle;
 	
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
 	private WebElement maPlansCount;
@@ -440,7 +443,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 	
-	@FindBy(xpath="//button[(@class='cta-button costs-tab-show ng-binding ng-scope') and contains(text(),'profile')]")
+	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 	
 	@FindBy(id="dupIconFlyOut")
@@ -523,7 +526,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
+		checkModelPopup(driver);
 		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);
@@ -555,8 +558,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'"+drug.split(" ")[0]+"')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}
 	
 	public void validateAddedDrugNew(String drug) throws InterruptedException {
@@ -668,7 +671,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		 options.selectByVisibleText(radius);
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);	
-		validateNew(map);
+		validateNew(mapToggle);
 	}
 
 	public boolean validatemesgmoredrugsothertext(String otherscount) {
@@ -1801,6 +1804,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
+		System.out.println(step3Info.getText());
 		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
 			return true;
 		return false;
@@ -2008,5 +2012,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		validateNew(returnLink,60);
+		jsClickNew(returnLink);
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
 	}
 }

@@ -76,7 +76,7 @@ public class oleStepDefinition {
 		String County = givenAttributesMap.get("County Name");
 		String ZipCode = givenAttributesMap.get("Zip Code");
 		String PlanType = givenAttributesMap.get("Plan Type");
-		String PlanYear = "2018"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		String SiteName =  "AARP_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -124,22 +124,23 @@ public class oleStepDefinition {
 		String PlanName = givenAttributesMap.get("Plan Name");
 		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String PlanYear = "2019"; 
-		String PlanPremium;
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
+		String PlanPremium = "";
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
 			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
 
 		}
 		else{
@@ -147,10 +148,77 @@ public class oleStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 
-			PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName);
+			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
+
+		} //--------------------------------------------------------------------------------------------------------------------
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : "+PlanName);
+		System.out.println("Plan Type is : "+PlanType);
+		System.out.println("Plan Zip Code is : "+ZipCode);
+		System.out.println("Plan County Name is : "+County);
+		System.out.println("Plan Plan Premium is : "+PlanPremium);
+		System.out.println("TFN for Plan Type is : "+TFN);
+		System.out.println("Plan Year is : "+PlanYear);
+		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Welcome Page");
+	}
+	
+	
+	@Then("^the user navigates to clicks on Enroll Now for AARP site to start the OLE flow$")
+	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanName = givenAttributesMap.get("Plan Name");
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
+		String PlanPremium = "";
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String TFN;
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		//-----------------------------------------------------------------------------------------------------
+		WelcomePage welcomePage;
+		if(SiteName.contains("UHC_ACQ")){
+			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			TFN = planSummaryPage.GetTFNforPlanType();
+			welcomePage = planSummaryPage.Enroll_OLE_Plan_campaign_uhc(PlanName,PlanType);
 
 		}
+		else{
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			TFN = planSummaryPage.GetTFNforPlanType();
+			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
+
+		} //--------------------------------------------------------------------------------------------------------------------
+		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -187,7 +255,8 @@ public class oleStepDefinition {
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		String PlanYear = "2019"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+ 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -432,6 +501,21 @@ public class oleStepDefinition {
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page();
+		if (medicareInfoPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE Medicare Information Page is NOT Displayed");
+	}
+	
+	@Then("^the user navigates to Medicare Information Page for PDP$")
+	public void the_user_navigates_to_Medicare_Information_Page_PDP() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		MedicareInformationPage medicareInfoPage = welcomePage.navigate_to_medicare_info_page_PDP();
 		if (medicareInfoPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
@@ -1977,8 +2061,7 @@ public class oleStepDefinition {
 					System.out.println("OLE Confirmation Page is Displayed");
 				} else {
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
-					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
-				}
+					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
 			} else {
 				System.out.println("Skipping the submit functionality in Offline-Prod environment");
 			}
