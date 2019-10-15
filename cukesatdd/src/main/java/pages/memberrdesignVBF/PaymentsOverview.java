@@ -44,7 +44,7 @@ public class PaymentsOverview extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, OneTimePaymentButton, 60);
 		validateNew(OneTimePaymentButton);
 	}

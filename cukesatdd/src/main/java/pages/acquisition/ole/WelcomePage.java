@@ -199,7 +199,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LearnMoreModal OpenLearnMore() {
-		AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		validate(LearnMoreButton);
 		LearnMoreButton.click();
 		try {

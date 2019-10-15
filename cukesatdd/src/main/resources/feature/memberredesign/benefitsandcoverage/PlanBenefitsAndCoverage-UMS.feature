@@ -1,8 +1,8 @@
 @benefitsAndCoverage @thePredators @codeMonkeys @regression_06_06_18
-Feature: C1.1 To test plan benefits and Coverage on UMS site
+Feature: 1.01 Member  benefits and Coverage page
 
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
-  @benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @regressionMember
+  @benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -16,7 +16,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15084 | PCP      | providerTier |
 
   #TC02_Primarycareprovider_specialist_withprovidertiering
-  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @regressionMember
+  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member witprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -29,7 +29,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15085 | MAPD     | COSMOSOfficevisit_BnC |
 
   #TC04_OutpatientSurgeryCentervisits_withoutprovidertiering
-  @benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @regressionMember
+  @benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -42,7 +42,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15087 | MAPD     | Individual_BnC | NON LIS       |
 
   #TC05_Primarycareprovider_specialist_withoutprovidertiering
-  @benefitsAndCoverage4 @OfficeVisitswithoutprovidertiering @regression @regressionMember
+  @benefitsAndCoverage4 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -55,7 +55,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15088 | MAPD     | memberWithoutProviderTiering_BnC |
 
   #TC07_Copay_Coinsurance_in_DrugCostsTable
-  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @regressionMember
+  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the copay coinsurance in drugcosts table
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -68,7 +68,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15090 | MAPD     | Individual_BnC | NON LIS       |
 
   #TC08_BenefitsFor_ComboMembers
-  @benefitsAndCoverage12 @BenefitsForCombo @regression @regressionMember
+  @benefitsAndCoverage12 @BenefitsForCombo @regression @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -81,7 +81,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15091 | Combo    | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
-  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @regressionMember
+  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -94,7 +94,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15092 | Peehip   | Group_BnC  |
 
   #TC10_Benefits_for_TexasERSMember
-  @benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @regressionMember
+  @benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part1_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -110,7 +110,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @benefitsAndCoverage22 @CMShip @regressionMember
+  @benefitsAndCoverage22 @CMShip @BnC_Part2_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -140,7 +140,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
 
  #TC12_Benefits_for_MedicaMember
-  @benefitsAndCoverage12_1 @CMFedDrugNonLis @regressionMember
+  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part2_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -208,7 +208,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
-  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @regressionMember @tamzid
+  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part2_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -223,7 +223,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15098 | SSUP     | Group_BnC      |
 
   #TC14_Benefits_for_PCPMember
-  @benefitsAndCoverage14_2 @CMFedDrugNonLis @regressionMember
+  @benefitsAndCoverage14_2 @CMFedDrugNonLis  @BnC_Part2_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -287,7 +287,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
        | 15097 | PCP      | Individual_BnC | NON LIS      | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List  | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura   | Formulario Completo                    | Lista de Medicamentos Alternativos       | 2      |                          |                           |                                        |                           | BDFAEC CBADEADF | 945007888-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
-  @benefitsAndCoverage21 @CMAncillarysection2 @regressionMember
+  @benefitsAndCoverage21 @CMAncillarysection2  @BnC_Part3_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify CMAncillarysection2 section is in place on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -330,7 +330,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15238 | MAPD     | Individual_BnC | NON LIS       |
 
     #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
-  @benefitsAndCoverage5 @WaystoSaveforPdp @regression @regressionMember
+  @benefitsAndCoverage5 @WaystoSaveforPdp @regression  @BnC_Part3_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -348,7 +348,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
         # note: Due to timing that it takes for GPS to do the update (add or remove),
   # this testcase result will not be stable. Since can't predict time for GPS to finish the update,
   # so the add or remove button does't always show up within the time the code expects it to.
-  @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression @regressionMember
+  @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression @BnC_Part3_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member with Rider
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -364,7 +364,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
     
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @benefitsAndCoverage1  @PDPLIS3member @regressionMember
+  @benefitsAndCoverage1  @PDPLIS3member @BnC_Part3_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -401,7 +401,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15248 | PDP     | PDPLIS_Bnc  | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
   #TC25_Group members_MAPD_LIS(3,4)
-  @benefitsAndCoverage1 @regressionMember @CMGroupmembersTC25 
+  @benefitsAndCoverage1 @BnC_Part3_regressionMember @CMGroupmembersTC25 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -437,7 +437,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15247 | MAPD     | Group_BnC  | LIS 4         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
 
   #TC26_Group members_PDP_LIS(1,2)
-  @benefitsAndCoverage2 @regressionMember @CMGroupmembersPDPLIS_TC26
+  @benefitsAndCoverage2 @BnC_Part3_regressionMember @CMGroupmembersPDPLIS_TC26
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 1/2 values on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -473,7 +473,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15369 | PDP      | Group_BnC  | LIS 1         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
 
   #TC23_Group NON LIS_MAPD
-  @benefitsAndCoverage23 @CMMapdGroupNonLis @regressionMember
+  @benefitsAndCoverage23 @CMMapdGroupNonLis @BnC_Part4_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -611,7 +611,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
-  @benefitsAndCoverage14 @CMFedDrugNonLis @regressionMember
+  @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part4_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -684,7 +684,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
   
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @benefitsAndCoverage15 @CMFedPDPNonLis @regressionMember
+  @benefitsAndCoverage15 @CMFedPDPNonLis @BnC_Part4_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -733,7 +733,7 @@ Feature: C1.1 To test plan benefits and Coverage on UMS site
       | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @benefitsAndCoverage18 @CMFedNonLisVillage @regressionMember
+  @benefitsAndCoverage18 @CMFedNonLisVillage @BnC_Part4_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

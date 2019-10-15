@@ -1,5 +1,5 @@
 @sso
-Feature: To test SSO functionality for SSO groups
+Feature: 1.13 Member SSO functionality for SSO groups
 
   @sso1 @US1048825 @regression @regression_sso    @regressionMember
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.

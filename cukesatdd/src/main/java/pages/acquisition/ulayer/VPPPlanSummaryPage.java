@@ -643,7 +643,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		handleChatPopup();
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
@@ -669,7 +669,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public void viewPlanSummary(String planType) {
-		
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
@@ -1312,7 +1311,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
 
-				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
 				//maDCELink.get(0).click();
 
@@ -1322,7 +1321,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
-		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+		if(currentUrl().contains("/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
 

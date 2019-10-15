@@ -24,7 +24,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public DrugCostEstimatorPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		if (loadingImages.size() > 0) {
 			CommonUtility.waitForElementToDisappear(driver, loadingImages.get(0), 120);
 		}

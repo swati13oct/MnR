@@ -171,7 +171,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);

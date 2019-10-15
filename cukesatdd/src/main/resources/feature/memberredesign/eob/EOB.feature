@@ -1,5 +1,5 @@
 @eob @fastandfurious 
-Feature:F1.1To test EOB on Dashboard page
+Feature:1.04 Member EOB on Dashboard page
 @eob1 @Eobsiteleavingpopup 
 Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>- Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
 Given login with following details logins in the member portal and validate elements

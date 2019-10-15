@@ -16,6 +16,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -35,6 +36,12 @@ public abstract class UhcDriver {
 
 	public WebDriver driver;
 	private long defaultTimeoutInSec=30;
+	
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
+	public static WebElement IPerceptionNoBtn;
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -123,7 +130,7 @@ public abstract class UhcDriver {
 
 	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
-	    	waitforElementNew(element);
+	    	waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -705,26 +712,23 @@ try {
 		}
 	}
 	
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
+	public void checkModelPopup(WebDriver driver) {
+		 checkModelPopup(driver, defaultTimeoutInSec);
+	}
+	
+	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
 
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
+			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+			
+			try{
+				if(IPerceptionsFrame.isDisplayed())	{
+					driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionNoBtn.click();
+					driver.switchTo().defaultContent();
 				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.xpath("//*[contains(@class,'btn-no')]")).click();
-				driver.switchTo().defaultContent();
+			}catch(Exception e){
+				System.out.println("Iperceptions popup not found");
 			}
-			counter++;
-		} while (counter < 2);
 
 	}
 	

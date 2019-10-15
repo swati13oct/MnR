@@ -15,6 +15,6 @@ import cucumber.api.CucumberOptions;
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVppPlanSummaryUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanSummaryUlayer.json" }, tags = {"@vppPlanCardsRegressionUlayer, @rightRailRegressionUlayer,@vppFavoritePlanRegressionUlayer" })
-public class RunMRATDDAcquisitionVppPlanSummaryUlayer { 
+public class RunMRATDDAcquisitionVppPlanSummaryUlayer {
  
 }

@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppPlanSummary
 Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
 
-  @vppPlanCardsRegressionUlayer @fastandfurious
+  @vppPlanCardsRegressionUlayer @fastandfurious @prodRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -34,18 +34,18 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
     Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in AARP Site
     Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
     Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
-    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
-    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
+#    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
+#    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans
     Then the user clicks on Enroll Now for AARP site and validates the Welcome to OLE Page
       
-
+	  
     Examples: 
        |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                         | annualDeductible                                       |
        | 15545  |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
        | 15546  |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0              | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                        |        
-       | 15551  |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              | $4,900.00          |  No drug coverage                            |                                                        | 
+#       | 15551  |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              | $4,900.00          |  No drug coverage                            |                                                        | 
        | 15552  |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  | 
                                                                                                                                                                                                                                                                          
       

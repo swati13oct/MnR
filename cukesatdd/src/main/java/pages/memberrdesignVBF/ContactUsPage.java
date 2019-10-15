@@ -109,7 +109,7 @@ public class ContactUsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		validateNew(heading);
 	}
 

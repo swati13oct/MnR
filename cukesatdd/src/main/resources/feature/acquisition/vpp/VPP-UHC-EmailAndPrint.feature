@@ -3,7 +3,7 @@
 Feature: 2.04.ACQ-Print and email on VPP page on UMS
 
 
-  @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018 @RegressionPredators
+  @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018 @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID>- Verify email plan compare plan details in UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -19,7 +19,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     | 15519  |   90210 |
 
 
-  @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators
+  @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID>- TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -35,7 +35,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
    | 15533   |   33012 | MAPD     |
 
 
-  @emailAndPrint_UHC3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 
+  @emailAndPrint_UHC3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button on view plan preview page on UHC site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
     Given the user is on the uhcmedicaresolutions site landing page
@@ -50,6 +50,9 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     #  | SNP Test Plans  | <SNP_testPlans> |
     Then user validates email option on UHC site
 	Then user validates email functionality with invalid and valid email address on UHC site
+	Then user validates print option on UHC site
+	Then user validates print functionality on UHC site
+	
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                         | PDP_testPlans                                                   | SNP_testPlans                                                                               |
       | 1598166 | 80001   | NO            | Jefferson County | Medica HealthCare Plans MedicareMax (HMO),Preferred Choice Dade (HMO)| AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP)|
@@ -73,6 +76,6 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
 
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166 | 80001   | NO            | Jefferson County | Medica HealthCare Plans MedicareMax (HMO),Preferred Choice Dade (HMO)| AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP)|
+#      | 1598166 | 80001   | NO            | Jefferson County | Medica HealthCare Plans MedicareMax (HMO),Preferred Choice Dade (HMO)| AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP)|
 
 
