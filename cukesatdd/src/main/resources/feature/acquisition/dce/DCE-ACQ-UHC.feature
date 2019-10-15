@@ -1,7 +1,7 @@
 @acq_dce_UHC
 Feature: 2.10. ACQ-DCE - UMS
 
-@acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer
+@acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer @prodRegression
 Scenario Outline: To verify DCE flow from Blayer home page
 Given the user is on the uhcmedicaresolutions site landing page
 When I access the acquisition DCE tool from home page on ums site
@@ -37,7 +37,7 @@ Examples:
 | Lipitor |  TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
-@switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer
+@switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
 Scenario Outline: To test the dce vpp flow with switch now option
 Given the user is on the uhcmedicaresolutions site landing page
 When the user performs plan search using following information in UMS site

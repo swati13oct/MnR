@@ -1,4 +1,4 @@
-@fastandfurious @OLE @Campaign_OLE_UHC
+@fastandfurious @OLE @Campaign_OLE_UHC @prodRegression
 Feature: 2.05.5. ACQ-OLE Campaign UMS
 
   @CampaignURL_OLE_Blayer_uhc @acquisitionRegression @FastnFurious
