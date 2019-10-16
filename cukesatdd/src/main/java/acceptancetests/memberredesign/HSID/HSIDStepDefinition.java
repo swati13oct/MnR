@@ -21,6 +21,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -190,8 +191,13 @@ public class HSIDStepDefinition {
 					} else if(hasWentWrongError) {
 						Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
 					} else {
-						System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
-						Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
+						if (hasSorryError && !isPotentialSorryWorkaroundCandidate(planType)) {
+							System.out.println("not candidate for 'sorry' error work around");
+							Assert.fail("***** Error in loading Redesign Account Landing Page *-*-* Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
+						} else {
+							System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
+							Assert.fail("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'");
+						}
 					}
 				}
 			}
@@ -636,6 +642,7 @@ public class HSIDStepDefinition {
 				||type.contains("contactus")||type.contains("profilepref")
 				||type.contains("order") ||type.contains("header")
 				||type.contains("pharmacylocator") ||type.contains("needhelp")
+				||type.contains("pnp")
 				) {	//for now only doing workaround for the above features
 			String forType="claims";
 			if (type.contains("contactus")) {
@@ -650,6 +657,8 @@ public class HSIDStepDefinition {
 				forType="reward";
 			} else if (type.contains("pharmacylocator")) {
 				forType="pharmacylocator";
+			} else if (type.contains("pnp")) {
+				forType="pnp";
 			} else if (type.contains("needhelp")) { //note: if for needhelp validation, just set it as claims
 				forType="claims";
 			}

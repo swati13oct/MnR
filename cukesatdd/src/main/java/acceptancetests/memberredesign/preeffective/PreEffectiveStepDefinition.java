@@ -22,6 +22,7 @@ import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -46,7 +47,7 @@ import pages.regression.testharness.TestHarness;
  *
  */
 
-public class PreEffectiveStepDefinition{
+public class PreEffectiveStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
@@ -226,7 +227,6 @@ public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage(Da
 	
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 
 }
@@ -248,7 +248,7 @@ public void validateClaimSupportIsNOTDisplayedOnBenefitsCoevargePageForSHIPPreff
 	if (memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 	
 	{BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	
 	benefitsCoveragePage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
 	benefitsCoveragePage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
 	}
@@ -263,7 +263,7 @@ public void validateClaimSupportIsNOTDisplayedOnBenefitsCoevargePageForSHIPPreff
 public void clickViewPlanDocumentsButton() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	
     benefitsCoveragePage.clickViewPlanDocumentsButton();  
     FormsAndResourcesPage formsAndResourcesPage = new FormsAndResourcesPage(benefitsCoveragePage.driver);
 	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);
@@ -305,7 +305,7 @@ public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttribute
 	{
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 		newclaimsSummarypage.validateExpOfBenSubNavNotDispForSsup();
 	}
@@ -315,7 +315,7 @@ public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttribute
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
 		//write code for handling iperception pop-up
 		//newclaimsSummarypage.feebackpopupClose();
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 		newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
 	}
@@ -341,7 +341,7 @@ public void validateClaimSupportIsNOTDisplayedOnClaimsPageForSHIPPreffective(Dat
 	
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
 		newclaimsSummarypage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
 	}
@@ -357,7 +357,7 @@ public void verifyCorrectPreEffectiveMessageIsDisplayedOnClaimsPage() throws Thr
 	
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	newclaimsSummarypage.verifyCorrectMessageForPreEffectiveMembers();
 	
                
@@ -413,7 +413,7 @@ public void verifyCorrectTechnicalSupportPhoneNumberIsDisplayedOnClaimsPage(Data
 	String TechnicalPhNo = memberAttributesMap.get("Technical TFN");
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	newclaimsSummarypage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 	
                
@@ -438,7 +438,7 @@ public void verifyPaymentTabIsDisplayedOnClaimsPage(DataTable givenAttributes)th
 	
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+		newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.verifyPaymentTabIsDisplayedForPreEffectiveMembers();
 	}
 	
@@ -464,16 +464,36 @@ public void userClicksOn_Account_settings_from_claims_page() throws Throwable {
 	getLoginScenario().saveBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE,profileAndPrefPage);	
 }
 
-@Given("^user is navigated to Account Settings page$")
+@Given("^preuser is navigated to Account Settings page$")
 public void userlands_on_Account_Settings_Page() throws Throwable {
-	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);      
-	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
-	ppp.validateprefrencepageURL();
-	
+		ProfileandPreferencesPage profilePreferencesPage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			profilePreferencesPage = testHarness.navigateDirectToProfilePageFromTestHarnessPage();
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			profilePreferencesPage = accountHomePage.navigateDirectToProfilePage();
+		}
+		if (profilePreferencesPage != null) {
+			getLoginScenario().saveBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE, profilePreferencesPage);
+		} else {
+			Assert.fail("Profile preference page not loaded");
+		}	
+}	
+
+@And("^the preuser validates the Plan Name, Member name, Member ID and account section in UMS site")
+public void user_Validates_FED_PROFILE_MEMBERNAME_ID_AccountProfile() {
+	ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+			.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+	if (profilePreferencesPage == null) {
+		System.out.println("Profile and Preferences page variable is Null");
+	}
+	profilePreferencesPage.validatePlanNameMemberidNameAcountProfilepre();
 }
 @Given("^verify that the pre effecctive member can access the account settings page to view security and sign-in preferences$")
 public void verify_preffectiev_member_can_access_the_page() throws Throwable {
-	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
+	ProfileandPreferencesPage ppp = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 	ProfileandPreferencesPage.checkForIPerceptionModel(ppp.driver);
 	ppp.validatepermanentaddress();
 	ppp.validatePhonepreffective();
@@ -603,7 +623,7 @@ public void user_clicks_on_the_Contact_Us_link_in_Need_help_Section_of_Claims_Pa
     // User navigates to Contact Us page by clicking on "contact us" link in CLaims Page
 	ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 			.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-	ClaimsSummaryPage.checkForIPerceptionModel(newclaimsSummarypage.driver);
+	newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 	ContactUsPage contactUsPage = newclaimsSummarypage.navigateToContactUsPage();
 	getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsPage);                      
 
@@ -628,6 +648,5 @@ public void verity_that_correct_phone_number_is_displayed_in_Technical_Support_s
 	
                
 }
-
 
 }

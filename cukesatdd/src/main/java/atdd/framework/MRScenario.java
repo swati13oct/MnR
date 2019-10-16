@@ -758,6 +758,7 @@ public class MRScenario {
 
 		capabilities.setCapability("platform", "Windows 7");
 		capabilities.setCapability("version", "66.0");
+		capabilities.setCapability("screenResolution", "1920x1080");
 		//capabilities.setCapability("parent-tunnel", "sauce_admin");
 		capabilities.setCapability("parent-tunnel", "optumtest");
 		capabilities.setCapability("tunnelIdentifier",
@@ -928,6 +929,7 @@ sauceLabsTunnelIdentifier);
 	}
 
 	public static void returnLoginCredentials() {
+		loginCreds.clear();
 		for (Entry<String, String> currEntry : returnMemberAttributeMap().entrySet()) {
 			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
 				if (currEntry.getValue().contains("/")) {
@@ -938,7 +940,7 @@ sauceLabsTunnelIdentifier);
 					loginCreds.put("user", currEntry.getValue());
 					loginCreds.put("pwd", "Password@1");
 				}
-
+				break;
 			}
 		}
 	}
@@ -1067,8 +1069,16 @@ sauceLabsTunnelIdentifier);
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 7");
 					capabilities.setCapability("version", "66.0");
+					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 				}
+				 else if (browserName.equalsIgnoreCase("edge")) {
+					System.out.println("Inside Edge");
+					capabilities = DesiredCapabilities.edge();
+					capabilities.setCapability("platform", "Windows 10");
+					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("screenResolution", "1920x1080");
+				 }
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				//capabilities.setCapability("parent-tunnel", "sauce_admin");		
 				capabilities.setCapability("parent-tunnel", "optumtest");						

@@ -1,5 +1,6 @@
 package pages.acquisition.bluelayer;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +18,21 @@ public class KeywordSearch extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement search;
 	
+	@FindBy(xpath="//a[contains(text(),'Visit a UHC Store')]")
+	private WebElement textonpage ;
+	
 	public void url(){
-		validate (search);
-	}
+		System.out.println("PageTitle " + driver.getTitle());
+		Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare"));
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validateNew(search);
+		validateNew(textonpage);
+		textonpage.getText();	
+			}
 	
 }

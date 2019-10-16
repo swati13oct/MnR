@@ -39,7 +39,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//p[text()='Drug Costs from Formulary']/parent::td/following::td[1]//a")
 	private WebElement dceLink;
 
-	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[text()='Look up your doctor']")
+	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[contains(text(),'Look up')]")
 	private WebElement LookUpYourDoctorLink;
 
 	@FindBy(id = "add-drug")
@@ -56,6 +56,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
+	
+	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	private WebElement closeButtonthankyoumessagepopup;
+
 	
 		
 	public ComparePlansPage(WebDriver driver) {
@@ -292,6 +296,10 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 	
-
+	public void validatingthankyoumessage() {
+		// TODO Auto-generated method stub
+		closeButtonthankyoumessagepopup.click();
+		System.out.println("Thank you Message pop up is closed");
+	}
 }
 

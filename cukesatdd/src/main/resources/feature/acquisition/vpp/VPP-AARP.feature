@@ -1,18 +1,39 @@
 @fixedTestCaseTest @vppUlayer
-Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
+Feature: 1.02-Plan summary in vpp flow AARP
 
-  @vppUlayerSmoke @vbfGate 
+  @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate 
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
+    #And the user views the plans of the below plan type in AARP site
+    Then the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    And the user validates the available plans for selected plan types in the AARP site
+    Then the user validates plan summary for the below plan in the AARP site
+      | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    And the user validates the pdf section
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      
+   @vppUlayerCurrentYrSmoke 
+  Scenario Outline: Verify plan summary in AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the AARP site
+    #And the user views the plans of the below plan type in AARP site
+    Then the user views the plans of the below plan type in AARP site and select Current year
+      | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
     Then the user validates plan summary for the below plan in the AARP site
       | Plan Name | <planName> |
@@ -90,43 +111,6 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | zipcode | isMultiCounty | county             | plantype | planName                                     |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
-  @emailandprintplancompare @predators @RegressionPredators
-  Scenario Outline:TID: <TID>- Verify print and email for <plantype> plan compare page in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code | <zipcode> |
-       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
-    And I select all 3 plans to compare in MA and click on compare plan link
-      | plan type | <plantype> |
-    When the user validate the print and email link option in plan compare
-    Then the user validating email and print option in plan compare
-
-    #Then I click back to all plans button and verify that all 3 plans are still selected
-    Examples: 
-     |  TID     | zipcode | plantype          |isMultiCounty |planName                                           |
-     |15523     |   90210 | MedicareAdvantage |NO            |AARP MedicareComplete SecureHorizons Essential (HMO) |
-
-
-
-  @emailandprintplanDetails @predators @decRelease2018 @RegressionPredators
-  Scenario Outline:TID: <TID>-  Verify email and Print plan functionalities on Plan Details page in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code | <zipcode> |
-       | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
-    And the user views the plans of the below plan type in AARP site
-      | Plan Type | <plantype> |
-    And the user validates the available plans for selected plan types in the AARP site
-    Then the user view plan details of the above selected plan in AARP site and validates
-      | Plan Name | <planName> |
-    Then the user validate the print and email links on the plan Details Page
-    Then the user validates the functionality of email and print buttons on the plan Details Page
-
-    Examples: 
-    |  TID   | zipcode | plantype | planName                                           | isMultutiCounty |
-     | 15531 |   90210 | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) |  No              |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify Eyewear Credit Benefits in Plan Details for provided plan
@@ -339,7 +323,6 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the AARP site 
-    Then user validates save plan option is unselected for all plans by default on AARP site
     Then user validates selected plans can be saved as favorite on AARP site
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
@@ -396,7 +379,7 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -422,45 +405,26 @@ Feature: 1.10-VBF-Acq-To test plan summary in vpp flow AARP site
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
  
- 
-  @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @thePredators @Apr_release_2019 
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button on view plan preview page on AARP site
-	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site 
-    #Then user validates selected plans can be saved as favorite on AARP site
-    #  | MA Test Plans   | <MA_testPlans>  |
-    #  | PDP Test Plans  | <PDP_testPlans> |
-    #  | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates email option on AARP site
-	Then user validates email functionality with invalid and valid email address on AARP site
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
-
-  @feature-F265872 @us1603378 @vppPrintRegressionUlayer @vppFavoritePlanPrintAarp @thePredators @Apr_release_2019 @RegressionPredators
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on AARP site
-	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site 
-    #Then user validates selected plans can be saved as favorite on AARP site
-    #  | MA Test Plans   | <MA_testPlans>  |
-    #  | PDP Test Plans  | <PDP_testPlans> |
-    #  | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates print option on AARP site
-	Then user validates print functionality on AARP site
-
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
-
+  @F322478 @us1603378 @UlayerSAMCall 
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Call SAM icon is visible or not
+ 		And  verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
+		Then user verify the popup and content   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @UlayerSAMChat 
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
+ 		Given the user is on AARP medicare acquisition site landing page
+ 		When verify Chat SAM icon is visible or not
+ 		And  verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
 

@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
-Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
+Feature: 2.02-Plan summary in vpp flow UMS
 
-  @planDetailsUMS @vppBlayerSmoke @vbfGate
+  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke @vbfGate
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -9,9 +9,9 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-    When user views plans of the below plan type in UMS site
+   # When user views plans of the below plan type in UMS site
+   When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
     And the user validates the pdf section for uhc
@@ -21,7 +21,29 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      
+   @vppBlayerCurrentYrSmoke 
+  Scenario Outline: Verify plan details in UMS site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page in the UMS site
+   # When user views plans of the below plan type in UMS site
+   When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    And the user validates the pdf section for uhc
+    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
+    Then User click on add to compare checkbox and click on view details link on UMS
+    Then I uncheck and go back to the vpp page to validate
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
+      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |   
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -90,36 +112,6 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-   @emailandprintplancompare @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline:TID: <TID>- Verify email plan compare plan details in UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I select all 3 plans to compare in MA and click on compare plan link in UHS site
-    When the user validate the print and email link option in plan compare in UHS site
-    Then the user validating email and print option in plan compare in UHS site
-    Then the user validate thank you message in plan compare in UHS site
-    Then the user clicks on back to all plans link and validates all three plans are selected
-
-    Examples: 
-    |  TID   | zipcode |
-    | 15519  |   90210 |
-
-   @emailandprintplanDetails @predatorsdecrelease2018 @RegressionPredators
-  Scenario Outline:TID: <TID>- TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    And the user view plan details of the above selected plan in UMS site vpp
-      | Plan Name | <planName> |
-    Then the user validate the print and email links on the plan Details Page on uhc site
-    Then the user validates the functionality of email and print buttons on the plan Details Page on uhc site
-
-    Examples: 
-   |  TID    | zipcode | planName                                           | plantype |
-   | 15533   |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
@@ -318,7 +310,7 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
          
 
       
-  @feature-F265872 @us1598162 @vppFavoritePlanRegression @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -326,7 +318,6 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
-    Then user validates save plan option is unselected for all plans by default on UHC site
     Then user validates selected plans can be saved as favorite on UHC site
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
@@ -410,44 +401,25 @@ Feature: 1.09-VBF-Acq-To test plan summary in vpp flow UMS site
       | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
 
 
-  @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @thePredators @Apr_release_2019 
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button on view plan preview page on UHC site
-	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site 
-    #Then user validates selected plans can be saved as favorite on UHC site
-    #  | MA Test Plans   | <MA_testPlans>  |
-    #  | PDP Test Plans  | <PDP_testPlans> |
-    #  | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates email option on UHC site
-	Then user validates email functionality with invalid and valid email address on UHC site
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
-
-
-  @feature-F265872 @us1603378 @vppPrintRegressionBlayer @vppFavoritePlanPrintUhc @thePredators @Apr_release_2019  @RegressionPredators
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on UHC site
-	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site 
-    #Then user validates selected plans can be saved as favorite on UHC site
-    #  | MA Test Plans   | <MA_testPlans>  |
-    #  | PDP Test Plans  | <PDP_testPlans> |
-    #  | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates print option on UHC site
-	Then user validates print functionality on UHC site
-
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1603378 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Nursing Home Plan (PPO SNP),UnitedHealthcare Assisted Living Plan (PPO SNP)|
-
+  @F322478 @us1603378 @BlayerSAMCall
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Call sticky action menu icon is visible or not
+ 		And  verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the popup and content in popup   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
+      
+  @F322478 @us1603378 @BlayerSAMChat
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on UHC site
+ 		Given the user is on the uhcmedicaresolutions site landing page
+ 		When verify Chat sticky action menu icon is visible or not
+ 		And  verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat at its original state   
+    
+      Examples: 
+      | UID     | 
+      | F322478 |
 

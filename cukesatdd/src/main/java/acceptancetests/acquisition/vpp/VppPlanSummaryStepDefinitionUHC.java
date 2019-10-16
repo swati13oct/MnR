@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.dce.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.KeywordSearch;
@@ -20,6 +20,7 @@ import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.keywordSearchAARP;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -133,8 +134,8 @@ public class VppPlanSummaryStepDefinitionUHC {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		/*String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);*/
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
@@ -652,7 +653,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	   if(!planType.equals("MA")){
 	   DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-	   drugCostEstimatorPage.navigateBackToPlanSummaryPage();
+	   drugCostEstimatorPage.clickReturnToSummaryLink();
 	   
 	   }  
    }
@@ -798,8 +799,9 @@ public class VppPlanSummaryStepDefinitionUHC {
   public void user_clicks_enrollInPlan_validates_welcomeOLE() throws InterruptedException{
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); 
-	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);	  
-   WelcomePage  welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName);
+	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);	
+	  String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+   WelcomePage  welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName,planType);
    if (welcomeOLEPage != null) {
 		getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 	} else {
@@ -831,7 +833,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		plansummaryPage.validateSpecialistBenefit(planType ,planName , specialist);
 		plansummaryPage.validateReferrralRequiredBenefit(planName ,referralRequired);
 		plansummaryPage.validatesOutOfPocketMaximum(planName , outOfPocketMaximum);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);	
+		plansummaryPage.validatePrescriptionDrugsTier1(planName,planType,prescriptionDrugsTier1);	
 	  }
 	  else
 		 System.out.println("Benefits are not applicable for PDP Plans"); 
@@ -856,7 +858,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.validatePlanPremium(planName ,monthlyPremium);
 		plansummaryPage.validateAnnualDeductible(planName ,annualDeductible);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName ,prescriptionDrugsTier1);
+		plansummaryPage.validatePrescriptionDrugsTier1(planName,planType,prescriptionDrugsTier1);
 	  }
 	  else
 		  System.out.println("Benefits are not applicable for MA, MAPD and DSNP Plans");
@@ -982,6 +984,22 @@ public class VppPlanSummaryStepDefinitionUHC {
 	@Then("^the member lands on the result page$")
 	public void I_land_on_result_page(){
 		KeywordSearch kws = (KeywordSearch) getLoginScenario().getBean(PageConstants.Keyword_Search);
-		kws.url();			
+		kws.url();		
+		if(kws != null)				
+			getLoginScenario().saveBean(PageConstants.Keyword_Search,
+					kws);			
+		
+	}
+	/**
+	 * @toDo:user is on the uhcmedicaresolutions site landing page
+	 */
+	@Given("^the potential user is on the uhcmedicaresolutions site landing page$")
+	public void the_user_on_UHC_Medicaresolutions_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 } 

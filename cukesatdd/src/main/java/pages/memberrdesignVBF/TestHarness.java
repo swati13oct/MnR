@@ -16,6 +16,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.memberrdesignVBF.HealthAndWellness;
+import pages.regression.accounthomepage.AccountHomePage;
 
 public class TestHarness extends UhcDriver {
 
@@ -127,7 +128,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Logout")
 	private WebElement logout;
 
-	@FindBy(linkText = "About UnitedHealthcare")
+	@FindBy(id = "copyrightUHC")
 	private WebElement aboutUHC;
 
 	@FindBy(linkText = "Legal Entity Disclosure")
@@ -163,6 +164,21 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
+	@FindBy(className = "atdd-need-help")
+	private WebElement neepHelp;
+	
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'atdd-tech-header')]")
+	private WebElement technicalSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'atdd-plan-header')]")
+	private WebElement planSupportHeading;
+	
+	@FindBy(xpath = "//div[@class='technical section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
+	private WebElement techSupportTelephone;
+	
+	@FindBy(xpath = "//div[@class='plan section']//*[contains(@class,'display-inline-block') and string-length(text()=13)]")
+	private WebElement planSupportTelephone;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -174,7 +190,7 @@ public class TestHarness extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
 			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
 			validateNew(pcpMedicaLogo);		
@@ -244,7 +260,7 @@ public class TestHarness extends UhcDriver {
 	 * @param Category
 	 */
 	public void validateTestHarnessElements(String Category) {
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (!(("GroupRetireeMapd").equalsIgnoreCase(Category))) {
 			validateNew(PaymentPageLink);
@@ -279,11 +295,12 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	/***
 	 * 
 	 * @return
 	 */
+	
 	public ClaimSummarypage navigateToClaimsSummaryPage() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(claimsPageLink);
@@ -681,6 +698,19 @@ public class TestHarness extends UhcDriver {
 
 	public void validatePremiumPaymentTabIsDisplayed() {
 		validateNew(premPaymentsTab);
+		
+	}
+	public void validateNeedHelpSection(){
+		scrollToView(neepHelp);
+		Assert.assertTrue("neepHelp is not displayed", neepHelp.isDisplayed());
+		scrollToView(technicalSupportHeading);
+		Assert.assertTrue("technicalSupportHeading is not displayed", technicalSupportHeading.isDisplayed());
+		scrollToView(planSupportHeading);
+		Assert.assertTrue("planSupportHeading is not displayed", planSupportHeading.isDisplayed());
+		scrollToView(techSupportTelephone);
+		Assert.assertTrue("techSupportTelephone is not displayed", techSupportTelephone.isDisplayed());
+		scrollToView(planSupportTelephone);
+		Assert.assertTrue("neepHelp is not displayed", planSupportTelephone.isDisplayed());
 		
 	}
 }

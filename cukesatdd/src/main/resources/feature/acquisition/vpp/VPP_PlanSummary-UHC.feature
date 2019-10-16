@@ -1,7 +1,8 @@
 @fixedTestCaseTest @vppPlanSummary
-Feature: To test VPP Plan Summary Page in UMS Site
+Feature: 2.01.ACQ-VPP Plan Summary Page in UMS 
 
- @vppPlanCardsRegressionBlayer @fastandfurious
+
+ @vppPlanCardsRegressionBlayer @fastandfurious @prodRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -25,16 +26,16 @@ Feature: To test VPP Plan Summary Page in UMS Site
       | Referral Required | <referralRequired> |
       | Out Of Pocket Maximum | <outOfPocketMaximum> |
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-    Then the user validates below plan benefit values for the above selected plan in UMS site for PDP  Plans
-      | Monthly Premium | <monthlyPremium> |
-      | Annual Deductible | <annualDeductible> |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |  
+#    Then the user validates below plan benefit values for the above selected plan in UMS site for PDP  Plans
+#      | Monthly Premium | <monthlyPremium> |
+#      | Annual Deductible | <annualDeductible> |
+#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |  
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in UMS Site  
-    Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site  
+#   Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in UMS Site  
     Then the user clicks on enter drug information link in the benefits table and validates the DCE Home Page for MAPD, PDP , DSNP Plan in UMS Site
     Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in UMS Site
-    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in UMS site
-    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in UMS site 
+#   Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in UMS site
+#    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in UMS site 
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans in UMS Site
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans in UMS Site
     Then the user clicks on Enroll Now for UMS site and validates the Welcome to OLE Page
@@ -43,7 +44,7 @@ Feature: To test VPP Plan Summary Page in UMS Site
    |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician  | specialist  | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                       | annualDeductible                                       |
    |  15553 |  90210  | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO)    | $0              | $0  copay             | $0  copay   | Yes              | $3,400.00          | $4  copay                                    |                                                        | 
    |  15554 |  28105  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO SNP)             | $0              | $0  copay             | $0  copay   | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance   |                                                        |                                                               
-   |  15542 |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              |  $4,900.00         |  No drug coverage                            |                                                        | 
+#   |  15542 |  90210  | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              |  $4,900.00         |  No drug coverage                            |                                                        | 
    |  15543 |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  |
       
    @rightRailRegressionBlayer @fastandfurious
@@ -58,7 +59,6 @@ Feature: To test VPP Plan Summary Page in UMS Site
     Then the user validates the right rail in UMS Site
     Then the user validates the Need Help Section in the right rail in ums Site
     Then the user validates the TFN in the Need Help Section in ums Site
-    Then the user validates and clicks on Find an agent in your area link in ums Site
     Then the user validates Get a free medicare Guide section in the right rail in ums Site
     Then the user enters the following information in the Get a free medicare Guide section in ums Site
      | First Name | <firstName> |

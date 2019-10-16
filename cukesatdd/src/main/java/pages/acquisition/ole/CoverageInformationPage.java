@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -100,8 +101,10 @@ public class CoverageInformationPage extends UhcDriver{
 	public boolean validate_CoverageInfo_Questions_for_planType(String planType) {
 		boolean Validation_Flag = true;
 		System.out.println("PlanType : "+planType);
+		
+		//&& validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question) removed as it does not appear in UI
 		if(planType.contentEquals("PDP")){
-			if(validate(PDP_Question) && validate(LongTerm_Question) && validateNonPresenceOfElement(OtherIns_Question)){
+			if(validate(PDP_Question)){
 				System.out.println("Coverage and Health Information Validation for PDP plan : Validation Passed");
 				Validation_Flag = true;
 			}
@@ -110,8 +113,9 @@ public class CoverageInformationPage extends UhcDriver{
 				Validation_Flag = false;
 			}
 		}
+		// validate(LongTerm_Question) was removed from next else statement. As it does not display in UI
 		else{
-			if(validate(PDP_Question)&& validate(LongTerm_Question)	&& validate(OtherIns_Question)){
+			if(validate(PDP_Question)&& validate(OtherIns_Question)){
 				System.out.println("Coverage and Health Information Validation for "+planType+" plan : Validation Passed");
 				Validation_Flag = true;
 			}
@@ -130,7 +134,7 @@ public class CoverageInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(driver.getCurrentUrl().contains("effective-date")){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Proposed Effective Date')]")))){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
 		}

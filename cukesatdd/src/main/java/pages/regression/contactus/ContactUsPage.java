@@ -4,6 +4,7 @@
 package pages.regression.contactus;
 
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -119,7 +120,10 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
 	private WebElement headingContactUs;
-	
+
+	@FindBy(xpath="//div[@class='deskHeaderContainer']")
+	private WebElement topHeaderContactUs;
+
 	@FindBy(xpath=".//*[@id='IPEinvL']/map/area[2]")
     private WebElement iPerceptionPopUp;
 
@@ -245,6 +249,9 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
 	private WebElement successHeader_EmailForm;
 	
+	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
+	private WebElement commonQuestionViewQuestionsBtn;
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
@@ -257,17 +264,21 @@ public class ContactUsPage extends UhcDriver{
 		super(driver);
 		try {
 			PageFactory.initElements(driver, this);
-			feebackpopupClose();
-			CommonUtility.waitForPageLoad(driver, headingContactUs, CommonConstants.TIMEOUT_30);
+			AccountHomePage.checkForIPerceptionModel(driver);
+			//feebackpopupClose();
+			if ((MRScenario.environment).toLowerCase().contains("offline"))
+				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
+			else 
+				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_30);
 			openAndValidate();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(headingContactUs);
+		validateNew(headingContactUs);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -833,12 +844,13 @@ public class ContactUsPage extends UhcDriver{
    	 else{
    		 Assert.assertTrue("Send A message Button not displayed", false);
    	 }
-		try {
+		/*try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+   	 	waitforElementVisibilityInTime(EmailUsModalbtnContinue, 30);
 		if(validate(EmailUsModal) && validate(EmailUsModalbtnContinue)){
 	   		 System.out.println("Email Us Moal and COntinue Button are displayed");  		 
 	   	 }
@@ -867,6 +879,12 @@ public class ContactUsPage extends UhcDriver{
             } catch (Exception e) {
                    e.printStackTrace();
             }
+     }
+     
+     public void navigateToCommonQuestionsPg() {
+    	 Assert.assertTrue("PROBLEM - unable to locate the 'View Questions' button on the Contact Us page", validate(commonQuestionViewQuestionsBtn));
+    	 commonQuestionViewQuestionsBtn.click();
+    	 CommonUtility.checkPageIsReady(driver);
      }
 
 

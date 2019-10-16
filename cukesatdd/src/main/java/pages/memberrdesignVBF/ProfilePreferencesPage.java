@@ -178,7 +178,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public ProfilePreferencesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, planName, 30);
 		openAndValidate();
 	}
@@ -308,7 +308,7 @@ public class ProfilePreferencesPage extends UhcDriver {
 	public void validateBreadCrumbClick() {
 		if (isHSIDLinkClickable) {
 			breadCrumbToNavigateBack.click();
-			RallyDashboardPage.checkModelPopup(driver);
+			checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, hsidPasswordLink, 50);
 			Assert.assertTrue(driver.getTitle().contains("Profile"));
 		} else {

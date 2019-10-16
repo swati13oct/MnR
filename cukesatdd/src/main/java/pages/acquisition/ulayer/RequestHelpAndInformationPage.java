@@ -70,6 +70,14 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath=" //input[@id='zip']")
 	private WebElement zipfield;
 
+	@FindBy(xpath="//div[contains(@class,'uhc-container')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need')]")
+	private WebElement needHelpHeader;
+	
+	@FindBy(xpath="//a[contains(@class,'tel')][contains(@class, 'tfn')]")
+	private WebElement needHelpTFN;
+	
+	@FindBy(id = "proceed")
+	private WebElement proceed;
 	
 	public RequestHelpAndInformationPage(WebDriver driver) {
 		super(driver);
@@ -79,20 +87,26 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		//validateNew(pdpInquityDropdown);
+		validateNew(needHelpHeader);
+		validateNew(needHelpTFN);
 		validateNew(zipCodeMedEd);
 		validateNew(lookUpZipLink);
+		
 
 	}
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest() {
-		/*if (requestAgentApptDropdown.getAttribute("class").contains("collapsed")) {
-			requestAgentApptDropdown.click();
-		}*/
-		
-		ma_requestAgentAppointmentLink.click();
+		if (currentUrl().contains("aarpmedicareplans")) {
+			switchToNewTabNew(ma_requestAgentAppointmentLink);
+		} else
+			ma_requestAgentAppointmentLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (currentUrl().contains("agentebrc")) {
+
+		if (currentUrl().contains("myuhcagent")) {
+			if (currentUrl().contains("aarpmedicareplans")) {
+				proceed.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
 			return new RequestAgentAppointmentPage(driver);
 		}
 

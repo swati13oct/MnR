@@ -39,6 +39,9 @@ public class AddDrugDetails extends UhcDriver {
 
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
+	
+	@FindBy(xpath = ".//*[@id='dosage-radios']//select")
+	public WebElement dosageDropdown;
 
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
@@ -85,17 +88,9 @@ public class AddDrugDetails extends UhcDriver {
 	 * 
 	 */
 	public AddDrugDetails selectDosage(String dosage) throws InterruptedException{
-
-	//	Thread.sleep(20000);
-		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']"));
-		WebElement element_label = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		CommonUtility.waitForPageLoadNew(driver, element_label, 20);
-		if(!element.isSelected()){
-			element_label.click();
-		
-		}
-		
-		Assert.assertTrue("Expected Dosage not selected ", element.isSelected());
+		WebElement e = driver.findElement(By.xpath("//fieldset[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		e.click();
+		//selectFromDropDownByText(driver, dosageDropdown, dosage);
 		return new AddDrugDetails(driver);
 	}
 

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -48,16 +49,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
 	private WebElement zipCodeField;
+	
+	@FindBy(id = "zipcode")
+	private WebElement zipCodeHealthPlans;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
 	private WebElement viewPlansButton;
+	
+	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
+	private WebElement GoBtnHealthPlans;
+	
 
 	@FindBy(xpath = "//div[@id='ipeL']/div[2]/map/area[3]")
 	private WebElement popUpcloseLink;
 
-	@FindBy(xpath = "//div[@class='modal-title']")
+	@FindBy(xpath = "//div[contains(@class,'popup-modal')][contains(@class,'active')]/div[@class='modal-title']")
 	private WebElement countyModal;
 
 	@FindBy(id = "ipeL")
@@ -140,7 +148,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
 	private WebElement takeTheQuizBtn;
 
-	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
+	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
@@ -242,15 +250,57 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(css=".icon-search")
 	private WebElement searchbutton;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	@FindBy(xpath="//button[contains(@class,'proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[3]/div/h3[7]/a")
+	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 	
-	@FindBy(xpath ="//*[@id='colhowdoesthiswork_provider']/tbody/tr/td/div/a")
+	@FindBy(xpath ="//*[contains(@class,'cta-button secondary') and contains(text(),'Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
+	
+	  @FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+			private WebElement callsam;
+			
+			@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+			private WebElement callsamtooltip;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
+			private WebElement callSamPopup;
+			
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+			private WebElement CallSamModel;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+			private WebElement CallSamTFN;
+			
+			@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+			private WebElement CallSamTFNClose;
+			
+			String CallSam= "Call a Licensed Insurance Agent";
+			@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[2]/img")
+			private WebElement chatsam;
+			
+			@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
+			private WebElement chatsamtooltip;
+			
+			@FindBy(xpath ="//*[@id='inner-chat']")
+			private WebElement chatSamPopup;
+			
+				@FindBy(xpath ="//*[@id='agent-name']")
+			private WebElement ChatSamHead;
+			
+			@FindBy(xpath ="//*[@id='sp-close-frame']")
+			private WebElement ChatSamTFNClose;
+			
+			String ChatSamText= "Chat with a Licensed Insurance Agent";
+			
+			
+	
+	
+	
 	  @FindBy(id="state-select")
 	  private WebElement stateDropDown;
     
@@ -284,6 +334,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
+	public static boolean isHealthPlan = false;
+	
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -307,10 +359,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		openAndValidate(visitorProfile);
 	}
 
-	public AcquisitionHomePage(WebDriver driver, String string) {
+	public AcquisitionHomePage(WebDriver driver, String siteOrPage) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate(string);
+		openAndValidate(siteOrPage);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -370,20 +422,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
-		try{
-			if(proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		}catch(Exception e){
-			System.out.println("Proactive chat popup not displayed");
-		}
+		checkModelPopup(driver,15);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
+	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
+	
 	}	
 	
-	public void openAndValidate(String site) {
-		if ("ULayer".equalsIgnoreCase(site)) {
+	public void openAndValidate(String siteOrPage) {
+		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 
 			if (MRScenario.environment.equals("offline")) {
 				startNew(AARP_ACQISITION_OFFLINE_PAGE_URL);
@@ -394,50 +442,76 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
-			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			
+			/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 			try{
 				if(proactiveChatExitBtn.isDisplayed())
 					jsClickNew(proactiveChatExitBtn);
 			}catch(Exception e){
 				System.out.println("Proactive chat popup not displayed");
+			}*/
+			clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
+		} else if("health-plans".equalsIgnoreCase(siteOrPage)){
+			isHealthPlan = true;
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver);
+			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+			try{
+				if(proactiveChatExitBtn!=null)
+				jsClickNew(proactiveChatExitBtn);
+				
+				else 
+					Assert.fail("Please check booleanvalue");
+				
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
 			}
-		} else {
+	}else {
 			openAndValidate();
 		}
 	}
 	
 	public void openAndValidate(int visitorProfile) {
-		if (visitorProfile>0) {		
-		CommonUtility.checkPageIsReadyNew(driver);
+		
+		if (visitorProfile>0) {				
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+		//checkModelPopup(driver);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
-		try{
+	//	clickIfElementPresentInTime(driver, proactiveChatExitBtn,2);
+		/*try{
 			if(proactiveChatExitBtn!=null)
 			jsClickNew(proactiveChatExitBtn);			
 			else 
 				Assert.fail("Please check booleanvalue");		
 		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
-		}
+		}*/
 		}
 	}
 
 	public  VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		if(isHealthPlan){
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			sendkeys(zipCodeHealthPlans, zipcode);
+
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		}else{
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
+		}
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
-		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		if (validate(countyModal))
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+	//	CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
-		try{
-			Thread.sleep(5000);
-		}
-		catch(Exception e)
-		{
 			
-		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
@@ -779,6 +853,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
+		//checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -1117,13 +1192,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
+				/*if(isHealthPlan){
+					CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+					sendkeys(zipCode, zipcode);
+
+					btnGO.click();
+				}else{*/
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
-
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-
+	//	}
 		/*
 		 * try { if (countyModal.isDisplayed()) { for (WebElement county :
 		 * countyRows) { if (county.getText().equalsIgnoreCase(countyName)) {
@@ -1150,7 +1231,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(footerTermsnConditionsLink);
 			validateNew(footerDisclaimersLink);
 			validateNew(footerAgentsnBrokersLink);
-			validateNew(footerRequestforAssistancelink);
+		//	validateNew(footerRequestforAssistancelink);
 			validateNew(footerAccessibilitylink);
 			validateNew(medicareAdvantagePlansLink);
 			validateNew(medicareSupplementInsurancePlansLink);
@@ -1277,28 +1358,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
 	}
 	
 	public AboutUsPage aboutUsClick() {
@@ -1460,7 +1519,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
-
+		//providerSearchFromHomeScreen.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
@@ -1556,4 +1615,101 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		return new VPPPlanSummaryPage(driver);
 	}
-}
+	
+	
+	public AcquisitionHomePage validateCallSam() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(callsam);
+			present = true;
+			} catch (NoSuchElementException e) {
+			present = false;
+			}
+			if (present) {
+			  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			  return new AcquisitionHomePage(driver);
+			}
+		else
+			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
+	}
+	
+	public AcquisitionHomePage validateCallSamContent() throws InterruptedException {
+	
+	Actions action = new Actions(driver);
+	WebElement element = callsam;
+	action.moveToElement(element).perform();
+	String toolTipText = callsamtooltip.getText();
+	System.out.println("====================================================================");
+	System.out.println(toolTipText);
+	System.out.println("====================================================================");
+	
+	if (CallSam.equalsIgnoreCase(toolTipText)) {
+	  System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	return null;
+	}
+	
+	public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
+	//CommonUtility.checkPageIsReady(driver);
+	callsam.click();
+	System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+	driver.switchTo().activeElement();
+	System.out.println(CallSamTFN.getText());
+	CallSamTFNClose.click();
+	validateNew(callsam);		
+	return null;
+	}
+	
+	public AcquisitionHomePage validateChatSam() throws InterruptedException {
+	boolean present;
+	try {
+	validateNew(chatsam);
+	present = true;
+	} catch (NoSuchElementException e) {
+	present = false;
+	}
+	if (present) {
+	  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+	return null;
+	}
+	
+	public AcquisitionHomePage validateChatSamContent() throws InterruptedException {
+	
+	Actions action = new Actions(driver);
+	WebElement element = chatsam;
+	action.moveToElement(element).perform();
+	String ChattoolTipText = chatsamtooltip.getText();
+	System.out.println("====================================================================");
+	System.out.println(ChattoolTipText);
+	System.out.println("====================================================================");
+	
+	if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+	  System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+	  return new AcquisitionHomePage(driver);
+	}
+	else
+		System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	return null;
+	}
+	
+	public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
+	//CommonUtility.checkPageIsReady(driver);
+	chatsam.click();
+	System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
+	chatsamtooltip.click();
+	driver.switchTo().activeElement();
+	System.out.println(ChatSamHead.getText());
+	ChatSamTFNClose.click();
+	validateNew(chatsam);		
+	return null;
+	}
+	
+	}

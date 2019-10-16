@@ -69,13 +69,44 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
 	 */
 	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) {
+	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		}
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
 
+	/*@When("^the user adds plan from plan search using following information in the AARP site$")
+	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
+		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -106,42 +137,7 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-	}
-
-	@When("^the user adds plan from plan search using following information in the AARP site$")
-	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
-		
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.addPlansForVisitorProfile(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
+	}*/
 
 	/**
 	 * @toDo:user validates plan count for all plan types on plan summary page
@@ -175,7 +171,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(plantype);
 	}
 
 
@@ -224,10 +220,11 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.CheckClick_NextYear_Plans();
 	}
 
+
 	/**
-	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
+	 * @toDo:select multiple plans to compare in MA and click on compare plan link
 	 */
-	@And("^I select all 3 plans to compare in MA and click on compare plan link$")
+	@And("^I select multiple plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -240,16 +237,17 @@ public class VppStepDefinitionUpdatedAARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = givenAttributesMap.get("plan type");
+		int plansForCompare=0;
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
-			plansummaryPage.handlePlanYearSelectionPopup();
-			plansummaryPage.checkAllMAPlans();
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansForCompare=plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
-			plansummaryPage.handlePlanYearSelectionPopup();
-			plansummaryPage.checkAllPDPlans();
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansForCompare=plansummaryPage.checkAllPDPlans();
 		}
-
+		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 		ComparePlansPage comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
@@ -281,19 +279,20 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	/**
-	 * @toDo:click back to all plans button and verify that all 3 plans are
-	 *             still selected
+	 * @toDo:click back to all plans button and verify that all plans are
+	 *              still selected
 	 */
-	@Then("^I click back to all plans button and verify that all 3 plans are still selected$")
+	@Then("^I click back to all plans button and verify that all plans are still selected$")
 	public void verifyAllPlansStillSelected() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
-		if (plansummaryPage.validateAllPlansChecked()) {
+		String plansForCompare=(String) getLoginScenario().getBean(PageConstants.plansForCompare);
+
+		plansummaryPage.clickonBackToAllPlans();
+		if (plansummaryPage.validateAllPlansChecked(plansForCompare)) {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating all plans are still selected");
-
 	}
 
 	/**
@@ -308,11 +307,25 @@ public class VppStepDefinitionUpdatedAARP {
 
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+	
+	@Then("^the user view plan details of the first plan in the given plan type in AARP site and validates$")
+	public void user_views_plandetails_selected_plantype_aarp() {
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);
@@ -431,7 +444,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		TFN = planSummaryPage.GetTFNforPlanType();
 
-		PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+		PlanPremium = planSummaryPage.getPlanPremium(PlanName,PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -860,7 +873,7 @@ public class VppStepDefinitionUpdatedAARP {
 	public void I_select_all_3_plans_to_compare_AARP() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickonViewPlans();
+		
 		plansummaryPage.checkAllMAPlans();
 		try {
 			Thread.sleep(3000);
@@ -996,29 +1009,6 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 
-	@Then("^user validates save plan option is unselected for all plans by default on AARP site$")
-	public void user_validates_save_plan_option_is_unselected_for_all_plans_by_default_on_AARP_site() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//----- MA plan type -----------------------------
-		String planType="MA";
-		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.validateEmailOptionExistOnPage(planType);
-		//plansummaryPage.validatePrintOptionExistOnPage(planType);
-		plansummaryPage.validateDefaultNoSavedPlan(planType);
-		//----- PDP plan type ----------------------------
-		planType="PDP";
-		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.validateEmailOptionExistOnPage(planType);
-		//plansummaryPage.validatePrintOptionExistOnPage(planType);
-		plansummaryPage.validateDefaultNoSavedPlan(planType);
-		//----- SNP plan type ----------------------------
-		planType="SNP";
-		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.validateEmailOptionExistOnPage(planType);
-		//plansummaryPage.validatePrintOptionExistOnPage(planType);
-		plansummaryPage.validateDefaultNoSavedPlan(planType);
-	}
 
 	@Then("^user validates selected plans can be saved as favorite on AARP site$")
 	public void user_validates_selected_plan_can_be_saved_as_favorite_on_AARP_site(DataTable givenAttributes) {
@@ -1033,18 +1023,21 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type ---------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
-		//----- SNp plan type ---------------------------
+		//----- SNP plan type ---------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
@@ -1060,7 +1053,8 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
+		plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 	
 	@Then("^user gets a create profile prompt on AARP site$")
@@ -1086,7 +1080,7 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site$")
-	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) {
+	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -1126,18 +1120,21 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1176,18 +1173,21 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1217,18 +1217,21 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1244,22 +1247,25 @@ public class VppStepDefinitionUpdatedAARP {
 		// note: the second plan in the list will be unsaved
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup(planType);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
 	}
 
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change from Home on AARP site$")
-	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) {
+	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1298,18 +1304,21 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
 
@@ -1338,15 +1347,21 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ---------------------------
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
+		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
@@ -1380,18 +1395,21 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
 
@@ -1402,14 +1420,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 
@@ -1431,7 +1452,7 @@ public class VppStepDefinitionUpdatedAARP {
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
-			plansummaryPage.validatePrintOptionExistOnPage(planType);
+		plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 
 	@Then("^user validates email functionality with invalid and valid email address on AARP site$")
@@ -1441,14 +1462,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 	}
 
@@ -1459,14 +1483,17 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type -----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		//----- PDP plan type ----------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		//----- SNP plan type ----------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 	}
 
@@ -1491,19 +1518,22 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
+		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		//----- SNP plan type --------------------------
-		planType="SNP";
-		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
-		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+//		planType="SNP";
+//		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
+//		plansummaryPage.viewPlanSummary(planType);
+//		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+//		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 	//^^^ note: added for US1598162
 
@@ -1558,7 +1588,8 @@ public class VppStepDefinitionUpdatedAARP {
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String resumeKey = plansummaryPage.StartApplicationButton(DateOfBirth,FirstName, LastName);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
@@ -1841,4 +1872,78 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, "2020");
 	}
 	
-}		
+	@When("^the user validate thank you message in plan compare in AARP site$")
+	public void user_validate_thank_you_message_in_plan_compare() {
+
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.TeamC_Plan_Compare_Page);
+		comparePlansPage.validatingthankyoumessage();
+	}
+	
+	@When("^verify Call SAM icon is visible or not$")
+	public void verify_Call_SAM_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the popup and content$")
+	public void user_verify_the_popup_and_content() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallpopup();	
+	}
+	
+	@When("^verify Chat SAM icon is visible or not$")
+	public void verify_Chat_SAM_icon_is_visible_or_not() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateChatSam();
+		if (Aquisitionhomepage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the Chat original state$")
+	public void user_verify_the_Chat_original_state() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSam();
+		
+		
+	}
+	
+	
+}

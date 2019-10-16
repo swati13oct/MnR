@@ -1,7 +1,7 @@
 @CT @OLE_UHC @OLE_VPP_UHC_ResumeApplication
-Feature: VPP OLE 3.0 Flow – Resume/Retrieve  Application in progress
+Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
 
-@OLE_VPP_UHC @UHC_Resume_App_UHC @OLE_Regression   
+@OLE_VPP_UHC @UHC_Resume_App_UHC @OLE_Regression @oleMedSupBlayer 
     Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on the uhcmedicaresolutions site landing page
    When the user performs plan search using following information in UMS site
@@ -14,14 +14,14 @@ Feature: VPP OLE 3.0 Flow – Resume/Retrieve  Application in progress
        | DOB           | <DOB>         |
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
-     Then the user clicks on resume application button
+       | Zipcode       | <zipcode>     | 
+     Then the user navigates to next page to locate resume application button
+   	 	| DOB               | <DOB>         |
      Then the user enters data to resume the application
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
-       | zipcode       | <zipcode>     |
-       
-      
+       | Zipcode       | <zipcode>     |   
       Then The user validates the resume application processed
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
@@ -32,7 +32,7 @@ Feature: VPP OLE 3.0 Flow – Resume/Retrieve  Application in progress
       |   90210 | NO              | Los Angeles County | MS       | 11031950 | John      | Carry   |    ABCD        | Resume          |
      
   
-@UHC_Retrive_App_UHC @OLE_Regression
+@UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on the uhcmedicaresolutions site landing page
    When the user performs plan search using following information in UMS site
@@ -42,7 +42,9 @@ Feature: VPP OLE 3.0 Flow – Resume/Retrieve  Application in progress
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
       
-   Then the user clicks on resume application button
+   Then the user will navigate to locate resume application button
+   	 	| DOB               | <DOB>         |
+   	 	| Zipcode           | <zipcode>     |
      Then the user enters data to resume the application
        | ApplicationID     | <ApplicationID>   |
        | DOB               | <DOB>         |

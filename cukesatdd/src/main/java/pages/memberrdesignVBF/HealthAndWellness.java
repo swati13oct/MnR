@@ -72,7 +72,7 @@ public class HealthAndWellness extends UhcDriver {
 	public HealthAndWellness(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		openAndValidate();
 	}
 	

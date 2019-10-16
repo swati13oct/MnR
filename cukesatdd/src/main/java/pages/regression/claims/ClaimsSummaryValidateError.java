@@ -25,7 +25,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 */
 	public void validatePhipErr() throws InterruptedException{ //Need to identify the PHIP member
 		CommonUtility.waitForPageLoadNew(driver, phip_errMsg, 5);	
-		Assert.assertTrue("PROBLEM - Error message not displayed for PHIP Member on claims Summary page",validate(phip_errMsg));
+		Assert.assertTrue("PROBLEM - Error message not displayed for PHIP Member on claims Summary page",claimsValidate(phip_errMsg));
 		System.out.println("Error Message Displayed for PHIP Member on claims Summary page. msg='"+phip_errMsg.getText()+"'");
 	}
 
@@ -38,19 +38,19 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 		String errorTextContent2="For information about claims older than 2 years, contact Customer Service toll-free at 1-800-523-5880.";
 		if (planType.equals("SHIP")) {
 			Assert.assertTrue(ship_errGrThan24mon + "is not beind dsiplayed", 
-					validate(ship_errGrThan24mon));
+					claimsValidate(ship_errGrThan24mon));
 			Assert.assertTrue("error text is not as expected. "
 					+ "Expected="+errorTextContent1+" | Actual="+ship_errGrThan24mon.getText(), 
 					ship_errGrThan24mon.getText().contains(errorTextContent1));
 		} else {
 			Assert.assertTrue(errGrThan24mon + "is not beind dsiplayed", 
-					validate(errGrThan24mon));
+					claimsValidate(errGrThan24mon));
 			Assert.assertTrue("error text is not as expected. "
 					+ "Expected="+errorTextContent1+" | Actual="+errGrThan24mon.getText(), 
 					errGrThan24mon.getText().contains(errorTextContent1));
 
 			Assert.assertTrue(errGrThanTwoYrs + "is not beind dsiplayed", 
-					validate(errGrThanTwoYrs));
+					claimsValidate(errGrThanTwoYrs));
 			Assert.assertTrue("error text is not as expected. "
 					+ "Expected="+errorTextContent2+" | Actual="+errGrThanTwoYrs.getText(), 
 					errGrThanTwoYrs.getText().contains(errorTextContent2));
@@ -92,7 +92,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 		if (planType.equalsIgnoreCase("SHIP")) {
 			ship_custSrchBtn.click();
 			Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", 
-					validate(ship_errMtyDates));
+					claimsValidate(ship_errMtyDates));
 			String expectedErrorText="he Dates are empty please reenter the date in MM/DD/YYYY format";
 			Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. "
 					+ "Expected='"+expectedErrorText+"' | Actual='"+ship_errMtyDates.getText()+"'", 
@@ -100,7 +100,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 		} else {
 			srchBtn.click();
 			Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", 
-					validate(errMtyDates));
+					claimsValidate(errMtyDates));
 			String expectedErrorText="The dates are empty, please re-enter the date in the following format: MM/DD/YYYY";
 			Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. "
 					+ "Expected='"+expectedErrorText+"' | Actual='"+errMtyDates.getText()+"'", 
@@ -112,7 +112,11 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 * Validate whether 'System error' message exists on claims summary page
 	 */
 	public void validateNoSystemErr() {
-		Assert.assertTrue("PROBLEM - located System Error",!claimsValidate(systemErrorMsg, 5));
+		long timeoutInSec=5;
+		if (getOnlyTestUiFlag())
+			System.out.println("TEST UI ONLY - will not flag sytem error");
+		else
+			Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg, timeoutInSec));
 	}
 
 	/**

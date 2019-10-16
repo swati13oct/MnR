@@ -1,5 +1,5 @@
 @branding
-Feature: To test branding functionality
+Feature: 1.14 Member Branding functionality
 
   @branding1 @regression @regression_branding @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that correct brand logos are displayed on Dashboard and Secondary Pages for members.

@@ -1,9 +1,8 @@
 @retiree
-Feature: To test the RETIREE drug search flow
+Feature: 3.02.ACQ- RETIREE drug search flow UMS
   
-
   @retireedrugsearch
-  Scenario Outline: This Scenario is to verify the drug search for different group types from landing page
+  Scenario Outline: This Scenario is to verify the drug search for different group types <groupname> from landing page
     Given The user is on Retiree Home page 
     And The user navigates to the Search for a Drug page
     When The User Selects the "<groupname>" Group name
@@ -11,16 +10,16 @@ Feature: To test the RETIREE drug search flow
     Then The User validate the Drug Details
     And The user return to the search results page
 
+    @retireedrugsearch_Smoke
     Examples: 
       | groupname |
       | ASRS and PSPRS |
+
+    Examples: 
+      | groupname |
       | CalPERS |
       | Georgia State Health Benefit Plan |
       | North Carolina State Health Plan |
  
-  @retireedrugsearch_Smoke
-     Examples: 
-      | groupname |
-      | ASRS and PSPRS |
 
            

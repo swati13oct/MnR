@@ -1,7 +1,7 @@
 @idCards @velocityDashers
-Feature: V1.1To This test scenario is to validate that ID card is accessible for all the members
+Feature: 1.17 ID cards on Dashboard
 
-  @idCards1 @regressionIDCards @regressionMember
+ @idCards1 @regressionIDCards @regressionMember
   Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -17,12 +17,12 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
       | Coverage Start  | <covergaeStart>  |
       | Coverage Status | <coverageStatus> |
       
-  # Added MAPD amd PDP user,  MA user was not provided  , also had to create a scenario for group user
+
     Examples: 
   | TID     | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName      	        | dob                         | covergaeStart | coverageStatus |
-  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Walgreens (PDP)                                    | 0197351101    | Ffebeaa Eaafcaca    	    | Subscriber - DOB 06/26/1953 | 06/01/18      | Active         |
-  |  15109  | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO)  | 912634084-00  | Dbdfaa Ecfadfdba 	    | Subscriber - DOB 04/29/1935 | 01/01/19      | Active         |
-  |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Kyleneaaa Pietzschaaa    | Subscriber - DOB 03/23/1948 | 01/01/19      | Active         | 
+  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Preferred (PDP)                                    | 0031240691    | Syreeta Glowski    	        | Subscriber - DOB 06/26/1932 | 01/01/13      | Active         |
+  |  15109  | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO)  | 912634084-00  | Roger Muszar 	    | Subscriber - DOB 04/24/1935 | 06/01/19      | Active         |
+  |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Kylene Pietzsch   | Subscriber - DOB 03/14/1948 | 01/01/19      | Active         | 
      
   @idCards2 @regressionIDCards_Group_User @regressionMember
   Scenario Outline: TID: <TID> -plan: <plantype> -memberType: <memberType> - Verify the fields in ID card page for group user
@@ -42,6 +42,6 @@ Feature: V1.1To This test scenario is to validate that ID card is accessible for
  
     Examples: 
     | TID   | plantype | memberType       | medicalPlan                                      | memberId      | memberName     | dob                         | covergaeStart | coverageStatus |
-    | 15114 | MAPD     | IDCardmember_grp | UnitedHealthcare Group Medicare Advantage (PPO)  | 940456900-00  |Caddca Afaefcba | Subscriber - DOB 05/07/1933 | 01/01/17      | Active         |
+    | 15114 | MAPD     | IDCardmember_grp | UnitedHealthcare Group Medicare Advantage (PPO)  | 940456900-00  | Mufid Fellenbaum | Subscriber - DOB 05/20/1933 | 01/01/17      | Active         |
   
      

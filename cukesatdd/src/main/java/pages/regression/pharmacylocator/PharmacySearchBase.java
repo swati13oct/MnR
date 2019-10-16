@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +24,8 @@ import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
+	protected long defaultPharmacyLocatorTimeout=2;
+	
 	public PharmacySearchBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -39,9 +44,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	@Override
 	public void openAndValidate() {
-		validate(zipcodeField);
-		validate(distanceDropDownField);
-		validate(continueField);
+		pharmacyValidate(zipcodeField);
+		pharmacyValidate(distanceDropDownField);
+		pharmacyValidate(continueField);
 	}
 
 	/** Select the distance from drop down, assuming default zip is used */
@@ -58,6 +63,57 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if(distanceDropDownField.getText().contains(distance) || !zipcodeField.getText().contains("null"))
 			return new PharmacySearchPage(driver);
 		return null;
+	}
+
+	/**
+	 * determine system time - only applicable for stage run
+	 * @return
+	 */
+	public String getStageSysTime() {
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		if (MRScenario.environment.contains("team-ci"))
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		String timeStr = "";
+		
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObj;
+		try {
+			jsonObj = (JSONObject) parser.parse(currentSysTimeStr);
+			JSONObject sysTimeJsonObj = (JSONObject) jsonObj; 
+			
+			timeStr = (String) sysTimeJsonObj.get("systemtime"); 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return timeStr;
+		/* tbd 
+		String winHandleBefore = driver.getWindowHandle();
+
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
+		String currentSysTime=currentSysTimeElement.getText();
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return currentSysTime; */
 	}
 
 	/** Wait time for results to appear on UI 
@@ -80,14 +136,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				total=Integer.parseInt(PharmacyFoundCount.getText().trim());
 			}
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (total >10) {
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element",
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -97,7 +153,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
-						validate(contactUnitedHealthCare));
+						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
@@ -115,7 +171,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						validate(pdf_otherPlans));
+						pharmacyValidate(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_otherPlans.click();
@@ -136,7 +192,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans", 
-						validate(pdf_WalgreenPlans));
+						pharmacyValidate(pdf_WalgreenPlans));
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
@@ -172,9 +228,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
 			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
 		}
-		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
-			if ((MRScenario.environmentMedicare.equals("stage"))) {
-				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
+			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
+				/* tbd 
 				String winHandleBefore = driver.getWindowHandle();
 
 				System.out.println("Proceed to open a new blank tab to check the system time");
@@ -189,17 +245,20 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				System.out.println("TEST - currentSysTime="+currentSysTime);
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
+				*/
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String currentSysTime=getStageSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
 						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
-			} else {
+			/* tbd } else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
 						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
-			}
+			} */
 		}
 	}
 
@@ -231,9 +290,17 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		//tbd		+ "please check user data input or env to see if everything is ok", 
 		//tbd		!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 		//note: test assume valid search will yield search result
-		if (validate(noResultMsg) || validate(noResultMsgTopPink)) {
-			if ((MRScenario.environmentMedicare.equals("stage"))) {
+		if (pharmacyValidate(noResultMsg) || pharmacyValidate(noResultMsgTopPink)) {
+			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+
+				String currentSysTime=getStageSysTime();
+				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. "
+						+ "Current system time is '"+currentSysTime+"'", 
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
+				/* tbd
 				String winHandleBefore = driver.getWindowHandle();
 
 				System.out.println("Proceed to open a new blank tab to check the system time");
@@ -252,13 +319,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
 						+ "Current system time is '"+currentSysTime+"'", 
-						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
-			} else {
+						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink)); */
+			/* tbd } else {
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. ", 
 						!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
-			}
+			} */
 		}
 		
 		int totalBefore=0;
@@ -309,15 +376,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
 					totalBefore>=totalAfter);
 			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					validate(pharmaciesAvailable));
+					pharmacyValidate(pharmaciesAvailable));
 			if (totalAfter >10) {
 				moveMouseToElement(moreInfoLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
-						validate(pagination));
+						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						validate(leftArrow));
+						pharmacyValidate(leftArrow));
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
-						validate(rightArrow));
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					leftArrow.click();
@@ -325,10 +392,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						validate(resultNavTooltip));
+						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						validate(tooltip));
+						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2="Change the pharmacy type you selected.";
@@ -463,9 +530,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		int timeoutInSec=2;
-		return pharmacyValidate(element, timeoutInSec);
-	}
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
+	} 
 	
 	/**
 	 * to validate whether element exists with input timeout value control
@@ -474,6 +541,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd
 	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -489,7 +557,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 		}
 		return false;
-	}
+	}*/
 }
 
 

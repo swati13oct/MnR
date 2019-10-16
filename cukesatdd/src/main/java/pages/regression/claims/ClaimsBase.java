@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -137,7 +137,7 @@ public class ClaimsBase extends UhcDriver  {
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
 	protected WebElement comboTab_SHIP;
 
-	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan') and not(contains(.,'Med'))]") 
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
@@ -145,7 +145,6 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
-
 
 	public ClaimsBase(WebDriver driver) {
 		super(driver);
@@ -155,6 +154,16 @@ public class ClaimsBase extends UhcDriver  {
 	public void openAndValidate() throws InterruptedException {
 	}
 
+	boolean onlyTestUiFlag=false;
+	
+	public void setOnlyTestUiFlag(boolean input) {
+		onlyTestUiFlag=input;
+	}
+
+	public boolean getOnlyTestUiFlag() {
+		return onlyTestUiFlag;
+	}
+	
 	/**
 	 * helper method to validate Need Help section content bases on input
 	 * @param section
@@ -170,18 +179,18 @@ public class ClaimsBase extends UhcDriver  {
 			WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
 		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",
-				validate(SectionElement));
+				claimsValidate(SectionElement));
 		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",
-				validate(imgElement));
+				claimsValidate(imgElement));
 		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",
-				validate(phoneElement));
+				claimsValidate(phoneElement));
 		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",
-				validate(ttyElement));
+				claimsValidate(ttyElement));
 		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",
-				validate(hrsOperationElement1));
+				claimsValidate(hrsOperationElement1));
 		if (hrsOperationElement2!=null) {
 			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",
-					validate(hrsOperationElement2));
+					claimsValidate(hrsOperationElement2));
 		}
 	}
 
@@ -201,7 +210,7 @@ public class ClaimsBase extends UhcDriver  {
 		while(x<15) {
 			try {
 				Thread.sleep(1000);
-				if (validate(verifyClaimSummaryAndPagination)) {
+				if (claimsValidate(verifyClaimSummaryAndPagination)) {
 					Thread.sleep(extra); //give it more time to settle the page
 					System.out.println("sleep for another 2 sec for the page to settle down...");
 					System.out.println("there is some indication of claims...let's check it out");
@@ -217,7 +226,7 @@ public class ClaimsBase extends UhcDriver  {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numClaimsDrugCustSrch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (validate(numClaimsMedlCustSrch)) 
+				if (claimsValidate(numClaimsMedlCustSrch)) 
 					numClaimsElement=numClaimsMedlCustSrch;
 			} else {
 				numClaimsElement=numClaimsShipCustSrch;
@@ -231,8 +240,8 @@ public class ClaimsBase extends UhcDriver  {
 				numClaimsElement=numClaimsShip;
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to lcoate the element for number of claims for range="+range, 
-				validate(numClaimsElement));
+		Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
+				claimsValidate(numClaimsElement));
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
@@ -272,7 +281,7 @@ public class ClaimsBase extends UhcDriver  {
 		if (planType.equalsIgnoreCase("SHIP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					claimsValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSection(validateSection, needHelp_TechSupp, 
@@ -294,16 +303,22 @@ public class ClaimsBase extends UhcDriver  {
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",
-					validate(needHelp_seeMoreWaysTo));
+					claimsValidate(needHelp_seeMoreWaysTo));
 			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",
-					validate(needHelp_contactUsLink));
+					claimsValidate(needHelp_contactUsLink));
 			String originalUrl=driver.getCurrentUrl();
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
-			if (memberType.toLowerCase().contains("combo")) {
+			//note: handle combo tab
+			//note: if specific scenario target combo user then flag if no combo, else just select right plan and move on
+			if (memberType.toLowerCase().contains("combo")) { 
 				System.out.println("This test is for combo plans, select the tab accordingly");
 				goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
 				goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+			} else {
+				boolean flagNonCombo=false; //note: if user has combo then select the right plan
+				goToSpecificComboTab(planType, flagNonCombo); 
+				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 			String expContactUsTitle="Help & Contact Us";
 			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
@@ -314,16 +329,20 @@ public class ClaimsBase extends UhcDriver  {
 			Assert.assertTrue("PROBLEM - not getting expected contact us Title. "
 					+ "Expected to contains='"+expContactUsTitle+"' | Actual URL='"+driver.getTitle()+"'", 
 					driver.getTitle().contains(expContactUsTitle));
+			//note: handle combo tab
+			//note: if specific scenario target combo user then flag if no combo, else just select right plan and move on
 			if (memberType.toLowerCase().contains("combo")) {
 				driver.get(originalUrl);
 				goToSpecificComboTab(planType); 
 			} else {
 				driver.navigate().back();
+				boolean flagNonCombo=false; //note: if user has combo then select the right plan
+				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					claimsValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSection(validateSection, needHelp_TechSupp, needHelp_TechSupp_img, 
@@ -338,24 +357,49 @@ public class ClaimsBase extends UhcDriver  {
 	}
 
 	/**
-	 * Navigate to specific plan for combo user
+	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
 	 */
 	public void goToSpecificComboTab(String planType) {
 		if (planType.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
 			comboTab_MAPD.click();
 		} else if (planType.equalsIgnoreCase("ship")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
 			comboTab_SHIP.click();
 		} else if (planType.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
 			comboTab_PDP.click();
 		} else if (planType.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
 			comboTab_SSUP.click();
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+		}
+	}
+	
+	/**
+	 * Navigate to specific plan for combo user
+	 * @param planType
+	 * @param flagNonCombo
+	 */
+	public void goToSpecificComboTab(String planType,boolean flagNonCombo) {
+		if (flagNonCombo)
+			goToSpecificComboTab(planType);
+		else {
+			if (planType.equalsIgnoreCase("mapd")) {
+				if (claimsValidate(comboTab_MAPD))
+					comboTab_MAPD.click();
+			} else if (planType.equalsIgnoreCase("ship")) {
+				if (claimsValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+			} else if (planType.equalsIgnoreCase("pdp")) {
+				if (claimsValidate(comboTab_PDP))
+					comboTab_PDP.click();
+			} else if (planType.equalsIgnoreCase("ssup")) {
+				if (claimsValidate(comboTab_SSUP)) 
+					comboTab_SSUP.click();
+			} 
 		}
 	}
 
@@ -367,8 +411,8 @@ public class ClaimsBase extends UhcDriver  {
 	public boolean validateAdobePdfDocText() {
 		boolean bypass_INC11365785_containsPdfDocText=false;
 		System.out.println("Validate PDF Doc text section exists");
-		if (validate(adobePdfDocText)) {
-			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",validate(adobePdfDocText));
+		if (claimsValidate(adobePdfDocText)) {
+			Assert.assertTrue("PROBLEM - unable to locate the Adobe PDF section",claimsValidate(adobePdfDocText));
 		} else {
 			System.out.println("Encountered issue from INC11365785, ignore for now until it's fixed.  "
 					+ "TODO: When fixed, take out this else portion");
@@ -402,12 +446,11 @@ public class ClaimsBase extends UhcDriver  {
 	 * For iPerception Model
 	 * @param driver
 	 */
-	public static void checkForIPerceptionModel(WebDriver driver) {
+	public void checkForIPerceptionModel(WebDriver driver) {
 		int counter = 0;
 		do {
 			System.out.println("current value of counter: " + counter);
 			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
 			if (IPerceptionsFrame.isEmpty()) {
 				try {
 					Thread.sleep(5000);
@@ -429,9 +472,9 @@ public class ClaimsBase extends UhcDriver  {
 	 * @return
 	 */
 	public boolean claimsValidate(WebElement element) {
-		int timeoutInSec=2;
-		return claimsValidate(element, timeoutInSec);
-	}
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
+	} 
 
 	/**
 	 * to validate whether element exists with input timeout value control
@@ -440,6 +483,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd
 	public boolean claimsValidate(WebElement element, int timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -455,5 +499,38 @@ public class ClaimsBase extends UhcDriver  {
 
 		}
 		return false;
+	} */
+
+	public void handleHowIsYourVisit() {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsSmileySurveyFrame = driver.findElements(By.id("artEXPOiFrame"));
+			if (IPerceptionsSmileySurveyFrame.isEmpty()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				System.out.println("iperception smiley survey was displayed, check to see if need to close it");
+				driver.switchTo().frame("artEXPOiFrame");
+				WebElement closeBtn=driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']"));
+				try {
+					closeBtn.click();
+					System.out.println("closed the iperception smiley survey");
+				} catch (WebDriverException e) {
+					System.out.println("nothing need to click for iperception smiley survey");
+				}
+				driver.switchTo().defaultContent();
+				break;
+			}
+			counter++;
+		} while (counter < 2);
+	}
+	
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
 	}
 }

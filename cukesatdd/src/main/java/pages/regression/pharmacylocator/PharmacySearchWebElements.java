@@ -247,6 +247,9 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//h2[@class='atdd-need-help']")
 	protected WebElement needHelpHeader;
 
+	@FindBy(xpath="//body")
+	protected WebElement timeJson;
+	
 	public PharmacySearchWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

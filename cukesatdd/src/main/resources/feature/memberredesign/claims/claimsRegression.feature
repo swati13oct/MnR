@@ -1,5 +1,5 @@
 @claims @thePredetors
-Feature: T1.1To validate the claims Summary page and claims Details page on the member site
+Feature: 1.12 Member claims Summary page/claims Details page 
 
   #----- beginning of VBF claims scenarios section ------------------------
   # note: runner for sanity is RunMRATDDClaimsVBF
@@ -159,9 +159,10 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
       | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
-      | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
       | 15234 | MA       | UHC_Individual      | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MA       | GROUP               | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+    # note: no non-000 segment ID user for time being, uncomment this when data is available
+    # | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
 
     @claims01b
     Examples: 
@@ -178,7 +179,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @claims01d
     Examples: 
       | TID   | planType | memberType          | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | 15236 | SHIP     | Individual          | Last 24 Months | COMPASS_CLAIMS  | 000       | NA                |
+      | 15236 | SHIP     | Individual          | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
       | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
   ### note: keep PDP SSO_Individual case but comment out b/c it's hard to find a member that has SSO enabled
