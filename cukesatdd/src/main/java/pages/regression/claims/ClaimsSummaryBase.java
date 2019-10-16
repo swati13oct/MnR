@@ -8,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.contactus.ContactUsPage;
@@ -267,8 +269,13 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver,claimsDetlTblMainSect , 10);
 		while(!(driver.getCurrentUrl().contains("/details")));
-		if (driver.getCurrentUrl().contains("/details")) 
-			return new pages.regression.claims.ClaimDetailsPage(driver);
+		if (driver.getCurrentUrl().contains("/details")) {
+			boolean onlyTestUiFlag=getOnlyTestUiFlag();
+			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
+			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			return claimDetailsPg;
+			//tbd return new pages.regression.claims.ClaimDetailsPage(driver);
+		}
 		return null;
 	}
 
@@ -371,7 +378,12 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		} catch (Exception ex) {
 			return null;
 		}
-		return new ClaimDetailsPage(driver);
+		
+		boolean onlyTestUiFlag=getOnlyTestUiFlag();
+		ClaimDetailsPage claimDetailPg=new ClaimDetailsPage(driver);
+		claimDetailPg.setOnlyTestUiFlag(onlyTestUiFlag);
+		return claimDetailPg;
+		//tbd return new ClaimDetailsPage(driver);
 	}
 
 	/**

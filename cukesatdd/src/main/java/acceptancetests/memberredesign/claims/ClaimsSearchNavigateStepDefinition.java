@@ -233,8 +233,6 @@ public class ClaimsSearchNavigateStepDefinition {
 		ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPgByFirstClaim();
 		
 		Assert.assertTrue("PROBLEM - unable to go to Claims details page!!!",null != newClaimDetailsPage);
-		boolean onlyTestUiFlag=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG);
-		newClaimDetailsPage.setOnlyTestUiFlag(onlyTestUiFlag);
 		getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 	} 
 
@@ -296,9 +294,6 @@ public class ClaimsSearchNavigateStepDefinition {
 			ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
 					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			newClaimDetailsPage=claimSummarypage.navigateToClaimDetailsPgByMoreInfoLnk(pageNum, rowNum);
-			boolean onlyTestUiFlag=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG);
-			newClaimDetailsPage.setOnlyTestUiFlag(onlyTestUiFlag);
-
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
