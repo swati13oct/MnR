@@ -61,7 +61,7 @@ public class DCEAcqStepDefinitionUHC {
 		if(yearBtnVppPageExists){
 			plansummaryPage.choose2017Plans();
 		}
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -98,7 +98,7 @@ public class DCEAcqStepDefinitionUHC {
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		//plansummaryPage.clickOnViewPlans(plantype);
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -121,7 +121,7 @@ public class DCEAcqStepDefinitionUHC {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEAfterDrugAdded(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEAfterDrugAdded(plantype);
 		if(dce!=null){
 			Assert.assertTrue(true);
 		}

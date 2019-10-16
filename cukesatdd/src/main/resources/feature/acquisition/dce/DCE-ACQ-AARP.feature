@@ -65,7 +65,7 @@ Then I switch to generic drug and validate
 And the user clicks on return link to navigate to plan summary
 Examples:
 | zipcode  |   drug   |dosage       | plantype | county | isMultutiCounty|quantity | frequency   |branded |
-| 90210    |  Lipitor|  TAB 10MG | MA| none 	| no| 30 |Every 1 month| yes    |
+| 90210    |  LIPITOR|  TAB 10MG | MA| none 	| no| 30 |Every 1 month| yes    |
 
 @defect3235 @DCE_Regression_Ulayer @prodRegression
 Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare

@@ -40,7 +40,7 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(css=".ng-scope > dl > .ng-binding")
 	private WebElement planName_Ind;
 	
-	@FindBy(xpath="//*[@id='details-00_950035171695_2019-12-31']/li[1]/dl/dd") //--- this is for PDP
+	@FindBy(xpath="(//dd[contains(@class,'ng-binding')])[1]") //--- this is for PDP
 	private WebElement planName_PDP;
 	
 	@FindBy(css="ul.coverage-details li:first-child dl>dd")
@@ -50,7 +50,7 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(css="li:nth-child(2) > dl > dd")
 	private WebElement id_ind;
 	
-	@FindBy(xpath="//dd[contains(@class,'ng-binding')]") //--- this is for PDP
+	@FindBy(xpath="(//dd[contains(@class,'ng-binding')])[2]") //--- this is for PDP
 	private WebElement id_PDP;
 	
 	@FindBy(css="li:nth-child(1) > dl > .ng-binding")
@@ -133,7 +133,7 @@ public class IDCardPage extends UhcDriver{
 		
 			try{
 			if(driver.findElement(By.xpath("(//*[contains(@class,'ng-scope ng-binding')])[1]")).getText().contains("PRESCRIPTION")){
-				//System.out.println("the Plan Name is: " + planName_PDP.getText());
+				System.out.println("the Plan Name is: " + planName_PDP.getText());
 				System.out.println("the ID is: " + id_PDP.getText());
 
 			}
@@ -147,7 +147,7 @@ public class IDCardPage extends UhcDriver{
 		System.out.println("the covrg status is: " + status.getText());
 		try{
 			if(driver.findElement(By.xpath("(//*[contains(@class,'ng-scope ng-binding')])[1]")).getText().contains("PRESCRIPTION")){
-				//Assert.assertEquals(medicalPlan, planName_PDP.getText().trim());
+				Assert.assertEquals(medicalPlan, planName_PDP.getText().trim());
 				Assert.assertEquals(memberId, id_PDP.getText().trim());
 			}
 		} catch(Exception e){
