@@ -79,6 +79,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * determine system time - only applicable for stage run
 	 * @return
 	 */
+	/* tbd - use the one from UhcDriver
 	public String getStageSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
@@ -109,7 +110,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return timeStr;
-	}
+	} */
 	
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote=new ArrayList<String>();
@@ -138,7 +139,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getStageSysTime();
+				String currentSysTime=getTestEnvSysTime();
 				
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
