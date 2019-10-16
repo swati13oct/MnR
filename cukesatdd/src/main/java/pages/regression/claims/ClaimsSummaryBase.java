@@ -343,7 +343,11 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		} 
 		while(!(driver.getCurrentUrl().contains("/details"))); 
 		if (driver.getCurrentUrl().contains("/details")) {
-			return new ClaimDetailsPage(driver);
+			
+			boolean onlyTestUiFlag=getOnlyTestUiFlag();
+			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
+			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			return claimDetlPg;
 		}
 		return null;
 	}

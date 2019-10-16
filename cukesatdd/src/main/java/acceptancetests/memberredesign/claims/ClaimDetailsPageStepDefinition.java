@@ -246,8 +246,6 @@ public class ClaimDetailsPageStepDefinition {
 			
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
-			boolean onlyTestUiFlag=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG);
-			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);
