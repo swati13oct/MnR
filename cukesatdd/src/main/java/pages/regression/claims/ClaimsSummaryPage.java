@@ -102,8 +102,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		return validateTable.validateYouHaveMsg(planType);
 	}
 
-	public boolean verifyPagination() {
-		return validateTable.verifyPagination();
+	public boolean verifyPagination(int numClaims) {
+		return validateTable.verifyPagination(numClaims);
 	}
 	public boolean validateClaimsTableExists(boolean flagZeroClaimUser) {
 		return validateTable.validateClaimsTableExists(flagZeroClaimUser);

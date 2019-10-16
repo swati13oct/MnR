@@ -83,6 +83,8 @@ public class ClaimDetailsPageStepDefinition {
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateTopBckToClaimsSummLnk(planType);
+		boolean onlyTestUiFlag=claimDetlPg.getOnlyTestUiFlag();
+		claimsSummPg.setOnlyTestUiFlag(onlyTestUiFlag);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
@@ -105,6 +107,8 @@ public class ClaimDetailsPageStepDefinition {
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateBtmBckToClaimsSummLnk();
+		boolean onlyTestUiFlag=claimDetlPg.getOnlyTestUiFlag();
+		claimsSummPg.setOnlyTestUiFlag(onlyTestUiFlag);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	} 
@@ -243,10 +247,10 @@ public class ClaimDetailsPageStepDefinition {
 				return;
 			} 
 			claimsSummPg.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
-			
+
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
-			
+
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, claimDetlPg);
@@ -258,10 +262,8 @@ public class ClaimDetailsPageStepDefinition {
 			System.out.println("Proceed to validate header section content on detail page");
 			claimDetlPg.validateHeaderSection(planType, memberType,claimSystem);
 
-			if (!claimDetlPg.getOnlyTestUiFlag()) {
-				System.out.println("Proceed to validate 'Learn More...' link");
-				claimDetlPg.validateLrnMoreCostLnk();
-			}
+			System.out.println("Proceed to validate 'Learn More...' link");
+			claimDetlPg.validateLrnMoreCostLnk();
 
 			System.out.println("Proceed to validate 'This page contains PDF documents...' text on detail page");
 			boolean bypass_INC11365785_adobePdfDocTxt=claimDetlPg.validateAdobePdfDocText();
@@ -278,16 +280,16 @@ public class ClaimDetailsPageStepDefinition {
 			}
 
 			if (!claimDetlPg.getOnlyTestUiFlag()) {
-			System.out.println("Proceed to validate 'Need Help' section on detail page");
-			String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
-			//note: if all goes well, go back to summary page to prep for next step
-			//note: if combo plan, after NeedHelp validation should land back on claims summary page.
-			//note: but for non combo case, need to go back to claims summary page 
-			if (!currentURL.contains("member/claims.html#/overview")) {
-				claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
-			} 
+				System.out.println("Proceed to validate 'Need Help' section on detail page");
+				String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
+				//note: if all goes well, go back to summary page to prep for next step
+				//note: if combo plan, after NeedHelp validation should land back on claims summary page.
+				//note: but for non combo case, need to go back to claims summary page 
+				if (!currentURL.contains("member/claims.html#/overview")) {
+					claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
+				} 
 			}
-			
+
 		}
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordBypass);
 	}

@@ -261,6 +261,11 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
 	protected WebElement rtArrowBtn;
 
+	@FindBy(xpath="//li[contains(@class,'prevLink') and contains(@class,'disabled')]")
+	protected WebElement disabled_prevBtn;
+	@FindBy(xpath="//li[contains(@class,'nextLink') and contains(@class,'disabled')]")
+	protected WebElement disabled_nextBtn;
+	
 	@FindBy(xpath="//div[@id='atddPagination']//p[contains(text(),'items found. Displaying 1 to')]")
 	protected WebElement itemsFoundDispTxt;
 

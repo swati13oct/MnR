@@ -214,7 +214,7 @@ public class ClaimsBase extends UhcDriver  {
 		while(x<15) {
 			try {
 				Thread.sleep(1000);
-				if (claimsValidate(verifyClaimSummaryAndPagination)) {
+				if (claimsValidate(anyTypeOfClaimsTbl)) {
 					Thread.sleep(extra); //give it more time to settle the page
 					System.out.println("sleep for another 2 sec for the page to settle down...");
 					System.out.println("there is some indication of claims...let's check it out");
@@ -224,7 +224,7 @@ public class ClaimsBase extends UhcDriver  {
 			x=x+1;
 		}
 		System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up"); 
-		 */
+		*/ 
 		WebElement numClaimsElement=numClaimsMed;
 		if (range.equalsIgnoreCase("custom search")) {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -244,8 +244,12 @@ public class ClaimsBase extends UhcDriver  {
 				numClaimsElement=numClaimsShip;
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
+		if (getOnlyTestUiFlag() && !claimsValidate(numClaimsElement)) { //note: if test UI only then just return claims=0 when element not found  
+			return 0;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
 				claimsValidate(numClaimsElement));
+		}
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	

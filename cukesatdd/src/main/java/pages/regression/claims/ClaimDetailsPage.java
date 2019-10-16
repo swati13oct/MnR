@@ -76,55 +76,55 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_eobStmtTxt));
 			if (!getOnlyTestUiFlag()) {
-			testItem="ship_paidToYou";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_paidToYou));
-			
-			testItem="ship_paidToProvider";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_paidToProvider));
+				testItem="ship_paidToYou";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_paidToYou));
+
+				testItem="ship_paidToProvider";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_paidToProvider));
 			}
 		} else {
 			testItem="claimNumberLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsNumLbl));
-			
+
 			testItem="dateRange";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(dateRng));
-			
+
 			if (!getOnlyTestUiFlag()) {
-			testItem="providerName";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(providerName));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!providerName.getText().equals(""));
-			
-			testItem="claimNum value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsNumDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsNumDyn.getText().equals(""));
+				testItem="providerName";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(providerName));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!providerName.getText().equals(""));
+
+				testItem="claimNum value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsNumDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsNumDyn.getText().equals(""));
 			}
 			testItem="claimTypeLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsTypLbl));
 			if (!getOnlyTestUiFlag()) {
-			testItem="claimsType value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsTypDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsTypDyn.getText().equals(""));
+				testItem="claimsType value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsTypDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsTypDyn.getText().equals(""));
 			}
 			testItem="claimStatusLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsStatLbl));
 			if (!getOnlyTestUiFlag()) {
-			testItem="claimStatus value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsStatDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsStatDyn.getText().equals(""));
+				testItem="claimStatus value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsStatDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsStatDyn.getText().equals(""));
 			}
 			testItem="medicalEOBLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
@@ -291,36 +291,36 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(dateRng));
 			if (!getOnlyTestUiFlag()) {
-			testItem="providerName";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(providerName));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!providerName.getText().equals(""));
-			testItem="claimNum value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsNumDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsNumDyn.getText().equals(""));
+				testItem="providerName";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(providerName));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!providerName.getText().equals(""));
+				testItem="claimNum value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsNumDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsNumDyn.getText().equals(""));
 			}
 			testItem="claimTypeLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsTypLbl));
 			if (!getOnlyTestUiFlag()) {
-			testItem="claimsType value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsTypDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsTypDyn.getText().equals(""));
+				testItem="claimsType value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsTypDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsTypDyn.getText().equals(""));
 			}
 			testItem="claimStatusLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsStatLbl));
 			if (!getOnlyTestUiFlag()) {
-			testItem="claimStatus value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsStatDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsStatDyn.getText().equals(""));
+				testItem="claimStatus value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsStatDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsStatDyn.getText().equals(""));
 			}
 			testItem="medicalEOBLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
@@ -424,7 +424,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page --->"
 				+driver.getCurrentUrl());
-		return new ClaimsSummaryPage(driver);
+		return new ClaimsSummaryPage(driver); // set the onlyTestUiFlag from the method that's calling this
 	}
 
 	/** 
@@ -437,7 +437,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		boolean bypass_INC11365785_searchEOBHistory=false;
 		if (!plantype.equals("SHIP")) {
 			if (((plantype.equals("MA") || plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE")) 
-				|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
+					|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
 				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)", 
 						!claimsValidate(detl_medicalEob));

@@ -99,6 +99,8 @@ public class ClaimsSearchNavigateStepDefinition {
 		String claimType="medical";
 		if (claimSystem.contains("D_") || claimSystem.contains("RX_")) 
 			claimType="prescription drug";
+		else if (claimSystem.contains("COMPAS")) 
+			claimType="NA";
 		System.out.println("This test will validate for claimType='"+claimType+"'");
 		
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);

@@ -255,7 +255,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim Type   | <claimType>   |
       | Claim System | <claimSystem> |
       | Claim Period | Custom search |
-	#Then I can validate the calendar will show up for custom search when click on From and To calendars    
+	Then I can validate the calendar will show up for custom search when click on From and To calendars    
     And I should be able to see the error message when no to and from dates being entered
     And I custom search claims for the following invalid time interval on claims summary page
       | Claims From Date | 01/02/2019 |
@@ -278,8 +278,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Member Type  | <memberType>  |
       | Claim Period | <claimPeriod> |
       | Claim System | <claimSystem> |
+    Then I can see the number of claims
     Then I can see the claims displayed based on the selection on claims summary page
-   # And I validate the pagination on the claims summary page
+    And I validate the pagination on the claims summary page
     And I can see the learn more and print and download option on claims summary table section
     And I validate the EOB section based on claims system on claims summary page
     And I validate the DownloadMyData section on claims summary page
@@ -293,9 +294,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | xxxxx | PDP     | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
-      | xxxxx | SHIP    | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
-      | xxxxx | MAPD    | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
+      | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
+      | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
 
 	

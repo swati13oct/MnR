@@ -131,7 +131,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 	/** this method validates claims table */
 	public boolean validateClaimsTableExists(boolean flagZeroUserNow) {
 		if (flagZeroUserNow)
-			System.out.println("WILL fail test if user has no claim table");
+			System.out.println("WILL fail test if user has no claim table with exception if onlyTestUiFlag=true");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
 		if (!getOnlyTestUiFlag()) 
@@ -458,7 +458,36 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 	}
 
 	/** this method validates pagination */
-	public boolean verifyPagination(){
+	public boolean verifyPagination(int numClaims){
+		System.out.println("Proceed to validate pagination for the case when there is '"+numClaims+"' claims...");
+		if (numClaims==0) { //note: if no claims then no pagination
+			return claimsValidate(summPgPagination);
+		} else { //note: more validation if has claims
+			Assert.assertTrue("PROBLEM: Unable to locate pagination element on page for user with claims", claimsValidate(summPgPagination));
+			Assert.assertTrue("PROBLEM: Unable to locate pagination portion '<N> items found. Displaying 1 to <N>' element on page", claimsValidate(itemsFoundDispTxt));
+			
+			boolean result=true;
+			if (numClaims<=10) { //note: if <= 10 items, left and right errors will be disabled
+				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element when user has 0 claims", claimsValidate(disabled_prevBtn));
+				Assert.assertTrue("PROBLEM: Unable to locate disabled nextLink element when user has 0 claims", claimsValidate(disabled_nextBtn));
+			} else { //note: more than 10 items, left arrow should be enabled at the beginning
+				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element initially when user has claims", claimsValidate(disabled_prevBtn));
+				Assert.assertTrue("PROBLEM: should not be able to locate disabled nextLink element when user has >=10 claims", !claimsValidate(disabled_nextBtn));
+
+				Assert.assertTrue("PROBLEM: Unable to locate prevLink arrow to click for validation", claimsValidate(rtArrowBtn));
+				rtArrowBtn.click();
+
+				Assert.assertTrue("PROBLEM: After clicking right arrow, prevLink element should no longer be disabled", !claimsValidate(disabled_prevBtn));
+
+				Assert.assertTrue("PROBLEM: Unable to locate nextLink arrow to click for validation", claimsValidate(ltArrowBtn));
+				ltArrowBtn.click();
+
+				Assert.assertTrue("PROBLEM: After clicking left arrow, prevLink element should once again be disabled", claimsValidate(disabled_prevBtn));
+			}
+
+
+		}
+
 		return claimsValidate(summPgPagination);
 	}
 

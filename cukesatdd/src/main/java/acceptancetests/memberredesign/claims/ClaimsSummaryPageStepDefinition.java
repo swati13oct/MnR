@@ -219,12 +219,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateToDateInvalidErrorMessage(){ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate custom search error for the from date is greater than the to date error message");
-		else {
-			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			claimsSummPg.validatefromDateLaterThanToDateError(planType);
-		}
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		claimsSummPg.validatefromDateLaterThanToDateError(planType);
 	}
 
 	/**
@@ -236,8 +232,14 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validate_pagination() throws Throwable { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue("PROBLEM - not getting expected pagination.  "
-				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination());
+		//note: use by E2E non-extensive, just put a non-zero number to validate pagination shows up
+		int tmpClaims=(Integer) getLoginScenario().getBean(ClaimsCommonConstants.TEST_CURRENTCLAIMS);
+		if (tmpClaims==0) 
+			Assert.assertTrue("PROBLEM - should not get pagination for user with 0 claim.  "
+					+ "NOTE: pagination will only show if user has claims for the search range",!claimsSummPg.verifyPagination(tmpClaims));
+		else
+			Assert.assertTrue("PROBLEM - not getting expected pagination.  "
+				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination(tmpClaims));
 	}
 
 	/**
@@ -338,11 +340,11 @@ public class ClaimsSummaryPageStepDefinition {
 		if (numClaims <=0) 
 			Assert.assertTrue("PROBLEM - Pagination will only show up if more than 0 claims.  "
 					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					!claimsSummPg.verifyPagination());
+					!claimsSummPg.verifyPagination(numClaims));
 		else 
 			Assert.assertTrue("PROBLEM - Pagination should show up if more than 0 claims.  "
 					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					claimsSummPg.verifyPagination());
+					claimsSummPg.verifyPagination(numClaims));
 	}
 
 	/**
@@ -369,6 +371,7 @@ public class ClaimsSummaryPageStepDefinition {
 		}
 		claimsSummPg.validateSystemErrorMsgNotExist();
 		claimsSummPg.printListOfClaimsResult(allClaims);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_CURRENTCLAIMS, numClaims);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ALLCLAIMS, allClaims);
 	}
 

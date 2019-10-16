@@ -343,7 +343,6 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		} 
 		while(!(driver.getCurrentUrl().contains("/details"))); 
 		if (driver.getCurrentUrl().contains("/details")) {
-			
 			boolean onlyTestUiFlag=getOnlyTestUiFlag();
 			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
 			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
