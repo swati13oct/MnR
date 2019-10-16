@@ -18,6 +18,7 @@ import atdd.framework.MRScenario;import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimsSummaryPage;
 
 /**
@@ -79,7 +80,7 @@ public class ClaimsSummaryPageStepDefinition {
 			claimsSummPg.validateComboTabs();
 			claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 		} else {
-			System.out.println("TEST - maybe combo case");
+			System.out.println("TEST - test is not specifically testing for combo but user maybe combo, handle the combo selection");
 			boolean flagNonCombo=false; //note: if user has combo then select the right plan
 			claimsSummPg.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
@@ -172,9 +173,9 @@ public class ClaimsSummaryPageStepDefinition {
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-		else {
+		//tbd if (claimsSummPg.getOnlyTestUiFlag())
+		//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+		//tbd else {
 			String planType = (String) getLoginScenario()
 					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -191,7 +192,7 @@ public class ClaimsSummaryPageStepDefinition {
 			claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 			if(claimsSummPg != null)
 				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
-		}
+			//tbd }
 	}
 
 	/**
@@ -278,13 +279,12 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean flagZeroClaimUser=true;
 		if (claimsSummPg.getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
-		else {
-			claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
-			if(claimsSummPg != null)
-				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
-
-		}
+			flagZeroClaimUser=false;
+		boolean result=claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
+		if (!claimsSummPg.getOnlyTestUiFlag() && !result) 
+			Assert.assertTrue("PROBLEM - validateClaimsTableExists return false with flagZeroClaimUser is set to '"+flagZeroClaimUser+"')", result);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/** 
@@ -381,9 +381,6 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateGreaterThanTwoYearsMessage() { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
-		else {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
@@ -400,7 +397,6 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("List the number of claims in each search range");
 			System.out.println(Arrays.asList(allClaims));
 			System.out.println("========================================");
-		}
 		}
 	}
 

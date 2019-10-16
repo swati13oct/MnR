@@ -246,6 +246,9 @@ public class ClaimDetailsPageStepDefinition {
 			
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
+			boolean onlyTestUiFlag=(boolean) getLoginScenario().getBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG);
+			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, claimDetlPg);
@@ -257,8 +260,10 @@ public class ClaimDetailsPageStepDefinition {
 			System.out.println("Proceed to validate header section content on detail page");
 			claimDetlPg.validateHeaderSection(planType, memberType,claimSystem);
 
-			System.out.println("Proceed to validate 'Learn More...' link");
-			claimDetlPg.validateLrnMoreCostLnk();
+			if (!claimDetlPg.getOnlyTestUiFlag()) {
+				System.out.println("Proceed to validate 'Learn More...' link");
+				claimDetlPg.validateLrnMoreCostLnk();
+			}
 
 			System.out.println("Proceed to validate 'This page contains PDF documents...' text on detail page");
 			boolean bypass_INC11365785_adobePdfDocTxt=claimDetlPg.validateAdobePdfDocText();
@@ -274,15 +279,17 @@ public class ClaimDetailsPageStepDefinition {
 				recordBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 			}
 
+			if (!claimDetlPg.getOnlyTestUiFlag()) {
 			System.out.println("Proceed to validate 'Need Help' section on detail page");
 			String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
-
 			//note: if all goes well, go back to summary page to prep for next step
 			//note: if combo plan, after NeedHelp validation should land back on claims summary page.
 			//note: but for non combo case, need to go back to claims summary page 
 			if (!currentURL.contains("member/claims.html#/overview")) {
 				claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
 			} 
+			}
+			
 		}
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordBypass);
 	}

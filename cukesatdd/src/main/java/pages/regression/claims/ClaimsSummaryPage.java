@@ -255,7 +255,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		} else if (plantype.equals("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_PDP));
 			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_PDP));
-			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
+			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+pLink+" is displayed");
 		} else if (plantype.equals("SSUP")) {
 			//note: F267688
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_MA));
@@ -303,12 +303,15 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 * @return true/false of validation result for clicking Learn More, Print, and Download option
 	 */
 	public void validateClickLrnMoreAndPrtAndDnldOpt() {
+		boolean flagZeroUserNow=false;
+		if (validateClaimsTableExists(flagZeroUserNow)) { // only check these items if there is claims
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Learn More...' link behavior", validateClickLrnMore());
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Print' button behavior", validateClickPrintBtn());
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Download' button behavior", validateClickDnldBtn());
 		System.out.println("Has claim(s), Got the expected behavior, "
 				+ "able to locate 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
-	}
+		}
+		}
 
 	/**
 	 * Validate 'Learn More...', will click and validate content exits

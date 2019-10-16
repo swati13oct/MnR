@@ -134,8 +134,9 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL fail test if user has no claim table");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
-		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
-				!claimsValidate(systemErrorMsg));
+		if (!getOnlyTestUiFlag()) 
+			Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
+					!claimsValidate(systemErrorMsg));
 		if (claimsValidate(medicalClaimsTbl))
 			System.out.println("!!! Claims Table is seen on the Claims Summary page!!!");
 		if (claimsValidate(claimsTblMoreInfoLnk))

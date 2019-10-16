@@ -329,7 +329,7 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
-		
+		//note: updated for microapp
 		@FindBy(xpath="//select[@ng-model='planTypeValue']")
 		private WebElement userSelectionDropDown;
 		public Object loginWithMicroApp(String userSelection) throws InterruptedException {

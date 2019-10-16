@@ -91,9 +91,9 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				System.out.println("Located dropdown option =>"+ship_claimTypeSelect.getOptions().get(i).getText());
 			} 	
 			//note: validate 'review your claims' element exists
-			if (getOnlyTestUiFlag()) 
-				System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-			else
+			//tbd if (getOnlyTestUiFlag()) 
+			//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+			//tbd else
 				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", claimsValidate(ship_reviewClaimsTxt));
 		} else {
 			//note: validate plan name element
@@ -170,9 +170,9 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				} 	
 			}
 			//note: validate 'review your claims' element exists
-			if (getOnlyTestUiFlag()) 
-				System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-			else
+			//tbd if (getOnlyTestUiFlag()) 
+			//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+			//tbd else
 				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", 
 						claimsValidate(reviewClaimsTxt));
 		}
@@ -186,9 +186,9 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 		WebElement testElement=fed_clamsSummCpTxt;
 		if (planType.equalsIgnoreCase("SHIP")) 
 			testElement=ship_clamsSummCpTxt;
-		if (getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-		else
+		//tbd if (getOnlyTestUiFlag()) 
+		//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
+		//tbd else
 			Assert.assertTrue("PROBLEM - 'Review your claims search' is not displaying as expected. "
 				+ "Expect to contain '"+expText+"' | Actual text='"+testElement.getText()+"'", 
 				testElement.getText().contains(expText));
