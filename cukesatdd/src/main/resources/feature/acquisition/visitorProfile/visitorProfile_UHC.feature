@@ -18,6 +18,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Drug      | <drug>      |
       | Quantity  | <quantity>  |
       | Frequency | <frequency> |
+      |Dosage  | <dosage>|
     When user successfully adds drug in ums site
       | Is Branded Drug | <branded> |
       | Drug            | <drug>    |
@@ -33,8 +34,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Drugname | <Drugname> |
 
     Examples: 
-      | state   | Drugname         | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |planyear |
-      | Alabama | Lipitor TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     | 2019 |
+      | state   | Drugname  |dosage       | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |planyear |
+      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     | 2019 |
 
   @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
