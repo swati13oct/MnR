@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -41,8 +42,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.stereotype.Component;
@@ -1085,6 +1089,13 @@ sauceLabsTunnelIdentifier);
 				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
 				//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+
+				//---begin - enable logging
+			    LoggingPreferences logPrefs  = new LoggingPreferences();
+			    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+			    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+				//---end - enable logging
+
 				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 				capabilities.setCapability("name", jobName);
 				try {
