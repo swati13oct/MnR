@@ -105,7 +105,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     And the user validates more information content based on plan type
     And the user validates view search PDF link
 
-	@pharmacylocatorulayer01a
+	@pharmacylocatorulayer01a @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear |cy_planName                                                       | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                  |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
@@ -148,7 +148,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
-	@pharmacylocatorulayer02a
+	@pharmacylocatorulayer02a @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Ulayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |

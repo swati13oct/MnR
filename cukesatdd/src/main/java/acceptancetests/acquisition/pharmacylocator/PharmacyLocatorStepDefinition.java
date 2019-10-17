@@ -119,7 +119,7 @@ public class PharmacyLocatorStepDefinition {
 		List<String> noteList=new ArrayList<String>();
 		noteList.add("");
 		noteList.add("===== TEST NOTE ================================================");
-		String currentEnvTime=pharmacySearchPage.getStageSysTime();
+		String currentEnvTime=pharmacySearchPage.getTestEnvSysTime();
 		noteList.add("test run at stage time ="+currentEnvTime);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
 		String[] tmp=currentEnvTime.split(" ");
