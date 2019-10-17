@@ -36,10 +36,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
 	
-	@FindBy(css="div.drug-info-container>div>span.name")
+	@FindBy(xpath="//*[contains(@id,'DrugName-noplan-0')]")
 	private WebElement drugName;
 	
-	@FindBy(css="li.pharmacy>div>span.address:last-child")
+	@FindBy(xpath="//*[contains(@class,'pharminfo')]")
 	private WebElement pharmacyAddress;
 	
 	public VisitorProfilePage(WebDriver driver) {
@@ -76,7 +76,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public void validateAddedDrugAndPharmacy(String drug) {
 		expandDrugBlock.click();
 		
-		Assert.assertEquals(drug, drugName.getText().trim());
+		Assert.assertTrue(drugName.getText().trim().contains(drug));
 		Assert.assertTrue(pharmacyAddress.isDisplayed());
 	}
 	
