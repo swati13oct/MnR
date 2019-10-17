@@ -3113,5 +3113,27 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 	
+	//--------------------------------------------
+	//temp-mine
+	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
+	private WebElement firstSaveHeartOnActiveSummaryPlanPage;
+	public void savedHeartFirstPlan() {
+		Assert.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
+		firstSaveHeartOnActiveSummaryPlanPage.click();
+	}
+	
+	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//span[contains(@class,'show')]//button[contains(text(),'Compare plans')]")
+	private WebElement firstComparePlanButton;
+	
+	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	private WebElement comparePgnHeader;
+	
+	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
+		firstComparePlanButton.click();
+		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
 
 }

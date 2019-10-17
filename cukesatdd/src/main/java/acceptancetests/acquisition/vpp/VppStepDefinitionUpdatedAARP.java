@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -1945,5 +1947,75 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	}
 	
+	//----------------------------------------------------------------
+	//temp-mine
+	@Then("^I select multiple plans to compare for selected plan and click on compare plan link in the AARP site$")
+	public void I_all_plans_to_compare(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
+		int plansForCompare=0;
+		if (plantype.equalsIgnoreCase("MA")) {
+		//tbd	plansummaryPage.clickonViewPlans();
+		//tbd	plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansForCompare=plansummaryPage.checkAllMAPlans();
+		} else {  //note: if not MA then it's PDP
+		//tbd	plansummaryPage.clickOnPDPPlans();
+		//tbd	plansummaryPage.handlePlanYearSelectionPopup(plantype);
+			plansForCompare=plansummaryPage.checkAllPDPlans();
+		}
+		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
+		ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(plantype);
+		if (comparePlansPage != null) {
+			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^user saves first plan on AARP site$")
+	public void saveFirtPlan() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.savedHeartFirstPlan();
+	}
+
+	@Then("^user validates print option for selected plan on AARP site$")
+	public void user_validates_print_option_for_plan_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
+		if (planType.equals("MA")) {
+			//----- MA plan type -----------------------------
+			plansummaryPage.validatePrintOptionExistOnPage(planType);
+		} else if (planType.equals("PDP")) {
+			//----- PDP plan type ----------------------------
+			plansummaryPage.validatePrintOptionExistOnPage(planType);
+		} else {
+			//----- SNP plan type ----------------------------
+			plansummaryPage.validatePrintOptionExistOnPage(planType);
+		}
+	}
+	
+	@Then("^user validates print functionality for selected plan on AARP site$")
+	public void user_validates_print_functionality_for_plan_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
+		if (planType.equals("MA")) {
+			//----- MA plan type -----------------------------
+			plansummaryPage.validatePrintOption(planType);
+		} else if (planType.equals("PDP")) {
+			//----- PDP plan type ----------------------------
+			plansummaryPage.validatePrintOption(planType);
+		} else {
+			//----- SNP plan type ----------------------------
+			plansummaryPage.validatePrintOption(planType);
+		}
+	}
 	
 }
