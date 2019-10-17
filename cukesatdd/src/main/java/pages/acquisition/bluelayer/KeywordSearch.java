@@ -23,7 +23,7 @@ public class KeywordSearch extends GlobalWebElements {
 	
 	public void url(){
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("medicare"));
+		Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare"));
         try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -33,6 +33,6 @@ public class KeywordSearch extends GlobalWebElements {
 		validateNew(search);
 		validateNew(textonpage);
 		textonpage.getText();	
-	}
+			}
 	
 }

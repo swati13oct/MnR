@@ -66,7 +66,7 @@ Feature: 1.02 Member Profile page
       | 00000 | MA       | MA_AARP_GOGreen_Profilepref    |
       | 00000 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
-  @accountProfile4 @US957739 @regressionMember
+  @accountProfile4 @US957739 
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -82,7 +82,7 @@ Feature: 1.02 Member Profile page
 
   # | 00000   | MA       | NOKIA      |
   # | 00000   | MAPD     | NOKIA      |
-  @accountProfile5 @regressionPCPMedica @regressionMember
+  @accountProfile5 @regressionPCPMedica 
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -109,7 +109,7 @@ Feature: 1.02 Member Profile page
       | 15105 | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile6 @regressionAccountProf&Pref @regressionMember
+  @accountProfile6 @regressionAccountProf&Pref 
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -153,7 +153,7 @@ Feature: 1.02 Member Profile page
       | planType | memberType |
 
   # | MAPD     | EPMPEnabled |
-  @accountProfile8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
+  @accountProfile8 @EPMPProfilePageContactusInformation @epmpfixed
   Scenario Outline: To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -169,7 +169,7 @@ Feature: 1.02 Member Profile page
       | planType | memberType  | dataType   |
       | MAPD     | EPMPEnabled | Individual |
 
-  @accountProfile9 @EMPMprofilePageForShip @regressionMember
+  @accountProfile9 @EMPMprofilePageForShip 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -184,7 +184,7 @@ Feature: 1.02 Member Profile page
       | planType |
 
   #| SHIP    |
-  @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
+  @accountProfile10 @EPMPProfilePageContactusGroup 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -201,7 +201,7 @@ Feature: 1.02 Member Profile page
       | planType | memberType | dataType | GroupPlanName |
 
   #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
-  @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed
+  @accountProfile11 @profilePageForTerminated @epmpfixed
   Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
