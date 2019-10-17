@@ -1,4 +1,4 @@
-package atdd.runners.member;
+package atdd.runners.MemberRegression;
 
 import org.junit.runner.RunWith;
 
@@ -9,18 +9,18 @@ import cucumber.api.CucumberOptions;
 
 /**
  * 
- * @author Tamzid
+ * @author schak38
  *
  */
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_Part4.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_Part4")
+jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_Part3.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_Part3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_Part4.json" }, tags = { "@BnC_Part4_regressionMember" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_Part3.json" }, tags = { "@BnC_Part3_regressionMember" })
 
-public class RunMRATDDRegressionBenefitNCoverage_Part4 {
+public class RunMRATDDRegressionBenefitNCoverage_Part3 {
 
 }
