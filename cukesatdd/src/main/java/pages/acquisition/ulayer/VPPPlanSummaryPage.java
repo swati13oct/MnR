@@ -3263,13 +3263,31 @@ for (int i = 0; i < initialCount + 1; i++) {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		targetKey="MS Plan Count";
-		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
-			finalResult=false;
-			failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
 			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
 		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		targetKey="PDP Plan Count";
 		failedmessage=comparePageItem(targetKey, origPage, emailage);
@@ -3277,6 +3295,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		targetKey="SNP Plan Count";
 		failedmessage=comparePageItem(targetKey, origPage, emailage);
@@ -3284,6 +3311,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		targetKey="Total Plan Count";
 		failedmessage=comparePageItem(targetKey, origPage, emailage);
@@ -3291,6 +3327,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		targetKey="Saved Heart Count";
 		failedmessage=comparePageItem(targetKey, origPage, emailage);
@@ -3298,6 +3343,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 
 		System.out.println("Finished validation for original page content vs page content from email deeplnk for plan summary ============");
 		

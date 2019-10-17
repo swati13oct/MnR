@@ -1367,6 +1367,15 @@ public class PlanDetailsPage extends UhcDriver {
 			listOfFailure.add(failedMessage);	
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
+		System.out.println("*************** b - sub section ************");
+		System.out.println("\tTEMP - failedMessage="+failedMessage);
+		for (String s: listOfFailure) {
+			System.out.println("\tTEMP -listOfFailure="+s);
+		}
+		for (String s: testNote) {
+			System.out.println("\tTEMP - testNote="+s);
+		}
+		System.out.println("*************** e - sub section ************");
 		
 		int totalTabs=Integer.valueOf(origPage.get(targetKey));
 		System.out.println("TEST - totalTabs="+totalTabs);
@@ -1377,6 +1386,15 @@ public class PlanDetailsPage extends UhcDriver {
 				listOfFailure.add(failedMessage);	
 			if (failedMessage.contains("BYPASS")) 
 				testNote.add(failedMessage);
+			System.out.println("*************** b - sub section ************");
+			System.out.println("\tTEMP - failedMessage="+failedMessage);
+			for (String s: listOfFailure) {
+				System.out.println("\tTEMP -listOfFailure="+s);
+			}
+			for (String s: testNote) {
+				System.out.println("\tTEMP - testNote="+s);
+			}
+			System.out.println("*************** e - sub section ************");
 
 			int totalSectionsPerTab=Integer.valueOf(origPage.get(targetKey));
 			System.out.println("TEST - totalSectionsPerTab="+totalSectionsPerTab);
@@ -1388,6 +1406,15 @@ public class PlanDetailsPage extends UhcDriver {
 					listOfFailure.add(failedMessage);	
 				if (failedMessage.contains("BYPASS")) 
 					testNote.add(failedMessage);
+				System.out.println("*************** b - sub section ************");
+				System.out.println("\tTEMP - failedMessage="+failedMessage);
+				for (String s: listOfFailure) {
+					System.out.println("\tTEMP -listOfFailure="+s);
+				}
+				for (String s: testNote) {
+					System.out.println("\tTEMP - testNote="+s);
+				}
+				System.out.println("*************** e - sub section ************");
 
 				int totalRowsPerSectionOfActiveTab=Integer.valueOf(origPage.get(targetKey));
 				System.out.println("TEST - totalRowsPerSectionOfActiveTab="+totalRowsPerSectionOfActiveTab);
@@ -1398,6 +1425,15 @@ public class PlanDetailsPage extends UhcDriver {
 						listOfFailure.add(failedMessage);	
 					if (failedMessage.contains("BYPASS")) 
 						testNote.add(failedMessage);
+					System.out.println("*************** b - sub section ************");
+					System.out.println("\tTEMP - failedMessage="+failedMessage);
+					for (String s: listOfFailure) {
+						System.out.println("\tTEMP -listOfFailure="+s);
+					}
+					for (String s: testNote) {
+						System.out.println("\tTEMP - testNote="+s);
+					}
+					System.out.println("*************** e - sub section ************");
 
 					int totalBoxesPerSectionOfActiveTab=Integer.valueOf(origPage.get(targetKey));
 					System.out.println("TEST - totalBoxesPerSectionOfActiveTab="+totalBoxesPerSectionOfActiveTab);
@@ -1408,6 +1444,15 @@ public class PlanDetailsPage extends UhcDriver {
 							listOfFailure.add(failedMessage);	
 						if (failedMessage.contains("BYPASS")) 
 							testNote.add(failedMessage);
+						System.out.println("*************** b - sub section ************");
+						System.out.println("\tTEMP - failedMessage="+failedMessage);
+						for (String s: listOfFailure) {
+							System.out.println("\tTEMP -listOfFailure="+s);
+						}
+						for (String s: testNote) {
+							System.out.println("\tTEMP - testNote="+s);
+						}
+						System.out.println("*************** e - sub section ************");
 					}
 					
 					//note: assume this is the optional service tab
@@ -1431,6 +1476,15 @@ public class PlanDetailsPage extends UhcDriver {
 								listOfFailure.add(failedMessage);	
 							if (failedMessage.contains("BYPASS")) 
 								testNote.add(failedMessage);
+							System.out.println("*************** b - sub section ************");
+							System.out.println("\tTEMP - failedMessage="+failedMessage);
+							for (String s: listOfFailure) {
+								System.out.println("\tTEMP -listOfFailure="+s);
+							}
+							for (String s: testNote) {
+								System.out.println("\tTEMP - testNote="+s);
+							}
+							System.out.println("*************** e - sub section ************");
 						}
 					}
 				}

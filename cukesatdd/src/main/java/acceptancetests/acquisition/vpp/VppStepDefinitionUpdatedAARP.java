@@ -18,6 +18,7 @@ import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -2138,6 +2139,19 @@ public class VppStepDefinitionUpdatedAARP {
 		//note: do not remove the comment line below
 		//List<String> noteList=comparePlansPage.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
+	}
+	
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(VPPCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario()
+			.getBean(VPPCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
 	}
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
