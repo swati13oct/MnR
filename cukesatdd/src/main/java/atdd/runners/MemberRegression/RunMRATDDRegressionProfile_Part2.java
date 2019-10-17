@@ -1,4 +1,4 @@
-package atdd.runners.member;
+package atdd.runners.MemberRegression;
 
 
 import org.junit.runner.RunWith;
@@ -16,13 +16,13 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionProfile_Part3.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProfile_Part3")
+jsonReport = "target/cucumber-RunMRATDDRegressionProfile_Part2.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProfile_Part2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/Profile.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProfile_Part3.json" }, tags = { "@AP_Part3_Regression" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProfile_Part2.json" }, tags = { "@AP_Part2_Regression" })
 
 
-public class RunMRATDDRegressionProfile_Part3 {
+public class RunMRATDDRegressionProfile_Part2 {
 
 }
