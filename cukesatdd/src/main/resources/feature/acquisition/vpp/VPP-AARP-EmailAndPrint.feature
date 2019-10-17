@@ -85,7 +85,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
 #---------------------------- 
   @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @prodRegression
-  Scenario Outline:TID: <TID> - Verify print and email for <plantype> plan compare page in AARP site
+  Scenario Outline:TID: <TID> -plantype: <plantype> - Verify print and email for plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -107,7 +107,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
      | 15523 | 90210   | PDP               | NO            | 
 
   @emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators @prodRegression
-  Scenario Outline:TID: <TID> -  Verify email and Print plan functionalities on Plan Details page in AARP site
+  Scenario Outline:TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -128,7 +128,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
 
   @emailAndPrint_AARP3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 @prodRegression
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
+  Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -140,8 +140,8 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     Then user saves first plan on AARP site
     Then user validates print option for selected plan on AARP site
 	Then user validates print functionality for selected plan on AARP site
-    Then user validates email option on AARP site
-	Then user validates email functionality with invalid and valid email address on AARP site
+    Then user validates email option for selected plan on AARP site
+	Then user validates email functionality with invalid and valid email address for selected plan on AARP site
 
 
     Examples: 

@@ -1985,19 +1985,8 @@ public class VppStepDefinitionUpdatedAARP {
 	public void user_validates_print_option_for_plan_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
-		if (planType.equals("MA")) {
-			//----- MA plan type -----------------------------
-			plansummaryPage.validatePrintOptionExistOnPage(planType);
-		} else if (planType.equals("PDP")) {
-			//----- PDP plan type ----------------------------
-			plansummaryPage.validatePrintOptionExistOnPage(planType);
-		} else {
-			//----- SNP plan type ----------------------------
-			plansummaryPage.validatePrintOptionExistOnPage(planType);
-		}
+		plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 	
 	@Then("^user validates print functionality for selected plan on AARP site$")
@@ -2005,17 +1994,24 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
-		if (planType.equals("MA")) {
-			//----- MA plan type -----------------------------
-			plansummaryPage.validatePrintOption(planType);
-		} else if (planType.equals("PDP")) {
-			//----- PDP plan type ----------------------------
-			plansummaryPage.validatePrintOption(planType);
-		} else {
-			//----- SNP plan type ----------------------------
-			plansummaryPage.validatePrintOption(planType);
-		}
+		plansummaryPage.validatePrintOption(planType);
 	}
 	
+	@Then("^user validates email option for selected plan on AARP site$")
+	public void user_validates_email_option_on_for_selected_plan_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.validateEmailOptionExistOnPage(planType);
+
+	}
+
+	@Then("^user validates email functionality with invalid and valid email address for selected plan on AARP site$")
+	public void user_validates_email_functionality_on_for_selected_plan_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.validateEmailOption(planType);
+	}
+
 }
