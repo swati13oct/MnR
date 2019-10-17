@@ -20,6 +20,7 @@ import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.keywordSearchAARP;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -983,7 +984,11 @@ public class VppPlanSummaryStepDefinitionUHC {
 	@Then("^the member lands on the result page$")
 	public void I_land_on_result_page(){
 		KeywordSearch kws = (KeywordSearch) getLoginScenario().getBean(PageConstants.Keyword_Search);
-		kws.url();			
+		kws.url();		
+		if(kws != null)				
+			getLoginScenario().saveBean(PageConstants.Keyword_Search,
+					kws);			
+		
 	}
 	/**
 	 * @toDo:user is on the uhcmedicaresolutions site landing page

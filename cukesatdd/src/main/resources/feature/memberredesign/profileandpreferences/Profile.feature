@@ -1,7 +1,7 @@
-@accountProfile @thePredators @regressionMember
+@accountProfile @thePredators @Total_Regression_Devided_into_5Parts
 Feature: 1.02 Member Profile page
 
-  @accountProfile1 @ShipEndtoEnd
+  @accountProfile1 @ShipEndtoEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -26,7 +26,7 @@ Feature: 1.02 Member Profile page
       | TID   | planType          |
       | 15103 | SHIP_ProfilePref  |
 
-  @accountProfile2 @MAPDandMAEndToEnd
+  @accountProfile2 @MAPDandMAEndToEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -46,12 +46,12 @@ Feature: 1.02 Member Profile page
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-      | TID   | planType | memberType                     |
-      | 15083 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
-      | 15083 | MA       | MA_AARP_GOGreen_Profilepref    |
-      | 15083 | PDP      | PDP_AARP_GOGreen_Profilepref   |
+      | TID     | planType | memberType                     |
+      | 15083_1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
+      | 15083_2 | MA       | MA_AARP_GOGreen_Profilepref    |
+      | 15083_3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
-  @accountProfile3 @NegativeTestonHSIDpage
+  @accountProfile3 @NegativeTestonHSIDpage @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -61,10 +61,10 @@ Feature: 1.02 Member Profile page
 
     #Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
     Examples: 
-      | TID   | planType | memberType                     |
-      | 00000 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
-      | 00000 | MA       | MA_AARP_GOGreen_Profilepref    |
-      | 00000 | PDP      | PDP_AARP_GOGreen_Profilepref   |
+      | TID      | planType | memberType                     |
+      | Unknown1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
+      | Unknown2 | MA       | MA_AARP_GOGreen_Profilepref    |
+      | Unknown3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
   @accountProfile4 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
@@ -82,7 +82,7 @@ Feature: 1.02 Member Profile page
 
   # | 00000   | MA       | NOKIA      |
   # | 00000   | MAPD     | NOKIA      |
-  @accountProfile5 @regressionPCPMedica @regressionMember
+  @accountProfile5 @regressionPCPMedica @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -109,7 +109,7 @@ Feature: 1.02 Member Profile page
       | 15105 | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile6 @regressionAccountProf&Pref @regressionMember
+  @accountProfile6 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -153,8 +153,8 @@ Feature: 1.02 Member Profile page
       | planType | memberType |
 
   # | MAPD     | EPMPEnabled |
-  @accountProfile8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed
-  Scenario Outline: To test end to end regression scenario for EPMP profile page
+  @accountProfile8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_Regression
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -166,8 +166,8 @@ Feature: 1.02 Member Profile page
     And I should be able to view and edit phone numbers
 
     Examples: 
-      | planType | memberType  | dataType   |
-      | MAPD     | EPMPEnabled | Individual |
+     | TID       | planType | memberType  | dataType   |
+     | Unknown_4 | MAPD     | EPMPEnabled | Individual |
 
   @accountProfile9 @EMPMprofilePageForShip @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
@@ -201,8 +201,8 @@ Feature: 1.02 Member Profile page
       | planType | memberType | dataType | GroupPlanName |
 
   #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
-  @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed
-  Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+  @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_Regression
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -215,11 +215,11 @@ Feature: 1.02 Member Profile page
     Then the user validates that  Communication Preferences section doesn't come for terminated members
 
     Examples: 
-      | planType | memberType  | dataType   |
-      | MAPD     | EPMPEnabled | Terminated |
+     | TID			 | planType | memberType  | dataType   |
+     | Unknown_5 | MAPD     | EPMPEnabled | Terminated |
 
-  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers
-  Scenario Outline: To test end to end regression scenario for account profile and preferences for a combo member
+  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_Regression
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -228,12 +228,12 @@ Feature: 1.02 Member Profile page
     And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
 
     Examples: 
-      | planType       | memberType             |
-      | Combo_PDP_SSUP | PDP_SSUPcombo          |
+      | TID			   | planType       | memberType             |
+      | Unknown_6  | Combo_PDP_SSUP | PDP_SSUPcombo          |
   
 
-  @AccountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers
-   Scenario Outline:To test end to end regression scenario for account profile and preferences for a Federal member
+  @AccountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers @AP_Part3_Regression
+   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile and preferences for a Federal member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -252,17 +252,17 @@ Feature: 1.02 Member Profile page
      And the user validates on clicking contact us link it should route to contact us page  
 	  
      Examples: 
-      | planType  | memberType              | copayCategory |
-      | PDP       | PDP_AARPIndividual      | NON LIS       |
-      | GrpPDP    | PDP_Group               | NON LIS       |
-      | MA        | MA_UHCIndividual        | NON LIS       |
-      | MA        | MA_UHCGroup             | NON LIS       |
-      | MAPD      | MAPD_Group              | NON LIS       |
-      | MAPD      | MAPD_Individual         | NON LIS       | 
+      | TID			    | planType  | memberType              | copayCategory |
+      | Unknown_7   | PDP       | PDP_AARPIndividual      | NON LIS       |
+      | Unknown_8   | GrpPDP    | PDP_Group               | NON LIS       |
+      | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS       |
+      | Unknown_10  | MA        | MA_UHCGroup             | NON LIS       |
+      | Unknown_11  | MAPD      | MAPD_Group              | NON LIS       |
+      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS       | 
       
       
-    @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers
-    Scenario Outline: To test end to end regression scenario for account profile page for PCP medica members
+    @AccountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
+    Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -277,13 +277,13 @@ Feature: 1.02 Member Profile page
     And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page
     Examples: 
-      | planType    | memberType            | copayCategory  |
-      | MA          | PCP                   | NON LIS        |
-      | MA          | MEDICA                | NON LIS        |  
+       | TID			  | planType    | memberType            | copayCategory  |
+       | Unknown_13 | MA          | PCP                   | NON LIS        |
+       | Unknown_14 | MA          | MEDICA                | NON LIS        |  
       
        
-     @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed
-    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+     @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
+    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -299,32 +299,11 @@ Feature: 1.02 Member Profile page
     And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page
     Examples:      
-      | planType | memberType        | copayCategory   |
-      | MAPD     | Terminated_AccPro | NON LIS |
-    
-     @HsidLogin @regressionMember @codetransformers
-   Scenario Outline:Verify HSID login functionality.
-   Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-    Then I validate that login is successfull  
-   Examples:
-   | planType  |  memberType  | copayCategory | 
-   | MA        |  Individual  |  NON LIS      |
-   | PDP       |  Individual  |  NON LIS      |
-   | MAPD      |  Individual  |  NON LIS      |
-   | PCP       |  Individual  |  NON LIS      |
-   | Medica    |  Individual  |  NON LIS      |  
-   | MAGroup   |  Group       |  NON LIS      |
-   | MAPDGroup |  Group       |  NON LIS      | 
-   | PDPGroup  |  Group       |  NON LIS      | 
-   | SHIP      |  ShipOnly    |  NON LIS      | 
-   | COMBO     | FedShip      |  NON LIS      |
-   | SSUPGroup |Group         |  NON LIS      |
-   
-    @accountProfile16 
-    Scenario Outline: To test end to end regression scenario for account profile  page for a terminated member
+     | TID			  | planType | memberType        | copayCategory   |
+     | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS |
+     
+      @accountProfile16 @AP_Part5_Regression
+    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -335,5 +314,28 @@ Feature: 1.02 Member Profile page
 	  And the user validates the address sectioning
      
 	    Examples:      
-      | planType | memberType        | copayCategory   |
-      | GOVT     | AP_ADDRESS | NON LIS |
+      | TID			   | planType | memberType        | copayCategory   |
+      | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS         |
+      
+    @accountProfile17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
+   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
+   Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>  |
+      | Member Type    | <memberType>|
+      | Copay Category | <copayCategory>|
+    Then I validate that login is successfull  
+   Examples:
+    | TID			   | planType  |  memberType  | copayCategory | 
+    | Unknown_17 | MA        |  Individual  |  NON LIS      |
+    | Unknown_18 | PDP       |  Individual  |  NON LIS      |
+    | Unknown_19 | MAPD      |  Individual  |  NON LIS      |
+    | Unknown_20 | PCP       |  Individual  |  NON LIS      |
+    | Unknown_21 | Medica    |  Individual  |  NON LIS      |  
+    | Unknown_22 | MAGroup   |  Group       |  NON LIS      |
+    | Unknown_23 | MAPDGroup |  Group       |  NON LIS      | 
+    | Unknown_24 | PDPGroup  |  Group       |  NON LIS      | 
+    | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS      | 
+    | Unknown_26 | COMBO     | FedShip      |  NON LIS      |
+    | Unknown_27 | SSUPGroup |Group         |  NON LIS      |
+   
+  
