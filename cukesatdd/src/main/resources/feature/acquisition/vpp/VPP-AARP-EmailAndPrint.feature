@@ -1,6 +1,7 @@
 @vppUlayer @emailAndPrint @emailAndPrint_AARP
 Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 
+  #SCENARIO TO BE REMOVED IF NEW ONES WORK OKAY
   #@emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID> - Verify print and email for <plantype> plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -20,6 +21,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
      | 15523 | 90210   | MedicareAdvantage | NO            | 
 
 
+  #SCENARIO TO BE REMOVED IF NEW ONES WORK OKAY
   #@emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID> -  Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -39,6 +41,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     | 15531 |   90210 | MA       | No              |
 
 
+  #SCENARIO TO BE REMOVED IF NEW ONES WORK OKAY
   #@emailAndPrint_AARP3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the received email content
@@ -62,6 +65,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
 
+  #SCENARIO TO BE REMOVED IF NEW ONES WORK OKAY
   #@emailAndPrint_AARP4 @feature-F265872 @us1603378 @vppFavoritePlanPrintAarp @predators @Apr_release_2019 @RegressionPredators
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can invoke the print button on view plan preview page on AARP site
 	# NOTE: Uncommment the step to save plans when there is a way to validate the print preview screen content
@@ -83,7 +87,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 #      | 1598166 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Plan 2 (HMO),AARP MedicareComplete SecureHorizons Essential (HMO) | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO SNP),UnitedHealthcare Nursing Home Plan (PPO SNP) |
 
 
-#---------------------------- 
+#---------------------------- NEW ONES ---------------------
   @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @prodRegression
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify print and email for plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
