@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.MemberRegression;
 
 import org.junit.runner.RunWith;
 
@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPharmacyLocatorP1.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmacyLocatorP1")
+jsonReport = "target/cucumber-RunMRATDDPharmacyLocatorVBF.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPharmacyLocatorVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmacylocator" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmacyLocatorP1.json" }, tags = { "@regressionMember,@regressionMember_Testharness","@pharmacylocator1a" })
-public class RunMRATDDRegressionPharmacyLocatorP1 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDPharmacyLocatorVBF.json" }, tags = { "@smokeTest_PharmacyLocatorMem" })
+public class RunMRATDDPharmacyLocatorVBF {
 
 }
