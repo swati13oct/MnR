@@ -1803,14 +1803,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-		if(planType.equalsIgnoreCase("PDP")){
-			validateNonPresenceOfElement(ProviderSearchLink);
-		}
-		else {
-			validateNew(ProviderSearchLink);           
-		}              
+		int attempts = 0;
+		while(attempts < 2) {
+	        try {
+				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+			                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+			    if(planType.equalsIgnoreCase("PDP")){
+			                    validateNonPresenceOfElement(ProviderSearchLink);
+			                    break;
+			    }
+			    else {
+			                    validateNew(ProviderSearchLink);
+			                    break;
+			    }
+	        }catch(StaleElementReferenceException e) {
+	        }
+	    	attempts++;
+		}    
 	}
 
 	public void validatePlanPremium (String planName , String monthlyPremium){

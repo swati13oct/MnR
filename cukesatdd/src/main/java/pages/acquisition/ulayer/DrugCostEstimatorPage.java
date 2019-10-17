@@ -2016,7 +2016,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 
 	public VPPPlanSummaryPage clickReturnToSummaryLink() {
-		validateNew(returnLink,60);
+		validateNew(returnLink,20);
 		jsClickNew(returnLink);
 		if(driver.getCurrentUrl().contains("plan-summary")){
 			return new VPPPlanSummaryPage(driver);
