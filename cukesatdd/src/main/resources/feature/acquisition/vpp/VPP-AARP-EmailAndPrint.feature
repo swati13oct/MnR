@@ -98,8 +98,9 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | plan type       | <plantype> |
     When the user validate the print and email link option in plan compare
     Then the user validating email and print option in plan compare
-    Then the user validate thank you message in plan compare in AARP site
+    Then the user validate thank you message in plan compare for selected plan in AARP site
     Then I click back to all plans button and verify that all plans are still selected
+    Then user loads page using email deeplink for plan and validate vpp summary page content on AARP site
     
     Examples: 
      | TID   | zipcode | plantype          | isMultiCounty | 
@@ -116,9 +117,10 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     And the user views the plans of the below plan type in AARP site
       | Plan Type       | <plantype> |
     And the user validates the available plans for selected plan types in the AARP site
-    Then the user view plan details of the first plan in the given plan type in AARP site and validates
+    Then the user view plan details of the first plan in the given plan type and perform validation in AARP site
     Then the user validate the print and email links on the plan Details Page
-    Then the user validates the functionality of email and print buttons on the plan Details Page
+    Then the user validates the functionality of email and print buttons on the plan Details Page in AARP site
+    Then user loads page using email deeplink and validate vpp detail page content on AAPR site
 
     Examples: 
       |  TID  | zipcode | plantype | isMultutiCounty |
@@ -142,7 +144,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
 	Then user validates print functionality for selected plan on AARP site
     Then user validates email option for selected plan on AARP site
 	Then user validates email functionality with invalid and valid email address for selected plan on AARP site
-
+	Then user loads page using email deeplink for plan and validate vpp summary page content on AARP site
 
     Examples: 
       | UID     | plantype | zipcode | isMultiCounty | county           | 

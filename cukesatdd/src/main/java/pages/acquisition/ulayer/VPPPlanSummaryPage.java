@@ -5,10 +5,14 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +22,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -3123,7 +3129,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	//--------------------------------------------
-	//temp-mine
+	//note: begin - added for deeplink validaton
 	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
 	private WebElement firstSaveHeartOnActiveSummaryPlanPage;
 	public void savedHeartFirstPlan() {
@@ -3145,4 +3151,159 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return null;
 	}
 
+	@FindBy(xpath="//div[contains(@class,'active')]//a[contains(@class,'added')]")
+	private List<WebElement> planSummary_listOfSavedHearts;
+
+	public HashMap<String, Integer> collectInfoVppPlanSummaryPg() {
+		System.out.println("Proceed to collect the plan counts on vpp summary page");
+
+		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
+		int maPlans = Integer.valueOf(maPlansCount.getText());
+		int msPlans = 0;
+		try {
+			msPlans = Integer.valueOf(msPlansCount.getText());
+		} catch (NumberFormatException e) {				
+			msPlans = 0;
+		}	
+		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		int snpPlans = Integer.valueOf(snpPlansCount.getText());
+
+		HashMap<String, Integer> result=new HashMap<String, Integer>();
+		result.put("Total Plan Count", allPlans);
+		result.put("MA Plan Count", maPlans);
+		result.put("MS Plan Count", msPlans);
+		result.put("PDP Plan Count", pdpPlans);
+		result.put("SNP Plan Count", snpPlans);
+		result.put("Saved Heart Count", planSummary_listOfSavedHearts.size());
+		return result;
+	}
+	
+	/**
+	 * Alternative to validate deeplink in email
+	 * Get the deeplink from network's postData from the email plan list request
+	 * Use that deeplink to open page and validate content at later step
+	 */
+	public String getEmailDeepLink() {
+		String deepLinkEntryLine=null;
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+	    for (LogEntry entry : entries) {
+	    	String line=entry.getMessage();
+	    	if (line.toLowerCase().contains("deeplink")) {
+	    		deepLinkEntryLine=line;
+	    		System.out.println("TEST found line="+line);
+	    	}
+	    }
+	    Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+	    JSONParser parser = new JSONParser();
+	    JSONObject jsobObj=null;
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+		}
+	    JSONObject messageObj = (JSONObject) jsobObj.get("message");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+	    JSONObject paramsObj = (JSONObject) messageObj.get("params");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+	    JSONObject requestObj = (JSONObject) paramsObj.get("request");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
+	    System.out.println("TEST - headersObj="+requestObj.toString());
+	    String postDataStr = (String) requestObj.get("postData");
+	    Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
+	    String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+	    tmp=tmp.replace("\\\\\"", "\"");
+	    System.out.println("TEST - tmp="+tmp);
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(tmp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
+		}
+	    JSONObject toObj = (JSONObject) jsobObj.get("to");
+	    Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+	    JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+	    JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
+	    System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+	    String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
+	    Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
+	    System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+	    return deepLinkStr;
+	}
+	
+	public String comparePageItem(String targetKey, HashMap<String, Integer> origPage, HashMap<String, Integer> emailage) {
+		String failedMessage="NONE";
+		System.out.println("TEST - validate content for map key="+targetKey+"...");
+		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+			if (targetKey.equals("Saved Heart Count")) {
+				failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else {
+				finalResult=false;
+				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			}
+		}
+		return failedMessage;
+	}
+	
+	boolean finalResult=true;
+	public List<String> validatePlanSummaryEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, Integer> origPage) {
+		List<String> testNote=new ArrayList<String>();
+		List<String> listOfFailure=new ArrayList<String>();
+		String failedMessage="";
+		
+		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan summary...");
+		System.out.println("Collect info from page content of the plan summary");
+		HashMap<String, Integer> emailage=collectInfoVppPlanSummaryPg();
+		String targetKey="MA Plan Count";
+		String failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		targetKey="MS Plan Count";
+		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+			finalResult=false;
+			failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			listOfFailure.add(failedMessage);	
+		}
+
+		targetKey="PDP Plan Count";
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		targetKey="SNP Plan Count";
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		targetKey="Total Plan Count";
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		targetKey="Saved Heart Count";
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		System.out.println("Finished validation for original page content vs page content from email deeplnk for plan summary ============");
+		
+		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , finalResult);
+		return testNote;
+	}
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
 }

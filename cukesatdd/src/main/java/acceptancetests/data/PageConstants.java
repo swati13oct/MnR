@@ -670,4 +670,14 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String plansForCompare="0";
 
+	//--------------------------------------------
+	//note: begin - added for deeplink validaton
+	public static final String SUMMARY_PAGE_DEEPLINK="summary_page_deeplink";
+	public static final String SUMMARY_PAGE_INFO="summary_page_info";
+	public static final String DETAIL_PAGE_DEEPLINK="detail_page_deeplink";
+	public static final String DETAIL_PAGE_INFO="detail_page_info";
+	public static final String COMPARE_PAGE_DEEPLINK="compare_page_deeplink";
+	public static final String COMPARE_PAGE_INFO="compare_page_info";
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
 }

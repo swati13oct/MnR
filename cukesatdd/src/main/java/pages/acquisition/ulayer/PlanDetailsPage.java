@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -26,9 +27,13 @@ import org.apache.pdfbox.io.RandomAccessRead;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,10 +42,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+//import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -124,7 +131,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 	private WebElement PremiumForPlan;
 
-	public JSONObject vppPlanDetailsJson;
+	public org.json.JSONObject vppPlanDetailsJson;
 
 	@FindBy(xpath = "//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
@@ -251,7 +258,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	private PageData planDocsPDF;
 
-	public JSONObject planDocPDFAcqJson;
+	public org.json.JSONObject planDocPDFAcqJson;
 
 	public WebElement getPlanCostsTab() {
 		return planCostsTab;
@@ -305,14 +312,14 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate(String planType) {
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
 		}else if(planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		}/*Added for SNP as well*/
 		validate(planCostsTab);
 
@@ -350,30 +357,30 @@ public class PlanDetailsPage extends UhcDriver {
 
 	}
 
-	public JSONObject getActualPdfLinksData() {
+	public org.json.JSONObject getActualPdfLinksData() {
 		// TODO Auto-generated method stub
 		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
 		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 
-		JSONObject jsonObject = new JSONObject();
+		org.json.JSONObject jsonObject = new org.json.JSONObject();
 		for (String key : planDocsPDF.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(planDocsPDF.getExpectedData().get(key));
-			JSONArray jsonArray = new JSONArray();
+			org.json.JSONArray jsonArray = new org.json.JSONArray();
 			for (WebElement element : elements) {
 
 				element.click();
 				try {
-					JSONObject jsonObjectForArray = new JSONObject();
+					org.json.JSONObject jsonObjectForArray = new org.json.JSONObject();
 					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
 					jsonArray.put(jsonObjectForArray);
-				} catch (JSONException e) {
+				} catch (org.json.JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			try {
 				jsonObject.put(key, jsonArray);
-			} catch (JSONException e) {
+			} catch (org.json.JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -718,7 +725,7 @@ public class PlanDetailsPage extends UhcDriver {
 		presDrugTab.get(0).click();
 		validateNew(yourDrugListHeading);
 		String actualDrug = addedDrug.getText().trim();
-		Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
+		org.testng.Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
 	}
 
 	/**
@@ -1165,5 +1172,284 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return Validation_Flag;
 	}
+
+	//--------------------------------------------
+	//note: begin - added for deeplink validaton
+	/**
+	 * Alternative to validate deeplink in email
+	 * Get the deeplink from network's postData from the email plan list request
+	 * Use that deeplink to open page and validate content at later step
+	 */
+	public String getEmailDeepLink() {
+		String deepLinkEntryLine=null;
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+	    for (LogEntry entry : entries) {
+	    	String line=entry.getMessage();
+	    	if (line.toLowerCase().contains("deeplink")) {
+	    		deepLinkEntryLine=line;
+	    		System.out.println("TEST found line="+line);
+	    	}
+	    }
+	    Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+	    JSONParser parser = new JSONParser();
+	    JSONObject jsobObj=null;
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+		}
+	    JSONObject messageObj = (JSONObject) jsobObj.get("message");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+	    JSONObject paramsObj = (JSONObject) messageObj.get("params");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+	    JSONObject requestObj = (JSONObject) paramsObj.get("request");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
+	    System.out.println("TEST - headersObj="+requestObj.toString());
+	    String postDataStr = (String) requestObj.get("postData");
+	    Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
+	    String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+	    tmp=tmp.replace("\\\\\"", "\"");
+	    System.out.println("TEST - tmp="+tmp);
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(tmp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
+		}
+	    JSONObject toObj = (JSONObject) jsobObj.get("to");
+	    Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+	    JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+	    JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
+	    System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+	    String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
+	    Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
+	    System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+	    return deepLinkStr;
+	}
+	
+	@FindBy(xpath="//div[contains(@class,'plan-detail-tabs')]//a")
+	private List<WebElement> listOfTabHeaders;
+	
+	@FindBy(xpath="//div[@class='accordion-content']")
+	private List<WebElement> listOfTabBody;
+	
+	@FindBy(xpath="//div[contains(@id,'detail') and contains(@class,'active')]//h3")
+	private List<WebElement> listOfSectionHeaderForActiveTab;
+	
+	@FindBy(xpath="//div[contains(@id,'detail') and contains(@class,'active')]//table")
+	private List<WebElement> listOfSectionTableForActiveTab;
+	
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String plantype, String forWhat) {
+		System.out.println("Proceed to collect the info on vpp detail page =====");
+		
+		HashMap<String, String> result=new HashMap<String, String>();
+		
+		String key="Total Tabs";
+		result.put(key, String.valueOf(listOfTabHeaders.size()));
+		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+
+		for (int i=0; i<listOfTabHeaders.size(); i++) { //note: loop through each table and store info
+			listOfTabHeaders.get(i).click();
+			int tabIndex=(i+1);
+			
+			//note: store section header
+			for(int k=0; k<listOfSectionHeaderForActiveTab.size(); k++) {
+				String sectionHeader=listOfSectionHeaderForActiveTab.get(k).getText();
+				key="T"+tabIndex+"S"+(k+1);
+				result.put(key, sectionHeader);
+			}
+			
+			//note: store section table
+			int numSectionTable=listOfSectionHeaderForActiveTab.size();
+			result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
+			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
+				String rowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
+				List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
+				int numRows=listOfRowsPerTable.size();
+
+				result.put("Total Rows For T"+tabIndex+"S"+sectionIndex,String.valueOf(numRows));
+
+				if (numRows==0) { //note: no table so check for box
+					String boxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]";
+					List<WebElement> listOfBoxes=driver.findElements(By.xpath(boxXpath));
+					result.put("Total Boxs For T"+tabIndex+"S"+sectionIndex, String.valueOf(listOfBoxes.size()));
+					for(int boxIndex=1; boxIndex<=listOfBoxes.size(); boxIndex++) { //note: loop through each box
+						String eachBoxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]["+boxIndex+"]";
+						key="T"+tabIndex+"S"+sectionIndex+"B"+boxIndex;
+						WebElement e=driver.findElement(By.xpath(eachBoxXpath));
+						String value=e.getText();
+						result.put(key, value);
+						System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+					}
+					
+					//note: assume this is the optional service tab
+					//note: after going through all the box should be no more section, don't iterate the rest of the section counts
+					break;
+				} else {
+					for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
+						String cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
+						List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
+						result.put("Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex,String.valueOf(listOfCellsPerRow.size()));
+						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
+							String eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
+							WebElement e=driver.findElement(By.xpath(eachCellXpath));
+							key="T"+tabIndex+"S"+sectionIndex+"R"+rowIndex+"C"+cellIndex;
+							String value=e.getAttribute("textContent");
+							result.put(key, value);
+							System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Finished collecting the info on vpp detail page =====");
+		return result;
+	}
+	@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+	private WebElement planYearPopup;
+	
+	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+	private WebElement currentYearSelection;
+	
+	@FindBy(xpath="//button[@id='lisGoBtn']")
+	private WebElement planYearPopupGoButton;
+
+	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	private WebElement nextYearSelection;
+
+	public void handlePlanYearSelectionPopup(String planType) {
+		if (!(planType.equalsIgnoreCase("MS"))) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if (validate(planYearPopup)) {
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+			}
+		}
+		}
+	}
+	
+	public String comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
+		String failedMessage="NONE";
+		System.out.println("TEST - validate content for map key="+targetKey+"...");
+		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+			if (targetKey.equals("T3S2B1") || targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2")) {
+				failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else {
+				finalResult=false;
+				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			}
+		}
+		System.out.println("TEST - failedMessage="+failedMessage);
+		return failedMessage;
+	}
+	
+	boolean finalResult=true;
+	public List<String> validatePlanDetailEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
+		List<String> testNote=new ArrayList<String>();
+		List<String> listOfFailure=new ArrayList<String>();
+		String failedMessage="";
+		
+		
+		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan detail...");
+		System.out.println("Collect info from page content of the plan compare");
+		HashMap<String, String> emailage=collectInfoVppPlanDetailPg(planType, "from deepLink");
+		
+		String targetKey="Total Tabs";
+		String failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
+		int totalTabs=Integer.valueOf(origPage.get(targetKey));
+		System.out.println("TEST - totalTabs="+totalTabs);
+		for (int tabIndex=1; tabIndex<=totalTabs; tabIndex++) { //note: loop through each table and validate info
+			targetKey="Total Sections Per T"+tabIndex;
+			failedmessage=comparePageItem(targetKey, origPage, emailage);
+			if (failedmessage.contains("mismatch")) 
+				listOfFailure.add(failedMessage);	
+			if (failedMessage.contains("BYPASS")) 
+				testNote.add(failedMessage);
+
+			int totalSectionsPerTab=Integer.valueOf(origPage.get(targetKey));
+			System.out.println("TEST - totalSectionsPerTab="+totalSectionsPerTab);
+			
+			for(int sectionIndex=1; sectionIndex<=totalSectionsPerTab; sectionIndex++) { //note: loop through each section table
+				targetKey="Total Rows For T"+tabIndex+"S"+sectionIndex;
+				failedmessage=comparePageItem(targetKey, origPage, emailage);
+				if (failedmessage.contains("mismatch")) 
+					listOfFailure.add(failedMessage);	
+				if (failedMessage.contains("BYPASS")) 
+					testNote.add(failedMessage);
+
+				int totalRowsPerSectionOfActiveTab=Integer.valueOf(origPage.get(targetKey));
+				System.out.println("TEST - totalRowsPerSectionOfActiveTab="+totalRowsPerSectionOfActiveTab);
+				if (totalRowsPerSectionOfActiveTab==0) {  //note: no table so check for box
+					targetKey="Total Boxs For T"+tabIndex+"S"+sectionIndex;
+					failedmessage=comparePageItem(targetKey, origPage, emailage);
+					if (failedmessage.contains("mismatch")) 
+						listOfFailure.add(failedMessage);	
+					if (failedMessage.contains("BYPASS")) 
+						testNote.add(failedMessage);
+
+					int totalBoxesPerSectionOfActiveTab=Integer.valueOf(origPage.get(targetKey));
+					System.out.println("TEST - totalBoxesPerSectionOfActiveTab="+totalBoxesPerSectionOfActiveTab);
+					for(int boxIndex=1; boxIndex<=totalBoxesPerSectionOfActiveTab; boxIndex++) {
+						targetKey="T"+tabIndex+"S"+sectionIndex+"B"+boxIndex;
+						failedmessage=comparePageItem(targetKey, origPage, emailage);
+						if (failedmessage.contains("mismatch")) 
+							listOfFailure.add(failedMessage);	
+						if (failedMessage.contains("BYPASS")) 
+							testNote.add(failedMessage);
+					}
+					
+					//note: assume this is the optional service tab
+					//note: after going through all the boxes should be no more section, don't iterate the rest of the section counts
+					break;
+				} else {
+					for(int rowIndex=1; rowIndex<=totalRowsPerSectionOfActiveTab; rowIndex++) { //note: loop through each row
+						targetKey="Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex;
+						failedmessage=comparePageItem(targetKey, origPage, emailage);
+						if (failedmessage.contains("mismatch")) 
+							listOfFailure.add(failedMessage);	
+						if (failedMessage.contains("BYPASS")) 
+							testNote.add(failedMessage);
+
+						int totalCellsPerRow=Integer.valueOf(origPage.get(targetKey));
+						System.out.println("TEST - totalCellsPerRow="+totalCellsPerRow);
+						for (int cellIndex=1; cellIndex<=totalCellsPerRow; cellIndex++) { //note: loop through each cell on the row
+							targetKey="T"+tabIndex+"S"+sectionIndex+"R"+rowIndex+"C"+cellIndex;
+							failedmessage=comparePageItem(targetKey, origPage, emailage);
+							if (failedmessage.contains("mismatch")) 
+								listOfFailure.add(failedMessage);	
+							if (failedMessage.contains("BYPASS")) 
+								testNote.add(failedMessage);
+						}
+					}
+				}
+			}
+			System.out.println("=========== Final result ==============");
+			if (finalResult) { 
+				System.out.println("GOOD - original page content and email deeplink page content matched.");
+			} else {
+				System.out.println("PROBLEM - original page content and email deeplink page content are not the same.");
+				for (String s: listOfFailure) {
+					System.out.println(s);
+				}
+			}
+		}
+		System.out.println("Finished validation for the original page content vs page content from email deeplnk for plan detail ===========");
+		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , finalResult);
+		return testNote;
+	}	
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
 
 }

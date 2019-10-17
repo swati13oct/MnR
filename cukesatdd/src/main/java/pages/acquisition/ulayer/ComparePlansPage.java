@@ -1,15 +1,24 @@
 package pages.acquisition.ulayer;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
@@ -301,5 +310,252 @@ public class ComparePlansPage extends UhcDriver {
 		closeButtonthankyoumessagepopup.click();
 		System.out.println("Thank you Message pop up is closed");
 	}
+	
+	//--------------------------------------------
+	//note: begin - added for deeplink validaton
+	/**
+	 * Alternative to validate deeplink in email
+	 * Get the deeplink from network's postData from the email plan list request
+	 * Use that deeplink to open page and validate content at later step
+	 */
+	public String getEmailDeepLink() {
+		String deepLinkEntryLine=null;
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+	    for (LogEntry entry : entries) {
+	    	String line=entry.getMessage();
+	    	if (line.toLowerCase().contains("deeplink")) {
+	    		deepLinkEntryLine=line;
+	    		System.out.println("TEST found line="+line);
+	    	}
+	    }
+	    Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+	    JSONParser parser = new JSONParser();
+	    JSONObject jsobObj=null;
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+		}
+	    JSONObject messageObj = (JSONObject) jsobObj.get("message");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+	    JSONObject paramsObj = (JSONObject) messageObj.get("params");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+	    JSONObject requestObj = (JSONObject) paramsObj.get("request");
+	    Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
+	    System.out.println("TEST - headersObj="+requestObj.toString());
+	    String postDataStr = (String) requestObj.get("postData");
+	    Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
+	    String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+	    tmp=tmp.replace("\\\\\"", "\"");
+	    System.out.println("TEST - tmp="+tmp);
+	    try {
+	    	jsobObj = (JSONObject) parser.parse(tmp);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
+		}
+	    JSONObject toObj = (JSONObject) jsobObj.get("to");
+	    Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+	    JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+	    JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
+	    Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
+	    System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+	    String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
+	    Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
+	    System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+	    return deepLinkStr;
+	}
+
+	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	private WebElement cmpPgHeader;
+	
+	@FindBy(xpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']")
+	private List<WebElement> listOfCmpPlansColumns;
+	
+	@FindBy(xpath="//div[@id='topRowCopy']//a[contains(@class,'added')]")
+	private List<WebElement> planCompare_listOfSavedHearts;
+	
+	@FindBy(xpath="//table[@id='fixTable']//tr")
+	private List<WebElement> listOfRowsInPlanCompareTbl;
+	
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat) {
+		System.out.println("Proceed to collect the info on vpp compare page =====");
+		HashMap<String, String> result=new HashMap<String, String>();
+		result.put("Page Header", cmpPgHeader.getText());
+		
+		result.put("Columns Count", String.valueOf(listOfCmpPlansColumns.size()));
+		for (int i=1; i<=listOfCmpPlansColumns.size(); i++) {
+			String columnXpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']["+i+"]";
+			
+			String planNameXpath=columnXpath+"//h3";
+			result.put(i+"- Plan Name", "none");
+			try {
+				WebElement e=driver.findElement(By.xpath(planNameXpath));
+				if (validate(e))
+					result.put(i+"- Plan Name", e.getAttribute("textContent"));
+			} catch (Exception e) {
+				System.out.println("no plan name info for '"+i+"- Plan Name'");
+			}
+			
+			String heartXpath=columnXpath+"//a[contains(@class,'added')]";
+			result.put(i+"- Plan Heart", "none");
+			try {
+				WebElement e=driver.findElement(By.xpath(heartXpath));
+				if (validate(e)) 
+					result.put(i+"- Plan Heart", "saved");
+			} catch (Exception e) {
+				System.out.println("no plan heart info for '"+i+"- Plan Heart'");
+			}
+			 
+		}
+		int cellsPerRow=listOfCmpPlansColumns.size()+1;
+		result.put("Total Table Rows", String.valueOf(listOfRowsInPlanCompareTbl.size()));
+		//note: loop through each row
+		int rowStartAt=1;
+		if (planType.equals("PDP")) {
+			rowStartAt=24;
+		}
+		for (int i=rowStartAt; i<=listOfRowsInPlanCompareTbl.size(); i++) {
+			String rowXpath="//table[@id='fixTable']//tr["+i+"]//td";
+			List<WebElement> tmp=driver.findElements(By.xpath(rowXpath));
+			if (tmp.size()==1) {
+				// only one cell then that's the table section header
+				String cellXpath="//table[@id='fixTable']//tr["+i+"]//td[1]";
+				WebElement e=driver.findElement(By.xpath(cellXpath));
+				String key="R"+i+"C1";
+				String value=e.getAttribute("textContent");
+				result.put("R"+i+"C1", value);
+				System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+				for (int j=1; j<=cellsPerRow; j++) {
+					key="R"+i+"C"+j;
+					result.put(key, "none");
+					System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+				}
+			} else { //note: data row, collect text of each cell
+				for (int j=1; j<=cellsPerRow; j++) {
+					String cellXpath="//table[@id='fixTable']//tr["+i+"]//td["+j+"]";
+					WebElement e=driver.findElement(By.xpath(cellXpath));
+					String key="R"+i+"C"+j;
+					String value=e.getText();
+					result.put(key, value);
+					System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+				}
+			}
+		}
+		System.out.println("Finished collecting the info on vpp compare page =====");
+		return result;
+	}
+	@FindBy(xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+	private WebElement planYearPopup;
+	
+	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+	private WebElement currentYearSelection;
+	
+	@FindBy(xpath="//button[@id='lisGoBtn']")
+	private WebElement planYearPopupGoButton;
+
+	@FindBy(xpath="//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	private WebElement nextYearSelection;
+
+	public void handlePlanYearSelectionPopup(String planType) {
+		if (!(planType.equalsIgnoreCase("MS"))) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
+		if (validate(planYearPopup)) {
+			if (validate(nextYearSelection)) {
+				nextYearSelection.click();
+				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				planYearPopupGoButton.click();
+			}
+		}
+		}
+	}
+	
+	public String comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
+		String failedMessage="NONE";
+		System.out.println("TEST - validate content for map key="+targetKey+"...");
+		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+			//note: keep this for now in case anything needs to be bypassed
+			//if (targetKey.equals("xyz")) { 
+			//	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+			//	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			//} else {
+				finalResult=false;
+				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			//}
+		}
+		System.out.println("TEST - failedMessage="+failedMessage);		
+		return failedMessage;
+	}
+	
+	boolean finalResult=true;
+	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
+		List<String> testNote=new ArrayList<String>();
+		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
+		List<String> listOfFailure=new ArrayList<String>();
+		String failedMessage="";
+		
+		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
+
+		
+		System.out.println("Collect info from page content of the plan compare");
+		HashMap<String, String> emailage=collectInfoVppPlanComparePg(planType, "email deepLink");
+		
+		String targetKey="Page Header";
+		String failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		targetKey="Columns Count";
+		int numPlanColumns=Integer.valueOf(origPage.get(targetKey));
+		failedmessage=comparePageItem(targetKey, origPage, emailage);
+		if (failedmessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+
+		for (int i=1; i<=numPlanColumns; i++) {
+			targetKey=i+"- Plan Name";
+			failedmessage=comparePageItem(targetKey, origPage, emailage);
+			if (failedmessage.contains("mismatch")) 
+				listOfFailure.add(failedMessage);	
+			if (failedMessage.contains("BYPASS")) 
+				testNote.add(failedMessage);
+
+			targetKey=i+"- Plan Heart";
+			failedmessage=comparePageItem(targetKey, origPage, emailage);
+			if (failedmessage.contains("mismatch")) 
+				listOfFailure.add(failedMessage);	
+			if (failedMessage.contains("BYPASS")) 
+				testNote.add(failedMessage);
+		}
+		
+		int cellsPerRow=numPlanColumns+1;
+		int totalTableRows=Integer.valueOf(origPage.get("Total Table Rows"));
+		int startRowIndex=1;
+		if (planType.equals("PDP")) {
+			startRowIndex=24;
+		}
+		for (int r=startRowIndex; r<=totalTableRows; r++) {
+			for (int c=1; c<=cellsPerRow; c++) {
+				targetKey="R"+r+"C"+c;
+				failedmessage=comparePageItem(targetKey, origPage, emailage);
+				if (failedmessage.contains("mismatch")) 
+					listOfFailure.add(failedMessage);	
+				if (failedMessage.contains("BYPASS")) 
+					testNote.add(failedMessage);
+			}		
+		}
+		System.out.println("Finished validation for the original page content vs page content from email deeplnk for plan compare ===========");
+		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , finalResult);
+		return testNote;
+	}
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
+
 }
 
