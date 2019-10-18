@@ -127,7 +127,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
       | 15531 | Blayer |  80001 | SNP      | No              |
 
 
-  @emailAndPrint_UHC3 @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 @prodRegression
+  @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on UHC site
      Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
