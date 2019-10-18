@@ -173,9 +173,6 @@ public class ClaimsSummaryPageStepDefinition {
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		//tbd if (claimsSummPg.getOnlyTestUiFlag())
-		//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-		//tbd else {
 			String planType = (String) getLoginScenario()
 					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -192,7 +189,6 @@ public class ClaimsSummaryPageStepDefinition {
 			claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
 			if(claimsSummPg != null)
 				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
-			//tbd }
 	}
 
 	/**
@@ -203,12 +199,12 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateEmptyDatesErrorMessage(){
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
-		else {
+		//tbd if (claimsSummPg.getOnlyTestUiFlag())
+		//tbd 	System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
+		//tbd else {
 			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 			claimsSummPg.validateEmptyDatesError(planType);
-		}
+			//tbd }
 	}
 
 	/**
@@ -253,7 +249,8 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
+		if (!claimsSummaryPage.getOnlyTestUiFlag()) 
+			claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
 	}
 
 	/**
@@ -466,9 +463,9 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validates_segmentid(DataTable memberAttributes) {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not validate segment ID");
-		else {		
+		//tbd if (claimsSummPg.getOnlyTestUiFlag()) 
+		//tbd 	System.out.println("TEST UI ONLY - will not validate segment ID");
+		//tbd else {		
 			Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
 			String expectedSegmentId = memberAttributesMap.get("Segment ID");
 			String planType = (String) getLoginScenario()
@@ -476,7 +473,7 @@ public class ClaimsSummaryPageStepDefinition {
 			String memberType = (String) getLoginScenario()
 					.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 			claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
-		}
+			//tbd }
 	}
 	
 	@When("^I am validating UI only$")

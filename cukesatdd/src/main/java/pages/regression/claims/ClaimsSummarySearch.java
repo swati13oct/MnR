@@ -113,7 +113,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 		checkForIPerceptionModel(driver);
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
-			if (!getOnlyTestUiFlag()) 
+			//tbd if (!getOnlyTestUiFlag()) 
 				moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);

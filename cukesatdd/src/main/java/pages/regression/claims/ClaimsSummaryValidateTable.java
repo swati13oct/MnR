@@ -78,25 +78,25 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (numClaims==0) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+noClaimsText+"' text/link. \n"+noteToTester, 
 					claimsValidate(optumRxLnkTxt_noClaims));
-			if (getOnlyTestUiFlag())
-				System.out.println("TEST UI ONLY - will not validate Rx link destination");
-			else {
+			//tbd if (getOnlyTestUiFlag())
+			//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+			//tbd else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_noClaims.click();
-			}
+				//tbd }
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate '"+hasClaimsText+"' text/link. \n"+noteToTester, 
 			claimsValidate(optumRxLnkTxt_hasClaims));
-			if (getOnlyTestUiFlag())
-				System.out.println("TEST UI ONLY - will not validate Rx link destination");
-			else {
+			//tbd if (getOnlyTestUiFlag())
+			//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+			//tbd else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_hasClaims.click();
-			}
+				//tbd }
 		}
-		if (getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate Rx link destination");
-		else {
+		//tbd if (getOnlyTestUiFlag())
+		//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+		//tbd else {
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
@@ -125,7 +125,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  "
 					+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
 					actualTitle.contains(expectedTitle));
-		}
+			//tbd }
 	}
 
 	/** this method validates claims table */
@@ -134,7 +134,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			System.out.println("WILL fail test if user has no claim table with exception if onlyTestUiFlag=true");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
-		if (!getOnlyTestUiFlag()) 
+		//tbd if (!getOnlyTestUiFlag()) 
 			Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
 					!claimsValidate(systemErrorMsg));
 		if (claimsValidate(medicalClaimsTbl))

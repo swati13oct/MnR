@@ -344,10 +344,10 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickPrintBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
+			//tbd return true;
+				//tbd } else {
 				String winHandleBefore = driver.getWindowHandle();
 				claimsSummPrntBtn.click();
 				try {
@@ -368,7 +368,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());	
 				return true;
-			}
+				//tbd }
 		} else
 			return false;
 	}
@@ -380,17 +380,17 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickDnldBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
+			//tbd 	return true;
+			//tbd } else {
 				try {
 					claimsSummDnldBtn.click();
 				} catch(Exception e) {
 					Assert.assertTrue("PROBLEM - encounted exception when attempting to click donwload button", false);
 				}
 				return true;
-			}
+				//tbd }
 		} else
 			return false;
 	}
@@ -414,10 +414,10 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				System.out.println("PROBLEM - non SHIP user should have 'DownloadMyData' button");
 				return false;
 			}
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
+			//tbd 	return true;
+			//tbd } else {
 				System.out.println("Blue Button-DownLoad my Data Button is displayed");
 				dnldMyDataBtn.click();
 
@@ -464,7 +464,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());	
 				return true;			
-			}
+				//tbd }
 		}
 	}
 
