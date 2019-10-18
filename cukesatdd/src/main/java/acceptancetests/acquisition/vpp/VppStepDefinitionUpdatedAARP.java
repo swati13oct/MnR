@@ -24,6 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -1952,6 +1953,7 @@ public class VppStepDefinitionUpdatedAARP {
 	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
+	/* tbd 
 	@Then("^user saves first plan on AARP site$")
 	public void saveFirtPlan() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2000,10 +2002,6 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);	
 	}
 	
-	/**
-	 * @toDo:the user validates the functionality of email and print buttons on
-	 *           the plan Details Page
-	 */
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page in AARP site$")
 	public void user_validates_the_functionality_of_email_and_print_buttons_on_the_plan_Details_Page() {
 
@@ -2012,9 +2010,9 @@ public class VppStepDefinitionUpdatedAARP {
 		vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
 		
 		//note: if email is successfully sent, deepLink info should be available, save it for later use
-		String deepLink=vppPlanDetailsPage.getEmailDeepLink();
-		System.out.println("TEST - email deepLink="+deepLink);
-		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK,deepLink);
+		//keep String deepLink=vppPlanDetailsPage.getEmailDeepLink();
+		//keep System.out.println("TEST - email deepLink="+deepLink);
+		//keep getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK,deepLink);
 
 	}
 	
@@ -2031,7 +2029,9 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 		//note: collect page data for email deeplink validation
-		HashMap<String, String> infoMap=vppPlanDetailsPage.collectInfoVppPlanDetailPg(plantype, "original");
+		EmailAndPrintUtil util=new EmailAndPrintUtil(vppPlanDetailsPage.driver);
+		//keep HashMap<String, String> infoMap=vppPlanDetailsPage.collectInfoVppPlanDetailPg(plantype, "original");
+		HashMap<String, String> infoMap=util.collectInfoVppPlanDetailPg(plantype, "original");
 		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
 	}
 	
@@ -2104,16 +2104,24 @@ public class VppStepDefinitionUpdatedAARP {
 		HashMap<String, String> origPage=(HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
 
 		//note: use new driver to achieve clear cache
-		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
-		newTestDriver.get(deepLink);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		//keep WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
+		//keep newTestDriver.get(deepLink);
+		//keep CommonUtility.checkPageIsReady(newTestDriver);
 		Thread.sleep(1000);
-		PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(newTestDriver);
-		email_vppPlanDetailsPage.handlePlanYearSelectionPopup(planType);
-		CommonUtility.checkPageIsReady(newTestDriver);
-		List<String> noteList=email_vppPlanDetailsPage.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		//keep PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(newTestDriver);
+
+		PlanDetailsPage tmpPg=(PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		PlanDetailsPage email_vppPlanDetailsPage = new PlanDetailsPage(tmpPg.driver);
+		//keep email_vppPlanDetailsPage.handlePlanYearSelectionPopup(planType);
+		//keep CommonUtility.checkPageIsReady(newTestDriver);
+		
+		
+		EmailAndPrintUtil util = new EmailAndPrintUtil(tmpPg.driver);
+		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		//keepList<String> noteList=email_vppPlanDetailsPage.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
+	
 	
 	@SuppressWarnings({ "unchecked", "static-access" })
 	@Then("^user loads page using email deeplink and validate vpp compare page content on AARP site$")
@@ -2141,10 +2149,10 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
 	
+	@SuppressWarnings("unchecked")   
 	@cucumber.api.java.After
 	public void testResultNote(Scenario scenario) { 
 		if(null!=getLoginScenario().getBean(VPPCommonConstants.TEST_RESULT_NOTE)) {   
-			@SuppressWarnings("unchecked")   
 			List<String> testNote=(List<String>) getLoginScenario()
 			.getBean(VPPCommonConstants.TEST_RESULT_NOTE);
 			for (String s: testNote) {   
@@ -2153,6 +2161,34 @@ public class VppStepDefinitionUpdatedAARP {
 			testNote.clear(); 
 		}
 	}
+	
+	@And("^the user views the plans of the below plan type$")
+	public void user_performs_planSearch(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		String site = givenAttributesMap.get("Site");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
+		if (site.equalsIgnoreCase("ulayer")) {
+			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.viewPlanSummary(plantype);
+			plansummaryPage.handlePlanYearSelectionPopup(plantype);
+		} else {
+			System.out.println("boo");
+			System.exit(0);
+		}
+	}
+	*/
+	
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
 

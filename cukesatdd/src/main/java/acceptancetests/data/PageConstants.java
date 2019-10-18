@@ -678,6 +678,8 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String DETAIL_PAGE_INFO="detail_page_info";
 	public static final String COMPARE_PAGE_DEEPLINK="compare_page_deeplink";
 	public static final String COMPARE_PAGE_INFO="compare_page_info";
+	public static final String ACQ_PAGE_TYPE="acq_page_type";
+	public static final String ACQ_PAGE_DRIVER="acq_page_driver";
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
 }
