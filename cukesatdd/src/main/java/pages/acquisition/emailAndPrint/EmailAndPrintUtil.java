@@ -13,6 +13,7 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
@@ -490,6 +491,7 @@ public class EmailAndPrintUtil extends UhcDriver{
 		Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
 	}
 
+
 	public void validateSummaryPrintOption(String planType) {
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
@@ -723,10 +725,16 @@ public class EmailAndPrintUtil extends UhcDriver{
 
 		
 	}
+	
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
 
 	public void validatingFunctionalityOfPrintOnPlanCompare(String planType) {
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
+		//note: for pdp need to move mouse around so the print is not blocked
 		System.out.println("Proceed to validate print popup screen for cancel option");
 		compare_validateprintbutton.click();
 
@@ -847,9 +855,9 @@ public class EmailAndPrintUtil extends UhcDriver{
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
 		System.out.println("!!!Entered valid Email ");
 		sendButtonEmailPlanComparePopUp.click();
-		System.out.println("Email has successfull send to user");
 		Assert.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
 		//Validating email success popup
+		System.out.println("Email has successfull send to user");
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		
@@ -968,9 +976,11 @@ public class EmailAndPrintUtil extends UhcDriver{
 	}
 
 	public void validateComparePrint() {
+		sleepBySec(1); //note: keep this sleep for compare page
+		CommonUtility.waitForPageLoad(driver, compare_validateprintbutton, 5);
+		moveMouseToElement(cmpPgHeader);
 		validateNew(compare_validateprintbutton);
 		System.out.println("successfully validated the Print in plan compare page ");
-
 	}
 
 	public void validateCompareEmail() {

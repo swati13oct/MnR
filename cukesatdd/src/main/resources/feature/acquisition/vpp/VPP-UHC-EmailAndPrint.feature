@@ -97,7 +97,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     Then the user validate thank you message in plan compare for selected plan in test site
     Then I click back to all plans button and verify that all plans are still selected on test site
     Then user loads page using email deeplink and validate vpp compare page content on test site
-   
+  
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
      | 15523 | Blayer |90210   | MA                | NO            | 
