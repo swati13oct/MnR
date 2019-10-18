@@ -2064,15 +2064,23 @@ public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , Strin
     
 }            
 public void validateIsMyProviderCoveredLinkInUMS(String planType , String planName) {
-    
-    WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-    if(planType.equalsIgnoreCase("PDP")){
-                    validateNonPresenceOfElement(ProviderSearchLink);
-    }
-    else {
-                    validateNew(ProviderSearchLink);           
-    }              
+    int attempts = 0;
+	while(attempts < 2) {
+        try {
+			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+		                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+		    if(planType.equalsIgnoreCase("PDP")){
+		                    validateNonPresenceOfElement(ProviderSearchLink);
+		                    break;
+		    }
+		    else {
+		                    validateNew(ProviderSearchLink);
+		                    break;
+		    }
+        }catch(StaleElementReferenceException e) {
+        }
+    	attempts++;
+	}
 }
 
 public void clicksOnIsProviderCoveredUMS(String planName) throws InterruptedException {
@@ -2482,7 +2490,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	  sendkeysNew(lastNameField, LastName);
 	  sendkeysNew(emailField, EmailAddress);
 	  validateNew(Submitbutton);
-	  Submitbutton.click();	 
+	  jsClickNew(Submitbutton);	 
 	  if(validateNew(medicareGuidePopup)){
 		  System.out.println("Pop up message has been displayed");
 		  WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
