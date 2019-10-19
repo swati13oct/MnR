@@ -57,7 +57,8 @@ public class VppEmailAndPrintStepDefinition {
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validatePrintFunctionOnSummaryPage(planType);
+		String pageType="summary";
+		util.validatePrintOptionOnPage(pageType, planType);
 	}
 
 	@Then("^user validates email option for selected plan on plan summary page on test site$")
@@ -108,7 +109,8 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validatingFunctionalityOfPrintOnPlanDetails(planType);
+		String pageType="detail";
+		util.validatePrintOptionOnPage(pageType, planType);
 	}
 
 	@Then("^the user validates the functionality of print button on the plan compare Page in test site$")
@@ -116,7 +118,8 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validatingFunctionalityOfPrintOnPlanCompare(planType);
+		String pageType="compare";
+		util.validatePrintOptionOnPage(pageType,planType);
 	}
 
 	@Then("^the user view plan details of the first plan in the given plan type and perform validation in test site$")
@@ -148,6 +151,7 @@ public class VppEmailAndPrintStepDefinition {
 		String site=(String) getLoginScenario().getBean(PageConstants.ACQ_PAGE_TYPE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
 		if (site.equalsIgnoreCase("ulayer")) {
 			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -155,7 +159,12 @@ public class VppEmailAndPrintStepDefinition {
 			if (planType.equalsIgnoreCase("MA")) {
 				plansForCompare=plansummaryPage.checkAllMAPlans();
 			} else {  //note: if not MA then it's PDP
+				//note: PDP somehow takes longer to load
+				CommonUtility.checkPageIsReady(wDriver);
+				util.waitForSummaryPageToLoad();
 				plansForCompare=plansummaryPage.checkAllPDPlans();
+				CommonUtility.checkPageIsReady(wDriver);
+				util.waitForComparePageToLoad();
 			}
 			getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 			pages.acquisition.ulayer.ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
@@ -168,7 +177,11 @@ public class VppEmailAndPrintStepDefinition {
 			if (planType.equalsIgnoreCase("MA")) {
 				plansForCompare=plansummaryPage.checkAllMAPlansCount();
 			} else {  //note: if not MA then it's PDP
+				CommonUtility.checkPageIsReady(wDriver);
+				util.waitForSummaryPageToLoad();
 				plansForCompare=plansummaryPage.checkAllPDPlans();
+				CommonUtility.checkPageIsReady(wDriver);
+				util.waitForComparePageToLoad();
 			}
 			getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 			ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);

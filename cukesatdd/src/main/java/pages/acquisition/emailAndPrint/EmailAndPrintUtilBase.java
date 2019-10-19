@@ -125,4 +125,56 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		}
 	}
 
+	public void validatePrintOptionOnPage(String pageType, String planType) {
+		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
+		// for now will only validate the print button will bring up the print preview page
+		CommonUtility.checkPageIsReady(driver);
+		if (pageType.equalsIgnoreCase("summary")) {
+			WebElement summary_printButton=null;
+			if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+				summary_printButton=summary_maPrintOption;
+			} else if (planType.equalsIgnoreCase("pdp")) {
+				summary_printButton=summary_pdpPrintOption;
+			} else if (planType.equalsIgnoreCase("snp")) {
+				summary_printButton=summary_snpPrintOption;
+			} else {
+				Assert.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
+			}
+			summary_printButton.click();
+		} else if (pageType.equalsIgnoreCase("compare")) {
+			compare_validateprintbutton.click();
+		} else if (pageType.equalsIgnoreCase("detail")) {
+			validatePrintButtonOnPlanDetails.click();
+		} else {
+			Assert.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
+		}
+
+		// Store the current window handle
+		String winHandleBefore = driver.getWindowHandle();
+		//System.out.println("TEST --------------- before handler="+driver.getWindowHandle());
+		String originalPageTitle=driver.getTitle();
+
+		//switch to handle the new print window
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
+		}
+		sleepBySec(5); //note: keep for the print page to load
+		//CommonUtility.checkPageIsReady(driver);
+		// Perform the actions on new window
+		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
+		System.out.println("Proceed to validate the new window content for print");
+		String printPreviewPageTitle=driver.getTitle();
+		Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
+
+		System.out.println("Proceed to close the print preview window");
+		driver.close();
+
+		// note: Switch back to original browser (first window)
+		driver.switchTo().window(winHandleBefore);
+
+		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
+		String pageTitleAfterClosingPrintPreview=driver.getTitle();
+		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+	}
+	
 }

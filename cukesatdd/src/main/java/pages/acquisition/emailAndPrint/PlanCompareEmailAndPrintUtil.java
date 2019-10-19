@@ -22,6 +22,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void openAndValidate() {
 	}
 
+	/* tbd 
 	public void validatingFunctionalityOfPrintOnPlanCompare(String planType) {
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
@@ -38,7 +39,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		for(String winHandle : driver.getWindowHandles()){
 			driver.switchTo().window(winHandle);
 		}
-		sleepBySec(5);
+		sleepBySec(5); //note: keep for the print page to load
 		//CommonUtility.checkPageIsReady(driver);
 		// Perform the actions on new window
 		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
@@ -57,7 +58,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 
 		
-	}
+	} */
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat) {
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
@@ -167,7 +168,6 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void validateEmailPlanCompare() {
 		validateNew(compare_validateemailbutton);
 		System.out.println("successfully validated the Email in plan compare page ");
-
 	}
 
 	public String compare_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
@@ -175,6 +175,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
 		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
 			//note: keep this for now in case anything needs to be bypassed
+			//note: for now can't tell because page is flashing
 			//if (targetKey.equals("xyz")) { 
 			//	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
 			//	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
@@ -263,38 +264,8 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		return testNote;
 	}
 	
-	public void validateComparePrintOption(String planType) {
-		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
-		// for now will only validate the print button will bring up the print preview page
-		System.out.println("Proceed to validate print popup screen for cancel option");
-		compare_validateprintbutton.click();
-
-		// Store the current window handle
-		String winHandleBefore = driver.getWindowHandle();
-		//System.out.println("TEST --------------- before handler="+driver.getWindowHandle());
-		String originalPageTitle=driver.getTitle();
-
-		//switch to handle the new print window
-		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
-		}
-		sleepBySec(5);
-		//CommonUtility.checkPageIsReady(driver);
-		// Perform the actions on new window
-		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
-		System.out.println("Proceed to validate the new window content for print");
-		String printPreviewPageTitle=driver.getTitle();
-		Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
-
-		System.out.println("Proceed to close the print preview window");
-		driver.close();
-
-		// note: Switch back to original browser (first window)
-		driver.switchTo().window(winHandleBefore);
-
-		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
-		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
-	}
+	public void waitForComparePageToLoad() {
+		CommonUtility.waitForPageLoad(driver, cmpPgHeader, 5);
+	} 
 
 }

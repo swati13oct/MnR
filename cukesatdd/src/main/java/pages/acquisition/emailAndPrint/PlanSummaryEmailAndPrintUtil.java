@@ -22,6 +22,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void openAndValidate() {
 	}
 
+	/* tbd 
 	public void validatePrintFunctionOnSummaryPage(String planType) {
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
@@ -48,7 +49,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		for(String winHandle : driver.getWindowHandles()){
 			driver.switchTo().window(winHandle);
 		}
-		sleepBySec(5);
+		sleepBySec(5); //note: keep for the print page to load
 		//CommonUtility.checkPageIsReady(driver);
 		// Perform the actions on new window
 		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
@@ -65,7 +66,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
 		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
-	}
+	} */
 
 	public void validateEmailOptionExistOnSummaryPage(String planType) {
 		WebElement emailElement=null;
@@ -287,11 +288,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	}
 
 	public boolean validateAllPlansCheckedOnSummaryPage(String plansForCompare) {
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		waitForSummaryPageToLoad();
 		List<WebElement> compareChkBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-add')]"));	
 		String expectedTxt=plansForCompare+" plans added";
 		System.out.println("Validate there are "+plansForCompare+" number of plans added for compare");
@@ -304,5 +301,9 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			}
 		}
 		return result;
+	}
+	
+	public void waitForSummaryPageToLoad() {
+		CommonUtility.waitForPageLoad(driver, vppTop, 5);
 	}
 }
