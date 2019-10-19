@@ -98,16 +98,16 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     And the user views the plans of the below plan type on test site
       | Plan Type       | <plantype> |
       | Site       | <site> |
-    Then user saves first plan on test site
+    Then user saves first plan on plan summary page on test site
     Then I select multiple plans to compare for selected plan and click on compare plan link in the test site
       | plan type       | <plantype> |
     Then the user validate the print link option in plan compare on test site
     Then the user validates the functionality of print button on the plan compare Page in test site
     Then the user validate the email link option in plan compare on test site
     Then the user validate thank you message in plan compare for selected plan in test site
-    Then I click back to all plans button and verify that all plans are still selected on test site
+    Then I click back to all plans button and verify that all plans are still selected on summary page on test site
     Then user loads page using email deeplink and validate vpp compare page content on test site
-  
+ 
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
      | 15523 | Ulayer |90210   | MA                | NO            | 
@@ -147,11 +147,11 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
     And the user views the plans of the below plan type on test site
       | Plan Type       | <plantype> |
       | Site       | <site> |
-    Then user saves first plan on test site
-    Then user validates print option for selected plan on test site
+    Then user saves first plan on plan summary page on test site
+    Then user validates print option for selected plan on plan summary page on test site
 	Then user validates print functionality for selected plan on plan summary page on test site
-    Then user validates email option for selected plan on test site
-	Then user validates email functionality with invalid and valid email address for selected plan on test site
+    Then user validates email option for selected plan on plan summary page on test site
+	Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site
 	Then user loads page using email deeplink for plan and validate vpp summary page content on test site
 
     Examples: 

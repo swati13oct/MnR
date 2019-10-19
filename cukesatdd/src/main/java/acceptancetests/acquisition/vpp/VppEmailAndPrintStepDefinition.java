@@ -22,7 +22,7 @@ import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
 import pages.acquisition.ulayer.ComparePlansPage;
 
 /**
- * Functionality: VPP flow for AARP site
+ * Functionality: VPP flow for Acquisition
  */
 /**
  * Steps related to email and print validation for both ulayer and blayer
@@ -37,43 +37,43 @@ public class VppEmailAndPrintStepDefinition {
 		return loginScenario;
 	}
 
-	@Then("^user saves first plan on test site$")
+	@Then("^user saves first plan on plan summary page on test site$")
 	public void saveFirtPlan() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.savedHeartFirstPlan();
+		util.savedHeartFirstPlanOnSummaryPage();
 	}
 
-	@Then("^user validates print option for selected plan on test site$")
-	public void user_validates_print_option_for_plan_on_AARP_site() {
+	@Then("^user validates print option for selected plan on plan summary page on test site$")
+	public void user_validates_print_option_for_plan_on_test_site() {
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validatePrintOptionExistOnPage(planType);
+		util.validatePrintOptionExistOnSummaryPage(planType);
 	}
 
 	@Then("^user validates print functionality for selected plan on plan summary page on test site$")
-	public void user_validates_print_functionality_for_plan_on_AARP_site() {
+	public void user_validates_print_functionality_for_plan_on_test_site() {
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validateSummaryPrintOption(planType);
+		util.validatePrintFunctionOnSummaryPage(planType);
 	}
 
-	@Then("^user validates email option for selected plan on test site$")
-	public void user_validates_email_option_on_for_selected_plan_AARP_site() {
+	@Then("^user validates email option for selected plan on plan summary page on test site$")
+	public void user_validates_email_option_on_for_selected_plan_test_site() {
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validateEmailOptionExistOnPage(planType);
+		util.validateEmailOptionExistOnSummaryPage(planType);
 	}
 
-	@Then("^user validates email functionality with invalid and valid email address for selected plan on test site$")
-	public void user_validates_email_functionality_on_for_selected_plan_AARP_site() {
+	@Then("^user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site$")
+	public void user_validates_email_functionality_on_for_selected_plan_test_site() {
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validateEmailOption(planType);
+		util.validateEmailFunctionOnSummaryPage(planType);
 
 		//note: collect page data for email deeplink validation
 		HashMap<String, Integer> vppSummaryPgInfo=util.collectInfoVppPlanSummaryPg();
@@ -84,10 +84,6 @@ public class VppEmailAndPrintStepDefinition {
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);	
 	}
 
-	/**
-	 * the user validates the functionality of email and print buttons on
-	 *           the plan Details Page
-	 */
 	@Then("^the user validates the functionality of email button on the plan Details Page in test site$")
 	public void user_validates_the_functionality_of_email_button_on_the_plan_Details_Page() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
@@ -124,7 +120,7 @@ public class VppEmailAndPrintStepDefinition {
 	}
 
 	@Then("^the user view plan details of the first plan in the given plan type and perform validation in test site$")
-	public void user_views_plandetails_selected_plantype_and_store_info_aarp() {
+	public void user_views_plandetails_selected_plantype_and_store_info_test() {
 		String site=(String) getLoginScenario().getBean(PageConstants.ACQ_PAGE_TYPE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
@@ -190,7 +186,7 @@ public class VppEmailAndPrintStepDefinition {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
 
-		util.validatingthankyoumessage();
+		util.validatePlanCompareEmailThankYouMessage();
 
 		//note: collect page data for email deeplink validation
 		util=new EmailAndPrintUtil(wDriver);
@@ -341,27 +337,27 @@ public class VppEmailAndPrintStepDefinition {
 	}
 
 
-	@Then("^I click back to all plans button and verify that all plans are still selected on test site$")
+	@Then("^I click back to all plans button and verify that all plans are still selected on summary page on test site$")
 	public void verifyAllPlansStillSelected() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
 
 		String plansForCompare=(String) getLoginScenario().getBean(PageConstants.plansForCompare);
-		util.clickonBackToAllPlans();
-		Assert.assertTrue("Error in validating all plans are still selected",util.validateAllPlansChecked(plansForCompare));
+		util.clickOnBackToAllPlansFromCompareBackToSummaryPage();
+		Assert.assertTrue("Error in validating all plans are still selected",util.validateAllPlansCheckedOnSummaryPage(plansForCompare));
 	}	
 
 	@When("^the user validate the email link option in plan compare on test site$")
 	public void user_validate_email_link_option_in_plan_compare() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validateCompareEmail();
+		util.validateEmailPlanCompare();
 	}
 
 	@When("^the user validate the print link option in plan compare on test site$")
 	public void user_validate_print_link_option_in_plan_compare() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		util.validateComparePrint();
+		util.validatePrintPlanCompare();
 	}
 }
