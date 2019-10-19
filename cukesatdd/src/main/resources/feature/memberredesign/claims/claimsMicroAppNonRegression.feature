@@ -1,5 +1,5 @@
-@claimsMicroApp @thePredetors
-Feature: T1.1To validate the claims Summary page and claims Details page on the member site
+@thePredetors
+Feature: T1.1To validate the claims Summary page and claims Details page on the member site - Extensive
 
   #----- beginning of claims00 ---------------------------------------------------------
   # DO NOT REMOVE this scenario
@@ -17,7 +17,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For NICE Medical & Drug - @claims00_N_M_p1 + @claims00_N_D_p1 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
-  @claimsMicroApp00 @def1041 @thePredators
+  @claimsMicroApp00
   Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type    | <planType>    |
@@ -140,7 +140,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   claimSystem = e.g. COSMOS / NICE / RX / COMPASS
   # note:   claimType = e.g. Prescription drug / Medical / NA (for ship)
   # note:   flagZeroClaimsUser = Yes / No (do you want to fail the test if user has 0 claims)
-  @forLocalTestOnly
   Scenario Outline: To validate via member authorization access for claims
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
