@@ -18,7 +18,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
   @claimsMicroApp00
-  Scenario Outline: DID: <DID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - <index> - Perform detail validation for claims on both summary and detail page for each search range options
+  Scenario Outline: -index <index> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |

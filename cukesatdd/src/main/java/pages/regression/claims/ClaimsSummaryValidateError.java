@@ -116,7 +116,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 		//tbd if (getOnlyTestUiFlag())
 		//tbd 	System.out.println("TEST UI ONLY - will not flag sytem error");
 		//tbd else
-			Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg, timeoutInSec));
+		Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg, timeoutInSec));
 	}
 
 	/**

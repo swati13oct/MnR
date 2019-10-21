@@ -281,15 +281,18 @@ public class ClaimDetailsPageStepDefinition {
 
 			if (!claimDetlPg.getOnlyTestUiFlag()) {
 				System.out.println("Proceed to validate 'Need Help' section on detail page");
-				String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
-				//note: if all goes well, go back to summary page to prep for next step
-				//note: if combo plan, after NeedHelp validation should land back on claims summary page.
-				//note: but for non combo case, need to go back to claims summary page 
-				if (!currentURL.contains("member/claims.html#/overview")) {
-					claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
-				} 
+				if (!MRScenario.environment.equalsIgnoreCase("team-a"))
+					System.out.println("NOTE: MRREST product summary call (used for Need Help) is disabled on team env, will skip this validation on team-a env");
+				else {
+					String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
+					//note: if all goes well, go back to summary page to prep for next step
+					//note: if combo plan, after NeedHelp validation should land back on claims summary page.
+					//note: but for non combo case, need to go back to claims summary page 
+					if (!currentURL.contains("member/claims.html#/overview")) {
+						claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
+					} 
+				}
 			}
-
 		}
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordBypass);
 	}
