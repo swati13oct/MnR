@@ -35,10 +35,6 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 		return planSummaryEmailAndPrintUtil.collectInfoVppPlanSummaryPg();
 	}
 	
-	public String summary_comparePageItem(String targetKey, HashMap<String, Integer> origPage, HashMap<String, Integer> emailage) {
-		return planSummaryEmailAndPrintUtil.summary_comparePageItem(targetKey, origPage, emailage);
-	}
-	
 	public List<String> validatePlanSummaryEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, Integer> origPage) {
 		return planSummaryEmailAndPrintUtil.validatePlanSummaryEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 	}
@@ -72,10 +68,6 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 		planComapreEmailAndPrintUtil.validateEmailPlanCompare();
 	}
 	
-	public String compare_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
-		return planComapreEmailAndPrintUtil.compare_comparePageItem(targetKey, origPage, emailage);
-	}
-	
 	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
 		return planComapreEmailAndPrintUtil.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 	}
@@ -88,10 +80,6 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public HashMap<String, String> collectInfoVppPlanDetailPg(String plantype, String forWhat) {
 		return planDetailsEmailAndPrintUtil.collectInfoVppPlanDetailPg(plantype, forWhat);
 	}	
-
-	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
-		return planDetailsEmailAndPrintUtil.detail_comparePageItem(targetKey, origPage, emailage);
-	}
 
 	public List<String> validatePlanDetailEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
 		return planDetailsEmailAndPrintUtil.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
@@ -109,9 +97,4 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 		planDetailsEmailAndPrintUtil.validateEmailOnPlanDetails();
 	}
 
-	/* tbd 
-	public void validateDetailPrintOption(String planType) {
-		planDetailsEmailAndPrintUtil.validateDetailPrintOption(planType);
-	} */
-		
 }

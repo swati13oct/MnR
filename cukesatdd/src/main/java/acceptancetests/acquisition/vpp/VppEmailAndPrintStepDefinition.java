@@ -231,6 +231,7 @@ public class VppEmailAndPrintStepDefinition {
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		List<String> noteList=util.validatePlanSummaryEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
@@ -255,7 +256,7 @@ public class VppEmailAndPrintStepDefinition {
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
 		util.checkModelPopup(newTestDriver);
-
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util = new EmailAndPrintUtil(newTestDriver);
 		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
@@ -285,7 +286,8 @@ public class VppEmailAndPrintStepDefinition {
 		//note: temperary bypass for now until the flash issue is resolved
 		List<String> noteList=new ArrayList<String>();
 		noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink page content flashing");
-		//note: do not remove the comment line below
+		//note: do not remove the comment lines below
+		//wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		//List<String> noteList=util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}

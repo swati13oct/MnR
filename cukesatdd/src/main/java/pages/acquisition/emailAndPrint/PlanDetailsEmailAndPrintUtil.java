@@ -91,19 +91,24 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	}
 
 	
-	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
+	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage, String planType) {
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
 		//note: MA  BYPASS: T1S1R2C2 T2S1R7C2 T2S1R8C2 T3S1B1 
 		//note: PDP BYPASS: T1S1R7C2 T1S1R8C2 T1S1R10C2 T1S1R17C1 
 		//note: SNP BYPASS: T1S1R2C2 T1S1R9C2  T1S1R10C2 T2S1R1C2 T2S1R3C2 T2S1R4C2 T2S1R5C2 
 		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
-			if (targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2") || targetKey.equals("T3S1B1")
-				||	targetKey.equals("T1S1R7C2") || targetKey.equals("T1S1R8C2") || targetKey.equals("T1S1R10C2") || targetKey.equals("T1S1R17C1")
-				||	targetKey.equals("T1S1R2C2") || targetKey.equals("T1S1R9C2") || targetKey.equals("T1S1R10C2") || targetKey.equals("T2S1R1C2")
-				||	targetKey.equals("T2S1R3C2") || targetKey.equals("T2S1R4C2") || targetKey.equals("T2S1R5C2") 
+			if (((planType.equalsIgnoreCase("MA")) && 
+					(targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2") || targetKey.equals("T3S1B1")))
+				||	
+					((planType.equalsIgnoreCase("PDP")) &&
+					(targetKey.equals("T1S1R7C2") || targetKey.equals("T1S1R8C2") || targetKey.equals("T1S1R10C2") || targetKey.equals("T1S1R17C1")))
+				||	
+					((planType.equalsIgnoreCase("SNP")) &&
+					(targetKey.equals("T1S1R2C2") || targetKey.equals("T1S1R9C2") || targetKey.equals("T1S1R10C2") || targetKey.equals("T2S1R1C2")
+					||	targetKey.equals("T2S1R3C2") || targetKey.equals("T2S1R4C2") || targetKey.equals("T2S1R5C2"))) 
 					) {
-				failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+				failedMessage="BYPASS '"+planType+"' validation until fix (tick# xxxxx) - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else {
 				detail_finalResult=false;
@@ -124,7 +129,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		HashMap<String, String> emailPage=collectInfoVppPlanDetailPg(planType, "from deepLink");
 		
 		String targetKey="Total Tabs";
-		String failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+		String failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 		System.out.println("HMM here?? - failedMessage="+failedMessage);
 		if (failedMessage.contains("mismatch")) 
 			listOfFailure.add(failedMessage);	
@@ -135,7 +140,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		System.out.println("TEST - totalTabs="+totalTabs);
 		for (int tabIndex=1; tabIndex<=totalTabs; tabIndex++) { //note: loop through each table and validate info
 			targetKey="Total Sections Per T"+tabIndex;
-			failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+			failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 			if (failedMessage.contains("mismatch")) 
 				listOfFailure.add(failedMessage);	
 			if (failedMessage.contains("BYPASS")) 
@@ -146,7 +151,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 			for(int sectionIndex=1; sectionIndex<=totalSectionsPerTab; sectionIndex++) { //note: loop through each section table
 				targetKey="Total Rows For T"+tabIndex+"S"+sectionIndex;
-				failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+				failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 				if (failedMessage.contains("mismatch")) 
 					listOfFailure.add(failedMessage);	
 				if (failedMessage.contains("BYPASS")) 
@@ -156,7 +161,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				System.out.println("TEST - totalRowsPerSectionOfActiveTab="+totalRowsPerSectionOfActiveTab);
 				if (totalRowsPerSectionOfActiveTab==0) {  //note: no table so check for box
 					targetKey="Total Boxs For T"+tabIndex+"S"+sectionIndex;
-					failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+					failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 					if (failedMessage.contains("mismatch")) 
 						listOfFailure.add(failedMessage);	
 					if (failedMessage.contains("BYPASS")) 
@@ -166,7 +171,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					System.out.println("TEST - totalBoxesPerSectionOfActiveTab="+totalBoxesPerSectionOfActiveTab);
 					for(int boxIndex=1; boxIndex<=totalBoxesPerSectionOfActiveTab; boxIndex++) {
 						targetKey="T"+tabIndex+"S"+sectionIndex+"B"+boxIndex;
-						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 						if (failedMessage.contains("mismatch")) 
 							listOfFailure.add(failedMessage);	
 						if (failedMessage.contains("BYPASS")) 
@@ -179,7 +184,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				} else {
 					for(int rowIndex=1; rowIndex<=totalRowsPerSectionOfActiveTab; rowIndex++) { //note: loop through each row
 						targetKey="Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex;
-						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 						if (failedMessage.contains("mismatch")) 
 							listOfFailure.add(failedMessage);	
 						if (failedMessage.contains("BYPASS")) 
@@ -189,7 +194,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 						System.out.println("TEST - totalCellsPerRow="+totalCellsPerRow);
 						for (int cellIndex=1; cellIndex<=totalCellsPerRow; cellIndex++) { //note: loop through each cell on the row
 							targetKey="T"+tabIndex+"S"+sectionIndex+"R"+rowIndex+"C"+cellIndex;
-							failedMessage=detail_comparePageItem(targetKey, origPage, emailPage);
+							failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 							if (failedMessage.contains("mismatch")) 
 								listOfFailure.add(failedMessage);	
 							if (failedMessage.contains("BYPASS")) 
