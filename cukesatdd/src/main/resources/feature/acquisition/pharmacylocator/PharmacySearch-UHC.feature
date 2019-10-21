@@ -158,7 +158,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
-   # @pharmacylocatorblayer02a @prodRegression
+    @pharmacylocatorblayer02a @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
@@ -178,7 +178,6 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
   @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
-
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
