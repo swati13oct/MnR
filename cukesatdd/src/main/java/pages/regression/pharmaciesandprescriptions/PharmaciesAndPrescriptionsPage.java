@@ -125,8 +125,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		else
 			validateTileNotExist(exp_TileHeaderTxt, exp_tileHeaderElement, exp_tileImg, exp_tileLnk);
 
-		exp_TileHeaderTxt="View your costs and plan benefits";
-		exp_TileLinkTxt="VIEW PRESCRIPTION DRUG COST SUMMARY";
+		exp_TileHeaderTxt="View your drug spending to date";
+		exp_TileLinkTxt="DRUG COST SUMMARY";
 		exp_tileHeaderElement=pTile_presBenfitInfoHeaderTxt;
 		exp_tileImg=pTile_presBenfitInfoImg;
 		exp_tileLnk=pTile_presBenfitInfoLnk;
