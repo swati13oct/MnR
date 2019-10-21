@@ -481,8 +481,8 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public boolean claimsValidate(WebElement element) {
 		long timeoutInSec=2;
-		return claimsValidate(element, timeoutInSec);
-		//return validate(element, timeoutInSec);
+		//tbd return claimsValidate(element, timeoutInSec);
+		return validate(element, timeoutInSec);
 	} 
 
 	/**
@@ -492,6 +492,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd 
 	public boolean claimsValidate(WebElement element, long timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -507,7 +508,7 @@ public class ClaimsBase extends UhcDriver  {
 
 		}
 		return false;
-	} 
+	} */
 
 	public void handleHowIsYourVisit() {
 		int counter = 0;

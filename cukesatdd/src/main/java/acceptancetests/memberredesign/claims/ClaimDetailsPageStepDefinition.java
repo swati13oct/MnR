@@ -145,7 +145,10 @@ public class ClaimDetailsPageStepDefinition {
 		} 
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetlPg.validateClaimsTotSection();
+		
+		claimDetlPg.validateSystemErrorMsgNotExist();
+		
+		claimDetlPg.validateClaimsTotSection(planType);
 	}
 
 	/**
@@ -250,7 +253,9 @@ public class ClaimDetailsPageStepDefinition {
 
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
-
+			
+			claimDetlPg.validateSystemErrorMsgNotExist();
+			
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, claimDetlPg);

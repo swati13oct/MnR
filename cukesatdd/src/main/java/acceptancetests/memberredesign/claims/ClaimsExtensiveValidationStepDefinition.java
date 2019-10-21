@@ -190,6 +190,9 @@ public class ClaimsExtensiveValidationStepDefinition {
 					ClaimDetailsPage newClaimDetailsPage = claimsSummaryPage.navigateToClaimDetailsPgByClaimRow(x);
 					Assert.assertTrue("PROBLEM - unable to load claims detail page from a given claims row on claims summary page. "
 							+ "table row index='"+x+"'", newClaimDetailsPage!=null);
+					
+					newClaimDetailsPage.validateSystemErrorMsgNotExist();
+					
 					System.out.println("Proceed to validate claims table");
 					getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 					//note: collect the values on the detail page then perform comparison between data collected from summary page
@@ -202,8 +205,12 @@ public class ClaimsExtensiveValidationStepDefinition {
 					}
 
 					System.out.println("Proceed to validate claims total - if encounter INC10332773 then ignore the failure for now");
-					newClaimDetailsPage.validateClaimsTotalAccurate(invokedBypass_INC10332773_YourShareMissmatched, planType);
+					double totalYourPlanPaid=newClaimDetailsPage.validateClaimsTotalAccurate(invokedBypass_INC10332773_YourShareMissmatched, planType);
 
+					if (planType.equalsIgnoreCase("SHIP")) {
+						double adjustmentValue=newClaimDetailsPage.validateClaimsTotSection(planType);
+						Assert.assertTrue("PROBLEM - 'Your Plan Paid' value is not the same as the 'Adjustment' value. totalYourPlanPaid='"+totalYourPlanPaid+"' | adjustmentValue='"+adjustmentValue+"' ", totalYourPlanPaid==adjustmentValue);
+					}
 					//note: if all goes well, go back to the summary page to prep for next run
 					claimsSummaryPage= newClaimDetailsPage.navigateBackToClaimSummPg(planType, claimPeriod);
 					Assert.assertTrue("PROBLEM - unable to get back to claims summary page to prep for next test step", 

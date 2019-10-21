@@ -22,6 +22,11 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	public void openAndValidate() {
 	}
 
+	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
+	
+	public void setTestOnlyUiFlagForAll(boolean b) {
+		validateError.setOnlyTestUiFlag(b);
+	}
 	/**
 	 * Validate tooltips on claims detail page
 	 * @param planType This is the plan type for testing
@@ -329,10 +334,78 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	/**
 	 * This method validates Claims total table on claims detail page
 	 */
-	public void validateClaimsTotSection() {
+	public double validateClaimsTotSection(String planType) {
 		CommonUtility.waitForPageLoadNew(driver, claimsTotTbl, 5);
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", 
 				claimsValidate(claimsTotTbl));
+
+		double result=0.0;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle in Claims Total section of Claims Details Page", 
+					claimsValidate(adjustmentToggleCollapsed));
+
+			adjustmentToggleCollapsed.click();
+
+			Assert.assertTrue("PROBLEM - Unable to locate the Expanded 'Adjustment' toggle in Claims Total section of Claims Details Page after clicking", 
+					claimsValidate(adjustmentToggleExpanded));
+			
+			//note: payable amount section
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' section after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSection));
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' value after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSectionValue));
+
+			String actPayableAmountValueStr=adjustmentPayableAmountSectionValue.getText().replace("$", "");
+			System.out.println("TEST - adjustmentPayableAmountSectionValue.getText()="+adjustmentPayableAmountSectionValue.getText());
+			System.out.println("TEST - actPayableAmountValueStr="+actPayableAmountValueStr);
+			double actPayableAmountValue=Double.valueOf(actPayableAmountValueStr);
+			System.out.println("TEST - actPayableAmountValueStr="+actPayableAmountValueStr);
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' text after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSectionText));
+			
+			String expTxt="Payable Amount";
+			String actTxt=adjustmentPayableAmountSectionText.getText();
+			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
+
+			//note: payment adjustment section
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Adjustment' section after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSection));
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' sign after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSectionSign));
+
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' value after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSectionValue));
+
+			String actPayableAdjValueStr=adjustmentPayableAmountSectionValue.getText().replace("$", "");
+			System.out.println("TEST - adjustmentPayableAmountSectionValue.getText()="+adjustmentPayableAmountSectionValue.getText());
+			System.out.println("TEST - actPayableAdjValueStr="+actPayableAdjValueStr);
+			double actPayableAdjValue=Double.valueOf(actPayableAdjValueStr);
+			System.out.println("TEST - actPayableAdjValue="+actPayableAdjValue);
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' text after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSectionText));
+
+			expTxt="Payment Adjustment";
+			actTxt=adjustmentPaymentAdjustmentSectionText.getText();
+			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
+
+			//note: do the math, will compare value with '"+Your Plan Paid+"' value for extensive validation case
+			if (adjustmentPaymentAdjustmentSectionSign.getText().equals("-")) {
+				result=actPayableAmountValue-actPayableAdjValue;
+			} else {
+				result=actPayableAmountValue+actPayableAdjValue;
+			}
+			
+			adjustmentToggleExpanded.click();
+	
+			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle after clicking to collapse it", 
+					claimsValidate(adjustmentToggleCollapsed));
+
+
+		}
+		return result;
 	}
 
 	/**
@@ -427,7 +500,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	 * @param invokedBypass If true (due to known defect/ticket) then it will not flag the mismatch 
 	 * @param planType This is the plan for testing
 	 */
-	public void validateClaimsTotalAccurate(boolean invokedBypass, String planType) {
+	public double validateClaimsTotalAccurate(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
@@ -490,6 +563,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  "
 					+ "totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, 
 					totalYourPlanPaid==rowTotalYourPlanPaid);
+			return totalYourPlanPaid;
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotItems.size()>0);
 			double totalAmountBilled=findValue(claimsTotItems.get(0));
@@ -543,6 +617,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 						+ "totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, 
 						totalYourShare==rowsTotalYourShare);
 			}
+			return totalYourShare;
 		}
 	}
 
@@ -584,5 +659,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			else
 				throw new IllegalArgumentException("Invalid String");
 		}
+	}
+	
+	public void validateSystemErrorMsgNotExist() {
+		validateError.validateNoSystemErr();
 	}
 }

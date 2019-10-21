@@ -273,6 +273,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			boolean onlyTestUiFlag=getOnlyTestUiFlag();
 			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
 			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			claimDetailsPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
 			return claimDetailsPg;
 			//tbd return new pages.regression.claims.ClaimDetailsPage(driver);
 		}
@@ -346,6 +347,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			boolean onlyTestUiFlag=getOnlyTestUiFlag();
 			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
 			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			claimDetlPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
 			return claimDetlPg;
 		}
 		return null;
@@ -385,6 +387,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		boolean onlyTestUiFlag=getOnlyTestUiFlag();
 		ClaimDetailsPage claimDetailPg=new ClaimDetailsPage(driver);
 		claimDetailPg.setOnlyTestUiFlag(onlyTestUiFlag);
+		claimDetailPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
 		return claimDetailPg;
 		//tbd return new ClaimDetailsPage(driver);
 	}
