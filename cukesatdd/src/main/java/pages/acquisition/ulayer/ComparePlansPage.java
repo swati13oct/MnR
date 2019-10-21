@@ -1,15 +1,24 @@
 package pages.acquisition.ulayer;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
 public class ComparePlansPage extends UhcDriver {
@@ -301,5 +310,6 @@ public class ComparePlansPage extends UhcDriver {
 		closeButtonthankyoumessagepopup.click();
 		System.out.println("Thank you Message pop up is closed");
 	}
+	
 }
 
