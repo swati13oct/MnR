@@ -364,12 +364,11 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' text after expanding the adjustment toggle", 
 					claimsValidate(adjustmentPayableAmountSectionText));
-			
 			String expTxt="Payable Amount";
 			String actTxt=adjustmentPayableAmountSectionText.getText();
 			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
 
-			//note: payment adjustment section
+			//note: payment adjustment section -------------------------
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Adjustment' section after expanding the adjustment toggle", 
 					claimsValidate(adjustmentPaymentAdjustmentSection));
 			
@@ -379,25 +378,28 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' value after expanding the adjustment toggle", 
 					claimsValidate(adjustmentPaymentAdjustmentSectionValue));
 
-			String actPayableAdjValueStr=adjustmentPayableAmountSectionValue.getText().replace("$", "");
+			String actPaymentAdjustmentSectionValueStr=adjustmentPaymentAdjustmentSectionValue.getText().replace("$", "");
 			System.out.println("TEST - adjustmentPayableAmountSectionValue.getText()="+adjustmentPayableAmountSectionValue.getText());
-			System.out.println("TEST - actPayableAdjValueStr="+actPayableAdjValueStr);
-			double actPayableAdjValue=Double.valueOf(actPayableAdjValueStr);
-			System.out.println("TEST - actPayableAdjValue="+actPayableAdjValue);
+			System.out.println("TEST - actPaymentAdjustmentSectionValueStr="+actPaymentAdjustmentSectionValueStr);
+			double actPaymentAdjustmentSectionValue=Double.valueOf(actPaymentAdjustmentSectionValueStr);
+			System.out.println("TEST - actPaymentAdjustmentSection="+actPaymentAdjustmentSectionValue);
+			
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' text after expanding the adjustment toggle", 
-					claimsValidate(adjustmentPaymentAdjustmentSectionText));
-
+			claimsValidate(adjustmentPaymentAdjustmentSectionText));
 			expTxt="Payment Adjustment";
 			actTxt=adjustmentPaymentAdjustmentSectionText.getText();
 			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
 
 			//note: do the math, will compare value with '"+Your Plan Paid+"' value for extensive validation case
+			System.out.println("TEST - adjustmentPaymentAdjustmentSectionSign.getText()="+adjustmentPaymentAdjustmentSectionSign.getText());
 			if (adjustmentPaymentAdjustmentSectionSign.getText().equals("-")) {
-				result=actPayableAmountValue-actPayableAdjValue;
+				result=actPayableAmountValue-actPaymentAdjustmentSectionValue;
+				System.out.println("TEST - subtract : '"+actPayableAmountValue+"'-'"+actPaymentAdjustmentSectionValue+"'="+(actPayableAmountValue-actPaymentAdjustmentSectionValue));
 			} else {
-				result=actPayableAmountValue+actPayableAdjValue;
+				result=actPayableAmountValue+actPaymentAdjustmentSectionValue;
+				System.out.println("TEST - add - '"+actPayableAmountValue+"'+'"+actPaymentAdjustmentSectionValue+"'"+(actPayableAmountValue-actPaymentAdjustmentSectionValue));
 			}
-			
+			System.out.println("TEST - result="+result);
 			adjustmentToggleExpanded.click();
 	
 			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle after clicking to collapse it", 
