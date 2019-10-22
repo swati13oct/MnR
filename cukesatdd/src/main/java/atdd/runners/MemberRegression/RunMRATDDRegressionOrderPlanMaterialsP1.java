@@ -1,4 +1,4 @@
-package atdd.runners.member;
+package atdd.runners.MemberRegression;
 
 import org.junit.runner.RunWith;
 
@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsP2")
+jsonReport = "target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP1.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP2.json" }, tags = { "@regressionMember,@regressionMember_Testharness","@GroupMemberOrderSelectionandConfirmation" })
-public class RunMRATDDRegressionOrderPlanMaterialsP2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP1.json" }, tags = { "@regressionMember,@regressionMember_Testharness","@Individual" })
+public class RunMRATDDRegressionOrderPlanMaterialsP1 {
 //,@regression_06_06_18
 }
