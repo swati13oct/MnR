@@ -57,12 +57,25 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
    
+    @mapd
     Examples: 
       | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
-      | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
       | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+
+    @pdp
+    Examples: 
+      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
+      | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
+
+    @pdp
+    Examples: 
+      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
+      | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
+
+    @ma
+    Examples: 
+      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MA       | MA-q2_may_rally017         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
 

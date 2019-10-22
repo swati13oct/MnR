@@ -115,13 +115,26 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #----------------- Final Test claims number makes sense from search periods --------------
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
-
+    
+    @mapd
     Examples: 
       | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_1  | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_2  | xxxxx | PDP      | PDP                        | COSMOS_CLAIMS   | Prescription drug | 000       | No                 | 
-      | 01_3  | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
       | 01_4  | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+
+    @pdp
+    Examples: 
+      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 01_2  | xxxxx | PDP      | PDP                        | COSMOS_CLAIMS   | Prescription drug | 000       | No                 | 
+
+    @ship
+    Examples: 
+      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 01_3  | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
+
+    @ma
+    Examples: 
+      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_5  | xxxxx | MA       | MA-q2_may_rally017         | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
 
