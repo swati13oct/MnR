@@ -69,9 +69,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateTileNotExist(String exp_TileHeaderTxt,  
 			WebElement exp_pTile_Txt, WebElement exp_pTile_img, WebElement exp_pTile_Lnk) {
 		Assert.assertTrue("PROBLEM - for PEEHIP member user should not see '"+exp_TileHeaderTxt+"' related elements", 
-				!pnpValidate(exp_pTile_Txt, 3)
-				&& !pnpValidate(exp_pTile_img, 3)
-				&& !pnpValidate(exp_pTile_Lnk, 3)
+				!pnpValidate(exp_pTile_Txt)
+				&& !pnpValidate(exp_pTile_img)
+				&& !pnpValidate(exp_pTile_Lnk)
 				);
 	}
 
@@ -238,19 +238,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	 * @param timeoutInSec
 	 * @return
 	 */
-	public boolean pnpValidate(WebElement element, int timeoutInSec) {
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
-			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
-				return true;
-			} else {
-				System.out.println("Element not found/not visible");
-			}
-		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-		}
-		return false;
+	public boolean pnpValidate(WebElement element) {
+		long defaultTimeoutInSec=3; 
+		return validate(element, defaultTimeoutInSec);
 	}
 }

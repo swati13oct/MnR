@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP3.json",deta
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderPlanMaterialsP3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP3.json" }, tags = { "@regressionMember,@regressionMember_Testharness","@ValidateHeaderComboTabs,@ValidateSHIPCouponBookErrorMessage,@orderPlanMaterials02" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderPlanMaterialsP3.json" }, tags = { "@regressionMember,@regressionMember_Testharness","@GroupMemberOrderSelectionandConfirmation" })
 public class RunMRATDDRegressionOrderPlanMaterialsP3 {
 //,@regression_06_06_18
 }
