@@ -45,7 +45,7 @@ Feature: 1.06 Member Plans and Documents Page
          | MAPD      | Individual_FormsResources | ENGLISH  | Benefit Highlights | Summary of Benefits | Evidence of Coverage | Certificate of Coverage | Comprehensive Formulary           | Alternative Drug List  | Prior Authorization | Step Therapy | Formulary Additions | Formulary Deletions | 
 	
 		 
-@formsAndResources1 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember
+@formsAndResources @F&RJMPLinks @Feb_release_2019 @gladiators
  Scenario Outline:  TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Rider: <rider>-To verify quicklinks for a MAPD member
    	Given login with following details logins in the member portal and validate elements
    	  | Plan Type      | <planType>      |

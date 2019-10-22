@@ -5,10 +5,14 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +22,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -1803,14 +1809,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-		if(planType.equalsIgnoreCase("PDP")){
-			validateNonPresenceOfElement(ProviderSearchLink);
-		}
-		else {
-			validateNew(ProviderSearchLink);           
-		}              
+		int attempts = 0;
+		while(attempts < 2) {
+	        try {
+				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+			                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+			    if(planType.equalsIgnoreCase("PDP")){
+			                    validateNonPresenceOfElement(ProviderSearchLink);
+			                    break;
+			    }
+			    else {
+			                    validateNew(ProviderSearchLink);
+			                    break;
+			    }
+	        }catch(StaleElementReferenceException e) {
+	        }
+	    	attempts++;
+		}    
 	}
 
 	public void validatePlanPremium (String planName , String monthlyPremium){
@@ -3113,5 +3128,21 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 	
-
+	//--------------------------------------------
+	//note: begin - added for deeplink validaton
+	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//span[contains(@class,'show')]//button[contains(text(),'Compare plans')]")
+	private WebElement firstComparePlanButton;
+	
+	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	private WebElement comparePgnHeader;
+	
+	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
+		firstComparePlanButton.click();
+		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
 }
