@@ -63,6 +63,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
       | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
       | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | MA       | MA-q2_may_rally017         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
 
 
 	
