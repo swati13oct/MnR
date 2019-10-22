@@ -198,7 +198,7 @@ public class MemberRedesignHeaderStepDefinition {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 		accountHomePage.findCareNotAvailable();
 		
-	
+	}
 
 	/**
 	 *  @toDo : see and validate Claims tab Header

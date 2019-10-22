@@ -1281,16 +1281,16 @@ public class TestHarness extends UhcDriver {
 		}
 
 		public void validatePaymentsTabNotDisplayed() {
-			if(premiumPayment.isDisplayed())
+			if(validate(premiumPayment))
 				Assert.fail("Payments tab not expected but still displayed");
 		}
 		public void validatePharmaciesTabNotDisplayed() {
-			if(pharmaciesTab.isDisplayed())
+			if(validate(pharmaciesTab))
 				Assert.fail("Pharmacies Tab is not expected but still displayed");
 			
 		}
 		public void validateHealthAndWellnessTabNotDisplayed() {
-			if(healthAndWellnessTab.isDisplayed())
+			if(validate(healthAndWellnessTab))
 				Assert.fail("H&W Tab is not expected but still displayed");
 			
 		}
