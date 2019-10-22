@@ -35,6 +35,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
@@ -3415,4 +3416,66 @@ catch (Exception e) {
 		} 
 		CommonUtility.checkPageIsReady(driver);
 	}
+	
+	//--------------------------------------------
+	//note: begin - added for email deeplink validaton
+	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//span[contains(@class,'show')]//button[contains(text(),'Compare plans')]")
+	private WebElement firstComparePlanButton;
+	
+	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	private WebElement comparePgnHeader;
+	
+	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
+		firstComparePlanButton.click();
+		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	
+	public int checkAllMAPlansCount(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));	
+		int plansForCompare=allMAPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare=4;
+		}
+		if(allMAPlans !=null){
+			for(int i = 0; i<plansForCompare; i++){
+				allMAPlans.get(i).click();
+				System.out.println("Plan added to compare : "+i);
+			}
+		}
+		return plansForCompare;
+	}
+	
+	public int checkAllPDPlans(){
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));	
+		int plansForCompare=allPDPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare=4;
+		}
+		if(allPDPlans !=null){
+			for(int i = 0; i<plansForCompare; i++){
+				allPDPlans.get(i).click();
+				System.out.println("Plan added to compare : "+i);
+			}
+		}
+		return plansForCompare;
+	}
+	//note: end - added for deeplink validaton
+	//--------------------------------------------
+
 }

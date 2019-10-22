@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -26,9 +27,13 @@ import org.apache.pdfbox.io.RandomAccessRead;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,10 +42,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+//import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -124,7 +131,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 	private WebElement PremiumForPlan;
 
-	public JSONObject vppPlanDetailsJson;
+	public org.json.JSONObject vppPlanDetailsJson;
 
 	@FindBy(xpath = "//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
@@ -251,7 +258,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	private PageData planDocsPDF;
 
-	public JSONObject planDocPDFAcqJson;
+	public org.json.JSONObject planDocPDFAcqJson;
 
 	public WebElement getPlanCostsTab() {
 		return planCostsTab;
@@ -305,14 +312,14 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate(String planType) {
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
 		}else if(planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		}/*Added for SNP as well*/
 		validate(planCostsTab);
 
@@ -350,30 +357,30 @@ public class PlanDetailsPage extends UhcDriver {
 
 	}
 
-	public JSONObject getActualPdfLinksData() {
+	public org.json.JSONObject getActualPdfLinksData() {
 		// TODO Auto-generated method stub
 		String fileName = CommonConstants.PLAN_DOC_PDF_ACQ_PAGE_DATA;
 		planDocsPDF = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 
-		JSONObject jsonObject = new JSONObject();
+		org.json.JSONObject jsonObject = new org.json.JSONObject();
 		for (String key : planDocsPDF.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(planDocsPDF.getExpectedData().get(key));
-			JSONArray jsonArray = new JSONArray();
+			org.json.JSONArray jsonArray = new org.json.JSONArray();
 			for (WebElement element : elements) {
 
 				element.click();
 				try {
-					JSONObject jsonObjectForArray = new JSONObject();
+					org.json.JSONObject jsonObjectForArray = new org.json.JSONObject();
 					jsonObjectForArray.put(element.getText(), element.getAttribute("href"));
 					jsonArray.put(jsonObjectForArray);
-				} catch (JSONException e) {
+				} catch (org.json.JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			try {
 				jsonObject.put(key, jsonArray);
-			} catch (JSONException e) {
+			} catch (org.json.JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -676,7 +683,8 @@ public class PlanDetailsPage extends UhcDriver {
 		System.out.println("!!!Entered valid Email ");
 		sendButtonEmailPlanDetailsPopUp.click();
 		System.out.println("Email has success fully send to user");
-		validateNew(validatesuccesspopup);
+		Assert.assertTrue("PROBLEM - unable to locate success message after clicking send", validate(validatesuccesspopup));
+	    //validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 
 	}
@@ -718,7 +726,7 @@ public class PlanDetailsPage extends UhcDriver {
 		presDrugTab.get(0).click();
 		validateNew(yourDrugListHeading);
 		String actualDrug = addedDrug.getText().trim();
-		Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
+		org.testng.Assert.assertTrue(actualDrug.contains(expectedDrugName), "Expected drug not matches with actual drug");
 	}
 
 	/**
