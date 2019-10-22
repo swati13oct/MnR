@@ -68,7 +68,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
 
-    @pdp
+    @ship
     Examples: 
       | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
