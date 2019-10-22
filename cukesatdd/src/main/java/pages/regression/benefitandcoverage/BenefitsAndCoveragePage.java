@@ -4001,18 +4001,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * this method checks that Order Plan Materials Sub Navigation Link 
 	 * under Benefits and Coverage is NOT displayed
 	 */
-	public void validateOrderPlanMaterialsSubNavNotDisplayed() throws InterruptedException 
+	public void validateOrderPlanMaterialsSubNavNotDisplayed() 
 	{
 
 		System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
 
-		Dimension size = driver.findElement(By.id("ordermaterials")).getSize();
-		System.out.println(size);
-		int height = size.getHeight();
-		System.out.println("Height is "+height);
-		int width = size.getWidth();
-		System.out.println("Width is "+width);
-		if (height == 0)
+		if (!orderMaterialsTab.isDisplayed())
 		{
 			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
 		}

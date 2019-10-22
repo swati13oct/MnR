@@ -45,7 +45,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payment')]")
 	private WebElement PaymentPageLink;
 
-	@FindBy(id = "claims_1")
+	@FindBy(xpath = "//*[contains(@id,'claims')]")
 	private WebElement claimsTab;
 	
 	@FindBy(xpath="//a[contains(text(),'Go to Claims page')]")
@@ -120,10 +120,10 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "healthwellness_4")
 	private List<WebElement> panelHealthWellness;
 
-	@FindBy(id = "findcarecost2")
+	@FindBy(xpath = "//*[contains(@id,'findcarecost2')]")
 	private List<WebElement> panelFindcarecost;
 
-	@FindBy(id = "claimsummaryC1")
+	@FindBy(xpath = "//*[contains(@id,'claimsummary')]")
 	private WebElement claimSummary;
 
 	@FindBy(id = "eobC1")
@@ -132,16 +132,16 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "benefitssummary")
 	private WebElement benefitsSummary;
 
-	@FindBy(id = "formsandresourcesC1")
+	@FindBy(xpath = "//*[contains(@id,'formsandresources')]")
 	private WebElement formsAndResources;
 
 	@FindBy(id = "ordermaterials")
 	private WebElement orderMaterials;
 
-	@FindBy(id = "coveragebenefits_2")
+	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(id = "premiumpayment_3")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")
@@ -240,7 +240,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'payment')]")
 	private WebElement paymentTabOnTopMenu;
 	
-	@FindBy(id="findcarecost2")
+	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
 	
 	@FindBy(id="pharmacies_5")
@@ -252,10 +252,10 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id="healthwellness_6")
 	private WebElement healthAndWellnessTab;
 	
-	@FindBy(xpath="//h1[contains(text(),'Health & Wellness')]")
+	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	@FindBy(id="ACCdropdown_3_3")
+	@FindBy(xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
 	private WebElement logOut;
 	
 	@FindBy(xpath="//*[contains(@id,'username')]")
@@ -1250,8 +1250,11 @@ public class TestHarness extends UhcDriver {
     		}
     		return null;
     	}
-		public void validateFindCareCostTab() {
-			validateNew(findCareCostTab);
+		public void validateFindCareCostTab(String memberType) {
+			if(memberType.equalsIgnoreCase("TERMINATED"))
+				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab));
+			else
+				validateNew(findCareCostTab);
 
 		}
 		public void clickOnPharmaciesNavTab() {
@@ -1275,6 +1278,21 @@ public class TestHarness extends UhcDriver {
 
 			}
 
+		}
+
+		public void validatePaymentsTabNotDisplayed() {
+			if(premiumPayment.isDisplayed())
+				Assert.fail("Payments tab not expected but still displayed");
+		}
+		public void validatePharmaciesTabNotDisplayed() {
+			if(pharmaciesTab.isDisplayed())
+				Assert.fail("Pharmacies Tab is not expected but still displayed");
+			
+		}
+		public void validateHealthAndWellnessTabNotDisplayed() {
+			if(healthAndWellnessTab.isDisplayed())
+				Assert.fail("H&W Tab is not expected but still displayed");
+			
 		}
 		
 
