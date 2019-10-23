@@ -126,7 +126,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	private WebElement EmailLabel_sofl;
 
 
-	@FindBy(id = "emailview")
+	@FindBy(id = "email")
 	private WebElement emailBoxUhc;
 
 	@FindBy(xpath = ".//*[@id='emailCardHeight']//span[@class='bold atdd-email ng-scope']")
@@ -184,16 +184,16 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='email' or @id='emailCardHeight']//div[@class='card-header clearfix']//a[@class='edit-btn edit-btn-email']")
 	private WebElement emailEditButton;
 
-	@FindBy(xpath = ".//*[@id='editEmail_P']/span[2]")
+	@FindBy(xpath = "//*[@id='email']//a[@class='edit-btn edit-btn-email']")
 	private WebElement emailEditButtonUhc; // for uhc member
 
-	@FindBy(id = "email_P")
+	@FindBy(xpath = "(//span[@ng-if='!txErsMember']/../span[2])[2]")
 	private WebElement emailAddressFieldUhc; // for uhc member
 
-	@FindBy(id = "updatedisable")
+	@FindBy(id = "updateEmail")
 	private WebElement emailSaveBtnUhc; // for uhc member
 
-	@FindBy(id = "cancelUpdateEmailBtn_P")
+	@FindBy(xpath = "//*[@id='email-form']/div[3]/div/a")
 	private WebElement emailCancelBtnUhc;
 
 	@FindBy(xpath = ".//*[@id='go-to-back-email']/span")
@@ -447,7 +447,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='temporaryAddress']/div[1]/a[1]")
 	private List<WebElement> tempEditButton;
 
-	@FindBy(xpath = "//flex-content[@ng-if='!passwordView']//span[contains(text(),'Edit')]")
+	@FindBy(xpath = "(//*[@class='account_settings form__content']/div/div)[1]/flex/flex-content/p/a/span[contains(text(),'Edit')]")
 	private WebElement passwordEditLink;
 	
 	@FindBy(xpath="//p[contains(text(),'The state and ZIP code combination entered is not')]")
@@ -504,7 +504,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(id = "TM_cancelUpdateAddressBtn")
 	private WebElement tempAddressCancelBtnUhc;
 
-	@FindBy(id = "contact")
+	@FindBy(id = "profileLagecy")
 	private WebElement contactInfoBox;
 
 	@FindBy(xpath = ".//*[@id='preferences-form0']/div/div[1]/div[2]/div[2]/div/fieldset/div[1]/div/label")
@@ -1005,13 +1005,13 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		 * newEmail.sendKeys("UHCMNRPORTALS@GMAIL.COM"); emailConfirm.click();
 		 * validateNew(emailErrorMessage); }else{
 		 */
-		emailBoxUhc.click();
+//		emailBoxUhc.click();
 		emailEditButtonUhc.click();
 		validateNew(emailAddressFieldUhc);
 		validateNew(emailSaveBtnUhc);
 		validateNew(emailCancelBtnUhc);
 		emailCancelBtnUhc.click();
-		emailGoBackBtnUhc.click();
+//		emailGoBackBtnUhc.click();
 		// }
 
 	}
@@ -1710,8 +1710,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 		hsidAccountLink.click();
 		Thread.sleep(3000);
 		System.out.println("title is: "+driver.getTitle());
-		Assert.assertTrue(driver.getTitle().equalsIgnoreCase("HealthSafe ID"));
-		driver.navigate().back();
+		Assert.assertTrue(driver.getTitle().contains("HealthSafe ID"));
+//		driver.navigate().back();
 	}
 
 	public void validateHealthSafeAccountLinkNOTPresent() throws InterruptedException {

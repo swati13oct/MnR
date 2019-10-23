@@ -45,8 +45,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Payment')]")
 	private WebElement PaymentPageLink;
 
-	@FindBy(id = "claims_1")
-	private WebElement claimsPageLink;
+	@FindBy(xpath = "//*[contains(@id,'claims')]")
+	private WebElement claimsTab;
 	
 	@FindBy(xpath="//a[contains(text(),'Go to Claims page')]")
 	private WebElement testHarnessClaimsLink;
@@ -120,10 +120,10 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "healthwellness_4")
 	private List<WebElement> panelHealthWellness;
 
-	@FindBy(id = "findcarecost2")
+	@FindBy(xpath = "//*[contains(@id,'findcarecost2')]")
 	private List<WebElement> panelFindcarecost;
 
-	@FindBy(id = "claimsummaryC1")
+	@FindBy(xpath = "//*[contains(@id,'claimsummary')]")
 	private WebElement claimSummary;
 
 	@FindBy(id = "eobC1")
@@ -132,20 +132,20 @@ public class TestHarness extends UhcDriver {
 	@FindBy(id = "benefitssummary")
 	private WebElement benefitsSummary;
 
-	@FindBy(id = "formsandresourcesC1")
+	@FindBy(xpath = "//*[contains(@id,'formsandresources')]")
 	private WebElement formsAndResources;
 
 	@FindBy(id = "ordermaterials")
 	private WebElement orderMaterials;
 
-	@FindBy(id = "coveragebenefits_2")
+	@FindBy(xpath = "//*[contains(@id,'coveragebenefits')]")
 	private WebElement coverageBenefits;
 
-	@FindBy(id = "premiumpayment_3")
+	@FindBy(xpath = "//*[contains(@id,'premiumpayment')]")
 	private WebElement premiumPayment;
 
 	@FindBy(id = "Help")
-	private WebElement help;
+	private WebElement helpLink;
 
 	@FindBy(id = "accountprofile")
 	private WebElement accountProfile;
@@ -239,6 +239,28 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'payment')]")
 	private WebElement paymentTabOnTopMenu;
+	
+	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
+	private WebElement findCareCostTab;
+	
+	@FindBy(id="pharmacies_5")
+	private WebElement pharmaciesTab;
+	
+	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
+	private WebElement pharmaciesHeader;
+	
+	@FindBy(id="healthwellness_6")
+	private WebElement healthAndWellnessTab;
+	
+	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
+	private WebElement healthAndWellnessHeader;
+	
+	@FindBy(xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	private WebElement logOut;
+	
+	@FindBy(xpath="//*[contains(@id,'username')]")
+	private WebElement usernameField;
+	
 	
 	String category = null;
 
@@ -361,7 +383,7 @@ public class TestHarness extends UhcDriver {
 			validateNew(tabsForComboMember.get(1));
 		}
 		validateNew(formsPageLink);
-		validateNew(claimsPageLink);
+		validateNew(claimsTab);
 		validateNew(benefitsPageLink);
 		validateNew(profilePageLink);
 
@@ -407,10 +429,8 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		CommonUtility.checkPageIsReady(driver);
-		validateNew(claimsPageLink);
-		claimsPageLink.click();
-		CommonUtility.checkPageIsReady(driver);
+		validateNew(claimsTab);
+		claimsTab.click();
 		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Claims")) {
@@ -556,32 +576,18 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public HealthAndWellnessPage clickHealthnWellnessTab() throws InterruptedException {
+	public HealthAndWellnessPage clickHealthnWellnessTab()  {
 		/*
 		 * validateNew(healthWellness); healthWellness.click();
 		 */
-		startNew(MRConstants.HEALTH_AND_WELLNESS_TESTHARNESS);
-		int counter = 0;
+		healthAndWellnessTab.click();
+		validateNew(healthAndWellnessHeader,60);
 
-		do {
-			if (counter <= 10) {
-				Thread.sleep(5000);
-				System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
-			} else {
-				System.out.println("TimeOut!!!");
-				return null;
-			}
-			counter++;
-
-			if (driver.getTitle().contains("Health")) {
-				return new HealthAndWellnessPage(driver);
-			}
-
-		} while (!(driver.getTitle().contains("Find Care")));
-		// CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().contains("Health")) {
 			return new HealthAndWellnessPage(driver);
 		}
+
+		
 		return null;
 
 	}
@@ -810,13 +816,9 @@ public class TestHarness extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public BenefitsAndCoveragePage validateBnCNaviation() {
+	public BenefitsAndCoveragePage validateBnCNavigation() {
 		validateNew(coverageBenefits);
 		coverageBenefits.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
-		benefitsSummary.click();
-		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
@@ -875,14 +877,13 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public PaymentsOverview validatePremiumPaymentPage() throws InterruptedException {
+	public PaymentHistoryPage validatePremiumPaymentPage() {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(premiumPayment);
 		premiumPayment.click();
-		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Payment")) {
-			return new PaymentsOverview(driver);
+			return new PaymentHistoryPage(driver);
 		}
 		return null;
 	}
@@ -891,7 +892,7 @@ public class TestHarness extends UhcDriver {
 	 * 
 	 */
 	public void validateContactUsPage() {
-		validateNew(help);
+		validateNew(helpLink);
 	}
 
 	/***
@@ -1249,5 +1250,50 @@ public class TestHarness extends UhcDriver {
     		}
     		return null;
     	}
+		public void validateFindCareCostTab(String memberType) {
+			if(memberType.equalsIgnoreCase("TERMINATED"))
+				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab));
+			else
+				validateNew(findCareCostTab);
+
+		}
+		public void clickOnPharmaciesNavTab() {
+			
+			validateNew(pharmaciesTab);
+			pharmaciesTab.click();
+			validateNew(pharmaciesHeader);
+			
+		}
+		public ContactUsPage clickOnHelpLink() {
+			helpLink.click();
+			return new ContactUsPage(driver);
+		}
+		
+		public void clickLogout() {
+			if (logOut.isDisplayed()) {
+				logOut.click();
+				validateNew(usernameField);
+				if (driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
+					Assert.assertTrue("user is logged out", true);
+
+			}
+
+		}
+
+		public void validatePaymentsTabNotDisplayed() {
+			if(validate(premiumPayment))
+				Assert.fail("Payments tab not expected but still displayed");
+		}
+		public void validatePharmaciesTabNotDisplayed() {
+			if(validate(pharmaciesTab))
+				Assert.fail("Pharmacies Tab is not expected but still displayed");
+			
+		}
+		public void validateHealthAndWellnessTabNotDisplayed() {
+			if(validate(healthAndWellnessTab))
+				Assert.fail("H&W Tab is not expected but still displayed");
+			
+		}
+		
 
 }

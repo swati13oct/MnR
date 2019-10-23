@@ -78,7 +78,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
-	@FindBy(xpath = "(//a[contains(text(),'Payments Page')])")
+	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
 	private WebElement TestHarnesspaymentsLink;
 
 	@FindBy(xpath = "//*[@id='premiumpayment_3']")
@@ -1774,15 +1774,15 @@ public class AccountHomePage extends UhcDriver {
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
 		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
 		 */
-		try {
-			System.out.println("iPerception Pop Up is Present");
-			driver.switchTo().frame("IPerceptionsEmbed");
-			iPerceptionCloseButton.click();
-			// driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
+//		try {
+//			System.out.println("iPerception Pop Up is Present");
+//			driver.switchTo().frame("IPerceptionsEmbed");
+//			iPerceptionCloseButton.click();
+//			// driver.switchTo().defaultContent();
+//			Thread.sleep(5000);
+//		} catch (Exception e) {
+//			System.out.println("iPerception Pop Up is not Present");
+//		}
 
 		Thread.sleep(6000);
 

@@ -23,6 +23,9 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
+		checkModelPopup(driver);
+		if(!pgHeader.getText().contains("Claims Summary"))
+			Assert.fail("Claims Summary header not found. Page loading issue");
 	}
 
 	ClaimsSummaryValidateHeader validateHeader=new ClaimsSummaryValidateHeader(driver);
@@ -497,5 +500,15 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				medsuppNavTab.click();
 		}	
 
+	}
+
+	public void validateSubTabs() {
+		validateNew(claimsTabTopMenu); 
+		validateNew(eob_claims);
+	}
+	
+	public EOBPage clickOnEOBNavTab(){
+		eob_claims.click();
+		return new EOBPage(driver);
 	}
 }

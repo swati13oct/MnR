@@ -80,13 +80,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='pcpCard']/section/button")
 	private WebElement Addaprovider;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[2]/div[1]/span")
+	@FindBy(xpath = "//*[contains(@id,'planBenefitsApp')]//*[contains(@class,'memberidlabel')]")
 	private WebElement memberId;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[1]/div[1]/span")
+	@FindBy(xpath = "//*[contains(@id,'planBenefitsApp')]//*[contains(@class,'membernamelabel')]")
 	private WebElement memberName;
 
-	@FindBy(xpath = "//*[@id='planBenefitsApp']/div/div/div[2]/div[1]/div/div[4]/div[1]/span")
+	@FindBy(xpath = "//*[contains(@id,'planBenefitsApp')]//*[contains(@class,'effectivedatelabel')]")
 	private WebElement effectiveDate;
 
 	@FindBy(xpath = ".//*[@id='planBenefitsApp']/section/div/div[1]/div/div/div/div/h1")
@@ -592,6 +592,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(),'Plan Documents & Resources')]")
 	private WebElement docsAndResourcesHeader;
 	
+	@FindBy(xpath = "//h1[contains(text(),'Order Plan Materials')]")
+	private WebElement orderMaterialsHeader;
+	
 	@FindBy(xpath ="//*[contains(@class,'plan_benefit_documents_forms_amd_resources')]//li[contains(@class,' updateSessionLoopContent else clearfix MAPD_govt_false_71710697_2019')]")
 	private List<WebElement> mapdPdfLinks;
 	
@@ -678,6 +681,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "benefitsSummary")
 	private WebElement benefitsSummarySection;
+	
+	@FindBy(id = "formsandresourcesC1")
+	private WebElement formsAndResourcesTab;
 
 	@FindBy(id = "needhelpsectioncontactus")
 	private WebElement needHelpSection;
@@ -914,7 +920,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='primary-care-provider-atdd']")
 	private WebElement primaryCareProviderSectionHeaderGroup;
 	
-	@FindBy(xpath = "//*[@id='ordermaterials']")
+	@FindBy(xpath = "//*[contains(@id,'ordermaterials')]")
 	private WebElement orderMaterialsTab;
 
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/*//div/div[8]/div/div/div/div/ul/li")
@@ -1340,14 +1346,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		//benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
-		try
-		{
-			openAndValidate();
-		}
-		catch(Exception e)
-		{
-
-		}
+		openAndValidate();
+	
+		
 	}
 
 	/**
@@ -1356,13 +1357,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validateFieldsOnBenefitsAndCoveragePage() {
 
 		try {
-			validate(planName);
+			validateNew(planName);
 
-			validate(memberId);
+			validateNew(memberId);
 
-			validate(memberName);
+			validateNew(memberName);
 
-			validate(effectiveDate);
+			validateNew(effectiveDate);
 
 		} catch (Exception e) {
 			System.out.println("Elements are not found ...");
@@ -1373,9 +1374,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * @toDo : To check benefits and coverage page has opened
 	 */
 
-	public void openAndValidate() throws InterruptedException  {
+	public void openAndValidate() {
 
 		checkModelPopup(driver);
+		validateFieldsOnBenefitsAndCoveragePage();
 
 	}
 
@@ -3999,18 +4001,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * this method checks that Order Plan Materials Sub Navigation Link 
 	 * under Benefits and Coverage is NOT displayed
 	 */
-	public void validateOrderPlanMaterialsSubNavNotDisplayed() throws InterruptedException 
+	public void validateOrderPlanMaterialsSubNavNotDisplayed() 
 	{
 
 		System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
 
-		Dimension size = driver.findElement(By.id("ordermaterials")).getSize();
-		System.out.println(size);
-		int height = size.getHeight();
-		System.out.println("Height is "+height);
-		int width = size.getWidth();
-		System.out.println("Width is "+width);
-		if (height == 0)
+		if (!orderMaterialsTab.isDisplayed())
 		{
 			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
 		}
@@ -5445,6 +5441,22 @@ public void validatePlanNavTabOrderMaterialsPage(String planType) {
 	}
 	
 }
+
+	public void validateNavTabs() {
+		validateNew(benefitsSummarySection);
+		validateNew(formsAndResourcesTab);
+		validateNew(orderMaterialsTab);
+	}
+
+	public void clickPlanDocsAndResourcesTab(){
+		formsAndResourcesTab.click();
+		validateNew(docsAndResourcesHeader);
+	}
+
+	public void clickOrderMaterialsNavTab() {
+		orderMaterialsTab.click();
+		validateNew(orderMaterialsHeader);	
+	}
 
 }
 
