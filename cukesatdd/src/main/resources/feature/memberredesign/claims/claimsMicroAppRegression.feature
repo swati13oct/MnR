@@ -2,11 +2,12 @@
 Feature: T1.1To validate the claims Summary page and claims Details page on the member site
 
   @claimsMicroApp01
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - UI ONLY - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - UI ONLY - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
     Given login with following details logins in the member portal and validate elements for microapp
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-      | Claim System | <claimSystem> |
+      | Plan Type    | <planType>        |
+      | Member Type  | <memberType>      |
+      | Claim System | <claimSystem>     |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     When I am validating UI only
     Then I can validate the claims summary header on claims summary page
@@ -56,29 +57,26 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Then I navigate to the Claim Details page from claims summary page
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
-   
+
     @mapd
     Examples: 
-      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-      | xxxxx | MAPD     | MAPD-q3_sep_Rx_0006        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
-
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 01_1  | MAPD-q3_sep_UAT4_Group029 | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
+      | 01_2  | MAPD-q3_sep_Rx_0006       | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months |
 
     @pdp
     Examples: 
-      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | xxxxx | PDP      | PDP                        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
+      | 02_1  | PDP                       | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
 
     @ship
     Examples: 
-      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
+      | 03_1  | SHIP-q3_sep_ship_009      | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months |
 
     @ma
     Examples: 
-      | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
-      | xxxxx | MA       | MA-q2_may_rally017         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 04_1  | MA-q2_may_rally017        | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
 
-
-	
+   

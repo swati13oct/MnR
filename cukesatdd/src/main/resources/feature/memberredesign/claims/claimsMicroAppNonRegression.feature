@@ -18,11 +18,12 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
   @claimsMicroApp00
-  Scenario Outline: -index <index> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
+  Scenario Outline: -index <index> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements for microapp
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-      | Claim System | <claimSystem> |
+      | Plan Type    | <planType>        |
+      | Member Type  | <memberType>      |
+      | Claim System | <claimSystem>     |
+      | User Selection | <userSelection> |
     #When if I access via dashboard I can navigate to claims summary page from View Your Claims
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page
@@ -116,27 +117,26 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
     
-    @mapd
+@abc    @mapd
     Examples: 
-      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 01_1  | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_2  | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_3  | xxxxx | MAPD     | MAPD-q3_sep_Rx_0006        | COSMOS_CLAIMS   | Prescription drug | 000       | Yes                | 
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+#     | 01_1  | MAPD-q3_sep_UAT4_Group029 | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_2  | MAPD-q3_sep_Rx_0006       | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
 
     @pdp
     Examples: 
-      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 02_1  | xxxxx | PDP      | PDP                        | COSMOS_CLAIMS   | Prescription drug | 000       | No                 | 
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 02_1  | PDP                       | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | No                 | 
 
     @ship
     Examples: 
-      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 03_1  | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 03_1  | SHIP-q3_sep_ship_009      | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
 
     @ma
     Examples: 
-      | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 04_1  | xxxxx | MA       | MA-q2_may_rally017         | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 04_1  | MA-q2_may_rally017        | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
 
   #----- beginning of claims test for offline prod - local run only ------------------
@@ -189,6 +189,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #----------
 
     Examples: 
-      | index | TID | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
-      |    01 | 000 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
+      | index | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
+      |    01 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 

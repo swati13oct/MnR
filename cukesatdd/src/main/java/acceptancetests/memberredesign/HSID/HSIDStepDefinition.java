@@ -716,8 +716,14 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
 		String testDataType = memberAttributesMap.get("Claim System");
+		String userSelection = memberAttributesMap.get("User Selection");
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
-		String userSelection = category;
+		//note: if run on team-a, then the user selection is for the dropdown option
+		//note: if run on stage or stage-testharness, then ignore the user selection field
+		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on diff env
+			userSelection = category;
+			memberAttributesMap.remove("User Selection");
+		} 
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
