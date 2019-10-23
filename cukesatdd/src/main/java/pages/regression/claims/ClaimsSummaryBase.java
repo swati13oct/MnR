@@ -274,6 +274,11 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
 			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			claimDetailsPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} //by default let it wait 3 seconds for data to load to simulate timing on prod
 			return claimDetailsPg;
 			//tbd return new pages.regression.claims.ClaimDetailsPage(driver);
 		}
@@ -348,6 +353,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
 			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			claimDetlPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+			Thread.sleep(3000); //by default let it wait 3 seconds for data to load to simulate timing on prod
 			return claimDetlPg;
 		}
 		return null;
@@ -388,6 +394,11 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		ClaimDetailsPage claimDetailPg=new ClaimDetailsPage(driver);
 		claimDetailPg.setOnlyTestUiFlag(onlyTestUiFlag);
 		claimDetailPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} //by default let it wait 3 seconds for data to load to simulate timing on prod
 		return claimDetailPg;
 		//tbd return new ClaimDetailsPage(driver);
 	}
