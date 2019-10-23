@@ -113,6 +113,9 @@ public class EOBPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 	
+	@FindBy(xpath = "//h1")
+	private WebElement pageHeader;
+	
 	
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
 	
@@ -126,7 +129,8 @@ public class EOBPage extends UhcDriver{
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
 		checkModelPopup(driver);
-
+		if(!pageHeader.getText().contains("Explanation of Benefits"))
+			Assert.fail("Page header not validated. Error loading the page");
 
 	}
 	
