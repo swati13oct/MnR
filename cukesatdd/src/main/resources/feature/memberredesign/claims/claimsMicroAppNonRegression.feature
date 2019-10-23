@@ -20,9 +20,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp00
   Scenario Outline: -index <index> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements for microapp
-      | Plan Type    | <planType>        |
-      | Member Type  | <memberType>      |
-      | Claim System | <claimSystem>     |
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Claim System   | <claimSystem>   |
       | User Selection | <userSelection> |
     #When if I access via dashboard I can navigate to claims summary page from View Your Claims
     When I navigate to the claims Summary page from dashboard or testharness page
@@ -117,16 +117,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
     
-@abc    @mapd
+    @mapd
     Examples: 
       | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-#     | 01_1  | MAPD-q3_sep_UAT4_Group029 | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_1  | MAPD-q3_sep_UAT4_Group029 | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
       | 01_2  | MAPD-q3_sep_Rx_0006       | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
-
-    @pdp
-    Examples: 
-      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 02_1  | PDP                       | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | No                 | 
 
     @ship
     Examples: 
@@ -189,6 +184,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #----------
 
     Examples: 
-      | index | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
-      |    01 | myUsername | myPassword | testUsername | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
+      | index | username   | password   | MemUserName  | userSelection | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
+      |    01 | myUsername | myPassword | testUsername | whatever      | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
 

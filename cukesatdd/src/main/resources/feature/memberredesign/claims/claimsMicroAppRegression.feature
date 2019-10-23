@@ -4,9 +4,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp01
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - UI ONLY - To validate the MEDICAL/SHIP claims Summary and details page UI elements only
     Given login with following details logins in the member portal and validate elements for microapp
-      | Plan Type    | <planType>        |
-      | Member Type  | <memberType>      |
-      | Claim System | <claimSystem>     |
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Claim System   | <claimSystem>   |
       | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     When I am validating UI only
@@ -62,12 +62,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | MAPD-q3_sep_UAT4_Group029 | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
-      | 01_2  | MAPD-q3_sep_Rx_0006       | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months |
-
-    @pdp
-    Examples: 
-      | index | userSelection             | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
-      | 02_1  | PDP                       | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | 02_2  | MAPD-q3_sep_Rx_0006       | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months |
 
     @ship
     Examples: 
