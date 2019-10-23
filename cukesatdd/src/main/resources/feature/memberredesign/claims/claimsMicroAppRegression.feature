@@ -62,6 +62,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | TID   | planType | memberType                 | claimPeriod    | claimSystem     | segmentId | claimType         |
       | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
       | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
+      | xxxxx | MAPD     | MAPD-q3_sep_Rx_0006        | Last 24 months | COSMOS_CLAIMS   | 000       | Prescription drug |
+
 
     @pdp
     Examples: 

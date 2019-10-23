@@ -120,22 +120,23 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_1  | xxxxx | MAPD     | MAPD-q3_sep_UAT4_Group029  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_4  | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_2  | xxxxx | MAPD     | GROUP-q3_sep_uat4_group029 | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_3  | xxxxx | MAPD     | MAPD-q3_sep_Rx_0006        | COSMOS_CLAIMS   | Prescription drug | 000       | Yes                | 
 
     @pdp
     Examples: 
       | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 01_2  | xxxxx | PDP      | PDP                        | COSMOS_CLAIMS   | Prescription drug | 000       | No                 | 
+      | 02_1  | xxxxx | PDP      | PDP                        | COSMOS_CLAIMS   | Prescription drug | 000       | No                 | 
 
     @ship
     Examples: 
       | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 01_3  | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
+      | 03_1  | xxxxx | SHIP     | SHIP-q3_sep_ship_009       | COMPASS_CLAIMS  | NA                | 000       | Yes                | 
 
     @ma
     Examples: 
       | index | TID   | planType | memberType                 | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 01_5  | xxxxx | MA       | MA-q2_may_rally017         | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 04_1  | xxxxx | MA       | MA-q2_may_rally017         | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
 
   #----- beginning of claims test for offline prod - local run only ------------------
