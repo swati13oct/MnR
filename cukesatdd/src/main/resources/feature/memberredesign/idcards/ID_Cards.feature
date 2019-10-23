@@ -19,9 +19,9 @@ Feature: 1.17 ID cards on Dashboard
       
 
     Examples: 
-  | TID     | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName      	        | dob                         | covergaeStart | coverageStatus |
-  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Preferred (PDP)                                    | 0031240691    | Syreeta Glowski    	        | Subscriber - DOB 06/26/1932 | 01/01/13      | Active         |
-  |  15109  | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO)  | 912634084-00  | Roger Muszar 	    | Subscriber - DOB 04/24/1935 | 06/01/19      | Active         |
+  | TID     | plantype  | memberType    | medicalPlan                                                        | memberId      | memberName      	 | dob                         | covergaeStart | coverageStatus |
+  |  15110  | PDP       | IDCardmember  | AARP MedicareRx Preferred (PDP)                                    | 0031240691    | Syreeta Glowski   | Subscriber - DOB 06/26/1932 | 01/01/13      | Active         |
+  |  15109  | MA        | IDCardmember  | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO)  | 912634084-00  | Roger Muszar 	   | Subscriber - DOB 04/24/1935 | 06/01/19      | Active         |
   |	 15109  | MAPD      | IDCardmember  | UnitedHealthcare MedicareComplete Choice (PPO)                     | 908949511-00  | Kylene Pietzsch   | Subscriber - DOB 03/14/1948 | 01/01/19      | Active         | 
      
   @idCards2 @regressionIDCards_Group_User @regressionMember

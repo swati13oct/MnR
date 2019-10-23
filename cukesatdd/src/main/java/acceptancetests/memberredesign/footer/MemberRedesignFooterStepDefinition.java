@@ -240,7 +240,13 @@ public class MemberRedesignFooterStepDefinition {
 		footerPage.NavigateToProfileandPref();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
-
+	
+	@Then("^the user navigates to profile and pref page for Ship member$")
+	public void user_navigates_to_PandP_page_for_Ship(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToProfileandPref_ship();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
 	@And("^the user validates the footer section in pref page$")
 	public void user_validates_footer_in_PandP() throws InterruptedException{
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);

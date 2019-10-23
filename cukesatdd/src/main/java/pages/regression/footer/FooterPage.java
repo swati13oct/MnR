@@ -3,6 +3,7 @@ package pages.regression.footer;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageData;
@@ -77,12 +78,16 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[2]")
 	private WebElement accountSettingOptionFromDashboard;
-
+	
+	
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofile;
 
-	@FindBy(id = "ACCdropdown_0_3")
+	@FindBy(id = "ACCdropdown_1_3")
 	private WebElement accountSettingOption;
+	
+	@FindBy(id = "ACCdropdown_0_3")
+	private WebElement accountSettingOptionShip;
 
 	@FindBy(id = "closeButton")
 	public WebElement iPerceptionclosebtn;
@@ -114,10 +119,24 @@ public class FooterPage extends UhcDriver {
 			System.out.println("iPerception Pop Up not displayed");
 		}
 	}
+	
+	public void feebackpopupClose_shortwait() throws InterruptedException
+	{ //waitForloader(driver,overlay, 20);
+		Thread.sleep(6000);
+		if (iPerceptionframe.isDisplayed()) {
+
+			switchToNewIframe(iPerceptionframe);
+			iPerceptionclosebtn.click();
+			driver.switchTo().defaultContent();
+			//iPerceptionAutoPopUp.click();
+		} else {
+			System.out.println("iPerception Pop Up not displayed");
+		}
+	}
 
 	public Object validateFooterLinks() throws InterruptedException{
-		Thread.sleep(10000);
-		feebackpopupClose();
+		Thread.sleep(5000);
+		//feebackpopupClose();
 		if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
 				&& LegalNoticesAndDisclosures.isDisplayed() 
 				&& Accessibility.isDisplayed() 
@@ -216,13 +235,32 @@ public class FooterPage extends UhcDriver {
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
-			waitforElement(accountSettingOption);
-			System.out.println("Profile and referance link is displayed");
-			accountSettingOption.click();
-			System.out.println("Profile and referance link is clicked");
+
+			if(accountSettingOption.isDisplayed()) {
+				System.out.println("Profile and Preferance link is displayed");
+				accountSettingOption.click();
+				System.out.println("Profile and Preferance link is clicked");
+			} 
+			
 		}
 		return null;
 	}
+	
+	
+	public FooterPage NavigateToProfileandPref_ship(){
+		validate(accountprofile);
+		if(accountprofile.isDisplayed()){
+			System.out.println("accountprofile button is displayed");
+			accountprofile.click();
+			if (accountSettingOptionShip.isDisplayed()) {
+				System.out.println("Profile and Preferance link is displayed");
+				accountSettingOptionShip.click();
+				System.out.println("Profile and Preferance link is clicked");
+			}
+		}
+		return null;
+	}
+	
 
 	public FooterPage validatePageFooter(){
 		return new FooterPage(driver);

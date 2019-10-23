@@ -29,6 +29,7 @@ import pages.member_deprecated.ulayer.ReviewOneTimePaymentsPage;
 import pages.member_deprecated.ulayer.TeamCLoginUlayerPayments;
 import pages.member_deprecated.ulayer.TeamHLoginUlayer;
 import pages.regression.testharness.*;
+import pages.regression.IDCardPage.IDCardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 //import pages.regression.payments.AccountHomePage;
 import pages.regression.payments.ConfirmOneTimePaymentPage;
@@ -126,12 +127,24 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@Then("^the user navigates to payment history$")
 	public void user_views_payment_history() throws InterruptedException {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
-		if (paymentHistoryPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-			System.out.println("user is on payments page");
+		AccountHomePage accountHomePage;	
+
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			PaymentHistoryPage paymentHistoryPage = testHarness.navigateToPaymentFromTestHarnessPage(); 
+			if (paymentHistoryPage != null) {
+				getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				System.out.println("user is on payments page");
+			} 
+		}else {
+
+			accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+			if (paymentHistoryPage != null) {
+				getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				System.out.println("user is on payments page");
+			}
 		}
 
 	}
