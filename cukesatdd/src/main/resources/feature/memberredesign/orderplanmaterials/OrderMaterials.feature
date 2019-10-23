@@ -87,13 +87,17 @@ Feature: 1.10 Member  order materials Page
     And user validates error message when submit without any selection
     Then user validates ability to submit order for each item individually for all available items
     
-    @Individual
+    @Individuala
     Examples: 
       | TID   | planType | memberType            | segmentId |  
       | 15287 | MA	     | AARP_Individual_order | 000       |
       | 15288 | MAPD     | AARP_Individual_order | 000       |
       | 15292 | PDP      | AARP_Individual_order | 000       |
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
+
+    @Individualb
+    Examples: 
+      | TID   | planType | memberType            | segmentId |  
       | 15286 | PCP      | Individual_order      | 000       |
       | 15285 | MEDICA   | Individual_order      | 000       |
       | 15293 | SHIP     | MEDSUPP_order         | 000       |

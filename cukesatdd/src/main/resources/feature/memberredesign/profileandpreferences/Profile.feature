@@ -56,7 +56,7 @@ Feature: 1.02 Member Profile page
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
-    And I click the HEALTHSAFE ID PASSWORD link and validate username and password
+    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
 
     #Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
@@ -128,7 +128,7 @@ Feature: 1.02 Member Profile page
       | User Type   | <userType>   |
       | member Type | <memberType> |
     Then the user validates Communication Preferences section
-    And the user clicks on edit preferences link and validates the page
+    And the user clicks on edit preferences link page for ship
     And the user clicks on profile & preferences link to go back to Account settings page
     And the user validates the address section
       | User Type   | <userType>   |

@@ -115,7 +115,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'click-to-call col-md-4')]/div[not (contains(@class,'ng-hide'))][1]//div[@class='message-block--full-width success margin-none']")
 	private WebElement reqConfirmation;
 	
-	@FindBy(xpath="//h1")
+	@FindBy(xpath="//h1[contains(text(),'Contact Us')]")
 	private WebElement heading;
 	
 	@FindBy(xpath = "//html//body//div//div//div[1]//div[2]//div//div//header//div//div[1]//nav")
@@ -264,12 +264,11 @@ public class ContactUsPage extends UhcDriver{
 		super(driver);
 		try {
 			PageFactory.initElements(driver, this);
-			AccountHomePage.checkForIPerceptionModel(driver);
-			//feebackpopupClose();
+			checkModelPopup(driver);
+			
 			if ((MRScenario.environment).toLowerCase().contains("offline"))
 				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
-			else 
-				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_30);
+			
 			openAndValidate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -278,7 +277,7 @@ public class ContactUsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validateNew(headingContactUs);
+		validateNew(heading);
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {

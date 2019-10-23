@@ -908,6 +908,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
 		profilePreferencesPage.validateHealthSafeAccountLink();
+		profilePreferencesPage.validateBreadCrumb();
 
 	}
 
