@@ -1,5 +1,5 @@
 @pharmaciesandprescriptions @Predators
-Feature: To test Pharamcies And Prescriptions on Member site
+Feature: 1.18 Member Pharamcies And Prescriptions page
 
 #----- beginning of VBF scenarios section ------------------   
   @F313410 @vbfGate
