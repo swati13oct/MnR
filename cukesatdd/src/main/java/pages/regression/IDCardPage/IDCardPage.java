@@ -53,7 +53,7 @@ public class IDCardPage extends UhcDriver{
 	@FindBy(xpath="(//dd[contains(@class,'ng-binding')])[2]") //--- this is for PDP
 	private WebElement id_PDP;
 	
-	@FindBy(css="li:nth-child(1) > dl > .ng-binding")
+	@FindBy(xpath="(//dd[contains(@class,'ng-binding')])[2]")
 	private WebElement id_grp;
 	
 	@FindBy(css=".member-name.ng-binding")
@@ -191,7 +191,7 @@ public void validateIDCardPage_grp(DataTable givenAttributes){
 	/**
 	 * Validates the details of the member
 	 */
-	//System.out.println("the Plan Name is: " + planName_grp.getText());
+	System.out.println("the Plan Name is: " + planName_grp.getText());
 	System.out.println("the ID is: " + id_grp.getText());
 	System.out.println("the name is: " + name.getText());
 	System.out.println("the DOB is: " + dateOfBirth.getText());

@@ -773,7 +773,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
 																	// 20);
-		CommonUtility.waitForPageLoad(driver, iPerceptionframe, 20);
+		CommonUtility.waitForPageLoad(driver, iPerceptionframe, 5);
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);
