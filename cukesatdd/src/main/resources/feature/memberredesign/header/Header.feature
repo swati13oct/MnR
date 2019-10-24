@@ -34,79 +34,78 @@ Feature: 1.08 Member Header/Navigation validation
 
   @header2 @premiumpaymentsheader @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check the Premium Payments Tab in the header
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then I should be able to see and use the Premium Payments tab Header
-	
-		@headerRegression
-    Examples: 
-      | TID   | planType | memberType              |
-      | 15252 | MAPD     | GroupLessSubsidy_header |
-    
-    @F287624 @US2037787 @US2037966
-    Examples: 
-      | TID       | planType    | memberType                    |
-      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
-      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
+	    Given login with following details logins in the member portal and validate elements
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
+	    Then I should be able to see and use the Premium Payments tab Header
+		
+			@headerRegression
+	    Examples: 
+	      | TID   | planType | memberType              |
+	      | 15252 | MAPD     | GroupLessSubsidy_header |
+	    
+	    @F287624 @US2037787 @US2037966
+	    Examples: 
+	      | TID       | planType    | memberType                    |
+	      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
+	      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
 
   @header3 @premiumpaymentsheader_100%subisdy @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then I should not be able to see the Premium Payments tab Header
- 
- 		@headerRegression
-    Examples: 
-      | TID   | planType | memberType | 
-      | 15253 | MAPD     | IndividualGroup_header  | 
-
-    @F287624 @US2037783 @US2037945 
-    Examples: 
-      | TID       | planType    | memberType                |
-      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
+	    Given login with following details logins in the member portal and validate elements
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
+	    Then I should not be able to see the Premium Payments tab Header
+	 
+	 		@headerRegression
+	    Examples: 
+	      | TID   | planType | memberType | 
+	      | 15253 | MAPD     | IndividualGroup_header  | 
+	
+	    @F287624 @US2037783 @US2037945 
+	    Examples: 
+	      | TID       | planType    | memberType                |
+	      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
 
   @header4 @findcarecostsheader @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    And I view the global navigation Header
-    Then I should be able to see and use the Find Care & Costs tab Header
-
-    Examples: 
-      | TID   | planType | memberType              |
-      | 15171 | MAPD     | Group_BnC               |
-      | 15171 | MAPD     | IndividualMember_header |
-      | 15171 | MAPD     | PCP_header              |
-      | 15171 | MAPD     | Medica_Pharmacylocator  |
+	    Given login with following details logins in the member portal and validate elements
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
+	    And I view the global navigation Header
+	    Then I should be able to see and use the Find Care & Costs tab Header
+	
+	    Examples: 
+	      | TID   | planType | memberType              |
+	      | 15171 | MAPD     | Group_BnC               |
+	      | 15171 | MAPD     | IndividualMember_header |
+	      | 15171 | MAPD     | PCP_header              |
+	      | 15171 | MAPD     | Medica_Pharmacylocator  |
 
   @header5 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Flow	| <flow> |
-    #And I view the global navigation Header
-    Then I should not be able to see the Find Care & Costs tab Header
-		Then I should not be able to see the Premium Payments tab Header
-		
-    Examples: 
-      | TID   | planType | memberType |flow |
-      | 15251 | SHIP     | Medsupp    | header|
+	    Given login with following details logins in the member portal and validate elements
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
+	      | Flow	| <flow> |
+	    #And I view the global navigation Header
+	    Then I should not be able to see the Find Care & Costs tab Header
+			
+	    Examples: 
+	      | TID   | planType | memberType |flow |
+	      | 15251 | SHIP     | Medsupp    | header|
 
   @header6 @Terminated_view @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
-    Given login with following details logins in the member portal and validate elements
-      | Member Type | <memberType> |
-    Then I should be able to see and use the Find Care & Costs tab Header
-    Then I should be able to see and use the Claims tab Header
-    Then I should be able to see and use the Premium Payments tab Header
-    Then I should be able to see and use the pharmacies tab in the header
-    Then I should be able to see and use the health and wellness tab in the header
-
-    Examples: 
-      | TID   |   memberType    |
-      | 15162 | Terminated    |  
+	    Given login with following details logins in the member portal and validate elements
+	      | Member Type | <memberType> |
+	    Then I should be able to see and use the Find Care & Costs tab Header
+	    Then I should be able to see and use the Claims tab Header
+	    Then I should be able to see and use the Premium Payments tab Header
+	    Then I should be able to see and use the pharmacies tab in the header
+	    Then I should be able to see and use the health and wellness tab in the header
+	
+	    Examples: 
+	      | TID   |   memberType    |
+	      | 15162 | Terminated    |  
 
