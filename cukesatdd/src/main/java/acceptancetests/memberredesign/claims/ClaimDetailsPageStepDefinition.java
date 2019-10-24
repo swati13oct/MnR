@@ -254,7 +254,7 @@ public class ClaimDetailsPageStepDefinition {
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
 			
-			claimDetlPg.validateSystemErrorMsgNotExist();
+			claimDetlPg.validateSystemErrorMsgNotExist(); //note: make sure detail page doesn't have system error also
 			
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);

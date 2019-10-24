@@ -369,6 +369,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param planType
 	 */
 	public void goToSpecificComboTab(String planType) {
+		try {
 		if (planType.equalsIgnoreCase("mapd")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
 			comboTab_MAPD.click();
@@ -383,6 +384,9 @@ public class ClaimsBase extends UhcDriver  {
 			comboTab_SSUP.click();
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+		} }
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

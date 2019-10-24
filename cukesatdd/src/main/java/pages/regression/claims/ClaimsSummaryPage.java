@@ -6,9 +6,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.regression.explanationofbenefits.EOBPage;
 
 /**
@@ -189,6 +191,11 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	public void validateExpOfBenSubNavDispForGroupSsup() throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, eob_claims, 5);
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+		Assert.assertTrue("PROBLEM - unable to locate EOB sub navigation of Claims for SSUP group user", claimsValidate(eob_claims));
+		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+			System.out.println("on team-a microapp env, will not attemp to navigate to other pages for now");
+			return;
+		}
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
@@ -227,6 +234,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 					+ "under Claims was not displayed as PDP Plan, Test step is failed due to it", false);
 		}
 	}
+
 
 	/**
 	 * Validate 'Search EOB History' on claims summary page

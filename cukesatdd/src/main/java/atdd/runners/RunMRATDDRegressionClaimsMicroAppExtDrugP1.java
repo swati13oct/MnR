@@ -7,19 +7,13 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 
 import cucumber.api.CucumberOptions;
 
-/**
- * 
- * @author schak38
- *
- */
-
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppP1.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppP1")
+jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppExtDrugP1.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppExtDrugP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppP1.json" }, tags = { "@claimsMicroApp","@mapd" })
-public class RunMRATDDRegressionClaimsMicroAppP1 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppExtDrugP1.json" }, tags = { "@claimsMicroApp00","@mapd_drug" })
+public class RunMRATDDRegressionClaimsMicroAppExtDrugP1 {
 
 }

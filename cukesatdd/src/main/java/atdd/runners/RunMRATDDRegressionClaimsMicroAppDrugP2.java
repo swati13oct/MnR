@@ -7,19 +7,13 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 
 import cucumber.api.CucumberOptions;
 
-/**
- * 
- * @author schak38
- *
- */
-
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppP4.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppP4")
+jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppDrugP2.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppDrugP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppP4.json" }, tags = { "@claimsMicroApp","@ma" })
-public class RunMRATDDRegressionClaimsMicroAppP4 {
-
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppDrugP2.json" }, tags = { "@claimsMicroApp","@pdp_drug" })
+public class RunMRATDDRegressionClaimsMicroAppDrugP2 {
+//note: use this runner for drug claims
 }

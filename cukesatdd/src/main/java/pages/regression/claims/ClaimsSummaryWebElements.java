@@ -34,7 +34,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//button[@id='all-claims-print-claims-btn']")
 	protected WebElement claimsSummPrntBtn;
 
-	@FindBy(id="eobC1")
+	@FindBy(xpath="//a[@id='eobC1']")
 	protected WebElement eob_claims;
 
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
