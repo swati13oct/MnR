@@ -140,7 +140,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     @mapd_drug
     Examples: 
-      | index | TID   | userSelection                     | planType@ | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | 15230 | MAPD-RX-q3_sep_Rx_0006            | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
       | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
 
@@ -152,7 +152,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planCategory> -planCategory: <planCategory> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+  Scenario Outline: TID: <TID> -planType: <planType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |

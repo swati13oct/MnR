@@ -399,19 +399,23 @@ public class ClaimsBase extends UhcDriver  {
 		if (flagNonCombo)
 			goToSpecificComboTab(planType);
 		else {
-			if (planType.equalsIgnoreCase("mapd")) {
-				if (claimsValidate(comboTab_MAPD))
-					comboTab_MAPD.click();
-			} else if (planType.equalsIgnoreCase("ship")) {
-				if (claimsValidate(comboTab_SHIP)) 
-					comboTab_SHIP.click();
-			} else if (planType.equalsIgnoreCase("pdp")) {
-				if (claimsValidate(comboTab_PDP))
-					comboTab_PDP.click();
-			} else if (planType.equalsIgnoreCase("ssup")) {
-				if (claimsValidate(comboTab_SSUP)) 
-					comboTab_SSUP.click();
-			} 
+			try {
+				if (planType.equalsIgnoreCase("mapd")) {
+					if (claimsValidate(comboTab_MAPD))
+						comboTab_MAPD.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					if (claimsValidate(comboTab_SHIP)) 
+						comboTab_SHIP.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					if (claimsValidate(comboTab_PDP))
+						comboTab_PDP.click();
+				} else if (planType.equalsIgnoreCase("ssup")) {
+					if (claimsValidate(comboTab_SSUP)) 
+						comboTab_SSUP.click();
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
