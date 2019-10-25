@@ -3523,16 +3523,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}}
 	
 	public void outpatientcenterwithoutprovidertier(){
-		String TableData="OUTPATIENT SURGERY CENTER VISITS\n"
-				+"20.00%";
-		if(outPatientSection.getText().equals(TableData.toString())){
-			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
-			System.out.println("The data in the outPatient section  is displaying correctly");  
-		}
-		else{
-			System.err.println("The data in the outPatient section  is not displaying correctly");
-			Assert.fail("The data in the outPatient section is not displaying correctly");
-		}}
+
+        //Sardar Start
+        //String TableData="OUTPATIENT SURGERY CENTER VISITS\n"
+        //            +"20.00%";
+        //if(outPatientSection.getText().equals(TableData.toString())){
+        String TableData="OUTPATIENT SURGERY CENTER VISITS";
+        if(outPatientSection.getText().contains(TableData.toString())){
+        //Sardar End
+
+               Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
+               System.out.println("The data in the outPatient section  is displaying correctly");  
+        }
+        else{
+               System.err.println("The data in the outPatient section  is not displaying correctly");
+               Assert.fail("The data in the outPatient section is not displaying correctly");
+        }}
 
 	public void validateWaysToSaveSection(String planType, String memberType) {
 		/*
