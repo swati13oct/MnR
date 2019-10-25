@@ -114,7 +114,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
 			//tbd if (!getOnlyTestUiFlag()) 
-				moveMouseToElement(ship_reviewClaimsTxt);
+			moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);
 			System.out.println("Clicked '"+claimPeriod+"' option");
@@ -143,8 +143,8 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			}
 			System.out.println("!!! Validating the drop down to select the claims from '"+claimPeriod+"'!!!");
 			option.click();
-			System.out.println("!!! Option selected from the view claims from drop down is ====>"
-			+(option.getText()));
+			CommonUtility.checkPageIsReady(driver);
+			System.out.println("!!! Option selected from the view claims from drop down is ====>"+(option.getText()));
 
 			if (planType.equals("MA") || planType.equals("SSUP")) {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",
@@ -158,6 +158,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 						claimsValidate(PrescriptionDrug));
 				System.out.println("!!!Claim type PrescriptionDrug is validated !!!");
 				PrescriptionDrug.click();
+				CommonUtility.checkPageIsReady(driver);
 				System.out.println("!!! Claim Type PrescriptionDrug is clicked !!!");
 			} else if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("medical")) {
@@ -166,6 +167,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				// note: MAPD has both medical and prescription drug options
 				// for MA case there will be just medical so there won't be a need for click
 				medical.click();
+				CommonUtility.checkPageIsReady(driver);
 			}
 		} else{
 			Assert.assertTrue("PROBLEM: Unable to locate customSearch element",claimsValidate(custSrch));
@@ -173,6 +175,8 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			+(custSrch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
 		}
+		sleepBySec(3);
+		Assert.assertTrue("PROBLEM - should not see claimloadingimage at this point...", !validate(claimloadingimage,2));
 	}
 
 	/**
@@ -228,7 +232,6 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 
 			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", claimsValidate(fromCalendarIconBtn));
 			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", claimsValidate(toCalendarIconBtn));
-
 			System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
 			fromCalendarIconBtn.click();
 			CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);

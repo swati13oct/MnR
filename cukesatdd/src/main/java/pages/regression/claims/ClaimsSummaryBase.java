@@ -5,11 +5,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.contactus.ContactUsPage;
@@ -267,6 +267,11 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		scrollToView(claimsSummPrntBtn);
 		claimsTblMoreInfoLnk.click();
 		CommonUtility.checkPageIsReady(driver);
+		try {
+			CommonUtility.waitForElementToDisappear(driver, claimloadingimage, 10);
+		} catch (TimeoutException e) {
+			Assert.assertTrue("PROBLEM - Signficant time has passed (at least 10 seconds) but claim loading image still spinning while the claim total sectoin already loaded", !validate(claimloadingimage,0) && validate(claimsDetlTblMainSect));
+		}
 		CommonUtility.waitForPageLoad(driver,claimsDetlTblMainSect , 10);
 		while(!(driver.getCurrentUrl().contains("/details")));
 		if (driver.getCurrentUrl().contains("/details")) {
@@ -274,11 +279,11 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
 			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			claimDetailsPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} //by default let it wait 3 seconds for data to load to simulate timing on prod
+			//tbd try {
+			//tbd 	Thread.sleep(3000);
+			//tbd } catch (InterruptedException e) {
+			//tbd 	e.printStackTrace();
+			//tbd } //by default let it wait 3 seconds for data to load to simulate timing on prod
 			return claimDetailsPg;
 			//tbd return new pages.regression.claims.ClaimDetailsPage(driver);
 		}

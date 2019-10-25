@@ -362,6 +362,7 @@ public class ClaimsSearchNavigateStepDefinition {
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		newClaimsSummaryPage.customSearchCalendar(planType, fromDate,toDate);
 		if(newClaimsSummaryPage != null)
-			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);	}
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);	
+	}
 
 }

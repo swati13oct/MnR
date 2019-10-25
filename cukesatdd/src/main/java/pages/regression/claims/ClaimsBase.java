@@ -148,6 +148,9 @@ public class ClaimsBase extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
 
+	@FindBy(xpath="//div[contains(@class,'claimloadingimage')]")
+	protected WebElement claimloadingimage;
+
 	public ClaimsBase(WebDriver driver) {
 		super(driver);
 		onlyTestUiFlag=false;
@@ -550,4 +553,14 @@ public class ClaimsBase extends UhcDriver  {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
 	}
+	
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("slept for '"+sec+"' sec");
+	}
+	
 }
