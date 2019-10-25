@@ -61,9 +61,10 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @mapd_medical
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | M_COSMOS_CLAIMS | Medical           | 000       | Last 24 months | 
       | 01_3  | 15235 | MAPD-COS-q3_sep_Cosmos_claims_012 | MAPD     | UHC_Individual  | M_COSMOS_CLAIMS | Medical           | 000       | Last 24 months | 
+      | 01_4  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
 
     @ma_medical
     Examples: 
@@ -136,12 +137,11 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can see the learn more and print and download option on claims summary table section
     And I validate the EOB section based on claims system on claims summary page
     And I validate the DownloadMyData section on claims summary page
-    Then I navigate to the Claim Details page from claims summary page
 
     @mapd_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | 15230 | MAPD-RX-q3_sep_Rx_0006            | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
+      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
       | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug
