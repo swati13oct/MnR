@@ -293,8 +293,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     Then user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link
     Then user validates and clicks on Disclaimers link under Exclusive hearing
     Then the user validates Header section
@@ -348,7 +347,7 @@ Feature: 1.01 Member  benefits and Coverage page
         # note: Due to timing that it takes for GPS to do the update (add or remove),
   # this testcase result will not be stable. Since can't predict time for GPS to finish the update,
   # so the add or remove button does't always show up within the time the code expects it to.
-  @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression @BnC_Part3_regressionMember
+  @benefitsAndCoverage13 @BenefitsRiderFunctionality @regression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member with Rider
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -370,8 +369,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-     | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates plan overview section for individual
     And the user view the LIS Drug Copays & Discounts header
    And the user validates the Learn More section link for stage
@@ -407,8 +405,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates plan overview section for group
     And the user view the LIS Drug Copays & Discounts header
     And the user validates the Learn More section link for stage
@@ -443,10 +440,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates plan overview section for group
-    And the user view the LIS Drug Copays & Discounts header
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
