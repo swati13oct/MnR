@@ -2967,7 +2967,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
-		if (validate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
@@ -2986,7 +2986,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
-		if (validate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
@@ -3059,10 +3059,10 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-	public void navigateToClaimsPageByViewYorClaimsLinkThenBackToHome() {
+	public void navigateToClaimsPageByViewYourClaimsLinkThenBackToHome() {
 		CommonUtility.waitForPageLoad(driver, viewYourClaimsLink, 10);
 		Assert.assertTrue("PROBLEM - unable to locate 'VIEW YOUR CLAIMS' link on dashboard page",
-				validate(viewYourClaimsLink));
+				validate(viewYourClaimsLink,0));
 		viewYourClaimsLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		checkForIPerceptionModel(driver);
@@ -3073,7 +3073,7 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - not getting expected page title for claims summary page. Expected to contains="
 				+ expPageTitle + " | Actual=" + driver.getTitle(), driver.getTitle().contains(expPageTitle));
 		System.out.println("The title of Claims page is-------->" + driver.getTitle());
-		if (validate(HomeTopMenuButton)) {
+		if (validate(HomeTopMenuButton,0)) {
 			HomeTopMenuButton.click();
 		} else {
 			locateElementWithinShadowRoot(shadowRootHeader, "#home_2");

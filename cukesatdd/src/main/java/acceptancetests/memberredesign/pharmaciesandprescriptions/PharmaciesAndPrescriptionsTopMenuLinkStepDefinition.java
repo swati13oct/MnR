@@ -264,6 +264,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			ContactUsPage contactUsPg=testHarness.navigateToContactUsPageFromTestHarnessPage();
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, contactUsPg!=null);
 			result=testHarness.findPnPLinksExistOnPg();
+	System.out.println("TEST - result="+result);
+	System.out.println("TEST - expectLink="+expectLink);
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else 
