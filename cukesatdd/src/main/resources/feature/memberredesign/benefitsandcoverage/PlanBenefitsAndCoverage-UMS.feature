@@ -474,8 +474,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the NON LIS user validates plan overview section for group
     And the user validates headers on Bnc page for group members
     And the user validates the Group Primarycare Provider section
@@ -509,7 +508,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name             | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+     | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC24_Group NON LIS_PDP
   @benefitsAndCoverage27 @CMPDPGroupNonLis
@@ -612,11 +611,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    And the user validates View all Benefits link and Prescription drug cost section
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -685,8 +680,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -734,8 +728,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
