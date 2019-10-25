@@ -819,7 +819,7 @@ public class TestHarness extends UhcDriver {
 	public BenefitsAndCoveragePage validateBnCNavigation() {
 		validateNew(coverageBenefits);
 		coverageBenefits.click();
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
@@ -881,7 +881,6 @@ public class TestHarness extends UhcDriver {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(premiumPayment);
 		premiumPayment.click();
-		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentHistoryPage(driver);
 		}
@@ -1293,6 +1292,9 @@ public class TestHarness extends UhcDriver {
 			if(validate(healthAndWellnessTab))
 				Assert.fail("H&W Tab is not expected but still displayed");
 			
+		}
+		public void validateFindCareCostTabNotAvailable() {
+			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab));			
 		}
 		
 
