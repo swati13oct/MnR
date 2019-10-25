@@ -194,10 +194,13 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should not be able to see the Find Care & Costs tab Header$")
 	public void I_should_not_be_able_to_see_the_Find_Care_Costs_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.findCareNotAvailable();
-		
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateFindCareCostTabNotAvailable();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.findCareNotAvailable();
+		}
 	}
 
 	/**

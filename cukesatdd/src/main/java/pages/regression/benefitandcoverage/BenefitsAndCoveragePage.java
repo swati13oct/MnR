@@ -232,7 +232,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='display-block collapse-expand atdd-bnc-drgpricingtiers collapsed']")
 	private WebElement LearnmoretierslinkAfterCollapsed;
 
-	@FindBy(xpath = "//a[@class='display-block collapse-expand collapsed atdd-bnc-drgstgtiers']")
+	@FindBy(xpath = "//*[contains(@class,'atdd-bnc-drgstgtiers')]")
 	private WebElement Learnmorestagelink;
 
 	@FindBy(xpath = "//a[@class='display-block collapse-expand atdd-bnc-drgstgtiers']")
@@ -266,7 +266,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "preferredRetailBenefit")
 	private WebElement preferredRetailBenefitTableIndipdp;
 
-	@FindBy(xpath = ".//*[@id='mapdPageLis']")
+	@FindBy(xpath = ".//*[contains(@id,'mapdPageLis')]")
 	private WebElement RetailDrugCost_Table;
 
 	@FindBy(id = "mapdPageNonLisForSRetail")
@@ -1966,7 +1966,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validate_drugcostheaderntext() {
 		validateWithValue("DRUG LOOKUP",DrugCostheaderandtext);
-		validateWithValue("Text-Estimate your drug costs and view ways to save.",drugLookUPText);
 
 	}
 
@@ -2180,12 +2179,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void clickOnLearnmoreaboutlinkstage() throws InterruptedException {
 		// TODO Auto-generated method stub
-		validateWithValue(" LEARN MORE ABOUT DRUG PAYMENT STAGES ", Learnmorestagelink);
+		Assert.assertTrue("Could not find the Learn more about drug link", Learnmorestagelink.getText().contains("LEARN MORE ABOUT DRUG PAYMENT STAGES"));
 		//tbd Learnmorestagelink.click();
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Learnmorestagelink);
 		js.executeScript("arguments[0].click();", Learnmorestagelink); 
-		Thread.sleep(2000);
+		
 		System.out.println(LearnmorestageExpandedArea.getAttribute("aria-expanded"));
 		// validating expanded stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestageExpandedArea.getAttribute("aria-expanded").equalsIgnoreCase("true")){
@@ -2198,7 +2197,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 
 		LearnmorestagelinkForCollapse.click();
-		Thread.sleep(2000);
 		//validating collapsed stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestagelinkAfterCollapse.getAttribute("aria-expanded").equalsIgnoreCase("false")){
 			System.out.println("LEARN MORE ABOUT DRUG PAYMENT STAGES link has  been collapsed successfully");
@@ -3536,7 +3534,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			Assert.fail("The data in the outPatient section is not displaying correctly");
 		}}
 
-	public void validateWaysToSaveSection(String memberType) {
+	public void validateWaysToSaveSection(String planType, String memberType) {
 		/*
 		  JavascriptExecutor jse = (JavascriptExecutor) driver;
 		  jse.executeScript("window.scrollBy(0,800)", "");
@@ -3544,40 +3542,40 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].scrollIntoView(true);", waysToSaveSection);
 		
-		if (memberType.equalsIgnoreCase("Wallgreens_BnC")) {
-			
-			validateNew(waysToSaveSection);
-			validateNew(lowTierdrugs);    
-			validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
-			validateNew(wallGreensWidget);
-			validateWithValue("Walgreens Preferred Retail Pharmacy", wallGreensWidgetText);             //validate Walgreens Preferred Retail Pharmacy
-			
-			validateNew(PreferredMailServicePharmacyLogo);
-			validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
-			
-			
-			
-		} else if (memberType.equalsIgnoreCase("MailOrderPharamacy_BnC")) {
-			validateNew(waysToSaveSection);
-			validateNew(lowTierdrugs);    
-			validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
-			
-			validateNew(retailpharmacylogo);
-			validateWithValue("Preferred Retail Pharmacy", PreferredRetailPharmacyText);
-			
-			validateNew(PreferredMailServicePharmacyLogo);
-			validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
-			
-		} else if (memberType.equalsIgnoreCase("Group") || memberType.equalsIgnoreCase("withoutWaysToSave_BnC")) {
+		if(planType.equalsIgnoreCase("PDP")){
+			if (memberType.contains("Wallgreens")) {
+				
+				validateNew(waysToSaveSection);
+				validateNew(lowTierdrugs);    
+				validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
+				validateNew(wallGreensWidget);
+				validateWithValue("Walgreens Preferred Retail Pharmacy", wallGreensWidgetText);             //validate Walgreens Preferred Retail Pharmacy
+				
+				validateNew(PreferredMailServicePharmacyLogo);
+				validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
+				
+				
+				
+			} else if (memberType.contains("MailOrderPharamacy")) {
+				validateNew(waysToSaveSection);
+				validateNew(lowTierdrugs);    
+				validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
+				
+				validateNew(retailpharmacylogo);
+				validateWithValue("Preferred Retail Pharmacy", PreferredRetailPharmacyText);
+				
+				validateNew(PreferredMailServicePharmacyLogo);
+				validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
+			}	
+		} else  {
 			//note: by default there will be one id=waystosave element on the page regardless memberType, so check to see it's less than 2 instead of 1
 			if (waysToSaveSectionvalidate.size() < 2) {
 				Assert.assertTrue("ways to save section doesnt exist for a non PDP memeber", true);
 			} else {
 				Assert.assertFalse("ways to save section exists for a non PDP memeber", true);
 			}
-		} else {
-			System.out.println("Please provide a valid member .Refer Notes in feature file");
 		}
+		
 
 	}
 
@@ -4567,20 +4565,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcosttableMAPDLIS4() {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_Table, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_Table);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_Table);
-		String mapdGroupTable= "Annual Deductible Stage\n"
-				+"Initial Coverage Stage\n"
-				+"Catastrophic Coverage Stage\n"
-				+"Covered Generic Drugs\n"
-				+"$85.001 \n"
-				+"You'll never pay more than 15%. \n"
-				+"$3.40 \n" 
-				+"All Other Covered Drugs\n"
-				+"You'll never pay more than 15%.\n"
-				+"$8.50\n"
-				+"1Your plan does not have a deductible. However, you may be responsible for an $85 deductible if you receive Extra Help with your Medicare prescription drug costs. ";
 
-		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
+		if(RetailDrugCost_Table.getText().contains("Annual Deductible Stage")&&RetailDrugCost_Table.getText().contains("Initial Coverage Stage")){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
@@ -4656,19 +4642,8 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 	public void validatedrugcosttablePDPGroupLIS1() {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_Table, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_Table);
-		validateWithValue("Drug cost table is diplaying for PDP GROUP LIS 1", RetailDrugCost_Table);
-		String mapdGroupTable= "Annual Deductible Stage\n"
-				+"Initial Coverage Stage\n"
-				+"Catastrophic Coverage Stage\n"
-				+"Covered Generic Drugs\n"
-				+"$0.00\n"
-				+"$3.40\n"
-				+"$0.00\n"
-				+"All Other Covered Drugs\n"
-				+"$8.50\n"
-				+"$0.00";
-
-		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
+		
+		if(RetailDrugCost_Table.getText().contains("Annual Deductible Stage")){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}

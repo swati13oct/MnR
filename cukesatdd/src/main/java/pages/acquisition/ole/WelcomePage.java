@@ -111,7 +111,7 @@ public class WelcomePage extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Welcome Page for OLE");
-
+		checkModelPopup(driver);
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}
