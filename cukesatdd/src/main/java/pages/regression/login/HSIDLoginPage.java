@@ -193,7 +193,7 @@ public class HSIDLoginPage extends UhcDriver {
 
 		//wait for some form of header to show
 
-		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
