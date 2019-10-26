@@ -110,8 +110,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			throws InterruptedException {
 		//note: MA - Medical; MAPID | PCP - Medical & Prescription drug 
 		//note: PDP - Prescription drug; SHIP - no Medical or Prescription drug
-		//tbd checkForIPerceptionModel(driver);
-		checkModelPopup(driver,10);
+		//keep checkModelPopup(driver,1);  //note: enable it if have problem with iPerception popup
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
 			//tbd if (!getOnlyTestUiFlag()) 
@@ -151,7 +150,6 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",
 						claimsValidate(ma_medicalClaimsTypTxt));
 			}
-
 			System.out.println("!! Claim type Medical is validated!!! ");
 			if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("prescription drug")) {
@@ -177,18 +175,8 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			System.out.println("!!! Validating the drop down to select the claims !!!");
 		}
 		System.out.println("Check to make sure the claimloadingimage disappeared");
-		int c=0;
-		int max=5;
-		int sec=1;
-		while (c<5) {
-			sleepBySec(sec);
-			if (!validate(claimloadingimage,0))
-				break;
-			else
-				c=c+1;
-			System.out.println("slept total of '"+(c*sec)+"' seconds...");
-		}
-		Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
 	}
 
 	/**

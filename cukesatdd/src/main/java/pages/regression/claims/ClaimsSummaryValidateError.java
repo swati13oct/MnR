@@ -112,11 +112,7 @@ public class ClaimsSummaryValidateError extends ClaimsSummaryBase{
 	 * Validate whether 'System error' message exists on claims summary page
 	 */
 	public void validateNoSystemErr() {
-		long timeoutInSec=2;
-		//tbd if (getOnlyTestUiFlag())
-		//tbd 	System.out.println("TEST UI ONLY - will not flag sytem error");
-		//tbd else
-		Assert.assertTrue("PROBLEM - located System Error",!validate(systemErrorMsg, timeoutInSec));
+		Assert.assertTrue("PROBLEM - located System Error",!claimsValidate(systemErrorMsg));
 	}
 
 	/**

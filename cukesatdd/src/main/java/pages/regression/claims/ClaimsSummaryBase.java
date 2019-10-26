@@ -267,11 +267,10 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		scrollToView(claimsSummPrntBtn);
 		claimsTblMoreInfoLnk.click();
 		CommonUtility.checkPageIsReady(driver);
-		try {
-			CommonUtility.waitForElementToDisappear(driver, claimloadingimage, 10);
-		} catch (TimeoutException e) {
-			Assert.assertTrue("PROBLEM - Signficant time has passed (at least 10 seconds) but claim loading image still spinning while the claim total sectoin already loaded", !validate(claimloadingimage,0) && validate(claimsDetlTblMainSect));
-		}
+		System.out.println("Check to make sure the claimloadingimage disappeared");
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
+		
 		CommonUtility.waitForPageLoad(driver,claimsDetlTblMainSect , 10);
 		while(!(driver.getCurrentUrl().contains("/details")));
 		if (driver.getCurrentUrl().contains("/details")) {
@@ -279,13 +278,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
 			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			claimDetailsPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
-			//tbd try {
-			//tbd 	Thread.sleep(3000);
-			//tbd } catch (InterruptedException e) {
-			//tbd 	e.printStackTrace();
-			//tbd } //by default let it wait 3 seconds for data to load to simulate timing on prod
 			return claimDetailsPg;
-			//tbd return new pages.regression.claims.ClaimDetailsPage(driver);
 		}
 		return null;
 	}
@@ -360,18 +353,8 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			claimDetlPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
 
 			System.out.println("Check to make sure the claimloadingimage disappeared");
-			int c=0;
-			int max=5;
-			int sec=1;
-			while (c<5) {
-				sleepBySec(sec);
-				if (!validate(claimloadingimage,0))
-					break;
-				else
-					c=c+1;
-				System.out.println("slept total of '"+(c*sec)+"' seconds...");
-			}
-			Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
+			int sec=waitForClaimPageToLoad();
+			Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
 
 			return claimDetlPg;
 		}
@@ -419,7 +402,6 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			e.printStackTrace();
 		} //by default let it wait 3 seconds for data to load to simulate timing on prod
 		return claimDetailPg;
-		//tbd return new ClaimDetailsPage(driver);
 	}
 
 	/**

@@ -147,7 +147,13 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
+	
+	@FindBy(id="artEXPOiFrame")
+	protected List<WebElement> IPerceptionsSmileySurveyFrame;
 
+	@FindBy(xpath="//div[@id='expoIconSection']//button[@id='expoBtnClose']")
+	protected WebElement closeBtn;
+	
 	@FindBy(xpath="//div[contains(@class,'claimloadingimage')]")
 	protected WebElement claimloadingimage;
 
@@ -209,39 +215,8 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public int getNumClaims(String range, String claimType) {
 		CommonUtility.checkPageIsReady(driver);
-		System.out.println("Check to make sure the claimloadingimage disappeared");
-		int c=0;
-		int max=5;
-		int sec=2;
-		while (c<5) {
-			sleepBySec(sec);
-			if (!validate(claimloadingimage,0))
-				break;
-			else
-				c=c+1;
-			System.out.println("slept total of '"+(c*sec)+"' seconds...");
-		}
-		Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
-
-		//tbd CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
-		/* keep for now, will remove after testing is stable that we don't need this sleep to get correct claims#
-		// note: do not modify this check - critical to wait
-		int extra=2000;
-		int x=0;
-		while(x<15) {
-			try {
-				Thread.sleep(1000);
-				if (claimsValidate(anyTypeOfClaimsTbl)) {
-					Thread.sleep(extra); //give it more time to settle the page
-					System.out.println("sleep for another 2 sec for the page to settle down...");
-					System.out.println("there is some indication of claims...let's check it out");
-					break;
-				}
-			} catch (InterruptedException e) {}
-			x=x+1;
-		}
-		System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up"); 
-		*/ 
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
 		WebElement numClaimsElement=numClaimsMed;
 		if (range.equalsIgnoreCase("custom search")) {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -387,22 +362,22 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public void goToSpecificComboTab(String planType) {
 		try {
-		if (planType.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
-			comboTab_MAPD.click();
-		} else if (planType.equalsIgnoreCase("ship")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
-			comboTab_SHIP.click();
-		} else if (planType.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
-			comboTab_PDP.click();
-		} else if (planType.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
-			comboTab_SSUP.click();
-		} else {
-			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
-		} }
-		catch (Exception e) {
+			if (planType.equalsIgnoreCase("mapd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
+				comboTab_MAPD.click();
+			} else if (planType.equalsIgnoreCase("ship")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
+				comboTab_SHIP.click();
+			} else if (planType.equalsIgnoreCase("pdp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
+				comboTab_PDP.click();
+			} else if (planType.equalsIgnoreCase("ssup")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
+				comboTab_SSUP.click();
+			} else {
+				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+			} 
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -475,30 +450,6 @@ public class ClaimsBase extends UhcDriver  {
 		return Math.round(x * 100.0) / 100.0;
 	}
 
-	/**
-	 * For iPerception Model
-	 * @param driver
-	 */
-	/* tbd 
-	public void checkForIPerceptionModel(WebDriver driver) {
-		int counter = 0;
-		do {
-			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	} */
 
 	/**
 	 * to validate whether element exists, default up to 2 seconds timeout
@@ -507,7 +458,7 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public boolean claimsValidate(WebElement element) {
 		long timeoutInSec=0;
-		return validate(element, timeoutInSec);
+		return claimsValidate(element, timeoutInSec);
 	} 
 
 	/**
@@ -517,11 +468,9 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd 
 	public boolean claimsValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -529,23 +478,21 @@ public class ClaimsBase extends UhcDriver  {
 				System.out.println("Element not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+			System.out.println("Exception: Element not found/not visible. Exception message: "+e.getMessage());
+			System.out.println("-------- end of Exception message");
 		}
 		return false;
-	} */
+	} 
 
 	public void handleHowIsYourVisit() {
 		int counter = 0;
 		do {
 			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsSmileySurveyFrame = driver.findElements(By.id("artEXPOiFrame"));
 			if (IPerceptionsSmileySurveyFrame.isEmpty()) {
 				sleepBySec(1);
 			} else {
 				System.out.println("iperception smiley survey was displayed, check to see if need to close it");
 				driver.switchTo().frame("artEXPOiFrame");
-				WebElement closeBtn=driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']"));
 				try {
 					closeBtn.click();
 					System.out.println("closed the iperception smiley survey");
@@ -571,6 +518,28 @@ public class ClaimsBase extends UhcDriver  {
 			e.printStackTrace();
 		}
 		//System.out.println("slept for '"+sec+"' sec");
+	}
+
+	public int waitForClaimPageToLoad() {
+		int maxTry=10;
+		int numberOfSeconds=1;
+		return waitForClaimPageToLoad(maxTry, numberOfSeconds);
+	}
+	
+	public int waitForClaimPageToLoad(int maxTry, int numberOfSeconds) {
+		int c=0;
+		int total=0;
+		while (c<maxTry) {
+			c=c+1;
+			sleepBySec(numberOfSeconds);
+			if (!claimsValidate(claimloadingimage)) {
+				total=c*numberOfSeconds;
+				break;
+			} 
+			System.out.println("slept total of '"+(total)+"' seconds...");
+		}
+		System.out.println("waited total of '"+(total)+"' seconds for the claimloadingimage to disappear...");
+		return total;
 	}
 	
 }

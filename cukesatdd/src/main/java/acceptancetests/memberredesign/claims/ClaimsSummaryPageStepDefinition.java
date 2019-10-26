@@ -173,22 +173,22 @@ public class ClaimsSummaryPageStepDefinition {
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-			String planType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Calendar calendar = Calendar.getInstance();
-			Date currentDate=calendar.getTime();
-			String toDate = dateFormat.format(currentDate);
-			System.out.println("current date="+toDate);
-			calendar.add(Calendar.YEAR, -2);
-			calendar.add(Calendar.DATE, -1);
-			Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
-			String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
-			System.out.println("2 yrs and 1 day ago date="+fromDate);
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		Date currentDate=calendar.getTime();
+		String toDate = dateFormat.format(currentDate);
+		System.out.println("current date="+toDate);
+		calendar.add(Calendar.YEAR, -2);
+		calendar.add(Calendar.DATE, -1);
+		Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
+		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
+		System.out.println("2 yrs and 1 day ago date="+fromDate);
 
-			claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-			if(claimsSummPg != null)
-				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
+		claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -202,9 +202,9 @@ public class ClaimsSummaryPageStepDefinition {
 		//tbd if (claimsSummPg.getOnlyTestUiFlag())
 		//tbd 	System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
 		//tbd else {
-			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			claimsSummPg.validateEmptyDatesError(planType);
-			//tbd }
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		claimsSummPg.validateEmptyDatesError(planType);
+		//tbd }
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class ClaimsSummaryPageStepDefinition {
 					+ "NOTE: pagination will only show if user has claims for the search range",!claimsSummPg.verifyPagination(tmpClaims));
 		else
 			Assert.assertTrue("PROBLEM - not getting expected pagination.  "
-				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination(tmpClaims));
+					+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination(tmpClaims));
 	}
 
 	/**
@@ -460,7 +460,7 @@ public class ClaimsSummaryPageStepDefinition {
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
-	
+
 	@Then("^I can validate the segment ID value in localStorage on claims summary page$")
 	public void validates_segmentid(DataTable memberAttributes) {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
@@ -468,16 +468,16 @@ public class ClaimsSummaryPageStepDefinition {
 		//tbd if (claimsSummPg.getOnlyTestUiFlag()) 
 		//tbd 	System.out.println("TEST UI ONLY - will not validate segment ID");
 		//tbd else {		
-			Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
-			String expectedSegmentId = memberAttributesMap.get("Segment ID");
-			String planType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			String memberType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-			claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
-			//tbd }
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+		//tbd }
 	}
-	
+
 	@When("^I am validating UI only$")
 	public void onlyTestUi() {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()

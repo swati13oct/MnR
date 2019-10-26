@@ -196,7 +196,6 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		//tbd checkForIPerceptionModel(driver);
 		checkModelPopup(driver,10);
 		try {
 			validateNew(eob_claims);
@@ -214,7 +213,6 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
 		checkModelPopup(driver,10);
-		//tbd checkForIPerceptionModel(driver);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);

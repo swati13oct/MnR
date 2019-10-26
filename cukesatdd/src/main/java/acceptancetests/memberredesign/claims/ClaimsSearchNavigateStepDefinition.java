@@ -169,7 +169,6 @@ public class ClaimsSearchNavigateStepDefinition {
 				claimType="medical";
 		}
 		System.out.println("This test will validate for claimType='"+claimType+"'");
-
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE, memberType);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_INPUT_CLAIM_TYPE, claimType);
@@ -180,21 +179,10 @@ public class ClaimsSearchNavigateStepDefinition {
 		System.out.println("Proceed to test for claim period="+claimPeriod);
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
-			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
-			claimsSummaryPage.validateComboTabs();
-			claimsSummaryPage.goToSpecificComboTab(planType); //note: click the target tab for testing
-		} else {
-			boolean flagNonCombo=false; //note: if user has combo then select the right plan
-			claimsSummaryPage.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
-		}
 		claimsSummaryPage.searchClaimsByTimePeriodClaimType(planType,claimPeriod, claimType);
 		if(claimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
 	}	
-
-
-
 	
 	/**
 	 * This step should only be run when user is login to dashboard.
