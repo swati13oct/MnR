@@ -532,8 +532,8 @@ public class ClaimsBase extends UhcDriver  {
 		while (c<maxTry) {
 			c=c+1;
 			sleepBySec(numberOfSeconds);
+			total=c*numberOfSeconds;
 			if (!claimsValidate(claimloadingimage)) {
-				total=c*numberOfSeconds;
 				break;
 			} 
 			System.out.println("slept total of '"+(total)+"' seconds...");
