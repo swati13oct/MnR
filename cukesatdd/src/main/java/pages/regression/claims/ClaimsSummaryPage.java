@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Assert;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -25,7 +22,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
-		checkModelPopup(driver);
+		checkModelPopup(driver,10);
 		if(!pgHeader.getText().contains("Claims Summary"))
 			Assert.fail("Claims Summary header not found. Page loading issue");
 	}
@@ -199,7 +196,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkForIPerceptionModel(driver);
+		//tbd checkForIPerceptionModel(driver);
+		checkModelPopup(driver,10);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -215,7 +213,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		claimsPgLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkForIPerceptionModel(driver);
+		checkModelPopup(driver,10);
+		//tbd checkForIPerceptionModel(driver);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);

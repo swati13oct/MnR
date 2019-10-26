@@ -484,10 +484,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 
 				Assert.assertTrue("PROBLEM: After clicking left arrow, prevLink element should once again be disabled", claimsValidate(disabled_prevBtn));
 			}
-
-
 		}
-
 		return claimsValidate(summPgPagination);
 	}
 

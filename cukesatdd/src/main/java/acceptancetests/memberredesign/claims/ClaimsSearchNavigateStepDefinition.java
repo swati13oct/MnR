@@ -67,11 +67,12 @@ public class ClaimsSearchNavigateStepDefinition {
 			ClaimsSummaryPage claimSummarypage = (ClaimsSummaryPage) getLoginScenario()
 					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			ClaimDetailsPage newClaimDetailsPage = claimSummarypage.navigateToClaimDetailsPgByFirstClaim();
-			if (null != newClaimDetailsPage)
+			Assert.assertTrue("PROBLEM - Claims details page is not loaded!!!", null != newClaimDetailsPage);
+			//tbd if (null != newClaimDetailsPage)
 				getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
-			else {
-				Assert.fail("Claims details page is not loaded!!!");
-			}
+				//tbd else {
+				//tbd 	Assert.fail("Claims details page is not loaded!!!");
+				//tbd }
 		} else if (claimSystem.equalsIgnoreCase("RxCLAIMS")) {
 			vbf_claimType = "Drug";
 			System.out.println("Skipping Claim Details navigation!!!");

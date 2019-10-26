@@ -209,7 +209,21 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public int getNumClaims(String range, String claimType) {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
+		System.out.println("Check to make sure the claimloadingimage disappeared");
+		int c=0;
+		int max=5;
+		int sec=2;
+		while (c<5) {
+			sleepBySec(sec);
+			if (!validate(claimloadingimage,0))
+				break;
+			else
+				c=c+1;
+			System.out.println("slept total of '"+(c*sec)+"' seconds...");
+		}
+		Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
+
+		//tbd CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
 		/* keep for now, will remove after testing is stable that we don't need this sleep to get correct claims#
 		// note: do not modify this check - critical to wait
 		int extra=2000;
@@ -465,6 +479,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * For iPerception Model
 	 * @param driver
 	 */
+	/* tbd 
 	public void checkForIPerceptionModel(WebDriver driver) {
 		int counter = 0;
 		do {
@@ -483,7 +498,7 @@ public class ClaimsBase extends UhcDriver  {
 			}
 			counter++;
 		} while (counter < 2);
-	}
+	} */
 
 	/**
 	 * to validate whether element exists, default up to 2 seconds timeout
@@ -491,8 +506,7 @@ public class ClaimsBase extends UhcDriver  {
 	 * @return
 	 */
 	public boolean claimsValidate(WebElement element) {
-		long timeoutInSec=2;
-		//tbd return claimsValidate(element, timeoutInSec);
+		long timeoutInSec=0;
 		return validate(element, timeoutInSec);
 	} 
 
@@ -527,11 +541,7 @@ public class ClaimsBase extends UhcDriver  {
 			System.out.println("current value of counter: " + counter);
 			List<WebElement> IPerceptionsSmileySurveyFrame = driver.findElements(By.id("artEXPOiFrame"));
 			if (IPerceptionsSmileySurveyFrame.isEmpty()) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
+				sleepBySec(1);
 			} else {
 				System.out.println("iperception smiley survey was displayed, check to see if need to close it");
 				driver.switchTo().frame("artEXPOiFrame");
@@ -560,7 +570,7 @@ public class ClaimsBase extends UhcDriver  {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("slept for '"+sec+"' sec");
+		//System.out.println("slept for '"+sec+"' sec");
 	}
 	
 }

@@ -347,7 +347,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		int counter =0;
 		do{
 			if(counter<=12)
-				Thread.sleep(3000);
+				sleepBySec(1);
 			else
 				return null;
 			counter++;
@@ -358,7 +358,21 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
 			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
 			claimDetlPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
-			Thread.sleep(3000); //by default let it wait 3 seconds for data to load to simulate timing on prod
+
+			System.out.println("Check to make sure the claimloadingimage disappeared");
+			int c=0;
+			int max=5;
+			int sec=1;
+			while (c<5) {
+				sleepBySec(sec);
+				if (!validate(claimloadingimage,0))
+					break;
+				else
+					c=c+1;
+				System.out.println("slept total of '"+(c*sec)+"' seconds...");
+			}
+			Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
+
 			return claimDetlPg;
 		}
 		return null;

@@ -110,7 +110,8 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			throws InterruptedException {
 		//note: MA - Medical; MAPID | PCP - Medical & Prescription drug 
 		//note: PDP - Prescription drug; SHIP - no Medical or Prescription drug
-		checkForIPerceptionModel(driver);
+		//tbd checkForIPerceptionModel(driver);
+		checkModelPopup(driver,10);
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
 			//tbd if (!getOnlyTestUiFlag()) 
@@ -175,8 +176,19 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			+(custSrch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
 		}
-		sleepBySec(3);
-		Assert.assertTrue("PROBLEM - should not see claimloadingimage at this point...", !validate(claimloadingimage,2));
+		System.out.println("Check to make sure the claimloadingimage disappeared");
+		int c=0;
+		int max=5;
+		int sec=1;
+		while (c<5) {
+			sleepBySec(sec);
+			if (!validate(claimloadingimage,0))
+				break;
+			else
+				c=c+1;
+			System.out.println("slept total of '"+(c*sec)+"' seconds...");
+		}
+		Assert.assertTrue("PROBLEM - waited for "+(max*3)+" seconds, still seeing claimloadingimage at this point, something maybe wrong...", !validate(claimloadingimage,0));
 	}
 
 	/**
