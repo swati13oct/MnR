@@ -332,7 +332,7 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
-		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
 			PaymentPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);

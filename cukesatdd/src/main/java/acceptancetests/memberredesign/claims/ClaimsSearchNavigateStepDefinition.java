@@ -195,7 +195,7 @@ public class ClaimsSearchNavigateStepDefinition {
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			accountHomePage.navigateToClaimsPageByViewYorClaimsLinkThenBackToHome();
+			accountHomePage.navigateToClaimsPageByViewYourClaimsLinkThenBackToHome();
 		}
 	}
 
