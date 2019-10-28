@@ -9,7 +9,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Claim System   | <claimSystem>   |
       | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
-    When I am validating UI only
+    #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

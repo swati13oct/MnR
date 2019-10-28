@@ -1,10 +1,12 @@
 package pages.regression.claims;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -542,4 +544,31 @@ public class ClaimsBase extends UhcDriver  {
 		return total;
 	}
 	
+	public void validateCurrencyFormat(String inputKey, String inputStr) {
+		inputStr=inputStr.replaceAll("\\s", "");
+		Number number = null;
+		try {
+		    number = NumberFormat.getCurrencyInstance(Locale.US).parse(inputStr);
+		} catch(ParseException pe) {
+		    Assert.assertTrue("PROBLEM - unable to parse value to currency format", false);
+		}
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data value format is not expected currency format.  Expected: $xx.xx | Actual: "+inputStr, number !=null);
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed currency format validation");
+	}
+
+	public void validateDateFormat(String inputKey, String inputStr, String delimiter) {
+		String datePattern="\\d{2}"+delimiter+"\\d{2}"+delimiter+"\\d{4}";
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: MM"+delimiter+"dd"+delimiter+"yyyy.  "
+				+ "Current: "+inputStr, 
+				inputStr.matches(datePattern));
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
+	}
+	
+	public void validateShipDateFormat(String inputKey, String inputStr, String delimiter) {
+		String datePattern="\\d{4}"+delimiter+"\\d{2}"+delimiter+"\\d{2}";
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: yyyy"+delimiter+"MM"+delimiter+"dd.  "
+				+ "Current: "+inputStr, 
+				inputStr.matches(datePattern));
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
+	}
 }

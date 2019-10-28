@@ -174,11 +174,13 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | MemUsername | <MemUserName> |
     And user clicks on member to select
     When I navigate to the claims Summary page from dashboard or testharness page
+    #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then I can validate the segment ID value in localStorage on claims summary page
       | Segment ID   | <segmentId>   |
+
     #----------------- Test for Last 24 months --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>     |
@@ -199,6 +201,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #----------
 
     Examples: 
-      | index | username   | password   | MemUserName  | userSelection | planType | memberType | claimSystem    | claimType | segmentId | flagZeroClaimsUser |
-      |    01 | myUsername | myPassword | testUsername | whatever      | SHIP     | COMBO      | COMPASS_CLAIMS | NA        | 000       | Yes                |
+      | index | username   | password   | MemUserName  | userSelection | planType | memberType | claimSystem    | claimType         | segmentId | flagZeroClaimsUser |
+      |    01 | myUsername | myPassword | testUsername | whatever      | PDP      | Individual | Rx_CLAIMS      | Prescription drug | 000       | Yes                |
+      |    02 | myUsername | myPassword | testUsername | whatever      | MAPD     | Individual | NICE_CLAIMS    | Medical           | 000       | Yes                |
+      |    03 | myUsername | myPassword | testUsername | whatever      | SHIP     | Individual | COMPASS_CLAIMS | NA                | 000       | Yes                |
+
 

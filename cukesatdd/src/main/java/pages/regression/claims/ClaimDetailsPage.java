@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
@@ -344,7 +345,12 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle in Claims Total section of Claims Details Page", 
 					claimsValidate(adjustmentToggleCollapsed));
 
-			adjustmentToggleCollapsed.click();
+			try {
+				adjustmentToggleCollapsed.click();
+			} catch (WebDriverException e) {
+				handleHowIsYourVisit();
+				adjustmentToggleCollapsed.click();
+			}
 
 			Assert.assertTrue("PROBLEM - Unable to locate the Expanded 'Adjustment' toggle in Claims Total section of Claims Details Page after clicking", 
 					claimsValidate(adjustmentToggleExpanded));
@@ -520,7 +526,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			double rowTotalPlanCostShare=0.0;
 			double rowTotalYourPlanPaid=0.0;
 			for (int x=0; x<ship_claimsTblRows.size(); x++) {
-				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				//String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				String xpath2=  "//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]["+(x+1)+"]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
 				System.out.println("--- index= "+x+" -----------------------");
 				double value=findValue(xpath2+"[1]/p");
 				System.out.println("rows Amount Charged value="+value);
