@@ -78,7 +78,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | Combo    | ComboFEDShip_BnC |
+      | 15091 | Combo    | ComboFEDShip_BnC_Sardar |
 
   #TC09_Benefits_for_ALPeehipMember
   @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @BnC_Part1_regressionMember
@@ -136,8 +136,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validate vas tiles on vas page
 
     Examples: 
-      | TID   | planType | memberType | language | PlanBenefitsTable   |
-      | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
+      | TID   | planType | memberType        | language | PlanBenefitsTable   |
+      | 15094 | HIP      | SHIP_BnC_Sardar   | ENGLISH  | Plan Benefits Table |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part2_regressionMember
@@ -204,8 +204,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
+      | TID   | planType | memberType             | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+       | 15095 | Medica   | Individual_BnC_Sardar | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part2_regressionMember
@@ -474,8 +474,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the NON LIS user validates plan overview section for group
     And the user validates headers on Bnc page for group members
     And the user validates the Group Primarycare Provider section
@@ -509,7 +508,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name             | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
+     | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC24_Group NON LIS_PDP
   @benefitsAndCoverage27 @CMPDPGroupNonLis
@@ -612,11 +611,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    And the user validates View all Benefits link and Prescription drug cost section
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -685,8 +680,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
@@ -734,8 +728,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
+    Then The user navigate to Benefits and Coverage page
     And the user validates Ind plan overview
       | Name            | <name>           |
       | Member ID       | <memberid>       |
