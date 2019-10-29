@@ -35,6 +35,9 @@ public class PlanPremiumPage extends UhcDriver{
 	//Page Header
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PageHeader;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Authorization')]")
+	private WebElement authPageHeader;
 
 	//Right Rail Elements
 
@@ -98,7 +101,7 @@ public class PlanPremiumPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Authorization')]")))){
+		if(validateNew(authPageHeader)){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPage(driver);
 		}

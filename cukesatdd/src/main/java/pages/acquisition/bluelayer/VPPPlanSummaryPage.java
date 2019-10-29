@@ -1876,7 +1876,7 @@ public boolean validateAllPlansChecked() {
 
     public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
         boolean isSpecificPlanInfoPresent = false;
-        if (planName.contains("HMO SNP")) {
+        if (planName.contains("SNP")) {
             //ElementData elementData = new ElementData("id", "viewDetailsMA");
         Thread.sleep(5000);
 isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
@@ -3368,7 +3368,7 @@ catch (Exception e) {
 	
 	public void CheckClick_NextYear_Plans() {
 
-		//try {
+		try {
 			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
@@ -3378,16 +3378,11 @@ catch (Exception e) {
 			
 			SelectYearGoBtn.click();
 			CommonUtility.checkPageIsReadyNew(driver);
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
 			e.printStackTrace();
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 	}
 	
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")

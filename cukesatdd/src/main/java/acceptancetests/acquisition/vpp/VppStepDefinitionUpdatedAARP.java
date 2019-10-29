@@ -810,7 +810,7 @@ public class VppStepDefinitionUpdatedAARP {
 
 		String County = "St. Louis County";
 		String ZipCode = "63043";
-		String PlanYear = "2019"; 
+		String PlanYear = "2020"; 
 		String SiteName =  "AARP_ACQ";
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -1029,23 +1029,23 @@ public class VppStepDefinitionUpdatedAARP {
 		//----- MA plan type ----------------------------
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- PDP plan type ---------------------------
 		planType="PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 		//----- SNP plan type ---------------------------
 		planType="SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+	//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 	}
 
 	@Then("^user saves two plans as favorite on AARP site$")
@@ -1058,8 +1058,8 @@ public class VppStepDefinitionUpdatedAARP {
 
 		//----- MA plan type ----------------------------
 		String planType="MA";
-		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.CheckClick_CurrentYear_Plans();
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 	
