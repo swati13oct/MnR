@@ -78,7 +78,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
 
 #--------------------------------
 
-  @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018 @RegressionPredators @prodRegression
+  @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify print and email for plan compare page in UHC site
      Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -101,9 +101,13 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
      | 15523 | Blayer |90210   | MA                | NO            | 
-     | 15523 | Blayer |90210   | PDP               | NO            | 
+     
+		@prodRegression
+     Examples:
+     | TID   | site   |zipcode | plantype          | isMultiCounty | 
+     | 15523 | Ulayer |90210   | PDP               | NO            | 
 
-   @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators @prodRegression
+   @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in UHC site
      Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -124,10 +128,14 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
       |  TID  | site   |zipcode | plantype | isMultutiCounty | 
       | 15531 | Blayer |  80001 | MA       | No              | 
       | 15531 | Blayer |  80001 | PDP      | No              |
-      | 15531 | Blayer |  80001 | SNP      | No              |
+    
+     @prodRegression
+     Examples:
+      | TID   | site   |zipcode | plantype          | isMultiCounty | 
+      | 15531 | Ulayer |  80001 | SNP      | No              |
 
 
-  @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019 @prodRegression
+  @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on UHC site
      Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -146,7 +154,11 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
 
     Examples: 
       | UID     | site   |plantype | zipcode | isMultiCounty | county           | 
-      | 1598166 | Blayer |MA       | 80001   | NO            | Jefferson County | 
       | 1598166 | Blayer |PDP      | 80001   | NO            | Jefferson County | 
       | 1598166 | Blayer |SNP      | 80001   | NO            | Jefferson County | 
+      
+    @prodRegression 
+    Examples: 
+      | UID     | site   |plantype | zipcode | isMultiCounty | county           | 
+      | 1598166 | Ulayer |MA       | 80001   | NO            | Jefferson County |
 
