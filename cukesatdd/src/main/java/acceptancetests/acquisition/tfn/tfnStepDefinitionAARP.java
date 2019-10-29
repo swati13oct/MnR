@@ -81,7 +81,7 @@ public class tfnStepDefinitionAARP {
 		String tfnNumber = memberAttributesMap.get("TFN Number MA");
 		tfnPage.navigateToVPPpage();
 		String tfn = tfnPage.validateMAtabTFN();
-		
+		tfnPage.checkModelPopup(wd,10);
 		if( tfn.equalsIgnoreCase(tfnNumber)){
 			System.out.println("MA Tab displaying correct TFN");
 		}

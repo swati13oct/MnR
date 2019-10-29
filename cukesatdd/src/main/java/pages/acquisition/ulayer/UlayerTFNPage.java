@@ -39,7 +39,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-list-1']/div/div[1]/div/div/h2")
 	public WebElement MAPlanHeader;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/div/div[1]/div/div/div/div/div[4]/div[1]/div/div/div/div[2]/div[1]/div/div/div[2]/div[1]/p[1]/a")
+	@FindBy(xpath = "//a[contains(@class,'tel ng-binding')]")
 	public WebElement TFN_MA;
 
 	@FindBy(xpath = "//*[@id='closeButton']")
@@ -1040,7 +1040,7 @@ public class UlayerTFNPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		checkModelPopup();
+		checkModelPopup(driver,10);
 		String TFNExpected = "1-877-699-5710";
 		String number = LearnAboutMedicareTFNumber.getText();
 		System.out.println("This is the TFN from UI:" + number);
@@ -1056,7 +1056,21 @@ public class UlayerTFNPage extends UhcDriver {
 		findPlansButton.click();
 		}
 	
-	
+	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
+
+		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+		
+		try{
+			if(IPerceptionsFrame.isDisplayed())	{
+				driver.switchTo().frame(IPerceptionsFrame);
+				IPerceptionNoBtn.click();
+				driver.switchTo().defaultContent();
+			}
+		}catch(Exception e){
+			System.out.println("Iperceptions popup not found");
+		}
+
+}
 	
 	
 }

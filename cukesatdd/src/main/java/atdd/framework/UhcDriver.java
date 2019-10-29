@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec=30;
+	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -718,7 +718,7 @@ try {
 		}
 	}
 	
-	public void checkModelPopup(WebDriver driver) {
+	public  void checkModelPopup(WebDriver driver) {
 		 checkModelPopup(driver, defaultTimeoutInSec);
 	}
 	
