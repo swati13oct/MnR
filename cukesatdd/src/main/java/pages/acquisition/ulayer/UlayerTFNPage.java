@@ -209,9 +209,10 @@ public class UlayerTFNPage extends UhcDriver {
 	public String validateMAtabTFN() throws Exception {
 		
 		String ma_TFN ="";
-		waitforElement(MAPlanvpp);
+		validateNew(MAPlanvpp);
 		jsClickNew(MAPlanvpp);
 		Thread.sleep(4000);
+		validateNew(plan2020);
 		plan2020.click();
 		Year_Selection_Go_Bttn.click();
 		Thread.sleep(4000);
@@ -513,7 +514,8 @@ public class UlayerTFNPage extends UhcDriver {
 		return MedSupTfn;	
 	}
 	public String validateDirectPageTFN() {
-		String Acqhome_TFN =getHome_TFN().getText().trim();
+		validateNew(home_TFN);
+		String Acqhome_TFN =home_TFN.getText().trim();
 		System.out.println("This is the TFN from Acquisition Home Page UI:  "+Acqhome_TFN);
 		return Acqhome_TFN;
 	}
@@ -1051,7 +1053,7 @@ public class UlayerTFNPage extends UhcDriver {
 		return false;
 	}
 	public void navigateToVPPpage() throws InterruptedException {
-		
+		validateNew(zipCode);
 		zipCode.sendKeys("90210");
 		findPlansButton.click();
 		}
