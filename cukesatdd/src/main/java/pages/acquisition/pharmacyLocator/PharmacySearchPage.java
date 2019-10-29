@@ -27,6 +27,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		checkModelPopup(driver);
 		//CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10);
 	}
 
@@ -442,7 +443,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			} else {
 				Assert.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
 						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
-				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens – Preferred Retail Pharmacy' widget", 
+				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
 						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap);

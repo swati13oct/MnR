@@ -2,7 +2,7 @@
 Feature: 2.03-ACQ-Plan details in vpp flow UMS
 
 
-  @vppPlanDetailsRegression
+  @vppPlanDetailsRegression @prodRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

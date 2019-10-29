@@ -72,13 +72,13 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement contactUsPageLink;
 
 	// @FindBy(css = ".view-id-link")
-	@FindBy(xpath = "//*[@id='dashboard']/div[1]/section[1]/account-info/div/div/a/span[1]")
-	private WebElement idCardLink;
+//	@FindBy(xpath = "(//*[contains(text(),'View & print member ID cards')])[1]")
+//	private WebElement idCardLink;
 
 	@FindBy(xpath = "(//*[@class='ng-scope']//a[text()='Premium Payments'])[1]")
 	private WebElement paymentsLink;
 
-	@FindBy(xpath = "(//a[contains(text(),'Payments Page')])")
+	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
 	private WebElement TestHarnesspaymentsLink;
 
 	@FindBy(xpath = "//*[@id='premiumpayment_3']")
@@ -1774,15 +1774,15 @@ public class AccountHomePage extends UhcDriver {
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
 		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
 		 */
-		try {
-			System.out.println("iPerception Pop Up is Present");
-			driver.switchTo().frame("IPerceptionsEmbed");
-			iPerceptionCloseButton.click();
-			// driver.switchTo().defaultContent();
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up is not Present");
-		}
+//		try {
+//			System.out.println("iPerception Pop Up is Present");
+//			driver.switchTo().frame("IPerceptionsEmbed");
+//			iPerceptionCloseButton.click();
+//			// driver.switchTo().defaultContent();
+//			Thread.sleep(5000);
+//		} catch (Exception e) {
+//			System.out.println("iPerception Pop Up is not Present");
+//		}
 
 		Thread.sleep(6000);
 
@@ -2116,25 +2116,34 @@ public class AccountHomePage extends UhcDriver {
 	 * 
 	 * @return
 	 */
+	
+	@FindBy(xpath = "//*[contains(@id,'home_2')]")
+	private WebElement TestHarnessPageHomeBttnround;
+	
+	@FindBy(xpath = "//*[@id='dashboard']")
+	private WebElement Dashboard;
+	
 	public IDCardPage viewIDCard() {
-		try {
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		} catch (Exception e) {
-			System.out.println("iPerception Pop Up not displayed");
-		}
 
-		if (driver.getCurrentUrl().contains("testharness")) {
-			driver.findElement(By.id("home_2")).click();
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='dashboard']")), 10);
-			validate(idCardLink);
-			idCardLink.click();
+		if (driver.getCurrentUrl().contains("testharness.html")) {
+			System.out.println("The page contains test harness");
+			jsClickNew(TestHarnessPageHomeBttnround);
+			System.out.println("Home button clicked");
+			CommonUtility.waitForPageLoad(driver,Dashboard, 30);
+			System.out.println("dashboard diplayed");
+			validate(viewRecomend);
+			viewRecomend.click();
 			return new IDCardPage(driver);
 		} else {
 
-			validate(idCardLink);
-			idCardLink.click();
+			validate(viewRecomend);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//	viewRecomend.click();
 			return new IDCardPage(driver);
 		}
 	}
@@ -2958,7 +2967,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
-		if (validate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
@@ -2977,7 +2986,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public WebElement locateElementWithinShadowRootNoAssert(WebElement shadowRootElement, String inputSelector) {
-		if (validate(shadowRootElement)) {
+		if (noWaitValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootElement);
 			try {
@@ -3050,10 +3059,10 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-	public void navigateToClaimsPageByViewYorClaimsLinkThenBackToHome() {
+	public void navigateToClaimsPageByViewYourClaimsLinkThenBackToHome() {
 		CommonUtility.waitForPageLoad(driver, viewYourClaimsLink, 10);
 		Assert.assertTrue("PROBLEM - unable to locate 'VIEW YOUR CLAIMS' link on dashboard page",
-				validate(viewYourClaimsLink));
+				validate(viewYourClaimsLink,0));
 		viewYourClaimsLink.click();
 		CommonUtility.checkPageIsReady(driver);
 		checkForIPerceptionModel(driver);
@@ -3064,7 +3073,7 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - not getting expected page title for claims summary page. Expected to contains="
 				+ expPageTitle + " | Actual=" + driver.getTitle(), driver.getTitle().contains(expPageTitle));
 		System.out.println("The title of Claims page is-------->" + driver.getTitle());
-		if (validate(HomeTopMenuButton)) {
+		if (validate(HomeTopMenuButton,0)) {
 			HomeTopMenuButton.click();
 		} else {
 			locateElementWithinShadowRoot(shadowRootHeader, "#home_2");

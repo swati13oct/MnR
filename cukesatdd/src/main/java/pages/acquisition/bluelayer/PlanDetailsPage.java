@@ -180,6 +180,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
+	@FindBy(id="//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	private List<WebElement> presDrugTab1;
+	
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 	
@@ -276,7 +279,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate(String planType) {
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assert.assertTrue(0 == presDrugTab.size(), "Prescription Drug tab not displayed for MA plans");
+			Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);

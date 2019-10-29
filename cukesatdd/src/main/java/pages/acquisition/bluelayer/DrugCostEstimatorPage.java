@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 public class DrugCostEstimatorPage extends UhcDriver {
 
@@ -1851,7 +1852,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public boolean validateDrugOnStep3FromHomePageFlow(String drug) {
 		CommonUtility.waitForPageLoadNew(driver, step3DrugSummaryInfo, 30);
-		validateNew(step3PharmacySummaryInfo);
+		validateNew(step3DrugSummaryInfo); System.out.println(step3DrugSummaryInfo);
 		if (step3DrugSummaryInfo.getText().contains(drug))
 			return true;
 		return false;
@@ -1914,8 +1915,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'" + drug.split(" ")[0] + "')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}	
 	
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
@@ -2041,6 +2042,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		validateNew(returnLink,20);
+		jsClickNew(returnLink);
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
 	}
 
 

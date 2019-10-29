@@ -1,4 +1,4 @@
-@fastandfurious @OLE @MAPD_OLE_UHC
+@fastandfurious @OLE @MAPD_OLE_UHC @prodRegression
 Feature: 2.05.2.ACQ-OLE MAPD UMS
 
   @MAPD_OLE_UHC @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_UHC @OEP_CHANGES @OLE_Regression_Blayer

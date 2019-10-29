@@ -1,5 +1,5 @@
 @contactUs @velocityDashers
-Feature: V1.1To test Send us a question Widget and Click to call functionality in contact us redesign pages in UHCM site
+Feature: 1.16 Member Contact us Page
 
   @smokeTest @ContactUs
   Scenario Outline: VBF - Verify Click to Call and email Widget section on contact us page for Federal member

@@ -22,6 +22,7 @@ import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -46,7 +47,7 @@ import pages.regression.testharness.TestHarness;
  *
  */
 
-public class PreEffectiveStepDefinition{
+public class PreEffectiveStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
@@ -226,7 +227,6 @@ public void validateCorrectTechSupportNumberIsDisplayedOnBenefitsCoevargePage(Da
 	
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
 	benefitsCoveragePage.verifyCorrectTechSupportNumberForPreEffectiveMembers(TechnicalPhNo);
 
 }
@@ -248,7 +248,7 @@ public void validateClaimSupportIsNOTDisplayedOnBenefitsCoevargePageForSHIPPreff
 	if (memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 	
 	{BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	
 	benefitsCoveragePage.verifyClaimSupportSupportNumberNOTDisplayedForSHIPPreEffectiveMembers();
 	benefitsCoveragePage.verifyClaimSupportSupportHeaderInNeedHelpNOTDisplayedForSHIPPreEffectiveMembers();
 	}
@@ -263,7 +263,7 @@ public void validateClaimSupportIsNOTDisplayedOnBenefitsCoevargePageForSHIPPreff
 public void clickViewPlanDocumentsButton() throws Throwable {
 	BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 			.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
-	BenefitsAndCoveragePage.checkModelPopup(benefitsCoveragePage.driver);
+	
     benefitsCoveragePage.clickViewPlanDocumentsButton();  
     FormsAndResourcesPage formsAndResourcesPage = new FormsAndResourcesPage(benefitsCoveragePage.driver);
 	getLoginScenario().saveBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE, formsAndResourcesPage);

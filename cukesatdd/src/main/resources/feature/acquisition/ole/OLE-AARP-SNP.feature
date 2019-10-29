@@ -1,4 +1,4 @@
-@fastandfurious @OLE @SNP_OLE_Ulayer
+@fastandfurious @OLE @SNP_OLE_Ulayer @prodRegression
 Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
 
   	@SNP_OLE_AARP @acquisitionRegression

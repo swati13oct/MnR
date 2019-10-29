@@ -3,12 +3,18 @@
  */
 package atdd.framework;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -16,6 +22,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -34,7 +41,14 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-
+	private long defaultTimeoutInSec=30;
+	
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
+	public static WebElement IPerceptionNoBtn;
+	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -106,10 +120,23 @@ public abstract class UhcDriver {
 			}
 		}
 	}
+	
+	public boolean validate(WebElement element) {  
+		return validate(element, defaultTimeoutInSec);
+	}
 
-	public boolean validate(WebElement element) {
+	public boolean validateNew(WebElement element) { 
+		return validateNew(element, defaultTimeoutInSec);
+	}
+
+	public void waitforElementNew(WebElement element) {
+		waitforElementNew(element, defaultTimeoutInSec);
+	}
+
+
+	public boolean validate(WebElement element, long timeoutInSec) {
     	try {
-	    	waitforElementNew(element);
+	    	waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
 				System.out.println("Element found!!!!");
 				return true;
@@ -443,8 +470,8 @@ try {
 	 * 
 	 * @param element
 	 */
-	public void waitforElementNew(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+	public void waitforElementNew(WebElement element,long timeoutInSec) {
+		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -512,12 +539,12 @@ try {
 	 * @param element
 	 * @return : boolean
 	 */
-	public boolean validateNew(WebElement element) {
+	public boolean validateNew(WebElement element, long timeoutInSec) {
 		scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
-			waitforElementNew(element);
+			waitforElementNew(element,timeoutInSec);
 			if (element.isDisplayed()) {
 				Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
 				System.out.println("@@@The element " + element.getText() + "is found@@@");
@@ -691,27 +718,73 @@ try {
 		}
 	}
 	
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
+	public void checkModelPopup(WebDriver driver) {
+		 checkModelPopup(driver, defaultTimeoutInSec);
 	}
+	
+	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
+
+			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+			
+			try{
+				if(IPerceptionsFrame.isDisplayed())	{
+					driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionNoBtn.click();
+					driver.switchTo().defaultContent();
+				}
+			}catch(Exception e){
+				System.out.println("Iperceptions popup not found");
+			}
+
+	}
+	
+	/**
+	 * determine system time 
+	 * note: for prod no one would be changing the date, 
+	 * note: so just get the current time (the build system) 
+	 * note: and format it the same like the one using getSystemTime from MRRestWAR
+	 * note: keep the format: Mon Oct 14 17:14:06 UTC 2019
+	 * @return
+	 */
+	@FindBy(xpath="//body")
+	protected WebElement timeJson;
+	public String getTestEnvSysTime() {
+		String timeStr = "";
+		if (MRScenario.environment.equalsIgnoreCase("prod")) { 
+			Date currentTime = new Date();
+			final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy ");
+			sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+			timeStr=sdf.format(currentTime);
+		} else {
+			String winHandleBefore = driver.getWindowHandle();
+			System.out.println("Proceed to open a new blank tab to check the system time");
+			String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+			if (MRScenario.environment.contains("team-ci"))
+				urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+			//open new tab
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+			for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle);
+			}
+			WebElement currentSysTimeElement=timeJson;
+			String currentSysTimeStr=currentSysTimeElement.getText();
+			
+			JSONParser parser = new JSONParser();
+			org.json.simple.JSONObject jsonObj;
+			try {
+				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+				
+				timeStr = (String) sysTimeJsonObj.get("systemtime"); 
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+		}
+		return timeStr;
+	}
+	
 }

@@ -137,12 +137,12 @@ public class DCEAcqStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
 
 		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
-		DrugDetails.selectDosage(drug);
+		DrugDetails.selectDosage(dosage);
 		DrugDetails.selectQnty(quantity);
 		DrugDetails.selectFrequency(frequency);		
 	}
@@ -317,6 +317,12 @@ public class DCEAcqStepDefinitionAARP {
 			System.out.println("===========Page not returned============");
 			Assert.fail();
 		}
+	}
+	
+	@And("^the user clicks on return link to navigate to plan summary$")
+	public void clickOnReturnLink(){
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dcePage.clickReturnToSummaryLink();
 	}
 	
 	@Then("^I should be directed to the VPP Plan Summary Page Ulayer and I should see the Plan Count Overlay populated appropriately$")

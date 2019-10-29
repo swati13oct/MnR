@@ -59,7 +59,7 @@ public class ClaimDetailsPage extends UhcDriver {
 
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReadyNew(driver);
-		RallyDashboardPage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		openAndValidate();
 	}
 

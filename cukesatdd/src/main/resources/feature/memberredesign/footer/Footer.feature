@@ -1,5 +1,5 @@
 @footer @member_redesign_footer @regressionMember
-Feature: F1.2Footer validation
+Feature: 1.05 Member Footer validation
 
   @footer1 @IncrediblesFooter
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
@@ -24,7 +24,30 @@ Feature: F1.2Footer validation
     And the user validates the footer section in Benefits page
 
     Examples: 
-      | TID   | planType | memberType                 |
-      | 15347 | MAPD     | IndMAPDUHC_Pharmacylocator |
-      | 15347 | SHIP     | EFT_MedSelectPlan_order    |
-      | 15347 | MAPD     | CALPERSGroup_ContactUs     |
+     | TID   | planType | memberType                 |
+     | 15347 | MAPD     | IndMAPDUHC_Pharmacylocator |
+    # | 15347 | MAPD     | CALPERSGroup_ContactUs     |
+      
+      
+     @footer2 @IncrediblesFooter @shipFooter
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to payment history
+    Then the user navigates to the footer section
+    And the user validates the footer section in payments page
+    Then the user navigates to claims page
+    And the user validates the footer section in claims page
+    Then the user navigates to EOB page to validate footer
+    And the user validates the footer section in EOB page
+    Then the user navigates to profile and pref page for Ship member
+    And the user validates the footer section in pref page
+    Then the user navigates to Contact us page
+    And the user validates the footer section in contact us page
+    Then the user navigates to Benefits page
+    And the user validates the footer section in Benefits page
+
+    Examples: 
+      | TID   | planType | memberType          |
+      | 15347 | SHIP     | FooterValidation    |

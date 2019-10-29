@@ -15,9 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //import pages.dashboard.member.drugcostestimator.blayer.DrugCostEstimatorPage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.testharness.TestHarness;
 //import pages.memberredesign.bluelayer.AccountHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
@@ -159,9 +162,13 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Home tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Home_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)){
+			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarnessPage.navigateDirectToAcccntHomePage();
+		}else{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 				accountHomePage.validateHeader();
+		}
 	}
 
 	/**
@@ -169,14 +176,17 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@Then("^I should be able to see and use the Find Care & Costs tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Find_Care_Costs_tab() {
-		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateFindCareCostTab(memberType);
+		}else{	
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
 				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 						accountHomePage.validateFindCareCostTab();
 						accountHomePage.validateFindCarePage();
 					}
-	
+		}
 	
 	/**
 	 * @toDo : verify that the Find Care & Costs tab is not displayed for ex: ship plan
@@ -184,12 +194,14 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should not be able to see the Find Care & Costs tab Header$")
 	public void I_should_not_be_able_to_see_the_Find_Care_Costs_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.findCareNotAvailable();
-		
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateFindCareCostTabNotAvailable();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.findCareNotAvailable();
+		}
 	}
-	
 
 	/**
 	 *  @toDo : see and validate Claims tab Header
@@ -197,8 +209,12 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Claims tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Claims_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage)testHarness.navigateToClaimsSummaryPage();
+			getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+		}else{	
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 				accountHomePage.validateClaims();
 				try {
 					accountHomePage.feebackpopupClose();
@@ -206,7 +222,7 @@ public class MemberRedesignHeaderStepDefinition {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+		}
 
 	}
 
@@ -216,15 +232,8 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header$")
 	public void clicking_on_the_Claims_tab_should_allow_me_to_see_links_for_the_Claims_Summary_tab_and_Explanation_of_Benefits_tab_on_the_second_level_navigation() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateClaimsL2Tabs();
-		try {
-			accountHomePage.feebackpopupClose();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateSubTabs();
 
 	}
 
@@ -253,10 +262,9 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header$")
 	public void then_click_the_Explanation_of_Benefits_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.checkModelPopup();
-		accountHomePage.clickeob();
+		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.clickOnEOBNavTab();
+
 	}
 
 	/**
@@ -265,9 +273,10 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Coverage & Benefits tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Coverage_Benefits_tab() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateCoverageBenefits();
+		{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.validateCoverageBenefits();
+		}
 	}
 
 	/**
@@ -276,10 +285,15 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header$")
 	public void clicking_on_the_Coverage_Benefits_tab_should_allow_me_to_see_links_for_the_Benefits_Summary_tab_the_Forms_Resources_tab_and_Explanation_of_Benefits_tab_on_the_second_level_navigation() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateCoverageBenefitsL2Tabs();
-
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage)testHarness.validateBnCNavigation();
+			bncPage.validateNavTabs();
+			getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, bncPage);
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.validateCoverageBenefitsL2Tabs();
+		}
 	}
 	/**
 	 * @toDo : clicks  Benefits Summary tab and Navigate to Benefits Summary Page
@@ -300,8 +314,8 @@ public class MemberRedesignHeaderStepDefinition {
 	public void then_click_the_Forms_Resources_tab_and_I_should_be_directed_to_the_Forms_Resources_Page() {
 		// Express the Regexp above with the code you wish you had
 		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.clickFormsResources();
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		bncPage.clickPlanDocsAndResourcesTab();
 	}
 
 	/**
@@ -310,9 +324,13 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^then click the Order Materials tab and I should be directed to the Order Materials Page Header$")
 	public void then_click_the_Order_Materials_tab_and_I_should_be_directed_to_the_Order_Materials_Page() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.clickOrderMaterials();
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		BenefitsAndCoveragePage bncPage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+
+		if(!memberType.equalsIgnoreCase("TERMINATED")){
+			bncPage.clickOrderMaterialsNavTab();
+		}else
+			bncPage.validateOrderPlanMaterialsSubNavNotDisplayed();
 
 	}
 
@@ -321,14 +339,22 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@Then("^I should be able to see and use the Premium Payments tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Premium_Payments_tab() {
-		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		try {
-			accountHomePage.navigateToPaymentHistoryPage();
-			accountHomePage.validatePremiumPage();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			if(memberType.equalsIgnoreCase("TERMINATED"))
+				testHarness.validatePaymentsTabNotDisplayed();
+			else{
+				PaymentHistoryPage paymentsPage = (PaymentHistoryPage) testHarness.validatePremiumPaymentPage();
+				getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE, paymentsPage);
+			}
+		}else{AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			try {
+				accountHomePage.navigateToPaymentHistoryPage();
+				accountHomePage.validatePremiumPage();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		 
 	}
@@ -339,11 +365,14 @@ public class MemberRedesignHeaderStepDefinition {
 	
 	@Then("^I should not be able to see the Premium Payments tab Header$")
 	public void upon_clicking_the_Premium_Payments_tab_I_should_navigate_to_the_Premium_Payments_Overview_Page() {
-		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+				testHarness.validatePaymentsTabNotDisplayed();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
 				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 						accountHomePage.premiumPaymentsNotAvailable();
-
+		}
 	}
 	/**
 	 *  @toDo : See and Validate Help button present on header
@@ -351,10 +380,13 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see the help button Header$")
 	public void I_should_be_able_to_see_the_help_button() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateHelp();
-
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.clickOnHelpLink();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.validateHelp();
+		}
 	}
 
 	/**
@@ -363,11 +395,15 @@ public class MemberRedesignHeaderStepDefinition {
 	@Then("^I should be able to see and use the Account/Profile dropdown and logout$")
 	public void I_should_be_able_to_see_and_use_the_Account_Profile_dropdown_and_its_options() {
 		// Express the Regexp above with the code you wish you had
-		//AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		accountHomePage.validateAccountProfile();
-		accountHomePage.clickLogout();
-	
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateAccountProfile();
+			testHarness.clickLogout();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.validateAccountProfile();
+			accountHomePage.clickLogout();
+		}
 	}
 		
 	
@@ -432,9 +468,35 @@ public class MemberRedesignHeaderStepDefinition {
 	
 	}
 	
-	
-	
+	@Then("^I should be able to see and use the pharmacies tab in the header$")
+	public void I_should_be_able_to_see_the_pharmacies_tab() {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+			if(memberType.equalsIgnoreCase("TERMINATED"))
+				testHarness.validatePharmaciesTabNotDisplayed();
+			else
+				testHarness.clickOnPharmaciesNavTab();
+		}
+
 	}
+	
+	@Then("^I should be able to see and use the health and wellness tab in the header$")
+	public void I_should_be_able_to_see_the_healthAndWellness_tab() {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+			if(memberType.equalsIgnoreCase("TERMINATED"))
+				testHarness.validateHealthAndWellnessTabNotDisplayed();
+			else
+				testHarness.clickHealthnWellnessTab();
+		}
+
+	}
+
+
+
+}
 	
 	
 

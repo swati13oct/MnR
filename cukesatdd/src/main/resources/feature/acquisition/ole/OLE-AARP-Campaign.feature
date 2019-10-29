@@ -1,4 +1,4 @@
- @fastandfurious @OLE @Campaign_OLE_Ulayer
+ @fastandfurious @OLE @Campaign_OLE_Ulayer @prodRegression
 Feature: 1.05.5.ACQ- OLE  common tool flow E2E Campaign AARP
  
  

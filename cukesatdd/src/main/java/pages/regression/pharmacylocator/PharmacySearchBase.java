@@ -24,6 +24,8 @@ import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
+	protected long defaultPharmacyLocatorTimeout=2;
+	
 	public PharmacySearchBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -67,6 +69,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * determine system time - only applicable for stage run
 	 * @return
 	 */
+	/* tbd - use the one from UhcDriver
 	public String getStageSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
@@ -97,22 +100,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return timeStr;
-		/* tbd 
-		String winHandleBefore = driver.getWindowHandle();
-
-		System.out.println("Proceed to open a new blank tab to check the system time");
-		//open new tab
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("window.open('http://dcestage-j64.uhc.com/DCERestWAR/dcerest/timeAdmin','_blank');");
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
-		}
-		WebElement currentSysTimeElement=driver.findElement(By.xpath("//td[@id='systemTime']"));
-		String currentSysTime=currentSysTimeElement.getText();
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		return currentSysTime; */
-	}
+	} */
 
 	/** Wait time for results to appear on UI 
 	 * @throws InterruptedException */
@@ -245,7 +233,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(winHandleBefore);
 				*/
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getStageSysTime();
+				String currentSysTime=getTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -292,7 +280,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 
-				String currentSysTime=getStageSysTime();
+				String currentSysTime=getTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -528,9 +516,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		int timeoutInSec=2;
-		return pharmacyValidate(element, timeoutInSec);
-	}
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
+	} 
 	
 	/**
 	 * to validate whether element exists with input timeout value control
@@ -539,6 +527,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd
 	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -554,7 +543,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 		}
 		return false;
-	}
+	}*/
 }
 
 

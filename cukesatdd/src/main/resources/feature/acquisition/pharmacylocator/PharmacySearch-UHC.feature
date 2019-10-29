@@ -1,4 +1,5 @@
 @pharmacylocatorblayer
+
 Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
@@ -46,12 +47,14 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates the pharmacies results
       | Language | English |
 
+
     @pharmacylocatorBlayerSmoke @pharmacyLocatorBlayerCurrentYrSmoke @pharmacyLocatorBlayerNextYrSmoke
 
     Examples: 
       | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                       | ny_planYear | ny_planName                                         | pharmacytype              | servicetype   |
       | Blayer   |   80002 |       25 | Adams County |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
    #  | Blayer   |   90210 |       25 | None         |        2019 | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Standard Network Pharmacy | Open 24 hours |
+
 
   #tbd @pharmacyLocatorBlayerNextYrSmoke
   #tbd Examples: 
@@ -109,7 +112,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates more information content based on plan type
     And the user validates view search PDF link
 
-   @pharmacylocatorblayer01a
+   @pharmacylocatorblayer01a @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
@@ -127,7 +130,9 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
+
   @pharmacylocatorblayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
+
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -153,7 +158,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
-   # @pharmacylocatorblayer02a
+    @pharmacylocatorblayer02a @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                                    | ny_planYear | ny_planName                                                    |pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | Blayer   |   10980 |       15 | None           |        2019 | AARP MedicareRx Preferred (PDP)                                |        2020 | AARP MedicareRx Preferred (PDP)                                | E-Prescribing               | True                  | False            | True                 |
@@ -171,8 +176,9 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
 
+
   @pharmacylocatorblayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -216,7 +222,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
   @pharmacylocatorblayer04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
@@ -250,7 +256,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
   @pharmacylocatorblayer05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
@@ -294,7 +300,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
 
   @pharmacylocatorblayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------

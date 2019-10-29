@@ -526,7 +526,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		//CommonUtility.waitForPageLoadNew(driver, pageHeading, 30);
+		checkModelPopup(driver);
 		checkModelPopup(driver);
 		checkProactiveChatPopup();
 		validateNew(addDrug);
@@ -559,8 +559,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void validateAddedDrug(String drug) throws InterruptedException {
 		WebElement drugHeading = driver.findElement(By
-				.xpath("//*[starts-with(@id,'drugDosageStrengthId_')][contains(text(),'"+drug.split(" ")[0]+"')]"));
-		Assert.assertTrue("Drug name not visible", validateNew(drugHeading));
+				.xpath("//*[contains(@id,'drugDosageStrengthId_')]"));
+		Assert.assertTrue("Drug name not visible", drugHeading.getText().contains(drug.toUpperCase()));
 	}
 	
 	public void validateAddedDrugNew(String drug) throws InterruptedException {
@@ -1805,6 +1805,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']/div[3]/div[1]")
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
+		System.out.println(step3Info.getText());
 		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
 			return true;
 		return false;
@@ -2012,5 +2013,16 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+
+	public VPPPlanSummaryPage clickReturnToSummaryLink() {
+		validateNew(returnLink,20);
+		jsClickNew(returnLink);
+		if(driver.getCurrentUrl().contains("plan-summary")){
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+		
 	}
 }

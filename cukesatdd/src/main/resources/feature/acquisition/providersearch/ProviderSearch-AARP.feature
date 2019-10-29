@@ -22,7 +22,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
       
 
-  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer
+  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
@@ -36,7 +36,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | planname                                          |year		  |
       |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear  |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer
+  @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -55,7 +55,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer
+  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -75,8 +75,21 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       |AARP Medicare Advantage SecureHorizons Essential (HMO)|
 
+  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageUlayerSmoke @prodRegression
+  Scenario Outline: Verify Provider Search  in AARP site from Home Page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user clicks on Provider Search on the Home Page
+    Then the user enters the zipcode and select a plan on the Rally tool
+      | Zip Code  | <zipcode>  |
+      | Plan Name | <planname> |
+       | 	Year  | <year>	   |
+    When user selects a provider and saves it
+
+    Examples: 
+      | zipcode | planname                                          | year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |currentYear  |
       
- @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
+ @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
@@ -90,7 +103,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | planname                                          | year		  |
       |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear	  |
       
-  @PlancompareProviderSearchAARP @AcqRegressionProviderSearchUlayer
+  @PlancompareProviderSearchAARP @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
      Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

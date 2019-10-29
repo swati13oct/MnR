@@ -22,7 +22,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
       
        
-  @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer
+  @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -41,7 +41,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | 15488 |   90210 | NO              | Los Angeles County | MAPD	|
       
       
-     @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer
+     @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from Global Header
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
@@ -55,7 +55,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | planname                                          | year		  |
       |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |currentYear |
 
-  @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer
+  @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -76,7 +76,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
 
 
-  @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer
+  @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
      Given the user is on the uhcmedicaresolutions site landing page
      When the user performs plan search using following information in UMS site
@@ -96,8 +96,21 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)|
 
+  @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageBlayerSmoke @prodRegression
+  Scenario Outline: Verify Provider Search  in UHC site from Home Page
+     Given the user is on the uhcmedicaresolutions site landing page
+    When the user clicks on Provider Search on the Home Page on UHC Site
+    Then the user enters the zipcode and select a plan on the Rally tool on UHC Site
+      | Zip Code  | <zipcode>  |
+      | Plan Name | <planname> |
+      | 	Year  | <year>	   |
+    When user selects a provider and saves it on UHC Site
+
+    Examples: 
+      | zipcode | planname                                          |  year		  |
+      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) | currentYear |
       
-      @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
+      @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from Home Page
      Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the Home Page on UHC Site

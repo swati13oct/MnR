@@ -12,11 +12,11 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanDocumentsUlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" },
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition.vpp" }, monochrome = true,
 features = { "src/main/resources/feature/acquisition/vpp" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json" }, tags = { "@PlanDocs_PDF_URLvalidation,@PlanDocs_PDF_Textvalidation" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanDocumentsUlayer.json" }, tags = { "@PlanDocs_ExcelValidation" })
 public class RunMRATDDAcquisitionPlanDocumentsUlayer { 
-//@PlanDocs_PDF_URLvalidation,
+//@PlanDocs_PDF_URLvalidation,@PlanDocs_PDF_URLvalidation,@PlanDocs_PDF_Textvalidation,
 }

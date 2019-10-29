@@ -5,10 +5,14 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +22,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -269,7 +275,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//input[@id='updates-last-name']")
 	public WebElement lastNameField;
 
-	@FindBy(xpath="//button[@id='signUp']")
+	@FindBy(xpath="//button[contains(@id,'signUp')]")
 	public WebElement Submitbutton;
 
 	//vvv note: added for US1598162
@@ -335,7 +341,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
 	private WebElement emailPlanSummaryCancelButton;
 
-	@FindBy(xpath = "//p[@id='emailSuccess']") 
+	@FindBy(xpath = "//*[@id='emailSuccess']") 
 	private WebElement emailPlanSummarySuccessText;
 	
 	@FindBy(xpath = "//button[@ng-click='closeEmailSuccessMsgSummaryPopUp()']")
@@ -593,6 +599,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
 		private WebElement MaleGender;
 		
+		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
+		private WebElement medicareGuidePopup;
+		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -640,7 +649,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		//AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver,15);
 		handleChatPopup();
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
@@ -666,7 +675,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public void viewPlanSummary(String planType) {
-		checkModelPopup(driver);
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
@@ -1304,36 +1312,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return result;
 	}
-
+	
 	public DrugCostEstimatorPage navigateToDCE(String plantype) {
 
 		if(plantype.equals("MA")||plantype.equals("MAPD")){
-			CommonUtility.waitForPageLoad(driver,viewPlans, 30);
-			if(validate(viewPlans)){
-				viewPlans.click();
-				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[@class='mabenefittable']//a[contains(@dtmname, 'Plans Landing:Plan:MA:Drug Cost Estimator')]"));
+
+				List<WebElement> maDCELink = driver.findElements(By.xpath(".//*[@id='plan-list-1']//*[contains(@class,'add-drug')]"));
 				((JavascriptExecutor)driver).executeScript("arguments[0].click();", maDCELink.get(0));
 				//maDCELink.get(0).click();
-			}else{
-				Assert.assertTrue("This scenario is for AEP period", true);
-
-			}
 
 		}else{
-			if(validate(viewPDPPlans)){
-				viewPDPPlans.click();
-				List<WebElement> view2017PDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
-				view2017PDPPlans.get(0).click();
-
-			}else{
-				Assert.assertTrue("This scenario is for AEP period", true);
-
-			}
-
+				List<WebElement> viewPDPPlans = driver.findElements(By.id("pdpDrugCostEstimatorLink"));
+				viewPDPPlans.get(0).click();
 		}
 		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
-		if(currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
+		if(currentUrl().contains("/drug-cost-estimator"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
 
@@ -1815,14 +1809,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateIsMyProviderCoveredLinkInAarp(String planType , String planName) {
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
-		if(planType.equalsIgnoreCase("PDP")){
-			validateNonPresenceOfElement(ProviderSearchLink);
-		}
-		else {
-			validateNew(ProviderSearchLink);           
-		}              
+		int attempts = 0;
+		while(attempts < 2) {
+	        try {
+				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+			                                    + "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+			    if(planType.equalsIgnoreCase("PDP")){
+			                    validateNonPresenceOfElement(ProviderSearchLink);
+			                    break;
+			    }
+			    else {
+			                    validateNew(ProviderSearchLink);
+			                    break;
+			    }
+	        }catch(StaleElementReferenceException e) {
+	        }
+	    	attempts++;
+		}    
 	}
 
 	public void validatePlanPremium (String planName , String monthlyPremium){
@@ -2231,9 +2234,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		sendkeysNew(lastNameField, LastName);
 		sendkeysNew(emailField, EmailAddress);
 		validateNew(Submitbutton);
-		Submitbutton.click();
-		WebElement popup = driver.findElement(By.xpath("//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]"));
-		if(validateNew(popup)){
+		jsClickNew(Submitbutton);
+		if(validateNew(medicareGuidePopup)){
 			System.out.println("Pop up message has been displayed");
 			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
 			closePopUp.click();
@@ -2704,15 +2706,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-		emailPlanSummarySendButton.click();
-		CommonUtility.waitForPageLoad(driver, emailPlanSummarySuccessText, 15);
-		Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessText));
+		jsClickNew(emailPlanSummarySendButton);
+		validateNew(emailPlanSummarySuccessText, 15);
 		String expectedSuccess1="Thank you!";
 		String expectedSuccess2="The email with your information will arrive shortly.";
 		String actualEmailSuccessText=emailPlanSummarySuccessText.getText();
 		Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected to contain '"+expectedSuccess1+"' and '"+expectedSuccess2+"' | Actual='"+actualEmailSuccessText+"'", (actualEmailSuccessText.contains(expectedSuccess1)) && (actualEmailSuccessText.contains(expectedSuccess2)));
 
-		Assert.assertTrue("PROBLEM - unable to locate success message after email is sent",validate(emailPlanSummarySuccessCloseButton));
+		validateNew(emailPlanSummarySuccessCloseButton);
 		System.out.println("Proceed to close the email popup screen to cleanup");
 		emailPlanSummarySuccessCloseButton.click();
 	}
@@ -2979,6 +2980,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 
 
+
 	public void CheckClick_CurrentYear_Plans() {
 		
 		try {
@@ -3003,6 +3005,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void CheckClick_NextYear_Plans() {
+
 
 		try {
 			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
@@ -3124,29 +3127,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		
 	}
-
-	public static void checkModelPopup(WebDriver driver) {
-		int counter = 0;
-		do {
-
-
-
-			System.out.println("current value of conter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	}	
-
+	
+	//--------------------------------------------
+	//note: begin - added for deeplink validaton
+	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//span[contains(@class,'show')]//button[contains(text(),'Compare plans')]")
+	private WebElement firstComparePlanButton;
+	
+	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
+	private WebElement comparePgnHeader;
+	
+	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
+		firstComparePlanButton.click();
+		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	//note: end- added for deeplink validaton
+	//--------------------------------------------
 }

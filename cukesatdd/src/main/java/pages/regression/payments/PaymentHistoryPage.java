@@ -36,13 +36,13 @@ import atdd.framework.UhcDriver;
  */
 public class PaymentHistoryPage extends UhcDriver {
 
-	@FindBy(id = "paymentHistoryApp1")
+	@FindBy(xpath= "//*[contains(@id,'paymentHistoryApp')]")
 	private WebElement paymentHistoryApp;
 
 	@FindBy(id = "paymentSearchRangeGovt")
 	private WebElement paymentSearchRangeGovt;
 
-	@FindBy(xpath = "//a[not (contains(@class,'ng-hide')) and contains(text(),'Make a One-Time Payment')]")
+	@FindBy(xpath = "//*[not (contains(@class,'ng-hide')) and contains(@class,'btn btn--primary onetimepayment')]")
 	private WebElement oneTimePaymentBtn;
 
 	@FindBy(xpath = "//*[@class='payment-method-btn'][1]/a[2]")
@@ -773,7 +773,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public void feebackpopupClose() throws InterruptedException { // waitForloader(driver,overlay,
 																	// 20);
-		CommonUtility.waitForPageLoad(driver, iPerceptionframe, 20);
+		CommonUtility.waitForPageLoad(driver, iPerceptionframe, 5);
 		if (validate(iPerceptionframe)) {
 
 			switchToNewIframe(iPerceptionframe);

@@ -1,8 +1,6 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,15 +15,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
+	protected long defaultPharmacySearchTimeout=2;
+	
 	public PharmacySearchBase(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -81,6 +79,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * determine system time - only applicable for stage run
 	 * @return
 	 */
+	/* tbd - use the one from UhcDriver
 	public String getStageSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
@@ -111,7 +110,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return timeStr;
-	}
+	} */
 	
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote=new ArrayList<String>();
@@ -140,7 +139,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getStageSysTime();
+				String currentSysTime=getTestEnvSysTime();
 				
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
@@ -501,8 +500,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		int timeoutInSec=2;
-		return pharmacyValidate(element, timeoutInSec);
+		long timeoutInSec=2;
+		return validate(element, timeoutInSec);
 	}
 	
 	/**
@@ -512,6 +511,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
+	/* tbd 
 	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
@@ -527,6 +527,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 		}
 		return false;
-	}	
+	}	*/
 }
 

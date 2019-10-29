@@ -61,7 +61,7 @@ public class DCEAcqStepDefinitionUHC {
 		if(yearBtnVppPageExists){
 			plansummaryPage.choose2017Plans();
 		}
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -97,12 +97,13 @@ public class DCEAcqStepDefinitionUHC {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickOnViewPlans(plantype);
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
+		//plansummaryPage.clickOnViewPlans(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCE(plantype);
 		if(dce!=null){
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
+	
 	
 	/**
 	 * @toDo:access the DCE tool after adding drug
@@ -120,7 +121,7 @@ public class DCEAcqStepDefinitionUHC {
 
 		String plantype = memberAttributesMap.get("Plan Type");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) loginScenario.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		pages.acquisition.dce.bluelayer.DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEAfterDrugAdded(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigateToDCEAfterDrugAdded(plantype);
 		if(dce!=null){
 			Assert.assertTrue(true);
 		}
@@ -226,6 +227,12 @@ public class DCEAcqStepDefinitionUHC {
 		System.out.println(acqhomepage);
 	}
 	
+	@And("^the user clicks on return link to navigate to plan summary in UHC$")
+	public void clickOnPlanSummaryReturnLink(){
+		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dcePage.clickReturnToSummaryLink();
+	}
+	
 	/**
 	 * @toDo:verify that the drug is still there
 	 */
@@ -322,12 +329,12 @@ public class DCEAcqStepDefinitionUHC {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
-		String drug = memberAttributesMap.get("Drug");
+		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
 
 		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
-		DrugDetails.selectDosage(drug);
+		DrugDetails.selectDosage(dosage);
 		DrugDetails.selectQnty(quantity);
 		DrugDetails.selectFrequency(frequency);		
 	}

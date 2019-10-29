@@ -1,4 +1,4 @@
-@fastandfurious @OLE @PDP_OLE_Ulayer
+@fastandfurious @OLE @PDP_OLE_Ulayer @prodRegression
 Feature: 1.05.3.ACQ-OLE common tool flow E2E PDP AARP
 
   @acquisitionRegression

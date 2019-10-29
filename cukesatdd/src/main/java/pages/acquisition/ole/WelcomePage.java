@@ -60,6 +60,9 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
 	private WebElement LearnMoreButton;
 	
+	@FindBy(xpath = "//h1[contains(text(),'Medicare Insurance Information')]")
+	private WebElement welcomepageHeader;
+	
 /*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeCheckBx;
 	*/
@@ -108,7 +111,7 @@ public class WelcomePage extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Welcome Page for OLE");
-
+		checkModelPopup(driver);
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}
@@ -182,13 +185,13 @@ public class WelcomePage extends UhcDriver{
 		}
 		return null;
 	}
-	
+
 	public MedicareInformationPage navigate_to_medicare_info_page_PDP() {
 		
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-information")){
+		if(validateNew(welcomepageHeader)){ 
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
@@ -196,7 +199,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LearnMoreModal OpenLearnMore() {
-		AcquisitionHomePage.checkModelPopup(driver);
+		checkModelPopup(driver);
 		validate(LearnMoreButton);
 		LearnMoreButton.click();
 		try {
