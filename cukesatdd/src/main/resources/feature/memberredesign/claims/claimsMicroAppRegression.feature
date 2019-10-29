@@ -2,7 +2,7 @@
 Feature: T1.1To validate the claims Summary page and claims Details page on the member site
 
   @claimsMicroApp01
-  Scenario Outline: -index: <index> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
+  Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -88,7 +88,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   ### note: this scenario is identical to the medical claims, any update related to summary steps need to apply to both scenarios
   ### note: this scenario doesn't contains steps related to detail page because drug case doesn't have detail page 
   @claimsMicroApp02
-  Scenario Outline: -index: <index> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
+  Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -152,7 +152,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
-  Scenario Outline: TID: <TID> -planType: <planType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
+  Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |
@@ -171,7 +171,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   ### note: rowNum is the data row where EOB pdf is located - only count the data row, exclude header row
   ### note: comment out NICE entry for now since no user data available
   #@claimsMicroApp04 @claimsEOB @US1268210 @F244667 @regressionMember
-  #Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
+  #Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
   #  Given login with following details logins in the member portal and validate elements for microapp
   #    | Plan Type      | <planType>    |
   #    | Member Type    | <memberType>  |
@@ -197,7 +197,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
   ### Waiting for data
   #@claimsMicroApp05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-  #Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
+  #Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
   #  Given login with following details logins in the member portal and validate elements for microapp
   #    | Plan Type    | <planType>    |
   #    | Member Type  | <memberType>  |
@@ -212,7 +212,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   #    | 267688 | TBD           | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
 
   @claimsMicroApp06 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
+  Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -226,7 +226,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | 267688 | SSP-GRP-q2_june_Cosmos_Seg233 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
   @claimsMicroApp07 @SHIP7yearsClaims @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
+  Scenario Outline: -userSelection: <userSelection> -TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements for microapp
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |

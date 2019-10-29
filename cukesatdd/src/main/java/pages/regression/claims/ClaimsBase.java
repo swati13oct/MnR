@@ -554,7 +554,7 @@ public class ClaimsBase extends UhcDriver  {
 		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed currency format validation");
 	}
 
-	public void validateDateFormat(String inputKey, String inputStr, String delimiter) {
+	public void validateMonthFirstDateFormat(String inputKey, String inputStr, String delimiter) {
 		String datePattern="\\d{2}"+delimiter+"\\d{2}"+delimiter+"\\d{4}";
 		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: MM"+delimiter+"dd"+delimiter+"yyyy.  "
 				+ "Current: "+inputStr, 
@@ -562,7 +562,7 @@ public class ClaimsBase extends UhcDriver  {
 		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
 	}
 	
-	public void validateShipDateFormat(String inputKey, String inputStr, String delimiter) {
+	public void validateYearFirstDateFormat(String inputKey, String inputStr, String delimiter) {
 		String datePattern="\\d{4}"+delimiter+"\\d{2}"+delimiter+"\\d{2}";
 		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: yyyy"+delimiter+"MM"+delimiter+"dd.  "
 				+ "Current: "+inputStr, 

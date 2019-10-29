@@ -48,7 +48,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
-			validateDateFormat(key, value, "-"); 
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 
 			xpath="//table[@id='medical']//tr["+rowNum+"]//td[3]";
@@ -117,7 +117,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
-			validateDateFormat(key, value, "/"); 
+			validateMonthFirstDateFormat(key, value, "/"); 
 			dataMap.put(key, value);
 
 			xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[4]";
@@ -177,7 +177,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
-			validateShipDateFormat(key, value, "-"); 
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 
 			xpath="//table[@id='ship']//tr["+rowNum+"]//td[5]";
@@ -229,7 +229,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
-			validateShipDateFormat(key, value, "-"); 
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 		}
 		System.out.println("Collected data from summary page 1st data row from claims table\n"+Arrays.asList(dataMap)+"\n");
