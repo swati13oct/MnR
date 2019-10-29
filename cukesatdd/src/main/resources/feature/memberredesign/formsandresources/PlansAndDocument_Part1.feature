@@ -34,15 +34,14 @@ Feature: 1.06.1 Member Plans and Documents Page part 1
     #Membership material comes dynamically based on the logic
     # EOB Header xpath is not working Need to fix it
     Examples: 
-      | TID   | planType | memberType                 | Identifier         | language | count | rider   |
-      | 15108 | MAPD     | Individual_FormsResources  | IndEffectiveAARP   | ENGLISH  |     7 | NoRider |
-      | 15108 | MAPD     | Individual_FormsResources  | IndEffectiveAARP   | ENGLISH  |     7 | Rider   |
-      | 15303 | MAPD     | Group_FormsResources       | GrpEffectiveUHC    | ENGLISH  |     7 | NoRider |
-      | 15108 | MAPD     | Individual_FormsResources  | IndEffectiveUHC    | ENGLISH  |     6 | NoRider |
-      | 15108 | MAPD     | Individual_FormsResourcesl | IndEffectiveUHC    | ENGLISH  |     6 | Rider   |
-      | 00000 | PCP      | Individual_FormsResources  | IndEffectivePCP    | ENGLISH  |     6 | NoRider |
-      | 15128 | MEDICA   | Individual_FormsResourcesl | IndEffectiveMedica | ENGLISH  |     6 | NoRider |
-
+      | TID     | planType | memberType                 | Identifier         | language | count | rider   |
+      | 15108_1 | MAPD     | Individual_FormsResources  | IndEffectiveAARP   | ENGLISH  |     7 | NoRider |
+      | 15108_2 | MAPD     | Individual_FormsResourcesl | IndEffectiveUHC    | ENGLISH  |     6 | Rider   |
+      | 15128_1 | PCP      | Individual_FormsResources  | IndEffectivePCP    | ENGLISH  |     6 | NoRider |
+      | 15128_2 | MEDICA   | Individual_FormsResourcesl | IndEffectiveMedica | ENGLISH  |     6 | NoRider |
+			| 15303   | MAPD     | Group_FormsResources       | GrpEffectiveUHC    | ENGLISH  |     7 | NoRider |
+  
+  
   @PlansAndDocuments2 @F&RJMPLinks @Feb_release_2019 @gladiators @regressionMember  @PD_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - Verify jump links for individual MA member
     Given login with following details logins in the member portal and validate elements
@@ -74,5 +73,4 @@ Feature: 1.06.1 Member Plans and Documents Page part 1
       | TID   | planType | memberType                 | Identifier          | language | count | rider   |
       | 15130 | MA       | Group_FormsResources       | GrpEffectiveUHC     | ENGLISH  |     7 | NoRider |
       | 00000 | MA       | Individual_FormsResourcesl | IndEffectiveUHC     | ENGLISH  |     7 | Rider   |
-      | 00001 | MA       | Individual_FormsResources  | IndEffectiveAARP    | ENGLISH  |     7 | Rider   |
-      | 00002 | MA       | Individual_FormsResources  | IndEffectiveAARP_NR | ENGLISH  |     7 | NoRider |
+
