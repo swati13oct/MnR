@@ -329,3 +329,19 @@ q2_june_combo0017/Password@1,Combo_PDP_SSUP,PDP_SSUPcombo,
 prema02/Password@1,GOVT,AP_ADDRESS,NON LIS,
 q2_jun_ship0190/Password@1,SHIP,FooterValidation,
 q3_sep_SHIP_006/Password@1,Terminated,
+q3_sep_UAT4_Group029/Password@1,MICRO,MAPD,UHC_GROUP,COSMOS_CLAIMS
+q3_sep_uat4_cosmos_008/Password@1,MICRO,MAPD,AARP_Individual,COSMOS_CLAIMS
+q3_sep_Cosmos_claims_012/Password@1,MICRO,MAPD,UHC_Individual,COSMOS_CLAIMS
+q2_jun_aarp0042/Password@1,MICRO,MAPD,AARP_Individual,COSMOS_CLAIMS
+q2_may_rally017/Password@1,MICRO,MA,UHC_Individual,COSMOS_CLAIMS
+q2_jun_grp0154/Password@1,MICRO,MA,UHC_GROUP,COSMOS_CLAIMS
+q2_dec_grp0288/Password@1,MICRO,SSUP,UHC_COMBO_GROUP,COSMOS_CLAIMS
+q2_jun_aarp0028/Password@1,MICRO,MAPD,AARP_Individual,NICE_CLAIMS
+q3_sep_ship_009/Password@1,MICRO,SHIP,Individual,COMPASS_CLAIMS
+q2_jun_aarp0042/Password@1,MICRO,MAPD,AARP_Individual,RX_CLAIMS
+q3_sep_Rx_0009/Password@1,MICRO,MAPD,UHC_Individual,RX_CLAIMS
+q3_sep_UAT4_AARP315/Password@1,MICRO,PDP,Individual,RX_CLAIMS
+q3_sep_UAT4_Group217/Password@1,MICRO,PDP,GROUP,RX_CLAIMS
+q2_june_preffec_019/Password@1,MICRO,SHIP,PHIP,COMPASS_CLAIMS
+q2_june_Cosmos_Seg233/Password@1,MICRO,SSUP,EOB_GROUP,COSMOS_CLAIMS
+SHIP7yearsclaims/Password@1,MICRO,SHIP,COMBO,7Year_COMPASS_CLAIMS

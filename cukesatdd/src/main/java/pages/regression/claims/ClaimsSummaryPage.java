@@ -245,7 +245,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		String pLink=" Prescription EOB link";
 		boolean bypass_INC11365785_srchEobHist=false;
 		if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
-				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE"))) {
+				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE") || claimSystem.toUpperCase().contains("RX"))) {
 			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, claimsValidate(medicalEob_MAPD));
 			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_MAPD));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" and "+pLink+" are displayed");

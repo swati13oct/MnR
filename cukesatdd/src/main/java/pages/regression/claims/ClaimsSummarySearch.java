@@ -56,13 +56,13 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
 					claimsValidate(pdp_drug));
 		} else if (planType.contains("MAPD") || planType.contains("MA")
-				||planType.contains("PCP") || planType.contains("MEDICA")){
+				||planType.contains("PCP") || planType.contains("MEDICA") || planType.contains("SSUP")){
 			System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
 			last24months = driver.findElement(By.id("date24MAtdd"));
 			last24months.click();
 			System.out.println("!!! Month Selected from the view claims from drop down is ====>"
 			+(last24months.getText()));
-			if (!planType.contains("MA")) { //note: MA doesn't have selection
+			if (!planType.contains("MA") && !planType.contains("SSUP")) { //note: MA doesn't have selection
 				Assert.assertTrue("PROBLEM - unable to locate 'Medical' for claims type for '"+planType+"' user",
 						claimsValidate(medical));
 			}
@@ -86,7 +86,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				System.out.println("!!! Proceed to switch back to claims type Medical !!!");
 			}
 			//note: by default if not specified, medical claims will be validated
-			if (claimSystem.toUpperCase().contains("D_")) {
+			if (claimSystem.toUpperCase().contains("D_") || claimSystem.toUpperCase().contains("RX_")) {
 				System.out.println("This test is specific for validating drug claims, select Prescription Drug option instead");
 				PrescriptionDrug.click();
 			}

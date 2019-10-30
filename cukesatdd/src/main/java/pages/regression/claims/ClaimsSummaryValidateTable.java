@@ -468,8 +468,8 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			
 			boolean result=true;
 			if (numClaims<=10) { //note: if <= 10 items, left and right errors will be disabled
-				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element when user has 0 claims", claimsValidate(disabled_prevBtn));
-				Assert.assertTrue("PROBLEM: Unable to locate disabled nextLink element when user has 0 claims", claimsValidate(disabled_nextBtn));
+				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element when user has non-0 claims", claimsValidate(disabled_prevBtn));
+				Assert.assertTrue("PROBLEM: Unable to locate disabled nextLink element when user has non-0 claims", claimsValidate(disabled_nextBtn));
 			} else { //note: more than 10 items, left arrow should be enabled at the beginning
 				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element initially when user has claims", claimsValidate(disabled_prevBtn));
 				Assert.assertTrue("PROBLEM: should not be able to locate disabled nextLink element when user has >=10 claims", !claimsValidate(disabled_nextBtn));
@@ -515,11 +515,13 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (planType.equalsIgnoreCase("SHIP")) {
 			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(e));
 		} else {
-			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(youHave1) || claimsValidate(youHave2));
+			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(youHave1) || claimsValidate(youHave2) || claimsValidate(youHave4));
 			if(claimsValidate(youHave1)) {
 				e=youHave1;
 			} else if (claimsValidate(youHave2)) {
 				e=youHave2;
+			} else if (claimsValidate(youHave4)) {
+				e=youHave4;
 			}
 		}
 		String expText="You have";

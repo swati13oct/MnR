@@ -4,6 +4,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp01
   Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
     Given login with following details logins in the member portal and validate elements for microapp
+      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -62,20 +63,21 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | M_COSMOS_CLAIMS | Medical           | 000       | Last 24 months | 
-      | 01_3  | 15235 | MAPD-COS-q3_sep_Cosmos_claims_012 | MAPD     | UHC_Individual  | M_COSMOS_CLAIMS | Medical           | 000       | Last 24 months | 
+      | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_3  | 15235 | MAPD-COS-q3_sep_Cosmos_claims_012 | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_4  | 15235 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 03_1  | 15234 |  MA-q2_may_rally017               | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
       | 03_2  | xxxxx |  MA-COS-q2_jun_grp0154            | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 03_3  | 15259 |  PDP+SSP_Group_Username-q2_dec_grp0288| SSUP | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @mapd_medical_nice
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 02_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
-
 
     @ship
     Examples: 
@@ -95,6 +97,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp02
   Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
     Given login with following details logins in the member portal and validate elements for microapp
+      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -146,8 +149,8 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @mapd_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
-      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | D_COSMOS_CLAIMS | Prescription drug | 000       | Last 24 months | 
+      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS | Prescription drug | 000       | Last 24 months | 
+      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug
     Examples: 
@@ -159,6 +162,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
   Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
     Given login with following details logins in the member portal and validate elements for microapp
+      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |
       | Claim System   | <claimSystem>   |
@@ -178,6 +182,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   #@claimsMicroApp04 @claimsEOB @US1268210 @F244667 @regressionMember
   #Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
   #  Given login with following details logins in the member portal and validate elements for microapp
+  #    | App Type       | MICRO           |
   #    | Plan Type      | <planType>    |
   #    | Member Type    | <memberType>  |
   #    | Claim System   | <claimSystem> |
@@ -204,6 +209,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   #@claimsMicroApp05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   #Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
   #  Given login with following details logins in the member portal and validate elements for microapp
+  #    | App Type       | MICRO           |
   #    | Plan Type    | <planType>    |
   #    | Member Type  | <memberType>  |
   #    | Claim System | <claimSystem> |
@@ -219,6 +225,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp06 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: -userSelection: <userSelection> -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
     Given login with following details logins in the member portal and validate elements for microapp
+      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -233,6 +240,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   @claimsMicroApp07 @SHIP7yearsClaims @regressionMember
   Scenario Outline: -userSelection: <userSelection> -TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
     Given login with following details logins in the member portal and validate elements for microapp
+      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |

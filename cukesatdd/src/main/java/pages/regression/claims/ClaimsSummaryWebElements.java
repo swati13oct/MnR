@@ -210,6 +210,9 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(id="numDays3")
 	protected WebElement youHave3;
+	
+	@FindBy(xpath="//h3[not(contains(@class,'ng-hide'))]//span[contains(@class,'days-title')]")
+	protected WebElement youHave4;
 
 	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div[2]/div/div[1]/section/div[2]/section/div/div/div/div/div/div/div[1]/p")
 	protected WebElement pcpTxt;
