@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionClaimsMicroAppMedicalP2.json",d
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionClaimsMicroAppMedicalP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/claims" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppMedicalP2.json" }, tags = { "@claimsMicroApp","@ma_medical" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsMicroAppMedicalP2.json" }, tags = { "@claimsMicroApp","@ma_medical_cosmos" })
 public class RunMRATDDRegressionClaimsMicroAppMedicalP2 {
 	//note: use this runner for medical claims
 }

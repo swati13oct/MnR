@@ -117,36 +117,41 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
     
-    @mapd_medical
+    @mapd_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
       | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | M_COSMOS_CLAIMS | Medical           | 000       | Yes                | 
       | 01_3  | 15235 | MAPD-COS-q3_sep_Cosmos_claims_012 | MAPD     | UHC_Individual  | M_COSMOS_CLAIMS | Medical           | 000       | Yes                | 
-      | 01_4  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
 
-    @ma_medical
+    @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 03_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 03_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+
+    @mapd_medical_nice
+    Examples: 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 02_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
+
 
     @ship
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 03_1  | 15236 | SHIP-q3_sep_ship_009              | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
+      | 04_1  | 15236 | SHIP-q3_sep_ship_009              | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
 
     @mapd_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
-      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
+      | 05_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
+      | 05_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | D_COSMOS_CLAIMS | Prescription drug | 000       | Yes                | 
 
     @pdp_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 02_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Yes                |
-      | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Yes                |
 
 
   #----- beginning of claims test for offline prod - local run only ------------------
