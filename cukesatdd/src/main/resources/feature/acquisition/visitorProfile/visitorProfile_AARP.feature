@@ -72,7 +72,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
     And the user clicks on the add plans button in the guest profile in AARP site
-    When the user performs plan search using following information in the AARP site
+    When the user enters zipcode on health plans page in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
