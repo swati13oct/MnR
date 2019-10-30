@@ -4,7 +4,7 @@ Feature: 2.05.5. ACQ-OLE Campaign UMS
   @CampaignURL_OLE_Blayer_uhc @acquisitionRegression @FastnFurious
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from UHC Acquisition site VPP Plan Summary
     Given the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL
-    When user views plans of the below plan type in UMS site for nextt year
+    When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
