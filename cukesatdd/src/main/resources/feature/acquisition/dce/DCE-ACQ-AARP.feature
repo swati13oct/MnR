@@ -94,7 +94,7 @@ Then I navigate back to plan details page and verify correct message shows when 
 
 Examples:
 | zipcode  |   drug    |dosage      | planname 										| plantype | county | isMultutiCounty|quantity | frequency   |branded |
-| 33021    |  Lipitor |  TAB 10MG |AARP MedicareComplete Choice Plan 2 (Regional PPO) | MA	| none 	| no| 30 |Every 1 month| yes    |
+| 33021    |  Lipitor |  TAB 10MG |AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MA	| none 	| no| 30 |Every 1 month| yes    |
 
 	
 @dceMousehoverOurPlans @aprilRelease2018

@@ -95,13 +95,7 @@ public class PlanPremiumPage extends UhcDriver{
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
-		if(validateNew(authPageHeader)){
+		if(validateNew(authPageHeader,45)){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPage(driver);
 		}

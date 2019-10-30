@@ -2798,12 +2798,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 	//^^^ note: added for US1598162	
 	
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-		Thread.sleep(4000);
+		
 		CommonUtility.waitForPageLoadNew(driver, DOB, 20);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
 		MaleGender.click();
 		part_A_monthDrpDwn.click();
 		Part_A_monthDrpDwnOption.click();
@@ -2823,6 +2824,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
+		Thread.sleep(2000);
 		ViewPlanMedSupPage.click();
 	}
 	
