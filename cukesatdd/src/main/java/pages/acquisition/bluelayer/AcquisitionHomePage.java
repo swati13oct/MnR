@@ -428,7 +428,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,25);
+		checkModelPopup(driver,45);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	

@@ -1,7 +1,7 @@
 @PlanCompare
 Feature: Acq-To test PlanCompare Flows in AARP site
 
-  @PlancompareProviderSearchAARPTest
+  @PlancompareProviderSearchAARPTest @vppPlanCompareUlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -17,7 +17,7 @@ Feature: Acq-To test PlanCompare Flows in AARP site
       | TID   | zipcode | isMultutiCounty | county             |
       | 15489 |   90210 | NO              | Los Angeles County |
 
-  @PlancompareDCETest
+  @PlancompareDCETest @vppPlanCompareUlayer
   Scenario Outline: TID: TID: <TID> -plan type: <plantype> - DCE_Through_Plan_Compare_Page_MAPD_PDP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

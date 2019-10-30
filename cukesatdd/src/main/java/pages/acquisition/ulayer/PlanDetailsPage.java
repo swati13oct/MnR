@@ -304,7 +304,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-		//validate(presDrugTab.get(0));
+		checkModelPopup(driver,45);
 		validate(planCostsTab);
 
 	}
