@@ -527,6 +527,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void openAndValidate() {
 
 		checkModelPopup(driver);
+		checkModelPopup(driver);
 		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);
