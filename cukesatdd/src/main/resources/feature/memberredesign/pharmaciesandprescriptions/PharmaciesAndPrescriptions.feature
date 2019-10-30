@@ -31,9 +31,9 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
+    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the claims page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link

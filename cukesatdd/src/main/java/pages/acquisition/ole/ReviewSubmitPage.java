@@ -43,6 +43,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	//Page Header
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-review')]")
 	private WebElement PageHeader;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Confirmation')]")
+	private WebElement confirmationPageHeader;
 
 	//Right Rail Elements
 
@@ -306,7 +309,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
 /*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
-		if(driver.getCurrentUrl().contains("confirmation")){
+		if(validateNew(confirmationPageHeader)){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}

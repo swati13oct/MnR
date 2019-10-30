@@ -877,7 +877,7 @@ public class VppStepDefinitionUHC {
 
 		String County = "St. Louis County";
 		String ZipCode = "63043";
-		String PlanYear = "2019";
+		String PlanYear = "2020";
 		String SiteName = "UHC_ACQ";
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -978,8 +978,8 @@ public class VppStepDefinitionUHC {
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.CheckClick_CurrentYear_Plans();
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 
