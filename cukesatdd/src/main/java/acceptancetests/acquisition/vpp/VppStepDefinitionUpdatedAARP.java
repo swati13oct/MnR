@@ -109,6 +109,35 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@When("^the user enters zipcode on health plans page in the AARP site$")
+	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode,county,isMultiCounty);
+		
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
 
 	/*@When("^the user adds plan from plan search using following information in the AARP site$")
 	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
