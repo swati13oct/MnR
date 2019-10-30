@@ -144,7 +144,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
 	public WebElement UHCSearchLinkfromGoogle1;
 
-	@FindBy(xpath = "//*[@id='zipcode'] or (//*[contains(@aria-label,'Enter ZIP code')])[2]")
+	@FindBy(xpath = "//*[@id='zipcode']")
 	private WebElement zipCodeUHC;
 
 	@FindBy(xpath = "(//*[contains(@aria-label,'Enter ZIP code')])[2]")
@@ -242,6 +242,7 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String googleSearchAARP() throws Exception {
 		String home_TFN ="";
+		validateNew(GoogleSearchField);
 		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan");
 		Thread.sleep(3000);
 		anywhereInGoogle.click();
@@ -441,7 +442,7 @@ public class UlayerTFNPage extends UhcDriver {
 	}
 
 
-	@FindBy(xpath="(//*[contains(@class,'wcmAuthorMode geoTargetedContent')])[2]")
+	@FindBy(xpath="(//*[contains(@class,'wcmAuthorMode geoTargetedContent')])[8]")
 	WebElement  MedSupTab_2;
 
 	public String medicalSupTFN_direct_2() throws InterruptedException {
@@ -471,9 +472,10 @@ public class UlayerTFNPage extends UhcDriver {
 	WebElement  plan2020;
 	
 	public String medicalSupTFNfromGoogle() throws InterruptedException {
+		validateNew(ShopMenu);
 		ShopMenu.click();
 		jsClickNew(ShopMedSuppLink);
-		popupCheck();
+		//popupCheck();
 		waitforElementNew(MedSuppZipEntry);
 		System.out.println("Zip found");
 		String MedSupTfn = "";
