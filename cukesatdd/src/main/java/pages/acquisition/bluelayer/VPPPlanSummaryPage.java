@@ -907,7 +907,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,25);
+		checkModelPopup(driver,45);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
