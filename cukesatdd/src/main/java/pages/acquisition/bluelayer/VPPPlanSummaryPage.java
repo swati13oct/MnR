@@ -907,7 +907,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,15);
+		checkModelPopup(driver,45);
 		handleChatPopup();
 		validateVPPPlanSummaryPage();
 	}
@@ -1876,7 +1876,7 @@ public boolean validateAllPlansChecked() {
 
     public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
         boolean isSpecificPlanInfoPresent = false;
-        if (planName.contains("HMO SNP")) {
+        if (planName.contains("SNP")) {
             //ElementData elementData = new ElementData("id", "viewDetailsMA");
         Thread.sleep(5000);
 isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
@@ -2759,11 +2759,8 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
 		String appeared_savedPlanIconXpath="";
 		
-		if(planType.equalsIgnoreCase("PDP"))
-			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
-		else
-			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
-		
+		appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
+
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 		expMatch=1;
@@ -2772,10 +2769,8 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
 		String appeared_savedTextXpath="";
 		
-		if(planType.equalsIgnoreCase("PDP"))
-			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
-		else
-			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//span[contains(text(),'Saved')]";
+		
+		appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
 		
 		System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 		List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
@@ -2798,7 +2793,7 @@ public void validatePlansAreSaved(String savePlanNames, String planType) {
 	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 	
 	System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"+savedPlanImgXpath;
 	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 	int expMatch=listOfTestPlans.size();
@@ -3368,7 +3363,7 @@ catch (Exception e) {
 	
 	public void CheckClick_NextYear_Plans() {
 
-		//try {
+		try {
 			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
@@ -3378,16 +3373,11 @@ catch (Exception e) {
 			
 			SelectYearGoBtn.click();
 			CommonUtility.checkPageIsReadyNew(driver);
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
 			e.printStackTrace();
 		}
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		
 	}
 	
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")

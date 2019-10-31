@@ -304,7 +304,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 
 		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-		//validate(presDrugTab.get(0));
+		checkModelPopup(driver,45);
 		validate(planCostsTab);
 
 	}
@@ -860,7 +860,7 @@ public class PlanDetailsPage extends UhcDriver {
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 			System.out.println(displayedText);
 			if(!displayedText.contains(medicalBenefits.get(i+1).getCells().get(1))){
-				Assert.fail("Proper value not found");
+				Assert.fail("Proper value not found: "+medicalBenefits.get(i+1).getCells().get(1));
 			}
 		}
 	}

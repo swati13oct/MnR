@@ -74,13 +74,13 @@ public class ComparePlansPage extends UhcDriver {
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 
 	@Override
 	public void openAndValidate() {
-		// TODO Auto-generated method stub
+		checkModelPopup(driver,45);
 		
 	}
 	

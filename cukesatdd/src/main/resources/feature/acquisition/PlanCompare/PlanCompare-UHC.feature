@@ -1,7 +1,7 @@
 @PlanCompare
 Feature: Acq-To test PlanCompare Flows in UHC site
 
-  @PlancompareProviderSearchUHCTest
+  @PlancompareProviderSearchUHCTest @vppPlanCompareBlayer
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -15,7 +15,7 @@ Feature: Acq-To test PlanCompare Flows in UHC site
       | TID   | zipcode | isMultutiCounty | county             |
       | 15488 |   90210 | NO              | Los Angeles County |
 
-  @PlancompareDCETest
+  @PlancompareDCETest @vppPlanCompareBlayer
   Scenario Outline: TID: <TID> -plan type: <plantype> - DCE_Through_Plan_Compare_Page_MAPD_PDP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
