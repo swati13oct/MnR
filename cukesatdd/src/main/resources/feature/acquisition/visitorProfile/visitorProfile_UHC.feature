@@ -77,7 +77,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And the user validates the plan year buttons are present or not and chooses the plan year in UHC
     	|Plan Year | <planYear> |
     And the user clicks on the add plans button in the guest profile in UHC site
-    When the user performs plan search using following information in UMS site
+    When the user enters zipcode on health plans page in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
