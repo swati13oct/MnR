@@ -378,6 +378,7 @@ public class MRConstants {
   
   public static final String MICROAPP_URL="https://www."+MRScenario.environment+"test-medicare.ocp-elr-core-nonprod.optum.com/";
   
+  public static final String OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP="https://www."+MRScenario.environment+"test-mymedicareaccount.ocp-elr-core-nonprod.optum.com/content/medicare/login/memberRedesign.html?testharness=true";
  }
 
 	    

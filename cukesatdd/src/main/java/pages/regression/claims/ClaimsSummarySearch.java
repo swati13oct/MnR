@@ -70,9 +70,10 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			if (planType.contains("MAPD") || planType.contains("PCP")) {
 				Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
 						claimsValidate(PrescriptionDrug));
-				System.out.println("!!!Claim type PDP is validated !!!");
+				System.out.println("!!!Claim type PrescriptionDrug option is validated !!!");
 				PrescriptionDrug.click();
-				System.out.println("!!! Claim Type PDP is clicked !!!");
+				waitForClaimPageToLoad();
+				System.out.println("!!! Validated PrescripitonDrug option can be selected !!!");
 				//note: this validation will only work if user also has drug claims, 
 				//note: comment out for now b/c hard to find a user with both type of claims
 				//Assert.assertTrue("PROBLEM - unable to locate Prescription Drug claims table for claims type for '"+planType+"' user",
@@ -81,14 +82,15 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				//Assert.assertTrue("PROBLEM - unable to locate Rx Number in claims table for claims type for '"+planType+"' user",
 				//	claimsValidate(RxNumberinthecalimstable));
 				//System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
-				System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
 				medical.click();
-				System.out.println("!!! Proceed to switch back to claims type Medical !!!");
+				waitForClaimPageToLoad();
+				System.out.println("!!! Validated Medical option can be selected !!!");
 			}
 			//note: by default if not specified, medical claims will be validated
 			if (claimSystem.toUpperCase().contains("D_") || claimSystem.toUpperCase().contains("RX_")) {
 				System.out.println("This test is specific for validating drug claims, select Prescription Drug option instead");
 				PrescriptionDrug.click();
+				waitForClaimPageToLoad();
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate Custom Search option for '"+planType+"' user",

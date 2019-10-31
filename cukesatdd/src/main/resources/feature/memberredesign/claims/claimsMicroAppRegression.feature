@@ -70,14 +70,15 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 03_1  | 15234 |  MA-q2_may_rally017               | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
-      | 03_2  | xxxxx |  MA-COS-q2_jun_grp0154            | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 03_3  | 15259 |  PDP+SSP_Group_Username-q2_dec_grp0288| SSUP | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_1  | 15234 |  MA-q2_may_rally017               | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
+      | 02_2  | xxxxx |  MA-COS-q2_jun_grp0154            | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_3  | 15259 |  PDP+SSP_Group_Username-q2_dec_grp0288| SSUP | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_4  | 15268 |  Medica_q2_jun_sofl0013           | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @mapd_medical_nice
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 02_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
+      | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
 
     @ship
     Examples: 
@@ -147,8 +148,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @mapd_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS | Prescription drug | 000       | Last 24 months | 
-      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS | Prescription drug | 000       | Last 24 months | 
+      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 01_3  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug
     Examples: 

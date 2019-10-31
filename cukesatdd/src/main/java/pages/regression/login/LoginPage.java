@@ -107,9 +107,12 @@ public class LoginPage extends UhcDriver {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					System.out.println("Running on" +MRScenario.environment + " a env, teamSpecialCase="+teamSpecialCase);
-					if (isMicroApp) { //microapp run
+					if (isMicroApp) { //note: microapp run
 						PAGE_URL=MRConstants.MICROAPP_URL;
-					} else { //non-microapp run
+						if (teamSpecialCase) { //note: microapp run for PCP or MEDICA user
+							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP;
+						}
+					} else { //note: non-microapp run
 						if (teamSpecialCase) {
 							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
 						} else {

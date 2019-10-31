@@ -129,14 +129,15 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 03_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 03_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 03_3  | xxxxx |  PDP+SSP_Group_Username-q2_dec_grp0288| SSUP | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_3  | xxxxx | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP  | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 02_4  | 15268 | Medica_q2_jun_sofl0013            | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @mapd_medical_nice
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 02_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
+      | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
 
     @ship
     Examples: 
@@ -148,6 +149,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 05_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
       | 05_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
+      | 05_3  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Yes                |
 
     @pdp_drug
     Examples: 
