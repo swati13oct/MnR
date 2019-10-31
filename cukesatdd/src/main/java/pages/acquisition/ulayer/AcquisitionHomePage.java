@@ -35,8 +35,11 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
+	@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	@FindBy(id= "zipcode")
+	private WebElement healthPlansZipcode;
 
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
@@ -353,7 +356,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,15);
+		checkModelPopup(driver,45);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -468,7 +471,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
-
 
 	public VPPPlanSummaryPage searchPlansForLearnFindPlans(String zipcode, String countyName) {
 		sendkeys(learnzipCodeField, zipcode);
@@ -865,13 +867,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
-		//The below was commented out because the xpath for zipcode and viewplans button was combined into one to work for both cases. Reach out to Aayush for any questions.
-		/*if(isHealthPlan){
-			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
-			sendkeys(zipCode, zipcode);
-
-			btnGO.click();
-		}else{*/
+		
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
@@ -882,6 +878,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			else
 				return null;
+	}
+	
+	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty){
+		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
+		sendkeys(healthPlansZipcode, zipcode);
+		viewPlansButton.click();
+		
+		if(isMultiCounty.equalsIgnoreCase("YES")){
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+		}
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 
 	public VPPPlanSummaryPage addPlansForVisitorProfile(String zipcode) {

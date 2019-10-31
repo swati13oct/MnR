@@ -27,6 +27,7 @@ import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
@@ -49,7 +50,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
 
-	@FindBy(xpath= "//*[@id='cta-zipcode' or @id='zipcode']")
+	@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 	
 	@FindBy(id = "zipcode")
@@ -82,6 +83,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
+	
+	@FindBy(id= "zipcode")
+	private WebElement healthPlansZipcode;
 
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")
 	private WebElement ma_moreHelpInfoLink;
@@ -424,7 +428,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,15);
+		checkModelPopup(driver,45);
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	
@@ -1711,5 +1715,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	validateNew(chatsam);		
 	return null;
 	}
-	
+
+	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty){
+		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
+		sendkeys(healthPlansZipcode, zipcode);
+		viewPlansButton.click();
+		
+		if(isMultiCounty.equalsIgnoreCase("YES")){
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+		}
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
+	
+}
