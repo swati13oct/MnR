@@ -649,7 +649,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,25);
+		checkModelPopup(driver,45);
 		handleChatPopup();
 		validateNew(maPlansCount);
 		validateNew(msPlansCount);
@@ -2427,10 +2427,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
 			String appeared_savedPlanIconXpath="";
 			
-			if(planType.equalsIgnoreCase("PDP"))
+		//	if(planType.equalsIgnoreCase("PDP"))
 				appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
-			else
-				appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+		//	else
+			//	appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
 			
 			System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 			List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
@@ -2439,10 +2439,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
 			String appeared_savedTextXpath="";
-			if(planType.equalsIgnoreCase("PDP"))
+			/*if(planType.equalsIgnoreCase("PDP"))
 				appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
-			else
-				appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//span[contains(text(),'Saved')]";
+			else*/
+				appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
 			
 			System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 			List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
@@ -2457,16 +2457,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 		String planTypePath="";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 			planTypePath="//div[@ng-show='showMaPlans']";
-		} else if (planType.equalsIgnoreCase("showPdpPlans")) {
-			planTypePath="//div[@ng-show='showMaPlans']";
+		} else if (planType.equalsIgnoreCase("pdp")) {
+			planTypePath="//div[@ng-show='showPdpPlans']";
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		
 		System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-		String appeared_savedPlanLIconXpath=planTypePath+headerPath+subPath+savedPlanImgXpath;
-		//System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
+		String appeared_savedPlanLIconXpath=planTypePath+"/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class, 'added')]"+savedPlanImgXpath;
+		System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch=listOfTestPlans.size();
 		Assert.assertTrue("PROBLEM - total saved plan icons not as expected.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
@@ -2798,12 +2798,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 	//^^^ note: added for US1598162	
 	
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-		Thread.sleep(4000);
+		
 		CommonUtility.waitForPageLoadNew(driver, DOB, 20);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
 		MaleGender.click();
 		part_A_monthDrpDwn.click();
 		Part_A_monthDrpDwnOption.click();
@@ -2823,6 +2824,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
+		Thread.sleep(2000);
 		ViewPlanMedSupPage.click();
 	}
 	

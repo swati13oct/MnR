@@ -96,7 +96,7 @@ public class VppStepDefinitionUHC {
 
 	}
 	
-	@When("^the user enters zipcode on health plans page in the AARP site in UMS site$")
+	@When("^the user enters zipcode on health plans page in UMS site$")
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1077,21 +1077,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 

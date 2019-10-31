@@ -252,7 +252,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public PlanDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// openAndValidate();
+		 openAndValidate();
 	}
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
@@ -294,23 +294,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : vppPlanDetails.getExpectedData().keySet()) {
-			WebElement element = findElement(vppPlanDetails.getExpectedData().get(key));
-			if (element != null) {
-				if (validate(element)) {
-					try {
-						jsonObject.put(key, element.getText());
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		vppPlanDetailsJson = jsonObject;
-
+		
+		checkModelPopup(driver,45);
 	}
 
 	public GetStartedPage clicksOnEnterDrugInformationLink() {
