@@ -44,7 +44,7 @@ When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-And the user views the plans of the below plan type in AARP site and select Current year
+And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
 And I access the DCE tool on aarp site
  |Plan Type | <plantype>|
@@ -74,7 +74,7 @@ When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-And the user views the plans of the below plan type in AARP site and select Current year
+And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
 And I go to the view plan details page and access DCE flow from prescription drugs tab
 	|Plan Name | <planname> |

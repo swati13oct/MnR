@@ -44,7 +44,7 @@ When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-When user views plans of the below plan type in UMS site for current year
+When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
 And I access the DCE tool
 		|Plan Type | <plantype> |

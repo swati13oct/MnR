@@ -38,7 +38,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 	
-	@FindBy(xpath= "//*[contains(@id,'nav-zipcode')]")
+	@FindBy(id= "zipcode")
 	private WebElement healthPlansZipcode;
 
 	@FindBy(className = "fd_myPlans")
