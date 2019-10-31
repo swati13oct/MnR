@@ -84,7 +84,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "learnfindplanBtn")
 	private WebElement learnfindPlansButton;
 	
-	@FindBy(xpath= "//*[contains(@id,'nav-zipcode')]")
+	@FindBy(id= "zipcode")
 	private WebElement healthPlansZipcode;
 
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[1]/a")

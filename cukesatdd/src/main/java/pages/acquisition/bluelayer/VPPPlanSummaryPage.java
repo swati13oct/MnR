@@ -2759,11 +2759,8 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
 		String appeared_savedPlanIconXpath="";
 		
-		if(planType.equalsIgnoreCase("PDP"))
-			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
-		else
-			appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
-		
+		appeared_savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
+
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanIconXpath);
 		List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanIconXpath));
 		expMatch=1;
@@ -2772,10 +2769,8 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		System.out.println("Proceed to validate 'Saved' text will appear after 'Save Plan' is clicked");
 		String appeared_savedTextXpath="";
 		
-		if(planType.equalsIgnoreCase("PDP"))
-			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
-		else
-			appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//span[contains(text(),'Saved')]";
+		
+		appeared_savedTextXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]//span[contains(text(),'Saved')]";
 		
 		System.out.println("TEST - appeared_savedTextXpath xpath="+appeared_savedTextXpath);
 		List<WebElement>  listOfAppearedSavedText=driver.findElements(By.xpath(appeared_savedTextXpath));
@@ -2798,7 +2793,7 @@ public void validatePlansAreSaved(String savePlanNames, String planType) {
 	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 	
 	System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"+savedPlanImgXpath;
 	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 	int expMatch=listOfTestPlans.size();
