@@ -42,7 +42,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       
       
      @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer @prodRegression
-  Scenario Outline: Verify Provider Search  in UHC site from Global Header
+  Scenario Outline: Verify Provider Search in UHC site from Global Header
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
     Then the user enters the zipcode and select a plan on the Rally tool on UHC Site
@@ -53,7 +53,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | planname                                          | year		  |
-      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |currentYear |
+      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear |
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page

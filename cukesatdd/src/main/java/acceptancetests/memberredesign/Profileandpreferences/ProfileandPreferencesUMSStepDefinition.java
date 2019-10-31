@@ -903,14 +903,14 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 
 	@Then("^I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link$")
-	public void i_click_the_HEALTHSAFE_ID_ACCOUNT_RECOVERY_AND_SECURITY_link() throws InterruptedException {
-		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
-				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+    public void i_click_the_HEALTHSAFE_ID_ACCOUNT_RECOVERY_AND_SECURITY_link() throws InterruptedException {
+           ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+                        .getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-		profilePreferencesPage.validateHealthSafeAccountLink();
-		profilePreferencesPage.validateBreadCrumb();
+           profilePreferencesPage.validateHealthSafeAccountLink();
+           profilePreferencesPage.validateBreadCrumbClick();
 
-	}
+    }
 
 	@And("^I should see the EPMP i frame on profile page$")
 	public void i_should_see_the_EPMP_i_frame_on_profile_page() {

@@ -309,7 +309,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
 /*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
-		if(validateNew(confirmationPageHeader)){
+		if(validateNew(confirmationPageHeader,45)){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}

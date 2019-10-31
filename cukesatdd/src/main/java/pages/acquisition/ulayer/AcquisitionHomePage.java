@@ -38,7 +38,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 	
-	@FindBy(xpath= "//*[contains(@id,'nav-zipcode')]")
+	@FindBy(id= "zipcode")
 	private WebElement healthPlansZipcode;
 
 	@FindBy(className = "fd_myPlans")
@@ -356,7 +356,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,25);
+		checkModelPopup(driver,45);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
