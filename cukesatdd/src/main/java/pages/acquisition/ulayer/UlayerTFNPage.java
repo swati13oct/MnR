@@ -109,6 +109,9 @@ public class UlayerTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@aria-label,'Medicare Supplement Insurance Plans')]")
 	private WebElement MedSupViewPlan;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Medicare Supplement Insurance Plans')])[5]")
+	private WebElement MedSupViewPlan2;
 
 	@FindBy(xpath = "(//*[contains(@class,'tel')])[1]")
 	private WebElement medSupTFN;
@@ -500,13 +503,11 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String medicalSupTFN_2() throws InterruptedException {
 		String MedSupTfn = "";
-		driver.navigate().refresh();
+		driver.navigate().to("https://www.aarpmedicareplans.com/health-plans.html?product=ma#/plan-summary");
 		Thread.sleep(5000);
-		validateNew(plan2020);
-		jsClickNew(plan2020);
-		Year_Selection_Go_Bttn.click();
-		Assert.assertTrue(MedSupViewPlan.isDisplayed()==true,"Still on Home Page");
-		jsClickNew(MedSupViewPlan);
+		validateNew(MedSupViewPlan2);
+		//Assert.assertTrue(MedSupViewPlan.isDisplayed()==true,"Still on Home Page");
+		jsClickNew(MedSupViewPlan2);
 		System.out.println("tamzid 40");
 		Thread.sleep(3000);
 		CommonUtility.waitForPageLoad(driver, medSupTFN, 30);
@@ -543,7 +544,10 @@ public class UlayerTFNPage extends UhcDriver {
 		MedAdvpageZipCodeField.sendKeys("90210");
 		MedAdvpageZipCodeButton.click();
 		Thread.sleep(5000);
-		CheckClick_NextYear_Plans();
+//		validateNew(plan2020);
+//		plan2020.click();
+//		Year_Selection_Go_Bttn.click();
+		//CheckClick_NextYear_Plans();
 		//waitforElementNew(MedAdvpageButtonViewPricing);
 		//MedAdvpageButtonViewPricing.click();
 		return Acqhome_TFN;
