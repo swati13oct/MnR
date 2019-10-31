@@ -54,6 +54,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 
@@ -303,9 +304,11 @@ public class PlanDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-		checkModelPopup(driver,45);
-		validate(planCostsTab);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
+		validateNew(planCostsTab);
 
 	}
 
