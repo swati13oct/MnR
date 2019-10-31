@@ -215,10 +215,10 @@ public class UlayerTFNPage extends UhcDriver {
 		validateNew(MAPlanvpp);
 		jsClickNew(MAPlanvpp);
 		Thread.sleep(4000);
-		validateNew(plan2020);
-		plan2020.click();
-		Year_Selection_Go_Bttn.click();
-		Thread.sleep(4000);
+//		validateNew(plan2020);
+//		plan2020.click();
+//		Year_Selection_Go_Bttn.click();
+//		Thread.sleep(4000);
 		ma_TFN = TFN_MA.getText().trim();
 		return ma_TFN;
 		
@@ -957,7 +957,7 @@ public class UlayerTFNPage extends UhcDriver {
 	}
 
 	public String maVPPPageTFN() throws InterruptedException {
-		checkChatWindowOnPage();
+		//checkChatWindowOnPage();
 		waitforElementNew(zipCodeEligiblityPage);
 		zipCodeEligiblityPage.sendKeys("90210");
 		zipBttnEligiblityPage.click();
@@ -965,7 +965,7 @@ public class UlayerTFNPage extends UhcDriver {
 		switchToNewTab();
 		Thread.sleep(5000);
 		MAPlanvpp.click();
-		HandleYearSelectionPopUp();
+		//HandleYearSelectionPopUp();
 		waitforElementNew(Home_TFN_Acq);
 		Thread.sleep(3000);
 		String Acqhome_TFN =Home_TFN_Acq.getText().trim();

@@ -19,8 +19,8 @@ Then user click the View plan and drug coverage details button for any PDP Plan 
 Then user Verify the Right Rail TFN on PDP OLE
 		|PDP TFN|<pdpTfn>|
  Examples:
-	| url 								 | ampTFN  		  |  medEdTfn      | maPlanTfn      |  medSupTfn     | pdpTfn         |
-	|https://www.uhcmedicaresolutions.com| 1-877-596-3258 | 1-855-265-1557 | 1-877-596-3258 | 1-888-378-0254 | 1-877-596-3258 |
+	| url 															 | ampTFN  			  |  medEdTfn      | maPlanTfn      |  medSupTfn     | pdpTfn         |
+	|https://www.uhcmedicaresolutions.com| 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 |
 		
 @Scenario2a  @campaign_traffic  @tfn_uhc
 Scenario Outline: To varify TFN landing in campaing url 
@@ -29,7 +29,7 @@ Given user is landing on UHC via campaign url
 Then user navigates to MA VPP tab to vaify TFN
 		|MA TFN |<maTabTfn>|
 	Examples:
-			| url 												  | maTabTfn  	   |    
+			| url 												  											| maTabTfn  	   |    
 			|https://ma.uhcmedicaresolutions.com/?wt.mc_id=8003728| 1-855-448-4586 |
 		
 @Scenario2b @campaign_traffic  @tfn_uhc 
@@ -47,8 +47,8 @@ Then user click the View plan and drug coverage details button for any PDP Plan 
 Then user Verify the Right Rail TFN on PDP OLE
 	|PDP TFN|<pdpTfn>| 
 	Examples:
-	| url 								 																				 | maTabTfn  		|  medSupTfn     | pdpTfn         |
-		|https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728|1-855-448-4586    | 1-866-271-0607 | 1-855-448-4586 |
+	| url 								 																																													 | maTabTfn  				|  medSupTfn     | pdpTfn         |
+	|https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728|1-855-448-4586    | 1-866-271-0607 | 1-855-448-4586 |
 		
 @Scenario3a  @Organic_Search_Google  @tfn_uhc
 Scenario Outline: - Google  search UHC Medicare Advantage Plan 
