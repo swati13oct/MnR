@@ -564,8 +564,8 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='address-temporary-form']/fieldset/div[7]/div/div/span")
 	private WebElement memberAutTempAddressErrorMessage;
 
-	@FindBy(xpath = "//iframe[@id='iPerceptionsFrame']") // EPMP i frame
-	// @FindBy (id = .//*[@id='contact'])
+	//@FindBy(xpath = "//iframe[@id='iPerceptionsFrame']") // EPMP i frame
+	@FindBy (xpath = ".//*[@id='contact']")
 	private WebElement EPMPIframe;
 
 	@FindBy(id = "epmp-contact") // EPMP contact info Header on Iframe
@@ -610,7 +610,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@class='ng-scope hsidlink']//a/u")
 	private WebElement signInAndSecuritySettingsLinkHSID;
 
-	@FindBy(xpath = "html//div//div[@class='epmp-css-profile']//iframe[@id='profileIframe']") // Iframe
+	@FindBy(xpath = "html//div//*[@class='epmp-css-profile']//iframe") // Iframe
 																				// To
 																				// perform
 																				// switch
