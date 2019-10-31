@@ -88,8 +88,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     # | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
     # | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
     # | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
-    # | xxxxx | MAPD     | COMBO_GROUP         | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
-    # | 15259 | SHIP     | COMBO               | Last 24 months | COMPASS_CLAIMS  | 000       | NA                |
 
 
   ### note: this scenario is identical to the medical claims, any update related to summary steps need to apply to both scenarios
