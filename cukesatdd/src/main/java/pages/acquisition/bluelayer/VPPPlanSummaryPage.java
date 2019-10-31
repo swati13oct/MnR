@@ -2797,7 +2797,7 @@ public void validatePlansAreSaved(String savePlanNames, String planType) {
 	List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 	
 	System.out.println("Validate "+listOfTestPlans.size()+" number of test plans are saved as favorite");
-	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"+savedPlanImgXpath;
+	String appeared_savedPlanLIconXpath=planTypePath+"//*[contains(@class,'added')]"+savedPlanImgXpath;
 	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 	int expMatch=listOfTestPlans.size();
@@ -2890,21 +2890,26 @@ public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 	String unsavePlan=listOfTestPlans.get(1);
 	System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
 
-	String testPlanXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]";
+	String testPlanXpath="//*[contains(text(),'"+unsavePlan+"')]";
 	List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 	int expMatch=1;
 	Assert.assertTrue("PROBLEM - unable to locate plan='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
 	
 	System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
-	String appeared_savedPlanLIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+savedPlanImgXpath;
+	String appeared_savedPlanLIconXpath="//*[contains(text(),'"+unsavePlan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savedPlanImgXpath;
 	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
 	List<WebElement>  listOfAppearedSavedPlanIcons=driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 	expMatch=1;
 	Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 	System.out.println("Proceed to click to unsave plan");
-	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfAppearedSavedPlanIcons.get(0));
-	((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfAppearedSavedPlanIcons.get(0));
+	jsClickNew(listOfAppearedSavedPlanIcons.get(0));
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
 	System.out.println("Proceed to validate 'Saved Plan' icon is not there after clicking to unsave it");
 	System.out.println("TEST - appeared_savedPlanLIconXpath xpath="+appeared_savedPlanLIconXpath);
@@ -2913,7 +2918,7 @@ public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 	Assert.assertTrue("PROBLEM - 'Saved Plan' icon should no longer appear for ='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedPlanIcons.size()+"'",listOfAppearedSavedPlanIcons.size()==expMatch);
 
 	System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
-	String savePlanIconXpath=headerPath+"[contains(text(),'"+unsavePlan+"')]"+subPath+savePlanImgXpath;
+	String savePlanIconXpath="//*[contains(text(),'"+unsavePlan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 	System.out.println("TEST - savePlanIconXpath xpath="+savePlanIconXpath);
 	List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savePlanIconXpath));
 	expMatch=1;
