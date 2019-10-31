@@ -128,7 +128,7 @@ Feature: 1.02 Member Profile page
       | User Type   | <userType>   |
       | member Type | <memberType> |
     Then the user validates Communication Preferences section
-    And the user clicks on edit preferences link page for ship
+    Then the user clicks on edit preferences link page for ship
     And the user clicks on profile & preferences link to go back to Account settings page
     And the user validates the address section
       | User Type   | <userType>   |
@@ -279,7 +279,7 @@ Feature: 1.02 Member Profile page
     Examples: 
        | TID			  | planType    | memberType            | copayCategory  |
        | Unknown_13 | MA          | PCP                   | NON LIS        |
-       | Unknown_14 | MA          | MEDICA                | NON LIS        |  
+       | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS        |
       
        
      @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
