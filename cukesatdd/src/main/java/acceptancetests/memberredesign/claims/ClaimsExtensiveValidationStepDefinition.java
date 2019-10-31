@@ -7,6 +7,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import pages.regression.claims.ClaimDetailsPage;
@@ -181,7 +182,6 @@ public class ClaimsExtensiveValidationStepDefinition {
 			for (int x=2; x<total; x++) { //note: look at row index 2, 3
 				System.out.println("========================================================================");
 				System.out.println("Proceed to validate data row index="+x+" ===============================");
-
 				HashMap<String, String> dataMapSummary=claimsSummaryPage.gatherDataFromSummaryPage(claimType, x, claimSystem, hasYourShare);
 				claimsDataForSearchPeriod.add(dataMapSummary); //note: save the info for later overall validation
 				if (claimType.equalsIgnoreCase("prescription drug")) {

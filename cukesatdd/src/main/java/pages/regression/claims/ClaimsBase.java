@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -470,17 +471,19 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public boolean claimsValidate(WebElement element, long timeoutInSec) {
 		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
 			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
+				System.out.println("Element '"+element.toString()+"' found!!!!");
 				return true;
 			} else {
-				System.out.println("Element not found/not visible");
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message: "+e.getMessage());
-			System.out.println("-------- end of Exception message");
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	} 
 
@@ -568,5 +571,13 @@ public class ClaimsBase extends UhcDriver  {
 				+ "Current: "+inputStr, 
 				inputStr.matches(datePattern));
 		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
+	}
+	
+	public void claimCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
 	}
 }

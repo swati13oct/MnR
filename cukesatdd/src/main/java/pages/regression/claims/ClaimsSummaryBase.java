@@ -39,6 +39,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 	 */
 	public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, 
 			String claimSystem, boolean hasYourShare) {
+		CommonUtility.waitForPageLoad(driver, pgHeader, 5);
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		//note: for claim summary medical table
 		if (claimType.equalsIgnoreCase("medical")) {

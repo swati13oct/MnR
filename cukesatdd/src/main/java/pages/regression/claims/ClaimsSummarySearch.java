@@ -110,6 +110,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 	 */
 	public void searchClaimsByTimePeriodClaimType(String planType,String claimPeriod, String claimType) 
 			throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, pgHeader, 5);
 		//note: MA - Medical; MAPID | PCP - Medical & Prescription drug 
 		//note: PDP - Prescription drug; SHIP - no Medical or Prescription drug
 		//keep checkModelPopup(driver,1);  //note: enable it if have problem with iPerception popup

@@ -721,7 +721,7 @@ public class HSIDStepDefinition {
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
-		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on diff env
+		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on stage
 			userSelection = category;
 			memberAttributesMap.remove("User Selection");
 		} 
@@ -760,8 +760,11 @@ public class HSIDStepDefinition {
 		pwd = loginCreds.get("pwd");
 		System.out.println("User is..." + userName);
 		System.out.println("Password is..." + pwd);
-		getLoginScenario()
-		.saveBean(LoginCommonConstants.USERNAME, userName);
+		//note: for team-a microapp env, the username is the userselection
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userSelection);
+		}
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();

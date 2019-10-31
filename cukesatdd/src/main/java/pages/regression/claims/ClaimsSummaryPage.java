@@ -2,6 +2,7 @@ package pages.regression.claims;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
-		checkModelPopup(driver,10);
+		//tbd checkModelPopup(driver,5);
+		claimCheckModelPopup(driver);
 		if(!pgHeader.getText().contains("Claims Summary"))
 			Assert.fail("Claims Summary header not found. Page loading issue");
 	}
@@ -196,7 +198,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkModelPopup(driver,10);
+		claimCheckModelPopup(driver);
+		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -212,7 +215,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		claimsPgLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkModelPopup(driver,10);
+		claimCheckModelPopup(driver);
+		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
@@ -428,6 +432,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			//tbd } else {
 				System.out.println("Blue Button-DownLoad my Data Button is displayed");
 				dnldMyDataBtn.click();
+				CommonUtility.waitForPageLoad(driver, dnldPopup_cancelBtn, 5);
 
 				//note: validate cancel button function
 				if (!claimsValidate(dnldPopup_cancelBtn)) {
