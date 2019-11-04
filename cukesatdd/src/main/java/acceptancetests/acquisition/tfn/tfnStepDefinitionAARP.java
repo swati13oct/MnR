@@ -197,7 +197,7 @@ public class tfnStepDefinitionAARP {
 		tfnPage = new UlayerTFNPage(wd);
 		tfnPage.openUrl(url);
 		System.out.println(url);
-		tfnPage.popupCheck();
+		//tfnPage.popupCheck();
 	
 		String tfn = tfnPage.validateDirectPageTFN();
 		if(tfn.equalsIgnoreCase(amptfn)){
@@ -227,7 +227,7 @@ public class tfnStepDefinitionAARP {
 		tfnPage = (UlayerTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		String medsuptfn = tfnPage.medicalSupTFN_direct_1();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
-			System.out.println("MA Tab displaying proper number");
+			System.out.println("MedSup Tab Tab displaying proper number");
 		}
 		else{
 			Assert.fail("Error validating plans in  VPP plan summary page");
@@ -430,14 +430,14 @@ public class tfnStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 
 		}
-		String tfn = memberAttributesMap.get("AMPTFN");
+		String tfn = memberAttributesMap.get("AMPTFN Google");
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		//wd = mr.getWebDriverNew();
 		tfnPage = new UlayerTFNPage(wd);
 		tfnPage.reopenGoogle();
 		String hometfn = tfnPage.googleSearchAARP();
 		System.out.println("I am here");
-		System.out.println("this is from UI"+hometfn);
+		System.out.println("this is from UI:  "+hometfn);
 		
 		if(tfn.equalsIgnoreCase(hometfn)){
 			System.out.println("Home Page displaying proper number");
@@ -518,7 +518,31 @@ public class tfnStepDefinitionAARP {
 
 		// WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		 tfnPage = new UlayerTFNPage(wd);
-		String medsuptfn = tfnPage.medicalSupTFN_direct();
+		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
+		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
+			System.out.println("MedSup Tab displaying proper number");
+		}
+		else{
+			Assert.fail("TFN did not match in  MedSup plan summary page");
+		}
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}
+	
+	@Then("^without clear cache navigate from google to MedSup  to varify TFN$")
+	public void navigate_to_MedSup_to_varify_TFN_no_clear_cache_from_google(DataTable givenAttributes) throws Exception {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+
+		}
+		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
+
+		// WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		 tfnPage = new UlayerTFNPage(wd);
+		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("MedSup Tab displaying proper number");
 		}

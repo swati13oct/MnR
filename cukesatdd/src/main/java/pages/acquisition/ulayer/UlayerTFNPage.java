@@ -73,6 +73,9 @@ public class UlayerTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Plans from UnitedHealthcare®')]")
 	@FindBy(xpath = "//a[contains(@href, 'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')][1]")
 	public WebElement AARPSearchLinkfromGoogle;
+	
+	@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
+	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	@FindBy(xpath = "//*[@id='lga']")
 	public WebElement anywhereInGoogle;
@@ -252,22 +255,13 @@ public class UlayerTFNPage extends UhcDriver {
 	public String googleSearchAARP() throws Exception {
 		String home_TFN ="";
 		validateNew(GoogleSearchField);
-		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan");
-		Thread.sleep(3000);
-		anywhereInGoogle.click();
-		GoogleSearchButton.click();
-		Thread.sleep(4000);
-		AARPSearchLinkfromGoogle.click();
-		CommonUtility.waitForPageLoad(driver, Home_TFN_Acq_1, 30);
-		try {
-			Thread.sleep(4000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		checkChatWindowOnPage();
+		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
+		validateNew(AARPSearchLinkfromGoogle_alternative);
+		AARPSearchLinkfromGoogle_alternative.click();
+		Thread.sleep(7000);
+		validateNew(Home_TFN_Acq_1);
 		home_TFN = Home_TFN_Acq_1.getText().trim();
-		System.out.println("TFN on Page : "+Home_TFN_Acq_1 );
+		System.out.println("TFN on UI Page :  "+Home_TFN_Acq_1.getText() );
 		return home_TFN;
 	}
 
@@ -462,7 +456,7 @@ public class UlayerTFNPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, medSupTFN, 30);
 		Thread.sleep(6000);
 		MedicalSupTfn = medSupTFN.getText().trim();
-		System.out.println("MedSUp TFN Displayed : "+MedicalSupTfn);
+		System.out.println("MedSUp TFN Displayed on UI  : "+MedicalSupTfn);
 		Thread.sleep(5000);
 		return MedicalSupTfn;	
 	}
@@ -522,7 +516,8 @@ public class UlayerTFNPage extends UhcDriver {
 		Thread.sleep(5000);
 		return MedSupTfn;	
 	}
-	public String validateDirectPageTFN() {
+	public String validateDirectPageTFN() throws InterruptedException {
+		Thread.sleep(7000);
 		validateNew(home_TFN);
 		String Acqhome_TFN =home_TFN.getText().trim();
 		System.out.println("This is the TFN from Acquisition Home Page UI:  "+Acqhome_TFN);
@@ -636,15 +631,17 @@ public class UlayerTFNPage extends UhcDriver {
 		driver.get(url);	
 	}
 
-	public String medicalSupTFN_FromDeepLink() {
+	public String medicalSupTFN_FromDeepLink() throws Exception {
 
 		String MedSupTfn = "";
 		jsClickNew(shopForPlanTAB);
 		zipCodeUHC.sendKeys("90210");
 		findPlansButtonUHC.click();
-		CommonUtility.waitForPageLoad(driver, MedSupViewPlan, 30);
-		jsClickNew(MedSupViewPlan);
-		CommonUtility.waitForPageLoad(driver, medSupTFN, 30);
+		validateNew(MedSupViewPlan_css);
+		Thread.sleep(5000);
+		MedSupViewPlan_css.click();
+		Thread.sleep(7000);
+		validateNew(medSupTFN);
 		MedSupTfn = medSupTFN.getText().trim();
 		System.out.println("This is the TFN from MedSup page: "+MedSupTfn);
 		return MedSupTfn;
