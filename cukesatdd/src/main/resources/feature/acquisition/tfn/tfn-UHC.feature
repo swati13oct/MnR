@@ -83,8 +83,8 @@ Given user visits UMS site using Direct URL and varify TFN
 Then user navigate to MedSup from Direct url to varify TFN
      |MedSup TFN	|<medSupTFN>|
 	Examples: 
-		| ampTFN  	  	  | medSupTFN 		| url                                  |
-    	| 1-877-596-3258  | 1-888-378-0254  | https://www.uhcmedicaresolutions.com/|
+		| ampTFN  	  	  | medSupTFN 			| url                                  |
+    | 1-877-596-3258  | 1-877-596-3258  | https://www.uhcmedicaresolutions.com/|
     		
 @Scenario4B  @Campaign_Precedence_Logic  @tfn_uhc
 Scenario Outline: -Visit UMS using  ums url id 800085, 800086, Direct URL, 
@@ -94,10 +94,10 @@ Given user visits UMS using  specific URL and varify TFN
 Then navigate to MedSup to varify TFN from specific UMS url
     			   |MedSup TFN	|<medSupTFN>|
     Examples: 
-    	| ampTFN  	  	  | medSupTFN 		|  url |
-        |  1-888-262-3289 | 1-866-260-5005  |  https://www.uhcmedicaresolutions.com/?WT.mc_id=800085 |
-    	| 1-888-581-8578  | 1-866-260-5005  | https://www.uhcmedicaresolutions.com/?WT.mc_id=800086 |		 
-		| 1-877-596-3258  | 1-888-378-0254  | http://www.uhcmedicaresolutions.com/|
+    	| ampTFN  	  	  | medSupTFN 		  |  url                                                   |
+      |  1-888-262-3289 | 1-866-260-5005  |  https://www.uhcmedicaresolutions.com/?WT.mc_id=800085 |
+    	| 1-888-581-8578  | 1-866-260-5005  | https://www.uhcmedicaresolutions.com/?WT.mc_id=800086  |		 
+		  | 1-877-596-3258  | 1-877-596-3258  | http://www.uhcmedicaresolutions.com/                   |
 		
  @Scenario4C  @Campaign_Precedence_Logic  @tfn_uhc
 Scenario Outline: - Google  search UHC Medicare Advantage Plan 
@@ -121,7 +121,7 @@ Then navigate from yahoo via uhc site to MedSup to varify TFN
 	 	 	 |MedSup TFN	|<medSupTFN>|
 	 Examples: 
 	 		| ampTFN  	  	   | medSupTFN 	      | url 				   |
-	 	    | 1-855-259-8119   | 1-866-462-4046   |https://www.yahoo.com   |	
+	 	    | 1-800-850-8659    |1-888-378-0849 |https://www.yahoo.com   |	
 		
 		
 		

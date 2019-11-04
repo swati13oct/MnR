@@ -429,7 +429,7 @@ try {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("Element Clicked");
+		System.out.println("The WebElement=  " +element.getText() + "  is Clicked");
 	}
 
 	/***
@@ -546,8 +546,8 @@ try {
 		try {
 			waitforElementNew(element,timeoutInSec);
 			if (element.isDisplayed()) {
-				Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
-				System.out.println("@@@The element " + element.getText() + "is found@@@");
+				Assert.assertTrue("@@@The element:   " + element.getText() + "   is found@@@", element.isDisplayed());
+				//System.out.println("@@@The element  " + element.getText() + "   is found@@@");
 			}
 		} catch (Exception e) {
 

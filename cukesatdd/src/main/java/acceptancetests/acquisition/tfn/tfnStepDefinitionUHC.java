@@ -346,7 +346,7 @@ public void user_visits_UMS_using_specific_URL_and_varify_TFN(DataTable givenAtt
 	wd = mr.getWebDriverNew();
 	tfnPage = new UlayerTFNPage(wd);
 	tfnPage.openUrl(url);
-	tfnPage.popupCheck();
+	//tfnPage.popupCheck();
 	String hometfn = tfnPage.validateAMPPageTFN_UHC_campaignLink();
 	if(tfn.equalsIgnoreCase(hometfn)){
 		System.out.println("TFN on MA Tab is displaying correct number:  "+ hometfn);

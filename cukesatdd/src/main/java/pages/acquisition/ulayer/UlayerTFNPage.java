@@ -42,6 +42,9 @@ public class UlayerTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(@class,'tel ng-binding')]")
 	public WebElement TFN_MA;
+	
+	@FindBy(xpath = "//a[contains(text(),'1-800-850-8659')]")
+	public WebElement TFN_MA_BySelector;
 
 	@FindBy(xpath = "//*[@id='closeButton']")
 	public WebElement popUpClose;
@@ -99,7 +102,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'AARP® Medicare Plans from UnitedHealthcare')]")
 	public WebElement YahooSearchResult;
 
-	@FindBy(xpath = "(//*[contains(text(),'Medicare Plans | UnitedHealthcare')])[1]")
+	@FindBy(xpath = "//a[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='cta-zipcode']")
@@ -108,8 +111,11 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='zipcodebtn']")
 	private WebElement findPlansButton;
 
-	@FindBy(xpath = "//*[contains(@aria-label,'Medicare Supplement Insurance Plans')]")
+	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
 	private WebElement MedSupViewPlan;
+	
+	@FindBy(xpath = "//*[@id='_au8mcmkkj']")
+	private WebElement MedSupViewPlan_css;
 	
 	@FindBy(xpath = "(//*[contains(text(),'Medicare Supplement Insurance Plans')])[5]")
 	private WebElement MedSupViewPlan2;
@@ -141,7 +147,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath="(//*[contains(@class,'tel')])[2]|//*[contains(@class,'tel')]")
 	private WebElement home_TFN_uhc_varies;
 
-	@FindBy(xpath = "//h3[contains(text(),'Medicare Plans | UnitedHealthcare')]")
+	@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
@@ -332,23 +338,23 @@ public class UlayerTFNPage extends UhcDriver {
 		YahooSearchField.sendKeys("UHC Medicare Advantage Plan");
 		Thread.sleep(3000);
 		YahooSearchBttn.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		YahooSearchResultUHC.click();
 		switchToNewTab();
 		Thread.sleep(7000);
 		System.out.println("now Driver is in this page:  "+driver.getTitle());
-		popupCheck();
-		zipCodeUHC.sendKeys("90210");
-		driver.findElement(By.xpath("//*[contains(@value,'Find Plan & Enroll')]")).click();
+		//popupCheck();
+		MedSuppZipEntry.sendKeys("90210");
+		MedSuppVppZipSearch.click();
 		switchToNewTab_2();
 		System.out.println("now Driver is in this page:  "+driver.getTitle());
-		CommonUtility.waitForPageLoad(driver, MAPlanvpp, 30);
-		Thread.sleep(10000);
-		popupCheck();
-		jsClickNew(MAPlanvpp);
-		Thread.sleep(3000);
-		CommonUtility.waitForPageLoad(driver, MA_TFN_Acq, 30);
-		ma_TFN = MA_TFN_Acq.getText().trim();
+	    //validateNew(MAPlanvpp);
+		Thread.sleep(4000);
+		driver.navigate().refresh();
+		System.out.println("I just refreshed the Page now waiting");
+		Thread.sleep(4000);
+		validateNew(TFN_MA_BySelector);
+		ma_TFN = TFN_MA_BySelector.getText().trim();
 		return ma_TFN;
 	}
 	
@@ -768,14 +774,12 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String googleSearchUHC_1() throws Exception {
 		String home_TFN ="";
-		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan");
-		Thread.sleep(3000);
-		anywhereInGoogle.click();
-		GoogleSearchButton.click();
+		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan"+ Keys.ENTER);
+		//GoogleSearchButton.click();
 		Thread.sleep(15000);
 		UHCSearchLinkfromGoogle.click();
-		popupCheck();
-		CommonUtility.waitForPageLoad(driver, Home_TFN_Acq_1, 30);
+		//popupCheck();
+		validateNew(Home_TFN_Acq_1);
 		home_TFN = Home_TFN_Acq_1.getText().trim();
 		return home_TFN;
 	}
@@ -822,12 +826,15 @@ public class UlayerTFNPage extends UhcDriver {
 	}
 
 	public String medicalSupTFN_UHC_3() throws InterruptedException {
-
-		validateNew(MedSupViewPlan);
+		driver.navigate().refresh();
+		Thread.sleep(5000);
+		validateNew(MedSupViewPlan_css);
 		String MedSupTfn = "";
-		Thread.sleep(5000);
-		jsClickNew(MedSupViewPlan);
-		Thread.sleep(5000);
+		jsClickNew(MedSupViewPlan_css);
+		System.out.println("");
+		MedSupViewPlan_css.click();
+		//Thread.sleep(5000);
+		validateNew(medSupTFN);
 		MedSupTfn = medSupTFN.getText().trim();
 		Thread.sleep(5000);
 		return MedSupTfn;	
