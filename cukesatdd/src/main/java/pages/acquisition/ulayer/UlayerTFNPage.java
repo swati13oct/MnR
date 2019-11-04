@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -27,7 +28,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
 	public WebElement LearnAbtMedicareTab;
 
-	@FindBy(xpath = "(//*[contains(text(),'855')])[2]")
+	@FindBy(xpath = "(//*[contains(text(),'877')])[2]")
 	public WebElement LearnAbtMedicareTab_TFN;
 	/*
 	@FindBy(xpath = "//*[@id='maviewplans']")
@@ -140,8 +141,7 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath="(//*[contains(@class,'tel')])[2]|//*[contains(@class,'tel')]")
 	private WebElement home_TFN_uhc_varies;
 
-	//@FindBy(xpath = "(//*[contains(text(),'Medicare Advantage Plans - UHC Medicare Solution')])[2]")
-	@FindBy(css = ".srg > .g:nth-child(2) .ellip")
+	@FindBy(xpath = "//h3[contains(text(),'Medicare Plans | UnitedHealthcare')]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
@@ -716,7 +716,7 @@ public class UlayerTFNPage extends UhcDriver {
 		return pdpTFN_UI;
 	}
 
-	@FindBy(xpath = "(//*[contains(text(),'View plan and drug coverage details')])[7]")
+	@FindBy(xpath = "(//*[contains(text(),'View plan and drug coverage details')])[1]")
 	public WebElement pdpViewPlnDrugCvrg;
 
 	@FindBy(xpath = "//*[contains(@class,'tel')]")
@@ -724,6 +724,7 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String PDPDrugCvrgTFN_UHC() throws Exception{
 		String pdpTFN_UI="";
+		validateNew(pdpViewPlnDrugCvrg);
 		pdpViewPlnDrugCvrg.click();
 		Thread.sleep(5000);
 		pdpTFN_UI=pdpViewPlnDrugCvrgTFN.getText().trim();
@@ -741,22 +742,26 @@ public class UlayerTFNPage extends UhcDriver {
 	public String PDPOleTFN_UHC() throws Exception{
 		String pdpTFN_UI="";
 		pdpOLEButton.click();
-		Thread.sleep(5000);
+		validateNew(pdpOleTFN);
 		pdpTFN_UI=pdpOleTFN.getText().trim();
 		System.out.println("This is the TFN from PDP OLE Page UI:  "+pdpTFN_UI);
 		return pdpTFN_UI;
 	}
+	@FindBy (xpath = "//*[contains(@aria-label,'Find a plan opens a new window')]")
+	private WebElement findPlanCampaignSite;
+	//*[contains(@aria-label,'Find a plan opens a new window')]
 
 	public String googleSearchUHC() throws Exception {
 		String home_TFN ="";
-		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan");
+		validateNew(GoogleSearchField);
+		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan"+Keys.ENTER);
 		Thread.sleep(3000);
-		anywhereInGoogle.click();
-		GoogleSearchButton.click();
-		Thread.sleep(4000);
+		validateNew(UHCSearchLinkfromGoogle);
 		UHCSearchLinkfromGoogle.click();
-		popupCheck();
-		CommonUtility.waitForPageLoad(driver, Home_TFN_Acq_1, 30);
+		checkModelPopup(driver,10);
+		findPlanCampaignSite.click();
+		switchToNewTab();
+		validateNew(Home_TFN_Acq_1);
 		home_TFN = Home_TFN_Acq_1.getText().trim();
 		return home_TFN;
 	}
@@ -776,7 +781,7 @@ public class UlayerTFNPage extends UhcDriver {
 	}
 	public String medicalSupTFN_UHC() throws InterruptedException {
 		driver.navigate().refresh();
-		waitforElementNew(zipCodeUHC);
+		validateNew(zipCodeUHC);
 		System.out.println("tamzid 1");
 		String MedSupTfn = "";
 		Thread.sleep(5000);
@@ -818,7 +823,7 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String medicalSupTFN_UHC_3() throws InterruptedException {
 
-		waitforElementNew(MedSupViewPlan);
+		validateNew(MedSupViewPlan);
 		String MedSupTfn = "";
 		Thread.sleep(5000);
 		jsClickNew(MedSupViewPlan);
@@ -844,9 +849,10 @@ public class UlayerTFNPage extends UhcDriver {
 
 	public String medicalSupTFN_UHC_5() throws InterruptedException {
 		shopForPlanTAB.click();
+		validateNew(zipCodeUHC);
 		zipCodeUHC.sendKeys("90210");
 		findPlansButtonUHC.click();
-		waitforElementNew(MedSupViewPlan);
+		validateNew(MedSupViewPlan);
 		String MedSupTfn = "";
 		Thread.sleep(5000);
 		jsClickNew(MedSupViewPlan);
@@ -867,13 +873,14 @@ public class UlayerTFNPage extends UhcDriver {
 		String MAvppTFN = "";
 		Thread.sleep(5000);
 		switchToNewTab();
-		popupCheck();
+		//popupCheck();
+		validateNew(zipCodeUHC);
 		zipCodeUHC.sendKeys("90210");
 		findPlansButtonUHC.click();
 		System.out.println("tamzid 4");
 		Thread.sleep(5000);
 		driver.navigate().refresh();
-		CommonUtility.waitForPageLoad(driver, Home_TFN_Acq, 30);
+		validateNew(Home_TFN_Acq);
 		MAvppTFN = Home_TFN_Acq.getText().trim();
 		System.out.println("tamzid 5");
 		Thread.sleep(5000);
@@ -886,11 +893,11 @@ public class UlayerTFNPage extends UhcDriver {
 		zipCodeUHC.sendKeys("90210");
 		String MAvppTFN = "";
 		Thread.sleep(3000);
-		popupCheck();
+		//popupCheck();
 		findPlansButtonUHC.click();
 		Thread.sleep(5000);
 		driver.navigate().refresh();
-		Thread.sleep(3000);
+		validateNew(Home_TFN_Acq);
 		MAvppTFN = Home_TFN_Acq.getText().trim();
 		Thread.sleep(3000);
 		return MAvppTFN;	
@@ -902,8 +909,51 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='b_searchboxSubmit']")
 	public WebElement bingSearchBttn;
 
-	@FindBy(xpath = "//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')]")
+	@FindBy(xpath = "//a[contains(@href, 'https://www.uhcmedicaresolutions.com/health-plans.html')]")
 	public WebElement UHCSearchLinkfromBing;
+	
+	@FindBy(xpath = "//a[contains(@aria-label,'Page 2')]")
+	public WebElement Page2LinkinBing;
+	
+	public void bingUHCSearchToFindUHCLink() {
+		try {
+			if(isElementPresent(UHCSearchLinkfromBing))
+			{
+				System.out.println("UHC Med Solution Link found on 1st page in Bing search");
+				UHCSearchLinkfromBing.click();
+			
+			} 
+			else 
+			{
+				Page2LinkinBing.click();
+				Thread.sleep(5000);
+				System.out.println("Trying to find UHC link in Bing search in Page 2");
+				UHCSearchLinkfromBing.click();
+				System.out.println("found UHC Link in Page 2 and clicked");
+			}
+		}
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isElementPresent(WebElement ele)
+    {
+       boolean ElementPresent=false;
+       try {
+           if(ele.isDisplayed())
+           {
+               ElementPresent=true;
+           }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Element is not proeset " +e);
+       }
+       return ElementPresent;
+    }
+
 
 	public String bingSearchUHC() throws Exception {
 		String home_TFN ="";
@@ -912,10 +962,15 @@ public class UlayerTFNPage extends UhcDriver {
 		bingSearchField.clear();
 		bingSearchField.sendKeys("UHC Medicare Advantage Plan");
 		bingSearchBttn.click();
-		Thread.sleep(4000);
-		UHCSearchLinkfromBing.click();
-		CommonUtility.waitForPageLoad(driver, Home_TFN_Acq_1, 30);
-		home_TFN = Home_TFN_Acq_1.getText().trim();
+		Thread.sleep(5000);
+		bingUHCSearchToFindUHCLink();
+		validateNew(zipCodeUHC);
+		zipCodeUHC.sendKeys("90210");
+		findPlansButtonUHC.click();
+		validateNew(MAPlanvpp2);
+		jsClickNew(MAPlanvpp2);
+		validateNew(MA_TFN_Acq);
+		home_TFN = MA_TFN_Acq.getText().trim();
 		return home_TFN;
 	}
 

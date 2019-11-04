@@ -1,7 +1,7 @@
 @tfn_blayer
 Feature: To test TFN in all flows on UHC site
 
-@Scenario1  @tfn_Direct_Traffic @tfn_uhc
+@Scenario1  @tfn_Direct_Traffic @tfn_uhc 
 Scenario Outline: Verify TFN in all VPP Tabs and PDP OLE with Direct Traffic on UHC site
 Given user is on UMS Prod and varify TFN
 	|  URL   	| <url>  |
@@ -22,7 +22,7 @@ Then user Verify the Right Rail TFN on PDP OLE
 	| url 															 | ampTFN  			  |  medEdTfn      | maPlanTfn      |  medSupTfn     | pdpTfn         |
 	|https://www.uhcmedicaresolutions.com| 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 | 1-877-596-3258 |
 		
-@Scenario2a  @campaign_traffic  @tfn_uhc
+@Scenario2a  @campaign_traffic  @tfn_uhc 
 Scenario Outline: To varify TFN landing in campaing url 
 Given user is landing on UHC via campaign url
 		|  URL     | <url>  |
@@ -59,10 +59,10 @@ Then user navigate to MedSup from Google to varify TFN
 		 |MedSup TFN	|<medSupTFN>|
 
  Examples: 
-		 	| ampTFN  	  	  | medSupTFN 		| url 					 |
-		 	| 1-800-607-2877  | 1-888-378-0849  |https://www.google.com/ |
+		 	| ampTFN  	  	  | medSupTFN 		  | url 					         |
+		 	| 1-844-861-4218  | 1-866-462-4046  |https://www.google.com/ |
 		 		
-@Scenario3b  @Organic_Search_Bing  @tfn_uhc
+@Scenario3b  @Organic_Search_Bing  @tfn_uhc 
 Scenario Outline: - Bing  search UHC Medicare Advantage Plan 
 Given user is on Bing and search UHC Medicare Advantage Plan to navigate to AMP page and varify TFN
 		 |  URL     | <url>  |

@@ -186,13 +186,13 @@ public void user_is_on_Google_and_search_UHC_Medicare_Advantage_Plan_to_navigate
 	tfnPage.openUrl(url);
 	String hometfn = tfnPage.googleSearchUHC();
 	System.out.println("I am here checking pop up for 30 sec .......");
-	tfnPage.popupCheck();
+	//tfnPage.popupCheck();
 	System.out.println("this is the TFN for Acqusition Home page from UI  "+hometfn);
 	if(tfn.equalsIgnoreCase(hometfn)){
 		System.out.println("Acqusition Home Page displaying correct number  "+hometfn);
 	}
 	else{
-		Assert.fail("Error validating TFN in  Acqusition homepage TFN  " + hometfn);
+		Assert.fail("TFN Displayed did not Match expected TFN in Acqusition homepage " + hometfn);
 	}	
 }
 @Then("^user navigate to MedSup from Google to varify TFN$")
@@ -206,8 +206,8 @@ public void user_navigate_to_MedSup_from_Google_to_varify_TFN(DataTable givenAtt
 	String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 	System.out.println("This is the TFN for MedSup page from Feature file:  "+medicalsuptfn);
 	tfnPage = new UlayerTFNPage(wd);
-	tfnPage.popupCheck();
-	String medsuptfn = tfnPage.medicalSupTFN_UHC_5();
+	//tfnPage.popupCheck();
+	String medsuptfn = tfnPage.medicalSupTFN_UHC();
 	if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
@@ -256,7 +256,7 @@ public void user_navigate_to_MedSup_from_Bing_to_varify_TFN(DataTable givenAttri
 	System.out.println("This is the TFN for MedSup page from Feature file:  "+medicalsuptfn);
 	tfnPage = new UlayerTFNPage(wd);
 	tfnPage.popupCheck();
-	String medsuptfn = tfnPage.medicalSupTFN_UHC();
+	String medsuptfn = tfnPage.medicalSupTFN_UHC_3();
 	if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
@@ -389,7 +389,7 @@ public void user_is_landing_on_UHC_via_campaign_url(DataTable givenAttributes) t
 	wd = mr.getWebDriverNew();
 	tfnPage = new UlayerTFNPage(wd);
 	tfnPage.openUrl(url);
-	tfnPage.popupCheck();	
+	//tfnPage.popupCheck();	
 }
 
 @Then("^user navigates to MA VPP tab to vaify TFN$")
