@@ -1075,6 +1075,7 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("version", "66.0");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
+					capabilities.setCapability("maxDuration", "3600");
 				}
 				 else if (browserName.equalsIgnoreCase("edge")) {
 					System.out.println("Inside Edge");
