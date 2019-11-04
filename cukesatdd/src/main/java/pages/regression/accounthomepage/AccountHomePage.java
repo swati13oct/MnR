@@ -594,64 +594,92 @@ public class AccountHomePage extends UhcDriver {
 	 * waiting for Hello-Person name text to be displayed on page
 	 */
 
-	public BenefitsAndCoveragePage navigateToBandCPage() {
+	public BenefitsAndCoveragePage navigateToBandCPage() 
+	{
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
-		try {
-			if (helloPerson.isDisplayed()) {
-				System.out.println("Hello PersonName on Dashboard home page was found");
-			} else {
-				waitForHomePage(welcome);
-				System.out.println("Welcome on Dashboard home page was found");
+			
+			try {
+				if (helloPerson.isDisplayed()) 
+				{
+					System.out.println("Hello PersonName on Dashboard home page was found");
+				} 
+				else 
+				{
+					waitForHomePage(welcome);
+					System.out.println("Welcome on Dashboard home page was found");
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
 			}
-		} catch (Exception e) {
-			waitForHomePage(welcome);
-			System.out.println("Welcome on Dashboard home page was found");
-
-		}
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
-			System.out.println("User is on Stage environment");
-
+		    		
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
+				&& ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
 			if (driver.getCurrentUrl().contains("/dashboard"))
 				;
 			{
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
-				driver.findElement(By.xpath("//a[contains(text(),'Coverage & Benefits')]")).click();
-				System.out.println("Now waiting for 10 seconds");
+
+				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
+					Thread.sleep(20000);
+				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
-				System.out.println("Current URL is " + driver.getCurrentUrl());
+				System.out.println(driver.getCurrentUrl());
+				CommonUtility.waitForPageLoad(driver, heading, 30);
 				if (driver.getTitle().contains("Benefits")) {
-					System.out.println("Title of Current Page is " + driver.getTitle());
+					System.out.println(driver.getTitle());
 					return new BenefitsAndCoveragePage(driver);
 				}
 
 			}
-		}
+		} else if (MRScenario.environmentMedicare.equals("stage")
+				&& ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
 
-		else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")
-				|| MRScenario.environmentMedicare.equals("team-e")) {
+		} else if (MRScenario.environmentMedicare.equals("team-h") || MRScenario.environmentMedicare.equals("test-a")) {
 
 			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
 			System.out.println(driver.getCurrentUrl());
+		} else if (MRScenario.environmentMedicare.equals("team-c")) {
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		} else if (MRScenario.environmentMedicare.equals("team-e")) {
+			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
+			CommonUtility.waitForPageLoad(driver, heading, 30);
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		} else {
 			driver.navigate().to(
 					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
-
 			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
 		}
+
+		/*
+		 * if (validate(iPerceptionPopUp)) { iPerceptionPopUp.click();
+		 * System.out.println("iPerception Pop Up displayed"); }
+		 */
 
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().equalsIgnoreCase("Benefits Overview")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
-
+	
 		return null;
-	}
-
+		}
+	
 	public ProfileandPreferencesPage navigateDirectToProfilePage() throws InterruptedException {
 
 		System.out.println("waiting for profile page");
