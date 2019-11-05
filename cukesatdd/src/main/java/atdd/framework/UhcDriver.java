@@ -421,23 +421,12 @@ try {
             return jsonObject;
     }
 
-	/***
-	 * the method clicks on an element using javaScriptExecutor
-	 * 
-	 * @param element
-	 */
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("The WebElement=  " +element.getText() + "  is Clicked");
+		System.out.println("The WebElement ===  " +element.getText() + "  : is Clicked");
 	}
 
-	/***
-	 * the method scrolls page upto element's location
-	 * 
-	 * @param element
-	 * @return
-	 */
 	public boolean scrollToView(WebElement element) {
 		try {
 
