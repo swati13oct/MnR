@@ -100,12 +100,12 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
  
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
-     | 15523 | Blayer |90210   | MA                | NO            | 
+#     | 15523 | Blayer |90210   | MA                | NO            | 
      
 		@prodRegression
      Examples:
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
-     | 15523 | Ulayer |90210   | PDP               | NO            | 
+     | 15523 | Blayer |90210   | PDP               | NO            | 
 
    @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in UHC site
