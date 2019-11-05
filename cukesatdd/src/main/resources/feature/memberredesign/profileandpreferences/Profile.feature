@@ -290,7 +290,7 @@ Feature: 1.02 Member Profile page
       | Copay Category | <copayCategory> |
     Then the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
-    And I validate the healthsafe ID links
+    And I validate the healthsafe ID links    
     Then the email address section should be verified
     Then the Phone Numbers section should be validated & all links clicked
     Then the user validates permanent address section

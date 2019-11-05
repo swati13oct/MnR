@@ -17,7 +17,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(id = "savePaperlessSettings")
 	protected WebElement savePrefButton;
 
-	@FindBy(id="save-prefs-btn-FEDERAL-INDIVIDUAL")
+	@FindBy(id="save-prefs-btn-SHIP")
 	protected WebElement savePrefButtonSHIP;
 
 	@FindBy(xpath = ".//iframe[@class='preferences']")  
