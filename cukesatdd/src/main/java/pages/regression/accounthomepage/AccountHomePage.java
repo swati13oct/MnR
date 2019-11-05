@@ -595,6 +595,7 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public BenefitsAndCoveragePage navigateToBandCPage() 
+	
 	{
 		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
 			
@@ -612,32 +613,62 @@ public class AccountHomePage extends UhcDriver {
 				// TODO Auto-generated catch block
 				
 			}
+	
 		    		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")
-				&& ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
+		{
 			System.out.println("user is on Stage login page");
 			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
-			if (driver.getCurrentUrl().contains("/dashboard"))
-				;
-			{
+		
+		if (driver.getCurrentUrl().contains("/aarp/dashboard"))
+		        {
 				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
-				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println(driver.getCurrentUrl());
-				CommonUtility.waitForPageLoad(driver, heading, 30);
-				if (driver.getTitle().contains("Benefits")) {
-					System.out.println(driver.getTitle());
-					return new BenefitsAndCoveragePage(driver);
-				}
+				driver.navigate().to(PAGE_URL + "aarp/member/benefits-coverage.html");
+		        }
+				
+	    if (driver.getCurrentUrl().contains("/pcp/dashboard"))
+			 {
+					System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
 
-			}
-		} else if (MRScenario.environmentMedicare.equals("stage")
+					driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			 }
+		if (driver.getCurrentUrl().contains("/medica/dashboard"))
+					 {
+							System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+							driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+					 }
+	    if (driver.getCurrentUrl().contains("/retiree/dashboard"))
+			 {
+			  System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+			  driver.navigate().to(PAGE_URL + "retiree/member/benefits-coverage.html"); 
+			 }
+		if (driver.getCurrentUrl().contains("/medicare/dashboard"))
+				 {
+				  System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				  driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html"); 
+	     }
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(driver.getCurrentUrl());
+		//CommonUtility.waitForPageLoad(driver, heading, 30);
+		if (driver.getTitle().contains("Benefits")) {
+			System.out.println(driver.getTitle());
+			return new BenefitsAndCoveragePage(driver);
+		}
+		}										
+			
+        else if (MRScenario.environmentMedicare.equals("stage")
 				&& ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
 			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
 			System.out.println(driver.getCurrentUrl());
