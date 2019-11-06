@@ -226,10 +226,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
-	private WebElement estimatedAnnualDrigCostLabel;
+	private WebElement estimatedAnnualDrugCostLabel;
 
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))])[1]")
-	private WebElement estimatedAnnualDrigCostValue;
+	private WebElement estimatedAnnualDrugCostValue;
 
 	@FindBy(xpath = "(.//*[@id='globalContentIdForSkipLink']//div[contains(@class,'module module-aside no-med-supp rigntrailwidget')])[2]")
 	private WebElement promoWidject;
@@ -1652,8 +1652,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateMedicalBenefitDrugSection() {
 		validateNew(drugCoveredInfo);//this field will not show 
-		validateNew(estimatedAnnualDrigCostLabel);
-		validateNew(estimatedAnnualDrigCostValue);
+		validateNew(estimatedAnnualDrugCostLabel,45);
+		validateNew(estimatedAnnualDrugCostValue);
 	}
 
 
