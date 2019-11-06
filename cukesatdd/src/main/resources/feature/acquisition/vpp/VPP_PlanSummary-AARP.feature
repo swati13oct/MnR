@@ -50,7 +50,7 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
      Examples:
        |   TID  | zipcode | isMultutiCounty | county             | plantype | planName                                             | monthlyPremium  | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                         | annualDeductible                                       |
        | 15551  |  90210  | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0              | $5  copay             | $10  copay  | Yes              | $4,900.00          |  No drug coverage                            |                                                        | 
-       | 15552  |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5  | 
+       | 15552  |  90210  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                      | $0              |                       |             |                  |                    | $0  copay                                    | $0 for Tier 1, Tier 2 $435 for Tier 3, Tier 4, Tier 5  | 
                                                                                                                                                                                                                                                                          
       
    @rightRailRegressionUlayer @fastandfurious

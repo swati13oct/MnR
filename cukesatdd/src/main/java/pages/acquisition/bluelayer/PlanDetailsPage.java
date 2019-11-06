@@ -29,6 +29,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 
@@ -295,7 +296,10 @@ public class PlanDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		
-		checkModelPopup(driver,45);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 	}
 
 	public GetStartedPage clicksOnEnterDrugInformationLink() {

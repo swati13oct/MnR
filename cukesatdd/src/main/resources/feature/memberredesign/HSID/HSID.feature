@@ -113,6 +113,7 @@ Feature:To test HSID registration flow
       | Plan Type      | <planType>  |
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
+   Then I validate that login is successfull     
       
    Examples:
    | planType|  memberType  | copayCategory | 
@@ -121,7 +122,14 @@ Feature:To test HSID registration flow
    | Medica  |  Individual  |  NON LIS      |  
    | MAGroup |  Individual  |  NON LIS      |
    | MAPDGroup|  Individual  |  NON LIS      | 
-   
+   | MA        |  Individual  |  NON LIS      |
+   | PDP       |  Individual  |  NON LIS      |   
+   | PDPGroup  |  Group       |  NON LIS      |   
+   | SHIP      |  ShipOnly    |  NON LIS      | 
+   | COMBO     | FedShip      |  NON LIS      |
+   | SSUPGroup |Group         |  NON LIS      |
+   | MAPre-effective       |  Individual  |  NON LIS      |
+   | GovtTermless       |  Individual  |  NON LIS      |
    
 		@hsid3 @validateStep1 @US968241
     Scenario Outline:Verify feilds in HSID registration Step 1 page.
