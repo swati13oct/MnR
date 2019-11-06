@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ole.WelcomePage;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class PlanComparePage extends UhcDriver{
@@ -42,7 +43,10 @@ public class PlanComparePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
-		// TODO Auto-generated method stub
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 		
 	}
 
