@@ -751,7 +751,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "standard_ccs-header")
 	private List<WebElement> catastrophicCoverageStageColumnFederal;
 
-	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
+	@FindBy(xpath = "//table[contains(@class,'standrdretailpharmcytable')]//tr[2]//*[contains(@headers,'ics-header')]")
 	private WebElement federalValueIC;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
