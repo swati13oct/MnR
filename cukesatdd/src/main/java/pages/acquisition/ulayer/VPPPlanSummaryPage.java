@@ -1652,7 +1652,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateMedicalBenefitDrugSection() {
 		validateNew(drugCoveredInfo);//this field will not show 
-		validateNew(estimatedAnnualDrigCostLabel);
+		validateNew(estimatedAnnualDrigCostLabel,45);
 		validateNew(estimatedAnnualDrigCostValue);
 	}
 
