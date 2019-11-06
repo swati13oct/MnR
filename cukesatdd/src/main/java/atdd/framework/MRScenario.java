@@ -1073,7 +1073,7 @@ sauceLabsTunnelIdentifier);
 				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
-					capabilities.setCapability("platform", "Windows 7");
+					capabilities.setCapability("platform", "Windows 10");
 					capabilities.setCapability("version", "latest");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
