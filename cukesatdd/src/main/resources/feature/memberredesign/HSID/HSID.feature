@@ -175,4 +175,3 @@ Examples:
       | appendinURL |
       | pcp         |
       | medica      |
-   

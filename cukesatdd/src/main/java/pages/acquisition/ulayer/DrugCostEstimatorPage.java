@@ -1438,6 +1438,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if (!(loadingBlock.isEmpty())) {
 			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 		}
+		Thread.sleep(3000);
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");
