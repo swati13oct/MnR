@@ -2,7 +2,7 @@
 Feature: To test TFN in all flows on AARP site
 
 	@Scenario_1  @tfn_Direct_Traffic @tfn_aarp
-Scenario Outline: Verify TFN in VPP Tabs and PDP OLE
+Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
 Given the user is on AARP medicare acquisition site page
 					|  URL   			 | <url>  |
 					|TFN Number MA |<tfnNumberMA>|
@@ -19,8 +19,8 @@ Examples:
      | 1-877-699-5710 | http://www.aarpmedicareplans.com/ |
 
 
-@Scenario5  @Campaign_url @campaign 
-Scenario Outline: - Visit Med Ed on AMP using campaign URL id 8001277
+@Scenario5  @Campaign_url @campaign
+Scenario Outline: - 5.0 Visit Med Ed on AMP using campaign URL id 8001277
 Given user is on campaign url and varify TFN
     		|  URL   | <url>  |
 Then click eligibility to check TFN on eligibility page
@@ -33,7 +33,7 @@ Then enter zipcode to check TFn on ma vpp page
     	    | 90210   | 1-877-495-2415	| 1-877-495-2415  | 1-877-495-2415 | https://www.aarpmedicareplans.com/medicare-education.html?WT.mc_id=8001277 |
 	    
 @Scenario6A  @Campaign_Precedence_Logic  @campaign 
-Scenario Outline: -validating TFN from Home Page
+Scenario Outline: -6.1 validating TFN from Home Page
 Given user visits AMP using Direct URL and varify TFN
 	|  URL   	| <url>  |
 	| AMPTFN	|<ampTFN>|
@@ -44,7 +44,7 @@ Then coming from dircet url and navigate to medsup to varify TFN
 	    	| 1-877-699-5710  | 1-877-699-5710  | http://www.aarpmedicareplans.com/ |
 
 @Scenario6B  @Campaign_Precedence_Logic  @tfn_aarp 
-Scenario Outline: - Google and search AARP Medicare Advantage Plan 
+Scenario Outline: - 6.2 Google and search AARP Medicare Advantage Plan 
 Given user is on Google and search AARP Medicare Advantage Plan to navigate to AMP page and varify TFN
 	 |  URL     | <url>  |
 	 | AMPTFN	|<ampTFN>|
@@ -55,7 +55,7 @@ Then navigate to MedSup to varify TFN from Google
 	    	| 1-800-850-6807  | 1-866-327-1593  |https://www.google.com/ |
 
 @Scenario6C  @Campaign_Precedence_Logic  @No_Longer_in_Excel_SOT
-Scenario Outline: -Visit AMP using  amp url id 860002
+Scenario Outline: -6.3 Visit AMP using  amp url id 860002
 Given user visits AMP using Direct URL and varify TFN
 	   |  URL   | <url>  |
 	   | AMPTFN	|<ampTFN>|
@@ -66,7 +66,7 @@ Then navigate to MedSup to varify TFN from specific url
 	    | 1-877-610-2672  | 1-888-708-8922  |  http://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans?WT.mc_id=860002&zipcode=90210 |
 	 
 @Scenario6D  @Campaign_Precedence_Logic  @tfn_aarp
-Scenario Outline: -Visit AMP using  amp url id 8001533
+Scenario Outline: -6.4 Visit AMP using  amp url id 8001533
 Given user visits AMP using Direct URL and varify TFN
 		|  URL   | <url>  |
 	    |AMPTFN	|<ampTFN>|
@@ -91,7 +91,7 @@ Examples:
 
 
 	 @Scenario6E  @Campaign_Precedence_Logic  @tfn_aarp
-	 Scenario Outline: - Google and search AARP Medicare Advantage Plan 
+	 Scenario Outline: - 6.5  Google and search AARP Medicare Advantage Plan 
 	 Given user is on Google and search AARP Medicare Advantage Plan to navigate to AMP page and varify TFN
 	 	 |  URL     | <url>  |
 	 	 | AMPTFN	|<ampTFN>|
@@ -102,7 +102,7 @@ Examples:
 	 	    	| 1-800-850-6807  | 1-866-327-1593  |https://www.google.com/ |
 	   
 @Scenario6F  @Campaign_Precedence_Logic  @tfn_aarp
-Scenario Outline: -Visit AMP using Direct URL after clearing cache and visit from google
+Scenario Outline: - 6.6 Visit AMP using Direct URL after clearing cache and visit from google
 Given user visits AMP using Direct URL and varify TFN
 	  |  URL   | <url>  |
 	  |AMPTFN	|<ampTFN>|
@@ -118,7 +118,7 @@ Then navigate to MedSup to varify TFN
 
 	   	    	
 @Scenario6G  @Campaign_Precedence_Logic  @campaign 
-Scenario Outline: - Yahoo and search AARP Medicare Advantage Plan 
+Scenario Outline: - 6.7 Yahoo and search AARP Medicare Advantage Plan 
 Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AMP page and varify TFN
 	   	     |  URL     | <url>  	 |
 	   	     |AMPTFN	|<ampTFN>|
@@ -129,7 +129,7 @@ Then navigate to MedSup to varify TFN from Yahoo
 	   	    	| 1-800-850-8230  | 1-866-327-1593  |https://www.Yahoo.com/ |
 	   	    		
 @Scenario6H  @campaign
-Scenario Outline: -Visit AMP using  amp url id 8001533
+Scenario Outline: -6.8 Visit AMP using  amp url id 8001533
 Given user visits AMP using  specific URL and varify TFN
 	   	   |  URL   | <url1>  |
 	   	   |AMPTFN	|<ampTFN>|
