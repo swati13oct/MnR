@@ -113,8 +113,8 @@ Then user is on Google and navigate to  AMP page to view the same TFN  and varif
 Then navigate to MedSup to varify TFN
 	  	   |MedSup TFN	|<medSupTFNGoogle>|
 	Examples: 
-	   	    	| ampTFN  	  	  | medSupTFN 		 | url                              | ampTFNGoogle  	  	  | medSupTFNGoogle    | url1 |
-	   	    	| 1-877-699-5710  | 1-877-699-5710   | http://www.aarpmedicareplans.com/ | 1-800-850-6807        | 1-866-327-1593 	   |https://www.google.com/ |
+	   	    	| ampTFN  	  	  | medSupTFN 		  | url                               | ampTFNGoogle  	  	  | medSupTFNGoogle    | url1                   |
+	   	    	| 1-877-699-5710  | 1-877-699-5710  | http://www.aarpmedicareplans.com/ | 1-800-850-6807        | 1-866-327-1593 	   |https://www.google.com/ |
 
 	   	    	
 @Scenario6G  @Campaign_Precedence_Logic  @campaign 

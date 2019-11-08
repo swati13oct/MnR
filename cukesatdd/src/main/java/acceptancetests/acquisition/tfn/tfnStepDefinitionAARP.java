@@ -225,7 +225,7 @@ public class tfnStepDefinitionAARP {
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
 		tfnPage = (UlayerTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-		String medsuptfn = tfnPage.medicalSupTFN_direct_1();
+		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}

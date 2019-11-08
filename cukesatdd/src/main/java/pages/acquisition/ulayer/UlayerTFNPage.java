@@ -340,8 +340,12 @@ public class UlayerTFNPage extends UhcDriver {
 		validateNew(AARPSearchLinkfromGoogle_alternative);
 		AARPSearchLinkfromGoogle_alternative.click();
 		Thread.sleep(7000);
-		validateNew(Home_TFN_Acq_1);
-		home_TFN = Home_TFN_Acq_1.getText().trim();
+		MedSuppZipEntry.sendKeys("90210");
+		MedSuppVppZipSearch.click();
+		switchToNewTab();
+		Thread.sleep(4000);
+		validateNew(TFN_MA);
+		home_TFN = TFN_MA.getText().trim();
 		System.out.println("This is MA-TAB TFN from UI :  "+home_TFN );
 		return home_TFN;
 	}
