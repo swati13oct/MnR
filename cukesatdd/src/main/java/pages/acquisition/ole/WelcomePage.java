@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 
@@ -111,7 +112,10 @@ public class WelcomePage extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Welcome Page for OLE");
-		checkModelPopup(driver,45);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}

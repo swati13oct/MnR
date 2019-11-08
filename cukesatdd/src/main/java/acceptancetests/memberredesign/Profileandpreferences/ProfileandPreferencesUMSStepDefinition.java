@@ -1125,7 +1125,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 * @toDo : The user checks the email section
 	 */
 	@Then("^the email address section should be verified$")
-	public void able_to_view_emailaddress_section() {
+	public void able_to_view_emailaddress_section() throws Throwable{
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 		profilePreferencesPage.validatemailsect1();		
