@@ -978,23 +978,20 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type ----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNp plan type ---------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user saves two plans as favorite on UHC site$")
@@ -1132,21 +1129,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
@@ -1178,21 +1175,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
@@ -1208,19 +1205,19 @@ public class VppStepDefinitionUHC {
 		// note: the second plan in the list will be unsaved
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input"); 
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType); 
 	}
@@ -1267,21 +1264,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
@@ -1312,21 +1309,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
@@ -1362,21 +1359,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
@@ -1450,17 +1447,17 @@ public class VppStepDefinitionUHC {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 	}
 
@@ -1485,21 +1482,21 @@ public class VppStepDefinitionUHC {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.selectCurrentYearPlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 	// ^^^ note: added for US1598162
