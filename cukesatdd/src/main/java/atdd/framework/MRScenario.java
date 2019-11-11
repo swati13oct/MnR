@@ -1061,20 +1061,23 @@ sauceLabsTunnelIdentifier);
 				if (browserName.equalsIgnoreCase("firefox")) {
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
-					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "57");
+					capabilities.setCapability("platform", "Windows 10");
+					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("maxDuration", "3600");
 				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
-					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "11.0");
-					capabilities.setCapability("screenResolution", "1024x768");
+					capabilities.setCapability("platform", "Windows 10");
+					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("screenResolution", "1024x768");	
+					capabilities.setCapability("maxDuration", "3600");				
 				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
-					capabilities.setCapability("platform", "Windows 7");
-					capabilities.setCapability("version", "66.0");
+					capabilities.setCapability("platform", "Windows 10");
+					capabilities.setCapability("version", "latest");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
+					capabilities.setCapability("maxDuration", "3600");
 				}
 				 else if (browserName.equalsIgnoreCase("edge")) {
 					System.out.println("Inside Edge");
@@ -1082,6 +1085,7 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("platform", "Windows 10");
 					capabilities.setCapability("version", "latest");
 					capabilities.setCapability("screenResolution", "1920x1080");
+					capabilities.setCapability("maxDuration", "3600");
 				 }
 				capabilities.setCapability("autoAcceptsAlerts", true);
 				//capabilities.setCapability("parent-tunnel", "sauce_admin");		

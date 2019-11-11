@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class DrugCostEstimatorPage extends UhcDriver {
@@ -526,8 +527,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 
-		checkModelPopup(driver);
-		checkModelPopup(driver);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);
@@ -1435,6 +1438,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if (!(loadingBlock.isEmpty())) {
 			CommonUtility.waitForElementToDisappear(driver, loadingBlock.get(0), 60);
 		}
+		Thread.sleep(3000);
 		String genericCost = costText.getText();System.out.println(genericCost);
 		if(brandedCost.equals(genericCost))
 			Assert.fail("Error in calculating costs after switching to generic");

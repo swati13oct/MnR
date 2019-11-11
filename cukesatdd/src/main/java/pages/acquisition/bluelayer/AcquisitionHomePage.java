@@ -149,7 +149,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/*@FindBy(xpath = "//a[@class='cta-button']")
 	private WebElement takeTheQuizBtn;*/
 	
-	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
+	@FindBy(xpath = "//a[contains(text(), 'Get a Plan Recommendation')]")
 	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
@@ -421,14 +421,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
 			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			checkModelPopup(driver,45);
 		}else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
+			checkModelPopup(driver,45);
 		} else {
 			startNew(UMS_ACQISITION_PAGE_URL);
+			checkModelPopup(driver,10);
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,45);
+		
 		clickIfElementPresentInTime(driver, proactiveChatExitBtn,20);
 	//	CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 	

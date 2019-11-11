@@ -348,15 +348,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			checkModelPopup(driver,45);
 		}
 		else if (MRScenario.environment.equals("prod")) {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
+			checkModelPopup(driver,45);
 		}else {
 			start(AARP_ACQISITION_PAGE_URL);
+			checkModelPopup(driver,10);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,45);
+		
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
