@@ -129,6 +129,7 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
 		CommonUtility.checkPageIsReady(driver);
+		int numWinHandleBefore=driver.getWindowHandles().size();
 		String winHandleBefore = driver.getWindowHandle();
 		String originalPageTitle=driver.getTitle();
 		System.out.println("Current title: "+driver.getTitle());
@@ -151,27 +152,28 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		} else {
 			Assert.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
 		}
-
-		// Store the current window handle
-		
+		CommonUtility.checkPageIsReady(driver);
+		int numWinHandleAfter=driver.getWindowHandles().size();
+		//note: Store the current window handle
+		Assert.assertTrue("PROBLEM - Print window was never opened after the click",numWinHandleAfter-numWinHandleBefore==1);
 		boolean flag = false;// flag will be used to determine a new window was opened after the click of print button
-		//switch to handle the new print window
+		//note: switch to handle the new print window
 		for(String winHandle : driver.getWindowHandles()){
 			if(!winHandle.equals(winHandleBefore))
 	          {
 				driver.switchTo().window(winHandle);
-				System.out.println("Proceed to validate the new window content for print");
-				sleepBySec(3); 
-				String printPreviewPageTitle=driver.getTitle();
-				Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
-				flag = true;
-				System.out.println("Proceed to close the print preview window");
+				//tbd System.out.println("Proceed to validate the new window content for print");
+				//tbd sleepBySec(1); 
+				//tbd String printPreviewPageTitle=driver.getTitle();
+				//tbd Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
+				//tbd flag = true;
+				//tbd System.out.println("Proceed to close the print preview window");
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 	          }
 		}
-		if(!flag)
-			Assert.fail("Print window was never opened after the click");
+		//tbd if(!flag)
+		//tbd Assert.fail("Print window was never opened after the click");
 		
 		//note: keep for the print page to load
 		//CommonUtility.checkPageIsReady(driver);
