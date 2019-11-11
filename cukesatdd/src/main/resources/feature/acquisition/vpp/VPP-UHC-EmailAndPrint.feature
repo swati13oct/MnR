@@ -100,7 +100,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
  
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
-#     | 15523 | Blayer |90210   | MA                | NO            | 
+     | 15523 | Blayer |90210   | MA                | NO            | 
      
 		@prodRegression
      Examples:

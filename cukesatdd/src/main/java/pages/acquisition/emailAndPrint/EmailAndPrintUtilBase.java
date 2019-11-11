@@ -162,8 +162,8 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 				driver.switchTo().window(winHandle);
 				System.out.println("Proceed to validate the new window content for print");
 				sleepBySec(3); 
-				/*String printPreviewPageTitle=driver.getTitle();
-				Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));*/
+				String printPreviewPageTitle=driver.getTitle();
+				Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
 				flag = true;
 				System.out.println("Proceed to close the print preview window");
 				driver.close();
