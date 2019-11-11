@@ -254,7 +254,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 			}
 		}
 		CommonUtility.waitForPageLoadNew(driver, PrescriptionBox_1, 30);
-		sendkeys(PrescriptionBox_1, "Adci");
+		sendkeys(PrescriptionBox_1, "exel");
 
 		try {
 			waitforElementVisibilityInTime(PrescriptionAutoResults, 30);
