@@ -67,9 +67,12 @@ public class AddDrugDetails extends UhcDriver {
 		return addDrugDetailsPageExpectedJson;
 	}*/
 	public void selectDosage(String dosage){
-	
-		WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
-		drugDosage.click();
+	WebElement drugDosage = driver.findElement(By.xpath("//*[@id='dosage-radios']/div/select"));
+		
+		Select options = new Select(drugDosage);
+		 options.selectByVisibleText(dosage);
+		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		drugDosage.click();*/
 		//selectFromDropDownByText(driver, dosageDropdown, dosage);  //this can be used if select dropdown is brought back
 	}
 	
