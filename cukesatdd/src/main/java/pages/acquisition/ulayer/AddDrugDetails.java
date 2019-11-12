@@ -52,8 +52,13 @@ public class AddDrugDetails extends UhcDriver {
 	}
 
 	public void selectDosage(String dosage) throws InterruptedException{
-		WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
-		drugDosage.click();
+		
+		WebElement drugDosage = driver.findElement(By.xpath("//*[@id='dosage-radios']/div/select"));
+		drugDosage.click();			
+			Select options = new Select(drugDosage);
+		 options.selectByVisibleText(dosage);
+		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		drugDosage.click();*/
 		//selectFromDropDownByText(driver, dosageDropdown, dosage);
 	}
 	

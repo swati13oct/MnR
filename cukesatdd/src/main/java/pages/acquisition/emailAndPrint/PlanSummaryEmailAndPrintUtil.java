@@ -2,6 +2,7 @@ package pages.acquisition.emailAndPrint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -168,6 +169,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		emailPlanSummarySuccessCloseButton.click();
 	}
 	public HashMap<String, Integer> collectInfoVppPlanSummaryPg() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the plan counts on vpp summary page");
 
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
@@ -189,6 +191,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		result.put("SNP Plan Count", snpPlans);
 		result.put("Saved Heart Count", planSummary_listOfSavedHearts.size());
 		System.out.println("collected result="+result);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
 	}
 
@@ -209,6 +212,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	boolean summary_finalResult=true;
 	public List<String> validatePlanSummaryEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, Integer> origPage) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		List<String> testNote=new ArrayList<String>();
 		List<String> listOfFailure=new ArrayList<String>();
 
@@ -273,6 +277,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		}
 
 		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , summary_finalResult);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return testNote;
 	}
 
