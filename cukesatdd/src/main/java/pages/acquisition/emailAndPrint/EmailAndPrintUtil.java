@@ -77,12 +77,12 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 	}
 	
 	//note: plan detail section------------------------------------------------
-	public HashMap<String, String> collectInfoVppPlanDetailPg(String plantype, String forWhat) {
-		return planDetailsEmailAndPrintUtil.collectInfoVppPlanDetailPg(plantype, forWhat);
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String plantype, String forWhat, WebDriver origDriver) {
+		return planDetailsEmailAndPrintUtil.collectInfoVppPlanDetailPg(plantype, forWhat, origDriver);
 	}	
 
-	public List<String> validatePlanDetailEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
-		return planDetailsEmailAndPrintUtil.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+	public List<String> validatePlanDetailEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage, WebDriver origDriver) {
+		return planDetailsEmailAndPrintUtil.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage, origDriver);
 	}
 
 	public void validatingFunctionalityOfEmailOnPlanDetails() {

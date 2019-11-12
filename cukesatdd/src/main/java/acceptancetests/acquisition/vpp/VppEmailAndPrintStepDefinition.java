@@ -94,7 +94,7 @@ public class VppEmailAndPrintStepDefinition {
 		
 		//note: collect page data for email deeplink validation
 		util=new EmailAndPrintUtil(wDriver);
-		HashMap<String, String> infoMap=util.collectInfoVppPlanDetailPg(planType, "original");
+		HashMap<String, String> infoMap=util.collectInfoVppPlanDetailPg(planType, "original", wDriver);
 		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
 
 
@@ -228,6 +228,7 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		//tbd wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
@@ -251,6 +252,7 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		Thread.sleep(1000);
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
@@ -258,7 +260,7 @@ public class VppEmailAndPrintStepDefinition {
 		util.checkModelPopup(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util = new EmailAndPrintUtil(newTestDriver);
-		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage, wDriver);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
 
