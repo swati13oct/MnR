@@ -52,8 +52,8 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 	}
 	
 	//note: plan compare section------------------------------------------------
-	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat) {
-		return planComapreEmailAndPrintUtil.collectInfoVppPlanComparePg(planType, forWhat);
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat, WebDriver origDriver) {
+		return planComapreEmailAndPrintUtil.collectInfoVppPlanComparePg(planType, forWhat, origDriver);
 	}
 	
 	public void validatePlanCompareEmailThankYouMessage() {
@@ -68,8 +68,8 @@ public class EmailAndPrintUtil extends EmailAndPrintUtilBase{
 		planComapreEmailAndPrintUtil.validateEmailPlanCompare();
 	}
 	
-	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
-		return planComapreEmailAndPrintUtil.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage, WebDriver origDriver) {
+		return planComapreEmailAndPrintUtil.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage, origDriver);
 	}
 	
 	public void waitForComparePageToLoad() {

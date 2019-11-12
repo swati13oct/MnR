@@ -203,7 +203,7 @@ public class VppEmailAndPrintStepDefinition {
 
 		//note: collect page data for email deeplink validation
 		util=new EmailAndPrintUtil(wDriver);
-		HashMap<String, String> infoMap=util.collectInfoVppPlanComparePg(planType, "original");
+		HashMap<String, String> infoMap=util.collectInfoVppPlanComparePg(planType, "original", wDriver);
 		getLoginScenario().saveBean(PageConstants.COMPARE_PAGE_INFO, infoMap);
 
 		//note: if email is successfully sent, deepLink info should be available, save it for later use
