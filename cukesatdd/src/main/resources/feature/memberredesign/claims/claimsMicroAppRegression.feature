@@ -270,6 +270,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
     Examples: 
       | TID   | userSelection             | planType | memberType | claimType | claimSystem          |
-      | 15259 | SHIP-COM-SHIP7yearsclaims | SHIP     | COMBO      | NA        | 7Year_COMPASS_CLAIMS |
+      | 15259 | SHIP-COM-SHIP7yearsclaims | SHIP     | Individual | NA        | 7Year_COMPASS_CLAIMS |
 
   #----- end of Regression claims scenarios section ------------------------   
