@@ -24,7 +24,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
-      | User Selection | <userSelection> |
     #When if I access via dashboard I can navigate to claims summary page from View Your Claims
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page

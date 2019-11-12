@@ -8,7 +8,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
-      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
@@ -100,7 +99,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
-      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
@@ -166,7 +164,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |
       | Claim System   | <claimSystem>   |
-      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     And I validate the error message for a PHIP Member on the screen
 
@@ -244,7 +241,6 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
-      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
