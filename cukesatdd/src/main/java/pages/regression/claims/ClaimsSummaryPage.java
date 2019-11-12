@@ -374,8 +374,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				int afterClicked_numTabs=afterClicked_tabs.size();					
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 
+				/* tbd
 				CommonUtility.checkPageIsReady(driver);
-				/* tbd 
 				System.out.println("New window for print = "+driver.getTitle());
 				String expPrintPageTitle="Print: My Claims Details";
 				Assert.assertTrue("PROBLEM - print page title is not as expected.", driver.getTitle().contains(expPrintPageTitle)); */
