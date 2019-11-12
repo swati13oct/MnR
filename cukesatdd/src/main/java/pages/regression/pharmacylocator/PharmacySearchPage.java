@@ -69,7 +69,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", pharmacyValidate(distanceOption_25miles));
 		if (!memberType.toUpperCase().contains("MEDICA")) { //note: medica sometimes shows plan name sometimes don't depending on user data
 			Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
-					pharmacyValidate(PlanNameDropDown));
+					validateNew(PlanNameDropDown));
 			select = new Select(PlanNameDropDown);           
 			String actualSelectedPlan = select.getFirstSelectedOption().getText();
 			Assert.assertTrue("PROBLEM - default selected plan name should not be null. "
@@ -508,7 +508,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		int posY=map_showHideMapLnk_coor.getY();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,"+(posY-bannderHight)+")");
-		moveMouseToElement(mailOrderFilter); //note: in case running on offline - scroll to this so show/hide map will be visible 
+	//	moveMouseToElement(mailOrderFilter); //note: in case running on offline - scroll to this so show/hide map will be visible 
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
 				pharmacyValidate(map_showHideMapLnk));
 		map_showHideMapLnk.click();

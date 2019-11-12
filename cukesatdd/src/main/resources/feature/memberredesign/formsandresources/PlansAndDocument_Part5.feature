@@ -86,7 +86,7 @@ Feature: 1.06.5 Member Plans and Documents Page Part 5
       | FID     | planType | memberType           | benefitstable  | planoverview  | outlineofcoverage   | ShipPreEffePlan               | CoverageDate               |
       | F282605 | SHIP     | ShipActievNewPreShip | Benefits Table | Plan Overview | Outline of Coverage | AARP MEDICARE SELECT PLAN CS1 | Coverage Starts 08/01/2019 |
 
-  #Need a ship Active member with New pre effective plan
+  #Need a ship Terminated member with New pre effective plan
   @PlansAndDocument25 @ShipTerminatedShipPre @regressionMember @release_june_2019 @PD_Part5_Regression
   Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
     Given login with following details logins in the member portal and validate elements
