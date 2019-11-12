@@ -18,7 +18,7 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
   # note:   For PDP & SHIP          - @claims00_R_p1 + @claims00_S_p1
   #----------------------------------------------------------------------------------
   @claimsMicroApp00
-  Scenario Outline: -userSelection: <userSelection> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
+  Scenario Outline: -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
     Given login with following details logins in the member portal and validate elements for microapp
       | App Type       | MICRO           |
       | Plan Type      | <planType>      |
@@ -119,42 +119,41 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     
     @mapd_medical_cosmos
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_3  | 15235 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_4  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 01_1  | xxxxx | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_2  | 15230 | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_3  | 15235 | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
     @ma_medical_cosmos
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_3  | xxxxx | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP  | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 02_4  | 15268 | Medica_q2_jun_sofl0013            | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 02_1  | 15234 | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_2  | xxxxx | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_3  | xxxxx | SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 02_4  | 15268 | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @mapd_medical_nice
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 03_1  | 15235 | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Yes                | 
 
     @ship
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 04_1  | 15236 | SHIP-q3_sep_ship_009              | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 04_1  | 15236 | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
 
     @mapd_drug
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 05_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
-      | 05_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
-      | 05_3  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 05_1  | 15230 | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
+      | 05_2  | 15235 | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Yes                | 
+      | 05_3  | xxxxx | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Yes                |
 
     @pdp_drug
     Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
-      | 06_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Yes                |
-      | 06_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
+      | 06_1  | 15299 | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Yes                |
+      | 06_2  | 15300 | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Yes                |
 
 
   #----- beginning of claims test for offline prod - local run only ------------------
@@ -209,9 +208,9 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
     #----------
 
     Examples: 
-      | index | username   | password   | MemUserName  | userSelection | planType | memberType | claimSystem    | claimType         | segmentId | flagZeroClaimsUser |
-      |    01 | myUsername | myPassword | testUsername | whatever      | PDP      | Individual | RX_CLAIMS      | Prescription drug | 000       | Yes                |
-      |    02 | myUsername | myPassword | testUsername | whatever      | MAPD     | Individual | NICE_CLAIMS    | Medical           | 000       | Yes                |
-      |    03 | myUsername | myPassword | testUsername | whatever      | SHIP     | Individual | COMPASS_CLAIMS | NA                | 000       | Yes                |
+      | index | username   | password   | MemUserName  | planType | memberType | claimSystem    | claimType         | segmentId | flagZeroClaimsUser |
+      |    01 | myUsername | myPassword | testUsername | PDP      | Individual | RX_CLAIMS      | Prescription drug | 000       | Yes                |
+      |    02 | myUsername | myPassword | testUsername | MAPD     | Individual | NICE_CLAIMS    | Medical           | 000       | Yes                |
+      |    03 | myUsername | myPassword | testUsername | SHIP     | Individual | COMPASS_CLAIMS | NA                | 000       | Yes                |
 
 
