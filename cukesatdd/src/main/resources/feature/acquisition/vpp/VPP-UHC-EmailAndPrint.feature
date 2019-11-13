@@ -100,7 +100,7 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
  
     Examples: 
      | TID   | site   |zipcode | plantype          | isMultiCounty | 
-#     | 15523 | Blayer |90210   | MA                | NO            | 
+     | 15523 | Blayer |90210   | MA                | NO            | 
      
 		@prodRegression
      Examples:
@@ -131,8 +131,8 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     
      @prodRegression
      Examples:
-      | TID   | site   |zipcode | plantype          | isMultiCounty | 
-      | 15531 | Ulayer |  80001 | SNP      | No              |
+      | TID   | site   |zipcode | plantype | isMultiCounty   | 
+      | 15531 | Blayer |  80001 | SNP      | No              |
 
 
   @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019
@@ -160,5 +160,5 @@ Feature: 2.04.ACQ-Print and email on VPP page on UMS
     @prodRegression 
     Examples: 
       | UID     | site   |plantype | zipcode | isMultiCounty | county           | 
-      | 1598166 | Ulayer |MA       | 80001   | NO            | Jefferson County |
+      | 1598166 | Blayer |MA       | 80001   | NO            | Jefferson County |
 

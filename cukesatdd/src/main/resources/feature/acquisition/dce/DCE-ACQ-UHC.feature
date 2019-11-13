@@ -34,7 +34,7 @@ Then user validates drug added on prescription drug benefits tab in UMS
 
 Examples:
 |     drug   | dosage |quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-| Lipitor |  TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
+| Lipitor |  Lipitor TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
