@@ -1,5 +1,5 @@
 @claimsMicroApp @thePredetors
-Feature: T1.1To validate the claims Summary page and claims Details page on the member site
+Feature: 1.12 To validate the claims Summary page and claims Details page on the member site
 
 #----- beginning of VBF section ----------------------------------------------------
   @F355345

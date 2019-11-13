@@ -97,11 +97,11 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
- 
+
    Examples: 
       | FID    | planType | memberType     | expectLink | 
       | 313410 | MAPD     | Terminated_PnP | no         |
-      | 313410 | MAPD     | PreEff_PnP     | no         |
+      | 313410 | PDP      | PreEff_PnP     | no         |
       | 313410 | MA       | Individual_PnP | no         |
       | 313410 | SHIP     | Individual_PnP | no         |
 

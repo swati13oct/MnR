@@ -515,7 +515,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-
+		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn, 5);
 		validateNew(paymentHistoryApp);
 		validateNew(oneTimePaymentBtn);
 		
