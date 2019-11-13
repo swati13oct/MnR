@@ -59,13 +59,16 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 		
 	} */
-	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat) {
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat, WebDriver origDriver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp compare page =====");
 		HashMap<String, String> result=new HashMap<String, String>();
 		result.put("Page Header", cmpPgHeader.getText());
 
 		result.put("Columns Count", String.valueOf(listOfCmpPlansColumns.size()));
 		for (int i=1; i<=listOfCmpPlansColumns.size(); i++) {
+			if (forWhat.equals("email deepLink")) 
+				origDriver.navigate().refresh();
 			String columnXpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']["+i+"]";
 
 			String planNameXpath=columnXpath+"//h3";
@@ -124,6 +127,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			}
 		}
 		System.out.println("Finished collecting the info on vpp compare page =====");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
 	}
 
@@ -189,14 +193,15 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	}
 
 	boolean compare_finalResult=true;
-	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage) {
+	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage, WebDriver origDriver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		List<String> testNote=new ArrayList<String>();
 		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
 		List<String> listOfFailure=new ArrayList<String>();
 		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
 
 		System.out.println("Collect info from page content of the plan compare");
-		HashMap<String, String> emailPage=collectInfoVppPlanComparePg(planType, "email deepLink");
+		HashMap<String, String> emailPage=collectInfoVppPlanComparePg(planType, "email deepLink", origDriver);
 		
 		String targetKey="Page Header";
 		String failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
@@ -261,6 +266,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		}
 
 		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , compare_finalResult);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return testNote;
 	}
 	

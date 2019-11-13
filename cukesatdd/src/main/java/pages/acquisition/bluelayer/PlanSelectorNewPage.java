@@ -88,10 +88,10 @@ public class PlanSelectorNewPage extends UhcDriver {
 	 */
 
 	// @FindBy(id="ui-active-menuitem")
-	@FindBy(xpath = "(//a[@id='ui-active-menuitem'])[1]")
+	@FindBy(xpath = "(//a[@class='ui-menu-item-wrapper'])[1]")
 	private WebElement PrescriptionAutoResultsOld;
 
-	@FindBy(xpath = "//ul[contains(@class,'ui-autocomplete')]/li[contains(@class,'ui-menu-item')]/a[contains(@class,'ui-corner-all')]")
+	@FindBy(xpath = "//ul[contains(@class,'ui-autocomplete')]/li[contains(@class,'ui-menu-item')]/a[1]")
 	private WebElement PrescriptionAutoResults;
 
 	@FindBy(xpath = "//div[contains(@class,'addDrugRow')]/a[@id='Drugs_AddDrug']")
@@ -254,7 +254,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 			}
 		}
 		CommonUtility.waitForPageLoadNew(driver, PrescriptionBox_1, 30);
-		sendkeys(PrescriptionBox_1, "Adci");
+		sendkeys(PrescriptionBox_1, "exel");
 
 		try {
 			waitforElementVisibilityInTime(PrescriptionAutoResults, 30);
