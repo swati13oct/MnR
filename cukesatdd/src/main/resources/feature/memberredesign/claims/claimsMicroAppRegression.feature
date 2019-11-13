@@ -5,10 +5,9 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   @F355345
   Scenario Outline: -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
     Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
       | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
+      | Member Type    | <memberType>    |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
@@ -25,9 +24,10 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I validate the Claims Total on claims details page
 
     Examples: 
-      | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | planType | memberType      | claimSystem     | claimType         | claimPeriod    | 
+      | MAPD     | ULayerInd       | COSMOSCLAIMS    | Medical           | Last 24 months | 
+      | MAPD     | ULayerInd       | NICECLAIMS      | Medical           | Last 24 months | 
+      | MAPD     | ULayerInd       | RxCLAIMS        | Prescription drug | Last 24 months | 
 
 #----- end of VBF section ----------------------------------------------------------
 
@@ -101,7 +101,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 02_1  | 15234 | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
       | 02_2  | xxxxx | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 02_3  | 15259 | SSUP | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_3  | 15259 | SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 02_4  | 15268 | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @mapd_medical_nice
