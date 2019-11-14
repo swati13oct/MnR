@@ -752,9 +752,9 @@ public class AccountHomePage extends UhcDriver {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-2 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
-						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
+						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
-								|| validate(coverageEnded) || validate(coverageStarted)) {
+								|| validate(coverageEnded,0) || validate(coverageStarted,0)) {
 							int index=2;
 							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
@@ -762,16 +762,14 @@ public class AccountHomePage extends UhcDriver {
 							if (link.getText().equalsIgnoreCase("logout"))
 								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
-
 						} else {
 							int index=3;
-							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+")";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
-
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					} catch (NoSuchElementException e) { // note: try one more selector before giving up
@@ -779,9 +777,9 @@ public class AccountHomePage extends UhcDriver {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-0 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
-						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
+						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug")
-								|| validate(coverageEnded) || validate(coverageStarted))) {
+								|| validate(coverageEnded,0) || validate(coverageStarted,0))) {
 							int index=2;
 							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
