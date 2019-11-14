@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import pages.regression.claims.ClaimDetailsPage;
@@ -161,7 +161,7 @@ public class ClaimsExtensiveValidationStepDefinition {
 		if (numClaims > 0) {	//note: only do this if claims > 0
 			System.out.println("Proceed to Claims Summary page");
 			ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			claimsSummaryPage.validateSystemErrorMsgNotExist();  //note: don't bother if getting system error already
 			//note: this can be updated handle more than 1 page of claims, 
 			//note: for now just handle 1st page of claims if there are more than 1 page
@@ -182,7 +182,6 @@ public class ClaimsExtensiveValidationStepDefinition {
 			for (int x=2; x<total; x++) { //note: look at row index 2, 3
 				System.out.println("========================================================================");
 				System.out.println("Proceed to validate data row index="+x+" ===============================");
-
 				HashMap<String, String> dataMapSummary=claimsSummaryPage.gatherDataFromSummaryPage(claimType, x, claimSystem, hasYourShare);
 				claimsDataForSearchPeriod.add(dataMapSummary); //note: save the info for later overall validation
 				if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -191,6 +190,9 @@ public class ClaimsExtensiveValidationStepDefinition {
 					ClaimDetailsPage newClaimDetailsPage = claimsSummaryPage.navigateToClaimDetailsPgByClaimRow(x);
 					Assert.assertTrue("PROBLEM - unable to load claims detail page from a given claims row on claims summary page. "
 							+ "table row index='"+x+"'", newClaimDetailsPage!=null);
+					
+					newClaimDetailsPage.validateSystemErrorMsgNotExist();
+					
 					System.out.println("Proceed to validate claims table");
 					getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE, newClaimDetailsPage);
 					//note: collect the values on the detail page then perform comparison between data collected from summary page
@@ -203,8 +205,12 @@ public class ClaimsExtensiveValidationStepDefinition {
 					}
 
 					System.out.println("Proceed to validate claims total - if encounter INC10332773 then ignore the failure for now");
-					newClaimDetailsPage.validateClaimsTotalAccurate(invokedBypass_INC10332773_YourShareMissmatched, planType);
+					double totalYourPlanPaid=newClaimDetailsPage.validateClaimsTotalAccurate(invokedBypass_INC10332773_YourShareMissmatched, planType);
 
+					if (planType.equalsIgnoreCase("SHIP")) {
+						double adjustmentValue=newClaimDetailsPage.validateClaimsTotSection(planType);
+						Assert.assertTrue("PROBLEM - 'Your Plan Paid' value is not the same as the 'Adjustment' value. totalYourPlanPaid='"+totalYourPlanPaid+"' | adjustmentValue='"+adjustmentValue+"' ", totalYourPlanPaid==adjustmentValue);
+					}
 					//note: if all goes well, go back to the summary page to prep for next run
 					claimsSummaryPage= newClaimDetailsPage.navigateBackToClaimSummPg(planType, claimPeriod);
 					Assert.assertTrue("PROBLEM - unable to get back to claims summary page to prep for next test step", 

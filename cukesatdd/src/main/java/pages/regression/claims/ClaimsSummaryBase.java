@@ -2,12 +2,14 @@ package pages.regression.claims;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.contactus.ContactUsPage;
@@ -37,6 +39,8 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 	 */
 	public HashMap<String,String> gatherDataFromSummaryPage(String claimType, int rowNum, 
 			String claimSystem, boolean hasYourShare) {
+		CommonUtility.waitForPageLoad(driver, pgHeader, 5);
+		sleepBySec(1); //note: need this for the page to settle
 		HashMap<String,String> dataMap=new HashMap<String,String> ();
 		//note: for claim summary medical table
 		if (claimType.equalsIgnoreCase("medical")) {
@@ -46,6 +50,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 
 			xpath="//table[@id='medical']//tr["+rowNum+"]//td[3]";
@@ -70,6 +75,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 
 			xpath="//table[@id='medical']//tr["+rowNum+"]//td[6]";
@@ -91,6 +97,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 						claimsValidate(element));
 				value=element.getText().trim();
+				validateCurrencyFormat(key, value);
 				dataMap.put(key, value);
 			} else {
 				if (claimSystem.contains("NICE")) {
@@ -102,6 +109,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 				Assert.assertTrue("PROBLEM - should not have 'Your Share' value showing on detail page", 
 						!claimsValidate(element));
 				value="$0.00";
+				validateCurrencyFormat(key, value);
 				dataMap.put(key, value);
 			}
 		} else if (claimType.equalsIgnoreCase("prescription drug")) {
@@ -111,6 +119,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
+			validateMonthFirstDateFormat(key, value, "/"); 
 			dataMap.put(key, value);
 
 			xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[4]";
@@ -143,14 +152,16 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
-
+			
 			xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[8]";
 			key="drug_youPaid";
 			element=driver.findElement(By.xpath(xpath));
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 
 			xpath="//table[@id='prescriptionDrug']//tr["+rowNum+"]//td[9]";
@@ -159,6 +170,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 		} else {
 			String xpath="//table[@id='ship']//tr["+rowNum+"]//td[4]";
@@ -167,6 +179,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			String value=element.getText().trim();
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 
 			xpath="//table[@id='ship']//tr["+rowNum+"]//td[5]";
@@ -191,6 +204,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 
 			xpath="//table[@id='ship']//tr["+rowNum+"]//td[8]";
@@ -199,6 +213,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 
 			xpath="//table[@id='ship']//tr["+rowNum+"]//td[9]";
@@ -207,6 +222,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateCurrencyFormat(key, value);
 			dataMap.put(key, value);
 
 			xpath="//table[@id='ship']//tr["+rowNum+"]//td[10]";
@@ -215,6 +231,7 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 			Assert.assertTrue("PROBLEM - unable to locate "+key+" element with xpath="+xpath+" in claims table", 
 					claimsValidate(element));
 			value=element.getText().trim();
+			validateYearFirstDateFormat(key, value, "-"); 
 			dataMap.put(key, convertDateFormat(value));
 		}
 		System.out.println("Collected data from summary page 1st data row from claims table\n"+Arrays.asList(dataMap)+"\n");
@@ -265,10 +282,19 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		scrollToView(claimsSummPrntBtn);
 		claimsTblMoreInfoLnk.click();
 		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Check to make sure the claimloadingimage disappeared");
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
+		
 		CommonUtility.waitForPageLoad(driver,claimsDetlTblMainSect , 10);
 		while(!(driver.getCurrentUrl().contains("/details")));
-		if (driver.getCurrentUrl().contains("/details")) 
-			return new pages.regression.claims.ClaimDetailsPage(driver);
+		if (driver.getCurrentUrl().contains("/details")) {
+			boolean onlyTestUiFlag=getOnlyTestUiFlag();
+			ClaimDetailsPage claimDetailsPg=new ClaimDetailsPage(driver);
+			claimDetailsPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			claimDetailsPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+			return claimDetailsPg;
+		}
 		return null;
 	}
 
@@ -329,14 +355,23 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		int counter =0;
 		do{
 			if(counter<=12)
-				Thread.sleep(3000);
+				sleepBySec(1);
 			else
 				return null;
 			counter++;
 		} 
 		while(!(driver.getCurrentUrl().contains("/details"))); 
 		if (driver.getCurrentUrl().contains("/details")) {
-			return new ClaimDetailsPage(driver);
+			boolean onlyTestUiFlag=getOnlyTestUiFlag();
+			ClaimDetailsPage claimDetlPg=new ClaimDetailsPage(driver);
+			claimDetlPg.setOnlyTestUiFlag(onlyTestUiFlag);
+			claimDetlPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+
+			System.out.println("Check to make sure the claimloadingimage disappeared");
+			int sec=waitForClaimPageToLoad();
+			Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
+
+			return claimDetlPg;
 		}
 		return null;
 	}
@@ -371,7 +406,17 @@ public class ClaimsSummaryBase extends ClaimsSummaryWebElements {
 		} catch (Exception ex) {
 			return null;
 		}
-		return new ClaimDetailsPage(driver);
+		
+		boolean onlyTestUiFlag=getOnlyTestUiFlag();
+		ClaimDetailsPage claimDetailPg=new ClaimDetailsPage(driver);
+		claimDetailPg.setOnlyTestUiFlag(onlyTestUiFlag);
+		claimDetailPg.setTestOnlyUiFlagForAll(onlyTestUiFlag);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} //by default let it wait 3 seconds for data to load to simulate timing on prod
+		return claimDetailPg;
 	}
 
 	/**
