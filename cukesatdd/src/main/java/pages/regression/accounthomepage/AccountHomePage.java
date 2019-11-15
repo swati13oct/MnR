@@ -756,11 +756,11 @@ public class AccountHomePage extends UhcDriver {
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
 								|| validate(coverageEnded,0) || validate(coverageStarted,0)) {
 							int index=2;
-							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+")";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						} else {
 							int index=3;
@@ -781,19 +781,19 @@ public class AccountHomePage extends UhcDriver {
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug")
 								|| validate(coverageEnded,0) || validate(coverageStarted,0))) {
 							int index=2;
-							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") >";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						} else {
 							int index=3;
-							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") >";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") >";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
