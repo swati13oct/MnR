@@ -364,5 +364,20 @@ Feature: 1.02 Member Profile page
        |  GROUPDPSSUP        | name1      | color1   | number1     |
        |  PREACTIVEGRP       | name1      | color1   | number1     |
        | ACTIVEGOVTSHIPCOMBO | name1      | color1   | number1     |
-    
+       |  MULTIGOVPRETERM    | name1      | color1   | number1     |
+       |  ACTIVEPRESHIP      | name1      | color1   | number1     |
+       |  ACTIVESHIP         | name1      | color1   | number1     |
+       |  PRESHIP            | name1      | color1   | number1     |
+       |ACTIVETERMFEDSHIPCOMBO | name1    | color1   | number1     |
+       |  MICROMULTIFEDSHIP  | name1      | color1   | number1     |
+       | MULTIFEDACTIVE      | name1      | color1   | number1     |         
+       | FEDSHIPPREEFFECTIVE | name1      | color1   | number1     |    
+       |  MAPREFFECTIVE      | name1      | color1   | number1     |
+       |  MAPDPREFFECTIVE    | name1      | color1   | number1     |
+       | PDPPREFFECTIVE      | name1      | color1   | number1     |  
+       | GRPMAPREFFECTIVE    | name1      | color1   | number1     |  
+       | GRPMAPDPREFFECTIVE  | name1      | color1   | number1     |  
+       |  SSUPPREFFECTIVE    | name1      | color1   | number1     |  
+       |  GRPPDPPREFFECTIVE  | name1      | color1   | number1     |  
+       |  GRPDPSSUP          | name1      | color1   | number1     |  
   
