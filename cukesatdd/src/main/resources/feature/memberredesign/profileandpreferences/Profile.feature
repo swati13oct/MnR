@@ -338,4 +338,31 @@ Feature: 1.02 Member Profile page
     | Unknown_26 | COMBO     | FedShip      |  NON LIS      |
     | Unknown_27 | SSUPGroup |Group         |  NON LIS      |
    
+   @microLogin
+  Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Member Type | <memberType> |
+    When the above plantype user logs in 
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+   Then member should navigate to Home pag  
+   Then User should be able to validate Dashboard elemt    
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | MAIndividualCOSMOS  | name1      | color1   | number1     |
+       | MAPDNICE            | name1      | color1   | number1     |
+       | MANICE              | name1      | color1   | number1     |
+       | MAPDCOSMOS          | name1      | color1   | number1     |
+       | AARPPDP             | name1      | color1   | number1     |
+       | ACTIVEPCP           | name1      | color1   | number1     |
+       | ACTIVEMedica        | name1      | color1   | number1     |
+       | GROUPMA             | name1      | color1   | number1     |
+       | GROUPMAPD           | name1      | color1   | number1     |
+       | GROUPDP             | name1      | color1   | number1     |
+       |  GROUPSSUP          | name1      | color1   | number1     |
+       |  GROUPDPSSUP        | name1      | color1   | number1     |
+       |  PREACTIVEGRP       | name1      | color1   | number1     |
+       | ACTIVEGOVTSHIPCOMBO | name1      | color1   | number1     |
+    
   
