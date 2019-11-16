@@ -3283,7 +3283,7 @@ public class AccountHomePage extends UhcDriver {
 		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 				secondTopMenuItemCssStr);
-		Assert.assertTrue("PROBLEM - unable locate top menu item", secondTopMenuItemCssStr!=null);
+		Assert.assertTrue("PROBLEM - unable locate top menu item", secondTopMenuItem!=null);
 		if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
 			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,

@@ -83,7 +83,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
-		validate(rallyHealthAndWellness);
+		validate(rallyHealthAndWellness,120);
 	}
 
 	/**
@@ -96,18 +96,18 @@ public class HealthAndWellnessPage extends UhcDriver{
 			} 		
 			healthAndWellness.isDisplayed();
 			healthAndWellness.click();
-			waitforElement(titleText);
+			waitforElementNew(titleText,60);//note: sometimes it takes a long time to load H&W page
 		} catch (Exception e) {
-				if (validate(healthAndWellness_harness)) {
-					System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
-					System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
-					healthAndWellness_harness.isDisplayed();
-					healthAndWellness_harness.click();
-					waitforElement(titleText);
-				} else {
-					System.out.println("Unable to Able to locate Rally or testharness HW button, last attemp for shadow-root");
-					locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
-				}
+			if (validate(healthAndWellness_harness)) {
+				System.out.println("Unable to locate Rally HW button but able to locate testharness HW button");
+				System.out.println("Unable to locate the xpath for healthAndWellness for stage and non-harness, try the one for stage and harness");
+				healthAndWellness_harness.isDisplayed();
+				healthAndWellness_harness.click();
+				waitforElement(titleText);
+			} else {
+				System.out.println("Unable to Able to locate Rally or testharness HW button, last attemp for shadow-root");
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
+			}
 		}
 	}
 
