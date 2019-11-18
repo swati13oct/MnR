@@ -2530,7 +2530,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				System.out.println(OutpatientSurgeryCenter.getText());
 			}
 			System.out.println(HospitalVisits.getText());
-			Assert.assertEquals(HospitalVisits.getText().trim(), "HOSPITAL VISITS");
+			Assert.assertTrue("Hospital Visits field text was changed or not found" ,HospitalVisits.getText().contains("HOSPITAL CARE"));
 			if(planType.contains("Medica"))
 			{
 				System.out.println(OutpatientSurgeryCenter2.getText());
