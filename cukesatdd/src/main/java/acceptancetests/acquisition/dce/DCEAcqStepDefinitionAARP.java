@@ -361,6 +361,7 @@ public class DCEAcqStepDefinitionAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
+		planSummaryPage.clickOnViewMoreForPlan(planName);
 		planSummaryPage.validateMedicalBenefitDrugSection();
 	}
 	
