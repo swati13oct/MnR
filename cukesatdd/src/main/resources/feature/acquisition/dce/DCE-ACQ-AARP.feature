@@ -8,6 +8,7 @@ When I access the acquisition DCE tool from home page
 And I have added a drug to my drug list
 |Drug|<drug>|
 And user selects drug details
+|Drug | <drug> |
 |Dosage|<dosage>|
 |Quantity|<quantity>|
 |Frequency|<frequency>|
@@ -51,6 +52,7 @@ And I access the DCE tool on aarp site
 And I have added a drug to my drug list
 	|Drug|<drug>|
 And user selects drug details
+	|Drug|<drug>|
 	|Dosage|<dosage>|
 	|Quantity|<quantity>|
 	|Frequency|<frequency>|

@@ -137,12 +137,13 @@ public class DCEAcqStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
+		String drug = memberAttributesMap.get("Drug");
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-
+		String newDosage = drug+" "+dosage;
 		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
-		DrugDetails.selectDosage(dosage);
+		DrugDetails.selectDosage(newDosage);
 		DrugDetails.selectQnty(quantity);
 		DrugDetails.selectFrequency(frequency);		
 	}
