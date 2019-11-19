@@ -221,7 +221,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@id='responsiveplan'])[1]")
 	private WebElement medSuppPlanList;
 
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 
 
@@ -1439,7 +1439,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if(validateNew(RightRail_TFN)){
+		if(validateNew(RightRail_TFN,45)){
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
