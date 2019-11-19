@@ -28,6 +28,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -1405,6 +1406,53 @@ public class DrugcostestimatorUhcStepDefinition {
 			Assert.fail("Error in landing on the optum rx sso page");
 
 	}
+	
+	@When("^I am using the DCE Tool to search a drug that requires Prior Authorization on the 2020 formulary$")
+	public void i_am_using_the_DCE_Tool_to_search_a_drug_that_requires_Prior_Authorization_on_the_formulary(DataTable memberAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String drug = memberAttributesMap.get("Drug");
+		System.out.println("------Drug-----------"+ drug);
+		String dosage = memberAttributesMap.get("Dosage");
+		System.out.println("-------Dosage----------"+ dosage);
+		String quantity = memberAttributesMap.get("Quantity");
+		System.out.println("-------Quantity----------"+ quantity);
+		String frequency = memberAttributesMap.get("Frequency");
+		System.out.println("--------Frequency---------"+ frequency);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.addDrug(drug, dosage, quantity, frequency);
+		dce.validateAddedDrug(dosage, quantity, frequency);
+
+	}
+
+	@When("^?I am using the DCE Tool to search a drug that requires Step Therapy on the (\\d+) formulary$")
+	public void i_am_using_the_DCE_Tool_to_search_a_drug_that_requires_Step_Therapy_on_the_formulary(int arg1, DataTable arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+	    throw new PendingException();
+	}
+
+	@Then("^?I will see a PA link and ST link appear in the drug limits section$")
+	public void i_will_see_a_PA_link_and_ST_link_appear_in_the_drug_limits_section() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^The link will open the relevant PDF in a new tab$")
+	public void the_link_will_open_the_relevant_PDF_in_a_new_tab() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
 }
 
 

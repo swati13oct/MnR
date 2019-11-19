@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionDCE.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCE")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/drugcostestimator" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/drugcostestimator" },monochrome= true, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionDCE {
 

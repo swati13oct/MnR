@@ -71,21 +71,21 @@ public class PDPEnquiryKitStepDefintionAARP {
 	/**
 	 * @toDo:the user accesses the Request Plan Information and Enrollment Materials 
 	 */
-	@And("^the user accesses the Request Plan Information and Enrollment Materials in AARP site$")
-	public void the_user_accessess_the_pdp_enquiry_kit_aarp()
-	{
-		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
-		
-		PDPEnrollementGuidePage pdpEnrollementGuidePage = requestHelpAndInformationPage.navigatesToPdpEnquiryKit();
-		if(pdpEnrollementGuidePage!=null){
-			getLoginScenario().saveBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE, pdpEnrollementGuidePage);
-			Assert.assertTrue(true);
-		}
-		else{
-			Assert.fail("ERROR loading pdpEnrollementGuidePage");
-		}
-		
-	}
+//	@And("^the user accesses the Request Plan Information and Enrollment Materials in AARP site$")
+//	public void the_user_accessess_the_pdp_enquiry_kit_aarp()
+//	{
+//		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+//		
+//		PDPEnrollementGuidePage pdpEnrollementGuidePage = requestHelpAndInformationPage.navigatesToPdpEnquiryKit();
+//		if(pdpEnrollementGuidePage!=null){
+//			getLoginScenario().saveBean(PageConstants.PDP_ENROLLMENT_GUIDE_PAGE, pdpEnrollementGuidePage);
+//			Assert.assertTrue(true);
+//		}
+//		else{
+//			Assert.fail("ERROR loading pdpEnrollementGuidePage");
+//		}
+//		
+//	}
 	
 	/**
 	 * @toDo:user submits by entering following details in Order Enrollment Information page 

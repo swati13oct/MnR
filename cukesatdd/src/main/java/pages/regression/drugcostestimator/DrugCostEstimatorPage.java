@@ -1760,6 +1760,20 @@ try {
 				return true;
 			return false;
 		}
+		
+		public void addDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+			this.clickOnAddDrug();
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+			addNewDrugModal.typeDrugName(drug);
+			addNewDrugModal.submit();
+			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			//addDrugDetails.selectDosage(dosage);
+			addDrugDetails.selectQnty(quantity);
+			addDrugDetails.selectFrequency(frequency);
+            addDrugDetails.continueAddDrugDetailsGeneric();
+
+		}
+
 
 	}
 
