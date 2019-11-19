@@ -221,7 +221,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@id='responsiveplan'])[1]")
 	private WebElement medSuppPlanList;
 
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 
 
