@@ -141,9 +141,9 @@ public class DCEAcqStepDefinitionAARP {
 		String dosage = memberAttributesMap.get("Dosage");
 		String quantity = memberAttributesMap.get("Quantity");
 		String frequency = memberAttributesMap.get("Frequency");
-		String newDosage = drug+" "+dosage;
+		dosage = drug+" "+dosage;
 		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
-		DrugDetails.selectDosage(newDosage);
+		DrugDetails.selectDosage(dosage);
 		DrugDetails.selectQnty(quantity);
 		DrugDetails.selectFrequency(frequency);		
 	}

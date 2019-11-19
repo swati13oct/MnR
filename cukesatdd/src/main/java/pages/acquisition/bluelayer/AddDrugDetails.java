@@ -40,7 +40,7 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(id = "addheadDetails_id")
 	public WebElement addDrugDetailsPageHeading;
 	
-	@FindBy(xpath = "//input[@id='dosage-0']/following-sibling::label")
+	@FindBy(xpath = "//*[contains(@id,'dosage')]//select")
 	public WebElement dosageDropdown;
 	
 	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
@@ -68,9 +68,9 @@ public class AddDrugDetails extends UhcDriver {
 	}*/
 	public void selectDosage(String dosage){
 	
-		WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
-		drugDosage.click();
-		//selectFromDropDownByText(driver, dosageDropdown, dosage);  //this can be used if select dropdown is brought back
+		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		drugDosage.click();*/
+		selectFromDropDownByText(driver, dosageDropdown, dosage);  //this can be used if select dropdown is brought back
 	}
 	
 	public void selectDosageAttribute(String dosage) throws InterruptedException{
