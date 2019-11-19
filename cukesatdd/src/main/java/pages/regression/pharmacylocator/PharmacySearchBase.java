@@ -157,11 +157,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				expectedURL="member/pharmacy-locator";
 				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
-				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						pharmacyValidate(pdf_otherPlans));
+						validateNew(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
-				CommonUtility.checkPageIsReady(driver);
+				Thread.sleep(2000);
 				pdf_otherPlans.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());

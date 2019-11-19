@@ -1849,7 +1849,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public boolean validateDrugOnStep3(String drug) {
 		CommonUtility.waitForPageLoad(driver, step3Info, 30);
-		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
+		if(step3Info.getText().contains(drug.toUpperCase())&&validateNew(drugCostCard))
 			return true;
 		return false;
 		
