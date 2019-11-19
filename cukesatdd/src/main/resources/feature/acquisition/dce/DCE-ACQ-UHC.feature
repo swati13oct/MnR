@@ -8,6 +8,7 @@ When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 |Drug|<drug>|
 And user selects drug details in ums site
+|Drug | <drug> |
 |Dosage|<dosage>|
 |Quantity|<quantity>|
 |Frequency|<frequency>|
@@ -34,7 +35,7 @@ Then user validates drug added on prescription drug benefits tab in UMS
 
 Examples:
 |     drug   | dosage |quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-| Lipitor |  Lipitor TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
+| Lipitor |  TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
