@@ -741,7 +741,8 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(xpath = "//*[@id='phone']//a[@class='edit-btn']")
 	private WebElement phoneEditIcon;
 	
-	@FindBy(xpath = "//*[@id='phone']//a[@class='edit-btn']") 
+	//tbd @FindBy(xpath = "//*[@id='phone']//a[@class='edit-btn']") 
+	@FindBy(xpath="//*[contains(@id,'phone')]//a[@class='edit-btn']")
 	private WebElement phoneEditText;
 
 	@FindBy(id = "daytimePhone")
@@ -1439,7 +1440,8 @@ private WebElement editEmailAddressArrowbutton;
 			validateNew(workPhoneUhc);
 			validateNew(mobilePhoneUhc);
 		}else  {
-			if(driver.findElement(By.xpath(".//*[@id='phone']//a[contains(text(),'Edit')]"))!= null) {
+			if(driver.findElement(By.xpath(".//*[contains(@id,'phone')]//a[contains(text(),'Edit')]"))!= null) {
+			//tbd if(driver.findElement(By.xpath(".//*[@id='phone']//a[contains(text(),'Edit')]"))!= null) {
 			phoneEditButton.click();
 			validateNew(eveningTimePhoneTextField);
 			validateNew(daytimePhoneTextField);
