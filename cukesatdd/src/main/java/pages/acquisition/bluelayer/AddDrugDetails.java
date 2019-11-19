@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -57,7 +58,7 @@ public class AddDrugDetails extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
 		validateNew(selectYourFrequencyDropdown);
 		validateNew(quantityField);
-		validateNew(dosageDropdown);
+		//validateNew(dosageDropdown);
 	}
 
 	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -71,6 +72,7 @@ public class AddDrugDetails extends UhcDriver {
 		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
 		drugDosage.click();*/
 		selectFromDropDownByText(driver, dosageDropdown, dosage);  //this can be used if select dropdown is brought back
+
 	}
 	
 	public void selectDosageAttribute(String dosage) throws InterruptedException{

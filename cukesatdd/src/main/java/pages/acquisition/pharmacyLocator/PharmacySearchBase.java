@@ -2,6 +2,7 @@ package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -500,8 +501,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec=2;
-		return validate(element, timeoutInSec);
+		long timeoutInSec=0;
+		return pharmacyValidate(element, timeoutInSec);
 	}
 	
 	/**
@@ -511,22 +512,30 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd 
-	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+	public boolean pharmacyValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
 			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
+				System.out.println("Element '"+element.toString()+"' found!!!!");
 				return true;
 			} else {
-				System.out.println("Element not found/not visible");
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
-	}	*/
+	} 
+
+	public void pharmarcyCheckModelPopup(WebDriver driver, int timeout) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+	}
+
 }
 

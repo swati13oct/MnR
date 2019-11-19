@@ -83,6 +83,8 @@ public class ClaimDetailsPageStepDefinition {
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateTopBckToClaimsSummLnk(planType);
+		boolean onlyTestUiFlag=claimDetlPg.getOnlyTestUiFlag();
+		claimsSummPg.setOnlyTestUiFlag(onlyTestUiFlag);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
@@ -105,6 +107,8 @@ public class ClaimDetailsPageStepDefinition {
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIM_DETAILS_PAGE);
 		ClaimsSummaryPage claimsSummPg =claimDetlPg.validateBtmBckToClaimsSummLnk();
+		boolean onlyTestUiFlag=claimDetlPg.getOnlyTestUiFlag();
+		claimsSummPg.setOnlyTestUiFlag(onlyTestUiFlag);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	} 
@@ -141,7 +145,10 @@ public class ClaimDetailsPageStepDefinition {
 		} 
 		ClaimDetailsPage claimDetlPg = (ClaimDetailsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIM_DETAILS_PAGE);
-		claimDetlPg.validateClaimsTotSection();
+		
+		claimDetlPg.validateSystemErrorMsgNotExist();
+		
+		claimDetlPg.validateClaimsTotSection(planType);
 	}
 
 	/**
@@ -231,7 +238,7 @@ public class ClaimDetailsPageStepDefinition {
 		} else {  //note: this test is assume prior test steps passed so user has claims
 			System.out.println("Proceed to Claims Summary page");
 			ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-					.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+					.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 			if (memberType.toLowerCase().contains("combo")) { //note: parse claimSystem determine which tab to click
 				System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 				claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
@@ -243,9 +250,12 @@ public class ClaimDetailsPageStepDefinition {
 				return;
 			} 
 			claimsSummPg.validateSystemErrorMsgNotExist(); //note: don't bother if getting system error already
-			
+
 			//note: use the first claim data for validation
 			ClaimDetailsPage claimDetlPg = claimsSummPg.navigateToClaimDetailsPgByClaimRow(2);
+			
+			claimDetlPg.validateSystemErrorMsgNotExist(); //note: make sure detail page doesn't have system error also
+			
 			Assert.assertTrue("PROBLEM - unable to go to claims details page is not loaded!!!!!!",
 					claimDetlPg != null);
 			getLoginScenario().saveBean(PageConstants.NEW_CLAIM_DETAILS_PAGE, claimDetlPg);
@@ -274,15 +284,20 @@ public class ClaimDetailsPageStepDefinition {
 				recordBypass.add("invokeBypass_INC11365785_searchEOBHistory_detailPage");
 			}
 
-			System.out.println("Proceed to validate 'Need Help' section on detail page");
-			String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
-
-			//note: if all goes well, go back to summary page to prep for next step
-			//note: if combo plan, after NeedHelp validation should land back on claims summary page.
-			//note: but for non combo case, need to go back to claims summary page 
-			if (!currentURL.contains("member/claims.html#/overview")) {
-				claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
-			} 
+			if (!claimDetlPg.getOnlyTestUiFlag()) {
+				System.out.println("Proceed to validate 'Need Help' section on detail page");
+				if (MRScenario.environment.equalsIgnoreCase("team-a"))
+					System.out.println("NOTE: MRREST product summary call (used for Need Help) is disabled on team env, will skip this validation on team-a env");
+				else {
+					String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);
+					//note: if all goes well, go back to summary page to prep for next step
+					//note: if combo plan, after NeedHelp validation should land back on claims summary page.
+					//note: but for non combo case, need to go back to claims summary page 
+					if (!currentURL.contains("member/claims.html#/overview")) {
+						claimsSummPg= claimDetlPg.navigateBackToClaimSummPg(planType, claimPeriod);
+					} 
+				}
+			}
 		}
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_RECORDINVOKEDBYPASS, recordBypass);
 	}

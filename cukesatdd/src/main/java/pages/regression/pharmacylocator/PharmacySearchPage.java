@@ -27,6 +27,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		pharmacyCheckModelPopup(driver);
+		/* tbd 
 		try {
 			driver.switchTo().frame("IPerceptionsEmbed");
 			iPerceptionCloseButton.click();
@@ -35,7 +37,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			CommonUtility.checkPageIsReady(driver);
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
-		}
+		} */
 		openAndValidate();
 	}
 
@@ -467,6 +469,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateMapSectionContent(boolean hasPrefRetailPharmacy) {
+		CommonUtility.waitForPageLoad(driver, map_mapBtn, 5);
 		moveMouseToElement(map_resultSection);
 		Assert.assertTrue("PROBLEM - unable to locate the map", 
 				pharmacyValidate(map_mapImg));

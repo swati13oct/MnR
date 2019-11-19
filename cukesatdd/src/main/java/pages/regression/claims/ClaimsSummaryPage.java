@@ -2,13 +2,13 @@ package pages.regression.claims;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.regression.explanationofbenefits.EOBPage;
 
 /**
@@ -23,7 +23,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 
 	@Override
 	public void openAndValidate() { 
-		checkModelPopup(driver);
+		//tbd checkModelPopup(driver,5);
+		claimCheckModelPopup(driver);
 		if(!pgHeader.getText().contains("Claims Summary"))
 			Assert.fail("Claims Summary header not found. Page loading issue");
 	}
@@ -34,7 +35,16 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
 	ClaimsSummaryValidateSegmentId validateSegmentId=new ClaimsSummaryValidateSegmentId(driver);
 	ClaimsSummarySearch searchClaims=new ClaimsSummarySearch(driver);
-
+	
+	public void setTestOnlyUiFlagForAll(boolean b) {
+		validateHeader.setOnlyTestUiFlag(b);
+		searchClaims.setOnlyTestUiFlag(b);
+		validateSegmentId.setOnlyTestUiFlag(b);
+		validateError.setOnlyTestUiFlag(b);
+		validateTable.setOnlyTestUiFlag(b);
+		validatePreEff.setOnlyTestUiFlag(b);
+	}
+	
 	public void validateSegmentId(String planType, String memberType, String expectedSegmentId) {
 		//keep Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		//keep String browserName = cap.getBrowserName().toLowerCase();
@@ -96,8 +106,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		return validateTable.validateYouHaveMsg(planType);
 	}
 
-	public boolean verifyPagination() {
-		return validateTable.verifyPagination();
+	public boolean verifyPagination(int numClaims) {
+		return validateTable.verifyPagination(numClaims);
 	}
 	public boolean validateClaimsTableExists(boolean flagZeroClaimUser) {
 		return validateTable.validateClaimsTableExists(flagZeroClaimUser);
@@ -180,10 +190,16 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	public void validateExpOfBenSubNavDispForGroupSsup() throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, eob_claims, 5);
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
+		Assert.assertTrue("PROBLEM - unable to locate EOB sub navigation of Claims for SSUP group user", claimsValidate(eob_claims));
+		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+			System.out.println("on team-a microapp env, will not attemp to navigate to other pages for now");
+			return;
+		}
 		eob_claims.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkForIPerceptionModel(driver);
+		claimCheckModelPopup(driver);
+		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(eob_header);
@@ -199,7 +215,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		claimsPgLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, eob_header, 5);
-		checkForIPerceptionModel(driver);
+		claimCheckModelPopup(driver);
+		//tbd checkModelPopup(driver,5);
 		try {
 			validateNew(eob_claims);
 			validateNew(plan_SSUP);
@@ -219,6 +236,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		}
 	}
 
+
 	/**
 	 * Validate 'Search EOB History' on claims summary page
 	 * @param claimSystem The type of claims system
@@ -231,7 +249,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		String pLink=" Prescription EOB link";
 		boolean bypass_INC11365785_srchEobHist=false;
 		if ((plantype.equals("MAPD") || plantype.equals("PCP") || plantype.equals("MEDICA")) &&
-				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE"))) {
+				(claimSystem.toUpperCase().contains("COSMOS") || claimSystem.toUpperCase().contains("NICE") || claimSystem.toUpperCase().contains("RX"))) {
 			Assert.assertTrue("PROBLEM - unable to locate"+mLink+onPage, claimsValidate(medicalEob_MAPD));
 			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_MAPD));
 			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" and "+pLink+" are displayed");
@@ -249,7 +267,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		} else if (plantype.equals("PDP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_PDP));
 			Assert.assertTrue("PROBLEM - unable to locate"+pLink+onPage, claimsValidate(drugEob_PDP));
-			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+mLink+" is displayed");
+			System.out.println("for '"+plantype+" and "+claimSystem+"' - "+pLink+" is displayed");
 		} else if (plantype.equals("SSUP")) {
 			//note: F267688
 			Assert.assertTrue("PROBLEM - should NOT be able to locate"+mLink+onPage, !claimsValidate(medicalEob_MA));
@@ -297,12 +315,15 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 * @return true/false of validation result for clicking Learn More, Print, and Download option
 	 */
 	public void validateClickLrnMoreAndPrtAndDnldOpt() {
+		boolean flagZeroUserNow=false;
+		if (validateClaimsTableExists(flagZeroUserNow)) { // only check these items if there is claims
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Learn More...' link behavior", validateClickLrnMore());
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Print' button behavior", validateClickPrintBtn());
 		Assert.assertTrue("PROBLEM - has claims but not getting expected 'Download' button behavior", validateClickDnldBtn());
 		System.out.println("Has claim(s), Got the expected behavior, "
 				+ "able to locate 'Learn More About Your Claims' link and 'PRINT' and 'DOWNLOAD CLAIMS' buttons");
-	}
+		}
+		}
 
 	/**
 	 * Validate 'Learn More...', will click and validate content exits
@@ -335,11 +356,13 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickPrintBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking print button");
+			//tbd return true;
+				//tbd } else {
 				String winHandleBefore = driver.getWindowHandle();
+				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				int beforeClicked_numTabs=beforeClicked_tabs.size();					
 				claimsSummPrntBtn.click();
 				try {
 					Thread.sleep(2000); //note: need this sleep otherwise the drive will be NPE when check page is ready
@@ -351,15 +374,18 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				int afterClicked_numTabs=afterClicked_tabs.size();					
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 
+				/* tbd
 				CommonUtility.checkPageIsReady(driver);
 				System.out.println("New window for print = "+driver.getTitle());
 				String expPrintPageTitle="Print: My Claims Details";
-				Assert.assertTrue("PROBLEM - print page title is not as expected.", driver.getTitle().contains(expPrintPageTitle));
+				Assert.assertTrue("PROBLEM - print page title is not as expected.", driver.getTitle().contains(expPrintPageTitle)); */
+				Assert.assertTrue("PROBLEM - print page popup is showing as expected.", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());	
 				return true;
-			}
+				//tbd }
 		} else
 			return false;
 	}
@@ -371,17 +397,17 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	 */
 	public boolean validateClickDnldBtn() {
 		if (claimsValidate(claimsSummPrntBtn)) {
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking download button");
+			//tbd 	return true;
+			//tbd } else {
 				try {
 					claimsSummDnldBtn.click();
 				} catch(Exception e) {
 					Assert.assertTrue("PROBLEM - encounted exception when attempting to click donwload button", false);
 				}
 				return true;
-			}
+				//tbd }
 		} else
 			return false;
 	}
@@ -405,12 +431,13 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				System.out.println("PROBLEM - non SHIP user should have 'DownloadMyData' button");
 				return false;
 			}
-			if (getOnlyTestUiFlag()) {
-				System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
-				return true;
-			} else {
+			//tbd if (getOnlyTestUiFlag()) {
+			//tbd 	System.out.println("TEST UI ONLY - will not validate behavior after clicking DownloadMyData button");
+			//tbd 	return true;
+			//tbd } else {
 				System.out.println("Blue Button-DownLoad my Data Button is displayed");
 				dnldMyDataBtn.click();
+				CommonUtility.waitForPageLoad(driver, dnldPopup_cancelBtn, 5);
 
 				//note: validate cancel button function
 				if (!claimsValidate(dnldPopup_cancelBtn)) {
@@ -455,7 +482,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 				driver.switchTo().window(winHandleBefore);
 				System.out.println("Main window = "+driver.getTitle());	
 				return true;			
-			}
+				//tbd }
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -62,6 +63,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 		}
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		boolean result = accountHomePage.findShadowRootTopMenuLinkForPnP();
 		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should not have Pharmacies & Prescriptions link on dashboard", !result);
 	}
@@ -81,6 +84,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 		}
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+		accountHomePage.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 		boolean result = accountHomePage.findShadowRootTopMenuLinkForPnP();
 		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should have Pharmacies & Prescriptions link on dashboard", result);
 	}
@@ -93,6 +98,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
 					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarness);
 			testHarness.waitForTestharnessTableToShow();
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
@@ -377,6 +384,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally dashboard will open new tab for this page
 			WebDriver testDriver=accountHomePage.driver;
+			String originalUrl=testDriver.getCurrentUrl();
 			String winHandleBefore = testDriver.getWindowHandle();
 			accountHomePage.navigateToNoticeAndDisclousuresPage();
 			result=accountHomePage.findPnPLinksExistOnPg();
@@ -384,7 +392,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
 				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
-			closeTabAndBackToDashoard(winHandleBefore, testDriver);
+			navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);
+			//tbd closeTabAndBackToDashoard(winHandleBefore, testDriver);
 		}
 	}
 

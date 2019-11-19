@@ -30,6 +30,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		pharmacyCheckModelPopup(driver);
+		/* tbd 
 		try {
 			driver.switchTo().frame("IPerceptionsEmbed");
 			iPerceptionCloseButton.click();
@@ -38,7 +40,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			CommonUtility.checkPageIsReady(driver);
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
-		}
+		} */
 		openAndValidate();
 	}
 
@@ -515,8 +517,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec=2;
-		return validate(element, timeoutInSec);
+		long timeoutInSec=0;
+		return pharmacyValidate(element, timeoutInSec);
 	} 
 	
 	/**
@@ -526,23 +528,31 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd
-	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+	public boolean pharmacyValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
 			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
+				System.out.println("Element '"+element.toString()+"' found!!!!");
 				return true;
 			} else {
-				System.out.println("Element not found/not visible");
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
-	}*/
+	}
+	
+	public void pharmacyCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}	
 }
 
 

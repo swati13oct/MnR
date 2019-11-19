@@ -139,9 +139,9 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 15531 | Ulayer |  80001 | MA       | No              | 
       | 15531 | Ulayer |  80001 | PDP      | No              |
       
-      @prodRegression
+     @prodRegression
      Examples:
-      | TID   | site   |zipcode | plantype          | isMultiCounty | 
+      | TID   | site   |zipcode | plantype | isMultiCounty   | 
       | 15531 | Ulayer |  80001 | SNP      | No              |
 
 
