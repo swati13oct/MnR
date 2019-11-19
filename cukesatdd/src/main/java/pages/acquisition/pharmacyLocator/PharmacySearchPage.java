@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.junit.Assert;
@@ -559,6 +560,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		}
 	}
-
+	
 }
 

@@ -19,6 +19,7 @@ def withJavaAndMaven(Closure closure) {
     }
 }
 
+
 /**
  * Run a closure on the docker-maven-slave with
  * java and maven environment configured
@@ -31,6 +32,7 @@ def withDockerMavenSlave(Closure closure) {
             closure()
     }
 }
+
 
 /**
  * Run a closure with the given credentials

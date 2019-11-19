@@ -2523,15 +2523,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			if(planType.contains("Medica") || planType.contains("PCP"))
 			{
 				System.out.println(OutpatientSurgeryCenter.getText());
-				Assert.assertEquals(OutpatientSurgeryCenter.getText().trim(), "OUTPATIENT SURGERY CENTER VISITS");
-			}
+				Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));			}
 			else
 			{
-				Assert.assertEquals(OutpatientSurgeryCenter.getText().trim(), "OUTPATIENT SURGERY CENTER VISITS");
+				Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
 				System.out.println(OutpatientSurgeryCenter.getText());
 			}
 			System.out.println(HospitalVisits.getText());
-			Assert.assertEquals(HospitalVisits.getText().trim(), "HOSPITAL VISITS");
+			Assert.assertTrue("Hospital Visits field text was changed or not found" ,HospitalVisits.getText().contains("HOSPITAL CARE"));
 			if(planType.contains("Medica"))
 			{
 				System.out.println(OutpatientSurgeryCenter2.getText());

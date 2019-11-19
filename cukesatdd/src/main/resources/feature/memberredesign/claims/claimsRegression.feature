@@ -143,6 +143,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | Member Type  | <memberType>  |
       | Claim Period | <claimPeriod> |
       | Claim System | <claimSystem> |
+    Then I can see the number of claims
     Then I can see the claims displayed based on the selection on claims summary page
     And I validate the pagination on the claims summary page
     And I can see the learn more and print and download option on claims summary table section
@@ -200,6 +201,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | Member Type  | <memberType>  |
       | Claim Period | <claimPeriod> |
       | Claim System | <claimSystem> |
+    Then I can see the number of claims
     Then I can see the claims displayed based on the selection on claims summary page
     And I validate the pagination on the claims summary page
     And I can see the learn more and print and download option on claims summary table section
@@ -248,6 +250,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | Member Type  | <memberType>  |
       | Claim Period | <claimPeriod> |
       | Claim System | <claimSystem> |
+    Then I can see the number of claims
     Then I can see the claims displayed based on the selection on claims summary page
     When I navigate to the Claim details page to see eob link on details page
       | Page Number | <pageNum> |
@@ -302,6 +305,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | Claim Type   | <claimType>   |
       | Claim System | <claimSystem> |
       | Claim Period | Custom search |
+    Then I can see the number of claims
     Then I custom search claims for ship users for 6 years claims on claims summary page
     Then I can see the claims displayed based on the selection on claims summary page
     And I validate the pagination on the claims summary page

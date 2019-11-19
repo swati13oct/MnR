@@ -8,6 +8,7 @@ When I access the acquisition DCE tool from home page on ums site
 And I have added a drug to my drug list on ums site
 |Drug|<drug>|
 And user selects drug details in ums site
+|Drug | <drug> |
 |Dosage|<dosage>|
 |Quantity|<quantity>|
 |Frequency|<frequency>|
@@ -34,7 +35,7 @@ Then user validates drug added on prescription drug benefits tab in UMS
 
 Examples:
 |     drug   | dosage |quantity | frequency   |branded |zipcode|plantype |            planName                            |radius|
-| Lipitor |  Lipitor TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
+| Lipitor |  TAB 10MG |   30    |Every 1 month| yes    | 90210 |   MAPD  |AARP Medicare Advantage SecureHorizons Focus (HMO)|15 miles|
 
 
 @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
@@ -51,6 +52,7 @@ And I access the DCE tool
 And I have added a drug to my drug list on ums site
 		|Drug|<drug>|
 And user selects drug details in ums site
+		|Drug | <drug> |
 		|Dosage|<dosage>|
 		|Quantity|<quantity>|
 		|Frequency|<frequency>|
@@ -65,7 +67,7 @@ Then I switch to generic drug and validate on ums site
 And the user clicks on return link to navigate to plan summary in UHC
 Examples:
 	| zipcode  | plantype |   drug   | dosage| county | isMultutiCounty|quantity | frequency   |branded |
-	| 90210    |  MA 	  |  LIPITOR|  TAB 10MG | none | no|30 | Every 1 month| yes   |
+	| 90210    |  MA 	  |  Lipitor|  TAB 10MG | none | no|30 | Every 1 month| yes   |
 
 @defect1662 @dceVBF
 Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
