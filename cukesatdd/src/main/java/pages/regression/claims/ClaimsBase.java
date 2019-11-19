@@ -1,10 +1,13 @@
 package pages.regression.claims;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -145,18 +148,29 @@ public class ClaimsBase extends UhcDriver  {
 
 	@FindBy(xpath="//div[contains(@class,'AdobeAcrobatComponent') and not(contains(@class,'ng-hide'))]//p//b[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;
+	
+	@FindBy(id="artEXPOiFrame")
+	protected List<WebElement> IPerceptionsSmileySurveyFrame;
+
+	@FindBy(xpath="//div[@id='expoIconSection']//button[@id='expoBtnClose']")
+	protected WebElement closeBtn;
+	
+	@FindBy(xpath="//div[contains(@class,'claimloadingimage')]")
+	protected WebElement claimloadingimage;
 
 	public ClaimsBase(WebDriver driver) {
 		super(driver);
+		onlyTestUiFlag=false;
 	}
 
 	@Override
 	public void openAndValidate() throws InterruptedException {
 	}
 
-	boolean onlyTestUiFlag=false;
+	boolean onlyTestUiFlag;
 	
 	public void setOnlyTestUiFlag(boolean input) {
+		System.out.println("Setting onlyTestUiFlag="+onlyTestUiFlag);
 		onlyTestUiFlag=input;
 	}
 
@@ -202,31 +216,14 @@ public class ClaimsBase extends UhcDriver  {
 	 */
 	public int getNumClaims(String range, String claimType) {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, anyTypeOfClaimsTbl, 15);
-		/* keep for now, will remove after testing is stable that we don't need this sleep to get correct claims#
-		// note: do not modify this check - critical to wait
-		int extra=2000;
-		int x=0;
-		while(x<15) {
-			try {
-				Thread.sleep(1000);
-				if (claimsValidate(verifyClaimSummaryAndPagination)) {
-					Thread.sleep(extra); //give it more time to settle the page
-					System.out.println("sleep for another 2 sec for the page to settle down...");
-					System.out.println("there is some indication of claims...let's check it out");
-					break;
-				}
-			} catch (InterruptedException e) {}
-			x=x+1;
-		}
-		System.out.println("Waited total of "+(x*1000+extra)+" seconds for claims to show up"); 
-		 */
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
 		WebElement numClaimsElement=numClaimsMed;
 		if (range.equalsIgnoreCase("custom search")) {
 			if (claimType.equalsIgnoreCase("prescription drug")) {
 				numClaimsElement=numClaimsDrugCustSrch;
 			} else if (claimType.equalsIgnoreCase("medical")) {
-				if (claimsValidate(numClaimsMedlCustSrch)) 
+				if (claimsValidate(numClaimsMedlCustSrch))
 					numClaimsElement=numClaimsMedlCustSrch;
 			} else {
 				numClaimsElement=numClaimsShipCustSrch;
@@ -240,8 +237,12 @@ public class ClaimsBase extends UhcDriver  {
 				numClaimsElement=numClaimsShip;
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
+		if (getOnlyTestUiFlag() && !claimsValidate(numClaimsElement)) { //note: if test UI only then just return claims=0 when element not found  
+			return 0;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate the element for number of claims for range="+range, 
 				claimsValidate(numClaimsElement));
+		}
 		try {
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
@@ -361,20 +362,24 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param planType
 	 */
 	public void goToSpecificComboTab(String planType) {
-		if (planType.equalsIgnoreCase("mapd")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
-			comboTab_MAPD.click();
-		} else if (planType.equalsIgnoreCase("ship")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
-			comboTab_SHIP.click();
-		} else if (planType.equalsIgnoreCase("pdp")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
-			comboTab_PDP.click();
-		} else if (planType.equalsIgnoreCase("ssup")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
-			comboTab_SSUP.click();
-		} else {
-			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+		try {
+			if (planType.equalsIgnoreCase("mapd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", claimsValidate(comboTab_MAPD));
+				comboTab_MAPD.click();
+			} else if (planType.equalsIgnoreCase("ship")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", claimsValidate(comboTab_SHIP));
+				comboTab_SHIP.click();
+			} else if (planType.equalsIgnoreCase("pdp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_PDP));
+				comboTab_PDP.click();
+			} else if (planType.equalsIgnoreCase("ssup")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", claimsValidate(comboTab_SSUP));
+				comboTab_SSUP.click();
+			} else {
+				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -387,19 +392,23 @@ public class ClaimsBase extends UhcDriver  {
 		if (flagNonCombo)
 			goToSpecificComboTab(planType);
 		else {
-			if (planType.equalsIgnoreCase("mapd")) {
-				if (claimsValidate(comboTab_MAPD))
-					comboTab_MAPD.click();
-			} else if (planType.equalsIgnoreCase("ship")) {
-				if (claimsValidate(comboTab_SHIP)) 
-					comboTab_SHIP.click();
-			} else if (planType.equalsIgnoreCase("pdp")) {
-				if (claimsValidate(comboTab_PDP))
-					comboTab_PDP.click();
-			} else if (planType.equalsIgnoreCase("ssup")) {
-				if (claimsValidate(comboTab_SSUP)) 
-					comboTab_SSUP.click();
-			} 
+			try {
+				if (planType.equalsIgnoreCase("mapd")) {
+					if (claimsValidate(comboTab_MAPD))
+						comboTab_MAPD.click();
+				} else if (planType.equalsIgnoreCase("ship")) {
+					if (claimsValidate(comboTab_SHIP)) 
+						comboTab_SHIP.click();
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					if (claimsValidate(comboTab_PDP))
+						comboTab_PDP.click();
+				} else if (planType.equalsIgnoreCase("ssup")) {
+					if (claimsValidate(comboTab_SSUP)) 
+						comboTab_SSUP.click();
+				} 
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -442,29 +451,6 @@ public class ClaimsBase extends UhcDriver  {
 		return Math.round(x * 100.0) / 100.0;
 	}
 
-	/**
-	 * For iPerception Model
-	 * @param driver
-	 */
-	public void checkForIPerceptionModel(WebDriver driver) {
-		int counter = 0;
-		do {
-			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	}
 
 	/**
 	 * to validate whether element exists, default up to 2 seconds timeout
@@ -472,8 +458,8 @@ public class ClaimsBase extends UhcDriver  {
 	 * @return
 	 */
 	public boolean claimsValidate(WebElement element) {
-		long timeoutInSec=2;
-		return validate(element, timeoutInSec);
+		long timeoutInSec=0;
+		return claimsValidate(element, timeoutInSec);
 	} 
 
 	/**
@@ -483,39 +469,33 @@ public class ClaimsBase extends UhcDriver  {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd
-	public boolean claimsValidate(WebElement element, int timeoutInSec) {
+	public boolean claimsValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
 			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
+				System.out.println("Element '"+element.toString()+"' found!!!!");
 				return true;
 			} else {
-				System.out.println("Element not found/not visible");
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
-	} */
+	} 
 
 	public void handleHowIsYourVisit() {
 		int counter = 0;
 		do {
 			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsSmileySurveyFrame = driver.findElements(By.id("artEXPOiFrame"));
 			if (IPerceptionsSmileySurveyFrame.isEmpty()) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
+				sleepBySec(1);
 			} else {
 				System.out.println("iperception smiley survey was displayed, check to see if need to close it");
 				driver.switchTo().frame("artEXPOiFrame");
-				WebElement closeBtn=driver.findElement(By.xpath("//div[@id='expoIconSection']//button[@id='expoBtnClose']"));
 				try {
 					closeBtn.click();
 					System.out.println("closed the iperception smiley survey");
@@ -532,5 +512,72 @@ public class ClaimsBase extends UhcDriver  {
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
+	}
+	
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("slept for '"+sec+"' sec");
+	}
+
+	public int waitForClaimPageToLoad() {
+		int maxTry=10;
+		int numberOfSeconds=1;
+		return waitForClaimPageToLoad(maxTry, numberOfSeconds);
+	}
+	
+	public int waitForClaimPageToLoad(int maxTry, int numberOfSeconds) {
+		int c=0;
+		int total=0;
+		while (c<maxTry) {
+			c=c+1;
+			sleepBySec(numberOfSeconds);
+			total=c*numberOfSeconds;
+			if (!claimsValidate(claimloadingimage)) {
+				break;
+			} 
+			System.out.println("slept total of '"+(total)+"' seconds...");
+		}
+		System.out.println("waited total of '"+(total)+"' seconds for the claimloadingimage to disappear...");
+		return total;
+	}
+	
+	public void validateCurrencyFormat(String inputKey, String inputStr) {
+		inputStr=inputStr.replaceAll("\\s", "");
+		Number number = null;
+		try {
+		    number = NumberFormat.getCurrencyInstance(Locale.US).parse(inputStr);
+		} catch(ParseException pe) {
+		    Assert.assertTrue("PROBLEM - unable to parse value to currency format", false);
+		}
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data value format is not expected currency format.  Expected: $xx.xx | Actual: "+inputStr, number !=null);
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed currency format validation");
+	}
+
+	public void validateMonthFirstDateFormat(String inputKey, String inputStr, String delimiter) {
+		String datePattern="\\d{2}"+delimiter+"\\d{2}"+delimiter+"\\d{4}";
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: MM"+delimiter+"dd"+delimiter+"yyyy.  "
+				+ "Current: "+inputStr, 
+				inputStr.matches(datePattern));
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
+	}
+	
+	public void validateYearFirstDateFormat(String inputKey, String inputStr, String delimiter) {
+		String datePattern="\\d{4}"+delimiter+"\\d{2}"+delimiter+"\\d{2}";
+		Assert.assertTrue("PROBLEM - '"+inputKey+"' field data format is not as expected. Expected: yyyy"+delimiter+"MM"+delimiter+"dd.  "
+				+ "Current: "+inputStr, 
+				inputStr.matches(datePattern));
+		System.out.println("'"+inputKey+"' data value '"+inputStr+"' passed date format validation");
+	}
+	
+	public void claimCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
 	}
 }

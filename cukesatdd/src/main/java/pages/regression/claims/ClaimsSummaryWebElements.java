@@ -34,7 +34,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//button[@id='all-claims-print-claims-btn']")
 	protected WebElement claimsSummPrntBtn;
 
-	@FindBy(id="eobC1")
+	@FindBy(xpath="//a[@id='eobC1']")
 	protected WebElement eob_claims;
 
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
@@ -210,6 +210,9 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 
 	@FindBy(id="numDays3")
 	protected WebElement youHave3;
+	
+	@FindBy(xpath="//h3[not(contains(@class,'ng-hide'))]//span[contains(@class,'days-title')]")
+	protected WebElement youHave4;
 
 	@FindBy(xpath=".//*[@id='globalContentIdForSkipLink']/div[3]/div[1]/div/div/div/div[2]/div/div[1]/section/div[2]/section/div/div/div/div/div/div/div[1]/p")
 	protected WebElement pcpTxt;
@@ -261,6 +264,11 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//a//span[text()='keyboard_arrow_right']")
 	protected WebElement rtArrowBtn;
 
+	@FindBy(xpath="//li[contains(@class,'prevLink') and contains(@class,'disabled')]")
+	protected WebElement disabled_prevBtn;
+	@FindBy(xpath="//li[contains(@class,'nextLink') and contains(@class,'disabled')]")
+	protected WebElement disabled_nextBtn;
+	
 	@FindBy(xpath="//div[@id='atddPagination']//p[contains(text(),'items found. Displaying 1 to')]")
 	protected WebElement itemsFoundDispTxt;
 

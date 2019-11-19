@@ -3143,4 +3143,14 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
+
+
+	public void clickOnViewMoreForPlan(String planName) {
+		WebElement viewMoreLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'plan-details__flex-container')]"));
+		if(validate(viewMoreLink))
+			viewMoreLink.click();
+
+		
+	}
 }

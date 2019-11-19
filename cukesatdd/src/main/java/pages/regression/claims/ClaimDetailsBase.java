@@ -150,6 +150,7 @@ public class ClaimDetailsBase extends ClaimDetailsWebElements{
 		}
 		Assert.assertTrue("PROBLEM - Unable to locate the Claims Summary link on top menu to return back to claim summary page to prep for next test step", claimsValidate(backButton));
 		CommonUtility.waitForPageLoad(driver, backButton, 5);
+		moveMouseToElement(claimsSummHeader);
 		backButton.click();
 		System.out.println("Clicked claims summary back button...");
 		CommonUtility.checkPageIsReady(driver);
