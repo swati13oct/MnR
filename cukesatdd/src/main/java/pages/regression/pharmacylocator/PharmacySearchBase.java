@@ -176,7 +176,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
-				Thread.sleep(2000); //note: keep this for the page to load
+				Thread.sleep(5000); //note: keep this for the page to load
 				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 				afterClicked_numTabs=afterClicked_tabs.size();					
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));

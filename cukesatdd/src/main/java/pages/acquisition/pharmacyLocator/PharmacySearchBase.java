@@ -123,15 +123,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
-		try {
-			Thread.sleep(1000); 
-			selectFromDropDownByText(driver, seletPlandropdown, planName);
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		sleepBySec(1); 
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
+		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
+			waitforElementDisapper(By.className("loading-block"), 30);
+		sleepBySec(1); //note: let the page settle down
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
@@ -533,5 +532,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 	}
 
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("slept for '"+sec+"' sec");
+	}
 }
 
