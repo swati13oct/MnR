@@ -61,7 +61,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     @pharmaciesandprescriptions01b
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
-	  | 313410 | PDP      | Individual_PnP	    | yes        |
+#	  | 313410 | PDP      | Individual_PnP	    | yes        |
 	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
 
     @pharmaciesandprescriptions01c
