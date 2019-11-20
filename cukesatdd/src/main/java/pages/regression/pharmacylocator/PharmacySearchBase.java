@@ -5,22 +5,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
@@ -234,7 +227,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(winHandleBefore);
 				*/
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -281,7 +274,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "

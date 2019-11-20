@@ -6,12 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -124,7 +120,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		return testNote;
 	}
 
-	public void selectsPlanName(String planName) {
+	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
 		try {
@@ -140,7 +136,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getAcqTestEnvSysTime(testSiteUrl);
 				
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
@@ -214,7 +210,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL.contains(expectedURL));
 	}
 	
-	public void searchesPharmacy(String language, String planName, String testPlanYear) throws InterruptedException {
+	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
@@ -260,7 +256,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					selectsPlanYear(testPlanYear);
 					CommonUtility.checkPageIsReady(driver);
 				}
-				selectsPlanName(planName);
+				selectsPlanName(planName, testSiteUrl);
 				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
 				WebElement pdfElement=pdf_otherPlans;
 				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement);
