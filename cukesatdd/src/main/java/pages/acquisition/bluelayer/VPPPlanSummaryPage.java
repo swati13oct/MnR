@@ -2070,6 +2070,12 @@ public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , Strin
 }            
 public void validateIsMyProviderCoveredLinkInUMS(String planType , String planName) {
     int attempts = 0;
+    try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	while(attempts < 2) {
         try {
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -3176,20 +3182,20 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 	jsClickNew(MaleGender);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
 	Thread.sleep(3000);
 	System.out.println("Plan to start date selected");
@@ -3479,8 +3485,12 @@ catch (Exception e) {
 	public void clickOnViewMoreForPlan(String planName) {
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		if(viewMoreLink.size()>0)
-			viewMoreLink.get(0).click();
-	
+		int count = 0;
+		while(count<2){
+			if(viewMoreLink.size()>0){
+				viewMoreLink.get(0).click();
+				break;
+			}count++;
+		}
 	}
 }
