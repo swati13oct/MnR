@@ -25,7 +25,7 @@ And I navigate to step3 page and validate drug info for DCE homepage flow uhc
 Then user enters zipcode on step3 and validate plan summary page in uhc
 |Zip|<zipcode>|
 And user views plans of the below plan type in UMS site
-| Plan Type | <plantype> |
+ | Plan Type | <plantype> |
 Then user validates drug cost in medical benefit section in the UMS site
 | Plan Name | <planName> |
 Then the user view plan details of the above selected plan in UMS site and validates

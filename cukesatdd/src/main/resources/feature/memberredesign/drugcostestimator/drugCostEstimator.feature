@@ -182,13 +182,13 @@ Feature: 1.07 Member DCE Page
       | Dosage    | <dosage>    |
       | Quantity  | <quantity>  |
       | Frequency | <frequency> |
- # And I am using the DCE Tool to search a drug that requires Step Therapy on the 2020 formulary
-  	#  | Med     | <Medicine>   |
-    #  | Dose    | <dose>       |
-    #  | Amount  | <quantity2>  |
-    #  | Limit   | <frequency2> |
- # Then I will see a PA link and ST link appear in the drug limits section
-#  And The link will open the relevant PDF in a new tab
+  And I am using the DCE Tool to search a drug that requires Step Therapy on the 2020 formulary
+  	  | Med     | <Medicine>   |
+      | Dose    | <dose>       |
+      | Amount  | <quantity2>  |
+      | Limit   | <frequency2> |
+  Then I will see a PA link and ST link appear in the drug limits section
+  And The link will open the relevant PDF in a new tab
 
   Examples: 
       | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |

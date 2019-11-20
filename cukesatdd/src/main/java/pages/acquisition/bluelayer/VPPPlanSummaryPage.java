@@ -778,7 +778,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			jsClickNew(MAmoreDetailsLink);
+			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
@@ -889,8 +889,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
                             CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
                             sleepBySec(2);
-							jsClickNew(maPlansViewLink);
-                           // maPlansViewLink.click();
+							//jsClickNew(maPlansViewLink);
+                            maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
             			driver.navigate().refresh();
