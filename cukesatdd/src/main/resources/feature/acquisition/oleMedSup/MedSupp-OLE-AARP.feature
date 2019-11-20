@@ -29,7 +29,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90210 | NO              | Los Angeles County | MS       | 11031950 | John      | Carry   |    ABCD        | Resume          |
+      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
      
   
 @UHC_Retrive_App_AARP @OLE_Regression @oleMedSupUlayer
@@ -54,7 +54,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
      
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
-     |   90210 | NO              | Los Angeles County | MS       | 11031950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
+     |   90210 | NO              | Los Angeles County | MS       | 11131950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
  
 @MedSuppOLEULayerSmoke
  Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
