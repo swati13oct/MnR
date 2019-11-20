@@ -51,7 +51,7 @@ public abstract class UhcDriver {
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//tbd driver.manage().window().maximize();
+		driver.manage().window().maximize();
 		driver.get(url);
 	}
 
@@ -460,7 +460,7 @@ try {
 	 */
 	public void startNew(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//tbd driver.manage().window().maximize();
+		driver.manage().window().maximize();
 		driver.get(url);
 	}
 
