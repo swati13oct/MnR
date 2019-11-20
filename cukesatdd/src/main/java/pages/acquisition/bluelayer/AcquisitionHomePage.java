@@ -149,7 +149,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	/*@FindBy(xpath = "//a[@class='cta-button']")
 	private WebElement takeTheQuizBtn;*/
 	
-	@FindBy(xpath = "//a[contains(text(), 'Plan Selector')]")
+	@FindBy(xpath = "//a[contains(text(), 'Get a Plan Recommendation')]")
 	private WebElement takeTheQuizBtn;
 
 	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
@@ -333,8 +333,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
-	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
+	private static String Local_AARP_URL = MRConstants.Local_URL;	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
@@ -425,7 +426,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver,45);
-		} else {
+		} else if(MRScenario.environment.equals("local")){
+			startNew(Local_AARP_URL);
+		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkModelPopup(driver,10);
 		}
@@ -1258,7 +1261,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return new PlanSelectorNewPage(driver);
 	}
-
+	
 	public PlanSelectorNewPage PSTButton() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		PageFactory.initElements(driver, this);

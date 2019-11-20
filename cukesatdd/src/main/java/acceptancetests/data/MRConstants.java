@@ -251,6 +251,8 @@ public class MRConstants {
 
   public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
+  public static String Local_URL = "http://10.178.145.230:4200/";
+  
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
   public static final String TeamH_ULayer_Member_URL = "https://"+MRScenario.environmentMedicare+"-medicare.uhc.com";

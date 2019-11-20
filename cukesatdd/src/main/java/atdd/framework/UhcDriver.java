@@ -440,7 +440,6 @@ try {
 	 */
 	public boolean scrollToView(WebElement element) {
 		try {
-
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
