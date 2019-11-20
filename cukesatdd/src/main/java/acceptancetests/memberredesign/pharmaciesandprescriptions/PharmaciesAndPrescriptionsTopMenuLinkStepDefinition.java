@@ -384,6 +384,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally dashboard will open new tab for this page
 			WebDriver testDriver=accountHomePage.driver;
+			String originalUrl=testDriver.getCurrentUrl();
 			String winHandleBefore = testDriver.getWindowHandle();
 			accountHomePage.navigateToNoticeAndDisclousuresPage();
 			result=accountHomePage.findPnPLinksExistOnPg();
@@ -391,7 +392,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
 			else
 				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
-			closeTabAndBackToDashoard(winHandleBefore, testDriver);
+			navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);
+			//tbd closeTabAndBackToDashoard(winHandleBefore, testDriver);
 		}
 	}
 

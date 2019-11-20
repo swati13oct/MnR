@@ -290,7 +290,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 	
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
@@ -1671,7 +1671,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if (validateNew(RightRail_TFN)) {
+		if (validateNew(RightRail_TFN,45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -3142,6 +3142,7 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	jsClickNew(MaleGender);
+	Thread.sleep(1000);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
 	//Thread.sleep(2000);
@@ -3149,17 +3150,17 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
-	Thread.sleep(3000);
+	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
 	ViewPlanMedSupPage.click();
 }
@@ -3475,5 +3476,11 @@ catch (Exception e) {
 	}
 	//note: end - added for deeplink validaton
 	//--------------------------------------------
-
+	public void clickOnViewMoreForPlan(String planName) {
+		List<WebElement> viewMoreLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+		if(viewMoreLink.size()>0)
+			viewMoreLink.get(0).click();
+	
+	}
 }

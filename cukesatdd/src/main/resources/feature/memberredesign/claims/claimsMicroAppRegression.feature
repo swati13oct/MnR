@@ -8,6 +8,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Claim System   | <claimSystem>   |
       | Member Type    | <memberType>    |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
@@ -24,10 +25,10 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I validate the Claims Total on claims details page
 
     Examples: 
-      | planType | memberType      | claimSystem     | claimType         | claimPeriod    | 
-      | MAPD     | ULayerInd       | COSMOSCLAIMS    | Medical           | Last 24 months | 
-      | MAPD     | ULayerInd       | NICECLAIMS      | Medical           | Last 24 months | 
-      | MAPD     | ULayerInd       | RxCLAIMS        | Prescription drug | Last 24 months | 
+      | planType | userSelection | memberType      | claimSystem     | claimType         | claimPeriod    | 
+      | MAPD     | xxxxx         | ULayerInd       | COSMOSCLAIMS    | Medical           | Last 24 months | 
+      | MAPD     | xxxxx         | ULayerInd       | NICECLAIMS      | Medical           | Last 24 months | 
+      | MAPD     | xxxxx         | ULayerInd       | RxCLAIMS        | Prescription drug | Last 24 months | 
 
 #----- end of VBF section ----------------------------------------------------------
 
@@ -39,6 +40,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
@@ -91,28 +93,28 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
     @mapd_medical_cosmos
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | xxxxx | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 01_2  | 15230 | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 01_3  | 15235 | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @ma_medical_cosmos
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 02_1  | 15234 | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
-      | 02_2  | xxxxx | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 02_3  | 15259 | SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 02_4  | 15268 | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
+      | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_3  | 15259 | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 02_4  | 15268 | Medica_q2_jun_sofl0013           | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @mapd_medical_nice
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 03_1  | 15235 | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
 
     @ship
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 04_1  | 15236 | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 04_1  | 15236 | SHIP-q3_sep_ship_009              | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
 
     #These items still pending data
     # | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
@@ -129,6 +131,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     #When I am validating UI only
     Then I can validate the claims summary header on claims summary page
@@ -175,16 +178,16 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
     @mapd_drug
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | 15230 | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_2  | 15235 | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_3  | xxxxx | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 01_1  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 01_2  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 01_3  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug
     Examples: 
-      | index | TID   | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
-      | 02_1  | 15299 | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
-      | 02_2  | 15300 | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
+      | 02_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
 
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
@@ -194,12 +197,13 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |
       | Claim System   | <claimSystem>   |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     And I validate the error message for a PHIP Member on the screen
 
     Examples: 
-      | TID   | planType | planCategory | claimSystem    |
-      | 15258 | SHIP     | PHIP         | COMPASS_CLAIMS |
+      | TID   | userSelection                | planType | planCategory | claimSystem    |
+      | 15258 | SHIP-COM-q2_june_preffec_019 | SHIP     | PHIP         | COMPASS_CLAIMS |
 
 
   ### Waiting for data
@@ -213,6 +217,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   #    | Plan Type      | <planType>    |
   #    | Member Type    | <memberType>  |
   #    | Claim System   | <claimSystem> |
+  #    | User Selection | <userSelection> |
   #  When I navigate to the claims Summary page from dashboard or testharness page
   #  And I can search claims for the following claim period on claims summary page
   #    | Plan Type    | <planType>    |
@@ -227,9 +232,9 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   #  Then I can validate the view as pdf link on claims details page header
   #
   #  Examples: 
-  #    | FID    | planType | memberType     | claimPeriod    | claimSystem   | pageNum | rowNum |
-  #   #| 244667 | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS   |       2 |      4 |
-  #    | 244667 | MA       | EOB_Individual | Last 24 months | COSMOS_CLAIMS |       1 |      1 |
+  #    | FID    | userSelection | planType | memberType     | claimPeriod    | claimSystem   | pageNum | rowNum |
+  #   #| 244667 | TBD           | MA       | EOB_Individual | Last 24 months | NICE_CLAIMS   |       2 |      4 |
+  #    | 244667 | TBD           | MA       | EOB_Individual | Last 24 months | COSMOS_CLAIMS |       1 |      1 |
 
   ### Waiting for data
   #@claimsMicroApp05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
@@ -239,13 +244,14 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   #    | Plan Type    | <planType>    |
   #    | Member Type  | <memberType>  |
   #    | Claim System | <claimSystem> |
+  #    | User Selection | <userSelection> |
   #  When I navigate to the claims Summary page from dashboard or testharness page
   #  Then Explanation of benefits sub navigation under Claims tab is not displayed
   #  Then Explanation of benefits deep link is invoked and validate the Page
   #
   #  Examples: 
-  #    | FID    | planType | memberType              | claimSystem   |
-  #    | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
+  #    | FID    | userSelection | planType | memberType              | claimSystem   |
+  #    | 267688 | TBD           | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
 
   @claimsMicroApp06 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
@@ -254,12 +260,13 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Validate Explanation of benefits Page for group SSUP
 
     Examples: 
-      | FID    | planType | memberType | claimSystem   |
-      | 267688 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
+      | FID    | userSelection                 | planType | memberType | claimSystem   |
+      | 267688 | SSP-GRP-q2_june_Cosmos_Seg233 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |
 
   @claimsMicroApp07 @SHIP7yearsClaims @regressionMember
   Scenario Outline: -TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
@@ -268,6 +275,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
+      | User Selection | <userSelection> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
@@ -292,7 +300,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I validate the claims summary link on claims detail top page
 
     Examples: 
-      | TID   | planType | memberType | claimType | claimSystem          |
-      | 15259 | SHIP     | Individual | NA        | 7Year_COMPASS_CLAIMS |
+      | TID   | userSelection             | planType | memberType | claimType | claimSystem          |
+      | 15259 | SHIP-COM-SHIP7yearsclaims | SHIP     | Individual | NA        | 7Year_COMPASS_CLAIMS |
 
 #----- end of regression section ---------------------------------------------------

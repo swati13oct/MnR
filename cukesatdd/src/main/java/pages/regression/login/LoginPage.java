@@ -332,16 +332,20 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
-		//tbd //note: updated for microapp
-		//tbd @FindBy(xpath="//select[@ng-model='planTypeValue']")
-		//tbd private WebElement userSelectionDropDown;
+		//note: updated for microapp
+		@FindBy(xpath="//select[@ng-model='planTypeValue']")
+		private WebElement userSelectionDropDown;
 		
-		public Object loginWithMicroApp(String username, String password) throws InterruptedException {
+		public Object loginWithMicroApp(String username, String password, String userSelection) throws InterruptedException {
 		//tbd public Object loginWithMicroApp(String userSelection) throws InterruptedException {
-			//tbd selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
+			System.out.println("TEST - username="+username+" | password="+password+" | userSelection"+userSelection);
+			if (validate(userSelectionDropDown,0)) {
+				selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
+			} else {
+				sendkeysNew(userNameField, username);
+				sendkeysNew(passwordField, password);
+			}
 			
-			sendkeysNew(userNameField, username);
-			sendkeysNew(passwordField, password);
 			signInButton.click();
 			System.out.println("Sign In clicked");
 			try {

@@ -1810,7 +1810,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement step3drugInfo;
 	public boolean validateDrugOnStep3(String drug) {
 		System.out.println(step3Info.getText());
-		if(step3Info.getText().contains(drug)&&validateNew(drugCostCard))
+		if(step3Info.getText().contains(drug.toUpperCase())&&validateNew(drugCostCard))
 			return true;
 		return false;
 		

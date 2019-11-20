@@ -717,14 +717,14 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
 		String testDataType = memberAttributesMap.get("Claim System");
-		//tbd String userSelection = memberAttributesMap.get("User Selection");
-		//tbd //note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
-		//tbd //note: if run on team-a, then the user selection is for the dropdown option
-		//tbd //note: if run on stage or stage-testharness, then ignore the user selection field
-		//tbd if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on stage
-		//tbd 	userSelection = category;
-		//tbd 	memberAttributesMap.remove("User Selection");
-		//tbd } 
+		String userSelection = memberAttributesMap.get("User Selection");
+		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
+		//note: if run on team-a, then the user selection is for the dropdown option
+		//note: if run on stage or stage-testharness, then ignore the user selection field
+		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on stage
+		 	userSelection = category;
+		} 
+	 	memberAttributesMap.remove("User Selection");
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -762,9 +762,9 @@ public class HSIDStepDefinition {
 		System.out.println("Password is..." + pwd);
 		//note: for team-a microapp env, the username is the userselection
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-		//tbd if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-		//tbd 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userSelection);
-		//tbd }
+		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+		 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userSelection+" or "+userName);
+		}
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -813,7 +813,7 @@ public class HSIDStepDefinition {
 				try {
 					if (isMicroApp) {
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd);
+						testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
 					} else {
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
 				
