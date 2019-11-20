@@ -2807,6 +2807,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		MaleGender.click();
+		Thread.sleep(1000);
 		part_A_monthDrpDwn.click();
 		Part_A_monthDrpDwnOption.click();
 		Thread.sleep(2000);
@@ -2870,9 +2871,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void ResumeApplicationButton() throws InterruptedException{
 		Thread.sleep(5000);
-		String DateOfBirth ="11031950";
+		String DateOfBirth ="11131950";
 		MedSupFormValidation(DateOfBirth);
-		Start_ApplicationBtn.click();
+		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3146,11 +3147,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void clickOnViewMoreForPlan(String planName) {
-		WebElement viewMoreLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'plan-details__flex-container')]"));
-		if(validate(viewMoreLink))
-			viewMoreLink.click();
-
-		
+		List<WebElement> viewMoreLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+		if(viewMoreLink.size()>0)
+			viewMoreLink.get(0).click();
+	
 	}
 }
