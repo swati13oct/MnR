@@ -153,7 +153,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
 						validateNew(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				pdf_otherPlans.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
