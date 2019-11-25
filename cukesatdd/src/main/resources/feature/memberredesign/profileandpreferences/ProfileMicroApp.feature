@@ -85,7 +85,7 @@ Feature: 1.02 Member Profile page
   
   @accountProfileMicroApp5 @regressionPCPMedica @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
-    Given login with following details logins in the member portal and validate elements
+    Given login with following details logins in the member portal and validate elements for microapp
       | App Type    | MICRO        |
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -175,8 +175,8 @@ Feature: 1.02 Member Profile page
   Scenario Outline: Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements for microapp
     #Removed from Regression as EPMP is still in the pipeline for development
-    #Given login with following details logins in the member portal and validate elements
-         | App Type       | MICRO           |
+    #Given login with following details logins in the member portal and validate elements 
+      | App Type    | MICRO        |
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
@@ -186,8 +186,8 @@ Feature: 1.02 Member Profile page
     And the user validate the temporary section on profile page for ship member
 
     Examples: 
-    | TID   | planType | memberType                      |
-    | SHIP_UnKnown | SHIP      | SHIP_ProfilePref    |   
+    | TID   | planType | memberType          |
+    | xxxxx | SHIP     | SHIP_ProfilePref    |   
 
 
   #| SHIP    |
