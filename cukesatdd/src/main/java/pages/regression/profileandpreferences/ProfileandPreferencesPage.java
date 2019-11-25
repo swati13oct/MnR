@@ -681,14 +681,14 @@ private WebElement editEmailAddressArrowbutton;
 	private WebElement hsidSignInAndSecurityLink;
 
 	//@FindBy(className = "emailShip")
-	@FindBy(xpath = " //*[@id='email']//*[@class='subtitle semi-bold margin-none card-title']")
+	@FindBy(xpath = "//div[@ng-click='emailEdit()']")
 	private WebElement emailAddressSection;
 
 	@FindBy(xpath = ".//*[@class='col-sm-12 editEmail margin-small']/span[3]")
 	private WebElement emailAddressRightArrow;
 
 	//@FindBy(xpath = "//*[@id='emailview']/div[1]/h4")
-		@FindBy(xpath = "//*[@id='emailview']")
+		@FindBy(xpath = "//*[@ng-click='emailEdit()']//span[contains(text(),'EMAIL ADDRESS')]")
 		private WebElement emailAddressHeader;
 
 		@FindBy(xpath = "//*[@id='email' ]//a[contains(text(),'Edit')]")
@@ -718,14 +718,14 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(xpath = "//*[@class='info-box padding-right']/p")
 	private WebElement updatedEmailAfterSave1;
 	
-	@FindBy(xpath = "//*[@class='bold atdd-email ng-scope']/../span[@id='profileemailaddress']")
+	@FindBy(xpath = "//div[@ng-click='emailEdit()']//span[@id='profileemailaddress']")
 	private WebElement updatedEmailAfterSave;
 
 	@FindBy(xpath = "//*[@id='email']/div[1]/h4/span")
 	private WebElement backButtonOnEmailField;
 
 	//@FindBy(xpath = "//*[@class='ng-scope emailShip']")
-	@FindBy(css=".atdd-phone-title")
+	@FindBy(xpath="//*[@id='profileLagecy']//div[@ng-click='phoneEdit()']")
 	private WebElement phoneSectionShip;
 
 	//@FindBy(xpath = "//*[@class='col-sm-12 margin-small editEmail']/div[1]/span[4]")
@@ -830,6 +830,12 @@ private WebElement editEmailAddressArrowbutton;
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
+	
+	@FindBy(xpath="//div[@id='email']//*[@ng-click='backtoShipView()']")
+	protected WebElement backtoShipView;
+	
+	@FindBy(xpath="//*[@id='phone']/div[1]/h5/span")
+	protected WebElement backToprofileDetail;
 
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -2051,6 +2057,7 @@ private WebElement editEmailAddressArrowbutton;
 		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
 		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
 		validateNew(emailAddressHeader);
+		emailAddressSection.click();
 		validateNew(emailEditIcon);
 		emailEditIcon.click();
 		validateNew(newEmailTextfield);
@@ -2060,10 +2067,13 @@ private WebElement editEmailAddressArrowbutton;
 		newEmailTextfield.sendKeys(emailAddress);
 		confirmEmailTextfield.sendKeys(emailAddress);
 		saveButtonOnEmailSave.click();
+		backtoShipView.click();
+		
 
-		validateNew(updatedEmailAfterSave);
+		//validateNew(updatedEmailAfterSave);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(15000);
+			validateNew(updatedEmailAfterSave);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2079,6 +2089,7 @@ private WebElement editEmailAddressArrowbutton;
 	public void validatePhoneSectionForShip() {
 
 		validateNew(phoneSectionShip);
+		phoneSectionShip.click();
 		validateNew(phoneRightArrowShip);
 		//phoneRightArrowShip.click();
 		validateNew(phoneNumberHeader);
@@ -2100,7 +2111,7 @@ private WebElement editEmailAddressArrowbutton;
 		validateNew(updatedDaytimePhoneAfterSave);
 		validateNew(updatedEvetimePhoneAfterSave);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2109,13 +2120,15 @@ private WebElement editEmailAddressArrowbutton;
 		System.out.println(updatedDaytimePhoneAfterSave.getText() + updatedEvetimePhoneAfterSave.getText());
 		if (updatedDaytimePhoneAfterSave.getText().contains("(123) 456-7890")
 				&& updatedEvetimePhoneAfterSave.getText().contains("(123) 456-7890"))
+			
 			Assert.assertTrue(true);
+		
 		else {
 			Assert.fail("Not able to validate the Phone  update functionality for a ship member");
 		}
 		//backButtonOnPhoneShip.click();  //Does not exist in the current portal
 		// TODO Auto-generated method stub // As Phone saves it automatically comes back to profile page, so no need to hit back button or any other button
-
+		backToprofileDetail.click();
 	}
 
 	public void validatePermanentAddressSectionForShip() {

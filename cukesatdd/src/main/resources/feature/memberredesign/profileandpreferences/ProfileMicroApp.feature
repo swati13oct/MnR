@@ -172,10 +172,13 @@ Feature: 1.02 Member Profile page
      | Unknown_4 | MAPD     | EPMPEnabled | Individual |
 
   @accountProfileMicroApp9 @EMPMprofilePageForShip @regressionMember
-  Scenario Outline: To test end to end regression scenario for EPMP profile page for ship
+  Scenario Outline: Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
+    Given login with following details logins in the member portal and validate elements for microapp
     #Removed from Regression as EPMP is still in the pipeline for development
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
+    #Given login with following details logins in the member portal and validate elements
+         | App Type       | MICRO           |
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     And the user validate the email section on profile page for ship member
     And the user validate the Phone section on profile page for ship member
@@ -183,7 +186,9 @@ Feature: 1.02 Member Profile page
     And the user validate the temporary section on profile page for ship member
 
     Examples: 
-      | planType |
+    | TID   | planType | memberType                      |
+    | SHIP_UnKnown | SHIP      | SHIP_ProfilePref    |   
+
 
   #| SHIP    |
   @accountProfileMicroApp10 @EPMPProfilePageContactusGroup @regressionMember
