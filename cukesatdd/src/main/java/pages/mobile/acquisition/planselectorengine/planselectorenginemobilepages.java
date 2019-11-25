@@ -1,9 +1,8 @@
 /**
  * 
  */
-package pages.acquisition.planSelectorEngine;
+package pages.mobile.acquisition.planselectorengine;
 
-import java.awt.Desktop.Action;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -29,9 +28,9 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.PageTitleConstants;
 
-public class PlanSelectorNewPages extends UhcDriver {
+public class planselectorenginemobilepages extends UhcDriver {
 
-	public PlanSelectorNewPages(WebDriver driver) {
+	public planselectorenginemobilepages(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -192,7 +191,7 @@ public class PlanSelectorNewPages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h1")
 	private WebElement pageStepsNumberName;
 	
-	@FindBy(xpath = "//*[@class='progress-bar-info']/div")
+	@FindBy(xpath = "//*[@class='progress-bar-info']/section")
 	private WebElement pageProgressPercentage;
 	
 	@FindBy(xpath = "//*[@class='all-fields-marked-wi']")
@@ -360,13 +359,13 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 	@FindBy(className = "get-started-main-inner")
 	private WebElement landingpageMainInner;
 	
-	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]/div[1]/div/h2")
+	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//div[@class='get-started-main-title how-does-this-work']")
 	private WebElement landingpageInnerTitle;
 	
 	@FindBy(xpath = "//*[@class='get-started-list']/li]")
 	public WebElement landingpageTracker;
 	
-	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]/div[3]/div/h2")
+	@FindBy(xpath = "//*[@class='get-started-main-inner']//div[contains(@class,'it-may-help-to-have')]")
 	public WebElement landingpageLabel;
 	
 	public void landingpage() {
