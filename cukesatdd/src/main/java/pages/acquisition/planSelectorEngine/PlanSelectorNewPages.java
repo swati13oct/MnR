@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import acceptancetests.vbfacquisition_deprecated.enrollinplan.oleCommonConstants;
@@ -193,10 +195,10 @@ public class PlanSelectorNewPages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/section")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(xpath = "//*[@class='LabelText h6']")
+	@FindBy(xpath = "//*[@class='all-fields-marked-wi']")
 	private WebElement pageRequiredInfo;
 	
-	@FindBy(xpath = "//*[@class='LabelText h6']/sup")
+	@FindBy(xpath = "//*[@class='all-fields-marked-wi']/sup")
 	private WebElement pageRequiredInfoMark;
 	
 	@FindBy(xpath = "//*[@for='zip-code']")
@@ -205,7 +207,7 @@ public class PlanSelectorNewPages extends UhcDriver {
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
 	private WebElement zipcodePageQuestionMark;
 	
-	@FindBy(xpath = "//*[@class='mt-3']/article/p")
+	@FindBy(xpath = "//*[@class='mt-4']/label[2]")
 	private WebElement zipcodeTextLabel;
 	
 	@FindBy(xpath = "//*[@for='MultipleCounty']")
@@ -293,11 +295,11 @@ public class PlanSelectorNewPages extends UhcDriver {
 			waitforElementVisibilityInTime(zipcodeTextLabel, 45);
 			Assert.assertTrue(zipcodeTextLabel.getText().contains("Plans are specific to your area"));
 			waitforElementNew(zipcodePageCountyQuestion);
-			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("What is your County?"));
+			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("Please select your County? *"));
 			waitforElementNew(zipcodePageCountyQuestionMark);
 			Assert.assertTrue(zipcodePageCountyQuestionMark.getText().contains("*"));
 			waitforElementVisibilityInTime(PRECounty, 45);
-			Assert.assertTrue(PRECountyInnerText.getText().contains("Please select County "));
+			Assert.assertTrue(PRECountyInnerText.getText().contains("Select County "));
 	}
 	
 	public void getStartedAndRunInvalidzipcode(String zipcodeid) throws InterruptedException {
@@ -311,12 +313,13 @@ public class PlanSelectorNewPages extends UhcDriver {
 		continueBtn.click();
 		waitforElementNew(errorMessage);
 		int size = zipcodeid.length();
-		if(size!=5) {
-			Assert.assertTrue(errorMessage.getText().contains("Please enter five digits for zip code"));
+		System.out.println("ZipCode Size is :"+size);
+		if(size<5 && size!=0) {
+			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for zip code"));
 		}else if(size==0)	{
 			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid zip code"));
-		}else {
-			Assert.assertTrue(errorMessage.getText().contains("No county retrieved for zipcode : '"+ zipcodeid + "'"));
+		}else{
+			Assert.assertTrue(errorMessage.getText().contains("Please enter valid zipcode."));
 		}	
 	}
 	
@@ -351,19 +354,19 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 	@FindBy(xpath = "//*[@class='get-started-main-inner']//img[@class='mb-3 mb-0-lg']")
 	private WebElement landingpageImage;
 	
-	@FindBy(xpath = "//*[@class='get-started-banner']//p[@class='text-lead']")
+	@FindBy(xpath = "//*[@class='get-started-banner']//p")
 	private WebElement landingpageText;
 		
 	@FindBy(className = "get-started-main-inner")
 	private WebElement landingpageMainInner;
 	
-	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//section[@class='get-started-main-title']")
+	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//div[@class='get-started-main-title how-does-this-work']")
 	private WebElement landingpageInnerTitle;
 	
 	@FindBy(xpath = "//*[@class='get-started-list']/li]")
 	public WebElement landingpageTracker;
 	
-	@FindBy(xpath = "//*[@class='get-started-main-inner']//section[@class='text-large']/strong")
+	@FindBy(xpath = "//*[@class='get-started-main-inner']//div[contains(@class,'it-may-help-to-have')]")
 	public WebElement landingpageLabel;
 	
 	public void landingpage() {
@@ -389,7 +392,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		for(int i=1; i<=3; i++) {
 			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" +i+ "]"))).getText();
 			System.out.println(landingpageTracker);
-			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='row']/section[2]/ul/li[" +i+ "]"))).getText();
+			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +i+ "]/span"))).getText();
 			System.out.println(landingpageTextPoints);
 		}
 		validate(landingpageImage, 30);

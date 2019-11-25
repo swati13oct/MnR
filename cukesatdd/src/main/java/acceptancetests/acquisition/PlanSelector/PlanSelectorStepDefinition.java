@@ -123,7 +123,8 @@ public class PlanSelectorStepDefinition {
 		}
 
 	}
-		@And("^clicks on get started button and runs questionnaire$"
+		@And("^clicks on get started button and runs questionnaire$")
+		
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
