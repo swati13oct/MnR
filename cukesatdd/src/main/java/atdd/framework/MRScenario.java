@@ -222,7 +222,7 @@ public class MRScenario {
 				  if  (environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
-				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
+				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.contains("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
 					csvName= "MemberRedesign-UUID.csv";
 				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
