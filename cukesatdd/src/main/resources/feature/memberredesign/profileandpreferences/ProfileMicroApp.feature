@@ -84,7 +84,7 @@ Feature: 1.02 Member Profile page
   # | 00000   | MAPD     | NOKIA      |
   
   @accountProfileMicroApp5 @regressionPCPMedica @regressionMember @AP_Part2_Regression
-  Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
+  Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements for microapp
       | App Type    | MICRO        |
       | Plan Type   | <planType>   |
