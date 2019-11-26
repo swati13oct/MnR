@@ -172,7 +172,7 @@ Feature: 1.02 Member Profile page
      | Unknown_4 | MAPD     | EPMPEnabled | Individual |
 
   @accountProfileMicroApp9 @EMPMprofilePageForShip @regressionMember
-  Scenario Outline: Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
+  Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements for microapp
     #Removed from Regression as EPMP is still in the pipeline for development
     #Given login with following details logins in the member portal and validate elements 
