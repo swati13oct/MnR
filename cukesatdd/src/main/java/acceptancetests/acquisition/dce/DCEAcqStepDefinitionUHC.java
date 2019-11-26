@@ -400,7 +400,7 @@ public class DCEAcqStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
-		planSummaryPage.validateMedicalBenefitDrugSection();
+		planSummaryPage.validateMedicalBenefitDrugSection(planName);
 	}
 	
 	@Then("^user validates drug added on prescription drug benefits tab in UMS$")

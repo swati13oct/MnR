@@ -476,7 +476,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
 		private WebElement startDrpDwnOption;
 		
-		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 		WebElement ViewPlanMedSupPage;
 
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
@@ -1958,10 +1958,15 @@ private boolean getSpecificPlanSummary(WebElement element, String planName) {
                     return false;
     }
 }
-public void validateMedicalBenefitDrugSection() {
-    validateNew(drugCoveredInfo);
-    validateNew(estimatedAnnualDrugCostLabel,45);
-    validateNew(estimatedAnnualDrugCostValue);
+public void validateMedicalBenefitDrugSection(String planName) {
+
+	//If any of these elements are not found, the test will fail so no need to add validate method.
+	
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]"));
+	driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]"));
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+
+
 }
 
 public void validateAndClickAddtoCompareinUMS(String planType , String planName) throws InterruptedException {
@@ -3151,20 +3156,23 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	Thread.sleep(1000);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(1000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
+	Thread.sleep(1000);
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-	Thread.sleep(2000);
+	Thread.sleep(1000);
 	monthBDrpDwn.click();
+	Thread.sleep(1000);
 	monthBDrpDwnOption.click();
-	Thread.sleep(2000);
+	Thread.sleep(1000);
 	yearBDrpDwn.click();
+	Thread.sleep(1000);
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-	Thread.sleep(2000);
+	Thread.sleep(1000);
 	startDrpDwnOption.click();
 	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
