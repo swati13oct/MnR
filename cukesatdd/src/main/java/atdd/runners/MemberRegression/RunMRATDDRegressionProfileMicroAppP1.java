@@ -20,7 +20,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionProfileMicroAppP1.json",detaile
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProfileMicroAppP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/ProfileMicroApp.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProfileMicroAppP1.json" }, tags = { "@accountProfileMicroApp5,@accountProfileMicroApp9" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProfileMicroAppP1.json" }, tags = { "@accountProfileMicroApp5,@accountProfileMicroApp9,@accountProfileMicroApp7,@accountProfileMicroApp8,@accountProfileMicroApp11,@AccountProfileMicroApp13,@accountProfileMicroApp15" })
 
 
 public class RunMRATDDRegressionProfileMicroAppP1 {
