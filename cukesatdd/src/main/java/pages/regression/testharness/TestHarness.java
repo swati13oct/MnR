@@ -1297,5 +1297,19 @@ public class TestHarness extends UhcDriver {
 			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab));			
 		}
 		
+		/***
+		 * 
+		 * @param Category
+		 */
+		public void validateTestHarnessElement(String Category) {
+			System.out.println(driver.getTitle());
+			//checkModelPopup(driver);
+			CommonUtility.checkPageIsReadyNew(driver);		
+			validateNew(formsPageLink);
+			validateNew(claimsTab);
+			validateNew(benefitsPageLink);
+			validateNew(profilePageLink);
+
+		}
 
 }

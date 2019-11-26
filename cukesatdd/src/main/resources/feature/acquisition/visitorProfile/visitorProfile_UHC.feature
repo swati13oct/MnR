@@ -31,11 +31,11 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Drug | <drug> |
     And the user returns to the visitor profile page in UHC
     Then the user should be able to see the Drug and pharmacy information in the guest profile page on UHC
-      | Drugname | <Drugname> |
+      | Drugname | <drug> |
 
     Examples: 
-      | state   | Drugname  |dosage       | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |planyear |
-      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     | 2019 |
+      | state   | drug  |dosage       | quantity | frequency     | zipcode | radius   |  quantity | frequency     | branded |planyear |
+      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | 2019 |
 
   @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
