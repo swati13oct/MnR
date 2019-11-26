@@ -323,6 +323,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject globalFooterDTMJson;
 	
 	public static boolean isHealthPlan = false;
+	
+	public String testSiteUrl;
 
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
@@ -348,13 +350,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		if (MRScenario.environment.equals("offline")) {
 			start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
 			checkModelPopup(driver,45);
 		}
 		else if (MRScenario.environment.equals("prod")) {
 			start(AARP_ACQISITION_PROD_PAGE_URL);
+			testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
 			checkModelPopup(driver,45);
 		}else {
 			start(AARP_ACQISITION_PAGE_URL);
+			testSiteUrl=AARP_ACQISITION_PAGE_URL;
 			checkModelPopup(driver,10);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
@@ -374,10 +379,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
@@ -394,6 +402,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			isHealthPlan = true;
 				CommonUtility.checkPageIsReadyNew(driver);
 				System.out.println("Current page URL: "+driver.getCurrentUrl());
+				testSiteUrl=driver.getCurrentUrl();
 				checkModelPopup(driver,15);
 				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 				try{
@@ -417,6 +426,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		testSiteUrl=driver.getCurrentUrl();
 		checkModelPopup(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45);
 		try{
@@ -437,6 +447,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		testSiteUrl=driver.getCurrentUrl();
 		checkModelPopup(driver,15);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
@@ -450,6 +461,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Proactive chat popup not displayed");
 		}
 		}
+	}
+	
+	public String getTestSiteUrl() {
+		return testSiteUrl;
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {

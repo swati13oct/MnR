@@ -81,6 +81,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	public void validateSelectionSection(String planType, String memberType) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the selection section on Order Plan Materials",orderValidate(common_selectionSection));
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			CommonUtility.waitForPageLoad(driver, selectionInstruction_ship, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction element on Order Plan Materials",orderValidate(selectionInstruction_ship));
 
 			Assert.assertTrue("PROBLEM - unable to locate 'Member ID Card (Health Insurance Card)' selection option on Order Plan Materials",orderValidate(option_ship_memberIDcardField));
@@ -91,6 +92,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			Assert.assertTrue("PROBLEM - unable to locate 'Claims Envelope' selection option on Order Plan Materials",orderValidate(option_ship_medicareHospital));
 			Assert.assertTrue("PROBLEM - unable to locate 'Certificate of Insurance' selection option on Order Plan Materials",orderValidate(option_ship_certificateInsurance));
 		} else {
+			CommonUtility.waitForPageLoad(driver, selectionInstruction_fed, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction on Order Plan Materials",orderValidate(selectionInstruction_fed));
 
 			Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
