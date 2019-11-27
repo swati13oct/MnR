@@ -3,16 +3,18 @@ Feature: 1.02 Member Profile page
 
   @accountProfileMicroApp1 @ShipEndtoEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
+    Given login with following details logins in the member portal and validate elements for microapp
+      | App Type    | MICRO        |
+      | Plan Type   | <planType> |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
 	And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
-      | Plan Type | <planType> |
+      | Plan Type | <memberType> |
     Then the user Clicks on the the Edit phone Link and validates the elements
-      | Plan Type | <planType> |
+      | Plan Type | <memberType> |
     Then the Ship user checks the Edit Button changes to Cancel Button
     Then the user checks the functionality of save Button in Phoneeditsection
     Then the user validate the functionality of Cancel Button In phoneeditSection
@@ -23,8 +25,8 @@ Feature: 1.02 Member Profile page
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-      | TID   | planType          |
-      | 15103 | SHIP_ProfilePref  |
+	    | TID   | planType | memberType          |
+	    | 15103 | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfileMicroApp2 @MAPDandMAEndToEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
@@ -147,14 +149,15 @@ Feature: 1.02 Member Profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | data type   | <dataType>   |
     When the user navigates to Profile and Preferences page
+    And I should see the communication prefernces section
     And I should see the EPMP i frame on profile page
-    And I should see the communicationpreferncessection
 
     Examples: 
-      | planType | memberType |
+      | planType | memberType |dataType	|
+      | MAPD     | EPMPEnabled |Individual |
 
-  # | MAPD     | EPMPEnabled |
   @accountProfileMicroApp8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
@@ -189,8 +192,6 @@ Feature: 1.02 Member Profile page
     | TID   | planType | memberType          |
     | xxxxx | SHIP     | SHIP_ProfilePref    |   
 
-
-  #| SHIP    |
   @accountProfileMicroApp10 @EPMPProfilePageContactusGroup @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
@@ -206,8 +207,8 @@ Feature: 1.02 Member Profile page
 
     Examples: 
       | planType | memberType | dataType | GroupPlanName |
-
-  #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
+     #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
+  
   @accountProfileMicroApp11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
@@ -222,7 +223,7 @@ Feature: 1.02 Member Profile page
     Then the user validates that  Communication Preferences section doesn't come for terminated members
 
     Examples: 
-     | TID			 | planType | memberType  | dataType   |
+     | TID		 | planType | memberType  | dataType   |
      | Unknown_5 | MAPD     | EPMPEnabled | Terminated |
 
   @accountProfileMicroApp12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_Regression
@@ -235,8 +236,8 @@ Feature: 1.02 Member Profile page
     And I should see the combo tabs on Account Profile page and user validates the elements on individual tabs
 
     Examples: 
-      | TID			   | planType       | memberType             |
-      | Unknown_6  | Combo_PDP_SSUP | PDP_SSUPcombo          |
+      | TID		   | planType       | memberType             |
+      | Unknown_6  | Combo_PDP_SSUP | EPMPEnabled_ProfilePref|
   
 
   @AccountProfileMicroApp13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers @AP_Part3_Regression

@@ -338,7 +338,7 @@ public class LoginPage extends UhcDriver {
 		
 		public Object loginWithMicroApp(String username, String password, String userSelection) throws InterruptedException {
 		//tbd public Object loginWithMicroApp(String userSelection) throws InterruptedException {
-			System.out.println("TEST - username="+username+" | password="+password+" | userSelection"+userSelection);
+			System.out.println("TEST - username="+username+" | password="+password+" | userSelection="+userSelection);
 			if (validate(userSelectionDropDown,0)) {
 				selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
 			} else {

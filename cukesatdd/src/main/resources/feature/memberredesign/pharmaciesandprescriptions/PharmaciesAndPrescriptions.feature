@@ -105,7 +105,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | 313410 | MA       | Individual_PnP | no         |
       | 313410 | SHIP     | Individual_PnP | no         |
 
-  #----- beginning of claims test for offline prod - local run only ------------------
+  #----- beginning of test for offline prod - local run only ------------------
   # DO NOT REMOVE this scenario
   # This scenario is not part of the regular regression run BUT is for aiding the team to do offline prod testing if needed
   # note: this setup is for the case when we need to validate on offline prod environment
