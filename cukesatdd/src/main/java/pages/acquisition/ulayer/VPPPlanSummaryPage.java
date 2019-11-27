@@ -605,7 +605,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
-			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+			
 			return valEstimatedAnnualDrugCostValue;
 		}
 		
@@ -2088,7 +2090,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	/* Navigation to DCE for all plan types having a plan name*/
 	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview module')]//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		
+	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
+				
+//		dcedropdown.click();
+		
+		//WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class, 'collapse drugs drug-provider-collapse')]//*[contains(@class,'edit-drugs')]"));
+		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
+		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
+		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
