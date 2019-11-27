@@ -670,6 +670,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	
 	public static final String plansForCompare="0";
 
+	public static final String TEST_SITE_URL="test_site_url";
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	public static final String SUMMARY_PAGE_DEEPLINK="summary_page_deeplink";
