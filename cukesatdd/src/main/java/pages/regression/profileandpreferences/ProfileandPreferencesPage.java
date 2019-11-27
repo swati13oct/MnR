@@ -52,7 +52,7 @@ public class ProfileandPreferencesPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		checkModelPopup(driver, 5L);
 
 	}
 
@@ -251,14 +251,19 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='phoneCardHeight' or @id='phone']")  // @id='phoneview' was there instead of phone
 	private WebElement phoneSection;
 
-	//tbd @FindBy(xpath = "//*[@id='phone' or @id='phoneCardHeight']//div[@class='card-header clearfix']//a[@class='edit-btn']")
-	@FindBy(xpath = "//div[contains(@class,'phone')]//span[contains(@class,'arrowIcon')]")
+	@FindBy(xpath = "//*[@id='phone' or @id='phoneCardHeight']//div[@class='card-header clearfix']//a[@class='edit-btn']")
 	private WebElement phoneEditButton;
 
-	//tbd @FindBy(xpath = "//*[@id='editPhone']/span[contains(text(),'Edit')]")
-	@FindBy(xpath = "//*[contains(@class,'phoneedit')]//a[contains(text(),'Edit')]")
+	@FindBy(xpath = "//div[contains(@class,'phone')]//span[contains(@class,'arrowIcon')]")
+	private WebElement phoneEditArrowShip;
+
+	@FindBy(xpath = "//*[@id='editPhone']/span[contains(text(),'Edit')]")
 	private WebElement phoneEditButtonUhc;
 
+	@FindBy(xpath = "//*[contains(@class,'phoneedit')]//a[contains(text(),'Edit')]")
+	private WebElement phoneEditButtonShip;
+
+	
 	@FindBy(xpath = "//*[@aria-label='Cancel Phone Edit']")
 	private WebElement phoneCancelButtonUhc;
 
@@ -1397,6 +1402,7 @@ private WebElement editEmailAddressArrowbutton;
 			validateNew(phoneCancelButtonUhc);
 			phoneGoBackBtnUhc.click();
 		} else  {
+			/* tbd
 			try{
 				 phoneEdit = phoneEditText.isDisplayed();
 			}
@@ -1404,7 +1410,7 @@ private WebElement editEmailAddressArrowbutton;
 				System.out.println(e.getMessage());
 			}
 			if(phoneEdit!= true){
-			validateNew(phoneSectionArrowUhc);
+				validateNew(phoneSectionArrowUhc);
 				phoneSectionArrowUhc.click();
 				validateNew(phoneEditButtonUhc);
 				validateNew(phoneGoBackBtnUhc);
@@ -1415,9 +1421,22 @@ private WebElement editEmailAddressArrowbutton;
 				phoneEditButton.click();
 				validateNew(phoneCancelButtonUhc);
 				phoneCancelButtonUhc.click();
+			}  */
+			if (validate(phoneSectionArrowUhc,2)) {
+				validateNew(phoneSectionArrowUhc);
+				phoneSectionArrowUhc.click();
+				validateNew(phoneEditButtonShip);
+				validateNew(phoneGoBackBtnUhc);
+//				validateNew(phoneCancelButtonUhc);
+				phoneGoBackBtnUhc.click();
+			} else {
+				validateNew(phoneEditButton);
+				phoneEditButton.click();
+				validateNew(phoneCancelButtonUhc);
+				phoneCancelButtonUhc.click();
 			}
 		}
-		
+		//phoneEditButton  phoneEditButtonUhc phoneGoBackBtnUhc
 	}
 
 	/**
@@ -1460,31 +1479,39 @@ private WebElement editEmailAddressArrowbutton;
 			validateNew(mobilePhoneUhc);
 		}else  {
 			if(driver.findElement(By.xpath(".//*[contains(@id,'phone')]//a[contains(text(),'Edit')]"))!= null) {
-			//tbd if(driver.findElement(By.xpath(".//*[@id='phone']//a[contains(text(),'Edit')]"))!= null) {
-			phoneEditButton.click();
-			CommonUtility.checkPageIsReady(driver);
-			phoneEditButtonUhc.click();
-			CommonUtility.checkPageIsReady(driver);
-			validateNew(eveningTimePhoneTextField);
-			validateNew(daytimePhoneTextField);
-			validateNew(phoneTopCancelButton);
-			validateNew(phoneCancelButton);
-			validateNew(phoneSaveButton);
-			eveningTimePhoneTextField.clear();
-			eveningTimePhoneTextField.sendKeys("123");
-			daytimePhoneTextField.click();
-			validateNew(eveningphoneErrorMessage);
-			String errormsg =  eveningphoneErrorMessage.getText();
-			if (errormsg != null)
-				System.out.println(errormsg);
-			else
-				Assert.fail("Could not validate the error message for incorrect phone number");
+				//tbd if(driver.findElement(By.xpath(".//*[@id='phone']//a[contains(text(),'Edit')]"))!= null) {
+				
+				if(memType.toUpperCase().contains("SHIP")) {
+					phoneEditArrowShip.click();
+					CommonUtility.waitForPageLoad(driver, phoneEditButtonShip, 5);
+					phoneEditButtonShip.click();
+				} else {
+				phoneEditButton.click();
+				}
+				
+				CommonUtility.checkPageIsReady(driver);
+				//tbd phoneEditButtonUhc.click();
+				//tbd CommonUtility.checkPageIsReady(driver);
+				validateNew(eveningTimePhoneTextField);
+				validateNew(daytimePhoneTextField);
+				validateNew(phoneTopCancelButton);
+				validateNew(phoneCancelButton);
+				validateNew(phoneSaveButton);
+				eveningTimePhoneTextField.clear();
+				eveningTimePhoneTextField.sendKeys("123");
+				daytimePhoneTextField.click();
+				validateNew(eveningphoneErrorMessage);
+				String errormsg =  eveningphoneErrorMessage.getText();
+				if (errormsg != null)
+					System.out.println(errormsg);
+				else
+					Assert.fail("Could not validate the error message for incorrect phone number");
 			}else {
 				validateNew(phoneSectionArrowUhc);
 				phoneSectionArrowUhc.click();
 				phoneEditButtonUhc.click();
 				validate(homePhoneUhc);
-//				validateNew(additionalPhoneUhc);
+				//				validateNew(additionalPhoneUhc);
 				validateNew(workPhoneUhc);
 				validateNew(mobilePhoneUhc);
 			}
@@ -1523,39 +1550,53 @@ private WebElement editEmailAddressArrowbutton;
 	 * @toDo : Validates the functionality of saving or updating Phone numbers
 	 *       in phone section
 	 */
-	public void validatePhoneSave() {
+	public void validatePhoneSave(String memType) {
 		try {
-		//phoneEditButton.click();
-		if (phoneSaveButton.isDisplayed()) {
-			String evetime = "2222222222";
-			String daytime = "2222222222";
-			eveningTimePhoneTextField.clear();
-			eveningTimePhoneTextField.sendKeys(Keys.CONTROL + "a");
-			Thread.sleep(500);
-			eveningTimePhoneTextField.sendKeys(Keys.DELETE);
-			Thread.sleep(500);
-			eveningTimePhoneTextField.sendKeys(evetime);
-			Thread.sleep(500);
-			
-			System.out.println("Cleared evening phone field");
-			daytimePhoneTextField.clear();
-			daytimePhoneTextField.sendKeys(Keys.CONTROL + "a");
-			Thread.sleep(500);
-			daytimePhoneTextField.sendKeys(Keys.DELETE);
-			Thread.sleep(500);
-			System.out.println("Cleared daytime phone field");
-			daytimePhoneTextField.sendKeys(daytime);
-			Thread.sleep(500);
-			phoneSaveButton.click();
-			Thread.sleep(500);
-
-			if (validate(eveningTimePhoneTextField_visble,2)) {
-			//tbd if (eveningTimePhoneTextField.isDisplayed()) {
-
-				Assert.fail();
+			if (!memType.toUpperCase().contains("SHIP")) {
+				phoneEditButton.click();
+				System.out.println("Clicked Edit button for phone");
 			}
+			CommonUtility.waitForPageLoad(driver, phoneSaveButton, 5);
+			if (validate(phoneSaveButton,0)) {
+				System.out.println("Phone - save button is displayed");
 
-		}
+				String evetime = "222-222-2222";
+				String daytime = "222-222-2222";
+				eveningTimePhoneTextField.clear();
+				eveningTimePhoneTextField.sendKeys(Keys.CONTROL + "a");
+				Thread.sleep(500);
+				eveningTimePhoneTextField.sendKeys(Keys.DELETE);
+				Thread.sleep(500);
+				eveningTimePhoneTextField.sendKeys(evetime);
+				Thread.sleep(500);
+
+				System.out.println("Cleared evening phone field");
+				daytimePhoneTextField.clear();
+				daytimePhoneTextField.sendKeys(Keys.CONTROL + "a");
+				Thread.sleep(500);
+				daytimePhoneTextField.sendKeys(Keys.DELETE);
+				Thread.sleep(500);
+				System.out.println("Cleared daytime phone field");
+				daytimePhoneTextField.sendKeys(daytime);
+				Thread.sleep(500);
+				phoneSaveButton.click();
+				Thread.sleep(500);
+
+				WebElement ePhone=eveningTimePhoneTextField;
+				if (memType.toUpperCase().contains("SHIP")) {
+					ePhone=eveningTimePhoneTextField_visble;
+				}
+				Assert.assertTrue("PROBLEM - still see the edit field for evening phone after clicking SAVE button", !validate(ePhone,2));
+				/* tbd if (validate(ePhone,2)) {
+					//tbd if (eveningTimePhoneTextField.isDisplayed()) {
+
+					Assert.fail();
+				} */
+
+			} else {
+				System.out.println("Phone - save button is NOT displayed");
+
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1581,7 +1622,7 @@ private WebElement editEmailAddressArrowbutton;
 		// TODO Auto-generated method stub
 		//tbd driver.findElement(By.xpath("//*[@class='phone parbase section']//*[@class='material-icons arrowIcon']")).click();
 		//tbd driver.findElement(By.xpath("//*[@id='phone']/div[1]/div/div/div/div/div/div/div/a")).click();
-		phoneEditButtonUhc.click();
+		phoneEditButtonShip.click();
 		CommonUtility.checkPageIsReady(driver);
 		Assert.assertTrue(phoneTopCancelButton.getAttribute("innerHTML").equalsIgnoreCase("CANCEL"));
 	}
@@ -1813,8 +1854,21 @@ private WebElement editEmailAddressArrowbutton;
 
 	public void validateEditPasswordLinkBox() {
 		CommonUtility.waitForPageLoad(driver, passwordEditLink, 5);
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		CommonUtility.checkPageIsReady(driver);
 		passwordEditLink.click();
+		System.out.println("Clicked Password Edit link");
+		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, confirmPassword, 5);
+		if(validate(currentPassword,0)){
+			if(validate(newPassword,0)){
+				Assert.assertTrue("Error in validating the edit password link box elements",validate(confirmPassword,0));
+
+				driver.findElement(By.xpath("/html/body/div/div/div[1]/div[1]/div/div[1]/flex/flex/flex-content[2]/div/p/a")).click();
+				CommonUtility.checkPageIsReady(driver);
+			}
+		}
+		/* tbd
 		if(currentPassword.isDisplayed()){
 			if(newPassword.isDisplayed()){
 				if(confirmPassword.isDisplayed()){
@@ -1823,7 +1877,7 @@ private WebElement editEmailAddressArrowbutton;
 				} else
 					Assert.fail("Error in validating the edit password link box elements");
 			}
-		}
+		} */
 	}
 	
 //	public void validateEmptyPasswordLinkBox() {
@@ -2038,38 +2092,42 @@ private WebElement editEmailAddressArrowbutton;
 
 	public void validatePhoneUpdate() {
 		editButtonInPhoneSection.click();
-
-		validateNew(homePhoneNumberTextField);
+		CommonUtility.waitForPageLoad(driver, homePhoneNumberTextField, 5);
+		validateNew(homePhoneNumberTextField,0);
 		homePhoneNumberTextField.clear();
 		homePhoneNumberTextField.sendKeys("1234567890");
 		// validateNew(additionalPhoneNumberTextField);
-		validateNew(workPhoneNumberTextField);
-		validateNew(mobilePhoneNumberTextField);
+		validateNew(workPhoneNumberTextField,0);
+		validateNew(mobilePhoneNumberTextField,0);
 
-		validateNew(cancelButtonInPhoneEdit);
-		validateNew(saveButtonInPhoneEdit);
-
+		validateNew(cancelButtonInPhoneEdit,0);
+		validateNew(saveButtonInPhoneEdit,0);
+		/* tbd
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 
 		saveButtonInPhoneEdit.click();
-
+		/* tbd 
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
+		CommonUtility.waitForPageLoad(driver, homePhoneNumberValue, 5);
 		validateNew(homePhoneNumberValue);
+		Assert.assertTrue("Not able to validate the phone update functionality", 
+				homePhoneNumberValue.getText().contains("123-456-7890"));
+		/* tbd
 		if (homePhoneNumberValue.getText().contains("123-456-7890"))
 			Assert.assertTrue(true);
 		else {
 			Assert.fail("Not able to validate the phone update functionality");
-		}
+		} */
 
 	}
 

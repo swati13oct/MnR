@@ -17,6 +17,7 @@ Feature: 1.02 Member Profile page
       | Plan Type | <memberType> |
     Then the Ship user checks the Edit Button changes to Cancel Button
     Then the user checks the functionality of save Button in Phoneeditsection
+      | Member Type | <memberType> |
     Then the user validate the functionality of Cancel Button In phoneeditSection
     Then the user validate the temporary address section for ship member
     Then the user validates that  Communication Preferences section comes up for Ship Member
@@ -42,6 +43,7 @@ Feature: 1.02 Member Profile page
       | Plan Type | <planType> |
     Then the user checks the Edit Button changes to Cancel Button
     Then the user checks the functionality of save Button in Phoneeditsection
+      | Member Type | <memberType> |
     Then the user validate the functionality of Cancel Button In phoneeditSection
     Then the user validate the temporary address section for  member
     And the user validates see more ways to contact us section
@@ -103,6 +105,7 @@ Feature: 1.02 Member Profile page
     And the user Clicks on the the Edit phone Link and validates the elements
       | Member Type | <memberType> |
     Then the user checks the functionality of save Button in Phoneeditsection
+      | Member Type | <memberType> |
     Then the user validate the functionality of Cancel Button In phoneeditSection
     Then the user validates that  Communication Preferences section doesn't come for PCP medica member
     And the user validates the address section

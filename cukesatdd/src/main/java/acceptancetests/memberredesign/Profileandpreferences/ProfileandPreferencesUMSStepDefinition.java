@@ -595,11 +595,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 
 	@Then("^the user checks the functionality of save Button in Phoneeditsection$")
-	public void UserValidatesPhoneSaveButton() {
+	public void UserValidatesPhoneSaveButton(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validatePhoneSave();
+		profilePreferencesPage.validatePhoneSave(memberType);
 
 	}
 
