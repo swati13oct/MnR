@@ -1162,17 +1162,17 @@ sauceLabsTunnelIdentifier);
 		return digest;
 	}
 	
-	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
-	static AppiumDriver mobileDriver;
-	public static String sauceLabsMobileTunnelIdentifier="OptumRDC_Manual_Dev";
-	public static String mobileSessionTimeout="900000";
-	public static String mobileTestSuiteName="Plan Recommendation Engine";
-	public static String mobileTestName="Landing Page";
+	public String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public AppiumDriver mobileDriver;
+	public  String sauceLabsMobileTunnelIdentifier="OptumRDC_Manual_Dev";
+	public  String mobileSessionTimeout="900000";
+	public  String mobileTestSuiteName="Plan Recommendation Engine";
+	public  String mobileTestName="Landing Page";
 	
-	public WebDriver getDriver(String deviceName) {
+	public AppiumDriver getMobileDriver(String deviceName) {
 
-		String findDeviceName = "iPhone X";
-		final String mobileOSName;
+		String findDeviceName = "iPhone X"; //Default device
+		String mobileOSName;
 		deviceName=deviceName.toUpperCase().trim();
 		
 		isSauceLabSelected = true;
@@ -1204,7 +1204,7 @@ sauceLabsTunnelIdentifier);
 		
 		capabilities.setCapability("deviceName", findDeviceName);
 		
-		if(findDeviceName.toUpperCase().contains("Samsung")) {
+		if(findDeviceName.toUpperCase().contains("SAMSUNG")) {
 			mobileOSName = "Android";
 			capabilities.setCapability("platformVersion", "8");
 			capabilities.setCapability("phoneOnly", "true");
@@ -1222,18 +1222,19 @@ sauceLabsTunnelIdentifier);
 				capabilities.setCapability("platformVersion", "11");
 			}	
 		}
-		capabilities.setCapability("platformName ", mobileOSName);
+		capabilities.setCapability("platformName", mobileOSName);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		try {
-			if(mobileOSName.equalsIgnoreCase("Android"))
+			if(mobileOSName.equalsIgnoreCase("Android")) {
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+			}
 			else
 				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
 
-			System.out.println("JobURL  --- "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
+			System.out.println(findDeviceName+" JobURL  --- "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			//System.out.println("JobReportURL  --- "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -4,11 +4,13 @@
 package atdd.framework;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,12 +29,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Predicate;
 
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.offset.PointOption;
+
 import java.util.regex.Pattern;
 
 /**
@@ -459,6 +468,8 @@ try {
 	 */
 	public void startNew(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")||driver.getClass().toString().toUpperCase().contains("IOS")) {}
+		else
 		driver.manage().window().maximize();
 		driver.get(url);
 	}
@@ -599,11 +610,14 @@ try {
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
-				.pollingEvery(2, TimeUnit.MILLISECONDS);
-		wait.until(new Predicate<WebDriver>() {
-			public boolean apply(WebDriver d) {
-				return (select.getOptions().size() > 1);
+		Wait wait = new FluentWait(driver)
+				.withTimeout(Duration.ofSeconds(60))
+				.pollingEvery(Duration.ofSeconds(60))
+				.ignoring(Exception.class);
+		
+		wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver d) {
+				return (select.getOptions().get(0));
 			}
 		});
 	}
@@ -784,6 +798,26 @@ try {
 			driver.switchTo().window(winHandleBefore);
 		}
 		return timeStr;
+	}
+	
+	public void mobileswipe(String percentage) {
+		AppiumDriver mobiledriver = (AppiumDriver) driver;
+		TouchAction mact = new TouchAction(mobiledriver);
+		Dimension size = mobiledriver.manage().window().getSize();
+	    //Starting y location set to 90% of the height (near bottom)
+	    int starty = (int) (size.height * 0.90);
+	    //Ending y location set to % of the height (near top)
+	    percentage = "0.".concat(percentage.replace("%", ""));
+	    int endy = (int) (size.height * Float.valueOf(percentage));
+	    //x position set to mid-screen horizontally
+	    int startx = (int) size.width / 2;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 	}
 	
 }
