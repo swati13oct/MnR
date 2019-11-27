@@ -14,7 +14,7 @@ Feature: 1.10 Member  order materials Page
     And user validates ability to submit order for item
       | Plan Type | <planType> |
       | Option    | <option>   |
-    And the user validate order additional material and click to add other order additional material in Order Confirmation Page
+    #And the user validate order additional material and click to add other order additional material in Order Confirmation Page
 
     Examples: 
 	  | planType | memberType       | option              | 
