@@ -2,7 +2,7 @@
 Feature: 1.10 Member  order materials Page
 
   #----- beginning of VBF scenarios section ------------------   
-  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate
+  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate @F357514
   Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
