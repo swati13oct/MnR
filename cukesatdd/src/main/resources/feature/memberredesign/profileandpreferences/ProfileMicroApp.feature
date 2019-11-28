@@ -62,8 +62,8 @@ Feature: 1.02 Member Profile page
     When the user navigates to Profile and Preferences page
     And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
     Then the user clicks on save button without filling current and new password and the red mandatory message should come
-
     #Then the user enters different password in confirm password field and clicks save button and the user should see expected error message - Please enter the same value again
+
     Examples: 
       | TID      | planType | memberType                     |
       | Unknown1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
@@ -104,6 +104,7 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType> |
     And the user Clicks on the the Edit phone Link and validates the elements
       | Member Type | <memberType> |
+    Then the user checks the Edit Button changes to Cancel Button
     Then the user checks the functionality of save Button in Phoneeditsection
       | Member Type | <memberType> |
     Then the user validate the functionality of Cancel Button In phoneeditSection
@@ -287,10 +288,11 @@ Feature: 1.02 Member Profile page
     Then the user validates that  Communication Preferences section doesn't come for PCP medica member 
     And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page
+
     Examples: 
        | TID			  | planType    | memberType            | copayCategory  |
        | Unknown_13 | MA          | PCP                   | NON LIS        |
-       | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS        |
+      # | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS        |
       
        
      @accountProfileMicroApp15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
@@ -309,6 +311,7 @@ Feature: 1.02 Member Profile page
     Then the user validates that  Communication Preferences section doesn't come for terminated members
     And the user validates see more ways to contact us section                                          
     And the user validates on clicking contact us link it should route to contact us page
+
     Examples:      
      | TID			  | planType | memberType        | copayCategory   |
      | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS |
@@ -335,22 +338,32 @@ Feature: 1.02 Member Profile page
       | Member Type    | <memberType>|
       | Copay Category | <copayCategory>|
     Then I validate that login is successfull  
+    
+   @accountProfileMicroApp17a
    Examples:
-    | TID			   | planType  |  memberType  | copayCategory | 
+    | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_17 | MA        |  Individual  |  NON LIS      |
     | Unknown_18 | PDP       |  Individual  |  NON LIS      |
     | Unknown_19 | MAPD      |  Individual  |  NON LIS      |
+
+   @accountProfileMicroApp17b
+   Examples:
+    | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_20 | PCP       |  Individual  |  NON LIS      |
     | Unknown_21 | Medica    |  Individual  |  NON LIS      |  
     | Unknown_22 | MAGroup   |  Group       |  NON LIS      |
     | Unknown_23 | MAPDGroup |  Group       |  NON LIS      | 
+
+   @accountProfileMicroApp17c
+   Examples:
+    | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_24 | PDPGroup  |  Group       |  NON LIS      | 
     | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS      | 
     | Unknown_26 | COMBO     | FedShip      |  NON LIS      |
     | Unknown_27 | SSUPGroup |Group         |  NON LIS      |
    
    @accountProfileMicroApp18
-  Scenario Outline: Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
+  Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
     When the above plantype user logs in 
@@ -359,36 +372,66 @@ Feature: 1.02 Member Profile page
       | PhoneNumber    | <phonenumber> |
    Then member should navigate to Home pag  
    Then User should be able to validate Dashboard elemt    
+ 
+ 	@accountProfileMicroApp18a
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | MAIndividualCOSMOS  | name1      | color1   | number1     |
        | MAPDNICE            | name1      | color1   | number1     |
        | MANICE              | name1      | color1   | number1     |
        | MAPDCOSMOS          | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18b
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        | AARPPDP             | name1      | color1   | number1     |
        | ACTIVEPCP           | name1      | color1   | number1     |
        | ACTIVEMedica        | name1      | color1   | number1     |
        | GROUPMA             | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18c
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        | GROUPMAPD           | name1      | color1   | number1     |
        | GROUPDP             | name1      | color1   | number1     |
        |  GROUPSSUP          | name1      | color1   | number1     |
        |  GROUPDPSSUP        | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18d
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        |  PREACTIVEGRP       | name1      | color1   | number1     |
        | ACTIVEGOVTSHIPCOMBO | name1      | color1   | number1     |
        |  MULTIGOVPRETERM    | name1      | color1   | number1     |
        |  ACTIVEPRESHIP      | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18e
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        |  ACTIVESHIP         | name1      | color1   | number1     |
        |  PRESHIP            | name1      | color1   | number1     |
        |ACTIVETERMFEDSHIPCOMBO | name1    | color1   | number1     |
        |  MICROMULTIFEDSHIP  | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18f
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        | MULTIFEDACTIVE      | name1      | color1   | number1     |         
        | FEDSHIPPREEFFECTIVE | name1      | color1   | number1     |    
        |  MAPREFFECTIVE      | name1      | color1   | number1     |
        |  MAPDPREFFECTIVE    | name1      | color1   | number1     |
+
+ 	@accountProfileMicroApp18g
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        | PDPPREFFECTIVE      | name1      | color1   | number1     |  
        | GRPMAPREFFECTIVE    | name1      | color1   | number1     |  
        | GRPMAPDPREFFECTIVE  | name1      | color1   | number1     |  
        |  SSUPPREFFECTIVE    | name1      | color1   | number1     |  
+
+ 	@accountProfileMicroApp18h
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
        |  GRPPDPPREFFECTIVE  | name1      | color1   | number1     |  
        |  GRPDPSSUP          | name1      | color1   | number1     |  
   

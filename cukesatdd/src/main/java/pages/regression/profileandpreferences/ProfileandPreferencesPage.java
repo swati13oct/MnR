@@ -257,8 +257,11 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'phone')]//span[contains(@class,'arrowIcon')]")
 	private WebElement phoneEditArrowShip;
 
-	@FindBy(xpath = "//*[@id='editPhone']/span[contains(text(),'Edit')]")
+	@FindBy(xpath = "//*[@id='phone']//a[contains(text(),'Edit')]")
 	private WebElement phoneEditButtonUhc;
+
+	@FindBy(xpath = "//*[@id='editPhone']/span[contains(text(),'Edit')]")
+	private WebElement phoneEditButtonIframe;
 
 	@FindBy(xpath = "//*[contains(@class,'phoneedit')]//a[contains(text(),'Edit')]")
 	private WebElement phoneEditButtonShip;
@@ -479,10 +482,12 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='addressview']/div[@class='go-to-icon']/i")
 	private WebElement addressSectionArrowUhc;
 	
-	//tbd @FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
 	@FindBy(xpath="//div[contains(@class,'phone')]//span[contains(@class,'arrowIcon')]")
 	private WebElement phoneSectionArrowUhc;
-	
+
+	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
+	private WebElement phoneSectionArrowIframe;
+
 	@FindBy(xpath = "(//*[@class='phone ng-scope']/p/span[@class='ng-binding'])[1]")
 	private WebElement updatedHomePhoneAfterSave;
 	
@@ -708,7 +713,8 @@ private WebElement editEmailAddressArrowbutton;
 		@FindBy(xpath = "//*[@ng-click='emailEdit()']//span[contains(text(),'EMAIL ADDRESS')]")
 		private WebElement emailAddressHeader;
 
-		@FindBy(xpath = "//*[@id='email' ]//a[contains(text(),'Edit')]")
+		//tbd @FindBy(xpath = "//*[@id='email' ]//a[contains(text(),'Edit')]")
+		@FindBy(xpath = "//*[contains(@id,'email') ]//a[contains(text(),'Edit')]")
 		private WebElement emailEditIcon;
 		
 		@FindBy(xpath = "//*[@id='editEmail_P']//span[contains(text(),'Edit')]")
@@ -776,10 +782,12 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(className = "atdd-phone-bottomcancel")
 	private WebElement cancelButtonOnPhoneSave;
 
-	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[1]/div/span[2]")
+	//tbd @FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[1]/div/span[2]")
+	@FindBy(xpath = "//div[contains(@class,'phone')]//span[contains(@class,'atdd-daytime-phone')]/../span[2]")
 	private WebElement updatedDaytimePhoneAfterSave;
 
-	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
+	//tbd @FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
+	@FindBy(xpath = "//div[contains(@class,'phone')]//span[contains(@class,'atdd-evening-phone')]/../span[2]")
 	private WebElement updatedEvetimePhoneAfterSave;
 
 	@FindBy(xpath = "//*[@id='phone']/div[1]/h4/span")
@@ -1274,6 +1282,7 @@ private WebElement editEmailAddressArrowbutton;
 	 * @toDo : Validates the permanent address section header
 	 */
 	public void validatepermanentaddress() {
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Permanent Address");
 		boolean permanentaddressArrowValue =false;
 		try {
@@ -1552,10 +1561,10 @@ private WebElement editEmailAddressArrowbutton;
 	 */
 	public void validatePhoneSave(String memType) {
 		try {
-			if (!memType.toUpperCase().contains("SHIP")) {
-				phoneEditButton.click();
-				System.out.println("Clicked Edit button for phone");
-			}
+		//tbd 	if (!memType.toUpperCase().contains("SHIP")) {
+			//tbd		phoneEditButton.click();
+			//tbd			System.out.println("Clicked Edit button for phone");
+			//tbd	}
 			CommonUtility.waitForPageLoad(driver, phoneSaveButton, 5);
 			if (validate(phoneSaveButton,0)) {
 				System.out.println("Phone - save button is displayed");
@@ -1612,9 +1621,14 @@ private WebElement editEmailAddressArrowbutton;
 
 	public void validateCancelElement() {
 		// TODO Auto-generated method stub
-//		phoneEdit.click();
-		phoneEditButtonUhc.click();
-		Assert.assertTrue(phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
+		if (validate(phoneEdit,0)) {
+			phoneEdit.click();
+		} else {
+			phoneEditButton.click();
+		}
+		CommonUtility.checkPageIsReady(driver);
+		Assert.assertTrue(phoneTopCancelButton.getAttribute("innerHTML").equalsIgnoreCase("CANCEL") 
+				|| phoneTopCancelButton.getText().equalsIgnoreCase("CANCEL"));
 
 	}
 
@@ -2017,6 +2031,7 @@ private WebElement editEmailAddressArrowbutton;
 		// validateEpmpIframe();
 		checkModelPopup(driver);
 		editEmailAddressArrowbutton.click();
+		CommonUtility.waitForPageLoad(driver, primaryEmailAddresMialBox, 5);
 		System.out.println("i clicked =================");
 		if (validate(primaryEmailAddresMialBox)) {
 			validate(editPrimaryEmailButton);
@@ -2040,17 +2055,17 @@ private WebElement editEmailAddressArrowbutton;
 		String email = element.getText();
 		System.out.println(email);
 		editPrimaryEmailButton.click();
+		WebElement textBoxElement=epmp_editPrimaryEmailAddressTeXtBox;
+		if (validate(editPrimaryEmailAddressTeXtBox1,0)) 
+			textBoxElement=editPrimaryEmailAddressTeXtBox1;
+		
+		textBoxElement.clear();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 5000);");
 		if (email.contains("koppuravuri")) {
-			epmp_editPrimaryEmailAddressTeXtBox.clear();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 5000);");
-			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_test@optum.com");
+			textBoxElement.sendKeys("chaitanya_test@optum.com");
 		} else {
-			epmp_editPrimaryEmailAddressTeXtBox.clear();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 5000);");
-			editPrimaryEmailAddressTeXtBox.sendKeys("chaitanya_koppuravuri@optum.com");
-
+			textBoxElement.sendKeys("chaitanya_koppuravuri@optum.com");
 		}
 		savePrimaryEmailButton.click();
 		try {
@@ -2684,12 +2699,13 @@ private WebElement editEmailAddressArrowbutton;
 		//emailAddressRightArrow.click();  // not in portal till EPMP gets enabled
 		boolean editEmail = false;
 		try {
-			editEmail =  emailEditIcon.isDisplayed();
+			//tbd editEmail =  emailEditIcon.isDisplayed();
+			editEmail =  validate(emailEditIcon,0);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
-			if(editEmail != true ) {
+		if(editEmail != true ) {
 			driver.switchTo().frame("contact");
 			editEmailAddressArrowbutton.click();
 			validateNew(emailEditIconArrow);
@@ -2697,7 +2713,7 @@ private WebElement editEmailAddressArrowbutton;
 			validateNew(editPrimaryEmailAddressTeXtBox1);
 			validateNew(saveButtonOnEmailSave1);
 			validateNew(cancelButtonOnEmailSave1);
-/*			editPrimaryEmailAddressTeXtBox1.clear();
+			/*			editPrimaryEmailAddressTeXtBox1.clear();
 			editPrimaryEmailAddressTeXtBox1.sendKeys(emailAddress);
 			saveButtonOnEmailSave1.click();
 			validateNew(updatedEmailAfterSave1);
@@ -2738,7 +2754,7 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(xpath="//*[@class='phone ng-scope']/p")
 	private WebElement phoneNumberHeaderpre;
 
-@FindBy(xpath=" //div[@class='phoneedit parbase section']//div//div//a[@class='edit-btn'][contains(text(),'Edit')]")
+@FindBy(xpath="//div[@class='phoneedit parbase section']//div//div//a[@class='edit-btn'][contains(text(),'Edit')]")
 private WebElement phoneEDITlinkpre; 
 
 @FindBy(xpath="//label[contains(text(),'Daytime Phone')]")
@@ -2777,9 +2793,9 @@ private WebElement cancelButtonOnPhoneSavepre;
 			if(editPhone != true ) {
 					validateNew(phoneSectionPreffective);
 					validateNew(phoneNumberHeaderpre);
-				phoneSectionArrowUhc.click();
-			validateNew(phoneEditButtonUhc);
-			phoneEditButtonUhc.click();
+					phoneSectionArrowIframe.click();
+			validateNew(phoneEditButtonIframe);
+			phoneEditButtonIframe.click();
 			validateNew(homePhoneUhc);
 			validateNew(workPhoneUhc);
 			validateNew(mobilePhoneUhc);
@@ -2805,6 +2821,8 @@ private WebElement cancelButtonOnPhoneSavepre;
 		else {
 			validateNew(phoneEDITlinkpre);
 			phoneEDITlinkpre.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, dayTimePhoneTextfieldpre, 5);
 			validateNew(dayTimePhoneTextfieldpre);
 			validateNew(eveningTimeTextfieldpre);
 			validateNew(saveButtonOnPhoneSavepre);
@@ -2814,23 +2832,27 @@ private WebElement cancelButtonOnPhoneSavepre;
 			eveningTimefieldpre.clear();
 			eveningTimefieldpre.sendKeys("1234567890");
 			saveButtonOnPhoneSavepre.click();
+			CommonUtility.waitForPageLoad(driver, updatedDaytimePhoneAfterSave, 5);
 			validateNew(updatedDaytimePhoneAfterSave);
 			validateNew(updatedEvetimePhoneAfterSave);
 			System.out.println(updatedDaytimePhoneAfterSave.getText() + updatedEvetimePhoneAfterSave.getText());
+			Assert.assertTrue("Not able to validate the Phone  update functionality for  member",(updatedDaytimePhoneAfterSave.getText().contains("(123) 456-7890")
+					&& updatedEvetimePhoneAfterSave.getText().contains("(123) 456-7890")));
+			/* tbd 
 			if (updatedDaytimePhoneAfterSave.getText().contains("(123) 456-7890")
 					&& updatedEvetimePhoneAfterSave.getText().contains("(123) 456-7890"))
 				Assert.assertTrue(true);
 			else {
 				Assert.fail("Not able to validate the Phone  update functionality for  member");
-			}
+			} */
 		}
-		
+		/* tbd 
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} */
 	   }
 	
 	@FindBy(xpath="//*[@class='box-inner-nocursor box-inner ng-scope'][3]")
@@ -2868,6 +2890,12 @@ private WebElement cancelButtonOnPhoneSavepre;
    @FindBy(xpath="(//*[@ng-if='showAddress != address.addressTypeCode.code'])[2]")
    private WebElement MailingAddressblock;
    
+	@FindBy(xpath="//a[@id='addressview']")
+	private WebElement AddMailingAddressblockIframe;
+  
+   
+ 
+   
 	public void validateMailingAddressSection() throws InterruptedException{
 		CommonUtility.checkPageIsReady(driver);
 		//tbd Thread.sleep(10000);
@@ -2876,7 +2904,8 @@ private WebElement cancelButtonOnPhoneSavepre;
 		//tbd 	BackArrowbutton.click();
 		//tbd }
 		//tbd else {
-			validateNew(AddMailingAddressblock);	
+			Assert.assertTrue("PROBLEM - unable to locate mailing address block", validate(AddMailingAddressblock, 0) || validate(AddMailingAddressblockIframe, 0));
+			//tbd validateNew(AddMailingAddressblock);	
 		//tbd }
 	}
 	/**
