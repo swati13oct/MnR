@@ -81,7 +81,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row3_1 > span")
 	public WebElement footerMedicareEducationLink;
 	
-	@FindBy(css = "//a[@class='back-to-top']")
+	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
 	public WebElement footerBackToTopLink;
 	
 	@FindBy(css = "#stateWidget > div > label")
@@ -133,7 +133,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerAlreadyAPlanMember, 30);
 		Assert.assertTrue(headerAlreadyAPlanMember.getText().contains("Already a Plan Member?"));
 		validate(headerAlreadyAPlanMemberPipeSymbol, 30);
-		Assert.assertTrue(headerAlreadyAPlanMemberPipeSymbol.getText().contains(" | "));
+		Assert.assertTrue(headerAlreadyAPlanMemberPipeSymbol.getText().contains("|"));
 		validate(headerSigninLink, 30);
 		Assert.assertTrue(headerSigninLink.getText().contains("Sign in"));
 		validate(headerRegisterLink, 30);
