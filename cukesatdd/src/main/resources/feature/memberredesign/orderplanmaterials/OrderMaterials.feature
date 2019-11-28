@@ -2,7 +2,7 @@
 Feature: 1.10 Member  order materials Page
 
   #----- beginning of VBF scenarios section ------------------   
-  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate
+  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate @F357514
   Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -14,7 +14,7 @@ Feature: 1.10 Member  order materials Page
     And user validates ability to submit order for item
       | Plan Type | <planType> |
       | Option    | <option>   |
-    And the user validate order additional material and click to add other order additional material in Order Confirmation Page
+    #And the user validate order additional material and click to add other order additional material in Order Confirmation Page
 
     Examples: 
 	  | planType | memberType       | option              | 
