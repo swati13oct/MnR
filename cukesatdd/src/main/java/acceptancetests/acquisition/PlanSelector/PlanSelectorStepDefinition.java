@@ -15,6 +15,7 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.planSelectorEngine.PlanSelectorHeaderAndFooter;
 import pages.acquisition.planSelectorEngine.PlanSelectorNewPages;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -190,6 +191,13 @@ public class PlanSelectorStepDefinition {
 	public void user_check_landing_page_Plan_Selector_tool() {
 		PlanSelectorNewPages planSelectorhomepage =  new PlanSelectorNewPages(wd);
 		planSelectorhomepage.landingpage();
+}
+	
+	@Then("^user validate Header and Footer elements of Plan Recommendation Engie$")
+	public void user_check_header_footer_Plan_Selector_tool() {
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		headerAndFooter.headerElements();
+		headerAndFooter.footerElements();
 }
 	
 	@And("^clicks on get started button and check error scenarios$")

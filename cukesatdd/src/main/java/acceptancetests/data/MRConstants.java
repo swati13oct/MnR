@@ -253,7 +253,7 @@ public class MRConstants {
   
   public static String Local_URL = "http://10.178.145.230:4200/";
   
-  public static String TeamDigital_URL = "http://publish-team-digital.ocp-elr-core-nonprod.optum.com/content/planselector/planselectordemo.html/";
+  public static String TeamDigital_URL = "https://team-digital-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/plan-recomendation-engine.html/";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
