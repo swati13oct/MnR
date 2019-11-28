@@ -34,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -105,11 +106,16 @@ public class MRScenario {
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
-	
+	public static String sauceLabsMobileTunnelIdentifier;
 
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+	
+	public String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public AppiumDriver mobileDriver;
+	public  String mobileSessionTimeout="900000";
+	public  String mobileTestSuiteName="Mobile Plan Recommendation Engine";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -166,7 +172,9 @@ public class MRScenario {
 		
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
-
+		sauceLabsMobileTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
+				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
+		
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
@@ -1161,87 +1169,89 @@ sauceLabsTunnelIdentifier);
 		}
 		return digest;
 	}
-	
-	public String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
-	public AppiumDriver mobileDriver;
-	public  String sauceLabsMobileTunnelIdentifier="OptumRDC_Manual_Dev";
-	public  String mobileSessionTimeout="900000";
-	public  String mobileTestSuiteName="Plan Recommendation Engine";
-	public  String mobileTestName="Landing Page";
+
 	
 	public AppiumDriver getMobileDriver(String deviceName) {
 
-		String findDeviceName = "iPhone X"; //Default device
+		String findDeviceName = "iPhone X"; // Default device
 		String mobileOSName;
-		deviceName=deviceName.toUpperCase().trim();
-		
+		deviceName = deviceName.toUpperCase().trim();
+
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
-		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); //max 30 mins
+		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for device allocation
+		// capabilities.setCapability("commandTimeouts", 30); //New command timeout max 60,000 sec
 		capabilities.setCapability("testobject_suite_name", mobileTestSuiteName);
-		capabilities.setCapability("testobject_test_name", mobileTestName);
-		capabilities.setCapability("tunnelIdentifier",sauceLabsMobileTunnelIdentifier);		
-		
-		if(deviceName.contains("IPHONEX")||deviceName.contains("IPHONE X"))
+		// capabilities.setCapability("testobject_test_name", mobileTestName);
+		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+
+		if (deviceName.contains("IPHONEX") || deviceName.contains("IPHONE X"))
 			findDeviceName = "iPhone X";
-		if(deviceName.contains("IPHONE8")||deviceName.contains("IPHONE 8"))
+		if (deviceName.contains("IPHONE8") || deviceName.contains("IPHONE 8"))
 			findDeviceName = "iPhone 8";
-		if(deviceName.contains("IPHONE7+")||deviceName.contains("IPHONE 7 PLUS")||deviceName.contains("IPHONE 7+")||deviceName.contains("IPHONE 7PLUS"))
+		if (deviceName.contains("IPHONE7+") || deviceName.contains("IPHONE 7 PLUS") || deviceName.contains("IPHONE 7+")
+				|| deviceName.contains("IPHONE 7PLUS"))
 			findDeviceName = "iPhone 7 Plus";
-		if(deviceName.contains("IPAD AIR 1")||deviceName.equals("IPAD AIR")||deviceName.equals("IPAD")||deviceName.contains("IPAD AIR1")||deviceName.contains("IPAD1")||deviceName.contains("IPAD 1"))
+		if (deviceName.contains("IPAD AIR 1") || deviceName.equals("IPAD AIR") || deviceName.equals("IPAD")
+				|| deviceName.contains("IPAD AIR1") || deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
 			findDeviceName = "iPad Air";
-		if(deviceName.contains("IPAD AIR 2")||deviceName.contains("IPAD AIR2")||deviceName.contains("IPAD AIR1")||deviceName.contains("IPAD1")||deviceName.contains("IPAD 1"))
+		if (deviceName.contains("IPAD AIR 2") || deviceName.contains("IPAD AIR2") || deviceName.contains("IPAD AIR1")
+				|| deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
 			findDeviceName = "iPad Air 2";
-		if(deviceName.contains("S9")||deviceName.equals("SAMSUNG")||deviceName.contains("GALAXY"))
+		if (deviceName.contains("S9") || deviceName.equals("SAMSUNG") || deviceName.contains("GALAXY"))
 			findDeviceName = "Samsung Galaxy S9";
-		if(deviceName.contains("S8+")||deviceName.contains("S8 +")||deviceName.contains("S8PLUS")||deviceName.contains("S8 PLUS"))
+		if (deviceName.contains("S8+") || deviceName.contains("S8 +") || deviceName.contains("S8PLUS")
+				|| deviceName.contains("S8 PLUS"))
 			findDeviceName = "Samsung Galaxy S8+";
-		if(deviceName.contains("S8"))
+		if (deviceName.contains("S8"))
 			findDeviceName = "Samsung Galaxy S8";
-		
+
 		capabilities.setCapability("deviceName", findDeviceName);
-		
-		if(findDeviceName.toUpperCase().contains("SAMSUNG")) {
+
+		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
 			mobileOSName = "Android";
 			capabilities.setCapability("platformVersion", "8");
 			capabilities.setCapability("phoneOnly", "true");
-		}
-		else {
+		} else {
 			mobileOSName = "iOS";
 			capabilities.setCapability("phoneOnly", "true");
 			capabilities.setCapability("platformVersion", "12");
-			
-			if(findDeviceName.toUpperCase().contains("IPAD")){
+
+			if (findDeviceName.toUpperCase().contains("IPAD")) {
 				capabilities.setCapability("tabletOnly", "true");
 				capabilities.setCapability("phoneOnly", "false");
 			}
-			if(findDeviceName.toUpperCase().equals("IPAD AIR")){
+			if (findDeviceName.toUpperCase().equals("IPAD AIR")) {
 				capabilities.setCapability("platformVersion", "11");
-			}	
+			}
 		}
 		capabilities.setCapability("platformName", mobileOSName);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+		String jobName = "Mobile Execution - Using " + findDeviceName + " in  " + sauceLabsMobileTunnelIdentifier
+				+ " environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		try {
-			if(mobileOSName.equalsIgnoreCase("Android")) {
+			if (mobileOSName.equalsIgnoreCase("Android"))
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-			}
 			else
 				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
-
-			System.out.println(findDeviceName+" JobURL  --- "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
-			//System.out.println("JobReportURL  --- "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+			System.out.println(findDeviceName + " JobURL  --- "
+					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
+			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			// System.out.println("JobReportURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			// System.out.println("APIURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return mobileDriver;
-			}
+	}
 
 }

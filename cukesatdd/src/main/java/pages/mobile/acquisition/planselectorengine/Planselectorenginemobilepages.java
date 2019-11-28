@@ -55,7 +55,7 @@ public class Planselectorenginemobilepages extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//h2[@class='get-started-main-title how-does-this-work']")
 	private WebElement landingpageInnerTitle;
 	
-	@FindBy(xpath = "//*[@class='get-started-main-inner']//h2[contains(@class,'it-may-help-to-have')]")
+	@FindBy(xpath = "//*[@class='get-started-main-inner']//h3[contains(@class,'it-may-help-to-have')]")
 	public WebElement landingpageLabel;
 
 	@Override
@@ -76,9 +76,9 @@ public class Planselectorenginemobilepages extends UhcDriver {
 		System.out.println("Validating Text: ");
 		validate(landingpageText, 30);
 		mobileswipe("20%");
-		String ExpectedText = " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. ";
+		String ExpectedText = "Answer a few simple questions and get personalized plan recommendations in about 10 minutes.";
 		String ActualText = landingpageText.getText();
-		System.out.println(ActualText.equalsIgnoreCase(ExpectedText));
+		System.out.println(ActualText.contains(ExpectedText));
 		validate(getStartedBtn, 30);
 		validate(landingpageMainInner, 30);
 		System.out.println("Validating Title in Inner Section: ");

@@ -3,6 +3,7 @@ package acceptancetests.mobile.acquisition.planselectorengine;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,20 +41,29 @@ public class PlanSelectorStepDefinitionMobile {
 		return loginScenario;
 	}
 	AppiumDriver wd;
-	
+	List<DataTableRow> inputRow;
+	Map<String, String> inputValues;
 	
 	@Given("^the user is on UHC medicare acquisition site landing page mobile$")
-	public void the_user_on_uhc_medicaresolutions_site_mobile() {
-		wd = getLoginScenario().getMobileDriver("S9");
+	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
+		inputRow = new ArrayList(inputdata.getGherkinRows());
+		inputValues = new HashMap<String, String>();
+		for (int i = 0; i < inputRow.size(); i++) {
+			inputValues.put(inputRow.get(i).getCells().get(0),
+			inputRow.get(i).getCells().get(1));
+		}
+
+		System.out.println("Given device : "+inputValues.get("Device Name"));
+		wd = getLoginScenario().getMobileDriver(inputValues.get("Device Name"));
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,aquisitionhomepage);
 	}
 	
 	@When("^user validate elements on landing page of Plan Recommendation Engine mobile$")
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
+		//System.out.println("Device Type "+inputValues.get("Device Type"));
 		Planselectorenginemobilepages planSelectorhomepagemobile =  new Planselectorenginemobilepages(wd);
 		planSelectorhomepagemobile.landingpagemobile();
 }
