@@ -290,7 +290,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 	
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
@@ -476,7 +476,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
 		private WebElement startDrpDwnOption;
 		
-		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 		WebElement ViewPlanMedSupPage;
 
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
@@ -1671,7 +1671,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if (validateNew(RightRail_TFN)) {
+		if (validateNew(RightRail_TFN,45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -1958,10 +1958,15 @@ private boolean getSpecificPlanSummary(WebElement element, String planName) {
                     return false;
     }
 }
-public void validateMedicalBenefitDrugSection() {
-    validateNew(drugCoveredInfo);
-    validateNew(estimatedAnnualDrugCostLabel,45);
-    validateNew(estimatedAnnualDrugCostValue);
+public void validateMedicalBenefitDrugSection(String planName) {
+
+	//If any of these elements are not found, the test will fail so no need to add validate method.
+	
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]"));
+	driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]"));
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+
+
 }
 
 public void validateAndClickAddtoCompareinUMS(String planType , String planName) throws InterruptedException {
@@ -2070,6 +2075,12 @@ public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , Strin
 }            
 public void validateIsMyProviderCoveredLinkInUMS(String planType , String planName) {
     int attempts = 0;
+    try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	while(attempts < 2) {
         try {
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -3142,24 +3153,28 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	jsClickNew(MaleGender);
+	Thread.sleep(1000);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(1000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
+	Thread.sleep(1000);
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(1000);
 	monthBDrpDwn.click();
+	Thread.sleep(1000);
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(1000);
 	yearBDrpDwn.click();
+	Thread.sleep(1000);
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(1000);
 	startDrpDwnOption.click();
-	Thread.sleep(3000);
+	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
 	ViewPlanMedSupPage.click();
 }
@@ -3175,20 +3190,20 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 	jsClickNew(MaleGender);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
 	Thread.sleep(3000);
 	System.out.println("Plan to start date selected");
@@ -3475,5 +3490,15 @@ catch (Exception e) {
 	}
 	//note: end - added for deeplink validaton
 	//--------------------------------------------
-
+	public void clickOnViewMoreForPlan(String planName) {
+		List<WebElement> viewMoreLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+		int count = 0;
+		while(count<2){
+			if(viewMoreLink.size()>0){
+				viewMoreLink.get(0).click();
+				break;
+			}count++;
+		}
+	}
 }

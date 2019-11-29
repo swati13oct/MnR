@@ -345,7 +345,7 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 							+ "Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", 
 							expectCol6.equals(actualCol6));
 				} else {
-					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")).getText();
+					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]/div/p")).getText();
 					String expectCol7="Your Share";
 					Assert.assertTrue("PROBLEM - medical claims table header column7 value not as expected. "
 							+ "Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", 
