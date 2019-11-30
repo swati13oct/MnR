@@ -170,7 +170,7 @@ And user verifies annual drug cost in the prescription drug tab of AARP site
 And the user clicks on Back to All Plans button present on details page in AARP site
 | Drug Name1     | <genericName1>     |
 | Drug Name2     | <drugName2>     |
-#| Drug Name3     | <genricName3>     |
+| Drug Name3     | <genricName3>     |
 #| Drug Name4     | <drugName4>     |
 #| Drug Name5     | <drugName5>     |
 Then user validates Drug information is reflected on plan summary page in AARP site
