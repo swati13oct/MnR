@@ -69,6 +69,10 @@ public class PharmacyLocatorStepDefinition {
 		String siteName = inputAttributesMap.get("Site Name");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		System.out.println("TEST - testSiteUrl="+testSiteUrl);
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		
 		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -119,11 +123,13 @@ public class PharmacyLocatorStepDefinition {
 		List<String> noteList=new ArrayList<String>();
 		noteList.add("");
 		noteList.add("===== TEST NOTE ================================================");
-		String currentEnvTime=pharmacySearchPage.getTestEnvSysTime();
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
 		noteList.add("test run at stage time ="+currentEnvTime);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
-		String[] tmp=currentEnvTime.split(" ");
-		String envTimeYear=tmp[tmp.length-1];
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envTimeYear=tmpDate[tmpDate.length-1];
 		System.out.println("TEST - sysTimeYear="+envTimeYear);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 		
@@ -191,7 +197,8 @@ public class PharmacyLocatorStepDefinition {
 		List<String> testNote=pharmacySearchPage.getListOfAvailablePlanNames();
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
-		pharmacySearchPage.selectsPlanName(testPlanName);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
 	
 	/** Verify the pharmacies as per the filter criteria 
@@ -204,7 +211,8 @@ public class PharmacyLocatorStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		String testPlanYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
-		pharmacySearchPage.searchesPharmacy(language,planName,testPlanYear);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.searchesPharmacy(language,planName,testPlanYear, testSiteUrl);
 	}
 	
 	/** Verify the pharmacies as per the filter criteria 
@@ -321,7 +329,8 @@ public class PharmacyLocatorStepDefinition {
 		inputMap.put("language", language);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap, testSiteUrl);
 	}
 
 	/** Choosing the different set of combination in Pharmacy filter */

@@ -594,7 +594,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 		private WebElement Part_B_yearDrpDwnOption;
 		
-		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 		WebElement ViewPlanMedSupPage;
 
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
@@ -1652,10 +1652,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public void validateMedicalBenefitDrugSection() {
-		validateNew(drugCoveredInfo);//this field will not show 
-		validateNew(estimatedAnnualDrugCostLabel,45);
-		validateNew(estimatedAnnualDrugCostValue);
+	public void validateMedicalBenefitDrugSection(String planName) {
+	
+		//If any of these elements are not found, the test will fail so no need to add validate method.
+		
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]"));
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]"));
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+
 
 	}
 
@@ -2815,25 +2819,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		DOB.click();
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		MaleGender.click();
 		Thread.sleep(1000);
 		part_A_monthDrpDwn.click();
+		Thread.sleep(1000);
 		Part_A_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
 		part_A_yearDrpDwn.click();
+		Thread.sleep(1000);
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		part_B_monthDrpDwn.click();
+		Thread.sleep(1000);
 		Part_B_monthDrpDwnOption.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		part_B_yearDrpDwn.click();
+		Thread.sleep(1000);
 		Part_B_yearDrpDwnOption.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		startDrpDwn.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
