@@ -168,8 +168,8 @@ And the user clicks on Back to Plans button on See Your Estimated Costs page in 
 And user verifies annual drug cost in the prescription drug tab of AARP site
 	| Plan Type | <plantype> |
 And the user clicks on Back to All Plans button present on details page in AARP site
-#| Drug Name1     | <genericName1>     |
-#| Drug Name2     | <drugName2>     |
+| Drug Name1     | <genericName1>     |
+| Drug Name2     | <drugName2>     |
 #| Drug Name3     | <genricName3>     |
 #| Drug Name4     | <drugName4>     |
 #| Drug Name5     | <drugName5>     |
