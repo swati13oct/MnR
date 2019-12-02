@@ -38,7 +38,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline")) {
+		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline") || MRScenario.environmentMedicare.equalsIgnoreCase("offline-stage")) {
 			start(UHCRETIREE_ACQISITION_PAGE_URL);
 		} else {
 			start(TEAM_UHCRETIREE_ACQISITION_PAGE_URL);
