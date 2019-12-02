@@ -339,13 +339,22 @@ public class LoginPage extends UhcDriver {
 		public Object loginWithMicroApp(String username, String password, String userSelection) throws InterruptedException {
 		//tbd public Object loginWithMicroApp(String userSelection) throws InterruptedException {
 			System.out.println("TEST - username="+username+" | password="+password+" | userSelection="+userSelection);
+			
+			/* keep - re-enable this once the data are mocked on team-atest
 			if (validate(userSelectionDropDown,0)) {
 				selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
 			} else {
 				sendkeysNew(userNameField, username);
 				sendkeysNew(passwordField, password);
+			} */
+
+			if (validate(userNameField,0)) {
+				sendkeysNew(userNameField, username);
+				sendkeysNew(passwordField, password);
+			} else {
+				selectFromDropDownByText(driver, userSelectionDropDown, userSelection);
 			}
-			
+
 			signInButton.click();
 			System.out.println("Sign In clicked");
 			try {
