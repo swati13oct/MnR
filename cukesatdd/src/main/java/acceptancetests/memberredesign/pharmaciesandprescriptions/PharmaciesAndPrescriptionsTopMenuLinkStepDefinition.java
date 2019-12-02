@@ -260,6 +260,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 	@Then("^user navigates to the contact us page to validate Pharamcies and Prescriptions link$")
 	public void validate_contact_us_page() throws InterruptedException { 
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
+		String memberType=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+
 		boolean result=false;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			String page="contact us";
@@ -268,7 +270,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			testHarness.waitForTestharnessTableToShow();
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			ContactUsPage contactUsPg=testHarness.navigateToContactUsPageFromTestHarnessPage();
+			ContactUsPage contactUsPg=testHarness.navigateToContactUsPageFromTestHarnessPage(memberType);
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, contactUsPg!=null);
 			result=testHarness.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 
@@ -276,7 +278,6 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			else 
 				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
 
-			String memberType=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 			if (memberType.toLowerCase().contains("terminated")) {
 				System.out.println("Terminated user doesn't have Common Question link, skipping this step");
 				navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);
@@ -306,7 +307,6 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			else
 				Assert.assertTrue("PROBLEM - user should NOT have Pharmacies & Prescriptions link on "+page+" page", !result);
 
-			String memberType=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 			if (memberType.toLowerCase().contains("terminated")) {
 				System.out.println("Terminated user doesn't have Common Question link, skipping this step");
 				navigateBackToDashboardOrTestharness(1, testDriver, originalUrl);

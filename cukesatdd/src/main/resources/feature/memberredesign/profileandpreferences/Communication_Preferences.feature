@@ -46,6 +46,7 @@ Feature: 1.03 Member Preferences page
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Segment ID: <segmentId> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section
     Then the user validates Communication Preferences section
@@ -63,17 +64,18 @@ Feature: 1.03 Member Preferences page
     Then the user validates the presence of Back links on Preferences page
 
     Examples: 
-      | TID   | planType                         | segmentId |  
-      | 15311 | MAPD_AARP_GOGreen_Profilepref    | 000       |
-      | 15312 | MA_AARP_GOGreen_Profilepref      | 000       |
-      | 15313 | PDP_AARP_GOGreen_Profilepref     | 000       |
+      | TID   | userSelection | planType                         | segmentId |  
+      | 15311 | xxxxx         | MAPD_AARP_GOGreen_Profilepref    | 000       |
+      | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref      | 000       |
+      | 15313 | xxxxx         | PDP_AARP_GOGreen_Profilepref     | 000       |
      #note: need user data with segment id non-000 AND EPMP enabled for below case
-     #| xxxxx | MA_001_AARP_GOGreen_Profilepref  | 001       |
+     #| xxxxx | xxxxx         | MA_001_AARP_GOGreen_Profilepref  | 001       |
       
   @CommunicationPreferences2 @goGreen @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user clicks on edit preferences link
     Then the user changes the online preference and saves the change
@@ -81,16 +83,16 @@ Feature: 1.03 Member Preferences page
 
     @smokeTest @MemberVBF @smokeTest_GoGreenEPMP @rallyDashboard @testharness
     Examples: 
-      | TID   | planType                        | 
-      | 15311 | MAPD_AARP_GOGreen_Profilepref   |
+      | TID   | userSelection | planType                        | 
+      | 15311 | xxxxx         | MAPD_AARP_GOGreen_Profilepref   |
 
     Examples: 
-      | TID   | planType                        |
-      | 15312 | MA_AARP_GOGreen_Profilepref     | 
-      | 15313 | PDP_AARP_GOGreen_Profilepref    |
-      | 15314 | MAPD_UHC_GOGreen_Profilepref    |
-      | 15315 | MA_UHC_GOGreen_Profilepref      |
-      | 15316 | MAPD_GROUP_GOGreen_Profilepref  |
+      | TID   | userSelection | planType                        |
+      | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref     | 
+      | 15313 | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
+      | 15314 | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
+      | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
+      | 15316 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
   @CommunicationPreferences3 @F220921 @regressionMember
@@ -119,33 +121,36 @@ Feature: 1.03 Member Preferences page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | TID   | planType       | memberType              |
-   #  | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
-      | 15310 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
+      | TID   | userSelection | planType       | memberType              |
+   #  | 15310 | xxxxx         | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | xxxxx         | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user validates that Communication Preferences section does not display
       | Plan Type   | <planType>   |
 
     Examples: 
-      | TID   | planType               |
-      | 15310 | SSUP_ProfilePref       |
-      | 15376 | Terminated_ProfilePref |
-      | 15308 | PCP_ProfilePref        |
-      | 15308 | MEDICA_ProfilePref     |
+      | TID   | userSelection | planType               |
+      | 15310 | xxxxx         | SSUP_ProfilePref       |
+      | 15376 | xxxxx         | Terminated_ProfilePref |
+      | 15308 | xxxxx         | PCP_ProfilePref        |
+      | 15308 | xxxxx         | MEDICA_ProfilePref     |
       
   @CommunicationPreferences6 @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
     Then the user validates that Communication Preferences section for Ship
@@ -161,5 +166,5 @@ Feature: 1.03 Member Preferences page
     Then a popup is displayed and validate the popup select Yes and submit
     And the user validate the success message
     Examples: 
-      | FID    | planType                 | planName                      |
-      | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SUPPLEMENT PLAN |
+      | FID    | userSelection | planType                 | planName                      |
+      | 276629 | xxxxx         | SHIP_MedSel_ProfilePref  | AARP MEDICARE SUPPLEMENT PLAN |

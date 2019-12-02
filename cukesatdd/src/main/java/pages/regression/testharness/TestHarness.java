@@ -479,7 +479,11 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage() {
-
+		String memberType="doesntMatter";
+		return navigateToContactUsPageFromTestHarnessPage(memberType);
+	}
+	
+	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
@@ -489,9 +493,13 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
-			return new ContactUsPage(driver);
+			if(memberType.equals("memberType")) {
+				return new ContactUsPage(driver);
+			} else {
+				return new ContactUsPage(driver, memberType);
+			}
+			//tbd return new ContactUsPage(driver);
 		}
-		System.out.println("TEST - 2");
 		return null;
 	}
 
