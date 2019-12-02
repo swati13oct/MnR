@@ -95,7 +95,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			CommonUtility.waitForPageLoad(driver, selectionInstruction_fed, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction on Order Plan Materials",orderValidate(selectionInstruction_fed));
 
-			Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
+			//tbd Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
 			Assert.assertTrue("PROBLEM - unable to locate 'Replacement ID card' selection option on Order Plan Materials",orderValidate(option_fed_replacementIdField));
 			Assert.assertTrue("PROBLEM - unable to locate 'VIEW MEMBER ID CARD' link on Order Plan Materials",orderValidate(link_fed_memberIDcardLink));
 		}
