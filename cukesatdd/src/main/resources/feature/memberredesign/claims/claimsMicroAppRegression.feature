@@ -4,7 +4,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 #----- beginning of VBF section ----------------------------------------------------
   @F355345
   Scenario Outline: -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
-    Given login with following details logins in the member portal and validate elements for microapp
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Claim System   | <claimSystem>   |
       | Member Type    | <memberType>    |
@@ -35,8 +35,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 #----- beginning of regression section ---------------------------------------------
   @claimsMicroApp01
   Scenario Outline: -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -126,8 +125,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   ### note: this scenario doesn't contains steps related to detail page because drug case doesn't have detail page 
   @claimsMicroApp02
   Scenario Outline: -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -192,8 +190,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
   Scenario Outline: -TID: <TID> -planType: <planType> -claimSystem: <claimSystem> - To validate the Error Message for a PHIP  member on claims sumamry page
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Plan Category  | <planCategory>  |
       | Claim System   | <claimSystem>   |
@@ -212,8 +209,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   ### note: comment out NICE entry for now since no user data available
   #@claimsMicroApp04 @claimsEOB @US1268210 @F244667 @regressionMember
   #Scenario Outline: -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the claims eob link on claims detail page
-  #  Given login with following details logins in the member portal and validate elements for microapp
-  #    | App Type       | MICRO           |
+  #  Given login with following details logins in the member portal and validate elements
   #    | Plan Type      | <planType>    |
   #    | Member Type    | <memberType>  |
   #    | Claim System   | <claimSystem> |
@@ -239,8 +235,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   ### Waiting for data
   #@claimsMicroApp05 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   #Scenario Outline: -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP member accessing EOB page via deep link
-  #  Given login with following details logins in the member portal and validate elements for microapp
-  #    | App Type       | MICRO           |
+  #  Given login with following details logins in the member portal and validate elements
   #    | Plan Type    | <planType>    |
   #    | Member Type  | <memberType>  |
   #    | Claim System | <claimSystem> |
@@ -255,8 +250,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
   @claimsMicroApp06 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: -FID: <FID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate that SSUP GROUP member accessing EOB page via deep link
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |
@@ -270,8 +264,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
   @claimsMicroApp07 @SHIP7yearsClaims @regressionMember
   Scenario Outline: -TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -To validate SHIP 6years back claims using Custom Search
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |

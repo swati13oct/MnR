@@ -82,12 +82,13 @@ public class LoginPage extends UhcDriver {
 		}
 
 		private boolean teamSpecialCase;
-		private boolean isMicroApp;
-		public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
+		//tbd private boolean isMicroApp;
+		//tbd public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
+		public LoginPage(WebDriver driver, boolean input_teamSpecialCase) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 			teamSpecialCase=input_teamSpecialCase;
-			this.isMicroApp=isMicroApp;
+			//tbd this.isMicroApp=isMicroApp;
 			openAndValidate();
 			
 		}
@@ -107,18 +108,18 @@ public class LoginPage extends UhcDriver {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
 				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					System.out.println("Running on" +MRScenario.environment + " a env, teamSpecialCase="+teamSpecialCase);
-					if (isMicroApp) { //note: microapp run
-						PAGE_URL=MRConstants.MICROAPP_URL;
-						if (teamSpecialCase) { //note: microapp run for PCP or MEDICA user
-							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP;
-						}
-					} else { //note: non-microapp run
+					//tbd if (isMicroApp) { //note: microapp run
+					//tbd 	PAGE_URL=MRConstants.MICROAPP_URL;
+					//tbd 	if (teamSpecialCase) { //note: microapp run for PCP or MEDICA user
+					//tbd 		PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA_MICROAPP;
+					//tbd 	}
+					//tbd } else { //note: non-microapp run
 						if (teamSpecialCase) {
 							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
 						} else {
 							PAGE_URL=MRConstants.OSE_NEW_URL;	
 						}
-					}
+					//tbd }
 				} else if("team-c".equalsIgnoreCase(MRScenario.environment)) {
 					if (teamSpecialCase) {
 						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
@@ -336,7 +337,8 @@ public class LoginPage extends UhcDriver {
 		@FindBy(xpath="//select[@ng-model='planTypeValue']")
 		private WebElement userSelectionDropDown;
 		
-		public Object loginWithMicroApp(String username, String password, String userSelection) throws InterruptedException {
+		public Object loginWithLegacy(String username, String password, String userSelection) throws InterruptedException {
+		//tbd public Object loginWithMicroApp(String username, String password, String userSelection) throws InterruptedException {
 		//tbd public Object loginWithMicroApp(String userSelection) throws InterruptedException {
 			System.out.println("TEST - username="+username+" | password="+password+" | userSelection="+userSelection);
 			

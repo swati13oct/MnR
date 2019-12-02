@@ -3,10 +3,10 @@ Feature: 1.02 Member Profile page
 
   @accountProfileMicroApp1 @ShipEndtoEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type    | MICRO        |
-      | Plan Type   | <planType> |
-      | Member Type | <memberType> |
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
 	And the ship user validates the need help section
@@ -26,8 +26,8 @@ Feature: 1.02 Member Profile page
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-	    | TID   | planType | memberType          |
-	    | 15103 | SHIP     | SHIP_ProfilePref    |   
+	    | TID   | userSelection | planType | memberType          |
+	    | 15103 | xxxxxxxxxx    | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfileMicroApp2 @MAPDandMAEndToEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
@@ -89,10 +89,10 @@ Feature: 1.02 Member Profile page
   
   @accountProfileMicroApp5 @regressionPCPMedica @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type    | MICRO        |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
     Then I should see the breadcrumb  in the upper left side of the page
@@ -113,9 +113,9 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType> |
 
     Examples: 
-      | TID   | planType | memberType                      |
-      | 15105 | PCP      | PCP_SouthFlorida_ProfilePref    |
-      | 15107 | Medica   | Medica_SouthFlorida_ProfilePref |
+      | TID   | userSelection | planType | memberType                      |
+      | 15105 | xxxxxxxxx     | PCP      | PCP_SouthFlorida_ProfilePref    |
+      | 15107 | xxxxxxxxx     | Medica   | Medica_SouthFlorida_ProfilePref |
 
   @accountProfileMicroApp6 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
@@ -180,12 +180,10 @@ Feature: 1.02 Member Profile page
 
   @accountProfileMicroApp9 @EMPMprofilePageForShip @regressionMember
   Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
-    Given login with following details logins in the member portal and validate elements for microapp
-    #Removed from Regression as EPMP is still in the pipeline for development
-    #Given login with following details logins in the member portal and validate elements 
-      | App Type    | MICRO        |
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given login with following details logins in the member portal and validate elements 
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user validate the email section on profile page for ship member
     And the user validate the Phone section on profile page for ship member
@@ -193,8 +191,8 @@ Feature: 1.02 Member Profile page
     And the user validate the temporary section on profile page for ship member
 
     Examples: 
-    | TID   | planType | memberType          |
-    | xxxxx | SHIP     | SHIP_ProfilePref    |   
+    | TID   | userSelection | planType | memberType          |
+    | xxxxx | xxxxxxxxx     | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfileMicroApp10 @EPMPProfilePageContactusGroup @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members

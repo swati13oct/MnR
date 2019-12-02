@@ -19,8 +19,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   #----------------------------------------------------------------------------------
   @claimsMicroApp00
   Scenario Outline: -index: <index> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -claimType: <claimType> -Segment ID: <segmentId> - Perform detail validation for claims on both summary and detail page for each search range options
-    Given login with following details logins in the member portal and validate elements for microapp
-      | App Type       | MICRO           |
+    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Claim System   | <claimSystem>   |

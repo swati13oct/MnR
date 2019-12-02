@@ -96,7 +96,9 @@ Feature: 1.03 Member Preferences page
   @CommunicationPreferences3 @F220921 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
-      | Plan Type | <planType> |
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section
     Then the user validates Communication Preferences section
@@ -108,8 +110,8 @@ Feature: 1.03 Member Preferences page
     Then the user validates the presence of Back links on ship Preferences page 
 
     Examples: 
-      | TID    | planType         |
-      | 15309  | SHIP_ProfilePref |
+      | TID    | userSelection | planType | memberType       |
+      | 15309  | xxxxxxxxx     | SHIP     | SHIP_ProfilePref |
 
   @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member

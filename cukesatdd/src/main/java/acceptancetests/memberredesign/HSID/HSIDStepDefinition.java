@@ -52,6 +52,7 @@ public class HSIDStepDefinition {
 		return loginScenario;
 	}
 
+	/* tbd 
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
 			throws Exception {
@@ -208,19 +209,20 @@ public class HSIDStepDefinition {
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
+					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} 
 				
 				else {
 					loginPage = new LoginPage(wd);
 				}
-/*
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage
-						.loginWithLegacy(userName, pwd);
-						if (accountHomePage != null) {
-					getLoginScenario()
-							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-									accountHomePage);*/
+
+				//AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				//		.loginWithLegacy(userName, pwd);
+				//		if (accountHomePage != null) {
+				//	getLoginScenario()
+				//			.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
+				//					accountHomePage);
 				TestHarness testHarnessPage=null;
 				try {
 					testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
@@ -248,20 +250,20 @@ public class HSIDStepDefinition {
 					Assert.fail("Login not successful...");
 				}
 			}
-		}
+		} 
 
-		/*
-		 * AssistiveRegistrationPage assistiveregistration =
-		 * (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
-		 * (assistiveregistration != null) {
-		 * getLoginScenario().saveBean(PageConstantsMnR
-		 * .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
-		 * Assert.assertTrue(true); } else {
-		 * Assert.fail("***** Error in loading  Assistive Registration Page *****"
-		 * ); }
-		 */
+		
+		 // AssistiveRegistrationPage assistiveregistration =
+		 // (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
+		 // (assistiveregistration != null) {
+		 // getLoginScenario().saveBean(PageConstantsMnR
+		 // .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+		 // Assert.assertTrue(true); } else {
+		 // Assert.fail("***** Error in loading  Assistive Registration Page *****"
+		 // ); }
+		 
 
-	}
+	}*/
 
 	@And("^login with following details logins in the member portal and validate elements and route to assistive flow$")
 	public void login_with_memberassistive(DataTable memberAttributes)
@@ -700,9 +702,11 @@ public class HSIDStepDefinition {
     }
 	//^^^ note: added for 'sorry' login error workaround	
 
-	//----------- microapp
-	@And("^login with following details logins in the member portal and validate elements for microapp$")
-	public void login_with_member_microapp(DataTable memberAttributes)
+	//----------- updated to handle microapp
+	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
+	@And("^login with following details logins in the member portal and validate elements$")
+	public void login_with_member(DataTable memberAttributes)
+	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
 		boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
@@ -721,7 +725,7 @@ public class HSIDStepDefinition {
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
-		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on stage
+		if (!MRScenario.environment.contains("team-atest")) { //note: need to do this so the same script can be run on stage
 		 	userSelection = category;
 		} 
 	 	memberAttributesMap.remove("User Selection");
@@ -805,7 +809,8 @@ public class HSIDStepDefinition {
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
+					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
 					loginPage = new LoginPage(wd);
 				}
@@ -813,7 +818,8 @@ public class HSIDStepDefinition {
 				try {
 					if (isMicroApp) {
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
+						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
+						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection);
 					} else {
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
 				
