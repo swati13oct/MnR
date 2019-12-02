@@ -19,18 +19,30 @@ Feature: 1.07 Member DCE Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When I navigate to drug look up page
-    Then I should see the Pharmacy search tab as a clickable element within the DCE tool
+    When I delete all added drugs
+    When I add branded drug
+      | Drug      | <drug1>      |
+      | Dosage    | <dosage1>    |
+      | Quantity  | <quantity1>  |
+      | Frequency | <frequency1> |
+    And I navigate to step2 page
     And I should be able to move forward or backward in the tool flow
 
     Examples: 
-      | TID   | planType                       |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref |
+      | TID   | planType                       |drug1   | dosage1          | quantity1 | frequency1  |
+      | 15325 | MAPD_GROUP_GOGreen_Profilepref |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @drugCostEstimator3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When I navigate to drug look up page
+    When I delete all added drugs
+    When I add branded drug
+      | Drug      | <drug1>      |
+      | Dosage    | <dosage1>    |
+      | Quantity  | <quantity1>  |
+      | Frequency | <frequency1> |
     And I navigate to step2 page
     And we search the pharmacy within miles zipcode and pharmacy type
       | Zipcode       | <zipcode>      |
@@ -40,8 +52,8 @@ Feature: 1.07 Member DCE Page
     And I should see pharmacy saver pharmacies in results
 
     Examples: 
-      | TID   | planType                       | zipcode | radius   | pharmacytype   |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |
+      | TID   | planType                       | zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
+      | 15325 | MAPD_GROUP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @drugCostEstimator4
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .

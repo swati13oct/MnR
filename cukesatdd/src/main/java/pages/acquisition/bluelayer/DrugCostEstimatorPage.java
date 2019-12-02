@@ -97,7 +97,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[2]/div/span[3]/div")
 	public WebElement PreferredRetailSavingMsg;
-
+	
+	@FindBy(xpath = "//*[@id='backToPlanSummaryTop']")
+        private WebElement backToPlanSummaryFrmPlanDetails;
+	
 	@FindBy(className = "tablePharmacy")
 	public WebElement PharmacyList;
 
@@ -529,6 +532,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public WebElement getBtnBackToPlans() {
 		return btnBackToPlans;
 	}
+	
+	public WebElement getBtnBackToPlansSummaryFrmDetails() {
+        return backToPlanSummaryFrmPlanDetails;
+    }
 	
 	@Override
 	public void openAndValidate() {
