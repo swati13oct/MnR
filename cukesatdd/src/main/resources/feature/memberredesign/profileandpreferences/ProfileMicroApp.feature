@@ -94,10 +94,10 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType> |
       | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
-    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
-    Then I should see the breadcrumb  in the upper left side of the page
-    And clicking the link should lead me back to the Account Settings page of the member site
-    And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
+#    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
+#    Then I should see the breadcrumb  in the upper left side of the page
+#    And clicking the link should lead me back to the Account Settings page of the member site
+#    And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
     And the user validate the Email section in UMS site
     And the user fill new email address and click save then user should see new updated email on page
     And the user validates the Phone section
