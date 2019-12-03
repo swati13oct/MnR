@@ -13,9 +13,9 @@ import org.testng.Assert;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanSelectorNewPages extends UhcDriver {
+public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 
-	public PlanSelectorNewPages(WebDriver driver) {
+	public PlanSelectorLandingAndZipcodePages(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -85,9 +85,9 @@ public class PlanSelectorNewPages extends UhcDriver {
 	private WebElement errorMessage;
 	
 	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
-	private WebElement zipcodePageTilte;
+	private WebElement planSelectorPageTilte;
 	
-	@FindBy(xpath = "//*[@class='progress-bar-info']/h1")
+	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
 	private WebElement pageStepsNumberName;
 	
 	@FindBy(xpath = "//*[@class='progress-bar-info']/div")
@@ -198,16 +198,17 @@ public class PlanSelectorNewPages extends UhcDriver {
 		Assert.assertTrue(coverageTitle.getText().contains("What type of coverage are you looking for?"));
 		waitforElementVisibilityInTime(previousBtn, 45);
 		previousBtn.click();
-		waitforElementNew(zipcodePageTilte);
-		Assert.assertTrue(zipcodePageTilte.getText().contains("Get help finding a plan"));
+		waitforElementNew(planSelectorPageTilte);
+		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 	}
 	
 	public void zipcodePage() {
 		boolean hidden;
 		System.out.println("Validating ZipcodePage Elements");
-		waitforElementNew(zipcodePageTilte);
-		Assert.assertTrue(zipcodePageTilte.getText().contains("Get help finding a plan"));
+		waitforElementNew(planSelectorPageTilte);
+		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
 		waitforElementNew(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
