@@ -12,11 +12,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.MedicareAdvantagePartCPlansPage;
+import pages.acquisition.bluelayer.MedicareEligibilityPage;
+import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planSelectorEngine.PlanSelectorHeaderAndFooter;
-import pages.acquisition.planSelectorEngine.PlanSelectorNewPages;
+import pages.acquisition.planSelectorEngine.PlanSelectorLandingAndZipcodePages;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -144,7 +147,7 @@ public class PlanSelectorStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY_DROP_DOWN, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-		PlanSelectorNewPages planSelectorhomepage =  new PlanSelectorNewPages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
@@ -189,7 +192,9 @@ public class PlanSelectorStepDefinition {
 	
 	@When("^user validate elements on landing page of Plan Recommendation Engie$")
 	public void user_check_landing_page_Plan_Selector_tool() {
-		PlanSelectorNewPages planSelectorhomepage =  new PlanSelectorNewPages(wd);
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
+		headerAndFooter.navigationToPlanRecommendationEngine();
 		planSelectorhomepage.landingpage();
 }
 	
@@ -219,7 +224,7 @@ public class PlanSelectorStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY_DROP_DOWN, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-		PlanSelectorNewPages planSelectorhomepage =  new PlanSelectorNewPages(wd);
+		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
 		} else {

@@ -6,6 +6,7 @@ package pages.acquisition.planSelectorEngine;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -14,6 +15,8 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class PlanSelectorHeaderAndFooter extends UhcDriver {
+	
+	Actions actions = new Actions(driver);
 
 	public PlanSelectorHeaderAndFooter(WebDriver driver) {
 		super(driver);
@@ -33,6 +36,9 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	private WebElement iframePst;
 
 //Header Elements
+	
+	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	private WebElement landingpageHeader;
 
 	@FindBy(xpath = "//header[contains(@class,'header')]")
 	private WebElement headerSection;
@@ -60,6 +66,47 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 	@FindBy(xpath = "//a[@id='dupIconFlyOut']/span")
 	private WebElement headerHeartNumberofPlan;
+	
+	@FindBy(css = "#collapsible-0>#nav>.uhc-container")
+	private WebElement headerNavigationBar;
+	
+	@FindBy(css = "#ghn_lnk_1 > span")
+	private WebElement headerNavigationBarHomeTab;
+	
+	@FindBy(css = "#ghn_lnk_2 > span")
+	private WebElement headerNavigationBarShopForaPlanTab;
+	
+	@FindBy(css = "#ghn_lnk_3 > span")
+	private WebElement headerNavigationBarLearnAboutMedicareTab;
+	
+	@FindBy(xpath = "//*[@id='mobile-nav']/div/div[2]/form/div/label")
+	private WebElement headerNavigationBarEnterSearchTab;
+	
+	@FindBy(css = "#nav_search_icon>svg")
+	private WebElement headerNavigationBarSearchIconTab;
+	
+//Inside Shop for a Plan Elements
+	
+	@FindBy(css = "#subnav_2 > div.scroll-wrapper > div > div:nth-child(1) > label")
+	private WebElement headerShopForaPlanFindplansinyourarea;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']//*[@class='showErrors']/input")
+	private WebElement headerShopForaPlanZipcodeBox;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']//button[@class='zip-button']")
+	private WebElement headerShopForaPlanZipcodeButton;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']//*[@class='zip-lookup']")
+	private WebElement headerShopForaPlanNeedQuestionofZipcode;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']//*[@class='zip-lookup']/a/text()")
+	private WebElement headerShopForaPlanLookupZipcode;
+	
+	@FindBy(xpath = "//*[@id='subnav_2']/div[1]/div/div[1]/a/text()")
+	private WebElement headerShopForaPlanequestMoreHelp;
+	
+	@FindBy(css = ".scroll-pane> div:nth-child(3) > div > h3:nth-child(11) > a")
+	private WebElement headerGetaPlanRecommendationLink;
 	
 //Footer Elements
 	
@@ -139,6 +186,29 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerRegisterLink, 30);
 		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
 		validate(headerHeartNumberofPlan, 30);
+		validate(headerNavigationBar, 30);
+		validate(headerNavigationBarHomeTab, 30);
+		Assert.assertTrue(headerNavigationBarHomeTab.getText().contains("Home"));
+		validate(headerNavigationBarShopForaPlanTab, 30);
+		Assert.assertTrue(headerNavigationBarShopForaPlanTab.getText().contains("Shop For a Plan"));
+		validate(headerNavigationBarLearnAboutMedicareTab, 30);
+		Assert.assertTrue(headerNavigationBarLearnAboutMedicareTab.getText().contains("Learn About Medicare"));
+		validate(headerNavigationBarEnterSearchTab, 30);
+		validate(headerNavigationBarSearchIconTab, 30);
+
+//MouseOver on Shop of a Plan and Validating Inside Shop of a Plan
+		System.out.println("Validating Shop of a Plan Elements: ");
+		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+		validate(headerShopForaPlanFindplansinyourarea, 30);
+		validate(headerShopForaPlanZipcodeBox, 30);
+		validate(headerShopForaPlanZipcodeButton, 30);
+		Assert.assertTrue(headerShopForaPlanZipcodeButton.getText().contains("Find Plans"));
+		validate(headerShopForaPlanNeedQuestionofZipcode, 30);
+		Assert.assertTrue(headerShopForaPlanNeedQuestionofZipcode.getText().contains("Need help finding a ZIP code? "));
+		validate(headerShopForaPlanLookupZipcode, 30);
+		Assert.assertTrue(headerShopForaPlanLookupZipcode.getText().contains("Look up ZIP code "));
+		validate(headerShopForaPlanequestMoreHelp, 30);
+		Assert.assertTrue(headerShopForaPlanequestMoreHelp.getText().contains("Request More Help and Information "));
 	}
 	
 //	Footer Element Verification Method
@@ -178,6 +248,13 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		Assert.assertTrue(footerAccessibilityLink.getText().contains("Accessibility"));
 		validate(footerCertificateStatement, 30);
 		validate(footerLastUpdated, 30);
+	}
+	
+	public void navigationToPlanRecommendationEngine() {
+		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+		headerGetaPlanRecommendationLink.click();
+		validate(landingpageHeader, 30);
 	}
 
 	public void browserBack() {

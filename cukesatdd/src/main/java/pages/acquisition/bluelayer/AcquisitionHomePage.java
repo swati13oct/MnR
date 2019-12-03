@@ -336,7 +336,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
 	private static String Local_AARP_URL = MRConstants.Local_URL;	
-	private static String DIGITAL_AARP_URL = MRConstants.TeamDigital_URL;
+	private static String DIGITAL_AARP_URL = MRConstants.TeamDigital_AARP_URL;
+	private static String DIGITAL_UHC_URL = MRConstants.TeamDigital_UHC_URL;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
@@ -429,8 +430,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			checkModelPopup(driver,45);
 		} else if(MRScenario.environment.equals("local")){
 			startNew(Local_AARP_URL);
-		} else if(MRScenario.environment.equals("team-digital")){
+		} else if(MRScenario.environment.equals("team-digital-aarp")){
 			startNew(DIGITAL_AARP_URL);
+		} else if(MRScenario.environment.equals("team-digital-uhc")){
+			startNew(DIGITAL_UHC_URL);
 		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkModelPopup(driver,10);
