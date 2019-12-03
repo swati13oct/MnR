@@ -17,7 +17,6 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
-import pages.acquisition.planSelectorEngine.PlanSelectorNewPages;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planselectorengine.PlanselectorHeaderFootermobilepages;
 import pages.mobile.acquisition.planselectorengine.Planselectorenginemobilepages;
