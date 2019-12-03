@@ -106,8 +106,8 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				}  else if("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					System.out.println("Running on" +MRScenario.environment + " a env, teamSpecialCase="+teamSpecialCase);
+				}  else if(MRScenario.environment.contains("team-a")) {
+					System.out.println("Running on" +MRScenario.environment + " env, teamSpecialCase="+teamSpecialCase);
 					//tbd if (isMicroApp) { //note: microapp run
 					//tbd 	PAGE_URL=MRConstants.MICROAPP_URL;
 					//tbd 	if (teamSpecialCase) { //note: microapp run for PCP or MEDICA user
@@ -218,7 +218,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) { //note: sometimes take longer to load page on this team env
+					if (MRScenario.environmentMedicare.contains("team-atest")) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
@@ -388,7 +388,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) { //note: sometimes take longer to load page on this team env
+					if (MRScenario.environmentMedicare.contains("team-a")) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {

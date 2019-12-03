@@ -747,7 +747,7 @@ public class HSIDStepDefinition {
 		boolean teamSpecialCase=false;
 		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+		if (MRScenario.environment.contains("team-a")) {
 			if ((planType != null) || (category != null)) {
 				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
@@ -808,7 +808,7 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+				if (MRScenario.environment.contains("team-a")) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
 					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
