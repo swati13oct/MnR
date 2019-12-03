@@ -212,7 +212,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 	@Then("^user navigates to the health and wellness page to validate Pharamcies and Prescriptions link$")
 	public void validate_health_and_wellness_page() throws InterruptedException { 
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
-		if (MRScenario.environment.equalsIgnoreCase("team-a"))	{		
+		if (MRScenario.environment.contains("team-a"))	{		
 			System.out.println("Lower env doesn't support Health and Wellness page, skipping this step");
 			return;
 		}

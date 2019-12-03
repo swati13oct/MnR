@@ -50,7 +50,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
 		Thread.sleep(5000); //note: keep this for the page to load
-		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i=0;

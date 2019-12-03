@@ -846,7 +846,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link$")
 	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link() throws InterruptedException {
-		if(MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
 			System.out.println("HSID password related step is not supported on lower env, skipping...");
 			return;
 		}
@@ -880,7 +880,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I should see the breadcrumb  in the upper left side of the page$")
 	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException {
-		if(MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
 			System.out.println("HSID password related step is not supported on lower env, skipping...");
 			return;
 		}
@@ -896,7 +896,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@And("^clicking the link should lead me back to the Account Settings page of the member site$")
 	public void clicking_the_link_should_lead_me_back_to_the_Account_Settings_page_of_the_Medica_member_site() {
-		if(MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
 			System.out.println("HSID password related step is not supported on lower env, skipping...");
 			return;
 		}
@@ -916,7 +916,7 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link$")
     public void i_click_the_HEALTHSAFE_ID_ACCOUNT_RECOVERY_AND_SECURITY_link() throws InterruptedException {
-		if(MRScenario.environmentMedicare.equalsIgnoreCase("team-a")) {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
 			System.out.println("HSID password related step is not supported on lower env, skipping...");
 			return;
 		}
