@@ -41,7 +41,11 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       | Is Multi County | <isMultutiCounty> |
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
-      
+    Then the UHC user clicks on Start Application Button proceed to next pages for getting resume application key
+       | DOB           | <DOB>         |
+       | Firstname     | <Firstname>   |
+       | Lastname      | <Lastname>    |
+       | Zipcode       | <zipcode>     |
    Then the user will navigate to locate resume application button
    	 	| DOB               | <DOB>         |
    	 	| Zipcode           | <zipcode>     |
@@ -56,7 +60,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
      
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
-     |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
+     |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrieve         |
    
       
       

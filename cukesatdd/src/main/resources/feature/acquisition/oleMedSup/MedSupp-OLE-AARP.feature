@@ -19,9 +19,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
-       | zipcode       | <zipcode>     |
-       
-      
+       | zipcode       | <zipcode>     |     
       Then user validates the resume application processed in the AARP site
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
@@ -41,7 +39,10 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-      
+   Then the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key
+       | DOB           | <DOB>         |
+       | Firstname     | <Firstname>   |
+       | Lastname      | <Lastname>    |
    Then user clicks on resume application button in the AARP site
      Then user enters data to resume the application in the AARP site
        | ApplicationID     | <ApplicationID>   |
