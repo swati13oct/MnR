@@ -19,6 +19,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planSelectorEngine.PlanSelectorNewPages;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.planselectorengine.PlanselectorHeaderFootermobilepages;
 import pages.mobile.acquisition.planselectorengine.Planselectorenginemobilepages;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -66,6 +67,13 @@ public class PlanSelectorStepDefinitionMobile {
 		//System.out.println("Device Type "+inputValues.get("Device Type"));
 		Planselectorenginemobilepages planSelectorhomepagemobile =  new Planselectorenginemobilepages(wd);
 		planSelectorhomepagemobile.landingpagemobile();
+}
+	
+	@When("^user validate presence of Header and Footer elements on landing page mobile$")
+	public void user_check_header_Footer_mobile() {
+		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		planSelectorheaderfootermobile.headerElementsMobile();
+		planSelectorheaderfootermobile.footerElementsMobile();
 }
 	
 }

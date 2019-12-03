@@ -1,11 +1,11 @@
-@PlanSelectorMobile
-Feature: Plan Selector Tool flow - Verify landing page in plan selector mobile page
+@PlanSelectorHeaderFooterMobile
+Feature: Plan Selector Tool flow - Verify Headerlanding page in plan selector mobile page
 
-  @PREmobile @planrecommandonationmobile @landingpagemobile
+  @PREmobile @planrecommandonationmobile @landingpagemobile @headerfootermobile
   Scenario Outline: - To validate mobile landing Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page mobile
       | Device Name | <DeviceName> |
-    When user validate elements on landing page of Plan Recommendation Engine mobile
+    When user validate presence of Header and Footer elements on landing page mobile
 
     Examples: 
       | DeviceName |

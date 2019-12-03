@@ -808,7 +808,7 @@ try {
 	    int starty = (int) (size.height * 0.90);
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
-	    int endy = (int) (size.height * Float.valueOf(percentage));
+	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
 		try {
