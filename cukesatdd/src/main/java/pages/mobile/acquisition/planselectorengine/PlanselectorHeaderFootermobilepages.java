@@ -80,9 +80,97 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 	@FindBy(css = "#subnav_2 .nav-back")
 	private WebElement headernavigationBackbutton;
 	
+	@FindBy(css = "#subnav_3 .nav-back")
+	private WebElement headernavigationmedicareBackbutton;
+	
 	@FindBy(css = "#nav>a.nav-close")
 	private WebElement headernavigationCloseicon;
-
+	
+	// Shop for s plan inner elements
+	@FindBy(css = "#subnav_2 label[for='nav-zipcode']")
+	private WebElement headerFindplanslabel;
+	
+	@FindBy(css = ".zip-form #nav-zipcode")
+	private WebElement headerfindZipcodetext;
+	
+	@FindBy(css = ".zip-form .zip-button")
+	private WebElement headerFindplansbutton;
+	
+	@FindBy(css = ".zip-lookup")
+	private WebElement headerNeedhelptext;
+	
+	@FindBy(css = ".zip-lookup>a")
+	private WebElement headerlookupzipLink;
+	
+	@FindBy(css = "#subnav_2 .nav-col>a")
+	private WebElement headerRequestforhelpLink;
+	
+	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
+	private WebElement headerShopLink;
+	
+	@FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
+	private WebElement headerEnrollLink;
+	
+	@FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
+	private WebElement headerResourcesLink;
+	
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
+	private WebElement headerAdvantageplanLink;
+	
+	@FindBy(css = "#subnav_2 div[class$='content-2'] div:nth-of-type(1) a") //element
+	private WebElement headerMedicaresupplementplanLink;
+	
+	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(2)>a")
+	private WebElement headerPrescriptionLink;
+	
+	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(3)>a")
+	private WebElement headerGetaplanrecommendationLink;
+	
+	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(4)>a")
+	private WebElement headerDrugcostLink;
+	
+	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
+	private WebElement headerPharmacysearchLink;
+	
+	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(6)>a")
+	private WebElement headerProvidersearchLink;
+	
+	@FindBy(css = "#subnav_2 #updates-mobile-email")
+	private WebElement hearderEmailtext;
+	
+	@FindBy(css = "#subnav_2 #updates-form .sign-up-button")
+	private WebElement headerEmailsubmitButton;
+	
+	//Learn about medicare inner element
+	@FindBy(css = "#subnav_3 #medEdHome")
+	private WebElement headerMedicareeducationLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(1)>a")
+	private WebElement headerEligibilityLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(2)>a")
+	private WebElement headerCoverageLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(3)>a")
+	private WebElement headermedicarePrescriptionprovidersLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(4)>a")
+	private WebElement headerCostbasicsLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(1)>a")
+	private WebElement headerMedicareadvantageLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(2) a")
+	private WebElement headerMedicaresupplemnetLink; //geo targetting
+	
+	@FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>a")
+	private WebElement headerMedicareprescriptionLink;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-3']>div ul>li a")
+	private WebElement headerEnrollment;
+	
+	@FindBy(css = "#subnav_3 div[class$='content-3'] li:nth-of-type(1)>a")
+	private WebElement headerFAQLink; //geo targetting
 	
 //Footer Elements
 	
@@ -95,7 +183,7 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = ".linksCond:nth-of-type(2)>li:nth-of-type(2)")
+	@FindBy(css = ".linksCond:nth-of-type(2)>li:nth-of-type(2)") //Geotargetting
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row2_4 > span")
@@ -182,23 +270,90 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		validate(headernavigationCloseicon, 30);
 		headernavigationCloseicon.click();
 		validate(headerSectionmenu, 30);
+		//validating shop for plan sub links
+		headerSectionmenu.click();
+		shopforaplanLink.click();
+		validate(headerFindplanslabel, 30);
+		validate(headerfindZipcodetext, 30);
+		validate(headerFindplansbutton, 30);
+		validate(headerNeedhelptext, 30);
+		validate(headerlookupzipLink, 30);
+		validate(headerRequestforhelpLink, 30);
+		validate(headerShopLink, 30);
+		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
+		validate(headerEnrollLink, 30);
+		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
+		validate(headerResourcesLink, 30);
+		Assert.assertTrue(headerResourcesLink.getText().contains("Resources"));
+		validate(headerAdvantageplanLink, 30);
+		Assert.assertTrue(headerAdvantageplanLink.getText().contains("Medicare Advantage Plans"));
+		validate(headerMedicaresupplementplanLink, 20);
+		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplement Plans"));
+		validate(headerPrescriptionLink, 30);
+		Assert.assertTrue(headerPrescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
+		validate(headerGetaplanrecommendationLink, 30);
+		Assert.assertTrue(headerGetaplanrecommendationLink.getText().contains("Get a Plan Recommendation"));
+		validate(headerDrugcostLink, 30);
+		Assert.assertTrue(headerDrugcostLink.getText().contains("Drug Cost Estimator"));
+		validate(headerPharmacysearchLink, 30);
+		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Pharmacy Search"));
+		validate(headerProvidersearchLink, 30);
+		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
+		validate(hearderEmailtext, 30);
+		validate(headerEmailsubmitButton, 30);
+		headernavigationBackbutton.click();
+		// Learn about medicare inner elements
+		learnaboutmedicareLink.click();
+		validate(headerMedicareeducationLink, 30);
+		Assert.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
+		validate(headerEligibilityLink, 30);
+		Assert.assertTrue(headerEligibilityLink.getText().contains("Eligibility"));
+		validate(headerCoverageLink, 30);
+		Assert.assertTrue(headerCoverageLink.getText().contains("Coverage Choices"));
+		validate(headermedicarePrescriptionprovidersLink, 30);
+		Assert.assertTrue(headermedicarePrescriptionprovidersLink.getText().contains("Providers"));
+		validate(headerCostbasicsLink, 30);
+		Assert.assertTrue(headerCostbasicsLink.getText().contains("Medicare Cost Basics"));
+		validate(headerMedicareadvantageLink, 30);
+		Assert.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
+		try {
+			validate(headerMedicaresupplemnetLink, 30);
+			Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
+			}catch(Exception e){
+				System.out.println("Medicare Supplement Insurance Plans link is not on header available for selected geo location");
+			}
+		validate(headerMedicareprescriptionLink, 30);
+		Assert.assertTrue(headerMedicareprescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
+		validate(headerEnrollment, 30);
+		Assert.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
+		try {
+		validate(headerFAQLink, 30);
+		Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
+		}catch(Exception e){
+			System.out.println("MedicareFAQ link is not available on header for selected geo location");
+		}
+		headernavigationmedicareBackbutton.click();
+		validate(learnaboutmedicareLink, 30);
+		validate(headernavigationCloseicon, 30);
+		headernavigationCloseicon.click();
 	}
 	
 //	Footer Element Verification Method
 	
 	public void footerElementsMobile() {
 		System.out.println("Validating Mobile Footer Elements: ");
-		mobileswipe("95%");
-		mobileswipe("95%");
-		mobileswipe("95%");
-		mobileswipe("95%");
+		mobileswipe("95%",4);
 		validate(footerSection, 30);
 		validate(footerVisitAARPOrgLink, 30);
 		Assert.assertTrue(footerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));	
-		validate(footerMedicareSupplementInsurancePlansLink, 30);
-		Assert.assertTrue(footerMedicareSupplementInsurancePlansLink.getText().contains("Medicare Supplement Insurance Plans"));
+		try {
+			validate(footerMedicareSupplementInsurancePlansLink, 30);
+			Assert.assertTrue(footerMedicareSupplementInsurancePlansLink.getText().contains("Medicare Supplement Insurance Plans"));
+			}catch(Exception e){
+				System.out.println("Medicare Supplement Insurance Plans link is not available on footer for selected geo location");
+			}
 		validate(footerMedicarePrescriptionDrugPlansLink, 30);
 		Assert.assertTrue(footerMedicarePrescriptionDrugPlansLink.getText().contains("Medicare Prescription Drug Plans"));
 		validate(footerMedicareEducationLink, 30);

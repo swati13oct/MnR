@@ -819,5 +819,11 @@ try {
 		}
 	    mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 	}
+
+	public void mobileswipe(String percentage, int count) {
+		for (int i = 1; i <= count; i++) {
+			mobileswipe(percentage);
+		}
+	}
 	
 }

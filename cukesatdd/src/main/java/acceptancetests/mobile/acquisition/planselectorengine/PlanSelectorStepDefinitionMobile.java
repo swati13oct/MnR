@@ -71,7 +71,7 @@ public class PlanSelectorStepDefinitionMobile {
 	@When("^user validate presence of Header and Footer elements on landing page mobile$")
 	public void user_check_header_Footer_mobile() {
 		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
-		planSelectorheaderfootermobile.headerElementsMobile();
+		//planSelectorheaderfootermobile.headerElementsMobile();
 		planSelectorheaderfootermobile.footerElementsMobile();
 }
 	
