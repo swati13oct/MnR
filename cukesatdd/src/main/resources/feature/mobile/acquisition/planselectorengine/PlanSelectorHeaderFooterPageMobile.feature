@@ -9,9 +9,12 @@ Feature: Plan Selector Tool flow - Verify Headerlanding page in plan selector mo
 
     Examples: 
       | DeviceName |
-      | iphonex    |
-      #| Samsung s9|
-      #| S8|
-      #|Samsung|
-      #|galaxy|
+      | Samsung s9 |
+      #| iphonex    |
+      #| S8         |
+      #| air pad 2  |
+      #| iphone 8   |
+      #| iphone 7+  |
+      #| s8+        |
+      #| ipad       |
       #|Nokia 7.2|
