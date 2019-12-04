@@ -317,8 +317,8 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		validate(headerMedicareadvantageLink, 30);
 		Assert.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
 		try {
-			validate(headerMedicaresupplemnetLink, 30);
-			Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
+			if(headerMedicaresupplemnetLink.isDisplayed())
+				Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
 			}catch(Exception e){
 				System.out.println("Medicare Supplement Insurance Plans link is not on header available for selected geo location");
 			}
@@ -327,8 +327,8 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		validate(headerEnrollment, 30);
 		Assert.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
 		try {
-		validate(headerFAQLink, 30);
-		Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
+		if(headerFAQLink.isDisplayed())
+			Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
 		}catch(Exception e){
 			System.out.println("MedicareFAQ link is not available on header for selected geo location");
 		}
@@ -349,8 +349,8 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));	
 		try {
-			validate(footerMedicareSupplementInsurancePlansLink, 30);
-			Assert.assertTrue(footerMedicareSupplementInsurancePlansLink.getText().contains("Medicare Supplement Insurance Plans"));
+			if(footerMedicareSupplementInsurancePlansLink.isDisplayed())
+				Assert.assertTrue(footerMedicareSupplementInsurancePlansLink.getText().contains("Medicare Supplement Insurance Plans"));
 			}catch(Exception e){
 				System.out.println("Medicare Supplement Insurance Plans link is not available on footer for selected geo location");
 			}
