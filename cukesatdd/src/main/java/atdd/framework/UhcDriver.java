@@ -759,6 +759,7 @@ try {
 			String winHandleBefore = driver.getWindowHandle();
 			System.out.println("Proceed to open a new blank tab to check the system time");
 			String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+			System.out.println("test env URL for getting time: "+urlGetSysTime);
 			if (MRScenario.environment.contains("team-ci"))
 				urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
 			//open new tab
@@ -769,7 +770,8 @@ try {
 			}
 			WebElement currentSysTimeElement=timeJson;
 			String currentSysTimeStr=currentSysTimeElement.getText();
-			
+			System.out.println("currentSysTimeStr="+currentSysTimeStr);
+		
 			JSONParser parser = new JSONParser();
 			org.json.simple.JSONObject jsonObj;
 			try {
@@ -798,6 +800,7 @@ try {
 			String winHandleBefore = driver.getWindowHandle();
 			System.out.println("Proceed to open a new blank tab to check the system time");
 			String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+			System.out.println("test env URL for getting time: "+urlGetSysTime);
 			//open new tab
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 		    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
@@ -806,7 +809,7 @@ try {
 			}
 			WebElement currentSysTimeElement=timeJson;
 			String currentSysTimeStr=currentSysTimeElement.getText();
-			
+			System.out.println("currentSysTimeStr="+currentSysTimeStr);
 			JSONParser parser = new JSONParser();
 			org.json.simple.JSONObject jsonObj;
 			try {
