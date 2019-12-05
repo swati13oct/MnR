@@ -251,7 +251,7 @@ public class MRConstants {
 
   public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
-  public static String Local_URL = "http://10.178.145.230:4200/";
+  public static String Local_URL = "https://www.aarpmedicareplans.com/";
   
   public static String TeamDigital_AARP_URL = "https://team-digital-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/";
   

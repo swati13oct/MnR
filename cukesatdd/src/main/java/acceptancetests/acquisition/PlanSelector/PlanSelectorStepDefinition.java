@@ -190,7 +190,7 @@ public class PlanSelectorStepDefinition {
 
 	}
 	
-	@When("^user validate elements on landing page of Plan Recommendation Engie$")
+	@When("^user validate elements on landing page of Plan Recommendation Engine$")
 	public void user_check_landing_page_Plan_Selector_tool() {
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
@@ -198,12 +198,37 @@ public class PlanSelectorStepDefinition {
 		planSelectorhomepage.landingpage();
 }
 	
-	@Then("^user validate Header and Footer elements of Plan Recommendation Engie$")
+	@Then("^user validate Header and Footer elements of Plan Recommendation Engine$")
 	public void user_check_header_footer_Plan_Selector_tool() {
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		headerAndFooter.headerElements();
 		headerAndFooter.footerElements();
 }
+	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
+	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String zipcode = memberAttributesMap.get("Zip Code");
+		System.out.println("Zipcode is:"+zipcode);
+		String email = memberAttributesMap.get("EMail");
+		System.out.println("Email is:"+email);
+		String searchKey = memberAttributesMap.get("Search Key");
+		System.out.println("Entered Search Key is:"+searchKey);
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		headerAndFooter.zipcodeFunctionInShopforaplan(zipcode);
+		Thread.sleep(5000);
+		headerAndFooter.emailFunctionInShopforaplan(email);
+		Thread.sleep(5000);
+		headerAndFooter.enterSearchFunction(searchKey);
+		Thread.sleep(5000);
+		headerAndFooter.backtoTopFunction();
+	}
 	
 	@And("^clicks on get started button and check error scenarios$")
 	public void clicks_on_get_started_button_and_check_error_scenarios(DataTable givenAttributes) throws Throwable {
