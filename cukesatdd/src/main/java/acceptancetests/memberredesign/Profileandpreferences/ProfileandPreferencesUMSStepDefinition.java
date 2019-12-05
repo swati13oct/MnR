@@ -551,6 +551,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validatePhoneElements(memberType);
 
 	}
+	
+	/**
+	 * @toDo : Validates the elements of Phone section
+	 */
+
+	@Then("^the user validates the Phone section with iframe$")
+	public void UserValidatesPhoneSectionIframe(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validatePhoneElementsWithIframe(memberType);
+
+	}
 
 	/**
 	 * @toDo : Validates the elements on clicking the Phone edit Button

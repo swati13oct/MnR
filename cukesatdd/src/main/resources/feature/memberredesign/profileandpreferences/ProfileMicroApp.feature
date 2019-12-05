@@ -35,16 +35,18 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
- #   And the user validates the need help section
+ #tbd   And the user validates the need help section
     Then the user validates permanent address section
-    Then the user validates the Phone section
+    Then the user validates the Phone section with iframe
       | Plan Type | <planType> |
-    Then the user Clicks on the the Edit phone Link and validates the elements
-      | Plan Type | <planType> |
-    Then the user checks the Edit Button changes to Cancel Button
-    Then the user checks the functionality of save Button in Phoneeditsection
-      | Member Type | <memberType> |
-    Then the user validate the functionality of Cancel Button In phoneeditSection
+   #tbd Then the user Clicks on the the Edit phone Link and validates the elements
+   #tbd   | Plan Type | <planType> |
+   #tbd Then the user checks the Edit Button changes to Cancel Button
+   #tbd Then the user checks the functionality of save Button in Phoneeditsection
+   #tbd   | Member Type | <memberType> |
+   #tbd Then the user Clicks on the the Edit phone Link and validates the elements
+   #tbd   | Plan Type | <planType> |
+   #tbd Then the user validate the functionality of Cancel Button In phoneeditSection
     Then the user validate the temporary address section for  member
     And the user validates see more ways to contact us section
     And the user validates on clicking contact us link it should route to contact us page
@@ -94,10 +96,10 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType> |
       | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
-#    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
-#    Then I should see the breadcrumb  in the upper left side of the page
-#    And clicking the link should lead me back to the Account Settings page of the member site
-#    And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
+    And I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link
+    Then I should see the breadcrumb  in the upper left side of the page
+    And clicking the link should lead me back to the Account Settings page of the member site
+    And I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link
     And the user validate the Email section in UMS site
     And the user fill new email address and click save then user should see new updated email on page
     And the user validates the Phone section

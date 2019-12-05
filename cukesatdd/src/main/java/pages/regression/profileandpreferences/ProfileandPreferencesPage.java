@@ -1283,6 +1283,14 @@ private WebElement editEmailAddressArrowbutton;
 	 */
 	public void validatepermanentaddress() {
 		CommonUtility.checkPageIsReady(driver);
+		boolean needToSwitchToIframe=false;
+		if (validate(EPMPIframe,0)) {
+			System.out.println("Swith to Iframe is Performed");
+			driver.switchTo().frame(iframeEPMP);			
+			CommonUtility.checkPageIsReady(driver);
+			needToSwitchToIframe=true;
+		}
+		
 		System.out.println("Permanent Address");
 		boolean permanentaddressArrowValue =false;
 		try {
@@ -1300,8 +1308,20 @@ private WebElement editEmailAddressArrowbutton;
 			validateNew(permanentAddressSection);
 			System.out.println("*** Permananet Address is seen==> " + permanentAddressSection.isDisplayed());
 		}
-	}
+		
+		
+		if (needToSwitchToIframe) {
+			System.out.println("Click the Address back arrow to get back to prior screen");
+			iframeBackToPriorPageArrow.click();
+
+			driver.switchTo().defaultContent();		
+			System.out.println("out of iframe...switch back to default content");
+			CommonUtility.checkPageIsReady(driver);
+		}
+	}	
 	
+	@FindBy(xpath="//span[contains(@class,'icon-arrow_wtail_left')]")
+	private WebElement iframeBackToPriorPageArrow;
 	
 	public void validatesAddressSection(String memType) {
 		if (memType.equals("AARP")) {
@@ -1446,6 +1466,138 @@ private WebElement editEmailAddressArrowbutton;
 			}
 		}
 		//phoneEditButton  phoneEditButtonUhc phoneGoBackBtnUhc
+	}
+	@FindBy(xpath="//a[@id='phoneview']")
+	private WebElement iframePhoneEdit;
+	
+	@FindBy(xpath="//input[@name='Phone0']")
+	private WebElement iframeEditPhoneInputField_homePhone;
+
+	@FindBy(xpath="//input[@name='Phone1']")
+	private WebElement iframeEditPhoneInputField_additionalPhone;
+
+	@FindBy(xpath="//input[@name='Phone2']")
+	private WebElement iframeEditPhoneInputField_workPhone;
+
+	@FindBy(xpath="//input[@name='Phone3']")
+	private WebElement iframeEditPhoneInputField_mobilePhone;
+
+	@FindBy(xpath="//a[@id='editPhone']")
+	private WebElement iframeEditPhone;
+	
+	@FindBy(xpath="//*[contains(text(),'Home phone number')]")
+	private WebElement iframeHomePhone;
+	
+	@FindBy(xpath="//*[contains(text(),'Additional phone number')]")
+	private WebElement iframeAdditionalPhone;
+
+	@FindBy(xpath="//*[contains(text(),'Work phone number')]")
+	private WebElement iframeWorkPhone;	
+	
+	@FindBy(xpath="//*[contains(text(),'Mobile phone number')]")
+	private WebElement iframeMobilePhone;	
+	
+	@FindBy(xpath="//button[contains(@id,'cancelUpdate') and contains(text(),'Cancel')]")
+	private WebElement iframeCancelPhoneEdit;
+	
+	@FindBy(xpath="//button[contains(@name,'updatePhones') and contains(text(),'Save')]")
+	private WebElement iframeSavePhoneEdit;
+	
+	@FindBy(xpath="//label[contains(@for,'enroll-sms-group-N')]")
+	private WebElement iframeMobileNoTextSelectionPhone;
+	
+	public void validatePhoneElementsWithIframe(String memType) {
+		try {
+		System.out.println("Phone Sections with iframe");
+		Assert.assertTrue("PROBLEM - user is not having iframe as expected", validate(EPMPIframe,0));
+		
+		driver.switchTo().frame(iframeEPMP);			
+		CommonUtility.checkPageIsReady(driver);
+		
+		System.out.println("click the iframe arrow to go to the phone detail page");
+		validateNew(iframePhoneEdit);
+		iframePhoneEdit.click();
+		
+		validateNew(iframeHomePhone);
+		validateNew(iframeAdditionalPhone);
+		validateNew(iframeWorkPhone);
+		validateNew(iframeMobilePhone);
+		
+		System.out.println("click edit on detail page to bring up the edit form to test cancel button");
+		validateNew(iframeEditPhone);
+		iframeEditPhone.click();
+		CommonUtility.checkPageIsReady(driver);
+		
+		validateNew(iframeEditPhoneInputField_homePhone);
+		validateNew(iframeEditPhoneInputField_additionalPhone);
+		validateNew(iframeEditPhoneInputField_workPhone);
+		validateNew(iframeEditPhoneInputField_mobilePhone);
+		
+		validateNew(iframeSavePhoneEdit);		
+		
+		validateNew(iframeCancelPhoneEdit);
+		
+		System.out.println("validate cancel button");
+		iframeCancelPhoneEdit.click();
+		CommonUtility.checkPageIsReady(driver);
+
+		Assert.assertTrue("PROBLEM - after clicking cancel still seeing the edit field for home phone", !validate(iframeEditPhoneInputField_homePhone,0));
+
+		System.out.println("click edit on detail page to bring up the edit form to test save button");
+		validateNew(iframeEditPhone);
+		iframeEditPhone.click();
+		CommonUtility.checkPageIsReady(driver);
+		
+		String homePhone = "2222222222";
+		String additionalPhone = "2222222222";
+		String workPhone = "2222222222";
+		String mobilePhone = "2222222222";
+		
+
+		
+		iframeEditPhoneInputField_homePhone.clear();
+		Thread.sleep(500);
+		iframeEditPhoneInputField_homePhone.sendKeys(homePhone);
+		Thread.sleep(500);
+		
+		iframeEditPhoneInputField_additionalPhone.clear();
+		Thread.sleep(500);
+		iframeEditPhoneInputField_additionalPhone.sendKeys(additionalPhone);
+		Thread.sleep(500);
+
+		iframeEditPhoneInputField_workPhone.clear();
+		Thread.sleep(500);
+		iframeEditPhoneInputField_workPhone.sendKeys(workPhone);
+		Thread.sleep(500);			
+		
+		iframeEditPhoneInputField_mobilePhone.clear();
+		Thread.sleep(500);
+		iframeEditPhoneInputField_mobilePhone.sendKeys(mobilePhone);
+		Thread.sleep(500);	
+		
+		if (validate(iframeMobileNoTextSelectionPhone,0)) {
+			iframeMobileNoTextSelectionPhone.click();
+			Thread.sleep(500);	
+		} 		
+		iframeSavePhoneEdit.click();
+		CommonUtility.checkPageIsReady(driver);
+		Thread.sleep(500);	
+		
+		Assert.assertTrue("PROBLEM - after clicking save still seeing the edit field for home phone", !validate(iframeEditPhoneInputField_homePhone,0));
+
+		//------------------------
+		validateNew(iframeBackToPriorPageArrow);
+		System.out.println("Click the Address back arrow to get back to prior screen");
+		iframeBackToPriorPageArrow.click();
+
+		driver.switchTo().defaultContent();		
+		System.out.println("out of iframe...switch back to default content");
+		CommonUtility.checkPageIsReady(driver);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
