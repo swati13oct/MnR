@@ -1594,9 +1594,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		if (applicationType.equalsIgnoreCase("Retrive")) {
+		/*if (applicationType.equalsIgnoreCase("Retrieve")) {
 			ApplicationID = memberAttributesMap.get("ApplicationID");
-		}
+		}*/
 		plansummaryPage.EnterDataForResumeApp(ApplicationID, DOB, zipcode);
 
 	}

@@ -25,7 +25,7 @@ Feature: 1.07 Member DCE Page
       | Dosage    | <dosage1>    |
       | Quantity  | <quantity1>  |
       | Frequency | <frequency1> |
-    Then I should see the Pharmacy search tab as a clickable element within the DCE tool
+    And I navigate to step2 page
     And I should be able to move forward or backward in the tool flow
 
     Examples: 
@@ -37,6 +37,7 @@ Feature: 1.07 Member DCE Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
     When I navigate to drug look up page
+    When I delete all added drugs
     When I add branded drug
       | Drug      | <drug1>      |
       | Dosage    | <dosage1>    |
