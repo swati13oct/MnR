@@ -400,7 +400,7 @@ Feature: 1.02 Member Profile page
  	@accountProfileMicroApp18d
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       |  PREACTIVEGR_ProfilePrefP       | name1      | color1   | number1     |
+       |  PREACTIVEGRP_ProfilePref       | name1      | color1   | number1     |
        | ACTIVEGOVTSHIPCOMBO_ProfilePref | name1      | color1   | number1     |
        |  MULTIGOVPRETERM_ProfilePref    | name1      | color1   | number1     |
        |  ACTIVEPRESHIP_ProfilePref      | name1      | color1   | number1     |
