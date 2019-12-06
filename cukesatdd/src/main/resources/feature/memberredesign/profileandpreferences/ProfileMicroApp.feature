@@ -150,7 +150,7 @@ Feature: 1.02 Member Profile page
 
   #-----------------------  Below All tests are EPMP ( Non regression) tests ---------------------------------------------------
   @accountProfileMicroApp7 @EPMPProfilePage
-  Scenario Outline: To test end to end regression scenario for EPMP profile page
+  Scenario Outline: TID: <TID> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -161,8 +161,8 @@ Feature: 1.02 Member Profile page
     And I should see the EPMP i frame on profile page
 
     Examples: 
-      | planType | memberType |dataType	|
-      | MAPD     | EPMPEnabled |Individual |
+      | TID   | planType | memberType |dataType	|
+      | xxxx  | MAPD     | EPMPEnabled |Individual_ProfilePref |
 
   @accountProfileMicroApp8 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for EPMP profile page
@@ -178,7 +178,7 @@ Feature: 1.02 Member Profile page
 
     Examples: 
      | TID       | planType | memberType  | dataType   |
-     | Unknown_4 | MAPD     | EPMPEnabled | Individual |
+     | Unknown_4 | MAPD     | EPMPEnabled | Individual_ProfilePref |
 
   @accountProfileMicroApp9 @EMPMprofilePageForShip @regressionMember
   Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
@@ -211,7 +211,7 @@ Feature: 1.02 Member Profile page
 
     Examples: 
       | planType | memberType | dataType | GroupPlanName |
-     #| MAPD     | EPMPEnabled | group    | HealthSelectRx |
+     #| MAPD     | EPMPEnabled | group    | HealthSelectRx_ProfilePref |
   
   @accountProfileMicroApp11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
@@ -228,7 +228,7 @@ Feature: 1.02 Member Profile page
 
     Examples: 
      | TID		 | planType | memberType  | dataType   |
-     | Unknown_5 | MAPD     | EPMPEnabled | Terminated |
+     | Unknown_5 | MAPD     | EPMPEnabled | Terminated_ProfilePref |
 
   @accountProfileMicroApp12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
@@ -265,12 +265,12 @@ Feature: 1.02 Member Profile page
 	  
      Examples: 
       | TID			    | planType  | memberType              | copayCategory |
-      | Unknown_7   | PDP       | PDP_AARPIndividual      | NON LIS       |
-      | Unknown_8   | GrpPDP    | PDP_Group               | NON LIS       |
-      | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS       |
-      | Unknown_10  | MA        | MA_UHCGroup             | NON LIS       |
-      | Unknown_11  | MAPD      | MAPD_Group              | NON LIS       |
-      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS       | 
+      | Unknown_7   | PDP       | PDP_AARPIndividual      | NON LIS_ProfilePref       |
+      | Unknown_8   | GrpPDP    | PDP_Group               | NON LIS_ProfilePref       |
+      | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS_ProfilePref       |
+      | Unknown_10  | MA        | MA_UHCGroup             | NON LIS_ProfilePref       |
+      | Unknown_11  | MAPD      | MAPD_Group              | NON LIS_ProfilePref       |
+      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
       
       
     @AccountProfileMicroApp14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
@@ -291,8 +291,8 @@ Feature: 1.02 Member Profile page
 
     Examples: 
        | TID			  | planType    | memberType            | copayCategory  |
-       | Unknown_13 | MA          | PCP                   | NON LIS        |
-      # | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS        |
+       | Unknown_13 | MA          | PCP                   | NON LIS_ProfilePref        |
+      # | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS_ProfilePref        |
       
        
      @accountProfileMicroApp15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
@@ -314,7 +314,7 @@ Feature: 1.02 Member Profile page
 
     Examples:      
      | TID			  | planType | memberType        | copayCategory   |
-     | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS |
+     | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS_ProfilePref |
      
       @accountProfileMicroApp16 @AP_Part5_Regression
     Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
@@ -329,7 +329,7 @@ Feature: 1.02 Member Profile page
      
 	    Examples:      
       | TID			   | planType | memberType        | copayCategory   |
-      | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS         |
+      | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
       
     @accountProfileMicroApp17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
@@ -342,25 +342,25 @@ Feature: 1.02 Member Profile page
    @accountProfileMicroApp17a
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
-    | Unknown_17 | MA        |  Individual  |  NON LIS      |
-    | Unknown_18 | PDP       |  Individual  |  NON LIS      |
-    | Unknown_19 | MAPD      |  Individual  |  NON LIS      |
+    | Unknown_17 | MA        |  Individual  |  NON LIS_ProfilePref      |
+    | Unknown_18 | PDP       |  Individual  |  NON LIS_ProfilePref      |
+    | Unknown_19 | MAPD      |  Individual  |  NON LIS_ProfilePref      |
 
    @accountProfileMicroApp17b
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
-    | Unknown_20 | PCP       |  Individual  |  NON LIS      |
-    | Unknown_21 | Medica    |  Individual  |  NON LIS      |  
-    | Unknown_22 | MAGroup   |  Group       |  NON LIS      |
-    | Unknown_23 | MAPDGroup |  Group       |  NON LIS      | 
+    | Unknown_20 | PCP       |  Individual  |  NON LIS_ProfilePref      |
+    | Unknown_21 | Medica    |  Individual  |  NON LIS_ProfilePref      |  
+    | Unknown_22 | MAGroup   |  Group       |  NON LIS_ProfilePref      |
+    | Unknown_23 | MAPDGroup |  Group       |  NON LIS_ProfilePref      | 
 
    @accountProfileMicroApp17c
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
-    | Unknown_24 | PDPGroup  |  Group       |  NON LIS      | 
-    | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS      | 
-    | Unknown_26 | COMBO     | FedShip      |  NON LIS      |
-    | Unknown_27 | SSUPGroup |Group         |  NON LIS      |
+    | Unknown_24 | PDPGroup  |  Group       |  NON LIS_ProfilePref      | 
+    | Unknown_25 | SHIP      |  ShipOnly    |  NON LIS_ProfilePref      | 
+    | Unknown_26 | COMBO     | FedShip      |  NON LIS_ProfilePref      |
+    | Unknown_27 | SSUPGroup |Group         |  NON LIS_ProfilePref      |
    
    @accountProfileMicroApp18
   Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
@@ -376,62 +376,62 @@ Feature: 1.02 Member Profile page
  	@accountProfileMicroApp18a
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       | MAIndividualCOSMOS  | name1      | color1   | number1     |
-       | MAPDNICE            | name1      | color1   | number1     |
-       | MANICE              | name1      | color1   | number1     |
-       | MAPDCOSMOS          | name1      | color1   | number1     |
+       | MAIndividualCOSMOS_ProfilePref  | name1      | color1   | number1     |
+       | MAPDNICE_ProfilePref            | name1      | color1   | number1     |
+       | MANICE_ProfilePref              | name1      | color1   | number1     |
+       | MAPDCOSMOS_ProfilePref          | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18b
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       | AARPPDP             | name1      | color1   | number1     |
-       | ACTIVEPCP           | name1      | color1   | number1     |
-       | ACTIVEMedica        | name1      | color1   | number1     |
-       | GROUPMA             | name1      | color1   | number1     |
+       | AARPPDP_ProfilePref             | name1      | color1   | number1     |
+       | ACTIVEPCP_ProfilePref           | name1      | color1   | number1     |
+       | ACTIVEMedica_ProfilePref        | name1      | color1   | number1     |
+       | GROUPMA_ProfilePref             | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18c
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       | GROUPMAPD           | name1      | color1   | number1     |
-       | GROUPDP             | name1      | color1   | number1     |
-       |  GROUPSSUP          | name1      | color1   | number1     |
-       |  GROUPDPSSUP        | name1      | color1   | number1     |
+       | GROUPMAPD_ProfilePref           | name1      | color1   | number1     |
+       | GROUPDP_ProfilePref             | name1      | color1   | number1     |
+       |  GROUPSSUP_ProfilePref          | name1      | color1   | number1     |
+       |  GROUPDPSSUP_ProfilePref        | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18d
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       |  PREACTIVEGRP       | name1      | color1   | number1     |
-       | ACTIVEGOVTSHIPCOMBO | name1      | color1   | number1     |
-       |  MULTIGOVPRETERM    | name1      | color1   | number1     |
-       |  ACTIVEPRESHIP      | name1      | color1   | number1     |
+       |  PREACTIVEGR_ProfilePrefP       | name1      | color1   | number1     |
+       | ACTIVEGOVTSHIPCOMBO_ProfilePref | name1      | color1   | number1     |
+       |  MULTIGOVPRETERM_ProfilePref    | name1      | color1   | number1     |
+       |  ACTIVEPRESHIP_ProfilePref      | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18e
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       |  ACTIVESHIP         | name1      | color1   | number1     |
-       |  PRESHIP            | name1      | color1   | number1     |
-       |ACTIVETERMFEDSHIPCOMBO | name1    | color1   | number1     |
-       |  MICROMULTIFEDSHIP  | name1      | color1   | number1     |
+       |  ACTIVESHIP_ProfilePref         | name1      | color1   | number1     |
+       |  PRESHIP_ProfilePref            | name1      | color1   | number1     |
+       |ACTIVETERMFEDSHIPCOMBO_ProfilePref | name1    | color1   | number1     |
+       |  MICROMULTIFEDSHIP_ProfilePref  | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18f
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       | MULTIFEDACTIVE      | name1      | color1   | number1     |         
-       | FEDSHIPPREEFFECTIVE | name1      | color1   | number1     |    
-       |  MAPREFFECTIVE      | name1      | color1   | number1     |
-       |  MAPDPREFFECTIVE    | name1      | color1   | number1     |
+       | MULTIFEDACTIVE_ProfilePref      | name1      | color1   | number1     |         
+       | FEDSHIPPREEFFECTIVE_ProfilePref | name1      | color1   | number1     |    
+       |  MAPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |
+       |  MAPDPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |
 
  	@accountProfileMicroApp18g
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       | PDPPREFFECTIVE      | name1      | color1   | number1     |  
-       | GRPMAPREFFECTIVE    | name1      | color1   | number1     |  
-       | GRPMAPDPREFFECTIVE  | name1      | color1   | number1     |  
-       |  SSUPPREFFECTIVE    | name1      | color1   | number1     |  
+       | PDPPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |  
+       | GRPMAPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
+       | GRPMAPDPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
+       |  SSUPPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
 
  	@accountProfileMicroApp18h
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
-       |  GRPPDPPREFFECTIVE  | name1      | color1   | number1     |  
-       |  GRPDPSSUP          | name1      | color1   | number1     |  
+       |  GRPPDPPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
+       |  GRPDPSSUP_ProfilePref          | name1      | color1   | number1     |  
   
