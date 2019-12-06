@@ -1574,16 +1574,15 @@ private WebElement editEmailAddressArrowbutton;
 		Thread.sleep(500);
 		iframeEditPhoneInputField_mobilePhone.sendKeys(mobilePhone);
 		Thread.sleep(500);	
-		
+		CommonUtility.waitForPageLoad(driver, iframeMobileNoTextSelectionPhone, 5);
 		if (validate(iframeMobileNoTextSelectionPhone,0)) {
 			iframeMobileNoTextSelectionPhone.click();
 			Thread.sleep(500);	
 		} 		
 		iframeSavePhoneEdit.click();
 		CommonUtility.checkPageIsReady(driver);
-		Thread.sleep(500);	
-		
-		Assert.assertTrue("PROBLEM - after clicking save still seeing the edit field for home phone", !validate(iframeEditPhoneInputField_homePhone,0));
+		Thread.sleep(1000);	
+		Assert.assertTrue("PROBLEM - after clicking save still seeing the save button", !validate(iframeSavePhoneEdit,0));
 
 		//------------------------
 		validateNew(iframeBackToPriorPageArrow);
