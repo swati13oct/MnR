@@ -748,8 +748,20 @@ public class HSIDStepDefinition {
 		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if (MRScenario.environment.contains("team-a")) {
-			if ((planType != null) || (category != null)) {
+			if ((planType != null) && (category == null)) {
 				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType == null) && (category != null)) {
+				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType != null) && (category != null)) {
+				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
+						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+						) {
 					teamSpecialCase=true;		
 					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
