@@ -3,6 +3,7 @@
  */
 package atdd.framework;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -37,8 +40,10 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.regex.Pattern;
@@ -800,7 +805,7 @@ try {
 		return timeStr;
 	}
 	
-	public void mobileswipe(String percentage) {
+	public void mobileswipe(String percentage,boolean swipeup) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
@@ -809,21 +814,38 @@ try {
 	    //Ending y location set to % of the height (near top)
 	    percentage = "0.".concat(percentage.replace("%", ""));
 	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
+	    if(!swipeup)
+	    	endy = endy+(int) (size.height * 0.2); //To avoid address bar position
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
+	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
+		if(swipeup)
+			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
+		else
+			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
 	}
 
-	public void mobileswipe(String percentage, int count) {
+	public void mobileswipe(String percentage, int count,boolean swipeup) {
 		for (int i = 1; i <= count; i++) {
-			mobileswipe(percentage);
+			mobileswipe(percentage,swipeup);
 		}
 	}
 	
+	public void hidekeypad() {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
+			((AndroidDriver)driver).hideKeyboard();
+		else
+			((IOSDriver)driver).hideKeyboard();
+	}
+
+	public void mobileactiontab(WebElement element) {
+		Actions act = new Actions(driver);
+		act.click(element).perform();
+	}
 }

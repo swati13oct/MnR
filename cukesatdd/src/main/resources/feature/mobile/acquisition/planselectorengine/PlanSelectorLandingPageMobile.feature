@@ -9,8 +9,7 @@ Feature: Plan Selector Tool flow - Verify landing page in plan selector mobile p
 
     Examples: 
       | DeviceName |
-      | iphonex    |
-      #| Samsung s9|
+      | Samsung s9|
       #| S8|
       #|Samsung|
       #|galaxy|

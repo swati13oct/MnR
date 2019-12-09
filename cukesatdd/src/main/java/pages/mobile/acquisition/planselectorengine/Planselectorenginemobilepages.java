@@ -75,7 +75,7 @@ public class Planselectorenginemobilepages extends UhcDriver {
 		validate(landingpageAnimationImage, 30);
 		System.out.println("Validating Text: ");
 		validate(landingpageText, 30);
-		mobileswipe("70%");
+		mobileswipe("70%",true);
 		String ExpectedText = "Answer a few simple questions and get personalized plan recommendations in about 10 minutes.";
 		String ActualText = landingpageText.getText();
 		System.out.println(ActualText.contains(ExpectedText));
@@ -92,7 +92,7 @@ public class Planselectorenginemobilepages extends UhcDriver {
 			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +i+ "]/span"))).getText();
 			System.out.println(landingpageTextPoints);
 		}
-		mobileswipe("70%");
+		mobileswipe("70%",true);
 		validate(landingpageImage, 30);
 		String landingpageLabelText = landingpageLabel.getText();
 		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));

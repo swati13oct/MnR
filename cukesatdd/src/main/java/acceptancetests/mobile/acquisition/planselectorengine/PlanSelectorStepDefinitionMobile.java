@@ -47,7 +47,7 @@ public class PlanSelectorStepDefinitionMobile {
 	List<DataTableRow> inputRow;
 	Map<String, String> inputValues;
 	
-	@Given("^the user is on UHC medicare acquisition site landing page mobile$")
+	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		inputRow = new ArrayList(inputdata.getGherkinRows());
 		inputValues = new HashMap<String, String>();
@@ -64,18 +64,39 @@ public class PlanSelectorStepDefinitionMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,aquisitionhomepage);
 	}
 	
-	@When("^user validate elements on landing page of Plan Recommendation Engine mobile$")
+	@When("^user navigates to PRE landing page mobile$")
+	public void user_navigates_PRE_landingpage_mobile(){
+	PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+	planSelectorheaderfootermobile.navigatePRELandingpageMobile();
+}
+	
+	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
 		//System.out.println("Device Type "+inputValues.get("Device Type"));
 		Planselectorenginemobilepages planSelectorhomepagemobile =  new Planselectorenginemobilepages(wd);
 		planSelectorhomepagemobile.landingpagemobile();
 }
 	
-	@When("^user validate presence of Header and Footer elements on landing page mobile$")
+	@Then("^user validate presence of Header and Footer elements on landing page mobile$")
 	public void user_check_header_Footer_mobile() {
 		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
 		planSelectorheaderfootermobile.headerElementsMobile();
 		planSelectorheaderfootermobile.footerElementsMobile();
 }
+	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine mobile$")
+	public void user_check_header_Footer_functionalities_mobile() {
+		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		planSelectorheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
+		planSelectorheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
+		planSelectorheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
+		planSelectorheaderfootermobile.backtoTopFunctionMobile();
+	}
 	
+	@Then("^user validates all Links from header and footer mobile$")
+	public void user_check_header_Footer_link_validation_mobile() {
+		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		planSelectorheaderfootermobile.headerLinkvalidationMobile();
+		planSelectorheaderfootermobile.footerLinkvalidationMobile();
+	}
+
 }
