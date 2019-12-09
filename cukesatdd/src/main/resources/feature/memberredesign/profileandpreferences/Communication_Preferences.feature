@@ -42,7 +42,7 @@ Feature: 1.03 Member Preferences page
   # TID: 15309 - TC9_Ship_GoGreen should come
   # TID: 15376 - TC10_Terminated view member
   #-------------------------  
-  @CommunicationPreferences1 @regressionMember
+  @CommunicationPreferences01 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Segment ID: <segmentId> - To verify Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -71,7 +71,7 @@ Feature: 1.03 Member Preferences page
      #note: need user data with segment id non-000 AND EPMP enabled for below case
      #| xxxxx | xxxxx         | MA_001_AARP_GOGreen_Profilepref  | 001       |
       
-  @CommunicationPreferences2 @goGreen @regressionMember
+  @CommunicationPreferences02 @goGreen @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -To verify Edit preferences section for Go Green
     Given login with following details logins in the member portal and validate elements
       | Plan Type | <planType> |
@@ -95,7 +95,7 @@ Feature: 1.03 Member Preferences page
       | 15316 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
-  @CommunicationPreferences3 @F220921 @regressionMember
+  @CommunicationPreferences03 @CommunicationPreferencesMicroApp03 @F220921 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -115,7 +115,7 @@ Feature: 1.03 Member Preferences page
       | TID    | userSelection | planType | memberType       |
       | 15309  | xxxxxxxxx     | SHIP     | SHIP_ProfilePref |
 
-  @CommunicationPreferences4 @EPMPpreferencesForComboOnProfile @regressionMember
+  @CommunicationPreferences04 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -130,7 +130,7 @@ Feature: 1.03 Member Preferences page
    #  | 15310 | xxxxx         | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
       | 15310 | xxxxx         | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
-  @CommunicationPreferences5 @NoEPMPpreferences @regressionMember
+  @CommunicationPreferences05 @NoEPMPpreferences @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -146,7 +146,7 @@ Feature: 1.03 Member Preferences page
       | 15308 | xxxxx         | PCP_ProfilePref        |
       | 15308 | xxxxx         | MEDICA_ProfilePref     |
       
-  @CommunicationPreferences6 @regressionMember @F276629
+  @CommunicationPreferences06 @CommunicationPreferencesMicroApp06 @regressionMember @F276629
   Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

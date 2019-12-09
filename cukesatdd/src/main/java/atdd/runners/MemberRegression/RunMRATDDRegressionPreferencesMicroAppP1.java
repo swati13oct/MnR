@@ -16,13 +16,12 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionProfileNonMicroAppP06.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProfileNonMicroAppP06")
+jsonReport = "target/cucumber-RunMRATDDRegressionPreferencesMicroAppP1.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesMicroAppP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/ProfileMicroApp.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProfileNonMicroAppP06.json" }, tags = { "@accountProfileMicroApp17c" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesMicroAppP1.json" }, tags = { "@CommunicationPreferencesMicroApp03,@CommunicationPreferencesMicroApp06" })
 
 
-public class RunMRATDDRegressionProfileNonMicroAppP06 {
-
+public class RunMRATDDRegressionPreferencesMicroAppP1 {
 }
