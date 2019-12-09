@@ -50,6 +50,9 @@ public class ClaimDetailsWebElements extends ClaimsBase{
 	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][4]//div[2]//p")
 	protected WebElement ship_eobVal;
 
+	@FindBy(xpath="//div[contains(@class,'shipDetlCompSection')]//section[@class='container--base']//div[@class='table-body-row'][4]//div[2]//*[contains(text(),'Unavailable')]")
+	protected WebElement ship_eobVal_unava;
+	
 	@FindBy(xpath="//div[contains(@class,'eobinformation')]")
 	protected WebElement ship_eobStmtTxt;
 
