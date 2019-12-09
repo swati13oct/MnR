@@ -125,7 +125,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
-	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | Long-term care              | False                 | False            | False                |
+	  | 15274	| MA       | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | Long-term care              | False                 | False            | False                |
 	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 000       | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
   @pharmacylocator2 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
@@ -134,10 +134,6 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	  | Plan Type     | <planType>     |
 	  | Member Type   | <memberType>   |
 	When the user navigates to pharmacy search page
-    Then I can validate the segment ID value in localStorage for pharmacy locator page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Segment ID  | <segmentId>  |
     #------ English -----------------------------------
 	And the user enters following details for pharmacy search
 	  | Zip Code 	  | <zipcode>      |
