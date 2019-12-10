@@ -99,13 +99,13 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='all-fields-marked-wi']/sup")
 	private WebElement pageRequiredInfoMark;
 	
-	@FindBy(xpath = "//*[@for='zip-code']")
+	@FindBy(css = ".row>div>div:nth-child(2)>label.primary-question-tex")
 	private WebElement zipcodePageQuestion;
 	
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
 	private WebElement zipcodePageQuestionMark;
 	
-	@FindBy(xpath = "//*[@class='mt-4']/label[2]")
+	@FindBy(xpath = "//*[@class='mt-3']/p")
 	private WebElement zipcodeTextLabel;
 	
 	@FindBy(xpath = "//*[@for='MultipleCounty']")
@@ -119,7 +119,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Previous')]")
 	private WebElement previousBtn;
 	
-	@FindBy(id = "custom-radio-group")
+	@FindBy(css = "div.row.pb-1>div>label.primary-question-tex")
 	private WebElement coverageTitle;
 	
 	
@@ -215,7 +215,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		waitforElementNew(pageRequiredInfoMark);
 		Assert.assertTrue(pageRequiredInfoMark.getText().contains("*"));
 		waitforElementNew(zipcodePageQuestion);
-		Assert.assertTrue(zipcodePageQuestion.getText().contains("What is your Zip Code?"));
+		Assert.assertTrue(zipcodePageQuestion.getText().contains("What is your ZIP Code?"));
 		waitforElementNew(zipcodePageQuestionMark);
 		Assert.assertTrue(zipcodePageQuestionMark.getText().contains("*"));
 		hidden = (driver.findElement(By.xpath("//*[@id='zip-code']")).getAttribute("placeholder") == "Enter ZIP Code") ? true : false;
@@ -249,11 +249,11 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		int size = zipcodeid.length();
 		System.out.println("ZipCode Size is :"+size);
 		if(size<5 && size!=0) {
-			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for zip code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for ZIP code"));
 		}else if(size==0)	{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid zip code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid ZIP code"));
 		}else{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter valid zipcode."));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter valid ZIP code."));
 		}	
 	}
 	
