@@ -439,6 +439,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		}catch(Exception e) {
 			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
 		}
+		browserBack();
 		}
 		
 //	Footer Element Verification Method
@@ -590,11 +591,11 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		headerShopForaPlanZipcodeBox.click();
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
 		headerShopForaPlanZipcodeButton.click();
+		waitforElementVisibilityInTime(headerNavigationBarHomeTab, 60);
 		String actualpageurl = driver.getCurrentUrl();
 		System.out.println("PlanSummary Page is :"+actualpageurl);
 		String ExpectedPage = "plan-summary";
 		Assert.assertTrue(actualpageurl.contains(ExpectedPage));
-		waitforElementVisibilityInTime(headerNavigationBarHomeTab, 60);
 		headerNavigationBarHomeTab.click();
 	}
 	
