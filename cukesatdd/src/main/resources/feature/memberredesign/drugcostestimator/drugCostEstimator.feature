@@ -11,7 +11,7 @@ Feature: 1.07 Member DCE Page
     Examples: 
       | TID   | planType | memberType              |
       | 15326 | SHIP     | EFT_MedSelectPlan_order |
-      | 15327 |          | SSUP_ProfilePref        |
+      | 15327 | SSUP     | SSUP_ProfilePref        |
       | 15337 | MA       | IDCardmember            |
 
   @drugCostEstimator2
