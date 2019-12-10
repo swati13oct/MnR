@@ -249,11 +249,11 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		int size = zipcodeid.length();
 		System.out.println("ZipCode Size is :"+size);
 		if(size<5 && size!=0) {
-			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for zip code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for ZIP code"));
 		}else if(size==0)	{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid zip code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid ZIP code"));
 		}else{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter valid zipcode."));
+			Assert.assertTrue(errorMessage.getText().contains("Please enter valid ZIP code."));
 		}	
 	}
 	
