@@ -848,4 +848,9 @@ try {
 		Actions act = new Actions(driver);
 		act.click(element).perform();
 	}
+	
+	public void pageloadcomplete() {
+		new WebDriverWait(driver, 30).until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+		System.out.println("Page load completed");
+	}
 }

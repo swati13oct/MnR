@@ -1,32 +1,26 @@
 /**
  * 
  */
-package pages.mobile.acquisition.planselectorengine;
+package pages.mobile.acquisition.planrecommendationengine;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.itextpdf.text.log.SysoCounter;
-
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanselectorHeaderFootermobilepages extends UhcDriver {
+public class HeaderFooterMobile extends UhcDriver {
 
-	public PlanselectorHeaderFootermobilepages(WebDriver driver) {
+	public HeaderFooterMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -435,10 +429,11 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 	public void navigationToPREPageMobile() {
 		backtoshopforaplan(false);
 		validate(headerGetaplanrecommendationLink, 30);
-		Assert.assertTrue(headerGetaplanrecommendationLink.getText().contains("Get a Plan Recommendation"));
+		Assert.assertTrue(headerGetaplanrecommendationLink.getText().contains("Plan Recommendation"));
 		headerGetaplanrecommendationLink.click();
+		validateLinks("/plan-recommendation-engine.html");
 		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("Get help finding an insurance plan"));
+		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}
 
 	// Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing
@@ -451,8 +446,9 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		headerShopLink.click();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
+		validateLinks("/plan-recommendation-engine.html");
 		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("Get help finding an insurance plan"));
+		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}
 
 	// ZipCode Function inside Shop for a Plan Mobile
@@ -465,22 +461,21 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		validate(headerFindplansbutton, 30);
 		headerfindZipcodetext.sendKeys(zipcode);
 		headerFindplansbutton.click();
-		String actualpageurl = driver.getCurrentUrl();
-		System.out.println("PlanSummary Page is :" + actualpageurl);
-		String ExpectedPage = "plan-summary";
-		Assert.assertTrue(actualpageurl.contains(ExpectedPage));
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.navigate().back();
+		pageloadcomplete();
+		validateLinks("/plan-summary||zipcode");
+		browserBack();
 	}
 
 	// Email Function inside Shop for a Plan Mobile
 	public void emailFunctionInShopforaplanMobile(String email) {
-		navigatePRELandingpageMobile();
+		if (driver.getCurrentUrl().contains("aarpmedicare")) {
+			validate(AARPlogoInHeader, 30);
+			AARPlogoInHeader.click();
+		} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
+			validate(UHClogoInHeader, 30);
+			UHClogoInHeader.click();
+		}
+		//Validating functionality from home page coz different page give different results
 		validate(headerSectionmenu, 30);
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
@@ -501,6 +496,7 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		
 	// Enter Search Key Function in Navigation bar mobile
 	public void enterSearchFunctionHeaderMobile(String SearchKey) {
+		browserRefresh();
 		validate(headerSectionmenu, 30);
 		String actualpageurl = driver.getCurrentUrl();
 		System.out.println("Actual Page is :"+actualpageurl);
@@ -508,23 +504,17 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		hedearmenuSearchbox.click();
 		hedearmenuSearchbox.sendKeys(SearchKey);
 		hedearmenuSearchicon.click();
-		String expectedpageurl = driver.getCurrentUrl();
 		String ExpectedPage = "/search?q1=";
-		Boolean urlmatch = ((actualpageurl.equals(expectedpageurl)));
-		if(!urlmatch) {
-			Assert.assertTrue(expectedpageurl.contains(ExpectedPage));
-		}else {
-			Assert.assertFalse(false, "Search function not working as expected");
-		}
-		driver.navigate().back();
+		validateLinks(ExpectedPage);
+		browserBack();
 	}
 		
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
+		browserRefresh();
 		navigatePRELandingpageMobile();
 		mobileswipe("85%",4,true);
 		waitforElementVisibilityInTime(footerBackToTopLink, 45);
-		//footerBackToTopLink.click();
 		mobileactiontab(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
@@ -700,11 +690,7 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		if (curURL.contains("aarpmedicare")) {
 			//another window - only aarp
 			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
-			try {
-				Thread.sleep(3000); //Page browserback
-			}catch(Exception e) {
-				
-			}
+			threadsleep(1500);
 			validateLinks("/health/medicare-insurance/?intcmp");
 			browserBack();
 			mobileswipe("80%",true);
@@ -777,12 +763,7 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 	
 	public void validateLinks(String expURL) {
 		String curURL = driver.getCurrentUrl();
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		threadsleep(1500);
 		if(expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[0]) || expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[1])){
 			System.out.println("Link validation True");
 		}
@@ -842,5 +823,18 @@ public class PlanselectorHeaderFootermobilepages extends UhcDriver {
 		}
 	}
 	
+	public void threadsleep(int sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void browserRefresh() {
+		driver.navigate().refresh();
+	}
+
 }
 

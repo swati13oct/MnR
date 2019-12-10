@@ -21,8 +21,8 @@ import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.planselectorengine.PlanselectorHeaderFootermobilepages;
-import pages.mobile.acquisition.planselectorengine.Planselectorenginemobilepages;
+import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePages;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -66,26 +66,32 @@ public class PlanSelectorStepDefinitionMobile {
 	
 	@When("^user navigates to PRE landing page mobile$")
 	public void user_navigates_PRE_landingpage_mobile(){
-	PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+	HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
 	planSelectorheaderfootermobile.navigatePRELandingpageMobile();
+}
+	
+	@When("^user navigates to PRE landing page via shop tool mobile$")
+	public void user_navigates_PRE_landingpage_shoptool_mobile(){
+		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
+	planSelectorheaderfootermobile.navigationToPREViaShopToolsMobile();
 }
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
 		//System.out.println("Device Type "+inputValues.get("Device Type"));
-		Planselectorenginemobilepages planSelectorhomepagemobile =  new Planselectorenginemobilepages(wd);
+		LandingAndZipcodeMobilePages planSelectorhomepagemobile =  new LandingAndZipcodeMobilePages(wd);
 		planSelectorhomepagemobile.landingpagemobile();
 }
 	
 	@Then("^user validate presence of Header and Footer elements on landing page mobile$")
 	public void user_check_header_Footer_mobile() {
-		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
 		planSelectorheaderfootermobile.headerElementsMobile();
 		planSelectorheaderfootermobile.footerElementsMobile();
 }
 	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine mobile$")
 	public void user_check_header_Footer_functionalities_mobile() {
-		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
 		planSelectorheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
 		planSelectorheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
 		planSelectorheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
@@ -94,7 +100,7 @@ public class PlanSelectorStepDefinitionMobile {
 	
 	@Then("^user validates all Links from header and footer mobile$")
 	public void user_check_header_Footer_link_validation_mobile() {
-		PlanselectorHeaderFootermobilepages planSelectorheaderfootermobile =  new PlanselectorHeaderFootermobilepages(wd);
+		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
 		planSelectorheaderfootermobile.headerLinkvalidationMobile();
 		planSelectorheaderfootermobile.footerLinkvalidationMobile();
 	}

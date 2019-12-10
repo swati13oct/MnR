@@ -27,9 +27,8 @@ Feature: Plan Selector Tool flow - Verify Header and Footer on medicare mobile p
       | Zip Code    | <Zipcode>    |
       | EMail       | <EMail>      |
       | Search Key  | <SearchKey>  |
-    When user navigates to PRE landing page mobile
-    #Then user validate presence of Header and Footer elements on landing page mobile
-    And user validate Header and Footer Functionality of Plan Recommendation Engine mobile
+    When user navigates to PRE landing page via shop tool mobile
+    Then user validate Header and Footer Functionality of Plan Recommendation Engine mobile
 
     Examples: 
       | DeviceName |  | Zipcode | EMail          | SearchKey                |

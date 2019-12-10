@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.acquisition.planselectorengine;
+package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ import acceptancetests.data.PageConstants;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 
-public class Planselectorenginemobilepages extends UhcDriver {
+public class LandingAndZipcodeMobilePages extends UhcDriver {
 
-	public Planselectorenginemobilepages(WebDriver driver) {
+	public LandingAndZipcodeMobilePages(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
