@@ -19,7 +19,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPreferencesMicroAppP1.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesMicroAppP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
-features = { "src/main/resources/feature/memberredesign/profileandpreferences/ProfileMicroApp.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/profileandpreferences/*.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesMicroAppP1.json" }, tags = { "@CommunicationPreferencesMicroApp03,@CommunicationPreferencesMicroApp06" })
 
 
