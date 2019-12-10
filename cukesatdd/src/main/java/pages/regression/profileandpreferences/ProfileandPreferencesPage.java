@@ -706,6 +706,10 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(xpath = "//div[@ng-click='emailEdit()']")
 	private WebElement emailAddressSection;
 
+	@FindBy(xpath = "//div[contains(@class,'emailship')]")
+	private WebElement emailAddressSection2;
+
+	
 	@FindBy(xpath = ".//*[@class='col-sm-12 editEmail margin-small']/span[3]")
 	private WebElement emailAddressRightArrow;
 
@@ -1642,11 +1646,20 @@ private WebElement editEmailAddressArrowbutton;
 				//tbd if(driver.findElement(By.xpath(".//*[@id='phone']//a[contains(text(),'Edit')]"))!= null) {
 				
 				if(memType.toUpperCase().contains("SHIP")) {
-					phoneEditArrowShip.click();
-					CommonUtility.waitForPageLoad(driver, phoneEditButtonShip, 5);
-					phoneEditButtonShip.click();
+					if (validate(phoneEditButton,0)) {
+						System.out.println("TEST -1");
+						phoneEditButton.click();
+					} else if (validate(phoneEditButtonUhc,0)) {
+						System.out.println("TEST -2");
+						phoneEditButtonUhc.click();
+					} else {
+						System.out.println("TEST -3");
+						phoneEditArrowShip.click();
+						CommonUtility.waitForPageLoad(driver, phoneEditButtonShip, 5);
+						phoneEditButtonShip.click();
+					}
 				} else {
-				phoneEditButton.click();
+					phoneEditButton.click();
 				}
 				
 				CommonUtility.checkPageIsReady(driver);
@@ -2316,7 +2329,7 @@ private WebElement editEmailAddressArrowbutton;
 
 		checkModelPopup(driver);
 
-		validateNew(emailAddressSection);
+		Assert.assertTrue("PROBLEM - unable to locate Email tile/section", validate(emailAddressSection2,0) || validate(emailAddressSection));
 		//validateNew(emailAddressRightArrow);  // coudn't find in portal till EPMP gets enabled 
 
 	}
