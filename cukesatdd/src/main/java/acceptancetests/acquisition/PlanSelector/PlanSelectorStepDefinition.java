@@ -198,13 +198,21 @@ public class PlanSelectorStepDefinition {
 		planSelectorhomepage.landingpage();
 }
 	
+	@When("^user navigate Plan Recommendation Engine Using Get Help Choosing in Tools$")
+	public void navigate_Plan_Selector_tool() {
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
+		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
+		planSelectorhomepage.landingpage();
+}
+	
 	@Then("^user validate Header and Footer elements of Plan Recommendation Engine$")
 	public void user_check_header_footer_Plan_Selector_tool() {
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		headerAndFooter.headerElements();
 		headerAndFooter.footerElements();
 }
-	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
+	@And("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -228,6 +236,13 @@ public class PlanSelectorStepDefinition {
 		headerAndFooter.enterSearchFunction(searchKey);
 		Thread.sleep(5000);
 		headerAndFooter.backtoTopFunction();
+	}
+	
+	@Then("^user validates all Links from header and footer desktop$")
+	public void user_check_header_Footer_link_validation_mobile() {
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		headerAndFooter.headerLinkvalidation();
+		headerAndFooter.footerLinkvalidation();
 	}
 	
 	@And("^clicks on get started button and check error scenarios$")

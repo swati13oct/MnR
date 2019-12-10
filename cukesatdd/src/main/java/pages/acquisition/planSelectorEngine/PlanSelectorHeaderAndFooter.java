@@ -3,7 +3,10 @@
  */
 package pages.acquisition.planSelectorEngine;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -48,6 +51,9 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='ums-logo']")
 	private WebElement UHClogoInHeader;
+	
+	@FindBy(css = ".companyNameHeader>p")
+	private WebElement companyNameUnderAARPlogoInHeader;
 	
 	@FindBy(xpath = "//a[@id='aarplink']")
 	private WebElement headerVisitAARPOrgLink;
@@ -255,6 +261,8 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		String actualpageurl = driver.getCurrentUrl();
 		if(actualpageurl.contains("aarpmedicareplans")) {
 			validate(AARPlogoInHeader, 30);
+			validate(companyNameUnderAARPlogoInHeader, 30);
+			Assert.assertTrue(companyNameUnderAARPlogoInHeader.getText().contains("UnitedHealthcare Insurance Company (UnitedHealthcare)"));
 			validate(headerVisitAARPOrgLink, 30);
 			Assert.assertTrue(headerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
 		}else if(actualpageurl.contains("uhcmedicaresolutions")){
@@ -306,7 +314,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerAdvantageplanLink, 30);
 		Assert.assertTrue(headerAdvantageplanLink.getText().contains("Medicare Advantage Plans"));
 		validate(headerMedicaresupplementplanLink, 30);
-		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplement Plans"));
+		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplement Plans"));  //GeoTargeting Element
 		validate(headerPrescriptionLink, 30);
 		Assert.assertTrue(headerPrescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
 		validate(headerGetaPlanRecommendationLink, 30);
@@ -318,7 +326,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerProvidersearchLink, 30);
 		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
 
-//MouseOver on Shop of a Plan and Validating Inside Shop of a Plan
+//MouseOver on Learn About Medicare and Validating Learn About Medicare
 		System.out.println("Validating Learn About Medicare Elements: ");
 		actions.moveToElement(headerNavigationBarLearnAboutMedicareTab).perform();
 		validate(headerEligibilityLink, 30);		
@@ -329,9 +337,110 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerMedicaresupplemnetLink, 30);
 		validate(headerMedicareprescriptionLink, 30);
 		validate(headerEnrollment, 30);
-		validate(headerFAQLink, 30);
+		validate(headerFAQLink, 30);  //GeoTargeting Element
 	}
 	
+	
+//	Header Element Click Verification Method 
+	
+		public void headerLinkvalidation(){
+			String curURL = driver.getCurrentUrl();			
+			headerSigninLink.click();
+			if (curURL.contains("aarpmedicare"))
+				validateLinks("medicare.uhc.com/aarp");
+			else
+				validateLinks("medicare.uhc.com");
+		browserBack();
+		
+		headerRegisterLink.click();
+		validateLinks("healthsafe-id.com/register/personalInfo");
+		
+		backtoshopforaplan();
+		headerShopForaPlanLookupZipcode.click();
+		validateLinks("/health-plans.html?lookupZipcode");
+		backtoshopforaplan();
+		headerShopForaPlanRequestMoreHelp.click();
+		validateLinks("health-plans/shop/connect");
+		backtoshopforaplan();
+		headerShopLink.click();
+		validateLinks("/health-plans/shop.html");
+		backtoshopforaplan();
+		headerEnrollLink.click();
+		validateLinks("/health-plans/enroll.html");
+		backtoshopforaplan();
+		headerResourcesLink.click();
+		validateLinks("/health-plans/resources.html");
+		backtoshopforaplan();
+		headerAdvantageplanLink.click();
+		validateLinks("/health-plans/shop/medicare-advantage-plans.html");
+		backtoshopforaplan();
+		headerMedicaresupplementplanLink.click();
+		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
+		backtoshopforaplan();
+		headerPrescriptionLink.click();
+		validateLinks("/health-plans/shop/prescription-drug-plans.html");
+		backtoshopforaplan();
+		headerGetaPlanRecommendationLink.click();
+		validateLinks("/plan-recommendation-engine.html");
+		backtoshopforaplan();
+		headerDrugcostLink.click();
+		validateLinks("health-plans/estimate-drug-costs.html");
+		backtoshopforaplan();
+		headerPharmacysearchLink.click();
+		validateLinks("/health-plans/aarp-pharmacy.html");
+		
+//		Opens in another window
+		backtoshopforaplan();
+		if (curURL.contains("aarpmedicare")) {
+				//another window - only aarp
+				navigatesubLink(headerProvidersearchLink.getAttribute("href"));
+		}else if(curURL.contains("uhcmedicaresolutions")){
+			//another window - only aarp
+			navigatesubLink(headerProvidersearchLink.getAttribute("href"));
+		}
+		
+// Learn about medicare inner elements	
+		backtolearnmoremodicare();
+		headerEligibilityLink.click();
+		validateLinks("/medicare-education/medicare-eligibility.html");
+		backtolearnmoremodicare();
+		headerCoverageLink.click();
+		validateLinks("/medicare-education/medicare-parts-and-medigap-plans.html");
+		backtolearnmoremodicare();
+		headermedicarePrescriptionProviderLink.click();
+		validateLinks("/medicare-education/medicare-benefits.html");
+		backtolearnmoremodicare();
+		headerCostbasicsLink.click();
+		validateLinks("/medicare-education/medicare-costs.html");
+		backtolearnmoremodicare();
+		headerMedicareadvantageLink.click();
+		validateLinks("/medicare-education/medicare-advantage-plans.html");
+		
+		backtolearnmoremodicare();
+		try {
+		validate(headerMedicaresupplemnetLink,30);
+		headerMedicaresupplemnetLink.click(); //geotargetting
+		validateLinks("/medicare-education/medicare-supplement-plans.html");
+		}catch(Exception e) {
+			System.out.println("Geo targetting link 'Medicare Supplement Insurance Plans' is not available");
+		}
+		backtolearnmoremodicare();
+		headerMedicareprescriptionLink.click();
+		validateLinks("/medicare-education/medicare-part-d.html");
+		backtolearnmoremodicare();
+		validate(headerEnrollment,30);
+		navigatesubLink(headerEnrollment.getAttribute("href"));
+		validateLinks("/medicare-education/enrollment-and-changing-plans.html");
+		backtolearnmoremodicare();
+		try {
+		validate(headerFAQLink,30);//geotargetting
+		navigatesubLink(headerFAQLink.getAttribute("href"));
+		validateLinks("/medicare-education/medicare-faq.html");
+		}catch(Exception e) {
+			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
+		}
+		}
+		
 //	Footer Element Verification Method
 	
 	public void footerElements() {
@@ -344,7 +453,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(footerSection, 30);
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));
-		validate(footerMedicareSupplementInsurancePlansLink, 30);
+		validate(footerMedicareSupplementInsurancePlansLink, 30);	//GeoTargeting Element
 		validate(footerMedicarePrescriptionDrugPlansLink, 30);
 		Assert.assertTrue(footerMedicarePrescriptionDrugPlansLink.getText().contains("Medicare Prescription Drug Plans"));
 		validate(footerMedicareEducationLink, 30);
@@ -371,6 +480,87 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		Assert.assertTrue(footerAccessibilityLink.getText().contains("Accessibility"));
 		validate(footerCertificateStatement, 30);
 		validate(footerLastUpdated, 30);
+	}
+	
+//	Footer Element Click Verification Method
+	
+	public void footerLinkvalidation() {
+		if (driver.getCurrentUrl().contains("aarpmedicare")) {
+			validate(AARPlogoInHeader, 30);
+			AARPlogoInHeader.click();
+		} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
+			validate(UHClogoInHeader, 30);
+			UHClogoInHeader.click();
+		}
+		navigationToPlanRecommendationEngine();
+		String curURL = driver.getCurrentUrl();
+		if (curURL.contains("aarpmedicare")) {
+			validate(AARPlogoInHeader, 30);
+			AARPlogoInHeader.click();
+			//another window - only aarp
+			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
+			try {
+				Thread.sleep(3000); //Page browserback
+			}catch(Exception e) {
+				
+			}
+			validateLinks("/health/medicare-insurance/?intcmp");
+			browserBack();
+		} else if (curURL.contains("uhcmedicare")) {
+			validate(UHClogoInHeader, 30);
+			UHClogoInHeader.click();
+		}
+		
+		footerMedicareAdvantagePlansLink.click();
+		validateLinks("/health-plans/shop/medicare-advantage-plans");
+		browserBack();
+		footerMedicareSupplementInsurancePlansLink.click();
+		validateLinks("/health-plans/shop/medicare-supplement-plans||health-plans.html?product=");
+		browserBack();
+		
+		footerMedicarePrescriptionDrugPlansLink.click();
+		validateLinks("/health-plans/shop/prescription-drug-plans");
+		browserBack();
+
+		footerMedicareEducationLink.click();
+		validateLinks("/medicare-education.html");
+		browserBack();
+
+		footerHomeLink.click();
+		if (driver.getCurrentUrl().contains("aarpmedicare")) {
+			validateLinks("aarpmedicareplans.ocp-elr-core-nonprod.optum.com");
+		}else if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			validateLinks("uhcmedicaresolutions");
+		}
+		footerAboutUsLink.click();
+		validateLinks("/about-us.html");
+		browserBack();
+		footerContactUsLink.click();
+		validateLinks("/contact-us.html");
+		browserBack();
+		footerSiteMapLink.click();
+		validateLinks("/sitemap.html");
+		browserBack();
+		footerPrivacyPolicyLink.click();
+		validateLinks("/privacy_policy.html");
+		browserBack();
+		footerTermsofUseLink.click();
+		validateLinks("/terms-of-use.html");
+		browserBack();
+		footerDisclaimersLink.click();
+		validateLinks("/disclaimer.html");
+		browserBack();
+		footerAgentsBrokersLink.click();
+		validateLinks("/health-insurance-brokers.html");
+		browserBack();
+		if (curURL.contains("uhcmedicare")) {
+		footerAccessibilityLink.click();
+		validateLinks("/legal/accessibility");
+		browserBack();
+		}
+		else {
+			validate(footerAccessibilityLink,30);
+		}	
 	}
 	
 //Navigating Plan RecommendationEngine via Get Plan Recommendation	
@@ -404,13 +594,8 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		System.out.println("PlanSummary Page is :"+actualpageurl);
 		String ExpectedPage = "plan-summary";
 		Assert.assertTrue(actualpageurl.contains(ExpectedPage));
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.navigate().back();
+		waitforElementVisibilityInTime(headerNavigationBarHomeTab, 60);
+		headerNavigationBarHomeTab.click();
 	}
 	
 //Email Function inside Shop for a Plan	
@@ -421,6 +606,8 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		headerShopForaPlanEmailBox.sendKeys(email);
 		headerShopForaPlanEmailButton.click();
 		validate(headerShopForaPlanThankYou, 30);
+		waitforElementVisibilityInTime(headerNavigationBarHomeTab, 60);
+		headerNavigationBarHomeTab.click();
 	}
 	
 //	Enter Search Key Function in Navigation bar
@@ -444,6 +631,8 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //	Back to Top Function in Footer
 	public void backtoTopFunction() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1200)");
 		waitforElementVisibilityInTime(footerBackToTopLink, 45);
 		footerBackToTopLink.click();
 		String actualpageurl = driver.getCurrentUrl();
@@ -454,6 +643,44 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 			validate(UHClogoInHeader, 30);
 			UHClogoInHeader.isSelected();
 		}
+	}
+	
+	public void validateLinks(String expURL) {
+		String curURL = driver.getCurrentUrl();
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[0]) || expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[1])){
+			System.out.println("Link validation True");
+		}
+		else if(curURL.contains(expURL)) {
+			System.out.println("Link validation True");
+		}
+		else {
+			System.out.println("Link validation False");
+			System.out.println("Expected URL "+expURL);
+			System.out.println("Actual URL "+curURL);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	public void backtoshopforaplan() {
+		browserBack();
+		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
+	}
+	
+	public void backtolearnmoremodicare() {
+		browserBack();
+		waitforElementVisibilityInTime(headerNavigationBarLearnAboutMedicareTab, 45);
+		actions.moveToElement(headerNavigationBarLearnAboutMedicareTab).perform();
+	}
+	
+	public void navigatesubLink(String subURL) {
+		driver.navigate().to(subURL);
 	}
 
 	public void browserBack() {
