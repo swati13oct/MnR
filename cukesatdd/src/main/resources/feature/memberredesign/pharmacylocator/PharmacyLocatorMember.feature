@@ -165,7 +165,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15295	| PDP      | IndAARPPDP_Pharmacylocator	 | 000       | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
-	  | 15274	| PDP      | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | Long-term care              | False                 | False            | False                |
+	  | 15274	| MA       | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | Long-term care              | False                 | False            | False                |
 	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 000       | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
 
