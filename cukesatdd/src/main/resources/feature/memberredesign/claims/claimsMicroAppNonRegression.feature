@@ -110,7 +110,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     #----------
     # note: These two steps below only applicable to SHIP and MEDICAL claims, NOTHING will be done for DRUG case
     ##note: covered by E2E also - skip on jenkins run to keep run time within 30 min
-    ##Then I validate Claim Details page content value and Learn More and EOB and tooltips
+    Then I validate Claim Details page content value and Learn More and EOB and tooltips
     Then I perform extensive validation for values between claims summary and claim details page
     #----------
     #----------------- Final Test claims number makes sense from search periods --------------

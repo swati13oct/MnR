@@ -67,9 +67,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					claimsValidate(ship_eobLbl));
 			testItem="ship_eobValue";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_eobVal) || claimsValidate(ship_eobVal_unava));
+					claimsValidate(ship_eobVal));
 			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!ship_eobVal.getText().equals("") || !ship_eobVal_unava.getText().equals(""));
+					!ship_eobVal.getText().equals(""));
 			testItem="ship_eobStatementText";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_eobStmtTxt));
@@ -248,9 +248,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					claimsValidate(ship_eobLbl));
 				testItem="ship_eobValue";
 				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-						claimsValidate(ship_eobVal) || claimsValidate(ship_eobVal_unava));
+						claimsValidate(ship_eobVal));
 				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-						!ship_eobVal.getText().equals("") || !ship_eobVal_unava.getText().equals(""));
+						!ship_eobVal.getText().equals(""));
 			testItem="ship_eobStatementText";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_eobStmtTxt));
