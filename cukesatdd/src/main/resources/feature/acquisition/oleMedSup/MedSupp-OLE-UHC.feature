@@ -1,7 +1,7 @@
 @CT @OLE_UHC @OLE_VPP_UHC_ResumeApplication
 Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
 
-@OLE_VPP_UHC @UHC_Resume_App_UHC @OLE_Regression @oleMedSupBlayer 
+@OLE_VPP_UHC @UHC_Resume_App_UHC @OLE_Regression @oleMedSupBlayer @prodRegression
     Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on the uhcmedicaresolutions site landing page
    When the user performs plan search using following information in UMS site
