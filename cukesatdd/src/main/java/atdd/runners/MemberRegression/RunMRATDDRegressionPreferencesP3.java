@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPreferencesP3.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPreferencesP3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/profileandpreferences/*.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/profileandpreferences/" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPreferencesP3.json" }, tags = { "@regressionMember","@CommunicationPreferences04" })
 public class RunMRATDDRegressionPreferencesP3 {
 
