@@ -3499,12 +3499,19 @@ catch (Exception e) {
 	public void clickOnViewMoreForPlan(String planName) {
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		int count = 0;
-		while(count<2){
-			if(viewMoreLink.size()>0){
+		List<WebElement> dceLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+		
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
 				viewMoreLink.get(0).click();
-				break;
-			}count++;
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		if((viewMoreLink.size()>0))// if after clicking above doesn't expand and the link size is greater than 0, then it will try the click again
+			viewMoreLink.get(0).click();
+			
 	}
 }
