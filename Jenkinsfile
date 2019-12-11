@@ -121,6 +121,8 @@ node('docker-maven-slave') {
         echo "Building source code"
         withUsernameAndPassword(credentialsId, 'MAVEN_USER', 'MAVEN_PASSWORD') {
             withJavaAndMavenEnv('1.8.0') {
+		    sh "echo ${env.JAVA_HOME}"
+            		sh 'java -version'
 				withDockerMavenSlave {
 					unstash 'source'
 					sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
