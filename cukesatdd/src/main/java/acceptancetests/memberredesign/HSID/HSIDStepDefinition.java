@@ -708,7 +708,7 @@ public class HSIDStepDefinition {
 	public void login_with_member(DataTable memberAttributes)
 	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
-		boolean isMicroApp=true;
+		//tbd boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -725,6 +725,22 @@ public class HSIDStepDefinition {
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
+		String useDropdown=System.getProperty("useDropdown");
+		boolean testHarnessUseDropdown=false;
+		if (useDropdown==null) 
+			System.out.println("use UUID for sign-in");
+		else {
+			if (useDropdown.equalsIgnoreCase("YES")) { //note: need to do this so the same script can be run on stage
+				if (MRScenario.environment.contains("team-atest") && (userSelection!=null)) {
+					testHarnessUseDropdown = true;
+					System.out.println("useDropdown=YES and env is team-atest, will use dropdown for sign-in");
+				} else {
+					System.out.println("useDropdown=YES but this is not team-atest env so will default back to use UUID for sign-in");
+				}
+			} else 		
+				System.out.println("use UUID for sign-in");
+		}
+
 		if (!MRScenario.environment.contains("team-atest")) { //note: need to do this so the same script can be run on stage
 		 	userSelection = category;
 		} 
@@ -828,13 +844,12 @@ public class HSIDStepDefinition {
 				}
 				TestHarness testHarnessPage=null;
 				try {
-					if (isMicroApp) {
+					if (testHarnessUseDropdown) {
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
-						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection);
+						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
 					} else {
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
-				
 					}
 				} catch (UnhandledAlertException ae) {
 					System.out.println("Exception: "+ae);

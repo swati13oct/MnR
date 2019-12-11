@@ -76,7 +76,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | userSelection | planType | memberType          | expectLink |
 	  | 313410 | xxxxx         | MAPD     | COMBO_PnP	        | yes        |
-	  | 313410 | xxxxx         | PDP      | COMBO_PnP	        | yes        |
+	 #| 313410 | xxxxx         | PDP      | COMBO_PnP	        | yes        |
+	  | 313410 | xxxxx         | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################
