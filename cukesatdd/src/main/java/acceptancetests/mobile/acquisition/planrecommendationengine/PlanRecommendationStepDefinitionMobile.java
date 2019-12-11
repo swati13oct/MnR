@@ -1,4 +1,4 @@
-package acceptancetests.mobile.acquisition.planselectorengine;
+package acceptancetests.mobile.acquisition.planrecommendationengine;
 
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
@@ -35,7 +35,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class PlanSelectorStepDefinitionMobile {
+public class PlanRecommendationStepDefinitionMobile {
 
 	@Autowired
 	MRScenario loginScenario;
