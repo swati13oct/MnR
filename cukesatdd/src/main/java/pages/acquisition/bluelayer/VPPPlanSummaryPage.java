@@ -3510,7 +3510,7 @@ catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(!(dceLink.size()>0))// if after clicking above doesn't expand and the DCE link is not found, then it will try the click again
+		if((viewMoreLink.size()>0))// if after clicking above doesn't expand and the link size is greater than 0, then it will try the click again
 			viewMoreLink.get(0).click();
 			
 	}
