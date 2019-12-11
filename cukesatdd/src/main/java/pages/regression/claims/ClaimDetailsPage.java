@@ -387,7 +387,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' text after expanding the adjustment toggle", 
 			claimsValidate(adjustmentPaymentAdjustmentSectionText));
 			expTxt="Payment Adjustment";
-			actTxt=adjustmentPaymentAdjustmentSectionText.getText();
+			actTxt=adjustmentPaymentAdjustmentSectionText.getText().trim();
 			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
 
 			//note: do the math, will compare value with '"+Your Plan Paid+"' value for extensive validation case
@@ -437,6 +437,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				claimsValidate(topButton));
 		topButton.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummHeader, 10);
+		System.out.println("TEST - driver.getCurrentUrl()"+driver.getCurrentUrl());
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", 
 				driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page back to Summary page -->"
@@ -456,6 +457,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				claimsValidate(claimsSummLnkOnDetlBtmPg));
 		claimsSummLnkOnDetlBtmPg.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummHeader, 10);//need this more time to load SOFL pages 
+		sleepBySec(1);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", 
 				driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page --->"
