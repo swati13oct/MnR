@@ -137,9 +137,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 
-	public void validateTileLnkDestination(String planType, String memberType, String tile, boolean runOnteamEnv) throws InterruptedException {
+	public void validateTileLnkDestination(String planType, String memberType, String tile, boolean runOnTeamEnv) throws InterruptedException {
 		String planCategoryId="0";
-		validateTileLnkDestination(planType, memberType, tile, planCategoryId, runOnteamEnv);
+		validateTileLnkDestination(planType, memberType, tile, planCategoryId, runOnTeamEnv);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	 * @param tile
 	 * @throws InterruptedException
 	 */
-	public void validateTileLnkDestination(String planType, String memberType, String tile, String planCategoryId, boolean runOnteamEnv) 
+	public void validateTileLnkDestination(String planType, String memberType, String tile, String planCategoryId, boolean runOnTeamEnv) 
 			throws InterruptedException { //note: if arrives here, already validated link existent
 		System.out.println("Proceed to validate tile='"+tile+"'...");
 		if (tile.equals("Prescription Benefits Information") && !planCategoryId.equals("0")) {
@@ -199,7 +199,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			CommonUtility.checkPageIsReady(driver);
 				String actUrl=driver.getCurrentUrl();
 				if (expUrl.contains("sso")) {
-					if (!runOnteamEnv) {
+					if (!runOnTeamEnv) {
 					String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
 					Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
 							+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
