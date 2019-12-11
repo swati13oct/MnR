@@ -45,17 +45,11 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 	AppiumDriver wd;
 	List<DataTableRow> inputRow;
-	Map<String, String> inputValues;
+	HashMap<String, String> inputValues;
 	
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
-		inputRow = new ArrayList(inputdata.getGherkinRows());
-		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
-			inputValues.put(inputRow.get(i).getCells().get(0),
-			inputRow.get(i).getCells().get(1));
-		}
-
+		readfeaturedata(inputdata);
 		System.out.println("Given device : "+inputValues.get("Device Name"));
 		wd = getLoginScenario().getMobileDriver(inputValues.get("Device Name"));
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
@@ -79,7 +73,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@When("^user navigates to \"([^\\\"]*)\" page mobile$")
 	public void user_navigates_to_given_page_mobile(String pageName){
 		LandingAndZipcodeMobilePage prelandingpage =  new LandingAndZipcodeMobilePage(wd);
-		prelandingpage.navigatePage(pageName);
+		prelandingpage.navigatepagemobile(pageName);
 }
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
@@ -114,5 +108,30 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validates zipcode page elements mobile$")
 	public void user_check_zipcodepage_elements_mobile() {
 		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
+		prezipcodemobile.zipcodepageelementsmobile();
 	}
+	
+	@And("^runs questionnaire at zipcode page mobile$")
+	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) {
+		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
+		readfeaturedata(inputdata);
+		prezipcodemobile.zipcodepagevalidationmobile(inputValues);
+	}
+	
+	@Then("^runs questionnaire at zipcode page with invalid data mobile$")
+	public void user_runs_questionnaire_zipcodepage_invalid_data_mobile(DataTable inputdata) {
+		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
+		readfeaturedata(inputdata);
+		prezipcodemobile.zipcodescreenerrorvalidationmobile(inputValues);
+	}
+	
+	public void readfeaturedata(DataTable data) {
+		inputRow = new ArrayList(data.getGherkinRows());
+		inputValues = new HashMap<String, String>();
+		for (int i = 0; i < inputRow.size(); i++) {
+			inputValues.put(inputRow.get(i).getCells().get(0),
+			inputRow.get(i).getCells().get(1));
+		}
+	}
+	
 }

@@ -3,6 +3,7 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -61,6 +62,75 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='get-started-main-inner']//h3[contains(@class,'it-may-help-to-have')]")
 	public WebElement landingpageLabel;
 
+	// ZipCode Elements
+		//Default Page elements
+		@FindBy(css = "nav>.breadcrumb")
+		private WebElement breadCrumb;
+	
+		@FindBy(css = ".progress-bar-title>h1")
+		private WebElement planSelectorPageTilte;
+		
+		@FindBy(css = ".progress-bar-info>h2")
+		private WebElement pageStepsNumberName;
+		
+		@FindBy(css = "div.progress-bar-value-background")
+		private WebElement progressbar;
+		
+		@FindBy(css = "div>.all-fields-marked-wi")
+		private WebElement pageRequiredInfo;
+		
+		@FindBy(css = ".all-fields-marked-wi>sup")
+		private WebElement pageRequiredInfoMark;
+		
+		@FindBy(css = "div>.primary-question-tex")
+		private WebElement zipcodePageQuestion;
+		
+		@FindBy(css = "div>.primary-question-tex>sup")
+		private WebElement zipcodePageQuestionMark;
+		
+		@FindBy(css = "#referenceTxt")
+		private WebElement zipcodeTextLabel;
+		
+		@FindBy(id = "zip-code")
+		private WebElement zipCode;
+		
+		@FindBy(css = ".container div>button[class*='primary button']")
+		private WebElement continueBtn;
+
+		// zip code actions elements
+		@FindBy(id = "zipInfo")
+		private WebElement countyInfo;
+		
+		@FindBy(css = "label[for='MultipleCounty']")
+		private WebElement multicountyText;
+		
+		@FindBy(id = "MultipleCounty")
+		private WebElement multicountySelect;
+		
+		@FindBy(css = "#MultipleCounty > option:nth-child(1)")
+		private WebElement defaultmultioptioninnerText;
+
+		@FindBy(css = "label[for='MultipleCounty']>sup")
+		private WebElement zipcodePageCountyQuestionMark;
+		
+		@FindBy(id = "errorMessage")
+		private WebElement errorMessage;
+
+		
+		
+		
+	//Coverage Page Elements		
+		
+		@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
+		private WebElement TypeOfCoverageOption;
+		
+		@FindBy(xpath = "//button[contains(text(),'Previous')]")
+		private WebElement previousBtn;
+		
+		@FindBy(css = "div.row.pb-1>div>label.primary-question-tex")
+		private WebElement coverageTitle;
+		
+	
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
@@ -101,11 +171,61 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		waitTillElementClickableInTime(getStartedBtn1, 45);
 	}
 
+	public void zipcodepageelementsmobile() {
+		validate(breadCrumb, 30);
+		validate(planSelectorPageTilte, 30);
+		validate(pageStepsNumberName, 30);
+		validate(progressbar, 30);
+		validate(pageRequiredInfo, 30);
+		validate(pageRequiredInfoMark, 30);
+		validate(zipcodePageQuestion, 30);
+		validate(zipcodePageQuestionMark, 30);
+		validate(zipcodeTextLabel, 30);
+		validate(zipCode, 30);
+		validate(continueBtn, 30);
+	}
 	
+	public void zipcodepagevalidationmobile(HashMap<String,String> inputdata) {
+		zipCode.sendKeys(inputdata.get("Zip Code"));
+		hidekeypad();
+		if(inputdata.get("Is Multi County").equalsIgnoreCase("no")){
+			validate(countyInfo, 20);
+			Assert.assertTrue(countyInfo.getText().contains(inputdata.get("County Name")));
+		}
+		else {
+			validate(multicountyText,20);
+			validate(defaultmultioptioninnerText,20);
+			validate(zipcodePageCountyQuestionMark,20);
+			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
+			validate(multicountySelect,20);
+			Select multicounty = new Select(multicountySelect);
+			multicounty.selectByVisibleText(inputdata.get("CountyDropDown"));
+			mobileswipe("40%", true);
+		}
+		continueBtn.click();
+		threadsleep(2000);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
+	}
 	
-	public void navigatePage(String pagename) {
+	public void zipcodescreenerrorvalidationmobile(HashMap<String,String> inputdata) {
+		zipCode.sendKeys(inputdata.get("Zip Code"));
+		hidekeypad();
+		if(inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
+			validate(multicountySelect,20);
+			mobileswipe("40%", true);
+		}
+		continueBtn.click();
+		mobileswipe("40%", false);
+		validate(errorMessage, 20);
+		Assert.assertTrue(errorMessage.getText().contains("Please"));
+		threadsleep(2000);
+		Assert.assertTrue(pageStepsNumberName.getText().contains("Location"));
+	}
+	
+	public void navigatepagemobile(String pagename) {
 		HeaderFooterMobile header = new HeaderFooterMobile(driver);
 		header.navigatePRELandingpageMobile();
+		mobileswipe("50%", true);
 		validate(getStartedBtn, 30);
 		getStartedBtn.click();
 	}
@@ -116,4 +236,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	public void threadsleep(int sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

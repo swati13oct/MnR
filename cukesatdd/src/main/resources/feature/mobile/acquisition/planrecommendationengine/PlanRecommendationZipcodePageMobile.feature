@@ -1,48 +1,47 @@
 @PlanSelector
-Feature: Plan Selector Tool flow - Verify zipcode page in plan selector page
+Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation engine mobile page
 
   @PRE @planrecommandonation @zipcodepagemobile @siglecountymobile
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engie
     Given the user is on UHC medicare acquisition site mobile
+      | Device Name | <DeviceName> |
     When user navigates to "Zip Code" page mobile
     Then user validates zipcode page elements mobile
-    And runs questionnaire
+    And runs questionnaire at zipcode page mobile
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <County>          |
 
     Examples: 
-      | Zipcode | isMultutiCounty |County Name|
-      |   10001 | NO              |New York|
+      | DeviceName | Zipcode | isMultutiCounty | County   |
+      | s9         |   10001 | NO              | New York |
 
   @PRE @planrecommandonation @zipcodepagemobile @multicountymobile
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Multi county in ZipCode Page in Plan Recommendation Engie
-    Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engie
-    And clicks on get started button and runs questionnaire
+    Given the user is on UHC medicare acquisition site mobile
+      | Device Name | <DeviceName> |
+    When user navigates to "Zip Code" page mobile
+    Then runs questionnaire at zipcode page mobile
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
-      | CountyDropDown  | <county>          |
+      | CountyDropDown  | <County>          |
 
     Examples: 
-      | Zipcode | isMultutiCounty | county           |
-      |   78006 | YES             | Bexar County     |
-      |   77485 | YES             | Fort Bend County |
+      | DeviceName | Zipcode | isMultutiCounty | County      |
+      | s9         |   35034 | YES             | Bibb County |
 
   @PRE @planrecommandonation @zipcodepagemobile @invalidZipcodemobile
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engie
-    Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engie
-    And clicks on get started button and check error scenarios
+    Given the user is on UHC medicare acquisition site mobile
+      | Device Name | <DeviceName> |
+    When user navigates to "Zip Code" page mobile
+    Then runs questionnaire at zipcode page with invalid data mobile
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
 
     Examples: 
-      | Zipcode | isMultutiCounty | county       |
-      |   78006 | YES             | Bexar County |
-      |   21310 | NO              |              |
-      |    1234 | NO              |              |
-      |     123 | NO              |              |
-      |      12 | NO              |              |
-      |       1 | NO              |              |
-      |         | NO              |              |
+      | DeviceName | Zipcode | isMultutiCounty |
+      | s9         |   21310 | NO              |
+      | s9         |   78006 | YES             |
+      | s9         |         | NO              |
+      | s9         |    1234 | NO              |
