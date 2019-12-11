@@ -105,6 +105,7 @@ Feature: 1.02 Member Profile page
     And the user validates the address section
       | Member Type | <memberType> |
 
+    @devRegression
     Examples: 
       | TID   | userSelection | planType | memberType                      |
       | 15105 | xxxxxxxxx     | PCP      | PCP_SouthFlorida_ProfilePref    |
@@ -183,6 +184,7 @@ Feature: 1.02 Member Profile page
     And the user validate the Permanent Address section on profile page for ship member
     And the user validate the temporary section on profile page for ship member
 
+   @devRegression
     Examples: 
     | TID   | userSelection | planType | memberType          |
     | xxxxx | xxxxxxxxx     | SHIP     | SHIP_ProfilePref    |   

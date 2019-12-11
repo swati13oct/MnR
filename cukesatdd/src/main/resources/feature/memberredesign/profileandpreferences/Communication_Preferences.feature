@@ -111,6 +111,7 @@ Feature: 1.03 Member Preferences page
     Then the user validates the update preferences functionality for ship
     Then the user validates the presence of Back links on ship Preferences page 
 
+	@devRegression
     Examples: 
       | TID    | userSelection | planType | memberType       |
       | 15309  | xxxxxxxxx     | SHIP     | SHIP_ProfilePref |
