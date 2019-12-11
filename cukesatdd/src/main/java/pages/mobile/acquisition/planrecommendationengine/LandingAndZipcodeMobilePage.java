@@ -17,8 +17,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import acceptancetests.data.PageConstants;
+import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+
+import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 
 public class LandingAndZipcodeMobilePage extends UhcDriver {
 
@@ -100,7 +103,12 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	
 	
-	
+	public void navigatePage(String pagename) {
+		HeaderFooterMobile header = new HeaderFooterMobile(driver);
+		header.navigatePRELandingpageMobile();
+		validate(getStartedBtn, 30);
+		getStartedBtn.click();
+	}
 	
 	public void validatecontains(String primarystring, String substring) {
 		if (!primarystring.matches(substring)) {

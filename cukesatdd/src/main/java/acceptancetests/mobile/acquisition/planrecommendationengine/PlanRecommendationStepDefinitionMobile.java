@@ -22,7 +22,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
-import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePages;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -66,43 +66,53 @@ public class PlanRecommendationStepDefinitionMobile {
 	
 	@When("^user navigates to PRE landing page mobile$")
 	public void user_navigates_PRE_landingpage_mobile(){
-	HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
-	planSelectorheaderfootermobile.navigatePRELandingpageMobile();
+	HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
+	preheaderfootermobile.navigatePRELandingpageMobile();
 }
 	
 	@When("^user navigates to PRE landing page via shop tool mobile$")
 	public void user_navigates_PRE_landingpage_shoptool_mobile(){
-		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
-	planSelectorheaderfootermobile.navigationToPREViaShopToolsMobile();
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
+		preheaderfootermobile.navigationToPREViaShopToolsMobile();
+}
+	
+	@When("^user navigates to \"([^\\\"]*)\" page mobile$")
+	public void user_navigates_to_given_page_mobile(String pageName){
+		LandingAndZipcodeMobilePage prelandingpage =  new LandingAndZipcodeMobilePage(wd);
+		prelandingpage.navigatePage(pageName);
 }
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
 		//System.out.println("Device Type "+inputValues.get("Device Type"));
-		LandingAndZipcodeMobilePages planSelectorhomepagemobile =  new LandingAndZipcodeMobilePages(wd);
-		planSelectorhomepagemobile.landingpagemobile();
+		LandingAndZipcodeMobilePage prelandingpagemobile =  new LandingAndZipcodeMobilePage(wd);
+		prelandingpagemobile.landingpagemobile();
 }
 	
 	@Then("^user validate presence of Header and Footer elements on landing page mobile$")
 	public void user_check_header_Footer_mobile() {
-		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
-		planSelectorheaderfootermobile.headerElementsMobile();
-		planSelectorheaderfootermobile.footerElementsMobile();
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
+		preheaderfootermobile.headerElementsMobile();
+		preheaderfootermobile.footerElementsMobile();
 }
 	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine mobile$")
 	public void user_check_header_Footer_functionalities_mobile() {
-		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
-		planSelectorheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
-		planSelectorheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
-		planSelectorheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
-		planSelectorheaderfootermobile.backtoTopFunctionMobile();
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
+		preheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
+		preheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
+		preheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
+		preheaderfootermobile.backtoTopFunctionMobile();
 	}
 	
 	@Then("^user validates all Links from header and footer mobile$")
 	public void user_check_header_Footer_link_validation_mobile() {
-		HeaderFooterMobile planSelectorheaderfootermobile =  new HeaderFooterMobile(wd);
-		planSelectorheaderfootermobile.headerLinkvalidationMobile();
-		planSelectorheaderfootermobile.footerLinkvalidationMobile();
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
+		preheaderfootermobile.headerLinkvalidationMobile();
+		preheaderfootermobile.footerLinkvalidationMobile();
 	}
-
+	
+	@Then("^user validates zipcode page elements mobile$")
+	public void user_check_zipcodepage_elements_mobile() {
+		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
+	}
 }
