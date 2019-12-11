@@ -331,6 +331,20 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 	
+	public PaymentHistoryPage navigateToPaymentOverviewSkipBtnValidation() throws InterruptedException {
+		
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(premPaymentsTab))
+			premPaymentsTab.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
+		}
+		
+		return null;
+	}
+	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
@@ -339,6 +353,18 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
+		}
+		return null;
+	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPageSkipBtnValidation() throws InterruptedException {
+		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
 		}
 		return null;
 	}

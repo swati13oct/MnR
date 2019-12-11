@@ -177,9 +177,9 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 				PaymentHistoryPage paymentPg=null;
 				String memberType=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 				if (memberType.toLowerCase().contains("preeff"))
-					paymentPg=testHarness.navigateToPaymentOverview();
+					paymentPg=testHarness.navigateToPaymentOverviewSkipBtnValidation();
 				else
-					paymentPg=testHarness.navigateToPaymentFromTestHarnessPage();
+					paymentPg=testHarness.navigateToPaymentFromTestHarnessPageSkipBtnValidation();
 				Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, paymentPg!=null);
 				result=testHarness.findPnPLinksExistOnPg();
 				if (expectLink.equalsIgnoreCase("yes")) 
@@ -194,7 +194,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			WebDriver testDriver=accountHomePage.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			PaymentHistoryPage paymentPg=accountHomePage.navigateToPaymentPage();
+			PaymentHistoryPage paymentPg=accountHomePage.navigateToPaymentPageSkipBtnValidation();
 			if (paymentPg==null)
 				System.out.println("User doesn't have payment option, skip this step validation");
 			else {

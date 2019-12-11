@@ -1908,6 +1908,32 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	public PaymentHistoryPage navigateToPaymentPageSkipBtnValidation() throws InterruptedException {
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			// driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		CommonUtility.checkPageIsReady(driver);
+
+		if (noWaitValidate(paymentsLink)) {
+			System.out.println("payment link is displayed on the header");
+			paymentsLink.click();
+			return new PaymentHistoryPage(driver, true);
+		} else if (validate(TestHarnesspaymentsLink)) {
+
+			System.out.println("TestHarness Page Payments Link is displayed");
+			TestHarnesspaymentsLink.click();
+			return new PaymentHistoryPage(driver,true);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on
 	 * link on Rally Dashboard mid section
