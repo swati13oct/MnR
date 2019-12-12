@@ -10,7 +10,7 @@ Feature: Plan Selector Tool flow - Verify Header and Footer on medicare mobile p
 
     Examples: 
       | DeviceName |
-      | Samsung s9 |
+      | iphonex |
 
   #| iphonex    |
   #| S8         |
@@ -32,7 +32,7 @@ Feature: Plan Selector Tool flow - Verify Header and Footer on medicare mobile p
 
     Examples: 
       | DeviceName |  | Zipcode | EMail          | SearchKey                |
-      | Samsung s9 |  |   90201 | abc@domain.com | plan for recommandations |
+      | Samsung s8 |  |   90201 | abc@domain.com | plan for recommandations |
 
   @PREmobile @planrecommandonationmobile @headerfootermobile @headerfooterlinksvalidation
   Scenario Outline: - To validate mobile header and footer in medicare page

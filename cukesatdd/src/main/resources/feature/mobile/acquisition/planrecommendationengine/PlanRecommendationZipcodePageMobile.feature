@@ -42,6 +42,6 @@ Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation en
     Examples: 
       | DeviceName | Zipcode | isMultutiCounty |
       | s9         |   21310 | NO              |
-      | s9         |   78006 | YES             |
-      | s9         |         | NO              |
-      | s9         |    1234 | NO              |
+      | iphone x   |   78006 | YES             |
+      | Samsung s8 |         | NO              |
+      | iphone 8   |    1234 | NO              |

@@ -94,7 +94,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = "#nav>a.nav-close")
 	private WebElement headernavigationCloseicon;
 	
-	// Shop for s plan inner elements
+	// Shop for a plan inner elements
 	@FindBy(css = "#subnav_2 label[for='nav-zipcode']")
 	private WebElement headerFindplanslabel;
 	
@@ -340,6 +340,13 @@ public class HeaderFooterMobile extends UhcDriver {
 		validate(headerEmailsubmitButton, 30);
 		headernavigationBackbutton.click();
 		// Learn about medicare inner elements
+		if (driver.getCurrentUrl().contains("aarpmedicare"))
+			AARPlogoInHeader.click();
+		else
+			UHClogoInHeader.click();
+		pageloadcomplete();
+		navigatePRELandingpageMobile();
+		headerSectionmenu.click();
 		learnaboutmedicareLink.click();
 		validate(headerMedicareeducationLink, 30);
 		Assert.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
@@ -461,7 +468,6 @@ public class HeaderFooterMobile extends UhcDriver {
 		validate(headerFindplansbutton, 30);
 		headerfindZipcodetext.sendKeys(zipcode);
 		headerFindplansbutton.click();
-		pageloadcomplete();
 		validateLinks("/plan-summary||zipcode");
 		browserBack();
 	}
@@ -762,8 +768,9 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 	
 	public void validateLinks(String expURL) {
+		pageloadcomplete();
 		String curURL = driver.getCurrentUrl();
-		threadsleep(1500);
+		threadsleep(3000);
 		if(expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[0]) || expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[1])){
 			System.out.println("Link validation True");
 		}
@@ -790,16 +797,19 @@ public class HeaderFooterMobile extends UhcDriver {
 		shopforaplanLink.click();
 		mobileswipe("90%",true);
 		validate(headerGetaplanrecommendationLink, 30);
-		headerGetaplanrecommendationLink.click();
+		mobileactiontab(headerGetaplanrecommendationLink);
 		validateLinks("/plan-recommendation-engine.html");
 	}
 	
 	public void browserBack() {
 		driver.navigate().back();
+		threadsleep(1000);
 	}
 
 	public void navigatesubLink(String subURL) {
 		driver.navigate().to(subURL);
+		threadsleep(1000);
+		pageloadcomplete();
 	}
 
 	public void validateLinksanotherWindowmobile(String expURL){
@@ -834,6 +844,8 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	public void browserRefresh() {
 		driver.navigate().refresh();
+		threadsleep(1000);
+		pageloadcomplete();
 	}
 
 }

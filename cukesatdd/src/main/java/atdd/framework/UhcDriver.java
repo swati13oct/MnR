@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +45,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 import java.util.regex.Pattern;
@@ -845,8 +847,12 @@ try {
 	}
 
 	public void mobileactiontab(WebElement element) {
-		Actions act = new Actions(driver);
-		act.click(element).perform();
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Actions act = new Actions(driver); // Works only for Android driver
+			act.click(element).perform();
+		}
+		else
+			jsClickNew(element);
 	}
 	
 	public void pageloadcomplete() {
