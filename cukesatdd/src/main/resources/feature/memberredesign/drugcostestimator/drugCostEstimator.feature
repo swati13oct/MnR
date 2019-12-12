@@ -92,6 +92,7 @@ Feature: 1.07 Member DCE Page
 
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
+
   #@drugCostEstimator5 @drugToolNotDisplayed #This is already covered above
   #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify DCE drug tile is not displayed for certain members
   #Given login with following details logins in the member portal and validate elements
@@ -101,6 +102,7 @@ Feature: 1.07 Member DCE Page
   #Examples:
   #| TID   | planType                |
   #| 15337 | IndividualDCEmember_DCE |
+
   @drugCostEstimator6 @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
     Given login with following details logins in the member portal and validate elements
