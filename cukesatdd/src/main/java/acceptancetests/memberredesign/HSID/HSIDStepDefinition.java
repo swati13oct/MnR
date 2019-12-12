@@ -794,9 +794,6 @@ public class HSIDStepDefinition {
 		System.out.println("Password is..." + pwd);
 		//note: for team-a microapp env, the username is the userselection
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-		if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
-		 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userSelection+" or "+userName);
-		}
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -848,6 +845,9 @@ public class HSIDStepDefinition {
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
+						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
+						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
+						}
 					} else {
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
 					}

@@ -140,7 +140,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @ship
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 04_1  | 15236 | SHIP-q3_sep_ship_009              | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
+      | 04_1  | 15236 | SHIP-q3_sep_Pre-effective_Ship_005| SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
 
     @mapd_drug
     Examples: 
@@ -212,5 +212,6 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       |    01 | myUsername | myPassword | testUsername | PDP      | Individual | RX_CLAIMS      | Prescription drug | 000       | Yes                |
       |    02 | myUsername | myPassword | testUsername | MAPD     | Individual | NICE_CLAIMS    | Medical           | 000       | Yes                |
       |    03 | myUsername | myPassword | testUsername | SHIP     | Individual | COMPASS_CLAIMS | NA                | 000       | Yes                |
+      |    04 | myUsername | myPassword | testUsername | PCP      | Individual | COSMOS_CLAIMS  | Medical           | 000       | Yes                |
 
 
