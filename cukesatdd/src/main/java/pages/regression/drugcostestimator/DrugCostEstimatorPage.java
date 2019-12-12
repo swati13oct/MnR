@@ -1573,7 +1573,9 @@ try {
 			List<WebElement> saveGenericMessage = driver
 					.findElements(By.id("generic-drug-saving-amount-0"));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
-			Assert.assertTrue("Save dollar amount message is incorect. valSaveGenericMessage="+valSaveGenericMessage, valSaveGenericMessage.contains("Save money"));
+			Assert.assertTrue("Save dollar amount message is incorect. "
+					+ "valSaveGenericMessage="+valSaveGenericMessage, 
+					!valSaveGenericMessage.contains("Save money"));
 			/* tbd 
 			if (!valSaveGenericMessage.contains("Save money")) {
 				Assert.assertTrue(true);
