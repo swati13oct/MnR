@@ -1,7 +1,7 @@
-@accountProfile @thePredators 
+@accountProfileProfile @thePredators 
 Feature: 1.02 Member Profile page
 
-  @account01 @accountMicroApp01 @ShipEndtoEnd @AP_Part1_Regression
+  @accountProfile01 @accountProfileMicroApp01 @ShipEndtoEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -29,7 +29,7 @@ Feature: 1.02 Member Profile page
 	    | TID   | userSelection | planType | memberType          |
 	    | 15103 | xxxxxxxxxx    | SHIP     | SHIP_ProfilePref    |   
 
-  @account02 @MAPDandMAEndToEnd @AP_Part1_Regression
+  @accountProfile02 @MAPDandMAEndToEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -48,7 +48,7 @@ Feature: 1.02 Member Profile page
       | 15083_2 | MA       | MA_AARP_GOGreen_Profilepref    |
       | 15083_3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
-  @account03 @NegativeTestonHSIDpage @AP_Part1_Regression
+  @accountProfile03 @NegativeTestonHSIDpage @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify all Negative tests on Password Edit on HSID PASSWORD Link Page
     Given login with following details logins in the member portal and validate elements
       | Member Type | <memberType> |
@@ -63,7 +63,7 @@ Feature: 1.02 Member Profile page
       | Unknown2 | MA       | MA_AARP_GOGreen_Profilepref    |
       | Unknown3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
-  @account04 @US957739 @regressionMember
+  @accountProfile04 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -80,7 +80,7 @@ Feature: 1.02 Member Profile page
   # | 00000   | MA       | NOKIA      |
   # | 00000   | MAPD     | NOKIA      |
   
-  @account05 @accountMicroApp05 @regressionPCPMedica @regressionMember @AP_Part2_Regression
+  @accountProfile05 @accountProfileMicroApp05 @regressionPCPMedica @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -111,7 +111,7 @@ Feature: 1.02 Member Profile page
       | 15105 | xxxxxxxxx     | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | xxxxxxxxx     | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @account06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
+  @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -141,7 +141,7 @@ Feature: 1.02 Member Profile page
       | 15083 | MAPD_AARPIndividual | AARP_ProfilePref |
 
   #-----------------------  Below All tests are EPMP ( Non regression) tests ---------------------------------------------------
-  @account07 @EPMPProfilePage
+  @accountProfile07 @EPMPProfilePage
   Scenario Outline: TID: <TID> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -156,7 +156,7 @@ Feature: 1.02 Member Profile page
       | TID   | planType | memberType |dataType	|
       | xxxx  | MAPD     | EPMPEnabled |Individual_ProfilePref |
 
-  @account08 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_Regression
+  @accountProfile08 @EPMPProfilePageContactusInformation @regressionMember @epmpfixed @AP_Part2_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for EPMP profile page
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -172,7 +172,7 @@ Feature: 1.02 Member Profile page
      | TID       | planType | memberType  | dataType   |
      | Unknown_4 | MAPD     | EPMPEnabled | Individual_ProfilePref |
 
-  @account09 @accountMicroApp09 @EMPMprofilePageForShip @regressionMember
+  @accountProfile09 @accountProfileMicroApp09 @EMPMprofilePageForShip @regressionMember
   Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
     Given login with following details logins in the member portal and validate elements 
       | Plan Type   | <planType>         |
@@ -189,7 +189,7 @@ Feature: 1.02 Member Profile page
     | TID   | userSelection | planType | memberType          |
     | xxxxx | xxxxxxxxx     | SHIP     | SHIP_ProfilePref    |   
 
-  @account10 @EPMPProfilePageContactusGroup @regressionMember
+  @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -206,7 +206,7 @@ Feature: 1.02 Member Profile page
       | planType | memberType | dataType | GroupPlanName |
      #| MAPD     | EPMPEnabled | group    | HealthSelectRx_ProfilePref |
   
-  @account11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_Regression
+  @accountProfile11 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part3_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -223,7 +223,7 @@ Feature: 1.02 Member Profile page
      | TID		 | planType | memberType  | dataType   |
      | Unknown_5 | MAPD     | EPMPEnabled | Terminated_ProfilePref |
 
-  @account12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_Regression
+  @accountProfile12 @ComboAccountSettings @regressionMember @codetransformers @AP_Part3_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -237,7 +237,7 @@ Feature: 1.02 Member Profile page
       | Unknown_6  | Combo_PDP_SSUP | EPMPEnabled_ProfilePref|
   
 
-  @account13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers @AP_Part3_Regression
+  @accountProfile13   @CTRegressionAccountProfile_FederalMembers @regressionMember @codetransformers @AP_Part3_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile and preferences for a Federal member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -266,7 +266,7 @@ Feature: 1.02 Member Profile page
       | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
       
       
-    @account14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
+    @accountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
     Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
      Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -288,7 +288,7 @@ Feature: 1.02 Member Profile page
       # | Unknown_14 | MA          | MA_UHCIndividual       | NON LIS_ProfilePref        |
       
        
-    @account15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
+    @accountProfile15 @profilePageForTerminated @regressionMember @epmpfixed @AP_Part4_Regression
     Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -309,7 +309,7 @@ Feature: 1.02 Member Profile page
      | TID			  | planType | memberType        | copayCategory   |
      | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS_ProfilePref |
      
-    @account16 @AP_Part5_Regression
+    @accountProfile16 @AP_Part5_Regression
     Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -324,7 +324,7 @@ Feature: 1.02 Member Profile page
       | TID			   | planType | memberType        | copayCategory   |
       | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
       
-   @account17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
+   @accountProfile17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
@@ -332,14 +332,14 @@ Feature: 1.02 Member Profile page
       | Copay Category | <copayCategory>|
     Then I validate that login is successfull  
     
-   @account17a
+   @accountProfile17a
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_17 | MA        |  Individual  |  NON LIS_ProfilePref      |
     | Unknown_18 | PDP       |  Individual  |  NON LIS_ProfilePref      |
     | Unknown_19 | MAPD      |  Individual  |  NON LIS_ProfilePref      |
 
-   @account17b
+   @accountProfile17b
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_20 | PCP       |  Individual  |  NON LIS_ProfilePref      |
@@ -347,7 +347,7 @@ Feature: 1.02 Member Profile page
     | Unknown_22 | MAGroup   |  Group       |  NON LIS_ProfilePref      |
     | Unknown_23 | MAPDGroup |  Group       |  NON LIS_ProfilePref      | 
 
-   @account17c
+   @accountProfile17c
    Examples:
     | TID		 | planType  |  memberType  | copayCategory | 
     | Unknown_24 | PDPGroup  |  Group       |  NON LIS_ProfilePref      | 
@@ -355,7 +355,7 @@ Feature: 1.02 Member Profile page
     | Unknown_26 | COMBO     | FedShip      |  NON LIS_ProfilePref      |
     | Unknown_27 | SSUPGroup |Group         |  NON LIS_ProfilePref      |
    
-  @account18
+  @accountProfile18
   Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
     Given I am a authenticated member on the member redesign site for Direct Login
       | Member Type | <memberType> |
@@ -366,7 +366,7 @@ Feature: 1.02 Member Profile page
    Then member should navigate to Home pag  
    Then User should be able to validate Dashboard elemt    
  
- 	@account18a
+ 	@accountProfile18a
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | MAIndividualCOSMOS_ProfilePref  | name1      | color1   | number1     |
@@ -374,7 +374,7 @@ Feature: 1.02 Member Profile page
        | MANICE_ProfilePref              | name1      | color1   | number1     |
        | MAPDCOSMOS_ProfilePref          | name1      | color1   | number1     |
 
- 	@account18b
+ 	@accountProfile18b
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | AARPPDP_ProfilePref             | name1      | color1   | number1     |
@@ -382,7 +382,7 @@ Feature: 1.02 Member Profile page
        | ACTIVEMedica_ProfilePref        | name1      | color1   | number1     |
        | GROUPMA_ProfilePref             | name1      | color1   | number1     |
 
- 	@account18c
+ 	@accountProfile18c
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | GROUPMAPD_ProfilePref           | name1      | color1   | number1     |
@@ -390,7 +390,7 @@ Feature: 1.02 Member Profile page
        |  GROUPSSUP_ProfilePref          | name1      | color1   | number1     |
        |  GROUPDPSSUP_ProfilePref        | name1      | color1   | number1     |
 
- 	@account18d
+ 	@accountProfile18d
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        |  PREACTIVEGRP_ProfilePref       | name1      | color1   | number1     |
@@ -398,7 +398,7 @@ Feature: 1.02 Member Profile page
        |  MULTIGOVPRETERM_ProfilePref    | name1      | color1   | number1     |
        |  ACTIVEPRESHIP_ProfilePref      | name1      | color1   | number1     |
 
- 	@account018e
+ 	@accountProfile018e
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        |  ACTIVESHIP_ProfilePref         | name1      | color1   | number1     |
@@ -406,7 +406,7 @@ Feature: 1.02 Member Profile page
        |ACTIVETERMFEDSHIPCOMBO_ProfilePref | name1    | color1   | number1     |
        |  MICROMULTIFEDSHIP_ProfilePref  | name1      | color1   | number1     |
 
- 	@account18f
+ 	@accountProfile18f
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | MULTIFEDACTIVE_ProfilePref      | name1      | color1   | number1     |         
@@ -414,7 +414,7 @@ Feature: 1.02 Member Profile page
        |  MAPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |
        |  MAPDPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |
 
- 	@account18g
+ 	@accountProfile18g
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        | PDPPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |  
@@ -422,7 +422,7 @@ Feature: 1.02 Member Profile page
        | GRPMAPDPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
        |  SSUPPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
 
- 	@account18h
+ 	@accountProfile18h
     Examples: 
        | memberType          | friendname | favcolor | phonenumber |
        |  GRPPDPPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
