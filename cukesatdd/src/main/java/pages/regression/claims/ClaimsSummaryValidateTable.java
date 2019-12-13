@@ -345,11 +345,12 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 							+ "Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", 
 							actualCol6.contains(expectCol6));
 				} else {
-					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]/div/p")).getText();
+					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]/div")).getText();
 					String expectCol7="Your Share";
 					Assert.assertTrue("PROBLEM - medical claims table header column7 value not as expected. "
 							+ "Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", 
-							expectCol7.equals(actualCol7));
+							actualCol7.contains(expectCol7));
+					//expectCol7.equals(actualCol7));
 				}
 			} else {
 				if (claimSystem.contains("NICE")) {
