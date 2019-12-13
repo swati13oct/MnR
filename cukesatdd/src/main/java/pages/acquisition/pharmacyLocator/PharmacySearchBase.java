@@ -35,6 +35,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public List<String> enterZipDistanceDetails(String zipcode, String distance, String county) {
+		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
