@@ -192,6 +192,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		if (switchTab) {
 			String winHandleBefore = driver.getWindowHandle();
+			CommonUtility.waitForPageLoad(driver, linkElement, 5);
 			linkElement.click();
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
