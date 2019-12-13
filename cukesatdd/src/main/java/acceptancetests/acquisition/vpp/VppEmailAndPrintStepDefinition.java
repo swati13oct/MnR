@@ -280,6 +280,7 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
