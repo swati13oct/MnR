@@ -1526,7 +1526,7 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+				|| MRScenario.environmentMedicare.contains("team-a")
 				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
@@ -1600,7 +1600,7 @@ public class AccountHomePage extends UhcDriver {
 			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
-		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+		} else if (MRScenario.environment.contains("team-a")) {
 			String Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 					+ "/content/medicare/member/pharmacy-locator/overview.html";
 			if (driver.getCurrentUrl().contains("mymedicareaccount")) {
@@ -1663,7 +1663,7 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, FormRsrceLinkTestHarness, 30);
 			FormRsrceLinkTestHarness.click();
 
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+		} else if (MRScenario.environmentMedicare.contains("team-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "
@@ -1908,6 +1908,32 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	public PaymentHistoryPage navigateToPaymentPageSkipBtnValidation() throws InterruptedException {
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			// driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		CommonUtility.checkPageIsReady(driver);
+
+		if (noWaitValidate(paymentsLink)) {
+			System.out.println("payment link is displayed on the header");
+			paymentsLink.click();
+			return new PaymentHistoryPage(driver, true);
+		} else if (validate(TestHarnesspaymentsLink)) {
+
+			System.out.println("TestHarness Page Payments Link is displayed");
+			TestHarnesspaymentsLink.click();
+			return new PaymentHistoryPage(driver,true);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on
 	 * link on Rally Dashboard mid section
@@ -1924,7 +1950,7 @@ public class AccountHomePage extends UhcDriver {
 				workaroundAttempt("order");
 			} else {
 				String Page_URL = "";
-				if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				if (MRScenario.environment.contains("team-a")) {
 					Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 							+ "/content/medicare/member/order-materials/overview.html";
 				} else {

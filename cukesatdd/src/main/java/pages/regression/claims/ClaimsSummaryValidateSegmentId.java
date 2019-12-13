@@ -30,7 +30,7 @@ public class ClaimsSummaryValidateSegmentId extends ClaimsSummaryBase{
 		if (memberType.toUpperCase().contains("COMBO"))
 			isComboUser=true;
 		if (planType.equalsIgnoreCase("SHIP"))
-			lookForPlanCategory="MEDICARE SUPPLEMENT";
+			lookForPlanCategory="SHIP";
 		else if (planType.equalsIgnoreCase("SSUP")) 
 			lookForPlanCategory="SSP";
 		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
@@ -63,10 +63,18 @@ public class ClaimsSummaryValidateSegmentId extends ClaimsSummaryBase{
 						+ "Please double check and correct test data", arr.length()>1);
 			for (int i = 0; i < arr.length(); i++) {
 				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				System.out.println("actualPlanCategory="+actualPlanCategory +" | lookForPlanCategory="+lookForPlanCategory);
 				//note: need to locate the right plan for segmentId validation
-				if (lookForPlanCategory.equals(actualPlanCategory)) {
-					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+				if (lookForPlanCategory.equalsIgnoreCase("SHIP")) {
+					if ("MEDICARE SUPPLEMENT".equals(actualPlanCategory) || "HOSPITAL INDEMNITY".equals(actualPlanCategory)) {
+						actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+					}
+				} else {
+					if (lookForPlanCategory.equals(actualPlanCategory)) {
+						actualSegmentId = arr.getJSONObject(i).getString("segmentId");
+					}
 				}
+					
 			}
 			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
 					actualSegmentId!=null);

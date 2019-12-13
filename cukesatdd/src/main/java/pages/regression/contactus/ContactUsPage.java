@@ -274,9 +274,29 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 	}
+	
+	public ContactUsPage(WebDriver driver, String memberType) {
+		super(driver);
+		try {
+			PageFactory.initElements(driver, this);
+			checkModelPopup(driver);
+			
+			if ((MRScenario.environment).toLowerCase().contains("offline"))
+				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
+			
+			openAndValidate(memberType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
+		validateNew(heading);
+	}
+
+	public void openAndValidate(String memberType) {
+		if (!memberType.contains("PreEff")) 
 		validateNew(heading);
 	}
 
