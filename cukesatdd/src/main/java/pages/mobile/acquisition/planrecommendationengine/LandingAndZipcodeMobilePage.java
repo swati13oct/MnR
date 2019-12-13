@@ -20,6 +20,7 @@ import org.testng.Assert;
 import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.MobileElement;
 import pages.acquisition.ulayer.PageTitleConstants;
 
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
@@ -35,102 +36,87 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
 
-	@FindBy(xpath = "//*[contains(@class,'get-started-banner')]//button[contains(text(),'Get Started')]")
+	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//button[contains(text(),'Get Started')]")
+	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	@FindBy(css = "h1[class^='text-display']")
 	private WebElement landingpageHeader;
 
-	@FindBy(xpath = "//*[@class='get-started-banner']//img[@class='mb-3 mb-0-lg']")
+	@FindBy(css = "div[class*='get-started-banner'] img")
 	private WebElement landingpageAnimationImage;
 
-	@FindBy(xpath = "//*[@class='get-started-main-inner']//img[@class='mb-3 mb-0-lg']")
+	@FindBy(css = "div[class*='get-started-main-inner'] img")
 	private WebElement landingpageImage;
 
-	@FindBy(xpath = "//*[@class='get-started-banner']//p")
+	@FindBy(css = "div[class*='get-started-banner'] p")
 	private WebElement landingpageText;
 
-	@FindBy(className = "get-started-main-inner")
+	@FindBy(css = "div[class*='get-started-main-inner']")
 	private WebElement landingpageMainInner;
 
-	@FindBy(xpath = "//*[contains(@class,'get-started-main-inner')]//h2[@class='get-started-main-title how-does-this-work']")
+	@FindBy(css = "div[class*='get-started-main-inner'] h2")
 	private WebElement landingpageInnerTitle;
 
-	@FindBy(xpath = "//*[@class='get-started-main-inner']//h3[contains(@class,'it-may-help-to-have')]")
+	@FindBy(css = "div[class*='get-started-main-inner'] h3")
 	public WebElement landingpageLabel;
 
 	// ZipCode Elements
-		//Default Page elements
-		@FindBy(css = "nav>.breadcrumb")
-		private WebElement breadCrumb;
-	
-		@FindBy(css = ".progress-bar-title>h1")
-		private WebElement planSelectorPageTilte;
-		
-		@FindBy(css = ".progress-bar-info>h2")
-		private WebElement pageStepsNumberName;
-		
-		@FindBy(css = "div.progress-bar-value-background")
-		private WebElement progressbar;
-		
-		@FindBy(css = "div>.all-fields-marked-wi")
-		private WebElement pageRequiredInfo;
-		
-		@FindBy(css = ".all-fields-marked-wi>sup")
-		private WebElement pageRequiredInfoMark;
-		
-		@FindBy(css = "div>.primary-question-tex")
-		private WebElement zipcodePageQuestion;
-		
-		@FindBy(css = "div>.primary-question-tex>sup")
-		private WebElement zipcodePageQuestionMark;
-		
-		@FindBy(css = "#referenceTxt")
-		private WebElement zipcodeTextLabel;
-		
-		@FindBy(id = "zip-code")
-		private WebElement zipCode;
-		
-		@FindBy(css = ".container div>button[class*='primary button']")
-		private WebElement continueBtn;
+	// Default Page elements
+	@FindBy(css = "nav>.breadcrumb")
+	private WebElement breadCrumb;
 
-		// zip code actions elements
-		@FindBy(id = "zipInfo")
-		private WebElement countyInfo;
-		
-		@FindBy(css = "label[for='MultipleCounty']")
-		private WebElement multicountyText;
-		
-		@FindBy(id = "MultipleCounty")
-		private WebElement multicountySelect;
-		
-		@FindBy(css = "#MultipleCounty > option:nth-child(1)")
-		private WebElement defaultmultioptioninnerText;
+	@FindBy(css = ".progress-bar-title>h1")
+	private WebElement planSelectorPageTilte;
 
-		@FindBy(css = "label[for='MultipleCounty']>sup")
-		private WebElement zipcodePageCountyQuestionMark;
-		
-		@FindBy(id = "errorMessage")
-		private WebElement errorMessage;
+	@FindBy(css = ".progress-bar-info>h2")
+	private WebElement pageStepsNumberName;
 
-		
-		
-		
-	//Coverage Page Elements		
-		
-		@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
-		private WebElement TypeOfCoverageOption;
-		
-		@FindBy(xpath = "//button[contains(text(),'Previous')]")
-		private WebElement previousBtn;
-		
-		@FindBy(css = "div.row.pb-1>div>label.primary-question-tex")
-		private WebElement coverageTitle;
-		
-	
+	@FindBy(css = "div.progress-bar-value-background")
+	private WebElement progressbar;
+
+	@FindBy(css = "div>.all-fields-marked-wi")
+	private WebElement pageRequiredInfo;
+
+	@FindBy(css = ".all-fields-marked-wi>sup")
+	private WebElement pageRequiredInfoMark;
+
+	@FindBy(css = "div>.primary-question-tex")
+	private WebElement zipcodePageQuestion;
+
+	@FindBy(css = "div>.primary-question-tex>sup")
+	private WebElement zipcodePageQuestionMark;
+
+	@FindBy(css = "#referenceTxt")
+	private WebElement zipcodeTextLabel;
+
+	@FindBy(css = "input#zip-code")
+	private WebElement zipCode;
+
+	@FindBy(css = ".container div>button[class*='primary button']")
+	private WebElement continueBtn;
+
+	// zip code actions elements
+	@FindBy(id = "zipInfo")
+	private WebElement countyInfo;
+
+	@FindBy(css = "label[for='MultipleCounty']")
+	private WebElement multicountyText;
+
+	@FindBy(css = "#MultipleCounty")
+	private WebElement multicountySelect;
+
+	@FindBy(css = "#MultipleCounty > option:nth-child(1)")
+	private WebElement defaultmultioptioninnerText;
+
+	@FindBy(css = "label[for='MultipleCounty']>sup")
+	private WebElement zipcodePageCountyQuestionMark;
+
+	@FindBy(id = "errorMessage")
+	private WebElement errorMessage;
+
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
@@ -160,9 +146,12 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		String ActualText1 = landingpageInnerTitle.getText();
 		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
 		for (int i = 1; i <= 3; i++) {
-			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]"))).getText();
+			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
+					.getText();
 			System.out.println(landingpageTracker);
-			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i + "]/span"))).getText();
+			String landingpageTextPoints = (driver.findElement(By.xpath(
+					"//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i + "]/span")))
+							.getText();
 			System.out.println(landingpageTextPoints);
 		}
 		mobileswipe("70%", true);
@@ -184,20 +173,22 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		validate(zipCode, 30);
 		validate(continueBtn, 30);
 	}
-	
-	public void zipcodepagevalidationmobile(HashMap<String,String> inputdata) {
+
+	public void zipcodepagevalidationmobile(HashMap<String, String> inputdata) {
+		zipCode.click();
+		int i = 0;
+		//mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		zipCode.sendKeys(inputdata.get("Zip Code"));
 		hidekeypad();
-		if(inputdata.get("Is Multi County").equalsIgnoreCase("no")){
+		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
 			Assert.assertTrue(countyInfo.getText().contains(inputdata.get("County Name")));
-		}
-		else {
-			validate(multicountyText,20);
-			validate(defaultmultioptioninnerText,20);
-			validate(zipcodePageCountyQuestionMark,20);
+		} else {
+			validate(multicountyText, 20);
+			validate(defaultmultioptioninnerText, 20);
+			validate(zipcodePageCountyQuestionMark, 20);
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
-			validate(multicountySelect,20);
+			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
 			multicounty.selectByVisibleText(inputdata.get("CountyDropDown"));
 			mobileswipe("40%", true);
@@ -206,12 +197,12 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		threadsleep(2000);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
 	}
-	
-	public void zipcodescreenerrorvalidationmobile(HashMap<String,String> inputdata) {
+
+	public void zipcodescreenerrorvalidationmobile(HashMap<String, String> inputdata) {
 		zipCode.sendKeys(inputdata.get("Zip Code"));
 		hidekeypad();
-		if(inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
-			validate(multicountySelect,20);
+		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
+			validate(multicountySelect, 20);
 			mobileswipe("40%", true);
 		}
 		continueBtn.click();
@@ -221,7 +212,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		threadsleep(2000);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Location"));
 	}
-	
+
 	public void navigatepagemobile(String pagename) {
 		HeaderFooterMobile header = new HeaderFooterMobile(driver);
 		header.navigatePRELandingpageMobile();
@@ -229,14 +220,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		validate(getStartedBtn, 30);
 		getStartedBtn.click();
 	}
-	
+
 	public void validatecontains(String primarystring, String substring) {
 		if (!primarystring.matches(substring)) {
 			System.out.println("Expected string - " + substring + " is not available in - " + primarystring);
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	public void threadsleep(int sec) {
 		try {
 			Thread.sleep(sec);

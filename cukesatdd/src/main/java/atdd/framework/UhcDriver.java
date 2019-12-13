@@ -447,7 +447,7 @@ try {
 		js.executeScript("arguments[0].click();", element);
 		System.out.println("Element Clicked");
 	}
-
+	
 	/***
 	 * the method scrolls page upto element's location
 	 * 
@@ -845,6 +845,13 @@ try {
 		else
 			((IOSDriver)driver).hideKeyboard();
 	}
+	
+	public void getkeypad() {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
+			((AndroidDriver)driver).getKeyboard();
+		else
+			((IOSDriver)driver).getKeyboard();
+	}
 
 	public void mobileactiontab(WebElement element) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -853,6 +860,26 @@ try {
 		}
 		else
 			jsClickNew(element);
+	}
+	
+	public void mobileactionsendkeys(WebElement element,String keys) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Actions act = new Actions(driver); // Works only for Android driver
+			act.click(element).sendKeys(keys).perform();
+		}
+		else {
+			//jsClickNew(element);
+			//jsSendkeys(element,keys);
+		MobileElement m = (MobileElement) ((IOSDriver)driver).findElement(By.id("zip-code"));
+		m.getAttribute("placeholder");
+		m.setValue(keys);			
+		element.sendKeys(keys);
+		}
+	}
+	
+	public void jsSendkeys(MobileElement element,String keys) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].value='"+ keys +"';", element);
 	}
 	
 	public void pageloadcomplete() {

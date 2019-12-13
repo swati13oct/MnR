@@ -258,6 +258,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 	
+	
 	//Shop page
 	@FindBy(xpath = "//span[contains(text(),'Get Help Choosing')]")
 	private WebElement HeaderShopToolsGetHelpChoosingLink;
@@ -432,17 +433,6 @@ public class HeaderFooterMobile extends UhcDriver {
 		Assert.assertTrue(footerCallbanner.getText().contains("Call a Licensed Insurance Agent"));
 	}
 
-	// Navigating Plan RecommendationEngine via Get Plan Recommendation Link Mobile
-	public void navigationToPREPageMobile() {
-		backtoshopforaplan(false);
-		validate(headerGetaplanrecommendationLink, 30);
-		Assert.assertTrue(headerGetaplanrecommendationLink.getText().contains("Plan Recommendation"));
-		headerGetaplanrecommendationLink.click();
-		validateLinks("/plan-recommendation-engine.html");
-		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
-	}
-
 	// Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing
 	public void navigationToPREViaShopToolsMobile() {
 		validate(headerSectionmenu, 30);
@@ -453,7 +443,6 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerShopLink.click();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
 		HeaderShopToolsGetHelpChoosingLink.click();
-		validateLinks("/plan-recommendation-engine.html");
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}
@@ -798,7 +787,8 @@ public class HeaderFooterMobile extends UhcDriver {
 		mobileswipe("90%",true);
 		validate(headerGetaplanrecommendationLink, 30);
 		mobileactiontab(headerGetaplanrecommendationLink);
-		validateLinks("/plan-recommendation-engine.html");
+		validate(landingpageHeader, 30);
+		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}
 	
 	public void browserBack() {

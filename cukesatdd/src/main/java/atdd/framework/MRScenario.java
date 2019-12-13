@@ -1210,6 +1210,8 @@ sauceLabsTunnelIdentifier);
 			findDeviceName = "Samsung Galaxy S8";
 
 		capabilities.setCapability("deviceName", findDeviceName);
+		
+		
 
 		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
 			mobileOSName = "Android";
@@ -1247,6 +1249,7 @@ sauceLabsTunnelIdentifier);
 			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
 			// System.out.println("APIURL ---
 			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
+			System.out.println(mobileDriver.getContext());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
