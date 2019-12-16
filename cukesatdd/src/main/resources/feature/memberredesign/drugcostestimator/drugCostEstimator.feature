@@ -9,10 +9,10 @@ Feature: 1.07 Member DCE Page
     Then I should not see drug look up on home page
 
     Examples: 
-      | TID   | planType | memberType              |
-      | 15326 | SHIP     | EFT_MedSelectPlan_order |
-      | 15327 | SSUP     | SSUP_ProfilePref        |
-      | 15337 | MA       | IDCardmember            |
+      | TID   | planType | memberType   |
+      | 15326 | SHIP     | SHIP_DCE     |
+      | 15327 | SSUP     | SSUP_DCE     |
+      | 15337 | MA       | MA_DCE       |
 
   @drugCostEstimator2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
@@ -29,8 +29,8 @@ Feature: 1.07 Member DCE Page
     And I should be able to move forward or backward in the tool flow
 
     Examples: 
-      | TID   | planType                       |drug1   | dosage1          | quantity1 | frequency1  |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
+      | TID   | planType       |drug1   | dosage1          | quantity1 | frequency1  |
+      | 15325 | MAPD_GROUP_DCE |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @drugCostEstimator3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
@@ -52,8 +52,8 @@ Feature: 1.07 Member DCE Page
     And I should see pharmacy saver pharmacies in results
 
     Examples: 
-      | TID   | planType                       | zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref |   06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
+      | TID   | planType       | zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1  |
+      | 15325 | MAPD_GROUP_DCE |   06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
   @drugCostEstimator4
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
@@ -88,7 +88,7 @@ Feature: 1.07 Member DCE Page
 
     Examples: 
       | TID   | planType                       | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | 15325 | MAPD_GROUP_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
 
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
@@ -135,7 +135,7 @@ Feature: 1.07 Member DCE Page
 
     Examples: 
       | TID   | planType                       | drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | 15325 | MAPD_GROUP_DCE | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @drugCostEstimator8 @switch_to_generic_case_2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that a pharmacy is not selected and it suggests the user with an appropriate save money message and cost savings are also updated
@@ -157,7 +157,7 @@ Feature: 1.07 Member DCE Page
 
     Examples: 
       | TID   | planType                       | drug    | dosage           | quantity | frequency     |
-      | 15325 | MAPD_GROUP_GOGreen_Profilepref | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
+      | 15325 | MAPD_GROUP_DCE| Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
   @vbfGate @MemberVBF
   Scenario Outline: plan: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
