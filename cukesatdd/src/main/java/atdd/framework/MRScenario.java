@@ -107,6 +107,7 @@ public class MRScenario {
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
 	public static String sauceLabsMobileTunnelIdentifier;
+	public static String appiumVersion;
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -174,7 +175,8 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 		sauceLabsMobileTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
-		
+		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ? CommonConstants.APPIUM_DEFAULT_VERSION
+				: System.getProperty(CommonConstants.APPIUM_VERSION));
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
@@ -1236,6 +1238,7 @@ sauceLabsTunnelIdentifier);
 				+ " environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
+		capabilities.setCapability("appiumVersion", appiumVersion);
 		try {
 			if (mobileOSName.equalsIgnoreCase("Android"))
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
