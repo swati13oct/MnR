@@ -551,6 +551,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		System.out.println("consumerDetails="+consumerDetails);
 		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
 		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
 				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
@@ -577,12 +578,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						+ "Please double check and correct test data", arr.length()>1);
 			for (int i = 0; i < arr.length(); i++) {
 				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				System.out.println("i="+i+" | actualPlanCategory="+actualPlanCategory+" | looking lookForPlanCategory="+lookForPlanCategory);
 				//note: need to locate the right plan for segmentId validation
 				if (lookForPlanCategory.equals(actualPlanCategory)) {
 					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
 				}
 			}
-			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails. Please double check planType from input match the actual user data", 
 					actualSegmentId!=null);
 		} catch (JSONException e) {
 			e.printStackTrace();

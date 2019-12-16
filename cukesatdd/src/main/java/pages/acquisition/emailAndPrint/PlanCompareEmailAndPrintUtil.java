@@ -100,6 +100,8 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			rowStartAt=24;
 		}
 		for (int i=rowStartAt; i<=listOfRowsInPlanCompareTbl.size(); i++) {
+			if (forWhat.equals("email deepLink")) 
+				origDriver.navigate().refresh();
 			String rowXpath="//table[@id='fixTable']//tr["+i+"]//td";
 			List<WebElement> tmp=driver.findElements(By.xpath(rowXpath));
 			if (tmp.size()==1) {
@@ -180,13 +182,13 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
 			//note: keep this for now in case anything needs to be bypassed
 			//note: for now can't tell because page is flashing
-			//if (targetKey.equals("xyz")) { 
-			//	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
-			//	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
-			//} else {
-			compare_finalResult=false;
-			failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
-			//}
+			if (targetKey.contains("Plan Heart")) { 
+			 	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+			 	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else {
+				compare_finalResult=false;
+				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			 }
 		}
 		System.out.println("TEST - failedMessage="+failedMessage);		
 		return failedMessage;

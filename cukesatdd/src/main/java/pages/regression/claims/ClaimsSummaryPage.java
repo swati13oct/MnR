@@ -191,7 +191,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		CommonUtility.waitForPageLoad(driver, eob_claims, 5);
 		System.out.println("Now checking for Explanation of benefits sub navigation of Claims");
 		Assert.assertTrue("PROBLEM - unable to locate EOB sub navigation of Claims for SSUP group user", claimsValidate(eob_claims));
-		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
+		if (MRScenario.environment.contains("team-a")) {
 			System.out.println("on team-a microapp env, will not attemp to navigate to other pages for now");
 			return;
 		}

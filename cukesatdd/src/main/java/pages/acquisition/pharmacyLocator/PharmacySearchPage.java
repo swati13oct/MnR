@@ -50,7 +50,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
 		Thread.sleep(5000); //note: keep this for the page to load
-		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i=0;
@@ -106,7 +106,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public boolean validateNoPharmaciesErrorMessage(){
 		indian_tribal_label_filter.click();
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 10);
-		validateNew(noPharmaciesErrorMessage);
+		Assert.assertTrue("PROBLEM - unable to locate No Pharmacy Error message", pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
 	}
 
@@ -114,7 +114,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		zipcodeField.sendKeys("11111");
 		searchbtn.click();
 		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		validateNew(zipcodeErrorMessage);
+		Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {

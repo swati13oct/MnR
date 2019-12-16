@@ -278,7 +278,7 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
+		if (MRScenario.environmentMedicare.contains("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 			return;
 		}
@@ -331,6 +331,20 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 	
+	public PaymentHistoryPage navigateToPaymentOverviewSkipBtnValidation() throws InterruptedException {
+		
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(premPaymentsTab))
+			premPaymentsTab.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
+		}
+		
+		return null;
+	}
+	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
@@ -339,6 +353,18 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
+		}
+		return null;
+	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPageSkipBtnValidation() throws InterruptedException {
+		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
 		}
 		return null;
 	}
@@ -479,7 +505,11 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage() {
-
+		String memberType="doesntMatter";
+		return navigateToContactUsPageFromTestHarnessPage(memberType);
+	}
+	
+	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
@@ -489,9 +519,13 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
-			return new ContactUsPage(driver);
+			if(memberType.equals("memberType")) {
+				return new ContactUsPage(driver);
+			} else {
+				return new ContactUsPage(driver, memberType);
+			}
+			//tbd return new ContactUsPage(driver);
 		}
-		System.out.println("TEST - 2");
 		return null;
 	}
 

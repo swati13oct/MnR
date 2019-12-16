@@ -282,7 +282,7 @@ public class HSIDLoginPage extends UhcDriver {
 		thSignIn.click();
 
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-ci1")
-				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-a"))) {
+				|| (MRScenario.environmentMedicare.contains("team-a"))) {
 
 			Alert alert = driver.switchTo().alert();
 			alert.accept();

@@ -2814,34 +2814,34 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
 		
-		CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+		validateNew(DOB,30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		MaleGender.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		part_A_monthDrpDwn.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Part_A_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
 		part_A_yearDrpDwn.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		part_B_monthDrpDwn.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		part_B_yearDrpDwn.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		startDrpDwn.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
@@ -3167,8 +3167,10 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void clickOnViewMoreForPlan(String planName) {
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		if(viewMoreLink.size()>0)
-			viewMoreLink.get(0).click();
+		
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
+				viewMoreLink.get(0).click();
+
 	
 	}
 }

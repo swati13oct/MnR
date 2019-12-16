@@ -3151,30 +3151,34 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
 	System.out.println("MedSup page form is displayed");
 	medSupZipcode.sendKeys(zipcode);
+	Thread.sleep(2000);
+	validateNew(DOB);
 	DOB.click();
+	Thread.sleep(2000);
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	jsClickNew(MaleGender);
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	jsClickNew(monthDrpDwn_PartA);
+	validateNew(monthDrpDwnOption);
 	monthDrpDwnOption.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	monthBDrpDwnOption.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-	Thread.sleep(1000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
 	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
@@ -3213,7 +3217,7 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 }
 
 public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
-	Thread.sleep(4000);
+	Thread.sleep(5000);
 	CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 	Start_ApplicationBtn.click();
 	System.out.println("Start application button is clicked on application page");
@@ -3495,12 +3499,11 @@ catch (Exception e) {
 	public void clickOnViewMoreForPlan(String planName) {
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		int count = 0;
-		while(count<2){
-			if(viewMoreLink.size()>0){
+	
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
 				viewMoreLink.get(0).click();
-				break;
-			}count++;
-		}
+
+
+			
 	}
 }

@@ -245,7 +245,7 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (MRScenario.environment.equalsIgnoreCase("team-a"))
+		if (MRScenario.environment.contains("team-a"))
 			System.out.println("NOTE: MRREST product summary call (used for Need Help) is disabled on team env, will skip this validation on team-a env");
 		else
 			claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
