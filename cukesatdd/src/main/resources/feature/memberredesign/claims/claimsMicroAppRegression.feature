@@ -94,14 +94,10 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-
-    @mapd_medical_cosmos 
-    Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_2  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
-    @ma_medical_cosmos
+    @ma_medical_cosmos @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
@@ -116,7 +112,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
 
     # mocked is not ready for dev yet, UUID is ok
-    @ship @devRegression @mocked
+    @ship @devRegression @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 04_1  | 15236 | SHIP-q3_sep_Pre-effective_Ship_005| SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
@@ -183,9 +179,9 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @mapd_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_2  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_3  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+ x     | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+ x     | 01_2  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+ x     | 01_3  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug @devRegression @mocked
     Examples: 
@@ -195,7 +191,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @pdp_drug
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
-      | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+ x     | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
 
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
@@ -208,6 +204,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     When I navigate to the claims Summary page from dashboard or testharness page
     And I validate the error message for a PHIP Member on the screen
 
+    @devRegression @mocked
     Examples: 
       | TID   | userSelection                | planType | planCategory | claimSystem    |
       | 15258 | SHIP-COM-q2_june_preffec_019 | SHIP     | PHIP         | COMPASS_CLAIMS |
@@ -302,6 +299,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Then I navigate to the Claim Details page from claims summary page
     And I validate the claims summary link on claims detail top page
 
+    @devRegression @mocked
     Examples: 
       | TID   | userSelection             | planType | memberType | claimType | claimSystem          |
       | 15259 | SHIP-COM-SHIP7yearsclaims | SHIP     | Individual | NA        | 7Year_COMPASS_CLAIMS |
