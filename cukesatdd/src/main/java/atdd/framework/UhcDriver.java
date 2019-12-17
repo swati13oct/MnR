@@ -750,82 +750,68 @@ try {
 	protected WebElement timeJson;
 	public String getMemTestEnvSysTime() {
 		String timeStr = "";
-		if (MRScenario.environment.equalsIgnoreCase("prod")) { 
-			Date currentTime = new Date();
-			final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy ");
-			sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-			timeStr=sdf.format(currentTime);
-		} else {
-			String winHandleBefore = driver.getWindowHandle();
-			System.out.println("Proceed to open a new blank tab to check the system time");
-			String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
-			System.out.println("test env URL for getting time: "+urlGetSysTime);
-			if (MRScenario.environment.contains("team-ci"))
-				urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
-			//open new tab
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-		    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
-			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
-			}
-			WebElement currentSysTimeElement=timeJson;
-			String currentSysTimeStr=currentSysTimeElement.getText();
-			System.out.println("currentSysTimeStr="+currentSysTimeStr);
-		
-			JSONParser parser = new JSONParser();
-			org.json.simple.JSONObject jsonObj;
-			try {
-				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
-				
-				timeStr = (String) sysTimeJsonObj.get("systemtime"); 
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
-			}
-			driver.close();
-			driver.switchTo().window(winHandleBefore);
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		System.out.println("test env URL for getting time: "+urlGetSysTime);
+		if (MRScenario.environment.contains("team-ci"))
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
 		}
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		System.out.println("currentSysTimeStr="+currentSysTimeStr);
+
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject jsonObj;
+		try {
+			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+
+			timeStr = (String) sysTimeJsonObj.get("systemtime"); 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
 		return timeStr;
 	}
-	
+
 	public String getAcqTestEnvSysTime(String testSiteUrl) {
 		String timeStr = "";
-		if (MRScenario.environment.equalsIgnoreCase("prod")) { 
-			Date currentTime = new Date();
-			final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy ");
-			sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-			timeStr=sdf.format(currentTime);
-		} else {
-			String winHandleBefore = driver.getWindowHandle();
-			System.out.println("Proceed to open a new blank tab to check the system time");
-			String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
-			System.out.println("test env URL for getting time: "+urlGetSysTime);
-			//open new tab
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-		    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
-			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
-			}
-			WebElement currentSysTimeElement=timeJson;
-			String currentSysTimeStr=currentSysTimeElement.getText();
-			System.out.println("currentSysTimeStr="+currentSysTimeStr);
-			JSONParser parser = new JSONParser();
-			org.json.simple.JSONObject jsonObj;
-			try {
-				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
-				
-				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
-				timeStr=(String) dataObj.get("systemDate"); 
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
-			}
-			driver.close();
-			driver.switchTo().window(winHandleBefore);
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		System.out.println("test env URL for getting time: "+urlGetSysTime);
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
 		}
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		System.out.println("currentSysTimeStr="+currentSysTimeStr);
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject jsonObj;
+		try {
+			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+
+			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
+			timeStr=(String) dataObj.get("systemDate"); 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
 		return timeStr;
 	}
-	
+
 }
