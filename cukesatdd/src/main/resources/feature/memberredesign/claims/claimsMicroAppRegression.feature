@@ -176,7 +176,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I validate the EOB section based on claims system on claims summary page
     And I validate the DownloadMyData section on claims summary page
 
-    @mapd_drug
+    @mapd_drug @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
@@ -187,10 +187,6 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
       | 02_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
-
-    @pdp_drug
-    Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
       | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
 
 
