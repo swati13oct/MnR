@@ -48,10 +48,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	HashMap<String, String> inputValues;
 	
 	@Given("^the user is on UHC medicare acquisition site mobile$")
-	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
-		readfeaturedata(inputdata);
-		System.out.println("Given device : "+inputValues.get("Device Name"));
-		wd = getLoginScenario().getMobileDriver(inputValues.get("Device Name"));
+	public void the_user_on_uhc_medicaresolutions_site_mobile() {
+		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -90,7 +88,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		preheaderfootermobile.footerElementsMobile();
 }
 	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine mobile$")
-	public void user_check_header_Footer_functionalities_mobile() {
+	public void user_check_header_Footer_functionalities_mobile(DataTable inputdata) {
+		readfeaturedata(inputdata);
 		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
 		preheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));

@@ -868,12 +868,11 @@ try {
 			act.click(element).sendKeys(keys).perform();
 		}
 		else {
-			//jsClickNew(element);
-			//jsSendkeys(element,keys);
-		MobileElement m = (MobileElement) ((IOSDriver)driver).findElement(By.id("zip-code"));
-		m.getAttribute("placeholder");
-		m.setValue(keys);			
-		element.sendKeys(keys);
+			//element.setValue("10001");
+			//((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';", m); 
+			//((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.click();
+			((AppiumDriver)driver).getKeyboard().sendKeys(keys);
 		}
 	}
 	

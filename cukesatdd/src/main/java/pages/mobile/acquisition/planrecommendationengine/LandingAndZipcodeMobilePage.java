@@ -175,10 +175,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodepagevalidationmobile(HashMap<String, String> inputdata) {
-		zipCode.click();
 		int i = 0;
-		//mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
-		zipCode.sendKeys(inputdata.get("Zip Code"));
+		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
@@ -199,7 +197,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodescreenerrorvalidationmobile(HashMap<String, String> inputdata) {
-		zipCode.sendKeys(inputdata.get("Zip Code"));
+		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
 			validate(multicountySelect, 20);

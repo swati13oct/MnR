@@ -108,12 +108,13 @@ public class MRScenario {
 	static BufferedReader memberRedesignVbfTypeReader = null;
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
-
+	public static String mobileDeviceName;
+	
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 	
-	public String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public static String TESTOBJECTAPIKEY;
 	public AppiumDriver mobileDriver;
 	public  String mobileSessionTimeout="900000";
 	public  String mobileTestSuiteName="Mobile Plan Recommendation Engine";
@@ -177,6 +178,8 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
+		TESTOBJECTAPIKEY = props.get("SaucslabAPIKey").trim();
+		mobileDeviceName = props.get("SaucslabDeviceName");
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
@@ -1173,22 +1176,23 @@ sauceLabsTunnelIdentifier);
 	}
 
 	
-	public AppiumDriver getMobileDriver(String deviceName) {
+	public AppiumDriver getMobileDriver() {
 
 		String findDeviceName = "iPhone X"; // Default device
 		String mobileOSName;
-		deviceName = deviceName.toUpperCase().trim();
-
+		String deviceName = mobileDeviceName.toUpperCase().trim();
+		System.out.println("Given device : "+deviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for device allocation
-		// capabilities.setCapability("commandTimeouts", 30); //New command timeout max 60,000 sec
+		capabilities.setCapability("commandTimeouts", 60); //New command timeout max 60,000 sec
 		capabilities.setCapability("testobject_suite_name", mobileTestSuiteName);
-		// capabilities.setCapability("testobject_test_name", mobileTestName);
+		//capabilities.setCapability("testobject_test_name", mobileTestName);
 		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		capabilities.setCapability("nativeWebTap", true);
 
 		if (deviceName.contains("IPHONEX") || deviceName.contains("IPHONE X"))
 			findDeviceName = "iPhone X";
@@ -1212,8 +1216,6 @@ sauceLabsTunnelIdentifier);
 			findDeviceName = "Samsung Galaxy S8";
 
 		capabilities.setCapability("deviceName", findDeviceName);
-		
-		
 
 		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
 			mobileOSName = "Android";
