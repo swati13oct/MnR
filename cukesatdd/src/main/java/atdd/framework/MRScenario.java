@@ -179,13 +179,12 @@ public class MRScenario {
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
 		TESTOBJECTAPIKEY = props.get("SaucslabAPIKey").trim();
-		mobileDeviceName = props.get("SaucslabDeviceName");
-		try {
-			System.out.println("Jenkins Device Name:"+System.getenv("DEVICE_NAME"));
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
+		//mobileDeviceName = props.get("SaucslabDeviceName");
+		mobileDeviceName="";
+		mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
+				: System.getenv("DEVICE_NAME"));
+		mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
+
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
