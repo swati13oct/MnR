@@ -102,6 +102,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validate the communications page for ship members */
 	public void validateGoGreenSectionForShip() {
+		CommonUtility.waitForPageLoad(driver, onlineDeliveryRadioButton, 5);
 		validateNew(gogreenleaf);
 		validateNew(goggreenheader);
 		validateNew(onlineDeliveryRadioButton);
