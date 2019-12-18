@@ -1,13 +1,13 @@
 @PlanSelector
 Feature: Plan Selector Tool flow - Verify header and footer page in plan selector page
 
-  @PRE @planrecommandonation @PRENavigationViaGetHelpChoosing
+  @PRE @planrecommandonation @PRENavigationViaGetHelpChoosing @regression
   Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-shop-Get Help Choosing in Tools 
   Given the user is on UHC medicare acquisition site landing page
   When user navigate Plan Recommendation Engine Using Get Help Choosing in Tools
   Then user validates all Links from header and footer desktop
   
-  @PRE @planrecommandonation @headerfooter
+  @PRE @planrecommandonation @headerfooter @regression
   Scenario Outline: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-Get a Plan Recommendations
     Given the user is on UHC medicare acquisition site landing page
     When user validate elements on landing page of Plan Recommendation Engine

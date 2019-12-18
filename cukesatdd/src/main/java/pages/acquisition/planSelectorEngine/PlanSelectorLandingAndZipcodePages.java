@@ -49,7 +49,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='get-started-main-inner']//img[@class='mb-3 mb-0-lg']")
 	private WebElement landingpageImage;
 	
-	@FindBy(xpath = "//*[@class='get-started-banner']//p")
+	@FindBy(xpath = "//*[@id='answer-a-few-simple']")
 	private WebElement landingpageText;
 		
 	@FindBy(className = "get-started-main-inner")
@@ -99,7 +99,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='all-fields-marked-wi']/sup")
 	private WebElement pageRequiredInfoMark;
 	
-	@FindBy(css = ".row>div>div:nth-child(2)>label.primary-question-tex")
+	@FindBy(css = ".row>div>div:nth-child(3)>label.primary-question-tex")
 	private WebElement zipcodePageQuestion;
 	
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
@@ -215,7 +215,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		waitforElementNew(pageRequiredInfoMark);
 		Assert.assertTrue(pageRequiredInfoMark.getText().contains("*"));
 		waitforElementNew(zipcodePageQuestion);
-		Assert.assertTrue(zipcodePageQuestion.getText().contains("What is your ZIP Code?"));
+		Assert.assertTrue(zipcodePageQuestion.getText().contains("ZIP"));
 		waitforElementNew(zipcodePageQuestionMark);
 		Assert.assertTrue(zipcodePageQuestionMark.getText().contains("*"));
 		hidden = (driver.findElement(By.xpath("//*[@id='zip-code']")).getAttribute("placeholder") == "Enter ZIP Code") ? true : false;
@@ -228,7 +228,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 			waitforElementVisibilityInTime(zipcodeTextLabel, 45);
 			Assert.assertTrue(zipcodeTextLabel.getText().contains("Plans are specific to your area"));
 			waitforElementNew(zipcodePageCountyQuestion);
-			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("Please select your County? *"));
+			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("County? *"));
 			waitforElementNew(zipcodePageCountyQuestionMark);
 			Assert.assertTrue(zipcodePageCountyQuestionMark.getText().contains("*"));
 			waitforElementVisibilityInTime(PRECounty, 45);
@@ -249,11 +249,11 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		int size = zipcodeid.length();
 		System.out.println("ZipCode Size is :"+size);
 		if(size<5 && size!=0) {
-			Assert.assertTrue(errorMessage.getText().contains("Please enter complete five digits for ZIP code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please"));
 		}else if(size==0)	{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter a valid ZIP code"));
+			Assert.assertTrue(errorMessage.getText().contains("Please"));
 		}else{
-			Assert.assertTrue(errorMessage.getText().contains("Please enter valid ZIP code."));
+			Assert.assertTrue(errorMessage.getText().contains("Please"));
 		}	
 	}
 	
@@ -270,7 +270,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		zipcodePagemultiCounty();
 		continueBtn.click();
 		waitforElementNew(errorMessage);
-		Assert.assertTrue(errorMessage.getText().contains("Please select County"));
+		Assert.assertTrue(errorMessage.getText().contains("Please"));
 	}
 
 	public void browserBack() {

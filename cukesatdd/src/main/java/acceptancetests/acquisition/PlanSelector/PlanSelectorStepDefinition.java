@@ -41,7 +41,7 @@ public class PlanSelectorStepDefinition {
 		return loginScenario;
 	}
 	WebDriver wd;
-	
+		
 	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
@@ -214,6 +214,7 @@ public class PlanSelectorStepDefinition {
 }
 	@And("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
+		String actualpageurl = wd.getCurrentUrl();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -233,8 +234,10 @@ public class PlanSelectorStepDefinition {
 		Thread.sleep(5000);
 		headerAndFooter.emailFunctionInShopforaplan(email);
 		Thread.sleep(5000);
-		headerAndFooter.enterSearchFunction(searchKey);
-		Thread.sleep(5000);
+		if(actualpageurl.contains("uhcmedicaresolutions")){
+			headerAndFooter.enterSearchFunction(searchKey);
+			Thread.sleep(5000);	
+		}
 		headerAndFooter.backtoTopFunction();
 	}
 	
@@ -272,6 +275,21 @@ public class PlanSelectorStepDefinition {
 		}
 			
 	}
+	
+	@And("^user selects plan type in coverage options page$")
+	public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String plantype = memberAttributesMap.get("isCoverageOpt");
+		System.out.println("Plan Type is:"+plantype);
+	}
+	
 	
 
 
