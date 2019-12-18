@@ -180,6 +180,12 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
 		TESTOBJECTAPIKEY = props.get("SaucslabAPIKey").trim();
 		mobileDeviceName = props.get("SaucslabDeviceName");
+		try {
+			System.out.println("Jenkins Device Name:"+System.getenv("DEVICE_NAME"));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
