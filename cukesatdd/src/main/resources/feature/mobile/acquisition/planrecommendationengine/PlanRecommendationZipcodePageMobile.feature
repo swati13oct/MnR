@@ -2,7 +2,7 @@
 Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation engine mobile page
 
   @PRE @planrecommandonation @zipcodepagemobile @siglecountymobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engie
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to "Zip Code" page mobile
     Then user validates zipcode page elements mobile
@@ -16,7 +16,7 @@ Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation en
       |   10001 | NO              | New York |
 
   @PRE @planrecommandonation @zipcodepagemobile @multicountymobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Multi county in ZipCode Page in Plan Recommendation Engie
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Multi county in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to "Zip Code" page mobile
     Then runs questionnaire at zipcode page mobile
@@ -29,7 +29,7 @@ Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation en
       |   35034 | YES             | Bibb County |
 
   @PRE @planrecommandonation @zipcodepagemobile @invalidZipcodemobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engie
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to "Zip Code" page mobile
     Then runs questionnaire at zipcode page with invalid data mobile
