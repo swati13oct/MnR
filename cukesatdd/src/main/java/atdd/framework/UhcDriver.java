@@ -885,4 +885,13 @@ try {
 		new WebDriverWait(driver, 30).until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
 		System.out.println("Page load completed");
 	}
+	
+	public void threadsleep(int sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

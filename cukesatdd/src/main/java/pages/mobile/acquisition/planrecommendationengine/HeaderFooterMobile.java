@@ -826,15 +826,6 @@ public class HeaderFooterMobile extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
-	
-	public void threadsleep(int sec) {
-		try {
-			Thread.sleep(sec);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public void browserRefresh() {
 		driver.navigate().refresh();

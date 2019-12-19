@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.planSelectorEngine.PlanSelectorCoverageOptionPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -68,10 +70,16 @@ public class PlanRecommendationStepDefinitionMobile {
 		preheaderfootermobile.navigationToPREViaShopToolsMobile();
 }
 	
-	@When("^user navigates to \"([^\\\"]*)\" page mobile$")
-	public void user_navigates_to_given_page_mobile(String pageName){
+	@When("^user navigates to Zip Code page mobile$")
+	public void user_navigates_to_zipcode_page_mobile(){
 		LandingAndZipcodeMobilePage prelandingpage =  new LandingAndZipcodeMobilePage(wd);
-		prelandingpage.navigatepagemobile(pageName);
+		prelandingpage.navigatezipcodepagemobile();
+}
+	
+	@When("^user navigates to \"([^\\\"]*)\" page mobile$")
+	public void user_navigates_to_given_page_mobile(String pageName,DataTable inputdata){
+		//LandingAndZipcodeMobilePage prelandingpage =  new LandingAndZipcodeMobilePage(wd);
+		//prelandingpage.navigatepagemobile(pageName);
 }
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
@@ -122,6 +130,32 @@ public class PlanRecommendationStepDefinitionMobile {
 		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
 		readfeaturedata(inputdata);
 		prezipcodemobile.zipcodescreenerrorvalidationmobile(inputValues);
+	}
+	
+	@Then("^user validate elements in coverage options page mobile$")
+	public void user_check_coveragepage_elements_mobile() {
+		CoverageOptionsMobilePage coveragepage =  new CoverageOptionsMobilePage(wd);
+		coveragepage.coverageOptionpageElementsMobile();
+	}
+	
+	@Then("^user selects plan type in coverage options page mobile$")
+	public void select_plan_type_coverage_page_mobile(DataTable inputdata) throws Throwable {
+		readfeaturedata(inputdata);
+		CoverageOptionsMobilePage coveragepage =  new CoverageOptionsMobilePage(wd);
+		String plantype = inputValues.get("Plan Type");
+		if (!(plantype.isEmpty())) {
+			coveragepage.coverageOptionpageFunctionalMobile(plantype,true);
+		}else {
+			coveragepage.coverageOptionpageErrormobile();
+		}
+	}
+	
+	@And("^user select planType and continous the page back to previous page mobile$")
+	public void previous_coverage_page_mobile(DataTable inputdata) throws Throwable {
+		readfeaturedata(inputdata);
+		CoverageOptionsMobilePage coveragepage =  new CoverageOptionsMobilePage(wd);
+		coveragepage.coverageOptionpageFunctionalMobile(inputValues.get("Plan Type"),false);
+		coveragepage.previouspageValidation();
 	}
 	
 	public void readfeaturedata(DataTable data) {

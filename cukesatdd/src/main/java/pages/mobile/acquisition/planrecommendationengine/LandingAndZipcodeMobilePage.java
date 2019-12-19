@@ -188,7 +188,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
-			multicounty.selectByVisibleText(inputdata.get("CountyDropDown"));
+			multicounty.selectByVisibleText(inputdata.get("County Name"));
 		}
 		continueBtn.click();
 		threadsleep(2000);
@@ -210,7 +210,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Location"));
 	}
 
-	public void navigatepagemobile(String pagename) {
+	public void navigatezipcodepagemobile() {
 		HeaderFooterMobile header = new HeaderFooterMobile(driver);
 		header.navigatePRELandingpageMobile();
 		mobileswipe("50%", true);
@@ -222,15 +222,6 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		if (!primarystring.matches(substring)) {
 			System.out.println("Expected string - " + substring + " is not available in - " + primarystring);
 			Assert.assertTrue(false);
-		}
-	}
-
-	public void threadsleep(int sec) {
-		try {
-			Thread.sleep(sec);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
