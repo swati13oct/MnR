@@ -264,8 +264,14 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		String actualpageurl = driver.getCurrentUrl();
 		if(actualpageurl.contains("aarpmedicareplans")) {
 			validate(AARPlogoInHeader, 30);
-			validate(companyNameUnderAARPlogoInHeader, 30);
-			Assert.assertTrue(companyNameUnderAARPlogoInHeader.getText().contains("UnitedHealthcare Insurance Company (UnitedHealthcare)"));
+			try {
+				if(companyNameUnderAARPlogoInHeader.isDisplayed()) //only aarp and geo targetting
+					System.out.println("Element found!!!!");
+				Assert.assertTrue(companyNameUnderAARPlogoInHeader.getText().contains("UnitedHealthcare Insurance Company"));
+			}
+			catch(Exception e){
+				System.out.println("Company name is not Visible");
+			}
 			validate(headerVisitAARPOrgLink, 30);
 			Assert.assertTrue(headerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
 		}else if(actualpageurl.contains("uhcmedicaresolutions")){
@@ -444,6 +450,14 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
 		}
 		
+		}
+		
+// PRE BreadCrumbs in Header	
+		
+		public void breadCrumbs() {
+			String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+			Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+			System.out.println(preBreadcrumbs);
 		}
 		
 //	Footer Element Verification Method

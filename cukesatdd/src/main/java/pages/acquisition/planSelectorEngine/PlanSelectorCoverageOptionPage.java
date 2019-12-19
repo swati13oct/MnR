@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
@@ -39,10 +40,10 @@ public class PlanSelectorCoverageOptionPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
 	private WebElement pageStepsNumberName;
 	
-	@FindBy(xpath = "//*[@class='progress-bar-info']/div")
+	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(id = "custom-radio-group")
+	@FindBy(css = "div.row.pb-1>div>fieldset>legend.primary-question-tex")
 	private WebElement coverageTitle;
 	
 	@FindBy(xpath = "//label[@class='radio-label']/div[contains(text(),'Medical and prescription drug')]")
@@ -53,19 +54,97 @@ public class PlanSelectorCoverageOptionPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(text(),'Previous')]")
 	private WebElement previousBtn;
+	
+	@FindBy(css = "p.all-fields-marked-wi")
+	private WebElement pageRequiredInfo;
+	
+	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(1)>label")
+	private WebElement plantypeMAPD;
+	
+	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(2)>label")
+	private WebElement plantypeMA;
+	
+	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(3)>label")
+	private WebElement plantypePDP;
+	
+	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(4)>label")
+	private WebElement plantypeNone;
+	
+	@FindBy(css = "#errorMessage>div:nth-child(2)")
+	private WebElement errorMessage;
+	
+	@FindBy(xpath = "//*[contains(@class,'radio-checked')]")
+	private WebElement radioselect;
 
 //Coverage Option Page Element Verification Method 
 	
 		public void coverageOptionpage() {
 			System.out.println("Coverage Option Validating Page: ");
+			String currentPageUrl = driver.getCurrentUrl();	
+			currentPageUrl.contains("/coverageOption");
 			waitforElementNew(planSelectorPageTilte);
 			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			waitforElementNew(pageStepsNumberName, 30);
 			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 2: Coverage Option"));
 			waitforElementNew(pageProgressPercentage, 30);
 			Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+			waitforElementNew(pageRequiredInfo);
+			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			waitforElementNew(coverageTitle);
-			Assert.assertTrue(coverageTitle.getText().contains("What type of coverage are you looking for?"));
+			Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+			validate(plantypeMAPD, 30);
+			Assert.assertTrue(plantypeMAPD.getText().contains("and"));
+			validate(plantypeMA, 30);
+			Assert.assertTrue(plantypeMA.getText().contains("Medical"));
+			validate(plantypePDP, 30);
+			Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
+			validate(plantypeNone, 30);
+			Assert.assertTrue(plantypeNone.getText().contains("don't"));
+			
+		}
+		
+//Coverage Option Page Function Verification		
+		
+		public void coverageOptionpageFunctional(String planType) {
+			System.out.println("Functional Operations");
+			if (planType.equalsIgnoreCase("MAPD")) {
+				waitforElementNew(plantypeMAPD);
+				plantypeMAPD.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+				continueBtn.click();
+			}else if (planType.equalsIgnoreCase("MA")) {
+				waitforElementNew(plantypeMA);
+				plantypeMA.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+				continueBtn.click();
+			}else if (planType.equalsIgnoreCase("PDP")) {
+				waitforElementNew(plantypePDP);
+				plantypePDP.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+				continueBtn.click();
+			}else if (planType.equalsIgnoreCase("NA")) {
+				waitforElementNew(plantypeNone);
+				plantypeNone.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+				continueBtn.click();
+			}			
+			
+		}
+		
+//Coverage Option Page Function Verification			
+		public void coverageOptionpageerror() {
+			System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
+			continueBtn.click();
+			Assert.assertTrue(errorMessage.getText().contains("Please"));
+		}
+		
+//Previous Button Functionality for Coverage Options Page
+		public void previouspageValidation() {
+			System.out.println("Previous page Validation");
+			if(radioselect.isDisplayed()) {
+				waitforElementNew(pageProgressPercentage, 30);
+				Assert.assertTrue(pageProgressPercentage.getText().contains("16% Complete"));
+			}
 		}
 
 	public void browserBack() {

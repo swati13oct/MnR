@@ -2,6 +2,7 @@ package acceptancetests.acquisition.PlanSelector;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.planSelectorEngine.PlanSelectorCoverageOptionPage;
 import pages.acquisition.planSelectorEngine.PlanSelectorHeaderAndFooter;
 import pages.acquisition.planSelectorEngine.PlanSelectorLandingAndZipcodePages;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -41,7 +43,17 @@ public class PlanSelectorStepDefinition {
 		return loginScenario;
 	}
 	WebDriver wd;
-		
+	List<DataTableRow> inputRow;
+	HashMap<String, String> inputValues;
+	
+	public void readfeaturedata(DataTable data) {
+		inputRow = new ArrayList(data.getGherkinRows());
+		inputValues = new HashMap<String, String>();
+		for (int i = 0; i < inputRow.size(); i++) {
+			inputValues.put(inputRow.get(i).getCells().get(0),
+			inputRow.get(i).getCells().get(1));
+		}
+	}
 	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
@@ -128,25 +140,14 @@ public class PlanSelectorStepDefinition {
 
 	}
 		@And("^clicks on get started button and runs questionnaire$")
-		
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		
-		String zipcode = memberAttributesMap.get("Zip Code");
-		System.out.println("Zipcode is:"+zipcode);
-		String county = memberAttributesMap.get("CountyDropDown");
-		System.out.println("county is:"+county);
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		System.out.println("isMultiCounty is:"+isMultiCounty);
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY_DROP_DOWN, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+			readfeaturedata(givenAttributes);
+			String zipcode = inputValues.get("Zip Code");
+			System.out.println("Zipcode is:"+zipcode);
+			String county = inputValues.get("CountyDropDown");
+			System.out.println("Email is:"+county);
+			String isMultiCounty = inputValues.get("Is Multi County");
+			System.out.println("Entered Search Key is:"+isMultiCounty);
 		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
@@ -195,14 +196,16 @@ public class PlanSelectorStepDefinition {
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
+		headerAndFooter.breadCrumbs();
 		planSelectorhomepage.landingpage();
-}
+	}
 	
 	@When("^user navigate Plan Recommendation Engine Using Get Help Choosing in Tools$")
 	public void navigate_Plan_Selector_tool() {
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
+		headerAndFooter.breadCrumbs();
 		planSelectorhomepage.landingpage();
 }
 	
@@ -215,19 +218,12 @@ public class PlanSelectorStepDefinition {
 	@And("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
 		String actualpageurl = wd.getCurrentUrl();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		
-		String zipcode = memberAttributesMap.get("Zip Code");
+		readfeaturedata(givenAttributes);
+		String zipcode = inputValues.get("Zip Code");
 		System.out.println("Zipcode is:"+zipcode);
-		String email = memberAttributesMap.get("EMail");
+		String email = inputValues.get("EMail");
 		System.out.println("Email is:"+email);
-		String searchKey = memberAttributesMap.get("Search Key");
+		String searchKey = inputValues.get("Search Key");
 		System.out.println("Entered Search Key is:"+searchKey);
 		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
 		headerAndFooter.zipcodeFunctionInShopforaplan(zipcode);
@@ -250,24 +246,13 @@ public class PlanSelectorStepDefinition {
 	
 	@And("^clicks on get started button and check error scenarios$")
 	public void clicks_on_get_started_button_and_check_error_scenarios(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		
-		String zipcode = memberAttributesMap.get("Zip Code");
-		System.out.println("Zipcode is:"+zipcode);
-		String county = memberAttributesMap.get("CountyDropDown");
-		System.out.println("county is:"+county);
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		System.out.println("isMultiCounty is:"+isMultiCounty);
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY_DROP_DOWN, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+		readfeaturedata(givenAttributes);
+		String zipcode = inputValues.get("Zip Code");
+		String county = inputValues.get("CountyDropDown");
+		String isMultiCounty = inputValues.get("Is Multi County");
 		PlanSelectorLandingAndZipcodePages planSelectorhomepage =  new PlanSelectorLandingAndZipcodePages(wd);
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		headerAndFooter.breadCrumbs();
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
 		} else {
@@ -276,21 +261,34 @@ public class PlanSelectorStepDefinition {
 			
 	}
 	
-	@And("^user selects plan type in coverage options page$")
-	public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+	@And("^user validate elements in coverage options page$")
+	public void elements_coverage_page() {
+		PlanSelectorCoverageOptionPage planSelectorCoverageepage =  new PlanSelectorCoverageOptionPage(wd);
+		PlanSelectorHeaderAndFooter headerAndFooter =  new PlanSelectorHeaderAndFooter(wd);
+		headerAndFooter.breadCrumbs();
+		planSelectorCoverageepage.coverageOptionpage();
 		
-		String plantype = memberAttributesMap.get("isCoverageOpt");
-		System.out.println("Plan Type is:"+plantype);
 	}
 	
+	@And("^user selects plan type in coverage options page$")
+	public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
+		readfeaturedata(givenAttributes);
+		PlanSelectorCoverageOptionPage planSelectorCoverageepage =  new PlanSelectorCoverageOptionPage(wd);
+		String plantype = inputValues.get("Plan Type");
+		if (!(plantype.isEmpty())) {
+			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
+		}else {
+			planSelectorCoverageepage.coverageOptionpageerror();
+		}
+	}
 	
-
+	@And("^user select planType and continous the page back to previous page$")
+	public void previous_coverage_page(DataTable givenAttributes) throws Throwable {
+		readfeaturedata(givenAttributes);
+		PlanSelectorCoverageOptionPage planSelectorCoverageepage =  new PlanSelectorCoverageOptionPage(wd);
+		planSelectorCoverageepage.coverageOptionpageFunctional(inputValues.get("Plan Type"));
+		planSelectorCoverageepage.browserBack();
+		planSelectorCoverageepage.previouspageValidation();
+	}
 
 }

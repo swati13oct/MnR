@@ -119,7 +119,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Previous')]")
 	private WebElement previousBtn;
 	
-	@FindBy(css = "div.row.pb-1>div>label.primary-question-tex")
+	@FindBy(css = "div.row.pb-1>div>fieldset>legend.primary-question-tex")
 	private WebElement coverageTitle;
 	
 	
@@ -127,6 +127,8 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 	
 	public void landingpage() {
 		System.out.println("Validating Title: ");
+		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		String ExpectedTitle = "Get help finding an insurance plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
@@ -173,7 +175,7 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		validate(countyInfo);
 		continueBtn.click();
 		waitforElementNew(coverageTitle);
-		Assert.assertTrue(coverageTitle.getText().contains("What type of coverage are you looking for?"));
+		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 	
 	}
 
@@ -197,14 +199,16 @@ public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
 		waitforElementNew(coverageTitle);
 		Assert.assertTrue(coverageTitle.getText().contains("What type of coverage are you looking for?"));
 		waitforElementVisibilityInTime(previousBtn, 45);
-		previousBtn.click();
+/*		previousBtn.click();
 		waitforElementNew(planSelectorPageTilte);
-		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));*/
 	}
 	
 	public void zipcodePage() {
 		boolean hidden;
 		System.out.println("Validating ZipcodePage Elements");
+		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		waitforElementNew(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
