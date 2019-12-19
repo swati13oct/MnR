@@ -189,7 +189,6 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
 			multicounty.selectByVisibleText(inputdata.get("CountyDropDown"));
-			mobileswipe("40%", true);
 		}
 		continueBtn.click();
 		threadsleep(2000);

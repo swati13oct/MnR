@@ -270,8 +270,15 @@ public class HeaderFooterMobile extends UhcDriver {
 		validate(headerSectionmenu, 30);
 		if (driver.getCurrentUrl().contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
-			validate(headerCompanyname, 30); //only aarp
-			Assert.assertTrue(headerCompanyname.getText().contains("UnitedHealthcare Insurance Company (UnitedHealthcare)"));
+			try {
+				if(headerCompanyname.isDisplayed()) //only aarp and geo targetting
+					System.out.println("Element found!!!!");
+				Assert.assertTrue(headerCompanyname.getText().contains("UnitedHealthcare Insurance Company"));
+			}
+			catch(Exception e){
+				System.out.println("Company name is not Visible");
+			}
+			
 		} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
 			validate(UHClogoInHeader, 30);
 		}
@@ -570,7 +577,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		menuclick();
 		//another window - only aarp
 		navigatesubLink(headerVisitAARPOrgLink.getAttribute("href"));
-		validateLinks("/health/medicare-insurance/?intcmp");
+		validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
 		}
 		
 		backtoshopforaplan(false);
@@ -686,9 +693,7 @@ public class HeaderFooterMobile extends UhcDriver {
 			//another window - only aarp
 			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
 			threadsleep(1500);
-			validateLinks("/health/medicare-insurance/?intcmp");
-			browserBack();
-			mobileswipe("80%",true);
+			validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
 			}
 		
 		footerMedicareAdvantagePlansLink.click();
@@ -802,23 +807,22 @@ public class HeaderFooterMobile extends UhcDriver {
 		pageloadcomplete();
 	}
 
-	public void validateLinksanotherWindowmobile(String expURL){
-		//Multi window handling is not possible in appium
+	public void validateLinksanotherWindowmobile(String expURL) {
 		Set<String> windows = driver.getWindowHandles();
-		if(windows.size()==2) {
+		System.out.println(windows);
+		if (windows.size() == 2) {
 			System.out.println(driver.getCurrentUrl());
-			Set<String> contextView = ((AppiumDriver)driver).getContextHandles();
-		    ArrayList<String> s = new ArrayList<String>(contextView);        
-		    ((AppiumDriver)driver).context(s.get(contextView.size()-1));
+			driver.switchTo().window("CDwindow-1");
+			threadsleep(1000);
+			validateLinks(expURL);
+			driver.close();
 			System.out.println(driver.getCurrentUrl());
-		//driver.switchTo().window("1");
-		validateLinks(expURL);
-		driver.close();
-		System.out.println(driver.getCurrentUrl());
-		//driver.switchTo().window("0");
-		}else {
-			System.out.println("Link validation fails in popup window"+expURL);
-			driver.switchTo().defaultContent();
+			driver.switchTo().window("CDwindow-0");
+			threadsleep(1000);
+		} else {
+			System.out.println("Link validation fails in popup window" + expURL);
+			driver.switchTo().window("CDwindow-0");
+			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
 	}
