@@ -397,6 +397,11 @@ public class PaymentHistoryPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, paymentOverviewSection,20);
 		 openAndValidate();
 	}
+	
+	public PaymentHistoryPage(WebDriver driver, boolean skipOpenAndValidation) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+	}
 
 	public void getSearchClick() {
 		paymentSearchRangeGovt.click();

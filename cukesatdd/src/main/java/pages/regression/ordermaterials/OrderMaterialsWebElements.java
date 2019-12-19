@@ -126,7 +126,7 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	protected WebElement option_fed_memberMaterialsfield;
 
-	@FindBy(xpath = "//*[@id='replacement-id']/..")
+	@FindBy(xpath = "//*[@for='replacement-id']/..")
 	protected WebElement option_fed_replacementIdField;
 
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")

@@ -102,6 +102,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validate the communications page for ship members */
 	public void validateGoGreenSectionForShip() {
+		CommonUtility.waitForPageLoad(driver, onlineDeliveryRadioButton, 5);
 		validateNew(gogreenleaf);
 		validateNew(goggreenheader);
 		validateNew(onlineDeliveryRadioButton);
@@ -149,8 +150,9 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validates the preferences for the SHIP members */
 	public void validateCommunicationPreferencesForShip(String planName) {
-		Assert.assertTrue("PROBLEM - unable to locate claimsLabel", validateNew(claimsLabel));
-		Assert.assertTrue("PROBLEM - unable to locate planDocumentsLabel", validateNew(planDocumentsLabel));
+		CommonUtility.waitForPageLoad(driver, claimsLabel, 5);
+		Assert.assertTrue("PROBLEM - unable to locate claimsLabel", validate(claimsLabel, 0));
+		Assert.assertTrue("PROBLEM - unable to locate planDocumentsLabel", validate(planDocumentsLabel,0));
 		Assert.assertEquals("PROBLEM planName not as expected.  Expected='"+planName+"' | Actual='"+shipPlanName.getText().trim()+"'", 
 				planName, shipPlanName.getText().trim());
 	}
