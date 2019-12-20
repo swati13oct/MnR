@@ -31,7 +31,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
-//		waitforElementVisibilityInTime(getStartedBtn, 30);
+//		validate(getStartedBtn, 30);
 
 	}
 
@@ -584,7 +584,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //Navigating Plan RecommendationEngine via Get Plan Recommendation	
 	public void navigationToPlanRecommendationEngine() {
-		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
 		headerGetaPlanRecommendationLink.click();
 		validate(landingpageHeader, 30);
@@ -593,7 +593,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
 	public void navigationToPlanRecommendationEngineViaShopTools() {
-		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
 		headerShopLink.click();
 		validate(HeaderShopToolsGetHelpChoosingLink, 30);
@@ -604,7 +604,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //ZipCode Function inside Shop for a Plan
 	public void zipcodeFunctionInShopforaplan(String zipcode) throws InterruptedException {
-		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
 		headerShopForaPlanZipcodeBox.click();
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
@@ -617,7 +617,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //Email Function inside Shop for a Plan	
 	public void emailFunctionInShopforaplan(String email) {
-		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
 		headerShopForaPlanEmailBox.click();
 		headerShopForaPlanEmailBox.sendKeys(email);
@@ -625,9 +625,9 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 		validate(headerShopForaPlanThankYou, 60);
 		try {
 			validate(closeIcon,30);
-			waitforElementVisibilityInTime(closeIcon, 60);
+			validate(closeIcon, 60);
 			closeIcon.click();
-			waitforElementVisibilityInTime(headerNavigationBarHomeTab, 60);
+			validate(headerNavigationBarHomeTab, 60);
 			headerNavigationBarHomeTab.click();
 			navigationToPlanRecommendationEngine();
 			}catch(Exception e) {
@@ -639,7 +639,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 //	Enter Search Key Function in Navigation bar
 	public void enterSearchFunction(String SearchKey) {
-		waitforElementVisibilityInTime(headerNavigationBarEnterSearchTab, 45);
+		validate(headerNavigationBarEnterSearchTab, 45);
 		String actualpageurl = driver.getCurrentUrl();
 		System.out.println("Actual Page is :"+actualpageurl);
 		headerNavigationBarEnterSearchTab.click();
@@ -661,7 +661,7 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	public void backtoTopFunction() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1200)");
-		waitforElementVisibilityInTime(footerBackToTopLink, 45);
+		validate(footerBackToTopLink, 45);
 		footerBackToTopLink.click();
 		String actualpageurl = driver.getCurrentUrl();
 		if(actualpageurl.contains("aarpmedicareplans")) {
@@ -697,13 +697,13 @@ public class PlanSelectorHeaderAndFooter extends UhcDriver {
 	
 	public void backtoshopforaplan() {
 		browserBack();
-		waitforElementVisibilityInTime(headerNavigationBarShopForaPlanTab, 45);
+		validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
 	}
 	
 	public void backtolearnmoremodicare() {
 		browserBack();
-		waitforElementVisibilityInTime(headerNavigationBarLearnAboutMedicareTab, 45);
+		validate(headerNavigationBarLearnAboutMedicareTab, 45);
 		actions.moveToElement(headerNavigationBarLearnAboutMedicareTab).perform();
 	}
 	

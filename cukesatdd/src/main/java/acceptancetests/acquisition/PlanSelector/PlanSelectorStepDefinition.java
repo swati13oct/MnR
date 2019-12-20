@@ -290,5 +290,13 @@ public class PlanSelectorStepDefinition {
 		planSelectorCoverageepage.browserBack();
 		planSelectorCoverageepage.previouspageValidation();
 	}
+	
+	@And("^user select planType and Click previous button to check previous page$")
+	public void previous_zipcode_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanSelectorCoverageOptionPage planSelectorCoverageepage =  new PlanSelectorCoverageOptionPage(wd);
+		planSelectorCoverageepage.coverageOptionpagePreviousButton(inputValues.get("Plan Type"));
+		planSelectorCoverageepage.previouspageValidation();
+	}
 
 }

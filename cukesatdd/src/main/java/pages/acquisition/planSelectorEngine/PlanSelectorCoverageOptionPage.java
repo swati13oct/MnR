@@ -82,15 +82,15 @@ public class PlanSelectorCoverageOptionPage extends UhcDriver {
 			System.out.println("Coverage Option Validating Page: ");
 			String currentPageUrl = driver.getCurrentUrl();	
 			currentPageUrl.contains("/coverageOption");
-			waitforElementNew(planSelectorPageTilte);
+			validate(planSelectorPageTilte);
 			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
-			waitforElementNew(pageStepsNumberName, 30);
+			validate(pageStepsNumberName, 30);
 			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 2: Coverage Option"));
-			waitforElementNew(pageProgressPercentage, 30);
+			validate(pageProgressPercentage, 30);
 			Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
-			waitforElementNew(pageRequiredInfo);
+			validate(pageRequiredInfo);
 			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
-			waitforElementNew(coverageTitle);
+			validate(coverageTitle);
 			Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 			validate(plantypeMAPD, 30);
 			Assert.assertTrue(plantypeMAPD.getText().contains("and"));
@@ -108,26 +108,54 @@ public class PlanSelectorCoverageOptionPage extends UhcDriver {
 		public void coverageOptionpageFunctional(String planType) {
 			System.out.println("Functional Operations");
 			if (planType.equalsIgnoreCase("MAPD")) {
-				waitforElementNew(plantypeMAPD);
+				validate(plantypeMAPD);
 				plantypeMAPD.click();
 				System.out.println("Plan Type "+planType +" Clicked");
-				continueBtn.click();
 			}else if (planType.equalsIgnoreCase("MA")) {
-				waitforElementNew(plantypeMA);
+				validate(plantypeMA);
 				plantypeMA.click();
 				System.out.println("Plan Type "+planType +" Clicked");
-				continueBtn.click();
 			}else if (planType.equalsIgnoreCase("PDP")) {
-				waitforElementNew(plantypePDP);
+				validate(plantypePDP);
 				plantypePDP.click();
 				System.out.println("Plan Type "+planType +" Clicked");
-				continueBtn.click();
 			}else if (planType.equalsIgnoreCase("NA")) {
-				waitforElementNew(plantypeNone);
+				validate(plantypeNone);
 				plantypeNone.click();
 				System.out.println("Plan Type "+planType +" Clicked");
-				continueBtn.click();
 			}			
+			continueBtn.click();
+			
+		}
+		
+//Coverage option page - Select Plantype and click on Previous Button	
+		
+		public void coverageOptionpagePreviousButton(String planType) {
+			System.out.println("Functional Operations");
+			if (planType.equalsIgnoreCase("MAPD")) {
+				validate(plantypeMAPD);
+				plantypeMAPD.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+			}else if (planType.equalsIgnoreCase("MA")) {
+				validate(plantypeMA);
+				plantypeMA.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+			}else if (planType.equalsIgnoreCase("PDP")) {
+				validate(plantypePDP);
+				plantypePDP.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+			}else if (planType.equalsIgnoreCase("NA")) {
+				validate(plantypeNone);
+				plantypeNone.click();
+				System.out.println("Plan Type "+planType +" Clicked");
+			}
+			if(radioselect.isDisplayed()) {
+				validate(pageProgressPercentage, 30);
+				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+			}else {
+				System.out.println("Plan Type not selected in Coverage Options Page");
+			}
+			previousBtn.click();
 			
 		}
 		
@@ -141,9 +169,17 @@ public class PlanSelectorCoverageOptionPage extends UhcDriver {
 //Previous Button Functionality for Coverage Options Page
 		public void previouspageValidation() {
 			System.out.println("Previous page Validation");
+			try {
 			if(radioselect.isDisplayed()) {
-				waitforElementNew(pageProgressPercentage, 30);
+				validate(pageProgressPercentage, 30);
 				Assert.assertTrue(pageProgressPercentage.getText().contains("16% Complete"));
+			}else if(pageStepsNumberName.getText().contains("Location")){
+				validate(pageProgressPercentage, 30);
+				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+			}
+		}
+			catch(Exception e){
+				System.out.println("Page is not Visible");
 			}
 		}
 
