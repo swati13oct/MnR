@@ -44,7 +44,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')])[1]")
+	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 	
 	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
@@ -84,7 +84,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//button[contains(@class, 'action-btn ally')]")
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
 	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
@@ -168,6 +168,7 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	if(validate(selectLocationOption)){
 		selectLocationOption.click();
+		validateNew(saveBtn2);
 		saveBtn2.click();
 	}
 	
@@ -225,6 +226,7 @@ public void selectsProviderFromGlobaHeader() {
 		
 		if(validate(selectLocationOption)){
 			selectLocationOption.click();
+			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
 		
