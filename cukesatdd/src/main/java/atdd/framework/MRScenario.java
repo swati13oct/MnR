@@ -1241,11 +1241,13 @@ sauceLabsTunnelIdentifier);
 		}
 		capabilities.setCapability("platformName", mobileOSName);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = "Mobile Execution - Using " + findDeviceName + " in  " + sauceLabsMobileTunnelIdentifier
+		String jobName = System.getProperty("user.name")+" Mobile Execution - Using " + findDeviceName + " in  " + sauceLabsMobileTunnelIdentifier
 				+ " environment";
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
+		capabilities.setCapability("acceptSslCerts", true);
+		capabilities.setCapability("forceMjsonwp", true);
 		try {
 			if (mobileOSName.equalsIgnoreCase("Android"))
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);

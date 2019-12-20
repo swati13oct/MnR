@@ -6,6 +6,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -49,6 +50,10 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 
 	@FindBy(css = ".all-fields-marked-wi>sup")
 	private WebElement pageRequiredInfoAsteriskMark;
+	
+	@FindBy(css = "div.sam")
+	public WebElement footerCallbannerSection;
+	
 	// --- Common elements Ends above ---
 
 	@FindBy(css = "div legend.primary-question-tex")
@@ -90,14 +95,14 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		System.out.println("Coverage Option Validating Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/coverageOption");
-		waitforElementNew(planSelectorPageTilte);
-		waitforElementNew(pageStepsNumberName, 30);
+		validate(planSelectorPageTilte,30);
+		validate(pageStepsNumberName, 30);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
-		waitforElementNew(progressbar, 30);
-		waitforElementNew(pageRequiredInfo);
-		waitforElementNew(coveragePagePrimaryQuestion);
+		validate(progressbar, 30);
+		validate(pageRequiredInfo,30);
+		validate(coveragePagePrimaryQuestion,30);
 		Assert.assertTrue(coveragePagePrimaryQuestion.getText().contains("coverage"));
-		waitforElementNew(coveragePagePrimaryQuestionAsteriskMark);
+		validate(coveragePagePrimaryQuestionAsteriskMark,30);
 		Assert.assertTrue(coveragePagePrimaryQuestionAsteriskMark.getText().contains("*"));
 		validate(plantypeMAPD, 30);
 		Assert.assertTrue(plantypeMAPD.getText().contains("and"));
@@ -117,20 +122,21 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void coverageOptionpageFunctionalMobile(String planType, boolean proceed) {
 		System.out.println("Coverage Page Selections");
 		if (planType.equalsIgnoreCase("MAPD")) {
-			waitforElementNew(plantypeMAPD);
+			validate(plantypeMAPD,30);
 			plantypeMAPD.click();
 		} else if (planType.equalsIgnoreCase("MA")) {
-			waitforElementNew(plantypeMA);
+			validate(plantypeMA,30);
 			plantypeMA.click();
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			waitforElementNew(plantypePDP);
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,plantypePDP,"50%",5,true);
 			plantypePDP.click();
 		} else if (planType.equalsIgnoreCase("NA")) {
-			waitforElementNew(plantypeNone);
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,plantypeNone,"50%",5,true);
 			plantypeNone.click();
 		}
 		System.out.println("Plan Type " + planType + " Clicked");
 		if (proceed) {
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
 			continueBtn.click();
 			threadsleep(2000);
 			String currentPageUrl = driver.getCurrentUrl();
@@ -141,6 +147,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	// Coverage Option Page Function Verification
 	public void coverageOptionpageErrormobile() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
 		continueBtn.click();
 		Assert.assertTrue(errorMessage.getText().contains("Please"));
 	}
@@ -149,6 +156,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void previouspageValidation() {
 		System.out.println("Previous page Validation");
 		if (radioselect.isDisplayed()) {
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,previousBtn,"50%",5,true);
 			previousBtn.click();
 			threadsleep(2000);
 			String currentPageUrl = driver.getCurrentUrl();

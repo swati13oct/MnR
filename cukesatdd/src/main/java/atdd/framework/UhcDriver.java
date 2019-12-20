@@ -894,4 +894,36 @@ try {
 			e.printStackTrace();
 		}
 	}
+	
+	public void mobileFindElement(WebElement element,int swipeCount,boolean swipeUp) {
+		try {
+			waitTillElementClickableInTime(element,3);
+			new Actions(driver).moveToElement(element).perform();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("not visible");
+			if(swipeCount<1)
+				return;
+			mobileswipe("80%",swipeUp);
+			swipeCount--;
+			mobileFindElement(element,swipeCount,swipeUp);
+		}
+	}
+	
+	public void mobileFindElementBeforeCallBanner(WebElement callBanner,WebElement element,String percentage,int swipeCount,boolean swipeUp) {
+		try {
+			validate(callBanner,30);
+			validate(element,30);
+			if(callBanner.getLocation().getY() -  element.getLocation().getY() <100) {
+				mobileswipe(percentage,swipeUp);
+				swipeCount--;
+				mobileFindElementBeforeCallBanner(callBanner,element,percentage,swipeCount,swipeUp);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Element not visible");
+		}
+	}
 }
