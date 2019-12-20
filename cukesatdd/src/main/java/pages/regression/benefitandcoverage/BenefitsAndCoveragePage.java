@@ -346,10 +346,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='table-body-cell outpatientsurgery-tier1-atdd ng-binding']")
 	private WebElement OutpatientSurgeryCenter2;
 
-	@FindBy(xpath = "//div[contains(@class,'outpatientsurgery')]")
+	@FindBy(xpath = "//*[contains(@class,'outpatientsurgery') and contains(text(),'OUTPATIENT')]")
 	private WebElement OutpatientSurgeryCenterValue;
 
-	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']//div[1]/div[1]/span)[1]")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']")
 	private WebElement OfficVisitsValue;
 
 	@FindBy(xpath = "//span[contains(text(),'YOUR PRIMARY CARE PROVIDER')]")
@@ -2544,10 +2544,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				Assert.fail("Outpatient Surgery Center Value is not displaying");
 			}
 
-			if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
+			validateNew(OfficVisitsValue);
 
-				Assert.fail();
-			}
 
 		}
 	}
