@@ -172,6 +172,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	if(validate(selectLocationOption)){
 		selectLocationOption.click();
+		validateNew(saveBtn2);
 		saveBtn2.click();
 	}
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
@@ -262,6 +263,7 @@ public class ProviderSearchPage extends UhcDriver {
 			
 			if(validate(selectLocationOption)){
 				selectLocationOption.click();
+				validateNew(saveBtn2);
 				saveBtn2.click();
 			}
 			
