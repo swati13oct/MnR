@@ -671,7 +671,7 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			Thread.sleep(8000);
 			
-		if(EmailForm.isDisplayed()){
+		if(validate(EmailForm)){
 			System.out.println("Get Started Button not visible, So using email Form Link!!!");
 			EmailForm.click();
 			Thread.sleep(2000);
