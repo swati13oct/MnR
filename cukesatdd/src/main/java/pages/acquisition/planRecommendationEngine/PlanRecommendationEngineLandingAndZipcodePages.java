@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.planSelectorEngine;
+package pages.acquisition.planRecommendationEngine;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,9 +13,9 @@ import org.testng.Assert;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanSelectorLandingAndZipcodePages extends UhcDriver {
+public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 
-	public PlanSelectorLandingAndZipcodePages(WebDriver driver) {
+	public PlanRecommendationEngineLandingAndZipcodePages(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

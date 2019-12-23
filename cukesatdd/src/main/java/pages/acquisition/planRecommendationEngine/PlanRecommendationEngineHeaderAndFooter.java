@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.planSelectorEngine;
+package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
 
@@ -17,11 +17,11 @@ import org.testng.Assert;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanSelectorHeaderAndFooter extends UhcDriver {
+public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 	Actions actions = new Actions(driver);
 
-	public PlanSelectorHeaderAndFooter(WebDriver driver) {
+	public PlanRecommendationEngineHeaderAndFooter(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

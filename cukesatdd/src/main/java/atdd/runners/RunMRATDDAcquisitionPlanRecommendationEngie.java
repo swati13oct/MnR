@@ -11,9 +11,21 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for community Meeting User Stories in Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngie.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngie")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/PlanSelector" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngie.json" }, tags = { "@planrecommandonation" })
+@ExtendedCucumberOptions(
+		retryCount=1, 
+		screenShotSize="", 
+		screenShotLocation="/screenshots/",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngie.json",
+		detailedReport = true, 
+		detailedAggregatedReport = true, 
+		overviewReport = true, 
+		toPDF = true, 
+		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngie")
+@CucumberOptions(
+		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" }, 
+		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" }, 
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngie.json" }, 
+		tags = { "@planrecommandonation" })
 public class RunMRATDDAcquisitionPlanRecommendationEngie {
 
 }

@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.planSelectorEngine.PlanSelectorCoverageOptionPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;

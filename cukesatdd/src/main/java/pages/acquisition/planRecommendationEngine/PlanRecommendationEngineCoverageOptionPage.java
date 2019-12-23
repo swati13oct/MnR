@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.acquisition.planSelectorEngine;
+package pages.acquisition.planRecommendationEngine;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,9 +14,9 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanSelectorCoverageOptionPage extends UhcDriver {
+public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
-	public PlanSelectorCoverageOptionPage(WebDriver driver) {
+	public PlanRecommendationEngineCoverageOptionPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
