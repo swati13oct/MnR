@@ -683,74 +683,67 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 	
 	public void footerLinkvalidationMobile() {
-		if (driver.getCurrentUrl().contains("aarpmedicare")) {
-			validate(AARPlogoInHeader, 30);
-			AARPlogoInHeader.click();
-		} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
-			validate(UHClogoInHeader, 30);
-			UHClogoInHeader.click();
-		}
 		String curURL = driver.getCurrentUrl();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"50%",5,true);
-		//mobileswipe("80%",4,true);
+		//driver.navigate().refresh();
 		if (curURL.contains("aarpmedicare")) {
 			//another window - only aarp
-			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
-			threadsleep(1500);
-			validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
+			//navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+			validate(footerVisitAARPOrgLink,30);
+			//footerVisitAARPOrgLink.click();
+			//threadsleep(1500);
+			//validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
+			//browserBack();
 			}
-		
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 		footerMedicareAdvantagePlansLink.click();
 		validateLinks("/health-plans/shop/medicare-advantage-plans");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 		validate(footerMedicareSupplementInsurancePlansLink,30);
-		//footerMedicareSupplementInsurancePlansLink.click();
 		mobileactiontab(footerMedicareSupplementInsurancePlansLink);
 		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
 		browserBack();
-		
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 		footerMedicarePrescriptionDrugPlansLink.click();
 		validateLinks("/health-plans/shop/prescription-drug-plans");
 		browserBack();
-		mobileswipe("80%",true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 		footerMedicareEducationLink.click();
 		validateLinks("/medicare-education.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerHomeLink.click();
-		Assert.assertTrue(driver.getCurrentUrl().equals(curURL));
-		navigatePRELandingpageMobile();
-		mobileswipe("80%",4,true);
+		browserBack();
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerAboutUsLink.click();
 		validateLinks("/about-us.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerContactUsLink.click();
 		validateLinks("/contact-us.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerSiteMapLink.click();
 		validateLinks("/sitemap.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerPrivacyPolicyLink.click();
 		validateLinks("/privacy_policy.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerTermsofUseLink.click();
 		validateLinks("/terms-of-use.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerDisclaimersLink.click();
 		validateLinks("/disclaimer.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerAgentsBrokersLink.click();
 		validateLinks("/health-insurance-brokers.html");
 		browserBack();
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		if (curURL.contains("uhcmedicare")) {
 		footerAccessibilityLink.click();
 		validateLinks("/legal/accessibility");
@@ -759,14 +752,15 @@ public class HeaderFooterMobile extends UhcDriver {
 		else {
 			validate(footerAccessibilityLink,30);
 		}
-		//mobileswipe("80%",3,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerCallbannerimage.click();
 		validate(footerCallbannerPopup,30);
-		footerCallbannerPopupclose.click();		
+		footerCallbannerPopupclose.click();	
 	}
 	
 	public void validateLinks(String expURL) {
 		pageloadcomplete();
+		//fixPrivateConnectionMobile();
 		String curURL = driver.getCurrentUrl();
 		threadsleep(3000);
 		if(expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[0]) || expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[1])){
@@ -812,11 +806,13 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 
 	public void validateLinksanotherWindowmobile(String expURL) {
+		threadsleep(2000);
 		Set<String> windows = driver.getWindowHandles();
 		System.out.println(windows);
-		if (windows.size() == 2) {
+		if (windows.size() >= 2) {
 			System.out.println(driver.getCurrentUrl());
-			driver.switchTo().window("CDwindow-1");
+			driver.switchTo().window("CDwindow-2");
+			fixPrivateConnectionMobile();
 			threadsleep(1000);
 			validateLinks(expURL);
 			driver.close();

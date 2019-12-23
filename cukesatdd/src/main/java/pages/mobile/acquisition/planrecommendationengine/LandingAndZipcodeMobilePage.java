@@ -100,6 +100,9 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = ".container div>button[class*='primary button']")
 	private WebElement continueBtn;
+	
+	@FindBy(css = "div.sam")
+	public WebElement footerCallbannerSection;
 
 	// zip code actions elements
 	@FindBy(id = "zipInfo")
@@ -127,7 +130,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 	}
 
-	public void landingpagemobile() {
+	public void landingpageElementsmobile() {
 		System.out.println("Validating Title: ");
 		String ExpectedTitle = "insurance plan";
 		validate(landingpageHeader, 30);
@@ -157,13 +160,13 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 							.getText();
 			System.out.println(landingpageTextPoints);
 		}
-		mobileswipe("70%", true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,getStartedBtn1,"50%",5,true);
 		validate(landingpageImage, 30);
 		validate(landingpageLabel, 30);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
 	}
 
-	public void zipcodepageelementsmobile() {
+	public void zipcodepageElementsmobile() {
 		validate(breadCrumb, 30);
 		validate(planSelectorPageTilte, 30);
 		validate(pageStepsNumberName, 30);
@@ -179,7 +182,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		validate(continueBtn, 30);
 	}
 
-	public void zipcodepagevalidationmobile(HashMap<String, String> inputdata) {
+	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
 		int i = 0;
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
@@ -187,6 +190,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			validate(countyInfo, 20);
 			Assert.assertTrue(countyInfo.getText().contains(inputdata.get("County Name")));
 		} else {
+			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
 			validate(multicountyText, 20);
 			validate(defaultmultioptioninnerText, 20);
 			validate(zipcodePageCountyQuestionMark, 20);
@@ -200,7 +204,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
 	}
 
-	public void zipcodescreenerrorvalidationmobile(HashMap<String, String> inputdata) {
+	public void zipcodescreenErrorValidationmobile(HashMap<String, String> inputdata) {
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {

@@ -85,7 +85,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
 		//System.out.println("Device Type "+inputValues.get("Device Type"));
 		LandingAndZipcodeMobilePage prelandingpagemobile =  new LandingAndZipcodeMobilePage(wd);
-		prelandingpagemobile.landingpagemobile();
+		prelandingpagemobile.landingpageElementsmobile();
 }
 	
 	@Then("^user validate presence of Header elements on landing page mobile$")
@@ -130,21 +130,21 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validates zipcode page elements mobile$")
 	public void user_check_zipcodepage_elements_mobile() {
 		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
-		prezipcodemobile.zipcodepageelementsmobile();
+		prezipcodemobile.zipcodepageElementsmobile();
 	}
 	
 	@And("^runs questionnaire at zipcode page mobile$")
 	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) {
 		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
 		readfeaturedata(inputdata);
-		prezipcodemobile.zipcodepagevalidationmobile(inputValues);
+		prezipcodemobile.zipcodepageValidationmobile(inputValues);
 	}
 	
 	@Then("^runs questionnaire at zipcode page with invalid data mobile$")
 	public void user_runs_questionnaire_zipcodepage_invalid_data_mobile(DataTable inputdata) {
 		LandingAndZipcodeMobilePage prezipcodemobile =  new LandingAndZipcodeMobilePage(wd);
 		readfeaturedata(inputdata);
-		prezipcodemobile.zipcodescreenerrorvalidationmobile(inputValues);
+		prezipcodemobile.zipcodescreenErrorValidationmobile(inputValues);
 	}
 	
 	@Then("^user validate elements in coverage options page mobile$")
