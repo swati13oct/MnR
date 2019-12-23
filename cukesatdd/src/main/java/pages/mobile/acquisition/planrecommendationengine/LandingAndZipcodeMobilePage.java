@@ -76,6 +76,9 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "div.progress-bar-value-background")
 	private WebElement progressbar;
+	
+	@FindBy(css = "div.progress-bar-info>p")
+	private WebElement pageProgressPercentage;
 
 	@FindBy(css = "div>.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
@@ -165,6 +168,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		validate(planSelectorPageTilte, 30);
 		validate(pageStepsNumberName, 30);
 		validate(progressbar, 30);
+		validate(pageProgressPercentage, 30);
+		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo, 30);
 		validate(pageRequiredInfoMark, 30);
 		validate(zipcodePageQuestion, 30);

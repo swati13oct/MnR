@@ -188,6 +188,9 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = "footer.footer")
 	private WebElement footerSection;
 	
+	@FindBy(css = "div.sam")
+	public WebElement footerCallbannerSection;
+	
 	@FindBy(css = "ul.visitaarp.linksCond > li > a")
 	private WebElement footerVisitAARPOrgLink;
 	
@@ -393,7 +396,11 @@ public class HeaderFooterMobile extends UhcDriver {
 	// Footer Element Verification Method
 	public void footerElementsMobile() {
 		System.out.println("Validating Mobile Footer Elements: ");
-		mobileswipe("95%", 6,true);
+		
+		//mobileswipe("95%", 6,true);
+		
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerSection,"50%",5,true);
+		
 		validate(footerSection, 30);
 		validate(footerVisitAARPOrgLink, 30);//only aarp
 		Assert.assertTrue(footerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
@@ -482,7 +489,8 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileswipe("95%",2,true);
+		//mobileswipe("95%",2,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,headerEmailsubmitButton,"50%",5,true);
 		validate(hearderEmailtext, 30);
 		hearderEmailtext.click();
 		hearderEmailtext.sendKeys(email);
@@ -513,10 +521,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
-		browserRefresh();
-		navigatePRELandingpageMobile();
-		mobileswipe("85%",4,true);
-		waitforElementVisibilityInTime(footerBackToTopLink, 45);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerBackToTopLink,"50%",5,true);
 		mobileactiontab(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
@@ -559,7 +564,6 @@ public class HeaderFooterMobile extends UhcDriver {
 	
 	public void headerLinkvalidationMobile() {
 		String curURL = driver.getCurrentUrl();
-		
 		menuclick();
 		headerSigninLink.click();
 		if (curURL.contains("aarpmedicare"))
@@ -687,8 +691,8 @@ public class HeaderFooterMobile extends UhcDriver {
 			UHClogoInHeader.click();
 		}
 		String curURL = driver.getCurrentUrl();
-		navigatePRELandingpageMobile();
-		mobileswipe("80%",4,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"50%",5,true);
+		//mobileswipe("80%",4,true);
 		if (curURL.contains("aarpmedicare")) {
 			//another window - only aarp
 			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));

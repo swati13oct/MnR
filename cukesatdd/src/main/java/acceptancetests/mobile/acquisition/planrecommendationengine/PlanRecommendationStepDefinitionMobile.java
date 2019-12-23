@@ -89,26 +89,42 @@ public class PlanRecommendationStepDefinitionMobile {
 		prelandingpagemobile.landingpagemobile();
 }
 	
-	@Then("^user validate presence of Header and Footer elements on landing page mobile$")
-	public void user_check_header_Footer_mobile() {
+	@Then("^user validate presence of Header elements on landing page mobile$")
+	public void user_check_header_mobile() {
 		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.headerElementsMobile();
+}
+	
+	@Then("^user validate presence of Footer elements on landing page mobile$")
+	public void user_check_Footer_mobile() {
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.footerElementsMobile();
 }
-	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine mobile$")
-	public void user_check_header_Footer_functionalities_mobile(DataTable inputdata) {
+	
+	@Then("^user validate Header Functionality of Plan Recommendation Engine mobile$")
+	public void user_check_header_functionalities_mobile(DataTable inputdata) {
 		readfeaturedata(inputdata);
 		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.zipcodeFunctionInShopforaplanHeaderMobile(inputValues.get("Zip Code"));
 		preheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
 		preheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
+	}
+	
+	@Then("^user validate Footer Functionality of Plan Recommendation Engine mobile$")
+	public void user_check_Footer_functionalities_mobile() {
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.backtoTopFunctionMobile();
 	}
 	
-	@Then("^user validates all Links from header and footer mobile$")
-	public void user_check_header_Footer_link_validation_mobile() {
+	@Then("^user validates all Links from header mobile$")
+	public void user_check_header_link_validation_mobile() {
 		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.headerLinkvalidationMobile();
+	}
+	
+	@Then("^user validates all Links from footer mobile$")
+	public void user_check_Footer_link_validation_mobile() {
+		HeaderFooterMobile preheaderfootermobile =  new HeaderFooterMobile(wd);
 		preheaderfootermobile.footerLinkvalidationMobile();
 	}
 	

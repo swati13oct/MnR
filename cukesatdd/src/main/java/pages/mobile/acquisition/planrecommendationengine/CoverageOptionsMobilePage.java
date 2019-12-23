@@ -45,6 +45,9 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "div.progress-bar-value-background")
 	private WebElement progressbar;
 
+	@FindBy(css = "div.progress-bar-info>p")
+	private WebElement pageProgressPercentage;
+	
 	@FindBy(css = "div>.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
@@ -99,6 +102,8 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		validate(pageStepsNumberName, 30);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
 		validate(progressbar, 30);
+		validate(pageProgressPercentage, 30);
+		Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
 		validate(pageRequiredInfo,30);
 		validate(coveragePagePrimaryQuestion,30);
 		Assert.assertTrue(coveragePagePrimaryQuestion.getText().contains("coverage"));
@@ -159,8 +164,8 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 			mobileFindElementBeforeCallBanner(footerCallbannerSection,previousBtn,"50%",5,true);
 			previousBtn.click();
 			threadsleep(2000);
-			String currentPageUrl = driver.getCurrentUrl();
-			Assert.assertTrue(currentPageUrl.contains("/location"));
+			validate(pageProgressPercentage, 30);
+			Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
 		}
 	}
 
