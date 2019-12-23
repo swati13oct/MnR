@@ -27,7 +27,7 @@ Feature: Plan Selector Tool flow - Verify Header and Footer on medicare mobile p
       |   90201 | abc@domain.com | plan for recommandations |
 
   @PREmobile @planrecommandonationmobile @headerfootermobile @footermobilefunctionalities
-  Scenario Outline: - To validate mobile footer functionalities in medicare page
+  Scenario: - To validate mobile footer functionalities in medicare page
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to PRE landing page mobile
     Then user validate Footer Functionality of Plan Recommendation Engine mobile
