@@ -66,16 +66,16 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	private WebElement coveragePagePrimaryQuestionAsteriskMark;
 
 	// Options
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(1)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label")
 	private WebElement plantypeMAPD;
 
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(2)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
 	private WebElement plantypeMA;
 
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(3)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(4)>label")
 	private WebElement plantypePDP;
 
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(4)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
 	private WebElement plantypeNone;
 
 	@FindBy(css = ".container div>button[class*='primary button']")

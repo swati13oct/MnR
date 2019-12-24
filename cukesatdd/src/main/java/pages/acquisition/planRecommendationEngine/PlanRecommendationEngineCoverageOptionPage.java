@@ -43,7 +43,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(css = "div.row.pb-1>div>fieldset>legend.primary-question-tex")
+	@FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex")
 	private WebElement coverageTitle;
 	
 	@FindBy(xpath = "//label[@class='radio-label']/div[contains(text(),'Medical and prescription drug')]")
@@ -58,16 +58,16 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 	
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(1)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
 	private WebElement plantypeMAPD;
 	
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(2)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
 	private WebElement plantypeMA;
 	
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(3)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(4)>label")
 	private WebElement plantypePDP;
 	
-	@FindBy(css = "#custom-radio-group>uhc-radio:nth-child(4)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
 	private WebElement plantypeNone;
 	
 	@FindBy(css = "#errorMessage>div:nth-child(2)")
