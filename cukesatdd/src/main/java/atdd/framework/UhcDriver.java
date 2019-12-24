@@ -840,6 +840,7 @@ try {
 	}
 	
 	public void hidekeypad() {
+		threadsleep(1000);
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
 			((AndroidDriver)driver).hideKeyboard();
 		else
@@ -847,6 +848,7 @@ try {
 	}
 	
 	public void getkeypad() {
+		threadsleep(1000);
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			((AndroidDriver)driver).getKeyboard();
 		else
@@ -915,7 +917,8 @@ try {
 		try {
 			validate(callBanner,30);
 			validate(element,30);
-			if(callBanner.getLocation().getY() -  element.getLocation().getY() <100) {
+			int locationDifference = 100;
+			if(callBanner.getLocation().getY() -  element.getLocation().getY() <locationDifference && swipeCount>0) {
 				mobileswipe(percentage,swipeUp);
 				swipeCount--;
 				mobileFindElementBeforeCallBanner(callBanner,element,percentage,swipeCount,swipeUp);
@@ -942,4 +945,20 @@ try {
 			System.out.println("No SSL error / Exception");
 		}
 	}
+	
+	public boolean fixLeavingProceedMobile() {
+		boolean status = false;
+		try {
+				threadsleep(500);
+				WebElement element =driver.findElement(By.cssSelector("a#proceed")); 
+				jsClickNew(element);
+				threadsleep(1000);
+				pageloadcomplete();
+				status=true;
+		} catch (Exception e) {
+			System.out.println("No Leaving Proceed Error");
+		}
+		return status;
+	}
+
 }

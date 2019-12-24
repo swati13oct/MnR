@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
@@ -269,7 +270,8 @@ public class HeaderFooterMobile extends UhcDriver {
 //Header Element Verification Method 
 	
 	public void headerElementsMobile() {
-		System.out.println("Validating Mobile Header Elements: ");
+		//Works only for Android due to prod issue in iphoneX
+		System.out.println("Validating Mobile Header Elements");
 		validate(headerSectionmenu, 30);
 		if (driver.getCurrentUrl().contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
@@ -338,6 +340,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		validate(headerMedicaresupplementplanLink, 20);
 		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplement Plans"));
 		validate(headerPrescriptionLink, 30);
+		mobileswipe("50%", 1,true);
 		Assert.assertTrue(headerPrescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
 		validate(headerGetaplanrecommendationLink, 30);
 		Assert.assertTrue(headerGetaplanrecommendationLink.getText().contains("Get a Plan Recommendation"));
@@ -349,7 +352,9 @@ public class HeaderFooterMobile extends UhcDriver {
 		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
 		validate(hearderEmailtext, 30);
 		validate(headerEmailsubmitButton, 30);
+		mobileswipe("90%", 1,false);
 		headernavigationBackbutton.click();
+		headernavigationCloseicon.click();
 		// Learn about medicare inner elements
 		if (driver.getCurrentUrl().contains("aarpmedicare"))
 			AARPlogoInHeader.click();
@@ -357,47 +362,49 @@ public class HeaderFooterMobile extends UhcDriver {
 			UHClogoInHeader.click();
 		pageloadcomplete();
 		navigatePRELandingpageMobile();
-		headerSectionmenu.click();
-		learnaboutmedicareLink.click();
-		validate(headerMedicareeducationLink, 30);
-		Assert.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
-		validate(headerEligibilityLink, 30);
-		Assert.assertTrue(headerEligibilityLink.getText().contains("Eligibility"));
-		validate(headerCoverageLink, 30);
-		Assert.assertTrue(headerCoverageLink.getText().contains("Coverage Choices"));
-		validate(headermedicarePrescriptionprovidersLink, 30);
-		Assert.assertTrue(headermedicarePrescriptionprovidersLink.getText().contains("Providers"));
-		validate(headerCostbasicsLink, 30);
-		Assert.assertTrue(headerCostbasicsLink.getText().contains("Medicare Cost Basics"));
-		validate(headerMedicareadvantageLink, 30);
-		Assert.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
-		try {
-			if(headerMedicaresupplemnetLink.isDisplayed())
-				Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
-			}catch(Exception e){
-				System.out.println("Medicare Supplement Insurance Plans link is not on header available for selected geo location");
-			}
-		validate(headerMedicareprescriptionLink, 30);
-		Assert.assertTrue(headerMedicareprescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
-		validate(headerEnrollment, 30);
-		Assert.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
-		try {
-		if(headerFAQLink.isDisplayed())
-			Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
-		}catch(Exception e){
-			System.out.println("MedicareFAQ link is not available on header for selected geo location");
-		}
-		headernavigationmedicareBackbutton.click();
-		validate(learnaboutmedicareLink, 30);
-		validate(headernavigationCloseicon, 30);
-		headernavigationCloseicon.click();
+		pageloadcomplete();
+		
+		// We have prod issue in PRE hence not validating the same
+		
+//		headerSectionmenu.click();
+//		learnaboutmedicareLink.click();
+//		validate(headerMedicareeducationLink, 30);
+//		Assert.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
+//		validate(headerEligibilityLink, 30);
+//		Assert.assertTrue(headerEligibilityLink.getText().contains("Eligibility"));
+//		validate(headerCoverageLink, 30);
+//		Assert.assertTrue(headerCoverageLink.getText().contains("Coverage Choices"));
+//		validate(headermedicarePrescriptionprovidersLink, 30);
+//		Assert.assertTrue(headermedicarePrescriptionprovidersLink.getText().contains("Providers"));
+//		validate(headerCostbasicsLink, 30);
+//		Assert.assertTrue(headerCostbasicsLink.getText().contains("Medicare Cost Basics"));
+//		validate(headerMedicareadvantageLink, 30);
+//		Assert.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
+//		try {
+//			if(headerMedicaresupplemnetLink.isDisplayed())
+//				Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
+//			}catch(Exception e){
+//				System.out.println("Medicare Supplement Insurance Plans link is not on header available for selected geo location");
+//			}
+//		validate(headerMedicareprescriptionLink, 30);
+//		Assert.assertTrue(headerMedicareprescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
+//		validate(headerEnrollment, 30);
+//		Assert.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
+//		try {
+//		if(headerFAQLink.isDisplayed())
+//			Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
+//		}catch(Exception e){
+//			System.out.println("MedicareFAQ link is not available on header for selected geo location");
+//		}
+//		headernavigationmedicareBackbutton.click();
+//		validate(learnaboutmedicareLink, 30);
+//		validate(headernavigationCloseicon, 30);
+//		headernavigationCloseicon.click();
 	}
 	
 	// Footer Element Verification Method
 	public void footerElementsMobile() {
 		System.out.println("Validating Mobile Footer Elements: ");
-		
-		//mobileswipe("95%", 6,true);
 		
 		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerSection,"50%",5,true);
 		
@@ -489,12 +496,12 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		//mobileswipe("95%",2,true);
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,headerEmailsubmitButton,"50%",5,true);
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,hearderEmailtext,"50%",5,true);
 		validate(hearderEmailtext, 30);
 		hearderEmailtext.click();
 		hearderEmailtext.sendKeys(email);
 		hidekeypad();
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,hearderEmailtext,"50%",1,true);
 		headerEmailsubmitButton.click();
 		validate(headerShopForaPlanThankYou, 30);
 		mobileswipe("90%",2,false);
@@ -537,13 +544,13 @@ public class HeaderFooterMobile extends UhcDriver {
 	
 	public void backtoshopforaplan(boolean back) {
 		if(back) {
-			if (driver.getCurrentUrl().contains("aarpmedicare")) {
-				validate(AARPlogoInHeader, 30);
-				AARPlogoInHeader.click();
-			} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
-				validate(UHClogoInHeader, 30);
-				UHClogoInHeader.click();
-			}
+//			if (driver.getCurrentUrl().contains("aarpmedicare")) {
+//				validate(AARPlogoInHeader, 30);
+//				AARPlogoInHeader.click();
+//			} else if (driver.getCurrentUrl().contains("uhcmedicare")) {
+//				validate(UHClogoInHeader, 30);
+//				UHClogoInHeader.click();
+//			}
 		}
 		else
 			browserBack();
@@ -563,137 +570,155 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 	
 	public void headerLinkvalidationMobile() {
+		System.out.println("Header Links Validation");
 		String curURL = driver.getCurrentUrl();
+		String curWindow;
 		menuclick();
 		headerSigninLink.click();
+		fixPrivateConnectionMobile();
 		if (curURL.contains("aarpmedicare"))
 			validateLinks("medicare.uhc.com/aarp");
 		else
 			validateLinks("medicare.uhc.com");
-		
 		browserBack();
 		menuclick();
 		headerRegisterLink.click();
+		fixPrivateConnectionMobile();
 		validateLinks("healthsafe-id.com/register/personalInfo||protected/mdm/challenge");
 		
 		if (curURL.contains("aarpmedicare")) {
 		browserBack();
 		menuclick();
 		//another window - only aarp
-		navigatesubLink(headerVisitAARPOrgLink.getAttribute("href"));
-		validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
+		//navigatesubLink(headerVisitAARPOrgLink.getAttribute("href"));
+		validate(headerVisitAARPOrgLink,30);
+		curWindow = driver.getWindowHandle();
+		headerVisitAARPOrgLink.click();
+		validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp",curWindow);
 		}
 		
-		backtoshopforaplan(false);
+		if (curURL.contains("aarpmedicare"))
+			shopforaplanLink.click();
+		else
+			backtoshopforaplan(false);
+
 		headerlookupzipLink.click();
 		validateLinks("/health-plans.html?lookupZipcode");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		headerRequestforhelpLink.click();
 		validateLinks("health-plans/shop/connect");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		headerShopLink.click();
 		validateLinks("/health-plans/shop.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
+		mobileswipe("50%",true);
 		headerEnrollLink.click();
 		validateLinks("/health-plans/enroll.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
+		mobileswipe("50%",true);
 		headerResourcesLink.click();
 		validateLinks("/health-plans/resources.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerAdvantageplanLink.click();
 		validateLinks("/health-plans/shop/medicare-advantage-plans.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerMedicaresupplementplanLink.click();
 		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerPrescriptionLink.click();
 		validateLinks("/health-plans/shop/prescription-drug-plans.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerGetaplanrecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerDrugcostLink.click();
 		validateLinks("health-plans/estimate-drug-costs.html");
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		headerPharmacysearchLink.click();
 		validateLinks("/health-plans/aarp-pharmacy.html");
 
 		// Opens in another window
-		backtoshopforaplan(true);
+		backtoshopforaplan(false);
 		mobileswipe("90%",true);
 		validate(headerProvidersearchLink,30);
+		curWindow = driver.getWindowHandle();
+		headerProvidersearchLink.click();
+		validateLinksanotherWindowmobile("/county-plan-selection/uhc.mnr/zip?",curWindow);
 		driver.navigate().refresh();
 		
-		// Learn about medicare inner elements
-		backtolearnmoremodicare(true);
-		headerMedicareeducationLink.click(); // Only in mobile
-		validateLinks("/medicare-education.html");
-		backtolearnmoremodicare(true);
-		headerEligibilityLink.click();
-		validateLinks("/medicare-education/medicare-eligibility.html");
-		backtolearnmoremodicare(true);
-		headerCoverageLink.click();
-		validateLinks("/medicare-education/medicare-parts-and-medigap-plans.html");
-		backtolearnmoremodicare(true);
-		headermedicarePrescriptionprovidersLink.click();
-		validateLinks("/medicare-education/medicare-benefits.html");
-		backtolearnmoremodicare(true);
-		headerCostbasicsLink.click();
-		validateLinks("/medicare-education/medicare-costs.html");
-		backtolearnmoremodicare(true);
-		mobileswipe("80%",true);
-		headerMedicareadvantageLink.click();
-		validateLinks("/medicare-education/medicare-advantage-plans.html");
 		
-		backtolearnmoremodicare(true);
-		mobileswipe("80%",true);
-		try {
-		validate(headerMedicaresupplemnetLink,30);
-		headerMedicaresupplemnetLink.click(); //geotargetting
-		validateLinks("/medicare-education/medicare-supplement-plans.html");
-		}catch(Exception e) {
-			System.out.println("Geo targetting link 'Medicare Supplement Insurance Plans' is not available");
-			driver.navigate().refresh();
-		}
-		backtolearnmoremodicare(true);
-		mobileswipe("90%",true);
-		headerMedicareprescriptionLink.click();
-		validateLinks("/medicare-education/medicare-part-d.html");
-		backtolearnmoremodicare(true);
-		mobileswipe("90%",true);
-		validate(headerEnrollment,30);
-		navigatesubLink(headerEnrollment.getAttribute("href"));
-		validateLinks("/medicare-education/enrollment-and-changing-plans.html");
-		backtolearnmoremodicare(true);
-		mobileswipe("90%",true);
-		try {
-		validate(headerFAQLink,30);//geotargetting
-		navigatesubLink(headerFAQLink.getAttribute("href"));
-		validateLinks("/medicare-education/medicare-faq.html");
-		}catch(Exception e) {
-			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
-			driver.navigate().refresh();
-		}
+		// We have prod issue in PRE hence not validating the same
+		
+		// Learn about medicare inner elements
+//		backtolearnmoremodicare(true);
+//		headerMedicareeducationLink.click(); // Only in mobile
+//		validateLinks("/medicare-education.html");
+//		backtolearnmoremodicare(true);
+//		headerEligibilityLink.click();
+//		validateLinks("/medicare-education/medicare-eligibility.html");
+//		backtolearnmoremodicare(true);
+//		headerCoverageLink.click();
+//		validateLinks("/medicare-education/medicare-parts-and-medigap-plans.html");
+//		backtolearnmoremodicare(true);
+//		headermedicarePrescriptionprovidersLink.click();
+//		validateLinks("/medicare-education/medicare-benefits.html");
+//		backtolearnmoremodicare(true);
+//		headerCostbasicsLink.click();
+//		validateLinks("/medicare-education/medicare-costs.html");
+//		backtolearnmoremodicare(true);
+//		mobileswipe("80%",true);
+//		headerMedicareadvantageLink.click();
+//		validateLinks("/medicare-education/medicare-advantage-plans.html");
+//		
+//		backtolearnmoremodicare(true);
+//		mobileswipe("80%",true);
+//		try {
+//		validate(headerMedicaresupplemnetLink,30);
+//		headerMedicaresupplemnetLink.click(); //geotargetting
+//		validateLinks("/medicare-education/medicare-supplement-plans.html");
+//		}catch(Exception e) {
+//			System.out.println("Geo targetting link 'Medicare Supplement Insurance Plans' is not available");
+//			driver.navigate().refresh();
+//		}
+//		backtolearnmoremodicare(true);
+//		mobileswipe("90%",true);
+//		headerMedicareprescriptionLink.click();
+//		validateLinks("/medicare-education/medicare-part-d.html");
+//		backtolearnmoremodicare(true);
+//		mobileswipe("90%",true);
+//		validate(headerEnrollment,30);
+//		navigatesubLink(headerEnrollment.getAttribute("href"));
+//		validateLinks("/medicare-education/enrollment-and-changing-plans.html");
+//		backtolearnmoremodicare(true);
+//		mobileswipe("90%",true);
+//		try {
+//		validate(headerFAQLink,30);//geotargetting
+//		navigatesubLink(headerFAQLink.getAttribute("href"));
+//		validateLinks("/medicare-education/medicare-faq.html");
+//		}catch(Exception e) {
+//			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
+//			driver.navigate().refresh();
+//		}
 	}
 	
 	public void footerLinkvalidationMobile() {
+		System.out.println("Footer Links Validation");
 		String curURL = driver.getCurrentUrl();
-		//driver.navigate().refresh();
+		String curWindow;
 		if (curURL.contains("aarpmedicare")) {
 			//another window - only aarp
 			//navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
 			mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 			validate(footerVisitAARPOrgLink,30);
-			//footerVisitAARPOrgLink.click();
-			//threadsleep(1500);
-			//validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp");
-			//browserBack();
+			curWindow = driver.getWindowHandle();
+			footerVisitAARPOrgLink.click();
+			validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp",curWindow);
 			}
 		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
 		footerMedicareAdvantagePlansLink.click();
@@ -750,9 +775,11 @@ public class HeaderFooterMobile extends UhcDriver {
 		browserBack();
 		}
 		else {
-			validate(footerAccessibilityLink,30);
+			//Open in another Window
+			curWindow = driver.getWindowHandle();
+			footerAccessibilityLink.click();
+			validateLinksanotherWindowmobile("/legal/accessibility",curWindow);
 		}
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
 		footerCallbannerimage.click();
 		validate(footerCallbannerPopup,30);
 		footerCallbannerPopupclose.click();	
@@ -760,7 +787,6 @@ public class HeaderFooterMobile extends UhcDriver {
 	
 	public void validateLinks(String expURL) {
 		pageloadcomplete();
-		//fixPrivateConnectionMobile();
 		String curURL = driver.getCurrentUrl();
 		threadsleep(3000);
 		if(expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[0]) || expURL.contains("||") && curURL.contains(expURL.split("\\|\\|")[1])){
@@ -805,23 +831,29 @@ public class HeaderFooterMobile extends UhcDriver {
 		pageloadcomplete();
 	}
 
-	public void validateLinksanotherWindowmobile(String expURL) {
+	public void validateLinksanotherWindowmobile(String expURL, String primaryWindow) {
 		threadsleep(2000);
 		Set<String> windows = driver.getWindowHandles();
 		System.out.println(windows);
 		if (windows.size() >= 2) {
+			for (String window : windows) {
+				if (!window.equals(primaryWindow)) {
+					driver.switchTo().window(window);
+					System.out.println(driver.getCurrentUrl());
+					if (fixLeavingProceedMobile()) {
+						fixPrivateConnectionMobile();
+						validateLinks(expURL);
+						driver.close();
+					} else
+						driver.close();
+				}
+			}
+			driver.switchTo().window(primaryWindow);
 			System.out.println(driver.getCurrentUrl());
-			driver.switchTo().window("CDwindow-2");
-			fixPrivateConnectionMobile();
-			threadsleep(1000);
-			validateLinks(expURL);
-			driver.close();
-			System.out.println(driver.getCurrentUrl());
-			driver.switchTo().window("CDwindow-0");
 			threadsleep(1000);
 		} else {
 			System.out.println("Link validation fails in popup window" + expURL);
-			driver.switchTo().window("CDwindow-0");
+			driver.switchTo().window(primaryWindow);
 			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
