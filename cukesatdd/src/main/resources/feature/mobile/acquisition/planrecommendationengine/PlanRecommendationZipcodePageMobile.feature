@@ -1,5 +1,5 @@
 @PlanSelector
-Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation engine mobile page
+Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation engine using mobile
 
   @PRE @planrecommandonation @zipcodepagemobile @siglecountymobile
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
@@ -28,7 +28,7 @@ Feature: Plan Selector Tool flow - Verify zipcode page in plan recommendation en
       | Zipcode | isMultutiCounty | County      |
       |   35034 | YES             | Bibb County |
 
-  @PRE @planrecommandonation @zipcodepagemobile @invalidZipcodemobile
+  @PRE @planrecommandonation @zipcodepagemobile @invalidZipcodemobile @zipcodenegative
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile

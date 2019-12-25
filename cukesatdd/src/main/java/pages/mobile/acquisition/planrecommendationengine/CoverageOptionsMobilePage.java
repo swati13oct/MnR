@@ -144,8 +144,8 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
 			continueBtn.click();
 			threadsleep(2000);
-			String currentPageUrl = driver.getCurrentUrl();
-			Assert.assertTrue(currentPageUrl.contains("/result"));
+			validate(pageStepsNumberName, 30);
+			Assert.assertTrue(pageStepsNumberName.getText().contains("Special Needs"));
 		}
 	}
 

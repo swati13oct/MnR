@@ -1,5 +1,5 @@
 @PlanSelectorMobile
-Feature: Plan Selector Tool flow - Verify landing page in plan selector mobile page
+Feature: Plan Selector Tool flow - Verify landing page in plan recommendation engine using mobile
 
   @PREmobile @planrecommandonationmobile @landingpagemobile
   Scenario: - To validate mobile landing Page in Plan Recommendation Engine

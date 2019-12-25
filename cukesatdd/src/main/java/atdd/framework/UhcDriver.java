@@ -845,6 +845,7 @@ try {
 			((AndroidDriver)driver).hideKeyboard();
 		else
 			((IOSDriver)driver).hideKeyboard();
+		threadsleep(1000);
 	}
 	
 	public void getkeypad() {
@@ -853,6 +854,7 @@ try {
 			((AndroidDriver)driver).getKeyboard();
 		else
 			((IOSDriver)driver).getKeyboard();
+		threadsleep(1000);
 	}
 
 	public void mobileactiontab(WebElement element) {

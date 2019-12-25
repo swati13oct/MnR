@@ -105,7 +105,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	public WebElement footerCallbannerSection;
 
 	// zip code actions elements
-	@FindBy(id = "zipInfo")
+	@FindBy(css = "#zipInfo")
 	private WebElement countyInfo;
 
 	@FindBy(css = "label[for='MultipleCounty']")
@@ -188,7 +188,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
-			Assert.assertTrue(countyInfo.getText().contains(inputdata.get("County Name")));
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()));
 		} else {
 			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
 			validate(multicountyText, 20);
@@ -199,6 +199,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Select multicounty = new Select(multicountySelect);
 			multicounty.selectByVisibleText(inputdata.get("County Name"));
 		}
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",2,true);
 		continueBtn.click();
 		threadsleep(2000);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
@@ -209,10 +210,10 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
 			validate(multicountySelect, 20);
-			mobileswipe("40%", true);
 		}
+		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",2,true);
 		continueBtn.click();
-		mobileswipe("40%", false);
+		mobileswipe("50%", false);
 		validate(errorMessage, 20);
 		Assert.assertTrue(errorMessage.getText().contains("Please"));
 		threadsleep(2000);
