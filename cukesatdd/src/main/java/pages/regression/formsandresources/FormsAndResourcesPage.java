@@ -24,8 +24,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.myDocumentsPage.myDocumentsPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -134,7 +134,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@id='myDocHeader']")
+	@FindBy(xpath = "//*[@id='myDocButtonText']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -514,6 +514,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='plan_material_fnr']//a[contains(@href,'order-materials')]")
 	private WebElement preEffecShipOrderPlan;
 
+	@FindBy(xpath = "//a[@id='myDocButtonText']")
+	public WebElement myDocumentsButton;
+
 	public WebElement getEobSectionall() {
 		return eobSectionall;
 	}
@@ -655,6 +658,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement getPreEffectivePharmacyLocatorLinkPDP() {
 		return preEffectivePharmacyLocatorLinkPDP;
 	}
+	
 
 	public WebElement getHome() {
 		return home;
@@ -2610,5 +2614,16 @@ System.out.println(memberType);
 
 		}
 		return false;
+	}
+
+	public myDocumentsPage navigateToMyDocumentsPage() {
+	
+		myDocumentsButton.click();
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("/my-documents/")){
+				return new myDocumentsPage(driver);
+	     }
+			 return null;
+			
 	}
 }
