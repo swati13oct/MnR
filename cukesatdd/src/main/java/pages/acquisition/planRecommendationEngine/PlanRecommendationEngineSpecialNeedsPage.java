@@ -150,13 +150,29 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 		
 // Splitting the input options and selecting it and Verifying the More Information Content
 // Then Clicking on Continue Button 		
-		public void specialneedspage(String options) {
-			String snpoptions[] = options.split(",");
-			for(String option:snpoptions) {
-				specialNeedspageFunctional(option);
-				specialNeedsOptionsMoreInfo(option);
-			}
-			continueBtn.click();
+		public void specialneedspage(String options,String status) {
+			if(status.equals("Positive")) {
+				String snpoptions[] = options.split(",");
+				for(String option:snpoptions) {
+					specialNeedspageFunctional(option);
+					specialNeedsOptionsMoreInfo(option);
+				}
+				continueBtn.click();
+			}else {
+				if(options.isEmpty()){
+					continueBtn.click();
+					validate(errorMessage, 30);
+					Assert.assertTrue(errorMessage.getText().contains("Please"));
+				}else if(options.contains("None")) {
+					String snpoptions[] = options.split(",");
+					for(String option:snpoptions) {
+					specialNeedspageFunctional(option);
+					}
+					continueBtn.click();
+					validate(errorMessage, 30);
+					Assert.assertTrue(errorMessage.getText().contains("Please"));
+				}
+			}			
 		}
 		
 		

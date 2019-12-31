@@ -311,14 +311,9 @@ public class PlanRecommendationEngineStepDefinition {
 	public void select_special_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
-		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"));	
+		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),inputValues.get("Status"));	
 	}
 	
-	@And("^user selects SNP options and validate More Info Details in Special Needs Page")
-	public void select_special_page_More_Info(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
-		planSelectorSpecialneedspage.specialneedspageMoreInfo(inputValues.get("SNP Options"));
-	}
+	
 
 }
