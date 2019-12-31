@@ -2,6 +2,7 @@ package acceptancetests.acquisition.planRecommendationEngine;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -297,6 +299,26 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		planSelectorCoverageepage.coverageOptionpagePreviousButton(inputValues.get("Plan Type"));
 		planSelectorCoverageepage.previouspageValidation();
+	}
+	
+	@Then("^user validate elements in Special Needs page$")
+	public void elements_special_page() {
+		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
+		planSelectorSpecialneedspage.specialNeedspage();
+	}
+	
+	@And("^user selects SNP options in Special Needs Page")
+	public void select_special_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
+		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"));	
+	}
+	
+	@And("^user selects SNP options and validate More Info Details in Special Needs Page")
+	public void select_special_page_More_Info(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
+		planSelectorSpecialneedspage.specialneedspageMoreInfo(inputValues.get("SNP Options"));
 	}
 
 }

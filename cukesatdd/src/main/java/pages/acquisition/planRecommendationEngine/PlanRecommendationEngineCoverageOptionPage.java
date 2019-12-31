@@ -81,7 +81,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		public void coverageOptionpage() {
 			System.out.println("Coverage Option Validating Page: ");
 			String currentPageUrl = driver.getCurrentUrl();	
-			currentPageUrl.contains("/coverageOption");
+			currentPageUrl.contains("/plan-recommendation-engine.html/");
 			validate(planSelectorPageTilte);
 			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
