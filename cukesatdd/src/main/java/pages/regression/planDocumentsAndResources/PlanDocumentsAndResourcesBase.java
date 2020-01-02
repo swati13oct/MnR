@@ -543,7 +543,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		JSONObject responseObj = (JSONObject) paramsObj.get("response");
 		Assert.assertTrue("PROBLEM - unable to locate message json object", responseObj!=null);
 		System.out.println("TEST - responseObj="+responseObj.toString());
-		Long statusValue = (long) responseObj.get("status");
+		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
 		Assert.assertTrue("PROBLEM - response is not getting status=200", statusValue==200);
 		String urlStr = (String) responseObj.get("url");

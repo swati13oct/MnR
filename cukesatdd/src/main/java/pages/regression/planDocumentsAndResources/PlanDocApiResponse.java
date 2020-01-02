@@ -136,10 +136,10 @@ public class PlanDocApiResponse {
 			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null", apiResponseJsobObj!=null);
-		success = (boolean) apiResponseJsobObj.get("success");
+		success = (Boolean) apiResponseJsobObj.get("success");
 		errorCode = (String) apiResponseJsobObj.get("errorCode");
-		anocCurrentYearFlag = (boolean) apiResponseJsobObj.get("anocCurrentYearFlag");
-		anocNextYearFlag = (boolean) apiResponseJsobObj.get("anocNextYearFlag");
+		anocCurrentYearFlag = (Boolean) apiResponseJsobObj.get("anocCurrentYearFlag");
+		anocNextYearFlag = (Boolean) apiResponseJsobObj.get("anocNextYearFlag");
 
 		JSONArray docListArrayObj = (JSONArray) apiResponseJsobObj.get("docList");
 		Assert.assertTrue("PROBLEM - docListArrayObj should not be null", docListArrayObj!=null);
