@@ -33,6 +33,7 @@ import pages.regression.healthandwellness.*;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
 import pages.regression.pharmacylocator.*;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
@@ -1119,6 +1120,40 @@ public class TestHarness extends UhcDriver {
     		}
     		return null;
     	}    
+    	
+    	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
+    		checkForIPerceptionModel(driver);
+    		StopWatch pageLoad = new StopWatch();
+    		pageLoad.start();
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		scrollToView(formsPageLink);
+    		try {
+    			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+    			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+    			jsClickNew(formsPageLink);
+        		CommonUtility.checkPageIsReady(driver);
+    		} catch (org.openqa.selenium.TimeoutException e) {
+    			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+    			driver.quit(); //note: force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    		} catch (WebDriverException we) {
+    			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+    			driver.quit(); //force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    		}
+    		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+    		Thread.sleep(2000); // note: give it a bit more time to settle down
+    		pageLoad.stop();
+    		long pageLoadTime_ms = pageLoad.getTime();
+    		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+    		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+    		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+    		if (driver.getTitle().contains("Documents")) {
+    			return new PlanDocumentsAndResourcesPage(driver);
+    		}
+    		return null;
+    	}  
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
