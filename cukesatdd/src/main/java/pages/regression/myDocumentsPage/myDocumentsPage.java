@@ -281,6 +281,28 @@ public class myDocumentsPage extends myDocumentsWebElements{
 		}
 	}
 
+	public void validateTableContent() {
+
+		System.out.println("Proceed to validate the Table Content in the First row");
+
+		String column1Value =documentTypeValueInColumn1.getText().toString();
+		String column2Value =documentDateValueInColumn2.getText().toString();
+		String column3Value =documentDescrValueInColumn3.getText().toString();
+				
+	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column1Value.length()>0);
+	 System.out.println("Document type in first column is : "+column1Value);
+			
+	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column2Value.length()>0);
+	 System.out.println("Document Date  in second column is : "+column2Value);
+	 
+	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column3Value.length()>0);
+	 System.out.println("Document Description  in Third column is : "+column3Value);
+		
+	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",
+				validate(viewDownloadLink));
+		
+	}
+
 
 
 }

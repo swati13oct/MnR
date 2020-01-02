@@ -40,9 +40,22 @@ public class myDocumentsWebElements extends UhcDriver {
 
 		@FindBy(xpath = "//p[contains(text(),'You can select a document type')]")
 		protected WebElement pageSummaryText ;
-
+		
+		//table elements
+		
+		@FindBy(xpath = "//table/tbody/tr[2]/td[1]/span")
+		protected WebElement documentTypeValueInColumn1 ;
+		
+		@FindBy(xpath = "//div/table/tbody/tr[2]/td[2]/span")
+		protected WebElement documentDateValueInColumn2 ;
+		
+		@FindBy(xpath = "//div/table/tbody/tr[2]/td[3]/span")
+		protected WebElement documentDescrValueInColumn3 ;
+		
+		@FindBy(xpath = "//div/table/tbody/tr[2]/td[4]/a[contains(text(),'View/Download')]")
+		protected WebElement viewDownloadLink ;
+		
 		// View Document from dropdown elements
-
 		@FindBy(xpath = "//*[@id='document-date']/option[contains(text(),'Last 90 Days')]")
 		protected WebElement dropDownlast90Days;
 

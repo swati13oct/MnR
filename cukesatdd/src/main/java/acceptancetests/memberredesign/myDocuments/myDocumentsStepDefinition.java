@@ -94,6 +94,7 @@ public class myDocumentsStepDefinition {
 
 	/**
 	 * This steps enables validates if Documents Table is present or not
+	 * If it's present then user validates the doc table else validates the error message
 	 */
 	@And("^I validate the Documents Table if present$")	
 	public void validate_the_Documents_Table() throws InterruptedException { 
@@ -105,6 +106,7 @@ public class myDocumentsStepDefinition {
 		{
 			myDocumentsPage.validateTableHeaders();	
 			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
+			myDocumentsPage.validateTableContent();
 			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
