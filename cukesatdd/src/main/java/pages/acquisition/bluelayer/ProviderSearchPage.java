@@ -44,8 +44,11 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')])[1]")
+	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
+	
+	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	private WebElement selectLocationOption;
 	
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
@@ -81,8 +84,8 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//button[contains(@class,'cta-header-button')]//span[text()='Save']")
-	private WebElement SaveBtn2;
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
+	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
 	private WebElement providerNameText;
@@ -162,6 +165,13 @@ public class ProviderSearchPage extends UhcDriver {
 	jsClickNew(Physician);
 	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 	jsClickNew(SaveBtn);
+	
+	if(validate(selectLocationOption)){
+		selectLocationOption.click();
+		validateNew(saveBtn2);
+		saveBtn2.click();
+	}
+	
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
@@ -211,8 +221,15 @@ public void selectsProviderFromGlobaHeader() {
 		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		PrimaryCarePhysician.click();
 		
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn2, 45);
-		SaveBtn2.click();
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		SaveBtn.click();
+		
+		if(validate(selectLocationOption)){
+			selectLocationOption.click();
+			validateNew(saveBtn2);
+			saveBtn2.click();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 		Viewsavebtn.click();
 		validateNew(providerNameText);
@@ -241,6 +258,12 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 		jsClickNew(SaveBtn);
+		
+		if(validate(selectLocationOption)){
+			selectLocationOption.click();
+			saveBtn2.click();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
