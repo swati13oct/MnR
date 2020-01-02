@@ -3,11 +3,6 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
@@ -17,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
 
 public class HeaderFooterMobile extends UhcDriver {
 
@@ -34,6 +28,8 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
+
+	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
 //Header Elements
 
@@ -406,7 +402,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	public void footerElementsMobile() {
 		System.out.println("Validating Mobile Footer Elements: ");
 		
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerSection,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerSection,"50%",5,true);
 		
 		validate(footerSection, 30);
 		validate(footerVisitAARPOrgLink, 30);//only aarp
@@ -496,12 +492,12 @@ public class HeaderFooterMobile extends UhcDriver {
 		headerSectionmenu.click();
 		validate(shopforaplanLink, 30);
 		shopforaplanLink.click();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,hearderEmailtext,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext,"50%",5,true);
 		validate(hearderEmailtext, 30);
 		hearderEmailtext.click();
 		hearderEmailtext.sendKeys(email);
 		hidekeypad();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,hearderEmailtext,"50%",1,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(hearderEmailtext,"50%",1,true);
 		headerEmailsubmitButton.click();
 		validate(headerShopForaPlanThankYou, 30);
 		mobileswipe("90%",2,false);
@@ -528,7 +524,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerBackToTopLink,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink,"50%",5,true);
 		mobileactiontab(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
@@ -575,7 +571,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		String curWindow;
 		menuclick();
 		headerSigninLink.click();
-		fixPrivateConnectionMobile();
+		mobileUtils.fixPrivateConnectionMobile();
 		if (curURL.contains("aarpmedicare"))
 			validateLinks("medicare.uhc.com/aarp");
 		else
@@ -583,7 +579,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		browserBack();
 		menuclick();
 		headerRegisterLink.click();
-		fixPrivateConnectionMobile();
+		mobileUtils.fixPrivateConnectionMobile();
 		validateLinks("healthsafe-id.com/register/personalInfo||protected/mdm/challenge");
 		
 		if (curURL.contains("aarpmedicare")) {
@@ -714,61 +710,61 @@ public class HeaderFooterMobile extends UhcDriver {
 		if (curURL.contains("aarpmedicare")) {
 			//another window - only aarp
 			//navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(footerHomeLink,"75%",5,true);
 			validate(footerVisitAARPOrgLink,30);
 			curWindow = driver.getWindowHandle();
 			footerVisitAARPOrgLink.click();
 			validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp",curWindow);
 			}
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerHomeLink,"75%",5,true);
 		footerMedicareAdvantagePlansLink.click();
 		validateLinks("/health-plans/shop/medicare-advantage-plans");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerHomeLink,"75%",5,true);
 		validate(footerMedicareSupplementInsurancePlansLink,30);
 		mobileactiontab(footerMedicareSupplementInsurancePlansLink);
 		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerHomeLink,"75%",5,true);
 		footerMedicarePrescriptionDrugPlansLink.click();
 		validateLinks("/health-plans/shop/prescription-drug-plans");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerHomeLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerHomeLink,"75%",5,true);
 		footerMedicareEducationLink.click();
 		validateLinks("/medicare-education.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerHomeLink.click();
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerAboutUsLink.click();
 		validateLinks("/about-us.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerContactUsLink.click();
 		validateLinks("/contact-us.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerSiteMapLink.click();
 		validateLinks("/sitemap.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerPrivacyPolicyLink.click();
 		validateLinks("/privacy_policy.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerTermsofUseLink.click();
 		validateLinks("/terms-of-use.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerDisclaimersLink.click();
 		validateLinks("/disclaimer.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		footerAgentsBrokersLink.click();
 		validateLinks("/health-insurance-brokers.html");
 		browserBack();
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,footerAccessibilityLink,"75%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(footerAccessibilityLink,"75%",5,true);
 		if (curURL.contains("uhcmedicare")) {
 		footerAccessibilityLink.click();
 		validateLinks("/legal/accessibility");
@@ -840,8 +836,8 @@ public class HeaderFooterMobile extends UhcDriver {
 				if (!window.equals(primaryWindow)) {
 					driver.switchTo().window(window);
 					System.out.println(driver.getCurrentUrl());
-					if (fixLeavingProceedMobile()) {
-						fixPrivateConnectionMobile();
+					if (mobileUtils.fixLeavingProceedMobile()) {
+						mobileUtils.fixPrivateConnectionMobile();
 						validateLinks(expURL);
 						driver.close();
 					} else

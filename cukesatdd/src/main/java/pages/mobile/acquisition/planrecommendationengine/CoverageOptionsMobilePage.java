@@ -3,15 +3,12 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
@@ -30,6 +27,10 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 
 	}
 
+	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	
+	String page = "Coverage";
+	
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
 
@@ -57,6 +58,15 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 	
+	@FindBy(css = ".container div>button[class*='primary button']")
+	private WebElement continueBtn;
+
+	@FindBy(css = ".container div>button[class*='secondary']")
+	private WebElement previousBtn;
+
+	@FindBy(css = "#errorMessage")
+	private WebElement errorMessage;
+
 	// --- Common elements Ends above ---
 
 	@FindBy(css = "div legend.primary-question-tex")
@@ -78,16 +88,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
 	private WebElement plantypeNone;
 
-	@FindBy(css = ".container div>button[class*='primary button']")
-	private WebElement continueBtn;
-
-	@FindBy(css = ".container div>button[class*='secondary']")
-	private WebElement previousBtn;
-
 	// Coverage actions elements
-
-	@FindBy(css = "#errorMessage")
-	private WebElement errorMessage;
 
 	@FindBy(css = "div .radio-checked")
 	private WebElement radioselect;
@@ -96,8 +97,6 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 
 	public void coverageOptionpageElementsMobile() {
 		System.out.println("Coverage Option Validating Page: ");
-		String currentPageUrl = driver.getCurrentUrl();
-		currentPageUrl.contains("/coverageOption");
 		validate(planSelectorPageTilte,30);
 		validate(pageStepsNumberName, 30);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
@@ -133,40 +132,38 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 			validate(plantypeMA,30);
 			plantypeMA.click();
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,plantypePDP,"50%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(plantypePDP,"50%",5,true);
 			plantypePDP.click();
 		} else if (planType.equalsIgnoreCase("NA")) {
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,plantypeNone,"50%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(plantypeNone,"50%",5,true);
 			plantypeNone.click();
 		}
 		System.out.println("Plan Type " + planType + " Clicked");
 		if (proceed) {
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
 			continueBtn.click();
-			threadsleep(2000);
-			validate(pageStepsNumberName, 30);
-			Assert.assertTrue(pageStepsNumberName.getText().contains("Special Needs"));
+			System.out.println("Validating "+page+" page Continue button functionality");
+			mobileUtils.nextPageValidation(page.toUpperCase());
 		}
 	}
 
 	// Coverage Option Page Function Verification
 	public void coverageOptionpageErrormobile() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
 		continueBtn.click();
 		Assert.assertTrue(errorMessage.getText().contains("Please"));
 	}
 
 	// Previous Button Functionality for Coverage Options Page
-	public void previouspageValidation() {
-		System.out.println("Previous page Validation");
-		if (radioselect.isDisplayed()) {
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,previousBtn,"50%",5,true);
-			previousBtn.click();
-			threadsleep(2000);
-			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+		public void previouspageValidation() {
+			System.out.println("Previous page Validation");
+			if (radioselect.isDisplayed()) {
+				mobileUtils.mobileFindElementBeforeCallBanner(previousBtn,"50%",5,true);
+				previousBtn.click();
+				threadsleep(2000);
+				validate(pageProgressPercentage, 30);
+				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+			}
 		}
-	}
-
 }

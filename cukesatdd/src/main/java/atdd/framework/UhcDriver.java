@@ -889,20 +889,11 @@ try {
 		new WebDriverWait(driver, 30).until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
 		System.out.println("Page load completed");
 	}
-	
-	public void threadsleep(int sec) {
-		try {
-			Thread.sleep(sec);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+
 	public void mobileFindElement(WebElement element,int swipeCount,boolean swipeUp) {
 		try {
 			waitTillElementClickableInTime(element,3);
-			new Actions(driver).moveToElement(element).perform();
+			//new Actions(driver).moveToElement(element).perform();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -914,53 +905,12 @@ try {
 			mobileFindElement(element,swipeCount,swipeUp);
 		}
 	}
-	
-	public void mobileFindElementBeforeCallBanner(WebElement callBanner,WebElement element,String percentage,int swipeCount,boolean swipeUp) {
-		try {
-			validate(callBanner,30);
-			validate(element,30);
-			int locationDifference = 100;
-			if(callBanner.getLocation().getY() -  element.getLocation().getY() <locationDifference && swipeCount>0) {
-				mobileswipe(percentage,swipeUp);
-				swipeCount--;
-				mobileFindElementBeforeCallBanner(callBanner,element,percentage,swipeCount,swipeUp);
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Element not visible");
-		}
-	}
-	
-	public void fixPrivateConnectionMobile() {
-		try {
-			//String URL = "https://self-signed.badssl.com/";
-			threadsleep(1000);
-			if (driver.findElement(By.cssSelector("body.ssl h1")).getText().contains("Your connection is not private")) {
-				driver.findElement(By.cssSelector("button#details-button")).click();
-				threadsleep(1000);
-				driver.findElement(By.cssSelector("a#proceed-link")).click();
-				threadsleep(1000);
-				pageloadcomplete();
-			}
-		} catch (Exception e) {
-			System.out.println("No SSL error / Exception");
-		}
-	}
-	
-	public boolean fixLeavingProceedMobile() {
-		boolean status = false;
-		try {
-				threadsleep(500);
-				WebElement element =driver.findElement(By.cssSelector("a#proceed")); 
-				jsClickNew(element);
-				threadsleep(1000);
-				pageloadcomplete();
-				status=true;
-		} catch (Exception e) {
-			System.out.println("No Leaving Proceed Error");
-		}
-		return status;
-	}
 
+	public void threadsleep(int sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

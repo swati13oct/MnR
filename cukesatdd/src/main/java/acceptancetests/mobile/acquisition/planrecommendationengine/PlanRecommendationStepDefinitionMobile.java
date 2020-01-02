@@ -3,33 +3,22 @@ package acceptancetests.mobile.acquisition.planrecommendationengine;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanSelectorNewPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -172,6 +161,26 @@ public class PlanRecommendationStepDefinitionMobile {
 		coveragepage.coverageOptionpageFunctionalMobile(inputValues.get("Plan Type"),false);
 		coveragepage.previouspageValidation();
 	}
+	
+	@Then("^user validate elements in Special Needs page mobile$")
+	public void elements_special_page() {
+		SpecialNeedsMobilePage specialneedspage =  new SpecialNeedsMobilePage(wd);
+		specialneedspage.specialNeedspageElements();
+	}
+	
+	@And("^user selects SNP options in Special Needs Page mobile")
+	public void select_special_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		SpecialNeedsMobilePage specialneedspage =  new SpecialNeedsMobilePage(wd);
+		String status = "Positive";
+		specialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
+	}
+	
+	@Then("^user validate previous button functionality in \"([^\\\"]*)\" page mobile$")
+	public void previous_button_validation_mobile(String pageName){
+		CommonutilitiesMobile commonMethods = new CommonutilitiesMobile(wd);
+		commonMethods.previouspageValidation(pageName);
+}
 	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());

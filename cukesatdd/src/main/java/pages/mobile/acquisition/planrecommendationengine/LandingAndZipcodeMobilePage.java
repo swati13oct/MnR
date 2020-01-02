@@ -4,24 +4,15 @@
 package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.HashMap;
-import java.util.List;
 
-import org.json.JSONObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import acceptancetests.data.PageConstants;
-import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
-import io.appium.java_client.MobileElement;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 
@@ -31,7 +22,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-
+	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	// Landing Page Elements
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -160,7 +151,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 							.getText();
 			System.out.println(landingpageTextPoints);
 		}
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,getStartedBtn1,"50%",5,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(getStartedBtn1,"50%",5,true);
 		validate(landingpageImage, 30);
 		validate(landingpageLabel, 30);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
@@ -183,14 +174,13 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
-		int i = 0;
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
 			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()));
 		} else {
-			mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",5,true);
+			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
 			validate(multicountyText, 20);
 			validate(defaultmultioptioninnerText, 20);
 			validate(zipcodePageCountyQuestionMark, 20);
@@ -199,7 +189,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Select multicounty = new Select(multicountySelect);
 			multicounty.selectByVisibleText(inputdata.get("County Name"));
 		}
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",2,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",2,true);
 		continueBtn.click();
 		threadsleep(2000);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
@@ -211,7 +201,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
 			validate(multicountySelect, 20);
 		}
-		mobileFindElementBeforeCallBanner(footerCallbannerSection,continueBtn,"50%",2,true);
+		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",2,true);
 		continueBtn.click();
 		mobileswipe("50%", false);
 		validate(errorMessage, 20);
