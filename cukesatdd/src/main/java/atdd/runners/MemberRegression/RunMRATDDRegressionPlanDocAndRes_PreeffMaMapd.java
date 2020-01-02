@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_PreeffMaMapd.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_PreeffMaMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
-features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_PreeffMaMapd.json" }, tags = { "@preeffective_ma_mapd" })
 public class RunMRATDDRegressionPlanDocAndRes_PreeffMaMapd {
 }

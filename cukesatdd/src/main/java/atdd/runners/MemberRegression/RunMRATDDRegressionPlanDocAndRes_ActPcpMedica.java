@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActPcpMedica.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_ActPcpMedica")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
-features = { "src/main/resources/feature/memberredesign/orderplanmaterials" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActPcpMedica.json" }, tags = { "@active_pcp_medica" })
 public class RunMRATDDRegressionPlanDocAndRes_ActPcpMedica {
 }
