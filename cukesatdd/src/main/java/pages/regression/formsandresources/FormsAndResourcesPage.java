@@ -9,8 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -2619,11 +2621,32 @@ System.out.println(memberType);
 	public myDocumentsPage navigateToMyDocumentsPage() {
 	
 		myDocumentsButton.click();
+		if (MRScenario.environment.contains("team-atest")) {
+			try {
+				Thread.sleep(8000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Check if Alert popup present...if yes, handle it...");
+			isAlertPresent();
+		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("/my-documents/")){
 				return new myDocumentsPage(driver);
 	     }
 			 return null;
 			
+	}
+	
+	public boolean isAlertPresent() {
+		try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				System.out.println("Detected Alert popup, accept it and move on...");
+		} catch (NoAlertPresentException Ex) {
+			System.out.println("DID NOT detect Alert popup, move on...");
+			return false;
+		}
+		return true;
 	}
 }
