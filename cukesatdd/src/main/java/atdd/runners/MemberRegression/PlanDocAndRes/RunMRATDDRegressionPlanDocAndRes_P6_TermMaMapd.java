@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression;
+package atdd.runners.MemberRegression.PlanDocAndRes;
 
 import org.junit.runner.RunWith;
 
@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActMa.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_ActMa")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMaMapd.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_TermMaMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActMa.json" }, tags = { "@active_ma" })
-public class RunMRATDDRegressionPlanDocAndRes_ActMa {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMaMapd.json" }, tags = { "@planAndDocuments06","@terminated_ma_mapd" })
+public class RunMRATDDRegressionPlanDocAndRes_P6_TermMaMapd {
 }

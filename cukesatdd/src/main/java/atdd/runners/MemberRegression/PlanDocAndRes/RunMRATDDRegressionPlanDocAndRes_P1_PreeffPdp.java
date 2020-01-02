@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression;
+package atdd.runners.MemberRegression.PlanDocAndRes;
 
 import org.junit.runner.RunWith;
 
@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActPcpMedica.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_ActPcpMedica")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P1_PreeffPdp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P1_PreeffPdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_ActPcpMedica.json" }, tags = { "@active_pcp_medica" })
-public class RunMRATDDRegressionPlanDocAndRes_ActPcpMedica {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P1_PreeffPdp.json" }, tags = { "@planAndDocuments01","@preeffective_pdp" })
+public class RunMRATDDRegressionPlanDocAndRes_P1_PreeffPdp {
 }
