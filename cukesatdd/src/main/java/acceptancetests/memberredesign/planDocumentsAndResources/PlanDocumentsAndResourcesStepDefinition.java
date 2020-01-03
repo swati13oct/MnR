@@ -139,7 +139,10 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		yearsMap.put("nextYear", String.valueOf(nextYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
-		planDocumentsAndResourcesPage.sleepBySec(10);
+		if (MRScenario.environment.contains("team-a"))
+			planDocumentsAndResourcesPage.sleepBySec(10);
+		else
+			planDocumentsAndResourcesPage.sleepBySec(5);
 		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 

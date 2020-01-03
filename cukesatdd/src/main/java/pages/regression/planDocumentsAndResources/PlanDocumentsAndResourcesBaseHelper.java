@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourcesWebElements  {
 	
@@ -118,6 +121,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	 */
 	public void goBackToPriorPgViaBack(String planType, String memberType, String origUrlBeforeClick) {
 		driver.navigate().back();
+		isAlertPresent();
 		CommonUtility.checkPageIsReady(driver);
 		String expUrl="/member/documents/overview.html";
 		String actUrl=driver.getCurrentUrl();
@@ -150,7 +154,9 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			driver.quit(); //force the test to fail instead of waiting time
 			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
 		}
-		int sec=10;
+		int sec=5;
+		if (MRScenario.environment.contains("team-a")) 
+			sec=10;
 		System.out.println("page load should stopped loading now, give it "+sec+" more sec to settle down");
 		sleepBySec(sec); // note: give it a bit more time to settle down
 		pageLoad.stop();
@@ -303,5 +309,19 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		System.out.println("TEST - move element to center view");
 
 	}
+
+	public boolean isAlertPresent() {
+		try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				System.out.println("Detected Alert popup, accept it and move on...");
+		} catch (NoAlertPresentException Ex) {
+			System.out.println("DID NOT detect Alert popup, move on...");
+			return false;
+		}
+		return true;
+	}
+
+
 	
 }

@@ -5,8 +5,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -1132,6 +1134,8 @@ public class TestHarness extends UhcDriver {
     			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
     			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
     			jsClickNew(formsPageLink);
+        		Thread.sleep(5000);
+        		isAlertPresent();
         		CommonUtility.checkPageIsReady(driver);
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
@@ -1139,7 +1143,7 @@ public class TestHarness extends UhcDriver {
     			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
     		} catch (WebDriverException we) {
     			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
-    			driver.quit(); //force the test to fail instead of waiting time
+    			//driver.quit(); //force the test to fail instead of waiting time
     			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
     		}
     		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
@@ -1154,6 +1158,20 @@ public class TestHarness extends UhcDriver {
     		}
     		return null;
     	}  
+    	
+    	public boolean isAlertPresent() {
+    		try {
+    				Alert alert = driver.switchTo().alert();
+    				alert.accept();
+    				System.out.println("Detected Alert popup, accept it and move on...");
+    		} catch (NoAlertPresentException Ex) {
+    			System.out.println("DID NOT detect Alert popup, move on...");
+    			return false;
+    		}
+    		return true;
+    	}
+
+
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);

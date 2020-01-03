@@ -107,15 +107,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			targetLinkElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
-			sleepBySec(3);
+			sleepBySec(5);
 			if (!redirectUrl.equals("none")) {
 				System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
-				sleepBySec(2);
+				sleepBySec(5);
 				CommonUtility.checkPageIsReady(driver);
 			}
-			System.out.println("TEST - 1 targetDocName="+targetDocName);
-			System.out.println("TEST - 2 targetDocName="+targetDocName.toUpperCase());
-			System.out.println("TEST - 3 check ="+targetDocName.toUpperCase().contains("Health & Wellness Products Catalog"));
 			if (targetDocName.toUpperCase().contains("HEALTH PRODUCTS BENEFIT") 
 					|| targetDocName.contains("Appointment of Representative Form")
 					|| targetDocName.toUpperCase().contains("OVER THE COUNTER ESSENTIALS")
@@ -145,6 +142,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			int afterClicked_numTabs=afterClicked_tabs.size();			
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			sleepBySec(5);
 			CommonUtility.checkPageIsReady(driver);
 
 			if (checkDestUrl) {
@@ -168,7 +166,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				targetLinkElement.click(); //note: if redirect then need to wait a little for the page to settle before checking destination link
 				CommonUtility.checkPageIsReady(driver);
 				
-				sleepBySec(3);
+				sleepBySec(5);
 				if (!redirectUrl.equals("none")) {
 					System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 					CommonUtility.checkPageIsReady(driver);
@@ -183,7 +181,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							CommonUtility.waitForPageLoad(driver, orderPlanPgHeader, 5);
 					if (testInputInfoMap.get("docName").equals("SEARCH DOCUMENTS")) {
 						CommonUtility.waitForPageLoad(driver, myDocumentsPgHeader, 5);
-						sleepBySec(3);
+						sleepBySec(5);
 						if (MRScenario.environment.contains("team-atest")) {
 							System.out.println("Check if Alert popup present...if yes, handle it...");
 							isAlertPresent();
@@ -783,18 +781,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		else
 			System.out.println("PROBLEM: CANNOT find doc: "+expDocName);
 		return planDocMap;  //note: if no match find then planDocMap will be null
-	}
-
-	public boolean isAlertPresent() {
-		try {
-				Alert alert = driver.switchTo().alert();
-				alert.accept();
-				System.out.println("Detected Alert popup, accept it and move on...");
-		} catch (NoAlertPresentException Ex) {
-			System.out.println("DID NOT detect Alert popup, move on...");
-			return false;
-		}
-		return true;
 	}
 
 }
