@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
  */
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P1_ActPcpMedica.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P1_ActPcpMedica")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },

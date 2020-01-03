@@ -150,7 +150,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			driver.quit(); //force the test to fail instead of waiting time
 			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
 		}
-		int sec=2;
+		int sec=10;
 		System.out.println("page load should stopped loading now, give it "+sec+" more sec to settle down");
 		sleepBySec(sec); // note: give it a bit more time to settle down
 		pageLoad.stop();
@@ -220,6 +220,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 				e.printStackTrace();
 			}
 		}
+		sleepBySec(2);
 	}
 	
 	public void moveMouseToElement(WebElement targetElement) {
