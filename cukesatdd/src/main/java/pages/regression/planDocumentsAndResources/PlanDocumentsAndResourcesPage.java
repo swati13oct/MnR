@@ -98,8 +98,8 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		providerDirectories.valiatePharmacyLocator_PD(testInputInfoMap, sectionDisplay);
 	}	
 
-	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap) {
-		providerDirectories.validateDefaultLangSelect_PD(testInputInfoMap);
+	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		providerDirectories.validateDefaultLangSelect_PD(testInputInfoMap, sectionDisplay);
 	}	
 
 	public void validateJumplink_MD(boolean sectionDisplay) {

@@ -121,13 +121,15 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	 */
 	public void goBackToPriorPgViaBack(String planType, String memberType, String origUrlBeforeClick) {
 		driver.navigate().back();
+		sleepBySec(5);
 		isAlertPresent();
 		CommonUtility.checkPageIsReady(driver);
 		String expUrl="/member/documents/overview.html";
 		String actUrl=driver.getCurrentUrl();
 		if (!actUrl.contains(expUrl)) { //note: give it one more try before giving up
 			driver.get(origUrlBeforeClick);
-			sleepBySec(1);
+			sleepBySec(5);
+			isAlertPresent();
 			actUrl=driver.getCurrentUrl();
 		}
 		Assert.assertTrue("PROBLEM - unable to go back to Plan Documents and Resources page. "
@@ -261,7 +263,8 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	}
 	
 	public void backToTopOfPage() {
-		moveMouseToElement(pageHeader);
+		//moveMouseToElement(pageHeader);
+		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
 	}
 
 	/**

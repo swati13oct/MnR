@@ -55,7 +55,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 	/**
 	 * Validate default language selection for Provider and Pharmacy Directories section
 	 */
-	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap) {
+	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
 		String section="Provider and Pharmacy Directories";
 		if (testInputInfoMap.get("planType").equals("MA")) 
 			section="Provider Directory";
@@ -64,6 +64,10 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		String expectedDefaultText="ENGLISH";
 		WebElement dropdownElement=langDropDown_PD;
 		
+		if (!sectionDisplay) {
+			Assert.assertTrue("PROBLEM - section expected not to display, should not see language dropdown for section '"+section+"'", !planDocValidate(dropdownElement));
+			return;
+		}
 		Assert.assertTrue("PROBLEM - unable to locate language dropdown for section '"+section+"'", planDocValidate(dropdownElement));
 		Select select = new Select(dropdownElement);
 		WebElement option = select.getFirstSelectedOption();
@@ -139,22 +143,35 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		*/
 		String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 		String redirectUrl="none";
-		if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP") && !testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
-			lnkElement=grp_providerSearch_link_PD;
-			imgElement=grp_providerSearch_link_img;		
-			instElement=grp_providerSearch_instr_PD;		
-			expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
-			redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/";
-		} else if (testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
-			if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
-				expectedUrl="https://member.int.uhc.com/AARP/find-care";
-				redirectUrl="https://member.int.uhc.com/aarp/find-care";
-			} else {
-				expectedUrl="https://member.int.uhc.com/UHC/find-care";
-				redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
-
-			}
+		//tbd if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP") && testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
+			//tbd expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+			//tbd redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/";
+			//tbd if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP")) {
+				
+			//tbd }
+		if (testInputInfoMap.get("planType").toUpperCase().contains("PCP")) {
+			expectedUrl="https://member.int.mymedicareaccount.uhc.com/PCP/find-care";
+			redirectUrl="https://member.int.mymedicareaccount.uhc.com/pcp/find-care";
+		} else if (testInputInfoMap.get("planType").toUpperCase().contains("MEDICA")) {
+			expectedUrl="https://member.int.mymedicareaccount.uhc.com/Medica/find-care";
+			redirectUrl="https://member.int.mymedicareaccount.uhc.com/medica/find-care";
 		}
+		else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
+			expectedUrl="https://member.int.uhc.com/AARP/find-care";
+			redirectUrl="https://member.int.uhc.com/aarp/find-care";
+		} else {
+			expectedUrl="https://member.int.uhc.com/UHC/find-care";
+			redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
+		}
+		//tbd } else if (testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
+			//tbd 	if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
+			//tbd 		expectedUrl="https://member.int.uhc.com/AARP/find-care";
+			//tbd 		redirectUrl="https://member.int.uhc.com/aarp/find-care";
+			//tbd 	} else {
+			//tbd 		expectedUrl="https://member.int.uhc.com/UHC/find-care";
+			//tbd 		redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
+			//tbd 	}
+			//tbd }
 
 		testInputInfoMap.put("section", section);
 		testInputInfoMap.put("docName", item);

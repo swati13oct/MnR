@@ -95,7 +95,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@And("^user navigates to plan documents and resources page validation$")
 	public void navigateToPlanAndResourcePageForSegementId(DataTable memberAttributes) throws InterruptedException {
 		//note: control the default test setup if no input specified
-		this.validateApi=true;
+		this.validateApi=false;
 		this.skipLnkDestCheck=false; 
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
@@ -183,6 +183,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		sectionNote.add("Validation UI result for page='"+page+"'");
 		planDocumentsAndResourcesPage.validatePageHeaderSection();
 		sectionNote.add("PASSED - page '"+page+"' header validation");
+		planDocumentsAndResourcesPage.validatePageBackToTopLink();
+		sectionNote.add("PASSED - page '"+page+"' 'Back To Top' link validation");
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
 		if (noteList==null)
 			noteList=new ArrayList<String>();
@@ -683,7 +685,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		sectionNote.add("PASSED - Pharmacy locator link validation");
 
 		//note: validate default language selection
-		planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap);
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - Default language dropdown validation");
 
 		if (sectionDisplay) {
