@@ -57,11 +57,15 @@ public class PlanDocumentsAndResourcesMM extends PlanDocumentsAndResourcesBase  
 	/**
 	 * Validate default language selection for Membership Materials section
 	 */
-	public void validateDefaultLangSelect_MM() {
+	public void validateDefaultLangSelect_MM(boolean sectionDisplay) {
 		String section="Membership Materials";
 		String expectedDefaultText="ENGLISH";
 		WebElement dropdownElement=langDropDown_MM;
 		
+		if (!sectionDisplay) {
+			Assert.assertTrue("PROBLEM - input expected not to see section, should not be able to locate language dropdown for section '"+section+"'", !planDocValidate(dropdownElement));
+			return;
+		}
 		Assert.assertTrue("PROBLEM - unable to locate language dropdown for section '"+section+"'", planDocValidate(dropdownElement));
 		Select select = new Select(dropdownElement);
 		WebElement option = select.getFirstSelectedOption();

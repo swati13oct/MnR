@@ -70,11 +70,15 @@ public class PlanDocumentsAndResourcesANOC extends PlanDocumentsAndResourcesBase
 	/**
 	 * Validate default language selection for Annual Notice of Changes Documents section
 	 */
-	public void validateDefaultLangSelect_ANOC() {
+	public void validateDefaultLangSelect_ANOC(boolean sectionDisplay) {
 		String section="Annual Notice of Changes Documents";
 		String expectedDefaultText="ENGLISH";
 		WebElement dropdownElement=langDropDown_ANOC;
 		
+		if (!sectionDisplay) {
+			Assert.assertTrue("PROBLEM - input expected not to see section, should not be able to locate language dropdown for section '"+section+"'", !planDocValidate(dropdownElement));
+			return;
+		}
 		Assert.assertTrue("PROBLEM - unable to locate language dropdown for section '"+section+"'", planDocValidate(dropdownElement));
 		Select select = new Select(dropdownElement);
 		WebElement option = select.getFirstSelectedOption();

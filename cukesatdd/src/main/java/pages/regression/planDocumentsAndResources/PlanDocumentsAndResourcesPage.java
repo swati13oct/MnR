@@ -50,8 +50,8 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		planMaterials.valiateViewMemberIdCard_PM(testInputInfoMap, viewMemberCardIdDisplay);
 	}
 
-	public void validateDefaultLangSelect_PM(HashMap<String,String> testInputInfoMap) {
-		planMaterials.validateDefaultLangSelect_PM(testInputInfoMap);
+	public void validateDefaultLangSelect_PM(HashMap<String,String> testInputInfoMap, boolean sectionDisplay) {
+		planMaterials.validateDefaultLangSelect_PM(testInputInfoMap, sectionDisplay);
 	}
 
 	public void validateFooter_PM(HashMap<String,String> testInputInfoMap) {
@@ -66,8 +66,8 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		membershipMaterials.validateSectionHeader_MM(sectionDisplay);
 	}
 
-	public void validateDefaultLangSelect_MM() {
-		membershipMaterials.validateDefaultLangSelect_MM();
+	public void validateDefaultLangSelect_MM(boolean sectionDisplay) {
+		membershipMaterials.validateDefaultLangSelect_MM(sectionDisplay);
 	}
 
 	public void validateJumplink_ANOC(boolean sectionDisplay)  {
@@ -78,8 +78,8 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		anoc.validateSectionHeader_ANOC(sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
 	}
 
-	public void validateDefaultLangSelect_ANOC()  {
-		anoc.validateDefaultLangSelect_ANOC();
+	public void validateDefaultLangSelect_ANOC(boolean sectionDisplay)  {
+		anoc.validateDefaultLangSelect_ANOC(sectionDisplay);
 	}
 
 	public void  validateJumplink_PD(boolean sectionDisplay) {

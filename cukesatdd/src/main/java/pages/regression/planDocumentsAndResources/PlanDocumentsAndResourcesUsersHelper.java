@@ -1648,7 +1648,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Guía para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -1819,7 +1819,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("Additional Drug Coverage");
+				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Prior Authorization Criteria");
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");

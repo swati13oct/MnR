@@ -132,7 +132,7 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 	/**
 	 * Validate default language selected for Plan Materials section
 	 */
-	public void validateDefaultLangSelect_PM(HashMap<String,String> testInputInfoMap) {
+	public void validateDefaultLangSelect_PM(HashMap<String,String> testInputInfoMap, boolean sectionDisplay) {
 		String planType=testInputInfoMap.get("planType");
 		String section="Plan Materials";
 		String expectedDefaultText="ENGLISH";
@@ -140,6 +140,10 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 
 		if (planType.equals("SHIP")) {
 			Assert.assertTrue("PROBLEM - SHIP user should not language dropdown for section '"+section+"'", !planDocValidate(dropdownElement));
+			return;
+		}
+		if (!sectionDisplay) {
+			Assert.assertTrue("PROBLEM - input expected not to see section, should not be able to locate language dropdown for section '"+section+"'", !planDocValidate(dropdownElement));
 			return;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate language dropdown for section '"+section+"'", planDocValidate(dropdownElement));

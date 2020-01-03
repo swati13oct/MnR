@@ -244,7 +244,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		sectionNote.add("PASSED - View Member ID Card link validation");
 
 		//note: validate default language selection
-		planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap);
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - Default language dropdown validation");
 
 		if (sectionDisplay) {
@@ -357,9 +357,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_MM(sectionDisplay);
 		sectionNote.add("PASSED - section header validation");
 
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_MM(sectionDisplay);
 		if (sectionDisplay) {
-			//note: validate default language selection
-			planDocumentsAndResourcesPage.validateDefaultLangSelect_MM();
 
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
@@ -486,10 +486,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_ANOC(sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
 		sectionNote.add("PASSED - section header validation");
 
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_ANOC(sectionDisplay);
+		sectionNote.add("PASSED - Default language dropdown validation");
+
 		if (sectionDisplay) {
-			//note: validate default language selection
-			planDocumentsAndResourcesPage.validateDefaultLangSelect_ANOC();
-			sectionNote.add("PASSED - Default language dropdown validation");
 
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
