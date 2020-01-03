@@ -107,7 +107,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			targetLinkElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
-			sleepBySec(1);
+			sleepBySec(3);
 			if (!redirectUrl.equals("none")) {
 				System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 				sleepBySec(2);
@@ -168,7 +168,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				targetLinkElement.click(); //note: if redirect then need to wait a little for the page to settle before checking destination link
 				CommonUtility.checkPageIsReady(driver);
 				
-				sleepBySec(1);
+				sleepBySec(3);
 				if (!redirectUrl.equals("none")) {
 					System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 					CommonUtility.checkPageIsReady(driver);
