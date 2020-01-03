@@ -227,25 +227,25 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		//note: validate jumplink
 		planDocumentsAndResourcesPage.validateJumplink_PM(sectionDisplay);
-		sectionNote.add("  PASSED - jumplink validation");
+		sectionNote.add("PASSED - jumplink validation");
 
 		//note: validate section header
 		planDocumentsAndResourcesPage.validateSectionHeader_PM(sectionDisplay);
-		sectionNote.add("  PASSED - section header validation");
+		sectionNote.add("PASSED - section header validation");
+
+		//note: validate order plan material link and image
+		planDocumentsAndResourcesPage.valiateOrderPlanMaterialsLink_PM(testInputInfoMap, orderPlanMaterialsDisplay);
+		sectionNote.add("PASSED - Order Plan Materials link validation");
+
+		//note: validate view member ID card link and image
+		planDocumentsAndResourcesPage.valiateViewMemberIdCard_PM(testInputInfoMap, viewMemberCardIdDisplay);
+		sectionNote.add("PASSED - View Member ID Card link validation");
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap);
+		sectionNote.add("PASSED - Default language dropdown validation");
 
 		if (sectionDisplay) {
-			//note: validate order plan material link and image
-			planDocumentsAndResourcesPage.valiateOrderPlanMaterialsLink_PM(testInputInfoMap, orderPlanMaterialsDisplay);
-			sectionNote.add("  PASSED - Order Plan Materials link validation");
-
-			//note: validate view member ID card link and image
-			planDocumentsAndResourcesPage.valiateViewMemberIdCard_PM(testInputInfoMap, viewMemberCardIdDisplay);
-			sectionNote.add("  PASSED - View Member ID Card link validation");
-
-			//note: validate default language selection
-			planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap);
-			sectionNote.add("  PASSED - Default language dropdown validation");
-
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
 			//-----------------------------------------
@@ -362,7 +362,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
 			//-----------------------------------------
-			sectionNote.add("----- Validation for English documents");
+			sectionNote.add("  ----- Validation for English documents");
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
@@ -380,7 +380,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			sectionNote.add("PASSED - English documents validation");
 
 			//-----------------------------------------
-			sectionNote.add("----- Validation for Spanish documents");
+			sectionNote.add("  ----- Validation for Spanish documents");
 			expDocDisplay=doc_es_curYr;
 			targetLang="ES";
 			targetYr=yearsMap.get("currentYear");
@@ -398,7 +398,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			sectionNote.add("PASSED - Spanish documents validation");
 
 			//-----------------------------------------
-			sectionNote.add("----- Validation for Chinese documents");
+			sectionNote.add("  ----- Validation for Chinese documents");
 			expDocDisplay=doc_zh_curYr;
 			targetLang="ZH";
 			targetYr=yearsMap.get("currentYear");
@@ -674,19 +674,19 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_PD(testInputInfoMap, sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
 		sectionNote.add("PASSED - section header validation");
 
+		//note: validate Provider Search link and image
+		planDocumentsAndResourcesPage.valiateProviderSearch_PD(testInputInfoMap, providerSearchDisplay);
+		sectionNote.add("PASSED - Provider Search link validation");
+
+		//note: validate Pharmacy Locator link and image
+		planDocumentsAndResourcesPage.valiatePharmacyLocator_PD(testInputInfoMap, pharmacyLocatorDisplay);
+		sectionNote.add("PASSED - Pharmacy locator link validation");
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap);
+		sectionNote.add("PASSED - Default language dropdown validation");
+
 		if (sectionDisplay) {
-			//note: validate Provider Search link and image
-			planDocumentsAndResourcesPage.valiateProviderSearch_PD(testInputInfoMap, providerSearchDisplay);
-			sectionNote.add("PASSED - Provider Search link validation");
-
-			//note: validate Pharmacy Locator link and image
-			planDocumentsAndResourcesPage.valiatePharmacyLocator_PD(testInputInfoMap, pharmacyLocatorDisplay);
-			sectionNote.add("PASSED - Pharmacy locator link validation");
-
-			//note: validate default language selection
-			planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap);
-			sectionNote.add("PASSED - Default language dropdown validation");
-
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
 			//-----------------------------------------
@@ -872,7 +872,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_EOB(sectionDisplay);
 		sectionNote.add("PASSED - section header validation");
 
-		if (sectionDisplay) {
+		//tbd if (sectionDisplay) {
 			//note: validate button for medical
 			planDocumentsAndResourcesPage.valiateMedicalLnk_EOB(testInputInfoMap, searchMedicalEobHsitoryDisplay);
 			sectionNote.add("PASSED - Search Medical EOB button validation");
@@ -880,7 +880,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			//note: validate button for drug
 			planDocumentsAndResourcesPage.valiateDrugLnk_EOB(testInputInfoMap, searchDrugEobHsitoryDisplay);
 			sectionNote.add("PASSED - Search Drug EOB button validation");
-		}
+		//tbd }
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
 		if (noteList==null)
 			noteList=new ArrayList<String>();
@@ -1057,22 +1057,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 			//-----------------------------
 			if (planType.equals("PDP")) {
-			subSection="Prescription Drug Mail Order Form";
-			testInputInfoMap.put("subSection", subSection);
-			testInputInfoMap.put("expDisplay_FnR", String.valueOf(presDrugMailOrderFormDisplay));
-			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
-			sectionNote.addAll(docSection_note);
-
-			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
-			for(String doc: targetDocList) {
-				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
-				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+				subSection="Prescription Drug Mail Order Form";
+				testInputInfoMap.put("subSection", subSection);
+				testInputInfoMap.put("expDisplay_FnR", String.valueOf(presDrugMailOrderFormDisplay));
+				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
-			}
-			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
-			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
-			sectionNote.add("  ------------------------------------------------------");
+
+				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
+				for(String doc: targetDocList) {
+					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
+					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
+					sectionNote.addAll(docSection_note);
+				}
+				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
+				sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+				sectionNote.add("  ------------------------------------------------------");
 			}
 		} 
 

@@ -1,5 +1,6 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,6 +84,10 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		else if (testInputInfoMap.get("planType").equals("PDP")) 
 			section="Pharmacy Directory";
 		String item="PHARMACY LOCATOR";
+		WebElement lnkElement=pharmacyLocator_link_PD;
+		WebElement imgElement=pharmacyLocator_link_img;
+		List<WebElement> instElement=pharmacyLocator_instr_PD;
+		/* tbd 
 		WebElement lnkElement=ind_pharmacyLocator_link_PD;
 		WebElement imgElement=ind_pharmacyLocator_link_img;
 		List<WebElement> instElement=ind_pharmacyLocator_instr_PD;
@@ -91,6 +96,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			imgElement=grp_pharmacyLocator_link_img;		
 			instElement=grp_pharmacyLocator_instr_PD;		
 		}
+		*/
 		String expectedUrl="/content/medicare/member/pharmacy-locator/overview.html";
 
 		testInputInfoMap.put("docName", item);
@@ -123,9 +129,14 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		else if (testInputInfoMap.get("planType").equals("PDP")) 
 			section="Pharmacy Directory";
 		String item="PROVIDER SEARCH";
+		WebElement lnkElement=providerSearch_link_PD;
+		WebElement imgElement=providerSearch_link_img;
+		List<WebElement> instElement=providerSearch_instr_PD;
+		/* tbd 
 		WebElement lnkElement=ind_providerSearch_link_PD;
 		WebElement imgElement=ind_providerSearch_link_img;
 		List<WebElement> instElement=ind_providerSearch_instr_PD;
+		*/
 		String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 		String redirectUrl="none";
 		if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP") && !testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
