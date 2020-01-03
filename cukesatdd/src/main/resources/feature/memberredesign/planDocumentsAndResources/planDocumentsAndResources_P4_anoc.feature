@@ -9,6 +9,10 @@ Feature: 1.06.1 Member Plans and Documents - section: Annual Notice of Changes D
     And user navigates to plan documents and resources page validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    And documents are able to load successfully
+	And I want to customize test setup
+	  | Validate API                     | true |
+	  | Skip Link Destination Validation | false |
 	Then user validates jumplink and listing of mandatory documents for section Annual Notice of Changes Documents
 	  | Section Display                    | <an_sd>    | 
 	  | English Current Year               | <an_en_cy> | 

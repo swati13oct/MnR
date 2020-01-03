@@ -9,6 +9,10 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
     And user navigates to plan documents and resources page validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    And documents are able to load successfully
+	And I want to customize test setup
+	  | Validate API                     | true |
+	  | Skip Link Destination Validation | false |
 	Then user validates jumplink and listing of mandatory documents for section Plan Materials
 	  | Section Display                    | <pm_sd> | 
 	  | Order Plan Materials               | <pm_op> | 

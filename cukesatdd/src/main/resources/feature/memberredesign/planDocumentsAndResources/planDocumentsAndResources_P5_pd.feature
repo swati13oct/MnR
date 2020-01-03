@@ -10,6 +10,10 @@ Feature: 1.06.1 Member Plans and Documents - section: Provider Directory -or- Ph
     And user navigates to plan documents and resources page validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    And documents are able to load successfully
+	And I want to customize test setup
+	  | Validate API                     | true |
+	  | Skip Link Destination Validation | false |
 	Then user validates jumplink and listing of mandatory documents for section Provider Directory or Pharmacy Directory or Provider and Pharmacy Directories
 	  | Section Display                    | <pd_sd>    | 
 	  | Provider Search                    | <pd_ps>    | 
