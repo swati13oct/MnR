@@ -52,7 +52,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			targetTestDocList=getExpectedDocList_MEDICA_IND_EFF(section, subSection);
 		} else if (planType.equals("PCP") && memberType.contains("IND_EFF")) {
 			targetTestDocList=getExpectedDocList_PCP_IND_EFF(section, subSection);
-			targetTestDocList=getExpectedDocList_MA_GROUP_TERM(section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("IND_PREEFF")) {
 			targetTestDocList=getExpectedDocList_PDP_IND_PREEFF(section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("GROUP_PREEFF")) {
