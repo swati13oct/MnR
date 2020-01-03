@@ -273,8 +273,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
 
-	// @FindBy(css = "img.primary-logo")
-	// private WebElement logoImage;
+	@FindBy(xpath = "//a[contains(text(),'Drug Lookup')]")
+	private WebElement drugLookuplink;
 
 	@FindBy(css = ".primary-logo")
 	private WebElement logoImage;
@@ -2097,15 +2097,25 @@ public class AccountHomePage extends UhcDriver {
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 				dceTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				waitforElement(drugLookup);
-				drugLookup.click();
-				try {
-					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
-				} catch (Exception e) {
-					System.out.println("Exception e: " + e);
+				if(validate(drugLookup)){
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					waitforElement(drugLookup);
+					drugLookup.click();
+					
+				} else {
+					
+					waitforElement(drugLookuplink);
+					drugLookuplink.click();
 				}
+				
+				try {
+						WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+						CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+					} catch (Exception e) {
+						System.out.println("Exception e: " + e);
+					}
+				
+				
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
