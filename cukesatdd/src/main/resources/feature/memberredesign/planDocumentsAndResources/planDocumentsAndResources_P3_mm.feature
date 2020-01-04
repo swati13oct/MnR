@@ -42,7 +42,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 08-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | false | false |
+      | 08-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
       | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | false | 
 
 	@active_mapd
@@ -67,7 +67,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 18-056 | 15131,15233 | SSUP     | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
+      | 18-056 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
 	@active_ship
 	Examples: 

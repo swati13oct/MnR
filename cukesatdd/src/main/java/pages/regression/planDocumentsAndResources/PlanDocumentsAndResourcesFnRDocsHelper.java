@@ -198,7 +198,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		}
 		if (docName.equals("Potential for Contract Termination")) {
 			testInputInfoMap.put("docName", docName);
-			testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf"); //note: MAPD IND & SSUP
+			testInputInfoMap.put("expectedUrl", "/Individual/PotentialContractTermination_UHC.pdf"); //note: MAPD IND & SSP
 			if (planType.toUpperCase().equals("MAPD") && memberType.toUpperCase().contains("GROUP")) 
 				testInputInfoMap.put("expectedUrl", "/Group/Potential_for_Contract_Termination.pdf");
 			else if (planType.toUpperCase().equals("MA")) 

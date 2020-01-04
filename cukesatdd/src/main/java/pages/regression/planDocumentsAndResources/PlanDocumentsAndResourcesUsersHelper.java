@@ -62,8 +62,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			targetTestDocList=getExpectedDocList_PDP_COMBO_GROUP_EFF(section, subSection);
 		} else if (planType.equals("SHIP") && memberType.contains("IND_EFF")) {
 			targetTestDocList=getExpectedDocList_SHIP_IND_EFF(section, subSection);
-		} else if (planType.equals("SSUP") && memberType.contains("COMBO_GROUP_EFF")) {
-			targetTestDocList=getExpectedDocList_SSUP_COMBO_GROUP_EFF(section, subSection);
+		} else if (planType.equals("SSP") && memberType.contains("COMBO_GROUP_EFF")) {
+			targetTestDocList=getExpectedDocList_SSP_COMBO_GROUP_EFF(section, subSection);
 		}
 				
 		
@@ -991,16 +991,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Formulario Completo");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -1148,7 +1148,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
 				targetTestDocList.add("Evidence Of Coverage");
@@ -1279,13 +1279,13 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	
 	/**
 	 * MAY NEED UPDATE IF ADD/MODIFY TEST USER
-	 * planTYpe=SSUP | memberType=COMBO_GROUP_EFF
+	 * planTYpe=SSP | memberType=COMBO_GROUP_EFF
 	 * @param section
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_SSUP_COMBO_GROUP_EFF(String section, String subSection) {
-		System.out.println("TEST - get expected docList for SSUP COMBO_GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
+	public List<String> getExpectedDocList_SSP_COMBO_GROUP_EFF(String section, String subSection) {
+		System.out.println("TEST - get expected docList for SSP COMBO_GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {

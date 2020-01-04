@@ -125,8 +125,8 @@ public class PlanDocApiResponse {
 	 * Turn the API response into a hash map
 	 * @param apiResponse
 	 */
-	public void buildDocListMap(String apiResponse) {
-
+	public boolean buildDocListMap(HashMap<String, String> testInputInfoMap, String apiResponse) {
+		String memberType=testInputInfoMap.get("memberType");
 		JSONParser parser = new JSONParser();
 		JSONObject apiResponseJsobObj=null;
 		try {
@@ -141,7 +141,17 @@ public class PlanDocApiResponse {
 		anocCurrentYearFlag = (Boolean) apiResponseJsobObj.get("anocCurrentYearFlag");
 		anocNextYearFlag = (Boolean) apiResponseJsobObj.get("anocNextYearFlag");
 
+		if (!success) {
+			System.out.println("Unable to get a successful API response");
+			return success;
+		}
+		
 		JSONArray docListArrayObj = (JSONArray) apiResponseJsobObj.get("docList");
+		if (memberType.contains("TERM")) {
+			Assert.assertTrue("PROBLEM - user is terminated, expect docListArrayObj to be null", docListArrayObj==null);
+			System.out.println("TEST - terminated user - will not be validating UI vs API");
+			return success;
+		} 
 		Assert.assertTrue("PROBLEM - docListArrayObj should not be null", docListArrayObj!=null);
 		for (int i=0; i<docListArrayObj.size(); i++) {
 			JSONObject eachObjDocListArray = (JSONObject) docListArrayObj.get(i);
@@ -208,6 +218,16 @@ public class PlanDocApiResponse {
 						planMatl_zh_curYr_docList.add(docObjMap);
 						memMatl_zh_curYr_docList.add(docObjMap);
 						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("4") || docObj.getType().equals("8002")) {
+					String docCategory="Comprehensive Formulary";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("7022")) {
 					String docCategory="Alternative Drug List";
@@ -313,7 +333,6 @@ public class PlanDocApiResponse {
 						proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
 				}
-
 			} else if (docObj.getYear().equals(nextYear)) {
 				//note: for next year
 				if (docObj.getType().equals("6002")) {
@@ -506,6 +525,7 @@ public class PlanDocApiResponse {
 		proPhmDirSecList.add(proPhmDir_en_nxtYr_docList);
 		proPhmDirSecList.add(proPhmDir_es_nxtYr_docList);
 		proPhmDirSecList.add(proPhmDir_zh_nxtYr_docList);
+		return success;
 	}
 
 	/**
@@ -567,6 +587,10 @@ public class PlanDocApiResponse {
 		doNoteAndText("==========================================================================================");
 		doNoteAndText("According to API response...");
 		doNoteAndText("===============");
+		if (!isSuccess()) {
+			doNoteAndText("Not able to get successful API response");
+			return noteList;
+		}
 		doNoteAndText("Plan Materials section has the following:");
 		doNoteAndText("  Has "+planMatl_en_curYr_docList.size()+" number of English doc for year="+this.currentYear);
 		doNoteAndText(planMatl_en_curYr_docList);

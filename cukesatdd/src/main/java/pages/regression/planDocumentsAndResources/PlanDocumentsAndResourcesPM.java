@@ -161,7 +161,7 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 	public void validateFooter_PM(HashMap<String, String> testInputInfoMap) {
 		String planType=testInputInfoMap.get("planType");
 		String section="Plan Materials footer";
-		if (planType.equals("SHIP") || planType.equals("SSUP")) {
+		if (planType.equals("SHIP") || planType.equals("SSP")) {
 			Assert.assertTrue("PROBLEM - for ship should not locate footer for '"+section+"' section", !planDocValidate(footer_PM));
 			return;
 		}

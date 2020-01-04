@@ -311,7 +311,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			} else {
 				condition= (actualSize==0);
 			}
-			Assert.assertTrue("PROBLEM - input didn't expect to see doc display for '"+section+"' section but actual list of doc is not 0.  Expected='0' | Actual='"+actualSize+"'", condition);
+			Assert.assertTrue("PROBLEM - input didn't expect to see doc display for '"+section+"' section for language '"+targetLang+"' but actual list of doc is not 0.  Expected='0' | Actual='"+actualSize+"'", condition);
 			noteList.add(0, "  CAN match expected result w/ input condition for section '"+section+"' for language '"+targetLang+"' - input expected not to see this doc");
 			return noteList; //note: if input doesn't expect to see list of doc for section and UI matches result, no need to validate what's in API
 		}
@@ -333,28 +333,42 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						String exp_category = (String)exp_mapElement.getKey(); 
 						Document exp_doc=(Document) exp_mapElement.getValue();
 
-						System.out.println("Check expected doc: category="+exp_category+" | segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
+						System.out.println("Check expected doc: category="+exp_category+" | exp_doc.segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
+						System.out.println("Check expected doc: act_doc.getSegmentId()="+act_doc.getSegmentId());
 						if ((exp_category.toLowerCase()).contains(act_category.toLowerCase())) {
 							boolean allMatch=true;
 							System.out.println("TEST - found match for category, check for more values...");
 							//note: for spanish, there is no id attribute for the li, so skip compCode
-							if (!act_doc.getType().equals(exp_doc.getType()))
+							if (!act_doc.getType().equals(exp_doc.getType())) {
 								allMatch=false;
-							if (!act_doc.getYear().equals(exp_doc.getYear()))
+								System.out.println("TEST - allMatch="+allMatch+" | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
+							}
+							if (!act_doc.getYear().equals(exp_doc.getYear())) {
 								allMatch=false;
-							if (!act_doc.getSegmentId().equals(exp_doc.getSegmentId()))
+								System.out.println("TEST - allMatch="+allMatch+" | Year: act="+act_doc.getYear()+" : exp="+exp_doc.getYear());
+							}
+							if (!act_doc.getSegmentId().contains(exp_doc.getSegmentId())) {
 								allMatch=false;
+								System.out.println("TEST - allMatch="+allMatch+" | Segment: act="+act_doc.getSegmentId()+" : exp="+exp_doc.getSegmentId());
+							}
 							if (checkDestUrl) {
-								if (!act_doc.getLink().contains(exp_doc.getLink()))
+								if (!act_doc.getLink().contains(exp_doc.getLink())) {
 									allMatch=false;
+									System.out.println("TEST - allMatch="+allMatch+" | link: act="+act_doc.getLink()+" : exp="+exp_doc.getLink());
+								}
 							}
-							if (!act_doc.getLanguage().toLowerCase().contains("es") && !act_category.contains("Pharmacy Directory")
-									&& !act_category.contains("Vendor Information Sheet")
-									&& !act_category.contains("Provider Directory")) {
-								if (!act_doc.getCompCode().equals(exp_doc.getCompCode()))
-									allMatch=false;
+							if (!act_doc.getCompCode().equals("")) {
+								if (!act_doc.getLanguage().toLowerCase().contains("es") && !act_category.contains("Pharmacy Directory")
+										&& !act_category.contains("Vendor Information Sheet")
+										&& !act_category.contains("Provider Directory")) {
+									if (!act_doc.getCompCode().equals(exp_doc.getCompCode())) {
+										allMatch=false;
+										System.out.println("TEST - allMatch="+allMatch+" | CompCode: act="+act_doc.getCompCode()+" : exp="+exp_doc.getCompCode());
+									}
+								}
+							} else {
+								System.out.println("TEST - actual CompCode from element is empty, skip the CompCode validation");
 							}
-
 							if (allMatch) {
 								found=true;
 								System.out.println("FOUND - doc with link="+act_doc.getLink());
@@ -371,6 +385,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				if (!found && (act_category.equals("HEALTH PRODUCTS BENEFIT") 
 						|| act_category.equals("HOME SERVICE DELIVERY BROCHURE")
 						|| act_category.equals("OVER THE COUNTER ESSENTIALS"))
+						|| act_category.equals("Over-the-Counter Drug List")
 						|| act_category.equals("Health & Wellness Products Catalog")) {
 					System.out.println(act_category+" doc doesn't come from this API, bypass this");
 					found=true;
@@ -380,6 +395,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					if (act_category.equals("HEALTH PRODUCTS BENEFIT") 
 							|| act_category.equals("HOME SERVICE DELIVERY BROCHURE")  
 							|| act_category.equals("OVER THE COUNTER ESSENTIALS")
+							|| act_category.equals("Over-the-Counter Drug List")
 							|| act_category.equals("Health & Wellness Products Catalog")) 
 						noteList.add("  SKIP match for '"+act_category+"' in /formsAndResourcesFor*/ API response");
 					else 
@@ -445,8 +461,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "3";
 		if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
 			return "2";
-		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase())) 
+		//tbd if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase())) 
+		//tbd 	return "1022";
+		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
 			return "1022";
+		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())) 
+			return "4";
 		if (docName.toLowerCase().equalsIgnoreCase("Alternative Drug List".toLowerCase()) ||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos".toLowerCase())||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos Alternativos".toLowerCase())) 
 			return "7022";
 		if (docName.toLowerCase().equalsIgnoreCase("Prior Authorization Criteria".toLowerCase())) 
@@ -522,16 +542,27 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	
 	
 	
-	public String getApiRequestUrl() {
+	public String getApiRequestUrl(HashMap<String, String> testInputInfoMap) {
+		String planType=testInputInfoMap.get("planType");
+		String memberType=testInputInfoMap.get("memberType");
 		String apiReqeust=null;
 		String lookForText1="formsAndResourcesFor";
 		String lookForText2="responseReceived";
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 		for (LogEntry entry : entries) {
 			String line=entry.getMessage();
-			if (line.contains(lookForText1) && line.contains(lookForText2)) {
-				apiReqeust=line;
-				System.out.println("TEST found line="+line);
+			if (memberType.contains("COMBO")) {
+				if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
+					apiReqeust=line;
+					System.out.println("TEST found line="+line);
+					break;
+				}
+			} else {
+				if (line.contains(lookForText1) && line.contains(lookForText2)) {
+					apiReqeust=line;
+					System.out.println("TEST found line="+line);
+					break;
+				}
 			}
 		}
 		Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
@@ -582,6 +613,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 	public List<String> validateDocOnUi(HashMap<String, String> testInputInfoMap, List<String> expDocList, List<String> sectionNote, PlanDocApiResponse api_planDocMap) {
 		String planType=testInputInfoMap.get("planType");
+		String memberType=testInputInfoMap.get("memberType");
 		String section=testInputInfoMap.get("section");
 		String targetSubSection=testInputInfoMap.get("targetSubSection");
 		String targetLang=testInputInfoMap.get("targetLang");
@@ -599,6 +631,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			act_docListFromUi.add(act_doc);
 		}
 		if (validateApi) {
+			if (memberType.contains("TERM")) {
+				sectionNote.add("  BYPASS - UI vs API validation because terminated user has no doc list");
+				return sectionNote;
+			}
+			/* tbd if ((planType.equals("PDP") && memberType.contains("COMBO_GROUP_EFF"))
+					||(planType.equals("SSP") && memberType.contains("COMBO_GROUP_EFF"))) {
+				sectionNote.add("  BYPASS - API validation for PDP COMBO GROUP because the user is not getting a successful API response - don't know why yet");
+				return sectionNote;
+			} */
 			boolean anocFlag=false;
 			List<HashMap<String, Document>> exp_docListFromApi=new ArrayList<HashMap<String, Document>>();
 			if (targetSubSection.equals("currentYear")) {
@@ -748,7 +789,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
 			//tbd if (Pattern.matches(expDocNamePattern, actualDocName)) {
 			if (m.find()) {
-				System.out.println("OMG - got a match");
 			
 			//keep if (actualDocName.toLowerCase().contains(expDocName.toLowerCase())) {
 				System.out.println("TEST - got a match");
@@ -759,8 +799,16 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				System.out.println("TEST classStr="+classStr);
 				String[] tmp=classStr.split("clearfix ");
 				String segmentId="---";
-				if (tmp.length>0) 
+				if (tmp.length>0) {  //note: in case one more field after for the PDP case
 					segmentId=tmp[1];
+					tmp=segmentId.split(" ");
+					if (tmp.length>1) {
+						System.out.println("TEST - segment still has whitespace");
+						segmentId=tmp[0];
+					}
+				}
+				System.out.println("TEST - fixed segmentId="+segmentId);
+
 				//note: find the element id and href for each of the doc
 				WebElement targetElement=driver.findElement(By.xpath(actualDocList_xpath+"["+i+"]//a"));
 				String expUrl=targetElement.getAttribute("href");

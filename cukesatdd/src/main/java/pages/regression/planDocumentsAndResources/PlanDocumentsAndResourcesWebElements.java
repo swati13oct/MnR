@@ -128,7 +128,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Senior Supplement Plan')]") 
-	protected WebElement comboTab_SSUP;
+	protected WebElement comboTab_SSP;
 
 	@FindBy(xpath="//div[contains(@class,'overview')]/div[contains(@class,'formsAndResourcesNotification base_tools_component section')]//strong[contains(text(),'This page contains PDF documents')]")
 	protected WebElement adobePdfDocText;

@@ -190,9 +190,9 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			} else if (planType.equalsIgnoreCase("pdp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", planDocValidate(comboTab_PDP));
 				comboTab_PDP.click();
-			} else if (planType.equalsIgnoreCase("ssup")) {
-				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSUP", planDocValidate(comboTab_SSUP));
-				comboTab_SSUP.click();
+			} else if (planType.equalsIgnoreCase("ssp")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", planDocValidate(comboTab_SSP));
+				comboTab_SSP.click();
 			} else {
 				Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
 			} 
@@ -220,9 +220,9 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 				} else if (planType.equalsIgnoreCase("pdp")) {
 					if (planDocValidate(comboTab_PDP))
 						comboTab_PDP.click();
-				} else if (planType.equalsIgnoreCase("ssup")) {
-					if (planDocValidate(comboTab_SSUP)) 
-						comboTab_SSUP.click();
+				} else if (planType.equalsIgnoreCase("ssp")) {
+					if (planDocValidate(comboTab_SSP)) 
+						comboTab_SSP.click();
 				} 
 			} catch(Exception e) {
 				e.printStackTrace();

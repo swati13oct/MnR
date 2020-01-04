@@ -151,17 +151,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	public void documents_are_able_to_load_successfully() {
 		System.out.println("Proceed to get API response...");
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 
-		String planDocAndResources_apiResponse_url=planDocumentsAndResourcesPage.getApiRequestUrl();
+		String planDocAndResources_apiResponse_url=planDocumentsAndResourcesPage.getApiRequestUrl(testInputInfoMap);
 		System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
+
 		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planDocAndResources_apiResponse_url);
 		System.out.println("TEST - apiResponseStr="+apiResponseStr);
 		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
+		
 		String currentYear = yearsMap.get("currentYear");
 		String nextYear = yearsMap.get("nextYear");
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
+		
 		PlanDocApiResponse planDocMap=new PlanDocApiResponse(String.valueOf(currentYear), String.valueOf(nextYear));
-		planDocMap.buildDocListMap(apiResponseStr);
+		boolean apiSuccess=planDocMap.buildDocListMap(testInputInfoMap, apiResponseStr);
+		Assert.assertTrue("PROBLEM - unable to get a successful API response", apiSuccess);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP, planDocMap);
 
 		List<String> noteList=planDocMap.printPlanDocDetail();
