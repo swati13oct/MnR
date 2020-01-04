@@ -147,11 +147,12 @@ public class PlanDocApiResponse {
 		}
 		
 		JSONArray docListArrayObj = (JSONArray) apiResponseJsobObj.get("docList");
-		if (memberType.contains("TERM")) {
+		Assert.assertTrue("PROBLEM - docListArrayObj is null", docListArrayObj!=null);
+		/*if (memberType.contains("TERM")) {
 			Assert.assertTrue("PROBLEM - user is terminated, expect docListArrayObj to be null", docListArrayObj==null);
 			System.out.println("TEST - terminated user - will not be validating UI vs API");
 			return success;
-		} 
+		} */
 		Assert.assertTrue("PROBLEM - docListArrayObj should not be null, may have trouble getting API response in this test run", docListArrayObj!=null);
 		for (int i=0; i<docListArrayObj.size(); i++) {
 			JSONObject eachObjDocListArray = (JSONObject) docListArrayObj.get(i);
