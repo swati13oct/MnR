@@ -168,7 +168,7 @@ public class Document {
 		//tbd 	return "1022";
 		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
 		 	return "1022";
-		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())) 
+		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Formulary Comprehensive".toLowerCase())) 
 		 	return "4";
 		if (docName.toLowerCase().equalsIgnoreCase("Alternative Drug List".toLowerCase()) ||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos".toLowerCase())||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos Alternativos".toLowerCase())) 
 			return "7022";

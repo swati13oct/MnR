@@ -1095,6 +1095,10 @@ sauceLabsTunnelIdentifier);
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
 				//---begin - enable logging
+				//note: commandTimeout=how long to run a command (unit second, default 300)
+				//capabilities.setCapability("commandTimeout", "400"); //tmp
+				//note: idleTimeout=how long to wait before sending next command (unit second, default 90)
+				capabilities.setCapability("idleTimeout", "200"); //tmp
 			    LoggingPreferences logPrefs  = new LoggingPreferences();
 			    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 			    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);

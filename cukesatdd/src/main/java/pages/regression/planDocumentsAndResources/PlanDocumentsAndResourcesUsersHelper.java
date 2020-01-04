@@ -991,16 +991,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Annual Notice of Changes");
-				//targetTestDocList.add("Evidence Of Coverage");
-				//targetTestDocList.add("Comprehensive Formulary");
+				targetTestDocList.add("Annual Notice of Changes");
+				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Aviso Annual de Cambios");
-				//targetTestDocList.add("Comprobante de Cobertura");
-				//targetTestDocList.add("Formulario Completo");
+				targetTestDocList.add("Aviso Annual de Cambios");
+				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {

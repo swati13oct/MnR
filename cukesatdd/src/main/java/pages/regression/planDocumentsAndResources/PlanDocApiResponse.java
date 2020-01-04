@@ -152,7 +152,7 @@ public class PlanDocApiResponse {
 			System.out.println("TEST - terminated user - will not be validating UI vs API");
 			return success;
 		} 
-		Assert.assertTrue("PROBLEM - docListArrayObj should not be null", docListArrayObj!=null);
+		Assert.assertTrue("PROBLEM - docListArrayObj should not be null, may have trouble getting API response in this test run", docListArrayObj!=null);
 		for (int i=0; i<docListArrayObj.size(); i++) {
 			JSONObject eachObjDocListArray = (JSONObject) docListArrayObj.get(i);
 			Document docObj=buildDocumentObj(eachObjDocListArray);
@@ -203,7 +203,7 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 						annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("1022")) {
+				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
@@ -219,16 +219,23 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 						annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
+				/* tbd	
 				} else if (docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
 						memMatl_en_curYr_docList.add(docObjMap);
+						annNotChgDoc_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
 						memMatl_es_curYr_docList.add(docObjMap);
+						annNotChgDoc_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
 						memMatl_zh_curYr_docList.add(docObjMap);
-					}
+						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+					} */
 				} else if (docObj.getType().equals("7022")) {
 					String docCategory="Alternative Drug List";
 					docObjMap.put(docCategory, docObj);
@@ -333,6 +340,7 @@ public class PlanDocApiResponse {
 						proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
 				}
+			//--------------	
 			} else if (docObj.getYear().equals(nextYear)) {
 				//note: for next year
 				if (docObj.getType().equals("6002")) {
@@ -374,7 +382,7 @@ public class PlanDocApiResponse {
 						memMatl_zh_nxtYr_docList.add(docObjMap);
 						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("1022")) {
+				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
