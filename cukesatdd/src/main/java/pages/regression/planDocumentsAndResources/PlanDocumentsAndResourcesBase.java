@@ -1,6 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -326,7 +327,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				Document act_doc=(Document) act_mapElement.getValue();
 
 				System.out.println("TEST - Actual doc: category="+act_category+" | segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
-
+				System.out.println("TEST - exp_docListFromApi size="+exp_docListFromApi.size());
 				boolean found=false;
 				for(HashMap<String, Document> exp_docItem: exp_docListFromApi) {
 					for (Map.Entry exp_mapElement : exp_docItem.entrySet()) { 
@@ -335,15 +336,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 						System.out.println("Check expected doc: category="+exp_category+" | exp_doc.segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
 						System.out.println("Check expected doc: act_doc.getSegmentId()="+act_doc.getSegmentId());
-						if ((exp_category.toLowerCase()).contains(act_category.toLowerCase())) {
+						if ((exp_category.toLowerCase()).contains(act_category.toLowerCase()) || (act_category.toLowerCase()).contains(exp_category.toLowerCase())) {
 							boolean allMatch=true;
 							System.out.println("TEST - found match for category, check for more values...");
 							//note: for spanish, there is no id attribute for the li, so skip compCode
 							if (!act_doc.getType().equals(exp_doc.getType())) {
 								if (act_category.equals("Comprehensive Formulary")) {
 									//note: tricky one, some has type 4 some has 1022. do this forn now, figure it out later
-									if ((act_doc.getType().equals("4") && exp_doc.getType().equals("1022"))
-											|| (act_doc.getType().equals("1022") && exp_doc.getType().equals("4")) ){
+									if ((act_doc.getType().equals("4") || act_doc.getType().equals("1022") || act_doc.getType().equals("8002"))
+										&& (exp_doc.getType().equals("4") || exp_doc.getType().equals("1022") || exp_doc.getType().equals("8002"))	){
 										System.out.println("TEST - act_category=Comprehensive Formulary | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
 										System.out.println("TEST - let it slide for now, need to figure out better way to handle this");
 									} else {
@@ -467,7 +468,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @param docName
 	 * @return
 	 */
-	public String getDocType(String docName) {
+	public String getDocType(HashMap<String, String> testInputInfoMap, String docName) {
+		String planType=testInputInfoMap.get("planType");
 		if (docName.toLowerCase().equalsIgnoreCase("Benefit Highlights".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Beneficios Importantes".toLowerCase())) 
 			return "6002";
 		if (docName.toLowerCase().equalsIgnoreCase("Summary of Benefits".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Resumen de Beneficios".toLowerCase())) 
@@ -490,7 +492,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "2021";
 		if (docName.toLowerCase().equalsIgnoreCase("Formulary Deletions".toLowerCase())) 
 			return "2022";
-		if (docName.toLowerCase().equalsIgnoreCase("Getting Started Guide".toLowerCase()) || docName.toLowerCase().contains("para Comenzar".toLowerCase())) 
+		if (docName.toLowerCase().equalsIgnoreCase("Getting Started Guide".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Quick Start Guide".toLowerCase())|| docName.toLowerCase().contains("para Comenzar".toLowerCase())) 
 			return "8006";
 		if (docName.toLowerCase().equalsIgnoreCase("Annual Notice of Changes".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Aviso Annual de Cambios".toLowerCase())) 
 			return "6014";
@@ -498,16 +500,20 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "1027";
 		if (docName.toLowerCase().equalsIgnoreCase("Vendor Information Sheet".toLowerCase()) || docName.toLowerCase().contains("sobre proveedores".toLowerCase())) 
 			return "7025";
-		if (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase())) 
+		if ((!planType.equals("PDP")) && (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase()))) 
 			return "1028";
+		if ((planType.equals("PDP")) && (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase()))) 
+			return "1026";
 		if (docName.toLowerCase().equalsIgnoreCase("Certificate of Coverage".toLowerCase()) ) 
-			return "-99";
+			return "8003";
 		if (docName.toLowerCase().equalsIgnoreCase("Summary of Benefits".toLowerCase()) ) 
-			return "-99";
+			return "3";
+		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
+			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
 			return "-99";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
-		return "-1";
+		return "-2";
 	}
 
 	/**
@@ -529,17 +535,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			engName="Comprehensive Formulary";
 		if (docName.toLowerCase().contains("Lista de Medicamentos".toLowerCase())) 
 			engName="Alternative Drug List";
-		if (docName.toLowerCase().contains("Gu.a para Comenzar".toLowerCase()))
+		if (docName.toLowerCase().contains("para Comenzar".toLowerCase()))
 			engName="Getting Started Guide";
 		if (docName.toLowerCase().equalsIgnoreCase("Aviso Annual de Cambios".toLowerCase()))
 			engName="Annual Notice of Changes";
 		if (docName.toLowerCase().equalsIgnoreCase("Directorio de Proveedores".toLowerCase()))
 			engName="Provider Directory";
-		if (docName.toLowerCase().contains("Informaci.n sobre proveedore".toLowerCase()))
+		if (docName.toLowerCase().contains("sobre proveedore".toLowerCase()))
 			engName="Vendor Information Sheet";
-		if (docName.toLowerCase().contains("Informaci.n del Directorio de Farmacia".toLowerCase()))
+		if (docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase()))
 			engName="Pharmacy Directory";
-		if (docName.toLowerCase().contains("Informaci.n del Directorio de Farmacia".toLowerCase()))
+		if (docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase()))
 			engName="Pharmacy Directory Information";
 		if (docName.toLowerCase().contains("Lista de Medicamentos sin Receta".toLowerCase()))
 			engName="Over-the-Counter Drug List";
@@ -547,11 +553,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			engName="UnitedHealth Passport Program";
 		if (docName.toLowerCase().contains("Vendor Information Sheet".toLowerCase())) //NOTE: may not need for real
 			engName="Vendor Information Sheet";
-		if (docName.toLowerCase().contains("Gu.a R.pida para Comenzar".toLowerCase())) //NOTE: may not need for real
+		if (docName.toLowerCase().contains("pida para Comenzar".toLowerCase())) //NOTE: may not need for real
 			engName="Quick Start Guide";
 		Assert.assertTrue("PROBLEM - need to update ATDD code to handle '"+docName+"' spanish name to english name", engName!=null);
 		return engName;
-	}
+	} 
 	
 	
 	
@@ -676,7 +682,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						exp_docListFromApi=api_planDocMap.getAnnNotChgDoc_es_curYr_docList();
 					else if (targetLang.equals("ZH"))
 						exp_docListFromApi=api_planDocMap.getAnnNotChgDoc_zh_curYr_docList();
-				} else if (section.equals("Provider Directories or Provider and Pharmacy Directories")) {
+				} else if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {
 					exp_docListFromApi=api_planDocMap.getProPhmDir_en_curYr_docList();
 					if (targetLang.equals("ES"))
 						exp_docListFromApi=api_planDocMap.getProPhmDir_es_curYr_docList();
@@ -704,7 +710,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						exp_docListFromApi=api_planDocMap.getAnnNotChgDoc_es_nxtYr_docList();
 					else if (targetLang.equals("ZH"))
 						exp_docListFromApi=api_planDocMap.getAnnNotChgDoc_zh_nxtYr_docList();
-				} else if (section.equals("Provider Directories or Provider and Pharmacy Directories")) {
+				} else if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {
 					exp_docListFromApi=api_planDocMap.getProPhmDir_en_nxtYr_docList();
 					if (targetLang.equals("ES"))
 						exp_docListFromApi=api_planDocMap.getProPhmDir_es_nxtYr_docList();
@@ -741,16 +747,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		String actualDocList_xpath="";
 		if (section.equals("Plan Materials")) {
 			langDropDown=langDropDown_PM;
-			actualDocList_xpath="//div[contains(@class,'planMaterial') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li";
+			actualDocList_xpath="//div[contains(@class,'planMaterial') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
 		} else if (section.equals("Membership Materials")) { 
 			langDropDown=langDropDown_MM;
-			actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li";
+			//actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li";
+			actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
 		} else if (section.equals("Annual Notice of Changes Documents")) {
 			langDropDown=langDropDown_ANOC;
-			actualDocList_xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li";
+			actualDocList_xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
 		} else if (section.equals("Provider Directory") || section.equals("Pharmacy Directory") || section.equals("Provider and Pharmacy Directories")) {
 			langDropDown=langDropDown_PD;
-			actualDocList_xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li";
+			actualDocList_xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
 		}
 
 		List<WebElement> actualListDoc = driver.findElements(By.xpath(actualDocList_xpath));
@@ -764,7 +771,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return planDocMap;
 		}
 
-		boolean switchTab=true;  //note: for PM doc, should pop up new tab if clicked
+		boolean switchTab=true;  //note: for PM doc, should open up new tab if clicked
 		String langValue="";
 		String category="";
 		if (targetLang.equals("EN")) {
@@ -778,29 +785,20 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			category=expDocName;
 			langValue="zh";
 		}
-
 		boolean found=false;
 		for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
 			WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0
 			String actualDocName=eachDoc.getText();
-			//tbd Matcher matcher= pattern.matcher(actualDocName);
+			System.out.println("TEST ------------- i="+i+" start validation for doc="+actualDocName+" for langauge="+langValue);
 			
-			//TODO - experiment
-			//tbd if (pattern.matcher(actualDocName).lookingAt()) {
-			
-			System.out.println("TEST - i="+i+"expDocName='"+expDocName+"' | actualDocName='"+actualDocName );
-			String expDocNamePattern=expDocName+"(.*?)";
-			System.out.println("TEST - i="+i+"expDocNamePattern='"+expDocNamePattern+"' | actualDocName='"+actualDocName );
-			Pattern p=Pattern.compile(expDocName+".*?");
-			Matcher m=p.matcher(actualDocName);
-			//System.out.println("TEST - K - "+m.find());
-			
-			
-			//tbd if (Pattern.matches(actualDocName,expDocName)) {
 			//note: need to change the expDocName into regex
 			//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 			//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
-			//tbd if (Pattern.matches(expDocNamePattern, actualDocName)) {
+			System.out.println("TEST - i="+i+" expDocName='"+expDocName+"' | actualDocName='"+actualDocName );
+			String expDocNamePattern=expDocName+"(.*?)";
+			System.out.println("TEST - i="+i+" expDocNamePattern='"+expDocNamePattern+"' | actualDocName='"+actualDocName );
+			Pattern p=Pattern.compile(expDocName+".*?");
+			Matcher m=p.matcher(actualDocName);
 			if (m.find()) {
 			
 			//keep if (actualDocName.toLowerCase().contains(expDocName.toLowerCase())) {
@@ -823,10 +821,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				System.out.println("TEST - fixed segmentId="+segmentId);
 
 				//note: find the element id and href for each of the doc
+				System.out.println("TEST - use xpath="+actualDocList_xpath+"["+i+"]//a");
 				WebElement targetElement=driver.findElement(By.xpath(actualDocList_xpath+"["+i+"]//a"));
 				String expUrl=targetElement.getAttribute("href");
 				Document docObj=new Document();
-				docObj.setType(getDocType(expDocName));
+				docObj.setType(getDocType(testInputInfoMap, expDocName));
 				docObj.setCompCode(eachDoc.getAttribute("id"));
 				docObj.setLanguage(langValue);
 				docObj.setLink(expUrl);

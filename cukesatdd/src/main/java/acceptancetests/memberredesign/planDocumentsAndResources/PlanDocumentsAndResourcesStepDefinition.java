@@ -702,7 +702,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
-
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");

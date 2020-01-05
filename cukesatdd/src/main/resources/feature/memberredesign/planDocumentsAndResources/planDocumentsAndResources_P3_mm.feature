@@ -42,20 +42,20 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 08-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
-      | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | false | 
+#LX      | 09-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
+#LX      | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | false | 
 
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 11-049 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | false | 
-	  | 12-050 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
-      | 13-051 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
+#LX      | 12-050 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
+#LX      | 13-051 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 14-052 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
+#LX      | 14-052 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
       | 15-053 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
 	@active_pdp
@@ -72,7 +72,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+#LX      | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
 
 
      

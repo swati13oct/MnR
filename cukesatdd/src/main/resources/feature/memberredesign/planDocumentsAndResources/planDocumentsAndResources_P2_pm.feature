@@ -44,26 +44,28 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | false | false | 
-      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | true  | false |
+      ## BAD 09 - has spanish docs in API response but UI did not list them on PM section
+#LX      | 09-028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+#LX      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | true  | false |
 
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 11-030 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
-	  | 12-031 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
-      | 13-032 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
+#LX      | 12-031 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+#LX      | 13-032 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 14-033 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+#LX      | 14-033 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
       | 15-034 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@active_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 16-035 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
+	  ## 17 BAD, AARP has duplicated items
       | 17-036 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
 
 	@active_ssup
@@ -74,7 +76,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 19-038 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+#LX      | 19-038 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
 
 
 

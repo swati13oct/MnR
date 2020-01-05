@@ -1,5 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
+import org.junit.Assert;
+
 /**
  *   Example of a Document Object content
  *     name=2019 English MAPD Individual Web FM Pharmacy Directory_UHC_DSNP
@@ -160,8 +162,8 @@ public class Document {
 			return "6002";
 		if (docName.toLowerCase().equalsIgnoreCase("Summary of Benefits".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Resumen de Beneficios".toLowerCase())) 
 			return "3";
-		if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
-			return "2";
+		//tbd if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
+		//tbd 	return "2";
 		if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
 			return "2";
 		//tbd if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
@@ -172,6 +174,8 @@ public class Document {
 		 	return "4";
 		if (docName.toLowerCase().equalsIgnoreCase("Alternative Drug List".toLowerCase()) ||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos".toLowerCase())||  docName.toLowerCase().equalsIgnoreCase("Lista de Medicamentos Alternativos".toLowerCase())) 
 			return "7022";
+		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
+			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Prior Authorization Criteria".toLowerCase())) 
 			return "2019";
 		if (docName.toLowerCase().equalsIgnoreCase("Step Therapy Criteria".toLowerCase())) 
@@ -180,7 +184,9 @@ public class Document {
 			return "2021";
 		if (docName.toLowerCase().equalsIgnoreCase("Formulary Deletions".toLowerCase())) 
 			return "2022";
-		if (docName.toLowerCase().equalsIgnoreCase("Getting Started Guide".toLowerCase()) || docName.toLowerCase().contains("Quick Start Guide".toLowerCase()) || docName.toLowerCase().contains("para Comenzar".toLowerCase())) 
+		if (docName.toLowerCase().equalsIgnoreCase("Getting Started Guide".toLowerCase()) || docName.toLowerCase().contains("para Comenzar".toLowerCase())) 
+			return "8006";
+		if (docName.toLowerCase().equalsIgnoreCase("Quick Start Guide".toLowerCase()))
 			return "8006";
 		if (docName.toLowerCase().equalsIgnoreCase("Annual Notice of Changes".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Aviso Annual de Cambios".toLowerCase())) 
 			return "6014";
@@ -188,8 +194,14 @@ public class Document {
 			return "1027";
 		if (docName.toLowerCase().equalsIgnoreCase("Vendor Information Sheet".toLowerCase()) || docName.toLowerCase().contains("sobre proveedores".toLowerCase())) 
 			return "7025";
-		if (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase())) 
-			return "1028";
+		if (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase())) { 
+			if (docName.contains("PDP")) 
+				return "1026";
+			else
+				return "1028";
+		}
+		if (docName.toLowerCase().equalsIgnoreCase("Certificate of Coverage".toLowerCase()))
+			return "8003";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-1";
 	}

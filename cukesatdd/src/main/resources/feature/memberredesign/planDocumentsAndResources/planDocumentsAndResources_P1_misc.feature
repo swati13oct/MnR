@@ -48,20 +48,20 @@ Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents 
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-	  | 09-009 | 15129       | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
-      | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+#LX      | 09-009 | 15129       | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
+#LX      | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 11-011 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true   | true  | true  | true  |	
-	  | 12-012 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
-      | 13-013 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
+#LX      | 12-012 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
+#LX      | 13-013 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
 	@active_pcp_medica      
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 14-014 | 15128       | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
+#LX      | 14-014 | 15128       | PCP      | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
       | 15-015 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true   | true  | true  | true  |
 
 	@active_pdp
@@ -78,7 +78,7 @@ Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents 
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+#LX      | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
 
 
 

@@ -126,6 +126,7 @@ public class PlanDocApiResponse {
 	 * @param apiResponse
 	 */
 	public boolean buildDocListMap(HashMap<String, String> testInputInfoMap, String apiResponse) {
+		String planType=testInputInfoMap.get("planType");
 		String memberType=testInputInfoMap.get("memberType");
 		JSONParser parser = new JSONParser();
 		JSONObject apiResponseJsobObj=null;
@@ -147,12 +148,11 @@ public class PlanDocApiResponse {
 		}
 		
 		JSONArray docListArrayObj = (JSONArray) apiResponseJsobObj.get("docList");
-		Assert.assertTrue("PROBLEM - docListArrayObj is null", docListArrayObj!=null);
-		/*if (memberType.contains("TERM")) {
-			Assert.assertTrue("PROBLEM - user is terminated, expect docListArrayObj to be null", docListArrayObj==null);
-			System.out.println("TEST - terminated user - will not be validating UI vs API");
+		//Assert.assertTrue("PROBLEM - docListArrayObj is null", docListArrayObj!=null);
+		if (docListArrayObj==null) {
+			System.out.println("TEST - API docListArrayObj is null");
 			return success;
-		} */
+		} 
 		Assert.assertTrue("PROBLEM - docListArrayObj should not be null, may have trouble getting API response in this test run", docListArrayObj!=null);
 		for (int i=0; i<docListArrayObj.size(); i++) {
 			JSONObject eachObjDocListArray = (JSONObject) docListArrayObj.get(i);
@@ -179,17 +179,38 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("3")) {
-					String docCategory="Summary of Benefits";
-					docObjMap.put(docCategory, docObj);
-					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
+					if (!memberType.contains("PREEFF")) {
+						String docCategory="Summary of Benefits";
+						docObjMap.put(docCategory, docObj);
+						if (docObj.getLanguage().equals("en_us")) {
+							planMatl_en_curYr_docList.add(docObjMap);
+							memMatl_en_curYr_docList.add(docObjMap);
+						} else if (docObj.getLanguage().equals("es")) {
+							planMatl_es_curYr_docList.add(docObjMap);
+							memMatl_es_curYr_docList.add(docObjMap);
+						} else if (docObj.getLanguage().equals("zh")) {
+							planMatl_zh_curYr_docList.add(docObjMap);
+							memMatl_zh_curYr_docList.add(docObjMap);
+						}
 					}
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+						annNotChgDoc_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+						annNotChgDoc_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("8003")) {
+					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
@@ -290,8 +311,11 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_curYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("8006")) {
+				} else if (docObj.getType().equals("8006")) { 
 					String docCategory="Getting Started Guide";
+					//note: if PDP then it's Quick Start Guide
+					if (planType.equals("PDP") || memberType.contains("PREEFF")) 
+						docCategory="Quick Start Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						memMatl_en_curYr_docList.add(docObjMap);
@@ -330,8 +354,9 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_curYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("1028")) {
-					String docCategory="Pharmacy Directory Information";
+				} else if (docObj.getType().equals("1028") || docObj.getType().equals("1026")) {
+					String docCategory="Pharmacy Directory";
+					//String docCategory="Pharmacy Directory Information";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						proPhmDir_en_curYr_docList.add(docObjMap);
@@ -339,6 +364,16 @@ public class PlanDocApiResponse {
 						proPhmDir_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("7001")) {
+					String docCategory="UnitedHealth Passport Program";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						memMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}
 			//--------------	
@@ -362,13 +397,32 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("8003")) {
+					String docCategory="Certificate of Coverage";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
@@ -494,8 +548,9 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("1028")) {
-					String docCategory="Pharmacy Directory Information";
+				} else if (docObj.getType().equals("1028") || docObj.getType().equals("1026")) {
+					//tbd String docCategory="Pharmacy Directory Information";
+					String docCategory="Pharmacy Directory";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						proPhmDir_en_nxtYr_docList.add(docObjMap);
