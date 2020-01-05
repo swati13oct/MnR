@@ -42,7 +42,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#LX      | 09-047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
+     | 09--047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
 #LX      | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | false | 
 
 	@active_mapd

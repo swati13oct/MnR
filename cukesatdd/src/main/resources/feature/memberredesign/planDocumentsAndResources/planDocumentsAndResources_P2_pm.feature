@@ -45,7 +45,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       ## BAD 09 - has spanish docs in API response but UI did not list them on PM section
-#LX      | 09-028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+     | 09--028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
 #LX      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | true  | false |
 
 	@active_mapd
