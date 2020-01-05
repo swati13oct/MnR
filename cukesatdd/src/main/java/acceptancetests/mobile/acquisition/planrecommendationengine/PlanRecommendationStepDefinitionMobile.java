@@ -168,7 +168,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		specialneedspage.specialNeedspageElements();
 	}
 	
-	@And("^user selects SNP options in Special Needs Page mobile")
+	@And("^user selects SNP options in Special Needs Page mobile$")
 	public void select_special_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		SpecialNeedsMobilePage specialneedspage =  new SpecialNeedsMobilePage(wd);
@@ -176,12 +176,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		specialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
 	}
 	
-	@Then("^user validate previous button functionality in \"([^\\\"]*)\" page mobile$")
-	public void previous_button_validation_mobile(String pageName){
-		CommonutilitiesMobile commonMethods = new CommonutilitiesMobile(wd);
-		commonMethods.previouspageValidation(pageName);
-}
-	
+	@And("^user selects SNP options in Special Needs Page mobile and validate errors$")
+	public void select_special_needs_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		SpecialNeedsMobilePage specialneedspage =  new SpecialNeedsMobilePage(wd);
+		String status = "Negative";
+		specialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
+	}
+
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();

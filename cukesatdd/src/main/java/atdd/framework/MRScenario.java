@@ -1193,7 +1193,6 @@ sauceLabsTunnelIdentifier);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for device allocation
-		capabilities.setCapability("commandTimeouts", 60); //New command timeout max 60,000 sec
 		capabilities.setCapability("testobject_suite_name", mobileTestSuiteName);
 		//capabilities.setCapability("testobject_test_name", mobileTestName);
 		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
@@ -1246,7 +1245,7 @@ sauceLabsTunnelIdentifier);
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
-		capabilities.setCapability("acceptSslCerts", true);
+		//capabilities.setCapability("acceptSslCerts", true);
 		capabilities.setCapability("forceMjsonwp", true);
 		try {
 			if (mobileOSName.equalsIgnoreCase("Android"))

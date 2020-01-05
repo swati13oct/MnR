@@ -58,7 +58,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 	
-	@FindBy(css = ".container div>button[class*='primary button']")
+	@FindBy(css = ".container div[class*='buttonPanel']>button[class*='primary button']")
 	private WebElement continueBtn;
 
 	@FindBy(css = ".container div>button[class*='secondary']")
@@ -143,7 +143,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
 			continueBtn.click();
 			System.out.println("Validating "+page+" page Continue button functionality");
-			mobileUtils.nextPageValidation(page.toUpperCase());
+			//mobileUtils.nextPageValidation(page.toUpperCase());
 		}
 	}
 

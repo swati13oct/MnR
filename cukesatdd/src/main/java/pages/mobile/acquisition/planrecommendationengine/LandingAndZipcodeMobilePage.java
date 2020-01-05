@@ -190,6 +190,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			multicounty.selectByVisibleText(inputdata.get("County Name"));
 		}
 		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",2,true);
+		mobileUtils.mobileFindElementAfterHeader(continueBtn,"50%",2,false);
 		continueBtn.click();
 		threadsleep(2000);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));

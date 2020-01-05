@@ -70,61 +70,61 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 	@FindBy(css = "div legend.primary-question-tex")
 	private WebElement specialNeedsPagePrimaryQuestion;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) span.labelCheck")
 	private WebElement snpMedicaid;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) span.labelCheck")
 	private WebElement snpConditions;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) span.labelCheck")
 	private WebElement snpNursinghome;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(4) span.labelCheck")
 	private WebElement snpNone;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) uhc-accordion .accordion-header")
 	private WebElement snpMedicaidAccordion;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) uhc-accordion .accordion-header")
 	private WebElement snpConditionsAccordion;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) uhc-accordion .accordion-header")
 	private WebElement snpNursinghomeAccordion;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) uhc-accordion svg")
 	private WebElement snpMedicaidAccordionCarrot;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) uhc-accordion svg")
 	private WebElement snpConditionsAccordionCarrot;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) uhc-accordion svg")
 	private WebElement snpNursinghomeAccordionCarrot;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) uhc-accordion .accordion-title>span")
 	private WebElement snpMedicaidAccordionMoreInfo;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) uhc-accordion .accordion-title>span")
 	private WebElement snpConditionsAccordionMoreInfo;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) uhc-accordion .accordion-title>span")
 	private WebElement snpNursinghomeAccordionMoreInfo;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) uhc-accordion .accordion-content p:nth-child(1)")
 	private WebElement snpMedicaidAccordionMoreInfo1stPara;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) uhc-accordion .accordion-content p:nth-child(1)")
 	private WebElement snpConditionsAccordionMoreInfo1stPara;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) uhc-accordion .accordion-content p:nth-child(1)")
 	private WebElement snpNursinghomeAccordionMoreInfo1stPara;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(1) uhc-accordion .accordion-content p:nth-child(2)")
 	private WebElement snpMedicareAccordionMoreInfo2ndPara;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(2) uhc-accordion .accordion-content p:nth-child(2)")
 	private WebElement snpConditionsAccordionMoreInfo2ndPara;
 
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group div:nth-of-type(3) uhc-accordion .accordion-content p:nth-child(2)")
 	private WebElement snpNursinghomeAccordionMoreInfo2ndPara;
 
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
@@ -166,19 +166,22 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				specialNeedspageFunctional(option);
 				specialNeedsOptionsMoreInfo(option);
 			}
+			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
 			continueBtn.click();
 			System.out.println("Validating "+page+" page Continue button functionality");
 			mobileUtils.nextPageValidation(page.toUpperCase());
 		} else {
 			if (options.isEmpty()) {
+				mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
 				continueBtn.click();
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("Please"));
-			} else if (options.contains("None")) {
+			} else if (options.toUpperCase().contains("NONE")) {
 				String snpoptions[] = options.split(",");
 				for (String option : snpoptions) {
 					specialNeedspageFunctional(option);
 				}
+				mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
 				continueBtn.click();
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("Please"));
@@ -192,18 +195,26 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		System.out.println("SNP Option " + SNPType + " Selection");
 		if (SNPType.equalsIgnoreCase("Medicaid")) {
 			validate(snpMedicaid);
+			mobileUtils.mobileFindElementBeforeCallBanner(snpMedicaid,"50%",10,true);
+			mobileUtils.mobileFindElementAfterHeader(snpMedicaid,"50%",2,false);
 			snpMedicaid.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("condition")) {
 			validate(snpConditions);
+			mobileUtils.mobileFindElementBeforeCallBanner(snpConditions,"50%",10,true);
+			mobileUtils.mobileFindElementAfterHeader(snpConditions,"50%",2,false);
 			snpConditions.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("facility")) {
 			validate(snpNursinghome);
+			mobileUtils.mobileFindElementBeforeCallBanner(snpNursinghome,"50%",10,true);
+			mobileUtils.mobileFindElementAfterHeader(snpNursinghome,"50%",2,false);
 			snpNursinghome.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("None")) {
 			validate(snpNone);
+			mobileUtils.mobileFindElementBeforeCallBanner(snpNone,"50%",10,true);
+			mobileUtils.mobileFindElementAfterHeader(snpNone,"50%",2,false);
 			snpNone.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		}
@@ -218,6 +229,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 				Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				mobileUtils.mobileFindElementBeforeCallBanner(snpMedicaidAccordionCarrot,"50%",10,true);
 				snpMedicaidAccordionCarrot.click();
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
@@ -228,6 +240,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 				Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				mobileUtils.mobileFindElementBeforeCallBanner(snpConditionsAccordionCarrot,"50%",10,true);
 				snpConditionsAccordionCarrot.click();
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
@@ -238,6 +251,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				mobileUtils.mobileFindElementBeforeCallBanner(snpNursinghomeAccordionCarrot,"50%",10,true);
 				snpNursinghomeAccordionCarrot.click();
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");

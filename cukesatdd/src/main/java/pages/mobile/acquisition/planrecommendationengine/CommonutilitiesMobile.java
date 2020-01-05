@@ -46,6 +46,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 
+	@FindBy(css = "body header")
+	public WebElement headerSection;
+
+	
 	@FindBy(css = ".container div>button[class*='primary button']")
 	private WebElement continueBtn;
 
@@ -70,6 +74,24 @@ public class CommonutilitiesMobile extends UhcDriver {
 				mobileswipe(percentage, swipeUp);
 				swipeCount--;
 				mobileFindElementBeforeCallBanner(element, percentage, swipeCount, swipeUp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element not visible");
+		}
+	}
+	
+	public void mobileFindElementAfterHeader(WebElement element, String percentage, int swipeCount,
+			boolean swipeUp) {
+		try {
+			validate(headerSection, 30);
+			validate(element, 30);
+			int locationDifference = 100;
+			if (element.getLocation().getY() - headerSection.getLocation().getY() < locationDifference
+					&& swipeCount > 0) {
+				mobileswipe(percentage, swipeUp);
+				swipeCount--;
+				mobileFindElementAfterHeader(element, percentage, swipeCount, swipeUp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,13 +139,6 @@ public class CommonutilitiesMobile extends UhcDriver {
 		}
 	}
 
-	// Function Verification
-	public void coverageOptionpageerror() {
-		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		continueBtn.click();
-		Assert.assertTrue(errorMessage.getText().contains("Please"));
-	}
-
 	// Previous Button Functionality Mobile
 	public void previouspageValidation(String pageName) {
 		System.out.println("Previous page Validation Mobile");
@@ -167,8 +182,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 		} else if (currentPageName.contains("SPECIAL")) {
 			previousPageName = "COVERAGE";
 			previousPagePercentage = "16%";
-			nextPageName = "PERSONAL";
-			nextPagePercentage = "32%";
+			nextPageName = "CARE AWAY";
+			nextPagePercentage = "42%";
 		} else {
 			previousPageName = "";
 			previousPagePercentage = "";
