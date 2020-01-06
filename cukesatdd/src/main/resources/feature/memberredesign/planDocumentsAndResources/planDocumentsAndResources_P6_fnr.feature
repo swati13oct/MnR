@@ -61,7 +61,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#LX      | 14-109 | 15128       | PCP      | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   | 
+      | 14-109 | 15128       | PCP      | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   | 
       | 15-110 | 15128       | MEDICA   | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@active_pdp

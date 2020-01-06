@@ -317,7 +317,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return noteList; //note: if input doesn't expect to see list of doc for section and UI matches result, no need to validate what's in API
 		}
 		//note: not all docs on UI are coming via the same API, so only validate if actualFromUi >= expectedFromApi
-		Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected.  Expected='"+expectedSize+"' | Actual='"+actualSize+"'", actualSize>=expectedSize);
+		Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected as the ones from API.  API Expected='"+expectedSize+"' | UI Actual='"+actualSize+"'", actualSize>=expectedSize);
 		boolean foundAll=true;
 
 		for(HashMap<String, Document> act_docItem: act_docListFromUi) {
@@ -506,8 +506,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "1026";
 		if (docName.toLowerCase().equalsIgnoreCase("Certificate of Coverage".toLowerCase()) ) 
 			return "8003";
-		if (docName.toLowerCase().equalsIgnoreCase("Summary of Benefits".toLowerCase()) ) 
-			return "3";
 		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
 			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 

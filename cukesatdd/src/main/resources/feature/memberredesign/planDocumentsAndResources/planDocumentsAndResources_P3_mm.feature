@@ -39,13 +39,13 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
       | 07-045 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | false | false | false |
       | 08-046 | xxxxx       | MAPD     | IND_TERM_PDnR         | true  | true  | true  | false |
 
-	@active_ma
+@abc	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
      | 09--047 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | false |
 #LX      | 10-048 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | false | 
 
-	@active_mapd
+@abc1	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 11-049 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | false | 
@@ -55,7 +55,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#LX      | 14-052 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
+      | 14-052 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | false |
       | 15-053 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | false |
 
 	@active_pdp

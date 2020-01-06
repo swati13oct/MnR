@@ -184,13 +184,13 @@ public class PlanDocApiResponse {
 						docObjMap.put(docCategory, docObj);
 						if (docObj.getLanguage().equals("en_us")) {
 							planMatl_en_curYr_docList.add(docObjMap);
-							memMatl_en_curYr_docList.add(docObjMap);
+							//tbd memMatl_en_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("es")) {
 							planMatl_es_curYr_docList.add(docObjMap);
-							memMatl_es_curYr_docList.add(docObjMap);
+							//tbd memMatl_es_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("zh")) {
 							planMatl_zh_curYr_docList.add(docObjMap);
-							memMatl_zh_curYr_docList.add(docObjMap);
+							//tbd memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
 				} else if (docObj.getType().equals("2")) {

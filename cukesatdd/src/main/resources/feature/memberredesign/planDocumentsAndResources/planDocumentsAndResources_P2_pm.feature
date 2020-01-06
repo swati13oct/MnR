@@ -58,7 +58,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-#LX      | 14-033 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+      | 14-033 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
       | 15-034 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@active_pdp
