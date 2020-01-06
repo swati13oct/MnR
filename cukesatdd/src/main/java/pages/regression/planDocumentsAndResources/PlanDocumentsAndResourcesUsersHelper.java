@@ -27,43 +27,43 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		System.out.println("TEST - getTargetDocList");
 		List<String> targetTestDocList = null;
 		if (planType.equals("MAPD") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_MAPD_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MAPD_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("MAPD") && memberType.contains("IND_PREEFF")) {
-			targetTestDocList=getExpectedDocList_MAPD_IND_PREEFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MAPD_IND_PREEFF(memberType, section, subSection);
 		} else if (planType.equals("MAPD") && memberType.contains("IND_TERM")) {
-			targetTestDocList=getExpectedDocList_MAPD_IND_TERM(section, subSection);
+			targetTestDocList=getExpectedDocList_MAPD_IND_TERM(memberType, section, subSection);
 		} else if (planType.equals("MAPD") && memberType.contains("GROUP_EFF") && !memberType.contains("PEEHIP")) {
-			targetTestDocList=getExpectedDocList_MAPD_GROUP_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MAPD_GROUP_EFF(memberType, section, subSection);
 		} else if (planType.equals("MAPD") && memberType.contains("PEEHIP_GROUP_EFF")) {
-			targetTestDocList=getExpectedDocList_MAPD_PEEHIP_GROUP_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MAPD_PEEHIP_GROUP_EFF(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_MA_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("GROUP_EFF")) {
-			targetTestDocList=getExpectedDocList_MA_GROUP_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_GROUP_EFF(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("GROUP_PREEFF")) {
-			targetTestDocList=getExpectedDocList_MA_GROUP_PREEFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_GROUP_PREEFF(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("GROUP_TERM")) {
-			targetTestDocList=getExpectedDocList_MA_GROUP_TERM(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_GROUP_TERM(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("IND_PREEFF")) {
-			targetTestDocList=getExpectedDocList_MA_IND_PREEFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_IND_PREEFF(memberType, section, subSection);
 		} else if (planType.equals("MA") && memberType.contains("IND_TERM")) {
-			targetTestDocList=getExpectedDocList_MA_IND_TERM(section, subSection);
+			targetTestDocList=getExpectedDocList_MA_IND_TERM(memberType, section, subSection);
 		} else if (planType.equals("MEDICA") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_MEDICA_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_MEDICA_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("PCP") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_PCP_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_PCP_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("IND_PREEFF")) {
-			targetTestDocList=getExpectedDocList_PDP_IND_PREEFF(section, subSection);
+			targetTestDocList=getExpectedDocList_PDP_IND_PREEFF(memberType, section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("GROUP_PREEFF")) {
-			targetTestDocList=getExpectedDocList_PDP_GROUP_PREEFF(section, subSection);
+			targetTestDocList=getExpectedDocList_PDP_GROUP_PREEFF(memberType, section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_PDP_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_PDP_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("COMBO_GROUP_EFF")) {
-			targetTestDocList=getExpectedDocList_PDP_COMBO_GROUP_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_PDP_COMBO_GROUP_EFF(memberType, section, subSection);
 		} else if (planType.equals("SHIP") && memberType.contains("IND_EFF")) {
-			targetTestDocList=getExpectedDocList_SHIP_IND_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_SHIP_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("SSP") && memberType.contains("COMBO_GROUP_EFF")) {
-			targetTestDocList=getExpectedDocList_SSP_COMBO_GROUP_EFF(section, subSection);
+			targetTestDocList=getExpectedDocList_SSP_COMBO_GROUP_EFF(memberType, section, subSection);
 		}
 				
 		
@@ -82,7 +82,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MAPD_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MAPD_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MAPD IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -217,6 +217,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
+				if (!memberType.contains("AARP")) {
+					targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
+				}
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
@@ -282,7 +285,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MAPD_GROUP_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MAPD_GROUP_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MAPD GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -464,7 +467,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -473,6 +476,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("UnitedHealth Passport Program"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -480,6 +484,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
@@ -638,7 +643,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_SHIP_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_SHIP_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for SHIP IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -773,7 +778,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_GROUP_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_GROUP_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -933,7 +938,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_PDP_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_PDP_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for PDP IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -1099,6 +1104,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("Disenrollment")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Disenrollment rights and responsibilities"); 
 				targetTestDocList.add("Disenrollment Form (Online)");
 				targetTestDocList.add("Disenrollment Form (PDF)");
 				return targetTestDocList;
@@ -1119,7 +1125,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_PDP_COMBO_GROUP_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_PDP_COMBO_GROUP_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for PDP COMBO_GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -1282,7 +1288,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_SSP_COMBO_GROUP_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_SSP_COMBO_GROUP_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for SSP COMBO_GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -1431,7 +1437,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MAPD_PEEHIP_GROUP_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MAPD_PEEHIP_GROUP_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MAPD PEEHIP_GROUP_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -1602,7 +1608,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MEDICA_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MEDICA_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MEDICA IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -1807,7 +1813,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_PCP_IND_EFF(String section, String subSection) {
+	public List<String> getExpectedDocList_PCP_IND_EFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for PCP IND_EFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2012,7 +2018,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_IND_TERM(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_IND_TERM(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA IND_TERM for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2168,7 +2174,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_GROUP_TERM(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_GROUP_TERM(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA GROUP_TERM for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2323,7 +2329,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MAPD_IND_TERM(String section, String subSection) {
+	public List<String> getExpectedDocList_MAPD_IND_TERM(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MAPD IND_TERM for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2500,7 +2506,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_IND_PREEFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_IND_PREEFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA IND_PREEFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2575,7 +2581,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Vendor Information Sheet"); //NOTE: maybe problem
+				targetTestDocList.add("Vendor Information Sheet"); //TODO: BAD
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -2662,7 +2668,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MAPD_IND_PREEFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MAPD_IND_PREEFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MAPD IND_PREEFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -2743,7 +2749,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Vendor Information Sheet");
+				targetTestDocList.add("Vendor Information Sheet"); //TODO: BAD
 				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
@@ -2839,106 +2845,132 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_MA_GROUP_PREEFF(String section, String subSection) {
+	public List<String> getExpectedDocList_MA_GROUP_PREEFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for MA GROUP_PREEFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Summary of Benefits");
+				targetTestDocList.add("Summary of Benefits"); //TODO
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Additional Drug Coverage");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Formulary/Drug List - Comprehensive"); //TODO
+				targetTestDocList.add("Additional Drug Coverage"); //TODO
+				targetTestDocList.add("Prior Authorization Criteria"); //TODO
+				targetTestDocList.add("Step Therapy Criteria"); //TODO
+				targetTestDocList.add("Formulary Additions");//TODO
+				targetTestDocList.add("Formulary Deletions");//TODO
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("EN-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("EN-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("Reimbursement Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Medication Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("Other Resources")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form");
@@ -2970,7 +3002,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_PDP_IND_PREEFF(String section, String subSection) {
+	public List<String> getExpectedDocList_PDP_IND_PREEFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for PDP IND_PREEFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -3130,7 +3162,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 	 * @param subSection
 	 * @return
 	 */
-	public List<String> getExpectedDocList_PDP_GROUP_PREEFF(String section, String subSection) {
+	public List<String> getExpectedDocList_PDP_GROUP_PREEFF(String memberType, String section, String subSection) {
 		System.out.println("TEST - get expected docList for PDP GROUP_PREEFF for section='"+section+"' | subSection='"+subSection+"'");
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
@@ -3150,11 +3182,21 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Quick Start Guide");
+				targetTestDocList.add("Benefit Highlights");
+				targetTestDocList.add("Comprehensive Formulary");
+				targetTestDocList.add("Additional Drug Coverage");
 				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
+				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("Certificate of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				targetTestDocList.add("Beneficios Importantes");
+				targetTestDocList.add("Formulario completo");
+				targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {

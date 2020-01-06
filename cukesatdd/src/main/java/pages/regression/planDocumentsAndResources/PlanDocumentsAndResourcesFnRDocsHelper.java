@@ -53,6 +53,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Medical Reimbursement Form (Online)")) {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/medicare/member/documents/medical-reimbursement-form.html");
+			if (memberType.contains("NICE"))
+				testInputInfoMap.put("expectedUrl", "https://www.personalhealthmessagecenter.com/public/forms/MedicalReimbursementMR");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
@@ -89,6 +91,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Appointment of Representative Form")) {
 			//Question expectedHref="http://www.cms.gov/Medicare/CMS-Forms/CMS-Forms/CMS-Forms-Items/CMS012207";
 			//Question expectedHref="https://www.cms.gov/Medicare/CMS-Forms/CMS-Forms/CMS-Forms-Items/CMS012207";
+			//TODO:
+			//note: include intermediary page for link to non-UHG site
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "www.cms.gov/Medicare/CMS-Forms/CMS-Forms/CMS-Forms-Items/CMS012207");
 			testInputInfoMap.put("redirectUrl", "none");

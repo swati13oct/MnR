@@ -29,6 +29,8 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		String section="Renew Magazine";
 		String item="CURRENT ISSUE";
 		WebElement lnkElment=currentIssueLink_RM;
+		//note: dev said the link itself has the word '2019' it's not tie to actual year. overwrite it but leave it like this for now in case it changes later
+		currentYear="2019";
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/index.html";
 		String redirectUrl="none";
 		if (memberType.toUpperCase().contains("GROUP")) {
