@@ -80,7 +80,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='mainContent']//button")
 	private WebElement continueButton;
 	
-	@FindBy(xpath="(//*[contains(@class,'searchData')]//*[contains(@data-test-key,'provider-name-link')])[2]")
+	@FindBy(xpath="(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[2]")
 	private WebElement PrimaryCarePhysician;
 	
 	@FindBy(xpath="//*[contains(@class,'action-btn negative print')]")
@@ -200,8 +200,8 @@ public class ProviderSearchPage extends UhcDriver {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
-			validateNew(nextYrTile);
-			nextYrTile.click();
+			if (validate(nextYrTile))
+				nextYrTile.click();
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));
 		validateNew(planNameToBeSelected);
