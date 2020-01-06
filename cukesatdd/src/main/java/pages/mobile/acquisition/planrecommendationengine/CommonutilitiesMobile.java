@@ -99,6 +99,15 @@ public class CommonutilitiesMobile extends UhcDriver {
 		}
 	}
 
+	
+	public void mobileLocateElementClick(WebElement element)
+	{
+		mobileFindElementBeforeCallBanner(continueBtn,"50%",8,true);
+		mobileFindElementAfterHeader(continueBtn,"50%",3,false);
+		element.click();
+	}
+	
+	
 	public void fixPrivateConnectionMobile() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";
@@ -174,7 +183,11 @@ public class CommonutilitiesMobile extends UhcDriver {
 		nextPageName = new String();
 		nextPagePercentage = new String();
 		// Update the else as else if for each page
-		if (currentPageName.contains("COVERAGE")) {
+		if (currentPageName.contains("LOCATION")) {
+			nextPageName = "COVERAGE";
+			nextPagePercentage = "8%";
+		}
+		else if (currentPageName.contains("COVERAGE")) {
 			previousPageName = "LOCATION";
 			previousPagePercentage = "8%";
 			nextPageName = "SPECIAL";

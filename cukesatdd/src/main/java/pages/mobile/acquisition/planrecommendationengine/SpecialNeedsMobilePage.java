@@ -152,8 +152,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		Assert.assertTrue(snpNursinghome.getText().contains("facility"));
 		validate(snpNone, 30);
 		Assert.assertTrue(snpNone.getText().contains("None"));
-		mobileUtils.mobileFindElementBeforeCallBanner(previousBtn,"50%",5,true);
-		previousBtn.click();
+		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validationg "+page+" page Previous button functionality");
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
@@ -166,14 +165,12 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				specialNeedspageFunctional(option);
 				specialNeedsOptionsMoreInfo(option);
 			}
-			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
-			continueBtn.click();
+			mobileUtils.mobileLocateElementClick(continueBtn);
 			System.out.println("Validating "+page+" page Continue button functionality");
 			mobileUtils.nextPageValidation(page.toUpperCase());
 		} else {
 			if (options.isEmpty()) {
-				mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
-				continueBtn.click();
+				mobileUtils.mobileLocateElementClick(continueBtn);
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("Please"));
 			} else if (options.toUpperCase().contains("NONE")) {
@@ -181,8 +178,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 				for (String option : snpoptions) {
 					specialNeedspageFunctional(option);
 				}
-				mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",10,true);
-				continueBtn.click();
+				mobileUtils.mobileLocateElementClick(continueBtn);
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("Please"));
 			}
@@ -194,28 +190,16 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 	public void specialNeedspageFunctional(String SNPType) {
 		System.out.println("SNP Option " + SNPType + " Selection");
 		if (SNPType.equalsIgnoreCase("Medicaid")) {
-			validate(snpMedicaid);
-			mobileUtils.mobileFindElementBeforeCallBanner(snpMedicaid,"50%",10,true);
-			mobileUtils.mobileFindElementAfterHeader(snpMedicaid,"50%",2,false);
-			snpMedicaid.click();
+			mobileUtils.mobileLocateElementClick(snpMedicaid);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("condition")) {
-			validate(snpConditions);
-			mobileUtils.mobileFindElementBeforeCallBanner(snpConditions,"50%",10,true);
-			mobileUtils.mobileFindElementAfterHeader(snpConditions,"50%",2,false);
-			snpConditions.click();
+			mobileUtils.mobileLocateElementClick(snpConditions);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("facility")) {
-			validate(snpNursinghome);
-			mobileUtils.mobileFindElementBeforeCallBanner(snpNursinghome,"50%",10,true);
-			mobileUtils.mobileFindElementAfterHeader(snpNursinghome,"50%",2,false);
-			snpNursinghome.click();
+			mobileUtils.mobileLocateElementClick(snpNursinghome);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("None")) {
-			validate(snpNone);
-			mobileUtils.mobileFindElementBeforeCallBanner(snpNone,"50%",10,true);
-			mobileUtils.mobileFindElementAfterHeader(snpNone,"50%",2,false);
-			snpNone.click();
+			mobileUtils.mobileLocateElementClick(snpNone);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		}
 	}
@@ -225,7 +209,6 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 	public void specialNeedsOptionsMoreInfo(String SNPType) {
 		if (SNPType.equalsIgnoreCase("Medicaid")) {
 			if (snpMedicaidAccordion.isDisplayed()) {
-				validate(snpMedicaidAccordionCarrot, 30);
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 				Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
@@ -236,7 +219,6 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 			}
 		} else if (SNPType.equalsIgnoreCase("condition")) {
 			if (snpConditionsAccordion.isDisplayed()) {
-				validate(snpConditionsAccordionCarrot, 30);
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 				Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
@@ -247,7 +229,6 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 			}
 		} else if (SNPType.equalsIgnoreCase("facility")) {
 			if (snpNursinghomeAccordion.isDisplayed()) {
-				validate(snpNursinghomeAccordionCarrot, 30);
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));

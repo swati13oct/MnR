@@ -132,26 +132,22 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 			validate(plantypeMA,30);
 			plantypeMA.click();
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			mobileUtils.mobileFindElementBeforeCallBanner(plantypePDP,"50%",5,true);
-			plantypePDP.click();
+			mobileUtils.mobileLocateElementClick(plantypePDP);
 		} else if (planType.equalsIgnoreCase("NA")) {
-			mobileUtils.mobileFindElementBeforeCallBanner(plantypeNone,"50%",5,true);
-			plantypeNone.click();
+			mobileUtils.mobileLocateElementClick(plantypeNone);
 		}
 		System.out.println("Plan Type " + planType + " Clicked");
 		if (proceed) {
-			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
-			continueBtn.click();
+			mobileUtils.mobileLocateElementClick(continueBtn);
 			System.out.println("Validating "+page+" page Continue button functionality");
-			//mobileUtils.nextPageValidation(page.toUpperCase());
+			mobileUtils.nextPageValidation(page.toUpperCase());
 		}
 	}
 
 	// Coverage Option Page Function Verification
 	public void coverageOptionpageErrormobile() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
-		continueBtn.click();
+		mobileUtils.mobileLocateElementClick(continueBtn);
 		Assert.assertTrue(errorMessage.getText().contains("Please"));
 	}
 
@@ -159,11 +155,9 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		public void previouspageValidation() {
 			System.out.println("Previous page Validation");
 			if (radioselect.isDisplayed()) {
-				mobileUtils.mobileFindElementBeforeCallBanner(previousBtn,"50%",5,true);
-				previousBtn.click();
-				threadsleep(2000);
-				validate(pageProgressPercentage, 30);
-				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+				mobileUtils.mobileLocateElementClick(previousBtn);
+				System.out.println("Validationg "+page+" page Previous button functionality");
+				mobileUtils.previouspageValidation(page.toUpperCase());
 			}
 		}
 }

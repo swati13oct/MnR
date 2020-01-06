@@ -42,6 +42,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -836,18 +837,24 @@ try {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
 		try {
 		threadsleep(1000);
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
 			((AndroidDriver)driver).hideKeyboard();
 		else {
-			//((IOSDriver)driver).hideKeyboard(HideKeyboardStrategy.PRESS_KEY,"Done");
-			//((IOSDriver)driver).hideKeyboard(HideKeyboardStrategy.TAP_OUTSIDE);
-			((AppiumDriver)driver).getKeyboard().sendKeys(Keys.RETURN);
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - "+curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
+			((IOSDriver) driver).context("NATIVE_APP");
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+			threadsleep(500);
+			((IOSDriver) driver).context(curHandle);
 		}
 		threadsleep(1000);
 		}catch(Exception e) {
+			e.printStackTrace();
 			System.out.println(driver.getCurrentUrl());
 		}
 	}
@@ -879,6 +886,8 @@ try {
 			//element.setValue("10001");
 			//((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';", m); 
 			//((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.click();
+			threadsleep(500);
 			element.click();
 			((AppiumDriver)driver).getKeyboard().sendKeys(keys);
 		}

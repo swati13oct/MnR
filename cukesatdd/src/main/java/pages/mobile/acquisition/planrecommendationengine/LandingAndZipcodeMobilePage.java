@@ -154,7 +154,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		mobileUtils.mobileFindElementBeforeCallBanner(getStartedBtn1,"50%",5,true);
 		validate(landingpageImage, 30);
 		validate(landingpageLabel, 30);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
+		waitTillElementClickableInTime(getStartedBtn1, 30);
 	}
 
 	public void zipcodepageElementsmobile() {
@@ -174,6 +174,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
+		String page = "Location";
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
@@ -189,11 +190,9 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Select multicounty = new Select(multicountySelect);
 			multicounty.selectByVisibleText(inputdata.get("County Name"));
 		}
-		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",2,true);
-		mobileUtils.mobileFindElementAfterHeader(continueBtn,"50%",2,false);
-		continueBtn.click();
-		threadsleep(2000);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
+		mobileUtils.mobileLocateElementClick(continueBtn);
+		System.out.println("Validating "+page+" page Continue button functionality");
+		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 
 	public void zipcodescreenErrorValidationmobile(HashMap<String, String> inputdata) {
@@ -202,9 +201,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
 			validate(multicountySelect, 20);
 		}
-		mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",2,true);
-		continueBtn.click();
-		mobileswipe("50%", false);
+		mobileUtils.mobileLocateElementClick(continueBtn);
 		validate(errorMessage, 20);
 		Assert.assertTrue(errorMessage.getText().contains("Please"));
 		threadsleep(2000);
