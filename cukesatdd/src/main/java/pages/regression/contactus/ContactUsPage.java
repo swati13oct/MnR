@@ -91,6 +91,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
 	private WebElement emailUsContinueBtn;
 	
+	
+	@FindBy(xpath = "//div[@id='messageModal']//span[contains(@class,'btn--primary')][text()='CONTINUE']")
+	private WebElement goToInboxCtnBtn;
+	
+	
 	@FindBy(id = "message-send")
 	private WebElement sendMessageBtn;
 	
@@ -678,8 +683,10 @@ public class ContactUsPage extends UhcDriver{
 			waitforElement(cancelLink);
 			cancelLink1.click();
 			Thread.sleep(2000);}
-			
-		else {
+		else if(validate(goToInboxButton)){	
+			validateGoToInbox();
+			}
+		else{		
 			getStartedButton.click();
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
@@ -756,6 +763,8 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			waitforElement(goToInboxButton);
 			Assert.assertTrue(validate(goToInboxButton));
+			goToInboxButton.click();
+			Assert.assertTrue(validateNew(goToInboxCtnBtn));			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

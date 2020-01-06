@@ -1,7 +1,7 @@
 @fixedTestCaseDCEVPP
 Feature: To test DCE to VPP plan Summary flow  in AARP site
 
-@dceThroughPlanSummaryNonAepAARP @aarp @regressionMember @dce1 @aarpDce
+@dceThroughPlanSummaryNonAepAARP @aarp @DCE_Regression_Ulayer @dce1 @aarpDce
 Scenario Outline: To Verify the drug cost estimator flow for <planName> for non AEP periodthrough plan summary
 Given the user is on the AARP medicare site landing page
 When user performs plan search using following information in the AARP site
@@ -83,13 +83,14 @@ Examples:
 Examples:
 | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|aep|currentyear|
 | 90002   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Standard Network             | 15 miles   |  WATTS PROFESSIONAL PHARMACY| MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO)| 30       |Every 1 month|Mail Order   |atorvastatin |fluticasone| no | no |
+| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail             | 15 miles   |  COMMUNITY, A WALGREENS PHARMACY    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|no | no |
 
 #| zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
 #| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
 #| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  Men's Health Foundation    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
 #| 78002    | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  HEB PHARMACY 019    | SNP      | UnitedHealthcare Chronic Complete (HMO SNP)        | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
 
-@dceThroughPlanDetailsAARP @aarp @regressionMember @dce2 @aarpDce2
+@dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer @dce2 @aarpDce2
 Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab
 Given the user is on the AARP medicare site landing page
 When user performs plan search using following information in the AARP site
@@ -180,8 +181,9 @@ Then user validates Drug information is reflected on plan summary page in AARP s
 Examples:
 | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|aep|currentyear|
 | 90002   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Standard Network             | 15 miles   |  WATTS PROFESSIONAL PHARMACY| MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO)| 30       |Every 1 month|Mail Order   |atorvastatin |fluticasone| no | no |
+| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail             | 15 miles   |  COMMUNITY, A WALGREENS PHARMACY    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|no | no |
                 
-@dceThroughPlanDetailsAARP @aarp @regressionMember @dce3 @aarpDce
+@dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer @dce3 @aarpDce
 Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
 Given the user is on the AARP medicare site landing page
 When user performs plan search using following information in the AARP site
@@ -266,6 +268,7 @@ Then user validates Drug information is reflected on plan summary page in AARP s
 Examples:
 | zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|aep|currentyear|
 | 90002   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Standard Network             | 15 miles   |  WATTS PROFESSIONAL PHARMACY| MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO)| 30       |Every 1 month|Mail Order   |atorvastatin |fluticasone| no | no |
+| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail             | 15 miles   |  COMMUNITY, A WALGREENS PHARMACY    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|no | no |
 
 #| zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | drugInitials4 | drugName4 | drugInitials5 | drugName5             | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|
 #| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Orfa          | Orfadin   | Fana          | Fanapt Titration Pack | Standard Network             | 15 miles   |  MEN'S HEALTH FOUNDATION    | MAPD     | AARP MedicareComplete SecureHorizons Plan 2 (HMO)  | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|
