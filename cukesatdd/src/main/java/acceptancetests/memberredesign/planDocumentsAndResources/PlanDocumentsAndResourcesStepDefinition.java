@@ -249,6 +249,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - Default language dropdown validation");
 
+		boolean finalCheck=true;
+		String problemText="";
 		if (sectionDisplay) {
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
@@ -257,7 +259,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
-
+			String language="English";
+			
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -268,14 +271,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - English documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for Spanish documents");
 			expDocDisplay=doc_es_curYr;
 			targetLang="ES";
 			targetYr=yearsMap.get("currentYear");
-
+			language="Spanish";
+			
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -286,14 +299,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - Spanish documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for Chinese documents");
 			expDocDisplay=doc_zh_curYr;
 			targetLang="ZH";
 			targetYr=yearsMap.get("currentYear");
-
+			language="Chinese";
+			
 			expDocList=new ArrayList<String>();
 
 			testInputInfoMap.put("section",section);
@@ -305,7 +328,16 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - Chinese documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//note: validate footer section
 			sectionNote.add("PASSED - footer validation");
@@ -316,6 +348,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+		
+		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
 
@@ -361,6 +395,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		//note: validate default language selection
 		planDocumentsAndResourcesPage.validateDefaultLangSelect_MM(sectionDisplay);
+		
+		boolean finalCheck=true;
+		String problemText="";
 		if (sectionDisplay) {
 
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
@@ -370,7 +407,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
-
+			String language="English";
+			
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -381,13 +419,23 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - English documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("  ----- Validation for Spanish documents");
 			expDocDisplay=doc_es_curYr;
 			targetLang="ES";
 			targetYr=yearsMap.get("currentYear");
+			language="Spanish";
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
@@ -399,13 +447,23 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - Spanish documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("  ----- Validation for Chinese documents");
 			expDocDisplay=doc_zh_curYr;
 			targetLang="ZH";
 			targetYr=yearsMap.get("currentYear");
+			language="Chinese";
 
 			expDocList=new ArrayList<String>();
 
@@ -418,7 +476,16 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - Chinese documents validation");
+			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 		}
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
@@ -426,6 +493,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+		
+		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -492,15 +561,19 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateDefaultLangSelect_ANOC(sectionDisplay);
 		sectionNote.add("PASSED - Default language dropdown validation");
 
+		boolean finalCheck=true;
+		String problemText="";
 		if (sectionDisplay) {
 
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year English documents");
+			String period="currentYear";
+			String language="English";
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
-			String targetYr=yearsMap.get("currentYear");
+			String targetYr=yearsMap.get(period);
 
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
@@ -512,13 +585,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year English documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year Spanish documents");
+			period="currentYear";
+			language="Spanish";
 			expDocDisplay=doc_es_curYr;
 			targetLang="ES";
-			targetYr=yearsMap.get("currentYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
@@ -530,13 +614,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year Spanish documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year Chinese documents");
+			period="currentYear";
+			language="Chinese";
 			expDocDisplay=doc_zh_curYr;
 			targetLang="ZH";
-			targetYr=yearsMap.get("currentYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
@@ -548,10 +643,21 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year Chinese documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year English documents");
+			period="nextYear";
+			language="English";
 			expDocDisplay=doc_en_nxtYr;
 			targetLang="EN";
 			targetYr=yearsMap.get("nextYear");
@@ -566,13 +672,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year English documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year Spanish documents");
+			period="nextYear";
+			language="Spanish";
 			expDocDisplay=doc_es_nxtYr;
 			targetLang="ES";
-			targetYr=yearsMap.get("nextYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
@@ -584,10 +701,21 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year Spanish documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year Chinese documents");
+			period="nextYear";
+			language="Chinese";
 			expDocDisplay=doc_zh_nxtYr;
 			targetLang="ZH";
 			targetYr=yearsMap.get("nextYear");
@@ -602,7 +730,16 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year Chinese documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 		}
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
@@ -610,6 +747,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+
+		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -691,14 +830,18 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - Default language dropdown validation");
 
+		boolean finalCheck=true;
+		String problemText="";
 		if (sectionDisplay) {
 			boolean checkDestUrl=false; //note: for this sect of doc, the href link in element is not the same as the one after clicked
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year English documents");
+			String period="currentYear";
+			String language="English";
 			boolean expDocDisplay=doc_en_curYr;
 			String targetLang="EN";
-			String targetYr=yearsMap.get("currentYear");
+			String targetYr=yearsMap.get(period);
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -709,13 +852,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year English documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year Spanish documents");
+			period="currentYear";
+			language="Spanish";
 			expDocDisplay=doc_es_curYr;
 			targetLang="ES";
-			targetYr=yearsMap.get("currentYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
@@ -727,13 +881,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year Spanish documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for current year Chinese documents");
+			period="currentYear";
+			language="Chinese";
 			expDocDisplay=doc_zh_curYr;
 			targetLang="ZH";
-			targetYr=yearsMap.get("currentYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-currentYear");
 			testInputInfoMap.put("section",section);
@@ -745,13 +910,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - current year Chinese documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year English documents");
+			period="nextYear";
+			language="English";
 			expDocDisplay=doc_en_nxtYr;
 			targetLang="EN";
-			targetYr=yearsMap.get("nextYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
@@ -763,13 +939,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year English documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year Spanish documents");
+			period="nextYear";
+			language="Spanish";
 			expDocDisplay=doc_es_nxtYr;
 			targetLang="ES";
-			targetYr=yearsMap.get("nextYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
@@ -781,13 +968,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year Spanish documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 
 			//-----------------------------------------
 			sectionNote.add("----- Validation for next year Chinese documents");
+			period="nextYear";
+			language="Chinese";
 			expDocDisplay=doc_zh_nxtYr;
 			targetLang="ZH";
-			targetYr=yearsMap.get("nextYear");
+			targetYr=yearsMap.get(period);
 
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang+"-nextYear");
 			testInputInfoMap.put("section",section);
@@ -799,7 +997,16 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - next year Chinese documents validation");
+			sectionNote.add("PASSED - "+period+" "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
+				sectionNote.add("PASSED - "+period+" "+language+" documents API validation");
+
+			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+period+" "+language+" documents API validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+period+" "+language+" documents API validation | ";
+			} 
+			sectionNote.remove(0);	
 		}
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
@@ -807,6 +1014,8 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+
+		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
 

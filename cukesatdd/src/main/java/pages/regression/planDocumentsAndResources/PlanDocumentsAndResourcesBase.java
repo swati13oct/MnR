@@ -1,7 +1,6 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,10 +11,8 @@ import java.util.regex.Pattern;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntry;
@@ -314,6 +311,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			}
 			Assert.assertTrue("PROBLEM - input didn't expect to see doc display for '"+section+"' section for language '"+targetLang+"' but actual list of doc is not 0.  Expected='0' | Actual='"+actualSize+"'", condition);
 			noteList.add(0, "  CAN match expected result w/ input condition for section '"+section+"' for language '"+targetLang+"' - input expected not to see this doc");
+			noteList.add(0, "API VALIDATOIN PASSED");
 			return noteList; //note: if input doesn't expect to see list of doc for section and UI matches result, no need to validate what's in API
 		}
 		//note: not all docs on UI are coming via the same API, so only validate if actualFromUi >= expectedFromApi
@@ -321,21 +319,21 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		boolean foundAll=true;
 
 		for(HashMap<String, Document> act_docItem: act_docListFromUi) {
-			System.out.println("===== attempt to validate element ===========");
+			System.out.println("===== attempt to validate each entry from UI ===========");
 			for (Map.Entry act_mapElement : act_docItem.entrySet()) { 
 				String act_category = (String)act_mapElement.getKey(); 
 				Document act_doc=(Document) act_mapElement.getValue();
 
-				System.out.println("TEST - Actual doc: category="+act_category+" | segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
+				System.out.println("TEST - Actual doc From UI: category="+act_category+" | segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
 				System.out.println("TEST - exp_docListFromApi size="+exp_docListFromApi.size());
 				boolean found=false;
 				for(HashMap<String, Document> exp_docItem: exp_docListFromApi) {
 					for (Map.Entry exp_mapElement : exp_docItem.entrySet()) { 
 						String exp_category = (String)exp_mapElement.getKey(); 
 						Document exp_doc=(Document) exp_mapElement.getValue();
-
-						System.out.println("Check expected doc: category="+exp_category+" | exp_doc.segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
-						System.out.println("Check expected doc: act_doc.getSegmentId()="+act_doc.getSegmentId());
+						System.out.println("=====");
+						System.out.println("Check expected doc From API: category="+exp_category+" | exp_doc.segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
+						System.out.println("Check expected doc From UI : category="+act_category+" | act_doc.segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
 						if ((exp_category.toLowerCase()).contains(act_category.toLowerCase()) || (act_category.toLowerCase()).contains(exp_category.toLowerCase())) {
 							boolean allMatch=true;
 							System.out.println("TEST - found match for category, check for more values...");
@@ -345,44 +343,44 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 									//note: tricky one, some has type 4 some has 1022. do this forn now, figure it out later
 									if ((act_doc.getType().equals("4") || act_doc.getType().equals("1022") || act_doc.getType().equals("8002"))
 										&& (exp_doc.getType().equals("4") || exp_doc.getType().equals("1022") || exp_doc.getType().equals("8002"))	){
-										System.out.println("TEST - act_category=Comprehensive Formulary | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
-										System.out.println("TEST - let it slide for now, need to figure out better way to handle this");
+										System.out.println("TEST - type - act_category=Comprehensive Formulary | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
+										System.out.println("TEST - type - let it slide for now, need to figure out better way to handle this");
 									} else {
 										allMatch=false;
-										System.out.println("TEST - allMatch="+allMatch+" | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
 									}
 								} else {
-								allMatch=false;
-								System.out.println("TEST - allMatch="+allMatch+" | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
-
+									allMatch=false;
 								}
-							}
+							} 
+							System.out.println("TEST - type - allMatch="+allMatch+" | Type: act="+act_doc.getType()+" : exp="+exp_doc.getType());
+							
 							if (!act_doc.getYear().equals(exp_doc.getYear())) {
 								allMatch=false;
-								System.out.println("TEST - allMatch="+allMatch+" | Year: act="+act_doc.getYear()+" : exp="+exp_doc.getYear());
 							}
+							System.out.println("TEST - year - allMatch="+allMatch+" | Year: act="+act_doc.getYear()+" : exp="+exp_doc.getYear());
+							
 							if (!act_doc.getSegmentId().contains(exp_doc.getSegmentId())) {
 								allMatch=false;
-								System.out.println("TEST - allMatch="+allMatch+" | Segment: act="+act_doc.getSegmentId()+" : exp="+exp_doc.getSegmentId());
 							}
+							System.out.println("TEST - segemnt - allMatch="+allMatch+" | Segment: act="+act_doc.getSegmentId()+" : exp="+exp_doc.getSegmentId());
 							if (checkDestUrl) {
 								if (!act_doc.getLink().contains(exp_doc.getLink())) {
 									allMatch=false;
-									System.out.println("TEST - allMatch="+allMatch+" | link: act="+act_doc.getLink()+" : exp="+exp_doc.getLink());
 								}
 							}
+							System.out.println("TEST - link - allMatch="+allMatch+" | link: act="+act_doc.getLink()+" : exp="+exp_doc.getLink());
 							if (!act_doc.getCompCode().equals("")) {
 								if (!act_doc.getLanguage().toLowerCase().contains("es") && !act_category.contains("Pharmacy Directory")
 										&& !act_category.contains("Vendor Information Sheet")
 										&& !act_category.contains("Provider Directory")) {
 									if (!act_doc.getCompCode().equals(exp_doc.getCompCode())) {
 										allMatch=false;
-										System.out.println("TEST - allMatch="+allMatch+" | CompCode: act="+act_doc.getCompCode()+" : exp="+exp_doc.getCompCode());
 									}
 								}
 							} else {
-								System.out.println("TEST - actual CompCode from element is empty, skip the CompCode validation");
+								System.out.println("TEST - compCode - actual CompCode from element is empty, skip the CompCode validation");
 							}
+							System.out.println("TEST - compCode - allMatch="+allMatch+" | CompCode: act="+act_doc.getCompCode()+" : exp="+exp_doc.getCompCode());
 							if (allMatch) {
 								found=true;
 								System.out.println("FOUND - doc with link="+act_doc.getLink());
@@ -402,6 +400,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						|| act_category.equals("Over-the-Counter Drug List")
 						|| act_category.equals("Health & Wellness Products Catalog")) {
 					System.out.println(act_category+" doc doesn't come from this API, bypass this");
+					noteList.add("    BYPASS look up for '"+act_category+"'  in API response");
 					found=true;
 				}
 				if (found) {
@@ -411,26 +410,28 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							|| act_category.equals("OVER THE COUNTER ESSENTIALS")
 							|| act_category.equals("Over-the-Counter Drug List")
 							|| act_category.equals("Health & Wellness Products Catalog")) 
-						noteList.add("  SKIP match for '"+act_category+"' in /formsAndResourcesFor*/ API response");
+						noteList.add("    SKIP match for '"+act_category+"' (documnet name in '"+targetLang+"') in /formsAndResourcesFor*/ API response");
 					else 
-						noteList.add("  FOUND match for '"+act_category+"' in /formsAndResourcesFor*/ API response");
+						noteList.add("    FOUND match for '"+act_category+"' (documnet name in '"+targetLang+"') in /formsAndResourcesFor*/ API response");
 					break;
 				} else {
 					System.out.println("not found match for act_category="+act_category);
 					foundAll=false;
-					noteList.add("  NOT find match for '"+act_category+"' in /formsAndResourcesFor*/ API response");
+					noteList.add("    * NOT FOUND match for '"+act_category+"' (documnet name in '"+targetLang+"') in /formsAndResourcesFor*/ API response or it is not expected to show in this section");
 				}
 			} 
 		}
 		if (foundAll) {
 			System.out.println("found match for ALL");
 			noteList.add(0, "  CAN match all docs in section '"+section+"' for language '"+targetLang+"'");
+			noteList.add(0, "API VALIDATOIN PASSED");
 		} else {
 			System.out.println("not found match for ALL");
 			foundAll=false;
-			noteList.add(0, "  CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'");
+			noteList.add(0, "  * CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'");
+			noteList.add(0, "API VALIDATOIN FAILED");
 		}
-		Assert.assertTrue("PROBLEM - CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'", foundAll);
+		//tbd Assert.assertTrue("PROBLEM - CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'", foundAll);
 		return noteList;
 	}
 
@@ -510,6 +511,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
 			return "-99";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Benefits Table".toLowerCase()) ) 
+			return "5002"; //note: SHIP
+		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
+			return "5006"; //note: SHIP
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -644,19 +649,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		for(String expDocName: expDocList) {
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
 			Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
-			sectionNote.add("  PASSED - document '"+expDocName+"' validation");
+			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
 		}
+		//note: this section will only invoke if step definition decide to validate API also
 		if (validateApi) {
 			if (memberType.contains("TERM")) {
 				sectionNote.add("  BYPASS - UI vs API validation because terminated user has no doc list");
 				return sectionNote;
 			}
-			/* tbd if ((planType.equals("PDP") && memberType.contains("COMBO_GROUP_EFF"))
-					||(planType.equals("SSP") && memberType.contains("COMBO_GROUP_EFF"))) {
-				sectionNote.add("  BYPASS - API validation for PDP COMBO GROUP because the user is not getting a successful API response - don't know why yet");
-				return sectionNote;
-			} */
 			boolean anocFlag=false;
 			List<HashMap<String, Document>> exp_docListFromApi=new ArrayList<HashMap<String, Document>>();
 			if (targetSubSection.equals("currentYear")) {
@@ -717,7 +718,18 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			}
 			List<String> docList_noteList=compareUiApiDocList(testInputInfoMap, act_docListFromUi, exp_docListFromApi, anocFlag, expDocDisplay, checkDestUrl);
-			sectionNote.addAll(docList_noteList);
+			//note: fix up the note and send it back up level to take care of the validation
+			if (docList_noteList.get(0).equals("API VALIDATOIN PASSED")) {
+				docList_noteList.remove(0);
+				sectionNote.addAll(docList_noteList);
+				sectionNote.add(0, "API VALIDATOIN PASSED");
+			} else if (docList_noteList.get(0).equals("API VALIDATOIN FAILED")) {
+				docList_noteList.remove(0);
+				sectionNote.addAll(docList_noteList);
+				sectionNote.add(0, "API VALIDATOIN FAILED");
+			} else {
+				sectionNote.addAll(docList_noteList);
+			}
 		}
 		return sectionNote;
 	}
@@ -734,6 +746,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public HashMap<String, Document> validateDoc(HashMap<String, String> testInputInfoMap, String expDocName) {
+		System.out.println("Proceed to validate expected document="+expDocName);
 		String section=testInputInfoMap.get("section");
 		String targetLang=testInputInfoMap.get("targetLang");
 		String targetYr=testInputInfoMap.get("targetYr");
@@ -758,6 +771,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			actualDocList_xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
 		}
 
+		//note: actualListDoc is the list of documents display on the UI
 		List<WebElement> actualListDoc = driver.findElements(By.xpath(actualDocList_xpath));
 		int actualTotalNumDoc=actualListDoc.size();
 		if (!expDocDisplay) {
@@ -787,42 +801,42 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
 			WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0
 			String actualDocName=eachDoc.getText();
-			System.out.println("TEST ------------- i="+i+" start validation for doc="+actualDocName+" for langauge="+langValue);
+			System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
 			
 			//note: need to change the expDocName into regex
 			//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 			//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
-			System.out.println("TEST - i="+i+" expDocName='"+expDocName+"' | actualDocName='"+actualDocName );
 			String expDocNamePattern=expDocName+"(.*?)";
-			System.out.println("TEST - i="+i+" expDocNamePattern='"+expDocNamePattern+"' | actualDocName='"+actualDocName );
+			System.out.println("TEST - looking for match for expDocName='"+expDocName+"' | expDocNamePattern='"+expDocNamePattern+"'");
 			Pattern p=Pattern.compile(expDocName+".*?");
 			Matcher m=p.matcher(actualDocName);
 			if (m.find()) {
 			
 			//keep if (actualDocName.toLowerCase().contains(expDocName.toLowerCase())) {
-				System.out.println("TEST - got a match");
+				System.out.println("TEST - got a name match for the expected doc from the list of UI docs, proceed to validate in detail...");
 				found=true;
 				planDocMap=new HashMap<String, Document>();
 				//note: find the element id and href 
-				String classStr=eachDoc.getAttribute("class");
-				System.out.println("TEST classStr="+classStr);
-				String[] tmp=classStr.split("clearfix ");
 				String segmentId="---";
-				if (tmp.length>0) {  //note: in case one more field after for the PDP case
-					segmentId=tmp[1];
-					tmp=segmentId.split(" ");
-					if (tmp.length>1) {
-						System.out.println("TEST - segment still has whitespace");
-						segmentId=tmp[0];
+					String classStr=eachDoc.getAttribute("class");
+					System.out.println("TEST - need to determine and fix up the segment ID for the matched UI doc.  classStr="+classStr);
+					String[] tmp=classStr.split("clearfix ");
+					if (tmp.length>0) {  //note: in case one more field after for the PDP case
+						segmentId=tmp[1];
+						tmp=segmentId.split(" ");
+						if (tmp.length>1) {
+							System.out.println("TEST - segment still has whitespace");
+							segmentId=tmp[0];
+						}
 					}
-				}
-				System.out.println("TEST - fixed segmentId="+segmentId);
+				System.out.println("TEST - fixed segmentId for the matched UI doc ="+segmentId);
 
 				//note: find the element id and href for each of the doc
-				System.out.println("TEST - use xpath="+actualDocList_xpath+"["+i+"]//a");
+				System.out.println("TEST - need to detemine the href and id for the matched UI doc using xpath="+actualDocList_xpath+"["+i+"]//a");
 				WebElement targetElement=driver.findElement(By.xpath(actualDocList_xpath+"["+i+"]//a"));
 				String expUrl=targetElement.getAttribute("href");
 				Document docObj=new Document();
+				docObj.setName(actualDocName);
 				docObj.setType(getDocType(testInputInfoMap, expDocName));
 				docObj.setCompCode(eachDoc.getAttribute("id"));
 				docObj.setLanguage(langValue);
@@ -836,10 +850,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				testInputInfoMap.put("expectedUrl", expUrl);
 				testInputInfoMap.put("redirectUrl", "none");
 				testInputInfoMap.put("switchTab", String.valueOf(switchTab));
-				System.out.println("TEST - switchTab="+testInputInfoMap.get("switchTab"));
+				System.out.println("TEST - need to determine whether new tab will open if link clicked... switchTab="+testInputInfoMap.get("switchTab"));
 				//note: validate if link destination is correct
 				validateLinkDest(testInputInfoMap, targetElement);
-
 				break;
 			}
 		}

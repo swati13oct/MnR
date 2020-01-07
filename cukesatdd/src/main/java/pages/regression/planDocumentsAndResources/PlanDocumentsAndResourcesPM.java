@@ -160,13 +160,19 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 	 */
 	public void validateFooter_PM(HashMap<String, String> testInputInfoMap) {
 		String planType=testInputInfoMap.get("planType");
+		String memberType=testInputInfoMap.get("memberType");
 		String section="Plan Materials footer";
 		if (planType.equals("SHIP") || planType.equals("SSP")) {
 			Assert.assertTrue("PROBLEM - for ship should not locate footer for '"+section+"' section", !planDocValidate(footer_PM));
 			return;
 		}
+		if (!memberType.contains("TERM")) {
+			System.out.println("SKIP footer validation for Terminated user because sometimes they have no doc and not footer but the dropdown still there");
+			return;
+		}
+			
 		Assert.assertTrue("PROBLEM - unable to locate footer for '"+section+"' section", planDocValidate(footer_PM));
-		
+
 		String item="Forms and Resources link";
 		WebElement lnkElment=footer_formsAndResources_link_PM;
 		String expectedUrl="#resources";
@@ -180,5 +186,6 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 		Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
 		actualUrl=lnkElment.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
+		
 	}
 }

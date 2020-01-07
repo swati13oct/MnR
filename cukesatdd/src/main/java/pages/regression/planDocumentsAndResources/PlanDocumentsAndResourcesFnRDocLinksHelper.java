@@ -1,13 +1,8 @@
 package pages.regression.planDocumentsAndResources;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import acceptancetests.util.CommonUtility;
 
 /**
  *  PlanDocumentsAndResourcesBase.getItemElementLnk - each doc should have an element in here

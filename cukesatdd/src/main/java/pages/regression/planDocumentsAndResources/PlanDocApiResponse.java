@@ -126,7 +126,6 @@ public class PlanDocApiResponse {
 	 * @param apiResponse
 	 */
 	public boolean buildDocListMap(HashMap<String, String> testInputInfoMap, String apiResponse) {
-		String planType=testInputInfoMap.get("planType");
 		String memberType=testInputInfoMap.get("memberType");
 		JSONParser parser = new JSONParser();
 		JSONObject apiResponseJsobObj=null;
@@ -184,13 +183,10 @@ public class PlanDocApiResponse {
 						docObjMap.put(docCategory, docObj);
 						if (docObj.getLanguage().equals("en_us")) {
 							planMatl_en_curYr_docList.add(docObjMap);
-							//tbd memMatl_en_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("es")) {
 							planMatl_es_curYr_docList.add(docObjMap);
-							//tbd memMatl_es_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("zh")) {
 							planMatl_zh_curYr_docList.add(docObjMap);
-							//tbd memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
 				} else if (docObj.getType().equals("2")) {
@@ -241,23 +237,6 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 						annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
-				/* tbd	
-				} else if (docObj.getType().equals("4") || docObj.getType().equals("8002")) {
-					String docCategory="Comprehensive Formulary";
-					docObjMap.put(docCategory, docObj);
-					if (docObj.getLanguage().equals("en_us")) {
-						planMatl_en_curYr_docList.add(docObjMap);
-						memMatl_en_curYr_docList.add(docObjMap);
-						annNotChgDoc_en_curYr_docList.add(docObjMap);
-					} else if (docObj.getLanguage().equals("es")) {
-						planMatl_es_curYr_docList.add(docObjMap);
-						memMatl_es_curYr_docList.add(docObjMap);
-						annNotChgDoc_es_curYr_docList.add(docObjMap);
-					} else if (docObj.getLanguage().equals("zh")) {
-						planMatl_zh_curYr_docList.add(docObjMap);
-						memMatl_zh_curYr_docList.add(docObjMap);
-						annNotChgDoc_zh_curYr_docList.add(docObjMap);
-					} */
 				} else if (docObj.getType().equals("7022")) {
 					String docCategory="Alternative Drug List";
 					docObjMap.put(docCategory, docObj);
@@ -313,8 +292,7 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("8006")) { 
 					String docCategory="Getting Started Guide";
-					//note: if PDP then it's Quick Start Guide
-					if (planType.equals("PDP") || memberType.contains("PREEFF")) 
+					if (docObj.getName().contains("Quick Start Guide")) 
 						docCategory="Quick Start Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
@@ -374,6 +352,26 @@ public class PlanDocApiResponse {
 						memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("5002")) {
+					String docCategory="Plan Benefits Table";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("5006")) {
+					String docCategory="A Guide to Health Insurance for People with Medicare";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}
 			//--------------	
@@ -509,6 +507,8 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("8006")) {
 					String docCategory="Getting Started Guide";
+					if (docObj.getName().contains("Quick Start Guide")) 
+						docCategory="Quick Start Guide";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						memMatl_en_nxtYr_docList.add(docObjMap);
@@ -637,7 +637,6 @@ public class PlanDocApiResponse {
 		String docs="";
 		for (HashMap<String, Document> item: inputList) {
 			docs=docs+" "+item.keySet();
-			//tbd doNoteAndText("    "+item.keySet());
 		}
 		doNoteAndText("    "+docs);
 	}

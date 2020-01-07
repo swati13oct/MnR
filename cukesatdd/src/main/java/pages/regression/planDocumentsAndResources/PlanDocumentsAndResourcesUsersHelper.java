@@ -1,7 +1,6 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import org.junit.Assert;
 
@@ -476,7 +475,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
-				targetTestDocList.add("UnitedHealth Passport Program"); 
+				//targetTestDocList.add("UnitedHealth Passport Program"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -484,7 +483,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport"); 
+				//targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
@@ -1157,7 +1156,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Summary of Benefits");
+				targetTestDocList.add("Summary of Benefits"); //note: copy deck didn't have this but online-stage UI does
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2134,7 +2133,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
-				targetTestDocList.add("How to appoint a representative");
+				targetTestDocList.add("How to appoint a representative"); //note: copy deck said it should be this but UI has Medical Reimbursement Form (PDF)
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
@@ -2287,10 +2286,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
-				//BAD: should be this 
-				//targetTestDocList.add("How to appoint a representative");
-				targetTestDocList.add("Medical Reimbursement Form (PDF)");
-				
+				targetTestDocList.add("How to appoint a representative");
+				//tbd targetTestDocList.add("Medical Reimbursement Form (PDF)"); //TODO - BAD: UI showed this but copy deck expect the 'How to appoint..."
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
@@ -3022,20 +3019,11 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
-				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("Alternative Drug List");
-				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
-				targetTestDocList.add("Beneficios Importantes");
-				targetTestDocList.add("Formulario completo");
-				targetTestDocList.add("Lista de Medicamentos");
-				targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
@@ -3182,21 +3170,21 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
-				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Additional Drug Coverage");
 				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Certificate of Coverage");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Certificate of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
-				targetTestDocList.add("Beneficios Importantes");
-				targetTestDocList.add("Formulario completo");
-				targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Beneficios Importantes");
+				//targetTestDocList.add("Formulario completo");
+				//targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
@@ -3207,10 +3195,10 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Certificate of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {

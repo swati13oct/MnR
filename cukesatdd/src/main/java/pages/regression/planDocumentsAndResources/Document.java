@@ -162,12 +162,8 @@ public class Document {
 			return "6002";
 		if (docName.toLowerCase().equalsIgnoreCase("Summary of Benefits".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Resumen de Beneficios".toLowerCase())) 
 			return "3";
-		//tbd if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
-		//tbd 	return "2";
 		if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
 			return "2";
-		//tbd if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
-		//tbd 	return "1022";
 		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
 		 	return "1022";
 		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Formulary Comprehensive".toLowerCase())) 
@@ -202,6 +198,10 @@ public class Document {
 		}
 		if (docName.toLowerCase().equalsIgnoreCase("Certificate of Coverage".toLowerCase()))
 			return "8003";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Benefits Table".toLowerCase())) 
+			return "5002"; //note: SHIP
+		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
+			return "5006"; //note: SHIP
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-1";
 	}
