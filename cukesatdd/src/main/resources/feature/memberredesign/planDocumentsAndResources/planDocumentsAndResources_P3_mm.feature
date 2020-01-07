@@ -72,7 +72,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#LX      | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+      | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
 
 
      

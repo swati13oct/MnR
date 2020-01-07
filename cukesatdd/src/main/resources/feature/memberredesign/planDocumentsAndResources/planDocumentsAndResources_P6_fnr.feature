@@ -78,5 +78,5 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#LX      | 19-114 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  | false   | false  | false  |
+      | 19-114 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  | false   | false  | false  |
     

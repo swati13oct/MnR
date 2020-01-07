@@ -65,7 +65,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 14-090 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | false    | false    | false    | false    | false    |
+      | 14-090 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 		## 15 - vendor information sheet does not have spanish name
       | 15-091 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
@@ -83,6 +83,6 @@ Feature: 1.06.1 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-#LX      | 19-095 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false    | false    | false    | false    | false    | false    | 
+      | 19-095 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false    | false    | false    | false    | false    | false    | 
   
   

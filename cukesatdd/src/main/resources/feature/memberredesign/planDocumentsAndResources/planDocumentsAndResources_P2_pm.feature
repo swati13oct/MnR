@@ -76,7 +76,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-#LX      | 19-038 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+      | 19-038 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
 
 
 

@@ -78,7 +78,7 @@ Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents 
 	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#LX      | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
 
 
 
