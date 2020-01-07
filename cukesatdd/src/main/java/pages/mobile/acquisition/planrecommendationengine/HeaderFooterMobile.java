@@ -458,8 +458,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		shopforaplanLink.click();
 		validate(headerShopLink, 30);
 		headerShopLink.click();
-		validate(HeaderShopToolsGetHelpChoosingLink, 30);
-		HeaderShopToolsGetHelpChoosingLink.click();
+		mobileUtils.mobileLocateElementClick(HeaderShopToolsGetHelpChoosingLink);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}

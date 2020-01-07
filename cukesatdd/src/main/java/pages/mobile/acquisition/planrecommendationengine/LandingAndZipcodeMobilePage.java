@@ -176,8 +176,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
 		String page = "Location";
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
-		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
+			hidekeypad();
 			validate(countyInfo, 20);
 			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()));
 		} else {
@@ -188,7 +188,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
-			multicounty.selectByVisibleText(inputdata.get("County Name"));
+			mobileSelectOption(multicounty,inputdata.get("County Name"));
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating "+page+" page Continue button functionality");

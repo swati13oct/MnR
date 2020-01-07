@@ -844,13 +844,7 @@ try {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
 			((AndroidDriver)driver).hideKeyboard();
 		else {
-			String curHandle = ((IOSDriver) driver).getContext();
-			System.out.println("curHandle - "+curHandle);
-			System.out.println(((IOSDriver) driver).getContextHandles());
-			((IOSDriver) driver).context("NATIVE_APP");
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
-			threadsleep(500);
-			((IOSDriver) driver).context(curHandle);
+			clickTextIOSNative("Done");
 		}
 		threadsleep(1000);
 		}catch(Exception e) {
@@ -918,7 +912,35 @@ try {
 			mobileFindElement(element,swipeCount,swipeUp);
 		}
 	}
+	
+	public void mobileSelectOption(Select element,String option) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			element.selectByVisibleText(option);
+		}
+		else {
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - "+curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
+			((IOSDriver) driver).context("NATIVE_APP");
+			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			threadsleep(500);
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+			((IOSDriver) driver).context(curHandle);
+			System.out.println("curHandle - "+((IOSDriver) driver).getContext());
+		}
+	}
 
+	public void clickTextIOSNative(String text) {
+		String curHandle = ((IOSDriver) driver).getContext();
+		System.out.println("curHandle - "+curHandle);
+		System.out.println(((IOSDriver) driver).getContextHandles());
+		((IOSDriver) driver).context("NATIVE_APP");
+		((IOSDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
+		threadsleep(500);
+		((IOSDriver) driver).context(curHandle);
+		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
+	}
+	
 	public void threadsleep(int sec) {
 		try {
 			Thread.sleep(sec);
