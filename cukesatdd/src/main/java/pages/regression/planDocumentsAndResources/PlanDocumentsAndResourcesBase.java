@@ -108,10 +108,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			targetLinkElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("Clicked the doc link...");
-			sleepBySec(5);
+			sleepBySec(3);
 			if (!redirectUrl.equals("none")) {
 				System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
-				sleepBySec(5);
+				sleepBySec(3);
 				CommonUtility.checkPageIsReady(driver);
 			}
 			if (targetDocName.toUpperCase().contains("HEALTH PRODUCTS BENEFIT") 
@@ -143,7 +143,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			int afterClicked_numTabs=afterClicked_tabs.size();			
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-			sleepBySec(5);
+			sleepBySec(3);
 			CommonUtility.checkPageIsReady(driver);
 
 			if (checkDestUrl) {

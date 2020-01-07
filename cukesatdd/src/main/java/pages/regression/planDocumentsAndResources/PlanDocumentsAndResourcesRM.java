@@ -32,15 +32,14 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		//note: dev said the link itself has the word '2019' it's not tie to actual year. overwrite it but leave it like this for now in case it changes later
 		currentYear="2019";
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/index.html";
-		String redirectUrl="none";
-		if (memberType.toUpperCase().contains("GROUP")) {
+		String redirectUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/user_guide.html";
+		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
 			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/index.html";
-			//tbd if (memberType.toUpperCase().contains("PEEHIP")) 
-			//tbd 	redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_2019/user_guide.html";
-		} else if (planType.toUpperCase().contains("PDP"))
+			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/user_guide.html";
+		} else if (planType.toUpperCase().contains("PDP")) {
 			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/index.html";
-		
-		testInputInfoMap.put("docName", item);
+			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/user_guide.html";
+		}
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);
 		testInputInfoMap.put("checkDestUrl", "true");

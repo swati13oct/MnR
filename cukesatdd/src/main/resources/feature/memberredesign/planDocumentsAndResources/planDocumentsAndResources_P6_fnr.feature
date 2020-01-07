@@ -12,7 +12,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
       | Member Type | <memberType> |
     And documents are able to load successfully
 	And I want to customize test setup
-	  | Validate API                     | true |
+	  | Validate API                     | true  |
 	  | Skip Link Destination Validation | false |
 	Then user validate Forms and Resources section
 	  | Section Display                    | <fnr_sd>   | 
@@ -73,7 +73,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 18-113 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false    | false   | true   | true   | false   | true   | false  |
+#AX      | 18-113 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false    | false   | true   | true   | false   | true   | false  |
 
 	@active_ship
 	Examples: 

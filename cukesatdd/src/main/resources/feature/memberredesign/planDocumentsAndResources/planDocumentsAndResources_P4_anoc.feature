@@ -11,7 +11,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Annual Notice of Changes D
       | Member Type | <memberType> |
     And documents are able to load successfully
 	And I want to customize test setup
-	  | Validate API                     | true |
+	  | Validate API                     | true  |
 	  | Skip Link Destination Validation | false |
 	Then user validates jumplink and listing of mandatory documents for section Annual Notice of Changes Documents
 	  | Section Display                    | <an_sd>    | 
@@ -60,19 +60,19 @@ Feature: 1.06.1 Member Plans and Documents - section: Annual Notice of Changes D
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | false    | false    | false    | false    | false    |
+      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
       | 15-072 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
 
 	@active_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 16-073 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
-      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false     | false    | false    |
+      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false     | false    | false    |
 
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 18-075 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
+#AX      | 18-075 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 
 	@active_ship
     Examples: 

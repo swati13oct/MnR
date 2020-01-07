@@ -71,6 +71,7 @@ public class PlanDocumentsAndResourcesANOC extends PlanDocumentsAndResourcesBase
 	 * Validate default language selection for Annual Notice of Changes Documents section
 	 */
 	public void validateDefaultLangSelect_ANOC(boolean sectionDisplay) {
+		CommonUtility.checkPageIsReady(driver);
 		String section="Annual Notice of Changes Documents";
 		String expectedDefaultText="ENGLISH";
 		WebElement dropdownElement=langDropDown_ANOC;
