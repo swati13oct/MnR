@@ -44,7 +44,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h1//span[text()='Results for ']")
 	public WebElement ResultsHeader;
 
-	@FindBy(xpath = "(//*[contains(@data-test-key,'provider-name-link')])[1]")
+	@FindBy(xpath = "(//*[contains(@data-test-id,'provider-name-link')])[1]")
 	public WebElement FirstHospitalRecord;
 
 	@FindBy(xpath = "//Img[@alt='Facility icon']")

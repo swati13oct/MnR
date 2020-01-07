@@ -75,19 +75,6 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
       |   90210 | NO              | Los Angeles County | MA       |AARP Medicare Advantage SecureHorizons Essential (HMO)|
 
-  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageUlayerSmoke @prodRegression
-  Scenario Outline: Verify Provider Search  in AARP site from Home Page
-    Given the user is on AARP medicare acquisition site landing page
-    When the user clicks on Provider Search on the Home Page
-    Then the user enters the zipcode and select a plan on the Rally tool
-      | Zip Code  | <zipcode>  |
-      | Plan Name | <planname> |
-       | 	Year  | <year>	   |
-    When user selects a provider and saves it
-
-    Examples: 
-      | zipcode | planname                                          | year		  |
-      |   90002 | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |currentYear  |
       
  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
