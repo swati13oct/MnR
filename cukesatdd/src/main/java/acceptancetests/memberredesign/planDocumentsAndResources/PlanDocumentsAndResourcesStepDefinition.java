@@ -1180,6 +1180,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.addAll(docSection_note);
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 			sectionNote.add("  ------------------------------------------------------");
 
@@ -1191,7 +1192,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(authFormsAndInfoDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-
 			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
@@ -1199,6 +1199,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.addAll(docSection_note);
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 			sectionNote.add("  ------------------------------------------------------");
 
@@ -1216,6 +1217,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.addAll(docSection_note);
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 			sectionNote.add("  ------------------------------------------------------");
 
@@ -1233,6 +1235,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.addAll(docSection_note);
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 			sectionNote.add("  ------------------------------------------------------");
 
@@ -1250,6 +1253,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				sectionNote.addAll(docSection_note);
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 			sectionNote.add("  ------------------------------------------------------");
 
@@ -1268,6 +1272,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 					sectionNote.addAll(docSection_note);
 				}
 				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
+				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
 				sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
 				sectionNote.add("  ------------------------------------------------------");
 			}

@@ -1172,7 +1172,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
@@ -2691,7 +2691,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("UnitedHealth Passport Program");
-				//targetTestDocList.add("Health & Wellness Products Catalog");
+				targetTestDocList.add("Health & Wellness Products Catalog");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {

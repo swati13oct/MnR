@@ -80,6 +80,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		Assert.assertTrue("PROBLEM - unable to locate sub-section '"+subSection_FnR+"' in '"+section+"' section", planDocValidate(subSectionElement));
 		moveMouseToElement(subSectionElement);
 		scrollElementToCenterScreen(subSectionElement);
+		System.out.println("Proceed to expand the section");
 		subSectionElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(1);
@@ -131,25 +132,28 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		List<String> linkValidate_note=validateLinkDest(testInputInfoMap, docElement);
 		section_note.addAll(linkValidate_note);
 		if (!switchTab) {
+			System.out.println("TEST - Prior link validation doesn't open new tab, so prep the page for next test for subsection='"+subSection+"' and doc='"+docName+"'");
 			prepFnrPg(testInputInfoMap, getSubSectionElement_FnR(subSection), docElement);
 		}
 		section_note.add("    PASSED - document '"+docName+"' in sub-section '"+subSection+"' validation");
 		return section_note;
 	}
-	
+	//lyc
 	/**
 	 * helper - prior step would reload the Plan Documents & Resources page, prep the page back to where the doc would be visible
 	 * @param subSectionElement
-	 * @param docElement
+	 * @param docElementfgi
 	 */
 	public void prepFnrPg(HashMap<String, String> testInputInfoMap, WebElement subSectionElement, WebElement docElement) {
 		boolean skipLnkDestCheck=Boolean.valueOf(testInputInfoMap.get("skipLnkDestCheck"));
 		if (!skipLnkDestCheck) {
-			scrollElementToCenterScreen(subSectionElement);
-			moveMouseToElement(subSectionElement); 
-			subSectionElement.click();
-			CommonUtility.waitForPageLoad(driver, docElement, 5);
-			CommonUtility.checkPageIsReady(driver);
+			if (!planDocValidate(docElement)) {
+				scrollElementToCenterScreen(subSectionElement);
+				moveMouseToElement(subSectionElement); 
+				subSectionElement.click();
+				CommonUtility.waitForPageLoad(driver, docElement, 5);
+				CommonUtility.checkPageIsReady(driver);
+			}
 			scrollElementToCenterScreen(docElement);
 			moveMouseToElement(docElement); 
 			CommonUtility.checkPageIsReady(driver);

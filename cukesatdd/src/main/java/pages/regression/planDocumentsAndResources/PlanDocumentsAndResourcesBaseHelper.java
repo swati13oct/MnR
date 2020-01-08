@@ -358,8 +358,9 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
 		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
 		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
-		System.out.println("TEST - move element to center view");
-
+		System.out.println("TEST - move element to center view"); 
+		/* JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
 
 	public boolean isAlertPresent() {

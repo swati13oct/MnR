@@ -152,16 +152,26 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 				
 			//tbd }
 		if (testInputInfoMap.get("planType").toUpperCase().contains("PCP")) {
+			if (MRScenario.environment.contains("team-a")) {
+				expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
+				redirectUrl="https://member.mymedicareaccount.com/pcp/find-care";
+			} else {
 			expectedUrl="https://member.int.mymedicareaccount.uhc.com/PCP/find-care";
 			redirectUrl="https://member.int.mymedicareaccount.uhc.com/pcp/find-care";
+			}
+			
 		} else if (testInputInfoMap.get("planType").toUpperCase().contains("MEDICA")) {
+			if (MRScenario.environment.contains("team-a")) {
+				expectedUrl="https://member.mymedicareaccount.com/Medica/find-care";
+				redirectUrl="https://member.mymedicareaccount.com/medica/find-care";
+			} else {
 			expectedUrl="https://member.int.mymedicareaccount.uhc.com/Medica/find-care";
 			redirectUrl="https://member.int.mymedicareaccount.uhc.com/medica/find-care";
-		}
-		else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
+			}
+		} else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
 			if (MRScenario.environment.contains("team-a")) {
 				expectedUrl="https://member.uhc.com/AARP/find-care";
-				redirectUrl="https://member.uhc.com/aarp/find-care";
+				redirectUrl="https://www.medicare.uhc.com/";
 			} else {
 				expectedUrl="https://member.int.uhc.com/AARP/find-care";
 				redirectUrl="https://member.int.uhc.com/aarp/find-care";
