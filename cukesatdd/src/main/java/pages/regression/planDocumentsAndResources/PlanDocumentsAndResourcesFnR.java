@@ -138,7 +138,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		section_note.add("    PASSED - document '"+docName+"' in sub-section '"+subSection+"' validation");
 		return section_note;
 	}
-	//lyc
+	
 	/**
 	 * helper - prior step would reload the Plan Documents & Resources page, prep the page back to where the doc would be visible
 	 * @param subSectionElement
