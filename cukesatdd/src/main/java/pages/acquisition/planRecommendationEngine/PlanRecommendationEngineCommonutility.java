@@ -55,31 +55,67 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 	@FindBy(css = "#errorMessage>div:nth-child(2)")
 	private WebElement errorMessage;
 	
-
+	public String currentPageName, previousPageName, previousPagePercentage, nextPageName, nextPagePercentage;
 		
-//Coverage Option Page Function Verification			
-		public void coverageOptionpageerror() {
-			System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-			continueBtn.click();
-			Assert.assertTrue(errorMessage.getText().contains("Please"));
-		}
-		
-//Previous Button Functionality for Coverage Options Page
-		public void previouspageValidation() {
-			System.out.println("Previous page Validation");
+// Previous Button Functionality Mobile
+		public void previouspageValidation(String pageName) {
+			System.out.println("Previous page Validation Mobile");
+			findPagedetails(pageName);
 			try {
-			if(errorMessage.isDisplayed()) {
-				validate(pageProgressPercentage, 30);
-				Assert.assertTrue(pageProgressPercentage.getText().contains("16% Complete"));
-			}else if(pageStepsNumberName.getText().contains("Location")){
-				validate(pageProgressPercentage, 30);
-				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
+				threadsleep(1500);
+				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
+						"Previous page validation failed");
+				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage));
+			} catch (Exception e) {
+				System.out.println("Unable to validate previous button functionality are not Visible");
 			}
 		}
-			catch(Exception e){
-				System.out.println("Page is not Visible");
+
+// Continue Button Functionality Mobile
+		public void nextPageValidation(String pageName) {
+			System.out.println("Next page Validation Desktop");
+			findPagedetails(pageName);
+			try {
+				threadsleep(1500);
+				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(nextPageName),
+						"Next page validation failed");
+				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage));
+			} catch (Exception e) {
+				System.out.println("Unable to validate Continue button functionality are not Visible");
 			}
 		}
+
+		public void findPagedetails(String pageName) {
+			currentPageName = pageName.toUpperCase().trim();
+			previousPageName = new String();
+			previousPagePercentage = new String();
+			nextPageName = new String();
+			nextPagePercentage = new String();
+			// Update the else as else if for each page
+			if (currentPageName.contains("COVERAGE")) {
+				previousPageName = "LOCATION";
+				previousPagePercentage = "8%";
+				nextPageName = "SPECIAL";
+				nextPagePercentage = "16%";
+			} else if (currentPageName.contains("SPECIAL")) {
+				previousPageName = "COVERAGE";
+				previousPagePercentage = "16%";
+				nextPageName = "CARE";
+				nextPagePercentage = "24%";
+			}else if (currentPageName.contains("CARE")) {
+				previousPageName = "SPECIAL";
+				previousPagePercentage = "24%";
+				nextPageName = "DOCTORS";
+				nextPagePercentage = "32%";
+			} else {
+				previousPageName = "";
+				previousPagePercentage = "";
+				nextPageName = "";
+				nextPagePercentage = "";
+			}
+			previousPagePercentage = previousPagePercentage + " COMPLETE";
+			nextPagePercentage = nextPagePercentage + " COMPLETE";
+		}		
 
 	public void browserBack() {
 

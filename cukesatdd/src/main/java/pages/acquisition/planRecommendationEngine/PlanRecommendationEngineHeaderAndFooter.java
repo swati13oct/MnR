@@ -85,10 +85,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
 	private WebElement headerNavigationBarHomeTab;
 	
-	@FindBy(css = "#ghn_lnk_2 > span")
+	@FindBy(css = "a[dtmname*='Shop For a Plan']")
 	private WebElement headerNavigationBarShopForaPlanTab;
 	
-	@FindBy(css = "#ghn_lnk_3 > span")
+	@FindBy(css = "a[dtmname*='Learn About Medicare']")
 	private WebElement headerNavigationBarLearnAboutMedicareTab;
 	
 	@FindBy(xpath = "//*[@id='mobile-nav']/div/div[2]/form/div/input")
@@ -503,7 +503,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 //	Footer Element Click Verification Method
 	
-	public void footerLinkvalidation() {
+	public void footerLinkvalidation() throws Exception{
 		if (driver.getCurrentUrl().contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
 			AARPlogoInHeader.click();
@@ -583,10 +583,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	}
 	
 //Navigating Plan RecommendationEngine via Get Plan Recommendation	
-	public void navigationToPlanRecommendationEngine() {
-		validate(headerNavigationBarShopForaPlanTab, 45);
+	public void navigationToPlanRecommendationEngine() throws InterruptedException{
+		/*validate(headerNavigationBarShopForaPlanTab, 45);
 		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
-		headerGetaPlanRecommendationLink.click();
+		 Thread.sleep(10000);
+		 validate(headerGetaPlanRecommendationLink, 30);
+		 actions.moveToElement(headerGetaPlanRecommendationLink,20,0).click().perform();*/
+		actions.moveToElement(headerNavigationBarShopForaPlanTab).click(headerGetaPlanRecommendationLink).build().perform();
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
 	}

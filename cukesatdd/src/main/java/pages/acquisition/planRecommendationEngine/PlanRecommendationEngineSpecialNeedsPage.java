@@ -13,6 +13,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 
@@ -26,8 +27,10 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 		checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
-
 	}
+	String page = "Special";
+	
+	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -58,64 +61,64 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	private WebElement snpMedicaid;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	private WebElement snpConditions;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	private WebElement snpNursinghome;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	private WebElement snpNone;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header")
 	private WebElement snpMedicaidAccordion;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-header")
 	private WebElement snpConditionsAccordion;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header")
 	private WebElement snpNursinghomeAccordion;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
 	private WebElement snpMedicaidAccordionCarrot;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
 	private WebElement snpConditionsAccordionCarrot;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
 	private WebElement snpNursinghomeAccordionCarrot;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
 	private WebElement snpMedicaidAccordionMoreInfo;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
 	private WebElement snpConditionsAccordionMoreInfo;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
 	private WebElement snpNursinghomeAccordionMoreInfo;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
 	private WebElement snpMedicaidAccordionMoreInfo1stPara;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
 	private WebElement snpConditionsAccordionMoreInfo1stPara;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-content>span>p:nth-child(1)")
 	private WebElement snpNursinghomeAccordionMoreInfo1stPara;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(1)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
 	private WebElement snpMedicareAccordionMoreInfo2ndPara;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(2)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
 	private WebElement snpConditionsAccordionMoreInfo2ndPara;
 	
-	@FindBy(css = "uhc-checkbox-group>div:nth-child(3)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
 	private WebElement snpNursinghomeAccordionMoreInfo2ndPara;
 	
-	@FindBy(css = "#errorMessage>div:nth-child(2)")
+	@FindBy(css = "#errorMessage>span:nth-child(2)")
 	private WebElement errorMessage;
 	
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
@@ -145,7 +148,9 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			Assert.assertTrue(snpNursinghome.getText().contains("facility"));
 			validate(snpNone, 30);
 			Assert.assertTrue(snpNone.getText().contains("None"));
-			
+			previousBtn.click();
+			System.out.println("Validationg "+page+" page Previous button functionality");
+			desktopCommonUtils.previouspageValidation(page.toUpperCase());
 		}
 		
 // Splitting the input options and selecting it and Verifying the More Information Content
@@ -162,7 +167,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				if(options.isEmpty()){
 					continueBtn.click();
 					validate(errorMessage, 30);
-					Assert.assertTrue(errorMessage.getText().contains("Please"));
+					Assert.assertTrue(errorMessage.getText().contains("No"));
 				}else if(options.contains("None")) {
 					String snpoptions[] = options.split(",");
 					for(String option:snpoptions) {

@@ -26,8 +26,11 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		checkModelPopup(driver);
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
-
 	}
+	
+	String page = "Coverage Options";
+	
+	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -100,7 +103,9 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 			Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
 			validate(plantypeNone, 30);
 			Assert.assertTrue(plantypeNone.getText().contains("don't"));
-			
+			previousBtn.click();
+			System.out.println("Validating "+page+" page Previous button functionality");
+			desktopCommonUtils.previouspageValidation(page.toUpperCase());
 		}
 		
 //Coverage Option Page Function Verification		
@@ -125,7 +130,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 				System.out.println("Plan Type "+planType +" Clicked");
 			}			
 			continueBtn.click();
-			
+			System.out.println("Validating "+page+" page Continue button functionality");
+			desktopCommonUtils.nextPageValidation(page.toUpperCase());
 		}
 		
 //Coverage option page - Select Plantype and click on Previous Button	
@@ -156,7 +162,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 				System.out.println("Plan Type not selected in Coverage Options Page");
 			}
 			previousBtn.click();
-			
+			System.out.println("Validating "+page+" page Previous button functionality");
+			desktopCommonUtils.previouspageValidation(page.toUpperCase());
 		}
 		
 //Coverage Option Page Function Verification			
@@ -164,23 +171,6 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 			System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
 			continueBtn.click();
 			Assert.assertTrue(errorMessage.getText().contains("Please"));
-		}
-		
-//Previous Button Functionality for Coverage Options Page
-		public void previouspageValidation() {
-			System.out.println("Previous page Validation");
-			try {
-			if(radioselect.isDisplayed()) {
-				validate(pageProgressPercentage, 30);
-				Assert.assertTrue(pageProgressPercentage.getText().contains("16% Complete"));
-			}else if(pageStepsNumberName.getText().contains("Location")){
-				validate(pageProgressPercentage, 30);
-				Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
-			}
-		}
-			catch(Exception e){
-				System.out.println("Page is not Visible");
-			}
 		}
 
 	public void browserBack() {

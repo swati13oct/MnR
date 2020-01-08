@@ -20,10 +20,12 @@ import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -59,7 +61,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -194,7 +196,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@When("^user validate elements on landing page of Plan Recommendation Engine$")
-	public void user_check_landing_page_Plan_Selector_tool() {
+	public void user_check_landing_page_Plan_Selector_tool() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
@@ -240,7 +242,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validates all Links from header and footer desktop$")
-	public void user_check_header_Footer_link_validation_mobile() {
+	public void user_check_header_Footer_link_validation_mobile() throws Exception {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.headerLinkvalidation();
 		headerAndFooter.footerLinkvalidation();
@@ -279,7 +281,15 @@ public class PlanRecommendationEngineStepDefinition {
 		String plantype = inputValues.get("Plan Type");
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
-		}else {
+		}
+	}
+	
+	@And("^user not selects plan type in coverage options page$")
+	public void notselect_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
+		String plantype = inputValues.get("Plan Type");
+		if (plantype.isEmpty()) {
 			planSelectorCoverageepage.coverageOptionpageerror();
 		}
 	}
@@ -289,8 +299,6 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		planSelectorCoverageepage.coverageOptionpageFunctional(inputValues.get("Plan Type"));
-//		planSelectorCoverageepage.browserBack();
-//		planSelectorCoverageepage.previouspageValidation();
 	}
 	
 	@And("^user select planType and Click previous button to check previous page$")
@@ -298,7 +306,6 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		planSelectorCoverageepage.coverageOptionpagePreviousButton(inputValues.get("Plan Type"));
-		planSelectorCoverageepage.previouspageValidation();
 	}
 	
 	@Then("^user validate elements in Special Needs page$")
@@ -311,7 +318,38 @@ public class PlanRecommendationEngineStepDefinition {
 	public void select_special_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
-		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),inputValues.get("Status"));	
+		String status = "Positive";
+		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
+	}
+	
+	@And("^user validating error scenario in Special Needs Page")
+	public void error_special_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(wd);
+		String status = "Negative";
+		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
+	}
+	
+	@Then("^user validate elements in Travel page$")
+	public void elements_travel_page() {
+		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage(wd);
+		planSelectorTravelpage.travelPageElement();
+	}
+	
+	@And("^user selects Travel options in Care Away From Home Page")
+	public void select_travel_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage(wd);
+		String status = "Positive";
+		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"),status);	
+	}
+	
+	@And("^user validating error scenario in Care Away From Home Page")
+	public void error_travel_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage(wd);
+		String status = "Negative";
+		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"),status);	
 	}
 	
 	
