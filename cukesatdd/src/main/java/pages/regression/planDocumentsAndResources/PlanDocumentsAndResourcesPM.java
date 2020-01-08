@@ -166,7 +166,7 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 			Assert.assertTrue("PROBLEM - for ship should not locate footer for '"+section+"' section", !planDocValidate(footer_PM));
 			return;
 		}
-		if (!memberType.contains("TERM")) {
+		if (memberType.contains("TERM")) {
 			System.out.println("SKIP footer validation for Terminated user because sometimes they have no doc and not footer but the dropdown still there");
 			return;
 		}

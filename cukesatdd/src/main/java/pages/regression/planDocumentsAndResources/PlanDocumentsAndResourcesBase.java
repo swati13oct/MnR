@@ -76,6 +76,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
 		boolean switchTab=Boolean.valueOf(testInputInfoMap.get("switchTab"));
 		String targetDocName=testInputInfoMap.get("docName");
+
+		//note: this is a bypass for team-atest, lower env has issue w/ this but would be fine on stage according to developer
+		if(MRScenario.environment.contains("team-a") 
+				&& planType.equals("PDP") && memberType.contains("GROUP")) {
+			section_note.add("    SKIP - link destination validation for '"+targetDocName+"' on team env, lower env won't work right for this link");
+			return section_note;
+		}
+
 		System.out.println("Proceed to validate clicking link element for doc='"+targetDocName+"'  | checkDestUrl="+checkDestUrl);
 		String expUrl=testInputInfoMap.get("expectedUrl");
 		String redirectUrl=testInputInfoMap.get("redirectUrl");
@@ -84,6 +92,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			expUrl=redirectUrl;
 			System.out.println("after redirect expUrl="+expUrl);
 		}
+		
 		//note: if skipLnkDestCheck=true, then overwrite whatever that's in checkDestUrl
 		boolean skipLnkDestCheck=Boolean.valueOf(testInputInfoMap.get("skipLnkDestCheck"));
 		if (skipLnkDestCheck) {
@@ -111,12 +120,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				sleepBySec(3);
 				CommonUtility.checkPageIsReady(driver);
 			}
+			//note: for these doc, popup will show when clicking this link, validate the proceed and cancel button
 			if (targetDocName.toUpperCase().contains("HEALTH PRODUCTS BENEFIT") 
 					|| targetDocName.contains("Appointment of Representative Form")
 					|| targetDocName.toUpperCase().contains("OVER THE COUNTER ESSENTIALS")
 					|| targetDocName.contains("Health & Wellness Products Catalog")) {
 				CommonUtility.waitForPageLoad(driver, siteLeavingPopup, 5);
-				//note: popup will show when clicking this link, validate the proceed and cancel button
 				System.out.println("Proceed to validate the leaving site popup after clicking "+targetDocName+" link");
 				Assert.assertTrue("PROBLEM - unable to locate the site-leaving popup after clicking the '"+targetDocName+"' link", planDocValidate(siteLeavingPopup));
 				Assert.assertTrue("PROBLEM - unable to locate the site-leaving popup PROCEED button after clicking the '"+targetDocName+"' link", planDocValidate(siteLeavingPopup_proceedBtn));
@@ -137,7 +146,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			}
 
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-			int afterClicked_numTabs=afterClicked_tabs.size();			
+			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			sleepBySec(3);
@@ -220,8 +229,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		Assert.assertTrue("PROBLEM - unable to locate 'Back To Top' link on the page", planDocValidate(backToTopElement));
 	}
 
-	public String getApiResponse(String inputUrl)  {
+	public String getApiResponse(String planType, String memberType, String inputUrl)  {
 
+		String origUrlBeforeClick=driver.getCurrentUrl();
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to get API response");
 		System.out.println("test URL= "+inputUrl);
@@ -236,6 +246,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
+		
+		//note: this particular user on lower env is getting stale element exception, refresh the page at this point to get it going
+		if (MRScenario.environment.contains("team-a") && planType.equals("PDP") && memberType.contains("COMBO")) 
+			refreshPage(planType, memberType, origUrlBeforeClick);
 		return apiResponseJsonStr;
 	}
 
@@ -652,6 +666,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
 		}
+		
 		//note: this section will only invoke if step definition decide to validate API also
 		if (validateApi) {
 			if (memberType.contains("TERM")) {
@@ -660,6 +675,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			}
 			boolean anocFlag=false;
 			List<HashMap<String, Document>> exp_docListFromApi=new ArrayList<HashMap<String, Document>>();
+			//note: use hte right expected list of doc based on the seciton and language
 			if (targetSubSection.equals("currentYear")) {
 				anocFlag=api_planDocMap.isAnocCurrentYearFlag();
 				System.out.println("TEST - api_planDocMap.isAnocCurrentYearFlag()="+anocFlag);
@@ -746,7 +762,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public HashMap<String, Document> validateDoc(HashMap<String, String> testInputInfoMap, String expDocName) {
-		System.out.println("Proceed to validate expected document="+expDocName);
+		System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI");
 		String section=testInputInfoMap.get("section");
 		String targetLang=testInputInfoMap.get("targetLang");
 		String targetYr=testInputInfoMap.get("targetYr");
@@ -755,6 +771,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		HashMap<String, Document> planDocMap=null;
 
 		WebElement langDropDown=null;
+		
+		//note: xpath for the documents and language dropdown for each section on the page
 		String actualDocList_xpath="";
 		if (section.equals("Plan Materials")) {
 			langDropDown=langDropDown_PM;
@@ -783,7 +801,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return planDocMap;
 		}
 
-		boolean switchTab=true;  //note: for PM doc, should open up new tab if clicked
+		//note: for PM doc, majority of those docs will open up new tab if clicked
+		boolean switchTab=true;  
 		String langValue="";
 		String category="";
 		if (targetLang.equals("EN")) {
@@ -797,13 +816,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			category=expDocName;
 			langValue="zh";
 		}
+
+		//note: loop through each doc in the section from UI and see if can locate the expected doc
 		boolean found=false;
 		for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
 			WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0
 			String actualDocName=eachDoc.getText();
 			System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
 			
-			//note: need to change the expDocName into regex
+			//note: use regex to find match for document name
 			//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 			//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
 			String expDocNamePattern=expDocName+"(.*?)";
@@ -811,10 +832,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			Pattern p=Pattern.compile(expDocName+".*?");
 			Matcher m=p.matcher(actualDocName);
 			if (m.find()) {
-			
-			//keep if (actualDocName.toLowerCase().contains(expDocName.toLowerCase())) {
 				System.out.println("TEST - got a name match for the expected doc from the list of UI docs, proceed to validate in detail...");
 				found=true;
+
+				//note: find the element attributes and store it into document object in case want to do API validation later
 				planDocMap=new HashMap<String, Document>();
 				//note: find the element id and href 
 				String segmentId="---";
@@ -851,8 +872,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				testInputInfoMap.put("redirectUrl", "none");
 				testInputInfoMap.put("switchTab", String.valueOf(switchTab));
 				System.out.println("TEST - need to determine whether new tab will open if link clicked... switchTab="+testInputInfoMap.get("switchTab"));
+
 				//note: validate if link destination is correct
 				validateLinkDest(testInputInfoMap, targetElement);
+				
+				//note: found the doc so no need to continue the loop
 				break;
 			}
 		}

@@ -10,10 +10,11 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
     And user navigates to plan documents and resources page validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    And documents are able to load successfully
-	And I want to customize test setup
-	  | Validate API                     | true  |
-	  | Skip Link Destination Validation | false |
+    ## note: no need for this section but keep it here for consistent with other scenarios  
+    ## And documents are able to load successfully
+	## And I want to customize test setup
+	##   | Validate API                     | true  |
+	##   | Skip Link Destination Validation | false |
 	Then user validate Forms and Resources section
 	  | Section Display                    | <fnr_sd>   | 
 	  | Prescription Drug Mail Order Form  | <fnr_pdmo> | 

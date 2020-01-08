@@ -146,6 +146,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	@SuppressWarnings("unchecked")
 	@And("^documents are able to load successfully$")
 	public void documents_are_able_to_load_successfully() {
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String memberType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE);
+
 		System.out.println("Proceed to get API response...");
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
@@ -153,7 +156,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		String planDocAndResources_apiResponse_url=planDocumentsAndResourcesPage.getApiRequestUrl(testInputInfoMap);
 		System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
 
-		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planDocAndResources_apiResponse_url);
+		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url);
 		System.out.println("TEST - apiResponseStr="+apiResponseStr);
 		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 		
@@ -173,6 +176,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		for (String s: result_testNote) {
 			System.out.println(s);
 		}
+		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 
 	@SuppressWarnings("unchecked")

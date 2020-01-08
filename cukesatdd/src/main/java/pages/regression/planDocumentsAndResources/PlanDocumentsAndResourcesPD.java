@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  {
@@ -157,21 +159,22 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			redirectUrl="https://member.int.mymedicareaccount.uhc.com/medica/find-care";
 		}
 		else if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
-			expectedUrl="https://member.int.uhc.com/AARP/find-care";
-			redirectUrl="https://member.int.uhc.com/aarp/find-care";
+			if (MRScenario.environment.contains("team-a")) {
+				expectedUrl="https://member.uhc.com/AARP/find-care";
+				redirectUrl="https://member.uhc.com/aarp/find-care";
+			} else {
+				expectedUrl="https://member.int.uhc.com/AARP/find-care";
+				redirectUrl="https://member.int.uhc.com/aarp/find-care";
+			}
 		} else {
-			expectedUrl="https://member.int.uhc.com/UHC/find-care";
-			redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
+			if (MRScenario.environment.contains("team-a")) {
+				expectedUrl="https://member.uhc.com/UHC/find-care";
+				redirectUrl="https://www.myuhc.com/member/prewelcome.do";
+			} else {
+				expectedUrl="https://member.int.uhc.com/UHC/find-care";
+				redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
+			}
 		}
-		//tbd } else if (testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
-			//tbd 	if (testInputInfoMap.get("memberType").toUpperCase().contains("AARP")) {
-			//tbd 		expectedUrl="https://member.int.uhc.com/AARP/find-care";
-			//tbd 		redirectUrl="https://member.int.uhc.com/aarp/find-care";
-			//tbd 	} else {
-			//tbd 		expectedUrl="https://member.int.uhc.com/UHC/find-care";
-			//tbd 		redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
-			//tbd 	}
-			//tbd }
 
 		testInputInfoMap.put("section", section);
 		testInputInfoMap.put("docName", item);

@@ -170,7 +170,56 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 		
 	}
 	
-
+	public void refreshPage(String planType, String memberType, String origUrlBeforeClick) {
+		driver.navigate().refresh();
+		sleepBySec(5);
+		isAlertPresent();
+		CommonUtility.checkPageIsReady(driver);
+		String expUrl="/member/documents/overview.html";
+		String actUrl=driver.getCurrentUrl();
+		if (!actUrl.contains(expUrl)) { //note: give it one more try before giving up
+			driver.get(origUrlBeforeClick);
+			sleepBySec(5);
+			isAlertPresent();
+			actUrl=driver.getCurrentUrl();
+		}
+		Assert.assertTrue("PROBLEM - unable to refresh Plan Documents and Resources page. "
+				+ "Expect URL contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		if (memberType.toLowerCase().contains("combo")) { 
+			System.out.println("This test is for combo plans, select the tab accordingly");
+			goToSpecificComboTab(planType); //note: click the target tab for testing, manual run one click is okay
+			goToSpecificComboTab(planType); //note: but selenium needs 2 clicks for this to work here, dunno why
+		}
+		
+		checkModelPopup(driver, 5);
+		StopWatch pageLoad = new StopWatch();
+		pageLoad.start();
+		try {
+			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+    		CommonUtility.checkPageIsReady(driver);
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+			driver.quit(); //note: force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+		} catch (WebDriverException we) {
+			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+		}
+		int sec=5;
+		if (MRScenario.environment.contains("team-a")) 
+			sec=10;
+		System.out.println("page load should stopped loading now, give it "+sec+" more sec to settle down");
+		sleepBySec(sec); // note: give it a bit more time to settle down
+		pageLoad.stop();
+		long pageLoadTime_ms = pageLoad.getTime();
+		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+		
+		
+	}
 
 
 
