@@ -209,31 +209,31 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = "#stateWidget > div > label")
 	public WebElement footerYourState;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_1 > div")
+	@FindBy(css = "a#gf_lnk_1")
 	public WebElement footerHomeLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_2 > div")
+	@FindBy(css = "a#gf_lnk_2")
 	public WebElement footerAboutUsLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_3 > div")
+	@FindBy(css = "a#gf_lnk_3")
 	public WebElement footerContactUsLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_4 > div")
+	@FindBy(css = "a#gf_lnk_4")
 	public WebElement footerSiteMapLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_5 > div")
+	@FindBy(css = "a#gf_lnk_5")
 	public WebElement footerPrivacyPolicyLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_6 > div")
+	@FindBy(css = "a#gf_lnk_6")
 	public WebElement footerTermsofUseLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_7 > div")
+	@FindBy(css = "a#gf_lnk_7")
 	public WebElement footerDisclaimersLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_8 > div")
+	@FindBy(css = "a#gf_lnk_8")
 	public WebElement footerAgentsBrokersLink;
 	
-	@FindBy(css = ".linksCond > #gf_lnk_9 > div")
+	@FindBy(css = "a#gf_lnk_9")
 	public WebElement footerAccessibilityLink;
 	
 	@FindBy(css = ".footer-middle>p:nth-of-type(1)")
@@ -242,7 +242,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = ".footer-middle>p:nth-of-type(2)")
 	public WebElement footerLastUpdated;
     
-	@FindBy(css = "button#sam-call-button img")
+	@FindBy(css = "#sam-call-button")
 	public WebElement footerCallbannerimage;
     
 	@FindBy(css = "button#sam-call-button >div>span:nth-of-type(1)")
@@ -706,19 +706,24 @@ public class HeaderFooterMobile extends UhcDriver {
 		System.out.println("Footer Links Validation");
 		String curURL = driver.getCurrentUrl();
 		String curWindow;
+		validate(footerCallbannerimage,30);
 		footerCallbannerimage.click();
 		validate(footerCallbannerPopup,30);
+		validate(footerCallbannerPopupclose,30);
 		footerCallbannerPopupclose.click();
 		System.out.println("Footerbanner Clicked");
 		
 		if (curURL.contains("aarpmedicare")) {
 			curWindow = driver.getWindowHandle();
 			//another window - only aarp
-			//navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
-			mobileUtils.mobileLocateElementClick(footerVisitAARPOrgLink);
-			validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp",curWindow);
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+				mobileUtils.mobileLocateElementClick(footerVisitAARPOrgLink);
+				validateLinksanotherWindowmobile("/health/medicare-insurance/?intcmp", curWindow);
+			} else {
+				navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
+				browserBack();
 			}
-		driver.navigate().refresh();
+		}
 		mobileUtils.mobileLocateElementClick(footerMedicareAdvantagePlansLink);
 		validateLinks("/health-plans/shop/medicare-advantage-plans");
 		browserBack();
@@ -734,6 +739,8 @@ public class HeaderFooterMobile extends UhcDriver {
 		browserBack();
 		mobileUtils.mobileLocateElementClick(footerHomeLink);
 		browserBack();
+		driver.navigate().refresh();
+		pageloadcomplete();
 		mobileUtils.mobileLocateElementClick(footerAboutUsLink);
 		validateLinks("/about-us.html");
 		browserBack();
@@ -755,19 +762,21 @@ public class HeaderFooterMobile extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(footerAgentsBrokersLink);
 		validateLinks("/health-insurance-brokers.html");
 		browserBack();
-
-		driver.navigate().refresh();
 		if (curURL.contains("uhcmedicare")) {
-		mobileUtils.mobileLocateElementClick(footerAccessibilityLink);
-		validateLinks("/legal/accessibility");
-		browserBack();
-		}
-		else {
-			//Open in another Window
-			curWindow = driver.getWindowHandle();
 			mobileUtils.mobileLocateElementClick(footerAccessibilityLink);
-			validateLinksanotherWindowmobile("/legal/accessibility",curWindow);
-		}		
+			validateLinks("/legal/accessibility");
+			browserBack();
+		} else {
+			curWindow = driver.getWindowHandle();
+			// Open in another Window
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+				mobileUtils.mobileLocateElementClick(footerAccessibilityLink);
+				validateLinksanotherWindowmobile("/legal/accessibility", curWindow);
+			} else {
+				navigatesubLink(footerAccessibilityLink.getAttribute("href"));
+				browserBack();
+			}
+		}
 	}
 	
 	public void validateLinks(String expURL) {
