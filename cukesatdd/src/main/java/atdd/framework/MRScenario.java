@@ -187,8 +187,8 @@ public class MRScenario {
 				: System.getenv("DEVICE_NAME"));
 		mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
 		
-		environmentName = (null == System.getenv("ENVIRONMENT") ? props.get("Environment")
-				: System.getenv("ENVIRONMENT"));
+		environmentName = (null == System.getenv("PRE_ENVIRONMENT") ? props.get("Environment")
+				: System.getenv("PRE_ENVIRONMENT"));
 		environmentName = (environmentName.toUpperCase().equals("TEAMDIGITAL_AARP_URL"))?environmentName.toUpperCase():"TEAMDIGITAL_UHC_URL";
 
 		// Setting permission to the scripts , so that jenkins server can access
