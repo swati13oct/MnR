@@ -109,6 +109,8 @@ public class MRScenario {
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
 	public static String mobileDeviceName;
+	public static String environmentName;
+	public static String desktopBrowserName;
 	
 	public static final String USERNAME = "ucpadmin";
 
@@ -184,6 +186,10 @@ public class MRScenario {
 		mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
 				: System.getenv("DEVICE_NAME"));
 		mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
+		
+		environmentName = (null == System.getenv("ENVIRONMENT") ? props.get("Environment")
+				: System.getenv("ENVIRONMENT"));
+		environmentName = (environmentName.toUpperCase().equals("TEAMDIGITAL_AARP_URL"))?environmentName:"TEAMDIGITAL_UHC_URL";
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -1002,8 +1008,14 @@ sauceLabsTunnelIdentifier);
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
-				: System.getProperty(CommonConstants.BROWSER_NAME));
+		String browserName;
+		
+		if(null == System.getenv("BROWSER_NAME")){
+			browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
+					: System.getProperty(CommonConstants.BROWSER_NAME));
+		}else {
+			browserName = System.getenv("BROWSER_NAME");
+		}
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
