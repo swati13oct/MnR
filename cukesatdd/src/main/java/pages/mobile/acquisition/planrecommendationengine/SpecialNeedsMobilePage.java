@@ -171,16 +171,14 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		} else {
 			if (options.isEmpty()) {
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				validate(errorMessage, 30);
-				Assert.assertTrue(errorMessage.getText().contains("Please"));
+				mobileUtils.mobleErrorValidation(page);
 			} else if (options.toUpperCase().contains("NONE")) {
 				String snpoptions[] = options.split(",");
 				for (String option : snpoptions) {
 					specialNeedspageFunctional(option);
 				}
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				validate(errorMessage, 30);
-				Assert.assertTrue(errorMessage.getText().contains("Please"));
+				mobileUtils.mobleErrorValidation(page);
 			}
 		}
 	}

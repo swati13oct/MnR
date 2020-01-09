@@ -107,6 +107,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 		element.click();
 	}
 	
+	public void mobileLocateElement(WebElement element)
+	{
+		mobileFindElementBeforeCallBanner(element,"50%",8,true);
+		mobileFindElementAfterHeader(element,"50%",4,false);
+	}
+	
 	public void mobileLocateElementClick(WebElement element,int swipeup,int swipedown)
 	{
 		mobileFindElementBeforeCallBanner(element,"50%",swipeup,true);
@@ -213,6 +219,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 		nextPagePercentage = nextPagePercentage + " COMPLETE";
 	}
 
+	public void mobleErrorValidation(String pagename) {
+		System.out.println("Error Validation");
+		validate(errorMessage, 30);
+		Assert.assertTrue(errorMessage.getText().toUpperCase().contains("PLEASE")|(errorMessage.getText().toUpperCase().contains("NO")));
+		Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pagename.toUpperCase()));
+	}
+	
 	public void browserBack() {
 		driver.navigate().back();
 	}

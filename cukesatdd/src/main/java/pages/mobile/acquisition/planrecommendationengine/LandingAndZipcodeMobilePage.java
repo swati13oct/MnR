@@ -196,16 +196,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void zipcodescreenErrorValidationmobile(HashMap<String, String> inputdata) {
+		String page = "Location";
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
 			validate(multicountySelect, 20);
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
-		validate(errorMessage, 20);
-		Assert.assertTrue(errorMessage.getText().contains("Please"));
-		threadsleep(2000);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Location"));
+		mobileUtils.mobleErrorValidation(page);
 	}
 
 	public void navigatezipcodepagemobile() {

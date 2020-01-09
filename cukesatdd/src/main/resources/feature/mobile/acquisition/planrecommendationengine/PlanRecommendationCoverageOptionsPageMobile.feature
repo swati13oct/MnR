@@ -28,6 +28,8 @@ Feature: Plan Selector Tool flow - Verify coverage options page in plan recommen
 
     Examples: 
       | Zipcode | isMultutiCounty | County      | isCoverageOpt |
+      |   90201 | NO              | Los Angeles | MAPD          |
+      |   10001 | NO              | New York    | MA            |
       |   12345 | NO              | Schenectady | PDP           |
       |   20007 | NO              | Columbia    | NA            |
 

@@ -72,7 +72,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "div legend.primary-question-tex")
 	private WebElement coveragePagePrimaryQuestion;
 
-	@FindBy(css = "div legend.primary-question-tex>sup")
+	@FindBy(css = "div legend.primary-question-tex sup")
 	private WebElement coveragePagePrimaryQuestionAsteriskMark;
 
 	// Options
@@ -148,7 +148,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void coverageOptionpageErrormobile() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
 		mobileUtils.mobileLocateElementClick(continueBtn);
-		Assert.assertTrue(errorMessage.getText().contains("Please"));
+		mobileUtils.mobleErrorValidation(page);
 	}
 
 	// Previous Button Functionality for Coverage Options Page
