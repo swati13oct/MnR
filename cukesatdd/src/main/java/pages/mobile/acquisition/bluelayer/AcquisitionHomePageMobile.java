@@ -36,9 +36,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 			checkModelPopup(driver,45);
 		} else if(MRScenario.environment.equals("local")){
 			startNew(Local_AARP_URL);
-		} else if(MRScenario.environment.equals("TeamDigital_AARP_URL")){
+		} else if(MRScenario.environmentName.equals("TEAMDIGITAL_AARP_URL")){
 			startNew(DIGITAL_AARP_URL);
-		} else if(MRScenario.environment.equals("TeamDigital_UHC_URL")){
+		} else if(MRScenario.environmentName.equals("TEAMDIGITAL_UHC_URL")){
 			startNew(DIGITAL_UHC_URL);
 		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);

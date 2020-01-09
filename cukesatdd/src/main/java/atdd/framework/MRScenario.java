@@ -189,7 +189,7 @@ public class MRScenario {
 		
 		environmentName = (null == System.getenv("ENVIRONMENT") ? props.get("Environment")
 				: System.getenv("ENVIRONMENT"));
-		environmentName = (environmentName.toUpperCase().equals("TEAMDIGITAL_AARP_URL"))?environmentName:"TEAMDIGITAL_UHC_URL";
+		environmentName = (environmentName.toUpperCase().equals("TEAMDIGITAL_AARP_URL"))?environmentName.toUpperCase():"TEAMDIGITAL_UHC_URL";
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
