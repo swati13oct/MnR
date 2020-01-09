@@ -13,6 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogEntry;
@@ -619,7 +620,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
@@ -647,6 +648,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		langDropdown.selectByValue(langElementValue);
 	}
 
+	/**
+	 * Using the list of expected documentation supplied by test input (PlanDocumentsAndResourcesUsersHelper)
+	 * will loop for each and call 'validateDoc' method to validate if it can be located on the UI for the test section.
+	 * NOTE:
+	 * if validateApi is enabled, will also validate if the list of doc in API response are displaying on the test section
+	 * @param testInputInfoMap
+	 * @param expDocList
+	 * @param sectionNote
+	 * @param api_planDocMap
+	 * @return
+	 */
 	public List<String> validateDocOnUi(HashMap<String, String> testInputInfoMap, List<String> expDocList, List<String> sectionNote, PlanDocApiResponse api_planDocMap) {
 		String planType=testInputInfoMap.get("planType");
 		String memberType=testInputInfoMap.get("memberType");
@@ -666,7 +678,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
 		}
-		
+		//note: if validateApi==false, then we are all done at this point for this validation
+		//---------------------------------------
 		//note: this section will only invoke if step definition decide to validate API also
 		if (validateApi) {
 			if (memberType.contains("TERM")) {
@@ -751,7 +764,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	}
 
 	/**
-	 * Go through the list of expected docs to see if there are matches in the UI result
+	 * For the given expected doc: 
+	 * - go to the section in test 
+	 * - select the correct language dropdown and validate if it shows up on the UI for the test section
+	 * NOTE: 
+	 * Sometimes may get staleElementException, will attempt one retry before giving up
+	 * Retry involves refreshing the page and then retrying the validation 
 	 * @param testInputInfoMap
 	 * @param section
 	 * @param langElementValue
@@ -762,129 +780,145 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public HashMap<String, Document> validateDoc(HashMap<String, String> testInputInfoMap, String expDocName) {
-		System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI");
-		String section=testInputInfoMap.get("section");
-		String targetLang=testInputInfoMap.get("targetLang");
-		String targetYr=testInputInfoMap.get("targetYr");
-		boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
-		boolean expDocDisplay=Boolean.valueOf(testInputInfoMap.get("expDocDisplay"));
-		HashMap<String, Document> planDocMap=null;
+		int count=0;
+		int maxRetry=1;
+		while (true) { 
+			try {
+				System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI");
+				String section=testInputInfoMap.get("section");
+				String targetLang=testInputInfoMap.get("targetLang");
+				String targetYr=testInputInfoMap.get("targetYr");
+				boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
+				boolean expDocDisplay=Boolean.valueOf(testInputInfoMap.get("expDocDisplay"));
+				HashMap<String, Document> planDocMap=null;
 
-		WebElement langDropDown=null;
-		
-		//note: xpath for the documents and language dropdown for each section on the page
-		String actualDocList_xpath="";
-		if (section.equals("Plan Materials")) {
-			langDropDown=langDropDown_PM;
-			actualDocList_xpath="//div[contains(@class,'planMaterial') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
-		} else if (section.equals("Membership Materials")) { 
-			langDropDown=langDropDown_MM;
-			//actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li";
-			actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
-		} else if (section.equals("Annual Notice of Changes Documents")) {
-			langDropDown=langDropDown_ANOC;
-			actualDocList_xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
-		} else if (section.equals("Provider Directory") || section.equals("Pharmacy Directory") || section.equals("Provider and Pharmacy Directories")) {
-			langDropDown=langDropDown_PD;
-			actualDocList_xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
-		}
+				WebElement langDropDown=null;
 
-		//note: actualListDoc is the list of documents display on the UI
-		List<WebElement> actualListDoc = driver.findElements(By.xpath(actualDocList_xpath));
-		int actualTotalNumDoc=actualListDoc.size();
-		if (!expDocDisplay) {
-			//note: if don't expect to see any doc then
-			//note: either language option is not display at all or if language option avaiable then no doc list showing
-			Assert.assertTrue("PROBLEM - should not see any doc for section '"+section+"' language '"+targetLang+"'", 
-					(validateLangDropDownAvaOptn(langDropDown, targetLang) && actualTotalNumDoc==0) 
-					|| !validateLangDropDownAvaOptn(langDropDown, targetLang));
-			return planDocMap;
-		}
+				//note: xpath for the documents and language dropdown for each section on the page
+				String actualDocList_xpath="";
+				if (section.equals("Plan Materials")) {
+					langDropDown=langDropDown_PM;
+					actualDocList_xpath="//div[contains(@class,'planMaterial') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
+				} else if (section.equals("Membership Materials")) { 
+					langDropDown=langDropDown_MM;
+					//actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li";
+					actualDocList_xpath="//div[contains(@class,'WelcomeKit') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_')]//li[not(contains(@class,'hide'))]";
+				} else if (section.equals("Annual Notice of Changes Documents")) {
+					langDropDown=langDropDown_ANOC;
+					actualDocList_xpath="//div[contains(@class,'annualNotice') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
+				} else if (section.equals("Provider Directory") || section.equals("Pharmacy Directory") || section.equals("Provider and Pharmacy Directories")) {
+					langDropDown=langDropDown_PD;
+					actualDocList_xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[contains(@class,'sectionWise_div_"+targetYr+"') and not(contains(@style,'display: none;'))]//li[not(contains(@class,'hide'))]";
+				}
 
-		//note: for PM doc, majority of those docs will open up new tab if clicked
-		boolean switchTab=true;  
-		String langValue="";
-		String category="";
-		if (targetLang.equals("EN")) {
-			category=expDocName;
-			langValue="en_us";
-		} else if (targetLang.equals("ES")) { 
-			category=getEnglishName(expDocName);
-			langValue="es";
-		} else if (targetLang.equals("ZH")) {
-			//TODO if zh for chinese - assume english for now
-			category=expDocName;
-			langValue="zh";
-		}
+				//note: actualListDoc is the list of documents display on the UI
+				List<WebElement> actualListDoc = driver.findElements(By.xpath(actualDocList_xpath));
+				int actualTotalNumDoc=actualListDoc.size();
+				if (!expDocDisplay) {
+					//note: if don't expect to see any doc then
+					//note: either language option is not display at all or if language option avaiable then no doc list showing
+					Assert.assertTrue("PROBLEM - should not see any doc for section '"+section+"' language '"+targetLang+"'", 
+							(validateLangDropDownAvaOptn(langDropDown, targetLang) && actualTotalNumDoc==0) 
+							|| !validateLangDropDownAvaOptn(langDropDown, targetLang));
+					return planDocMap;
+				}
 
-		//note: loop through each doc in the section from UI and see if can locate the expected doc
-		boolean found=false;
-		for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
-			WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0
-			String actualDocName=eachDoc.getText();
-			System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
-			
-			//note: use regex to find match for document name
-			//note: because actual docName will have (PDF,xxxKB)... at the end of the string
-			//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
-			String expDocNamePattern=expDocName+"(.*?)";
-			System.out.println("TEST - looking for match for expDocName='"+expDocName+"' | expDocNamePattern='"+expDocNamePattern+"'");
-			Pattern p=Pattern.compile(expDocName+".*?");
-			Matcher m=p.matcher(actualDocName);
-			if (m.find()) {
-				System.out.println("TEST - got a name match for the expected doc from the list of UI docs, proceed to validate in detail...");
-				found=true;
+				//note: for PM doc, majority of those docs will open up new tab if clicked
+				boolean switchTab=true;  
+				String langValue="";
+				String category="";
+				if (targetLang.equals("EN")) {
+					category=expDocName;
+					langValue="en_us";
+				} else if (targetLang.equals("ES")) { 
+					category=getEnglishName(expDocName);
+					langValue="es";
+				} else if (targetLang.equals("ZH")) {
+					//TODO if zh for chinese - assume english for now
+					category=expDocName;
+					langValue="zh";
+				}
 
-				//note: find the element attributes and store it into document object in case want to do API validation later
-				planDocMap=new HashMap<String, Document>();
-				//note: find the element id and href 
-				String segmentId="---";
-					String classStr=eachDoc.getAttribute("class");
-					System.out.println("TEST - need to determine and fix up the segment ID for the matched UI doc.  classStr="+classStr);
-					String[] tmp=classStr.split("clearfix ");
-					if (tmp.length>0) {  //note: in case one more field after for the PDP case
-						segmentId=tmp[1];
-						tmp=segmentId.split(" ");
-						if (tmp.length>1) {
-							System.out.println("TEST - segment still has whitespace");
-							segmentId=tmp[0];
+				//note: loop through each doc in the section from UI and see if can locate the expected doc
+				boolean found=false;
+				for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
+					WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0
+					String actualDocName=eachDoc.getText();
+					System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
+
+					//note: use regex to find match for document name
+					//note: because actual docName will have (PDF,xxxKB)... at the end of the string
+					//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
+					String expDocNamePattern=expDocName+"(.*?)";
+					System.out.println("TEST - looking for match for expDocName='"+expDocName+"' | expDocNamePattern='"+expDocNamePattern+"'");
+					Pattern p=Pattern.compile(expDocName+".*?");
+					Matcher m=p.matcher(actualDocName);
+					if (m.find()) {
+						System.out.println("TEST - got a name match for the expected doc from the list of UI docs, proceed to validate in detail...");
+						found=true;
+
+						//note: find the element attributes and store it into document object in case want to do API validation later
+						planDocMap=new HashMap<String, Document>();
+						//note: find the element id and href 
+						String segmentId="---";
+						String classStr=eachDoc.getAttribute("class");
+						System.out.println("TEST - need to determine and fix up the segment ID for the matched UI doc.  classStr="+classStr);
+						String[] tmp=classStr.split("clearfix ");
+						if (tmp.length>0) {  //note: in case one more field after for the PDP case
+							segmentId=tmp[1];
+							tmp=segmentId.split(" ");
+							if (tmp.length>1) {
+								System.out.println("TEST - segment still has whitespace");
+								segmentId=tmp[0];
+							}
 						}
+						System.out.println("TEST - fixed segmentId for the matched UI doc ="+segmentId);
+
+						//note: find the element id and href for each of the doc
+						System.out.println("TEST - need to detemine the href and id for the matched UI doc using xpath="+actualDocList_xpath+"["+i+"]//a");
+						WebElement targetElement=driver.findElement(By.xpath(actualDocList_xpath+"["+i+"]//a"));
+						String expUrl=targetElement.getAttribute("href");
+						Document docObj=new Document();
+						docObj.setName(actualDocName);
+						docObj.setType(getDocType(testInputInfoMap, expDocName));
+						docObj.setCompCode(eachDoc.getAttribute("id"));
+						docObj.setLanguage(langValue);
+						docObj.setLink(expUrl);
+						docObj.setYear(targetYr);
+						docObj.setSegmentId(segmentId);
+						docObj.setCheckDestUrl(checkDestUrl);
+						docObj.setSwitchTab(switchTab);
+						planDocMap.put(category, docObj);
+						testInputInfoMap.put("docName", actualDocName);
+						testInputInfoMap.put("expectedUrl", expUrl);
+						testInputInfoMap.put("redirectUrl", "none");
+						testInputInfoMap.put("switchTab", String.valueOf(switchTab));
+						System.out.println("TEST - need to determine whether new tab will open if link clicked... switchTab="+testInputInfoMap.get("switchTab"));
+
+						//note: validate if link destination is correct
+						validateLinkDest(testInputInfoMap, targetElement);
+
+						//note: found the doc so no need to continue the loop
+						break;
 					}
-				System.out.println("TEST - fixed segmentId for the matched UI doc ="+segmentId);
-
-				//note: find the element id and href for each of the doc
-				System.out.println("TEST - need to detemine the href and id for the matched UI doc using xpath="+actualDocList_xpath+"["+i+"]//a");
-				WebElement targetElement=driver.findElement(By.xpath(actualDocList_xpath+"["+i+"]//a"));
-				String expUrl=targetElement.getAttribute("href");
-				Document docObj=new Document();
-				docObj.setName(actualDocName);
-				docObj.setType(getDocType(testInputInfoMap, expDocName));
-				docObj.setCompCode(eachDoc.getAttribute("id"));
-				docObj.setLanguage(langValue);
-				docObj.setLink(expUrl);
-				docObj.setYear(targetYr);
-				docObj.setSegmentId(segmentId);
-				docObj.setCheckDestUrl(checkDestUrl);
-				docObj.setSwitchTab(switchTab);
-				planDocMap.put(category, docObj);
-				testInputInfoMap.put("docName", actualDocName);
-				testInputInfoMap.put("expectedUrl", expUrl);
-				testInputInfoMap.put("redirectUrl", "none");
-				testInputInfoMap.put("switchTab", String.valueOf(switchTab));
-				System.out.println("TEST - need to determine whether new tab will open if link clicked... switchTab="+testInputInfoMap.get("switchTab"));
-
-				//note: validate if link destination is correct
-				validateLinkDest(testInputInfoMap, targetElement);
-				
-				//note: found the doc so no need to continue the loop
-				break;
+				}
+				if (found)
+					System.out.println("FOUND doc: "+expDocName);
+				else
+					System.out.println("PROBLEM: CANNOT find doc: "+expDocName);
+				return planDocMap;  //note: if no match find then planDocMap will be null
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Got StaleElementReferenceException, will reload page and then try one more time before giving up");
+				String origUrlBeforeClick=driver.getCurrentUrl();
+				String planType=testInputInfoMap.get("planType");
+				String memberType=testInputInfoMap.get("memberType");
+				refreshPage(planType, memberType, origUrlBeforeClick);
+				if (++count == maxRetry) {
+					Assert.assertTrue("PROBLEM: Got StaleElementReferenceException and already reload page and retried once, giving up", false);
+					throw e;
+				}
 			}
 		}
-		if (found)
-			System.out.println("FOUND doc: "+expDocName);
-		else
-			System.out.println("PROBLEM: CANNOT find doc: "+expDocName);
-		return planDocMap;  //note: if no match find then planDocMap will be null
 	}
 
 }

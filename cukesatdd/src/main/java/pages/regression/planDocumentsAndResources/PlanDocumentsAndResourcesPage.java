@@ -89,12 +89,12 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		providerDirectories.validateSectionHeader_PD(testInputInfoMap, sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
 	}	
 
-	public void valiateProviderSearch_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay)  {
-		providerDirectories.valiateProviderSearch_PD(testInputInfoMap, sectionDisplay);
+	public List<String> valiateProviderSearch_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay)  {
+		return providerDirectories.valiateProviderSearch_PD(testInputInfoMap, sectionDisplay);
 	}	
 
-	public void valiatePharmacyLocator_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
-		providerDirectories.valiatePharmacyLocator_PD(testInputInfoMap, sectionDisplay);
+	public List<String> valiatePharmacyLocator_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		return providerDirectories.valiatePharmacyLocator_PD(testInputInfoMap, sectionDisplay);
 	}	
 
 	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {

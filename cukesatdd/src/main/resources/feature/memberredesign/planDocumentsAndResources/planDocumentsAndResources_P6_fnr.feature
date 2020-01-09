@@ -44,7 +44,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
       | 06-103    | xxxxx       | MA       | IND_TERM_PDnR         | true   | false    | true    | true   | true  | false    | true   | true   |
 	  ##BAD how to appoint vs Medical Reimburse
       | 07-102    | xxxxx       | MA       | GROUP_TERM_PDnR       | true   | false    | false   | true   | true   | false   | true   | true   |
-      | 07-101    | xxxxx       | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
+#      | 07-101    | xxxxx       | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@active_ma
 	Examples: 

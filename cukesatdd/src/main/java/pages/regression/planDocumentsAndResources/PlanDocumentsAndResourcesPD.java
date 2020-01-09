@@ -83,7 +83,8 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 	 * Validate Pharmacy locator link for Provider and Pharmacy Directories
 	 * @param sectionDisplay
 	 */
-	public void valiatePharmacyLocator_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+	public List<String> valiatePharmacyLocator_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		List<String> noteList=new ArrayList<String>();
 		String section="Provider and Pharmacy Directories";
 		if (testInputInfoMap.get("planType").equals("MA")) 
 			section="Provider Directory";
@@ -93,16 +94,6 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		WebElement lnkElement=pharmacyLocator_link_PD;
 		WebElement imgElement=pharmacyLocator_link_img;
 		List<WebElement> instElement=pharmacyLocator_instr_PD;
-		/* tbd 
-		WebElement lnkElement=ind_pharmacyLocator_link_PD;
-		WebElement imgElement=ind_pharmacyLocator_link_img;
-		List<WebElement> instElement=ind_pharmacyLocator_instr_PD;
-		if (testInputInfoMap.get("planType").toUpperCase().contains("GROUP") || testInputInfoMap.get("memberType").toUpperCase().contains("GROUP")) {
-			lnkElement=grp_pharmacyLocator_link_PD;
-			imgElement=grp_pharmacyLocator_link_img;		
-			instElement=grp_pharmacyLocator_instr_PD;		
-		}
-		*/
 		String expectedUrl="/content/medicare/member/pharmacy-locator/overview.html";
 
 		testInputInfoMap.put("docName", item);
@@ -117,18 +108,20 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElement));
 			String actualUrl=lnkElement.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-			validateLinkDest(testInputInfoMap, lnkElement);
+			noteList=validateLinkDest(testInputInfoMap, lnkElement);
 		} else {
 			Assert.assertTrue("PROBLEM - should not locate '"+item+"' link image in '"+section+"' section", !planDocValidate(imgElement));
 			Assert.assertTrue("PROBLEM - should not locate '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElement));
 		}
+		return noteList;
 	}
 
 	/**
 	 * Validate Provider Search link in Provider and Pharmacy Directories section
 	 * @param sectionDisplay
 	 */
-	public void valiateProviderSearch_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+	public List<String> valiateProviderSearch_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		List<String> noteList=new ArrayList<String>();
 		String section="Provider and Pharmacy Directories";
 		if (testInputInfoMap.get("planType").equals("MA")) 
 			section="Provider Directory";
@@ -138,19 +131,8 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		WebElement lnkElement=providerSearch_link_PD;
 		WebElement imgElement=providerSearch_link_img;
 		List<WebElement> instElement=providerSearch_instr_PD;
-		/* tbd 
-		WebElement lnkElement=ind_providerSearch_link_PD;
-		WebElement imgElement=ind_providerSearch_link_img;
-		List<WebElement> instElement=ind_providerSearch_instr_PD;
-		*/
 		String expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=UHCMS1&backBtn=false";
 		String redirectUrl="none";
-		//tbd if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP") && testInputInfoMap.get("memberType").toUpperCase().contains("PREEFF")) {
-			//tbd expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
-			//tbd redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/";
-			//tbd if (testInputInfoMap.get("memberType").toUpperCase().contains("GROUP")) {
-				
-			//tbd }
 		if (testInputInfoMap.get("planType").toUpperCase().contains("PCP")) {
 			if (MRScenario.environment.contains("team-a")) {
 				expectedUrl="https://member.mymedicareaccount.com/PCP/find-care";
@@ -191,6 +173,8 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);
 		testInputInfoMap.put("checkDestUrl", "true");
+		if (MRScenario.environment.contains("team-a")) 
+			testInputInfoMap.put("checkDestUrl", "false"); //note: lower env config may not be the same as stage, bypass this check
 		testInputInfoMap.put("switchTab", "false");
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' instruction in '"+section+"' section", instElement.size()>0);
@@ -198,11 +182,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElement));
 			String actualUrl=lnkElement.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-			validateLinkDest(testInputInfoMap, lnkElement);
+			noteList=validateLinkDest(testInputInfoMap, lnkElement);
 		} else {
 			Assert.assertTrue("PROBLEM - should not locate '"+item+"' link image in '"+section+"' section", !planDocValidate(imgElement));
 			Assert.assertTrue("PROBLEM - should not locate '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElement));
 		}
+		return noteList;
 	}
 	
 	/**

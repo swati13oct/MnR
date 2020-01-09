@@ -114,6 +114,8 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 
 	public List<String> validateDocs_FnR(HashMap<String, String> testInputInfoMap) {
 		List<String> section_note=new ArrayList<String>();
+		String planType=testInputInfoMap.get("planType");
+		String memberType=testInputInfoMap.get("memberType");
 		String subSection=testInputInfoMap.get("subSection");
 		String docName=testInputInfoMap.get("docName");
 		String expectedUrl=testInputInfoMap.get("expectedUrl");
@@ -123,6 +125,11 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		WebElement docElement=getItemElementLnk(docName);
 		CommonUtility.waitForPageLoad(driver, docElement, 5);
 		section_note.add("  ----- Validation result for document '"+docName+"' in sub-section '"+subSection+"'");
+		if (!planDocValidate(docElement)
+				&& docName.equals("How to appoint a representative") && subSection.equals("Authorization Forms")
+				&& planType.equals("MA") && memberType.contains("GROUP_TERM")) {
+			Assert.assertTrue("PROBLEM - unable to locate document='"+docName+"' in '"+subSection+"' sub-section - fix need to be done by Author", planDocValidate(docElement));
+		}
 		Assert.assertTrue("PROBLEM - unable to locate document='"+docName+"' in '"+subSection+"' sub-section", planDocValidate(docElement));
 		section_note.add("    PASSED - located document '"+docName+"' in sub-section '"+subSection+"'");
 		String actualUrl=docElement.getAttribute("href");

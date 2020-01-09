@@ -115,7 +115,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
+				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -125,7 +125,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -494,14 +494,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
+				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
@@ -971,7 +971,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
+				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -980,7 +980,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -1641,7 +1641,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
+				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -1651,7 +1651,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -1846,7 +1846,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
+				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -1856,7 +1856,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
+				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");

@@ -823,11 +823,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		sectionNote.add("PASSED - section header validation");
 
 		//note: validate Provider Search link and image
-		planDocumentsAndResourcesPage.valiateProviderSearch_PD(testInputInfoMap, providerSearchDisplay);
+		sectionNote.addAll(planDocumentsAndResourcesPage.valiateProviderSearch_PD(testInputInfoMap, providerSearchDisplay));
 		sectionNote.add("PASSED - Provider Search link validation");
 
 		//note: validate Pharmacy Locator link and image
-		planDocumentsAndResourcesPage.valiatePharmacyLocator_PD(testInputInfoMap, pharmacyLocatorDisplay);
+		sectionNote.addAll(planDocumentsAndResourcesPage.valiatePharmacyLocator_PD(testInputInfoMap, pharmacyLocatorDisplay));
 		sectionNote.add("PASSED - Pharmacy locator link validation");
 
 		//note: validate default language selection
