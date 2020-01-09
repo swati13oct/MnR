@@ -1,5 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
+import java.util.List;
+
 import org.junit.Assert;
 
 /**
@@ -152,6 +154,29 @@ public class Document {
 		this.segmentId = segmentId;
 	}
 	
+	public boolean compareTwoDocuments(Document doc1, Document doc2) {
+		if (doc1.getName().equals(doc2.getName())
+		&& doc1.getLink().equals(doc2.getLink())
+		&& doc1.getType().equals(doc2.getType())
+		&& doc1.getLanguage().equals(doc2.getLanguage())
+		&& doc1.getYear().equals(doc2.getYear())
+		&& doc1.getCompCode().equals(doc2.getCompCode())
+		&& doc1.isCheckDestUrl()==doc2.isCheckDestUrl()
+		&& doc1.isSwitchTab()==doc2.isSwitchTab()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean hasDuplicateInDocList(List<Document> docList, Document doc) {
+		boolean check=false;
+		for(Document d: docList) {
+			if (compareTwoDocuments(d, doc))
+				check=true;
+		}
+		return check;
+	}
+	
 	/**
 	 * helper - get the type for the given doc
 	 * @param docName
@@ -202,6 +227,8 @@ public class Document {
 			return "5002"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
 			return "5006"; //note: SHIP
+		if (docName.toLowerCase().equalsIgnoreCase("Formulary/Drug List - Comprehensive".toLowerCase())) 
+			return "8002";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-1";
 	}
