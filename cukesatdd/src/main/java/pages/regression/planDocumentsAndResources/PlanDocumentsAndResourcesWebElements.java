@@ -159,7 +159,6 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//h1[contains(@class,'heading')]")
 	protected WebElement pageHeader;
 	
-	//tbd @FindBy(xpath="//div[contains(@class,'planMaterial') and not(contains(@class,'ng-hide'))]//h2")
 	@FindBy(xpath="//div[(contains(@class,'planMaterial') or contains(@class,'UHC_GROUP_PDP')) and not(contains(@class,'ng-hide'))]//h2")
 	protected WebElement sectionHeader_PM;
 	
@@ -184,7 +183,6 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected List<WebElement> listOfSections_PD;
 	
 	//note: careful updating this xpath, it's currently covering for multiple user types
-	//tbd @FindBy(xpath="//div[contains(@class,'Provider_Pharmacy_Directories') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Provider and Pharmacy Directories') || contains(text(),'Provider Directory')]")
     @FindBy(xpath="//div[contains(@class,'Directories') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Provider_Dir') or contains(@class,'Pharmacy_Dir') or contains(@class,'PharmacyDirectory') or contains(@class,'ProviderDirectory') or contains(@class,'Annual') or contains(@class,'Header_')) and not(contains(@class,'ng-hide'))]//h2")
 	protected WebElement sectionHeader_PD;
 	
@@ -224,7 +222,6 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement viewMemberIdCardImg_PM;
 	
 	//--------------------------
-	//tbd @FindBy(xpath="//div[contains(@class,'otherPages') and not(contains(@class,'ng-hide'))]//li[contains(@class,'quickLink') and not(contains(@style,'display: none;'))]//a[@dtmid='cta_quicklink_pm']")
 	@FindBy(xpath="//div[contains(@class,'otherPages') and not(contains(@class,'ng-hide'))]//li[contains(@class,'quickLink') and not(contains(@style,'display: none;'))]//a[contains(@dtmname,'plan materials')]")
 	protected WebElement jumpLink_PM;
 	
@@ -318,7 +315,6 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement myDocumentLink_MD;
 
 	//note: careful updating this xpath, it's currently covering for multiple user types
-	//tbd @FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segments') and contains(@class,'EOB') and not(contains(@class,'ng-hide'))]//div[contains(@class,'explanationbenefits')]//a[contains(text(),'MEDICAL')]")
 	@FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segments') and contains(@class,'EOB') and not(contains(@class,'ng-hide')) and not(contains(@class,'PDP'))]//div[contains(@class,'explanationbenefits')]//a[contains(text(),'MEDICAL')]")
 	protected WebElement searchMedicalEobHistoryLink_EOB;
 
@@ -397,9 +393,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Prescription Mail Order Form') and contains(text(),'Preferred Mail Service Pharmacy through OptumRx')]")
 	protected WebElement presMailOrderForm_link_RF_FnR;
 	//- href="/content/dam/UCP/Individual/OptumRx_Home_Delivery_Form.pdf"
-
 	
-	//tbd @FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms and Information')]")
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms')]")
 	protected WebElement authorizationFormsAndInfo_sectionAF_FnR;
 	

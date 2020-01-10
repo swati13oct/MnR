@@ -30,18 +30,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	//note: if enabling this, you must run 'documents are able to load successfully' step in the scenario
 	//note: if input given, input will be used  - step: I want to customize test setup
 	//note: default will be false if no input given - step: user navigates to plan documents and resources page validation
-	//tbd boolean validateApi=true;
 	boolean validateApi;
 	//note: global bypass the click link and validate destination URL check to speed things up if needed for debug
 	//note: if input given, input will be used  - step: I want to customize test setup
 	//note: default will be false if no input given - step: user navigates to plan documents and resources page validation
-	//tbd boolean skipLnkDestCheck=false;
 	boolean skipLnkDestCheck;
 
-	//tbd PlanDocumentsAndResourcesStepDefinitionHelper docHelper=new PlanDocumentsAndResourcesStepDefinitionHelper();
 	PlanDocumentsAndResourcesFnRDocsHelper docHelper_FnR=new PlanDocumentsAndResourcesFnRDocsHelper();
 	PlanDocumentsAndResourcesUsersHelper userHelper=new PlanDocumentsAndResourcesUsersHelper();
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
@@ -159,11 +156,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url);
 		System.out.println("TEST - apiResponseStr="+apiResponseStr);
 		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
-		
+
 		String currentYear = yearsMap.get("currentYear");
 		String nextYear = yearsMap.get("nextYear");
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
-		
+
 		PlanDocApiResponse planDocMap=new PlanDocApiResponse(String.valueOf(currentYear), String.valueOf(nextYear));
 		boolean apiSuccess=planDocMap.buildDocListMap(testInputInfoMap, apiResponseStr);
 		Assert.assertTrue("PROBLEM - unable to get a successful API response", apiSuccess);
@@ -264,7 +261,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
 			String language="English";
-			
+
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -292,7 +289,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ES";
 			targetYr=yearsMap.get("currentYear");
 			language="Spanish";
-			
+
 			expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -320,7 +317,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			targetLang="ZH";
 			targetYr=yearsMap.get("currentYear");
 			language="Chinese";
-			
+
 			expDocList=new ArrayList<String>();
 
 			testInputInfoMap.put("section",section);
@@ -352,7 +349,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
-		
+
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
@@ -399,7 +396,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		//note: validate default language selection
 		planDocumentsAndResourcesPage.validateDefaultLangSelect_MM(sectionDisplay);
-		
+
 		boolean finalCheck=true;
 		String problemText="";
 		if (sectionDisplay) {
@@ -412,7 +409,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			String targetLang="EN";
 			String targetYr=yearsMap.get("currentYear");
 			String language="English";
-			
+
 			List<String> expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
@@ -497,7 +494,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
-		
+
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
@@ -1089,15 +1086,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_EOB(sectionDisplay);
 		sectionNote.add("PASSED - section header validation");
 
-		//tbd if (sectionDisplay) {
-			//note: validate button for medical
-			planDocumentsAndResourcesPage.valiateMedicalLnk_EOB(testInputInfoMap, searchMedicalEobHsitoryDisplay);
-			sectionNote.add("PASSED - Search Medical EOB button validation");
+		//note: validate button for medical
+		planDocumentsAndResourcesPage.valiateMedicalLnk_EOB(testInputInfoMap, searchMedicalEobHsitoryDisplay);
+		sectionNote.add("PASSED - Search Medical EOB button validation");
 
-			//note: validate button for drug
-			planDocumentsAndResourcesPage.valiateDrugLnk_EOB(testInputInfoMap, searchDrugEobHsitoryDisplay);
-			sectionNote.add("PASSED - Search Drug EOB button validation");
-		//tbd }
+		//note: validate button for drug
+		planDocumentsAndResourcesPage.valiateDrugLnk_EOB(testInputInfoMap, searchDrugEobHsitoryDisplay);
+		sectionNote.add("PASSED - Search Drug EOB button validation");
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
 		if (noteList==null)
 			noteList=new ArrayList<String>();
@@ -1264,7 +1259,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap.put("expDisplay_FnR", "true"); 
 				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 				//sectionNote.addAll(docSection_note);
-				
+
 				targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 				for(String doc: targetDocList) {
 					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);

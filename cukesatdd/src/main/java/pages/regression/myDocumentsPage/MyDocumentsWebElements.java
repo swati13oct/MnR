@@ -12,8 +12,8 @@ import atdd.framework.UhcDriver;
 /**
  * Functionality : WebElements for My Documents page
  */
-public class myDocumentsWebElements extends UhcDriver {
-	public myDocumentsWebElements(WebDriver driver) {
+public class MyDocumentsWebElements extends UhcDriver {
+	public MyDocumentsWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

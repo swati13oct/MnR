@@ -1,3 +1,4 @@
+@planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp
 
   #------------------------------------------

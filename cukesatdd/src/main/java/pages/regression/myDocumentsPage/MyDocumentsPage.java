@@ -16,11 +16,11 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-public class myDocumentsPage extends myDocumentsWebElements{
+public class MyDocumentsPage extends MyDocumentsWebElements{
 
 	
 
-	public myDocumentsPage(WebDriver driver) {
+	public MyDocumentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

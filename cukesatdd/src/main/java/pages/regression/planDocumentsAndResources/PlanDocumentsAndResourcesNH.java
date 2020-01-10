@@ -17,7 +17,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 	}
 
 	/**
-	 * Validate each section in Need Help section on claims summary page
+	 * Validate each section in Need Help section
 	 * @param planType
 	 */
 	public String validateSectionInNeedHelp(String planType, String memberType) {

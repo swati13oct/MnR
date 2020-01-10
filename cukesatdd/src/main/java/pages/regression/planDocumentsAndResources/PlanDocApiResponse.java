@@ -549,7 +549,6 @@ public class PlanDocApiResponse {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1028") || docObj.getType().equals("1026")) {
-					//tbd String docCategory="Pharmacy Directory Information";
 					String docCategory="Pharmacy Directory";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
@@ -1002,6 +1001,6 @@ public class PlanDocApiResponse {
 	public void setNoteList(List<String> noteList) {
 		this.noteList = noteList;
 	}
-
+	
 
 }

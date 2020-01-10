@@ -306,10 +306,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 */
 	@SuppressWarnings("rawtypes")
 	public List<String> compareUiApiDocList(HashMap<String, String> testInputInfoMap, List<HashMap<String, Document>> act_docListFromUi, List<HashMap<String, Document>> exp_docListFromApi, boolean anocFlag, boolean expDocDisplay, boolean checkDestUrl) {
+		String planType=testInputInfoMap.get("planType");
+		String memberType=testInputInfoMap.get("memberType");
+		
 		String section=testInputInfoMap.get("section");
 		String targetLang=testInputInfoMap.get("targetLang");
 		System.out.println("Proceed to compare '"+section+"' section '"+targetLang+"' language - UI vs API...");
 		System.out.println("expDocDisplay="+expDocDisplay+" | anocFlag="+anocFlag+" | checkDestUrl="+checkDestUrl);
+		
 		List<String> noteList=new ArrayList<String> ();
 		int expectedSize=exp_docListFromApi.size();
 		int actualSize=act_docListFromUi.size();
@@ -329,8 +333,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			noteList.add(0, "API VALIDATOIN PASSED");
 			return noteList; //note: if input doesn't expect to see list of doc for section and UI matches result, no need to validate what's in API
 		}
+		
 		//note: not all docs on UI are coming via the same API, so only validate if actualFromUi >= expectedFromApi
 		Assert.assertTrue("PROBLEM - number of documents in section '"+section+"' for language '"+targetLang+"' is not as expected as the ones from API.  API Expected='"+expectedSize+"' | UI Actual='"+actualSize+"'", actualSize>=expectedSize);
+		
 		boolean foundAll=true;
 
 		for(HashMap<String, Document> act_docItem: act_docListFromUi) {
@@ -349,7 +355,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						System.out.println("=====");
 						System.out.println("Check expected doc From API: category="+exp_category+" | exp_doc.segment="+exp_doc.getSegmentId()+" | type="+exp_doc.getType()+" | year="+exp_doc.getYear()+" | code="+exp_doc.getCompCode()+" | link="+exp_doc.getLink());
 						System.out.println("Check expected doc From UI : category="+act_category+" | act_doc.segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
-						if ((exp_category.toLowerCase()).contains(act_category.toLowerCase()) || (act_category.toLowerCase()).contains(exp_category.toLowerCase())) {
+
+						//note: if fidn a match with the name between UI and API
+						//note: or for PDP GROUP case if UI has Formulary/DrugList - Comprehensive and API has Comprehensive Formulary
+						if (((exp_category.toLowerCase()).contains(act_category.toLowerCase()) || (act_category.toLowerCase()).contains(exp_category.toLowerCase()))
+								|| (act_category.equals("Formulary/Drug List - Comprehensive") && exp_category.equals("Comprehensive Formulary") && planType.equals("PDP") && memberType.contains("GROUP"))
+								) {
 							boolean allMatch=true;
 							System.out.println("TEST - found match for category, check for more values...");
 							//note: for spanish, there is no id attribute for the li, so skip compCode
@@ -446,7 +457,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			noteList.add(0, "  * CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'");
 			noteList.add(0, "API VALIDATOIN FAILED");
 		}
-		//tbd Assert.assertTrue("PROBLEM - CANNOT match all docs in section '"+section+"' for language '"+targetLang+"'", foundAll);
 		return noteList;
 	}
 
@@ -492,8 +502,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "3";
 		if (docName.toLowerCase().equalsIgnoreCase("Evidence of Coverage".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Comprobante de Cobertura".toLowerCase())) 
 			return "2";
-		//tbd if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())|| docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase())) 
-		//tbd 	return "1022";
 		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary-Spanish".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario Completo-Spanish".toLowerCase())) 
 			return "1022";
 		if (docName.toLowerCase().equalsIgnoreCase("Comprehensive Formulary".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Formulario completo".toLowerCase())) 
@@ -530,6 +538,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "5002"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
 			return "5006"; //note: SHIP
+		if (docName.toLowerCase().equalsIgnoreCase("Formulary/Drug List - Comprehensive".toLowerCase())) 
+			return "8002";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}

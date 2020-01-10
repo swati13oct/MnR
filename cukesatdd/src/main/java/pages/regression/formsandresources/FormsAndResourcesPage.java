@@ -27,7 +27,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.regression.claims.ClaimsSummaryPage;
-import pages.regression.myDocumentsPage.myDocumentsPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -2618,7 +2618,7 @@ System.out.println(memberType);
 		return false;
 	}
 
-	public myDocumentsPage navigateToMyDocumentsPage() {
+	public MyDocumentsPage navigateToMyDocumentsPage() {
 	
 		myDocumentsButton.click();
 		if (MRScenario.environment.contains("team-atest")) {
@@ -2632,7 +2632,7 @@ System.out.println(memberType);
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (driver.getCurrentUrl().contains("/my-documents/")){
-				return new myDocumentsPage(driver);
+				return new MyDocumentsPage(driver);
 	     }
 			 return null;
 			

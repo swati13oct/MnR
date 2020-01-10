@@ -1,10 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 
 /**
  * @Functionality : Plan Documents and Resources page - setup test data for testing
@@ -395,14 +392,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			return testInputInfoMap; 
 		}			
 		
-		
 		Assert.assertTrue("PROBLEM - need to update ATDD to handle docName='"+docName+"'", false);
 		return testInputInfoMap;
 	}
-
-
-
-
-
-
 }

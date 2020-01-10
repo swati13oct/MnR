@@ -24,7 +24,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
-import pages.regression.myDocumentsPage.myDocumentsPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.testharness.TestHarness;
 
@@ -60,7 +60,7 @@ public class myDocumentsStepDefinition {
 
 		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
 				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		myDocumentsPage myDocumentsPage = formsAndResourcesPage.navigateToMyDocumentsPage();
+		MyDocumentsPage myDocumentsPage = formsAndResourcesPage.navigateToMyDocumentsPage();
 		Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
 	}
@@ -72,7 +72,7 @@ public class myDocumentsStepDefinition {
 
 	@And("user validates header section content on My Documents Page$")	
 	public void user_validates_header_Content() throws InterruptedException { 
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.validateHeaderSection();
 
@@ -86,7 +86,7 @@ public class myDocumentsStepDefinition {
 	public void search_by_ValidTimeperiod(DataTable memberAttributes) throws InterruptedException { 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String timePeriod=memberAttributesMap.get("Search Range");
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.searchDocumentsByTimePeriod(timePeriod);
 
@@ -99,7 +99,7 @@ public class myDocumentsStepDefinition {
 	@And("^I validate the Documents Table if present$")	
 	public void validate_the_Documents_Table() throws InterruptedException { 
 		int currentNumberOfRowsInDocumentsTable = 0;
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		Boolean tableIsPresent=myDocumentsPage.validateDocumentsTable();
 		if(tableIsPresent)
@@ -124,7 +124,7 @@ public class myDocumentsStepDefinition {
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.customSearchCalendar(fromDate,toDate);
 	}
@@ -135,7 +135,7 @@ public class myDocumentsStepDefinition {
 	 */
 	@Then("^I should be able to see the error messages when to and from dates are not entered$")
 	public void validateEmptyDatesErrorMessage(){
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 
 		myDocumentsPage.validateEmptyDatesError();
@@ -154,7 +154,7 @@ public class myDocumentsStepDefinition {
 		String fromDate = memberAttributesMap.get("From Date");
 		String toDate = memberAttributesMap.get("To Date");
 		System.out.println("From Date is: "+ fromDate +"And To Date is: "+ toDate );
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.customSearchByTimeInterval(fromDate,toDate);
 	}
@@ -166,7 +166,7 @@ public class myDocumentsStepDefinition {
 	@And("^I validate the disclaimer on my Documents Page$")
 	public void validateDisclaimer() throws InterruptedException{ 
 
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.validateDisclaimer();
 
@@ -178,7 +178,7 @@ public class myDocumentsStepDefinition {
 	@And("^I validate the Note  text on my Documents Page$")
 	public void validateNoteText() throws InterruptedException{ 
 
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.validateNoteText();
 
@@ -191,7 +191,7 @@ public class myDocumentsStepDefinition {
 	@Then("^I validate Need Help section on my Documents Page$")
 	public void validateNeedHelpSection() throws InterruptedException{ 
 
-		myDocumentsPage myDocumentsPage = (myDocumentsPage) getLoginScenario()
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
 				.getBean(PageConstantsMnR.My_Documents_PAGE);
 		myDocumentsPage.validateNeedHelpSection();
 
