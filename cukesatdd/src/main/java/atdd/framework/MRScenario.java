@@ -982,6 +982,10 @@ sauceLabsTunnelIdentifier);
 
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
 				: System.getProperty(CommonConstants.BROWSER_NAME));
+		
+		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+				: System.getProperty(CommonConstants.BROWSER_VERSION));
+		
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
@@ -1074,7 +1078,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 					capabilities.setCapability("maxDuration", "3600");
