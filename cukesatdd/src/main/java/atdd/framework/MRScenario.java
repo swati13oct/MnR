@@ -1074,7 +1074,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", "beta");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 					capabilities.setCapability("maxDuration", "3600");
