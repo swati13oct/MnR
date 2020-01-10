@@ -983,6 +983,7 @@ sauceLabsTunnelIdentifier);
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
+		System.out.println("browser version "+ System.getProperty(CommonConstants.BROWSER_VERSION));
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		
