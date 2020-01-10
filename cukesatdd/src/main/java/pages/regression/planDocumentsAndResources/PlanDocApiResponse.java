@@ -126,6 +126,7 @@ public class PlanDocApiResponse {
 	 * @param apiResponse
 	 */
 	public boolean buildDocListMap(HashMap<String, String> testInputInfoMap, String apiResponse) {
+		String planType=testInputInfoMap.get("planType");
 		String memberType=testInputInfoMap.get("memberType");
 		JSONParser parser = new JSONParser();
 		JSONObject apiResponseJsobObj=null;
