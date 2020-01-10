@@ -1,7 +1,7 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
 Feature: 1.06. ACQ- MedSupp OLE flow AARP
 
-  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer
+  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer @prodRegression
  Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -30,7 +30,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
       |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
      
   
-@UHC_Retrive_App_AARP @OLE_Regression @oleMedSupUlayer
+@UHC_Retrive_App_AARP @oleMedSupUlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site

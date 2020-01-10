@@ -551,6 +551,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validatePhoneElements(memberType);
 
 	}
+	
+	/**
+	 * @toDo : Validates the elements of Phone section
+	 */
+
+	@Then("^the user validates the Phone section with iframe$")
+	public void UserValidatesPhoneSectionIframe(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validatePhoneElementsWithIframe(memberType);
+
+	}
 
 	/**
 	 * @toDo : Validates the elements on clicking the Phone edit Button
@@ -595,11 +610,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 
 	@Then("^the user checks the functionality of save Button in Phoneeditsection$")
-	public void UserValidatesPhoneSaveButton() {
+	public void UserValidatesPhoneSaveButton(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validatePhoneSave();
+		profilePreferencesPage.validatePhoneSave(memberType);
 
 	}
 
@@ -845,7 +861,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link$")
 	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link() throws InterruptedException {
-
+		if(MRScenario.environmentMedicare.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -876,6 +895,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I should see the breadcrumb  in the upper left side of the page$")
 	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -888,6 +911,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@And("^clicking the link should lead me back to the Account Settings page of the member site$")
 	public void clicking_the_link_should_lead_me_back_to_the_Account_Settings_page_of_the_Medica_member_site() {
+		if(MRScenario.environmentMedicare.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -904,12 +931,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link$")
     public void i_click_the_HEALTHSAFE_ID_ACCOUNT_RECOVERY_AND_SECURITY_link() throws InterruptedException {
-           ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+		if(MRScenario.environmentMedicare.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
                         .getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-           profilePreferencesPage.validateHealthSafeAccountLink();
-           profilePreferencesPage.validateBreadCrumbClick();
-
+		profilePreferencesPage.validateHealthSafeAccountLink();
+		profilePreferencesPage.validateBreadCrumbClick();
     }
 
 	@And("^I should see the EPMP i frame on profile page$")

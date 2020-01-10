@@ -91,7 +91,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 */
 	public void clickHealthnWellnessTab(){
 		try {
-			if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+			if (MRScenario.environment.contains("team-a")) {
 				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
 			} 		
 			healthAndWellness.isDisplayed();

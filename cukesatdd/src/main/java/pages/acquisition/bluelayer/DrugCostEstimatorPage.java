@@ -1433,7 +1433,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(brandedCost);
 		CommonUtility.waitForPageLoad(driver, switchNowBtn, 30);
 		if(validateNew(switchNowBtn))
-			switchNowBtn.click();
+			jsClickNew(switchNowBtn);
 		CommonUtility.waitForPageLoad(driver, updateBtn, 30);
 		updateBtn.click();
 		

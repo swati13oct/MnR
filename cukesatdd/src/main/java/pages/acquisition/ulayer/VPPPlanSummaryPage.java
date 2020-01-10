@@ -3165,10 +3165,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void clickOnViewMoreForPlan(String planName) {
+		
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		if(viewMoreLink.size()>0)
-			viewMoreLink.get(0).click();
+		
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
+				viewMoreLink.get(0).click();
+
 	
 	}
 }

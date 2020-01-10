@@ -370,3 +370,52 @@ And I select the first pharmacy on there
 Examples:
 |     drug        | quantity | frequency   |branded |zipcode  |radius|
 | Lipitor TAB 10MG|    30    |Every 1 month| yes    | 90210   |15 miles|
+
+@dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer @dce3 @uhcDce
+Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+Given user is on blue layer landing page
+When user performs plan search using following information in the UMS site
+       | Zip Code    | <zipcode>  |
+        | County      | <county>   |
+        |aep | <aep>|
+				|currentyear|<currentyear>|
+Then the user navigates to the plan details for the given plan type in UMS site
+       | Plan Type | <plantype> |
+       |Plan Name  |<planName>  |
+Then the user navigates to Plan Costs tab in UMS site
+Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+	  | PlanName       | <planName>      |
+      | Drug Name1     | <drugName1>     |
+And selects drug details in UMS site
+	  | Drug Name1     | <drugName1>     |
+	  |Quantity|<quantity>|
+	  |Frequency|<frequency>|
+When user successfully adds drug in the UMS site
+	  | Drug Name1     | <drugName1>     |
+Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+When the user selects the pharmacy type and distance in UMS site
+      | Pharmacy Type | <pharmacyType> |
+      | Distance      | <distance>     |
+Then the user selects a pharmacy from the list of pharmacies in UMS site
+       | Pharmacy Name | <pharmacyName> |
+Then the user validates the added drugs on See your Estimated Costs page in UMS site
+	  | Drug Name1     | <drugName1>     |
+When the user clicks on Edit Drug List link in UMS site
+Then Enter your drugs page is displayed to the user in UMS site
+Then User click on Switch now to select the Generic of the Brand drug added in UMS site
+Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+Then the user change the pharmacy type and select new pharmacy in UMS site
+     | New Pharmacy Type | <newPharmacyType> |
+Then the user validates the added drugs on See your Estimated Costs page in UMS site
+	  | Drug Name1     | <genericName1>     |
+And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
+And user verifies annual drug cost in the Plan Cost tab of UMS site
+	| Plan Type | <plantype> |
+And the user clicks on Back to All Plans button present on details page in UMS site
+Then user validates Drug information is reflected on plan summary page in UMS site
+	| PlanName       | <planName>      |
+
+Examples:
+| zipcode | county             | drugInitials1       | drugName1     | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType                 | distance   |  pharmacyName               | plantype | planName                                           | quantity | frequency   |newPharmacyType|genericName1|genricName3|aep|currentyear|
+| 90210   | Los Angeles County | lipi                |  Lipitor      | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail             | 15 miles   |  COMMUNITY, A WALGREENS PHARMACY    | PDP      | AARP MedicareRx Walgreens (PDP)                    | 30       |Every 1 month|Mail Service   |atorvastatin |fluticasone|no | no |
+
