@@ -2617,6 +2617,9 @@ System.out.println(memberType);
 		}
 		return false;
 	}
+/* tbd 
+	@FindBy(xpath = "//a[@id='myDocButtonText']")
+	public WebElement myDocumentsButton;
 
 	public MyDocumentsPage navigateToMyDocumentsPage() {
 	
@@ -2637,7 +2640,7 @@ System.out.println(memberType);
 			 return null;
 			
 	}
-	
+*/	
 	public boolean isAlertPresent() {
 		try {
 				Alert alert = driver.switchTo().alert();

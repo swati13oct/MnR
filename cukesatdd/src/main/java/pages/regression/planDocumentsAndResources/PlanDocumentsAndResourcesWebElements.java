@@ -325,6 +325,8 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segments') and contains(@class,'EOB') and not(contains(@class,'ng-hide'))]//div[contains(@class,'explanationbenefits')]//a[contains(text(),'SEARCH EOB HISTORY') or contains(text(),'VIEW EOB STATEMENTS')]")
 	protected WebElement searchEobHistoryLink_EOB;
 
+	@FindBy(xpath = "//*[@id='myDocButtonText']")
+	protected WebElement myDocumentSection;
 	//--------------------------
 	@FindBy(xpath="//div[contains(@class,'renewmagazine') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Current Issue')]")
 	protected WebElement currentIssueLink_RM;

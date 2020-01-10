@@ -6,13 +6,10 @@ Feature: Member My Documents Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-   And user clicks on the view document and resources link and navigate to forms and resource page
+    And user navigates to plan documents and resources page validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-   # And user navigates to plan documents and resources page validation
-   #   | Plan Type   | <planType>   |
-   #   | Member Type | <memberType> |
-    Then validate that My Document section is displayed
+    Then validate that My Document section is displayed on Plan And Resources Page
     Then the user navigates to my Documents Page
     Then user validates header section content on My Documents Page
 	#----------------- Test for 90 days----------
@@ -47,7 +44,7 @@ Feature: Member My Documents Page
     And I validate the Note  text on my Documents Page
     And I validate the disclaimer on my Documents Page 
     Then I validate Need Help section on my Documents Page
-@abc
+
     Examples: 
       | TID   | planType | memberType            |                
       | 10000 | MAPD     | Individual_MyDocuments|

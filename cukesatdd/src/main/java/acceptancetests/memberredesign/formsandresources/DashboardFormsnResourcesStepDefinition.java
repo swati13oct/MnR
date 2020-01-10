@@ -656,6 +656,7 @@ public class DashboardFormsnResourcesStepDefinition {
 	 * }
 	 */
 	/* to verify the my doc section */
+	/* tbd 
 	@Then("^validate that My Document section is displayed$")
 	public void mydocumentsectionisdispayed() throws InterruptedException {
 
@@ -670,7 +671,7 @@ public class DashboardFormsnResourcesStepDefinition {
 			Assert.fail("my doc section is not present");
 		}
 
-	}
+	} */
 
 	@Then("^validate that the AnocSection is displayed$")
 	public void validate_that_the_Anoc_Section_is_displayed() throws Throwable {

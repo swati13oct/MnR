@@ -1,8 +1,5 @@
 package pages.regression.myDocumentsPage;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -10,15 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 
 public class MyDocumentsPage extends MyDocumentsWebElements{
-
-	
 
 	public MyDocumentsPage(WebDriver driver) {
 		super(driver);
@@ -32,7 +24,6 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to validate the page Elements
 	 */
-
 	public void validateHeaderSection() {
 		Assert.assertTrue("PROBLEM - unable to locate page header element", 
 				validate(pageHeader));
@@ -67,7 +58,6 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to search Documents with different date ranges
 	 */
-
 	public void searchDocumentsByTimePeriod(String timePeriod) {
 		WebElement option=null;
 		if (timePeriod.equals("Last 90 days")) {
@@ -89,20 +79,19 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		option.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("!!! Option selected from drop down is ====>"+(option.getText()));
-
 	}
 
 
 	/**
 	 * method to validate if documents Table is present or not
 	 */
-
 	public Boolean validateDocumentsTable() {
-
-		if(DocTablePresent.size()>0)
+		//note: need to wait because table take a little longer to load
+		CommonUtility.waitForPageLoad(driver, DocTablePresent, 5);
+		if(planDocValidate(DocTablePresent))
 			return true;
-		else
-		{
+		else {
+			//note: if no table then assume no doc, there should be message indicating no doc
 			Assert.assertTrue("PROBLEM - unable to locate no Docs Available Error message", validate(noDocsAvailableError));
 			String actualNoDocsErrorMssg=noDocsAvailableError.getText();
 			String expectedErrorMssg="There are no documents available for the time period entered. Select a new date range.";
@@ -111,7 +100,6 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 					expectedErrorMssg.equals(actualNoDocsErrorMssg));
 		}
 		return false;
-
 	}
 
 	/**
@@ -141,13 +129,11 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		Assert.assertTrue("PROBLEM - Documents claims table header column4 value not as expected. "
 				+ "Expected='"+expectCol4+"' | Actual='"+actualCol4+"'", 
 				expectCol4.equals(actualCol4));
-
 	}
 
 	/**
 	 * method to validate number of Rows in document Table
 	 */
-
 	public int validateNumberOfRowsInTable(){
 		WebElement TogetRows = driver.findElement(By.xpath("//table/tbody"));
 		List<WebElement>TotalRowsList = TogetRows.findElements(By.tagName("tr"));
@@ -162,30 +148,25 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to validate the custom search scenario with a valid date Range
 	 */
-
 	public void customSearchCalendar(String fromDate, String toDate) {
-
 		Assert.assertTrue("PROBLEM - unable to locate text field button for 'From' date", validate(fromTxtField));
 		Assert.assertTrue("PROBLEM - unable to locatetext field button for'To' date", validate(toTxtField));
 		Assert.assertTrue("PROBLEM - unable to locate Search Button", validate(searchButton));
 		fromTxtField.sendKeys(fromDate);
 		toTxtField.sendKeys(toDate);
 		searchButton.click();
-
+		sleepBySec(3); //note: for custom search it may take longer to load result, play it safe wait a little
 	}
 
 	/**
 	 * method to validate the custom search scenario when no date is entered in From date and To date textfields
 	 */
-
 	public void validateEmptyDatesError() {
-
 		//note: clear the From and To text fields to prep for next testing
 		fromTxtField.sendKeys(Keys.CONTROL + "a");
 		fromTxtField.sendKeys(Keys.DELETE);
 		toTxtField.sendKeys(Keys.CONTROL + "a");
 		toTxtField.sendKeys(Keys.DELETE);
-
 
 		searchButton.click();
 		Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(errMtyDates));
@@ -198,11 +179,10 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to validate the custom search scenario when from date is greater than To date
 	 */
-
 	public void customSearchByTimeInterval(String fromDate, String toDate) {
-		// TODO Auto-generated method stub
-		sendkeys(fromTxtField,fromDate);
-		sendkeys(toTxtField,toDate);
+		CommonUtility.waitForPageLoad(driver, fromTxtField, 5);
+		fromTxtField.sendKeys(fromDate);
+		toTxtField.sendKeys(toDate);
 
 		Assert.assertTrue("PROBLEM - unable to locate the from date comes before to date error ", validate(errFromDateGreaterThanToDate));
 		String expectedErrorText="Your From date needs to come before or on the same day as your To date.";
@@ -214,7 +194,6 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to validate Disclaimers text on My documents page
 	 */
-
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer", validate(disclaimer));
 		String expectedErrorText="This page contains documents in PDF format. PDF (Portable Document Format) files can be viewed with Adobe® Reader®. If you don't already have this viewer on your computer, download it free from the ADOBE WEBSITE.";
@@ -226,21 +205,17 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	/**
 	 * method to validate Note text on My documents page
 	 */
-
 	public void validateNoteText() {
-
 		Assert.assertTrue("PROBLEM - unable to locate Note Text ", validate(noteText));
 		String expectedErrorText="This is not a full list of documents that have been sent to you. This is only what can be sent electronically. Important information will continue to arrive in the mail. Please continue to read all plan documents you receive.";
 		Assert.assertTrue("PROBLEM -Note text doesn't Match"
 				+ "Expected='"+expectedErrorText+"' | Actual='"+noteText.getText()+"'", 
 				noteText.getText().contains(expectedErrorText));
-
 	}
 
 	/**
 	 * Main method for validating Need Help section
 	 */
-
 	public void validateNeedHelpSection() {
 		System.out.println("Proceed to validate the Need Help section header");
 		Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
@@ -255,7 +230,6 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		validateNeedHelpSectionContent(validateSection, needHelp_PlanSupportSection, 
 				needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, 
 				needHelp_PlanSupport_wkDayHrs, null);
-
 	}
 
 	/**
@@ -282,28 +256,23 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	}
 
 	public void validateTableContent() {
-
 		System.out.println("Proceed to validate the Table Content in the First row");
 
 		String column1Value =documentTypeValueInColumn1.getText().toString();
 		String column2Value =documentDateValueInColumn2.getText().toString();
 		String column3Value =documentDescrValueInColumn3.getText().toString();
-				
-	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column1Value.length()>0);
-	 System.out.println("Document type in first column is : "+column1Value);
-			
-	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column2Value.length()>0);
-	 System.out.println("Document Date  in second column is : "+column2Value);
-	 
-	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",column3Value.length()>0);
-	 System.out.println("Document Description  in Third column is : "+column3Value);
-		
-	 Assert.assertTrue("PROBLEM - unable to locate the view/download link",
+
+		Assert.assertTrue("PROBLEM - unable to locate the view/download link",column1Value.length()>0);
+		System.out.println("Document type in first column is : "+column1Value);
+
+		Assert.assertTrue("PROBLEM - unable to locate the view/download link",column2Value.length()>0);
+		System.out.println("Document Date  in second column is : "+column2Value);
+
+		Assert.assertTrue("PROBLEM - unable to locate the view/download link",column3Value.length()>0);
+		System.out.println("Document Description  in Third column is : "+column3Value);
+
+		Assert.assertTrue("PROBLEM - unable to locate the view/download link",
 				validate(viewDownloadLink));
-		
 	}
-
-
-
 }
 

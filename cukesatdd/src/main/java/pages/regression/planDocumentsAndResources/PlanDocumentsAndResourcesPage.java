@@ -6,6 +6,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+
 import org.openqa.selenium.support.PageFactory;
 
 public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase  {
@@ -173,6 +176,30 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 
 	public String validateSectionInNeedHelp(String planType, String memberType) {
 		return needHelp.validateSectionInNeedHelp(planType, memberType);
+	}
+	
+	/**
+	 * For MyDocument testing
+	 */
+	public MyDocumentsPage navigateToMyDocumentsPage() {
+		myDocumentLink_MD.click();
+		if (MRScenario.environment.contains("team-atest")) {
+			sleepBySec(8);
+			System.out.println("Check if Alert popup present...if yes, handle it...");
+			isAlertPresent();
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("/my-documents/")){
+				return new MyDocumentsPage(driver);
+	     }
+		return null;
+	}
+	
+	public boolean isMyDocumentSectionExist() {
+		if (planDocValidate(myDocumentSection))
+			return true;
+		else 
+			return false;
 	}
 
 
