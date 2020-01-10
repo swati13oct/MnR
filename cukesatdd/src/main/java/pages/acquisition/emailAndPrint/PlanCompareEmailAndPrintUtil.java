@@ -102,6 +102,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		for (int i=rowStartAt; i<=listOfRowsInPlanCompareTbl.size(); i++) {
 			if (forWhat.equals("email deepLink")) 
 				origDriver.navigate().refresh();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 			String rowXpath="//table[@id='fixTable']//tr["+i+"]//td";
 			List<WebElement> tmp=driver.findElements(By.xpath(rowXpath));
 			if (tmp.size()==1) {
