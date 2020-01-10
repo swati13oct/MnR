@@ -126,11 +126,9 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void coverageOptionpageFunctionalMobile(String planType, boolean proceed) {
 		System.out.println("Coverage Page Selections");
 		if (planType.equalsIgnoreCase("MAPD")) {
-			validate(plantypeMAPD,30);
-			plantypeMAPD.click();
+			mobileUtils.mobileLocateElementClick(plantypeMAPD);
 		} else if (planType.equalsIgnoreCase("MA")) {
-			validate(plantypeMA,30);
-			plantypeMA.click();
+			mobileUtils.mobileLocateElementClick(plantypeMA);
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			mobileUtils.mobileLocateElementClick(plantypePDP);
 		} else if (planType.equalsIgnoreCase("NA")) {

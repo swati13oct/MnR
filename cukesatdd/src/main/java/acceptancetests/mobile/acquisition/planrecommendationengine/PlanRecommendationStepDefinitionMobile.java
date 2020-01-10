@@ -16,6 +16,7 @@ import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePa
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -183,7 +184,29 @@ public class PlanRecommendationStepDefinitionMobile {
 		String status = "Negative";
 		specialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
 	}
+	
+	@Then("^user validate elements in Travel page mobile$")
+	public void elements_travel_page() {
+		TravelMobilePage careawaypage =  new TravelMobilePage(wd);
+		careawaypage.travelpageElements();
+	}
 
+	@And("^user selects Travel options in Travel Page mobile$")
+	public void select_travel_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		TravelMobilePage careawaypage =  new TravelMobilePage(wd);
+		String status = "Positive";
+		careawaypage.travelpage(inputValues.get("Travel Options"),status);	
+	}
+	
+	@And("^user selects Travel options in Travel Page mobile and validate errors$")
+	public void select_travel_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		TravelMobilePage careawaypage =  new TravelMobilePage(wd);
+		String status = "Negative";
+		careawaypage.travelpage(inputValues.get("Travel Options"),status);	
+	}
+	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
