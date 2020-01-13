@@ -1383,8 +1383,8 @@ private WebElement editEmailAddressArrowbutton;
 
 	public void validatecommunicationpreferences() {
 		driver.switchTo().defaultContent();
-		validateNew(communicationpreferncessection);
-		validateNew(editPreferencesLink);
+		validateNew(communicationpreferncessection, 5);
+		validateNew(editPreferencesLink, 5);
 	}
 
 

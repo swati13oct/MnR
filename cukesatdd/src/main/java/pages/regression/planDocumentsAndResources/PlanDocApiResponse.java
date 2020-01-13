@@ -181,13 +181,21 @@ public class PlanDocApiResponse {
 				} else if (docObj.getType().equals("3")) {
 					if (!memberType.contains("PREEFF")) {
 						String docCategory="Summary of Benefits";
+						//note: Conversation with Keri where Feb copy deck is not available yet
+						//note: since PDP GROUP is showing the doc in Membership Materials, then use it as expected behavior
 						docObjMap.put(docCategory, docObj);
 						if (docObj.getLanguage().equals("en_us")) {
 							planMatl_en_curYr_docList.add(docObjMap);
+							if (planType.equals("PDP") && memberType.contains("GROUP"))
+								memMatl_en_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("es")) {
 							planMatl_es_curYr_docList.add(docObjMap);
+							if (planType.equals("PDP") && memberType.contains("GROUP"))
+								memMatl_es_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("zh")) {
 							planMatl_zh_curYr_docList.add(docObjMap);
+							if (planType.equals("PDP") && memberType.contains("GROUP"))
+								memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
 				} else if (docObj.getType().equals("2")) {
