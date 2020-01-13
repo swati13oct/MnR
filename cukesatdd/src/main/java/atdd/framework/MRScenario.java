@@ -984,8 +984,8 @@ sauceLabsTunnelIdentifier);
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
 		System.out.println("browser version "+ System.getProperty(CommonConstants.BROWSER_VERSION));
-		String browserVersion = (null == System.getProperty("browserversion") ? "latest"
-				: System.getProperty("browserversion"));
+		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
