@@ -3497,12 +3497,6 @@ catch (Exception e) {
 	//note: end - added for deeplink validaton
 	//--------------------------------------------
 	public void clickOnViewMoreForPlan(String planName) {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
 	
