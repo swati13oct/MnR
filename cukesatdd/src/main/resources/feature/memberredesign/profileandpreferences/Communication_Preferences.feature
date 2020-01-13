@@ -113,8 +113,8 @@ Feature: 1.03 Member Preferences page
 
 	@devRegression
     Examples: 
-      | TID    | userSelection | planType | memberType       |
-      | 15309  | xxxxxxxxx     | SHIP     | SHIP_ProfilePref |
+      | TID    | userSelection      | planType | memberType       |
+      | 15309  | q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref |
 
   @CommunicationPreferences04 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member

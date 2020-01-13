@@ -122,15 +122,18 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
       | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_3  | 15235 | q2_jun_uhc0009                    | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      #tbd | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
     @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_3  | xxxxx | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 02_4  | 15268 | Medica_q2_jun_sofl0013            | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 02_3  | xxxxx | q2_dec_grp0288| SSUP              | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 02_4  | 15268 | q2_jun_sofl0013                   | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      #tbd | 02_3  | xxxxx | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      #tbd | 02_4  | 15268 | Medica_q2_jun_sofl0013            | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @mapd_medical_nice
     Examples: 

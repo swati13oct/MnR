@@ -105,11 +105,11 @@ Feature: 1.02 Member Profile page
     And the user validates the address section
       | Member Type | <memberType> |
 
-    @devRegression
+    @devRegression @mocked
     Examples: 
-      | TID   | userSelection | planType | memberType                      |
-      | 15105 | xxxxxxxxx     | PCP      | PCP_SouthFlorida_ProfilePref    |
-      | 15107 | xxxxxxxxx     | Medica   | Medica_SouthFlorida_ProfilePref |
+      | TID   | userSelection       | planType | memberType                      |
+      | 15105 | q2_jun_sofl0002     | PCP      | PCP_SouthFlorida_ProfilePref    |
+      | 15107 | q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
   @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
@@ -184,10 +184,10 @@ Feature: 1.02 Member Profile page
     And the user validate the Permanent Address section on profile page for ship member
     And the user validate the temporary section on profile page for ship member
 
-    @devRegression
+    @devRegression @mocked
     Examples: 
-    | TID   | userSelection | planType | memberType          |
-    | xxxxx | xxxxxxxxx     | SHIP     | SHIP_ProfilePref    |   
+    | TID   | userSelection      | planType | memberType          |
+    | xxxxx | q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
