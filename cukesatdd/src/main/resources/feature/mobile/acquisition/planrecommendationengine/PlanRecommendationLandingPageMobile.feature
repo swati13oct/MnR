@@ -4,7 +4,7 @@ Feature: Plan Selector Tool flow - Verify landing page in plan recommendation en
   @PREmobile @planrecommandonationmobile @landingpagemobile @landingpageelementsmobile
   Scenario: - To validate mobile landing Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site mobile
-   	Then user navigates to PRE landing page mobile
+   	#Then user navigates to PRE landing page mobile
     #Then user validate elements on landing page of Plan Recommendation Engine mobile
     
   @PREmobile @planrecommandonationmobile @landingpagemobile @landingpageshoptools
