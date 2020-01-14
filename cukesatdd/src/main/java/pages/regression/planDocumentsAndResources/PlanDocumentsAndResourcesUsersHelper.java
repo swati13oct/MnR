@@ -782,35 +782,33 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		List<String> targetTestDocList = new ArrayList<String>();
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
-				targetTestDocList.add("Benefit Highlights");
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
-				targetTestDocList.add("Beneficios Importantes");
-				targetTestDocList.add("Resumen de Beneficios");
-				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
-				targetTestDocList.add("Getting Started Guide");
-				targetTestDocList.add("Benefit Highlights");
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("Summary of Benefits");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
-				targetTestDocList.add("Gu.a para Comenzar"); //note: regex
-				targetTestDocList.add("Beneficios Importantes");
-				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
@@ -823,8 +821,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -850,14 +848,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Información sobre proveedores");
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Información sobre proveedores");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {

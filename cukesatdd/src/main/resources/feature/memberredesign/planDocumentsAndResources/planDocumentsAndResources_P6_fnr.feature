@@ -42,15 +42,15 @@ Feature: 1.06.1 Member Plans and Documents - section: Forms And Resources
 	@terminated_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 06-103    | xxxxx       | MA       | IND_TERM_PDnR         | true   | false    | true    | true   | true  | false    | true   | true   |
-      | 07-102    | xxxxx       | MA       | GROUP_TERM_PDnR       | true   | false    | false   | true   | true   | false   | true   | true   |
-#      | 07-101    | xxxxx       | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
+      | 06-103 | xxxxx       | MA       | IND_TERM_PDnR         | true   | false    | true    | true   | true  | false    | true   | true   |
+      | 07-102 | xxxxx       | MA       | GROUP_TERM_PDnR       | true   | false    | false   | true   | true   | false   | true   | true   |
+      | 07-101 | xxxxx       | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
 
-	@active_ma
+@abc	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-     | 09--104 | 15129       | MA       | IND_EFF_PDnR          | true   | false    | true    | true   | true   | false   | true   | true   |
-#LX      | 10-105 | 15130       | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
+ #     | 09-104 | 15129       | MA       | IND_EFF_PDnR          | true   | false    | true    | true   | true   | false   | true   | true   |
+      | 10-105 | 15130       | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
 
 	@active_mapd @devRegression
 	Examples: 

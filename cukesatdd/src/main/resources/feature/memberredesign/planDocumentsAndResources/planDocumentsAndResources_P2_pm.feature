@@ -42,12 +42,11 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
       | 07-026 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | false | true  | false | false | false |
       | 08-027 | xxxxx       | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
 
-	@active_ma
+@abc	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      ## BAD 09 - has spanish docs in API response but UI did not list them on PM section
      | 09--028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
-#LX      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | true  | false |
+      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
 
 	@active_mapd @devRegression
 	Examples: 

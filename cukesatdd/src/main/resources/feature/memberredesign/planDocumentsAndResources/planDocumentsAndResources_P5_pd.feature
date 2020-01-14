@@ -48,11 +48,11 @@ Feature: 1.06.1 Member Plans and Documents - section: Provider Directory -or- Ph
       | 08-084 | xxxxx       | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 
 
-	@active_ma
+@abc	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-     | 09--085 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
-#LX      | 10-086 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
+#      | 09--085 | 15129      | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | 10-086 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@active_mapd @devRegression
 	Examples: 

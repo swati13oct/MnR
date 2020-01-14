@@ -47,11 +47,11 @@ Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents 
       | 07-007 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
       | 08-008 | xxxxx       | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
-	@active_ma
+@abc	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09--009 | 15129       | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
-#LX      | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+#      | 09--009 | 15129      | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
+      | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@active_mapd @devRegression
 	Examples: 
