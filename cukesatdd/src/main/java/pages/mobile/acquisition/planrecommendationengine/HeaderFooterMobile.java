@@ -31,8 +31,7 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
-//Header Elements
-
+	//Header Elements
 	@FindBy(css = "div[class*='nav-toggle']")
 	private WebElement headerSectionmenu;
 	
@@ -258,13 +257,11 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 	
-	
 	//Shop page
-	@FindBy(xpath = "//span[contains(text(),'Get Help Choosing')]")
+	@FindBy(css = "a.card-link__link[dtmname*='Get Help']")
 	private WebElement HeaderShopToolsGetHelpChoosingLink;
 	
-//Header Element Verification Method 
-	
+	//Header Element Verification Method 
 	public void headerElementsMobile() {
 		//Works only for Android due to prod issue in iphoneX
 		System.out.println("Validating Mobile Header Elements");
@@ -458,7 +455,9 @@ public class HeaderFooterMobile extends UhcDriver {
 		shopforaplanLink.click();
 		validate(headerShopLink, 30);
 		headerShopLink.click();
-		mobileUtils.mobileLocateElementClick(HeaderShopToolsGetHelpChoosingLink);
+		mobileUtils.mobileLocateElement(HeaderShopToolsGetHelpChoosingLink);
+		navigatesubLink(HeaderShopToolsGetHelpChoosingLink.getAttribute("href"));
+		//mobileUtils.mobileLocateElementClick(HeaderShopToolsGetHelpChoosingLink);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("insurance plan"));
 	}
@@ -865,4 +864,3 @@ public class HeaderFooterMobile extends UhcDriver {
 	}
 
 }
-

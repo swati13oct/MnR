@@ -98,7 +98,6 @@ public class CommonutilitiesMobile extends UhcDriver {
 			System.out.println("Element not visible");
 		}
 	}
-
 	
 	public void mobileLocateElementClick(WebElement element)
 	{
