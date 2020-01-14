@@ -88,34 +88,54 @@ Feature: 1.10 Member  order materials Page
     And user validates error message when submit without any selection
     Then user validates ability to submit order for each item individually for all available items
     
-    @Individuala
+    #-------------------
+    @Individuala @devRegression
     Examples: 
       | TID   | userSelection | planType | memberType            | segmentId |  
       | 15287 | xxxxx         | MA	     | AARP_Individual_order | 000       |
       | 15288 | xxxxx         | MAPD     | AARP_Individual_order | 000       |
       | 15292 | xxxxx         | PDP      | AARP_Individual_order | 000       |
+
+    @Individuala
+    Examples: 
+      | TID   | userSelection | planType | memberType            | segmentId |  
       | 15288 | xxxxx         | MAPD     | UHC_Individual_order  | 000       |
 
+    #-------------------
     @Individualb
     Examples: 
       | TID   | userSelection | planType | memberType            | segmentId |  
       | 15286 | xxxxx         | PCP      | Individual_order      | 000       |
       | 15285 | xxxxx         | MEDICA   | Individual_order      | 000       |
+
+    @Individualb @devRegression
+    Examples: 
+      | TID   | userSelection | planType | memberType            | segmentId |  
       | 15293 | xxxxx         | SHIP     | MEDSUPP_order         | 000       |
+
+    #-------------------
+    @GroupMemberOrderSelectionandConfirmation @devRegression
+    Examples: 
+      | TID   | userSelection | planType | memberType            | segmentId | 
+      | 15289 | xxxxx         | MAPD     | UHC_Group_order       | 000       |
 
     @GroupMemberOrderSelectionandConfirmation 
     Examples: 
       | TID   | userSelection | planType | memberType            | segmentId | 
       | 15289 | xxxxx         | MA       | UHC_Group_order       | 000       |
-      | 15289 | xxxxx         | MAPD     | UHC_Group_order       | 000       |
       | 15290 | xxxxx         | PDP      | UHC_Group_order       | 000       |
+
+    #-------------------
+    @ValidateHeaderComboTabs @devRegression
+    Examples: 
+      | TID   | userSelection | planType | memberType            | segmentId | 
+      | 15281 | xxxxx         | MAPD	 | COMBO_order           | 000       |
+      | 15281 | xxxxx         | MEDSUPP	 | COMBO_order           | 000       |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @ValidateHeaderComboTabs
     Examples: 
       | TID   | userSelection | planType | memberType            | segmentId | 
-      | 15281 | xxxxx         | MAPD	 | COMBO_order           | 000       |
-      | 15281 | xxxxx         | MEDSUPP	 | COMBO_order           | 000       |
       | 15291 | xxxxx         | PDP      | COMBO_order	         | 000       |
     # | 15291 | xxxxx         | SSUP     | COMBO_order	         | 000       |
 
