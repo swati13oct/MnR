@@ -985,7 +985,7 @@ sauceLabsTunnelIdentifier);
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
 		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
-		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? props.get("BrowserVersion")
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after "+ browserVersion);
 
