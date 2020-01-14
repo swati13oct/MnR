@@ -88,17 +88,21 @@ Feature: 1.10 Member  order materials Page
     Then user validates ability to submit order for each item individually for all available items
     
     #-------------------
-    @Individuala @devRegression
-    Examples: 
-      | TID   | planType | memberType            | segmentId |  
-      | 15287 | MA	     | AARP_Individual_order | 000       |
-      | 15288 | MAPD     | AARP_Individual_order | 000       |
-      | 15292 | PDP      | AARP_Individual_order | 000       |
-
     @Individuala
     Examples: 
       | TID   | planType | memberType            | segmentId |  
       | 15288 | MAPD     | UHC_Individual_order  | 000       |
+      | 15288 | MAPD     | AARP_Individual_order | 000       |
+
+    @Individuala @ma @devRegression
+    Examples: 
+      | TID   | planType | memberType            | segmentId |  
+      | 15287 | MA	     | AARP_Individual_order | 000       |
+
+    @Individuala @pdp @devRegression
+    Examples: 
+      | TID   | planType | memberType            | segmentId |  
+      | 15292 | PDP      | AARP_Individual_order | 000       |
 
     #-------------------
     @Individualb
@@ -107,7 +111,7 @@ Feature: 1.10 Member  order materials Page
       | 15286 | PCP      | Individual_order      | 000       |
       | 15285 | MEDICA   | Individual_order      | 000       |
 
-    @Individualb @devRegression
+    @Individualb @ship @devRegression
     Examples: 
       | TID   | planType | memberType            | segmentId |  
       | 15293 | SHIP     | MEDSUPP_order         | 000       |
@@ -125,7 +129,7 @@ Feature: 1.10 Member  order materials Page
       | 15290 | PDP      | UHC_Group_order       | 000       |
 
     #-------------------
-    @ValidateHeaderComboTabs @devRegression
+    @ValidateHeaderComboTabs @combo_ship_mapd @devRegression
     Examples: 
       | TID   | planType | memberType            | segmentId | 
       | 15281 | MAPD	 | COMBO_order           | 000       |

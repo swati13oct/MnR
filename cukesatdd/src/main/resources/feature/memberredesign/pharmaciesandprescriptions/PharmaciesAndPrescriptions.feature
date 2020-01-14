@@ -57,9 +57,13 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | AARP_Individual_PnP | yes        |
+
+    @pharmaciesandprescriptions01a
+    Examples: 
+	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | UHC_Individual_PnP  | yes        |
 
-    @pharmaciesandprescriptions01b @devRegression
+    @pharmaciesandprescriptions01b
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | PDP      | Individual_PnP	    | yes        |
@@ -114,7 +118,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | 313410 | PDP      | PreEff_PnP     | no         |
       | 313410 | MA       | Individual_PnP | no         |
       
-   @devRegression
+   @ship @devRegression
    Examples: 
       | FID    | planType | memberType     | expectLink | 
       | 313410 | SHIP     | Individual_PnP | no         |
