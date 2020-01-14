@@ -74,7 +74,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #AX      | 18-056 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
-	@active_ship
+	@active_ship @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
