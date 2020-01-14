@@ -2303,7 +2303,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
-				targetTestDocList.add("Step Therapy for Part B Drugs");
+				//targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
 				targetTestDocList.add("Potential for Contract Termination");
 				targetTestDocList.add("Seasonal flu shot information");
