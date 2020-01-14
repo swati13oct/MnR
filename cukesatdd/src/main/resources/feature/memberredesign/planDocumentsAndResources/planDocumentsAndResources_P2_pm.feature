@@ -49,10 +49,14 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
      | 09--028 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
 #LX      | 10-029 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | true  | false |
 
-	@active_mapd
+	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 11-030 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+
+	@active_mapd
+	Examples: 
+      | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
 #LX      | 12-031 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
 #LX      | 13-032 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 

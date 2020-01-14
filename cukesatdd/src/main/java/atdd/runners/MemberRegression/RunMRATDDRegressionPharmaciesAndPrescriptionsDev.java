@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.MemberRegression;
 
 import org.junit.runner.RunWith;
 
@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsP5.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmaciesAndPrescriptionsP5")
+jsonReport = "target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsDev.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPharmaciesAndPrescriptionsDev")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsP5.json" }, tags = { "@pharmaciesandprescriptions02" })
-public class RunMRATDDRegressionPharmaciesAndPrescriptionsP5 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPharmaciesAndPrescriptionsDev.json" }, tags = { "@devRegression" })
+public class RunMRATDDRegressionPharmaciesAndPrescriptionsDev {
 
 }

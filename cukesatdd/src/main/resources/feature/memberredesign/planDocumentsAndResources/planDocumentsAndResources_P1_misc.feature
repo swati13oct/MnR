@@ -53,10 +53,14 @@ Feature: 1.06.1 Member Plans and Documents - section: header -and- My Documents 
       | 09--009 | 15129       | MA       | IND_EFF_PDnR          | true  | true   | true  | false | true  |
 #LX      | 10-010 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
-	@active_mapd
+	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 11-011 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true   | true  | true  | true  |	
+
+	@active_mapd
+	Examples: 
+      | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #LX      | 12-012 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
 #LX      | 13-013 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 

@@ -54,11 +54,14 @@ Feature: 1.06.1 Member Plans and Documents - section: Provider Directory -or- Ph
      | 09--085 | 15129       | MA       | IND_EFF_PDnR          | true  | true  | false | true     | true     | false    | false    | false    | false    |
 #LX      | 10-086 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
+	@active_mapd @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 11-087 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-		## 11 - pharmacy directory did not show up for spanish
-      | 11-087 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 #LX      | 12-088 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 #LX      | 13-089 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 

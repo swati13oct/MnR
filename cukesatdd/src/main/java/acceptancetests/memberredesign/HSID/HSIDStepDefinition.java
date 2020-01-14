@@ -735,7 +735,7 @@ public class HSIDStepDefinition {
 					testHarnessUseDropdown = true;
 					System.out.println("useDropdown=YES and env is team-atest, will use dropdown for sign-in");
 				} else {
-					System.out.println("useDropdown=YES but this is not team-atest env so will default back to use UUID for sign-in");
+					System.out.println("useDropdown=YES but this is either not team-atest env or feature file has no userSelection field, so will default back to use UUID for sign-in");
 				}
 			} else 		
 				System.out.println("use UUID for sign-in");

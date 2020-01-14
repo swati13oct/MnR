@@ -45,6 +45,7 @@ Feature: Member My Documents Page
     And I validate the disclaimer on my Documents Page 
     Then I validate Need Help section on my Documents Page
 
+    @devRegression
     Examples: 
       | TID   | planType | memberType            |                
       | 10000 | MAPD     | Individual_MyDocuments|
