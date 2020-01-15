@@ -997,7 +997,8 @@ sauceLabsTunnelIdentifier);
 				domain = "ocp-elr-core-nonprod.optum.com";
 		else 
 			domain = "ocp-ctc-dmz-nonprod.optum.com";
-
+		System.out.println("env chosen is: "+ environment);
+		System.out.println("domain chosen is: "+ domain);
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
