@@ -146,7 +146,7 @@ public class PlanDocApiResponse {
 			System.out.println("Unable to get a successful API response");
 			return success;
 		}
-		
+
 		JSONArray docListArrayObj = (JSONArray) apiResponseJsobObj.get("docList");
 		//Assert.assertTrue("PROBLEM - docListArrayObj is null", docListArrayObj!=null);
 		if (docListArrayObj==null) {
@@ -186,15 +186,15 @@ public class PlanDocApiResponse {
 						docObjMap.put(docCategory, docObj);
 						if (docObj.getLanguage().equals("en_us")) {
 							planMatl_en_curYr_docList.add(docObjMap);
-							if (planType.equals("PDP") && memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
 								memMatl_en_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("es")) {
 							planMatl_es_curYr_docList.add(docObjMap);
-							if (planType.equals("PDP") && memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
 								memMatl_es_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("zh")) {
 							planMatl_zh_curYr_docList.add(docObjMap);
-							if (planType.equals("PDP") && memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
@@ -383,7 +383,7 @@ public class PlanDocApiResponse {
 						planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}
-			//--------------	
+				//--------------	
 			} else if (docObj.getYear().equals(nextYear)) {
 				//note: for next year
 				if (docObj.getType().equals("6002")) {
@@ -404,13 +404,16 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
-						memMatl_en_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
-						memMatl_es_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
-						memMatl_zh_nxtYr_docList.add(docObjMap);
+						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2")) {
 					String docCategory="Evidence of Coverage";
@@ -1010,6 +1013,6 @@ public class PlanDocApiResponse {
 	public void setNoteList(List<String> noteList) {
 		this.noteList = noteList;
 	}
-	
+
 
 }

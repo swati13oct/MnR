@@ -7,6 +7,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  {

@@ -73,14 +73,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 		String planType=testInputInfoMap.get("planType");
 		String memberType=testInputInfoMap.get("memberType");
+		String section=testInputInfoMap.get("section");
 
 		boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
 		boolean switchTab=Boolean.valueOf(testInputInfoMap.get("switchTab"));
 		String targetDocName=testInputInfoMap.get("docName");
-
 		//note: this is a bypass for team-atest, lower env has issue w/ this but would be fine on stage according to developer
 		if(MRScenario.environment.contains("team-a") 
-				&& planType.equals("PDP") && memberType.contains("GROUP")) {
+				&& (!section.equals("Forms And Resources"))) {
 			section_note.add("    SKIP - link destination validation for '"+targetDocName+"' on team env, lower env won't work right for this link");
 			return section_note;
 		}
@@ -395,10 +395,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 								}
 							}
 							System.out.println("TEST - link - allMatch="+allMatch+" | link: act="+act_doc.getLink()+" : exp="+exp_doc.getLink());
-							if (!act_doc.getCompCode().equals("")) {
+							if (act_doc.getCompCode().equals("null")) //note: CompCode is text null
+								System.out.println("TEST - compCode - actual CompCode from element is null, skip the CompCode validation");
+							else if (!act_doc.getCompCode().equals("") || !act_doc.getCompCode().equals("null")) {
+								//note: actual CompCode has something...
 								if (!act_doc.getLanguage().toLowerCase().contains("es") && !act_category.contains("Pharmacy Directory")
 										&& !act_category.contains("Vendor Information Sheet")
 										&& !act_category.contains("Provider Directory")) {
+									//note: and it's not spanish for Pharmacy Directory / Vendor Info Sheet / Provider Directory
 									if (!act_doc.getCompCode().equals(exp_doc.getCompCode())) {
 										allMatch=false;
 									}
@@ -676,6 +680,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		String targetSubSection=testInputInfoMap.get("targetSubSection");
 		String targetLang=testInputInfoMap.get("targetLang");
 		boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
+		
 		boolean expDocDisplay=Boolean.valueOf(testInputInfoMap.get("expDocDisplay"));
 		boolean validateApi=Boolean.valueOf(testInputInfoMap.get("validateApi"));
 		List<HashMap<String, Document>> act_docListFromUi=new ArrayList<HashMap<String, Document>>();
