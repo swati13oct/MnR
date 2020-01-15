@@ -315,7 +315,7 @@ Feature: 2.10. ACQ-DCE - UMS
 
   #| 30210   |
   #| 10002   |
-  @dce @regressionMember @blayer
+  @dce @regressionMember @blayer @DCE_Regression_Blayer
   Scenario Outline: To verify DCE flow from Blue Layer home page hover over
     Given the user is on the uhcmedicaresolutions site landing page
     When I click on Drug Cost Estimator link from Shop for a plan hover over for ums site
@@ -323,6 +323,7 @@ Feature: 2.10. ACQ-DCE - UMS
       | Drug | <drug> |
     And user selects drug details in ums site
       | Drug      | <drug>      |
+      | Dosage    | <dosage>    |
       | Quantity  | <quantity>  |
       | Frequency | <frequency> |
     When user successfully adds drug in ums site
@@ -348,8 +349,8 @@ Feature: 2.10. ACQ-DCE - UMS
 
     #Test Id V1.0: 15486
     Examples: 
-      | drug             | quantity | frequency     | branded | zipcode | plantype | planName                                         | radius   |
-      | Lipitor TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP MedicareComplete SecureHorizons Focus (HMO) | 15 miles |
+      | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                         | radius   |
+      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP MedicareComplete SecureHorizons Focus (HMO) | 15 miles |
 
   @dcePerformanceBlayer
   Scenario Outline: To go to DCE flow from Home page

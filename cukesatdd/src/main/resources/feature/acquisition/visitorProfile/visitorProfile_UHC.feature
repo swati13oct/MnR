@@ -3,7 +3,7 @@
 @Test @UHCvisitorprofile
 Feature: 2.08. ACQ-Visitor profile - UMS
 
-  @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC @prodRegression
+  @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC @prodRegression @DCE_Regression_Blayer
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page
@@ -37,7 +37,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | state   | drug  |dosage       | quantity | frequency     | zipcode | radius   |  quantity | frequency     | branded |planyear |
       | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | 2019 |
 
-  @addDrugsDCE
+  @addDrugsDCE @DCE_Regression_Blayer
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
     And the user selects the state drop down value in UHC home page

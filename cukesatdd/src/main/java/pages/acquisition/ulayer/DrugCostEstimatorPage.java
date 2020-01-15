@@ -1915,6 +1915,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
+		scrollToView(btnViewCost);
 		getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}

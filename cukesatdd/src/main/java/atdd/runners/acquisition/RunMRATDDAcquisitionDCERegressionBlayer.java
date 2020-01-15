@@ -18,7 +18,6 @@ import cucumber.api.CucumberOptions;
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCERegressionBlayer.json" }, tags = { "@DCE_Regression_Blayer" })
 
 
-
 public class RunMRATDDAcquisitionDCERegressionBlayer {
 
 }
