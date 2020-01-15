@@ -1,5 +1,5 @@
 @PlanSelectorAARP
-Feature: Plan Selector Tool flow - Verify back to plan options navigation to plan selector page
+Feature: 1.12-Plan Selector Tool flow - Verify back to plan options navigation to plan selector page
 
   @UlayerPST @Spartans @planSelectorRegression @pstULayerSmoke
   Scenario Outline: TID: 15474 - To validate Plan selector flow in AARP site

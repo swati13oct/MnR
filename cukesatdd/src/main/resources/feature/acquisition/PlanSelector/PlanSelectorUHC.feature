@@ -1,5 +1,5 @@
 @PlanSelectorUHC
-Feature: Plan Selector Tool flow - Verify back to plan options navigation to plan selector page
+Feature: 2.12-Plan Selector Tool flow - Verify back to plan options navigation to plan selector page
 
   @blayerPST @Spartans @planSelectorRegression @pstBLayerSmoke
   Scenario Outline: TID: 15471 -To validate Plan selector flow in UHC site
