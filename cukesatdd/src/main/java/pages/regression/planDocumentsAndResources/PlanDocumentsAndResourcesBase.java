@@ -397,7 +397,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							System.out.println("TEST - link - allMatch="+allMatch+" | link: act="+act_doc.getLink()+" : exp="+exp_doc.getLink());
 							if (act_doc.getCompCode().equals("null")) //note: CompCode is text null
 								System.out.println("TEST - compCode - actual CompCode from element is null, skip the CompCode validation");
-							else if (!act_doc.getCompCode().equals("") || !act_doc.getCompCode().equals("null")) {
+							else if (!act_doc.getCompCode().equals("") && !act_doc.getCompCode().equals("null")) {
 								//note: actual CompCode has something...
 								if (!act_doc.getLanguage().toLowerCase().contains("es") && !act_category.contains("Pharmacy Directory")
 										&& !act_category.contains("Vendor Information Sheet")
