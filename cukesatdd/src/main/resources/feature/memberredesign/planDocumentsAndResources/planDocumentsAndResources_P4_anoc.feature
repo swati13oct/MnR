@@ -1,5 +1,5 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
-Feature: 1.06.1 Member Plans and Documents - section: Annual Notice of Changes Documents
+Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes Documents
 
   #------------------------------------------
   @planAndDocuments04 @anoc 

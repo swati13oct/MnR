@@ -1,5 +1,5 @@
 @myDocuments  @thePredators @regressionMember @E2E @feature-F368974
-Feature: Member My Documents Page
+Feature: 1.06.7 Member My Documents Page
 
   @myDocuments01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario

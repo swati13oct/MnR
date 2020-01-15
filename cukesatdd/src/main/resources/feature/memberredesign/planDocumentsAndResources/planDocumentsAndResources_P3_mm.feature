@@ -1,5 +1,5 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
-Feature: 1.06.1 Member Plans and Documents - section: Membership Materials
+Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 
   #------------------------------------------
   @planAndDocuments03 @membershipMaterials 
