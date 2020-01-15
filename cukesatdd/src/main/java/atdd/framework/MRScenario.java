@@ -151,11 +151,12 @@ public class MRScenario {
 			environmentMedicare = environment;
 		}
 
-		if (props.containsKey("Domain")) {
+		
+		/*if (props.containsKey("Domain")) {
 			domain = props.get("Domain");
 		} else {
 			domain = null;
-		}
+		}*/
 		isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
 				: System.getProperty(CommonConstants.IS_TESTHARNESS));
 		isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
@@ -985,9 +986,17 @@ sauceLabsTunnelIdentifier);
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
 		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
-		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? props.get("BrowserVersion")
+		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after "+ browserVersion);
+		
+		String env = System.getProperty("environment");
+		if(env.equals("stage")||env.equals("offline-stage"))
+			domain = "uhc.com";
+		else if(env.equals("team-e")||env.equals("team-t")||env.equals("team-v1"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+		else 
+			domain = "ocp-ctc-dmz-nonprod.optum.com";
 
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
