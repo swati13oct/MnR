@@ -114,7 +114,7 @@ Feature: 1.10. ACQ-DCE AARP
 
   #| 30210   |
   #| 10002   |
-  @dce  @DCE_Regression_Ulayer @ulayer
+  @dce @DCE_Regression_Ulayer @ulayer
   Scenario Outline: To verify DCE flow from Ulayer home page hover over
     Given the user is on AARP medicare acquisition site landing page
     When I click on Drug Cost Estimator link from Shop for a plan hover over for AARP site
