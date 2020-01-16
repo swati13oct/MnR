@@ -2103,6 +2103,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
 		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
 		
+		if(planName.contains("PDP")) {
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@id, 'pdpDrugCostEstimatorLink')]"));
+		}
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
