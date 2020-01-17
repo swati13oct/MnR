@@ -141,24 +141,26 @@ public class MRScenario {
 		props = getProperties();
 
 		// Set acqusisition and member urls 
-		environment = props.get("Environment");
-
-		if (environment.equals("awe-test-a")) {
-			environmentMedicare = "test-a";
-		} else if (environment.equals("awe-stage")) {
-			environmentMedicare = "stage";
-		} else {
-			environmentMedicare = environment;
+		if(!(props==null)){
+			System.out.println("before accessing props");
+			environment = props.get("Environment");
+			System.out.println("after accessing props");
+			if (environment.equals("awe-test-a")) {
+				environmentMedicare = "test-a";
+			} else if (environment.equals("awe-stage")) {
+				environmentMedicare = "stage";
+			} else {
+				environmentMedicare = environment;
+			}
+			
+			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
+					: System.getProperty(CommonConstants.IS_TESTHARNESS));
+			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
+					? props.get("isHSIDCompatible") : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+			
+			sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
+					: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 		}
-		
-		isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
-				: System.getProperty(CommonConstants.IS_TESTHARNESS));
-		isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
-				? props.get("isHSIDCompatible") : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
-		
-		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
-				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
-
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
@@ -567,11 +569,11 @@ public class MRScenario {
 			} else {
 				domain = null;
 			}
-
+			return props;
 		}
 		
+		return null;
 		
-		return props;
 	}
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
