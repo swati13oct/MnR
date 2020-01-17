@@ -984,18 +984,9 @@ sauceLabsTunnelIdentifier);
 		// Is system propery exists defining JENKINS_BROWSER, we're running in
 		// JENKINS and
 		// will prefer those browser properties.
-		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
-
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
-				: System.getProperty(CommonConstants.BROWSER_NAME));
-		
-		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
-		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
-				: System.getProperty(CommonConstants.BROWSER_VERSION));
-		System.out.println("browser version after "+ browserVersion);
 		
 		String env = System.getProperty("environment");
+		String browsername = "";
 		if(!(null==env)){
 			if(env.equals("stage")||env.equals("offline-stage"))
 				domain = "uhc.com";
@@ -1005,9 +996,24 @@ sauceLabsTunnelIdentifier);
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			System.out.println("env chosen is: "+ environment);
 			System.out.println("domain chosen is: "+ domain);
+		}else{
+			browsername = props.get("BrowserName");
 		}
+			
+		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+
+		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+				: System.getProperty(CommonConstants.BROWSER_NAME));
+		
+		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
+		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+				: System.getProperty(CommonConstants.BROWSER_VERSION));
+		System.out.println("browser version after "+ browserVersion);
+		
+		
 		// Again, Jenkins takes precedent.
-		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
+		String pathToBinary = (null == System.getProperty("phantomjs") ? "null"
 				: System.getProperty("phantomjs"));
 
 		System.out.println("getWebDriver: returning driver for " + browser);
