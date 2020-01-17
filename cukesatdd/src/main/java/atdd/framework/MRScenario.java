@@ -1069,19 +1069,19 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "browserVersion");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("maxDuration", "3600");
 				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "browserVersion");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1024x768");	
 					capabilities.setCapability("maxDuration", "3600");				
 				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "browserVersion");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 					capabilities.setCapability("maxDuration", "3600");
@@ -1090,7 +1090,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside Edge");
 					capabilities = DesiredCapabilities.edge();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "browserVersion");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("maxDuration", "3600");
 				 }
