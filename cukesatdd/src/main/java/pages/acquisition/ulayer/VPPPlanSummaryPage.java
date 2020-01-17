@@ -2098,13 +2098,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
 				
 //		dcedropdown.click();
-		
+		WebElement DCELink;
 		//WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class, 'collapse drugs drug-provider-collapse')]//*[contains(@class,'edit-drugs')]"));
-		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
 		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
 		
 		if(planName.contains("PDP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@id, 'pdpDrugCostEstimatorLink')]"));
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@id, 'pdpDrugCostEstimatorLink')]"));
+		}
+		else {
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
+
 		}
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
