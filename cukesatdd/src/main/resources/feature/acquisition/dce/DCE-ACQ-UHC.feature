@@ -1,7 +1,7 @@
 @acq_dce_UHC
 Feature: 2.10. ACQ-DCE - UMS
 
-  @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer @prodRegression
+  @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer01 @prodRegression
   Scenario Outline: To verify DCE flow from Blayer home page
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the acquisition DCE tool from home page on ums site
@@ -37,7 +37,7 @@ Feature: 2.10. ACQ-DCE - UMS
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                           | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 15 miles |
 
-  @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
+  @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer02 @prodRegression
   Scenario Outline: To test the dce vpp flow with switch now option
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -69,7 +69,119 @@ Feature: 2.10. ACQ-DCE - UMS
       | zipcode | plantype | drug    | dosage   | county | isMultutiCounty | quantity | frequency     | branded |
       |   90210 | MA       | Lipitor | TAB 10MG | none   | no              |       30 | Every 1 month | yes     |
 
-  @defect1662 @dceVBF
+    @dce @regressionMember @blayer @DCE_Regression_Blayer03
+  Scenario Outline: To verify DCE flow from Blue Layer home page hover over
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I click on Drug Cost Estimator link from Shop for a plan hover over for ums site
+    And I have added a drug to my drug list on ums site
+      | Drug | <drug> |
+    And user selects drug details in ums site
+      | Drug      | <drug>      |
+      | Dosage    | <dosage>    |
+      | Quantity  | <quantity>  |
+      | Frequency | <frequency> |
+    When user successfully adds drug in ums site
+      | Is Branded Drug | <branded> |
+      | Drug            | <drug>    |
+    And I navigate to step2 page on ums site
+    And the user selects the pharmacy tab information
+      | Zipcode | <zipcode> |
+      | Radius  | <radius>  |
+    And I select the first pharmacy on there
+    And I navigate to step3 page and validate drug info for DCE homepage flow uhc
+      | Drug | <drug> |
+    Then user enters zipcode on step3 and validate plan summary page in uhc
+      | Zip | <zipcode> |
+    And user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+    Then user validates drug cost in medical benefit section in the UMS site
+      | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then user validates drug added on prescription drug benefits tab in UMS
+      | Drug | <drug> |
+
+    #Test Id V1.0: 15486
+    Examples: 
+      | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                           | radius   |
+      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 15 miles |
+
+
+########################### End of Regression Scenarios ########################
+
+  @dcePerformanceBlayer
+  Scenario Outline: To go to DCE flow from Home page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I access the acquisition DCE tool from home page on ums site
+    And I have added a drug to my drug list on ums site
+      | Drug | <drug> |
+    And user selects drug details in ums site
+      | Drug      | <drug>      |
+      | Quantity  | <quantity>  |
+      | Frequency | <frequency> |
+    When user successfully adds drug in ums site
+      | Is Branded Drug | <branded> |
+      | Drug            | <drug>    |
+    And I navigate to step2 page on ums site
+    And the user selects the pharmacy tab information
+      | Zipcode | <zipcode> |
+      | Radius  | <radius>  |
+    And I select the first pharmacy on there
+
+    Examples: 
+      | drug             | quantity | frequency     | branded | zipcode | radius   |
+      | Lipitor TAB 10MG |       30 | Every 1 month | yes     |   90210 | 15 miles |
+
+  @dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer @dce3 @uhcDce
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+    Given user is on blue layer landing page
+    When user performs plan search using following information in the UMS site
+      | Zip Code    | <zipcode>     |
+      | County      | <county>      |
+      | aep         | <aep>         |
+      | currentyear | <currentyear> |
+    Then the user navigates to the plan details for the given plan type in UMS site
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then the user navigates to Plan Costs tab in UMS site
+    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+      | PlanName   | <planName>  |
+      | Drug Name1 | <drugName1> |
+    And selects drug details in UMS site
+      | Drug Name1 | <drugName1> |
+      | Quantity   | <quantity>  |
+      | Frequency  | <frequency> |
+    When user successfully adds drug in the UMS site
+      | Drug Name1 | <drugName1> |
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+    When the user selects the pharmacy type and distance in UMS site
+      | Pharmacy Type | <pharmacyType> |
+      | Distance      | <distance>     |
+    Then the user selects a pharmacy from the list of pharmacies in UMS site
+      | Pharmacy Name | <pharmacyName> |
+    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+      | Drug Name1 | <drugName1> |
+    When the user clicks on Edit Drug List link in UMS site
+    Then Enter your drugs page is displayed to the user in UMS site
+    Then User click on Switch now to select the Generic of the Brand drug added in UMS site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+    Then the user change the pharmacy type and select new pharmacy in UMS site
+      | New Pharmacy Type | <newPharmacyType> |
+    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+      | Drug Name1 | <genericName1> |
+    And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
+    And user verifies annual drug cost in the Plan Cost tab of UMS site
+      | Plan Type | <plantype> |
+    And the user clicks on Back to All Plans button present on details page in UMS site
+    Then user validates Drug information is reflected on plan summary page in UMS site
+      | PlanName | <planName> |
+
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
+      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+      
+      @defect1662 @dceVBF
   Scenario Outline: To go through dce from homepage and validate drug is still there when going to dce from vpp
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the acquisition DCE tool from home page on ums site
@@ -315,110 +427,4 @@ Feature: 2.10. ACQ-DCE - UMS
 
   #| 30210   |
   #| 10002   |
-  @dce @regressionMember @blayer @DCE_Regression_Blayer
-  Scenario Outline: To verify DCE flow from Blue Layer home page hover over
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I click on Drug Cost Estimator link from Shop for a plan hover over for ums site
-    And I have added a drug to my drug list on ums site
-      | Drug | <drug> |
-    And user selects drug details in ums site
-      | Drug      | <drug>      |
-      | Dosage    | <dosage>    |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-    When user successfully adds drug in ums site
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page on ums site
-    And the user selects the pharmacy tab information
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy on there
-    And I navigate to step3 page and validate drug info for DCE homepage flow uhc
-      | Drug | <drug> |
-    Then user enters zipcode on step3 and validate plan summary page in uhc
-      | Zip | <zipcode> |
-    And user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    Then user validates drug cost in medical benefit section in the UMS site
-      | Plan Name | <planName> |
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    Then user validates drug added on prescription drug benefits tab in UMS
-      | Drug | <drug> |
-
-    #Test Id V1.0: 15486
-    Examples: 
-      | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                         | radius   |
-      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP MedicareComplete SecureHorizons Focus (HMO) | 15 miles |
-
-  @dcePerformanceBlayer
-  Scenario Outline: To go to DCE flow from Home page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the acquisition DCE tool from home page on ums site
-    And I have added a drug to my drug list on ums site
-      | Drug | <drug> |
-    And user selects drug details in ums site
-      | Drug      | <drug>      |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-    When user successfully adds drug in ums site
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page on ums site
-    And the user selects the pharmacy tab information
-      | Zipcode | <zipcode> |
-      | Radius  | <radius>  |
-    And I select the first pharmacy on there
-
-    Examples: 
-      | drug             | quantity | frequency     | branded | zipcode | radius   |
-      | Lipitor TAB 10MG |       30 | Every 1 month | yes     |   90210 | 15 miles |
-
-  @dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer @dce3 @uhcDce
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
-    Given user is on blue layer landing page
-    When user performs plan search using following information in the UMS site
-      | Zip Code    | <zipcode>     |
-      | County      | <county>      |
-      | aep         | <aep>         |
-      | currentyear | <currentyear> |
-    Then the user navigates to the plan details for the given plan type in UMS site
-      | Plan Type | <plantype> |
-      | Plan Name | <planName> |
-    Then the user navigates to Plan Costs tab in UMS site
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
-      | PlanName   | <planName>  |
-      | Drug Name1 | <drugName1> |
-    And selects drug details in UMS site
-      | Drug Name1 | <drugName1> |
-      | Quantity   | <quantity>  |
-      | Frequency  | <frequency> |
-    When user successfully adds drug in the UMS site
-      | Drug Name1 | <drugName1> |
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    When the user selects the pharmacy type and distance in UMS site
-      | Pharmacy Type | <pharmacyType> |
-      | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in UMS site
-      | Pharmacy Name | <pharmacyName> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
-      | Drug Name1 | <drugName1> |
-    When the user clicks on Edit Drug List link in UMS site
-    Then Enter your drugs page is displayed to the user in UMS site
-    Then User click on Switch now to select the Generic of the Brand drug added in UMS site
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    Then the user change the pharmacy type and select new pharmacy in UMS site
-      | New Pharmacy Type | <newPharmacyType> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
-      | Drug Name1 | <genericName1> |
-    And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
-    And user verifies annual drug cost in the Plan Cost tab of UMS site
-      | Plan Type | <plantype> |
-    And the user clicks on Back to All Plans button present on details page in UMS site
-    Then user validates Drug information is reflected on plan summary page in UMS site
-      | PlanName | <planName> |
-
-    Examples: 
-      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
-      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      

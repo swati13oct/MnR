@@ -3,7 +3,7 @@
 @Test @AARPvisitorprofile
 Feature: 1.08. ACQ- Visitor profile AARP
 
-  @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer
+  @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer08
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -35,7 +35,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
-  @addDrugsDCE @DCE_Regression_Ulayer
+  @addDrugsDCE @DCE_Regression_Ulayer09
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
