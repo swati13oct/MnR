@@ -56,7 +56,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-#LX      | 12-031 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+      | 12-031 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
 #LX      | 13-032 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 
 	@active_pcp_medica
@@ -69,7 +69,6 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 16-035 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
-	  ## 17 BAD, AARP has duplicated items
       | 17-036 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true  | true  | true  | true  | false |
 
 	@active_ssup

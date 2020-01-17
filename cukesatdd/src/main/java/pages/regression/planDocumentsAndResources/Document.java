@@ -227,6 +227,8 @@ public class Document {
 			return "5006"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("Formulary/Drug List - Comprehensive".toLowerCase())) 
 			return "8002";
+		if (docName.toLowerCase().equalsIgnoreCase("Additional Drug Coverage".toLowerCase())) 
+			return "4005";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-1";
 	}

@@ -357,9 +357,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						System.out.println("Check expected doc From UI : category="+act_category+" | act_doc.segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
 
 						//note: if fidn a match with the name between UI and API
-						//note: or for PDP GROUP case if UI has Formulary/DrugList - Comprehensive and API has Comprehensive Formulary
+						//note: or for PDP/MAPD GROUP case if UI has Formulary/DrugList - Comprehensive and API has Comprehensive Formulary
 						if (((exp_category.toLowerCase()).contains(act_category.toLowerCase()) || (act_category.toLowerCase()).contains(exp_category.toLowerCase()))
-								|| (act_category.equals("Formulary/Drug List - Comprehensive") && exp_category.equals("Comprehensive Formulary") && planType.equals("PDP") && memberType.contains("GROUP"))
+								|| (act_category.equals("Formulary/Drug List - Comprehensive") && exp_category.equals("Comprehensive Formulary") && (planType.equals("PDP")||planType.equals("MAPD")) && memberType.contains("GROUP"))
 								) {
 							boolean allMatch=true;
 							System.out.println("TEST - found match for category, check for more values...");
@@ -495,6 +495,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	
 	/**
 	 * helper - get the type for the given doc
+	 * NOTE: 
+	 * if you are adding entry here, 
+	 * make sure make corresponding update in Document.java - getDocType
+	 * and PlanDocApiResponse.java - buildDocListMap
 	 * @param docName
 	 * @return
 	 */
@@ -537,13 +541,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
 			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
-			return "-99";
+			return "-99"; //note: don't know what it should be yet
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Benefits Table".toLowerCase()) ) 
 			return "5002"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("A Guide to Health Insurance for People with Medicare".toLowerCase())) 
 			return "5006"; //note: SHIP
 		if (docName.toLowerCase().equalsIgnoreCase("Formulary/Drug List - Comprehensive".toLowerCase())) 
 			return "8002";
+		if (docName.toLowerCase().equalsIgnoreCase("Additional Drug Coverage".toLowerCase())) 
+			return "4005";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -861,6 +867,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					String actualDocName=eachDoc.getText();
 					System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
 
+					//note: some doc has Evidence Of Coverage or Evidence of Coverage, just make it consistent to ease validation
+					if (expDocName.equals("Evidence Of Coverage")) 
+						expDocName="Evidence of Coverage";
+					if (actualDocName.equals("Evidence Of Coverage")) 
+						actualDocName="Evidence of Coverage";
 					//note: use regex to find match for document name
 					//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 					//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run

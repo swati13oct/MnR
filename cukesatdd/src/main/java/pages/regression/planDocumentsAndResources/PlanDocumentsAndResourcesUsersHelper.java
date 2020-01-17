@@ -290,17 +290,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Additional Drug Coverage");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				//targetTestDocList.add("Prior Authorization Criteria");
+				//targetTestDocList.add("Step Therapy Criteria");
+				//targetTestDocList.add("Formulary Additions");
+				//targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -315,8 +314,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
-				targetTestDocList.add("Getting Started Guide");
+				//targetTestDocList.add("Moving to your new plan");
+				//targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");
@@ -1486,11 +1485,11 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Annual Notice of Changes");
-				//targetTestDocList.add("Evidence Of Coverage");
-				//targetTestDocList.add("Certificate of Coverage");
-				//targetTestDocList.add("Comprehensive Formulary");
-				//targetTestDocList.add("Additional Drug Coverage");
+				targetTestDocList.add("Annual Notice of Changes");
+				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("Certificate of Coverage");
+				targetTestDocList.add("Comprehensive Formulary");
+				targetTestDocList.add("Additional Drug Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {

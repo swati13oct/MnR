@@ -61,8 +61,8 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#LX      | 12-012 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
-#LX      | 13-013 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
+      | 12-012 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
+#AX      | 13-013 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
 	@active_pcp_medica      
 	Examples: 

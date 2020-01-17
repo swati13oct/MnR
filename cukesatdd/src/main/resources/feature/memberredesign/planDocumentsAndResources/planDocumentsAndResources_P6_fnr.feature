@@ -60,7 +60,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#LX      | 12-107 | 15303       | MAPD     | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |	  
+      | 12-107 | 15303       | MAPD     | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |	  
 #LX      | 13-108 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | false    | false   | true   | true   | false   | true   | true   |
 
 	@active_pcp_medica

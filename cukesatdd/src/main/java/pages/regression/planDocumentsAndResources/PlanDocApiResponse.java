@@ -186,15 +186,15 @@ public class PlanDocApiResponse {
 						docObjMap.put(docCategory, docObj);
 						if (docObj.getLanguage().equals("en_us")) {
 							planMatl_en_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 								memMatl_en_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("es")) {
 							planMatl_es_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 								memMatl_es_curYr_docList.add(docObjMap);
 						} else if (docObj.getLanguage().equals("zh")) {
 							planMatl_zh_curYr_docList.add(docObjMap);
-							if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+							if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
@@ -232,6 +232,8 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
+					//tbd if (planType.equals("MAPD") && memberType.contains("GROUP") && section.equals("Plan Materials"))
+					//tbd 	docCategory="Formulary/Drug List - Comprehensive";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_curYr_docList.add(docObjMap);
@@ -382,10 +384,26 @@ public class PlanDocApiResponse {
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_curYr_docList.add(docObjMap);
 					}
+				} else if (docObj.getType().equals("4005")) {
+					String docCategory="Additional Drug Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+						annNotChgDoc_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+						annNotChgDoc_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+						annNotChgDoc_zh_curYr_docList.add(docObjMap);
+					}
 				}
 				//--------------	
+		    //note: for next year section
 			} else if (docObj.getYear().equals(nextYear)) {
-				//note: for next year
 				if (docObj.getType().equals("6002")) {
 					String docCategory="Benefit Highlights";
 					docObjMap.put(docCategory, docObj);
@@ -404,15 +422,15 @@ public class PlanDocApiResponse {
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 							memMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
 						planMatl_es_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 							memMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
-						if ((planType.equals("PDP") || planType.equals("MA"))&& memberType.contains("GROUP"))
+						if ((planType.equals("PDP") || planType.equals("MA") || planType.equals("MAPD"))&& memberType.contains("GROUP"))
 							memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("2")) {
@@ -449,6 +467,8 @@ public class PlanDocApiResponse {
 					}
 				} else if (docObj.getType().equals("1022") || docObj.getType().equals("4") || docObj.getType().equals("8002")) {
 					String docCategory="Comprehensive Formulary";
+					//tbd if (planType.equals("MAPD") && memberType.contains("GROUP") && section.equals("Plan Materials"))
+					//tbd 	docCategory="Formulary/Drug List - Comprehensive";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						planMatl_en_nxtYr_docList.add(docObjMap);
@@ -569,6 +589,22 @@ public class PlanDocApiResponse {
 						proPhmDir_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
 						proPhmDir_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("4005")) {
+					String docCategory="Additional Drug Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
 				}
 			}
