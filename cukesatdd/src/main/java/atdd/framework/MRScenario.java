@@ -140,7 +140,7 @@ public class MRScenario {
 
 		props = getProperties();
 
-		/* Set acqusisition and member urls */
+		// Set acqusisition and member urls 
 		environment = props.get("Environment");
 
 		if (environment.equals("awe-test-a")) {
@@ -150,13 +150,7 @@ public class MRScenario {
 		} else {
 			environmentMedicare = environment;
 		}
-
 		
-		/*if (props.containsKey("Domain")) {
-			domain = props.get("Domain");
-		} else {
-			domain = null;
-		}*/
 		isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
 				: System.getProperty(CommonConstants.IS_TESTHARNESS));
 		isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
@@ -551,23 +545,32 @@ public class MRScenario {
 			System.out
 			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+			// Read properties from classpath
+			StringBuffer propertyFilePath = new StringBuffer(
+					CommonConstants.PROPERTY_FILE_FOLDER);
+			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+			.append(CommonConstants.PROPERTY_FILE_NAME);
+			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+					.toString());
+			try {
+				prop.load(is);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			for (String key : prop.stringPropertyNames()) {
+				String value = prop.getProperty(key);
+				props.put(key, value);
+			}
+			
+			if (props.containsKey("Domain")) {
+				domain = props.get("Domain");
+			} else {
+				domain = null;
+			}
+
 		}
-		// Read properties from classpath
-		StringBuffer propertyFilePath = new StringBuffer(
-				CommonConstants.PROPERTY_FILE_FOLDER);
-		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-		.append(CommonConstants.PROPERTY_FILE_NAME);
-		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
-				.toString());
-		try {
-			prop.load(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		for (String key : prop.stringPropertyNames()) {
-			String value = prop.getProperty(key);
-			props.put(key, value);
-		}
+		
+		
 		return props;
 	}
 
@@ -991,14 +994,16 @@ sauceLabsTunnelIdentifier);
 		System.out.println("browser version after "+ browserVersion);
 		
 		String env = System.getProperty("environment");
-		if(env.equals("stage")||env.equals("offline-stage"))
-			domain = "uhc.com";
-		else if(env.equals("team-e")||env.equals("team-t")||env.equals("team-v1"))
+		if(!(null==env)){
+			if(env.equals("stage")||env.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(env.equals("team-e")||env.equals("team-t")||env.equals("team-v1"))
 				domain = "ocp-elr-core-nonprod.optum.com";
-		else 
-			domain = "ocp-ctc-dmz-nonprod.optum.com";
-		System.out.println("env chosen is: "+ environment);
-		System.out.println("domain chosen is: "+ domain);
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
+		}
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
