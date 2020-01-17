@@ -98,6 +98,7 @@ public class MRScenario {
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
+	public static String browserVersion;
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
@@ -982,6 +983,12 @@ sauceLabsTunnelIdentifier);
 
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
 				: System.getProperty(CommonConstants.BROWSER_NAME));
+		
+		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
+		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+				: System.getProperty(CommonConstants.BROWSER_VERSION));
+		System.out.println("browser version after "+ browserVersion);
+		
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? props.get("BrowserPathToBinary")
 				: System.getProperty("phantomjs"));
@@ -1062,19 +1069,19 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", "browserVersion");
 					capabilities.setCapability("maxDuration", "3600");
 				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", "browserVersion");
 					capabilities.setCapability("screenResolution", "1024x768");	
 					capabilities.setCapability("maxDuration", "3600");				
 				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", "browserVersion");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 					capabilities.setCapability("maxDuration", "3600");
@@ -1083,7 +1090,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside Edge");
 					capabilities = DesiredCapabilities.edge();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", "browserVersion");
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("maxDuration", "3600");
 				 }
