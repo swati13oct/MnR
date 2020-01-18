@@ -694,11 +694,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			selectLangFromDropdown(section, targetLang);
 
 		for(String expDocName: expDocList) {
+			System.out.println("OMG - validating UI for doc ="+expDocName);
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
 			Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
 			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
+			System.out.println("OMG - Adding doc to list ="+expDocName+" | list size="+act_docListFromUi.size());
 		}
+		System.out.println("OMG - out of here");
 		//note: if validateApi==false, then we are all done at this point for this validation
 		//---------------------------------------
 		//note: this section will only invoke if step definition decide to validate API also
@@ -835,6 +838,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				//note: actualListDoc is the list of documents display on the UI
 				List<WebElement> actualListDoc = driver.findElements(By.xpath(actualDocList_xpath));
 				int actualTotalNumDoc=actualListDoc.size();
+				System.out.println("TEST - There are total of '"+actualTotalNumDoc+"' on UI for section="+section);
 				if (!expDocDisplay) {
 					//note: if don't expect to see any doc then
 					//note: either language option is not display at all or if language option avaiable then no doc list showing
@@ -861,6 +865,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 
 				//note: loop through each doc in the section from UI and see if can locate the expected doc
+				System.out.println("Proceed to loop through the list of UI docs and compare to expected input doc to see if it is in the list...");
 				boolean found=false;
 				for (int i=1; i<=actualListDoc.size(); i++ ) { //note: xpath start w/ index 1
 					WebElement eachDoc=actualListDoc.get(i-1); //note: list array index start w/ 0

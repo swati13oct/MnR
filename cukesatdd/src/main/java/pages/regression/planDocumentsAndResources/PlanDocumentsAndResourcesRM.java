@@ -39,6 +39,9 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		} else if (planType.toUpperCase().contains("PDP")) {
 			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/index.html";
 			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/user_guide.html";
+		} else if (planType.toUpperCase().contains("MAPD")) {
+			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/user_guide.html";
 		}
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);
