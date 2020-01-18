@@ -49,7 +49,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 11-049 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | false | 
+      | 11-049 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | false | 
 
 	@active_mapd
 	Examples: 

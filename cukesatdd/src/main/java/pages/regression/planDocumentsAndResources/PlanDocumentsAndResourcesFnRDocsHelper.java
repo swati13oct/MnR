@@ -67,10 +67,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		}
 		if (docName.equals("Prescription Drug Reimbursement Form")) {
 			testInputInfoMap.put("docName", docName);
-			testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Individual/Drug_Reimbursement_Form_MAPD.pdf");
+			testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			if (planType.equals("PDP")) 
 				testInputInfoMap.put("expectedUrl", "/Individual/Direct_Member_Reimbursement_Form_PDP.pdf");
-			if (planType.equals("MAPD") && memberType.contains("PREEFF")) 
+			if (planType.equals("MAPD") && (memberType.contains("PREEFF") || memberType.contains("IND_EFF"))) 
 				testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");

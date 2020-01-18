@@ -51,7 +51,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 11-030 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false | 
+      | 11-030 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
 	@active_mapd
 	Examples: 

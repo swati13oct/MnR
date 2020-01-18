@@ -56,7 +56,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 11-011 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true   | true  | true  | true  |	
+      | 11-011 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true   | true  | true  | true  |	
 
 	@active_mapd
 	Examples: 

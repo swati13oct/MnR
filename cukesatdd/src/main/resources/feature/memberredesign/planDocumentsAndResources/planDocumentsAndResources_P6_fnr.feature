@@ -36,8 +36,8 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@preeffective_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 04-099    | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true   | true     | true    | true   | true   | true    | true   | true   |
-      | 05-100    | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true   | true     | false   | true   | true   | true    | true   | true   |
+      | 04-099 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true   | true     | true    | true   | true   | true    | true   | true   |
+      | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true   | true     | false   | true   | true   | true    | true   | true   |
 
 	@terminated_ma_mapd
 	Examples: 
@@ -55,7 +55,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 11-106 | 15108       | MAPD     | IND_EFF_PDnR          | true   | true     | true    | true   | true   | true    | true   | true   |
+      | 11-106 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true   | true     | true    | true   | true   | true    | true   | true   |
 
 	@active_mapd
 	Examples: 

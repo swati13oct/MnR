@@ -57,7 +57,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 11-087 | 15108       | MAPD     | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+      | 11-087 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@active_mapd
 	Examples: 

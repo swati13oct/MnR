@@ -694,14 +694,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			selectLangFromDropdown(section, targetLang);
 
 		for(String expDocName: expDocList) {
-			System.out.println("OMG - validating UI for doc ="+expDocName);
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
 			Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
 			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
-			System.out.println("OMG - Adding doc to list ="+expDocName+" | list size="+act_docListFromUi.size());
 		}
-		System.out.println("OMG - out of here");
 		//note: if validateApi==false, then we are all done at this point for this validation
 		//---------------------------------------
 		//note: this section will only invoke if step definition decide to validate API also
@@ -873,10 +870,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					System.out.println("TEST ------------- UI doc list i="+i+" start validation for UI doc="+actualDocName+" for langauge="+langValue);
 
 					//note: some doc has Evidence Of Coverage or Evidence of Coverage, just make it consistent to ease validation
-					if (expDocName.equals("Evidence Of Coverage")) 
-						expDocName="Evidence of Coverage";
-					if (actualDocName.equals("Evidence Of Coverage")) 
-						actualDocName="Evidence of Coverage";
+					if (expDocName.contains("Evidence Of Coverage")) 
+						expDocName=expDocName.replace("Evidence Of Coverage","Evidence of Coverage");
+					if (actualDocName.contains("Evidence Of Coverage")) 
+						actualDocName=actualDocName.replace("Evidence Of Coverage", "Evidence of Coverage");
 					//note: use regex to find match for document name
 					//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 					//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
