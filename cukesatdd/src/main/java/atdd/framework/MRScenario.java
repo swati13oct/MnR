@@ -98,7 +98,6 @@ public class MRScenario {
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
-	public static String browserVersion;
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
@@ -1007,7 +1006,7 @@ sauceLabsTunnelIdentifier);
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
 		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
-		browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
+		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after "+ browserVersion);
 		
