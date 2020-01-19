@@ -836,7 +836,7 @@ public class CommonConstants {
 	
 	public static final String PLAN_NAME_ON_PROFILE_PAGE= "planName";
     //Browsers supported in MRScenario
-	public static final String BROWSER_NAME = "BROWSER_NAME";
+	public static final String BROWSER_NAME = "browsername";
 	public static final String BROWSER_VERSION = "browserversion";
     public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
     public static final String DESKTOP_WEBDRIVER = "WebDriver";
