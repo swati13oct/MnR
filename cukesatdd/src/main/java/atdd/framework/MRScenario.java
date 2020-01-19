@@ -81,7 +81,9 @@ public class MRScenario {
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
+	
 	public static String environment = System.getProperty("environment");
+	public static String browsername=""; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -144,14 +146,8 @@ public class MRScenario {
 			System.out.println("before accessing props");
 			environment = props.get("Environment");
 			System.out.println("after accessing props");
-			if (environment.equals("awe-test-a")) {
-				environmentMedicare = "test-a";
-			} else if (environment.equals("awe-stage")) {
-				environmentMedicare = "stage";
-			} else {
-				environmentMedicare = environment;
-			}
-			
+			environmentMedicare = environment;
+			browsername = props.get("BrowserName");
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
@@ -667,98 +663,6 @@ public class MRScenario {
 		}
 	}
 
-	/*  public WebDriver getWebDriver() {*/
-
-	/*
-	 * 
-	 * Below code excecutes if webdriver value is passed in build command ::
-	 * either saucelabs or headless
-	 */
-	/*                          if (null != System.getProperty("webdriverhost")
-                                                            && !(System.getProperty("webdriverhost").equalsIgnoreCase(""))) {
-
-                                             if (System.getProperty("webdriverhost").equalsIgnoreCase(
-                                                                           "saucelabs")) {
-                                                            DesiredCapabilities capabilities = DesiredCapabilities
-                                                                                          .firefox();
-                                                            capabilities.setCapability("platform", "Windows 7");
-                                                            capabilities.setCapability("version", "45.0");
-                                                            capabilities.setCapability("parent-tunnel", "sauce_admin");
-                                                            capabilities.setCapability("tunnelIdentifier",
-                                                                                          "OptumSharedTunnel-Prd");
-                                                            //capabilities.setCapability("name", "MRATDD-TestSuite");
-                                                            capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-                                                            String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-                capabilities.setCapability("name", jobName);
-                                                            try {
-                                                                           webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-                                                            } catch (MalformedURLException e) {
-                                                                           // TODO Auto-generated catch block
-                                                                           e.printStackTrace();
-                                                            }
-                                             } else {
-                                                            /*
-	 * Below code snippet is for triggering HeadLess Browser
-	 * (PhantomJS)
-	 */
-	/*                                                        String phantomjs = System.getProperty("phantomjs");
-                                                            DesiredCapabilities caps = new DesiredCapabilities();
-                                                            if (StringUtils.isBlank(phantomjs)) {
-                                                                           caps.setCapability(
-                                                                                                         PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-                                                                                                         props.get("HeadlessBrowserPath"));
-                                                            } else {
-                                                                           caps.setCapability(
-                                                                                                         PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-                                                                                                         System.getProperty("phantomjs"));
-                                                            }
-                                                            caps.setJavascriptEnabled(true);
-                                                            caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-                                                                                          new String[] { "--web-security=false",
-                                                                                                                        "--ignore-ssl-errors=true",
-                                                                                                                        "--ssl-protocol=any" });
-                                                            String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-                                                            System.setProperty("phantomjs.page.settings.userAgent",
-                                                                                          userAgent);
-                                                            webDriver = new PhantomJSDriver(caps);
-                                             }
-
-                              } else {/*
-	 * Below code excecutes if webdriver value is not passed in
-	 * build command :: mostly running locally and triggering runner
-	 * class directly
-	 */
-	/*
-	 * TODO: pperugu :: Need to update the headless browser code below
-	 * for local
-	 */
-	/*
-                                         String phantomjs = System.getProperty("phantomjs");
-                                             String agent = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-us; LG-LU3000 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-                                             DesiredCapabilities caps = new DesiredCapabilities();
-                                             if (StringUtils.isBlank(phantomjs)) {
-                                                            caps.setCapability(
-                                                                                          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-                                                                                          props.get("HeadlessBrowserPath"));
-                                             } else {
-                                                            caps.setCapability(
-                                                                                          PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-                                                                                          System.getProperty("phantomjs"));
-                                             }
-                                             caps.setCapability(
-                                                                           PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX
-                                                                                                         + "userAgent", agent);
-                                             caps.setJavascriptEnabled(true);
-                                             caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
-                                                                           new String[] { "--web-security=false",
-                                                                                                         "--ignore-ssl-errors=true", "--ssl-protocol=any" });
-                                             String userAgent = "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1";
-                                             System.setProperty("phantomjs.page.settings.userAgent", userAgent);
-                                             webDriver = new PhantomJSDriver(caps);
-
-                              }
-                              return webDriver;
-               }*/
 
 	public WebDriver getWebDriver() {
 
@@ -984,8 +888,13 @@ sauceLabsTunnelIdentifier);
 		// JENKINS and
 		// will prefer those browser properties.
 		
+		/* 
+		 * the following logic was added to determine the environment and domain to use from a single logic instead 
+		 * of using multiple config properties files and folders to manage the same logic
+		 * The logic is if the environment is passed in from the System (when running from Jenkins)
+		 * then based on the environment it associates the appropriate domain. 
+		 */
 		
-		String browsername = "";
 		if(!(null==environment)){
 			if(environment.equals("stage")||environment.equals("offline-stage"))
 				domain = "uhc.com";
@@ -995,17 +904,17 @@ sauceLabsTunnelIdentifier);
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			System.out.println("env chosen is: "+ environment);
 			System.out.println("domain chosen is: "+ domain);
-		}else{
-			browsername = props.get("BrowserName");
 		}
 			
+		
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
+		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the properties file
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
-		System.out.println("browser version before "+ System.getProperty(CommonConstants.BROWSER_VERSION));
+		//if the browser version is passed in from Jenkins then use that, otherwise use latest version by default
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after "+ browserVersion);
