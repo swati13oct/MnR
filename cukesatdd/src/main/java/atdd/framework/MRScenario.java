@@ -81,7 +81,7 @@ public class MRScenario {
 
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
-	public static String environment;
+	public static String environment = System.getProperty("environment");
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -539,7 +539,7 @@ public class MRScenario {
 	public static Map<String, String> getProperties() {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
-		String propertiesFileToPick = System.getProperty("environment");
+		String propertiesFileToPick = environment;
 		System.out.println("Using properties for environment ...."
 				+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
@@ -984,12 +984,12 @@ sauceLabsTunnelIdentifier);
 		// JENKINS and
 		// will prefer those browser properties.
 		
-		String env = System.getProperty("environment");
+		
 		String browsername = "";
-		if(!(null==env)){
-			if(env.equals("stage")||env.equals("offline-stage"))
+		if(!(null==environment)){
+			if(environment.equals("stage")||environment.equals("offline-stage"))
 				domain = "uhc.com";
-			else if(env.equals("team-e")||env.equals("team-t")||env.equals("team-v1"))
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1"))
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else 
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
