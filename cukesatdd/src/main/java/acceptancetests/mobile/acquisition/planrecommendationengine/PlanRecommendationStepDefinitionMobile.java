@@ -13,6 +13,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecia
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
@@ -205,6 +206,28 @@ public class PlanRecommendationStepDefinitionMobile {
 		TravelMobilePage careawaypage =  new TravelMobilePage(wd);
 		String status = "Negative";
 		careawaypage.travelpage(inputValues.get("Travel Options"),status);	
+	}
+	
+	@Then("^user validate elements in Doctors page mobile$")
+	public void elements_doctors_page() {
+		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
+		doctorpage.doctorspageElements();
+	}
+	
+	@Then("^user selects Doctors in Doctors page mobile$")
+	public void select_doctors_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
+		String status = "Positive";
+		doctorpage.doctorspage(inputValues.get("Doctors Selection"),status);
+	}
+	
+	@And("^user selects Doctors in Doctors page mobile and validate errors$")
+	public void select_doctors_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
+		String status = "Negative";
+		doctorpage.doctorspage(inputValues.get("Doctors Selection"),status);	
 	}
 	
 	public void readfeaturedata(DataTable data) {
