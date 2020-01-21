@@ -148,14 +148,19 @@ public class MRScenario {
 			System.out.println("after accessing props");
 			environmentMedicare = environment;
 			browsername = props.get("BrowserName");
-			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? props.get("isTestHarness")
+			isTestHarness = props.get("isTestHarness");
+			isHSIDCompatible =  props.get("isHSIDCompatible");
+			
+		}else{
+			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
-					? props.get("isHSIDCompatible") : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
-			
-			sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
-					: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
+					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+		
 		}
+		
+		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
+				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
