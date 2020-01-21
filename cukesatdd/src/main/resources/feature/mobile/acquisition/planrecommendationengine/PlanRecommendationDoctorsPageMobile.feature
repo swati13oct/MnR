@@ -22,7 +22,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
       |   10001 | NO              | New York | MA            | Condition    | Travel       |
 
   @PRE @planrecommandonation @doctorspagemobile @doctorspagepageoptionselectionmobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <> - To validate Doctors page fucntions in Plan Recommendation Engine Mobile
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> - To validate Doctors page fucntions in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile
@@ -40,10 +40,11 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection |
-      |   10001 | NO              | New York | MA            | None         | Travel       | willing to use   |
+      #|   10001 | NO              | New York | MA            | None         | Travel       | want to use      |
+      |   10001 | NO              | New York | MA            | None         | Travel       | lookup           |
 
   @PRE @planrecommandonation @doctorspagemobile @doctorspagepageerrorvalidationmobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <> - To validate Doctors page error functions in Plan Recommendation Engine Mobile
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile

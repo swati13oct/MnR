@@ -138,6 +138,7 @@ public class DoctorsMobilePage extends UhcDriver {
 			} else if (doctorsSelection.equalsIgnoreCase("lookup")) {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
+				mobileUtils.mobileLocateElementClick(continueBtn);
 				doctorlookup();
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
