@@ -487,6 +487,26 @@ public class PharmacyLocatorStepDefinition {
 		pharmacySearchPage.clickDirectoryLnk(isMultiCounty, countyName);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
 	}
+	
+	/** user is on the Medicare Site landing page for Testharness*/
+	@Given("^the user is on the Acquisition Site TestHarness page$")
+	public void validateUserIsOnTestharnessPage(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		String Zipcode = inputAttributesMap.get("Zip Code");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,aquisitionhomepage);
+		PharmacySearchPage pharmacySearchPage= aquisitionhomepage.navigateFromTestharnessToPharmacySearch(Zipcode);
+		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);
+
+	}
 }
 
 

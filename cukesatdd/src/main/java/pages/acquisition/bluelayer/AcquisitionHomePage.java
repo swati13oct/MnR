@@ -310,6 +310,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
 	  @FindBy(id="dupIconFlyOut")
 	  private WebElement shoppingCartIcon;
+	  
+	  @FindBy(id = "pharmacy-zip-search")
+		private WebElement thpharmacyzipsearch;
+	   	
+	  @FindBy(xpath = "//input/parent::form//button[text()='Go']")
+	  private WebElement thpharmacyGoButton;
+	   	
 	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -337,6 +344,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	
+	public String MicroAppSiteUrl;
+	
+	public String testSiteUrl;
 
 	public static boolean isHealthPlan = false;
 	
@@ -367,6 +378,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage);
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String siteOrPage,String testharnessurl) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(siteOrPage,testharnessurl);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1734,6 +1751,51 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
+	}
+	
+	public void openAndValidate(String siteOrPage, String testharnessurl) {
+		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
+		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(UMS_ACQISITION_PROD_PAGE_URL+testharurl);
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				startNew(UMS_ACQISITION_PAGE_URL+testharurl);
+				testSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
+	}
+	
+	public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
+		//checkModelPopup(driver);
+		validateNew(thpharmacyzipsearch);
+		thpharmacyzipsearch.sendKeys(zipcode);
+		thpharmacyGoButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+
 	}
 	
 }
