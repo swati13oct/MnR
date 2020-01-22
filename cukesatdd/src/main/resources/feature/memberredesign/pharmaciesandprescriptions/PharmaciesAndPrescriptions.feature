@@ -68,10 +68,12 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | PDP      | Individual_PnP	    | yes        |
 
-    @pharmaciesandprescriptions01b
-    Examples: 
-	  | FID    | planType | memberType          | expectLink |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
+    #note: PEEHIP terminated plan with UHC on 12/31/2019, not valida case anymore
+    #note: moving it to terminated case
+    #@pharmaciesandprescriptions01b
+    #Examples: 
+	#  | FID    | planType | memberType          | expectLink |
+	#  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
 
     @pharmaciesandprescriptions01c
     Examples: 
@@ -117,6 +119,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | 313410 | MAPD     | Terminated_PnP | no         |
       | 313410 | PDP      | PreEff_PnP     | no         |
       | 313410 | MA       | Individual_PnP | no         |
+	  | 313410 | MAPD     | GROUP_PEEHIP_PnP| no        |
       
    @ship @devRegression
    Examples: 

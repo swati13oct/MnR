@@ -132,9 +132,10 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| MA       | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 000       | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
+	# | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 
   @pharmacylocator2 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -Segment ID: <segmentId> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator English page on member site
@@ -180,9 +181,10 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	Examples: 
 	  | TID 	| planType | memberType         		 | segmentId | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
 	  | 15294	| MAPD     | IndMAPDUHC_Pharmacylocator	 | 000       | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| MA       | TexasRx_Pharmacylocator	 | 000       | 14867   | 25       | E-Prescribing               | False                 | False            | False                |
 	  | 15274	| PDP      | Walgreen_Pharmacylocator  	 | 000       | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	#note: PEEHIP terminated group plan w/ UHC, no longer a valid active plan case
+	# | 15273	| MAPD     | Peehip_Pharmacylocator  	 | 000       | 29148   | 15       | E-Prescribing               | False                 | False            | False                |
 
 
   @pharmacylocator3 @E2E @Chinese @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages @regressionMember @regressionMember_Testharness
