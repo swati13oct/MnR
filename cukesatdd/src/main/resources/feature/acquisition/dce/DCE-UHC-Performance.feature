@@ -1,7 +1,7 @@
 @fixedTestCaseDCEVPP
 Feature: To test DCE to VPP plan Summary flow  in UMS site
 
-  @dceThroughPlanSummaryNonAepUHC @uhc @DCE_Regression_Blayer @dce1 @uhcDce1
+  @dceThroughPlanSummaryNonAepUHC @uhc @DCE_Regression_Blayer_VPP2 @dce1 @uhcDce1
   Scenario Outline: To Verify the drug cost estimator flow for <planName> for non AEP periodthrough plan summary
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
@@ -67,7 +67,7 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
       |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY                    | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
-  @dceThroughPlanDetailsUHC1 @uhc @DCE_Regression_Blayer @dce2 @uhcDce
+  @dceThroughPlanDetailsUHC1 @uhc @DCE_Regression_Blayer_VPP3 @dce2 @uhcDce
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
@@ -137,7 +137,7 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
       |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY     | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
-  @dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer @dce3 @uhcDce
+  @dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer_VPP4 @dce3 @uhcDce
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site

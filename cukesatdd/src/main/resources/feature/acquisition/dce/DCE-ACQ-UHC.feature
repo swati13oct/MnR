@@ -1,7 +1,7 @@
 @acq_dce_UHC
 Feature: 2.10. ACQ-DCE - UMS
 
-  @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer @prodRegression
+  @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer_Home1 @prodRegression
   Scenario Outline: To verify DCE flow from Blayer home page
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the acquisition DCE tool from home page on ums site
@@ -37,7 +37,7 @@ Feature: 2.10. ACQ-DCE - UMS
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                           | radius   |
       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 15 miles |
 
-  @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer @prodRegression
+  @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer_VPP1 @prodRegression
   Scenario Outline: To test the dce vpp flow with switch now option
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -69,7 +69,7 @@ Feature: 2.10. ACQ-DCE - UMS
       | zipcode | plantype | drug    | dosage   | county | isMultutiCounty | quantity | frequency     | branded |
       |   90210 | MA       | Lipitor | TAB 10MG | none   | no              |       30 | Every 1 month | yes     |
 
-    @dce @regressionMember @blayer @DCE_Regression_Blayer
+    @dce @regressionMember @blayer @DCE_Regression_Blayer_Home1
   Scenario Outline: To verify DCE flow from Blue Layer home page hover over
     Given the user is on the uhcmedicaresolutions site landing page
     When I click on Drug Cost Estimator link from Shop for a plan hover over for ums site
