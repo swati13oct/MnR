@@ -55,7 +55,8 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 12-050 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
-#LX      | 13-051 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
+     ### note: PEEHIP group terminated as of 12/31/2019
+     #| 13-051 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 
 	@active_pcp_medica
 	Examples: 

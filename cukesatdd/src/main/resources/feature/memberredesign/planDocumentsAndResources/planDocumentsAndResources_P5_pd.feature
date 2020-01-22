@@ -63,7 +63,8 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 12-088 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | false    | false    | false    | false    | false    | false    |
-#AX      | 13-089 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | false    | false    | false    | false    | false    | false    |
+     ### note: PEEHIP group terminated as of 12/31/2019
+     #| 13-089 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 
 	@active_pcp_medica
 	Examples: 
