@@ -61,7 +61,7 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
 	  |   78006 | YES             | Bexar County   |  MAPD 		    |
 	  
 	@PRE @planrecommandonation @coveragepage @previousfunctionbeforePRE
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage previous options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user validate elements on landing page of Plan Recommendation Engine
     And clicks on get started button and runs questionnaire
