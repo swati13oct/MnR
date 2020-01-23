@@ -8,19 +8,25 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -392,4 +398,31 @@ public class DCEAcqStepDefinitionAARP {
 		}
 	}
 	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+	/** user is on the Medicare Site landing page for DCE Testharness*/
+	@Given("^the user is on the Acquisition Site DCE TestHarness page$")
+	public void validateUserIsOnDCETestharnessPage(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		DCETestHarnessPage dceTestHarnessPage = (DCETestHarnessPage) aquisitionhomepage.GetDCEtestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.DCE_TESTHARNESS_PAGE,dceTestHarnessPage);
+	}
+	
+	@When("^the user enters following information in the Acquisition Site DCE TestHarness page$")
+	public void the_user_enters_following_information_in_the_Acquisition_Site_DCE_TestHarness_page(DataTable arg1) throws Throwable {
+
+	}
 }

@@ -12,13 +12,13 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionDCERegressionUlayerHome - Scenario for VPP Page
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionDCERegressionUlayerVPP2.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCERegressionUlayerVPP2")
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCERegressionUlayerVPP1.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCERegressionUlayerVPP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCERegressionUlayerVPP2.json" }, tags = { "@DCE_Regression_Ulayer_VPP2" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCERegressionUlayerVPP1.json" }, tags = { "@DCE_Regression_Ulayer_VPP1" })
 
 ///dce/DCE-ACQ-AARP.feature
 
-public class RunMRATDDAcquisitionDCERegressionUlayerVPP2 {
+public class RunMRATDDAcqDCERegressionUlayerVPP1 {
 
 }

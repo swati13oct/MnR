@@ -25,6 +25,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.bluelayer.KeywordSearch;
+import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -1590,6 +1591,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			return null;
 
+		}
+
+		public DCETestHarnessPage GetDCEtestHarnessPage() {
+			return new DCETestHarnessPage(driver);
 		}
 	} 
 
