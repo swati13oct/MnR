@@ -1385,6 +1385,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@Then("^I should not see drug look up on home page$")
 	public void I_should_not_see_drug_look_up_on_home_page() throws Throwable {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			System.out.println("This scenario should be done on non-testharness env. Current test env is testharness, skipping this step...");
+			return;
+		}
 		AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		account_home_page.dce_not_present();
 	}
@@ -1393,6 +1397,10 @@ public class DrugcostestimatorUhcStepDefinition {
 
 	@Then("^I click on drug lookup tile which takes me to optum rx sso landing page$")
 	public void I_should_be_optum_rx_sso_landing_page() throws Throwable {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			System.out.println("This scenario should be done on non-testharness env. Current test env is testharness, skipping this step...");
+			return;
+		}
 		AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		// Need to add the code
 

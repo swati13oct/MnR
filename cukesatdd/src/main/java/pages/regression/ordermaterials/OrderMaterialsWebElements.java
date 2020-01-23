@@ -113,7 +113,8 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'header')]//div[contains(@class,'ship')]//p")
 	protected WebElement subSectionText_ship;
 
-	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'federal')]//p")
+	//tbd @FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'federal')]//p")
+	@FindBy(xpath="//div[contains(@class,'federal')]//p")
 	protected WebElement selectionInstruction_fed;
 
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']")
@@ -125,7 +126,7 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	protected WebElement option_fed_memberMaterialsfield;
 
-	@FindBy(xpath = "//*[@id='replacement-id']/..")
+	@FindBy(xpath = "//*[@for='replacement-id']/..")
 	protected WebElement option_fed_replacementIdField;
 
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")

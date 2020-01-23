@@ -26,7 +26,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
-				validate(pgHeader));
+				pnpValidate(pgHeader));
 		String expTxt="Pharmacies & Prescriptions for "+firstname+" "+lastName;
 		String actTxt=pgHeader.getText();
 		Assert.assertTrue("PROBLEM - header text is not as expected. "
@@ -36,7 +36,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
-				validate(pharmaciesText));
+				pnpValidate(pharmaciesText));
 		Pattern expectedTxt1=Pattern.compile("Get the most out of your prescription drug benefits\\.");
 		Pattern expectedTxt2=Pattern.compile("You can make sure your drugs are covered, estimate costs and find ways to save money\\. .*earch for national and local pharmacies in your plan.s network to fill your prescriptions\\.");
 		String actualTxt=pharmaciesText.getText();
@@ -48,11 +48,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	public void validateTileContent(String exp_TileHeaderTxt, String exp_TileLinkTxt, 
 			WebElement exp_pTile_Txt, WebElement exp_pTile_img, WebElement exp_pTile_Lnk) {
 		Assert.assertTrue("PROBLEM - unable to locate '"+exp_TileHeaderTxt+"' tile header element", 
-				validate(exp_pTile_Txt));
+				pnpValidate(exp_pTile_Txt));
 		Assert.assertTrue("PROBLEM - unable to locate '"+exp_TileHeaderTxt+"' tile image element", 
-				validate(exp_pTile_img));
+				pnpValidate(exp_pTile_img));
 		Assert.assertTrue("PROBLEM - unable to locate '"+exp_TileHeaderTxt+"' tile link element", 
-				validate(exp_pTile_Lnk));
+				pnpValidate(exp_pTile_Lnk));
 
 		String act_TileHeaderTxt=exp_pTile_Txt.getText().trim();
 		Assert.assertTrue("PROBLEM - '"+exp_TileHeaderTxt+"' tile text not as expected. "
@@ -137,9 +137,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 
-	public void validateTileLnkDestination(String planType, String memberType, String tile) throws InterruptedException {
+	public void validateTileLnkDestination(String planType, String memberType, String tile, boolean runOnTeamEnv) throws InterruptedException {
 		String planCategoryId="0";
-		validateTileLnkDestination(planType, memberType, tile, planCategoryId);
+		validateTileLnkDestination(planType, memberType, tile, planCategoryId, runOnTeamEnv);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	 * @param tile
 	 * @throws InterruptedException
 	 */
-	public void validateTileLnkDestination(String planType, String memberType, String tile, String planCategoryId) 
+	public void validateTileLnkDestination(String planType, String memberType, String tile, String planCategoryId, boolean runOnTeamEnv) 
 			throws InterruptedException { //note: if arrives here, already validated link existent
 		System.out.println("Proceed to validate tile='"+tile+"'...");
 		if (tile.equals("Prescription Benefits Information") && !planCategoryId.equals("0")) {
@@ -192,23 +192,28 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		if (switchTab) {
 			String winHandleBefore = driver.getWindowHandle();
+			CommonUtility.waitForPageLoad(driver, linkElement, 5);
 			linkElement.click();
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 			CommonUtility.checkPageIsReady(driver);
-			String actUrl=driver.getCurrentUrl();
-			if (expUrl.contains("sso")) {
-				String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-						+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
-						actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
-			} else {
-				Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-					+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			}
-			driver.close();
-			driver.switchTo().window(winHandleBefore);
+				String actUrl=driver.getCurrentUrl();
+				if (expUrl.contains("sso")) {
+					if (!runOnTeamEnv) {
+					String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
+					Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+							+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
+							actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
+					} else {
+						System.out.println("Test run on team env, sso is not supported, skip expected URL validation");
+					}
+				} else {
+					Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
+						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+				}
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
 		} else {
 			linkElement.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -223,23 +228,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	 * to validate the plan material link. FnR page takes long time to load, only validate URL is correct
 	 */
 	public void validatePlanMaterialsLink() { 
-		Assert.assertTrue("PROBLEM - unable to locate Plan Materials icon element", validate(viewPlanMaterialsImg));
-		Assert.assertTrue("PROBLEM - unable to locate Plan Materials link element", validate(viewPlanMaterialsLnk));
+		Assert.assertTrue("PROBLEM - unable to locate Plan Materials icon element", pnpValidate(viewPlanMaterialsImg));
+		Assert.assertTrue("PROBLEM - unable to locate Plan Materials link element", pnpValidate(viewPlanMaterialsLnk));
 		String exp_lnk="/member/documents/overview.html";
 		String act_lnk=viewPlanMaterialsLnk.getAttribute("href");
 		Assert.assertTrue("PROBLEM - 'PLAN MATERIALS' link url is not as expected. "
 				+ "Expect='"+exp_lnk+"' | Actual='"+act_lnk+"'", act_lnk.contains(exp_lnk));
 	}
 
-	/**
-	 * to validate whether element exists with input timeout value control
-	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
-	 * @param element
-	 * @param timeoutInSec
-	 * @return
-	 */
-	public boolean pnpValidate(WebElement element) {
-		long defaultTimeoutInSec=3; 
-		return validate(element, defaultTimeoutInSec);
-	}
+
 }

@@ -137,7 +137,8 @@ public class ClaimDetailsWebElements extends ClaimsBase{
 	protected WebElement med_amountBilled;
 	@FindBy(xpath="//div[@id='claimDynamicStatus']//span//p")
 	protected WebElement med_claimStatus;
-	@FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../p")
+	//tbd @FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../p")
+	@FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../../p")
 	protected WebElement med_yourShare;
 
 	//note: for claim summary drug table
@@ -269,4 +270,32 @@ public class ClaimDetailsWebElements extends ClaimsBase{
 	@FindBy(xpath = "//section[@id='cltotshippartb']//div[@class='card-body']//div[@class='col-md-2']/p[contains(text(),'$')]")
 	protected List<WebElement> shipClaimsTotVal;
 	//^^^ note:	added for VBF		
+	
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//span[contains(@class,'tZero')]")
+	protected WebElement adjustmentToggleCollapsed;
+
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//span[contains(@class,'t180')]")
+	protected WebElement adjustmentToggleExpanded;
+
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][1]")
+	protected WebElement adjustmentPayableAmountSection;
+	
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][1]//p[1]")
+	protected WebElement adjustmentPayableAmountSectionValue;
+
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][1]//p[2]")
+	protected WebElement adjustmentPayableAmountSectionText;
+	
+	
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][2]")
+	protected WebElement adjustmentPaymentAdjustmentSection;
+
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][2]/div[1]")
+	protected WebElement adjustmentPaymentAdjustmentSectionSign;
+	
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][2]//p[1]")
+	protected WebElement adjustmentPaymentAdjustmentSectionValue;
+
+	@FindBy(xpath="//div[contains(@ng-show,'providerType') and not(contains(@class,'ng-hide'))]//div[contains(@class,'adjustmentsToggle') and @data-toggle='collapse']//parent::div/following-sibling::div/div[contains(@class,'adjustmentsToggle_sec')]//div[contains(@class,'row')][2]//p[2]")
+	protected WebElement adjustmentPaymentAdjustmentSectionText;
 }

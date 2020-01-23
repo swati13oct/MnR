@@ -52,10 +52,11 @@ public class HSIDStepDefinition {
 		return loginScenario;
 	}
 
+	/* tbd 
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
 			throws Exception {
-
+		boolean isMicroApp=false;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -209,18 +210,19 @@ public class HSIDStepDefinition {
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} 
 				
 				else {
 					loginPage = new LoginPage(wd);
 				}
-/*
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage
-						.loginWithLegacy(userName, pwd);
-						if (accountHomePage != null) {
-					getLoginScenario()
-							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-									accountHomePage);*/
+
+				//AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				//		.loginWithLegacy(userName, pwd);
+				//		if (accountHomePage != null) {
+				//	getLoginScenario()
+				//			.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
+				//					accountHomePage);
 				TestHarness testHarnessPage=null;
 				try {
 					testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
@@ -248,20 +250,20 @@ public class HSIDStepDefinition {
 					Assert.fail("Login not successful...");
 				}
 			}
-		}
+		} 
 
-		/*
-		 * AssistiveRegistrationPage assistiveregistration =
-		 * (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
-		 * (assistiveregistration != null) {
-		 * getLoginScenario().saveBean(PageConstantsMnR
-		 * .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
-		 * Assert.assertTrue(true); } else {
-		 * Assert.fail("***** Error in loading  Assistive Registration Page *****"
-		 * ); }
-		 */
+		
+		 // AssistiveRegistrationPage assistiveregistration =
+		 // (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
+		 // (assistiveregistration != null) {
+		 // getLoginScenario().saveBean(PageConstantsMnR
+		 // .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+		 // Assert.assertTrue(true); } else {
+		 // Assert.fail("***** Error in loading  Assistive Registration Page *****"
+		 // ); }
+		 
 
-	}
+	}*/
 
 	@And("^login with following details logins in the member portal and validate elements and route to assistive flow$")
 	public void login_with_memberassistive(DataTable memberAttributes)
@@ -624,9 +626,6 @@ public class HSIDStepDefinition {
 				return false;
 			}
 		}
-		System.out.println("TEST - testDataType="+testDataType);
-		System.out.println("TEST - category="+category);
-		System.out.println("TEST - planType="+planType);
 		String type="";
 		if ((testDataType==null) && (category!=null)) {
 			type=category.toLowerCase();
@@ -703,4 +702,220 @@ public class HSIDStepDefinition {
     }
 	//^^^ note: added for 'sorry' login error workaround	
 
+	//----------- updated to handle microapp
+	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
+	@And("^login with following details logins in the member portal and validate elements$")
+	public void login_with_member(DataTable memberAttributes)
+	//tbd public void login_with_member_microapp(DataTable memberAttributes)
+			throws Exception {
+		//tbd boolean isMicroApp=true;
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+		String planType = memberAttributesMap.get("Plan Type");
+		String testDataType = memberAttributesMap.get("Claim System");
+		String userSelection = memberAttributesMap.get("User Selection");
+		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
+		//note: if run on team-a, then the user selection is for the dropdown option
+		//note: if run on stage or stage-testharness, then ignore the user selection field
+		String useDropdown=System.getProperty("useDropdown");
+		boolean testHarnessUseDropdown=false;
+		if (useDropdown==null) 
+			System.out.println("use UUID for sign-in");
+		else {
+			if (useDropdown.equalsIgnoreCase("YES")) { //note: need to do this so the same script can be run on stage
+				if (MRScenario.environment.contains("team-atest") && (userSelection!=null)) {
+					testHarnessUseDropdown = true;
+					System.out.println("useDropdown=YES and env is team-atest, will use dropdown for sign-in");
+				} else {
+					System.out.println("useDropdown=YES but this is not team-atest env so will default back to use UUID for sign-in");
+				}
+			} else 		
+				System.out.println("use UUID for sign-in");
+		}
+
+		if (!MRScenario.environment.contains("team-atest")) { //note: need to do this so the same script can be run on stage
+		 	userSelection = category;
+		} 
+	 	memberAttributesMap.remove("User Selection");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+		// note: for the team-a env, it needs a different URL for PCP and Medica users
+		boolean teamSpecialCase=false;
+		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
+		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
+		if (MRScenario.environment.contains("team-a")) {
+			if ((planType != null) && (category == null)) {
+				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType == null) && (category != null)) {
+				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType != null) && (category != null)) {
+				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
+						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+						) {
+					teamSpecialCase=true;		
+					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			}
+		}
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		Assert.assertTrue("unable to find a " + desiredAttributes + " member. Member Type data could not be setup !!! ", loginCreds != null);
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+		//note: for team-a microapp env, the username is the userselection
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
+			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+			loginPage.validateelements();
+
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarnessPage=null;
+				try {
+					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+				}
+				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
+				return;
+			}
+			AccountHomePage accountHomePage=null;
+			try {
+				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			} catch (UnhandledAlertException ae) {
+				System.out.println("Exception: "+ae);
+				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+			}
+			
+			if (accountHomePage != null) {
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+			} else {  
+				sorryWorkAroundAttempt(wd, testDataType, category, planType);
+			}
+		} else { //note: isHSIDCompatible=no then go to either dashboard or testharness
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				LoginPage loginPage=null;
+				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
+				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
+				if (MRScenario.environment.contains("team-a")) {
+					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
+				} else {
+					loginPage = new LoginPage(wd);
+				}
+				TestHarness testHarnessPage=null;
+				try {
+					if (testHarnessUseDropdown) {
+						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
+						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
+						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
+						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
+						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
+						}
+					} else {
+						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
+					}
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login", false);
+				}
+				Assert.assertTrue("PROBLEM - Login not successful...",testHarnessPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE,testHarnessPage);
+			} else {
+				LoginPage loginPage = new LoginPage(wd);
+				RallyDashboardPage rallyDashboard=null;
+				try {
+					rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** Got Alert text : There was an error while processing login", false);
+				}
+				Assert.assertTrue("PROBLEM - Login not successful...",rallyDashboard != null);
+				getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+			}
+		}
+	}
+	
+	public void sorryWorkAroundAttempt(WebDriver wd, String testDataType, String category, String planType) throws InterruptedException {
+		// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
+		if ((testDataType==null) && (category==null) && (planType==null)) {
+			System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
+			Assert.assertTrue("***** Error in loading  Redesign Account Landing Page *****", false);
+		} else {
+			//System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
+			boolean hasSorryError=false;
+			boolean hasWentWrongError=false;
+			try { //check to see if it has sorry error
+				WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
+				if (sorry.isDisplayed()) {
+					hasSorryError=true;
+				}
+			} catch (Exception e) {}
+			try { //check to see if it has something went wrong eeror
+				WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
+				if (wentWrong.isDisplayed()) {
+					hasWentWrongError=true;
+				}
+			} catch (Exception e) {}
+			if (hasSorryError && isPotentialSorryWorkaroundCandidate(planType)) {
+				//note: has the potential for sorry workaround if getting sorry error
+				Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
+				try {
+					boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
+				} catch (Exception e) {
+					System.out.println("Exception: "+e);
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page *****", false);
+				}
+			} else if(hasWentWrongError) {
+				Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
+			} else {
+				if (hasSorryError && !isPotentialSorryWorkaroundCandidate(planType)) {
+					System.out.println("not candidate for 'sorry' error work around");
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page *-*-* Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'", false);
+				} else {
+					System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
+					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'", false);
+				}
+			}
+		}
+
+	}
+	
 }

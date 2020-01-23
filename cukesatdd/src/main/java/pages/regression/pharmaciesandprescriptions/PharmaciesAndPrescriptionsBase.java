@@ -1,5 +1,7 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import java.util.concurrent.TimeUnit;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +44,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					pnpValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
@@ -64,9 +66,9 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 
 			System.out.println("Proceed to validate the Need Help - See More Ways section content");
 			Assert.assertTrue("PROBLEM - unable to locate the 'See more ways to' text in Need Help section",
-					validate(needHelp_seeMoreWaysTo));
+					pnpValidate(needHelp_seeMoreWaysTo));
 			Assert.assertTrue("PROBLEM - unable to locate the 'contact us' link in Need Help section",
-					validate(needHelp_contactUsLink));
+					pnpValidate(needHelp_contactUsLink));
 			needHelp_contactUsLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			//tbd handleComboTabIfComboUser(planType, memberType);
@@ -83,7 +85,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		} else {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-					validate(needHelp_SectionHeader));
+					pnpValidate(needHelp_SectionHeader));
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
@@ -112,13 +114,13 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, 
 			WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
-		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element", validate(SectionElement));
-		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section", validate(imgElement));
-		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section", validate(phoneElement));
-		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section", validate(ttyElement));
-		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement1));
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element", pnpValidate(SectionElement));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section", pnpValidate(imgElement));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section", pnpValidate(phoneElement));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section", pnpValidate(ttyElement));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", pnpValidate(hrsOperationElement1));
 		if (hrsOperationElement2!=null) {
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement2));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", pnpValidate(hrsOperationElement2));
 		}
 	}
 
@@ -170,20 +172,20 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		WebElement targetTab=null;
 		if (planType.equalsIgnoreCase("MAPD")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", 
-					validate(comboTab_MAPD));
+					pnpValidate(comboTab_MAPD));
 			targetTab=comboTab_MAPD;
 		} else if (planType.equalsIgnoreCase("SHIP") 
 				|| planType.equalsIgnoreCase("MEDSUPP")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", 
-					validate(comboTab_SHIP));
+					pnpValidate(comboTab_SHIP));
 			targetTab=comboTab_SHIP;
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", 
-					validate(comboTab_PDP));
+					pnpValidate(comboTab_PDP));
 			targetTab=comboTab_PDP;
 		} else if (planType.equalsIgnoreCase("SSUP")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", 
-					validate(comboTab_SSUP));
+					pnpValidate(comboTab_SSUP));
 			targetTab=comboTab_SSUP;
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover "
@@ -208,23 +210,23 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			CommonUtility.checkPageIsReady(driver);
 			WebElement targetTab=null;
 			if (planType.equalsIgnoreCase("MAPD")) {
-				if (validate(comboTab_MAPD))
+				if (pnpValidate(comboTab_MAPD))
 					targetTab=comboTab_MAPD;
 				else
 					return;
 			} else if (planType.equalsIgnoreCase("SHIP") 
 					|| planType.equalsIgnoreCase("MEDSUPP")) {
-				if (validate(comboTab_SHIP))
+				if (pnpValidate(comboTab_SHIP))
 					targetTab=comboTab_SHIP;
 				else
 					return;
 			} else if (planType.equalsIgnoreCase("PDP")) {
-				if (validate(comboTab_PDP))
+				if (pnpValidate(comboTab_PDP))
 					targetTab=comboTab_PDP;
 				else
 					return;
 			} else if (planType.equalsIgnoreCase("SSUP")) {
-				if (validate(comboTab_SSUP))
+				if (pnpValidate(comboTab_SSUP))
 					targetTab=comboTab_SSUP;
 				else
 					return;
@@ -295,5 +297,50 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		}
 		return resultInfo;
 	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean pnpValidate(WebElement element) {
+		long defaultTimeoutInSec=3; 
+		return pnpValidate(element, defaultTimeoutInSec);
+	}
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean pnpValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	}
+	
+	public void pnpCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}	
 
 }

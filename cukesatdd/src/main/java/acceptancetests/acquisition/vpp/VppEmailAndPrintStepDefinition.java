@@ -94,7 +94,7 @@ public class VppEmailAndPrintStepDefinition {
 		
 		//note: collect page data for email deeplink validation
 		util=new EmailAndPrintUtil(wDriver);
-		HashMap<String, String> infoMap=util.collectInfoVppPlanDetailPg(planType, "original");
+		HashMap<String, String> infoMap=util.collectInfoVppPlanDetailPg(planType, "original", wDriver);
 		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
 
 
@@ -203,7 +203,7 @@ public class VppEmailAndPrintStepDefinition {
 
 		//note: collect page data for email deeplink validation
 		util=new EmailAndPrintUtil(wDriver);
-		HashMap<String, String> infoMap=util.collectInfoVppPlanComparePg(planType, "original");
+		HashMap<String, String> infoMap=util.collectInfoVppPlanComparePg(planType, "original", wDriver);
 		getLoginScenario().saveBean(PageConstants.COMPARE_PAGE_INFO, infoMap);
 
 		//note: if email is successfully sent, deepLink info should be available, save it for later use
@@ -228,6 +228,7 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		//tbd wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
@@ -251,6 +252,7 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		Thread.sleep(1000);
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
@@ -258,7 +260,7 @@ public class VppEmailAndPrintStepDefinition {
 		util.checkModelPopup(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util = new EmailAndPrintUtil(newTestDriver);
-		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		List<String> noteList=util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage, wDriver);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
 
@@ -278,17 +280,18 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		CommonUtility.checkPageIsReady(newTestDriver);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		CommonUtility.checkPageIsReady(newTestDriver);
 		util.checkModelPopup(newTestDriver);
 
 		//note: temperary bypass for now until the flash issue is resolved
-		List<String> noteList=new ArrayList<String>();
-		noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink page content flashing");
+		//tbd List<String> noteList=new ArrayList<String>();
+		//tbd noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink page content flashing");
 		//note: do not remove the comment lines below
-		//wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
-		//List<String> noteList=util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
+		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
+		List<String> noteList=util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage, wDriver);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
 

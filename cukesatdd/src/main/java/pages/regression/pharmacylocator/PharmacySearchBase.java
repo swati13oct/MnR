@@ -5,22 +5,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
@@ -30,6 +23,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		pharmacyCheckModelPopup(driver);
+		/* tbd 
 		try {
 			driver.switchTo().frame("IPerceptionsEmbed");
 			iPerceptionCloseButton.click();
@@ -38,7 +33,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			CommonUtility.checkPageIsReady(driver);
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
-		}
+		} */
 		openAndValidate();
 	}
 
@@ -155,11 +150,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				expectedURL="member/pharmacy-locator";
 				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
-				CommonUtility.waitForPageLoad(driver, pdf_otherPlans, 15);
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
-						pharmacyValidate(pdf_otherPlans));
+						validateNew(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
-				CommonUtility.checkPageIsReady(driver);
+				Thread.sleep(5000);
 				pdf_otherPlans.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -182,7 +176,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
-				Thread.sleep(2000); //note: keep this for the page to load
+				Thread.sleep(5000); //note: keep this for the page to load
 				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 				afterClicked_numTabs=afterClicked_tabs.size();					
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
@@ -233,7 +227,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(winHandleBefore);
 				*/
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -280,7 +274,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -516,8 +510,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec=2;
-		return validate(element, timeoutInSec);
+		long timeoutInSec=0;
+		return pharmacyValidate(element, timeoutInSec);
 	} 
 	
 	/**
@@ -527,23 +521,31 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @param timeoutInSec
 	 * @return
 	 */
-	/* tbd
-	public boolean pharmacyValidate(WebElement element, int timeoutInSec) {
+	public boolean pharmacyValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOf(element));
 			if (element.isDisplayed()) {
-				System.out.println("Element found!!!!");
+				System.out.println("Element '"+element.toString()+"' found!!!!");
 				return true;
 			} else {
-				System.out.println("Element not found/not visible");
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
 		} catch (Exception e) {
-			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
-
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
-	}*/
+	}
+	
+	public void pharmacyCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}	
 }
 
 

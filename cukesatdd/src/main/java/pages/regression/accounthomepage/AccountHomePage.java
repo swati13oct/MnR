@@ -272,8 +272,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
 
-	// @FindBy(css = "img.primary-logo")
-	// private WebElement logoImage;
+	@FindBy(xpath = "//a[contains(text(),'Drug Lookup')]")
+	private WebElement drugLookuplink;
 
 	@FindBy(css = ".primary-logo")
 	private WebElement logoImage;
@@ -752,26 +752,24 @@ public class AccountHomePage extends UhcDriver {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-2 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
-						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
+						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))
-								|| validate(coverageEnded) || validate(coverageStarted)) {
+								|| validate(coverageEnded,0) || validate(coverageStarted,0)) {
 							int index=2;
-							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+")";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
-
 						} else {
 							int index=3;
-							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-2 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-2 > a:nth-child("+(index-1)+")";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
-
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
 					} catch (NoSuchElementException e) { // note: try one more selector before giving up
@@ -779,23 +777,23 @@ public class AccountHomePage extends UhcDriver {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
 								"#dropdown-toggle-0 > span > span:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
-						if (validate(accountLabel) && (accountLabel.getText().toLowerCase().contains("supplement")
+						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug")
-								|| validate(coverageEnded) || validate(coverageStarted))) {
+								|| validate(coverageEnded,0) || validate(coverageStarted,0))) {
 							int index=2;
-							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+")";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") >";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						} else {
 							int index=3;
-							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") > span";
+							String menuItemCssStr="#dropdown-options-0 > a:nth-child("+index+") >";
 							WebElement link = locateElementWithinShadowRoot(shadowRootHeader,
 									menuItemCssStr);
 							if (link.getText().equalsIgnoreCase("logout"))
-								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") > span";
+								menuItemCssStr="#dropdown-options-0 > a:nth-child("+(index-1)+") >";
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	menuItemCssStr);
 						}
 						System.out.println("clicked account setting options within account setting dropdown button");
@@ -1528,7 +1526,7 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+				|| MRScenario.environmentMedicare.contains("team-a")
 				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
@@ -1602,7 +1600,7 @@ public class AccountHomePage extends UhcDriver {
 			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
-		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+		} else if (MRScenario.environment.contains("team-a")) {
 			String Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 					+ "/content/medicare/member/pharmacy-locator/overview.html";
 			if (driver.getCurrentUrl().contains("mymedicareaccount")) {
@@ -1665,7 +1663,7 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, FormRsrceLinkTestHarness, 30);
 			FormRsrceLinkTestHarness.click();
 
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+		} else if (MRScenario.environmentMedicare.contains("team-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "
@@ -1910,6 +1908,32 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	public PaymentHistoryPage navigateToPaymentPageSkipBtnValidation() throws InterruptedException {
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			// driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		CommonUtility.checkPageIsReady(driver);
+
+		if (noWaitValidate(paymentsLink)) {
+			System.out.println("payment link is displayed on the header");
+			paymentsLink.click();
+			return new PaymentHistoryPage(driver, true);
+		} else if (validate(TestHarnesspaymentsLink)) {
+
+			System.out.println("TestHarness Page Payments Link is displayed");
+			TestHarnesspaymentsLink.click();
+			return new PaymentHistoryPage(driver,true);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on
 	 * link on Rally Dashboard mid section
@@ -1926,7 +1950,7 @@ public class AccountHomePage extends UhcDriver {
 				workaroundAttempt("order");
 			} else {
 				String Page_URL = "";
-				if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				if (MRScenario.environment.contains("team-a")) {
 					Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 							+ "/content/medicare/member/order-materials/overview.html";
 				} else {
@@ -2072,15 +2096,25 @@ public class AccountHomePage extends UhcDriver {
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 				dceTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				waitforElement(drugLookup);
-				drugLookup.click();
-				try {
-					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
-				} catch (Exception e) {
-					System.out.println("Exception e: " + e);
+				if(validate(drugLookup)){
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					waitforElement(drugLookup);
+					drugLookup.click();
+					
+				} else {
+					
+					waitforElement(drugLookuplink);
+					drugLookuplink.click();
 				}
+				
+				try {
+						WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+						CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+					} catch (Exception e) {
+						System.out.println("Exception e: " + e);
+					}
+				
+				
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
@@ -3285,6 +3319,7 @@ public class AccountHomePage extends UhcDriver {
 		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
 				secondTopMenuItemCssStr);
+		Assert.assertTrue("PROBLEM - unable locate top menu item", secondTopMenuItem!=null);
 		if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
 			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
 			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,

@@ -1,7 +1,7 @@
 @CT @OLE @OLE_Ulayer @OLE_VPP_UHC_ResumeApplication
 Feature: 1.06. ACQ- MedSupp OLE flow AARP
 
-  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer
+  @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer @prodRegression
  Scenario Outline: MedSup Resume Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -19,9 +19,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
-       | zipcode       | <zipcode>     |
-       
-      
+       | zipcode       | <zipcode>     |     
       Then user validates the resume application processed in the AARP site
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
@@ -29,10 +27,10 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90210 | NO              | Los Angeles County | MS       | 11031950 | John      | Carry   |    ABCD        | Resume          |
+      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
      
   
-@UHC_Retrive_App_AARP @OLE_Regression @oleMedSupUlayer
+@UHC_Retrive_App_AARP @oleMedSupUlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
@@ -41,7 +39,10 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-      
+   Then the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key
+       | DOB           | <DOB>         |
+       | Firstname     | <Firstname>   |
+       | Lastname      | <Lastname>    |
    Then user clicks on resume application button in the AARP site
      Then user enters data to resume the application in the AARP site
        | ApplicationID     | <ApplicationID>   |
@@ -54,7 +55,7 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
      
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
-     |   90210 | NO              | Los Angeles County | MS       | 11031950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
+     |   90210 | NO              | Los Angeles County | MS       | 11131950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
  
 @MedSuppOLEULayerSmoke
  Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary

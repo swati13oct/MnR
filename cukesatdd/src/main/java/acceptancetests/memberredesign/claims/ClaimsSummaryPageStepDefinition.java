@@ -9,10 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -38,7 +35,7 @@ public class ClaimsSummaryPageStepDefinition {
 	@Then("^I validate the claims displayed based on the selection on claims summary page$") 
 	public void vbf_validate_claims_table() { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.vbf_validateClaimsTable();
 	}	
 
@@ -73,13 +70,13 @@ public class ClaimsSummaryPageStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 		String memberType = memberAttributesMap.get("Member Type");
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, validate there are tabs and select the tab accordingly");
 			claimsSummPg.validateComboTabs();
 			claimsSummPg.goToSpecificComboTab(planType); //note: click the target tab for testing
 		} else {
-			System.out.println("TEST - maybe combo case");
+			System.out.println("TEST - test is not specifically testing for combo but user maybe combo, handle the combo selection");
 			boolean flagNonCombo=false; //note: if user has combo then select the right plan
 			claimsSummPg.goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
 		}
@@ -172,26 +169,22 @@ public class ClaimsSummaryPageStepDefinition {
 	public void greaterThanTwoYears_custom_search_claims() throws InterruptedException{ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-		else {
-			String planType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Calendar calendar = Calendar.getInstance();
-			Date currentDate=calendar.getTime();
-			String toDate = dateFormat.format(currentDate);
-			System.out.println("current date="+toDate);
-			calendar.add(Calendar.YEAR, -2);
-			calendar.add(Calendar.DATE, -1);
-			Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
-			String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
-			System.out.println("2 yrs and 1 day ago date="+fromDate);
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar calendar = Calendar.getInstance();
+		Date currentDate=calendar.getTime();
+		String toDate = dateFormat.format(currentDate);
+		System.out.println("current date="+toDate);
+		calendar.add(Calendar.YEAR, -2);
+		calendar.add(Calendar.DATE, -1);
+		Date twoYearsAndOneDayBackFromCurrentDate=calendar.getTime();
+		String fromDate = dateFormat.format(twoYearsAndOneDayBackFromCurrentDate);
+		System.out.println("2 yrs and 1 day ago date="+fromDate);
 
-			claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
-			if(claimsSummPg != null)
-				getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
-		}
+		claimsSummPg.customSearchClaimsByTimeInterval(planType, fromDate,toDate);
+		if(claimsSummPg != null)
+			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 
 	/**
@@ -202,12 +195,12 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateEmptyDatesErrorMessage(){
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
-		else {
-			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			claimsSummPg.validateEmptyDatesError(planType);
-		}
+		//tbd if (claimsSummPg.getOnlyTestUiFlag())
+		//tbd 	System.out.println("TEST UI ONLY - will not validate custom search error for no to and from dates being entered");
+		//tbd else {
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		claimsSummPg.validateEmptyDatesError(planType);
+		//tbd }
 	}
 
 	/**
@@ -218,12 +211,8 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateToDateInvalidErrorMessage(){ 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate custom search error for the from date is greater than the to date error message");
-		else {
-			String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			claimsSummPg.validatefromDateLaterThanToDateError(planType);
-		}
+		String planType = (String) getLoginScenario().getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		claimsSummPg.validatefromDateLaterThanToDateError(planType);
 	}
 
 	/**
@@ -235,8 +224,14 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validate_pagination() throws Throwable { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		Assert.assertTrue("PROBLEM - not getting expected pagination.  "
-				+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination());
+		//note: use by E2E non-extensive, just put a non-zero number to validate pagination shows up
+		int tmpClaims=(Integer) getLoginScenario().getBean(ClaimsCommonConstants.TEST_CURRENTCLAIMS);
+		if (tmpClaims==0) 
+			Assert.assertTrue("PROBLEM - should not get pagination for user with 0 claim.  "
+					+ "NOTE: pagination will only show if user has claims for the search range",!claimsSummPg.verifyPagination(tmpClaims));
+		else
+			Assert.assertTrue("PROBLEM - not getting expected pagination.  "
+					+ "NOTE: pagination will only show if user has claims for the search range",claimsSummPg.verifyPagination(tmpClaims));
 	}
 
 	/**
@@ -250,7 +245,10 @@ public class ClaimsSummaryPageStepDefinition {
 				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
+		if (MRScenario.environment.contains("team-a"))
+			System.out.println("NOTE: MRREST product summary call (used for Need Help) is disabled on team env, will skip this validation on team-a env");
+		else
+			claimsSummaryPage.validateSectionInNeedHelp(planType, memberType);
 	}
 
 	/**
@@ -277,7 +275,11 @@ public class ClaimsSummaryPageStepDefinition {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		boolean flagZeroClaimUser=true;
-		claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
+		if (claimsSummPg.getOnlyTestUiFlag()) 
+			flagZeroClaimUser=false;
+		boolean result=claimsSummPg.validateClaimsTableExists(flagZeroClaimUser);
+		if (!claimsSummPg.getOnlyTestUiFlag() && !result) 
+			Assert.assertTrue("PROBLEM - validateClaimsTableExists return false with flagZeroClaimUser is set to '"+flagZeroClaimUser+"')", result);
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
@@ -333,11 +335,11 @@ public class ClaimsSummaryPageStepDefinition {
 		if (numClaims <=0) 
 			Assert.assertTrue("PROBLEM - Pagination will only show up if more than 0 claims.  "
 					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					!claimsSummPg.verifyPagination());
+					!claimsSummPg.verifyPagination(numClaims));
 		else 
 			Assert.assertTrue("PROBLEM - Pagination should show up if more than 0 claims.  "
 					+ "There are "+numClaims+" number of claims for claim period opion="+claimPeriod,
-					claimsSummPg.verifyPagination());
+					claimsSummPg.verifyPagination(numClaims));
 	}
 
 	/**
@@ -364,6 +366,7 @@ public class ClaimsSummaryPageStepDefinition {
 		}
 		claimsSummPg.validateSystemErrorMsgNotExist();
 		claimsSummPg.printListOfClaimsResult(allClaims);
+		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_CURRENTCLAIMS, numClaims);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ALLCLAIMS, allClaims);
 	}
 
@@ -376,9 +379,6 @@ public class ClaimsSummaryPageStepDefinition {
 	public void validateGreaterThanTwoYearsMessage() { 
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not validate search range is greater than two years error");
-		else {
 		String planType = (String) getLoginScenario()
 				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
 		HashMap<String, Integer> allClaims = (HashMap<String, Integer>) getLoginScenario()
@@ -395,7 +395,6 @@ public class ClaimsSummaryPageStepDefinition {
 			System.out.println("List the number of claims in each search range");
 			System.out.println(Arrays.asList(allClaims));
 			System.out.println("========================================");
-		}
 		}
 	}
 
@@ -457,29 +456,31 @@ public class ClaimsSummaryPageStepDefinition {
 		if(claimsSummPg != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
-	
+
 	@Then("^I can validate the segment ID value in localStorage on claims summary page$")
 	public void validates_segmentid(DataTable memberAttributes) {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
-		if (claimsSummPg.getOnlyTestUiFlag()) 
-			System.out.println("TEST UI ONLY - will not validate segment ID");
-		else {		
-			Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
-			String expectedSegmentId = memberAttributesMap.get("Segment ID");
-			String planType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
-			String memberType = (String) getLoginScenario()
-					.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
-			claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
-		}
+		//tbd if (claimsSummPg.getOnlyTestUiFlag()) 
+		//tbd 	System.out.println("TEST UI ONLY - will not validate segment ID");
+		//tbd else {		
+		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		String expectedSegmentId = memberAttributesMap.get("Segment ID");
+		String planType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_PLAN_TYPE);
+		String memberType = (String) getLoginScenario()
+				.getBean(ClaimsCommonConstants.TEST_INPUT_MEMBER_TYPE);
+		claimsSummPg.validateSegmentId(planType, memberType, expectedSegmentId);
+		//tbd }
 	}
-	
+
 	@When("^I am validating UI only$")
 	public void onlyTestUi() {
 		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
 		claimsSummPg.setOnlyTestUiFlag(true);
+		claimsSummPg.setTestOnlyUiFlagForAll(true);
 		getLoginScenario().saveBean(ClaimsCommonConstants.TEST_ONLY_TEST_UI_FLAG, true);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummPg);
 	}
 }

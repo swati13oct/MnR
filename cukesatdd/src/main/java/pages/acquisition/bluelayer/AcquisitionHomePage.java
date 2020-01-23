@@ -458,7 +458,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver);
+			checkModelPopup(driver,45);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 			
 			/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
@@ -473,7 +473,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			isHealthPlan = true;
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver);
+			checkModelPopup(driver,45);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try{
 				if(proactiveChatExitBtn!=null)

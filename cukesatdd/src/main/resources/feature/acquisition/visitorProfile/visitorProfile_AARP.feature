@@ -29,11 +29,11 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drug | <drug> |
     And the user returns to the visitor profile page
     Then the user should be able to see the Drug and pharmacy information in the guest profile page
-      | Drugname | <Drugname> |
+      | Drugname | <drug> |
 
     Examples: 
-      | state   | Drugname |dosage        | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |
-      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles | Lipitor TAB 10MG |       30 | Every 1 month | yes     |
+      | state   | drug |dosage        | quantity | frequency     | zipcode | radius          | quantity | frequency     | branded |
+      | Alabama | Lipitor |TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
   @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile

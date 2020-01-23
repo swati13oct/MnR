@@ -20,7 +20,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPlansandDocument_P6.json",detai
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlansandDocument_P6")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/formsandresources" },monochrome=true, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlansandDocument_P6.json" }, tags = { "@PD_Part6_Regression" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlansandDocument_P6.json" }, tags = { "@PlansAndDocument26" })
 
 public class RunMRATDDRegressionPlansandDocument_P6 {
 

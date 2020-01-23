@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
@@ -22,6 +23,11 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	public void openAndValidate() {
 	}
 
+	ClaimsSummaryValidateError validateError=new ClaimsSummaryValidateError(driver);
+	
+	public void setTestOnlyUiFlagForAll(boolean b) {
+		validateError.setOnlyTestUiFlag(b);
+	}
 	/**
 	 * Validate tooltips on claims detail page
 	 * @param planType This is the plan type for testing
@@ -70,6 +76,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			testItem="ship_paidToYou";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_paidToYou));
+
 			testItem="ship_paidToProvider";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_paidToProvider));
@@ -77,6 +84,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			testItem="claimNumberLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsNumLbl));
+
 			testItem="dateRange";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(dateRng));
@@ -85,6 +93,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					claimsValidate(providerName));
 			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
 					!providerName.getText().equals(""));
+
 			testItem="claimNum value";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsNumDyn));
@@ -213,44 +222,44 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			testItem="ship_dateRangeLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_dateRngLbl));
-			testItem="ship_dateRangeValue";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_dateRngVal));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!ship_dateRngVal.getText().equals(""));
+				testItem="ship_dateRangeValue";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_dateRngVal));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!ship_dateRngVal.getText().equals(""));
 			testItem="ship_claimNumLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_claimsNumLbl));
-			testItem="ship_claimNumValue";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_claimsNumVal));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!ship_claimsNumVal.getText().equals(""));
+				testItem="ship_claimNumValue";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_claimsNumVal));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!ship_claimsNumVal.getText().equals(""));
 			testItem="ship_claimTypeLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_claimsTypLbl));
-			testItem="ship_claimTypeValue";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_claimsTypVal));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!ship_claimsTypVal.getText().equals(""));
+				testItem="ship_claimTypeValue";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_claimsTypVal));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!ship_claimsTypVal.getText().equals(""));
 			testItem="ship_eobLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_eobLbl));
-			testItem="ship_eobValue";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_eobVal));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!ship_eobVal.getText().equals(""));
+				testItem="ship_eobValue";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_eobVal));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!ship_eobVal.getText().equals(""));
 			testItem="ship_eobStatementText";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(ship_eobStmtTxt));
-			testItem="ship_paidToYou";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_paidToYou));
-			testItem="ship_paidToProvider";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(ship_paidToProvider));
+				testItem="ship_paidToYou";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_paidToYou));
+				testItem="ship_paidToProvider";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(ship_paidToProvider));
 		} else {
 			testItem="claimNumberLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
@@ -258,32 +267,32 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			testItem="dateRange";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(dateRng));
-			testItem="providerName";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(providerName));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!providerName.getText().equals(""));
-			testItem="claimNum value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsNumDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsNumDyn.getText().equals(""));
+				testItem="providerName";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(providerName));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!providerName.getText().equals(""));
+				testItem="claimNum value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsNumDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsNumDyn.getText().equals(""));
 			testItem="claimTypeLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsTypLbl));
-			testItem="claimsType value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsTypDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsTypDyn.getText().equals(""));
+				testItem="claimsType value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsTypDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsTypDyn.getText().equals(""));
 			testItem="claimStatusLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(claimsStatLbl));
-			testItem="claimStatus value";
-			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
-					claimsValidate(claimsStatDyn));
-			Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
-					!claimsStatDyn.getText().equals(""));
+				testItem="claimStatus value";
+				Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
+						claimsValidate(claimsStatDyn));
+				Assert.assertTrue("PROBLEM - "+testItem+" element text should not be empty on claims detail page", 
+						!claimsStatDyn.getText().equals(""));
 			testItem="medicalEOBLabel";
 			Assert.assertTrue("PROBLEM - unable to locate "+testItem+" element on claims detail page", 
 					claimsValidate(medicalEobLbl));
@@ -309,23 +318,92 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 					claimsValidate(medicalClaimsDetlTxt));
 			System.out.println("Medical Claims Details text is seen on the Claims Details page");
 		}
-		Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",
-				claimsValidate(lrnMoreLnkTog));
-		System.out.println("Learn More link is seen on the Claims Details Page");
-		Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",
-				claimsValidate(claimsDetlTblMainSect));
-		Assert.assertTrue("PROBLEM - Claims Table is not present in Claims Details Page", 
-				claimsDetlTblMainSect.isDisplayed());
-		System.out.println("Claims table is seen in the Cliams details page");
+		//tbd if (getOnlyTestUiFlag()) 
+		//tbd 	System.out.println("TEST UI ONLY - will not test Learn More and claims detail table on claims detail page");
+		//tbd else {
+			Assert.assertTrue("PROBLEM - unable to locate learnMoreLink",
+					claimsValidate(lrnMoreLnkTog));
+			System.out.println("Learn More link is seen on the Claims Details Page");
+			Assert.assertTrue("PROBLEM - unable to locate claimDetTableMainSection",
+					claimsValidate(claimsDetlTblMainSect));
+			Assert.assertTrue("PROBLEM - Claims Table is not present in Claims Details Page", 
+					claimsDetlTblMainSect.isDisplayed());
+			System.out.println("Claims table is seen in the Cliams details page");
+			//tbd }
 	}
 
 	/**
 	 * This method validates Claims total table on claims detail page
 	 */
-	public void validateClaimsTotSection() {
+	public double validateClaimsTotSection(String planType) {
 		CommonUtility.waitForPageLoadNew(driver, claimsTotTbl, 5);
 		Assert.assertTrue("PROBLEM - Claims Total is not present in Claims Details Page", 
 				claimsValidate(claimsTotTbl));
+
+		double result=0.0;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle in Claims Total section of Claims Details Page", 
+					claimsValidate(adjustmentToggleCollapsed));
+
+			try {
+				adjustmentToggleCollapsed.click();
+			} catch (WebDriverException e) {
+				handleHowIsYourVisit(); //note: on offline-prod, the smiley may block the toggle
+				adjustmentToggleCollapsed.click();
+			}
+
+			Assert.assertTrue("PROBLEM - Unable to locate the Expanded 'Adjustment' toggle in Claims Total section of Claims Details Page after clicking", 
+					claimsValidate(adjustmentToggleExpanded));
+			
+			//note: payable amount section
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' section after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSection));
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' value after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSectionValue));
+
+			String actPayableAmountValueStr=adjustmentPayableAmountSectionValue.getText().replace("$", "");
+			double actPayableAmountValue=Double.valueOf(actPayableAmountValueStr);
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Amount' text after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPayableAmountSectionText));
+			String expTxt="Payable Amount";
+			String actTxt=adjustmentPayableAmountSectionText.getText();
+			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
+
+			//note: payment adjustment section -------------------------
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payable Adjustment' section after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSection));
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' sign after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSectionSign));
+
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' value after expanding the adjustment toggle", 
+					claimsValidate(adjustmentPaymentAdjustmentSectionValue));
+
+			String actPaymentAdjustmentSectionValueStr=adjustmentPaymentAdjustmentSectionValue.getText().replace("$", "");
+			double actPaymentAdjustmentSectionValue=Double.valueOf(actPaymentAdjustmentSectionValueStr);
+			
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Payment Adjustment' text after expanding the adjustment toggle", 
+			claimsValidate(adjustmentPaymentAdjustmentSectionText));
+			expTxt="Payment Adjustment";
+			actTxt=adjustmentPaymentAdjustmentSectionText.getText().trim();
+			Assert.assertTrue("PROBLEM - adjustmentPayableAmountSectionText is not as expected. Expected='"+expTxt+"' | Actual='"+actTxt+"' ", expTxt.equals(actTxt));
+
+			//note: do the math, will compare value with '"+Your Plan Paid+"' value for extensive validation case
+			if (adjustmentPaymentAdjustmentSectionSign.getText().equals("-")) {
+				result=actPayableAmountValue-actPaymentAdjustmentSectionValue;
+			} else {
+				result=actPayableAmountValue+actPaymentAdjustmentSectionValue;
+			}
+			adjustmentToggleExpanded.click();
+	
+			Assert.assertTrue("PROBLEM - Unable to locate the collapsed 'Adjustment' toggle after clicking to collapse it", 
+					claimsValidate(adjustmentToggleCollapsed));
+
+
+		}
+		return result;
 	}
 
 	/**
@@ -359,6 +437,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				claimsValidate(topButton));
 		topButton.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummHeader, 10);
+		System.out.println("TEST - driver.getCurrentUrl()"+driver.getCurrentUrl());
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", 
 				driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page back to Summary page -->"
@@ -378,11 +457,12 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 				claimsValidate(claimsSummLnkOnDetlBtmPg));
 		claimsSummLnkOnDetlBtmPg.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummHeader, 10);//need this more time to load SOFL pages 
+		sleepBySec(1);
 		Assert.assertTrue("PROBLEM - unable to navigate from details page to summary page", 
 				driver.getCurrentUrl().contains("/overview"));
 		System.out.println("The member has navigated from details page to Summary page --->"
 				+driver.getCurrentUrl());
-		return new ClaimsSummaryPage(driver);
+		return new ClaimsSummaryPage(driver); // set the onlyTestUiFlag from the method that's calling this
 	}
 
 	/** 
@@ -395,7 +475,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		boolean bypass_INC11365785_searchEOBHistory=false;
 		if (!plantype.equals("SHIP")) {
 			if (((plantype.equals("MA") || plantype.equals("MAPD")) && claimSystem.toUpperCase().contains("NICE")) 
-				|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
+					|| (plantype.equals("SSUP") && claimSystem.toUpperCase().contains("COSMOS"))) {
 				Assert.assertTrue("PROBLEM - existing behavior should not be able to locate Medical EOB link on detail page "
 						+ "(NOTE: this is not the right behavior, there is a prod defect)", 
 						!claimsValidate(detl_medicalEob));
@@ -420,7 +500,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 	 * @param invokedBypass If true (due to known defect/ticket) then it will not flag the mismatch 
 	 * @param planType This is the plan for testing
 	 */
-	public void validateClaimsTotalAccurate(boolean invokedBypass, String planType) {
+	public double validateClaimsTotalAccurate(boolean invokedBypass, String planType) {
 		System.out.println("Proceed to validate total values are accurate");
 		if (planType.equalsIgnoreCase("ship")) {
 			String xpath1="//section[@id='cltotshippartb']//div[@class='row margin-small']//div[@class='col-md-2']";
@@ -438,7 +518,8 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			double rowTotalPlanCostShare=0.0;
 			double rowTotalYourPlanPaid=0.0;
 			for (int x=0; x<ship_claimsTblRows.size(); x++) {
-				String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				//String xpath2="//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]//div[@class='card-body']["+(x+1)+"]//div[@class='row'][2]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
+				String xpath2=  "//div[@id='shipPartBDetailsTable']//div[contains(@ng-repeat,'billLineDetailsList')]["+(x+1)+"]//div[contains(@class,'col-md-9')]//div[@class='col-md-2']";
 				System.out.println("--- index= "+x+" -----------------------");
 				double value=findValue(xpath2+"[1]/p");
 				System.out.println("rows Amount Charged value="+value);
@@ -483,6 +564,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			Assert.assertTrue("PROBLEM - 'Your Plan Paid' from each list doesn't add up to the value from claims total section.  "
 					+ "totalYourPlanPaid="+totalYourPlanPaid+" | rowTotalYourPlanPaid="+rowTotalYourPlanPaid, 
 					totalYourPlanPaid==rowTotalYourPlanPaid);
+			return totalYourPlanPaid;
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate the claims total rows",claimsTotItems.size()>0);
 			double totalAmountBilled=findValue(claimsTotItems.get(0));
@@ -536,6 +618,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 						+ "totalYourShare="+totalYourShare+" | rowsTotalYourShare="+rowsTotalYourShare, 
 						totalYourShare==rowsTotalYourShare);
 			}
+			return totalYourShare;
 		}
 	}
 
@@ -577,5 +660,9 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 			else
 				throw new IllegalArgumentException("Invalid String");
 		}
+	}
+	
+	public void validateSystemErrorMsgNotExist() {
+		validateError.validateNoSystemErr();
 	}
 }

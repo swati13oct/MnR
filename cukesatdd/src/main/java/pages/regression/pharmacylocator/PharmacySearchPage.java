@@ -27,6 +27,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.checkPageIsReady(driver);
+		pharmacyCheckModelPopup(driver);
+		/* tbd 
 		try {
 			driver.switchTo().frame("IPerceptionsEmbed");
 			iPerceptionCloseButton.click();
@@ -35,7 +37,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			CommonUtility.checkPageIsReady(driver);
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
-		}
+		} */
 		openAndValidate();
 	}
 
@@ -69,7 +71,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - unable to locate distance option '20 miles'", pharmacyValidate(distanceOption_25miles));
 		if (!memberType.toUpperCase().contains("MEDICA")) { //note: medica sometimes shows plan name sometimes don't depending on user data
 			Assert.assertTrue("PROBLEM - unable to locate the plan name dropdown element", 
-					pharmacyValidate(PlanNameDropDown));
+					validateNew(PlanNameDropDown));
 			select = new Select(PlanNameDropDown);           
 			String actualSelectedPlan = select.getFirstSelectedOption().getText();
 			Assert.assertTrue("PROBLEM - default selected plan name should not be null. "
@@ -467,6 +469,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateMapSectionContent(boolean hasPrefRetailPharmacy) {
+		CommonUtility.waitForPageLoad(driver, map_mapBtn, 5);
 		moveMouseToElement(map_resultSection);
 		Assert.assertTrue("PROBLEM - unable to locate the map", 
 				pharmacyValidate(map_mapImg));
@@ -508,7 +511,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		int posY=map_showHideMapLnk_coor.getY();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,"+(posY-bannderHight)+")");
-		moveMouseToElement(mailOrderFilter); //note: in case running on offline - scroll to this so show/hide map will be visible 
+	//	moveMouseToElement(mailOrderFilter); //note: in case running on offline - scroll to this so show/hide map will be visible 
 		Assert.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
 				pharmacyValidate(map_showHideMapLnk));
 		map_showHideMapLnk.click();
@@ -548,6 +551,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		System.out.println("consumerDetails="+consumerDetails);
 		String actualSegmentId=getSegmentIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
 		Assert.assertTrue("PROBLEM - not getting expected SegmentId for plan '"+planType+"'. "
 				+ "Expected='"+expectedSegmentId+"' | Actual='"+actualSegmentId+"'", 
@@ -574,12 +578,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						+ "Please double check and correct test data", arr.length()>1);
 			for (int i = 0; i < arr.length(); i++) {
 				String actualPlanCategory = arr.getJSONObject(i).getString("planCategory");
+				System.out.println("i="+i+" | actualPlanCategory="+actualPlanCategory+" | looking lookForPlanCategory="+lookForPlanCategory);
 				//note: need to locate the right plan for segmentId validation
 				if (lookForPlanCategory.equals(actualPlanCategory)) {
 					actualSegmentId = arr.getJSONObject(i).getString("segmentId");
 				}
 			}
-			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails", 
+			Assert.assertTrue("PROBLEM - unable to locate segmentId from localStorage.consumerDetails. Please double check planType from input match the actual user data", 
 					actualSegmentId!=null);
 		} catch (JSONException e) {
 			e.printStackTrace();

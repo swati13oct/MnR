@@ -78,25 +78,25 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (numClaims==0) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+noClaimsText+"' text/link. \n"+noteToTester, 
 					claimsValidate(optumRxLnkTxt_noClaims));
-			if (getOnlyTestUiFlag())
-				System.out.println("TEST UI ONLY - will not validate Rx link destination");
-			else {
+			//tbd if (getOnlyTestUiFlag())
+			//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+			//tbd else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_noClaims.click();
-			}
+				//tbd }
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate '"+hasClaimsText+"' text/link. \n"+noteToTester, 
 			claimsValidate(optumRxLnkTxt_hasClaims));
-			if (getOnlyTestUiFlag())
-				System.out.println("TEST UI ONLY - will not validate Rx link destination");
-			else {
+			//tbd if (getOnlyTestUiFlag())
+			//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+			//tbd else {
 				winHandleBefore = driver.getWindowHandle();
 				optumRxLnkTxt_hasClaims.click();
-			}
+				//tbd }
 		}
-		if (getOnlyTestUiFlag())
-			System.out.println("TEST UI ONLY - will not validate Rx link destination");
-		else {
+		//tbd if (getOnlyTestUiFlag())
+		//tbd 	System.out.println("TEST UI ONLY - will not validate Rx link destination");
+		//tbd else {
 			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int afterClicked_numTabs=afterClicked_tabs.size();					
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
@@ -125,17 +125,18 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 			Assert.assertTrue("PROBLEM - unable to go back to claims summary page after validating optumrx.com link.  "
 					+ "Expected to contains '"+expectedTitle+"' | Actual URL='"+actualTitle+"' | "+noteToTester,
 					actualTitle.contains(expectedTitle));
-		}
+			//tbd }
 	}
 
 	/** this method validates claims table */
 	public boolean validateClaimsTableExists(boolean flagZeroUserNow) {
 		if (flagZeroUserNow)
-			System.out.println("WILL fail test if user has no claim table");
+			System.out.println("WILL fail test if user has no claim table with exception if onlyTestUiFlag=true");
 		else 
 			System.out.println("WILL NOT fail test if user has no claim table");
+		//tbd if (!getOnlyTestUiFlag()) 
 		Assert.assertTrue("PROBLEM - should not get System Error message on claim page", 
-				!claimsValidate(systemErrorMsg));
+					!claimsValidate(systemErrorMsg));
 		if (claimsValidate(medicalClaimsTbl))
 			System.out.println("!!! Claims Table is seen on the Claims Summary page!!!");
 		if (claimsValidate(claimsTblMoreInfoLnk))
@@ -342,13 +343,14 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 					String expectCol6="Your Share";
 					Assert.assertTrue("PROBLEM - medical claims table header column6 value not as expected. "
 							+ "Expected='"+expectCol6+"' | Actual='"+actualCol6+"'", 
-							expectCol6.equals(actualCol6));
+							actualCol6.contains(expectCol6));
 				} else {
-					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]")).getText();
+					String actualCol7=driver.findElement(By.xpath("//table[@id='medical']//tr[1]//th[7]/div")).getText();
 					String expectCol7="Your Share";
 					Assert.assertTrue("PROBLEM - medical claims table header column7 value not as expected. "
 							+ "Expected='"+expectCol7+"' | Actual='"+actualCol7+"'", 
-							expectCol7.equals(actualCol7));
+							actualCol7.contains(expectCol7));
+					//expectCol7.equals(actualCol7));
 				}
 			} else {
 				if (claimSystem.contains("NICE")) {
@@ -457,7 +459,33 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 	}
 
 	/** this method validates pagination */
-	public boolean verifyPagination(){
+	public boolean verifyPagination(int numClaims){
+		System.out.println("Proceed to validate pagination for the case when there is '"+numClaims+"' claims...");
+		if (numClaims==0) { //note: if no claims then no pagination
+			return claimsValidate(summPgPagination);
+		} else { //note: more validation if has claims
+			Assert.assertTrue("PROBLEM: Unable to locate pagination element on page for user with claims", claimsValidate(summPgPagination));
+			Assert.assertTrue("PROBLEM: Unable to locate pagination portion '<N> items found. Displaying 1 to <N>' element on page", claimsValidate(itemsFoundDispTxt));
+			
+			boolean result=true;
+			if (numClaims<=10) { //note: if <= 10 items, left and right errors will be disabled
+				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element when user has non-0 claims", claimsValidate(disabled_prevBtn));
+				Assert.assertTrue("PROBLEM: Unable to locate disabled nextLink element when user has non-0 claims", claimsValidate(disabled_nextBtn));
+			} else { //note: more than 10 items, left arrow should be enabled at the beginning
+				Assert.assertTrue("PROBLEM: Unable to locate disabled prevLink element initially when user has claims", claimsValidate(disabled_prevBtn));
+				Assert.assertTrue("PROBLEM: should not be able to locate disabled nextLink element when user has >=10 claims", !claimsValidate(disabled_nextBtn));
+
+				Assert.assertTrue("PROBLEM: Unable to locate prevLink arrow to click for validation", claimsValidate(rtArrowBtn));
+				rtArrowBtn.click();
+
+				Assert.assertTrue("PROBLEM: After clicking right arrow, prevLink element should no longer be disabled", !claimsValidate(disabled_prevBtn));
+
+				Assert.assertTrue("PROBLEM: Unable to locate nextLink arrow to click for validation", claimsValidate(ltArrowBtn));
+				ltArrowBtn.click();
+
+				Assert.assertTrue("PROBLEM: After clicking left arrow, prevLink element should once again be disabled", claimsValidate(disabled_prevBtn));
+			}
+		}
 		return claimsValidate(summPgPagination);
 	}
 
@@ -488,11 +516,13 @@ public class ClaimsSummaryValidateTable extends ClaimsSummaryBase{
 		if (planType.equalsIgnoreCase("SHIP")) {
 			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(e));
 		} else {
-			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(youHave1) || claimsValidate(youHave2));
+			Assert.assertTrue("PROBLEM - Unable to locate the 'You have...' message on page", claimsValidate(youHave1) || claimsValidate(youHave2) || claimsValidate(youHave4));
 			if(claimsValidate(youHave1)) {
 				e=youHave1;
 			} else if (claimsValidate(youHave2)) {
 				e=youHave2;
+			} else if (claimsValidate(youHave4)) {
+				e=youHave4;
 			}
 		}
 		String expText="You have";

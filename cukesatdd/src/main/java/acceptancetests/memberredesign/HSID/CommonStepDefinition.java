@@ -206,4 +206,116 @@ public class CommonStepDefinition {
 		rallyDashboard.validateNeedHelpSection();
 
 	}
+
+@When("^the above plantype user logs in$")
+	public void plantype_user_logs(DataTable memberattributes) throws InterruptedException {
+		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
+		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
+		launchBrowser();
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		LoginPage loginPage = new LoginPage(wd);
+		getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			SecurityQuestionsPage securityQuestionsPage = (SecurityQuestionsPage) loginPage.loginWith(userName, pwd);
+			if (securityQuestionsPage != null) {
+				getLoginScenario().saveBean(PageConstants.SECURITY_QUESTIONS_PAGE, securityQuestionsPage);
+			} else {
+				Assert.fail("securityQuestionsPage is not displayed...");
+			}
+			i_enter_the_security_questions(memberattributes);
+		} else {
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			} else {
+
+				RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.loginWithLegacy(userName, pwd);
+				if (rallyDashboard != null) {
+					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			}
+		}
+	}
+	/***
+	 * 
+	 */
+	public void validateURLNavigation() {
+		category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		System.out.println("Current category: " + category);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Current URL: " + wd.getCurrentUrl());
+		if (category.equalsIgnoreCase("UhcMapdInd"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/medicare/dashboard"));
+		else if (category.equalsIgnoreCase("AARPMapdInd"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
+		else if (category.equalsIgnoreCase("GroupRetireeMapd"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/retiree/dashboard"));
+		else if (category.equalsIgnoreCase("Ship"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
+		else if (category.equalsIgnoreCase("PCP"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/pcp/dashboard"));
+		else if (category.equalsIgnoreCase("Medica"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/medica/dashboard"));
+		else if (category.equalsIgnoreCase("ComboMAPDANDSHIP"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
+		else if (category.equalsIgnoreCase("TerminatedFedAARP"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/aarp/dashboard"));
+		else if (category.equalsIgnoreCase("TerminatedFedUHC"))
+			Assert.assertTrue(wd.getCurrentUrl().contains("/medicare/dashboard"));
+		else {
+			System.out.println("Please specifiy a specific member type ");
+			Assert.fail("Please specifiy a specific member type ");
+		}
+	}
+	/***
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Then("^User should be able to validate Dashboard elemt$")
+	public void user_validate_dashboard_elements() throws InterruptedException {
+	//	category = CommonStepDefinition.getMemberAttributeMap().get("Member Type");
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+
+			testHarness.validateTestHarnessElement(category);
+		} else {
+			RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
+					.getBean(PageConstants.RALLY_DASHBOARD_PAGE);
+			validateURLNavigation();
+			rallyDashboard.validateDashboardElements(category);
+		}
+	}
+	
+	@Then("^member should navigate to Home pag$")
+	public void member_should_navigate_to_home_pag() throws InterruptedException {
+		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
+			LoginPage loginPage = (LoginPage) getLoginScenario().getBean(PageConstants.LOGIN_PAGE);
+			getLoginScenario().saveBean(PageConstants.LOGIN_PAGE, loginPage);
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarness = (TestHarness) loginPage.navigateToHomePage();
+				if (testHarness != null) {
+					getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarness);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			} else {
+
+				RallyDashboardPage rallyDashboard = (RallyDashboardPage) loginPage.navigateToHomePage();
+				if (rallyDashboard != null) {
+					getLoginScenario().saveBean(PageConstants.RALLY_DASHBOARD_PAGE, rallyDashboard);
+				} else {
+					Assert.fail("Login not successful...");
+				}
+			}
+		} else {
+			Assert.assertTrue("Skipping this functionality as already done in previous step!!!", true);
+		}
+	}
 }

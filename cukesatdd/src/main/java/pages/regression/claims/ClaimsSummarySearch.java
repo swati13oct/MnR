@@ -5,10 +5,7 @@ import java.util.Date;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -59,13 +56,13 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
 					claimsValidate(pdp_drug));
 		} else if (planType.contains("MAPD") || planType.contains("MA")
-				||planType.contains("PCP") || planType.contains("MEDICA")){
+				||planType.contains("PCP") || planType.contains("MEDICA") || planType.contains("SSUP")){
 			System.out.println("!!! Validating the drop down to select the claims from last 24 months  !!!");
 			last24months = driver.findElement(By.id("date24MAtdd"));
 			last24months.click();
 			System.out.println("!!! Month Selected from the view claims from drop down is ====>"
 			+(last24months.getText()));
-			if (!planType.contains("MA")) { //note: MA doesn't have selection
+			if (!planType.contains("MA") && !planType.contains("SSUP")) { //note: MA doesn't have selection
 				Assert.assertTrue("PROBLEM - unable to locate 'Medical' for claims type for '"+planType+"' user",
 						claimsValidate(medical));
 			}
@@ -73,9 +70,10 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			if (planType.contains("MAPD") || planType.contains("PCP")) {
 				Assert.assertTrue("PROBLEM - unable to locate 'Prescription Drug' for claims type for '"+planType+"' user",
 						claimsValidate(PrescriptionDrug));
-				System.out.println("!!!Claim type PDP is validated !!!");
+				System.out.println("!!!Claim type PrescriptionDrug option is validated !!!");
 				PrescriptionDrug.click();
-				System.out.println("!!! Claim Type PDP is clicked !!!");
+				waitForClaimPageToLoad();
+				System.out.println("!!! Validated PrescripitonDrug option can be selected !!!");
 				//note: this validation will only work if user also has drug claims, 
 				//note: comment out for now b/c hard to find a user with both type of claims
 				//Assert.assertTrue("PROBLEM - unable to locate Prescription Drug claims table for claims type for '"+planType+"' user",
@@ -84,14 +82,16 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				//Assert.assertTrue("PROBLEM - unable to locate Rx Number in claims table for claims type for '"+planType+"' user",
 				//	claimsValidate(RxNumberinthecalimstable));
 				//System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
-				System.out.println("!!! Claim Type Prescription Drug is Selected !!!");
+				sleepBySec(1); //note: force it to slow down to avoid race condition
 				medical.click();
-				System.out.println("!!! Proceed to switch back to claims type Medical !!!");
+				waitForClaimPageToLoad();
+				System.out.println("!!! Validated Medical option can be selected !!!");
 			}
 			//note: by default if not specified, medical claims will be validated
-			if (claimSystem.toUpperCase().contains("D_")) {
+			if (claimSystem.toUpperCase().contains("D_") || claimSystem.toUpperCase().contains("RX_")) {
 				System.out.println("This test is specific for validating drug claims, select Prescription Drug option instead");
 				PrescriptionDrug.click();
+				waitForClaimPageToLoad();
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate Custom Search option for '"+planType+"' user",
@@ -111,11 +111,13 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 	 */
 	public void searchClaimsByTimePeriodClaimType(String planType,String claimPeriod, String claimType) 
 			throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, pgHeader, 5);
 		//note: MA - Medical; MAPID | PCP - Medical & Prescription drug 
 		//note: PDP - Prescription drug; SHIP - no Medical or Prescription drug
-		checkForIPerceptionModel(driver);
+		//keep checkModelPopup(driver,1);  //note: enable it if have problem with iPerception popup
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
+			//tbd if (!getOnlyTestUiFlag()) 
 			moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);
@@ -145,14 +147,13 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			}
 			System.out.println("!!! Validating the drop down to select the claims from '"+claimPeriod+"'!!!");
 			option.click();
-			System.out.println("!!! Option selected from the view claims from drop down is ====>"
-			+(option.getText()));
+			CommonUtility.checkPageIsReady(driver);
+			System.out.println("!!! Option selected from the view claims from drop down is ====>"+(option.getText()));
 
 			if (planType.equals("MA") || planType.equals("SSUP")) {
 				Assert.assertTrue("PROBLEM - planType='"+planType+"' - unable to locate the medical option",
 						claimsValidate(ma_medicalClaimsTypTxt));
 			}
-
 			System.out.println("!! Claim type Medical is validated!!! ");
 			if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("prescription drug")) {
@@ -160,6 +161,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 						claimsValidate(PrescriptionDrug));
 				System.out.println("!!!Claim type PrescriptionDrug is validated !!!");
 				PrescriptionDrug.click();
+				CommonUtility.checkPageIsReady(driver);
 				System.out.println("!!! Claim Type PrescriptionDrug is clicked !!!");
 			} else if ((planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")) 
 					&& claimType.equalsIgnoreCase("medical")) {
@@ -168,6 +170,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				// note: MAPD has both medical and prescription drug options
 				// for MA case there will be just medical so there won't be a need for click
 				medical.click();
+				CommonUtility.checkPageIsReady(driver);
 			}
 		} else{
 			Assert.assertTrue("PROBLEM: Unable to locate customSearch element",claimsValidate(custSrch));
@@ -175,6 +178,9 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 			+(custSrch.getText()));
 			System.out.println("!!! Validating the drop down to select the claims !!!");
 		}
+		System.out.println("Check to make sure the claimloadingimage disappeared");
+		int sec=waitForClaimPageToLoad();
+		Assert.assertTrue("PROBLEM - waited total of '"+sec+"' seconds and still seeing claimloadingimage at this point, something maybe wrong...", !claimsValidate(claimloadingimage));
 	}
 
 	/**
@@ -230,7 +236,6 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 
 			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", claimsValidate(fromCalendarIconBtn));
 			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", claimsValidate(toCalendarIconBtn));
-
 			System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
 			fromCalendarIconBtn.click();
 			CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);

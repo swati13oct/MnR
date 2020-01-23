@@ -3,16 +3,12 @@
  */
 package atdd.framework;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,35 +18,20 @@ import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.touch.TouchActions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Predicate;
 
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.HideKeyboardStrategy;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.offset.PointOption;
-
 import java.util.regex.Pattern;
 
 /**
@@ -450,7 +431,7 @@ try {
 		js.executeScript("arguments[0].click();", element);
 		System.out.println("Element Clicked");
 	}
-	
+
 	/***
 	 * the method scrolls page upto element's location
 	 * 
@@ -459,6 +440,7 @@ try {
 	 */
 	public boolean scrollToView(WebElement element) {
 		try {
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
@@ -478,8 +460,6 @@ try {
 	 */
 	public void startNew(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")||driver.getClass().toString().toUpperCase().contains("IOS")) {}
-		else
 		driver.manage().window().maximize();
 		driver.get(url);
 	}
@@ -620,14 +600,11 @@ try {
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {
-		Wait wait = new FluentWait(driver)
-				.withTimeout(Duration.ofSeconds(60))
-				.pollingEvery(Duration.ofSeconds(60))
-				.ignoring(Exception.class);
-		
-		wait.until(new Function<WebDriver, WebElement>() {
-			public WebElement apply(WebDriver d) {
-				return (select.getOptions().get(0));
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
+				.pollingEvery(2, TimeUnit.MILLISECONDS);
+		wait.until(new Predicate<WebDriver>() {
+			public boolean apply(WebDriver d) {
+				return (select.getOptions().size() > 1);
 			}
 		});
 	}
@@ -771,182 +748,70 @@ try {
 	 */
 	@FindBy(xpath="//body")
 	protected WebElement timeJson;
-	public String getTestEnvSysTime() {
+	public String getMemTestEnvSysTime() {
 		String timeStr = "";
-		if (MRScenario.environment.equalsIgnoreCase("prod")) { 
-			Date currentTime = new Date();
-			final SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy ");
-			sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-			timeStr=sdf.format(currentTime);
-		} else {
-			String winHandleBefore = driver.getWindowHandle();
-			System.out.println("Proceed to open a new blank tab to check the system time");
-			String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
-			if (MRScenario.environment.contains("team-ci"))
-				urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
-			//open new tab
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-		    js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
-			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
-			}
-			WebElement currentSysTimeElement=timeJson;
-			String currentSysTimeStr=currentSysTimeElement.getText();
-			
-			JSONParser parser = new JSONParser();
-			org.json.simple.JSONObject jsonObj;
-			try {
-				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
-				
-				timeStr = (String) sysTimeJsonObj.get("systemtime"); 
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
-			}
-			driver.close();
-			driver.switchTo().window(winHandleBefore);
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
+		System.out.println("test env URL for getting time: "+urlGetSysTime);
+		if (MRScenario.environment.contains("team-ci"))
+			urlGetSysTime="https://www." + MRScenario.environment + "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/MRRestWAR/rest/time/getSystemTime";
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
 		}
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		System.out.println("currentSysTimeStr="+currentSysTimeStr);
+
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject jsonObj;
+		try {
+			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+
+			timeStr = (String) sysTimeJsonObj.get("systemtime"); 
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
 		return timeStr;
 	}
-	
-	public void mobileswipe(String percentage,boolean swipeup) {
-		AppiumDriver mobiledriver = (AppiumDriver) driver;
-		TouchAction mact = new TouchAction(mobiledriver);
-		Dimension size = mobiledriver.manage().window().getSize();
-	    //Starting y location set to 90% of the height (near bottom)
-	    int starty = (int) (size.height * 0.90);
-	    //Ending y location set to % of the height (near top)
-	    percentage = "0.".concat(percentage.replace("%", ""));
-	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
-	    if(!swipeup)
-	    	endy = endy+(int) (size.height * 0.2); //To avoid address bar position
-	    //x position set to mid-screen horizontally
-	    int startx = (int) size.width / 2;
-	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
-		threadsleep(1000);
-		if(swipeup)
-			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
-		else
-			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
-	}
 
-	public void mobileswipe(String percentage, int count,boolean swipeup) {
-		for (int i = 1; i <= count; i++) {
-			mobileswipe(percentage,swipeup);
+	public String getAcqTestEnvSysTime(String testSiteUrl) {
+		String timeStr = "";
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		System.out.println("test env URL for getting time: "+urlGetSysTime);
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
 		}
-	}
-	
-	@SuppressWarnings("rawtypes")
-	public void hidekeypad() {
+		WebElement currentSysTimeElement=timeJson;
+		String currentSysTimeStr=currentSysTimeElement.getText();
+		System.out.println("currentSysTimeStr="+currentSysTimeStr);
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject jsonObj;
 		try {
-		threadsleep(1000);
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
-			((AndroidDriver)driver).hideKeyboard();
-		else {
-			clickTextIOSNative("Done");
-		}
-		threadsleep(1000);
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println(driver.getCurrentUrl());
-		}
-	}
-	
-	public void getkeypad() {
-		threadsleep(1000);
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
-			((AndroidDriver)driver).getKeyboard();
-		else
-			((IOSDriver)driver).getKeyboard();
-		threadsleep(1000);
-	}
+			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
 
-	public void mobileactiontab(WebElement element) {
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			Actions act = new Actions(driver); // Works only for Android driver
-			act.click(element).perform();
-		}
-		else
-			jsClickNew(element);
-	}
-	
-	public void mobileactionsendkeys(WebElement element,String keys) {
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			Actions act = new Actions(driver); // Works only for Android driver
-			act.click(element).sendKeys(keys).perform();
-		}
-		else {
-			//element.setValue("10001");
-			//((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';", m); 
-			//((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
-			element.click();
-			threadsleep(500);
-			element.click();
-			((AppiumDriver)driver).getKeyboard().sendKeys(keys);
-		}
-	}
-	
-	public void jsSendkeys(MobileElement element,String keys) {
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("arguments[0].value='"+ keys +"';", element);
-	}
-	
-	public void pageloadcomplete() {
-		new WebDriverWait(driver, 30).until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-		System.out.println("Page load completed");
-	}
-
-	public void mobileFindElement(WebElement element,int swipeCount,boolean swipeUp) {
-		try {
-			waitTillElementClickableInTime(element,3);
-			//new Actions(driver).moveToElement(element).perform();
-		}
-		catch(Exception e) {
+			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
+			timeStr=(String) dataObj.get("systemDate"); 
+		} catch (ParseException e) {
 			e.printStackTrace();
-			System.out.println("not visible");
-			if(swipeCount<1)
-				return;
-			mobileswipe("80%",swipeUp);
-			swipeCount--;
-			mobileFindElement(element,swipeCount,swipeUp);
+			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
 		}
-	}
-	
-	public void mobileSelectOption(Select element,String option) {
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			element.selectByVisibleText(option);
-		}
-		else {
-			String curHandle = ((IOSDriver) driver).getContext();
-			System.out.println("curHandle - "+curHandle);
-			System.out.println(((IOSDriver) driver).getContextHandles());
-			((IOSDriver) driver).context("NATIVE_APP");
-			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			threadsleep(500);
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
-			((IOSDriver) driver).context(curHandle);
-			System.out.println("curHandle - "+((IOSDriver) driver).getContext());
-		}
-	}
-
-	public void clickTextIOSNative(String text) {
-		String curHandle = ((IOSDriver) driver).getContext();
-		System.out.println("curHandle - "+curHandle);
-		System.out.println(((IOSDriver) driver).getContextHandles());
-		((IOSDriver) driver).context("NATIVE_APP");
-		((IOSDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
-		threadsleep(500);
-		((IOSDriver) driver).context(curHandle);
-		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
-	}
-	
-	public void threadsleep(int sec) {
-		try {
-			Thread.sleep(sec);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return timeStr;
 	}
 
 }

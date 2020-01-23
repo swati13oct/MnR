@@ -2,7 +2,7 @@
 Feature: 1.10 Member  order materials Page
 
   #----- beginning of VBF scenarios section ------------------   
-  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate
+  @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate @F357514
   Scenario Outline: Verify order materials confirmation page on member site
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -14,7 +14,7 @@ Feature: 1.10 Member  order materials Page
     And user validates ability to submit order for item
       | Plan Type | <planType> |
       | Option    | <option>   |
-    And the user validate order additional material and click to add other order additional material in Order Confirmation Page
+    #And the user validate order additional material and click to add other order additional material in Order Confirmation Page
 
     Examples: 
 	  | planType | memberType       | option              | 
@@ -73,6 +73,7 @@ Feature: 1.10 Member  order materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | User Selection | <userSelection> |
     When user navigates to order plan materials page
       | Plan Type | <planType> |
       | Member Type | <memberType> |
@@ -89,39 +90,39 @@ Feature: 1.10 Member  order materials Page
     
     @Individuala
     Examples: 
-      | TID   | planType | memberType            | segmentId |  
-      | 15287 | MA	     | AARP_Individual_order | 000       |
-      | 15288 | MAPD     | AARP_Individual_order | 000       |
-      | 15292 | PDP      | AARP_Individual_order | 000       |
-      | 15288 | MAPD     | UHC_Individual_order  | 000       |
+      | TID   | userSelection | planType | memberType            | segmentId |  
+      | 15287 | xxxxx         | MA	     | AARP_Individual_order | 000       |
+      | 15288 | xxxxx         | MAPD     | AARP_Individual_order | 000       |
+      | 15292 | xxxxx         | PDP      | AARP_Individual_order | 000       |
+      | 15288 | xxxxx         | MAPD     | UHC_Individual_order  | 000       |
 
     @Individualb
     Examples: 
-      | TID   | planType | memberType            | segmentId |  
-      | 15286 | PCP      | Individual_order      | 000       |
-      | 15285 | MEDICA   | Individual_order      | 000       |
-      | 15293 | SHIP     | MEDSUPP_order         | 000       |
+      | TID   | userSelection | planType | memberType            | segmentId |  
+      | 15286 | xxxxx         | PCP      | Individual_order      | 000       |
+      | 15285 | xxxxx         | MEDICA   | Individual_order      | 000       |
+      | 15293 | xxxxx         | SHIP     | MEDSUPP_order         | 000       |
 
     @GroupMemberOrderSelectionandConfirmation 
     Examples: 
-      | TID   | planType | memberType            | segmentId | 
-      | 15289 | MA       | UHC_Group_order       | 000       |
-      | 15289 | MAPD     | UHC_Group_order       | 000       |
-      | 15290 | PDP      | UHC_Group_order       | 000       |
+      | TID   | userSelection | planType | memberType            | segmentId | 
+      | 15289 | xxxxx         | MA       | UHC_Group_order       | 000       |
+      | 15289 | xxxxx         | MAPD     | UHC_Group_order       | 000       |
+      | 15290 | xxxxx         | PDP      | UHC_Group_order       | 000       |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @ValidateHeaderComboTabs
     Examples: 
-      | TID   | planType | memberType            | segmentId | 
-      | 15281 | MAPD	 | COMBO_order           | 000       |
-      | 15281 | MEDSUPP	 | COMBO_order           | 000       |
-      | 15291 | PDP      | COMBO_order	         | 000       |
-    # | 15291 | SSUP     | COMBO_order	         | 000       |
+      | TID   | userSelection | planType | memberType            | segmentId | 
+      | 15281 | xxxxx         | MAPD	 | COMBO_order           | 000       |
+      | 15281 | xxxxx         | MEDSUPP	 | COMBO_order           | 000       |
+      | 15291 | xxxxx         | PDP      | COMBO_order	         | 000       |
+    # | 15291 | xxxxx         | SSUP     | COMBO_order	         | 000       |
 
     @ValidateSHIPCouponBookErrorMessage
     Examples: 
-      | TID   | planType | memberType                    | segmentId |  
-      | 15293 | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
+      | TID   | userSelection | planType | memberType                    | segmentId |  
+      | 15293 | xxxxx         | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
 
   #####################################################
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
@@ -132,12 +133,13 @@ Feature: 1.10 Member  order materials Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | User Selection | <userSelection> |
     Then user should not see Order Materials Link for terminated member
     Then user validates header navigation is not available for Terminated member
 
     Examples: 
-      | TID   | planType | memberType                  |
-      | 15284 | MAPD     | AARP_Terminatedmember_order |
+      | TID   | userSelection | planType | memberType                  |
+      | 15284 | xxxxx         | MAPD     | AARP_Terminatedmember_order |
     
 
 

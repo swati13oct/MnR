@@ -3,9 +3,9 @@ Feature: 1.06.6 Member Plans and Documents Page Part 6
 
 						# This feature File consist of Scenario 26 to 28.
 	
-	 #Need a Fed Active member with New pre effective plan
+	 #Need a Combo Active member with New pre effective plan
   @PlansAndDocument26 @FedActiveShipPre  @release_june_2019 @PD_Part6_Regression
-  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
+  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for Combo Active member with pre-effective plan
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -28,11 +28,11 @@ Feature: 1.06.6 Member Plans and Documents Page Part 6
 
     Examples: 
       | FID     | planType | memberType          | FirstPlanName          | SecondPlanName                     | ShipPreEffePlan               | CoverageDate               |
-      | F282605 | Combo    | FedActiveNewPreShip | Prescription Drug Plan | Medicare Supplement Insurance Plan | AARP MEDICARE SUPPLEMENT PLAN | Coverage Starts 08/01/2019 |
+      | F282605 | Combo    | ActivePreEffective | Medicare Advantage Prescription Drug Plan | Medicare Supplement Insurance Plan | AARP MEDICARE SUPPLEMENT PLAN | Coverage Starts 08/01/2019 |
 
-  #Need a Fed Terminated member with New pre effective plan
+  #Need a Combo Terminated member with New pre effective plan
   @PlansAndDocument27 @FedTerminatedShipPre  @release_june_2019 @PD_Part6_Regression
-  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for SHIP members
+  Scenario Outline: FID: <FID> -Plan Type: <planType> -Member Type: <memberType> - To validate the forms and resources page for COMBO Terminated member with pre-effective plan
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

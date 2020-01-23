@@ -1,6 +1,8 @@
 package pages.regression.ordermaterials;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +36,7 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 			else
 				idCard=nonship_idCardLinkOrderPage;
 		}
-		Assert.assertTrue("PROBLEM - not getting expected ID card link element with expected URL",validate(idCard));
+		Assert.assertTrue("PROBLEM - not getting expected ID card link element with expected URL",orderValidate(idCard));
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 			System.out.println("For testharness will only validate ID card element exists with expected URL.  UHC user's ID link will get redirect to systest3.");
 			if (!testFor.equalsIgnoreCase("orderPage")) { //note: already order so need to get back to order page to prep for next step
@@ -52,7 +54,7 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		Assert.assertTrue("PROBLEM - not getting expected URL after clicking view ID card link.  Expected URL to contain '"+expected_url+"' | Actual URL='"+driver.getCurrentUrl()+"'",driver.getCurrentUrl().contains(expected_url));
 		System.out.println("Successfully validated expected content for selection section on Order Plan Materials page");
 
-		Assert.assertTrue("PROBLEM - unable to locate the close button on the ID card page",validate(idCardCloseButton));
+		Assert.assertTrue("PROBLEM - unable to locate the close button on the ID card page",orderValidate(idCardCloseButton));
 		idCardCloseButton.click();
 		System.out.println("Attempt to close the ID card view and move onto next step...should be back to dashboard page...");
 		CommonUtility.checkPageIsReady(driver);
@@ -72,16 +74,16 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		CommonUtility.checkPageIsReady(driver);
 		WebElement targetTab=null;
 		if (planType.equalsIgnoreCase("MAPD")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(OPM_comboTab_MAPD));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", orderValidate(OPM_comboTab_MAPD));
 			targetTab=OPM_comboTab_MAPD;
 		} else if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(OPM_comboTab_SHIP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", orderValidate(OPM_comboTab_SHIP));
 			targetTab=OPM_comboTab_SHIP;
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(OPM_comboTab_PDP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", orderValidate(OPM_comboTab_PDP));
 			targetTab=OPM_comboTab_PDP;
 		} else if (planType.equalsIgnoreCase("SSUP")) {
-			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(OPM_comboTab_SSUP));
+			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", orderValidate(OPM_comboTab_SSUP));
 			targetTab=OPM_comboTab_SSUP;
 		} else {
 			Assert.assertTrue("PROBLEM - need to enhance code to cover planType '"+planType+"' for combo testing", false);
@@ -105,22 +107,22 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 			CommonUtility.checkPageIsReady(driver);
 			WebElement targetTab=null;
 			if (planType.equalsIgnoreCase("MAPD")) {
-				if (validate(OPM_comboTab_MAPD))
+				if (orderValidate(OPM_comboTab_MAPD))
 					targetTab=OPM_comboTab_MAPD;
 				else 
 					return;
 			} else if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP")) {
-				if (validate(OPM_comboTab_SHIP))
+				if (orderValidate(OPM_comboTab_SHIP))
 					targetTab=OPM_comboTab_SHIP;
 				else
 					return;
 			} else if (planType.equalsIgnoreCase("PDP")) {
-				if (validate(OPM_comboTab_PDP)) 
+				if (orderValidate(OPM_comboTab_PDP)) 
 					targetTab=OPM_comboTab_PDP;
 				else
 					return;
 			} else if (planType.equalsIgnoreCase("SSUP")) {
-				if (validate(OPM_comboTab_SSUP))
+				if (orderValidate(OPM_comboTab_SSUP))
 					targetTab=OPM_comboTab_SSUP;
 				else
 					return;
@@ -221,21 +223,26 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, 
 			WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
-		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
-		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",validate(imgElement));
-		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",validate(phoneElement));
-		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",validate(ttyElement));
-		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement1));
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",orderValidate(SectionElement));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section",orderValidate(imgElement));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section",orderValidate(phoneElement));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section",orderValidate(ttyElement));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",orderValidate(hrsOperationElement1));
 		if (hrsOperationElement2!=null) {
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",validate(hrsOperationElement2));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section",orderValidate(hrsOperationElement2));
 		}
 	}
 
 	/** Helper method - handle the iPerception PopUp if any */
 	public void takeCareiPerceptionPopUp() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		/* tbd 
 		try{
 			CommonUtility.waitForPageLoad(driver, iPerceptionPopUp, 5);
-			if(validate(iPerceptionPopUp)){
+			if(orderValidate(iPerceptionPopUp)){
 				System.out.println("FeedBack Modal Present");
 				iPerceptionClose.click();
 				if (validate(iPerceptionPopUp)){
@@ -245,7 +252,7 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 			}
 		} catch (Exception e) {
 			System.out.println("FeedBack Modal NOT Present");
-		}
+		} */
 
 	}
 
@@ -262,5 +269,40 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		}
 		return false;
 	}
+	
+	/**
+	 * to validate whether element exists, default up to 2 seconds timeout
+	 * @param element
+	 * @return
+	 */
+	public boolean orderValidate(WebElement element) {
+		long timeoutInSec=0;
+		return orderValidate(element, timeoutInSec);
+	} 
+	
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean orderValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
 
 }
