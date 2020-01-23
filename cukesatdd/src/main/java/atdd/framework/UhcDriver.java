@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +34,14 @@ import com.google.common.base.Predicate;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.offset.PointOption;
+
 import java.util.regex.Pattern;
 
 /**
@@ -602,9 +612,9 @@ try {
 	public void waitUntilSelectOptionsPopulated(final Select select) {
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS)
 				.pollingEvery(2, TimeUnit.MILLISECONDS);
-		wait.until(new Predicate<WebDriver>() {
-			public boolean apply(WebDriver d) {
-				return (select.getOptions().size() > 1);
+		wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver d) {
+				return (select.getOptions().get(0));
 			}
 		});
 	}
