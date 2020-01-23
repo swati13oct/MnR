@@ -10,31 +10,79 @@ Feature: ACQ-DCE-MicroApp - AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-      | Plan Name 			| <planName> |
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Name       | <planName>        |
+    And user access DCE tool on aarp site
       | Plan Type | <plantype> |
-    And I access the DCE tool on aarp site
-      | Plan Type | <plantype> |
-    And I have added a drug to my drug list
-      | Drug | <drug> |
-    And user selects drug details
-      | Drug      | <drug>      |
-      | Dosage    | <dosage>    |
-      | Quantity  | <quantity>  |
-      | Frequency | <frequency> |
-    When user successfully adds drug
-      | Is Branded Drug | <branded> |
-      | Drug            | <drug>    |
-    And I navigate to step2 page
-    And I select the first pharmacy
-    And I navigate to step3 page and validate
-      | Drug | <drug> |
-    Then I switch to generic drug and validate
-    And the user clicks on return link to navigate to plan summary
+      | PlanName  | <planName> |
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+      | PlanName   | <planName>  |
+      | Drug Name1 | <drugName1> |
+    And selects drug details in ums site
+      | Drug Name1 | <drugName1> |
+      | Quantity   | <quantity>  |
+      | Frequency  | <frequency> |
+    When user successfully adds drug in the ums site
+      | Drug Name1 | <drugName1> |
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+      | PlanName   | <planName>  |
+      | Drug Name2 | <drugName2> |
+    And selects drug details for other drugs in ums site
+      | Drug Name2 | <drugName2> |
+      | Quantity   | <quantity>  |
+      | Frequency  | <frequency> |
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+      | PlanName   | <planName>  |
+      | Drug Name3 | <drugName3> |
+    And selects drug details in ums site
+      | Drug Name3 | <drugName3> |
+      | Quantity   | <quantity>  |
+      | Frequency  | <frequency> |
+    When user successfully adds drug in the ums site
+      | Drug Name3 | <drugName3> |
+    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+    #| PlanName       | <planName>      |
+    #| Drug Name4     | <drugName4>     |
+    #And selects drug details for other drugs in ums site
+    #| Drug Name4     | <drugName4>     |
+    #|Quantity|<quantity>|
+    #|Frequency|<frequency>|
+    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
+    #| PlanName       | <planName>      |
+    #| Drug Name5     | <drugName5>     |
+    #And selects drug details for other drugs in ums site
+    #| Drug Name5     | <drugName5>     |
+    #|Quantity|<quantity>|
+    #|Frequency|<frequency>|
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    When the user selects the pharmacy type and distance in AARP site
+      | Pharmacy Type | <pharmacyType> |
+      | Distance      | <distance>     |
+    Then the user selects a pharmacy from the list of pharmacies in AARP site
+      | Pharmacy Name | <pharmacyName> |
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
+      | Drug Name1 | <drugName1> |
+      | Drug Name2 | <drugName2> |
+      | Drug Name3 | <drugName3> |
+    #| Drug Name4     | <drugName4>     |
+    #| Drug Name5     | <drugName5>     |
+    When the user clicks on Edit Drug List link in AARP site
+    Then Enter your drugs page is displayed to the user in AARP site
+    Then User click on Switch now to select the Generic of the Brand drug added in AARP site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    Then the user change the pharmacy type and select new pharmacy in AARP site
+      | New Pharmacy Type | <newPharmacyType> |
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
+      | Drug Name1 | <genericName1> |
+      | Drug Name2 | <drugName2>    |
+      | Drug Name3 | <genricName3>  |
 
+    #| Drug Name4     | <drugName4>     |
+    #| Drug Name5     | <drugName5>     |
     Examples: 
-      | THPage | siteName | zipcode | drug    | dosage   | plantype | county | isMultutiCounty | quantity | frequency     | branded |
-      | dce    | Ulayer   |   90210 | Lipitor | TAB 10MG | MA       | none   | no              |       30 | Every 1 month | yes     |
+      | THPage | siteName | zipcode | isMultutiCounty | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
+      | dce    | Ulayer   |   90002 | NO              | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY      | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | dce    | Ulayer   |   80002 | NO              | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY  | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | dce    | Ulayer   |   80210 | NO              | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @defect3235 @DCE_Regression_Ulayer_VPP1 @prodRegression
   Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare

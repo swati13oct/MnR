@@ -425,9 +425,15 @@ public class DCEAcqStepDefinitionAARP {
 	public void the_user_enters_following_information_in_the_Acquisition_Site_DCE_TestHarness_page(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
-		String MultiCOunty = inputAttributesMap.get("County Name");
+		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String planName = inputAttributesMap.get("Plan Name");
 		DCETestHarnessPage dceTestHarnessPage = (DCETestHarnessPage) loginScenario.getBean(PageConstants.DCE_TESTHARNESS_PAGE);
-
+		dceTestHarnessPage.enterZipandSearch(ZipCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			dceTestHarnessPage.SelectCounty(CountyName);
+		}
+		dceTestHarnessPage.selectPlan(planName);
+		
 	}
 }
