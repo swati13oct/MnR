@@ -824,6 +824,11 @@ try {
 		return timeStr;
 	}
 
+	public void startNewMobile(String url) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.get(url);
+	}
+	
 	public void mobileswipe(String percentage,boolean swipeup) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);

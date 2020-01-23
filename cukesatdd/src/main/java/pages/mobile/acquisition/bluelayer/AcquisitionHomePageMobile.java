@@ -29,17 +29,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
-			startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
 			checkModelPopup(driver,45);
 		}else if (MRScenario.environment.equals("prod")) {
-			startNew(UMS_ACQISITION_PROD_PAGE_URL);
+			startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver,45);
 		} else if(MRScenario.environment.equals("local")){
-			startNew(Local_AARP_URL);
+			startNewMobile(Local_AARP_URL);
 		} else if(MRScenario.environmentName.equals("TEAMDIGITAL_AARP_URL")){
-			startNew(DIGITAL_AARP_URL);
+			startNewMobile(DIGITAL_AARP_URL);
 		} else if(MRScenario.environmentName.equals("TEAMDIGITAL_UHC_URL")){
-			startNew(DIGITAL_UHC_URL);
+			startNewMobile(DIGITAL_UHC_URL);
 		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkModelPopup(driver,10);
