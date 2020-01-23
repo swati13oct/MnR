@@ -29,9 +29,9 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@preeffective_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 01-096    | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | false   | true   | true   | 
-      | 02-097    | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true   | false    | false   | true   | true   | false   | true   | true   |
-      | 03-098    | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | true    | true   | true   | 
+      | 01-096 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | false   | true   | true   | 
+      | 02-097 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true   | false    | false   | true   | true   | false   | true   | true   |
+      | 03-098 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | true    | true   | true   | 
 
 	@preeffective_pdp
 	Examples: 
@@ -42,7 +42,7 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	@terminated_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 06-103 | xxxxx       | MA       | IND_TERM_PDnR         | true   | false    | true    | true   | true  | false    | true   | true   |
+      | 06-103 | xxxxx       | MA       | IND_TERM_PDnR         | true   | false    | true    | true   | true   | false   | true   | true   |
       | 07-102 | xxxxx       | MA       | GROUP_TERM_PDnR       | true   | false    | false   | true   | true   | false   | true   | true   |
       | 07-101 | xxxxx       | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
 

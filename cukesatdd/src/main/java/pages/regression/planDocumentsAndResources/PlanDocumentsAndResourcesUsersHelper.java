@@ -2024,16 +2024,18 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Benefit Highlights");
-				//targetTestDocList.add("Summary of Benefits");
-				//targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("Benefit Highlights");
+				targetTestDocList.add("Summary of Benefits");
+				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("UnitedHealth Passport Program");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Beneficios Importantes");
-				//targetTestDocList.add("Resumen de Beneficios");
-				//targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Beneficios Importantes");
+				targetTestDocList.add("Resumen de Beneficios");
+				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Programa UnitedHealth Passport");
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
@@ -2130,11 +2132,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
-				targetTestDocList.add("How to appoint a representative"); //note: copy deck said it should be this but UI has Medical Reimbursement Form (PDF)
+				targetTestDocList.add("How to appoint a representative"); 
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;

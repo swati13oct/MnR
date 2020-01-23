@@ -29,7 +29,6 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@preeffective_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-	  ## BAD 01 03 - provider directory missing
       | 01-077 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
       | 02-078 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
       | 03-079 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
@@ -44,7 +43,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 06-082 | xxxxx       | MA       | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
-      | 07-083 | xxxxx       | MA       | GROUP_TERM_PDnR       | false  | false | false | false    | false     | false    | false    | false    | false    |
+      | 07-083 | xxxxx       | MA       | GROUP_TERM_PDnR       | false | false | false | false    | false     | false    | false    | false    | false    |
       | 08-084 | xxxxx       | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 
 
