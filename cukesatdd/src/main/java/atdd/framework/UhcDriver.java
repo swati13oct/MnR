@@ -814,4 +814,143 @@ try {
 		return timeStr;
 	}
 
+	public void mobileswipe(String percentage,boolean swipeup) {
+		AppiumDriver mobiledriver = (AppiumDriver) driver;
+		TouchAction mact = new TouchAction(mobiledriver);
+		Dimension size = mobiledriver.manage().window().getSize();
+	    //Starting y location set to 90% of the height (near bottom)
+	    int starty = (int) (size.height * 0.90);
+	    //Ending y location set to % of the height (near top)
+	    percentage = "0.".concat(percentage.replace("%", ""));
+	    int endy = (int) (size.height * Float.valueOf(1-Float.valueOf(percentage)));
+	    if(!swipeup)
+	    	endy = endy+(int) (size.height * 0.2); //To avoid address bar position
+	    //x position set to mid-screen horizontally
+	    int startx = (int) size.width / 2;
+	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
+		threadsleep(1000);
+		if(swipeup)
+			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
+		else
+			mact.longPress(PointOption.point(startx, endy)).moveTo(PointOption.point(startx, starty)).release().perform();
+	}
+
+	public void mobileswipe(String percentage, int count,boolean swipeup) {
+		for (int i = 1; i <= count; i++) {
+			mobileswipe(percentage,swipeup);
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public void hidekeypad() {
+		try {
+		threadsleep(1000);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
+			((AndroidDriver)driver).hideKeyboard();
+		else {
+			clickTextIOSNative("Done");
+		}
+		threadsleep(1000);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(driver.getCurrentUrl());
+		}
+	}
+	
+	public void getkeypad() {
+		threadsleep(1000);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
+			((AndroidDriver)driver).getKeyboard();
+		else
+			((IOSDriver)driver).getKeyboard();
+		threadsleep(1000);
+	}
+
+	public void mobileactiontab(WebElement element) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Actions act = new Actions(driver); // Works only for Android driver
+			act.click(element).perform();
+		}
+		else
+			jsClickNew(element);
+	}
+	
+	public void mobileactionsendkeys(WebElement element,String keys) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Actions act = new Actions(driver); // Works only for Android driver
+			act.click(element).sendKeys(keys).perform();
+		}
+		else {
+			//element.setValue("10001");
+			//((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';", m); 
+			//((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.click();
+			threadsleep(500);
+			element.click();
+			((AppiumDriver)driver).getKeyboard().sendKeys(keys);
+		}
+	}
+	
+	public void jsSendkeys(MobileElement element,String keys) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("arguments[0].value='"+ keys +"';", element);
+	}
+	
+	public void pageloadcomplete() {
+		new WebDriverWait(driver, 30).until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+		System.out.println("Page load completed");
+	}
+
+	public void mobileFindElement(WebElement element,int swipeCount,boolean swipeUp) {
+		try {
+			waitTillElementClickableInTime(element,3);
+			//new Actions(driver).moveToElement(element).perform();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("not visible");
+			if(swipeCount<1)
+				return;
+			mobileswipe("80%",swipeUp);
+			swipeCount--;
+			mobileFindElement(element,swipeCount,swipeUp);
+		}
+	}
+	
+	public void mobileSelectOption(Select element,String option) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			element.selectByVisibleText(option);
+		}
+		else {
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - "+curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
+			((IOSDriver) driver).context("NATIVE_APP");
+			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			threadsleep(500);
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+			((IOSDriver) driver).context(curHandle);
+			System.out.println("curHandle - "+((IOSDriver) driver).getContext());
+		}
+	}
+
+	public void clickTextIOSNative(String text) {
+		String curHandle = ((IOSDriver) driver).getContext();
+		System.out.println("curHandle - "+curHandle);
+		System.out.println(((IOSDriver) driver).getContextHandles());
+		((IOSDriver) driver).context("NATIVE_APP");
+		((IOSDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
+		threadsleep(500);
+		((IOSDriver) driver).context(curHandle);
+		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
+	}
+	
+	public void threadsleep(int sec) {
+		try {
+			Thread.sleep(sec);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
