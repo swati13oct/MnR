@@ -1,8 +1,8 @@
 @acq_DCE_MicroApp_AARP
 Feature: ACQ-DCE-MicroApp - AARP
 
-  @switchNowStep3 @dceVBF @DCE_MicroApp_Regression_Ulayer @prodRegression
-  Scenario Outline: To test the DCE flow from vpp and the switch now option in step 3
+  @DCE_MicroApp_Regression_TestHarness
+  Scenario Outline: To test the DCE flow from TestHarness and the switch now option in step 3
     Given the user is on the Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
