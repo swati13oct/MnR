@@ -422,7 +422,12 @@ public class DCEAcqStepDefinitionAARP {
 	}
 	
 	@When("^the user enters following information in the Acquisition Site DCE TestHarness page$")
-	public void the_user_enters_following_information_in_the_Acquisition_Site_DCE_TestHarness_page(DataTable arg1) throws Throwable {
+	public void the_user_enters_following_information_in_the_Acquisition_Site_DCE_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String MultiCOunty = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		DCETestHarnessPage dceTestHarnessPage = (DCETestHarnessPage) loginScenario.getBean(PageConstants.DCE_TESTHARNESS_PAGE);
 
 	}
 }

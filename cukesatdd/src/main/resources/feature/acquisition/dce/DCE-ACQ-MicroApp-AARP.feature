@@ -10,6 +10,7 @@ Feature: ACQ-DCE-MicroApp - AARP
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+      | Plan Name 			| <planName> |
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     And I access the DCE tool on aarp site
