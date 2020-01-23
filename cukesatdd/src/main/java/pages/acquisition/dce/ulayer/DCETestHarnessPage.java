@@ -14,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 public class DCETestHarnessPage extends UhcDriver{
 	
 	private PageData switchgeneric;
@@ -59,21 +60,35 @@ public class DCETestHarnessPage extends UhcDriver{
 	}
 
 
-	public void enterZipandSearch(String zipCode2) {
-		// TODO Auto-generated method stub
-		
+	public void enterZipandSearch(String ZIP) {
+		ZipCode.sendKeys(ZIP);
+		jsClickNew(ZipSearch);
 	}
 
 
 	public void SelectCounty(String countyName) {
-		// TODO Auto-generated method stub
+		validateNew(CountyDropDown);		
+		jsClickNew(CountyDropDown);
+		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '"+countyName+"')]"));
+		CountySelection.click();
 		
 	}
 
 
 	public void selectPlan(String planName) {
-		// TODO Auto-generated method stub
-		
+		validateNew(PlanDropDown);		
+		jsClickNew(PlanDropDown);
+		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '"+planName+"')]"));
+		CountySelection.click();	
+	}
+
+
+	public DrugCostEstimatorPage StartDCE() {
+	
+		validateNew(DCEbutton_StartDCE);
+		jsClickNew(DCEbutton_StartDCE);
+
+		return new DrugCostEstimatorPage(driver);
 	}
 	
 

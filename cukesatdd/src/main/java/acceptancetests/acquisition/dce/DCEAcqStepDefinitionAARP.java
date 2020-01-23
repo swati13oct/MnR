@@ -434,6 +434,9 @@ public class DCEAcqStepDefinitionAARP {
 			dceTestHarnessPage.SelectCounty(CountyName);
 		}
 		dceTestHarnessPage.selectPlan(planName);
-		
+		DrugCostEstimatorPage dce = dceTestHarnessPage.StartDCE();
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 }
