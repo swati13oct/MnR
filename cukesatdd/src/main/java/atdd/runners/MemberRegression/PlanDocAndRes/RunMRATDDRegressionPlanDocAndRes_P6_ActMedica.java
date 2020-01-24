@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_ActPcpMedica.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_ActPcpMedica")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_ActMedica.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_ActMedica")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_ActPcpMedica.json" }, tags = { "@planAndDocuments06","@active_pcp_medica" })
-public class RunMRATDDRegressionPlanDocAndRes_P6_ActPcpMedica {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_ActMedica.json" }, tags = { "@planAndDocuments06","@active_medica" })
+public class RunMRATDDRegressionPlanDocAndRes_P6_ActMedica {
 }

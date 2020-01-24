@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_PreeffMaMapd.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_PreeffMaMapd")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMapd.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_TermMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_PreeffMaMapd.json" }, tags = { "@planAndDocuments06","@preeffective_ma_mapd" })
-public class RunMRATDDRegressionPlanDocAndRes_P6_PreeffMaMapd {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMapd.json" }, tags = { "@planAndDocuments06","@terminated_mapd" })
+public class RunMRATDDRegressionPlanDocAndRes_P6_TermMapd {
 }
