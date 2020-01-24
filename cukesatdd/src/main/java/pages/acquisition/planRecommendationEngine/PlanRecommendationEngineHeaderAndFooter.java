@@ -4,6 +4,7 @@
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -515,15 +516,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		String curURL = driver.getCurrentUrl();
 		if (curURL.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
-			AARPlogoInHeader.click();
 			//another window - only aarp
-			navigatesubLink(footerVisitAARPOrgLink.getAttribute("href"));
+			footerVisitAARPOrgLink.click();
+			validateLinks("/health/medicare-insurance/?intcmp");
 			try {
 				Thread.sleep(3000); //Page browserback
 			}catch(Exception e) {
-				
 			}
-			validateLinks("/health/medicare-insurance/?intcmp");
 			browserBack();
 		} else if (curURL.contains("uhcmedicare")) {
 			validate(UHClogoInHeader, 30);
@@ -712,6 +711,30 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 	public void navigatesubLink(String subURL) {
 		driver.navigate().to(subURL);
+	}
+	
+	public void validateLinksanotherWindow(String expURL, String primaryWindow) {
+		threadsleep(2000);
+		Set<String> windows = driver.getWindowHandles();
+		System.out.println(windows);
+		if (windows.size() >= 2) {
+			for (String window : windows) {
+				if (!window.equals(primaryWindow)) {
+					driver.switchTo().window(window);
+					System.out.println(driver.getCurrentUrl());
+					validateLinks(expURL);
+					driver.close();
+				}else
+					driver.close();
+				System.out.println(driver.getCurrentUrl());
+				threadsleep(1000);
+			}
+		}else {
+				System.out.println("Link validation fails in popup window" + expURL);
+				driver.switchTo().window(primaryWindow);
+				threadsleep(1000);
+				Assert.assertTrue(false);
+			}
 	}
 
 	public void browserBack() {

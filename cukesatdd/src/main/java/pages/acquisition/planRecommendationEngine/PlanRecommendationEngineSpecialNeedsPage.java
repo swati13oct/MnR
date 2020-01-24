@@ -46,7 +46,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(css = "div>fieldset>legend.primary-question-tex")
+	@FindBy(css = "uhc-checkbox-group>fieldset>legend>span:nth-child(2)")
 	private WebElement coverageTitle;
 	
 	@FindBy(css = "div>fieldset>legend.primary-question-tex>sup")
