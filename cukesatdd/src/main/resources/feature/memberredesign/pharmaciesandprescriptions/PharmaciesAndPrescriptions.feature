@@ -119,7 +119,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | 313410 | MAPD     | Terminated_PnP | no         |
       | 313410 | PDP      | PreEff_PnP     | no         |
       | 313410 | MA       | Individual_PnP | no         |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP| no        |
       
    @ship @devRegression
    Examples: 
@@ -184,7 +183,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | planType | memberType          | expectLink | username   | password   | MemUserName  | 
 	  | 313410 | PDP      | Individual_PnP	    | yes        | myUsername | myPassword | testUsername |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        | myUsername | myPassword | testUsername |
 
     @forLocalTestOnly01_pharmaciesandprescriptions01c
     Examples: 
