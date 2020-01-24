@@ -45,7 +45,7 @@ public class SavingsOppurtunity extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		
-		openAndValidate();
+		//openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
@@ -59,7 +59,8 @@ public class SavingsOppurtunity extends UhcDriver{
 	
 	public DrugCostEstimatorPage savedrugbutton() throws InterruptedException {
 		validateNew(savedrugbutton);
-		savedrugbutton.click();
+		jsClickNew(savedrugbutton);
+		//savedrugbutton.click();
 		return new DrugCostEstimatorPage(driver);
 	}
 	
