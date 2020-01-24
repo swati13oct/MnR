@@ -80,6 +80,10 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		anoc.validateSectionHeader_ANOC(sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
 	}
 
+	public void validateSectionHeader_ANOC_sanity(boolean sectionDisplay)  {
+		anoc.validateSectionHeader_ANOC_sanity(sectionDisplay);
+	}
+
 	public void validateDefaultLangSelect_ANOC(boolean sectionDisplay)  {
 		anoc.validateDefaultLangSelect_ANOC(sectionDisplay);
 	}
@@ -90,6 +94,10 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 
 	public void validateSectionHeader_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay, HashMap<String, Boolean> expectedDocTypeDisplayMap, HashMap<String, String> yearsMap) {
 		providerDirectories.validateSectionHeader_PD(testInputInfoMap, sectionDisplay, expectedDocTypeDisplayMap, yearsMap);
+	}
+	
+	public void validateSectionHeader_PD_sanity(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		providerDirectories.validateSectionHeader_PD_sanity(testInputInfoMap, sectionDisplay);
 	}	
 
 	public List<String> valiateProviderSearch_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay)  {

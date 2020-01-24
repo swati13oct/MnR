@@ -55,6 +55,31 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 	}
 
 	/**
+	 * Validate header section for Provider and Pharmacy Directories
+	 * @param sectionDisplay
+	 * @param expectedDocTypeDisplayMap
+	 * @param yearsMap
+	 */
+	public void validateSectionHeader_PD_sanity(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {
+		String section="Provider and Pharmacy Directories";
+		if (testInputInfoMap.get("planType").equals("MA")) 
+			section="Provider Directory";
+		else if (testInputInfoMap.get("planType").equals("PDP")) 
+			section="Pharmacy Directory";
+		WebElement headerElement=sectionHeader_PD;
+
+		if (sectionDisplay) {
+			Assert.assertTrue("PROBLEM - unable to locate page section header text element", planDocValidate(headerElement));
+			String actualHeaderText=headerElement.getText();
+			String expectedHeaderText=section;
+			Assert.assertTrue("PROBLEM - not getting expected section header text for section '"+section+"'.  Expected='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'", actualHeaderText.equals(expectedHeaderText));
+
+		} else {
+			Assert.assertTrue("PROBLEM - should not locate page section header text element", !planDocValidate(headerElement));
+		}
+	}
+	
+	/**
 	 * Validate default language selection for Provider and Pharmacy Directories section
 	 */
 	public void validateDefaultLangSelect_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay) {

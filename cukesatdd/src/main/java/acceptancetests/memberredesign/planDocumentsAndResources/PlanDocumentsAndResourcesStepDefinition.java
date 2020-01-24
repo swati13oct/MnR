@@ -353,6 +353,46 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validates section Plan Materials$")
+	public void validateSection_PM_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Plan Materials";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_PM(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_PM(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PM(testInputInfoMap, sectionDisplay);
+		sectionNote.add("PASSED - Default language dropdown validation");
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+	}
+
 
 
 	@SuppressWarnings("unchecked")
@@ -496,6 +536,45 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validates section Membership Materials or Welcome Guide$")
+	public void validateSection_MM_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Membership Materials";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_MM(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_MM(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_MM(sectionDisplay);
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -751,7 +830,46 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validates section Annual Notice of Changes Documents$")
+	public void validateSection_ANOC_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Annual Notice of Changes Documents";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
 
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_ANOC(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_ANOC_sanity(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_ANOC(sectionDisplay);
+		sectionNote.add("PASSED - Default language dropdown validation");
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Then("^user validates jumplink and listing of mandatory documents for section Provider Directory or Pharmacy Directory or Provider and Pharmacy Directories$")
 	public void validateSection_PD(DataTable memberAttributes) {
@@ -1018,6 +1136,52 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 		Assert.assertTrue("PROBLEM - "+problemText, finalCheck);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validates section Provider Directory or Pharmacy Directory or Provider and Pharmacy Directories$")
+	public void validateSection_PD_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType = (String) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE);
+		String section="Provider and Pharmacy Directories";
+		if (planType.equals("MA")) 
+			section="Provider Directory";
+		else if (planType.equals("PDP")) 
+			section="Pharmacy Directory";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_PD_sanity(testInputInfoMap, sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+
+		//note: validate default language selection
+		planDocumentsAndResourcesPage.validateDefaultLangSelect_PD(testInputInfoMap, sectionDisplay);
+		sectionNote.add("PASSED - Default language dropdown validation");
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+
+	}
 
 
 	@SuppressWarnings("unchecked")
@@ -1050,6 +1214,34 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		//note: validate button and destination url
 		planDocumentsAndResourcesPage.valiateSearchDocuments_MD(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - button and destination url validation");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validate My Documents section$")
+	public void validateSection_MD_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="My Documents";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+		//note: validate jumplink
+
+		testInputInfoMap.put("section", section);
+
+		planDocumentsAndResourcesPage.validateJumplink_MD(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_MD(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1093,6 +1285,41 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		//note: validate button for drug
 		planDocumentsAndResourcesPage.valiateDrugLnk_EOB(testInputInfoMap, searchDrugEobHsitoryDisplay);
 		sectionNote.add("PASSED - Search Drug EOB button validation");
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validate Explanation of Benefits section$")
+	public void validateSection_EOB_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Explanation of Benefits (EOB)";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+		//note: validate jumplink
+
+		testInputInfoMap.put("section", section);
+
+		planDocumentsAndResourcesPage.validateJumplink_EOB(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_EOB(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
 		if (noteList==null)
 			noteList=new ArrayList<String>();
@@ -1299,6 +1526,41 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		noteList.addAll(sectionNote);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validate Forms and Resources section$")
+	public void validateSection_FnR_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Forms And Resources";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_FnR(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+	}
+
 
 	@SuppressWarnings("unchecked")
 	@Then("^user validate Renew Magazine section$")
@@ -1333,6 +1595,40 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		sectionNote.add("PASSED - Current Issue validation");
 		planDocumentsAndResourcesPage.valiatePreviousIssue_RM(testInputInfoMap, sectionDisplay);
 		sectionNote.add("PASSED - Previous Issue validation");
+
+		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
+		if (noteList==null)
+			noteList=new ArrayList<String>();
+		noteList.addAll(sectionNote);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^user sanity validate Renew Magazine section$")
+	public void validateSection_RM_sanity(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String section="Renew Magazine";
+		List<String> sectionNote=new ArrayList<String>();
+		sectionNote.add("\n===============================================================================");
+		sectionNote.add("Validation result for section='"+section+"'");
+
+		//--------------
+		boolean sectionDisplay=Boolean.valueOf(memberAttributesMap.get("Section Display"));
+
+		//--------------
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		//note: first go back to top of the page
+		planDocumentsAndResourcesPage.backToTopOfPage();
+		testInputInfoMap.put("section", section);
+
+		//note: validate jumplink
+		planDocumentsAndResourcesPage.validateJumplink_RM(sectionDisplay);
+		sectionNote.add("PASSED - jumplink validation");
+
+		//note: validate section header
+		planDocumentsAndResourcesPage.validateSectionHeader_RM(sectionDisplay);
+		sectionNote.add("PASSED - section header validation");
 
 		List<String> noteList=(List<String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE);
 		if (noteList==null)

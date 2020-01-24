@@ -49,6 +49,27 @@ public class PlanDocumentsAndResourcesANOC extends PlanDocumentsAndResourcesBase
 	}
 	
 	/**
+	 * Validate header section for Annual Notice of Changes Documents
+	 * @param sectionDisplay
+	 * @param expectedDocTypeDisplayMap
+	 * @param yearsMap
+	 */
+	public void validateSectionHeader_ANOC_sanity(boolean sectionDisplay) {
+		String section="Annual Notice of Changes Documents";
+		WebElement headerElement=sectionHeader_ANOC;
+
+		if (sectionDisplay) {
+			Assert.assertTrue("PROBLEM - unable to locate page section header text element", planDocValidate(headerElement));
+			String actualHeaderText=headerElement.getText();
+			String expectedHeaderText=section;
+			Assert.assertTrue("PROBLEM - not getting expected section header text for section '"+section+"'.  Expected='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'", actualHeaderText.equals(expectedHeaderText));
+			
+		} else {
+			Assert.assertTrue("PROBLEM - should not locate page section header text element", !planDocValidate(headerElement));
+		}
+	}
+	
+	/**
 	 * Validate jumplink for Annual Notice of Changes Documents
 	 * @param sectionDisplay
 	 */
