@@ -505,6 +505,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //	Footer Element Click Verification Method
 	
 	public void footerLinkvalidation() throws Exception{
+		String curWindow;
 		if (driver.getCurrentUrl().contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
 			AARPlogoInHeader.click();
@@ -516,19 +517,14 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		String curURL = driver.getCurrentUrl();
 		if (curURL.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
+			curWindow = driver.getWindowHandle();
 			//another window - only aarp
 			footerVisitAARPOrgLink.click();
-			validateLinks("/health/medicare-insurance/?intcmp");
-			try {
-				Thread.sleep(3000); //Page browserback
-			}catch(Exception e) {
-			}
-			browserBack();
+			validateLinksanotherWindow("/health/medicare-insurance/?intcmp",curWindow);
 		} else if (curURL.contains("uhcmedicare")) {
 			validate(UHClogoInHeader, 30);
 			UHClogoInHeader.click();
 		}
-		
 		footerMedicareAdvantagePlansLink.click();
 		validateLinks("/health-plans/shop/medicare-advantage-plans");
 		browserBack();
@@ -550,6 +546,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		}else if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 			validateLinks("uhcmedicaresolutions");
 		}
+		navigationToPlanRecommendationEngine();
 		footerAboutUsLink.click();
 		validateLinks("/about-us.html");
 		browserBack();
@@ -688,8 +685,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		}
 		else if(curURL.contains(expURL)) {
 			System.out.println("Link validation True");
-		}
-		else {
+		}else {
 			System.out.println("Link validation False");
 			System.out.println("Expected URL "+expURL);
 			System.out.println("Actual URL "+curURL);
@@ -715,26 +711,21 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 	public void validateLinksanotherWindow(String expURL, String primaryWindow) {
 		threadsleep(2000);
-		Set<String> windows = driver.getWindowHandles();
+		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() >= 2) {
-			for (String window : windows) {
-				if (!window.equals(primaryWindow)) {
-					driver.switchTo().window(window);
-					System.out.println(driver.getCurrentUrl());
-					validateLinks(expURL);
-					driver.close();
-				}else
-					driver.close();
-				System.out.println(driver.getCurrentUrl());
-				threadsleep(1000);
+			driver.switchTo().window(windows.get(2)); 	
+			System.out.println(driver.getCurrentUrl());
+			validateLinks(expURL);
+			driver.close();
+			driver.switchTo().window(windows.get(0));
 			}
-		}else {
-				System.out.println("Link validation fails in popup window" + expURL);
-				driver.switchTo().window(primaryWindow);
-				threadsleep(1000);
-				Assert.assertTrue(false);
-			}
+		else {
+			System.out.println("Link validation fails in popup window" + expURL);
+			driver.switchTo().window(primaryWindow);
+			threadsleep(1000);
+			Assert.assertTrue(false);
+		}
 	}
 
 	public void browserBack() {

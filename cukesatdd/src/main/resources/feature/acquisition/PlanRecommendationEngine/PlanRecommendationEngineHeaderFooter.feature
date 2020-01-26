@@ -5,14 +5,25 @@ Feature: plan Recommendation Engie flow - Verify header and footer page in plan 
   Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-shop-->Get Help Choosing in Tools 
   Given the user is on UHC medicare acquisition site landing page
   When user navigate Plan Recommendation Engine Using Get Help Choosing in Tools
-  Then user validates all Links from header and footer desktop
   
-  @PRE @planrecommandonation @headerfooter @regression
+  @PRE @planrecommandonation @headervalidation @regression
+  Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
+    Given the user is on UHC medicare acquisition site landing page
+    When user validate elements on landing page of Plan Recommendation Engine
+    Then user validate Header elements and Link Validation of Plan Recommendation Engine
+      
+@PRE @planrecommandonation @footervalidation @regression
+  Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
+    Given the user is on UHC medicare acquisition site landing page
+    When user validate elements on landing page of Plan Recommendation Engine
+    Then user validate Footer elements and Link Validation of Plan Recommendation Engine
+
+      
+  @PRE @planrecommandonation @headerfooterfunctionality @regression
   Scenario Outline: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
     Given the user is on UHC medicare acquisition site landing page
     When user validate elements on landing page of Plan Recommendation Engine
-    Then user validate Header and Footer elements of Plan Recommendation Engine
-    And user validate Header and Footer Functionality of Plan Recommendation Engine
+    Then user validate Header and Footer Functionality of Plan Recommendation Engine
     | Zip Code        | <Zipcode>    |
     | EMail           | <EMail>      |
     | Search Key      | <SearchKey>  |		   

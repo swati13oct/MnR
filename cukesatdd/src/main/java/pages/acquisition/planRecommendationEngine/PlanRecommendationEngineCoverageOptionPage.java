@@ -170,7 +170,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		public void coverageOptionpageerror() {
 			System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
 			continueBtn.click();
-			Assert.assertTrue(errorMessage.getText().contains("Please"));
+			Assert.assertTrue(errorMessage.getText().contains("No"));
 		}
 
 	public void browserBack() {

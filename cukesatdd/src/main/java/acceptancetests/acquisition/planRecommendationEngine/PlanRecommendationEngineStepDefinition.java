@@ -213,13 +213,19 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorhomepage.landingpage();
 }
 	
-	@Then("^user validate Header and Footer elements of Plan Recommendation Engine$")
-	public void user_check_header_footer_Plan_Selector_tool() {
+	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
+	public void user_check_header_Plan_Selector_tool() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.headerElements();
+		headerAndFooter.headerLinkvalidation();
+	}
+	@Then("^user validate Footer elements and Link Validation of Plan Recommendation Engine$")
+	public void user_check_header_footer_Plan_Selector_tool() throws Exception {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.footerElements();
-}
-	@And("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
+		headerAndFooter.footerLinkvalidation();
+	}
+	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
 		String actualpageurl = wd.getCurrentUrl();
 		readfeaturedata(givenAttributes);
@@ -239,13 +245,6 @@ public class PlanRecommendationEngineStepDefinition {
 			Thread.sleep(5000);	
 		}
 		headerAndFooter.backtoTopFunction();
-	}
-	
-	@Then("^user validates all Links from header and footer desktop$")
-	public void user_check_header_Footer_link_validation_mobile() throws Exception {
-		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.headerLinkvalidation();
-		headerAndFooter.footerLinkvalidation();
 	}
 	
 	@And("^clicks on get started button and check error scenarios$")
