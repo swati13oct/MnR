@@ -22,6 +22,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
@@ -350,6 +351,57 @@ public class PlanRecommendationEngineStepDefinition {
 		String status = "Negative";
 		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"),status);	
 	}
+	
+	@And("^user validate elements in doctors page$")
+    public void elements_doctor_page() {
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
+                    PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+                    headerAndFooter.breadCrumbs();
+                    planSelectorDoctorspage.doctorspage();
+                    
+    }
+    
+    @And("^user selects doctors in doctors page$")
+    public void select_plan_type_doctor_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
+                    String doctor = inputValues.get("Doctors");
+                    if (!(doctor.isEmpty())) {
+                                    planSelectorDoctorspage.doctorspageFunctional(doctor);
+                    }
+    }
+    
+    @And("^user not selects doctors in doctors page$")
+    public void notselect_doctor_type_doctor_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
+                    String plantype = inputValues.get("Doctors");
+                    if (plantype.isEmpty()) {
+                                    planSelectorDoctorspage.doctorspageerror();
+                    }
+    }
+    
+    @And("^user select doctors and continous the page back from Doctors to previous page$")
+    public void previous_doctors_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
+                    planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors"));
+    }
+    
+    @And("^user select doctors and Click previous button from Doctors to check previous page$")
+    public void previous_travel_page(DataTable givenAttributes) {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
+                    planSelectorDoctorspage.doctorspagePreviousButton(inputValues.get("Doctors"));
+    }
+    
+    @And("^user validating error scenario in doctors Page")
+    public void error_doctor_page(DataTable givenAttributes) {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage(wd);
+                    String status = "Negative";
+                    planSelectorTravelpage.travelpage(inputValues.get("Doctors"),status);                
+    }
 	
 	
 
