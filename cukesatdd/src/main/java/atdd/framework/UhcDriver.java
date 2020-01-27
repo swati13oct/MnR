@@ -965,7 +965,7 @@ try {
 		System.out.println("curHandle - "+curHandle);
 		System.out.println(((AndroidDriver) driver).getContextHandles());
 		((AndroidDriver) driver).context("NATIVE_APP");
-		((AndroidDriver) driver).findElement(MobileBy.name(text)).click();
+		((AndroidDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
 		threadsleep(500);
 		((AndroidDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());

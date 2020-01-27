@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -173,7 +174,7 @@ public class DoctorsMobilePage extends UhcDriver {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				doctorlookup("sue",3);
+				//doctorlookup("sue",3);
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
 			//mobileUtils.nextPageValidation(page.toUpperCase());
@@ -234,9 +235,8 @@ public class DoctorsMobilePage extends UhcDriver {
 						System.out.println(driver.getCurrentUrl());
 						mobileUtils.fixLeavingProceedMobile();
 						mobileUtils.fixPrivateConnectionMobile();
-						clickTextAndroidNative("Continue");
+						Alert alert = driver.switchTo().alert();
 						werallyResults = werally.werallySearch(type,search,count);
-						driver.close();
 					}
 					driver.switchTo().window(primaryWindow);
 				}
