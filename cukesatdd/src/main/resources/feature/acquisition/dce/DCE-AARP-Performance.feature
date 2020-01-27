@@ -1,7 +1,7 @@
 @fixedTestCaseDCEVPP
 Feature: To test DCE to VPP plan Summary flow  in AARP site
 
-  @dceThroughPlanSummaryNonAepAARP @aarp @DCE_Regression_Ulayer_VPP2 @dce1 @aarpDce
+  @dceThroughPlanSummaryNonAepAARP @aarp @DCE_Regression_Ulayer @dce1 @aarpDce
   Scenario Outline: To Verify the drug cost estimator flow for <planName> for non AEP periodthrough plan summary
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
@@ -80,12 +80,19 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | PlanName | <planName> |
 
     #Test ID: 15616,15617,15618
-    Examples: 
+@DCE_Regression_Ulayer_VPP2MAPD
       Examples:
-
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY      | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+@DCE_Regression_Ulayer_VPP2PDP
+      Examples:
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY  | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+@DCE_Regression_Ulayer_VPP2SNP
+      Examples:
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer_VPP3 @dce2 @aarpDce2
@@ -175,11 +182,18 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
     Then user validates Drug information is reflected on plan summary page in AARP site
       | PlanName | <planName> |
 
-    #Test ID: 15619,15620,15621
+
+@DCE_Regression_Ulayer_VPP3MAPD
     Examples: 
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY     | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+@DCE_Regression_Ulayer_VPP3PDP
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+@DCE_Regression_Ulayer_VPP3SNP
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer_VPP4 @dce3 @aarpDce
@@ -265,9 +279,16 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | PlanName | <planName> |
 
     #Test ID: 15623, 15624, 15625 : Few scenario's are left to be covered
+@DCE_Regression_Ulayer_VPP4MAPD
     Examples: 
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY     | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+@DCE_Regression_Ulayer_VPP4PDP
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+@DCE_Regression_Ulayer_VPP4SNP
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       
