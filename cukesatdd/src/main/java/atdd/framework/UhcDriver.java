@@ -960,6 +960,17 @@ try {
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
 	}
 	
+	public void clickTextAndroidNative(String text) {
+		String curHandle = ((AndroidDriver) driver).getContext();
+		System.out.println("curHandle - "+curHandle);
+		System.out.println(((AndroidDriver) driver).getContextHandles());
+		((AndroidDriver) driver).context("NATIVE_APP");
+		((AndroidDriver) driver).findElement(MobileBy.name(text)).click();
+		threadsleep(500);
+		((AndroidDriver) driver).context(curHandle);
+		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());
+	}
+	
 	public void threadsleep(int sec) {
 		try {
 			Thread.sleep(sec);
