@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -102,6 +103,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		for (int i=rowStartAt; i<=listOfRowsInPlanCompareTbl.size(); i++) {
 			if (forWhat.equals("email deepLink")) 
 				origDriver.navigate().refresh();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 			String rowXpath="//table[@id='fixTable']//tr["+i+"]//td";
 			List<WebElement> tmp=driver.findElements(By.xpath(rowXpath));
 			if (tmp.size()==1) {
@@ -119,12 +121,17 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				}
 			} else { //note: data row, collect text of each cell
 				for (int j=1; j<=cellsPerRow; j++) {
-					String cellXpath="//table[@id='fixTable']//tr["+i+"]//td["+j+"]";
-					WebElement e=driver.findElement(By.xpath(cellXpath));
-					String key="R"+i+"C"+j;
-					String value=e.getText();
-					result.put(key, value);
-					System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+					String cellXpath = "";
+					try{
+						cellXpath="//table[@id='fixTable']//tr["+i+"]//td["+j+"]";
+						WebElement e=driver.findElement(By.xpath(cellXpath));
+						String key="R"+i+"C"+j;
+						String value=e.getText();
+						result.put(key, value);
+						System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+					}catch (NoSuchElementException e) {
+						System.out.println("unable to find this element with xpath='"+cellXpath+"', ignore it, move on");
+					}
 				}
 			}
 		}
