@@ -3,6 +3,9 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,6 +61,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                 @FindBy(xpath = "//button[contains(text(),'Previous')]")
                 private WebElement previousBtn;
                 
+             // --- Common elements Ends above ---                
+                
                 @FindBy(css = "p.all-fields-marked-wi")
                 private WebElement pageRequiredInfo;
                 
@@ -75,6 +80,38 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                 
                 @FindBy(xpath = "//*[contains(@class,'radio-checked')]")
                 private WebElement radioselect;
+                
+// Doctors Page Modal popup
+            	
+            	@FindBy(css = "#modal div>button[class*='primary button']")
+            	private WebElement modalFinddoctors;
+            	
+            	@FindBy(css = "#modal div button[class*='secondary']")
+            	private WebElement modalCancel;
+            	
+            	@FindBy(css = "#modal #modal-label")
+            	private WebElement modalTitle;
+
+            	@FindBy(css = "#modal .modal-content")
+            	private WebElement modalDescription;      
+            	
+//Doctors Page Confirmation Modal popup
+            	
+
+            	@FindBy(css = "#modal div>button[class*='primary button']")
+            	private WebElement modalContinuedoctors;
+
+            	@FindBy(css = "#modal .modal-content .row:nth-of-type(1) p")
+            	private WebElement modalDoctorsCount;
+
+            	@FindBy(css = "#modal .modal-content .row:nth-of-type(2) uhc-list-item")
+            	private List<WebElement> modalDoctorsList;
+
+            	//#modal .modal-content .row:nth-of-type(2) uhc-list-item button[class*='secondary']
+            	//Find doctor element and lookup remove button
+            	@FindBy(css = "button[class*='secondary']")
+            	private List<WebElement> modalDoctorsRemovebutton;
+			          	
 
 //Doctors Page Element Verification Method 
                 
@@ -103,45 +140,47 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 desktopCommonUtils.previouspageValidation(page.toUpperCase());
                                 }
                                 
+// Selecting doctor options in Doctor Page
+                                
+                                public void doctorspageOptions(String doctor) {
+                                    System.out.println("Doctor Page Functional Operations");
+                                    if (doctor.equalsIgnoreCase("innetwork")) {
+                                                    validate(innetwork);
+                                                    innetwork.click();
+                                                    System.out.println("Doctors Type "+ doctor +" Clicked");
+                                    }else if (doctor.equalsIgnoreCase("outnetwork")) {
+                                                    validate(outnetwork);
+                                                    outnetwork.click();
+                                                    System.out.println("Doctors Type "+ doctor +" Clicked");
+                                    }else if (doctor.equalsIgnoreCase("mydoctors")) {
+                                                    validate(mydoctors);
+                                                    mydoctors.click();
+                                                    System.out.println("Doctors Type "+ doctor +" Clicked");
+                                    }     
+                                }                                
+                                
 //Doctors Page Function Verification                      
                                 
                                 public void doctorspageFunctional(String doctor) {
+                                	String curWindow;
                                                 System.out.println("Doctor Page Functional Operations");
-                                                if (doctor.equalsIgnoreCase("innetwork")) {
-                                                                validate(innetwork);
-                                                                innetwork.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }else if (doctor.equalsIgnoreCase("outnetwork")) {
-                                                                validate(outnetwork);
-                                                                outnetwork.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }else if (doctor.equalsIgnoreCase("mydoctors")) {
-                                                                validate(mydoctors);
-                                                                mydoctors.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }
+                                                doctorspageOptions(doctor);
                                                 continueBtn.click();
+                                                if(doctor.equalsIgnoreCase("mydoctors")) {
+                                                	curWindow = driver.getWindowHandle();
+                                                	doctorModellookup();
+                                                	modalFinddoctors.click();
+                                                	validateLinksanotherWindow("connect.int.werally.in/",curWindow);
+                                                }
                                                 System.out.println("Validating "+page+" page Continue button functionality");
-                                                desktopCommonUtils.nextPageValidation(page.toUpperCase());
+//                                                desktopCommonUtils.nextPageValidation(page.toUpperCase());
                                 }
                                 
 //Doctors page - Select Doctor Type and click on Previous Button              
                                 
                                 public void doctorspagePreviousButton(String doctor) {
                                                 System.out.println("Doctor Page Functional Operations");
-                                                if (doctor.equalsIgnoreCase("innetwork")) {
-                                                                validate(innetwork);
-                                                                innetwork.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }else if (doctor.equalsIgnoreCase("outnetwork")) {
-                                                                validate(outnetwork);
-                                                                outnetwork.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }else if (doctor.equalsIgnoreCase("mydoctors")) {
-                                                                validate(mydoctors);
-                                                                mydoctors.click();
-                                                                System.out.println("Doctors Type "+ doctor +" Clicked");
-                                                }
+                                                doctorspageOptions(doctor);
                                                 if(radioselect.isDisplayed()) {
                                                                 validate(pageProgressPercentage, 30);
                                                                 Assert.assertTrue(pageProgressPercentage.getText().contains("32% Complete"));
@@ -158,6 +197,50 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 System.out.println("Doctor type not selected - Error Scenario in Doctors Page");
                                                 continueBtn.click();
                                                 Assert.assertTrue(errorMessage.getText().contains("No"));
+                                }
+                                
+//Doctors Model Popup Window Verification                                
+                                
+                                public void doctorModellookup() {
+                                	validate(modalDescription);
+                        			Assert.assertTrue(modalDescription.getText().contains("Save"));
+                        			validate(modalTitle);
+                        			Assert.assertTrue(modalTitle.getText().contains("browser"));
+                        			validate(modalCancel);
+                        			Assert.assertTrue(modalCancel.getText().contains("Cancel"));
+                        			validate(modalFinddoctors);
+                        			Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
+                            	}
+                                
+                                
+//Doctors Confirmation Model Popup Window Verification                                
+                                
+                                public void doctorConfirmationModellookup() {
+                                	validate(modalTitle);
+                        			Assert.assertTrue(modalTitle.getText().contains("Your Doctors"));
+                                	validate(modalDoctorsCount);
+                        			Assert.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
+                        			validate(modalCancel);
+                        			Assert.assertTrue(modalCancel.getText().contains("Cancel"));
+                        			validate(modalContinuedoctors);
+                        			Assert.assertTrue(modalContinuedoctors.getText().contains("Continue"));
+                            	}                                
+                                
+//Switch to Werally Window Page
+                                
+                                public void validateLinksanotherWindow(String expURL, String primaryWindow) {
+                            		threadsleep(2000);
+                            		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
+                            		System.out.println(windows);
+                            		if (windows.size() >= 2) {
+                            			driver.switchTo().window(windows.get(1)); 	
+                            			System.out.println(driver.getCurrentUrl());
+                            		}else {
+                            			System.out.println("Link validation fails in popup window" + expURL);
+                            			driver.switchTo().window(primaryWindow);
+                            			threadsleep(1000);
+                            			Assert.assertTrue(false);
+                            		}
                                 }
 
                 public void browserBack() {

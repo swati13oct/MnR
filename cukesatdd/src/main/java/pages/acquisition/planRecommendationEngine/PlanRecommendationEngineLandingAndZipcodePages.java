@@ -119,7 +119,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Previous')]")
 	private WebElement previousBtn;
 	
-	@FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex")
+	@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(2)")
 	private WebElement coverageTitle;
 	
 	
