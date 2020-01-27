@@ -278,7 +278,7 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
-		if (MRScenario.environmentMedicare.contains("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
+		if (MRScenario.environment.contains("team-a") ||MRScenario.environment.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 			return;
 		}
