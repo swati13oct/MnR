@@ -9,7 +9,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And the user selects the state drop down value in UHC home page
       | State | <state> |
     And the user clicks on the shopping cart icon in UHC site
-    And the user validates the plan year buttons are present or not and chooses the plan year in UHC
+    #And the user validates the plan year buttons are present or not and chooses the plan year in UHC
       | Plan Year | <planyear> |
     And the user clicks on the add drugs button in the guest profile in UHC site
     And I have added a drug to my drug list on ums site
