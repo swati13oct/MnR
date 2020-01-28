@@ -1259,7 +1259,7 @@ sauceLabsTunnelIdentifier);
 		capabilities.setCapability("appiumVersion", appiumVersion);
 		//capabilities.setCapability("acceptSslCerts", true);
 		capabilities.setCapability("forceMjsonwp", true);
-		capabilities.setCapability("autoAcceptAlerts", true);
+		//capabilities.setCapability("autoAcceptAlerts", true);
 		try {
 			if (mobileOSName.equalsIgnoreCase("Android"))
 				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
