@@ -164,10 +164,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 		System.out.println("Previous page Validation Mobile");
 		findPagedetails(pageName);
 		try {
-			threadsleep(1500);
+			threadsleep(3000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
-					"Previous page validation failed");
-			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage));
+					"Previous page name validation failed");
+			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),"Previous page % validation failed");
 		} catch (Exception e) {
 			System.out.println("Unable to validate previous button functionality are not Visible");
 		}
@@ -178,12 +178,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 		System.out.println("Next page Validation Mobile");
 		findPagedetails(pageName);
 		try {
-			threadsleep(1500);
+			threadsleep(5000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(nextPageName),
-					"Next page validation failed");
-			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage));
+					"Next page name validation failed");
+			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),"Next page % validation failed");
 		} catch (Exception e) {
-			System.out.println("Unable to validate Continue button functionality are not Visible");
+			System.out.println("Unable to validate Continue button functionality on Next page");
 		}
 	}
 
