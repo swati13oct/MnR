@@ -914,8 +914,7 @@ sauceLabsTunnelIdentifier);
 			
 		
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
-				? System.getProperty(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
-		//tbd ? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
+				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
 		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the properties file
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
