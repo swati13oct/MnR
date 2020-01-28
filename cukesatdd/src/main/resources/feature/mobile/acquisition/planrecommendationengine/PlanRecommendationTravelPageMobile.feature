@@ -1,7 +1,7 @@
-@PlanRecommandonationEngine
+@PlanRecommandonationEngineMobile
 Feature: Plan Recommendation Engie flow - Verify Care Away from Home - Travel page in plan recommendation engine using mobile
 
-  @PRE @planrecommandonation @travelpagemobile @travelpageelementsmobile
+  @PRE @planrecommandonationmobile @travelpagemobile @travelpageelementsmobile @F372739
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> - To validate Travel options elements in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
@@ -19,7 +19,7 @@ Feature: Plan Recommendation Engie flow - Verify Care Away from Home - Travel pa
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds |
       |   10001 | NO              | New York | MA            | Condition    |
 
-  @PRE @planrecommandonation @travelpagemobile @travelpagepageoptionselectionmobile
+  @PRE @planrecommandonationmobile @travelpagemobile @travelpagepageoptionselectionmobile @F372739
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel<TravelOption> - To validate Travel page fucntions in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
@@ -37,11 +37,11 @@ Feature: Plan Recommendation Engie flow - Verify Care Away from Home - Travel pa
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption                  |
       |   10001 | NO              | New York | MA            | Condition    | Travel                        |
-      |   10001 | NO              | New York | MA            | Condition    | Care Away                     |
-      |   10001 | NO              | New York | MA            | Condition    | Another Part,Travel,Care Away |
+      |   10002 | NO              | New York | MA            | Condition    | Care Away                     |
+      |   10003 | NO              | New York | MA            | Condition    | Another Part,Travel,Care Away |
 
-  @PRE @planrecommandonation @travelpagemobile @travelpagepageerrorvalidationmobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel<TravelOption> - To validate Travel page fucntions in Plan Recommendation Engine Mobile
+  @PRE @planrecommandonationmobile @travelpagemobile @travelpagepageerrorvalidationmobile @F372739
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel<TravelOption> - To validate Travel page error fucntions in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile
@@ -58,4 +58,4 @@ Feature: Plan Recommendation Engie flow - Verify Care Away from Home - Travel pa
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption   |
       |   10001 | NO              | New York | MA            | Condition    | Care Away,None |
-      |   10001 | NO              | New York | MA            | Condition    |                |
+      |   10002 | NO              | New York | MA            | Condition    |                |

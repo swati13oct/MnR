@@ -1,7 +1,7 @@
-@PlanRecommandonationEngine
+@PlanRecommandonationEngineMobile
 Feature: Plan Recommendation Engie flow - Verify special needs page in plan recommendation engine using mobile
 
-  @PRE @planrecommandonation @specialneedspagemobile @specialneedspageelements
+  @PRE @planrecommandonationmobile @specialneedspagemobile @specialneedspageelements @F372729
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate special needs page elements in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
@@ -17,8 +17,8 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
       | Zipcode | isMultutiCounty | County   | isCoverageOpt |
       |   10001 | NO              | New York | MA            |
 
-  @PRE @planrecommandonation @specialneedspagemobile @specialneedspageoptionselection
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Status:<status> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile
+  @PRE @planrecommandonationmobile @specialneedspagemobile @specialneedspageoptionselection @F372729
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Status:<status> - To validate special needs page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile
@@ -33,11 +33,11 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds      |
       |   10001 | NO              | New York | MA            | Condition         |
-      |   10001 | NO              | New York | PDP           | Medicaid,Facility |
-      |   10001 | NO              | New York | MA            | None              |
+      |   10002 | NO              | New York | PDP           | Medicaid,Facility |
+      |   10003 | NO              | New York | MA            | None              |
 
-  @PRE @planrecommandonation @specialneedspagemobile @snperrorvalidationmobile
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Status:<status> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile
+  @PRE @planrecommandonationmobile @specialneedspagemobile @snperrorvalidationmobile @F372729
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Status:<status> - To validate special needs page error validation using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine Mobile
     Given the user is on UHC medicare acquisition site mobile
     When user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile
@@ -52,4 +52,4 @@ Feature: Plan Recommendation Engie flow - Verify special needs page in plan reco
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds   |
       |   10001 | NO              | New York | MA            |                |
-      |   10001 | NO              | New York | MA            | Condition,None |
+      |   10002 | NO              | New York | MA            | Condition,None |

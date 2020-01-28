@@ -4,6 +4,7 @@
 package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -160,7 +161,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 
-	public void doctorspage(String doctorsSelection, String status) {
+	public void doctorspage(String doctorsSelection,String doctorsName,String multiDoctor, String status) {
 		if (status.equals("Positive")) {
 			if (doctorsSelection.equalsIgnoreCase("willing to use")) {
 				mobileUtils.mobileLocateElementClick(doctorUHCNetworkOption);
@@ -174,7 +175,10 @@ public class DoctorsMobilePage extends UhcDriver {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				//doctorlookup("sue",3);
+				if(multiDoctor.equalsIgnoreCase("YES"))
+					doctorlookup(doctorsName,3);
+				else
+					doctorlookup(doctorsName,1);
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
 			//mobileUtils.nextPageValidation(page.toUpperCase());
@@ -202,7 +206,8 @@ public class DoctorsMobilePage extends UhcDriver {
 		int beforeRemove = modalDoctorsList.size();
 		WebElement remove = modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
 		mobileUtils.mobileLocateElementClick(remove);
-		if(beforeRemove!=(modalDoctorsList.size()-1)) {
+		int afterRemove = modalDoctorsList.size();
+		if(beforeRemove==afterRemove) {
 			System.out.println("Remove Results Count mismatch");
 			Assert.assertTrue(false);
 		}
@@ -211,11 +216,11 @@ public class DoctorsMobilePage extends UhcDriver {
 	public void getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		if(count==modalDoctorsList.size() && count==confirmationSize) {
-			confirmationResults=null;
-			for (int i = count; i > 0; i--) {
+			confirmationResults=new ArrayList<String>();
+			for (int i = 0; i < count; i++)
 				confirmationResults.add(modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().trim());
-			}
 			Collections.sort(confirmationResults);
+			System.out.println(confirmationResults);
 		}
 		else {
 			System.out.println("Modal Results Count mismatch");
@@ -237,6 +242,7 @@ public class DoctorsMobilePage extends UhcDriver {
 						mobileUtils.fixLeavingProceedMobile();
 						mobileUtils.fixPrivateConnectionMobile();
 						mobileUtils.fixFormResubmission(true);
+						pageloadcomplete();
 						System.out.println(driver.getCurrentUrl());
 						werallyResults = werally.werallySearch(type,search,count);
 					}
@@ -256,7 +262,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	public void verifyConfirmationmodalResults(int count,ArrayList<String> werally,ArrayList<String> confirm) {
 
 		if(werally.size()==confirm.size() && count==werally.size()) {
-			if(werally.equals(confirm)) {
+			if(equalsname(werally,confirm)) {
 				System.out.println("Werally and Modal Result's Content matched");
 			}
 			else {
@@ -270,4 +276,25 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 	}
 	
+	public boolean equalsname(ArrayList<String> werally,ArrayList<String> doctorsmodal) {
+		boolean result=true;
+		for(int i = 0;i<werally.size();i++) {
+			String wname[] = werally.get(i).replace(",","").replace(".", "").split(" ");
+			Arrays.sort(wname);
+			for(int j=0;j<doctorsmodal.size();j++) {
+				String dname[] = doctorsmodal.get(j).replace(",","").replace(".", "").split(" ");
+				Arrays.sort(dname);
+				System.out.println(Arrays.equals(wname, dname));
+				if(Arrays.equals(wname, dname)) {
+					result=true;
+					break;
+				}
+				else {
+					result=false;
+				}
+			}
+		}
+		System.out.println("Doctors Name validation Result "+result);
+		return result;
+	}
 }

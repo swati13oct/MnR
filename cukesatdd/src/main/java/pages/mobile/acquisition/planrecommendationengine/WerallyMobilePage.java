@@ -65,7 +65,10 @@ public class WerallyMobilePage extends UhcDriver {
 	// Find doctor element and lookup save button
 	@FindBy(css = "div[class*='hidden'] button")
 	private WebElement doctorsSavebutton;
-
+	
+	@FindBy(css = "div[class*='savedProviderModal'] h1")
+	private WebElement saveModelDoctorName;
+	
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>button")
 	private WebElement saveModalClosebutton;
 
@@ -84,24 +87,30 @@ public class WerallyMobilePage extends UhcDriver {
 		if (type.toUpperCase().contains("DOCTOR")) {
 			searchBox.sendKeys(searchParameter);
 			hidekeypad();
-			mobileUtils.mobileLocateElementClick(searchButton);
+			mobileswipe("70%",1,false);
+			searchButton.click();
+			pageloadcomplete();
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
-				for (int i = count; i > 0; i--) {
+				for (int i = count-1; i >= 0; i--) {
+					threadsleep(1000);
 					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
-					WebElement elem = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
-					mobileUtils.mobileLocateElementClick(elem);
-					if (i == 1)
-						mobileUtils.mobileLocateElementClick(viewSavedbutton);
+					WebElement save = searchResults.get(i).findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
+					save.click();
+					threadsleep(1000);
+					if (i == 0)
+						viewSavedbutton.click();
 					else
-						mobileUtils.mobileLocateElementClick(saveModalClosebutton);
+						saveModalClosebutton.click();
 				}
-				mobileUtils.mobileLocateElementClick(checkProviderCoveragebutton);
+				threadsleep(1000);
+				checkProviderCoveragebutton.click();
 			} else {
 				System.out.println("Required search Results is not Returned");
 				Assert.assertTrue(false);
 			}
 			Collections.sort(doctorsName);
+			System.out.println(doctorsName);
 		}
 		return doctorsName;
 	}

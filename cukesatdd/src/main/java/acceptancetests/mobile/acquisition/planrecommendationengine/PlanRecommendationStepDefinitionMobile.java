@@ -219,7 +219,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
 		String status = "Positive";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"),status);
+		doctorpage.doctorspage(inputValues.get("Doctors Selection"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
 	}
 	
 	@And("^user selects Doctors in Doctors page mobile and validate errors$")
@@ -227,7 +227,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
 		String status = "Negative";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"),status);	
+		doctorpage.doctorspage(inputValues.get("Doctors Selection"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);	
 	}
 	
 	public void readfeaturedata(DataTable data) {
