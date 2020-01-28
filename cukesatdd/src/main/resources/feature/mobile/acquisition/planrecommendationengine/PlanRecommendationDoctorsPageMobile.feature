@@ -40,9 +40,9 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection |
-      #|   10001 | NO              | New York | MA            | None         | Travel       | willing to use   |
-      #|   10001 | NO              | New York | MA            | None         | Travel       | want to use      |
-      |   10001 | NO              | New York | MA            | None         | Travel       | lookup           |
+      |   10001 | NO              | New York | MA            | None         | Travel       | willing to use   |
+      |   10001 | NO              | New York | MA            | None         | Travel       | want to use      |
+      #|   10001 | NO              | New York | MA            | None         | Travel       | lookup           |
 
   @PRE @planrecommandonation @doctorspagemobile @doctorspagepageerrorvalidationmobile
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile

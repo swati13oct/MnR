@@ -174,7 +174,7 @@ public class DoctorsMobilePage extends UhcDriver {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				//doctorlookup("sue",3);
+				doctorlookup("sue",3);
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
 			//mobileUtils.nextPageValidation(page.toUpperCase());
@@ -200,7 +200,8 @@ public class DoctorsMobilePage extends UhcDriver {
 	public void removeDoctors() {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
-		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
+		WebElement remove = modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
+		mobileUtils.mobileLocateElementClick(remove);
 		if(beforeRemove!=(modalDoctorsList.size()-1)) {
 			System.out.println("Remove Results Count mismatch");
 			Assert.assertTrue(false);
@@ -235,7 +236,8 @@ public class DoctorsMobilePage extends UhcDriver {
 						System.out.println(driver.getCurrentUrl());
 						mobileUtils.fixLeavingProceedMobile();
 						mobileUtils.fixPrivateConnectionMobile();
-						Alert alert = driver.switchTo().alert();
+						mobileUtils.fixFormResubmission(true);
+						System.out.println(driver.getCurrentUrl());
 						werallyResults = werally.werallySearch(type,search,count);
 					}
 					driver.switchTo().window(primaryWindow);

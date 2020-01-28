@@ -960,15 +960,27 @@ try {
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
 	}
 	
-	public void clickTextAndroidNative(String text) {
+	public void fixFormResubmissionAndroid(boolean positive) {
 		String curHandle = ((AndroidDriver) driver).getContext();
 		System.out.println("curHandle - "+curHandle);
 		System.out.println(((AndroidDriver) driver).getContextHandles());
 		((AndroidDriver) driver).context("NATIVE_APP");
-		((AndroidDriver) driver).findElement(MobileBy.AccessibilityId(text)).click();
+		try {
+		if(positive)
+			((AndroidDriver) driver).findElement(MobileBy.id("com.android.chrome:id/positive_button")).click();
+		else
+			((AndroidDriver) driver).findElement(MobileBy.id("com.android.chrome:id/negative_button")).click();
+		}catch(Exception e) {
+			System.out.println("Unable/No form resubmission");
+		}
 		threadsleep(500);
 		((AndroidDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());
+	}
+	
+	public void fixFormResubmission(boolean positive) {
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
+			fixFormResubmissionAndroid(positive);
 	}
 	
 	public void threadsleep(int sec) {

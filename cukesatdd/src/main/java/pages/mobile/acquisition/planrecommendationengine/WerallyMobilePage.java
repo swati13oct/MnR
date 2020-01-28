@@ -83,18 +83,20 @@ public class WerallyMobilePage extends UhcDriver {
 		validate(searchBox, 30);
 		if (type.toUpperCase().contains("DOCTOR")) {
 			searchBox.sendKeys(searchParameter);
-			searchButton.click();
+			hidekeypad();
+			mobileUtils.mobileLocateElementClick(searchButton);
 			int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 			if (actualResultscount >= count) {
 				for (int i = count; i > 0; i--) {
 					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
-					searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button")).click();
+					WebElement elem = searchResults.get(i).findElement(By.cssSelector("div[class*='hidden'] button"));
+					mobileUtils.mobileLocateElementClick(elem);
 					if (i == 1)
-						viewSavedbutton.click();
+						mobileUtils.mobileLocateElementClick(viewSavedbutton);
 					else
-						saveModalClosebutton.click();
+						mobileUtils.mobileLocateElementClick(saveModalClosebutton);
 				}
-				checkProviderCoveragebutton.click();
+				mobileUtils.mobileLocateElementClick(checkProviderCoveragebutton);
 			} else {
 				System.out.println("Required search Results is not Returned");
 				Assert.assertTrue(false);
