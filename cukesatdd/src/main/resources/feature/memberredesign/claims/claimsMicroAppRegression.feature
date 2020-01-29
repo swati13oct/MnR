@@ -104,7 +104,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | 01_5  | 15268 | MEDICA-COSMOS-q2_jun_sofl0013     | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_6  | 15268 | PCP_CLAIMS_q3_sept_UAT4_AARP_032  | PCP      | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
-@abc    @mapd_medical_cosmos2
+    @mapd_medical_cosmos2
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_7  | xxxxx | xxxxx                             | SSP      | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
