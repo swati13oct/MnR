@@ -2695,7 +2695,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("UnitedHealth Passport Program");
-				targetTestDocList.add("Health & Wellness Products Catalog");
+				//targetTestDocList.add("Health & Wellness Products Catalog");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
