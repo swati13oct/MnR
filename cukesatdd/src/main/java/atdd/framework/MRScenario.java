@@ -159,7 +159,7 @@ public class MRScenario {
 					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
 		
 		}
-		
+
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 		// Setting permission to the scripts , so that jenkins server can access
@@ -904,7 +904,7 @@ sauceLabsTunnelIdentifier);
 		if(!(null==environment)){
 			if(environment.equals("stage")||environment.equals("offline-stage"))
 				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1"))
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1") || environment.equals("team-atest"))
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else 
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
