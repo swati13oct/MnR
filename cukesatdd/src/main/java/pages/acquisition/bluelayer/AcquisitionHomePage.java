@@ -28,6 +28,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
@@ -1798,4 +1799,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 	
+	public String getTestSiteUrl() {
+		return testSiteUrl;
+	}
+	public DCETestHarnessPage GetDCEtestHarnessPage() {
+		return new DCETestHarnessPage(driver);
+	}
 }

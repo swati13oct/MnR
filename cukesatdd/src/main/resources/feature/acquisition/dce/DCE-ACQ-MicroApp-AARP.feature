@@ -1,7 +1,7 @@
 @acq_DCE_MicroApp_AARP
 Feature: ACQ-DCE-MicroApp - AARP
 
-  @DCE_MicroApp_Regression_TestHarness
+  @DCE_MicroApp_TestHarness_AARP
   Scenario Outline: To test the DCE flow from TestHarness and the switch now option in step 3
     Given the user is on the Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
@@ -18,7 +18,7 @@ Feature: ACQ-DCE-MicroApp - AARP
       | Drug Name1 | <drugName1> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    When user successfully adds drug in the ums site
+    When user successfully adds drug in the AMS site for TestHarness
       | Drug Name1 | <drugName1> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
