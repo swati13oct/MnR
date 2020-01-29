@@ -4,6 +4,8 @@
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,6 +18,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
 public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
@@ -32,6 +35,10 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                 }
                 
                 String page = "Doctors";
+                
+                PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
+            	ArrayList<String> werallyResults = new ArrayList<String>();
+            	ArrayList<String> confirmationResults = new ArrayList<String>();
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -86,7 +93,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
             	@FindBy(css = "#modal div>button[class*='primary button']")
             	private WebElement modalFinddoctors;
             	
-            	@FindBy(css = "#modal div button[class*='secondary']")
+            	@FindBy(xpath = "//button[contains(text(),'Cancel')]")
             	private WebElement modalCancel;
             	
             	@FindBy(css = "#modal #modal-label")
@@ -161,19 +168,17 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 
 //Doctors Page Function Verification                      
                                 
-                                public void doctorspageFunctional(String doctor) {
-                                	String curWindow;
+                                public void doctorspageFunctional(String doctor,String doctorsName,String multiDoctor) {
                                                 System.out.println("Doctor Page Functional Operations");
                                                 doctorspageOptions(doctor);
                                                 continueBtn.click();
                                                 if(doctor.equalsIgnoreCase("mydoctors")) {
-                                                	curWindow = driver.getWindowHandle();
-                                                	doctorModellookup();
-                                                	modalFinddoctors.click();
-                                                	validateLinksanotherWindow("connect.int.werally.in/",curWindow);
+                                                	if(multiDoctor.equalsIgnoreCase("YES"))
+                                                		doctorModellookup(doctorsName,3);
+                                    				else
+                                    					doctorModellookup(doctorsName,1);
                                                 }
                                                 System.out.println("Validating "+page+" page Continue button functionality");
-//                                                desktopCommonUtils.nextPageValidation(page.toUpperCase());
                                 }
                                 
 //Doctors page - Select Doctor Type and click on Previous Button              
@@ -201,7 +206,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 
 //Doctors Model Popup Window Verification                                
                                 
-                                public void doctorModellookup() {
+                                public void doctorModellookup(String search,int count) {
+                                	String curWindow = driver.getWindowHandle();
                                 	validate(modalDescription);
                         			Assert.assertTrue(modalDescription.getText().contains("Save"));
                         			validate(modalTitle);
@@ -210,6 +216,15 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                         			Assert.assertTrue(modalCancel.getText().contains("Cancel"));
                         			validate(modalFinddoctors);
                         			Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
+                        			modalFinddoctors.click();
+                                	validateLinksanotherWindow(curWindow,"Doctors",search, count );
+                                	getConfimationPopupResults(count);
+                                	verifyConfirmationmodalResults(count,werallyResults,confirmationResults);
+//                                	doctorConfirmationModellookup();
+                            		if(count>2)
+                            			removeDoctors();
+                            		modalContinuedoctors.click();
+                            		
                             	}
                                 
                                 
@@ -228,20 +243,98 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 
 //Switch to Werally Window Page
                                 
-                                public void validateLinksanotherWindow(String expURL, String primaryWindow) {
+                                public void validateLinksanotherWindow(String primaryWindow,String type,String search,int count) {
                             		threadsleep(2000);
                             		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
                             		System.out.println(windows);
-                            		if (windows.size() >= 2) {
-                            			driver.switchTo().window(windows.get(1)); 	
-                            			System.out.println(driver.getCurrentUrl());
-                            		}else {
-                            			System.out.println("Link validation fails in popup window" + expURL);
-                            			driver.switchTo().window(primaryWindow);
-                            			threadsleep(1000);
+                            		if (windows.size() == 2) {
+                            			for (String window : windows) {
+                        					if (!window.equals(primaryWindow)) {
+                        						driver.switchTo().window(window);
+                        						System.out.println(driver.getCurrentUrl());
+                        						werallyResults = werally.werallySearch(type,search,count);
+                        						System.out.println("werallyResults Size is : "+werallyResults.size());
+                        						System.out.println("werallyResults Content is : "+werallyResults);
+                            		}
+                        					driver.switchTo().window(primaryWindow);
+                            			}
+                            		System.out.println(driver.getCurrentUrl());
+                        			threadsleep(1000);
+                        		} else {
+                        			System.out.println("Unexpected windows opened");
+                        			driver.switchTo().window(primaryWindow);
+                        			threadsleep(1000);
+                        			Assert.assertTrue(false);
+                        		}
+                                }
+                                
+                                public void getConfimationPopupResults(int count) {
+                            		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
+                            		if(count==modalDoctorsList.size() && count==confirmationSize) {
+                            			for (int i = count; i > 0; i--) {
+                            				confirmationResults.add(driver.findElement(By.cssSelector("#modal .modal-content .row:nth-of-type(2) uhc-list-item:nth-child("+ i +") .list-item-content>div>strong")).getText().trim());
+                            			}
+                            			Collections.sort(confirmationResults);
+                            			System.out.println("confirmationResults Size is : "+confirmationResults.size());
+                            			System.out.println("confirmationResults Content is : "+confirmationResults);
+                            		}
+                            		else {
+                            			System.out.println("Modal Results Count mismatch");
                             			Assert.assertTrue(false);
                             		}
-                                }
+                            	}        
+                                
+                                public void verifyConfirmationmodalResults(int count,ArrayList<String> werally,ArrayList<String> confirm) {
+
+                            		if(werally.size()==confirm.size() && count==werally.size()) {
+                            			if(equalsname(werally,confirm)) {
+                            				System.out.println("Werally and Modal Result's Content matched");
+                            			}
+                            			else {
+                            				System.out.println("Werally and Modal Result's Content mismatch");
+                            				Assert.assertTrue(false);
+                            			}
+                            		}
+                            		else {
+                            			System.out.println("Werally and Modal Results Count mismatch");
+                            			Assert.assertTrue(false);
+                            		}
+                            	}
+                                
+                                public boolean equalsname(ArrayList<String> werally,ArrayList<String> doctorsmodal) {
+                            		boolean result=true;
+                            		for(int i = 0;i<werally.size();i++) {
+                            			String wname[] = werally.get(i).replace(",","").replace(".", "").split(" ");
+                            			Arrays.sort(wname);
+                            			for(int j=0;j<doctorsmodal.size();j++) {
+                            				String dname[] = doctorsmodal.get(j).replace(",","").replace(".", "").split(" ");
+                            				Arrays.sort(dname);
+                            				System.out.println(Arrays.equals(wname, dname));
+                            				if(Arrays.equals(wname, dname)) {
+                            					result=true;
+                            					break;
+                            				}
+                            				else {
+                            					result=false;
+                            				}
+                            			}
+                            		}
+                            		System.out.println("Doctors Name validation Result "+result);
+                            		return result;
+                            	}
+                                
+                                public void removeDoctors() {
+                            		// By default removing 2nd doctor
+                            		int beforeRemove = modalDoctorsList.size();
+                            		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
+                            		int afterRemove = modalDoctorsList.size();
+                            		if(beforeRemove!=afterRemove) {
+                            			System.out.println("Remove Results Count mismatch");                            		
+                            		}else {
+                            			System.out.println("Remove Results Count matching and Remove is not removed");
+                            			Assert.assertTrue(false);
+                            		}
+                            	}
 
                 public void browserBack() {
 

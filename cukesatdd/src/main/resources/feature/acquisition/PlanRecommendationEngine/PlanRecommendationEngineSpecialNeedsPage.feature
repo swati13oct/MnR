@@ -1,10 +1,10 @@
-@PlanRecommandonationEngine
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify special needs page in plan Recommendation Engine
 
-  @PRE @planrecommandonation @specialneedspage @elementValidation
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , - To validate special needs page Elements in Plan Recommendation Engine
+  @PRE @planrecommendation @specialneedspage @elementValidation @F372729
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate special needs page Elements in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -16,10 +16,10 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
       | Zipcode | isMultiCounty   |isCoverageOpt |
       |   90201 | NO              |MAPD 		 |
   
-  @PRE @planrecommandonation @specialneedspage @positive 
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , - To validate special needs page positive scenarios in Plan Recommendation Engine
+  @PRE @planrecommendation @specialneedspage @specialneedspageoptionselection @F372729
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate special needs page positive scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -37,20 +37,20 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
       |   10001 | NO              | 			  |NA 		 	 | facility	 					 |
       |   12345 | NO              | 			  |MAPD		 	 | None		 					 |
       
-  @PRE @planrecommandonation @specialneedspage @errorscenario
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , - To validate special needs page error scenarios in Plan Recommendation Engine
+  @PRE @planrecommendation @specialneedspage @specialneedspageerrorScenario @F372729
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate special needs page error scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
       | CountyDropDown	| <county>			|
     And user selects plan type in coverage options page  
       | Plan Type       |<isCoverageOpt>	|
-	And user validating error scenario in Special Needs Page 
+		And user validating error scenario in Special Needs Page 
 	  | SNP Options 	|<specialNeeds>		|
 
     Examples: 
       | Zipcode | isMultiCounty   | county		   |isCoverageOpt | specialNeeds 				    |
-      |   90201 | NO              | 			   |MAPD 		  | Medicaid,condition,facility,None |
-#      |   21212 | YES             |Baltimore County|MA	 		  | 	 |
+      |   90201 | NO              | 			   		 |MAPD 		  | Medicaid,condition,facility,None |
+      |   21212 | YES             |Baltimore County|MA	 		  | 	 |

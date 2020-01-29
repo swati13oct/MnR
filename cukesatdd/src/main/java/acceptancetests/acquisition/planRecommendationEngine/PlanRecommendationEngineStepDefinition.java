@@ -196,14 +196,19 @@ public class PlanRecommendationEngineStepDefinition {
 
 	}
 	
-	@When("^user validate elements on landing page of Plan Recommendation Engine$")
-	public void user_check_landing_page_Plan_Selector_tool() throws InterruptedException {
+	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
+	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
 		headerAndFooter.breadCrumbs();
+	}
+	
+	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
+	public void user_check_landing_page_Plan_Selector_tool() throws InterruptedException {
+		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		planSelectorhomepage.landingpage();
 	}
+
 	
 	@When("^user navigate Plan Recommendation Engine Using Get Help Choosing in Tools$")
 	public void navigate_Plan_Selector_tool() {
@@ -367,7 +372,7 @@ public class PlanRecommendationEngineStepDefinition {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
                     String doctor = inputValues.get("Doctors");
                     if (!(doctor.isEmpty())) {
-                                    planSelectorDoctorspage.doctorspageFunctional(doctor);
+                                    planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
                     }
     }
     
@@ -375,8 +380,8 @@ public class PlanRecommendationEngineStepDefinition {
     public void notselect_doctor_type_doctor_page(DataTable givenAttributes) throws Throwable {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-                    String plantype = inputValues.get("Doctors");
-                    if (plantype.isEmpty()) {
+                    String doctor = inputValues.get("Doctors");
+                    if (doctor.isEmpty()) {
                                     planSelectorDoctorspage.doctorspageerror();
                     }
     }
@@ -385,7 +390,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void previous_doctors_page(DataTable givenAttributes) throws Throwable {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-                    planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors"));
+                    planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
     }
     
     @And("^user select doctors and Click previous button from Doctors to check previous page$")

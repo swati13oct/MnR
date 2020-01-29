@@ -1,10 +1,10 @@
-@PlanRecommandonationEngine
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommendation Engine
 
-  @PRE @planrecommandonation @travelpage @elementValidation
-    Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page Elements in Plan Recommendation Engine
+  @PRE @planrecommendation @travelpage @elementValidation @F372739
+    Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> - To validate travel page Elements in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -18,10 +18,10 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
       | Zipcode | isMultiCounty   |isCoverageOpt |specialNeeds|
       |   90201 | NO              |MAPD 		 |Medicaid,condition,facility |
   
-  @PRE @planrecommandonation @travelpage @positive
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <specialNeeds> -Status:<status> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  @PRE @planrecommendation @travelpage @travelpageoptionselection @F372739
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page positive scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -41,10 +41,10 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
       |   10001 | NO              | 			  |NA 		 	 | facility	 					 |within				|
       |   12345 | NO              | 			  |MAPD		 	 | None		 					 |None					|
       
-  @PRE @planrecommandonation @travelpage @errorscenario1
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <specialNeeds> -Status:<status> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  @PRE @planrecommendation @travelpage @travelpageerrorScenario @F372739
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page error scenarios in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -53,7 +53,7 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
       | Plan Type       |<isCoverageOpt>	|
     And user selects SNP options in Special Needs Page 
 	  | SNP Options 	|<specialNeeds>		|
-	And user validating error scenario in Care Away From Home Page 
+		And user validating error scenario in Care Away From Home Page 
 	  |Travel Options	|<travel>	|
 
     Examples: 

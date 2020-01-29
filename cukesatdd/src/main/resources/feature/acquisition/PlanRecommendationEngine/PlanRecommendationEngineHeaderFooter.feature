@@ -1,28 +1,23 @@
-@PlanRecommandonationEngine
-Feature: plan Recommendation Engie flow - Verify header and footer page in plan Recommendation Engie
+@PlanRecommendationEngine
+Feature: Plan Recommendation Engine flow - Verify header and footer page in plan Recommendation Engine
 
-  @PRE @planrecommandonation @PRENavigationViaGetHelpChoosing @regression
-  Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-shop-->Get Help Choosing in Tools 
-  Given the user is on UHC medicare acquisition site landing page
-  When user navigate Plan Recommendation Engine Using Get Help Choosing in Tools
-  
-  @PRE @planrecommandonation @headervalidation @regression
-  Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
+  @PRE @planrecommendation @headervalidation @regression @F383639
+  Scenario: - To validate Header elements and Links Verification in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     Then user validate Header elements and Link Validation of Plan Recommendation Engine
       
-@PRE @planrecommandonation @footervalidation @regression
-  Scenario: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
+	@PRE @planrecommendation @footervalidation @regression @F383639
+  Scenario: - To validate Footer elements and Links Verification in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     Then user validate Footer elements and Link Validation of Plan Recommendation Engine
 
       
-  @PRE @planrecommandonation @headerfooterfunctionality @regression
-  Scenario Outline: - To validate user able to navigate to Plan Recommendation Engie via Shop For a Plan-->Get a Plan Recommendations
+  @PRE @planrecommendation @headerfooterfunctionality @regression @F383639
+  Scenario Outline: - To validate Header and Footer Functionalities in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     Then user validate Header and Footer Functionality of Plan Recommendation Engine
     | Zip Code        | <Zipcode>    |
     | EMail           | <EMail>      |

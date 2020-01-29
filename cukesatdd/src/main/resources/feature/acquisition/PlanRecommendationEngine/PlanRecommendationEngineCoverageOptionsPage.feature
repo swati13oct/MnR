@@ -1,10 +1,10 @@
-@PlanRecommandonationEngine
-Feature: Plan Recommendation Engie flow - Verify coverage options page in plan Recommendation Engie
+@PlanRecommendationEngine
+Feature: Plan Recommendation Engine flow - Verify coverage options page in plan Recommendation Engine
 
-  @PRE @planrecommandonation @coveragepage @elementValidation 
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  @PRE @planrecommendation @coveragepage @elementValidation @F372736
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> - To validate coverage options page Elements using Single County in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> |
@@ -14,10 +14,10 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
       | Zipcode | isMultiCounty   |
       |   90201 | NO              |
   
-  @PRE @planrecommandonation @coveragepage @regression 
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  @PRE @planrecommendation @coveragepage @coveragepageoptionselection @regression @F372736
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Selecting coverage options using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> 	|
@@ -26,15 +26,15 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
 
     Examples: 
       | Zipcode | isMultiCounty   | isCoverageOpt |
-      |   90201 | NO              | MAPD 		  |
+      |   90201 | NO              | MAPD 		  	|
       |   10001 | NO              | MA	  		  |
       |   12345 | NO              | PDP	  		  |
       |   90210 | NO              | NA	  		  |
       
-    @PRE @planrecommandonation @coveragepage @regression @errorScenario
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+    @PRE @planrecommendation @coveragepage @coveragepageerrorScenario @regression @F372736
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate error Scenario of coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> |
@@ -45,10 +45,10 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
       | Zipcode | isMultiCounty | isCoverageOpt |
       |   45634 | NO            |  	  		    |
           
-  @PRE @planrecommandonation @coveragepage @previousfunctionafterPRE
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+  @PRE @planrecommendation @coveragepage @previousfunctionafterContinue @F372736
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Previous Button functionality after Click continue of coverage options page using multi County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> |
@@ -58,12 +58,12 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
 
     Examples: 
       | Zipcode | isMultiCounty | county		   | isCoverageOpt  |
-	  |   78006 | YES             | Bexar County   |  MAPD 		    |
+	  	|	  78006 | YES           | Bexar County |  MAPD 		      |
 	  
-	@PRE @planrecommandonation @coveragepage @previousfunctionbeforePRE
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate coverage previous options page using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
+	@PRE @planrecommendation @coveragepage @previousfunctionbeforeContinue @F372736	
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Previous Button functionality before Click continue of coverage previous options page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultiCounty> |
@@ -73,5 +73,5 @@ Feature: Plan Recommendation Engie flow - Verify coverage options page in plan R
 
     Examples: 
       | Zipcode | isMultiCounty | county		   | isCoverageOpt  |
-	  |   78006 | YES             | Bexar County   |  MAPD 		    |
-	  |   45634 | NO              | 	   		   |  PDP			|
+	  |   78006 | YES             | Bexar County |  MAPD 		    |
+	  |   45634 | NO              | 	   		   	 |  PDP			|

@@ -1,10 +1,10 @@
-@PlanRecommandonationEngine
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
-  @PRE @planrecommandonation @zipcodepage @siglecounty
+  @PRE @planrecommendation @zipcodepage @siglecounty @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -13,10 +13,10 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Zipcode | isMultutiCounty |
       |   90210 | NO              |
       
-@PRE @planrecommandonation @zipcodepage @multicounty
+@PRE @planrecommendation @zipcodepage @multicounty @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Multi county in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -27,10 +27,10 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       |   77485 | YES             | Fort Bend County|
       
       
-@PRE @planrecommandonation @zipcodepage @invalidZipcode @regression
+@PRE @planrecommendation @zipcodepage @invalidZipcode @regression @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
-    When user validate elements on landing page of Plan Recommendation Engine
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and check error scenarios
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
