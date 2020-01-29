@@ -34,7 +34,7 @@ Feature: 2.10. ACQ-DCE-MicroApp - UMS
       | Drug Name3 | <drugName3> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    When user successfully adds drug in the UMS site
+    When user successfully adds drug in the UMS site for TestHarness
       | Drug Name3 | <drugName3> |
     Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
     When the user selects the pharmacy type and distance in UMS site
@@ -56,9 +56,6 @@ Feature: 2.10. ACQ-DCE-MicroApp - UMS
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <genricName3>  |
-    And the user clicks on Back to Plans button in UMS site
-    Then user validates Drug information is reflected on plan summary page in UMS site
-      | PlanName | <planName> |
 
     #Test ID: 15487,15490,15494
     Examples: 

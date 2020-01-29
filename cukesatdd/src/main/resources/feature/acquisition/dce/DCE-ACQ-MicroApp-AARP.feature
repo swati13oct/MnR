@@ -34,7 +34,7 @@ Feature: ACQ-DCE-MicroApp - AARP
       | Drug Name3 | <drugName3> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    When user successfully adds drug in the ums site
+    When user successfully adds drug in the AMS site for TestHarness
       | Drug Name3 | <drugName3> |
     Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
     When the user selects the pharmacy type and distance in AARP site
