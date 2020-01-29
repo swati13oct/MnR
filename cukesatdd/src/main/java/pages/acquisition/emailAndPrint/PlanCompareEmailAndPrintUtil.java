@@ -186,7 +186,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public String compare_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
-		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		if (origPage.get(targetKey)!=null && !(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
 			//note: keep this for now in case anything needs to be bypassed
 			//note: for now can't tell because page is flashing
 			if (targetKey.contains("Plan Heart")) { 
