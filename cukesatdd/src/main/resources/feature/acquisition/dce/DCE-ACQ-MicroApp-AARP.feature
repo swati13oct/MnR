@@ -2,7 +2,7 @@
 Feature: ACQ-DCE-MicroApp - AARP
 
   @DCE_MicroApp_TestHarness_AARP
-  Scenario Outline: To test the DCE flow from TestHarness and the switch now option in step 3
+  Scenario Outline: To test the DCE flow on AARP Acquisition TestHarness
     Given the user is on the Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
@@ -59,6 +59,6 @@ Feature: ACQ-DCE-MicroApp - AARP
 
     Examples: 
       | THPage | siteName | zipcode | isMultutiCounty | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
-      | dce    | Ulayer   |   90002 | NO              | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | WATTS PROFESSIONAL PHARMACY      | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | dce    | Ulayer   |   90002 | NO              | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY      | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       | dce    | Ulayer   |   80002 | YES             | Adams County       | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY  | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       | dce    | Ulayer   |   80210 | NO              | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |

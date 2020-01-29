@@ -1,8 +1,8 @@
 @acq_DCE_MicroApp_UMS
-Feature: 2.10. ACQ-DCE-MicroApp - UMS
+Feature: ACQ-DCE-MicroApp - UMS
 
   @DCE_MicroApp_TestHarness_UHC
-  Scenario Outline: To test the DCE flow from TestHarness and the switch now option in step 3
+  Scenario Outline: To test the DCE flow on UHC Acquisition TestHarness 
     Given the user is on the UMS Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
