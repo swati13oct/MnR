@@ -312,8 +312,8 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	}
 	
 	public void backToTopOfPage() {
-		//moveMouseToElement(pageHeader);
-		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
+		moveMouseToElement(pageHeader);
+		//backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
 	}
 
 	/**
