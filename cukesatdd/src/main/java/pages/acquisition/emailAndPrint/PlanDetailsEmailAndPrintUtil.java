@@ -101,12 +101,9 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	
 	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage, String planType) {
-		//note: replace all \r\n or \n to make output consistent in both for compare
 		String originalValue=origPage.get(targetKey);
-		originalValue=originalValue.replaceAll("(\r\n|\n)", "");
 		String emailValue=emailage.get(targetKey);
-		emailValue=emailValue.replaceAll("(\r\n|\n)", "");
-		
+		//note: replace all \r\n or \n to make output consistent in both for compare
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
@@ -130,11 +127,32 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				failedMessage="BYPASS '"+planType+"' validation until fix (tick# xxxxx) - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else if (originalValue.contains("footnote") && !emailValue.contains("footnote")) {
-				failedMessage="BYPASS '"+planType+"' validation for footnote - ";
+				//note: footnote is not actual text on UI display but in original page getAttribute("innerText") or getTextContent() are picking it up as text
+				//note: on UI both looks identifical betwween original page and email
+				failedMessage="BYPASS '"+planType+"' validation for extra footnote - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else {
-				detail_finalResult=false;
-				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+				//note: Some extra empty line or space are showing with getAttribute("innerText") or getTextContent() are picking it up as text
+				//note: on UI both looks identifical betwween original page and email
+				//note: attempt to clean up the string to do one comparison one more time
+				originalValue=originalValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
+				
+				emailValue=emailValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
+				
+		System.out.println("OMG - targetKey="+targetKey);		
+		System.out.println("OMG - originalValue="+originalValue);
+		System.out.println("OMG - emailValue="+emailValue);
+				if (originalValue.equals(emailValue)) {
+					failedMessage="BYPASS '"+planType+"' validation for extra new line or space - ";
+					failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+				} else {
+					//note:...ok, give up
+					detail_finalResult=false;
+					failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+					
+				}
+				
+				
 			}
 		}
 		System.out.println("TEST - failedMessage="+failedMessage);
