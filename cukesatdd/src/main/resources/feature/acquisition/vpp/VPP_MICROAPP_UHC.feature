@@ -308,7 +308,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
 
-  @vppMicorAPPBlayer14 @vppMicorAPPBlayerPlanCompare
+  @vppMicorAPPBlayer14 @vppMicorAPPBlayerPlanDetails
   Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page

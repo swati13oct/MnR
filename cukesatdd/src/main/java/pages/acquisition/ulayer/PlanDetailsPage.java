@@ -137,10 +137,10 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryTop']")
 	private WebElement topbackToPlanslink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryBottom']")
 	private WebElement downbackToPlanslink;
 
 	@FindBy(xpath = ".//*[@id='printdetails']")
@@ -555,7 +555,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
-
+		validateNew(downbackToPlanslink);
 		waitforElement(downbackToPlanslink);
 		downbackToPlanslink.click();
 		Thread.sleep(3000);

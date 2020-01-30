@@ -20,8 +20,8 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
       | DocumentCode | <docCode> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | planName                                     | pdfType               | docCode                 |
-      |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare MedicareComplete Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
+      |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
 
   @vppMicorAPPUlayer02 @vppMicorAPPUlayerPlanDetails
   Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
@@ -42,8 +42,8 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
       | DocumentCode | <docCode> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county         | plantype | planName                              | pdfType             | docCode             |
-      |   99210 | No              | Spokane County | MA       | AARP MedicareComplete Essential (HMO) | Summary of Benefits | AAWA19HM4290842_000 |
+      | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType             | docCode             |
+      |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 |
 
   @vppMicorAPPUlayer03 @vppMicorAPPUlayerPlanDetails
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
@@ -89,7 +89,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
     Examples: 
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                     | optionalRider   | monthlyPremium | yearlyPremium |
       #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0             | $0            |
+      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)  | Dental Platinum | $0             | $0            |
 
   #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
   @vppMicorAPPUlayer05 @vppMicorAPPUlayerPlanSummary
@@ -273,28 +273,6 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
       | zipcode | isMultutiCounty | county       | plantype | planName                                            |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-  @vppMicorAPPUlayer10 @vppMicorAPPUlayerPlanDetails
-  Scenario Outline: Verify plan summary in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    #And the user views the plans of the below plan type in AARP site
-    Then the user views the plans of the below plan type in AARP site and select Current year
-      | Plan Type | <plantype> |
-    And the user validates the available plans for selected plan types in the AARP site
-    Then the user validates plan summary for the below plan in the AARP site
-      | Plan Name | <planName> |
-    Then the user view plan details of the above selected plan in AARP site and validates
-      | Plan Name | <planName> |
-    And the user validates the pdf section
-
-    Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
-
   @vppMicorAPPUlayer11 @vppMicorAPPUlayerPlanDetails
   Scenario Outline: To click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -313,7 +291,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
 
     Examples: 
       | zipcode | isMultiCounty | county             | plantype | planName                                          |
-      |   90210 | NO            | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppMicorAPPUlayer12 @vppMicorAPPUlayerPlanDetails
   Scenario Outline: Verify plan summary in AARP site
@@ -331,7 +309,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
 
     Examples: 
       | zipcode | isMultiCounty | county             | plantype | planName                                     |
-      |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP) |
+      |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |
 
   @vppMicorAPPUlayer13 @vppMicorAPPUlayerPlanSummary
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
