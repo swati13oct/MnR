@@ -101,13 +101,20 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	
 	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage, String planType) {
+		//note: replace all \r\n or \n to make output consistent in both for compare
+		String originalValue=origPage.get(targetKey);
+		originalValue=originalValue.replaceAll("(\r\n|\n)", "");
+		String emailValue=emailage.get(targetKey);
+		emailValue=emailValue.replaceAll("(\r\n|\n)", "");
+		
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
 		//note: MA  BYPASS: T1S1R2C2 T2S1R7C2 T2S1R8C2 T3S1B1 T4S1R9C1 Plan Heart
 		//note: PDP BYPASS: T1S1R7C2 T1S1R8C2 T1S1R10C2 T1S1R17C1 Plan Heart
 		//note: SNP BYPASS: T1S1R2C2 T1S1R9C2  T1S1R10C2 T2S1R1C2 T2S1R3C2 T2S1R4C2 T2S1R5C2 
-		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		//tbd if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		if (!originalValue.equals(emailValue)) {
 			if (((planType.equalsIgnoreCase("MA")) && 
 					(targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2") || 
 							targetKey.equals("T3S1B1") || targetKey.equals("T4S1R9C1")))
@@ -122,7 +129,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					) {
 				failedMessage="BYPASS '"+planType+"' validation until fix (tick# xxxxx) - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
-			} else if (origPage.get(targetKey).contains("footnote") && !emailage.get(targetKey).contains("footnote")) {
+			} else if (originalValue.contains("footnote") && !emailValue.contains("footnote")) {
 				failedMessage="BYPASS '"+planType+"' validation for footnote - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else {
