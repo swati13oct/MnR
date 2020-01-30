@@ -62,6 +62,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			System.out.println("Previous page Validation Mobile");
 			findPagedetails(pageName);
 			try {
+				pageloadcomplete();
 				threadsleep(3000);
 				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
 						"Previous page name validation failed");
@@ -76,6 +77,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			System.out.println("Next page Validation Desktop");
 			findPagedetails(pageName);
 			try {
+				pageloadcomplete();
 				threadsleep(5000);
 				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(nextPageName),
 						"Next page name validation failed");
