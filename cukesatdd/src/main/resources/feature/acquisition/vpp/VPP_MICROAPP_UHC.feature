@@ -254,7 +254,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
 
   @vppMicorAPPBlayer10 @vppMicorAPPBlayerPlanCompare
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
