@@ -122,6 +122,9 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					) {
 				failedMessage="BYPASS '"+planType+"' validation until fix (tick# xxxxx) - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else if (origPage.get(targetKey).contains("footnote") && !emailage.get(targetKey).contains("footnote")) {
+				failedMessage="BYPASS '"+planType+"' validation for footnote - ";
+				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else {
 				detail_finalResult=false;
 				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
