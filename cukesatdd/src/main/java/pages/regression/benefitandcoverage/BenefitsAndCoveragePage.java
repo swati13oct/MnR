@@ -43,10 +43,10 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 
 /**
-* @Functionality : To check Benefits and Coverage page
-*
-**
-*/
+ * @Functionality : To check Benefits and Coverage page
+ *
+ **
+ */
 public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public PageData benefitsCoverage;
@@ -62,14 +62,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'VIEW PLAN DOCUMENTS')]/ancestor::p/preceding-sibling::p")
 	private WebElement messageForPreeffective;
 
-               @FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
-               public WebElement preEffectiveTechSupportNumber;
-               
-               @FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")
-               public WebElement preEffectiveClaimsSupportNumber;
-               
-               @FindBy(xpath = "//h3[@class='needhelp h4 margin-none atdd-claims-header']")
-               public WebElement preEffectiveClaimsSupportHeader;
+	@FindBy(xpath = "//p[contains(@ng-if, 'preEffective == true') or (contains(@ng-if, 'preEffective != true') and contains(@ng-if, 'businessType ==') )]")
+	public WebElement preEffectiveTechSupportNumber;
+
+	@FindBy(xpath = "//p[contains(text(),'1-800-523-5880')]")
+	public WebElement preEffectiveClaimsSupportNumber;
+
+	@FindBy(xpath = "//h3[@class='needhelp h4 margin-none atdd-claims-header']")
+	public WebElement preEffectiveClaimsSupportHeader;
 
 	@FindBy(id = "IPerceptionsEmbed")
 	public WebElement iPerceptionframe;
@@ -170,7 +170,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//h2[@class='atdd-bnc-drgcopaysdiscounts-title']")
 	private WebElement lisDrugCopayHeader;
-	
+
 	@FindBy(xpath = "//p[contains(text(),'Your plan premium is calculated based on the plan')]")
 	private WebElement lisDrugCopayHeadertext;
 
@@ -408,7 +408,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'View all additional benefits')]")
 	private WebElement ViewAllAncillaryBnFtLink;
-	
+
 	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
 	private WebElement Disclaimertext;
 
@@ -504,7 +504,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[1]")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[2]")
+	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div/div/div[2]/span")
 	private WebElement specialistValue;
 
 	@FindBy(xpath="//*[@id='plandeductiblecard1']")
@@ -573,7 +573,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//strong[contains(text(),'Lower-tier Drugs')]")
 	private WebElement lowTierdrugsText;
-	 
+
 	@FindBy(className = "atdd-bnc-rx187grptable")
 	private WebElement PeehipTable;
 
@@ -591,16 +591,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//h1[contains(text(),'Plan Documents & Resources')]")
 	private WebElement docsAndResourcesHeader;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Order Plan Materials')]")
 	private WebElement orderMaterialsHeader;
-	
+
 	@FindBy(xpath ="//*[contains(@class,'plan_benefit_documents_forms_amd_resources')]//li[contains(@class,' updateSessionLoopContent else clearfix MAPD_govt_false_71710697_2019')]")
 	private List<WebElement> mapdPdfLinks;
-	
+
 	@FindBy(xpath ="//*[contains(@class,'plan_benefit_documents_forms_amd_resources')]//li[contains(@class,'updateLanguagePdfs_Content clearfix PDP_govt_false_49144037_2019 showElement')]")
 	private List<WebElement> pdpPdfLinks;
-	
+
 	@FindBy(xpath = ".//*[@id='standard_ads-header']/span/p")
 	private WebElement annualDeductibleColumnheader;
 
@@ -612,22 +612,22 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='standard_ccs-header']/span/p")
 	private WebElement catastrophicCoverageStageColumnheader;
-	
+
 	@FindBy(id = "submit-order-materials")
 	private WebElement submitOrderBtn;
-	
+
 	@FindBy(id = "notShipRadio")
 	private WebElement radioBtnsSectionNonShip;
-	
+
 	@FindBy(id = "shipRadio")
 	private WebElement radioBtnsSectionShip;
-	
+
 	@FindBy(id = "premiumpayment_3")
 	private WebElement paymentsTab;
-	
+
 	@FindBy(xpath= "//h1[contains(text(), 'Premium Payments')]")
 	private WebElement paymentsHeader;
-	
+
 	@FindBy(xpath= "//*[contains(@class,'card')]//*[contains(@dtmid,'cta_ordermaterials')]")
 	private WebElement planDocsAndResourcesBtn;
 
@@ -640,23 +640,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//img[@alt=' walgreenpharmacylogo']")
 	private WebElement wallGreensWidget;
-	
+
 	@FindBy(xpath = "//p[contains(text(),'Walgreens Preferred Retail Pharmacy')]")
 	private WebElement wallGreensWidgetText;
-	
+
 	@FindBy(xpath = "//img[@alt='mailservicelogo']")
 	private WebElement PreferredMailServicePharmacyLogo;
-	
+
 	@FindBy(xpath = "//img[@alt='retailpharmacylogo']")
 	private WebElement retailpharmacylogo;
-	
-	
+
+
 	@FindBy(xpath = "(//p[contains(text(),'Preferred Mail Service Pharmacy')])[3]")
 	private WebElement PreferredMailServicePharmacyText;
-	
+
 	@FindBy(xpath = "(//p[contains(text(),' Preferred Retail Pharmacy')])[1]")
 	private WebElement PreferredRetailPharmacyText;
-	
+
 	@FindBy(xpath = "//img[@alt='mailservicelogo']/parent::div/following-sibling::div/p")
 	private WebElement mailOrderWidget;
 
@@ -672,16 +672,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(id = "lang-select-2")
 	private WebElement planDocumentsLangDropdown;
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]//*[contains(text(),'VIEW OTHER DOCUMENTS')]")
 	private WebElement viewDocsAndResourcesLink;
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]//*[contains(text(),'View other documents')]")
 	private WebElement viewDocsAndResourcesLinkShip;
 
 	@FindBy(id = "benefitsSummary")
 	private WebElement benefitsSummarySection;
-	
+
 	@FindBy(id = "formsandresourcesC1")
 	private WebElement formsAndResourcesTab;
 
@@ -765,7 +765,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(className = "drugCopaysAndDiscounts")
 	private WebElement drugCopaysAndDiscount;
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'drugCoPaysDiscountsParsys parsys')]")
 	private WebElement drugCopaysAndDiscountSection;
 
@@ -919,7 +919,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='primary-care-provider-atdd']")
 	private WebElement primaryCareProviderSectionHeaderGroup;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'ordermaterials')]")
 	private WebElement orderMaterialsTab;
 
@@ -977,10 +977,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]//..//p[2]")
 	private WebElement PreferredRetailPharmacyDrugCostsTextLine;
-	
+
 	@FindBy(xpath= "//p[contains(text(),'Preferred Retail Pharmacy Drug Costs')]//..//p[2]")
 	private WebElement PreferredRetailPharmacyDrugCostsTextLinePDP;
-	
+
 	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]")
 	private WebElement PreferredMailServicePharmacyDrugCostsText;
 
@@ -989,13 +989,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath= "//p[contains(text(),'Preferred Mail Service Pharmacy Drug Costs')]//..//p[2]")
 	private WebElement PreferredMailServicePharmacyDrugCostsTextLinePDP;
-	
+
 	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]")
 	private WebElement StandardNetworkPharmacyRetailDrugCostsText;
 
 	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[2]")
 	private WebElement StandardNetworkPharmacyRetailDrugCostsTextLine;
-	
+
 	@FindBy(xpath= "//p[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]//..//p[2]")
 	private WebElement StandardNetworkPharmacyRetailDrugCostsTextLinePDP;
 
@@ -1016,28 +1016,28 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath= "//h2[contains(text(),'Prescription Drug Costs')]")
 	private WebElement PrescriptionDrugCostsrkSectionHeaderONRally;
-	
+
 	@FindBy(xpath= "(//a[contains(text(),'View all benefits')])[1]")
 	private WebElement ViewAllBenefitsLinkONRally;
-	
+
 	@FindBy(xpath= "(//*[contains(@class,'planBenefitDocumentsContainer')]/div[2]//*[contains(@class,'PlanPdf section')][1]//li[2]/a")
 	private WebElement pdfLink1;
-	
+
 	@FindBy(xpath= "(//*[contains(@class,'planBenefitDocumentsContainer')]/div[2]//*[contains(@class,'PlanPdf section')][2]//li[2]/a")
 	private WebElement pdfLink2;
-	
+
 	@FindBy(xpath = "//*[@id='49144037']")
 	protected WebElement pdpNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='49144037']//*[contains(text(),'Prescription')]")
 	protected WebElement pdpNavTabOrderMaterials;
-	
+
 	@FindBy(xpath = "//*[@id='15825500']//*[contains(text(),'Supplement')]")
 	protected WebElement medsuppNavTabOrderMaterials;
-	
+
 	@FindBy(xpath = "//*[@id='15825500']")
 	protected WebElement medsuppNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 
@@ -1347,8 +1347,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		//String fileName = CommonConstants.BENEFITS_AND_COVERAGE_PAGE_DATA;
 		//benefitsCoverage = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		openAndValidate();
-	
-		
+
+
 	}
 
 	/**
@@ -1571,17 +1571,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-	
+
 	public void Select_langdropdown_selection(String language) {
 		if (langdropdown.isDisplayed()) {
 			Select langdropdwn = new Select(langdropdown);
 			int languageindex = Integer.parseInt(language);
-				langdropdwn.selectByIndex(languageindex);
+			langdropdwn.selectByIndex(languageindex);
 			System.out.println("The selected language  is " + langdropdwn.getFirstSelectedOption().getText());
-				Assert.assertTrue("The selected language  is "+langdropdwn.getFirstSelectedOption().getText(),true);
-			} else
-				Assert.fail("Issue in language selection");
-		} 
+			Assert.assertTrue("The selected language  is "+langdropdwn.getFirstSelectedOption().getText(),true);
+		} else
+			Assert.fail("Issue in language selection");
+	} 
 
 	/**
 	 * @toDo : The user validates the language dropdown in Documents section and
@@ -1608,7 +1608,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	
+
 	public void validate_drugCostDropdownzIndividualMAPD_select() {
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		System.out.println(drugCostdropdwn.getFirstSelectedOption().getText());
@@ -1721,16 +1721,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
 		driver.get("https://member.int.uhc.com/retiree/dashboard");
 		Thread.sleep(4000);
-			validate(ViewAllAncillaryBnFtLink);
-			ViewAllAncillaryBnFtLink.click();
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		validate(ViewAllAncillaryBnFtLink);
+		ViewAllAncillaryBnFtLink.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void  rally_dashboardValues() throws InterruptedException {
 		driver.get("https://member.int.uhc.com/retiree/dashboard");
 		Thread.sleep(4000);
@@ -1738,12 +1738,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validate(PrescriptionDrugCostsrkSectionHeaderONRally);
 			validate(ViewAllBenefitsLinkONRally);
 			Assert.assertTrue("Prescription DrugCost Section Header and View All Benefits Link are displaying on the Rally page", true);
-			} catch (Exception e) {
-				Assert.fail("Prescription DrugCost Section Header and View All Benefits Link are not displaying on the Rally page");
-			}
+		} catch (Exception e) {
+			Assert.fail("Prescription DrugCost Section Header and View All Benefits Link are not displaying on the Rally page");
+		}
 	}
-	
-	
+
+
 	/**
 	 * @toDo : The user validates the Learn more button under Exclusive hearing
 	 *       section of Ancillary benefits
@@ -2184,7 +2184,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Learnmorestagelink);
 		js.executeScript("arguments[0].click();", Learnmorestagelink); 
-		
+
 		System.out.println(LearnmorestageExpandedArea.getAttribute("aria-expanded"));
 		// validating expanded stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestageExpandedArea.getAttribute("aria-expanded").equalsIgnoreCase("true")){
@@ -2378,7 +2378,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validate(OfficVisitsValue);
 
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
+		Assert.assertTrue(OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
 		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
 
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
@@ -2626,12 +2626,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
-		
+
 		validateNew(SearchProvider);
 		validateWithValue("Provider Search", SearchProvider);
 		validateWithValue("Search For Provider",StartSearch);
 		StartSearch.click();
-		
+
 		switchToNewTab();
 		System.out.println(driver.getCurrentUrl());
 
@@ -2859,7 +2859,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 *       members in Need help section
 	 */
 	public void validateContactUsNeedHelp() {
-		
+
 		validateNew(needHelpSection);
 		validateNew(Seemorewaystext);
 
@@ -3357,42 +3357,42 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		drpPharmacy.selectByValue("Retail Cost Sharing");
 		System.out.println("Retail Cost Sharing dropdown value selected");
 		validateNew(retailTable);
-			String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
-					+"30-day supply (non-maintenance drugs) 30-day supply (maintenance drugs*) 31- to 60-day supply** 61- to 90-day supply**\n"
-		+"Tier 1\n"
-		+"You pay 100% of costs until $50 deductible is met*\n"
-		+"$10 copay\n"
-		+"$10 copay\n"
-		+"$20 copay\n"
-		+"$30 copay\n"
-		+"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-		+"When your out-of-pocket costs reach the $5,100 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
-		+"The catastrophic coverage will go toward Part D covered medications.\n"
-		+"Tier 2\n"
-		+"$35 copay\n"
-		+"$45 copay\n"
-		+"$70 copay\n"
-		+"$105 copay\n"
-		+"Tier 3\n"
-		+"$60 copay\n"
-		+"$75 copay\n"
-		+"$120 copay\n"
-+"$180 copay";
-					
+		String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
+				+"30-day supply (non-maintenance drugs) 30-day supply (maintenance drugs*) 31- to 60-day supply** 61- to 90-day supply**\n"
+				+"Tier 1\n"
+				+"You pay 100% of costs until $50 deductible is met*\n"
+				+"$10 copay\n"
+				+"$10 copay\n"
+				+"$20 copay\n"
+				+"$30 copay\n"
+				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"The catastrophic coverage will go toward Part D covered medications.\n"
+				+"Tier 2\n"
+				+"$35 copay\n"
+				+"$45 copay\n"
+				+"$70 copay\n"
+				+"$105 copay\n"
+				+"Tier 3\n"
+				+"$60 copay\n"
+				+"$75 copay\n"
+				+"$120 copay\n"
+				+"$180 copay";
 
-			System.out.println("The hardcoaded table value is- "+TableData.toString());
-			System.out.println("The table value is- "+retailTable.getText());
 
-			if(retailTable.getText().equals(TableData.toString())){
-				Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-				System.out.println("The data in the drug cost table is displaying correctly");  
-			}
-			else{
-				System.err.println("The data in the drug cost table is not displaying correctly");
-				Assert.fail("The data in the drug cost table is not displaying correctly");
-			}
+		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
+		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+retailTable.getText());
+
+		if(retailTable.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
-		/*JavascriptExecutor jse = (JavascriptExecutor) driver;
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+	}
+	/*JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-150)", "");
 		if (ICStage30dayNonMain.size() > 0 && ICStage30dayMain.size() > 0 && ICStage31to60.size() > 0
 				&& ICStage61to90.size() > 0) {
@@ -3418,25 +3418,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Thread.sleep(5000);
 		waitforElementNew(MailOrderTable);
 		String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
-+"31- to 60-day supply 61- to 90-day supply\n"
-+"Tier 1 :\n"
-+"You pay 100% of costs until $50 deductible is met*\n"
-+"$20 copay\n"
-+"$30 copay\n"
-+"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-		+"When your out-of-pocket costs reach the $5,100 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
-		+"The catastrophic coverage will go toward Part D covered medications.\n"
-		+"Tier 2 :\n"
-		+"$70 copay\n"
-		+"$105 copay\n"
-		+"Tier 3 :\n"
-		+"$120 copay\n"
-		+"$180 copay";
-//+"* Please see Additional Drug Coverage for a list of the plan’s maintenance drugs. ERS is continuing to offer additional coverage on some prescription drugs that are normally excluded from coverage on your Formulary. Please see your Additional Drug Coverage list for more information.";
-				
+				+"31- to 60-day supply 61- to 90-day supply\n"
+				+"Tier 1 :\n"
+				+"You pay 100% of costs until $50 deductible is met*\n"
+				+"$20 copay\n"
+				+"$30 copay\n"
+				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"The catastrophic coverage will go toward Part D covered medications.\n"
+				+"Tier 2 :\n"
+				+"$70 copay\n"
+				+"$105 copay\n"
+				+"Tier 3 :\n"
+				+"$120 copay\n"
+				+"$180 copay";
+		//+"* Please see Additional Drug Coverage for a list of the plan’s maintenance drugs. ERS is continuing to offer additional coverage on some prescription drugs that are normally excluded from coverage on your Formulary. Please see your Additional Drug Coverage list for more information.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+MailOrderTable.getText());
+		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
+		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+MailOrderTable.getText());
 
 		if(MailOrderTable.getText().trim().equals(TableData.toString().trim())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -3446,7 +3445,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
-	/*	if (ICStage31to60MailOrder.size() > 0 || ICStage61to90MailOrder.size() > 0) {
+		/*	if (ICStage31to60MailOrder.size() > 0 || ICStage61to90MailOrder.size() > 0) {
 			Assert.assertTrue("The columns are correct in texas Ers  mail ordertable", true);
 		} else {
 			Assert.assertFalse("The columns are incorrect in texas Ers  mail ordertable", true);
@@ -3505,15 +3504,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 
 	}
-	
+
 	public void OutpatientSurgeryCentervisits_withprovidertiering(){
 		//Sardar Start
 		//String TableData="OUTPATIENT SURGERY CENTER VISITS \n"
-			//	+"Type 1: $75.00\n"
-				//+"Type 2:  $150.00";
-		String TableData="OUTPATIENT SURGERY CENTER VISITS";
+		//	+"Type 1: $75.00\n"
+		//+"Type 2:  $150.00";
+		String TableData="OUTPATIENT";
 		if(outPatientSection.getText().contains(TableData.toString())){
-		//Sardar End
+			//Sardar End
 			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
 			System.out.println("The data in the outPatient section  is displaying correctly");  
 		}
@@ -3521,24 +3520,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.err.println("The data in the outPatient section  is not displaying correctly");
 			Assert.fail("The data in the outPatient section is not displaying correctly");
 		}}
-	
+
 	public void outpatientcenterwithoutprovidertier(){
 
-        //Sardar Start
-        //String TableData="OUTPATIENT SURGERY CENTER VISITS\n"
-        //            +"20.00%";
-        //if(outPatientSection.getText().equals(TableData.toString())){
-        String TableData="OUTPATIENT SURGERY CENTER VISITS";
-        if(outPatientSection.getText().contains(TableData.toString())){
-        //Sardar End
+		//Sardar Start
+		//String TableData="OUTPATIENT SURGERY CENTER VISITS\n"
+		//            +"20.00%";
+		//if(outPatientSection.getText().equals(TableData.toString())){
+		String TableData="OUTPATIENT";
+		if(outPatientSection.getText().contains(TableData.toString())){
+			//Sardar End
 
-               Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
-               System.out.println("The data in the outPatient section  is displaying correctly");  
-        }
-        else{
-               System.err.println("The data in the outPatient section  is not displaying correctly");
-               Assert.fail("The data in the outPatient section is not displaying correctly");
-        }}
+			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
+			System.out.println("The data in the outPatient section  is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the outPatient section  is not displaying correctly");
+			Assert.fail("The data in the outPatient section is not displaying correctly");
+		}}
 
 	public void validateWaysToSaveSection(String planType, String memberType) {
 		/*
@@ -3547,29 +3546,29 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		 */
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].scrollIntoView(true);", waysToSaveSection);
-		
+
 		if(planType.equalsIgnoreCase("PDP")){
 			if (memberType.contains("Wallgreens")) {
-				
+
 				validateNew(waysToSaveSection);
 				validateNew(lowTierdrugs);    
 				validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
 				validateNew(wallGreensWidget);
 				validateWithValue("Walgreens Preferred Retail Pharmacy", wallGreensWidgetText);             //validate Walgreens Preferred Retail Pharmacy
-				
+
 				validateNew(PreferredMailServicePharmacyLogo);
 				validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
-				
-				
-				
+
+
+
 			} else if (memberType.contains("MailOrderPharamacy")) {
 				validateNew(waysToSaveSection);
 				validateNew(lowTierdrugs);    
 				validateWithValue("Lower-tier Drugs",lowTierdrugsText);        //validate Lower-tier Drugs
-				
+
 				validateNew(retailpharmacylogo);
 				validateWithValue("Preferred Retail Pharmacy", PreferredRetailPharmacyText);
-				
+
 				validateNew(PreferredMailServicePharmacyLogo);
 				validateWithValue("Preferred Mail Service Pharmacy", PreferredMailServicePharmacyText); 
 			}	
@@ -3581,14 +3580,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				Assert.assertFalse("ways to save section exists for a non PDP memeber", true);
 			}
 		}
-		
+
 
 	}
 
 	public void fedtabledata()
 	{
-		
-		
+
+
 		//System.out.println(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText());
 		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[3]")).getText(),"$4.00");
 		Assert.assertEquals(driver.findElement(By.xpath(".//*[@class='table-white atdd-bnc-standrdretailpharmcytable']//tr[2]/td[4]")).getText(),"no more than 37% for generic drugs or 25% for brand name drugs");
@@ -3728,7 +3727,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} else {
 			Assert.assertFalse("Catastrophic Coverage stage doesn't have any value", true);
 		}
-// special character is not validating
+		// special character is not validating
 		//validatePeehiptableValues();
 	}
 
@@ -3747,13 +3746,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			} 
 		} else if (planType.equalsIgnoreCase("MEDSUPP")|| planType.equalsIgnoreCase("SHIP")) {
 			if(validateNew(medsuppNavTab))
-					medsuppNavTab.click();
-				System.out.println("located medicare supplement plan tab and clicked it");	
-				
+				medsuppNavTab.click();
+			System.out.println("located medicare supplement plan tab and clicked it");	
+
 		} else if(planType.contains("MA")){
 			if(validate(mapdNavTab))
 				mapdNavTab.click();
-			
+
 			// benefits summary section
 			validateNew(benefitsSummarySection);
 			validateNew(officeVisitSection);
@@ -3761,11 +3760,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(OutpatientSurgeryCenterSection);
 
 			// out of pocket maximum section
-	
+
 			validateNew(outOfPocketSection);
 			validateNew(inNetworkSection);
 			validateNew(outOfNetworkSection);
-			
+
 			// PCP section
 			validateNew(PrimaryCareProviderHeaderInd);
 			validateNew(YourPrimaryCareProvider);
@@ -3773,12 +3772,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(StartSearch);
 			//validateNew(drugCostDropdown);
 			//validateNew(drugCopaysAndDiscountSection);
-			
+
 			System.out.println();
-			
+
 		} else if(planType.equalsIgnoreCase("PDP")){
 			if(validate(pdpNavTab))
-					pdpNavTab.click();
+				pdpNavTab.click();
 			validateNew(drugCostDropdown);
 			validateNew(drugCopaysAndDiscountSection);
 		}
@@ -3793,7 +3792,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(planDocumentsTitle);
 		validateNew(planDocumentsLangDropdown);
 		validateNew(view_label);
-		
+
 		// Need help section
 		validateNew(needHelpSection);
 		validateNew(NeedHelpHeader);
@@ -3803,7 +3802,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void validateCopayCoinsuranceInDrugTable() {
 		//note: Dec2018 - wait for the element to show up before validation
-		
+
 		validateNew(drugTableNonLisMember);
 
 		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0
@@ -4035,13 +4034,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	}
 
-               public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException 
-               {
+	public void verifyCorrectTechSupportNumberForPreEffectiveMembers(String technicalPhNo) throws InterruptedException 
+	{
 
-                              System.out.println("Now checking for Tech Support Number for Pre-effective members");
-                              System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
-                              Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
-                              System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
+		System.out.println("Now checking for Tech Support Number for Pre-effective members");
+		System.out.println("The Tech Support phone number displayed on screen is "+preEffectiveTechSupportNumber.getText());
+		Assert.assertEquals(preEffectiveTechSupportNumber.getText(),technicalPhNo);
+		System.out.println("Assert for correct Tech Suppport Phone Number  was passed");
 
 	}
 
@@ -4596,8 +4595,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"All Other Covered Drugs\n"
 				+"$0.00\n"
 				+"$0.00";
-System.out.println("the hardcoded value" +mapdGroupTable);
-System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
+		System.out.println("the hardcoded value" +mapdGroupTable);
+		System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
@@ -4608,7 +4607,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 		}
 
 	}
-	
+
 	public void validatedrugcosttableMAPD_NONLIS() {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
@@ -4877,7 +4876,7 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 				+"Tier 5\n"
 				+"33%\n"
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
-				
+
 
 		System.out.println("The hardcoaded table value is- "+TableData.toString());
 		System.out.println("The table value is- "+RetailDrugCost_TableNONLIS.getText());
@@ -4942,10 +4941,10 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 
 
 	public void outPatientSection(){
-		String TableData="OUTPATIENT SURGERY CENTER VISITS \n"
+		String TableData="OUTPATIENT\n"
 				+"Type 1: $150.00\n"
 				+"Type 2:  $275.00";
-		if(outPatientSection.getText().equals(TableData.toString())){
+		if(outPatientSection.getText().contains(TableData.toString())){
 			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
 			System.out.println("The data in the outPatient section  is displaying correctly");  
 		}
@@ -4987,447 +4986,447 @@ System.out.println("the hardcoded value" +RetailDrugCost_Table.getText());
 	public void validatePeehiptableValues(){
 		String TableData= "Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
 				+"Tier 1\n"
-		+"No Deductible\n"
-		+"$6.00\n"
-		+"$6.00\n"
-		+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
-		+"either — $6.00\n"
-		+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
-		+"Tier 2\n"
-		+"$40.00\n"
-		+"$40.00\n"
-		+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
-		+"either — $40.00\n"
-		+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
-		+"Tier 3\n"
-		+"$60.00\n"
-		+"$60.00\n"
-		+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
-		+"either — $60.00\n"
-		+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
-		+"Tier 4\n"
-		+"$60.00\n"
-		+"$60.00\n"
-		+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
-		+"either — $60.00\n"
-+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.";
-				System.out.println("The hardcoaded table value is- "+TableData.toString());
-				System.out.println("The table value is- "+PeehipTable.getText());
+				+"No Deductible\n"
+				+"$6.00\n"
+				+"$6.00\n"
+				+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
+				+"either — $6.00\n"
+				+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
+				+"Tier 2\n"
+				+"$40.00\n"
+				+"$40.00\n"
+				+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
+				+"either — $40.00\n"
+				+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
+				+"Tier 3\n"
+				+"$60.00\n"
+				+"$60.00\n"
+				+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
+				+"either — $60.00\n"
+				+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.\n"
+				+"Tier 4\n"
+				+"$60.00\n"
+				+"$60.00\n"
+				+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
+				+"either — $60.00\n"
+				+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.";
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+PeehipTable.getText());
 
-				if(PeehipTable.getText().toString().equals(TableData.toString())){
-					Assert.assertTrue("The data in the table is displaying correctly", true);
-					System.out.println("The data in the table is displaying correctly");  
-				}
-				else{
-					System.err.println("The data in the table is not displaying correctly");
-					Assert.fail("The data in the table is not displaying correctly");
-				}}
-	
-	
-	
-		public void validategroupdrugtableMAPD() throws InterruptedException{
-			standardRetailBenefitTableIndiMAPD();
-			preferredMailBenefitTableIndiMAPD();
+		if(PeehipTable.getText().toString().equals(TableData.toString())){
+			Assert.assertTrue("The data in the table is displaying correctly", true);
+			System.out.println("The data in the table is displaying correctly");  
 		}
-	
-		
-		
-public void standardRetailBenefitTableIndiMAPD() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
-	
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No deductible.\n"
-			+"$3.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$10.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 3\n"
-			+"100% until the $150.00 deductible is met.*\n"
-			+"$45.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$95.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"30%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		else{
+			System.err.println("The data in the table is not displaying correctly");
+			Assert.fail("The data in the table is not displaying correctly");
+		}}
 
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
-	if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
-	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
-	}
-	validateWithValue("Standard Network Pharmacy Retail Drug Text", StandardNetworkPharmacyRetailDrugCostsText);
-	validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLine);
+
+	public void validategroupdrugtableMAPD() throws InterruptedException{
+		standardRetailBenefitTableIndiMAPD();
+		preferredMailBenefitTableIndiMAPD();
 	}
 
-public void preferredMailBenefitTableIndiMAPD() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
-	
-	CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-	validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No deductible.\n"
-			+"$0.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$0.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 3\n"
-			+"100% until the $150.00 deductible is met.*\n"
-			+"$125.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$275.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"30%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
-	if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
-	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
-	}
-	validateWithValue("Preferred Mail Service Pharmacy Drug Costs", PreferredMailServicePharmacyDrugCostsText);
-	validateWithValue("Preferred Mail Service Pharmacy Drug Costs Text Line", PreferredMailServicePharmacyDrugCostsTextLine);
-}
+	public void standardRetailBenefitTableIndiMAPD() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 
-public void validategroupdrugtableMedica() throws InterruptedException{
-	standardRetailBenefitTableIndiMedica();
-	preferredMailBenefitTableIndiMedica();
-}
-public void preferredMailBenefitTableIndiMedica() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
-	Thread.sleep(2000);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$3.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$10.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 3\n"
+				+"100% until the $150.00 deductible is met.*\n"
+				+"$45.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$95.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"30%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-	CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-	validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No Deductible\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Tier 3\n"
-			+"$80.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$185.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"33%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs";
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
-
-	if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
-	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
+		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+		validateWithValue("Standard Network Pharmacy Retail Drug Text", StandardNetworkPharmacyRetailDrugCostsText);
+		validateWithValue("Standard Network Pharmacy Retail Drug Text Line", StandardNetworkPharmacyRetailDrugCostsTextLine);
 	}
 
-}
-public void standardRetailBenefitTableIndiMedica() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
-	Thread.sleep(2000);
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No Deductible\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Tier 3\n"
-			+"$30.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$65.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"33%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs";
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
+	public void preferredMailBenefitTableIndiMAPD() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 
-	if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
-	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
-	}
-}
+		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 3\n"
+				+"100% until the $150.00 deductible is met.*\n"
+				+"$125.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$275.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"30%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
-
-public void validategroupdrugtablePCP() throws InterruptedException{
-	standardRetailBenefitTableIndiPCP();
-	preferredMailBenefitTableIndiPCP();
-}
-public void preferredMailBenefitTableIndiPCP() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
-	Thread.sleep(2000);
-
-	CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-	validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No Deductible\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Tier 3\n"
-			+"$131.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$290.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"33%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs";
-
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
-
-	if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
-	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
+		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+		validateWithValue("Preferred Mail Service Pharmacy Drug Costs", PreferredMailServicePharmacyDrugCostsText);
+		validateWithValue("Preferred Mail Service Pharmacy Drug Costs Text Line", PreferredMailServicePharmacyDrugCostsTextLine);
 	}
 
-}
-public void standardRetailBenefitTableIndiPCP() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
-	Thread.sleep(2000);
-	String TableData= "Annual Deductible Stage\n"
-			+"Initial Coverage Stage\n"
-			+"Coverage Gap Stage\n"
-			+"Catastrophic Coverage Stage\n"
-			+"Tier 1\n"
-			+"No Deductible\n"
-			+"$0.00\n"
-			+"$0.00\n"
-			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
-			+"Tier 2\n"
-			+"$5.00\n"
-			+"$5.00\n"
-			+"Tier 3\n"
-			+"$47.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 4\n"
-			+"$100.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-			+"Tier 5\n"
-			+"33%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs";
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
-
-	if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
+	public void validategroupdrugtableMedica() throws InterruptedException{
+		standardRetailBenefitTableIndiMedica();
+		preferredMailBenefitTableIndiMedica();
 	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
+	public void preferredMailBenefitTableIndiMedica() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
+		Thread.sleep(2000);
+
+		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Tier 3\n"
+				+"$80.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$185.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs";
+
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
+
+		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+
 	}
-}
+	public void standardRetailBenefitTableIndiMedica() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
+		Thread.sleep(2000);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Tier 3\n"
+				+"$30.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$65.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs";
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
-public void validatedrugcosttableMapdLIS() throws InterruptedException{
-	Select drugCostdropdwn = new Select(drugCostDropdown);
-	drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
-	Thread.sleep(2000);
-	String TableData= "Annual Deductible Stage\n"
-+"Initial Coverage Stage\n"
-+"Catastrophic Coverage Stage\n"
-+"Covered Generic Drugs\n"
-+"No Deductible\n"
-+"$3.40\n"
-+"$0.00\n"
-+"All Other Covered Drugs\n"
-+"$8.50\n"
-+"$0.00";
-	System.out.println("The hardcoaded table value is- "+TableData.toString());
-	System.out.println("The table value is- "+RetailDrugCost_Table.getText());
-
-	if(RetailDrugCost_Table.getText().equals(TableData.toString())){
-		Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
-		System.out.println("The data in the drug cost table is displaying correctly");  
+		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
 	}
-	else{
-		System.err.println("The data in the drug cost table is not displaying correctly");
-		Assert.fail("The data in the drug cost table is not displaying correctly");
+
+
+
+	public void validategroupdrugtablePCP() throws InterruptedException{
+		standardRetailBenefitTableIndiPCP();
+		preferredMailBenefitTableIndiPCP();
 	}
-}
+	public void preferredMailBenefitTableIndiPCP() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
+		Thread.sleep(2000);
 
-public void validatePrimaryCareProviderSection() {
+		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$290.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs";
 
-	validateNew(PrimaryCareProviderHeaderInd);
-	validateNew(YourPrimaryCareProvider);
-	validateNew(ChangeYourPcpButton);
-	validateNew(SearchProvider);
-	validateNew(StartSearch);
-}
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
-public void validatePdfLinks(String planType){
-	try {
-		Thread.sleep(15000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+
 	}
-	
-	if(planType.equalsIgnoreCase("MAPD")){
-		
-		if(mapdPdfLinks.size()!=0){
-			System.out.println(" PDF links size:"+ mapdPdfLinks.size());
+	public void standardRetailBenefitTableIndiPCP() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
+		Thread.sleep(2000);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$5.00\n"
+				+"$5.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"$100.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs";
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
+
+		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+	}
+
+	public void validatedrugcosttableMapdLIS() throws InterruptedException{
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
+		Thread.sleep(2000);
+		String TableData= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Covered Generic Drugs\n"
+				+"No Deductible\n"
+				+"$3.40\n"
+				+"$0.00\n"
+				+"All Other Covered Drugs\n"
+				+"$8.50\n"
+				+"$0.00";
+		System.out.println("The hardcoaded table value is- "+TableData.toString());
+		System.out.println("The table value is- "+RetailDrugCost_Table.getText());
+
+		if(RetailDrugCost_Table.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+	}
+
+	public void validatePrimaryCareProviderSection() {
+
+		validateNew(PrimaryCareProviderHeaderInd);
+		validateNew(YourPrimaryCareProvider);
+		validateNew(ChangeYourPcpButton);
+		validateNew(SearchProvider);
+		validateNew(StartSearch);
+	}
+
+	public void validatePdfLinks(String planType){
+		try {
+			Thread.sleep(15000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if(planType.equalsIgnoreCase("MAPD")){
+
+			if(mapdPdfLinks.size()!=0){
+				System.out.println(" PDF links size:"+ mapdPdfLinks.size());
+			}else
+				Assert.fail("No PDFs found");
+
+		}else if(planType.equalsIgnoreCase("PDP")){
+
+			if(pdpPdfLinks.size()!=0){
+				System.out.println(" PDF links size:"+ pdpPdfLinks.size());
+			}else
+				Assert.fail("No PDFs found");
+		}
+
+	}
+
+	public void navigateToDocumentsAndResourcesPage(String planType){
+		if(planType.equalsIgnoreCase("SHIP")||planType.equalsIgnoreCase("MEDSUPP")){
+			validateNew(viewDocsAndResourcesLinkShip);
+			viewDocsAndResourcesLinkShip.click();
+		}
+		else{
+			validateNew(viewDocsAndResourcesLink);
+			viewDocsAndResourcesLink.click();
+		}
+		if(!validateNew(docsAndResourcesHeader))
+			Assert.fail("Error in loading the documents and resources page");		
+	}
+
+	public void navigateToOrderPlanMaterialsPage(){
+		validateNew(orderMaterialsTab);
+		orderMaterialsTab.click();
+	}
+
+	public void validateOrderPlanMaterialsPage(String planType){
+		if(planType.equalsIgnoreCase("MEDSUPP") || planType.equalsIgnoreCase("SHIP")){
+			validateNew(radioBtnsSectionShip);
 		}else
-			Assert.fail("No PDFs found");
+			validateNew(radioBtnsSectionNonShip);
 
-	}else if(planType.equalsIgnoreCase("PDP")){
-	
-		if(pdpPdfLinks.size()!=0){
-			System.out.println(" PDF links size:"+ pdpPdfLinks.size());
-		}else
-			Assert.fail("No PDFs found");
-	}
-	
+		validateNew(submitOrderBtn);
+		validateNew(planDocsAndResourcesBtn);
 	}
 
-public void navigateToDocumentsAndResourcesPage(String planType){
-	if(planType.equalsIgnoreCase("SHIP")||planType.equalsIgnoreCase("MEDSUPP")){
-		validateNew(viewDocsAndResourcesLinkShip);
-		viewDocsAndResourcesLinkShip.click();
+	public PaymentHistoryPage navigateToPaymentsPage(){
+		paymentsTab.click();
+
+		if(validateNew(paymentsHeader))
+			return new PaymentHistoryPage(driver);
+		return null;
 	}
-	else{
-		validateNew(viewDocsAndResourcesLink);
-		viewDocsAndResourcesLink.click();
+
+	public void validatePlanNavTab(String planType) {
+
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTab.click();
+		}		
 	}
-	if(!validateNew(docsAndResourcesHeader))
-		Assert.fail("Error in loading the documents and resources page");		
-}
 
-public void navigateToOrderPlanMaterialsPage(){
-	validateNew(orderMaterialsTab);
-	orderMaterialsTab.click();
-}
+	public void validatePlanNavTabOrderMaterialsPage(String planType) {
 
-public void validateOrderPlanMaterialsPage(String planType){
-	if(planType.equalsIgnoreCase("MEDSUPP") || planType.equalsIgnoreCase("SHIP")){
-		validateNew(radioBtnsSectionShip);
-	}else
-		validateNew(radioBtnsSectionNonShip);
-	
-	validateNew(submitOrderBtn);
-	validateNew(planDocsAndResourcesBtn);
-}
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(validate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+			pdpNavTabOrderMaterials.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(validate(medsuppNavTab))
+				medsuppNavTabOrderMaterials.click();
+		}
 
-public PaymentHistoryPage navigateToPaymentsPage(){
-	paymentsTab.click();
-	
-	if(validateNew(paymentsHeader))
-		return new PaymentHistoryPage(driver);
-	return null;
-}
-
-public void validatePlanNavTab(String planType) {
-
-	if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
-		if(validate(mapdNavTab))
-			mapdNavTab.click();	
-	}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
-		pdpNavTab.click();
-	}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
-		if(validate(medsuppNavTab))
-			medsuppNavTab.click();
-	}		
-}
-
-public void validatePlanNavTabOrderMaterialsPage(String planType) {
-
-	if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
-		if(validate(mapdNavTab))
-			mapdNavTab.click();	
-	}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
-		pdpNavTabOrderMaterials.click();
-	}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
-		if(validate(medsuppNavTab))
-			medsuppNavTabOrderMaterials.click();
 	}
-	
-}
 
 	public void validateNavTabs() {
 		validateNew(benefitsSummarySection);

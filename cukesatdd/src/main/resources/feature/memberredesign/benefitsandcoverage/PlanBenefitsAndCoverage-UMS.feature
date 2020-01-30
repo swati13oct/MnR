@@ -78,7 +78,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | Combo    | ComboFEDShip_BnC_Sardar |
+      | 15091 | Combo    | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
   @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @BnC_Part1_regressionMember
