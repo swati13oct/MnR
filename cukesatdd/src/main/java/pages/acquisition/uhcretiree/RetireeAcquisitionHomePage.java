@@ -218,7 +218,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	public ProviderSearchPageUhcRetiree navigateToProviderSearchTool() {
 		validateNew(providerSearchFromHomeScreen);
 		switchToNewTabNew(providerSearchFromHomeScreen);
-		if (!MRScenario.environmentMedicare.equalsIgnoreCase("stage")) { //need this sleep for lower env
+		if (!MRScenario.environment.equalsIgnoreCase("stage")) { //need this sleep for lower env
 			try { //need this sleep for 
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
