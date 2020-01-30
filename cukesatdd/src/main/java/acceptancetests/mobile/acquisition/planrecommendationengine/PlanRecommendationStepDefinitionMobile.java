@@ -230,6 +230,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		doctorpage.doctorspage(inputValues.get("Doctors Selection"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);	
 	}
 	
+	@And("^user selects Doctors in Doctors page mobile and cancels the selection$")
+	public void select_doctors_page_cancelvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
+		doctorpage.doctorspageCancel(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));	
+	}
+	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();

@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,8 +32,9 @@ public class DoctorsMobilePage extends UhcDriver {
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
+
 	String page = "Doctors";
-	
+
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	WerallyMobilePage werally = new WerallyMobilePage(driver);
 	ArrayList<String> werallyResults = new ArrayList<String>();
@@ -80,10 +80,10 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div legend.primary-question-tex")
 	private WebElement doctorPagePrimaryQuestion;
-	
+
 	@FindBy(css = "div legend.primary-question-tex span>sup")
 	private WebElement doctorPagePrimaryQuestionMark;
-	
+
 	@FindBy(css = "div legend.primary-question-tex .description-text")
 	private WebElement doctorPagePrimaryQuestionDecsription;
 
@@ -96,40 +96,35 @@ public class DoctorsMobilePage extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(4)>label")
 	private WebElement doctorLookupOption;
 
-	//Doctors Page Modal popup
-	
+	// Doctors Page Modal popup
+
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalFinddoctors;
-	
-	@FindBy(css = "#modal div button[class*='secondary']")
+
+	@FindBy(css = "#modal div[class*='modal-footer'] button[class*='secondary']")
 	private WebElement modalCancel;
-	
+
 	@FindBy(css = "#modal #modal-label")
 	private WebElement modalTitle;
-	
+
 	@FindBy(css = "#modal .modal-content")
 	private WebElement modalDescription;
-	
-	//Doctors Page Confirmation Modal popup
-	
+
+	// Doctors Page Confirmation Modal popup
+
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
-	
+
 	@FindBy(css = "#modal .modal-content .row:nth-of-type(1) p")
 	private WebElement modalDoctorsCount;
-	
+
 	@FindBy(css = "#modal .modal-content .row:nth-of-type(2) uhc-list-item")
 	private List<WebElement> modalDoctorsList;
-	
+
 	// Find doctor element and lookup for name
 	@FindBy(css = ".list-item-content")
 	private WebElement doctorName;
-	
-	//#modal .modal-content .row:nth-of-type(2) uhc-list-item button[class*='secondary']
-	//Find doctor element and lookup remove button
-	@FindBy(css = "button[class*='secondary']")
-	private List<WebElement> modalDoctorsRemovebutton;
-	
+
 	// Doctors Page Element Verification Method
 	public void doctorspageElements() {
 		System.out.println("Travel Validating Page: ");
@@ -157,11 +152,11 @@ public class DoctorsMobilePage extends UhcDriver {
 
 		mobileUtils.mobileLocateElementClick(doctorWantOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
-		System.out.println("Validationg "+page+" page Previous button functionality");
+		System.out.println("Validationg " + page + " page Previous button functionality");
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 
-	public void doctorspage(String doctorsSelection,String doctorsName,String multiDoctor, String status) {
+	public void doctorspage(String doctorsSelection, String doctorsName, String multiDoctor, String status) {
 		if (status.equals("Positive")) {
 			if (doctorsSelection.equalsIgnoreCase("willing to use")) {
 				mobileUtils.mobileLocateElementClick(doctorUHCNetworkOption);
@@ -175,13 +170,13 @@ public class DoctorsMobilePage extends UhcDriver {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				mobileUtils.mobileLocateElementClick(continueBtn);
-				if(multiDoctor.equalsIgnoreCase("YES"))
-					doctorlookup(doctorsName,3);
+				if (multiDoctor.equalsIgnoreCase("YES"))
+					doctorlookup(doctorsName, 3);
 				else
-					doctorlookup(doctorsName,1);
+					doctorlookup(doctorsName, 1);
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
-			//mobileUtils.nextPageValidation(page.toUpperCase());
+			mobileUtils.nextPageValidation(page.toUpperCase());
 		} else {
 			if (doctorsSelection.isEmpty()) {
 				mobileUtils.mobileLocateElementClick(continueBtn);
@@ -189,25 +184,47 @@ public class DoctorsMobilePage extends UhcDriver {
 			}
 		}
 	}
-	
-	public void doctorlookup(String search,int count) {
+
+	public void doctorlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
 		mobileUtils.mobileLocateElementClick(modalFinddoctors);
-		validateWerallySearchanotherWindowmobile(curdriverhandle,"Doctors", search, count);
+		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
 		getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count,werallyResults,confirmationResults);
-		if(count>2)
+		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
+		if (count > 2)
 			removeDoctors();
 		mobileUtils.mobileLocateElementClick(modalContinuedoctors);
 	}
-	
+
+	public void doctorModellookupElements() {
+		validate(modalDescription);
+		Assert.assertTrue(modalDescription.getText().contains("Save"));
+		validate(modalTitle);
+		Assert.assertTrue(modalTitle.getText().contains("browser"));
+		validate(modalCancel);
+		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
+		validate(modalFinddoctors);
+		Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
+	}
+
+	public void doctorConfirmationModellookupElements() {
+		validate(modalTitle);
+		Assert.assertTrue(modalTitle.getText().contains("Your Doctors"));
+		validate(modalDoctorsCount);
+		Assert.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
+		validate(modalCancel);
+		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
+		validate(modalContinuedoctors);
+		Assert.assertTrue(modalContinuedoctors.getText().contains("Continue"));
+	}
+
 	public void removeDoctors() {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
 		WebElement remove = modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
 		mobileUtils.mobileLocateElementClick(remove);
 		int afterRemove = modalDoctorsList.size();
-		if(beforeRemove==afterRemove) {
+		if (beforeRemove == afterRemove) {
 			System.out.println("Remove Results Count mismatch");
 			Assert.assertTrue(false);
 		}
@@ -215,26 +232,25 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	public void getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
-		if(count==modalDoctorsList.size() && count==confirmationSize) {
-			confirmationResults=new ArrayList<String>();
+		if (count == modalDoctorsList.size() && count == confirmationSize) {
+			confirmationResults = new ArrayList<String>();
 			for (int i = 0; i < count; i++)
-				confirmationResults.add(modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().trim());
+				confirmationResults.add(
+						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().trim());
 			Collections.sort(confirmationResults);
 			System.out.println(confirmationResults);
-		}
-		else {
+		} else {
 			System.out.println("Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
 	}
-	
-	public void validateWerallySearchanotherWindowmobile(String primaryWindow,String type,String search,int count) {
+
+	public void validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		threadsleep(2000);
-		werallyResults=null;
+		werallyResults = null;
 		Set<String> windows = driver.getWindowHandles();
 		System.out.println(windows);
 		if (windows.size() == 2) {
-			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 				for (String window : windows) {
 					if (!window.equals(primaryWindow)) {
 						driver.switchTo().window(window);
@@ -244,11 +260,10 @@ public class DoctorsMobilePage extends UhcDriver {
 						mobileUtils.fixFormResubmission(true);
 						pageloadcomplete();
 						System.out.println(driver.getCurrentUrl());
-						werallyResults = werally.werallySearch(type,search,count);
+						werallyResults = werally.werallySearch(type, search, count);
 					}
 					driver.switchTo().window(primaryWindow);
 				}
-			}
 			System.out.println(driver.getCurrentUrl());
 			threadsleep(1000);
 		} else {
@@ -259,42 +274,67 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 	}
 
-	public void verifyConfirmationmodalResults(int count,ArrayList<String> werally,ArrayList<String> confirm) {
+	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
 
-		if(werally.size()==confirm.size() && count==werally.size()) {
-			if(equalsname(werally,confirm)) {
+		if (werally.size() == confirm.size() && count == werally.size()) {
+			if (equalsname(werally, confirm)) {
 				System.out.println("Werally and Modal Result's Content matched");
-			}
-			else {
+			} else {
 				System.out.println("Werally and Modal Result's Content mismatch");
 				Assert.assertTrue(false);
 			}
-		}
-		else {
+		} else {
 			System.out.println("Werally and Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
 	}
-	
-	public boolean equalsname(ArrayList<String> werally,ArrayList<String> doctorsmodal) {
-		boolean result=true;
-		for(int i = 0;i<werally.size();i++) {
-			String wname[] = werally.get(i).replace(",","").replace(".", "").split(" ");
+
+	public boolean equalsname(ArrayList<String> werally, ArrayList<String> doctorsmodal) {
+		boolean result = true;
+		for (int i = 0; i < werally.size(); i++) {
+			String wname[] = werally.get(i).replace(",", "").replace(".", "").split(" ");
 			Arrays.sort(wname);
-			for(int j=0;j<doctorsmodal.size();j++) {
-				String dname[] = doctorsmodal.get(j).replace(",","").replace(".", "").split(" ");
+			for (int j = 0; j < doctorsmodal.size(); j++) {
+				String dname[] = doctorsmodal.get(j).replace(",", "").replace(".", "").split(" ");
 				Arrays.sort(dname);
 				System.out.println(Arrays.equals(wname, dname));
-				if(Arrays.equals(wname, dname)) {
-					result=true;
+				if (Arrays.equals(wname, dname)) {
+					result = true;
 					break;
-				}
-				else {
-					result=false;
+				} else {
+					result = false;
 				}
 			}
 		}
-		System.out.println("Doctors Name validation Result "+result);
+		System.out.println("Doctors Name validation Result " + result);
 		return result;
 	}
+
+	public void doctorspageCancel(String doctorsName, String multiDoctor) {
+		mobileUtils.mobileLocateElementClick(doctorLookupOption);
+		System.out.println("Plan Type Lookup Clicked");
+		mobileUtils.mobileLocateElementClick(continueBtn);
+		if (multiDoctor.equalsIgnoreCase("YES")) {
+			String curdriverhandle = driver.getWindowHandle();
+			mobileUtils.mobileLocateElementClick(modalFinddoctors);
+			validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", doctorsName, 2);
+			doctorConfirmationModellookupElements();
+			modalCancel.click();
+			if(validate(modalCancel,10)==true) {
+				System.out.println("Modal Popup is not closed");
+				Assert.assertTrue(false);
+			}
+		}
+		else {
+			doctorModellookupElements();
+			modalCancel.click();
+			if(validate(modalCancel,10)==true) {
+				System.out.println("Confirmation Modal Popup is not closed");
+				Assert.assertTrue(false);
+			}
+		}
+		System.out.println("Validating " + page + " page modal cancel button functionality");
+		pageStepsNumberName.getText().toUpperCase().contains(page.toUpperCase());
+	}
+
 }

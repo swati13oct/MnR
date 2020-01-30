@@ -65,9 +65,9 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
       | Multi Doctor        | <isMultiDoctor>    |
 
     Examples: 
-      | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO              | New York | MA            | None         | Travel       | lookup           | sue         | NO            |
-      |   10002 | NO              | New York | MA            | None         | Travel       | lookup           | sue         | YES           |
+      | Zipcode | isMultutiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
+      |   10001 | NO              | New York    | MA            | None         | Travel       | lookup           | sue         | NO            |
+      |   35034 | YES             | Bibb County | MA            | None         | Travel       | lookup           | sue         | YES           |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageerrorvalidationmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile
@@ -91,3 +91,26 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
     Examples: 
       | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
       |   10001 | NO              | New York | MA            | None         | Travel       |                  |             |               |
+
+  @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepagecancelmobile @F372731
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page modal cancel functions in Plan Recommendation Engine Mobile
+    Given the user is on UHC medicare acquisition site mobile
+    When user navigates to Zip Code page mobile
+    And runs questionnaire at zipcode page mobile
+      | Zip Code        | <Zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <County>          |
+    And user selects plan type in coverage options page mobile
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page mobile
+      | SNP Options | <SpecialNeeds> |
+    And user selects Travel options in Travel Page mobile
+      | Travel Options | <TravelOption> |
+    Then user selects Doctors in Doctors page mobile and cancels the selection
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+
+    Examples: 
+      | Zipcode | isMultutiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsName | isMultiDoctor |
+      |   35034 | YES             | Bibb County | MA            | None         | Travel       |             |               |
+      |   10001 | NO              | New York    | MA            | None         | Travel       | sue         | YES           |
