@@ -136,12 +136,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				//note: on UI both looks identifical betwween original page and email
 				//note: attempt to clean up the string to do one comparison one more time
 				originalValue=originalValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
-				
 				emailValue=emailValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
-				
-		System.out.println("OMG - targetKey="+targetKey);		
-		System.out.println("OMG - originalValue="+originalValue);
-		System.out.println("OMG - emailValue="+emailValue);
 				if (originalValue.equals(emailValue)) {
 					failedMessage="BYPASS '"+planType+"' validation for extra new line or space - ";
 					failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
