@@ -179,8 +179,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valPrescritionDrugEstimatedTotalAnnualCost;
 
-	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
-	private WebElement valCostTabEstimatedTotalAnnualCost;
+	@FindBy(xpath = "(//*[contains(@class,'plan-detail-table')]//*[contains(@ng-if,'PlanContentSuppDetail')]//*[contains(text(),'Yearly')]/ancestor::td//*[contains(@ng-show,'')]//*[contains(@class,'ng-binding')])")
+	private WebElement valCostTabYearlyCost; 
 
 	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
 	private WebElement editProviderButtonOnPlanDetails;
@@ -239,7 +239,7 @@ public class PlanDetailsPage extends UhcDriver {
 	private List<WebElement> countyList;
 
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
-		return valCostTabEstimatedTotalAnnualCost;
+		return valCostTabYearlyCost;
 	}
 
 	@FindBy(id="backToPlanSummaryTop")
