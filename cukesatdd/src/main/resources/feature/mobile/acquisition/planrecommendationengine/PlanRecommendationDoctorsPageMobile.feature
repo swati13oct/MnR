@@ -65,9 +65,9 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
       | Multi Doctor        | <isMultiDoctor>    |
 
     Examples: 
-      | Zipcode | isMultutiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO              | New York    | MA            | None         | Travel       | lookup           | sue         | NO            |
-      |   35034 | YES             | Bibb County | MA            | None         | Travel       | lookup           | sue         | YES           |
+      | Zipcode | isMultutiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
+      |   10001 | NO              | New York | MA            | None         | Travel       | lookup           | sue         | NO            |
+      |   10002 | NO              | New York | MA            | None         | Travel       | lookup           | sue         | YES           |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageerrorvalidationmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile
@@ -112,5 +112,5 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultutiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsName | isMultiDoctor |
-      |   35034 | YES             | Bibb County | MA            | None         | Travel       |             |               |
-      |   10001 | NO              | New York    | MA            | None         | Travel       | sue         | YES           |
+      |   10001 | NO              | New York    | MA            | None         | Travel       |             |               |
+      |   35034 | YES             | Bibb County | MA            | None         | Travel       | robert      | YES           |
