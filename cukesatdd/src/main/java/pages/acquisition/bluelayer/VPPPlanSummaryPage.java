@@ -284,7 +284,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@class,'single-added-text show')]/following::a[contains(text(),'View Plan')][1]")
 	private WebElement ViewPlanLink_AddedToCompare;
 	
-	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//div[not (contains(@class,'ng-hide'))]/a[contains(@class,'view-more-link')]")
+	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//div[not (contains(@class,'ng-hide'))]//a[contains(text(),'View Plan Details')]")
 	private WebElement ViewPlanLink;
 
 	@FindBy(id = "plan-list-1")

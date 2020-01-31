@@ -93,7 +93,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	private WebElement compareBoxMessage;
-
+	
+	@FindBy(xpath = "//span[@class='single-added-text ng-scope show']")
+	private WebElement compareBoxChecked;
+	
 	@FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	private WebElement compareBoxMessagePDP;
 
@@ -481,16 +484,15 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBox() {
-		if (compareBoxMessage.getText().contains("plan added")) {
-			clickCompareBox();
-			Assert.assertTrue(compareBoxMessage.getText().contains("Add to compare"),
+		if(validateNew(compareBoxChecked)){
+			Assert.assertTrue(compareBoxMessage.getText().contains("1 plan added, please select another plan to continue"),
 					"Message not changed to Add to Compare");
 			return true;
-		} else {
-			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
-			return false;
 		}
-
+		 else {
+				Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
+				return false;
+			}
 	}
 
 	public void clickCompareBox() {

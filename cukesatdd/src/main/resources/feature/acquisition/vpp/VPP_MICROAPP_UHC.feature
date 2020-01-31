@@ -235,7 +235,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @vppMicorAPPBlayer09 @vppMicorAPPBlayerPlanDetails
-  Scenario Outline: Verify plan details in UMS site
+  Scenario Outline: Verify plan details and Plan Compare checkbox in plan details  page in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -254,7 +254,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
+      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO)  |
 
   @vppMicorAPPBlayer10 @vppMicorAPPBlayerPlanCompare
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -306,7 +306,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
 
     Examples: 
       | zipcode | planName                                           | plantype |
-      |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
+      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
 
   @vppMicorAPPBlayer14 @vppMicorAPPBlayerPlanDetails
   Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
@@ -321,7 +321,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
 
     Examples: 
       | zipcode | planName                                           | plantype |
-      |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
+      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
 
   @vppMicorAPPBlayer15 @vppMicorAPPBlayerPlanSummary
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
