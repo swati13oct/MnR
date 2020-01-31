@@ -35,7 +35,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | memberType | planType | claimPeriod    | claimSystem  |
      # | ShipInd    | SHIP     | Last 24 months | SHIPCLAIMS   |
       | ULayerInd  | MAPD     | Last 24 months | COSMOSCLAIMS |
-      | ULayerInd  | MAPD     | Last 24 months | NICECLAIMS   |
+     # | ULayerInd  | MAPD     | Last 24 months | NICECLAIMS   |
     #  | ULayerInd  | PDP      | Last 24 months | RxCLAIMS     |
     #  | BlueLayerInd | MAPD     | Last 24 months | COSMOSCLAIMS |
     #  | BlueLayerInd | MAPD     | Last 24 months | RxCLAIMS     |
