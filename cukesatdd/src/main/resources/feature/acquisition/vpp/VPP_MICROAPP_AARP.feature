@@ -23,6 +23,28 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
       | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
       |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
 
+  @vppPlanDetailsRegression @prodRegression
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    When user scrolls down to Plan selector on VPP detail page on right rail widget
+   
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                 | eyeWearBenefitType | eyeWearExpectedText                                                                          | dentalBenefitType | dentalExpectedText                                                     | transportationBenefitType | transportationExpectedText                                                       | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
+     | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+     | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $3,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
+
+
+
+
   @vppMicorAPPUlayer02 @vppMicorAPPUlayerPlanDetails
   Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
     Given the user is on AARP medicare acquisition site landing page
@@ -89,7 +111,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for AARP
     Examples: 
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                     | optionalRider   | monthlyPremium | yearlyPremium |
       #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)  | Dental Platinum | $0             | $0            |
+      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)  | Dental Platinum | $16             | $192            |
 
   #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
   @vppMicorAPPUlayer05 @vppMicorAPPUlayerPlanSummary
