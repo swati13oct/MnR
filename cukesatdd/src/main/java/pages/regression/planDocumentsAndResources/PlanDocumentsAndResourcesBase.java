@@ -425,7 +425,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					} 
 				}
 				if (!found && (act_category.equals("HEALTH PRODUCTS BENEFIT") 
-						|| act_category.equals("HOME SERVICE DELIVERY BROCHURE")
+						|| act_category.equals("Home Delivery Brochure")
 						|| act_category.equals("OVER THE COUNTER ESSENTIALS"))
 						|| act_category.equals("Over-the-Counter Drug List")
 						|| act_category.equals("Health & Wellness Products Catalog")) {
@@ -436,7 +436,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				if (found) {
 					System.out.println("found match for act_category="+act_category);
 					if (act_category.equals("HEALTH PRODUCTS BENEFIT") 
-							|| act_category.equals("HOME SERVICE DELIVERY BROCHURE")  
+							|| act_category.equals("Home Delivery Brochure")  
 							|| act_category.equals("OVER THE COUNTER ESSENTIALS")
 							|| act_category.equals("Over-the-Counter Drug List")
 							|| act_category.equals("Health & Wellness Products Catalog")) 

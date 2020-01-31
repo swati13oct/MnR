@@ -1154,7 +1154,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
+				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Summary of Benefits"); //note: copy deck didn't have this but online-stage UI does
@@ -3188,7 +3188,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				//targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Comprehensive Formulary");
 				//targetTestDocList.add("Additional Drug Coverage");
-				targetTestDocList.add("HOME SERVICE DELIVERY BROCHURE");
+				targetTestDocList.add("Home Delivery Brochure");
 				//targetTestDocList.add("Evidence Of Coverage");
 				//targetTestDocList.add("Certificate of Coverage");
 				return targetTestDocList;
