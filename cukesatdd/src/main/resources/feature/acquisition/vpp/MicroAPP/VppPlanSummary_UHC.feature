@@ -1,54 +1,7 @@
-@vppMicorAPPBlayer
-Feature: VPP PlanSummary deatils and Compare Testcases for UHC
+@vppPlanSummaryUHC
+Feature: Vpp to plan Summary UHC Scenarios
 
-  @vppMicorAPPBlayer01 @vppMicorAPPBlayerPlanDetails
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    Then the user click on Plan costs tab and validates
-      | Monthly Premium | <monthlyPremium> |
-      | Yearly Premium  | <yearlyPremium>  |
-
-    Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium |
-      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          |
-      | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            |
-      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          |
-
-  @vppMicorAPPBlayer02 @vppMicorAPPBlayerPlanDetails
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
-    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    Then the user click on Optional Services tab and add the rider
-      | Optional Rider  | <optionalRider>  |
-      | Monthly Premium | <monthlyPremium> |
-    Then the user click on Plan costs tab and validates
-      | Monthly Premium | <monthlyPremium> |
-      | Yearly Premium  | <yearlyPremium>  |
-
-    Examples: 
-      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                     | optionalRider   | monthlyPremium | yearlyPremium |
-      #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0             | $0            |
-
-  #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
-  @vppMicorAPPBlayer03 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC01
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -97,7 +50,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | 15542 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |
       | 15543 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 |
 
-  @vppMicorAPPBlayer05 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC02
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -123,8 +76,8 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |
       | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |
 
-  @vppMicorAPPBlayer06 @vppMicorAPPBlayerPlanSummary
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
+  @vppPlanSummaryUHC03
+  Scenario Outline: UD: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
@@ -186,7 +139,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppMicorAPPBlayer07 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -212,118 +165,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppMicorAPPBlayer08 @vppMicorAPPBlayerDetails
-  Scenario Outline: Verify plan details in UMS site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    And the user validates the pdf section for uhc
-    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
-    Then User click on add to compare checkbox and click on view details link on UMS
-    Then I uncheck and go back to the vpp page to validate
-
-    Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                            |
-      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-
-  @vppMicorAPPBlayer09 @vppMicorAPPBlayerPlanDetails
-  Scenario Outline: Verify plan details and Plan Compare checkbox in plan details  page in UMS site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
-    # When user views plans of the below plan type in UMS site
-    When user views plans of the below plan type in UMS site for current year
-      | Plan Type | <plantype> |
-    Then the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    And the user validates the pdf section for uhc
-    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
-    Then User click on add to compare checkbox and click on view details link on UMS
-    Then I uncheck and go back to the vpp page to validate
-
-    Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO)  |
-
-  @vppMicorAPPBlayer10 @vppMicorAPPBlayerPlanCompare
-  Scenario Outline: To verify correct message shows on view details page after checking compare plans box
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I click on add to compare checkbox and click on view details link
-    Then I uncheck and recheck the compare box and verify the message and link exists
-    Then I uncheck and go back to the vpp page to validate
-
-    Examples: 
-      | zipcode |
-      |   33012 |
-
-  @vppMicorAPPBlayer11 @vppMicorAPPBlayerPlanCompare
-  Scenario Outline: To test checkbox is unchecked on vpp after unchecking it on view details page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I click on add to compare checkbox and click on view details link
-    Then I uncheck and go back to the vpp page to validate
-
-    Examples: 
-      | zipcode |
-      |   33012 |
-
-  @vppMicorAPPBlayer12 @vppMicorAPPBlayerPlanCompare
-  Scenario Outline: To test correct message is displayed for PDP plans after checking compare plans box
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I select pdp plans and go to view details page
-    Then I check compare box and verify right info is shown
-
-    Examples: 
-      | zipcode |
-      |   33012 |
-
-  @vppMicorAPPBlayer13 @vppMicorAPPBlayerPlanCompare
-  Scenario Outline: To test two plans are added when clicked on compare plans on Plan details page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    And the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    Then the user clicks on add to compare box and validates that info shows 2 plans added
-
-    Examples: 
-      | zipcode | planName                                           | plantype |
-      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
-
-  @vppMicorAPPBlayer14 @vppMicorAPPBlayerPlanDetails
-  Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    And the user view plan details of the above selected plan in UMS site vpp
-      | Plan Name | <planName> |
-    Then the user clicks on both top and bottom back to plans link and validates its redirection
-
-    Examples: 
-      | zipcode | planName                                           | plantype |
-      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
-
-  @vppMicorAPPBlayer15 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC06
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -338,7 +180,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
 
-  @vppMicorAPPBlayer16 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC07
   Scenario Outline: Vaidate the Right Rail Promo Widget
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -352,7 +194,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | zipcode | plantype | planName                    |
       |   55344 | MA       | UnitedHealthcare Sync (PPO) |
 
-  @vppMicorAPPBlayer17 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC08
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When verify Call sticky action menu icon is visible or not
@@ -363,7 +205,7 @@ Feature: VPP PlanSummary deatils and Compare Testcases for UHC
       | UID     |
       | F322478 |
 
-  @vppMicorAPPBlayer18 @vppMicorAPPBlayerPlanSummary
+  @vppPlanSummaryUHC09
   Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When verify Chat sticky action menu icon is visible or not
