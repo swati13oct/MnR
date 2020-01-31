@@ -2126,11 +2126,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
 		RightRail_AgentInYourArea.click();
+		ArrayList<String> tabs_windows = new ArrayList<String> (driver.getWindowHandles());
+		 driver.switchTo().window(tabs_windows.get(1));
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("agentebrc")) {
 			System.out.println("Agent EBRC Page is displayed");
 			Assert.assertTrue(true);
-			driver.navigate().back();
+			//driver.navigate().back();
+			driver.switchTo().window(tabs_windows.get(0));
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");

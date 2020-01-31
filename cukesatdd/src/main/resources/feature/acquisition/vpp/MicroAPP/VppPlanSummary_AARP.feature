@@ -57,6 +57,7 @@ Feature: Vpp to plan Summary AARP Scenarios
     Then the user validates the right rail in AARP Site
     Then the user validates the Need Help Section in the right rail in aarp Site
     Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
     Then the user validates Get a free medicare Guide section in the right rail in aarp Site
     Then the user enters the following information in the Get a free medicare Guide section in aarp Site
       | First Name    | <firstName>    |

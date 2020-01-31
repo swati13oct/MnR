@@ -62,6 +62,7 @@ Feature: Vpp to plan Summary UHC Scenarios
     Then the user validates the right rail in UMS Site
     Then the user validates the Need Help Section in the right rail in ums Site
     Then the user validates the TFN in the Need Help Section in ums Site
+    And the user validates and clicks on Find an agent in your area link in ums Site
     Then the user validates Get a free medicare Guide section in the right rail in ums Site
     Then the user enters the following information in the Get a free medicare Guide section in ums Site
       | First Name    | <firstName>    |
