@@ -333,8 +333,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
-	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
+	private static String Local_AARP_URL = MRConstants.Local_URL;	
+	private static String DIGITAL_AARP_URL = MRConstants.TeamDigital_AARP_URL;
+	private static String DIGITAL_UHC_URL = MRConstants.TeamDigital_UHC_URL;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 
@@ -425,7 +428,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver,45);
-		} else {
+		} else if(MRScenario.environment.equals("local")){
+			startNew(Local_AARP_URL);
+		} else if(MRScenario.environmentName.equalsIgnoreCase("TEAMDIGITAL_AARP_URL")){
+			startNew(DIGITAL_AARP_URL);
+		} else if(MRScenario.environmentName.equalsIgnoreCase("TEAMDIGITAL_UHC_URL")){
+			startNew(DIGITAL_UHC_URL);
+		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkModelPopup(driver,10);
 		}
@@ -1258,7 +1267,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return new PlanSelectorNewPage(driver);
 	}
-
+	
 	public PlanSelectorNewPage PSTButton() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		PageFactory.initElements(driver, this);
