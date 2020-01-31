@@ -164,8 +164,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 		System.out.println("Previous page Validation Mobile");
 		findPagedetails(pageName);
 		try {
-			threadsleep(3000);
 			pageloadcomplete();
+			threadsleep(3000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
 					"Previous page name validation failed");
 			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),"Previous page % validation failed");
@@ -179,8 +179,8 @@ public class CommonutilitiesMobile extends UhcDriver {
 		System.out.println("Next page Validation Mobile");
 		findPagedetails(pageName);
 		try {
-			threadsleep(5000);
 			pageloadcomplete();
+			threadsleep(5000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(nextPageName),
 					"Next page name validation failed");
 			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),"Next page % validation failed");
