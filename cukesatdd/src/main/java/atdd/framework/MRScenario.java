@@ -53,6 +53,8 @@ import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
+import io.appium.java_client.AppiumDriver;
+
 import java.security.*;
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
@@ -1104,5 +1106,10 @@ sauceLabsTunnelIdentifier);
 		} catch (NoSuchAlgorithmException e) {
 		}
 		return digest;
+	}
+
+	public AppiumDriver getMobileDriver() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
