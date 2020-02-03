@@ -501,10 +501,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[1]")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div//div[1]/span)[1]")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div/div/div[2]/span")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/div/div[2]/span")
 	private WebElement specialistValue;
 
 	@FindBy(xpath="//*[@id='plandeductiblecard1']")
@@ -751,7 +751,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(id = "standard_ccs-header")
 	private List<WebElement> catastrophicCoverageStageColumnFederal;
 
-	@FindBy(xpath = "//table[contains(@class,'standrdretailpharmcytable')]//tr[2]/td[count(//table[contains(@class,'standrdretailpharmcytable')]//tr/th[@id='standard_ics-header']/preceding-sibling::*)+1]/*[not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath = "//table/tbody/tr[2]/td[2]/div[1]")
 	private WebElement federalValueIC;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -3815,6 +3815,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		validateNew(federalValueIC);
 		String input = federalValueIC.getText();
+		System.out.println(">>>>>>>>Value in the Initial Coverage Stage is:"+input);
 		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$");
 		if (pattern.matcher(input).matches()) {
 			Assert.assertTrue("value  in IC column exists", true);
@@ -3835,9 +3836,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			if (memberid1.contains("-11")) {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,900)", "");
-				System.out.println("User is on ship page");
+				System.out.println(">>>Validating the benefits for a Ship Plan");
 				validateNew(shipClaimsSupportHeader);
 			} else {
+				System.out.println(">>>Validating the benefits of a Federal Plan of a combo Member");
 				validateNew(drugCopaysAndDiscount);
 			}
 
@@ -3845,12 +3847,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(memberIdForPlan);
 			memberid1 = memberIdForPlan.getText();
 			if (memberid1.contains("-11")) {
-				System.out.println("User is on ship page");
+				System.out.println(">>>Validating the benefits for a Ship Plan");
 
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,900)", "");
 				validateNew(shipClaimsSupportHeader);
 			} else {
+				System.out.println(">>>Validating the benefits of a Federal Plan of a combo Member");
 				validateNew(drugCopaysAndDiscount);
 			}
 
