@@ -39,7 +39,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	 */
 	@When("^I view the global navigation HW$")
 	public void I_view_the_global_navigation() throws InterruptedException {
-		if (MRScenario.environmentMedicare.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a")) {
 			Assert.assertTrue("Health and Wellness page content won't load on lower environment, fail it to exit", false);
 			return;
 		}

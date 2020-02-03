@@ -12,6 +12,9 @@ Feature: 1.06.7 Member My Documents Page
     Then validate that My Document section is displayed on Plan And Resources Page
     Then the user navigates to my Documents Page
     Then user validates header section content on My Documents Page
+    And I validate the Note  text on my Documents Page
+    And I validate the disclaimer on my Documents Page 
+    Then I validate Need Help section on my Documents Page
 	#----------------- Test for 90 days----------
     And then the user searches documents for a valid Period on My documents page
       | Search Range | Last 90 days |
@@ -41,9 +44,6 @@ Feature: 1.06.7 Member My Documents Page
     And I custom search documents for the following invalid time interval on my Documents page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
-    And I validate the Note  text on my Documents Page
-    And I validate the disclaimer on my Documents Page 
-    Then I validate Need Help section on my Documents Page
 
     @devRegression
     Examples: 

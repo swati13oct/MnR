@@ -110,25 +110,25 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		String expectCol1="DOCUMENT TYPE";
 		Assert.assertTrue("PROBLEM -  Documents table header column1 value not as expected. "
 				+ "Expected='"+expectCol1+"' | Actual='"+actualCol1+"'", 
-				expectCol1.equals(actualCol1));
+				expectCol1.equalsIgnoreCase(actualCol1));
 
 		String actualCol2=driver.findElement(By.xpath("//table/tbody/tr[1]/th[2]/a")).getText();
 		String expectCol2="DATE";
 		Assert.assertTrue("PROBLEM - Documents claims table header column2 value not as expected. "
 				+ "Expected='"+expectCol2+"' | Actual='"+actualCol2+"'", 
-				expectCol2.equals(actualCol2));
+				expectCol2.equalsIgnoreCase(actualCol2));
 
 		String actualCol3=driver.findElement(By.xpath("//table/tbody/tr[1]/th[3]/a")).getText();
 		String expectCol3="DESCRIPTION";
 		Assert.assertTrue("PROBLEM - Documents claims table header column3 value not as expected. "
 				+ "Expected='"+expectCol3+"' | Actual='"+actualCol3+"'", 
-				expectCol3.equals(actualCol3));
+				expectCol3.equalsIgnoreCase(actualCol3));
 
 		String actualCol4=driver.findElement(By.xpath("//table/tbody/tr[1]/th[4]")).getText();
 		String expectCol4="View/Download";
 		Assert.assertTrue("PROBLEM - Documents claims table header column4 value not as expected. "
 				+ "Expected='"+expectCol4+"' | Actual='"+actualCol4+"'", 
-				expectCol4.equals(actualCol4));
+				expectCol4.equalsIgnoreCase(actualCol4));
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 */
 	public void validateDisclaimer() {
 		Assert.assertTrue("PROBLEM - unable to locate the disclaimer", validate(disclaimer));
-		String expectedErrorText="This page contains documents in PDF format. PDF (Portable Document Format) files can be viewed with Adobe® Reader®. If you don't already have this viewer on your computer, download it free from the ADOBE WEBSITE.";
+		String expectedErrorText="This page contains documents in PDF format. PDF (Portable Document Format) files can be viewed with Adobe® Reader®. If you don't already have this viewer on your computer, download it free from the Adobe Website.";
 		Assert.assertTrue("PROBLEM -Disclaimer text doesn't Match."
 				+ "Expected='"+expectedErrorText+"' | Actual='"+disclaimer.getText()+"'", 
 				disclaimer.getText().contains(expectedErrorText));
@@ -206,6 +206,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 * method to validate Note text on My documents page
 	 */
 	public void validateNoteText() {
+		CommonUtility.waitForPageLoad(driver, noteText, 5);
 		Assert.assertTrue("PROBLEM - unable to locate Note Text ", validate(noteText));
 		String expectedErrorText="This is not a full list of documents that have been sent to you. This is only what can be sent electronically. Important information will continue to arrive in the mail. Please continue to read all plan documents you receive.";
 		Assert.assertTrue("PROBLEM -Note text doesn't Match"
