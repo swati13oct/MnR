@@ -2,7 +2,7 @@
 Feature: ACQ-DCE-MicroApp - AARP
 
   @DCE_MicroApp_TestHarness_AARP
-  Scenario Outline: To test the DCE flow on AARP Acquisition TestHarness
+  Scenario Outline: To test the DCE flow on AARP Acquisition TestHarness: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |

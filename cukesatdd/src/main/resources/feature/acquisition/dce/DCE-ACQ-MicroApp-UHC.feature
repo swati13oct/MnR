@@ -2,7 +2,7 @@
 Feature: ACQ-DCE-MicroApp - UMS
 
   @DCE_MicroApp_TestHarness_UHC
-  Scenario Outline: To test the DCE flow on UHC Acquisition TestHarness 
+  Scenario Outline: To test the DCE flow on UHC Acquisition TestHarness: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the UMS Acquisition Site DCE TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
