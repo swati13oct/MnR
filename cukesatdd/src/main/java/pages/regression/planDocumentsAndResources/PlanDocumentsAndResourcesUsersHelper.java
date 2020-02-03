@@ -1153,6 +1153,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");

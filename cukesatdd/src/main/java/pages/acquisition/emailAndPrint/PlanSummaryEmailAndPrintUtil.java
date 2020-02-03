@@ -144,6 +144,9 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		result.put("PDP Plan Count", pdpPlans);
 		result.put("SNP Plan Count", snpPlans);
 		result.put("Saved Heart Count", planSummary_listOfSavedHearts.size());
+		result.put("Enroll Button Count", planSummary_listOfEnrollInPlanButtons.size());
+		result.put("View Plan Details Button Count", planSummary_listOfViewPlanDetailsButtons.size());
+		
 		System.out.println("collected result="+result);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
@@ -216,6 +219,20 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
 
+		targetKey="Enroll Button Count";
+		failedMessage=summary_comparePageItem(targetKey, origPage, emailPage);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
+		targetKey="View Plan Details Button Count";
+		failedMessage=summary_comparePageItem(targetKey, origPage, emailPage);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
 		System.out.println("Finished validation for original page content vs page content from email deeplnk for plan summary ============");
 		if (summary_finalResult) { 
 			if (testNote.size()==0) {

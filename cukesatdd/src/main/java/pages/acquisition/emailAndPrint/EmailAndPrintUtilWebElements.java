@@ -71,7 +71,13 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'active')]//a[contains(@class,'added')]")
 	protected List<WebElement> planSummary_listOfSavedHearts;
+	
+	@FindBy(xpath="//div[contains(@class,'active')]//div[@class='enroll-details']//a[contains(@dtmname,'Enroll in Plan')]")
+	protected List<WebElement> planSummary_listOfEnrollInPlanButtons;
 
+	@FindBy(xpath="//div[contains(@class,'active')]//div[@class='enroll-details']//a[contains(@dtmname,'View More Details')]")
+	protected List<WebElement> planSummary_listOfViewPlanDetailsButtons;
+	
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
 	protected WebElement vppTop;
 
@@ -153,6 +159,11 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
 	protected WebElement sendButtonEmailPlanDetailsPopUp;
 
+	@FindBy(xpath="//a[contains(@dtmname,'Enroll in Plan')]")
+	protected List<WebElement> planDetailEnrollButtonList;
+	
+	@FindBy(xpath="//label[contains(@dtmname,'Add to Compare')]")
+	protected List<WebElement> planDetailAddToCompareBoxList;
 
 	public EmailAndPrintUtilWebElements(WebDriver driver) {
 		super(driver);

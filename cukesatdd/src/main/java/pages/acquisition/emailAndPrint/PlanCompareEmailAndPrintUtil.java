@@ -45,6 +45,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			} catch (Exception e) {
 				System.out.println("no plan name info for '"+i+"- Plan Name'");
 			}
+			System.out.println("TEST - "+i+"- Plan Name="+result.get(i+"- Plan Name"));
 
 			String heartXpath=columnXpath+"//a[contains(@class,'added')]";
 			result.put(i+"- Plan Heart", "none");
@@ -55,6 +56,18 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			} catch (Exception e) {
 				System.out.println("no plan heart info for '"+i+"- Plan Heart'");
 			}
+			System.out.println("TEST - "+i+"- Plan Heart="+result.get(i+"- Plan Heart"));
+			
+			String enrollXpath=columnXpath+"//div[@id='innerdiv' and not(contains(@class,'ng-hide'))]//a[contains(@id,'enrollbtnplancompare')]";
+			result.put(i+"- Plan Enroll", "none");
+			try {
+				WebElement e=driver.findElement(By.xpath(enrollXpath));
+				if (validate(e)) 
+					result.put(i+"- Plan Enroll", "true");
+			} catch (Exception e) {
+				System.out.println("no plan Enroll Button for '"+i+"- Plan Enroll'");
+			}
+			System.out.println("TEST - "+i+"- Plan Enroll="+result.get(i+"- Plan Enroll"));
 
 		}
 		int cellsPerRow=listOfCmpPlansColumns.size()+1;
@@ -202,6 +215,13 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				testNote.add(failedMessage);
 
 			targetKey=i+"- Plan Heart";
+			failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
+			if (failedMessage.contains("mismatch")) 
+				listOfFailure.add(failedMessage);	
+			if (failedMessage.contains("BYPASS")) 
+				testNote.add(failedMessage);
+
+			targetKey=i+"- Plan Enroll";
 			failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
 			if (failedMessage.contains("mismatch")) 
 				listOfFailure.add(failedMessage);	

@@ -33,6 +33,15 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		result.put(key, String.valueOf(listOfTabHeaders.size()));
 		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
 
+		key="Number Enroll Button";
+		result.put(key, String.valueOf(planDetailEnrollButtonList.size()));
+		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+
+		key="Number Add to compare Checkbox";
+		result.put(key, String.valueOf(planDetailAddToCompareBoxList.size()));
+		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+		
+		
 		for (int i=0; i<listOfTabHeaders.size(); i++) { //note: loop through each table and store info
 			listOfTabHeaders.get(i).click();
 			CommonUtility.checkPageIsReady(driver);
@@ -114,7 +123,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (!originalValue.equals(emailValue)) {
 			if (((planType.equalsIgnoreCase("MA")) && 
 					(targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2") || 
-							targetKey.equals("T3S1B1") || targetKey.equals("T4S1R9C1")))
+							targetKey.equals("T3S1B1") || targetKey.equals("T4S1R9C1") || targetKey.equals("T2S1R10C2")))
 				||	
 					((planType.equalsIgnoreCase("PDP")) &&
 					(targetKey.equals("T1S1R7C2") || targetKey.equals("T1S1R8C2") || targetKey.equals("T1S1R10C2") || 
@@ -178,6 +187,20 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
 
+		targetKey="Number Enroll Button";
+		failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
+		targetKey="Number Add to compare Checkbox";
+		failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
 		int totalTabs=Integer.valueOf(origPage.get(targetKey));
 		System.out.println("TEST - totalTabs="+totalTabs);
 		for (int tabIndex=1; tabIndex<=totalTabs; tabIndex++) { //note: loop through each table and validate info
