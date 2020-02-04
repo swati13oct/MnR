@@ -29,8 +29,8 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage on claims summary page
-      | Segment ID   | <segmentId>   |
+    #Then I can validate the segment ID value in localStorage on claims summary page
+    #  | Segment ID   | <segmentId>   |
     #----------------- Test Custom calendar and search error cases --------------------------
     ## note: covered in E2E, keep in case want to test here also
     ##And I can search claims for claim period and claim type on claim summary page
@@ -128,10 +128,9 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
      #| 01_4  | xxxxx | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288| SSUP    | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_4  | xxxxx | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288| SSUP    | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_4  | xxxxx | xxxxx                             | SSUP     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
       | 01_5  | 15268 | MEDICA-COSMOS-q2_jun_sofl0013     | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 01_6  | 15268 | PCP_CLAIMS_q3_sept_UAT4_AARP_032  | PCP      | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 01_7  | xxxxx | xxxxx                             | SSP      | GROUP           | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
     @ma_medical_cosmos
     Examples: 

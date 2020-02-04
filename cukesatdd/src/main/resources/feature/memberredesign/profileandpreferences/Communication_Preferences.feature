@@ -53,9 +53,9 @@ Feature: 1.03 Member Preferences page
     Then the user validates the presence of Communication preferences header
     And the user clicks on edit preferences link
     Then the user validates headers on Preferences page
-    Then I can validate the segment ID value in localStorage on preference page
-      | Plan Type  | <planType>  |
-      | Segment ID | <segmentId> |
+    #Then I can validate the segment ID value in localStorage on preference page
+    #  | Plan Type  | <planType>  |
+    #  | Segment ID | <segmentId> |
     Then the user validates the presence of Plan Name on Communication Preferences Page
     And the user validates the iframe on Communication Preferences Page
     Then the user validates the I have read checkbox and check it
@@ -63,7 +63,7 @@ Feature: 1.03 Member Preferences page
     Then the user validates the Note Section on Preferences Page
     Then the user validates the presence of Back links on Preferences page
 
-    Examples: 
+     Examples: 
       | TID   | userSelection | planType                         | segmentId |  
       | 15311 | xxxxx         | MAPD_AARP_GOGreen_Profilepref    | 000       |
       | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref      | 000       |
