@@ -255,7 +255,7 @@ public class MRConstants {
   
   public static final String TeamDigital_AARP_URL="https://team-digital-"+MRScenario.environment+".ocp-elr-core-nonprod.optum.com/";
   
-  public static final String TeamDigital_UHC_URL="https://digital-uat-"+MRScenario.environment+".ocp-elr-core-nonprod.optum.com/";
+  public static final String TeamDigital_UHC_URL="https://team-digital-"+MRScenario.environment+".ocp-elr-core-nonprod.optum.com/";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   
