@@ -63,8 +63,8 @@ public class PlanRecommendationEngineStepDefinition {
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		aquisitionhomepage.openPRE();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);

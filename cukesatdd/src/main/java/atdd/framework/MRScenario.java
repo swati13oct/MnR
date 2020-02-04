@@ -87,7 +87,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	
-	public static String environment = System.getProperty("environment");
+	public static String environment = System.getenv("ENVIRONMENT");
 	public static String browsername=""; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
@@ -111,17 +111,14 @@ public class MRScenario {
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
 	public static String mobileDeviceName;
-	public static String environmentName;
 	public static String desktopBrowserName;
+	public static String TESTOBJECTAPIKEY;
+	public AppiumDriver mobileDriver;
+	public  String mobileSessionTimeout="900000";
 	
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
-	
-	public static String TESTOBJECTAPIKEY;
-	public AppiumDriver mobileDriver;
-	public  String mobileSessionTimeout="900000";
-	public  String mobileTestSuiteName="Mobile Plan Recommendation Engine";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -187,9 +184,7 @@ public class MRScenario {
 				: System.getenv("DEVICE_NAME"));
 		mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
 		
-		environmentName = (null == System.getenv("PRE_ENVIRONMENT") ? props.get("Environment")
-				: System.getenv("PRE_ENVIRONMENT"));
-		environmentName = (environmentName.toUpperCase().equals("TEAMDIGITAL_AARP_URL"))?environmentName.toUpperCase():"TEAMDIGITAL_UHC_URL";
+		environment = props.get("Environment");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -250,8 +245,8 @@ public class MRScenario {
 				  if  (environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
-				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t")))) {
-					csvName= "MemberRedesign-UUID.csv";
+				 } else if ((environment.equalsIgnoreCase("team-a")|| (environment.contains("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
+						csvName= "MemberRedesign-UUID.csv";
 				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
 				 }
@@ -577,6 +572,7 @@ public class MRScenario {
 			System.out
 			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+		}
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(
 					CommonConstants.PROPERTY_FILE_FOLDER);
@@ -600,9 +596,6 @@ public class MRScenario {
 				domain = null;
 			}
 			return props;
-		}
-		
-		return null;
 		
 	}
 
@@ -1046,19 +1039,19 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside firefox");
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("maxDuration", "3600");
 				} else if (browserName.equalsIgnoreCase("IE")) {
 					capabilities = DesiredCapabilities.internetExplorer();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1024x768");	
 					capabilities.setCapability("maxDuration", "3600");				
 				} else if (browserName.equalsIgnoreCase("chrome")) {
 					System.out.println("Inside chrome");
 					capabilities = DesiredCapabilities.chrome();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("recordMp4", true);
 					capabilities.setCapability("maxDuration", "3600");
@@ -1067,7 +1060,7 @@ sauceLabsTunnelIdentifier);
 					System.out.println("Inside Edge");
 					capabilities = DesiredCapabilities.edge();
 					capabilities.setCapability("platform", "Windows 10");
-					capabilities.setCapability("version", "latest");
+					capabilities.setCapability("version", browserVersion);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("maxDuration", "3600");
 				 }
@@ -1155,7 +1148,7 @@ sauceLabsTunnelIdentifier);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for device allocation
-		capabilities.setCapability("testobject_suite_name", mobileTestSuiteName);
+		//capabilities.setCapability("testobject_suite_name", "PRE");
 		//capabilities.setCapability("testobject_test_name", mobileTestName);
 		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
