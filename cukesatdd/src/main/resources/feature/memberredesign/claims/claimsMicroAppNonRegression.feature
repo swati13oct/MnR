@@ -29,8 +29,8 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    #Then I can validate the segment ID value in localStorage on claims summary page
-    #  | Segment ID   | <segmentId>   |
+    Then I can validate the segment ID value in localStorage on claims summary page
+      | Segment ID   | <segmentId>   |
     #----------------- Test Custom calendar and search error cases --------------------------
     ## note: covered in E2E, keep in case want to test here also
     ##And I can search claims for claim period and claim type on claim summary page

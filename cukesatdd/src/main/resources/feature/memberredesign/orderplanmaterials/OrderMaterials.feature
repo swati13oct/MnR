@@ -138,7 +138,7 @@ Feature: 1.10 Member  order materials Page
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @ValidateHeaderComboTabs
     Examples: 
-      | TID   | userSelection | planType | memberType            | segmentId | 
+      | TID   | planType | memberType            | segmentId | 
       | 15291 | PDP      | COMBO_order	         | 000       |
     # | 15291 | SSUP     | COMBO_order	         | 000       |
 
