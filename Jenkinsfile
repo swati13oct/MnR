@@ -13,6 +13,10 @@ def pomLocation = "cukesatdd/pom.xml"
  *
  * @param closure - the closure to execute
  */
+
+
+
+
 def withJavaAndMaven(Closure closure) {
     withEnv(['JAVA_VERSION=1.7.0', "JAVA_HOME=${tool 'java'}", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
         closure()
