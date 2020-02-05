@@ -1,7 +1,7 @@
 @vppPlanSummaryAARP
 Feature: Vpp to plan Summary AARP Scenarios
 
- @vppPlanSummaryAARP01
+  @vppPlanSummaryAARP01
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -161,7 +161,6 @@ Feature: Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  
   @vppPlanSummaryAARP05
   Scenario Outline: Verify plan summary for SNP plan types in AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -177,7 +176,7 @@ Feature: Vpp to plan Summary AARP Scenarios
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planName                                     |
+      | zipcode | isMultiCounty | county             | plantype | planName                                       |
       |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |
 
   @vppPlanSummaryAARP06
@@ -231,3 +230,25 @@ Feature: Vpp to plan Summary AARP Scenarios
     Examples: 
       | UID     |
       | F322478 |
+
+  @vppPlanSummaryAARP10
+  Scenario Outline: To verify links displayed in the global footer of AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    #When user accesses global footer of the AARP Medicare Plans home page
+    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
+    And user clicks on contactus link of aboutus page
+    And user clicks on sitemap link of contactus page
+    And user clicks on privacypolicy link of sitemap page
+    #And user clicks on termsOfuse link of privacypolicy page
+    And user clicks on disclaimers link of terms&conditions page
+    And user clicks on agents&brokers link of disclaimers page
+    #And user clicks on Request Assistance and validates modal window ulayer
+    And user verifies home link of agents&brokers page ulayer
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
+      |   90210 | No              | Los Angeles County |              80002 |
