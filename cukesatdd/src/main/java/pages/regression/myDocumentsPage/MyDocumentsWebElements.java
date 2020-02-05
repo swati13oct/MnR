@@ -98,7 +98,7 @@ public class MyDocumentsWebElements extends PlanDocumentsAndResourcesPage {
 	@FindBy(xpath = "//div[2]/p[contains(text(),'This page contains documents in PDF format.')]")
 	protected WebElement disclaimer;
 
-	@FindBy(xpath = "//p[1][contains(text(),'This is not a full list of documents')]")
+	@FindBy(xpath = "//p[contains(text(),'This is not a full list of documents')]")
 	protected WebElement noteText;
 
 	//note: need help - plan support
