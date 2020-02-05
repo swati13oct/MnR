@@ -73,6 +73,17 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 	}
+	
+	@Given("^the user lands on AARP medicare acquisition site page$")
+	public void the_user_lands_AARP_medicares_Site() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "Ulayer");
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "Ulayer");
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
 
 	/**
 	 * @throws InterruptedException 
@@ -1978,6 +1989,13 @@ public class VppStepDefinitionUpdatedAARP {
 		aquisitionhomepage.validateChatSam();
 		
 		
+	}
+	
+	@Then("^the user clicks on Enroll Now for AARP site from Plan Details$")
+	public void the_user_clicks_on_Enroll_Now_for_AARP_site_from_Plan_Details() throws Throwable {
+	   
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 	}
 	
 	//--------------------------------------------
