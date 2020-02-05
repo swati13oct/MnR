@@ -171,15 +171,6 @@ public class MRScenario {
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
 					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
-			
-			if(environment.equals("stage")||environment.equals("offline-stage"))
-				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else 
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: "+ environment);
-			System.out.println("domain chosen is: "+ domain);
 		}
 		
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
@@ -928,6 +919,17 @@ sauceLabsTunnelIdentifier);
 		 * The logic is if the environment is passed in from the System (when running from Jenkins)
 		 * then based on the environment it associates the appropriate domain. 
 		 */
+		
+		if(!(null==environment)){
+			if(environment.equals("stage")||environment.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
+		}
 	
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
