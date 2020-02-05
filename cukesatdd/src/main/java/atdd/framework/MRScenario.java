@@ -171,7 +171,15 @@ public class MRScenario {
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
 					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
-		
+			
+			if(environment.equals("stage")||environment.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
 		}
 		
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
@@ -592,18 +600,9 @@ public class MRScenario {
 				domain = null;
 			}
 			return props;
-		}else{
-			if(environment.equals("stage")||environment.equals("offline-stage"))
-				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else 
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: "+ environment);
-			System.out.println("domain chosen is: "+ domain);
-			
-			return null;
 		}
+			return null;
+		
 	}
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
