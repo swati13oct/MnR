@@ -86,7 +86,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	
-	public static String environment = System.getenv("environment");
+	public static String environment = System.getProperty("environment");
 	public static String browsername=""; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
@@ -591,8 +591,19 @@ public class MRScenario {
 				domain = null;
 			}
 			return props;
-		}
+		}else{
+			if(environment.equals("stage")||environment.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
+			
 			return null;
+		}
+			
 		
 	}
 
@@ -919,18 +930,7 @@ sauceLabsTunnelIdentifier);
 		 * The logic is if the environment is passed in from the System (when running from Jenkins)
 		 * then based on the environment it associates the appropriate domain. 
 		 */
-		
-		if(!(null==environment)){
-			if(environment.equals("stage")||environment.equals("offline-stage"))
-				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else 
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: "+ environment);
-			System.out.println("domain chosen is: "+ domain);
-		}
-	
+
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
