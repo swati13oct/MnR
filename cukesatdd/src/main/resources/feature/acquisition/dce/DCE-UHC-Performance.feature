@@ -2,7 +2,7 @@
 Feature: To test DCE to VPP plan Summary flow  in UMS site
 
   @dceThroughPlanSummaryNonAepUHC @uhc @DCE_Regression_Blayer @dce1 @uhcDce1
-  Scenario Outline: To Verify the drug cost estimator flow for <planName> for non AEP periodthrough plan summary
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> for non AEP periodthrough plan summary: PlanName <planName>; ZipCode <zipcode>
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
       | Zip Code    | <zipcode>     |
@@ -76,7 +76,7 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsUHC1 @uhc @DCE_Regression_Blayer_VPP3 @dce2 @uhcDce
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab: PlanName <planName>; ZipCode <zipcode>
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
       | Zip Code    | <zipcode>     |
@@ -154,7 +154,7 @@ Feature: To test DCE to VPP plan Summary flow  in UMS site
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsUHC2 @uhc @DCE_Regression_Blayer_VPP4 @dce3 @uhcDce
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab: PlanName <planName>; ZipCode <zipcode>
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
       | Zip Code    | <zipcode>     |

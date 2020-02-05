@@ -2,7 +2,7 @@
 Feature: To test DCE to VPP plan Summary flow  in AARP site
 
   @dceThroughPlanSummaryNonAepAARP @aarp @DCE_Regression_Ulayer @dce1 @aarpDce
-  Scenario Outline: To Verify the drug cost estimator flow for <planName> for non AEP periodthrough plan summary
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> for non AEP periodthrough plan summary: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
@@ -96,7 +96,7 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer_VPP3 @dce2 @aarpDce2
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Prescription Drug Benefits tab: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
@@ -197,7 +197,7 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       |   80210 | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @dceThroughPlanDetailsAARP @aarp @DCE_Regression_Ulayer_VPP4 @dce3 @aarpDce
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
