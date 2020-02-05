@@ -851,8 +851,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public void verifyPharmacyResults() {
+	public void verifyPharmacyResults() throws InterruptedException {
 		Assert.assertTrue(pharmacyResults.isDisplayed());
+		Thread.sleep(4000);
 	}
 
 	public int getResultPharmacyCount() {

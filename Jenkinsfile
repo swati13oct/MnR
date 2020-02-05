@@ -123,15 +123,18 @@ node('docker-maven-slave') {
 
     stage ('Build') {
         echo "Building source code"
+       
+		withDockerMavenSlave {
+			unstash 'source'
+			sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
+		}
 
-        withDockerMavenSlave {
-            unstash 'source'
-            sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
-        }
-
-        echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/target/*pmd.xml', fingerprint: true
-    }
+		echo "Build complete"
+			archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/target/*pmd.xml', fingerprint: true
+   
+	}
+		
+      
     echo "Build complete"
 	
 	stage('Trigger Downstream TestSuite'){
