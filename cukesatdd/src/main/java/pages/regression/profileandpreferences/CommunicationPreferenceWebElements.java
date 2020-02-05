@@ -35,7 +35,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(className = "atdd-goGreenHeader")
 	protected WebElement goggreenheader;
 
-	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']")
+	@FindBy(xpath = "//*[@class='control control-checkbox consent-checkbox']//input")
 	protected WebElement iHavereadCheckbox;
 
 	@FindBy(xpath = "//div[@class='otherPages SHIP']//label[@for='requiredplan']")
