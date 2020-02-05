@@ -2383,8 +2383,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
         ArrayList<String> tabs_windows = new ArrayList<String> (driver.getWindowHandles());
 		 driver.switchTo().window(tabs_windows.get(1));
         CommonUtility.checkPageIsReadyNew(driver);
-        if (driver.getCurrentUrl().contains("myuhcagent")) {
-           System.out.println("Myuhcagent Page is displayed");
+        if (driver.getCurrentUrl().contains("agentebrc")) {
+           System.out.println("Agent EBRC Page is displayed");
            Assert.assertTrue(true);
           // driver.navigate().back();
            driver.switchTo().window(tabs_windows.get(0));
