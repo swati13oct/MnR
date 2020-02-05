@@ -34,7 +34,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -87,7 +86,7 @@ public class MRScenario {
 	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	
-	public static String environment = System.getenv("ENVIRONMENT");
+	public static String environment = System.getenv("environment");
 	public static String browsername=""; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
@@ -105,20 +104,22 @@ public class MRScenario {
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
+	public static String browserVersion;
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
 	public static String sauceLabsMobileTunnelIdentifier;
 	public static String appiumVersion;
-	public static String mobileDeviceName;
+	public static String mobileDeviceName = "";
 	public static String desktopBrowserName;
-	public static String TESTOBJECTAPIKEY;
 	public AppiumDriver mobileDriver;
 	public  String mobileSessionTimeout="900000";
 	
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+	
+	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -152,8 +153,8 @@ public class MRScenario {
 
 		props = getProperties();
 
-		// Set acqusisition and member urls 
-		if(!(props==null)){
+		 
+		if(!(props==null)){ //when running on local this logic will be used 
 			System.out.println("before accessing props");
 			environment = props.get("Environment");
 			System.out.println("after accessing props");
@@ -161,8 +162,11 @@ public class MRScenario {
 			browsername = props.get("BrowserName");
 			isTestHarness = props.get("isTestHarness");
 			isHSIDCompatible =  props.get("isHSIDCompatible");
+			mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
+					: System.getenv("DEVICE_NAME"));
+			mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
 			
-		}else{
+		}else{ //running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
@@ -177,14 +181,6 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
 		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ? CommonConstants.APPIUM_DEFAULT_VERSION
 				: System.getProperty(CommonConstants.APPIUM_VERSION));
-		TESTOBJECTAPIKEY = props.get("SaucslabAPIKey").trim();
-		//mobileDeviceName = props.get("SaucslabDeviceName");
-		mobileDeviceName="";
-		mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
-				: System.getenv("DEVICE_NAME"));
-		mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
-		
-		environment = props.get("Environment");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -568,11 +564,11 @@ public class MRScenario {
 		String propertiesFileToPick = environment;
 		System.out.println("Using properties for environment ...."
 				+ propertiesFileToPick);
-		if (StringUtils.isBlank(propertiesFileToPick)) {
+		if (StringUtils.isBlank(propertiesFileToPick) || (null==environment)) {
 			System.out
 			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
-		}
+		
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(
 					CommonConstants.PROPERTY_FILE_FOLDER);
@@ -596,7 +592,18 @@ public class MRScenario {
 				domain = null;
 			}
 			return props;
-		
+		}else{
+			if(environment.equals("stage")||environment.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
+			
+			return null;
+		}
 	}
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
@@ -922,34 +929,13 @@ sauceLabsTunnelIdentifier);
 		 * The logic is if the environment is passed in from the System (when running from Jenkins)
 		 * then based on the environment it associates the appropriate domain. 
 		 */
-		
-		if(!(null==environment)){
-			if(environment.equals("stage")||environment.equals("offline-stage"))
-				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else 
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: "+ environment);
-			System.out.println("domain chosen is: "+ domain);
-		}
-			
-		
+	
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
 
-		String browserName;
-		
-		if(null == System.getenv("BROWSER_NAME")){
-			browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? props.get("BrowserName")
-					: System.getProperty(CommonConstants.BROWSER_NAME));
-		}else {
-			browserName = System.getenv("BROWSER_NAME");
-		}
-
-		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the properties file
-		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the CI config properties file
+		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
 		//if the browser version is passed in from Jenkins then use that, otherwise use latest version by default
@@ -1064,32 +1050,34 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("maxDuration", "3600");
 				 }
-				capabilities.setCapability("autoAcceptsAlerts", true);
-				//capabilities.setCapability("parent-tunnel", "sauce_admin");		
-				capabilities.setCapability("parent-tunnel", "optumtest");						
-				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-				//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				if(!(null==capabilities)){
+					capabilities.setCapability("autoAcceptsAlerts", true);
+					//capabilities.setCapability("parent-tunnel", "sauce_admin");		
+					capabilities.setCapability("parent-tunnel", "optumtest");						
+					capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+					//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+					capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
-				//---begin - enable logging
-			    LoggingPreferences logPrefs  = new LoggingPreferences();
-			    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-			    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-				//---end - enable logging
-
-				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-				capabilities.setCapability("name", jobName);
-				try {
-
-					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-					getJobURL(getSessionId());
-					//webDriver.manage().deleteAllCookies();
-				} catch (MalformedURLException e) {
-					Assert.fail("Invalid Sauce URL: [" + URL + "]");
-				}
-
+					//---begin - enable logging
+				    LoggingPreferences logPrefs  = new LoggingPreferences();
+				    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+				    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+					//---end - enable logging
+	
+					String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+					capabilities.setCapability("name", jobName);
+					try {
+	
+						webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+						MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+						System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+						getJobURL(getSessionId());
+						//webDriver.manage().deleteAllCookies();
+					} catch (MalformedURLException e) {
+						Assert.fail("Invalid Sauce URL: [" + URL + "]");
+					}
+				}else
+					Assert.fail("Error in setting capabilities due to unidentified browser. Check your browser and/or Jenkins job pipeline script to make sure browser is added in the build command");
 			}
 		//}
 		return webDriver;
