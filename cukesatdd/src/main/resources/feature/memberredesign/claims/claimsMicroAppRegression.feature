@@ -100,15 +100,12 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @mapd_medical_cosmos2 @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-     #| 01_4  | 15259 | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288 | SSUP   | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_4  | xxxxx | SSP_CLAIMS_q1_feb_ssp_001         | SSUP     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_5  | 15268 | MEDICA-COSMOS-q2_jun_sofl0013     | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_6  | 15268 | PCP_CLAIMS_q3_sept_UAT4_AARP_032  | PCP      | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
-    #note: waiting for dropdown, claims data already mocked
-    @mapd_medical_cosmos2 @mocked
-    Examples: 
-      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_4  | xxxxx | xxxxx                             | SSUP     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+	 # note: don't have a working user that is SSP COMBO
+     #| 01_4  | 15259 | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288 | SSUP   | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @ma_medical_cosmos @devRegression @mocked
     Examples: 
@@ -116,8 +113,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
       | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
-	#@devRegression  - UUID and mocked BOTH are not ready for dev yet
-    @mapd_medical_nice @mocked
+    @mapd_medical_nice @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
@@ -128,7 +124,6 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
       | 04_1  | 15236 | SHIP_CLAIMS_q1_feb_2020SHIP_034   | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
 
     #These items still pending data
-    # | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
     # | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
     # | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
 
