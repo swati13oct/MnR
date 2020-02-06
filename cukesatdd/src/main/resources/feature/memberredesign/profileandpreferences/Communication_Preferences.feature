@@ -149,6 +149,7 @@ Feature: 1.03 Member Preferences page
   Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
     Then the user validates that Communication Preferences section for Ship
@@ -163,6 +164,7 @@ Feature: 1.03 Member Preferences page
     And the user click on the Save Preferences button
     Then a popup is displayed and validate the popup select Yes and submit
     And the user validate the success message
+
     Examples: 
-      | FID    | planType                 | planName                      |
-      | 276629 | SHIP_MedSel_ProfilePref  | AARP MEDICARE SUPPLEMENT PLAN |
+      | FID    | planType                 | memberType       | planName                      |
+      | 276629 | SHIP                     | SHIP_ProfilePref | AARP MEDICARE SUPPLEMENT PLAN |
