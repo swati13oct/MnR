@@ -46,7 +46,6 @@ Feature: Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium |
       | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
-      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)           | Dental Platinum | $14            | $168          |
 
   @vppPlanDetailsUHC03
   Scenario Outline: Verify plan details in UMS site
@@ -217,3 +216,49 @@ Feature: Vpp to plan Details UHC Scenarios
       |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
       |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
+
+  @vppPlanDetailsUHC10
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user validates following PDF link is displayes with correct document code for UHC
+      | PDF type     | <pdfType> |
+      | DocumentCode | <docCode> |
+    Then the user click on PDF link and validates document code in URL for UHC
+      | PDF type     | <pdfType> |
+      | DocumentCode | <docCode> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
+      |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+
+  @vppPlanDetailsUHC11
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC
+    Then the user view plan details of the above selected plan in UMS site and validates
+      | Plan Name | <planName> |
+    Then the user validates following PDF link is displayes with correct document code for UHC
+      | PDF type     | <pdfType> |
+      | DocumentCode | <docCode> |
+    Then the user validates the document code is present in the PDF for UHC
+      | PDF type     | <pdfType> |
+      | DocumentCode | <docCode> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             |
+      |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 |
