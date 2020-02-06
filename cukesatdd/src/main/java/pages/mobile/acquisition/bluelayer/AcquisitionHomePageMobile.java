@@ -10,6 +10,8 @@ import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
+	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
 	public AcquisitionHomePageMobile(WebDriver driver) {
 		super(driver);
@@ -17,10 +19,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	public void openPRE() {
-		if(MRScenario.environment.equalsIgnoreCase("aarpmedicareplans")){
-			startNewMobile(MRConstants.TeamDigital_AARP_URL);
+		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
+			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
 		} else {
-			startNewMobile(MRConstants.TeamDigital_UHC_URL);
+			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
 		}
 		System.out.println("Current mobile page URL: "+driver.getCurrentUrl());
 	}

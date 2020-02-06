@@ -1737,11 +1737,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
-		if(MRScenario.environment.equalsIgnoreCase("aarpmedicareplans")){
-			startNew(MRConstants.TeamDigital_AARP_URL);
+		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
 		} else {
-			startNew(MRConstants.TeamDigital_UHC_URL);
+			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
 		}
+		
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
 	

@@ -594,7 +594,7 @@ public class MRScenario {
 		}else{
 			if(environment.equals("stage")||environment.equals("offline-stage"))
 				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-digital"))
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.contains("digital-uat"))
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else 
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
