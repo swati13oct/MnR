@@ -1129,6 +1129,7 @@ sauceLabsTunnelIdentifier);
 
 		String findDeviceName = "iPhone X"; // Default device
 		String mobileOSName;
+		mobileDeviceName = System.getenv("DEVICE_NAME");
 		String deviceName = mobileDeviceName.toUpperCase().trim();
 		System.out.println("Given device : "+deviceName);
 		isSauceLabSelected = true;
