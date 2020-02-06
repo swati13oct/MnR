@@ -720,6 +720,7 @@ public class HSIDStepDefinition {
 		String category = memberAttributesMap.get("Member Type");
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page

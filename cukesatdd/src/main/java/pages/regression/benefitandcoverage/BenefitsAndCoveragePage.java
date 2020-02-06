@@ -346,10 +346,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='table-body-cell outpatientsurgery-tier1-atdd ng-binding']")
 	private WebElement OutpatientSurgeryCenter2;
 
-	@FindBy(xpath = "//*[contains(@class,'outpatientsurgery') and contains(text(),'OUTPATIENT')]")
+	@FindBy(xpath = "//*[@class='outpatientsurgery-atdd ng-binding ng-scope' or @class='table-body-cell outpatientsurgery-tier1-atdd ng-binding']")
 	private WebElement OutpatientSurgeryCenterValue;
 
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/div/div[1]/span")
 	private WebElement OfficVisitsValue;
 
 	@FindBy(xpath = "//span[contains(text(),'YOUR PRIMARY CARE PROVIDER')]")
@@ -484,7 +484,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(css = "img.img-responsive")
 	private WebElement logoImage;
 
-	@FindBy(xpath = ".//*[@id='drug-benefits']/div[5]/div[10]/div/div[1]/div/div")
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-CTgrouptable']")
 	private WebElement hartfortdrugtable;
 
 	@FindBy(className = "atdd-bnc-CTgrouptable")
@@ -1429,7 +1429,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,3000)", "");
-		validate(NeedHelpHeader);
+		validateNew(NeedHelpHeader);
 		System.out.println("***Need help header is validated ***");
 
 	}
@@ -1721,7 +1721,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
 		driver.get("https://member.int.uhc.com/retiree/dashboard");
 		Thread.sleep(4000);
-		validate(ViewAllAncillaryBnFtLink);
+		validateNew(ViewAllAncillaryBnFtLink);
 		ViewAllAncillaryBnFtLink.click();
 		try {
 			Thread.sleep(4000);
@@ -1735,8 +1735,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		driver.get("https://member.int.uhc.com/retiree/dashboard");
 		Thread.sleep(4000);
 		try {
-			validate(PrescriptionDrugCostsrkSectionHeaderONRally);
-			validate(ViewAllBenefitsLinkONRally);
+			validateNew(PrescriptionDrugCostsrkSectionHeaderONRally);
+			validateNew(ViewAllBenefitsLinkONRally);
 			Assert.assertTrue("Prescription DrugCost Section Header and View All Benefits Link are displaying on the Rally page", true);
 		} catch (Exception e) {
 			Assert.fail("Prescription DrugCost Section Header and View All Benefits Link are not displaying on the Rally page");
@@ -2091,8 +2091,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		Select dropdown = new Select(drugCostDropdown);
 		List<WebElement> webElements = dropdown.getOptions();
-		// System.out.println(webElements);
+
 		for (WebElement element : webElements) {
+			System.out.println(">>>>>>>>>>>>>>>Drug Costs dropdown option being validated <<<<<<<<<<<<<<<<<<: "+element.getText());
 			if (element.getText().contains("Standard Retail Pharmacy")) {
 				System.out.println(element.getText());
 				Assert.assertTrue("The element" + element.getText() + "should display", true);
@@ -2510,43 +2511,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNotDisplay("Copays coinsurance header",Copayscoinsuranceheader);
 		} else {
 			validateWithValue("Benefits Summary Header", BenefitsSummaryHeader);
-
 			validateWithValue("Copays coinsurance header",Copayscoinsuranceheader);
 			validateWithValue("Hospital Visits",HospitalVisits);
 			validateWithValue("Office Visits",OfficeVisits);
 			validateWithValue("Outpatient Surgery Center",OutpatientSurgeryCenter);
-
 			validateWithValue("Outpatient Surgery Center Value",OutpatientSurgeryCenterValue);
 			validateWithValue("Offic Visits Value",OfficVisitsValue);
-
 			Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-			if(planType.contains("Medica") || planType.contains("PCP"))
-			{
-				System.out.println(OutpatientSurgeryCenter.getText());
-				Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));			}
-			else
-			{
-				Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
-				System.out.println(OutpatientSurgeryCenter.getText());
-			}
-			System.out.println(HospitalVisits.getText());
+			Assert.assertTrue("OUTPATIENT field text was changed or not found" ,OutpatientSurgeryCenter.getText().contains("OUTPATIENT"));
 			Assert.assertTrue("Hospital Visits field text was changed or not found" ,HospitalVisits.getText().contains("HOSPITAL CARE"));
-			if(planType.contains("Medica"))
-			{
-				System.out.println(OutpatientSurgeryCenter2.getText());
-				if (StringUtils.isEmpty(OutpatientSurgeryCenter2.getText())) {
 
-					Assert.fail();
-				}              
+			if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
+				Assert.fail("Problem>>>>>>>>>>>>>.Outpatient Surgery Center Value is not displaying<<<<<<<<<<<<<<<<<<<<<<<<<<");
 			}
-			else if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
-
-				Assert.fail("Outpatient Surgery Center Value is not displaying");
+			if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
+				System.out.println(">>>>>>>>>>Office Visits value is not displaying<<<<<<<<<<<<<<<<<<<<");
+				Assert.fail();
 			}
-
-			validateNew(OfficVisitsValue);
-
-
 		}
 	}
 
@@ -2564,18 +2545,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateWithValue("Header-Office Visits", OfficeVisits);
 		validateWithValue("Header-Outpatient Surgery Center", OutpatientSurgeryCenter);
 		Assert.assertEquals(OfficeVisits.getText(), "OFFICE VISITS ");
-		Assert.assertEquals(OutpatientSurgeryCenter.getText(), "OUTPATIENT SURGERY CENTER VISITS");
-		Assert.assertEquals(HospitalVisits.getText(), "HOSPITAL VISITS ");
+		Assert.assertTrue(OutpatientSurgeryCenter.getText().contains("OUTPATIENT HOSPITAL SERVICES"));
+		Assert.assertTrue(HospitalVisits.getText().contains("HOSPITAL"));
 		System.out.println(AmbulanceHeader.getText());
 		Assert.assertEquals(AmbulanceHeader.getText(), "AMBULANCE");
 		System.out.println(EmergencyHeader.getText());
 		Assert.assertEquals(EmergencyHeader.getText(), "EMERGENCY CARE");
 		if (StringUtils.isEmpty(OutpatientSurgeryCenterValue.getText())) {
-
+			System.out.println(">>>>>>>>>>Outpatient Surgery Center Value is blank<<<<<<<<<<<<<<<<<<<<");
 			Assert.fail();
 		}
 		if (StringUtils.isEmpty(OfficVisitsValue.getText())) {
-
+			System.out.println(">>>>>>>>>>Office Visits value is blank<<<<<<<<<<<<<<<<<<<<");
 			Assert.fail();
 		}
 
@@ -2629,7 +2610,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		validateNew(SearchProvider);
 		validateWithValue("Provider Search", SearchProvider);
-		validateWithValue("Search For Provider",StartSearch);
+		validateWithValue("SEARCH FOR PROVIDERS",StartSearch);
 		StartSearch.click();
 
 		switchToNewTab();
@@ -2642,8 +2623,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		{
 			Assert.assertTrue(true);
 		}
-		else
-		{
+		else{
+			System.out.println("Problem Spotted>>>>>>>>>Unable to navigate to Provider Search Page<<<<<<<<<<<<<<<");
 			Assert.fail();        
 		}
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -2906,14 +2887,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Select langdropdwn = new Select(langdropdown);
 		if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
 		{
-			List<WebElement> pdfs = driver.findElements(By.xpath(".//div[@class='PlanPdf section']//div[contains(@ng-show, 'planProfileInfo.employerGroupIndicator')]//li[not(contains(@class,'ng-hide'))]//a"));
-
-			System.out.println("Size"+pdfs.size());
+			List<WebElement> pdfs = driver.findElements(By.xpath("//div/span[contains(@class,'document-list-new margin-none')]//ul//li/a"));
+			System.out.println(">>>>>>>>>>>>.Size of Pdf's<<<<<<<<<<<<<<<< "+pdfs.size());
 			for (int i=0;i<pdfs.size();i++)
 			{  
 				String pdfnames = null;
 				pdfnames= (pdfs.get(i).getText());
-				System.out.println(pdfnames);
+				System.out.println(">>>>>>>>>>PDF visible<<<<<<<: "+pdfnames);
 			}
 
 			if(a.length==pdfs.size())
@@ -2947,7 +2927,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL"))
 		{
 
-			List<WebElement> pdfs = driver.findElements(By.xpath(".//div[@class='PlanPdf section']//div[contains(@ng-show, 'planProfileInfo.employerGroupIndicator')]//li[not(contains(@class,'ng-hide'))]//a"));
+			List<WebElement> pdfs = driver.findElements(By.xpath("//div/span[contains(@class,'document-list-new margin-none')]//ul//li/a"));
 
 			System.out.println("Number of documents are - "+pdfs.size());
 			for (int i=0;i<pdfs.size();i++)
@@ -3313,7 +3293,6 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	public void validatehartfortprescriptiondrugtable() {
-
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -3324,6 +3303,40 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(hartfortdrugtable);
+		String TableData="Standard Network Pharmacy Retail Drug Costs\n"
+		        +"Copay *\n"
+				+"footnote\n"
+				+"Initial Coverage Stage *\n"
+				+"footnote\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"$5.00 copay\n"
+				+"$5.00 copay\n"
+				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"Tier 2\n"
+				+"$25.00 copay\n"
+				+"$25.00 copay\n"
+				+"Tier 3\n"
+				+"$40.00 copay\n"
+				+"$40.00 copay\n"
+				+"Tier 4\n"
+				+"$40.00 copay\n"
+				+"$40.00 copay";
+
+		if(hartfortdrugtable.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.out.println(">>>>>>>>>   The Expected table value is    <<<<<<<<<<<<     \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+hartfortdrugtable.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+
+
 	}
 
 	public void validateTownOfGreenwichdrugtable() {
@@ -3336,6 +3349,43 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		validateNew(GreenwichTable);
+		String TableData="Standard Network Pharmacy Retail Drug Costs\n"
+		        +"Copay *\n"
+				+"footnote\n"
+				+"Initial Coverage Stage *\n"
+				+"footnote\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"$5.00 copay\n"
+				+"$5.00 copay\n"
+				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"Tier 2\n"
+				+"$5.00 copay\n"
+				+"$5.00 copay\n"
+				+"Tier 3\n"
+				+"$20.00 copay\n"
+				+"$20.00 copay\n"
+				+"Tier 4\n"
+				+"$35.00 copay\n"
+				+"$35.00 copay\n"
+				+"Tier 5\n"
+				+"$35.00 copay\n"
+				+"$35.00 copay";
+
+		if(GreenwichTable.getText().equals(TableData.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		}
+		else{
+			System.out.println(">>>>>>>>>   The Expected table value is    <<<<<<<<<<<<     \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+GreenwichTable.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
+
+
 	}
 
 	public void validatedrugCostSectionTexas() {
@@ -3434,8 +3484,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"$180 copay";
 		//+"* Please see Additional Drug Coverage for a list of the plan’s maintenance drugs. ERS is continuing to offer additional coverage on some prescription drugs that are normally excluded from coverage on your Formulary. Please see your Additional Drug Coverage list for more information.";
 
-		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
-		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+MailOrderTable.getText());
+		System.out.println(">>>>>>>>>>>>>>Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
+		System.out.println(">>>>>>>>>>>>>>>Actual table value is >>>>>>>>>> "+"\n"+MailOrderTable.getText());
 
 		if(MailOrderTable.getText().trim().equals(TableData.toString().trim())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -3531,12 +3581,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		if(outPatientSection.getText().contains(TableData.toString())){
 			//Sardar End
 
-			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
-			System.out.println("The data in the outPatient section  is displaying correctly");  
+			Assert.assertTrue("Problem>>>>>>>>>>>>>>>>The data in the outPatient section is displaying correctly", true);
+			System.out.println("Problem>>>>>>>>>>>>>>>>The data in the outPatient section  is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the outPatient section  is not displaying correctly");
-			Assert.fail("The data in the outPatient section is not displaying correctly");
+			System.err.println("Problem>>>>>>>>>>>>>>>>The data in the outPatient section  is not displaying correctly");
+			Assert.fail("Problem>>>>>>>>>>>>>>>>The data in the outPatient section is not displaying correctly");
 		}}
 
 	public void validateWaysToSaveSection(String planType, String memberType) {
@@ -3797,7 +3847,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(needHelpSection);
 		validateNew(NeedHelpHeader);
 		validateNew(contactUslink);
-		validateNew(disclaimersLink);
+		validateNew(moreinformation);
 	}
 
 	public void validateCopayCoinsuranceInDrugTable() {
@@ -4605,6 +4655,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n" +mapdGroupTable);
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n" +RetailDrugCost_Table.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4614,37 +4666,38 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void validatedrugcosttableMAPD_NONLIS() {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable= "Annual Deductible Stage\n"
-				+"Initial Coverage Stage\n"
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP NON LIS USER", RetailDrugCost_TableNONLIS);
+		String mapdGroupTable= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage \n"
+				+"Initial Coverage Stage \n"
 				+"Coverage Gap Stage\n"
-				+"Catastrophic Coverage Stage\n"
+				+"Catastrophic Coverage Stage \n"
 				+"Tier 1 \n"
 				+"No Deductible\n"
-				+"$7.00\n"
-				+"$7.00\n"
-				+"$3.40 copay for all generic drugs and $8.50 copay for brand name drugs.\n"
+				+"$3.00\n"
+				+"$3.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2 \n"
-				+"$15.00\n"
-				+"$15.00\n"
+				+"$28.00\n"
+				+"You pay 25% of the total cost for generic drugs and 25% of the cost (plus a portion of the dispensing fee) for brand name drugs.\n"
 				+"Tier 3 \n"
-				+"$15.00\n"
-				+"$15.00\n"
+				+"$55.00\n"
 				+"Tier 4 \n"
-				+"$100.00\n"
-				+"$100.00";
+				+"$55.00";
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
 
 	}
-
-
 
 
 	public void validatedrugcosttablePDPGroupLIS1() {
@@ -4656,10 +4709,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Catastrophic Coverage Stage\n"
 				+"Covered Generic Drugs\n"
 				+"$0.00\n"
-				+"$3.40\n"
+				+"$3.60\n"
 				+"$0.00\n"
 				+"All Other Covered Drugs\n"
-				+"$8.50\n"
+				+"$8.95\n"
 				+"$0.00";
 
 		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
@@ -4667,6 +4720,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else {
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<"+mapdGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<"+RetailDrugCost_Table.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4676,17 +4731,18 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable= "Annual Deductible Stage\n"
-				+"Initial Coverage Stage\n"
-				+"Coverage Gap Stage\n"
-				+"Catastrophic Coverage Stage\n"
+		String mapdGroupTable= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage \n"
+				+"Initial Coverage Stage \n"
+				+"Coverage Gap Stage \n"
+				+"Catastrophic Coverage Stage \n"
 				+"Tier 1 \n"
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2 \n"
 				+"$20.00\n"
 				+"$20.00\n"
@@ -4697,16 +4753,16 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"$35.00\n"
 				+"$35.00";
 
-		System.out.println("The table value is- "+mapdGroupTable.toString());
-		System.out.println("The table value is- "+RetailDrugCost_TableNONLIS.getText());
 
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the drug cost table is not displaying correctly");
-			Assert.fail("The data in the drug cost table is not displaying correctly");
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<"+mapdGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<"+RetailDrugCost_TableNONLIS.getText());
+			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
+			Assert.fail(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<<<<<<<<<");
 		}
 
 	}
@@ -4719,7 +4775,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	public void preferredRetailBenefitTableIndipdp(){
 		CommonUtility.waitForPageLoad(driver, preferredRetailBenefitTableIndipdp, 15);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferredRetailBenefitTableIndipdp);
+		validateWithValue("Drug cost table", preferredRetailBenefitTableIndipdp);
 		String TableData= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -4727,33 +4783,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$5.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $415.00 deductible is met.*\n"
-				+"$30.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"100% until the $435.00 deductible is met.*\n"
+				+"$40.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"32%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+preferredRetailBenefitTableIndipdp.getText());
 
 		if(preferredRetailBenefitTableIndipdp.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Expected table value is-<<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is-<<<<<<<<<<<<<   \n"+preferredRetailBenefitTableIndipdp.getText());
+
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4774,33 +4831,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$15.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $415.00 deductible is met.*\n"
-				+"$90.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"100% until the $435.00 deductible is met.*\n"
+				+"$120.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"32%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4818,33 +4875,33 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$15.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$20.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $415.00 deductible is met.*\n"
-				+"$45.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$435\n"
+				+"$47.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
 		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<- \n- "+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4881,14 +4938,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
 
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+RetailDrugCost_TableNONLIS.getText());
-
 		if(RetailDrugCost_TableNONLIS.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -4913,32 +4970,31 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 +"Specialist:\n"
 +"$40.00";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+officeVisitSection.getText());
 
 		if(officeVisitSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the Office visit section is displaying correctly", true);
 			System.out.println("The data in the Office visit section  is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual value is- <<<<<<<<<<<<< \n"+officeVisitSection.getText());
 			System.err.println("The data in the Office visit section  is not displaying correctly");
 			Assert.fail("The data in the Office visit section is not displaying correctly");
 		}}
 	public void hospitalVisitSection(){
-		String TableData= "HOSPITAL VISITS \n"
-				+"Inpatient Visits\n"
-				+"days 1 - 6 : $295.00 Copay per day\n"
-				+"days 7 - 90 : $0.00 Copay per day";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+hospitalVisitSection.getText());
+		String TableData= "INPATIENT HOSPITAL CARE \n"
+				+"days 1 - 8 : $225.00 Copay per day\n"
+				+"days 9 - 90 : $0.00 Copay per day";
+		System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<<- "+TableData.toString());
+		System.out.println(">>>>>>>>>>The Actual table value is<<<<<<<<<<<<<- "+hospitalVisitSection.getText());
 
 		if(hospitalVisitSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the hospital Visit Section is displaying correctly", true);
 			System.out.println("The data in the hospital Visit Section  is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the hospital Visit Section  is not displaying correctly");
-			Assert.fail("The data in the hospital Visit Section is not displaying correctly");
+			System.err.println(">>>>>>>>>>>The data in the hospital Visit Section  is not displaying correctly<<<<<<<<<");
+			Assert.fail(">>>>>>>>>>>>>>>>>>The data in the hospital Visit Section is not displaying correctly<<<<<<<<<<");
 		}}
 
 
@@ -4958,8 +5014,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void inNetworkSection(){
 		String TableData= "IN-NETWORK\n"
 				+"$3,400.00";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+inNetworkSection.getText());
+		System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+		System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+inNetworkSection.getText());
 
 		if(inNetworkSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the InNetwork section is displaying correctly", true);
@@ -4974,8 +5030,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		String TableData= "OUT-OF-NETWORK\n"
 
 +"N/A";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+outNetworkSection.getText());
+		System.out.println(">>>>>>>>>The Expected value is<<<<<<<<<<<< \n"+TableData.toString());
+		System.out.println(">>>>>>>>>>>>>>>>>>>The Actual value is- <<<<<<<<<<<<< \n"+outNetworkSection.getText());
 
 		if(outNetworkSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the out Network Section is displaying correctly", true);
@@ -5013,14 +5069,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Your share of the cost for a covered drug will be either co-insurance or a copay, whichever is the lesser amount between:\n"
 				+"either — $60.00\n"
 				+"or — 5% co-insurance on the cost of the drug OR a co-pay of $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs, whichever is the larger amount.";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+PeehipTable.getText());
 
 		if(PeehipTable.getText().toString().equals(TableData.toString())){
 			Assert.assertTrue("The data in the table is displaying correctly", true);
 			System.out.println("The data in the table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+PeehipTable.getText());
+
 			System.err.println("The data in the table is not displaying correctly");
 			Assert.fail("The data in the table is not displaying correctly");
 		}}
@@ -5038,40 +5095,40 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 
-		String TableData= "Annual Deductible Stage\n"
-				+"Initial Coverage Stage\n"
+		String TableData="Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n" 
 				+"Coverage Gap Stage\n"
 				+"Catastrophic Coverage Stage\n"
 				+"Tier 1\n"
-				+"No deductible.\n"
+				+"No Deductible\n"
 				+"$3.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$10.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $150.00 deductible is met.*\n"
+				+"$150.00\n"
 				+"$45.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"$95.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"30%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
 		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5092,34 +5149,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Catastrophic Coverage Stage\n"
 				+"Tier 1\n"
 				+"No deductible.\n"
-				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$3.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$10.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $150.00 deductible is met.*\n"
-				+"$125.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$150"
+				+"$45.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"$275.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$95.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"30%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5163,14 +5220,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"33%\n"
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5203,14 +5260,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Tier 5\n"
 				+"33%\n"
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
 		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< "+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5254,14 +5311,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"33%\n"
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
 
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+preferedMail_Table1PDP.getText());
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5294,14 +5351,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Tier 5\n"
 				+"33%\n"
 				+"no more than 37% for generic drugs or 25% for brand name drugs";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 
 		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -5316,13 +5373,13 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"Catastrophic Coverage Stage\n"
 				+"Covered Generic Drugs\n"
 				+"No Deductible\n"
-				+"$3.40\n"
+				+"$3.60\n"
 				+"$0.00\n"
 				+"All Other Covered Drugs\n"
-				+"$8.50\n"
+				+"$8.95\n"
 				+"$0.00";
-		System.out.println("The hardcoaded table value is- "+TableData.toString());
-		System.out.println("The table value is- "+RetailDrugCost_Table.getText());
+		System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+		System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+RetailDrugCost_Table.getText());
 
 		if(RetailDrugCost_Table.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);

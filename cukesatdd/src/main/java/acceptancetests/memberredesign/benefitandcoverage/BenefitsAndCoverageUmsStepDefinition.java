@@ -1542,9 +1542,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @author njain112
 	 */
 
-	@And("^the user verifies that the correct pdfs are there in the plan material section$")
+	@And("^the user verifies that the correct pdfs are there in the plan material section of benefits page$")
 	public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
-		System.out.println("***the user verifies that the correct pdfs are there in the plan material section***");
+		System.out.println("***the user verifies that the correct pdfs are there in the plan material section of benefits page***");
 
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
