@@ -122,10 +122,13 @@ Feature: Vpp to plan Details UHC Scenarios
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
-      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
-      |   35045 | YES             | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)   |
+      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                     |
+      |   35045 | YES             | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)            |
+      |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)           |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP) |
 
   @vppPlanDetailsUHC07
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
