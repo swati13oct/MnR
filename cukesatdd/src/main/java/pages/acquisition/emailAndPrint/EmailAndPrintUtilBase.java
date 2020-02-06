@@ -162,31 +162,30 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 			if(!winHandle.equals(winHandleBefore))
 	          {
 				driver.switchTo().window(winHandle);
-				//tbd System.out.println("Proceed to validate the new window content for print");
-				//tbd sleepBySec(1); 
-				//tbd String printPreviewPageTitle=driver.getTitle();
-				//tbd Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
-				//tbd flag = true;
-				//tbd System.out.println("Proceed to close the print preview window");
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 	          }
 		}
-		//tbd if(!flag)
-		//tbd Assert.fail("Print window was never opened after the click");
-		
 		//note: keep for the print page to load
 		//CommonUtility.checkPageIsReady(driver);
 		// Perform the actions on new window
 		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
-		
 
 		// note: Switch back to original browser (first window)
-		
-
 		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
 		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 	
+	/** 
+	 * Need to keep the original sesson on sauce lab alive by refreshing the page
+	 * TODO - look into custom extending the sauce lab session
+	 * @param sessionFrom
+	 * @param targetDriver
+	 */
+	public void keepSessionAlive(String sessionFrom, WebDriver targetDriver) {
+		if (sessionFrom.equals("from deepLink"))
+			targetDriver.navigate().refresh();
+	}
+
 }

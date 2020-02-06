@@ -172,7 +172,7 @@ public class MRScenario {
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
 					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
 		}
-		
+
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 
