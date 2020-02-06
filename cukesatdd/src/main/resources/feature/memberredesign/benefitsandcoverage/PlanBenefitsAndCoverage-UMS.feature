@@ -81,7 +81,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15091 | Combo    | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
-  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @BnC_Part1_regressionMember
+  #Peehip members are discontinued from PROD. None of the available members are Active .Terminated members dont have the BNC page display.
+  @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the benefits for an AL peehip member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -155,7 +156,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Monthly premium | <monthlypremium> |
     And the user validates headers on Bnc page for indi members
       | Plan Type       | <planType>       |
-    And the user validates the Primarycare Provider section
+   # And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
    And the user validates the Out of Pocket Max section
    And the user view the Drug Copays & Discounts header
@@ -238,7 +239,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Monthly premium | <monthlypremium> |
      And the user validates headers on Bnc page for indi members
       | Plan Type       | <planType>       |
-    And the user validates the Primarycare Provider section
+    #And the user validates the Primarycare Provider section
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section
    And the user view the Drug Copays & Discounts header
@@ -294,9 +295,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then The user navigate to Benefits and Coverage page
-    Then user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link
+    Then user validates ADDITIONAL BENEFITS Section
     Then user validates and clicks on Disclaimers link under Exclusive hearing
-    Then the user validates Header section
     Then the user validates Hearing section
     Then the user validates the Hearing Aid section
     Then the user validates the Vision section
@@ -309,7 +309,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType | copayCategory |
-      | 15238 | MAPD     | Group_BnC  | NON LIS       |
+      | 15238 | MAPD     | Group_BnC_Ancillary | NON LIS       |
 
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
   @benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part3_regressionMember

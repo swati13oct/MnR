@@ -585,9 +585,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
 
-	@And("^user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link$")
+	@And("^user validates ADDITIONAL BENEFITS Section$")
 	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
-		System.out.println("***user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link***");
+;
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.VIEW_ALL_ANCILLARY_BENEFITS();
@@ -1558,8 +1558,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
-		System.out.println(values.size());
-		System.out.println(values.size());
+
 		boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
 		System.out.println(arraycheck);
 		if (arraycheck == true)
