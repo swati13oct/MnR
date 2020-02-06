@@ -109,8 +109,7 @@ Feature: Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC06
   Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Details
-    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
-      | Site Name | <siteName> |
+    Given the user is on UHC medicare acquisition site page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -123,10 +122,10 @@ Feature: Vpp to plan Details UHC Scenarios
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                          |
-      | Blayer   |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
-      | Blayer   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
-      | Blayer   |   35045 | YES             | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                          |
+      |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO) |
+      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                   |
+      |   35045 | YES             | Chilton County     | SNP      | UnitedHealthcare Dual Complete (HMO SNP)          |
 
   @vppPlanDetailsUHC07
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
