@@ -88,10 +88,10 @@ Feature: Vpp to plan Details AARP Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium |
-      #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
+      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
+      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)           | Dental Platinum | $14            | $168          |
 
-  #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
   @vppPlanDetailsAARP05
   Scenario Outline: To click Back to all plans from Top and bottom of the plan deatils page and verify redirection back to the VPP-Summary page AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -200,3 +200,28 @@ Feature: Vpp to plan Details AARP Scenarios
     Examples: 
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+  @vppPlanDetailsAARP09
+  Scenario Outline: To verify links displayed in the global footer on plan details page for AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then the user navigates to the plan Details page
+      | Plan Name | <planName> |
+    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
+    And user clicks on contactus link of aboutus page
+    And user clicks on sitemap link of contactus page
+    And user clicks on privacypolicy link of sitemap page
+    #And user clicks on termsOfuse link of privacypolicy page
+    And user clicks on disclaimers link of terms&conditions page
+    And user clicks on agents&brokers link of disclaimers page
+    #And user clicks on Request Assistance and validates modal window ulayer
+    And user verifies home link of agents&brokers page ulayer
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                               |
+      |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |

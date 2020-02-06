@@ -24,7 +24,7 @@ Feature: Vpp to plan Details UHC Scenarios
       | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          |
 
   @vppPlanDetailsUHC02
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -43,11 +43,11 @@ Feature: Vpp to plan Details UHC Scenarios
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                     | optionalRider   | monthlyPremium | yearlyPremium |
-      #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0             | $0            |
+      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium |
+      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            |
+      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
+      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)           | Dental Platinum | $14            | $168          |
 
-  #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
   @vppPlanDetailsUHC03
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
@@ -108,7 +108,7 @@ Feature: Vpp to plan Details UHC Scenarios
       |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
 
   @vppPlanDetailsUHC06
-  Scenario Outline: OLE Landing from UHC Acquisition site VPP Plan Details
+  Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - OLE Landing from UHC Acquisition site VPP Plan Details
     Given the user is on UHC medicare acquisition site page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
