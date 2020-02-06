@@ -121,6 +121,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
 
 	// Right Rail Element - TFN
 	@FindBy(xpath = "//*[@class='tel ng-binding']")
@@ -883,6 +886,18 @@ public class PlanDetailsPage extends UhcDriver {
 			bValidation = false;
 		return bValidation;
 	}
+	
+	
+	public void clickAndValidatePrescriptionDrugBenefits() {
+		prescriptiondrugTab.click();
+		if(drugBenefitsSection.isDisplayed()){	
+				Assert.assertTrue(true);
+				System.out.println("We are on prescriptiondrugTab");
+		}
+		else
+				Assert.assertTrue(false);
+	}
+	
 	/**
 	 * @author bnaveen4
 	 * Add the optional rider

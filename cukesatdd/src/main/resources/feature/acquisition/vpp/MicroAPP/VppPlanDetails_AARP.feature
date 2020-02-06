@@ -225,3 +225,24 @@ Feature: Vpp to plan Details AARP Scenarios
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                               |
       |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
+
+  @vppPlanDetailsAARP10
+  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user click on Prescription Drug Benefits and validates in AARP site
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
