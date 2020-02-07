@@ -117,20 +117,28 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I can validate the numbers of claims from all search periods
       | Flag Zero Claims User | <flagZeroClaimsUser> |
     
-    @mapd_medical_cosmos
+    @mapd_medical_cosmos1
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
       | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
       | 01_2  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_3  | 15235 | MAPD-UHC-COSMOS-q2_jun_uhc0009    | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+
+    @mapd_medical_cosmos2
+    Examples: 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
+      | 01_4  | xxxxx | SSP_CLAIMS_q1_feb_ssp_001         | SSUP     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
+      | 01_5  | 15268 | MEDICA-COSMOS-q2_jun_sofl0013     | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+      | 01_6  | 15268 | PCP_CLAIMS_q3_sept_UAT4_AARP_032  | PCP      | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
+
+	 # note: don't have a working user that is SSP COMBO
+     #| 01_4  | xxxxx | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288| SSUP    | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
 
     @ma_medical_cosmos
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser |
       | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
       | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
-      | 02_3  | xxxxx | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Yes                | 
-      | 02_4  | 15268 | Medica_q2_jun_sofl0013            | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Yes                |
 
     @mapd_medical_nice
     Examples: 
@@ -140,7 +148,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @ship
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | flagZeroClaimsUser | 
-      | 04_1  | 15236 | SHIP-q3_sep_Pre-effective_Ship_005| SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
+      | 04_1  | 15236 | SHIP_CLAIMS_q1_feb_2020SHIP_034   | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Yes                |
 
     @mapd_drug
     Examples: 
