@@ -341,7 +341,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	
@@ -1751,6 +1751,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
+	}
+
+	public void openPRE() {
+		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+		} else {
+			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+		}
+		
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
 	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {

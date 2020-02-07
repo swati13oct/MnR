@@ -395,7 +395,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (MRScenario.environmentMedicare.contains("team-a")) { //note: sometimes take longer to load page on this team env
+					if (MRScenario.environment.contains("team-a")) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(5000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
 					} else {

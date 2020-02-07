@@ -10,43 +10,23 @@ import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
-
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
-	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
-	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-	private static String Local_AARP_URL = MRConstants.Local_URL;	
-	private static String DIGITAL_AARP_URL = MRConstants.TeamDigital_AARP_URL;
-	private static String DIGITAL_UHC_URL = MRConstants.TeamDigital_UHC_URL;
-	
-	public static boolean isHealthPlan = false;
+	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	
 	public AcquisitionHomePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+	}
+
+	public void openPRE() {
+		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
+			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+		} else {
+			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+		}
+		System.out.println("Current mobile page URL: "+driver.getCurrentUrl());
 	}
 	
-	@Override
-	public void openAndValidate() {
-		if (MRScenario.environment.equals("offline")) {
-			startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
-			checkModelPopup(driver,45);
-		}else if (MRScenario.environment.equals("prod")) {
-			startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
-			checkModelPopup(driver,45);
-		} else if(MRScenario.environment.equals("local")){
-			startNewMobile(Local_AARP_URL);
-		} else if(MRScenario.environment.equals("TEAMDIGITAL_AARP_URL")){
-			startNewMobile(DIGITAL_AARP_URL);
-		} else if(MRScenario.environment.equals("TEAMDIGITAL_UHC_URL")){
-			startNewMobile(DIGITAL_UHC_URL);
-		}else {
-			startNew(UMS_ACQISITION_PAGE_URL);
-			checkModelPopup(driver,10);
-		}
-		System.out.println("Current page URL: "+driver.getCurrentUrl());
-	}	
-
 	public void fixPrivateConnectionMobile() {
 		try {
 			//String URL = "https://self-signed.badssl.com/";

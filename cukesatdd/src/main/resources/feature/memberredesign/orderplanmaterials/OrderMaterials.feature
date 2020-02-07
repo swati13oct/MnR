@@ -142,10 +142,12 @@ Feature: 1.10 Member  order materials Page
       | 15291 | PDP      | COMBO_order	         | 000       |
     # | 15291 | SSUP     | COMBO_order	         | 000       |
 
-    @ValidateSHIPCouponBookErrorMessage
-    Examples: 
-      | TID   | planType | memberType                    | segmentId |  
-      | 15293 | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
+    # note: only SHIP user with Medicare Select Plan will be able to order Medicare Select Hospital Directory
+    # note: don't have working user with this specific plan yet, comment out for now and re-enable when user is available
+    #@ValidateSHIPCouponBookErrorMessage
+    #Examples: 
+    #  | TID   | planType | memberType                    | segmentId |  
+    #  | 15293 | SHIP     | COMBO_EFT_MedSelectPlan_order | 000       |
 
   #####################################################
   # note: For terminated user, the Order Materials link on dashboard body and top menu will not be visible
