@@ -606,7 +606,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : The user validates the Leaving popup in  Ancillary section
-	 */
+	 *//*
 
 	@And("^user validates the Leaving  popup$")
 	public void user_validates__leavingpopup() {
@@ -617,9 +617,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
-	/** 
+	*//** 
 	 * @toDo : The user validates the cancel button  of the leaving popup in  Ancillary section
-	 */
+	 *//*
 
 	@And("^user validates and click on Cancel button$")
 	public void user_validates__cacenbutton() {
@@ -627,9 +627,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Cancelbutton();
 	}
-	/** 
+	*//** 
 	 * @toDo : The user validates the proceed button  of the leaving popup in  Ancillary section
-	 */
+	 *//*
 
 
 	@And("^user validates and clicks on Proceed button and navigate to heathnavigationpage$")
@@ -640,7 +640,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
-	/** 
+*/	/** 
 	 * @toDo : The user validates the DrugCoverage section headers and text
 	 */
 	@And("^the user validates Drug coverage header and text under the section")

@@ -135,7 +135,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath= ".//*[@class='margin-small bold atdd-benefitssummary-eyewear']//following-sibling::p")
 	private WebElement VisionContent;
 
-	@FindBy(xpath = "//h4[contains(text(),'Exclusive hearing savings')]")
+	@FindBy(xpath = "//*[@id='ancillary']//h4[@class='h4 margin-extra-small atdd-benefitssummary-exclusivehearing']")
 	private WebElement Hearingaid;
 
 	@FindBy(xpath = "//span[contains(text(),'VISION')]")
@@ -412,7 +412,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-exclsvehearing-arrowdwn")
 	private WebElement Disclaimertext;
 
-	@FindBy(className = "atdd-bnc-ancilry-learnmorbtn")
+	@FindBy(xpath = "//a[@class='btn btn--secondary margin-small atdd-bnc-ancilry-learnmorbtn']")
 	private WebElement LearnmoreButton;
 
 	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
@@ -501,7 +501,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(className = "atdd-bnc-txers-retailcostsharing-table")
 	private WebElement retailTable;
 
-	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div//div[1]/span)[1]")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div//div[1]/span[1]")
 	private WebElement pcpValue;
 
 	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']/div/div/div[2]/span")
@@ -1745,13 +1745,14 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 
 	/**
+	 * @return 
 	 * @toDo : The user validates the Learn more button under Exclusive hearing
 	 *       section of Ancillary benefits
 	 */
 
 	public void Exclusivelearnmore() {
-		try {
-			validate(LearnmoreButton);
+		
+			validateNew(LearnmoreButton);
 			LearnmoreButton.click();
 
 			try {
@@ -1760,11 +1761,17 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// validate(disclaimersLink);
-			System.out.println("text" + LearnmoreButton.getText());
-		} catch (Exception e) {
-			System.out.println("Elements is not found ...");
-		}
+			
+			/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+			driver.switchTo().window(tabs2.get(1));*/
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getCurrentUrl().contains("uhchearing.com")) {
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Not able to navigate to UHC Hearing site");
+			}
+
+		
 	}
 
 	/*
@@ -1772,23 +1779,23 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	 * driver.findElement(By.className(LearnmoreButton));
 	 * TxtBoxContent.getText(); LearnmoreButton.click();
 	 * System.out.println("Printing "+TxtBoxContent);
-	 */
+	 
 	// LearnmoreButton.click();
-	/*
+	
 	 * if (LearnmoreButton.isDisplayed()) { Assert.assertTrue(true); } else
 	 * Assert.fail("Button not displayed");
-	 */
-	/*
+	 
+	
 	 * if
 	 * (driver.getCurrentUrl().contains("www.hihealthinnovations.com/medicare"))
 	 * { return; } else { Assert.fail("The element " + ProceedButton.getText() +
 	 * "is not found"); }
-	 */
+	 
 	// LearnmoreButton.click();
 
-	/**
+	*//**
 	 * @toDo : The user validates the Leaving popup in Ancillary section
-	 */
+	 *//*
 	public void Leavingpopup() {
 
 		try {
@@ -1798,50 +1805,32 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo : The user validates the proceed button of the leaving popup in
 	 *       Ancillary section
-	 */
+	 *//*
 
 	public boolean Proceedbutton() {
 		// LearnmoreButton.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		LearnmoreButton.click();
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(ProceedButton);
-		ProceedButton.click();
-		try {
-			Thread.sleep(40000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs2.get(1));
 		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("hihealthinnovations.com/medicare")) {
+		if (driver.getCurrentUrl().contains("uhchearing.com")) {
 			Assert.assertTrue(true);
 		} else {
-			Assert.fail("The element " + ProceedButton.getText() + "is not found");
+			Assert.fail("Not able to navigate to UHC Hearing site");
 		}
 
 		return true;
 	}
 
-	/**
+	*//**
 	 * @toDo : The user validates the cancel button of the leaving popup in
 	 *       Ancillary section
-	 */
+	 *//*
 	public void Cancelbutton() {
 
 		try {
@@ -1855,7 +1844,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.out.println("Elements is not found ...");
 		}
 	}
-
+*/
 	/**
 	 * @toDo : The user validates the DrugCoverage section headers and text
 	 */
@@ -3521,8 +3510,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
+		System.out.println("PCP value to be validated: "+ input);
 
-		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$"); if
+		Pattern pattern = Pattern.compile("^\\d{1,4}\\.\\d{2}\\%$"); if
 		(pattern.matcher(input).matches()) {
 			Assert.assertTrue("PCP values exists", true); } else { throw new
 				IllegalArgumentException("Invalid String"); }
@@ -5311,20 +5301,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"$0.00\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
 				+"Tier 3\n"
 				+"$131.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"$290.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs";
-
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -5342,7 +5331,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 		Thread.sleep(2000);
-		String TableData= "Annual Deductible Stage\n"
+		String TableData= "Additional Drug Coverage\n"
+		        +"Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
 				+"Catastrophic Coverage Stage\n"
@@ -5352,20 +5342,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"$0.00\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$5.00\n"
-				+"$5.00\n"
+				+"$10.00\n"
+				+"$10.00\n"
 				+"Tier 3\n"
 				+"$47.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"$100.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs";
-
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		
 		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  

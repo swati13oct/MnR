@@ -303,12 +303,10 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validates the Dental section
     Then the user validates chiropractic section
     Then user validates and clicks on Learn More button under Exclusive hearing section
-    And user validates the Leaving  popup
-    Then user validates and click on Cancel button
-    Then user validates and clicks on Proceed button and navigate to heathnavigationpage
 
-    Examples: 
-      | TID   | planType | memberType | copayCategory |
+
+    Examples:  
+      | TID   | planType | memberType         | copayCategory |
       | 15238 | MAPD     | Group_BnC_Ancillary | NON LIS       |
 
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
