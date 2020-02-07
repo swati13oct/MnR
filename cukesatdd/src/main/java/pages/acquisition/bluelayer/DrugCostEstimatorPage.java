@@ -2098,9 +2098,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		boolean Validate_ZipPharmacy = false;
 		if(DCE_uhcacquisition.contains(DrugName1) && DCE_uhcacquisition.contains(DrugName2) 
 				&& DCE_uhcacquisition.contains(DrugName3) && DCE_uhcacquisition.contains(PharmacyName)) {
-			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 			Validate_ZipPharmacy = true;
 			validation_Flag=true;
+			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
 		String DCEDrugList = localStorage.getItem("drugList");
@@ -2110,16 +2110,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		if(DCEDrugList.contains(DrugName1) && DCEDrugList.contains(DrugName2) 
 				&& DCEDrugList.contains(DrugName3) && DCEDrugList.contains(PharmacyName)
 				 && DCEDrugList.contains(ZipCode)) {
-			System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);
 			Validate_DrugList = true;
 			validation_Flag = (validation_Flag)?true:false;
+			System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);
 		}
-		System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
-		System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);		
 		System.out.println("UHC Local Storage Validation Status : "+validation_Flag);
 		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
 	}
-
-
 	
 }
