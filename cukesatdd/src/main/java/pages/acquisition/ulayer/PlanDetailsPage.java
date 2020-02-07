@@ -891,6 +891,7 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	public void clickAndValidatePrescriptionDrugBenefits() {
 		prescriptiondrugTab.click();
+		validateNew(drugBenefitsSection);
 		if(drugBenefitsSection.isDisplayed()){	
 				Assert.assertTrue(true);
 				System.out.println("We are on prescriptiondrugTab");
