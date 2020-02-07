@@ -33,6 +33,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
@@ -151,6 +152,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@id='mainWrapper']/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[3]/div/div[1]/a")
 	private WebElement previousYearLink;
 
+	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//input[contains(@id,'compare-plan-')]/following-sibling::label")
+	private List<WebElement> planCompareList;
 
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
@@ -462,6 +465,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 	
+		@FindBy(xpath = "//span[contains(@class,'single-added-text show')]/following::a[contains(text(),'View Plan')][1]")
+		private WebElement ViewPlanLink_AddedToCompare;
+		
 		@FindBy(id = "mpbed-month")
 		private WebElement medSuppMonthDrpdwn;
 		
@@ -894,12 +900,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 
-	public void verifyCompareCheckBoxesAreUnchecked(){
-
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+	
+	public boolean verifyCompareCheckBoxesAreUnchecked(){
+		if (!planCompareList.get(0).isSelected())
+			return true;
+		return false;
 
 	}
-
 	public void UncheckAndVerifyCompareChkBox(){
 		compareChkBox.click();
 		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
@@ -2964,6 +2971,17 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 
+	public PlanDetailsPage clickViewDetails_AddedToCompare() {
+
+		validateNew(ViewPlanLink_AddedToCompare);
+		ViewPlanLink_AddedToCompare.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
+	
+
 
 
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
@@ -3177,4 +3195,5 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	
 	}
+	
 }

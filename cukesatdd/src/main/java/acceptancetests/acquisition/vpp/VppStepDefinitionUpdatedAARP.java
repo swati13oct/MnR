@@ -388,6 +388,46 @@ public class VppStepDefinitionUpdatedAARP {
 		vppPlanDetailsPage.validatePdfSection(planType);
 	}
 
+	
+	@Then("^User clicks on Back to Plans link and navigate back to plan summary in AARP site$")
+	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_AARP_site() {
+
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		if (plansummaryPage != null) {
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the Plan Summary Page");
+	}
+	
+	@And("^User click on add to compare checkbox and click on view details link on AARP$")
+	public void user_click_on_compare_checkbox_AARP() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickCompareChkBox();
+		PlanDetailsPage planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
+		if (planDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
+			planDetailsPage.clickCompareBox();
+		}
+	}
+	
+	@Then("^I uncheck and go back to the vpp page to validate for AARP$")
+	public void uncheck_and_validate_vpp_page_for_AARP() {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		plandetailspage.clickCompareBox();
+		VPPPlanSummaryPage vppsummarypage = plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+		if (vppsummarypage != null) {
+			if (vppsummarypage.verifyCompareCheckBoxesAreUnchecked())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating that the checkboxes are unchecked");
+		} else
+			Assert.fail("Error in loading the vpp plan summary page");
+	}
+	
 	/**
 	 * @toDo:user validates the available plans for selected plan types
 	 */

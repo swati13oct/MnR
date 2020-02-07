@@ -216,7 +216,6 @@ Feature: Vpp to plan Details UHC Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |
       |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
   @vppPlanDetailsUHC10

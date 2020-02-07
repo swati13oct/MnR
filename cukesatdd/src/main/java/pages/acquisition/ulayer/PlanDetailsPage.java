@@ -248,8 +248,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
 
-
-
+	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
+	private WebElement compareBox;
 
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -808,6 +808,7 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return null;
 	}
+	
 
 	/**
 	 * @author bnaveen4
@@ -1131,6 +1132,9 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
+	public void clickCompareBox() {
+		compareBox.click();
+	}
 
 	public boolean ClickValidatePDFText_URL_ForDocCode(String pDFtype, String documentCode) {
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));

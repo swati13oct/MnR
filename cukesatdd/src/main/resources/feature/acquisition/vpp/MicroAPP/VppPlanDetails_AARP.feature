@@ -218,7 +218,6 @@ Feature: Vpp to plan Details AARP Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |
       |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
   @vppPlanDetailsAARP10
@@ -241,6 +240,26 @@ Feature: Vpp to plan Details AARP Scenarios
     And user clicks on agents&brokers link of disclaimers page
     #And user clicks on Request Assistance and validates modal window ulayer
     And user verifies home link of agents&brokers page ulayer
+
+    Examples: 
+      | zipcode | isMultutiCounty | county       | plantype | planName                                               |
+      |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
+
+  @vppPlanDetailsAARP11
+  Scenario Outline: Verify plan details in UMS site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then the user navigates to the plan Details page
+      | Plan Name | <planName> |
+    And the user validates the pdf section
+    Then User clicks on Back to Plans link and navigate back to plan summary in AARP site
+    Then User click on add to compare checkbox and click on view details link on AARP
+    Then I uncheck and go back to the vpp page to validate for AARP
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                               |
