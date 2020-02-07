@@ -1125,9 +1125,18 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	
 	@Then("^the user navigates to Communication Preferences page$")
-	public void user_navigate_toCommunicationPreferencespage() throws InterruptedException {
+	public void user_navigate_toCommunicationPreferencespage(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 		CommunicationPreferencePage communicationPreferencePage = profilePreferencesPage.navigateToCommunicationPreferencePage();
+		if (memberType.toLowerCase().contains("combo"))
+			communicationPreferencePage.clickCombTab(planType);
 		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
 	}
 	

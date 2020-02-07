@@ -240,7 +240,7 @@ public class MRScenario {
 				  if  (environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
-				 } else if ((environment.equalsIgnoreCase("team-a")|| (environment.contains("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
+				 } else if ((environment.contains("team-a")|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
 						csvName= "MemberRedesign-UUID.csv";
 				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
@@ -594,7 +594,7 @@ public class MRScenario {
 		}else{
 			if(environment.equals("stage")||environment.equals("offline-stage"))
 				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.contains("digital-uat"))
+			else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.contains("digital-uat"))
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else 
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
@@ -1059,7 +1059,11 @@ sauceLabsTunnelIdentifier);
 					//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 					capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
-					//---begin - enable logging
+					//---begin - enable logging - needed by predators - do not remove this portion
+					//note: commandTimeout=how long to run a command (unit second, default 300)
+					//capabilities.setCapability("commandTimeout", "400"); 
+					//note: idleTimeout=how long to wait before sending next command (unit second, default 90)
+					capabilities.setCapability("idleTimeout", "200"); 
 				    LoggingPreferences logPrefs  = new LoggingPreferences();
 				    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 				    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
