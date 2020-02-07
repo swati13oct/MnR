@@ -146,7 +146,7 @@ Feature: 1.03 Member Preferences page
       | 15308 | MEDICA_ProfilePref     |
       
   @CommunicationPreferences06 @CommunicationPreferencesMicroApp06 @regressionMember @F276629
-  Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
+  Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP with plan <planName>
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
