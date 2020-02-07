@@ -476,5 +476,11 @@ public class DCEAcqStepDefinitionUHC {
 			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
-	
+	@Then("^the user validates Local Storage for Zip, added drugs and Pharmacy details for UHC$")
+	public void the_user_validates_the_added_drugs_on_See_your_Estimated_Costs_page_in_AARP_site(DataTable DCEAttributes) throws Throwable {
+		Map<String, String> DCEAttributesMap=parseInputArguments(DCEAttributes);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateLocalStorage(DCEAttributesMap);
+	}
 }

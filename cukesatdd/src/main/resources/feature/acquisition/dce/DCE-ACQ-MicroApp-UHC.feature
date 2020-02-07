@@ -56,10 +56,16 @@ Feature: ACQ-DCE-MicroApp - UMS
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <genricName3>  |
+    Then the user validates Local Storage for Zip, added drugs and Pharmacy details for UHC
+      | Zip Code      | <zipcode>      |
+      | Drug Name1    | <genericName1> |
+      | Drug Name2    | <drugName2>    |
+      | Drug Name3    | <genricName3>  |
+      | Pharmacy Name | <pharmacyName> |
 
-    #Test ID: 15487,15490,15494
+
     Examples: 
       | THPage | siteName | zipcode | isMultutiCounty | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                     | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       | dce    | Ulayer   |   90002 | NO              | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY                     | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
-      | dce    | Ulayer   |   80002 | YES             | Adams County       | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | WALGREENS  | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | dce    | Ulayer   |   80002 | YES             | Adams County       | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | WALGREENS                        | PDP      | AARP MedicareRx Walgreens (PDP)                    |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
       | dce    | Ulayer   |   80210 | NO              | Denver County      | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CENTURA HEALTH PHARMACY AT PORTE | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
