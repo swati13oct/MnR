@@ -152,6 +152,8 @@ Feature: 1.03 Member Preferences page
       | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then the user validates that Communication Preferences section for Ship
       | Plan Name | <planName> |
     And the user select "US MAIL" for "Plan Documents"
@@ -163,8 +165,11 @@ Feature: 1.03 Member Preferences page
     And the user click Terms and Conditions check box
     And the user click on the Save Preferences button
     Then a popup is displayed and validate the popup select Yes and submit
+      | Plan Name | <planName> |
     And the user validate the success message
 
     Examples: 
-      | FID    | planType                 | memberType       | planName                      |
-      | 276629 | SHIP                     | SHIP_ProfilePref | AARP MEDICARE SUPPLEMENT PLAN |
+      | FID    | planType                 | memberType             | planName                      |
+      | 276629 | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
+      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
+      
