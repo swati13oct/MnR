@@ -54,6 +54,8 @@ import org.springframework.stereotype.Component;
 import acceptancetests.data.CommonConstants;
 import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 
 import java.security.*;
 import javax.crypto.*;
@@ -106,11 +108,18 @@ public class MRScenario {
 	static BufferedReader memberAmpTypeReader = null;
 	static BufferedReader memberUmsTypeReader = null;
 	static BufferedReader memberRedesignVbfTypeReader = null;
+	public static String sauceLabsMobileTunnelIdentifier;
+	public static String appiumVersion;
+	public static String mobileDeviceName = "";
+	public static String desktopBrowserName;
+	public AppiumDriver mobileDriver;
+	public  String mobileSessionTimeout="900000";
 	
-
 	public static final String USERNAME = "ucpadmin";
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
+	
+	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
 
 	//public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -144,8 +153,8 @@ public class MRScenario {
 
 		props = getProperties();
 
-		// Set acqusisition and member urls 
-		if(!(props==null)){
+		 
+		if(!(props==null)){ //when running on local this logic will be used 
 			System.out.println("before accessing props");
 			environment = props.get("Environment");
 			System.out.println("after accessing props");
@@ -153,17 +162,25 @@ public class MRScenario {
 			browsername = props.get("BrowserName");
 			isTestHarness = props.get("isTestHarness");
 			isHSIDCompatible =  props.get("isHSIDCompatible");
+			mobileDeviceName = (null == System.getenv("DEVICE_NAME") ? props.get("SaucslabDeviceName")
+					: System.getenv("DEVICE_NAME"));
+			mobileDeviceName = (mobileDeviceName.toUpperCase().equals("DEFAULT"))?props.get("SaucslabDeviceName"):mobileDeviceName;
 			
-		}else{
+		}else{ //running from Jenkins will use this logic
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
 					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
-		
 		}
-		
+
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
+
+		sauceLabsMobileTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
+				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
+		appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ? CommonConstants.APPIUM_DEFAULT_VERSION
+				: System.getProperty(CommonConstants.APPIUM_VERSION));
+
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
 		File groovyScript = new File("src/main/resources/pdfReporter.groovy");
@@ -223,8 +240,8 @@ public class MRScenario {
 				  if  (environment.contains("team-ci")){
 						csvName = "MemberRedesign-VBF-Teamci.csv";
 								
-				} else if ((environment.equalsIgnoreCase("team-a")|| (environment.contains("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
-					csvName= "MemberRedesign-UUID.csv";
+				 } else if ((environment.equalsIgnoreCase("team-a")|| (environment.contains("team-atest")||(environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-t"))))) {
+						csvName= "MemberRedesign-UUID.csv";
 				 }else  if(tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")){
 							csvName = "MemberRedesign-VBF.csv";
 				 }
@@ -550,6 +567,7 @@ public class MRScenario {
 			System.out
 			.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+		
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(
 					CommonConstants.PROPERTY_FILE_FOLDER);
@@ -573,9 +591,19 @@ public class MRScenario {
 				domain = null;
 			}
 			return props;
+		}else{
+			if(environment.equals("stage")||environment.equals("offline-stage"))
+				domain = "uhc.com";
+			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.contains("digital-uat"))
+				domain = "ocp-elr-core-nonprod.optum.com";
+			else 
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
+			System.out.println("env chosen is: "+ environment);
+			System.out.println("domain chosen is: "+ domain);
+			
+			return null;
 		}
-		
-		return null;
+			
 		
 	}
 
@@ -902,23 +930,12 @@ sauceLabsTunnelIdentifier);
 		 * The logic is if the environment is passed in from the System (when running from Jenkins)
 		 * then based on the environment it associates the appropriate domain. 
 		 */
-		
-		if(!(null==environment)){
-			if(environment.equals("stage")||environment.equals("offline-stage"))
-				domain = "uhc.com";
-			else if(environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else 
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: "+ environment);
-			System.out.println("domain chosen is: "+ domain);
-		}
-			
-		
+
 		String browser = (null == System.getProperty(CommonConstants.JENKINS_BROWSER)
 				? props.get(CommonConstants.DESKTOP_WEBDRIVER) : System.getProperty(CommonConstants.JENKINS_BROWSER));
 
-		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the properties file
+
+		//if the browsername is passed in from Jenkins then use that, otherwise use the one from the CI config properties file
 		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 		
@@ -928,6 +945,7 @@ sauceLabsTunnelIdentifier);
 		System.out.println("browser version after "+ browserVersion);
 		
 		
+
 		// Again, Jenkins takes precedent.
 		String pathToBinary = (null == System.getProperty("phantomjs") ? "null"
 				: System.getProperty("phantomjs"));
@@ -1033,32 +1051,34 @@ sauceLabsTunnelIdentifier);
 					capabilities.setCapability("screenResolution", "1920x1080");
 					capabilities.setCapability("maxDuration", "3600");
 				 }
-				capabilities.setCapability("autoAcceptsAlerts", true);
-				//capabilities.setCapability("parent-tunnel", "sauce_admin");		
-				capabilities.setCapability("parent-tunnel", "optumtest");						
-				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-				//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+				if(!(null==capabilities)){
+					capabilities.setCapability("autoAcceptsAlerts", true);
+					//capabilities.setCapability("parent-tunnel", "sauce_admin");		
+					capabilities.setCapability("parent-tunnel", "optumtest");						
+					capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+					//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+					capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
-				//---begin - enable logging
-			    LoggingPreferences logPrefs  = new LoggingPreferences();
-			    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-			    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-				//---end - enable logging
-
-				String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
-				capabilities.setCapability("name", jobName);
-				try {
-
-					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-					getJobURL(getSessionId());
-					//webDriver.manage().deleteAllCookies();
-				} catch (MalformedURLException e) {
-					Assert.fail("Invalid Sauce URL: [" + URL + "]");
-				}
-
+					//---begin - enable logging
+				    LoggingPreferences logPrefs  = new LoggingPreferences();
+				    logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+				    capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+					//---end - enable logging
+	
+					String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  " + System.getProperty("environment") +" environment";
+					capabilities.setCapability("name", jobName);
+					try {
+	
+						webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+						MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+						System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
+						getJobURL(getSessionId());
+						//webDriver.manage().deleteAllCookies();
+					} catch (MalformedURLException e) {
+						Assert.fail("Invalid Sauce URL: [" + URL + "]");
+					}
+				}else
+					Assert.fail("Error in setting capabilities due to unidentified browser. Check your browser and/or Jenkins job pipeline script to make sure browser is added in the build command");
 			}
 		//}
 		return webDriver;
@@ -1104,8 +1124,94 @@ sauceLabsTunnelIdentifier);
 		return digest;
 	}
 
+	
 	public AppiumDriver getMobileDriver() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String findDeviceName = "iPhone X"; // Default device
+		String mobileOSName;
+		mobileDeviceName = System.getenv("DEVICE_NAME");
+		String deviceName = mobileDeviceName.toUpperCase().trim();
+		System.out.println("Given device : "+deviceName);
+		isSauceLabSelected = true;
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
+		capabilities.setCapability("privateDevicesOnly", "true");
+		capabilities.setCapability("noReset", "false");
+		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout); // max 30 mins for device allocation
+		//capabilities.setCapability("testobject_suite_name", "PRE");
+		//capabilities.setCapability("testobject_test_name", mobileTestName);
+		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		capabilities.setCapability("nativeWebTap", true);
+
+		if (deviceName.contains("IPHONEX") || deviceName.contains("IPHONE X"))
+			findDeviceName = "iPhone X";
+		if (deviceName.contains("IPHONE8") || deviceName.contains("IPHONE 8"))
+			findDeviceName = "iPhone 8";
+		if (deviceName.contains("IPHONE7+") || deviceName.contains("IPHONE 7 PLUS") || deviceName.contains("IPHONE 7+")
+				|| deviceName.contains("IPHONE 7PLUS"))
+			findDeviceName = "iPhone 7 Plus";
+		if (deviceName.contains("IPAD AIR 1") || deviceName.equals("IPAD AIR") || deviceName.equals("IPAD")
+				|| deviceName.contains("IPAD AIR1") || deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
+			findDeviceName = "iPad Air";
+		if (deviceName.contains("IPAD AIR 2") || deviceName.contains("IPAD AIR2") || deviceName.contains("IPAD AIR1")
+				|| deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
+			findDeviceName = "iPad Air 2";
+		if (deviceName.contains("S9") || deviceName.equals("SAMSUNG") || deviceName.contains("GALAXY"))
+			findDeviceName = "Samsung Galaxy S9";
+		if (deviceName.contains("S8+") || deviceName.contains("S8 +") || deviceName.contains("S8PLUS")
+				|| deviceName.contains("S8 PLUS"))
+			findDeviceName = "Samsung Galaxy S8+";
+		if (deviceName.contains("S8"))
+			findDeviceName = "Samsung Galaxy S8";
+
+		capabilities.setCapability("deviceName", findDeviceName);
+
+		if (findDeviceName.toUpperCase().contains("SAMSUNG")) {
+			mobileOSName = "Android";
+			capabilities.setCapability("platformVersion", "8");
+			capabilities.setCapability("phoneOnly", "true");
+		} else {
+			mobileOSName = "iOS";
+			capabilities.setCapability("phoneOnly", "true");
+			capabilities.setCapability("platformVersion", "12");
+
+			if (findDeviceName.toUpperCase().contains("IPAD")) {
+				capabilities.setCapability("tabletOnly", "true");
+				capabilities.setCapability("phoneOnly", "false");
+			}
+			if (findDeviceName.toUpperCase().equals("IPAD AIR")) {
+				capabilities.setCapability("platformVersion", "11");
+			}
+		}
+		capabilities.setCapability("platformName", mobileOSName);
+		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
+		String jobName = System.getProperty("user.name")+" Mobile Execution - Using " + findDeviceName + " in  " + sauceLabsMobileTunnelIdentifier
+				+ " environment";
+		capabilities.setCapability("name", jobName);
+		capabilities.setCapability("recordMp4", true);
+		capabilities.setCapability("appiumVersion", appiumVersion);
+		//capabilities.setCapability("acceptSslCerts", true);
+		capabilities.setCapability("forceMjsonwp", true);
+		//capabilities.setCapability("autoAcceptAlerts", true);
+		try {
+			if (mobileOSName.equalsIgnoreCase("Android"))
+				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+			else
+				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+			System.out.println(findDeviceName + " JobURL  --- "
+					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
+			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			// System.out.println("JobReportURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			// System.out.println("APIURL ---
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
+			System.out.println(mobileDriver.getContext());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mobileDriver;
 	}
+
 }
