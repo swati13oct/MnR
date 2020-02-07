@@ -1757,29 +1757,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
 		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
 		//String testharurl = "content/pharmacysearchtestharnesspage.html";
-		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
+		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+				MicroAppSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL+testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL+testharurl);
-				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl+testharurl);
 				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL+testharurl);
-				testSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+				testSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
-				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl+testharurl);
-				MicroAppSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+				MicroAppSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());

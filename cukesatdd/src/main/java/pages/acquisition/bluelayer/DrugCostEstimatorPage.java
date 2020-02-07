@@ -2082,9 +2082,27 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String DrugName2 = dCEAttributesMap.get("Drug Name2");
 		String DrugName3 = dCEAttributesMap.get("Drug Name3");
 		String PharmacyName = dCEAttributesMap.get("Pharmacy Name");
+		System.out.println(ZipCode);
+		System.out.println(DrugName1);
+		System.out.println(DrugName2);
+		System.out.println(DrugName3);
+		System.out.println(PharmacyName);
 
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
 		LocalStorage localStorage = webStorage.getLocalStorage();		
+
+		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
+		System.out.println("UHC ACQ info from Local Storage");
+		System.out.println(DCE_uhcacquisition);
+		boolean validation_Flag=false;
+		boolean Validate_ZipPharmacy = false;
+		if(DCE_uhcacquisition.contains(DrugName1) && DCE_uhcacquisition.contains(DrugName2) 
+				&& DCE_uhcacquisition.contains(DrugName3) && DCE_uhcacquisition.contains(PharmacyName)) {
+			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
+			Validate_ZipPharmacy = true;
+			validation_Flag=true;
+		}
+		
 		String DCEDrugList = localStorage.getItem("drugList");
 		System.out.println("UHC DrugList from Local Storage");
 		System.out.println(DCEDrugList);
@@ -2094,20 +2112,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				 && DCEDrugList.contains(ZipCode)) {
 			System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);
 			Validate_DrugList = true;
+			validation_Flag = (validation_Flag)?true:false;
 		}
-
-		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
-		System.out.println("UHC ACQ info from Local Storage");
-		System.out.println(DCE_uhcacquisition);
-
-		boolean Validate_ZipPharmacy = false;
-		if(DCE_uhcacquisition.contains(DrugName1) && DCE_uhcacquisition.contains(DrugName2) 
-				&& DCE_uhcacquisition.contains(DrugName3) && DCE_uhcacquisition.contains(PharmacyName)) {
-			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
-			Validate_ZipPharmacy = true;
-		}
-		boolean validation_Flag = Validate_DrugList && Validate_ZipPharmacy;
-		System.out.println("UHC Local Storage Validation Status : "+Validate_ZipPharmacy);
+		System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
+		System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);		
+		System.out.println("UHC Local Storage Validation Status : "+validation_Flag);
 		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
 	}
 
