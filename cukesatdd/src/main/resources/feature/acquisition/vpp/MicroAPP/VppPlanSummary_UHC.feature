@@ -41,7 +41,7 @@ Feature: Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible |
-      | 15553 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
+      #| 15553 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
       | 15554 |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
     @prodRegression
@@ -89,39 +89,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | MA Test Plans  | <MA_testPlans>  |
       | PDP Test Plans | <PDP_testPlans> |
       | SNP Test Plans | <SNP_testPlans> |
-    Then user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates ability to unsave a saved plan on UHC site
-      | MA Test Plans  | <MA_testPlans>  |
-      | PDP Test Plans | <PDP_testPlans> |
-      | SNP Test Plans | <SNP_testPlans> |
-    Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -181,19 +149,19 @@ Feature: Vpp to plan Summary UHC Scenarios
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
 
-  @vppPlanSummaryUHC07
-  Scenario Outline: Vaidate the Right Rail Promo Widget
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    Then the user validates the VPP Promo right rail widjet
-      | Plan Name | <planName> |
-
-    Examples: 
-      | zipcode | plantype | planName                    |
-      |   55344 | MA       | UnitedHealthcare Sync (PPO) |
+  #@vppPlanSummaryUHC07
+  #Scenario Outline: Vaidate the Right Rail Promo Widget
+    #Given the user is on the uhcmedicaresolutions site landing page
+    #When I access the vpp page
+      #| Zip Code | <zipcode> |
+    #When user views plans of the below plan type in UMS site
+      #| Plan Type | <plantype> |
+    #Then the user validates the VPP Promo right rail widjet
+      #| Plan Name | <planName> |
+#
+    #Examples: 
+      #| zipcode | plantype | planName                    |
+      #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
 
   @vppPlanSummaryUHC08
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
@@ -217,7 +185,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | UID     |
       | F322478 |
 
-  @vppPlanSummaryAARP10
+  @vppPlanSummaryUHC10
   Scenario Outline: To verify links displayed in Global footer section in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
