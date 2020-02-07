@@ -292,12 +292,71 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the Plan Details Page");
 	}
 
+	@Then("^the user validates following PDF link is displayes with correct document code for UHC$")
+	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code_for_UHC(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String PDFtype = memberAttributesMap.get("PDF type");
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
+		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+
+	}
+	
+	@Then("^the user click on PDF link and validates document code in URL for UHC$")
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_URL_for_UHC(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String PDFtype = memberAttributesMap.get("PDF type");
+
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
+
+	}
+	
 	@When("^the user validates the pdf section for uhc$")
 	public void userValidatesPDFSection() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatePdfSection(planType);
+	}
+	
+	@Then("^the user validates the document code is present in the PDF for UHC$")
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_PDF_for_UHC(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String PDFtype = memberAttributesMap.get("PDF type");
+
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFText_ForDocCode(PDFtype, DocumentCode);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
+
 	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
@@ -1779,6 +1838,13 @@ public class VppStepDefinitionUHC {
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium, yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "
 				+ monthlyPremium + " " + yearlyPremium, validationFlag);
+	}
+	
+	@Then("^the user click on Prescription Drug Benefits and validates in UHC site$")
+	public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_UHC_site() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.clickAndValidatePrescriptionDrugBenefits();
 	}
 
 	@Then("^the user click on Optional Services tab and add the rider$")
