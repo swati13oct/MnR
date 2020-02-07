@@ -110,7 +110,7 @@ Feature: Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC06
   Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - OLE Landing from UHC Acquisition site VPP Plan Details
-    Given the user is on UHC medicare acquisition site page
+    Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -151,7 +151,7 @@ Feature: Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC08
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
-    Given user is on blue layer landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When user performs plan search using following information in the UMS site
       | Zip Code    | <zipcode>     |
       | County      | <county>      |
@@ -219,7 +219,6 @@ Feature: Vpp to plan Details UHC Scenarios
 
   @vppPlanDetailsUHC10
   Scenario Outline: To verify links displayed in Global footer section on plan details page in UMS site
-    Given the user is on the uhcmedicaresolutions site landing page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
