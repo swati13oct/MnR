@@ -40,9 +40,9 @@ Feature: Vpp to plan Summary UHC Scenarios
     Then the user clicks on Enroll Now for UMS site and validates the Welcome to OLE Page
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                       | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible |
       #| 15553 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
-      | 15554 |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
+      | 15554 |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
     @prodRegression
     Examples: 
@@ -104,6 +104,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
 
+
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
@@ -151,18 +152,17 @@ Feature: Vpp to plan Summary UHC Scenarios
 
   #@vppPlanSummaryUHC07
   #Scenario Outline: Vaidate the Right Rail Promo Widget
-    #Given the user is on the uhcmedicaresolutions site landing page
-    #When I access the vpp page
-      #| Zip Code | <zipcode> |
-    #When user views plans of the below plan type in UMS site
-      #| Plan Type | <plantype> |
-    #Then the user validates the VPP Promo right rail widjet
-      #| Plan Name | <planName> |
-#
-    #Examples: 
-      #| zipcode | plantype | planName                    |
-      #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-
+  #Given the user is on the uhcmedicaresolutions site landing page
+  #When I access the vpp page
+  #| Zip Code | <zipcode> |
+  #When user views plans of the below plan type in UMS site
+  #| Plan Type | <plantype> |
+  #Then the user validates the VPP Promo right rail widjet
+  #| Plan Name | <planName> |
+  #
+  #Examples:
+  #| zipcode | plantype | planName                    |
+  #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
   @vppPlanSummaryUHC08
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
