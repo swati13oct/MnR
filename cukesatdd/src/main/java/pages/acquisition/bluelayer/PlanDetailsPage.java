@@ -180,10 +180,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public JSONObject planDocPDFAcqJson;
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryTop']")
 	private WebElement topbackToPlanslink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryBottom']")
 	private WebElement downbackToPlanslink;
 
 	@FindBy(id = "medicalbenefits")
@@ -556,17 +556,15 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
-
 		waitforElement(downbackToPlanslink);
-		downbackToPlanslink.click();
-		Thread.sleep(3000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", downbackToPlanslink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", downbackToPlanslink);
+		Thread.sleep(7000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 			Assert.assertTrue(true);
 		}
-
 		else
 			Assert.assertTrue(false);
-
 	}
 
 	public void browserBack() {
