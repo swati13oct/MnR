@@ -50,6 +50,6 @@ Feature: 1.06.7 Member My Documents Page
       | TID   | planType | memberType            |                
      | 10000 | MAPD     | Individual_MyDocuments|
      | 10001 | MAPD     | Group_MyDocuments     |
-     #| 10002 | COMBO    | Combo_MyDocuments     |
+     | 10002 | COMBO    | Combo_MyDocuments     |
 
     
