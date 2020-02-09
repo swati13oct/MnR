@@ -34,7 +34,7 @@ Feature: 1.06.7 Member My Documents Page
     #----------------- Test for Current Year----------
     And then the user searches documents for a valid Period on My documents page
       | Search Range | Current Year |
-    Then I validate the Documents Table if present 
+    Then I validate the Documents Table if present for Current Year
     #----------------- Test Custom calendar--------------------------
     And then the user searches documents for a valid Period on My documents page
       |  Search Range | Custom Search |
@@ -49,5 +49,5 @@ Feature: 1.06.7 Member My Documents Page
     Examples: 
     | TID   | planType | memberType            |                
     | 10000 | MAPD     | Individual_MyDocuments|
-    #| 10001 | MAPD     | Group_MyDocuments     |
+    | 10001 | MAPD     | Group_MyDocuments     |
     | 10002 | COMBO    | FedAndShip_MyDocuments |

@@ -128,13 +128,29 @@ public class MyDocumentsStepDefinition {
 	}
 	
 	/**
+	 * This steps enables validates if Documents Table is present or not
+	 * If it's present then user validates the doc table else validates the error message
+	 */
+	@And("^I validate the Documents Table if present for Current Year$")	
+	public void validate_the_Documents_Table_ForCurrentYear() throws InterruptedException { 
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
+				.getBean(PageConstantsMnR.My_Documents_PAGE);
+		Boolean tableIsPresent=myDocumentsPage.validateDocumentsTable();
+		if(tableIsPresent) {
+			myDocumentsPage.validateTableHeaders();	
+			myDocumentsPage.validateTableContent();
+
+		}
+	}
+	
+	/**
 	 * This steps validates the calendar elements on Custom search
 	 * Also it lets user to perform a Custom search with a date Range 
 	 *  From: Current Date Minus 26 months To :Current Date 
 	 */
 	@Then("^I can validate the calendar will show up for custom search when user clicks on From and To calendars$")	
 	public void validate_the_Calendar() throws InterruptedException { 
-		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(26).toDate());
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(24).toDate());
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 
