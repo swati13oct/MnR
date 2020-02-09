@@ -104,7 +104,6 @@ Feature: Vpp to plan Summary UHC Scenarios
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
 
-
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
@@ -135,7 +134,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC06
+  @vppPlanSummaryUHC05
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -150,7 +149,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
 
-  #@vppPlanSummaryUHC07
+  #@vppPlanSummaryUHC06
   #Scenario Outline: Vaidate the Right Rail Promo Widget
   #Given the user is on the uhcmedicaresolutions site landing page
   #When I access the vpp page
@@ -163,29 +162,38 @@ Feature: Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC08
+ 
+  @vppPlanSummaryUHC07
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     When verify Call sticky action menu icon is visible or not
     And verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the popup and content in popup
 
     Examples: 
-      | UID     |
-      | F322478 |
+      | UID     | zipcode | isMultiCounty | county           |
+      | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC09
+  @vppPlanSummaryUHC08
   Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
     When verify Chat sticky action menu icon is visible or not
     And verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the Chat at its original state
 
     Examples: 
-      | UID     |
-      | F322478 |
+      | UID     | zipcode | isMultiCounty | county           |
+      | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC10
+  @vppPlanSummaryUHC09
   Scenario Outline: To verify links displayed in Global footer section in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -202,3 +210,30 @@ Feature: Vpp to plan Summary UHC Scenarios
     #And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
     #And user clicks on Request Assistance and validates modal window bluelayer
     And user verifies home link of agents&brokers page bluelayer
+    
+     Examples: 
+      | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
+      |   90210 | No              | Los Angeles County |              80002 |
+    
+
+  @vppPlanSummaryUHC10
+  Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan summary page on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type on test site
+      | Plan Type | <plantype> |
+      | Site      | <site>     |
+    Then user saves first plan on plan summary page on test site
+    Then user validates print option for selected plan on plan summary page on test site
+    Then user validates print functionality for selected plan on plan summary page on test site
+    Then user validates email option for selected plan on plan summary page on test site
+    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site
+    Then user loads page using email deeplink for plan and validate vpp summary page content on test site
+
+    Examples: 
+      | UID     | site   | plantype | zipcode | isMultiCounty | county           |
+      | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
+      | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |

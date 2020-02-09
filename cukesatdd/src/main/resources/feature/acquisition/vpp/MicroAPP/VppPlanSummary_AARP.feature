@@ -194,42 +194,49 @@ Feature: Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryAARP07
-  Scenario Outline: To check Plan Summary for specific to sync plan
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site
-      | Plan Type | <plantype> |
-    Then User validates the VPP promowidjet for specifc plans
-      | Plan Name | <planName> |
-
-    Examples: 
-      | zipcode | isMultutiCounty | plantype | planName                    |
-      |   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-
+  #@vppPlanSummaryAARP07
+  #Scenario Outline: To check Plan Summary for specific to sync plan
+  #Given the user is on AARP medicare acquisition site landing page
+  #When the user performs plan search using following information in the AARP site
+  #| Zip Code        | <zipcode>         |
+  #| Is Multi County | <isMultutiCounty> |
+  #And the user views the plans of the below plan type in AARP site
+  #| Plan Type | <plantype> |
+  #Then User validates the VPP promowidjet for specifc plans
+  #| Plan Name | <planName> |
+  #
+  #Examples:
+  #| zipcode | isMultutiCounty | plantype | planName                    |
+  #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
   @vppPlanSummaryAARP08
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
     When verify Call SAM icon is visible or not
     And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the popup and content
 
     Examples: 
-      | UID     |
-      | F322478 |
+      | UID     | zipcode | isMultutiCounty | county             |
+      | F322478 |   90210 | NO              | Los Angeles County |
 
   @vppPlanSummaryAARP09
   Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
     When verify Chat SAM icon is visible or not
     And verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the Chat original state
 
     Examples: 
-      | UID     |
-      | F322478 |
+      | UID     | zipcode | isMultutiCounty | county             |
+      | F322478 |   90210 | NO              | Los Angeles County |
 
   @vppPlanSummaryAARP10
   Scenario Outline: To verify links displayed in the global footer of AARP site
@@ -252,3 +259,25 @@ Feature: Vpp to plan Summary AARP Scenarios
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
+
+  @vppPlanSummaryAARP11
+  Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type on test site
+      | Plan Type | <plantype> |
+      | Site      | <site>     |
+    Then user saves first plan on plan summary page on test site
+    Then user validates print option for selected plan on plan summary page on test site
+    Then user validates print functionality for selected plan on plan summary page on test site
+    Then user validates email option for selected plan on plan summary page on test site
+    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site
+    Then user loads page using email deeplink for plan and validate vpp summary page content on test site
+
+    Examples: 
+      | UID     | site   | plantype | zipcode | isMultiCounty | county           |
+      | 1598166 | Ulayer | PDP      |   80001 | NO            | Jefferson County |
+      | 1598166 | Ulayer | SNP      |   80001 | NO            | Jefferson County |
