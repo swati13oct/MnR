@@ -451,7 +451,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+    # | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
     And the user validates static links
       | Plan Type | <planType> |
     And the user validates spanish and chinese should not display in dropdown
@@ -499,7 +499,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user verifies that the correct pdfs are coming in the plan material section
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+     # | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
     And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
@@ -541,7 +541,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+     # | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
     And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section

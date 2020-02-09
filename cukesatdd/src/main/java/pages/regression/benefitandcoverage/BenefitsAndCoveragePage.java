@@ -5209,19 +5209,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 				+"$0.00\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
 				+"Tier 3\n"
 				+"$80.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"$185.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs";
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
 
 		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
