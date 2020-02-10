@@ -1971,7 +1971,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
 		validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
 
-		locateapharmacybutton.click();
+		/*locateapharmacybutton.click();
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
@@ -2000,7 +2000,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
