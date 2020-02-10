@@ -1,8 +1,6 @@
 package pages.regression.profileandpreferences;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -112,6 +110,9 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//input[@id='savepreferno']/../label")
 	protected WebElement welcomeKitNo;
 
+	@FindBy(xpath="//button[contains(@ng-show,'hipOrPhipPlans') and not(contains(@class,'ng-hide')) and text()='OK']")
+	protected WebElement hipOrPhipPlansOkBtn;
+	
 	@FindBy(xpath = "//button[not(contains(@class,'ng-hide')) and @ng-click='savePreferSubmitRadio();']")
 	protected WebElement submitBtnForWelcomeKitYES;
 
@@ -175,18 +176,21 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='Paperless_Settings']//h2")
 	protected WebElement paperlessOptionInactive;
 
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
+	protected WebElement comboTab_MAPD;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
+	protected WebElement comboTab_SHIP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Prescription Drug Plan')]") 
+	protected WebElement comboTab_PDP;
+
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
+	protected WebElement comboTab_SSUP;
+
 	public CommunicationPreferenceWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		try {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if (validate(iPerceptionPopUp)) {
-				System.out.println("Iperception popup found");
-				driver.navigate().refresh();
-			}
-		} catch (Exception e) {
-			System.out.println("Iperception popup NOT Present");
-		}
 	}
 
 	@Override
