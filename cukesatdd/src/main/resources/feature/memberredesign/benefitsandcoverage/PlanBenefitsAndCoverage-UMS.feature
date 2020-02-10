@@ -13,7 +13,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType   |
-      | 15084 | PCP      | providerTier |
+      | 15084 | PCP      | providerTier_BNC |
 
   #TC02_Primarycareprovider_specialist_withprovidertiering
   @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_regressionMember
