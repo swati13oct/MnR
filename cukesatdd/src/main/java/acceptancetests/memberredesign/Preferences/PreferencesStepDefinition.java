@@ -1,21 +1,19 @@
 package acceptancetests.memberredesign.Preferences;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.profileandpreferences.CommunicationPreferencePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstantsMnR;
-import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
-import acceptancetests.memberredesign.claims.ClaimsSearchNavigateStepDefinition;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 
 /** Functionality: Profile And Preferences page */
 public class PreferencesStepDefinition {
@@ -186,10 +184,12 @@ public class PreferencesStepDefinition {
 	}
 
 	@Then("^a popup is displayed and validate the popup select Yes and submit$")
-	public void validatePopup() {
+	public void validatePopup(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planName = memberAttributesMap.get("Plan Name");
 		CommunicationPreferencePage communicationPreferencesPage = (CommunicationPreferencePage) getLoginScenario()
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
-		communicationPreferencesPage.validatePopUp();
+		communicationPreferencesPage.validatePopUp(planName);
 	}
 
 	@And("^the user validate the success message$")
@@ -201,7 +201,7 @@ public class PreferencesStepDefinition {
 	
 	@Then("^I can validate the segment ID value in localStorage on preference page$")
 	public void validates_segmentid(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap=ClaimsSearchNavigateStepDefinition.parseInputArguments(memberAttributes);
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planMemType = memberAttributesMap.get("Plan Type");
 		String expectedSegmentId = memberAttributesMap.get("Segment ID");
 		String[] tmp=planMemType.split("_");
@@ -212,4 +212,15 @@ public class PreferencesStepDefinition {
 				.getBean(PageConstantsMnR.COMMUNICATION_PREFERENCE_PAGE);
 		communicationPreferencesPage.validateSegmentId(planType, memberType, expectedSegmentId);
 	}
+	
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}	
+
 }
