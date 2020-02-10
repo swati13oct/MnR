@@ -1,6 +1,5 @@
 target/
 
-
 .settings/
 .project
 .report.js
@@ -9,3 +8,5 @@ target/
 .index.html
 .jquery-1.6.4.min.js
 .style.css
+.classpath
+.gitignore
