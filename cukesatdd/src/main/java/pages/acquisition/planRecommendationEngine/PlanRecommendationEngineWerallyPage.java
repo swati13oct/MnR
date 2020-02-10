@@ -75,7 +75,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	@FindBy(css = "div[class*='savedProviderModal'] div[class*='modal-btn']>a")
 	private WebElement viewSavedbutton;
 
-	@FindBy(css = "#savedProviders>check-provider-coverage button")
+	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
 
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
