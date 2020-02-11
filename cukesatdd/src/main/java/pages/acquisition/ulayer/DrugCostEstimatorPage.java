@@ -2036,7 +2036,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//CommonUtility.checkPageIsReadyNew(driver);
 
 		String ZipCode = dCEAttributesMap.get("Zip Code");
 		String DrugName1 = dCEAttributesMap.get("Drug Name1");

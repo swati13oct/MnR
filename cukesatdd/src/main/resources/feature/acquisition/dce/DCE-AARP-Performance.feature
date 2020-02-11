@@ -2,7 +2,7 @@
 Feature: To test DCE to VPP plan Summary flow  in AARP site
 
   @dceThroughPlanSummaryNonAepAARP @aarp @DCE_Regression_Ulayer @dce1 @aarpDce
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> for non AEP periodthrough plan summary: PlanName <planName>; ZipCode <zipcode>
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan summary: PlanName <planName>; ZipCode <zipcode>
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
@@ -37,20 +37,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Frequency  | <frequency> |
     When user successfully adds drug in the ums site
       | Drug Name3 | <drugName3> |
-    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
-    #| PlanName       | <planName>      |
-    #| Drug Name4     | <drugName4>     |
-    #And selects drug details for other drugs in ums site
-    #| Drug Name4     | <drugName4>     |
-    #|Quantity|<quantity>|
-    #|Frequency|<frequency>|
-    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
-    #| PlanName       | <planName>      |
-    #| Drug Name5     | <drugName5>     |
-    #And selects drug details for other drugs in ums site
-    #| Drug Name5     | <drugName5>     |
-    #|Quantity|<quantity>|
-    #|Frequency|<frequency>|
     Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
     When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
@@ -61,8 +47,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Drug Name1 | <drugName1> |
       | Drug Name2 | <drugName2> |
       | Drug Name3 | <drugName3> |
-    #| Drug Name4     | <drugName4>     |
-    #| Drug Name5     | <drugName5>     |
     When the user clicks on Edit Drug List link in AARP site
     Then Enter your drugs page is displayed to the user in AARP site
     Then User click on Switch now to select the Generic of the Brand drug added in AARP site
@@ -73,8 +57,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <genricName3>  |
-    #| Drug Name4     | <drugName4>     |
-    #| Drug Name5     | <drugName5>     |
     And the user clicks on Back to Plans button in AARP site
     Then user validates Drug information is reflected on plan summary page in AARP site
       | PlanName | <planName> |
@@ -132,20 +114,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Frequency  | <frequency> |
     When user successfully adds drug in the ums site
       | Drug Name3 | <drugName3> |
-    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
-    #| PlanName       | <planName>      |
-    #| Drug Name4     | <drugName4>     |
-    #And selects drug details for other drugs in ums site
-    #| Drug Name4     | <drugName4>     |
-    #|Quantity|<quantity>|
-    #|Frequency|<frequency>|
-    #Then user adds drug to drug cost estimator flow for the given plan name in AARP site
-    #| PlanName       | <planName>      |
-    #| Drug Name5     | <drugName5>     |
-    #And selects drug details for other drugs in ums site
-    #| Drug Name5     | <drugName5>     |
-    #|Quantity|<quantity>|
-    #|Frequency|<frequency>|
     Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
     When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
@@ -156,8 +124,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Drug Name1 | <drugName1> |
       | Drug Name2 | <drugName2> |
       | Drug Name3 | <drugName3> |
-    #| Drug Name4     | <drugName4>     |
-    #| Drug Name5     | <drugName5>     |
     When the user clicks on Edit Drug List link in AARP site
     Then Enter your drugs page is displayed to the user in AARP site
     Then User click on Switch now to select the Generic of the Brand drug added in AARP site
@@ -168,17 +134,10 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <genricName3>  |
-    #      | Drug Name4     | <drugName4>     |
-    #      | Drug Name5     | <drugName5>     |
     And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
     And user verifies annual drug cost in the prescription drug tab of AARP site
       | Plan Type | <plantype> |
     And the user clicks on Back to All Plans button present on details page in AARP site
-    # | Drug Name1 | <genericName1> |
-    # | Drug Name2 | <drugName2>    |
-    # | Drug Name3 | <genricName3>  |
-    #| Drug Name4     | <drugName4>     |
-    #| Drug Name5     | <drugName5>     |
     Then user validates Drug information is reflected on plan summary page in AARP site
       | PlanName | <planName> |
 
@@ -269,8 +228,6 @@ Feature: To test DCE to VPP plan Summary flow  in AARP site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |
       | Drug Name3 | <genricName3>  |
-    #      | Drug Name4     | <drugName4>     |
-    #      | Drug Name5     | <drugName5>     |
     And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
     And user verifies annual drug cost in the Plan Cost tab of AARP site
       | Plan Type | <plantype> |
