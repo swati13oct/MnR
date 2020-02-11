@@ -1230,26 +1230,26 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
 
-	/** 
-	 * @toDo : Validates the headers for ship members
-	 */
-
-	@And("^the user validates headers on Bnc page for ship members$")
-	public void user_validate_Headers_ForShip() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeadersShip();
-	}
+	
 
 	/** 
 	 * @toDo : Validates the headers for ship members
 	 */
 
 	@And("^the user validates plan overview and summary on Bnc page for ship members$")
-	public void user_validate_Headers_Ship() {
+	public void user_validate_Headers_Ship(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitsExpectedCount = memberAttributesMap.get("Benefits Expected");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeadersShip();
+		benefitsCoveragePage.validateHeadersShip(benefitsExpectedCount);
 	}
 
 	/** 

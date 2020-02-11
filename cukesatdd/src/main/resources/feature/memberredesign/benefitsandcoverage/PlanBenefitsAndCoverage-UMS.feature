@@ -120,6 +120,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
      Then verify ancillary benefit section is not displayed
     And the user validates plan overview and summary on Bnc page for ship members
+     | Benefits Expected | <numberOfBenefitCards> |
     And the user validates hand image under discount and services section
     And the user validates the Vas section on benefits and coverage page
     And the user validates additional information on Bnc page for ship members
@@ -136,8 +137,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validate vas tiles on vas page
 
     Examples: 
-      | TID   | planType | memberType        | language | PlanBenefitsTable   |
-      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |
+      | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards |  
+      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                  |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part2_regressionMember

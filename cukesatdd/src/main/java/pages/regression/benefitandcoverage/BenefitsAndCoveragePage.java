@@ -162,7 +162,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "//p[@class='atdd-bnc-drugcoverage-title']")
 	private WebElement DrugCoveragetext_pdp;
 
-	@FindBy(xpath = "//p[@class='atdd-bnc-drugcoverage-title']")
+	@FindBy(xpath = "//p[@class='atdd-bnc-drugcoverage-title' or @class='atdd-bnc-drgcvrgeinfo' ]")
 	private WebElement DrugCoveragetext_pdpIndi;
 
 	@FindBy(className = "atdd-bnc-drugcoverage-title")
@@ -2692,20 +2692,25 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 
 	/**
+	 * @param benefitsExpectedCount 
 	 * @toDo : Validates the headers for ship members
 	 */
-	public void validateHeadersShip() {
-		System.out.println("member is on B& C page ");
+	public void validateHeadersShip(String benefitsExpectedCount) {
+
 		validateNew(MemberName);
 		validateNew(MemberId);
 		validateNew(EffectiveDate);
 		validateNew(BenefitsSummaryHeadership);
-		int i = 0 ;
-		List<WebElement> tilelist = driver.findElements(By.xpath("(.//*[@id='benefitShipCard'])["+i+"]"));
-		for(i=1;i<=tilelist.size();i++)
+		int i = 0;
+		int benefitsCountExpected = Integer.parseInt(benefitsExpectedCount);	
+		List<WebElement> tilelist = driver.findElements(By.xpath(".//*[@id='benefitShipCard']"));
+		int benefitsActualCount=tilelist.size();
+		for(i=0;i<tilelist.size();i++)
 		{
-			validate(tilelist.get(i));
+			validateNew(tilelist.get(i));
 		}
+		Assert.assertTrue("PROBLEM -Benfits count doesn't Match."
+				+ "Expected='"+benefitsExpectedCount+"' | Actual='"+benefitsActualCount,benefitsCountExpected==benefitsActualCount);
 
 	}
 
@@ -2842,7 +2847,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		validateNew(contactUslink);
-		contactUslink.click();
+		/*contactUslink.click();
 		try {
 			Thread.sleep(30000);
 		} catch (InterruptedException e) {
@@ -2851,7 +2856,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		System.out.println("Title is " + getTitle());
 		driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
-
+*/
 		//Assert.assertTrue(getTitle().equalsIgnoreCase("Contact"));
 
 	}
@@ -3882,10 +3887,24 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(memberIdForPlan);
 			memberid1 = memberIdForPlan.getText();
 			if (memberid1.contains("-11")) {
+				validateNew(MemberName);
+				validateNew(MemberId);
+				validateNew(EffectiveDate);
+				validateNew(BenefitsSummaryHeadership);
+				
+				System.out.println(">>>>>>>>>Validating the benefits for a Ship Plan<<<<<<<<<<<<");
+				List<WebElement> tilelist = driver.findElements(By.xpath(".//*[@id='benefitShipCard']"));
+				int benefitsActualCount=tilelist.size();
+				for(int i=0;i<tilelist.size();i++)
+				{
+					validateNew(tilelist.get(i));
+				}
+				Assert.assertTrue("PROBLEM -No Benefit ship Card Present",benefitsActualCount>0);
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,900)", "");
-				System.out.println(">>>>>>>>>Validating the benefits for a Ship Plan<<<<<<<<<<<<");
 				validateNew(shipClaimsSupportHeader);
+				
+				
 			} else {
 				System.out.println(">>>>>>>>>>Validating the benefits of a Federal Plan of a combo Member<<<<<<<<<<<<");
 				validateNew(drugCopaysAndDiscount);
@@ -3895,8 +3914,19 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			validateNew(memberIdForPlan);
 			memberid1 = memberIdForPlan.getText();
 			if (memberid1.contains("-11")) {
-				System.out.println(">>>Validating the benefits for a Ship Plan<<<<<<<<<<<<");
-
+				validateNew(MemberName);
+				validateNew(MemberId);
+				validateNew(EffectiveDate);
+				validateNew(BenefitsSummaryHeadership);
+				
+				System.out.println(">>>>>>>>>Validating the benefits for a Ship Plan<<<<<<<<<<<<");
+				List<WebElement> tilelist = driver.findElements(By.xpath(".//*[@id='benefitShipCard']"));
+				int benefitsActualCount=tilelist.size();
+				for(int i=0;i<tilelist.size();i++)
+				{
+					validateNew(tilelist.get(i));
+				}
+				Assert.assertTrue("PROBLEM -No Benefit ship Card Present",benefitsActualCount>0);
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("window.scrollBy(0,900)", "");
 				validateNew(shipClaimsSupportHeader);
@@ -3906,6 +3936,10 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			}
 
 		}
+		else{
+			Assert.fail(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Member is not a Combo user.Please replace the user<<<<<<<<<<<<<<<<<<<<<,, ");
+		}
+		
 	}
 
 	public void validatesAddRider() {
