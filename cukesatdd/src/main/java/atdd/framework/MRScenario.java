@@ -87,7 +87,7 @@ public class MRScenario {
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	
 	public static String environment = System.getProperty("environment");
-	public static String browsername=""; 
+	public static String browsername="chrome"; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
