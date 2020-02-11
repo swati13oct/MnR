@@ -13,7 +13,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType   |
-      | 15084 | PCP      | providerTier_BNC |
+      | 15084 | MAPD      | providerTier_BNC |
 
   #TC02_Primarycareprovider_specialist_withprovidertiering
   @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_regressionMember
@@ -123,7 +123,6 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates hand image under discount and services section
     And the user validates the Vas section on benefits and coverage page
     And the user validates additional information on Bnc page for ship members
-    And the user validate Value Add Service page on clicking additional info button
     And the user validates view and document label
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
@@ -138,7 +137,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType        | language | PlanBenefitsTable   |
-      | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
+      | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part2_regressionMember

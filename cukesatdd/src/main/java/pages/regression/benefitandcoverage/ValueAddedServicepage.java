@@ -61,6 +61,13 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='collapseLargeCard1']/div/div[1]/p[5]/a")
 	private WebElement Healthlink;
 	
+	@FindBy(xpath = "//h2[contains(text(),'At Your Best by UnitedHealthcare™')]")
+	private WebElement atYourBestTile;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Hearing Care Program by HearUSA')]")
+	private WebElement hearingCareProgramByHearUSATile;
+	   
+	       
 	//private PageData valueAddedservicePage; 
 
 	public ValueAddedServicepage(WebDriver driver) {
@@ -71,26 +78,26 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void validatenurseHealthLine() {
 		// TODO Auto-generated method stub
-		validate(nurseHealthLine);
+		validateNew(nurseHealthLine);
 	}
 	public void validatesilverSneaker() {
 		// TODO Auto-generated method stub
-		validate(silverSneaker);
+		validateNew(silverSneaker);
 	}
 	public void validatemyCarePath() {
 		// TODO Auto-generated method stub
-		validate(mycarepath);
+		validateNew(mycarepath);
 	}
 	public void validatevisionDiscount() {
 		// TODO Auto-generated method stub
-		validate(visionDiscount);
+		validateNew(visionDiscount);
 	}
 	
 	public void validatevasheadertext() {
 		// TODO Auto-generated method stub
-		validate(vasheader);
-		validate(vastext);
-		validate(vastext2);
+		validateNew(vasheader);
+		validateNew(vastext);
+		validateNew(vastext2);
 	}
 	
 	public void validateviewmorelink() {
@@ -103,20 +110,23 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
-		validate(viewmore);
+		validateNew(viewmore);
 		
 		
 	}
 	
 	/**
-	 * @toDo : Validates the vastiles on vas page
+	 * @toDo : Validates the vas tiles on vas page
 	 */
 	
 	public void vastiles()
 	{
+		validateNew(atYourBestTile);
+		validateNew(hearingCareProgramByHearUSATile);
 		
-		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
-		validate(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
+		
+		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
+		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
 		
 	}
 	
@@ -138,7 +148,7 @@ public class ValueAddedServicepage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(disclaimers);
+		validateNew(disclaimers);
 		disclaimers.click();
 	}
 	
