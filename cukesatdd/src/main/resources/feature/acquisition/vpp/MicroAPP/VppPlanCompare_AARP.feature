@@ -2,7 +2,7 @@
 Feature: Vpp to plan Compare AARP Scenarios
 
   @vppPlanCompareAARP01
-  Scenario Outline: TID: <TID> - Verify Plan Compare Page
+  Scenario Outline: TID: <TID> - Verify Rally Tool from Plan Compare Page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -15,9 +15,76 @@ Feature: Vpp to plan Compare AARP Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype |
-      | 15489 |   90210 | NO              | Los Angeles County | MAPD     |
+      | 00001 |   90210 | NO              | Los Angeles County | MAPD     |
+
+  @vppPlanCompareAARP02
+  Scenario Outline: TID: <TID> - Verify a plan can be removed using Remove link from the widget on the top of page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then remove one plan from plan compare page for AARP
+    And click on back to plans on plan compare page for AARP
+    Then Verify the Plan compare checkbox should be unchecked for the removed plan for AARP
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 00002 |   90210 | NO              | Los Angeles County | MAPD     |
+
+  @vppPlanCompareAARP03
+  Scenario Outline: TID: <TID> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in AARP
+    Then verify plan compare page is loaded on AARP
+    Then Click on Add Icon and verify it navigates to plan summary page for AARP
+    And check one plan and add it to plancompare for AARP
+    Then Verify newly added plan displayed on plan compare page for AARP
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | plantype | count |
+      | 00003 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
+
+  @vppPlanCompareAARP04
+  Scenario Outline: TID: <TID> - Verify the checkbox for add to compare link is not visible for single plan.
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    Then verify plan compare checkbox is not visible on plan summary on AARP
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county           | plantype |
+      | 00004 |   96799 | NO              | Western District | PDP      |
+      | 00005 |   78006 | YES             | Bexar County     | SNP      |
+      | 00006 |   90265 | YES             | Ventura County   | MAPD     |
+      | 00007 |   70072 | NO              | Jefferson Parish | MAPD     |
 
   @vppPlanCompareAARP05
+  Scenario Outline: TID: <TID> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare for AARP
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county         | plantype |
+      | 00008 |   35616 | NO              | Colbert County | MAPD     |
+
+  @vppPlanCompareAARP06
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -33,7 +100,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             | plantype |
       | F322478 |   90210 | NO              | Los Angeles County | MAPD     |
 
-  @vppPlanCompareAARP06
+  @vppPlanCompareAARP07
   Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -49,7 +116,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             | plantype |
       | F322478 |   90210 | NO              | Los Angeles County | MAPD     |
 
-  @vppPlanCompareAARP07
+  @vppPlanCompareAARP08
   Scenario Outline: To verify links displayed in the global footer of AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -72,7 +139,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype |
       |   90210 | No              | Los Angeles County |              80002 | MAPD     |
 
-  @vppPlanCompareAARP08
+  @vppPlanCompareAARP09
   Scenario Outline: Navigation for plan comapre to OLE
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -86,7 +153,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype |
       |   90210 | No              | Los Angeles County |              80002 | MAPD     |
 
-  @vppPlanCompareAARP09
+  @vppPlanCompareAARP10
   Scenario Outline: Navigation for plan comapre to Plan Detail
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -106,7 +173,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | planName                                       | pdfType               | docCode                 |
       |   90210 | No              | Los Angeles County |              80002 | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
 
-  @vppPlanCompareAARP10
+  @vppPlanCompareAARP11
   Scenario Outline: Navigation for plan comapre to Back to summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -120,7 +187,7 @@ Feature: Vpp to plan Compare AARP Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype |
       |   90210 | No              | Los Angeles County |              80002 | MAPD     |
 
-  @vppPlanCompareAARP11
+  @vppPlanCompareAARP12
   Scenario Outline: Validate email and print on plan compare
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

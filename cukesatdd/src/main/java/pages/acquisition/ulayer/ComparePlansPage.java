@@ -114,6 +114,21 @@ public class ComparePlansPage extends UhcDriver {
    	private WebElement ChatSamTFNClose;
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
+   	
+   	@FindBy(xpath="//*[contains(@class,'remove')]")
+	private WebElement removeLink;
+	
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplan;
+
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplanName;
+	
+	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
+	private WebElement add3Plan;
+	
+	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
+	private WebElement plan3added;
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -496,6 +511,59 @@ public class ComparePlansPage extends UhcDriver {
 		ChatSamTFNClose.click();
 		validateNew(chatsam);		
 		return null;
+	}
+	public void validatePlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		//validateNew(viewDetailslink);
+		//validateNew(savePlanIcon);
+		System.out.println("Validated all links plan compare");
+		
+	}
+	
+	public void clickOnRemoveLink(){
+		validateNew(removeLink);
+		String PlanName=remove4thplanName.getText();
+		System.out.println("4th plan name is : " + PlanName );
+		remove4thplan.click();
+		System.out.println("Clicked on Remove Link on plan Compare page");
+
+	}
+	
+	public void clickOnBacktoPlans(){
+		validateNew(backToAllPlansLink);
+		backToAllPlansLink.click();
+		System.out.println("Clicked on Back to plans");
+	}
+	
+	public VPPPlanSummaryPage clickOnAddIcon(){
+   	 
+    	//a[@class='planNameVisibility']//h3
+    	 
+    	 validateNew(add3Plan);
+    	 add3Plan.click();
+ 		try {
+ 			Thread.sleep(4000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		if(currentUrl().contains("#/plan-summary"))
+ 			return new VPPPlanSummaryPage(driver);
+ 		return null;
+     }
+	
+	public void validatenewlyAddPlan() {
+   	 
+   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//a[@class='planNameVisibility']//h3"));	
+		int plansForCompare=allMAPlans.size();
+		if (plansForCompare == 3) {
+			Assert.assertTrue(true);
+			System.out.println("Verified Three plans Added on plan compare");
+		}
+		else Assert.assertTrue(false); 		
 	}
 		
 }

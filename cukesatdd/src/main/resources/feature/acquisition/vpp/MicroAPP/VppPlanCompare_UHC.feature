@@ -2,6 +2,20 @@
 Feature: Vpp to plan Compare UHC Scenarios
 
   @vppPlanCompareUHC01
+  Scenario Outline: TID: <TID> - Verify Rally Tool from plan compare for UHC
+    Given the user is on the uhcmedicaresolutions site landing page
+    When I access the vpp page
+      | Zip Code | <zipcode> |
+    And I select all 3 plans to compare and click on compare plan link in UHC
+    And I Click on Look up your doctor link on Plan compare
+    And I click on Get Started on and Add Provider from find care page
+    Then Verify provider is count is updated on plan compare page
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             |
+      | 00001 |   90210 | NO              | Los Angeles County |
+
+  @vppPlanCompareUHC02
   Scenario Outline: TID: <TID> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -16,9 +30,9 @@ Feature: Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype |
-      | 15488 |   90210 | NO              | Los Angeles County | MAPD     |
+      | 00002 |   90210 | NO              | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC02
+  @vppPlanCompareUHC03
   Scenario Outline: TID: <TID> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -33,9 +47,9 @@ Feature: Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | count |
-      | 15488 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
+      | 00003 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
 
-  @vppPlanCompareUHC03
+  @vppPlanCompareUHC04
   Scenario Outline: TID: <TID> - Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -48,10 +62,12 @@ Feature: Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county           | plantype |
-      | 15488 |   96799 | NO              | Western District | PDP      |
-      | 15488 |   78006 | YES             | Bexar County     | SNP      |
+      | 00004 |   96799 | NO              | Western District | PDP      |
+      | 00005 |   78006 | YES             | Bexar County     | SNP      |
+      | 00006 |   90265 | YES             | Ventura County   | MAPD     |
+      | 00007 |   70072 | NO              | Jefferson Parish | MAPD     |
 
-  @vppPlanCompareUHC04
+  @vppPlanCompareUHC05
   Scenario Outline: TID: <TID> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -64,4 +80,4 @@ Feature: Vpp to plan Compare UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype |
-      | 15488 |   35616 | NO              | Colbert County | MAPD     |
+      | 00008 |   35616 | NO              | Colbert County | MAPD     |

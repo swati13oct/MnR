@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -608,6 +609,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 		private WebElement medicareGuidePopup;
+		
+		@FindBy(xpath="//label[contains(@for,'compare-plan')]")
+		private WebElement planCompareCheckBox;
+		
+		@FindBy(xpath="//span[@class='multiple-added-text show']")
+		private WebElement multipleCompareText;
+		
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3195,5 +3203,76 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	
 	}
+	
+	public void verifyPlanCountforPlanCompare() {
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+	System.out.println("Plan compare checkbox status:" + CheckStatus);
+	Assert.assertEquals("true", CheckStatus.trim());
+	System.out.println("checkbox is checked");
+
+	}
+
+	public void checkMAPlansOnly(int counter) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+		if (allMAPlans != null) {
+			for (int i = 0; i < allMAPlans.size(); i++) {
+				allMAPlans.get(i).click();
+				if (i == counter) {
+					break;
+				}
+			}
+		}
+
+	}
+
+	public void clickon3rdPlan() {
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		// js.executeScript("document.getElementById('compare-plan-3').click;");
+		System.out.println("checked third plan for plan compare");
+	}
+
+	public void checkOneCheckboxVerifyAutoSelection(String Status) {
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		System.out.println("checked One plan for plan compare");
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		if (Status.contains("true")) {
+			Assert.assertEquals(Status, CheckStatus.trim());
+			System.out.println("Verified checkbox is checked");
+			String text = multipleCompareText.getText();
+			System.out.println(text);
+		} else {
+			Assert.assertEquals(Status, CheckStatus.trim());
+			System.out.println("Verified checkbox is un checked");
+		}
+	}
+
+	public boolean verifyPlanCompareCheckboxNotVisible() {
+		try {
+			boolean blnDisplay = planCompareCheckBox.isDisplayed();
+			System.out.println("Plan compare checkbox is Displayed");
+			return blnDisplay;
+		} catch (NoSuchElementException ex) {
+			System.out.println("Plan compare checkbox is Not Displayed");
+			return false;
+		}
+
+	}
+	
 	
 }
