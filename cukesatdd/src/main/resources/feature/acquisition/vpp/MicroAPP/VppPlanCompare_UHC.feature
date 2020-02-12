@@ -47,9 +47,9 @@ Feature: Vpp to plan Compare UHC Scenarios
     Then verify plan compare checkbox is not visible on plan summary on UHC
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype |
-      | 15488 |   96799 | NO              | Western District   | PDP      |
-      | 15488 |   90210 | NO              | Los Angeles County | SNP      |
+      | TID   | zipcode | isMultutiCounty | county           | plantype |
+      | 15488 |   96799 | NO              | Western District | PDP      |
+      | 15488 |   78006 | YES             | Bexar County     | SNP      |
 
   @vppPlanCompareUHC04
   Scenario Outline: TID: <TID> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection

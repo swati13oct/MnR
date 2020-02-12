@@ -3570,14 +3570,18 @@ catch (Exception e) {
 			   System.out.println("Verified checkbox is un checked");
 		}
 	}
-	public boolean verifyPlanCompareCheckboxNotVisible(){
-		
-		if (planCompareCheckBox == null)
-        { 
-			System.out.println("Verified checkbox is  displayed");	
-			return true; 
-        }
-		System.out.println("Verified checkbox is not displayed");	
-        return false;
+
+	public boolean verifyPlanCompareCheckboxNotVisible() {
+		try {
+			boolean blnDisplay = planCompareCheckBox.isDisplayed();
+			System.out.println("Plan compare checkbox is Displayed");
+			return blnDisplay;
+		} catch (NoSuchElementException ex) {
+			System.out.println("Plan compare checkbox is Not Displayed");
+			return false;
+		}
+
 	}
+		
+	
 }
