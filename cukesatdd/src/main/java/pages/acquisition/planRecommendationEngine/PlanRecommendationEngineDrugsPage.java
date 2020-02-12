@@ -78,6 +78,17 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                 @FindBy(xpath = "//*[contains(@class,'radio-checked')]")
                 private WebElement radioselect;
                 
+// Build Your Prescription Drugs page Elements
+                
+                @FindBy(css = "h2.primary-question-tex")
+                private WebElement buildYourPrescriptionTitle;
+                
+                @FindBy(css = "div>p.description-text:nth-child(2)")
+                private WebElement buildYourPrescriptionInnerContent;
+                
+                @FindBy(css = "#drug-label")
+                private WebElement addDrug;
+                
 // Drugs Page Modal popup
             	
             	@FindBy(css = "#modal div>button[class*='primary button']")
@@ -139,23 +150,32 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 
                                 public void drugpageOptions(String drug) {
                                     System.out.println("Drugs Page Functional Operations");
-                                    if (drug.equalsIgnoreCase("yesOption")) {
+                                    if (drug.equalsIgnoreCase("Yes")) {
                                                     validate(yesOption);
                                                     yesOption.click();
                                                     System.out.println("Prescription Type "+ drug +" Clicked");
-                                    }else if (drug.equalsIgnoreCase("noOption")) {
+                                    }else if (drug.equalsIgnoreCase("No")) {
                                                     validate(noOption);
                                                     noOption.click();
                                                     System.out.println("Prescription Type "+ drug +" Clicked");
-                                    }   
+                                    } 
+                                    continueBtn.click();
+                                }  
+                                
+//Drugs Page Function Verification     
+                                
+                                public void drugspageerror() {
+                                                System.out.println("Drugs type not selected - Error Scenario in Drugs Page");
+                                                continueBtn.click();
+                                                Assert.assertTrue(errorMessage.getText().contains("No"));
                                 }                                
                                 
 //Drugs Page Function Verification                      
                                 
                                 public void drugpageFunctional(String drug,String drugsName,String multiDrug) {
                                                 System.out.println("Drugs Page Functional Operations");
-                                                continueBtn.click();
-                                                if(drug.equalsIgnoreCase("mydoctors")) {
+                                                
+                                                if(drug.equalsIgnoreCase("Yes")) {
                                                 	if(multiDrug.equalsIgnoreCase("YES"))
                                                 		drugModellookup(drugsName,3);
                                     				else
@@ -164,12 +184,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 System.out.println("Validating "+page+" page Continue button functionality");
                                 }
                                 
-//Drugs Page Function Verification                                      
-                                public void drugspageerror() {
-                                                System.out.println("Drugs type not selected - Error Scenario in Drugs Page");
-                                                continueBtn.click();
-                                                Assert.assertTrue(errorMessage.getText().contains("No"));
-                                }
+
                                 
 //Drugs Model Popup Window Verification                                
                                 

@@ -23,8 +23,10 @@ import pages.acquisition.bluelayer.PlanSelectorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -407,6 +409,72 @@ public class PlanRecommendationEngineStepDefinition {
                     String status = "Negative";
                     planSelectorTravelpage.travelpage(inputValues.get("Doctors"),status);                
     }
+    
+    @And("^user validate elements in drugs page$")
+    public void elements_drugs_page() {
+    				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+                    PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+                    headerAndFooter.breadCrumbs();
+                    planSelectorDrugspage.drugspage();
+                    
+    }
+    
+       @And("^user selects prescription options in drug page$")
+    public void select_prescription_drug_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+                    String drug = inputValues.get("Drugs");
+                    if (!(drug.isEmpty())) {
+                    	planSelectorDrugspage.drugpageOptions(drug);
+                    }
+                    	
+    }
+    
+       @And("^user not selects prescription options in drug page$")
+    public void notselect_prescription_opt_drug_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+                    String drug = inputValues.get("Drugs");
+                    if (drug.isEmpty()) {
+                    	planSelectorDrugspage.drugspageerror();
+                    }
+    }
+       
+       @And("^user validate elements in pharmacy page$")
+   	public void elements_pharmacy_page() {
+    	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
+   		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+   		headerAndFooter.breadCrumbs();
+   		planSelectorPharmacyepage.pharmacypage();
+   		
+   	}
+   	
+   	@And("^user selects pharmacy option in pharmacy page$")
+   	public void select_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
+   		readfeaturedata(givenAttributes);
+   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
+   		String pharmacytype = inputValues.get("Pharmacy Type");
+   		if (!(pharmacytype.isEmpty())) {
+   			planSelectorPharmacyepage.doctorspageFunctional(pharmacytype);
+   		}
+   	}
+   	
+   	@And("^user not selects pharmacy option in pharmacy page$")
+   	public void notselect_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
+   		readfeaturedata(givenAttributes);
+   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
+   		String pharmacytype = inputValues.get("Pharmacy Type");
+   		if (pharmacytype.isEmpty()) {
+   			planSelectorPharmacyepage.pharmacypageerror();
+   		}
+   	}
+   	
+   	@And("^user select pharmacy option and Click previous button to check previous page$")
+   	public void previous_pharmacy_page(DataTable givenAttributes) {
+   		readfeaturedata(givenAttributes);
+   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
+   		planSelectorPharmacyepage.pharmacypagePreviousButton(inputValues.get("Pharmacy Type"));
+   	}
 	
 	
 
