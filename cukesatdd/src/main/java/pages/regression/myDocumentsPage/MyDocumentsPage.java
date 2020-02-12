@@ -27,13 +27,14 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 * method to validate the page Elements
 	 */
 	public void validateHeaderSection() {
+		CommonUtility.waitForPageLoad(driver, pageHeader, 10);
 		Assert.assertTrue("PROBLEM - unable to locate page header element", 
-				validate(pageHeader));
+				validate(pageHeader,0));
 		Assert.assertTrue("PROBLEM - unable to locate Return to Previous Page Link", 
 				validate(returnToPreviousPageLink)); 
 
 		Assert.assertTrue("PROBLEM - unable to locate Label for document Type ", 
-				validate(labelForDocType));
+				validate(labelForDocType,0));
 
 		String actualLabel1=labelForDocType.getText();
 		String expectLabel1="Document Type:";
@@ -43,7 +44,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 
 
 		Assert.assertTrue("PROBLEM - unable to locate Label for View Documents dropdown", 
-				validate(labelForViewDocumentsFromDropdown));
+				validate(labelForViewDocumentsFromDropdown,0));
 
 		String actualLabel2=labelForViewDocumentsFromDropdown.getText();
 		String expectLabel2="View Documents From:";
@@ -52,9 +53,9 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 				expectLabel2.equals(actualLabel2));
 
 		Assert.assertTrue("PROBLEM - unable to locate Document Type Dropdown ", 
-				validate(documentTypeDropdown));
+				validate(documentTypeDropdown,0));
 		Assert.assertTrue("PROBLEM - unable to locate page Summary text below the My Documents header", 
-				validate(pageSummaryText));
+				validate(pageSummaryText,0));
 	}
 
 	/**
@@ -91,11 +92,11 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	public Boolean validateDocumentsTable() {
 		//note: need to wait because table take a little longer to load
 		CommonUtility.waitForPageLoad(driver, DocTablePresent, 5);
-		if(planDocValidate(DocTablePresent))
+		if(planDocValidate(DocTablePresent,0))
 			return true;
 		else {
 			//note: if no table then assume no doc, there should be message indicating no doc
-			Assert.assertTrue("PROBLEM - unable to locate no Docs Available Error message", validate(noDocsAvailableError));
+			Assert.assertTrue("PROBLEM - unable to locate no Docs Available Error message", validate(noDocsAvailableError,0));
 			String actualNoDocsErrorMssg=noDocsAvailableError.getText();
 			String expectedErrorMssg="There are no documents available for the time period entered. Select a new date range.";
 			Assert.assertTrue("PROBLEM - Error message text doesn't match the expected value. "
@@ -153,9 +154,9 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 * method to validate the custom search scenario with a valid date Range
 	 */
 	public void customSearchCalendar(String fromDate, String toDate) {
-		Assert.assertTrue("PROBLEM - unable to locate text field button for 'From' date", validate(fromTxtField));
-		Assert.assertTrue("PROBLEM - unable to locatetext field button for'To' date", validate(toTxtField));
-		Assert.assertTrue("PROBLEM - unable to locate Search Button", validate(searchButton));
+		Assert.assertTrue("PROBLEM - unable to locate text field button for 'From' date", validate(fromTxtField,0));
+		Assert.assertTrue("PROBLEM - unable to locatetext field button for'To' date", validate(toTxtField,0));
+		Assert.assertTrue("PROBLEM - unable to locate Search Button", validate(searchButton,0));
 		fromTxtField.sendKeys(fromDate);
 		toTxtField.sendKeys(toDate);
 		searchButton.click();
@@ -173,7 +174,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		toTxtField.sendKeys(Keys.DELETE);
 
 		searchButton.click();
-		Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(errMtyDates));
+		Assert.assertTrue("PROBLEM - unable to locate the EmptyDatesError element when 'To' and 'From' dates are emtpy", validate(errMtyDates,0));
 		String expectedErrorText="Re-enter the date like this: MM/DD/YYYY";
 		Assert.assertTrue("PROBLEM -error text is not as expected when 'To' and 'From' dates are emtpy. "
 				+ "Expected='"+expectedErrorText+"' | Actual='"+errMtyDates.getText()+"'", 
@@ -188,7 +189,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		fromTxtField.sendKeys(fromDate);
 		toTxtField.sendKeys(toDate);
 
-		Assert.assertTrue("PROBLEM - unable to locate the from date comes before to date error ", validate(errFromDateGreaterThanToDate));
+		Assert.assertTrue("PROBLEM - unable to locate the from date comes before to date error ", validate(errFromDateGreaterThanToDate,0));
 		String expectedErrorText="Your From date needs to come before or on the same day as your To date.";
 		Assert.assertTrue("PROBLEM -error text is not as expected when from date is greater than To date."
 				+ "Expected='"+expectedErrorText+"' | Actual='"+errFromDateGreaterThanToDate.getText()+"'", 
@@ -199,7 +200,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 * method to validate Disclaimers text on My documents page
 	 */
 	public void validateDisclaimer() {
-		Assert.assertTrue("PROBLEM - unable to locate the disclaimer", validate(disclaimer));
+		Assert.assertTrue("PROBLEM - unable to locate the disclaimer", validate(disclaimer,0));
 		String expectedErrorText="This page contains documents in PDF format. PDF (Portable Document Format) files can be viewed with Adobe® Reader®. If you don't already have this viewer on your computer, download it free from the Adobe Website.";
 		Assert.assertTrue("PROBLEM -Disclaimer text doesn't Match."
 				+ "Expected='"+expectedErrorText+"' | Actual='"+disclaimer.getText()+"'", 
@@ -211,7 +212,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 */
 	public void validateNoteText() {
 		CommonUtility.waitForPageLoad(driver, noteText, 5);
-		Assert.assertTrue("PROBLEM - unable to locate Note Text ", validate(noteText));
+		Assert.assertTrue("PROBLEM - unable to locate Note Text ", validate(noteText,0));
 		String expectedErrorText="This is not a full list of documents that have been sent to you. This is only what can be sent electronically. Important information will continue to arrive in the mail. Please continue to read all plan documents you receive.";
 		Assert.assertTrue("PROBLEM -Note text doesn't Match"
 				+ "Expected='"+expectedErrorText+"' | Actual='"+noteText.getText()+"'", 
@@ -224,7 +225,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	public void validateNeedHelpSection() {
 		System.out.println("Proceed to validate the Need Help section header");
 		Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
-				validate(needHelp_SectionHeader));
+				validate(needHelp_SectionHeader,0));
 
 		String validateSection="Need Help - Technical Support";
 		validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
@@ -250,13 +251,13 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	public void validateNeedHelpSectionContent(String section, WebElement SectionElement, WebElement imgElement, 
 			WebElement phoneElement, WebElement ttyElement, WebElement hrsOperationElement1, WebElement hrsOperationElement2) {
 		System.out.println("Proceed to validate the "+section+" section content");
-		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement));
-		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section", validate(imgElement));
-		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section", validate(phoneElement));
-		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section", validate(ttyElement));
-		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement1));
+		Assert.assertTrue("PROBLEM - unable to locate the "+section+" section element",validate(SectionElement,0));
+		Assert.assertTrue("PROBLEM - unable to locate the img elemnt in "+section+" section", validate(imgElement,0));
+		Assert.assertTrue("PROBLEM - unable to locate the phone elemnt in "+section+" section", validate(phoneElement,0));
+		Assert.assertTrue("PROBLEM - unable to locate the TTY elemnt in "+section+" section", validate(ttyElement,0));
+		Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement1,0));
 		if (hrsOperationElement2!=null) {
-			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement2));
+			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", validate(hrsOperationElement2,0));
 		}
 	}
 
@@ -277,7 +278,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		System.out.println("Document Description  in Third column is : "+column3Value);
 
 		Assert.assertTrue("PROBLEM - unable to locate the view/download link",
-				validateNew(viewDownloadLink));
+				validate(viewDownloadLink,0));
 	}
 	
 	public void myDocCheckModelPopup(WebDriver driver) {

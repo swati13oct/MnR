@@ -573,7 +573,7 @@ public class HSIDLoginPage extends UhcDriver {
 	//note: do not remove this wait time
 	public void waitToReachDashboard(String username) {
 		int y=0;
-		while (y < 20) {
+		while (y < 30) {
 			try {
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
 				if (header.size() > 0) {

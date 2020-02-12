@@ -177,7 +177,6 @@ public class MyDocumentsStepDefinition {
 		if(tableIsPresent) {
 			myDocumentsPage.validateTableHeaders();	
 			myDocumentsPage.validateTableContent();
-
 		}
 	}
 	

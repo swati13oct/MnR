@@ -45,7 +45,8 @@ Feature: 1.06.7 Member My Documents Page
     And I custom search documents for the following invalid time interval on my Documents page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
-#------------Pass documents expected flag as Y or N only--------------
+      
+    #------------Pass documents expected flag as Y or N only--------------
     @devRegression
     Examples: 
     | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
@@ -57,7 +58,7 @@ Feature: 1.06.7 Member My Documents Page
     | 10002 | COMBO    | FedAndShip_MyDocuments|           N                      |
     
     
-     @myDocuments02
+  @myDocuments02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario via deeplink
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -96,8 +97,8 @@ Feature: 1.06.7 Member My Documents Page
     And I custom search documents for the following invalid time interval on my Documents page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
-#------------Pass documents expected flag as Y or N only--------------
-    
+      
+    #------------Pass documents expected flag as Y or N only--------------
     Examples: 
     | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
     | 10000 | MAPD     | Individual_MyDocuments|           Y                      |
