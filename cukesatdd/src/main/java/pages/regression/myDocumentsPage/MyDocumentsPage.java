@@ -257,7 +257,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	}
 
 	public void validateTableContent() {
-		System.out.println("Proceed to validate the Table Content in the First row");
+		System.out.println(">>>>>>>>>>>>>>Proceed to validate the Table Content in the First row<<<<<<<<<<<<");
 
 		String column1Value =documentTypeValueInColumn1.getText().toString();
 		String column2Value =documentDateValueInColumn2.getText().toString();
@@ -273,7 +273,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		System.out.println("Document Description  in Third column is : "+column3Value);
 
 		Assert.assertTrue("PROBLEM - unable to locate the view/download link",
-				validate(viewDownloadLink));
+				validateNew(viewDownloadLink));
 	}
 }
 

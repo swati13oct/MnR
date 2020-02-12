@@ -36,6 +36,8 @@ import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.LoginPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -919,4 +921,66 @@ public class HSIDStepDefinition {
 
 	}
 	
+
+	@And("^login with a deeplink in the member portal and validate elements$")
+	public void login_with_deeplink(DataTable memberAttributes)
+			throws Exception {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+
+	
+	 	memberAttributesMap.remove("User Selection");
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+		
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		Assert.assertTrue("unable to find a " + desiredAttributes + " member. Member Type data could not be setup !!! ", loginCreds != null);
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+        String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
+	     HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
+			    loginPage.validateelements();
+			    MyDocumentsPage	myDocumentsPage=null;
+				try {
+						myDocumentsPage =  (MyDocumentsPage) loginPage.doLoginWith(userName, pwd);
+				} catch (UnhandledAlertException ae) {
+					System.out.println("Exception: "+ae);
+					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+				}
+				Assert.assertTrue("PROBLEM - Login not successful...", myDocumentsPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+					
+	}	
 }

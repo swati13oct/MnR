@@ -85,6 +85,8 @@ public class MyDocumentsStepDefinition {
 		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
 		
 	}
+	
+	
 
 	/**
 	 * This step will validate few elements on My Documents Page
@@ -108,6 +110,42 @@ public class MyDocumentsStepDefinition {
 		myDocumentsPage.searchDocumentsByTimePeriod(timePeriod);
 	}
 
+	
+	
+	/**
+	 * This steps enables validates if Documents Table is present or not in past 24 months and also compares it to the documents expected flag if it should have the table or not
+	 * If it's present then user validates the doc table else validates the error message
+	 */
+	@And("^then the user validates the Documents Table if present in past twenty four months time frame$")	
+	public void validate_the_Documents_Table24Months(DataTable memberAttributes) throws InterruptedException { 
+		int currentNumberOfRowsInDocumentsTable = 0;
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String documentsExpected=memberAttributesMap.get("Documents Expected");
+
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
+				.getBean(PageConstantsMnR.My_Documents_PAGE);
+		Boolean tableIsPresent=myDocumentsPage.validateDocumentsTable();
+		if(tableIsPresent) {
+			myDocumentsPage.validateTableHeaders();	
+			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
+			myDocumentsPage.validateTableContent();
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
+		}
+		/**
+		 * validating the expected flag versus the flag to validate if table is present
+		 */
+		if(documentsExpected.equalsIgnoreCase("Y")&& !tableIsPresent)
+		{
+		Assert.fail(">>>>>>>>>>>Document table is expected but no document table found.<<<<<<<<<<<<<<<<");
+		}
+		
+	}
+
+	
+	
+	
+	
 	/**
 	 * This steps enables validates if Documents Table is present or not
 	 * If it's present then user validates the doc table else validates the error message
