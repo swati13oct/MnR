@@ -463,6 +463,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public List<WebElement> getHdrDrugName() {
+		CommonUtility.waitForPageLoadNew(driver, step3EditDrugsList, 45);
 		return hdrDrugName;
 	}
 
@@ -2058,20 +2059,20 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
 		LocalStorage localStorage = webStorage.getLocalStorage();		
 
-		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
-		System.out.println("UHC ACQ info from Local Storage");
-		System.out.println(DCE_uhcacquisition);
+		String DCE_aarpacquisition = localStorage.getItem("aarpacquisition");
+		System.out.println("AARP ACQ info from Local Storage");
+		System.out.println(DCE_aarpacquisition);
 		boolean validation_Flag=false;
 		boolean Validate_ZipPharmacy = false;
-		if(DCE_uhcacquisition.contains(DrugName1) && DCE_uhcacquisition.contains(DrugName2) 
-				&& DCE_uhcacquisition.contains(DrugName3) && DCE_uhcacquisition.contains(PharmacyName)) {
+		if(DCE_aarpacquisition.contains(DrugName1) && DCE_aarpacquisition.contains(DrugName2) 
+				&& DCE_aarpacquisition.contains(DrugName3) && DCE_aarpacquisition.contains(PharmacyName)) {
 			Validate_ZipPharmacy = true;
 			validation_Flag=true;
-			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
+			System.out.println("AARP ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
 		String DCEDrugList = localStorage.getItem("drugList");
-		System.out.println("UHC DrugList from Local Storage");
+		System.out.println("AARP DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;
 		if(DCEDrugList.contains(DrugName1) && DCEDrugList.contains(DrugName2) 
@@ -2079,9 +2080,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 				 && DCEDrugList.contains(ZipCode)) {
 			Validate_DrugList = true;
 			validation_Flag = (validation_Flag)?true:false;
-			System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);
+			System.out.println("AARP DrugList from Local Storage validated : "+Validate_DrugList);
 		}
-		System.out.println("UHC Local Storage Validation Status : "+validation_Flag);
-		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
+		System.out.println("AARP Local Storage Validation Status : "+validation_Flag);
+		Assert.assertTrue("AARP Local Storage Validation Failed",validation_Flag);		
 	}
 }
