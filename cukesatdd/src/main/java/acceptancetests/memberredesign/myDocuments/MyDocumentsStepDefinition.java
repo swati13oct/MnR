@@ -160,7 +160,7 @@ public class MyDocumentsStepDefinition {
 			myDocumentsPage.validateTableHeaders();	
 			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
 			myDocumentsPage.validateTableContent();
-			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table. currentNumberOfRowsInDocumentsTable='"+currentNumberOfRowsInDocumentsTable+"' | previousNumberOfRowsInDocumentsTable='"+previousNumberOfRowsInDocumentsTable+"'", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
 		}
 	}

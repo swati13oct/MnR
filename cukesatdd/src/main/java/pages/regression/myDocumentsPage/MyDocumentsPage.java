@@ -1,6 +1,7 @@
 package pages.regression.myDocumentsPage;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	public MyDocumentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		myDocCheckModelPopup(driver);
 	}
 
 	@Override
@@ -79,6 +81,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 		option.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("!!! Option selected from drop down is ====>"+(option.getText()));
+		myDocCheckModelPopup(driver);
 	}
 
 
@@ -135,6 +138,7 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 	 * method to validate number of Rows in document Table
 	 */
 	public int validateNumberOfRowsInTable(){
+		sleepBySec(10);
 		WebElement TogetRows = driver.findElement(By.xpath("//table/tbody"));
 		List<WebElement>TotalRowsList = TogetRows.findElements(By.tagName("tr"));
 		int totalRows=TotalRowsList.size();
@@ -274,6 +278,14 @@ public class MyDocumentsPage extends MyDocumentsWebElements{
 
 		Assert.assertTrue("PROBLEM - unable to locate the view/download link",
 				validateNew(viewDownloadLink));
+	}
+	
+	public void myDocCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
 	}
 }
 

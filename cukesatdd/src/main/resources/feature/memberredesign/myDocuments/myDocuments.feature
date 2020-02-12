@@ -50,12 +50,15 @@ Feature: 1.06.7 Member My Documents Page
     Examples: 
     | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
     | 10000 | MAPD     | Individual_MyDocuments|           Y                      |
+
+    Examples: 
+    | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
     | 10001 | MAPD     | Group_MyDocuments     |           Y                      |
     | 10002 | COMBO    | FedAndShip_MyDocuments|           N                      |
     
     
      @myDocuments02
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario via deeplink
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -94,7 +97,7 @@ Feature: 1.06.7 Member My Documents Page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
 #------------Pass documents expected flag as Y or N only--------------
-    @devRegression
+    
     Examples: 
     | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
     | 10000 | MAPD     | Individual_MyDocuments|           Y                      |
