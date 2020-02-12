@@ -87,7 +87,7 @@ public class MRScenario {
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 	
 	public static String environment = System.getProperty("environment");
-	public static String browsername=""; 
+	public static String browsername="chrome"; 
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -170,7 +170,7 @@ public class MRScenario {
 			isTestHarness = (null == System.getProperty(CommonConstants.IS_TESTHARNESS) ? "Yes"
 					: System.getProperty(CommonConstants.IS_TESTHARNESS));
 			isHSIDCompatible = (null == System.getProperty(CommonConstants.IS_HSID_COMPATIBLE)
-					? "No" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
+					? "Yes" : System.getProperty(CommonConstants.IS_HSID_COMPATIBLE));
 		}
 
 		sauceLabsTunnelIdentifier = (null == System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER) ? CommonConstants.SAUCELABS_DEFAULT_TUNNEL
