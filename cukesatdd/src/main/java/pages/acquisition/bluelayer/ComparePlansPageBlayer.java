@@ -1,4 +1,5 @@
 package pages.acquisition.bluelayer;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -63,6 +64,34 @@ public class ComparePlansPageBlayer extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Edit provider list']")
 	public WebElement EditproviderlistLink;
+
+	@FindBy(xpath="//*[contains(@class,'remove')]")
+	private WebElement removeLink;
+	
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplan;
+
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplanName;
+	
+	@FindBy(xpath="//*[@class='view-more-link']")
+	private WebElement viewDetailslink;
+	
+	@FindBy(xpath="//*[text()='Save Plan']")
+	private WebElement savePlanIcon;
+	
+	@FindBy(xpath="//*[text()='Saved']")
+	private WebElement savedPlanIcon;
+	
+	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
+	private WebElement add3Plan;
+	
+	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
+	private WebElement plan3added;
+	
+	
+	
+	
 		
 	public ComparePlansPageBlayer(WebDriver driver) {
 		super(driver);
@@ -271,7 +300,59 @@ public class ComparePlansPageBlayer extends UhcDriver {
 		}
 
 	}
+	
+	public void clickOnRemoveLink(){
+		validateNew(removeLink);
+		String PlanName=remove4thplanName.getText();
+		System.out.println("4th plan name is : " + PlanName );
+		remove4thplan.click();
+		System.out.println("Clicked on Remove Link on plan Compare page");
 
+	}
+	
+	public void clickOnBacktoPlans(){
+		validateNew(backToAllPlansLink);
+		backToAllPlansLink.click();
+		System.out.println("Clicked on Back to plans");
+	}
+	public void validatePlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		//validateNew(viewDetailslink);
+		//validateNew(savePlanIcon);
+		System.out.println("Validated all links plan compare");
+		
+	}
 
+     public VPPPlanSummaryPage clickOnAddIcon(){
+    	 
+    	//a[@class='planNameVisibility']//h3
+    	 
+    	 validateNew(add3Plan);
+    	 add3Plan.click();
+ 		try {
+ 			Thread.sleep(4000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		if(currentUrl().contains("#/plan-summary"))
+ 			return new VPPPlanSummaryPage(driver);
+ 		return null;
+     }
+     
+     public void validatenewlyAddPlan() {
+    	 
+    	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//a[@class='planNameVisibility']//h3"));	
+ 		int plansForCompare=allMAPlans.size();
+ 		if (plansForCompare == 3) {
+ 			Assert.assertTrue(true);
+ 			System.out.println("Verified Three plans Added on plan compare");
+ 		}
+ 		else Assert.assertTrue(false); 		
+ 	}
+     
 }
 

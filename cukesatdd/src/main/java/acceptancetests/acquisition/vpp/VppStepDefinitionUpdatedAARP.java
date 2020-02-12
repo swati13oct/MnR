@@ -2046,6 +2046,12 @@ public class VppStepDefinitionUpdatedAARP {
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 	}
 	
+	@Then("^verify plan compare page is loaded on AARP$")
+	public void verify_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlanComparePage();
+	}	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

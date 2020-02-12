@@ -570,6 +570,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//button[@id='lisGoBtn']")
 		private WebElement planYearPopupGoButton;
 		
+		@FindBy(xpath="//span[@class='multiple-added-text show']")
+		private WebElement multipleCompareText;
+		
+		@FindBy(xpath="//label[contains(@for,'compare-plan')]")
+		private WebElement planCompareCheckBox;
+		
+		
 
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
@@ -1830,8 +1837,6 @@ public ComparePlansPageBlayer clickOnCompareLink(){
 				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
-
-
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -1873,6 +1878,28 @@ public boolean validateAllPlansChecked() {
 			for (int i = 0; i < allMAPlans.size(); i++) {
 				allMAPlans.get(i).click();
 				if (i == 3){
+					break;
+				}
+			}
+		}
+
+	}
+	
+	
+	public void checkMAPlansOnly(int counter) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+		if (allMAPlans != null) {
+			for (int i = 0; i < allMAPlans.size(); i++) {
+				allMAPlans.get(i).click();
+				if (i == counter){
 					break;
 				}
 			}
@@ -3504,9 +3531,53 @@ catch (Exception e) {
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
 	
 		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
-				viewMoreLink.get(0).click();
+				viewMoreLink.get(0).click();			
+	}
+	
+	public void verifyPlanCountforPlanCompare(){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus =  js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("true", CheckStatus.trim());
+		System.out.println("checkbox is checked");
+		
+	}	
 
-
-			
+	public void clickon3rdPlan(){
+		WebElement Checkbox = driver.findElement(By.xpath(
+				"//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		//js.executeScript("document.getElementById('compare-plan-3').click;");
+		System.out.println("checked third plan for plan compare");
+	}
+	
+	public void checkOneCheckboxVerifyAutoSelection(String Status){
+		WebElement Checkbox = driver.findElement(By.xpath(
+				"//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		System.out.println("checked One plan for plan compare");
+		String CheckStatus =  js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		if(Status.contains("true")){
+			Assert.assertEquals(Status, CheckStatus.trim());
+			  System.out.println("Verified checkbox is checked");
+			  String text = multipleCompareText.getText();
+				System.out.println(text);
+		}else{
+			Assert.assertEquals(Status, CheckStatus.trim());
+			   System.out.println("Verified checkbox is un checked");
+		}
+	}
+	public boolean verifyPlanCompareCheckboxNotVisible(){
+		
+		if (planCompareCheckBox == null)
+        { 
+			System.out.println("Verified checkbox is  displayed");	
+			return true; 
+        }
+		System.out.println("Verified checkbox is not displayed");	
+        return false;
 	}
 }

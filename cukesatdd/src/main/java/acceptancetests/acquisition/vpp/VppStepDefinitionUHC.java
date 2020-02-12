@@ -33,6 +33,7 @@ import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.ComparePlansPage;
 
 /**
  * Functionality: VPP UHC site
@@ -1954,5 +1955,102 @@ public class VppStepDefinitionUHC {
 	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
+	}
+	
+	@Then("^verify plan compare page is loaded on UHC$")
+	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlanComparePage();
+	}	
+	
+	@Then("^remove one plan from plan compare page for UHC$")
+	public void remove_one_plan_from_plan_compare_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnRemoveLink();
+	}
+	
+	@Then("^click on back to plans on plan compare page for UHC$")
+	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnBacktoPlans();
+	}
+	
+	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan for UHC$")
+	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan_for_UHC() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyPlanCountforPlanCompare();
+	}
+	
+	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
+	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType, String Counter) throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+    int counter=Integer.parseInt(Counter);
+	if (planType.equals("MAPD")) {
+		plansummaryPage.clickonViewPlans();
+		plansummaryPage.checkMAPlansOnly(counter);
+		System.out.println("Selected All MAPD plans for Plan Compare");
+	} 
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+	if (planComparePage != null) {
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		// comparePlansPage.backToVPPPage();
+	} else
+		Assert.fail("Error in loading the compare plans page");
+}
+	
+	@Then("^Click on Add Icon and verify it navigates to plan summary page for UHC$")
+	public void click_on_Add_Icon_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnAddIcon();		
+	}
+	
+	@Then("^check one plan and add it to plancompare for UHC$")
+	public void check_one_plan_and_add_it_to_plancompare_for_UHC() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickon3rdPlan();
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^Verify newly added plan displayed on plan compare page for UHC$")
+    public void verify_newly_added_plan_displayed_on_plan_compare_page_for_UHC() throws Throwable {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatenewlyAddPlan();
+    }
+
+	@Then("^user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare$")
+	public void user_select_and_unselect_one_plan_for_plan_compare() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.checkOneCheckboxVerifyAutoSelection("true");
+		plansummaryPage.checkOneCheckboxVerifyAutoSelection("false");
+		
+	}
+	
+	@Then("^verify plan compare checkbox is not visible on plan summary on UHC$")
+	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary_on_UHC() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
+		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ",validationFlag);
+
 	}
 } 

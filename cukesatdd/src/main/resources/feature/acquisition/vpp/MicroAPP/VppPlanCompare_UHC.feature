@@ -2,53 +2,66 @@
 Feature: Vpp to plan Compare UHC Scenarios
 
   @vppPlanCompareUHC01
-  Scenario Outline: To verify correct message shows on view details page after checking compare plans box
+  Scenario Outline: TID: <TID> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I click on add to compare checkbox and click on view details link
-    Then I uncheck and recheck the compare box and verify the message and link exists
-    Then I uncheck and go back to the vpp page to validate
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans to compare and click on compare plan link in UHC
+    Then verify plan compare page is loaded on UHC
+    Then remove one plan from plan compare page for UHC
+    And click on back to plans on plan compare page for UHC
+    Then Verify the Plan compare checkbox should be unchecked for the removed plan for UHC
 
     Examples: 
-      | zipcode |
-      |   33012 |
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 15488 |   90210 | NO              | Los Angeles County | MAPD     |
 
   @vppPlanCompareUHC02
-  Scenario Outline: To test checkbox is unchecked on vpp after unchecking it on view details page
+  Scenario Outline: TID: <TID> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I click on add to compare checkbox and click on view details link
-    Then I uncheck and go back to the vpp page to validate
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    Then verify plan compare page is loaded on UHC
+    Then Click on Add Icon and verify it navigates to plan summary page for UHC
+    And check one plan and add it to plancompare for UHC
+    Then Verify newly added plan displayed on plan compare page for UHC
 
     Examples: 
-      | zipcode |
-      |   33012 |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | count |
+      | 15488 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
 
   @vppPlanCompareUHC03
-  Scenario Outline: To test correct message is displayed for PDP plans after checking compare plans box
+  Scenario Outline: TID: <TID> - Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I select pdp plans and go to view details page
-    Then I check compare box and verify right info is shown
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    Then verify plan compare checkbox is not visible on plan summary on UHC
 
     Examples: 
-      | zipcode |
-      |   33012 |
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 15488 |   96799 | NO              | Western District   | PDP      |
+      | 15488 |   90210 | NO              | Los Angeles County | SNP      |
 
   @vppPlanCompareUHC04
-  Scenario Outline: To test two plans are added when clicked on compare plans on Plan details page
+  Scenario Outline: TID: <TID> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
-    And the user view plan details of the above selected plan in UMS site and validates
-      | Plan Name | <planName> |
-    Then the user clicks on add to compare box and validates that info shows 2 plans added
+    Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare
 
     Examples: 
-      | zipcode | planName                                             | plantype |
-      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
+      | TID   | zipcode | isMultutiCounty | county         | plantype |
+      | 15488 |   35616 | NO              | Colbert County | MAPD     |
