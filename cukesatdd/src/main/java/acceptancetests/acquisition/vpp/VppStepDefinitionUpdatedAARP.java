@@ -2030,15 +2030,6 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	
-	@Then("^user verify the Chat original state$")
-	public void user_verify_the_Chat_original_state() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSam();
-		
-		
-	}
-	
 	@Then("^the user clicks on Enroll Now for AARP site from Plan Details$")
 	public void the_user_clicks_on_Enroll_Now_for_AARP_site_from_Plan_Details() throws Throwable {
 	   
@@ -2051,7 +2042,119 @@ public class VppStepDefinitionUpdatedAARP {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
-	}	
+	}
+	
+	
+	@Then("^user verify the Chat original state on Plan Comapare$")
+	public void user_verify_the_Chat_original_state_Plan_Comapare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChatSam();
+				
+	}
+	
+	
+	@Then("^the user clicks on Enroll in plan for AARP site and validates the Welcome to OLE Page on Plan Compare")
+	  public void user_clicks_enrollInPlan_PlanCompare_AARP() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plan();
+	   if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	  }
+  
+	
+	@Then("^the user clicks on Plan details linnk in Plan Compare page")
+	  public void user_clicks_planDetails_PlanCompare_AARP() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetails();
+			if (vppPlanDetailsPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in Loading the Plan Details Page");
+		
+	  }
+	
+	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
+	  public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
+			if (plansummaryPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plansummaryPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in navigating back to Plan Summary Page");
+		
+	  }
+	@When("^verify Call SAM icon is visible or not on Plan Comapare$")
+	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPage PlanComparePage = planComparePage.validateCallSam();
+		if (PlanComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, PlanComparePage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the popup and content on Plan Comapare$")
+	public void user_verify_the_popup_and_content_PlanCompare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallpopup();	
+	}
+	
+	@When("^verify Chat SAM icon is visible or not on Plan Comapare$")
+	public void verify_Chat_SAM_icon_is_visible_or_not_PlanCompare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPage PlanComparePage  = planComparePage.validateChatSam();
+		if (PlanComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, PlanComparePage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare$")
+	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChatSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the Chat original state$")
+	public void user_verify_the_Chat_original_state_PlanCompare() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChatSam();
+		
+		
+	}
+	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 
