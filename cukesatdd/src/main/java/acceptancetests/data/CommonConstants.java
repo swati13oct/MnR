@@ -836,7 +836,8 @@ public class CommonConstants {
 	
 	public static final String PLAN_NAME_ON_PROFILE_PAGE= "planName";
     //Browsers supported in MRScenario
-	public static final String BROWSER_NAME = "BROWSER_NAME";
+	public static final String BROWSER_NAME = "browsername";
+	public static final String BROWSER_VERSION = "browserversion";
     public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
     public static final String DESKTOP_WEBDRIVER = "WebDriver";
 	public static final String JENKINS_BROWSER = "webdriverhost";
@@ -863,5 +864,9 @@ public class CommonConstants {
 	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Stage";
 	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "OptumRDC_Manual_Stage";
+	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
+	public static final String APPIUM_DEFAULT_VERSION = "1.15.0";
+	public static final String APPIUM_VERSION = "1.15.1";
 	
 }

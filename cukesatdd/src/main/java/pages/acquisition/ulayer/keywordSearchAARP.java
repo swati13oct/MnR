@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
+
 @SuppressWarnings({ "deprecation" })
 public class keywordSearchAARP extends GlobalWebElements {
 
@@ -14,6 +16,11 @@ public class keywordSearchAARP extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}	
+	
+	@Override
+	public void openAndValidate() {
+		checkModelPopup(driver);
+	}
 	
 	@FindBy(id = "search-field")
 	private WebElement search;

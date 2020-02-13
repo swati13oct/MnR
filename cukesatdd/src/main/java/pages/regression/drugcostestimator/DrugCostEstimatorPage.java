@@ -6,6 +6,7 @@ package pages.regression.drugcostestimator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -297,6 +299,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='loading-dialog']")
 	public WebElement overlay;
+	
+	@FindBy(xpath="//div[@class='loading-dialog' and contains(@style,'none')]")
+	public WebElement overlay_disappeared;
+	
+	@FindBy(xpath="//a[@role='button' and contains(@class,'pharmacy-tab-show')]")
+	public WebElement nextSelectPharmacyBtn;
 
 	@Override
 	public void openAndValidate() {
@@ -317,13 +325,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 //
 //		System.out.println("savedrugpageJson----->" + savedrugpageJson);
 		
-		validate(validateIntroductoryText);
+		dceValidate(validateIntroductoryText,0);
 		System.out.println("You are on DCE page now ");
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
 	{ 
-		if (validate(iPerceptionframe)) {
+		if (dceValidate(iPerceptionframe,0)) {
 
 			switchToNewIframe(iPerceptionframe);
 			iPerceptionclosebtn.click();
@@ -532,17 +540,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 * validate pharmacy information step 2 tab, zipcode, miles selection, search link
 	 */
 	public void pharmacyInformation(String zipcode, String radius) {
-		if (validate(zipcodeInput)) {
+		if (dceValidate(zipcodeInput)) {
 			Assert.assertTrue(true);
 		} else Assert.assertTrue("zipcodeInput is not present", false);	
 
 
-		if (validate(milesSelection)) {
+		if (dceValidate(milesSelection)) {
 			Assert.assertTrue(true);
 		} else Assert.assertTrue("milesSelection is not present", false);	
 
 		sendkeys(zipcodeInput, zipcode);
-		if (validate(btnSearch)) {
+		if (dceValidate(btnSearch)) {
 			btnSearch.click();
 			Assert.assertTrue(true);
 		} else Assert.assertTrue("btnSearch is not present", false);
@@ -618,11 +626,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
-//		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
+		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 		delDrgConfirm.click();
-		Thread.sleep(5000);
+		//tbd Thread.sleep(5000);
 		waitForloader(driver, overlay, 30);
-		Thread.sleep(5000);
+		//tbd CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+		//tbd Thread.sleep(5000);
 
 	}
 
@@ -637,7 +646,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
-		Thread.sleep(5000);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+		//tbd Thread.sleep(5000);
 		return new AddDrugDetails(driver);
 	}
 
@@ -648,7 +658,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		
 		
-		validate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1+ "')]")));
+		dceValidate(driver.findElement(By.xpath("//div[@id='drugs-tab']//p[contains (text(), '" + args1+ "')]")));
 
 		// List<WebElement> stri =
 		// driver.findElements(By.xpath("//div[@id='drugs-tab']//p[contains
@@ -950,7 +960,7 @@ try {
 	 * validate pharmacy Information - enter zipcode and search
 	 */
 	public void pharmacyInformation(String zipcode) {
-		validate(zipcodeInput);
+		dceValidate(zipcodeInput);
 		sendkeys(zipcodeInput, zipcode);
 		btnZipCodeSearch.click();
 	}
@@ -982,7 +992,8 @@ try {
 	 * select first pharmacy result
 	 */
 	public void select_first_pharmacy_result() throws InterruptedException {
-		waitForloader(driver, overlay, 30);
+		//tbd waitForloader(driver, overlay, 30);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		CommonUtility.waitForPageLoad(driver, first_pharmacy_select_LNK, 20);
 		Thread.sleep(2000);
 
@@ -992,9 +1003,10 @@ try {
 		System.out.println("--------first_pharmacy_select_btn.click----------------"+ first_pharmacy_select_btn.getText());
 		//first_pharmacy_select_btn.click();
 		jsClickNew(first_pharmacy_select_btn);
-		Thread.sleep(2000);
-		waitForloader(driver, overlay, 30);
-		Thread.sleep(2000);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+		//tbd Thread.sleep(2000);
+		//tbd waitForloader(driver, overlay, 30);
+		//bt dThread.sleep(2000);
 		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
 
@@ -1093,15 +1105,21 @@ try {
 	 * Delete all drug
 	 */
 	public void delete_all_drugs() throws InterruptedException {
-		waitForloader(driver,overlay,20);
-
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
-			CommonUtility.waitForPageLoadNew(driver, first_delete_link, 20);
+			System.out.println("Proceed to delete drug...");
+			CommonUtility.waitForPageLoad(driver, nextSelectPharmacyBtn, 5);
+			moveMouseToElement(nextSelectPharmacyBtn);
+			System.out.println("Moved mouse to nextSelectPharmacyBtn");
+			CommonUtility.waitForPageLoad(driver, first_delete_link, 10);
 			first_delete_link.click();
-			CommonUtility.waitForPageLoadNew(driver, delDrgConfirm, 10);
+			System.out.println("Clicked first_delete_link");
+			Thread.sleep(1000);
+			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
-			
-			//waitForloader(driver, overlay, 30);
+			System.out.println("Clicked delDrgConfirm");
+			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm,5));
+			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		}
 	}
 
@@ -1557,11 +1575,15 @@ try {
 			List<WebElement> saveGenericMessage = driver
 					.findElements(By.id("generic-drug-saving-amount-0"));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
+			Assert.assertTrue("Save dollar amount message is incorect. "
+					+ "valSaveGenericMessage="+valSaveGenericMessage, 
+					!valSaveGenericMessage.contains("Save money"));
+			/* tbd 
 			if (!valSaveGenericMessage.contains("Save money")) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.assertTrue("Save dollar amount message is incorect",false);
-			}
+			} */
 
 	}
 
@@ -1599,10 +1621,11 @@ try {
 	 * 
 	 */
 	public void clickSwitchToGeneric() throws InterruptedException {
-		if(validate(btnSwitchUpd))
+		if(dceValidate(btnSwitchUpd))
 		{
 			btnSwitchUpd.click();
-			waitForloader(driver, overlay, 30);
+			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+			//tbd waitForloader(driver, overlay, 30);
 			Assert.assertTrue(true);
 		}
 		else Assert.assertTrue("update switch to generic button is not present", false);
@@ -1644,8 +1667,9 @@ try {
 		}
 
 		driver.get(NewDCEUrl);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 
-		Thread.sleep(15000);
+		//tbd Thread.sleep(15000);
 	}
 
 	//====================================================================
@@ -1761,6 +1785,46 @@ try {
 			return false;
 		}
 
+		/**
+		 * to validate whether element exists, default up to 2 seconds timeout
+		 * @param element
+		 * @return
+		 */
+		public boolean dceValidate(WebElement element) {
+			long timeoutInSec=0;
+			return dceValidate(element, timeoutInSec);
+		} 
+
+		/**
+		 * to validate whether element exists with input timeout value control
+		 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+		 * @param element
+		 * @param timeoutInSec
+		 * @return
+		 */
+		public boolean dceValidate(WebElement element, long timeoutInSec) {
+			//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			try {
+				if (element.isDisplayed()) {
+					System.out.println("Element '"+element.toString()+"' found!!!!");
+					return true;
+				} else {
+					System.out.println("Element '"+element.toString()+"' not found/not visible");
+				}
+			} catch (Exception e) {
+				System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+			}
+			//note: default in UhcDriver is 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+			return false;
+		} 
+
+		public void moveMouseToElement(WebElement targetElement) {
+			Actions action = new Actions(driver);
+			action.moveToElement(targetElement).build().perform(); 
+		}
 	}
+
 
 

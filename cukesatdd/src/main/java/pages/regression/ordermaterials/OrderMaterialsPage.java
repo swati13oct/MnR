@@ -81,6 +81,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	public void validateSelectionSection(String planType, String memberType) throws InterruptedException {
 		Assert.assertTrue("PROBLEM - unable to locate the selection section on Order Plan Materials",orderValidate(common_selectionSection));
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			CommonUtility.waitForPageLoad(driver, selectionInstruction_ship, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction element on Order Plan Materials",orderValidate(selectionInstruction_ship));
 
 			Assert.assertTrue("PROBLEM - unable to locate 'Member ID Card (Health Insurance Card)' selection option on Order Plan Materials",orderValidate(option_ship_memberIDcardField));
@@ -91,9 +92,10 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			Assert.assertTrue("PROBLEM - unable to locate 'Claims Envelope' selection option on Order Plan Materials",orderValidate(option_ship_medicareHospital));
 			Assert.assertTrue("PROBLEM - unable to locate 'Certificate of Insurance' selection option on Order Plan Materials",orderValidate(option_ship_certificateInsurance));
 		} else {
+			CommonUtility.waitForPageLoad(driver, selectionInstruction_fed, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction on Order Plan Materials",orderValidate(selectionInstruction_fed));
 
-			Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
+			//tbd Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
 			Assert.assertTrue("PROBLEM - unable to locate 'Replacement ID card' selection option on Order Plan Materials",orderValidate(option_fed_replacementIdField));
 			Assert.assertTrue("PROBLEM - unable to locate 'VIEW MEMBER ID CARD' link on Order Plan Materials",orderValidate(link_fed_memberIDcardLink));
 		}
@@ -189,10 +191,14 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		if (option.contains("Member Materials") || option.contains("Welcome Guide") || option.contains("Welcome kit")) {
 			itemType="Member materials / Welcome Guide / Welcome kit";
 			itemToOrderElement=option_fed_memberMaterialsfield;
-		} else if (option.contains("Replacement ID card")) {
+		} 
+		
+		else if (option.contains("Replacement ID card")) {
 			itemType="Replacement ID card";
 			itemToOrderElement=option_fed_replacementIdField;
-		} else if (option.contains("Member ID Card")) {
+		}
+		
+		else if (option.contains("Member ID Card")) {
 			itemType="Member ID Card";
 			itemToOrderElement=option_ship_memberIDcardField;			
 		} else if (option.contains("Electronic Funds Transfer (EFT) Brochure")) {
@@ -215,16 +221,20 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			itemToOrderElement=option_ship_certificateInsurance;			
 		} else if (option.contains("None")){
 			System.out.println("validate error case where no option is selected followed by clicking submit button");
-		} else {
-			Assert.assertTrue("PROBLEM - option '"+option+"' is not an expected available option", false);
-		}
+		} //else {
+			//Assert.assertTrue("PROBLEM - option '"+option+"' is not an expected available option", false);
+		//}
 
 		String result="";
 		if (option.contains("None")) {
 			System.out.println("No option for order material selected");
-		} else {
+		} 
+		
+		else {
 			System.out.println("************* Selecting "+itemType+" Radio***************");
+			CommonUtility.checkPageIsReady(driver);
 			itemToOrderElement.click();
+			CommonUtility.checkPageIsReady(driver);
 			if (!itemToOrderElement.isEnabled()) {
 				System.out.println("************* NOT ABLE to SELECT "+itemType+" Radio***************");
 			}
@@ -318,8 +328,8 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			listOfItems.add("Member ID Card");
 			listOfItems.add("Electronic Funds Transfer (EFT) Brochure");
-			listOfItems.add("Medicare Select Hospital Directory");
 			listOfItems.add("Coupon Book");
+			listOfItems.add("Medicare Select Hospital Directory");
 			listOfItems.add("Claims Envelope");
 			listOfItems.add("Certificate of Insurance");
 		} else {

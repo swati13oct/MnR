@@ -867,8 +867,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public void verifyPharmacyResults() {
+	public void verifyPharmacyResults() throws InterruptedException {
 		Assert.assertTrue(pharmacyResults.isDisplayed());
+		Thread.sleep(5000);
 	}
 
 	public int getResultPharmacyCount() {
@@ -1914,6 +1915,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void clickButtonViewCost() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validateNew(getBtnViewCost());
 		getBtnViewCost().click();
 		validateNew(getDrugCostCard());

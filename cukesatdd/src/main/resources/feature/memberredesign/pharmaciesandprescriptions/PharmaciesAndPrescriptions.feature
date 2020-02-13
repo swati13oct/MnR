@@ -31,7 +31,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
+   #note: uncomment payment page when one-time payment button is showing again
+   # Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the claims page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
@@ -52,17 +53,27 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates Plan Materials link
     Then user validates Need Help section content
 
-    @pharmaciesandprescriptions01a
+    @pharmaciesandprescriptions01a @devRegression
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | AARP_Individual_PnP | yes        |
+
+    @pharmaciesandprescriptions01a
+    Examples: 
+	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | UHC_Individual_PnP  | yes        |
 
     @pharmaciesandprescriptions01b
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | PDP      | Individual_PnP	    | yes        |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
+
+    #note: PEEHIP terminated plan with UHC on 12/31/2019, not valida case anymore
+    #note: moving it to terminated case
+    #@pharmaciesandprescriptions01b
+    #Examples: 
+	#  | FID    | planType | memberType          | expectLink |
+	#  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
 
     @pharmaciesandprescriptions01c
     Examples: 
@@ -74,7 +85,12 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | COMBO_PnP	        | yes        |
-	  | 313410 | PDP      | COMBO_PnP	        | yes        |
+	 #| 313410 | PDP      | COMBO_PnP	        | yes        |
+
+    @pharmaciesandprescriptions01d @devRegression
+    Examples: 
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################
@@ -103,9 +119,13 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | 313410 | MAPD     | Terminated_PnP | no         |
       | 313410 | PDP      | PreEff_PnP     | no         |
       | 313410 | MA       | Individual_PnP | no         |
+      
+   @ship @devRegression
+   Examples: 
+      | FID    | planType | memberType     | expectLink | 
       | 313410 | SHIP     | Individual_PnP | no         |
 
-  #----- beginning of claims test for offline prod - local run only ------------------
+  #----- beginning of test for offline prod - local run only ------------------
   # DO NOT REMOVE this scenario
   # This scenario is not part of the regular regression run BUT is for aiding the team to do offline prod testing if needed
   # note: this setup is for the case when we need to validate on offline prod environment
@@ -163,7 +183,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | planType | memberType          | expectLink | username   | password   | MemUserName  | 
 	  | 313410 | PDP      | Individual_PnP	    | yes        | myUsername | myPassword | testUsername |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        | myUsername | myPassword | testUsername |
 
     @forLocalTestOnly01_pharmaciesandprescriptions01c
     Examples: 

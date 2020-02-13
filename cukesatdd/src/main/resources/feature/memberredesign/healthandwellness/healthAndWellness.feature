@@ -7,11 +7,11 @@ Feature: 1.09 Member Health and Wellness Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    #When the above plantype user logs in UMS Site Desktop HW
     And I view the global navigation HW
     And then click the health and wellness tab HW
-    #And I should see the H&W Generic dashboard and lifestyle,learning and rewards L2 tabs HW
     And I should see the H&W Generic dashboard
+    And I should see GET REWARD tile if available and be able to click it
+      | Plan Type   | <planType>   |
 
     Examples: 
       | TID   | planType | memberType    |
@@ -19,3 +19,4 @@ Feature: 1.09 Member Health and Wellness Page
       | 15341 | MA       | RewardsMember |
       | 15342 | PDP      | RewardsMember |
       | 15343 | COMBO    | RewardsMember |
+      | xxxxx | SHIP     | RewardsMember |

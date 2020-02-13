@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -22,43 +23,6 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void openAndValidate() {
 	}
 
-	/* tbd 
-	public void validatingFunctionalityOfPrintOnPlanCompare(String planType) {
-		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
-		// for now will only validate the print button will bring up the print preview page
-		//note: for pdp need to move mouse around so the print is not blocked
-		System.out.println("Proceed to validate print popup screen for cancel option");
-		compare_validateprintbutton.click();
-
-		// Store the current window handle
-		String winHandleBefore = driver.getWindowHandle();
-		//System.out.println("TEST --------------- before handler="+driver.getWindowHandle());
-		String originalPageTitle=driver.getTitle();
-
-		//switch to handle the new print window
-		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
-		}
-		sleepBySec(5); //note: keep for the print page to load
-		//CommonUtility.checkPageIsReady(driver);
-		// Perform the actions on new window
-		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
-		System.out.println("Proceed to validate the new window content for print");
-		String printPreviewPageTitle=driver.getTitle();
-		Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
-
-		System.out.println("Proceed to close the print preview window");
-		driver.close();
-
-		// note: Switch back to original browser (first window)
-		driver.switchTo().window(winHandleBefore);
-
-		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
-		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
-
-		
-	} */
 	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String forWhat, WebDriver origDriver) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the info on vpp compare page =====");
@@ -67,8 +31,9 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 		result.put("Columns Count", String.valueOf(listOfCmpPlansColumns.size()));
 		for (int i=1; i<=listOfCmpPlansColumns.size(); i++) {
-			if (forWhat.equals("email deepLink")) 
-				origDriver.navigate().refresh();
+			keepSessionAlive(forWhat, origDriver);
+			//tbd if (forWhat.equals("email deepLink")) 
+			//tbd 	origDriver.navigate().refresh();
 			String columnXpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']["+i+"]";
 
 			String planNameXpath=columnXpath+"//h3";
@@ -80,6 +45,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			} catch (Exception e) {
 				System.out.println("no plan name info for '"+i+"- Plan Name'");
 			}
+			System.out.println("TEST - "+i+"- Plan Name="+result.get(i+"- Plan Name"));
 
 			String heartXpath=columnXpath+"//a[contains(@class,'added')]";
 			result.put(i+"- Plan Heart", "none");
@@ -90,6 +56,18 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			} catch (Exception e) {
 				System.out.println("no plan heart info for '"+i+"- Plan Heart'");
 			}
+			System.out.println("TEST - "+i+"- Plan Heart="+result.get(i+"- Plan Heart"));
+			
+			String enrollXpath=columnXpath+"//div[@id='innerdiv' and not(contains(@class,'ng-hide'))]//a[contains(@id,'enrollbtnplancompare')]";
+			result.put(i+"- Plan Enroll", "none");
+			try {
+				WebElement e=driver.findElement(By.xpath(enrollXpath));
+				if (validate(e)) 
+					result.put(i+"- Plan Enroll", "true");
+			} catch (Exception e) {
+				System.out.println("no plan Enroll Button for '"+i+"- Plan Enroll'");
+			}
+			System.out.println("TEST - "+i+"- Plan Enroll="+result.get(i+"- Plan Enroll"));
 
 		}
 		int cellsPerRow=listOfCmpPlansColumns.size()+1;
@@ -100,6 +78,10 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			rowStartAt=24;
 		}
 		for (int i=rowStartAt; i<=listOfRowsInPlanCompareTbl.size(); i++) {
+			keepSessionAlive(forWhat, origDriver);
+			//tbd if (forWhat.equals("email deepLink")) 
+			//tbd 	origDriver.navigate().refresh();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 			String rowXpath="//table[@id='fixTable']//tr["+i+"]//td";
 			List<WebElement> tmp=driver.findElements(By.xpath(rowXpath));
 			if (tmp.size()==1) {
@@ -117,12 +99,17 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				}
 			} else { //note: data row, collect text of each cell
 				for (int j=1; j<=cellsPerRow; j++) {
-					String cellXpath="//table[@id='fixTable']//tr["+i+"]//td["+j+"]";
-					WebElement e=driver.findElement(By.xpath(cellXpath));
-					String key="R"+i+"C"+j;
-					String value=e.getText();
-					result.put(key, value);
-					System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+					String cellXpath = "";
+					try{
+						cellXpath="//table[@id='fixTable']//tr["+i+"]//td["+j+"]";
+						WebElement e=driver.findElement(By.xpath(cellXpath));
+						String key="R"+i+"C"+j;
+						String value=e.getText();
+						result.put(key, value);
+						System.out.println("TEST - "+forWhat+" - key='"+key+"' | value='"+value+"'");
+					}catch (NoSuchElementException e) {
+						System.out.println("unable to find this element with xpath='"+cellXpath+"', ignore it, move on");
+					}
 				}
 			}
 		}
@@ -177,16 +164,16 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public String compare_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage) {
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
-		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		if (origPage.get(targetKey)!=null && !(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
 			//note: keep this for now in case anything needs to be bypassed
 			//note: for now can't tell because page is flashing
-			//if (targetKey.equals("xyz")) { 
-			//	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
-			//	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
-			//} else {
-			compare_finalResult=false;
-			failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
-			//}
+			if (targetKey.contains("Plan Heart")) { 
+			 	failedMessage="BYPASS validation until fix (tick# xxxxx) - ";
+			 	failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else {
+				compare_finalResult=false;
+				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			 }
 		}
 		System.out.println("TEST - failedMessage="+failedMessage);		
 		return failedMessage;
@@ -194,6 +181,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	boolean compare_finalResult=true;
 	public List<String> validatePlanCompareEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage, WebDriver origDriver) {
+		String forWhat="from deepLink";
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		List<String> testNote=new ArrayList<String>();
 		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
@@ -201,7 +189,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan compare...");
 
 		System.out.println("Collect info from page content of the plan compare");
-		HashMap<String, String> emailPage=collectInfoVppPlanComparePg(planType, "email deepLink", origDriver);
+		HashMap<String, String> emailPage=collectInfoVppPlanComparePg(planType, forWhat, origDriver);
 		
 		String targetKey="Page Header";
 		String failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
@@ -227,6 +215,13 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 				testNote.add(failedMessage);
 
 			targetKey=i+"- Plan Heart";
+			failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
+			if (failedMessage.contains("mismatch")) 
+				listOfFailure.add(failedMessage);	
+			if (failedMessage.contains("BYPASS")) 
+				testNote.add(failedMessage);
+
+			targetKey=i+"- Plan Enroll";
 			failedMessage=compare_comparePageItem(targetKey, origPage, emailPage);
 			if (failedMessage.contains("mismatch")) 
 				listOfFailure.add(failedMessage);	

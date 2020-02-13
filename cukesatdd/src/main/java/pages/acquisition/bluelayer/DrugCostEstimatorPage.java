@@ -97,7 +97,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[2]/div/span[3]/div")
 	public WebElement PreferredRetailSavingMsg;
-
+	
+	@FindBy(xpath = "//*[@id='backToPlanSummaryTop']")
+        private WebElement backToPlanSummaryFrmPlanDetails;
+	
 	@FindBy(className = "tablePharmacy")
 	public WebElement PharmacyList;
 
@@ -530,6 +533,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return btnBackToPlans;
 	}
 	
+	public WebElement getBtnBackToPlansSummaryFrmDetails() {
+        return backToPlanSummaryFrmPlanDetails;
+    }
+	
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
@@ -844,8 +851,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public void verifyPharmacyResults() {
+	public void verifyPharmacyResults() throws InterruptedException {
 		Assert.assertTrue(pharmacyResults.isDisplayed());
+		Thread.sleep(4000);
 	}
 
 	public int getResultPharmacyCount() {
@@ -1426,7 +1434,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(brandedCost);
 		CommonUtility.waitForPageLoad(driver, switchNowBtn, 30);
 		if(validateNew(switchNowBtn))
-			switchNowBtn.click();
+			jsClickNew(switchNowBtn);
 		CommonUtility.waitForPageLoad(driver, updateBtn, 30);
 		updateBtn.click();
 		

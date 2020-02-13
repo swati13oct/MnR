@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
 Feature: 2.02-Plan summary in vpp flow UMS
       
-  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer1 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
+  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer1 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
