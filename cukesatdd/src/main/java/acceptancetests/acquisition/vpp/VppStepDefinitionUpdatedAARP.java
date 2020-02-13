@@ -2173,7 +2173,7 @@ public class VppStepDefinitionUpdatedAARP {
 	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan_for_AARP() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyPlanCountforPlanCompare();
+		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
 	}
 
 	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link in AARP$")

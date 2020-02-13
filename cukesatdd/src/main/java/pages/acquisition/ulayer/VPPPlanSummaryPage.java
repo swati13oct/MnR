@@ -3204,12 +3204,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	}
 	
-	public void verifyPlanCountforPlanCompare() {
+	public void verifyPlanComapreCheckboxIsUnchecked() {
+	validate(planCompareCheckBox);
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
 	System.out.println("Plan compare checkbox status:" + CheckStatus);
-	Assert.assertEquals("true", CheckStatus.trim());
-	System.out.println("checkbox is checked");
+	Assert.assertEquals("false", CheckStatus.trim());
+	System.out.println("Verified Plan Compare checkbox is unchecked");
 
 	}
 

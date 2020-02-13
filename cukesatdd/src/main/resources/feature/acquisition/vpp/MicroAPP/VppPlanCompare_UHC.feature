@@ -4,9 +4,11 @@ Feature: Vpp to plan Compare UHC Scenarios
   @vppPlanCompareUHC01
   Scenario Outline: TID: <TID> - Verify Rally Tool from plan compare for UHC
     Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    And I select all 3 plans to compare and click on compare plan link in UHC
+     When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans to compare and click on compare plan link in UHC
     And I Click on Look up your doctor link on Plan compare
     And I click on Get Started on and Add Provider from find care page
     Then Verify provider is count is updated on plan compare page

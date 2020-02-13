@@ -3534,12 +3534,12 @@ catch (Exception e) {
 				viewMoreLink.get(0).click();			
 	}
 	
-	public void verifyPlanCountforPlanCompare(){
+	public void verifyPlanComapreCheckboxIsUnchecked(){
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String CheckStatus =  js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
-		Assert.assertEquals("true", CheckStatus.trim());
-		System.out.println("checkbox is checked");
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
 		
 	}	
 
