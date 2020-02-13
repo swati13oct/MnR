@@ -31,6 +31,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
@@ -937,9 +938,14 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+		String deepLinkUrl = memberAttributesMap.get("Deeplink");
+		getLoginScenario().saveBean(LoginCommonConstants.DEEPLINK,deepLinkUrl);
 
-	
+	    //----- note: these parameters won't be in csv, take them out of memberAttributesMap before searching csv
 	 	memberAttributesMap.remove("User Selection");
+	 	memberAttributesMap.remove("Deeplink");
+	 	//------------
+	 	
 		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
@@ -969,18 +975,27 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-        String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
-	     HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
-			    loginPage.validateelements();
-			    MyDocumentsPage	myDocumentsPage=null;
-				try {
-						myDocumentsPage =  (MyDocumentsPage) loginPage.doLoginWith(userName, pwd);
-				} catch (UnhandledAlertException ae) {
-					System.out.println("Exception: "+ae);
-					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
-				}
+		//tbd String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
+		loginPage.validateelements();
+		try {
+			if (deepLinkUrl.contains("my-documents")) {
+				MyDocumentsPage	myDocumentsPage=null;
+				myDocumentsPage =  (MyDocumentsPage) loginPage.doLoginWith(userName, pwd);
 				Assert.assertTrue("PROBLEM - Login not successful...", myDocumentsPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
-					
+			} else if (deepLinkUrl.contains("rewards/program-overview")) {
+				HealthAndWellnessPage healthAndWellnessPage=null;
+				healthAndWellnessPage =  (HealthAndWellnessPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", healthAndWellnessPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.HEALTH_AND_WELLNESS_PAGE,healthAndWellnessPage);
+			} else {
+				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
+			}
+		} catch (UnhandledAlertException ae) {
+			System.out.println("Exception: "+ae);
+			Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
+		}
+
 	}	
 }

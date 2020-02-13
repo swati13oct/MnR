@@ -69,4 +69,6 @@ public class LoginCommonConstants {
 	public static String PLAN_NAME;
 	
 	public static String CATOGERY = "category";
+	
+	public static String DEEPLINK = "deeplink";
 }

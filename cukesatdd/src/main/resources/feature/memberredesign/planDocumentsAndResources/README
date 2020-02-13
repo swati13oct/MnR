@@ -13,6 +13,9 @@ Sections
 	RM = Renew Magazine
 	NH - Need Help
 
+When this README is written, DOC LOG DB is scheduled to get update every Wednesday.
+So some users could be affected w/ the expected documentation because of the update.
+
 Feature files
 	planDocumentsAndResources_P1_misc.feature
 	- catch-all - cover header, EOB, Renew Magazine, Adobe, Need Help validations

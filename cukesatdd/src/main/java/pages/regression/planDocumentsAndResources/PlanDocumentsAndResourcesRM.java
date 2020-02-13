@@ -29,19 +29,23 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		String section="Renew Magazine";
 		String item="CURRENT ISSUE";
 		WebElement lnkElment=currentIssueLink_RM;
-		//note: dev said the link itself has the word '2019' it's not tie to actual year. overwrite it but leave it like this for now in case it changes later
-		currentYear="2019";
-		String expectedUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/index.html";
-		String redirectUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/user_guide.html";
+		//note: at the beginning of the year when the year switch happens, the doc link may not be updated right away w/ the right year in the link
+		//note: so don't dynamic determine it for now
+		currentYear="2020";
+		String season="winter";
+		String expectedUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_"+season+"_"+currentYear+"/index.html";
+		String redirectUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/user_guide.html";
+			currentYear="2019";
+			season="fall";
+			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/user_guide.html";
 		} else if (planType.toUpperCase().contains("PDP")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/user_guide.html";
+			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/user_guide.html";
 		} else if (planType.toUpperCase().contains("MAPD")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/user_guide.html";
+			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/user_guide.html";
 		}
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);

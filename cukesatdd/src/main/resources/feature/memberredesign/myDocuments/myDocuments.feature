@@ -63,6 +63,7 @@ Feature: 1.06.7 Member My Documents Page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
+      | Deeplink     | https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html |
     Then user validates header section content on My Documents Page
     And I validate the Note  text on my Documents Page
     And I validate the disclaimer on my Documents Page 
@@ -100,7 +101,7 @@ Feature: 1.06.7 Member My Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     Examples: 
-    | TID   | planType | memberType            | documentsExpectedInPast24Months  |             
+    | TID   | planType | memberType            | documentsExpectedInPast24Months  |            
     | 10000 | MAPD     | Individual_MyDocuments|           Y                      |
     | 10001 | MAPD     | Group_MyDocuments     |           Y                      |
     | 10002 | COMBO    | FedAndShip_MyDocuments|           N                      |  
