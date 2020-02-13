@@ -400,7 +400,66 @@ public class PlanDocApiResponse {
 						memMatl_zh_curYr_docList.add(docObjMap);
 						annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
-				}
+				} else if (docObj.getType().equals("5009")) {
+					String docCategory="CDI Long Notice (CA Only)";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+					}
+					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
+					String docCategory2="Privacy Notice";
+					docObjMap2.put(docCategory2, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap2);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap2);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap2);
+					}
+				} else if (docObj.getType().equals("1021")) {
+					String docCategory="Schedule of benefits";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6011")) {
+					String docCategory="Certificate of Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("7010")) {
+					String docCategory="Your Plan Getting Started";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_curYr_docList.add(docObjMap);
+						memMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_curYr_docList.add(docObjMap);
+						memMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_curYr_docList.add(docObjMap);
+						memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				}					
 				//--------------	
 		    //note: for next year section
 			} else if (docObj.getYear().equals(nextYear)) {
@@ -605,6 +664,65 @@ public class PlanDocApiResponse {
 						planMatl_zh_nxtYr_docList.add(docObjMap);
 						memMatl_zh_nxtYr_docList.add(docObjMap);
 						annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("5009")) {
+					String docCategory="CDI Long Notice (CA Only)";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
+					String docCategory2="Privacy Notice";
+					docObjMap2.put(docCategory2, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap2);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap2);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap2);
+					}
+				} else if (docObj.getType().equals("1021")) {
+					String docCategory="Schedule of benefits";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("6011")) {
+					String docCategory="Certificate of Coverage";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("7010")) {
+					String docCategory="Your Plan Getting Started";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						planMatl_en_nxtYr_docList.add(docObjMap);
+						memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						planMatl_es_nxtYr_docList.add(docObjMap);
+						memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						planMatl_zh_nxtYr_docList.add(docObjMap);
+						memMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				}
 			}

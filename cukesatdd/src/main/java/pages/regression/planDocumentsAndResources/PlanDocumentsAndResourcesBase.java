@@ -537,7 +537,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		if ((planType.equals("PDP")) && (docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Pharmacy Directory Information".toLowerCase()) || docName.toLowerCase().contains("del Directorio de Farmacia".toLowerCase()))) 
 			return "1026";
 		if (docName.toLowerCase().equalsIgnoreCase("Certificate of Coverage".toLowerCase()) ) 
-			return "8003";
+			if (planType.equals("SSP"))
+				return "6011";
+			else
+				return "8003";
 		if (docName.toLowerCase().equalsIgnoreCase("UnitedHealth Passport Program".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Programa UnitedHealth Passport".toLowerCase())) 
 			return "7001";
 		if (docName.toLowerCase().equalsIgnoreCase("Moving to your new plan".toLowerCase()) ) 
@@ -550,6 +553,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "8002";
 		if (docName.toLowerCase().equalsIgnoreCase("Additional Drug Coverage".toLowerCase())) 
 			return "4005";
+		if (docName.toLowerCase().equalsIgnoreCase("CDI Long Notice".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Privacy Notice".toLowerCase())) 
+			return "5009";
+		if (docName.toLowerCase().equalsIgnoreCase("Schedule of benefits".toLowerCase()) ) 
+			return "1021";
+		if (docName.toLowerCase().equalsIgnoreCase("Your Plan Getting Started".toLowerCase()) ) 
+			return "7010";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}

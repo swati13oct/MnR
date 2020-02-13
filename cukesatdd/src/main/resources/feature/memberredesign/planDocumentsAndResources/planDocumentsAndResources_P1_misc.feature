@@ -80,7 +80,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-#AX      | 18-018 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | false  | false | false | false |
+      | 18-018 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | false  | false | false | false |
 
 	@active_ship @devRegression
 	Examples: 

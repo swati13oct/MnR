@@ -1134,11 +1134,11 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
+				//targetTestDocList.add("Prior Authorization Criteria");
+				//targetTestDocList.add("Step Therapy Criteria");
+				//targetTestDocList.add("Formulary Additions");
+				//targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1154,7 +1154,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
@@ -1176,7 +1176,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
@@ -1299,7 +1299,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Privacy Notice");
-				targetTestDocList.add("CDI Long Notice (CA Only)");
+				targetTestDocList.add("CDI Long Notice");
+				//targetTestDocList.add("CDI Long Notice (CA Only)");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1314,7 +1315,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Schedule of Benefits");
 				targetTestDocList.add("Certificate of Coverage");
