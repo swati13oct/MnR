@@ -153,7 +153,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		validate(snpNone, 30);
 		Assert.assertTrue(snpNone.getText().contains("None"));
 		mobileUtils.mobileLocateElementClick(previousBtn);
-		System.out.println("Validationg "+page+" page Previous button functionality");
+		System.out.println("Validating "+page+" page Previous button functionality");
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 

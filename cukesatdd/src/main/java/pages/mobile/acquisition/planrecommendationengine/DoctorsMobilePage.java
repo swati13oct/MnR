@@ -127,7 +127,7 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	// Doctors Page Element Verification Method
 	public void doctorspageElements() {
-		System.out.println("Travel Validating Page: ");
+		System.out.println("Doctors Validating Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
@@ -152,7 +152,7 @@ public class DoctorsMobilePage extends UhcDriver {
 
 		mobileUtils.mobileLocateElementClick(doctorWantOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
-		System.out.println("Validationg " + page + " page Previous button functionality");
+		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 

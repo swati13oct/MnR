@@ -14,6 +14,7 @@ import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
@@ -236,6 +237,19 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		DoctorsMobilePage doctorpage =  new DoctorsMobilePage(wd);
 		doctorpage.doctorspageCancel(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));	
+	}
+	
+	@Then("^user validate elements in Drug page mobile$")
+	public void elements_drug_page() {
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.drugspageElements();
+	}
+	
+	@Then("^user selects skip option in Drug page mobile$")
+	public void elements_drugskip_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DrugMobilePage drugpage =  new DrugMobilePage(wd);
+		drugpage.skipDrugs(inputValues.get("Drug Selection"));
 	}
 	
 	public void readfeaturedata(DataTable data) {
