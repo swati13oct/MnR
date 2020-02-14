@@ -8,11 +8,15 @@ Feature: 1.07 Member DCE Page
       | Member Type | <memberType> |
     Then I should not see drug look up on home page
 
+    @devRegression
     Examples: 
       | TID   | planType | memberType   |
       | 15326 | SHIP     | SHIP_DCE     |
-      | 15327 | SSUP     | SSUP_DCE     |
       | 15337 | MA       | MA_DCE       |
+
+    Examples: 
+      | TID   | planType | memberType   |
+      | 15327 | SSUP     | SSUP_DCE     |
 
   @drugCostEstimator2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation

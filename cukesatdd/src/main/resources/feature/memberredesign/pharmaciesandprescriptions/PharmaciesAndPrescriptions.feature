@@ -27,7 +27,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
-      | User Selection | <userSelection> |
     Then user should see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -54,30 +53,44 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates Plan Materials link
     Then user validates Need Help section content
 
+    @pharmaciesandprescriptions01a @devRegression
+    Examples: 
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | MAPD     | AARP_Individual_PnP | yes        |
+
     @pharmaciesandprescriptions01a
     Examples: 
-	  | FID    | userSelection | planType | memberType          | expectLink |
-	  | 313410 | xxxxx         | MAPD     | AARP_Individual_PnP | yes        |
-	  | 313410 | xxxxx         | MAPD     | UHC_Individual_PnP  | yes        |
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | MAPD     | UHC_Individual_PnP  | yes        |
 
     @pharmaciesandprescriptions01b
     Examples: 
-	  | FID    | userSelection | planType | memberType          | expectLink |
-	  | 313410 | xxxxx         | PDP      | Individual_PnP	    | yes        |
-	  | 313410 | xxxxx         | MAPD     | GROUP_PEEHIP_PnP    | yes        |
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | PDP      | Individual_PnP	    | yes        |
+
+    #note: PEEHIP terminated plan with UHC on 12/31/2019, not valida case anymore
+    #note: moving it to terminated case
+    #@pharmaciesandprescriptions01b
+    #Examples: 
+	#  | FID    | planType | memberType          | expectLink |
+	#  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        |
 
     @pharmaciesandprescriptions01c
     Examples: 
-	  | FID    | userSelection | planType | memberType          | expectLink |
-	  | 313410 | xxxxx         | MEDICA   | Individual_PnP	    | yes        |
-	  | 313410 | xxxxx         | PCP      | Individual_PnP	    | yes        |
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | MEDICA   | Individual_PnP	    | yes        |
+	  | 313410 | PCP      | Individual_PnP	    | yes        |
 
     @pharmaciesandprescriptions01d
     Examples: 
-	  | FID    | userSelection | planType | memberType          | expectLink |
-	  | 313410 | xxxxx         | MAPD     | COMBO_PnP	        | yes        |
-	 #| 313410 | xxxxx         | PDP      | COMBO_PnP	        | yes        |
-	  | 313410 | xxxxx         | PDP      | COMBO_GROUP_PnP	    | yes        |
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | MAPD     | COMBO_PnP	        | yes        |
+	 #| 313410 | PDP      | COMBO_PnP	        | yes        |
+
+    @pharmaciesandprescriptions01d @devRegression
+    Examples: 
+	  | FID    | planType | memberType          | expectLink |
+	  | 313410 | PDP      | COMBO_GROUP_PnP	    | yes        |
 
 
   #####################################################
@@ -89,7 +102,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-      | User Selection | <userSelection> |
     Then user should not see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -103,11 +115,15 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
 
    Examples: 
-      | FID    | userSelection | planType | memberType     | expectLink | 
-      | 313410 | xxxxx         | MAPD     | Terminated_PnP | no         |
-      | 313410 | xxxxx         | PDP      | PreEff_PnP     | no         |
-      | 313410 | xxxxx         | MA       | Individual_PnP | no         |
-      | 313410 | xxxxx         | SHIP     | Individual_PnP | no         |
+      | FID    | planType | memberType     | expectLink | 
+      | 313410 | MAPD     | Terminated_PnP | no         |
+      | 313410 | PDP      | PreEff_PnP     | no         |
+      | 313410 | MA       | Individual_PnP | no         |
+      
+   @ship @devRegression
+   Examples: 
+      | FID    | planType | memberType     | expectLink | 
+      | 313410 | SHIP     | Individual_PnP | no         |
 
   #----- beginning of test for offline prod - local run only ------------------
   # DO NOT REMOVE this scenario
@@ -167,7 +183,6 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Examples: 
 	  | FID    | planType | memberType          | expectLink | username   | password   | MemUserName  | 
 	  | 313410 | PDP      | Individual_PnP	    | yes        | myUsername | myPassword | testUsername |
-	  | 313410 | MAPD     | GROUP_PEEHIP_PnP    | yes        | myUsername | myPassword | testUsername |
 
     @forLocalTestOnly01_pharmaciesandprescriptions01c
     Examples: 

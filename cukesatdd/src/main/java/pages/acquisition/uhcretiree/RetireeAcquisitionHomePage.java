@@ -16,8 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -38,7 +36,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("Stage") || MRScenario.environmentMedicare.equalsIgnoreCase("offline") ||MRScenario.environmentMedicare.equalsIgnoreCase("offline-stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("Stage") || MRScenario.environment.equalsIgnoreCase("offline") ||MRScenario.environment.equalsIgnoreCase("offline-stage")) {
 			start(UHCRETIREE_ACQISITION_PAGE_URL);
 		} else {
 			start(TEAM_UHCRETIREE_ACQISITION_PAGE_URL);
@@ -218,7 +216,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	public ProviderSearchPageUhcRetiree navigateToProviderSearchTool() {
 		validateNew(providerSearchFromHomeScreen);
 		switchToNewTabNew(providerSearchFromHomeScreen);
-		if (!MRScenario.environmentMedicare.equalsIgnoreCase("stage")) { //need this sleep for lower env
+		if (!MRScenario.environment.equalsIgnoreCase("stage")) { //need this sleep for lower env
 			try { //need this sleep for 
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

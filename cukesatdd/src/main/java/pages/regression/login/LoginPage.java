@@ -218,7 +218,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (MRScenario.environmentMedicare.contains("team-atest")) { //note: sometimes take longer to load page on this team env
+					if (!(null==MRScenario.environmentMedicare)&& (MRScenario.environmentMedicare.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
@@ -395,12 +395,12 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (MRScenario.environmentMedicare.contains("team-a")) { //note: sometimes take longer to load page on this team env
-						Thread.sleep(3000);
-						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+					if (MRScenario.environment.contains("team-a")) { //note: sometimes take longer to load page on this team env
+						Thread.sleep(5000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
 					} else {
-					Thread.sleep(2000);
-					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+						Thread.sleep(2000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
 					}
 				} else {
 					System.out.println("TimeOut!!!");

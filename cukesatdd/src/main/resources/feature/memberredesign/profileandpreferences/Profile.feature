@@ -6,7 +6,6 @@ Feature: 1.02 Member Profile page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
-      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
 	And the ship user validates the need help section
@@ -26,8 +25,8 @@ Feature: 1.02 Member Profile page
     And the user validates on clicking contact us link it should route to contact us page
 
     Examples: 
-	    | TID   | userSelection | planType | memberType          |
-	    | 15103 | xxxxxxxxxx    | SHIP     | SHIP_ProfilePref    |   
+	    | TID   | planType | memberType          |
+	    | 15103 | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfile02 @MAPDandMAEndToEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
@@ -105,11 +104,11 @@ Feature: 1.02 Member Profile page
     And the user validates the address section
       | Member Type | <memberType> |
 
-    @devRegression
+    @devRegression @mocked
     Examples: 
-      | TID   | userSelection | planType | memberType                      |
-      | 15105 | xxxxxxxxx     | PCP      | PCP_SouthFlorida_ProfilePref    |
-      | 15107 | xxxxxxxxx     | Medica   | Medica_SouthFlorida_ProfilePref |
+      | TID   | userSelection                           | planType | memberType                      |
+      | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
+      | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
   @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
@@ -184,10 +183,10 @@ Feature: 1.02 Member Profile page
     And the user validate the Permanent Address section on profile page for ship member
     And the user validate the temporary section on profile page for ship member
 
-    @devRegression
+    @devRegression @mocked
     Examples: 
-    | TID   | userSelection | planType | memberType          |
-    | xxxxx | xxxxxxxxx     | SHIP     | SHIP_ProfilePref    |   
+    | TID   | userSelection           | planType | memberType          |
+    | xxxxx | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |   
 
   @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members

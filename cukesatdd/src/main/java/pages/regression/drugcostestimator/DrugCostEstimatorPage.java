@@ -1105,19 +1105,21 @@ try {
 	 * Delete all drug
 	 */
 	public void delete_all_drugs() throws InterruptedException {
-		//tbd waitForloader(driver,overlay,20);
 		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		while (driver.findElements(By.className("delete-drug")).size() > 0) {
-			CommonUtility.waitForPageLoadNew(driver, first_delete_link, 20);
+			System.out.println("Proceed to delete drug...");
 			CommonUtility.waitForPageLoad(driver, nextSelectPharmacyBtn, 5);
 			moveMouseToElement(nextSelectPharmacyBtn);
+			System.out.println("Moved mouse to nextSelectPharmacyBtn");
+			CommonUtility.waitForPageLoad(driver, first_delete_link, 10);
 			first_delete_link.click();
+			System.out.println("Clicked first_delete_link");
 			Thread.sleep(1000);
-			CommonUtility.waitForPageLoadNew(driver, delDrgConfirm, 10);
+			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
+			System.out.println("Clicked delDrgConfirm");
+			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm,5));
 			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
-			
-			//tbd waitForloader(driver, overlay, 30);
 		}
 	}
 

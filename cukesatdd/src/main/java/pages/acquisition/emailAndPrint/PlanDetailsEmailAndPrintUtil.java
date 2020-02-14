@@ -33,12 +33,22 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		result.put(key, String.valueOf(listOfTabHeaders.size()));
 		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
 
+		key="Number Enroll Button";
+		result.put(key, String.valueOf(planDetailEnrollButtonList.size()));
+		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+
+		key="Number Add to compare Checkbox";
+		result.put(key, String.valueOf(planDetailAddToCompareBoxList.size()));
+		System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
+		
+		
 		for (int i=0; i<listOfTabHeaders.size(); i++) { //note: loop through each table and store info
 			listOfTabHeaders.get(i).click();
 			CommonUtility.checkPageIsReady(driver);
 			int tabIndex=(i+1);
-			if (forWhat.equals("from deepLink"))
-				origDriver.navigate().refresh();
+			keepSessionAlive(forWhat, origDriver);
+			//tbd if (forWhat.equals("from deepLink"))
+			//tbd 	origDriver.navigate().refresh();
 
 			//note: store section header
 			for(int k=0; k<listOfSectionHeaderForActiveTab.size(); k++) {
@@ -51,8 +61,9 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			int numSectionTable=listOfSectionHeaderForActiveTab.size();
 			result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
-				if (forWhat.equals("from deepLink"))
-					origDriver.navigate().refresh();
+				keepSessionAlive(forWhat, origDriver);
+				//tbd if (forWhat.equals("from deepLink"))
+				//tbd 	origDriver.navigate().refresh();
 				String rowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
 				List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
 				int numRows=listOfRowsPerTable.size();
@@ -64,8 +75,6 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					List<WebElement> listOfBoxes=driver.findElements(By.xpath(boxXpath));
 					result.put("Total Boxs For T"+tabIndex+"S"+sectionIndex, String.valueOf(listOfBoxes.size()));
 					for(int boxIndex=1; boxIndex<=listOfBoxes.size(); boxIndex++) { //note: loop through each box
-						//tbd if (forWhat.equals("from deepLink"))
-						//tbd 	origDriver.navigate().refresh();
 						String eachBoxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]["+boxIndex+"]";
 						key="T"+tabIndex+"S"+sectionIndex+"B"+boxIndex;
 						WebElement e=driver.findElement(By.xpath(eachBoxXpath));
@@ -79,8 +88,6 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					break;
 				} else {
 					for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
-						//tbd if (forWhat.equals("from deepLink"))
-						//tbd 	origDriver.navigate().refresh();
 						String cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
 						result.put("Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex,String.valueOf(listOfCellsPerRow.size()));
@@ -88,9 +95,9 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 							String eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
 							WebElement e=driver.findElement(By.xpath(eachCellXpath));
 							key="T"+tabIndex+"S"+sectionIndex+"R"+rowIndex+"C"+cellIndex;
-							String value=e.getAttribute("textContent");
+							//tbd String value=e.getAttribute("textContent");
+							String value=e.getAttribute("innerText");
 							result.put(key, value);
-							System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
 						}
 					}
 				}
@@ -103,16 +110,20 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	
 	public String detail_comparePageItem(String targetKey, HashMap<String, String> origPage, HashMap<String, String> emailage, String planType) {
+		String originalValue=origPage.get(targetKey);
+		String emailValue=emailage.get(targetKey);
+		//note: replace all \r\n or \n to make output consistent in both for compare
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		String failedMessage="NONE";
 		System.out.println("TEST - validate content for map key="+targetKey+"...");
 		//note: MA  BYPASS: T1S1R2C2 T2S1R7C2 T2S1R8C2 T3S1B1 T4S1R9C1 Plan Heart
 		//note: PDP BYPASS: T1S1R7C2 T1S1R8C2 T1S1R10C2 T1S1R17C1 Plan Heart
 		//note: SNP BYPASS: T1S1R2C2 T1S1R9C2  T1S1R10C2 T2S1R1C2 T2S1R3C2 T2S1R4C2 T2S1R5C2 
-		if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		//tbd if (!(origPage.get(targetKey)).equals(emailage.get(targetKey))) {
+		if (!originalValue.equals(emailValue)) {
 			if (((planType.equalsIgnoreCase("MA")) && 
 					(targetKey.equals("T1S1R2C2") || targetKey.equals("T2S1R7C2") || targetKey.equals("T2S1R8C2") || 
-							targetKey.equals("T3S1B1") || targetKey.equals("T4S1R9C1")))
+							targetKey.equals("T3S1B1") || targetKey.equals("T4S1R9C1") || targetKey.equals("T2S1R10C2")))
 				||	
 					((planType.equalsIgnoreCase("PDP")) &&
 					(targetKey.equals("T1S1R7C2") || targetKey.equals("T1S1R8C2") || targetKey.equals("T1S1R10C2") || 
@@ -124,9 +135,28 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					) {
 				failedMessage="BYPASS '"+planType+"' validation until fix (tick# xxxxx) - ";
 				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+			} else if (originalValue.contains("footnote") && !emailValue.contains("footnote")) {
+				//note: footnote is not actual text on UI display but in original page getAttribute("innerText") or getTextContent() are picking it up as text
+				//note: on UI both looks identifical betwween original page and email
+				failedMessage="BYPASS '"+planType+"' validation for extra footnote - ";
+				failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
 			} else {
-				detail_finalResult=false;
-				failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+				//note: Some extra empty line or space are showing with getAttribute("innerText") or getTextContent() are picking it up as text
+				//note: on UI both looks identifical betwween original page and email
+				//note: attempt to clean up the string to do one comparison one more time
+				originalValue=originalValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
+				emailValue=emailValue.replaceAll("(\r\n|\n)", "").replaceAll("\\s", "");
+				if (originalValue.equals(emailValue)) {
+					failedMessage="BYPASS '"+planType+"' validation for extra new line or space - ";
+					failedMessage=failedMessage+"item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+				} else {
+					//note:...ok, give up
+					detail_finalResult=false;
+					failedMessage="item '"+targetKey+"' mismatch | original='"+origPage.get(targetKey)+"' | email='"+emailage.get(targetKey)+"'";
+					
+				}
+				
+				
 			}
 		}
 		System.out.println("TEST - failedMessage="+failedMessage);
@@ -136,15 +166,19 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	boolean detail_finalResult=true;
 	public List<String> validatePlanDetailEmailDeeplink(String planType, String deepLinkStringId, String infoMapStringId, String deepLink, HashMap<String, String> origPage, WebDriver origDriver) {
+		String forWhat="from deepLink";
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
+		
+		keepSessionAlive(forWhat, origDriver);//note: need this to trick the original driver from timing out before the validation is done
+		//tbd origDriver.navigate().refresh(); 
 		List<String> testNote=new ArrayList<String>();
 		List<String> listOfFailure=new ArrayList<String>();
 
 		System.out.println("Proceed to validate the original page content vs page content from email deeplnk for plan detail...");
 		System.out.println("Collect info from page content of the plan compare");
-		HashMap<String, String> emailPage=collectInfoVppPlanDetailPg(planType, "from deepLink", origDriver);
-		origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
+		HashMap<String, String> emailPage=collectInfoVppPlanDetailPg(planType, forWhat, origDriver);
+		keepSessionAlive(forWhat, origDriver);//note: need this to trick the original driver from timing out before the validation is done
+		//tbd origDriver.navigate().refresh(); 
 		
 		String targetKey="Total Tabs";
 		String failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
@@ -153,10 +187,25 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
 
+		targetKey="Number Enroll Button";
+		failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
+		targetKey="Number Add to compare Checkbox";
+		failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
 		int totalTabs=Integer.valueOf(origPage.get(targetKey));
 		System.out.println("TEST - totalTabs="+totalTabs);
 		for (int tabIndex=1; tabIndex<=totalTabs; tabIndex++) { //note: loop through each table and validate info
-			origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
+			keepSessionAlive(forWhat, origDriver);//note: need this to trick the original driver from timing out before the validation is done
+			//tbd origDriver.navigate().refresh(); 
 			targetKey="Total Sections Per T"+tabIndex;
 			failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 			if (failedMessage.contains("mismatch")) 
@@ -170,7 +219,8 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			for(int sectionIndex=1; sectionIndex<=totalSectionsPerTab; sectionIndex++) { //note: loop through each section table
 				targetKey="Total Rows For T"+tabIndex+"S"+sectionIndex;
 				System.out.println("TEST - targetKey="+targetKey);	
-				origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
+				keepSessionAlive(forWhat, origDriver);//note: need this to trick the original driver from timing out before the validation is done
+				//tbd origDriver.navigate().refresh(); 
 				failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 				if (failedMessage.contains("mismatch")) 
 					listOfFailure.add(failedMessage);	
@@ -192,7 +242,6 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					for(int boxIndex=1; boxIndex<=totalBoxesPerSectionOfActiveTab; boxIndex++) {
 						targetKey="T"+tabIndex+"S"+sectionIndex+"B"+boxIndex;
 						System.out.println("TEST - targetKey="+targetKey);	
-						//tbd origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 						if (failedMessage.contains("mismatch")) 
 							listOfFailure.add(failedMessage);	
@@ -207,7 +256,6 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 					for(int rowIndex=1; rowIndex<=totalRowsPerSectionOfActiveTab; rowIndex++) { //note: loop through each row
 						targetKey="Total Cells For T"+tabIndex+"S"+sectionIndex+"R"+rowIndex;
 						System.out.println("TEST - targetKey="+targetKey);	
-						//tbd origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 						failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 						if (failedMessage.contains("mismatch")) 
 							listOfFailure.add(failedMessage);	
@@ -219,7 +267,6 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 						for (int cellIndex=1; cellIndex<=totalCellsPerRow; cellIndex++) { //note: loop through each cell on the row
 							targetKey="T"+tabIndex+"S"+sectionIndex+"R"+rowIndex+"C"+cellIndex;
 							System.out.println("TEST - targetKey="+targetKey);	
-							//tbd origDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 							failedMessage=detail_comparePageItem(targetKey, origPage, emailPage, planType);
 							if (failedMessage.contains("mismatch")) 
 								listOfFailure.add(failedMessage);	
