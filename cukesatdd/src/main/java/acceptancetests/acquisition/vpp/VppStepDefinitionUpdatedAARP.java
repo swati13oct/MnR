@@ -419,13 +419,7 @@ public class VppStepDefinitionUpdatedAARP {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		plandetailspage.clickCompareBox();
 		VPPPlanSummaryPage vppsummarypage = plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
-		if (vppsummarypage != null) {
-			if (vppsummarypage.verifyCompareCheckBoxesAreUnchecked())
-				Assert.assertTrue(true);
-			else
-				Assert.fail("Error in validating that the checkboxes are unchecked");
-		} else
-			Assert.fail("Error in loading the vpp plan summary page");
+			vppsummarypage.verifyPlanComapreCheckboxIsUncheckedforFirstPlan();
 	}
 	
 	/**

@@ -126,12 +126,12 @@ Feature: Vpp to plan Details AARP Scenarios
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                            |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                     |
-      |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)           |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)          |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP) |
+      | zipcode | isMultutiCounty | county             | plantype | planName                                                   |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)        |
+      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            |
+      |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        |
 
   @vppPlanDetailsAARP07
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
@@ -246,7 +246,7 @@ Feature: Vpp to plan Details AARP Scenarios
       |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppPlanDetailsAARP11
-  Scenario Outline: Verify plan details in UMS site
+  Scenario Outline: Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |

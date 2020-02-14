@@ -513,6 +513,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void clickCompareBox() {
+		validateNew(compareBox);
 		compareBox.click();
 	}
 

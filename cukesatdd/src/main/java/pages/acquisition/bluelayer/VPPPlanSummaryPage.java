@@ -1359,21 +1359,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox(){
-		
-		WebElement planCompare = driver.findElement(By.xpath("//input[@id='compare-plan-1']/following-sibling::label"));
-		planCompare.click();
-		
-		/*for(int currentCheckboxIndex = 0; currentCheckboxIndex < planCompareList.size(); currentCheckboxIndex ++) {
-		if(planCompareList.get(currentCheckboxIndex).getText().trim().equalsIgnoreCase("Add to compare")){
-			planCompareList.get(currentCheckboxIndex).click();
-				Assert.assertTrue("Text not changed after checking checkbox", planCompareList.get(currentCheckboxIndex)
-						.getText().trim().equalsIgnoreCase("Added to compare"));
-		break;
-			} else {
-			continue;
-		}
-		}*/
-
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
 	}
 
 	public void clickCompareChkBoxPDP() {

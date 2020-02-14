@@ -162,7 +162,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
 
-	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']/input")
+	@FindBy(xpath="//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label")
 	private WebElement compareChkBox;
 
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
@@ -927,11 +927,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox(){
-		if(validate(compareChkBox)){
-			waitforElement(compareChkBox);
-			compareChkBox.click();
-		}
-
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
@@ -3213,6 +3212,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 	System.out.println("Verified Plan Compare checkbox is unchecked");
 
 	}
+	
+	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
+
+		}
 
 	public void checkMAPlansOnly(int counter) {
 		try {
@@ -3273,7 +3282,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return false;
 		}
 
-	}
-	
+	}	
 	
 }
