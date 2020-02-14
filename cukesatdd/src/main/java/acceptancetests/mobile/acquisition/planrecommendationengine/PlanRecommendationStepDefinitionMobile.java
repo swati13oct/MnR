@@ -18,6 +18,7 @@ import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 import acceptancetests.data.CommonConstants;
@@ -296,6 +297,28 @@ public class PlanRecommendationStepDefinitionMobile {
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.drugsInitiate(inputValues.get("Drug Selection"));
 		drugpage.continueNextpage();
+	}
+	
+	@Then("^user validate elements in Pharmacy page mobile$")
+	public void elements_pharmacy_page() {
+		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
+		pharmacypage.pharmacypageElements();
+	}
+	
+	@Then("^user selects Pharmacy in Pharmacy page mobile$")
+	public void select_pharmacy_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
+		String status = "Positive";
+		pharmacypage.pharmacyFunctional(inputValues.get("Pharmacy Selection"),status);
+	}
+	
+	@And("^user selects Pharmacy in Pharmacy page mobile and validate errors$")
+	public void select_pharmacy_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
+		String status = "Negative";
+		pharmacypage.pharmacyFunctional(inputValues.get("Pharmacy Selection"),status);	
 	}
 	
 	public void readfeaturedata(DataTable data) {
