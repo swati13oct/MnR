@@ -241,6 +241,10 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
+	
+	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
+	private WebElement planDocs;
+	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
 	}
@@ -1016,6 +1020,7 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 
 	}public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 		String PdfHref = PDFlink.getAttribute("href");
 		System.out.println("href for the PDF is : "+PdfHref);
@@ -1029,6 +1034,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 
 	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 
 		String parentHandle = driver.getWindowHandle();

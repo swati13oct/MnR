@@ -239,6 +239,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement riderYearlyPremium;
 	
+	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
+	private WebElement planDocs;
+	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
 	}
@@ -838,6 +841,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 	
 	public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 		String PdfHref = PDFlink.getAttribute("href");
 		System.out.println("href for the PDF is : "+PdfHref);
@@ -850,6 +854,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 	
 	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 
 		String parentHandle = driver.getWindowHandle();
