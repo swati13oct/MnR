@@ -2,9 +2,9 @@
 Feature: Vpp to plan Compare UHC Scenarios
 
   @vppPlanCompareUHC01
-  Scenario Outline: TID: <TID> - Verify Rally Tool from plan compare for UHC
+  Scenario Outline: TID: <TID> Plan Type: <plantype> - Verify Rally Tool from plan compare for UHC
     Given the user is on the uhcmedicaresolutions site landing page
-     When the user performs plan search using following information in UMS site
+    When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
@@ -14,11 +14,11 @@ Feature: Vpp to plan Compare UHC Scenarios
     Then Verify provider is count is updated on plan compare page
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             |
-      | 00001 |   90210 | NO              | Los Angeles County |
+      | TID   | zipcode | isMultutiCounty | county             | plantype |
+      | 00001 |   90210 | NO              | Los Angeles County | MAPD     |
 
   @vppPlanCompareUHC02
-  Scenario Outline: TID: <TID> - Verify a plan can be removed using Remove link from the widget on the top of page
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -35,7 +35,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | 00002 |   90210 | NO              | Los Angeles County | MAPD     |
 
   @vppPlanCompareUHC03
-  Scenario Outline: TID: <TID> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -52,7 +52,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | 00003 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
 
   @vppPlanCompareUHC04
-  Scenario Outline: TID: <TID> - Verify the checkbox for add to compare link is not visible for single plan.
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> -  Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -70,7 +70,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | 00007 |   70072 | NO              | Jefferson Parish | MAPD     |
 
   @vppPlanCompareUHC05
-  Scenario Outline: TID: <TID> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |

@@ -21,8 +21,8 @@ Feature: Vpp to plan Details UHC Scenarios
       | DocumentCode | <docCode> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
-      |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+      | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 |
+      | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
 
   @vppPlanDetailsUHC02
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
@@ -44,8 +44,8 @@ Feature: Vpp to plan Details UHC Scenarios
       | DocumentCode | <docCode> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             |
-      |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             |
+      | 00002 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 |
 
   @vppPlanDetailsUHC03
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
@@ -94,7 +94,7 @@ Feature: Vpp to plan Details UHC Scenarios
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          |
 
   @vppPlanDetailsUHC05
-  Scenario Outline: TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
       | Zip Code | <zipcode> |
@@ -105,11 +105,11 @@ Feature: Vpp to plan Details UHC Scenarios
     Then the user clicks on both top and bottom back to plans link and validates its redirection
 
     Examples: 
-      | zipcode | planName                                             | plantype |
-      |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
+      | TID   | zipcode | planName                                             | plantype |
+      | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
 
   @vppPlanDetailsUHC06
-  Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - OLE Landing from UHC Acquisition site VPP Plan Details
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - - OLE Landing from UHC Acquisition site VPP Plan Details
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -123,15 +123,15 @@ Feature: Vpp to plan Details UHC Scenarios
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                                   |
-      |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)          |
-      |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            |
-      |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                                   |
+      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)          |
+      | 00005 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            |
+      | 00006 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  |
+      | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        |
 
   @vppPlanDetailsUHC07
-  Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Provider Search  in UHC site from Plan Details page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -146,11 +146,11 @@ Feature: Vpp to plan Details UHC Scenarios
     Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                               |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               |
+      | 00009 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) |
 
   @vppPlanDetailsUHC08
-  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -193,11 +193,11 @@ Feature: Vpp to plan Details UHC Scenarios
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
-      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+      | TID   | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
+      | 00010 |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
 
   @vppPlanDetailsUHC09
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -211,13 +211,13 @@ Feature: Vpp to plan Details UHC Scenarios
     Then the user click on Prescription Drug Benefits and validates in UHC site
 
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                            |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
-      |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      | 00011 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | 00012 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
+      | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
   @vppPlanDetailsUHC10
-  Scenario Outline: To verify links displayed in Global footer section on plan details page in UMS site
+  Scenario Outline: TCID - <TCID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -238,11 +238,11 @@ Feature: Vpp to plan Details UHC Scenarios
     And user verifies home link of agents&brokers page bluelayer
 
     Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                            |
-      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            |
+      | 00014 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @vppPlanDetailsUHC11
-  Scenario Outline: Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -260,5 +260,5 @@ Feature: Vpp to plan Details UHC Scenarios
     Then I uncheck and go back to the vpp page to validate
 
     Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                            |
-      |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            |
+      | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
