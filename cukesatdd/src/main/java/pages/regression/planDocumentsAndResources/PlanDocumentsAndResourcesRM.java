@@ -36,8 +36,6 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		String expectedUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/index.html";
 		String redirectUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
-			currentYear="2019";
-			season="fall";
 			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/index.html";
 			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/user_guide.html";
 		} else if (planType.toUpperCase().contains("PDP")) {
