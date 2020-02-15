@@ -1799,6 +1799,69 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
+	
+	
+	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
+	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayer PlanComparePage = planComparePage.validateCallSam();
+		if (PlanComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, PlanComparePage);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the popup and content on Plan Comapare on UHC site$")
+	public void user_verify_the_popup_and_content_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallpopup();	
+	}
+	
+	@When("^verify Chat SAM icon is visible or not on Plan Comapare on UHC site$")
+	public void verify_Chat_SAM_icon_is_visible_or_not_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayer ChatIcon  = planComparePage.validateChatSam();
+		if (ChatIcon != null) {
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, ChatIcon);
+			Assert.assertTrue(true);
+			System.out.println("TFN Widget is Displayed");
+		}
+		else{
+			Assert.fail("TFN Widget is NOT Displayed");
+		}
+	}
+	
+	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
+	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChatSamContent();
+		
+	}
+	
+	
+	@Then("^user verify the Chat original state on UHC site$")
+	public void user_verify_the_Chat_original_state_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChatSam();
+	}
 	@Then("^the user validates the following Additional Benefits of Plan for the plan in UMS$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_UMS(
 			DataTable givenAttributes) throws Throwable {
@@ -1897,65 +1960,7 @@ public class VppStepDefinitionUHC {
 
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 	}
-	@When("^verify Call sticky action menu icon is visible or not$")
-	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
-	}
-	
-	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
-	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
-	}
-		
-	@Then("^user verify the popup and content in popup$")
-	public void user_verify_the_popup_and_content_in_popup() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallpopup();
-		
-	}
-	
-	@When("^verify Chat sticky action menu icon is visible or not$")
-	public void verify_Chat_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage Aquisitionhomepage = aquisitionhomepage.validateCallSam();
-		if (Aquisitionhomepage != null) {
-			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
-			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
-		}
-		else{
-			Assert.fail("TFN Widget is NOT Displayed");
-		}
-	}
-	
-	
-	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
-	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
-				
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
-		
-	}
-	
-	@Then("^user verify the Chat at its original state$")
-	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
-	}
+
 	
 	@Then("^verify plan compare page is loaded on UHC$")
 	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
@@ -2053,4 +2058,30 @@ public class VppStepDefinitionUHC {
 		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ",validationFlag);
 
 	}
+	
+	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on Plan Compare")
+	  public void user_clicks_enrollInPlan_PlanCompare_UHC() throws InterruptedException{
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plan_UHC();
+	   if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	  }
+	
+	@Then("^the user clicks on Plan details link in Plan Compare page on UHC")
+	  public void user_clicks_planDetails_PlanCompare_UHC() throws InterruptedException{
+		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetail();
+			if (vppPlanDetailsPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in Loading the Plan Details Page");
+		
+	  }
+	
+	
 } 

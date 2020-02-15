@@ -83,3 +83,100 @@ Feature: Vpp to plan Compare UHC Scenarios
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype |
       | 00008 |   35616 | NO              | Colbert County | MAPD     |
+
+  @vppPlanCompareUHC06
+  Scenario Outline: TID: <TID> - Verify Call sticky action menu on AARP site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    When verify Call SAM icon is visible or not on Plan Comapare on UHC site
+    And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site
+    Then user verify the popup and content on Plan Comapare on UHC site
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
+      | 00009 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
+
+  @vppPlanCompareUHC07
+  Scenario Outline: TID: <TID> - Verify Chat sticky action menu on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    When verify Chat SAM icon is visible or not on Plan Comapare on UHC site
+    And verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site
+    Then user verify the Chat original state on UHC site
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
+      | 00010 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
+
+  @vppPlanCompareUHC08
+  Scenario Outline: TID: <TID> - To verify links displayed in the global footer of UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    #When user accesses global footer of the AARP Medicare Plans home page
+    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
+    And user clicks on contactus link of aboutus page
+    And user clicks on sitemap link of contactus page
+    And user clicks on privacypolicy link of sitemap page
+    #And user clicks on termsOfuse link of privacypolicy page
+    And user clicks on disclaimers link of terms&conditions page
+    And user clicks on agents&brokers link of disclaimers page
+    #And user clicks on Request Assistance and validates modal window ulayer
+    And user verifies home link of agents&brokers page ulayer
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
+      | 00011 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
+
+  @vppPlanCompareUHC09
+  Scenario Outline: TID: <TID> - Navigation for plan comapre to OLE
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    Then the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on Plan Compare
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
+      | 00012 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
+
+  @vppPlanCompareUHC10
+  Scenario Outline: TID: <TID> -  Navigation for plan comapre to Plan Detail
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    Then the user clicks on Plan details link in Plan Compare page on UHC
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count | pdfType               | docCode                 |
+      | 00013 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
+
+  @vppPlanCompareUHC11
+  Scenario Outline: TID: <TID> - Navigation for plan comapre to Back to summary page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
+    And click on back to plans on plan compare page for UHC
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
+      | 00014 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
