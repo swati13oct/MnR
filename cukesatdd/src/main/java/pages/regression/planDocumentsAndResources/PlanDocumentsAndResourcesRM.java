@@ -41,20 +41,19 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		} else if (planType.toUpperCase().contains("PDP")) {
 			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/index.html";
 			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/user_guide.html";
-		} else if (planType.toUpperCase().contains("MAPD")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/user_guide.html";
+		//} else if (planType.toUpperCase().contains("MAPD")) {
+		//	expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/index.html";
+		///	redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/user_guide.html";
 		}
+		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);
 		testInputInfoMap.put("checkDestUrl", "true");
 		testInputInfoMap.put("switchTab", "true");
-		
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
 			String actualUrl=lnkElment.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-			//note: when clicking the link, it will get redirect to the guide instead of index.html
 			validateLinkDest(testInputInfoMap, lnkElment);
 		} else {
 			Assert.assertTrue("PROBLEM - should not see '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElment));

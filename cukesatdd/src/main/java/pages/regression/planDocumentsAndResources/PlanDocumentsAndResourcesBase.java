@@ -150,8 +150,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-			sleepBySec(3);
 			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 
 			if (checkDestUrl) {
 				String actUrl=driver.getCurrentUrl();
