@@ -985,16 +985,16 @@ public class HSIDStepDefinition {
 				Assert.assertTrue("PROBLEM - Login not successful...", myDocumentsPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
 			} else if (deepLinkUrl.contains("rewards/program-overview")) {
-				HealthAndWellnessPage healthAndWellnessPage=null;
-				healthAndWellnessPage =  (HealthAndWellnessPage) loginPage.doLoginWith(userName, pwd);
-				Assert.assertTrue("PROBLEM - Login not successful...", healthAndWellnessPage != null);
-				getLoginScenario().saveBean(PageConstantsMnR.HEALTH_AND_WELLNESS_PAGE,healthAndWellnessPage);
+				AccountHomePage accountHomePage=null;
+				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			} else {
 				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
 			}
 		} catch (UnhandledAlertException ae) {
 			System.out.println("Exception: "+ae);
-			Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
+			Assert.assertTrue("PROBLEM - ***** Error in loading  Member Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
 		}
 
 	}	

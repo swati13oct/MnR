@@ -231,7 +231,6 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			HealthAndWellnessPage healthnWellnessPg = new HealthAndWellnessPage(testHarness.driver);
 			healthnWellnessPg.clickHealthnWellnessTab();
-			HealthAndWellnessPage.checkForIPerceptionModel(healthnWellnessPg.driver);
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null);
 			result=testHarness.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 
@@ -246,7 +245,6 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			String originalUrl=testDriver.getCurrentUrl();
 			HealthAndWellnessPage healthnWellnessPg = new HealthAndWellnessPage(accountHomePage.driver);
 			healthnWellnessPg.clickHealthnWellnessTab();
-			HealthAndWellnessPage.checkForIPerceptionModel(healthnWellnessPg.driver);
 			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null);
 			result=accountHomePage.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 

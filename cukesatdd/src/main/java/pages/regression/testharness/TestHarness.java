@@ -264,6 +264,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'username')]")
 	private WebElement usernameField;
 	
+	@FindBy(xpath="//a[contains(text(),'Go to Health and wellness')]")
+	private WebElement testHarnessHealthAndWelnessLink;
 	
 	String category = null;
 
@@ -1397,6 +1399,20 @@ public class TestHarness extends UhcDriver {
 			validateNew(benefitsPageLink);
 			validateNew(profilePageLink);
 
+		}
+		
+		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkForIPerceptionModel(driver);
+				validateNew(testHarnessHealthAndWelnessLink);
+				testHarnessHealthAndWelnessLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkForIPerceptionModel(driver);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+			if (driver.getTitle().contains("Health And Wellness")) {
+				return new HealthAndWellnessPage(driver);
+			}
+			return null;
 		}
 
 }

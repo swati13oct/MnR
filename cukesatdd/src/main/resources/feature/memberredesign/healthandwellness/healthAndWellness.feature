@@ -1,22 +1,62 @@
-@healthAndWellness @member_redesign_H&W
+@healthAndWellness @regressionMember
 Feature: 1.09 Member Health and Wellness Page
 
-  @healthAndWellness1 @member_redesign_H&W @regressiongenericpagesH&W @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to check health and wellness and its Lifestyle, Learning and Rewards tabs
-    #Given I am a authenticated member on the member redesign site HW
+  @healthAndWellness01  @regressiongenericpagesH&W @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    And I view the global navigation HW
-    And then click the health and wellness tab HW
+    And I navigate to the Health and Wellness page
     And I should see the H&W Generic dashboard
     And I should see GET REWARD tile if available and be able to click it
-      | Plan Type   | <planType>   |
+      | Has Reward   | <hasReward>   |
+    And I should see RENEW ACTIVE tile if available and be able to click it
+      | Has RenewActive | <hasRenewActive>   |
+      
+    @healthAndWellness01a
+    Examples: 
+      | TID   | planType | memberType        | hasReward | hasRenewActive |
+      | 15340 | MAPD     | RewardsMember     | true      | true           |
+      | 15341 | MA       | AARP_RewardsMember| true      | false          |
+      | 15341 | MA       | UHC_RewardsMember | true      | true           |
+
+    @healthAndWellness01b
+    Examples: 
+      | TID   | planType | memberType        | hasReward | hasRenewActive |
+      | 15342 | PDP      | RewardsMember     | false     | false          |
+      | 15343 | COMBO    | RewardsMember     | false     | false          |
+      | xxxxx | SHIP     | RewardsMember     | false     | true           |
+
+  @healthAndWellness02
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated UHC member on the new Member site, I want to validate health and wellness page content via UHC deeplink
+    Given login with a deeplink in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Deeplink     | http://stage-myuhcmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
+    And I navigate to the Health and Wellness page from Rally
+    And I should see the H&W Generic dashboard
+    And I should see GET REWARD tile if available and be able to click it
+      | Has Reward   | <hasReward>   |
+    And I should see RENEW ACTIVE tile if available and be able to click it
+      | Has RenewActive | <hasRenewActive>   |
 
     Examples: 
-      | TID   | planType | memberType    |
-      | 15340 | MAPD     | RewardsMember |
-      | 15341 | MA       | RewardsMember |
-      | 15342 | PDP      | RewardsMember |
-      | 15343 | COMBO    | RewardsMember |
-      | xxxxx | SHIP     | RewardsMember |
+      | TID   | planType  | memberType        | hasReward | hasRenewActive |
+      | 15341 | MA        | UHC_RewardsMember | true      | true           |
+      
+  @healthAndWellness03    
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated AARP member on the new Member site, I want to validate health and wellness page content via AARP deeplink
+    Given login with a deeplink in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Deeplink     | http://stage-myaarpmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
+    And I navigate to the Health and Wellness page from Rally
+    And I should see the H&W Generic dashboard
+    And I should see GET REWARD tile if available and be able to click it
+      | Has Reward   | <hasReward>   |
+    And I should see RENEW ACTIVE tile if available and be able to click it
+      | Has RenewActive | <hasRenewActive>   |
+
+    Examples: 
+      | TID   | planType  | memberType         | hasReward | hasRenewActive |
+      | 15341 | MA        | AARP_RewardsMember | true      | false          |
