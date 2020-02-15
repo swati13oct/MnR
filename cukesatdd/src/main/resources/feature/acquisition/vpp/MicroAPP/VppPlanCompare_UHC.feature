@@ -124,16 +124,15 @@ Feature: Vpp to plan Compare UHC Scenarios
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
-    #When user accesses global footer of the AARP Medicare Plans home page
-    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
-    And user clicks on contactus link of aboutus page
-    And user clicks on sitemap link of contactus page
-    And user clicks on privacypolicy link of sitemap page
-    #And user clicks on termsOfuse link of privacypolicy page
-    And user clicks on disclaimers link of terms&conditions page
-    And user clicks on agents&brokers link of disclaimers page
+    And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
+    And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
+    And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
+    And the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site
+    #And the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site
+    And the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site
+    And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
     #And user clicks on Request Assistance and validates modal window ulayer
-    And user verifies home link of agents&brokers page ulayer
+    And user verifies home link of agents&brokers page bluelayer
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
