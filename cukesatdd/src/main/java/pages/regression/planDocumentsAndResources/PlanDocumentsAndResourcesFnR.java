@@ -73,7 +73,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		
 		if (!expDisplay_FnR) {
 			Assert.assertTrue("PROBLEM - should not locate sub-section '"+subSection_FnR+"' in '"+section+"' section based on input", !planDocValidate(subSectionElement));
-			section_note.add("  PASSED - sub-section '"+subSection_FnR+"' is not displayed");
+			section_note.add("  PASSED - subsection '"+subSection_FnR+"' is not displayed just as expected");
 			return section_note;
 		}
 		//----------------------------------------------
@@ -84,7 +84,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		subSectionElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(1);
-		section_note.add("  PASSED - sub-section '"+subSection_FnR+"' element validation");
+		section_note.add("  PASSED - subsection '"+subSection_FnR+"' section element validation");
 		return section_note;
 	}
 	
@@ -124,7 +124,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		System.out.println("Proceed to validate FnR doc='"+docName+"' | checkDestUrl="+checkDestUrl+"'' | switchTab='"+switchTab+"'");
 		WebElement docElement=getItemElementLnk(docName);
 		CommonUtility.waitForPageLoad(driver, docElement, 5);
-		section_note.add("  ----- Validation result for document '"+docName+"' in sub-section '"+subSection+"'");
+		section_note.add("    ----- Validation result for document '"+docName+"' in sub-section '"+subSection+"'");
 		if (!planDocValidate(docElement)
 				&& docName.equals("How to appoint a representative") && subSection.equals("Authorization Forms")
 				&& planType.equals("MA") && memberType.contains("GROUP_TERM")) {
@@ -142,7 +142,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 			System.out.println("TEST - Prior link validation doesn't open new tab, so prep the page for next test for subsection='"+subSection+"' and doc='"+docName+"'");
 			prepFnrPg(testInputInfoMap, getSubSectionElement_FnR(subSection), docElement);
 		}
-		section_note.add("    PASSED - document '"+docName+"' in sub-section '"+subSection+"' validation");
+		section_note.add("    PASSED - document '"+docName+"' in subsection '"+subSection+"' validation");
 		return section_note;
 	}
 	

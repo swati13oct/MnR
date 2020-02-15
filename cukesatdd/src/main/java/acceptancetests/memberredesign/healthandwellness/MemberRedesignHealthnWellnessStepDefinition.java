@@ -136,15 +136,15 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	@And("^I should see RENEW ACTIVE tile if available and be able to click it$")
 	public void getRenewActiveValidation(DataTable memberAttributes) {
 		//tbd String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		//tbd String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String hasRenewActive=memberAttributesMap.get("Has RenewActive");
 		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
 		if (hasRenewActive.equalsIgnoreCase("true")) {
-			healthnWellnessPage.validateRenewActive();
+			healthnWellnessPage.validateRenewActive(planType);
 		} else {
-			healthnWellnessPage.validateNoRenewActive();
+			healthnWellnessPage.validateNoRenewActive(planType);
 		}
 	}
 

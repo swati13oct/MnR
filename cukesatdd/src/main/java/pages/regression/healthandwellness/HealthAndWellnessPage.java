@@ -320,14 +320,35 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 	
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[@data-linkdesc='Renew Active']//img")
-	protected WebElement renewActiveIconImg;
+	protected WebElement renewActiveIconImg_ship;
 	
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
-	protected WebElement cardTitle;
+	protected WebElement cardTitle_ship;
 	
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][4]//a[text()='LEARN MORE']")
-	protected WebElement learnMoreBtn;
+	protected WebElement learnMoreBtn_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][5]//a[text()='Find a gym']")
+	protected WebElement findGymLnk_ship;
 	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][6]//a[text()='Brain health tools']")
+	protected WebElement brainHealthToolsLnk_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//strong")
+	protected WebElement yourCode_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//a")
+	protected WebElement tooltipIcon_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]")
+	protected WebElement tooltipText_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
+	protected WebElement closeTooltipX_ship;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[text()='Terms and Conditions']")
+	protected WebElement termsAndConditions_ship;
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='FIND YOUR GYM']")
 	protected WebElement findGymLnk;
 	
@@ -349,21 +370,30 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='Terms and Conditions']")
 	protected WebElement termsAndConditions;
 
-	public void validateNoRenewActive() {
-		String targetElement="Renew Active icon image";
-		Assert.assertTrue("PROBLEM - should not be able to locate '"+targetElement+"'", !validate(renewActiveIconImg,0));
-		targetElement="Card Title";
-		Assert.assertTrue("PROBLEM - should not be able to locate '"+targetElement+"'", !validate(cardTitle,0));
+	public void validateNoRenewActive(String planType) {
+		String targetElement="Find Your Gym";
+		WebElement gymElement=findGymLnk;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			targetElement="Find a Gym";
+			gymElement=findGymLnk_ship;
+		}
+		Assert.assertTrue("PROBLEM - should not be able to locate '"+targetElement+"'", !validate(gymElement,0));
+
+		targetElement="Brain Health Tools";
+		WebElement brainElement=brainHealthToolsLnk;
+		if (planType.equalsIgnoreCase("SHIP")) 
+			brainElement=brainHealthToolsLnk_ship;
+		Assert.assertTrue("PROBLEM - should not be able to locate '"+targetElement+"'", !validate(brainElement,0));
 	}
 	
-	public void validateRenewActive() {
+	public void validateRenewActive(String planType) {
 		String originalUrl=driver.getCurrentUrl();
-		/* tbd 
+		if (planType.equalsIgnoreCase("SHIP")) { 
 			//note: that shoe icon ------------------
 			String targetElement="Renew Active icon image";
-			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(renewActiveIconImg,0));
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(renewActiveIconImg_ship,0));
 			String expectedHref="https://member.int.uhc.com/active/overview";
-			renewActiveIconImg.click();
+			renewActiveIconImg_ship.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 			sleepBySec(10);
@@ -372,36 +402,41 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, validate(generalHeader,0));
 			goBackToPriorPgViaBack(originalUrl);
 
-		//note: card title ------------------
-		String targetElement="Card Title";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(cardTitle,0));
-		String expectedText="Renew Active";
-		String actualText=cardTitle.getText();
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected='"+expectedText+"' | Actual='"+actualText+"'", actualText.equals(expectedText));
+			//note: card title ------------------
+			targetElement="Card Title";
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(cardTitle_ship,0));
+			String expectedText="Renew Active";
+			String actualText=cardTitle_ship.getText();
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected='"+expectedText+"' | Actual='"+actualText+"'", actualText.equals(expectedText));
 
- 
-		//note: Learn More button ------------------
-		targetElement="Learn More buttone";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(learnMoreBtn,0));
-		String expectedHref="https://member.int.uhc.com/active/overview";
-		String actualEleLnkHref=learnMoreBtn.getAttribute("href");
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		renewActiveIconImg.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-		sleepBySec(10);
-		String actualUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-		Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, validate(generalHeader,0));
-		goBackToPriorPgViaBack(originalUrl);
-		*/
+
+			//note: Learn More button ------------------
+			targetElement="Learn More buttone";
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(learnMoreBtn_ship,0));
+			expectedHref="https://member.int.uhc.com/active/overview";
+			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
+			renewActiveIconImg_ship.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+			sleepBySec(10);
+			actualUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, validate(generalHeader,0));
+			goBackToPriorPgViaBack(originalUrl);
+		}
 		//note: Find A Gym ------------------
 		String targetElement="Find Your Gym";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(findGymLnk,0));
+		WebElement gymElement=findGymLnk;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			targetElement="Find a Gym";
+			gymElement=findGymLnk_ship;
+		}
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(gymElement,0));
 		String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
-		String actualEleLnkHref=findGymLnk.getAttribute("href");
+		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		findGymLnk.click();
+		gymElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 		sleepBySec(10);
@@ -412,11 +447,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 		//note: Brain Health Tools ------------------
 		targetElement="Brain Health Tools";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(brainHealthToolsLnk,0));
+		WebElement brainElement=brainHealthToolsLnk;
+		if (planType.equalsIgnoreCase("SHIP")) 
+			brainElement=brainHealthToolsLnk_ship;
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(brainElement,0));
 		expectedHref="https://member.int.uhc.com/active/train-your-brain";
-		actualEleLnkHref=brainHealthToolsLnk.getAttribute("href");
+		actualEleLnkHref=brainElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		brainHealthToolsLnk.click();
+		brainElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 		sleepBySec(10);
@@ -427,36 +465,50 @@ public class HealthAndWellnessPage extends UhcDriver{
 
 		//note: Confirmation Code ------------------
 		targetElement="Your Code";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(yourCode,0));
-		String actualText=yourCode.getText();
+		WebElement codeElement=yourCode;
+		if (planType.equalsIgnoreCase("SHIP")) 
+			codeElement=yourCode_ship;
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(codeElement,0));
+		String actualText=codeElement.getText();
 		System.out.println("TEST - yourCode="+actualText);
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected code not empty string | Actual='"+actualText+"'", !actualText.equals(""));
-		
-		
+
 		//note: tooltip ------------------
 		targetElement="tooltip icon";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(tooltipIcon,0));
-		scrollElementToCenterScreen(tooltipIcon);
-		moveMouseToElement(tooltipIcon);
-		CommonUtility.waitForPageLoad(driver, tooltipText, 15);
+		WebElement tooltipIconElement=tooltipIcon;
+		WebElement tooltipTextElement=tooltipText;
+		WebElement closeTooltipXElement=closeTooltipX;
+		if (planType.equalsIgnoreCase("SHIP")) {
+			tooltipIconElement=tooltipIcon_ship;
+			tooltipTextElement=tooltipText_ship;
+			closeTooltipXElement=closeTooltipX_ship;
+		}
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(tooltipIconElement,0));
+		scrollElementToCenterScreen(tooltipIconElement);
+		moveMouseToElement(tooltipIconElement);
+		CommonUtility.waitForPageLoad(driver, tooltipTextElement, 15);
 		targetElement="tooltip text";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(tooltipText,0));
-		actualText=tooltipText.getText();
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(tooltipTextElement,0));
+		actualText=tooltipTextElement.getText();
 		String expectedText="Use your unique Renew Active confirmation code to access your gym membership, ";
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected text to contain '"+expectedText+"' | Actual='"+actualText+"'", actualText.contains(expectedText));
 		targetElement="close tooltip X";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(closeTooltipX,0));
-		closeTooltipX.click();
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(closeTooltipXElement,0));
+		closeTooltipXElement.click();
 		sleepBySec(1);
-		Assert.assertTrue("PROBLEM - should not be able to locate tooltip text anymore after closing", !validate(tooltipText,0));
-		
+		Assert.assertTrue("PROBLEM - should not be able to locate tooltip text anymore after closing", !validate(tooltipTextElement,0));
+
 		//note: Terms and Conditions ------------------
 		targetElement="Terms and Conditions";
-		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(termsAndConditions,0));
+		WebElement termsAndConditionsElement=termsAndConditions;
+		if (planType.equalsIgnoreCase("SHIP")) {	
+			termsAndConditionsElement=termsAndConditions_ship;
+		}
+		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", validate(termsAndConditionsElement,0));
 		expectedHref="https://member.int.uhc.com/active/terms";
-		actualEleLnkHref=termsAndConditions.getAttribute("href");
+		actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		termsAndConditions.click();
+		termsAndConditionsElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 		sleepBySec(10);

@@ -158,6 +158,13 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				Assert.assertTrue("PROBLEM - '"+targetDocName+"' link destination URL is not as expected. "
 						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 				section_note.add("    PASSED - element link in href attribute vs actual link URL after clicked validation");
+				if (actUrl.contains(".htm")) {
+					//tbd Assert.assertTrue("PROBLEM - unable to locate page header text on the landing page", planDocValidate(generalPgHeader));
+					if (planDocValidate(generalPgHeader))
+						section_note.add("    PASSED - validated there is header text on landing page after clicked");
+					else
+						section_note.add("    * FAILED - unable to locate page header text on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+				}
 			} else {
 				section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
 			}
@@ -204,6 +211,13 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						Assert.assertTrue("PROBLEM - '"+targetDocName+"' link destination URL is not as expected. "
 							+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 						section_note.add("    PASSED - element link in href attribute vs actual link URL after clicked validation");
+						if (actUrl.contains(".htm")) {
+							//tbd Assert.assertTrue("PROBLEM - unable to locate page header text on the landing page for doc '"+testInputInfoMap.get("docName")+"'", planDocValidate(generalPgHeader));
+							if (planDocValidate(generalPgHeader)) 
+								section_note.add("    PASSED - validated there is header text on landing page after clicked");
+							else
+								section_note.add("    * FAILED - unable to locate page header text on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+						}
 					}
 				} else {
 					section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
@@ -956,6 +970,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			}
 		}
+	}
+	
+	public boolean determineSectionResult(List<String> resultList) {
+		boolean sectionResult=true;
+		for(String s: resultList) {
+			if (s.contains("FAILED"))
+				sectionResult=false;
+		}
+		return sectionResult;
 	}
 
 }
