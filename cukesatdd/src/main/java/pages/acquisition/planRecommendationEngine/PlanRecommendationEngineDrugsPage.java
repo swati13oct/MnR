@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
@@ -52,6 +53,9 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                 @FindBy(xpath = "//*[@class='progress-bar-info']/p")
                 private WebElement pageProgressPercentage;
                 
+                @FindBy(css = "div.progress-bar-value-background")
+            	private WebElement progressbar;
+                
                 @FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex")
                 private WebElement drugTitle;
                 
@@ -80,6 +84,12 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                 
 // Build Your Prescription Drugs page Elements
                 
+                @FindBy(css = "uhc-temp-display>div.container div>div>h2")
+            	private WebElement drugsearchbuildpres;
+            	
+            	@FindBy(css = "uhc-temp-display>div.container div>div>p")
+            	private WebElement drugsearchdescription;
+                
                 @FindBy(css = "h2.primary-question-tex")
                 private WebElement buildYourPrescriptionTitle;
                 
@@ -89,36 +99,74 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                 @FindBy(css = "#drug-label")
                 private WebElement addDrug;
                 
-// Drugs Page Modal popup
+                @FindBy(css = "input#drug")
+            	private WebElement drugsearchBox;
+                
+                @FindBy(css = "uhc-autocomplete button")
+            	private WebElement drugsearchButton;
             	
+            	@FindBy(css = "uhc-alert")
+            	private WebElement drugsearchError;
+            	
+            	@FindBy(css = "uhc-autocomplete uhc-menu-item")
+            	private List<WebElement> drugsAutoList;
+                
+// drugs Page Modal popup
+            	
+            	@FindBy(css = "#modal uhc-radio[class*='checked']")
+            	private WebElement modalSelcetedDrug;
+            	
+            	@FindBy(css = "#modal uhc-radio-group uhc-radio")
+            	private List<WebElement> modalSelcetedDrugsList;
+
             	@FindBy(css = "#modal div>button[class*='primary button']")
-            	private WebElement modalFinddoctors;
-            	
-            	@FindBy(xpath = "//button[contains(text(),'Cancel')]")
-            	private WebElement modalCancel;
-            	
+            	private WebElement modalcontinue;
+
+            	@FindBy(css = "#modal div[class*='modal-footer'] button[class*='secondary']")
+            	private WebElement modalBackCancel;
+
             	@FindBy(css = "#modal #modal-label")
             	private WebElement modalTitle;
 
-            	@FindBy(css = "#modal .modal-content")
-            	private WebElement modalDescription;      
+            	@FindBy(css = "#modal #dosage-select")
+            	private WebElement modalDosageSelect;
+
+            	@FindBy(css = "#modal #package-select")
+            	private WebElement modalPackageSelect;
             	
-//Drugs Page Generic Modal popup
+            	@FindBy(css = "#modal #Quantity")
+            	private WebElement modalQuantity;
+            	
+            	@FindBy(css = "#modal #frequency-select")
+            	private WebElement modalFrequencySelect;
+            	
+            	@FindBy(css = "#modal uhc-alert")
+            	private WebElement modalError;
+            	
+//Generic modal
+            	
+            	@FindBy(css = "#modal uhc-alert")
+            	private WebElement modalGenericDescription;
+            	
+            	@FindBy(css = "#modal legend")
+            	private WebElement modalGenericDrug;
+            	
+            	@FindBy(css = "#modal uhc-radio:nth-of-type(1) label .radio-label-content")
+            	private WebElement modalGenericKeep;
+            	
+            	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+            	private WebElement modalGenericSwitch;
             	
 
-            	@FindBy(css = "#modal div>button[class*='primary button']")
-            	private WebElement modalContinuedoctors;
+            	@FindBy(css = "uhc-temp-display p[role='alert']")
+            	private WebElement modaldrugsCount;
 
-            	@FindBy(css = "#modal .modal-content .row:nth-of-type(1) p")
-            	private WebElement modalDoctorsCount;
+            	@FindBy(css = "uhc-list uhc-list-item")
+            	private List<WebElement> drugsList;
 
-            	@FindBy(css = "#modal .modal-content .row:nth-of-type(2) uhc-list-item")
-            	private List<WebElement> modalDoctorsList;
-
-            	//#modal .modal-content .row:nth-of-type(2) uhc-list-item button[class*='secondary']
-            	//Find doctor element and lookup remove button
-            	@FindBy(css = "button[class*='secondary']")
-            	private List<WebElement> modalDoctorsRemovebutton;
+            	// Find drug element and lookup for name
+            	@FindBy(css = ".list-item-content")
+            	private WebElement drugName;
 			          	
 
 //Drugs Page Element Verification Method 
@@ -146,6 +194,40 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 desktopCommonUtils.previouspageValidation(page.toUpperCase());
                                 }
                                 
+//Drugs Search Page Element Verification Method
+                            	public void drugsSearchpageElements() {
+                            			System.out.println("Drugs Search Validating Page: ");
+                            			String currentPageUrl = driver.getCurrentUrl();
+                            			currentPageUrl.contains("/plan-recommendation-engine.html/");
+                            			validate(planSelectorPageTilte);
+                            			validate(pageStepsNumberName, 30);
+                            			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
+                            			validate(pageProgressPercentage, 30);
+                            			Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+                            			validate(progressbar);
+                            			validate(drugsearchbuildpres);
+                            			validate(drugsearchdescription);
+                            			Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
+                            			validate(drugsearchBox);
+                            			validate(drugsearchButton);
+                            			validate(continueBtn);
+                            			previousBtn.click();
+                            			Assert.assertTrue(yesOption.getText().contains("add"));
+                            			continueBtn.click();
+                            		}
+                            	
+//Drugs Search Generic Element Verification Method
+                            	public void genericElements() {
+                            		validate(modalGenericDescription, 30);
+                            		Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
+                            		validate(modalGenericDrug, 30);
+                            		Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
+                            		validate(modalGenericKeep, 30);
+                            		Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
+                            		validate(modalGenericSwitch, 30);
+                            		Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
+                            	}                            	
+                                
 // Selecting drug options in Drug Costs Page
                                 
                                 public void drugpageOptions(String drug) {
@@ -158,9 +240,234 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                     validate(noOption);
                                                     noOption.click();
                                                     System.out.println("Prescription Type "+ drug +" Clicked");
-                                    } 
-                                    continueBtn.click();
-                                }  
+                                    }                                    
+                                } 
+                                
+//Skip the Drug Page to Pharmacy Page
+                                
+                                public void skipDrugs(String drugsSelection) {
+                                	drugpageOptions(drugsSelection);
+                                	continueBtn.click();
+                            		System.out.println("Validating " + page + " page Continue button functionality");
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                            	}
+                                
+//Drug option selects in Drug page
+                                
+                                public void drugsInitiate(String drugSelection) {
+                                	drugpageOptions(drugSelection);
+                                	continueBtn.click();
+                            		validate(drugsearchBox);
+                            	}
+//Drug Adding details in Drug Page                                
+                                
+                                public void drugsHandlerWithdetails(String drugsDetails) {
+                            		String drugName="";
+                            		boolean searchButtonClick=false;
+                            		String dosage="";
+                            		String packageName="";
+                            		String count="";
+                            		boolean threeeMonthfrequency=false;
+                            		boolean GenericDrug=false;
+                            		boolean switchGeneric=false;
+                            		
+                            		String[] drugslist=drugsDetails.split(":");
+                            		for(int i=0;i<drugslist.length;i++) {
+                            			String drugInfo = drugslist[i];
+                            			if(drugInfo.trim().length()>0) {
+                            				String[] drugDetails=drugInfo.split(",");
+                            				drugName = drugDetails[0];
+                            				if(drugDetails[1].toUpperCase().equals("NO"))
+                            					searchButtonClick = true;
+                            				dosage=drugDetails[2];
+                            				packageName=drugDetails[3];
+                            				count=drugDetails[4];
+                            				if(drugDetails[5].toUpperCase().equals("3"))
+                            					threeeMonthfrequency = true;
+                            				if(drugDetails[6].toUpperCase().equals("YES"))
+                            					GenericDrug = true;
+                            				if(drugDetails[7].toUpperCase().equals("YES"))
+                            					switchGeneric = true;
+
+                            				addDrugbySearch(drugName,searchButtonClick,dosage,packageName,count,threeeMonthfrequency,GenericDrug,switchGeneric);
+                            			}
+                            		}
+                            		validateResultsCount();
+                            		checkRemove(drugslist.length);
+                            		validateResultsCount();
+                            		
+                            	}
+                                
+// Continue Function
+                                
+                                public void continueNextpage() {
+                            		validate(drugsearchBox,30);
+                            		threadsleep(2000);
+                            		continueBtn.click();
+                            		System.out.println("Validating " + page + " page Continue button functionality");
+                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                            	}
+                                
+//Validating Result Count
+                                public void validateResultsCount() {
+                            		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
+                            		if (drugsList.size() == confirmationSize) {
+                            			System.out.println("Resutls and Count matched");
+                            		} else {
+                            			System.out.println("Resutls and Count mismatch");
+                            			Assert.assertTrue(false);
+                            		}
+                            	}
+                                
+                                
+//Check Remove Count                                
+                                public void checkRemove(int count){
+                            		if (count > 2)
+                            			removedrug();
+                            	}
+                                
+//Remove Drug Function
+                                
+                                public void removedrug() {
+                            		// By default removing 2nd drug
+                            		int beforeRemove = drugsList.size();
+                            		WebElement remove = drugsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
+                            		remove.click();
+                            		int afterRemove = drugsList.size();
+                            		if (beforeRemove == afterRemove) {
+                            			System.out.println("Remove Results Count mismatch");
+                            			Assert.assertTrue(false);
+                            		}
+                            	}
+//Canceling the Model in Drug Page                                
+                                
+                                public void drugspageCancel(String drugInfo) {
+
+                            		String drugName = drugInfo.split(",")[0];
+                            		boolean generic = false;
+                            		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+                            			generic = true;
+                            		drugsSearchpageElements();
+
+                            		System.out.println("Validating Modal Cancel functionalities");
+
+                            		// Select modal cancel
+                            		drugsearchBox.sendKeys(drugName);
+                            		drugsearchButton.click();
+                            		validate(modalSelcetedDrug,30);
+                            		threadsleep(2000);
+                            		modalBackCancel.click();
+                            		threadsleep(2000);
+                            		if (drugsearchBox.isDisplayed() == false) {
+                            			System.out.println("Drug Select modal is not closed");
+                            			Assert.assertTrue(false);
+                            		}
+
+                            		// Drug details modal cancel
+                            		drugsearchBox.clear();
+                            		drugsearchBox.sendKeys(drugName);
+                            		drugsearchButton.click();
+                            		validate(modalSelcetedDrug,30);
+                            		threadsleep(2000);
+                            		modalcontinue.click();
+                            		threadsleep(2000);
+                            		validate(modalDosageSelect,30);
+                            		threadsleep(2000);
+                            		modalBackCancel.click();
+                            		threadsleep(2000);
+                            		if (drugsearchBox.isDisplayed() == false) {
+                            			System.out.println("Drug details modal is not closed");
+                            			Assert.assertTrue(false);
+                            		}
+
+                            		// Generic modal back
+                            		if (generic) {
+                            			drugsearchBox.clear();
+                            			drugsearchBox.sendKeys(drugName);
+                            			drugsearchButton.click();
+                            			validate(modalSelcetedDrug,30);
+                            			threadsleep(2000);
+                            			modalcontinue.click();
+                            			threadsleep(2000);
+                            			validate(modalDosageSelect,30);
+                            			threadsleep(2000);
+                            			modalcontinue.click();
+                            			threadsleep(2000);
+                            			genericElements();
+                            			validate(modalGenericDrug,30);
+                            			threadsleep(2000);
+                            			modalBackCancel.click();
+                            			threadsleep(2000);
+                            			 if (modalQuantity.isDisplayed() == false) {
+                            				System.out.println("Generic drug modal is not closed");
+                            				Assert.assertTrue(false);
+                            			}
+                            		}
+                            	}
+                                
+//Adding Drug Functionality
+                                
+                                public void addDrugbySearch(String drugName, boolean searchButtonClick,String dosage, String packageName, String count,
+                            			boolean threeeMonthfrequency, boolean GenericDrug,boolean switchGeneric) {
+                            		try {
+                            			validate(drugsearchBox,30);
+                            			threadsleep(2000);
+                            			drugsearchBox.clear();
+                            			drugsearchBox.sendKeys(drugName);
+                            			if(searchButtonClick) {
+                            			drugsearchButton.click();
+                            			validate(modalSelcetedDrug,30);
+                            			threadsleep(2000);
+                            			Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),"Drug name is not Matched :"+drugName);
+                            			//Select modal
+                            			modalcontinue.click();
+                            			threadsleep(2000);
+                            			}
+                            			else {
+                            				drugsAutoList.get(0).click();
+                            			}
+                            			
+                            			validate(modalDosageSelect,30);
+                            			threadsleep(2000);
+                            			Select dos = new Select(modalDosageSelect);
+                            			Select freq = new Select(modalFrequencySelect);
+
+                            			if (!dosage.isEmpty())
+                            				dos.selectByVisibleText(dosage);
+                            			if (!packageName.isEmpty()) {
+                            				Select pack = new Select(modalPackageSelect);
+                            				pack.selectByVisibleText(packageName);
+                            			}
+                            			if (!count.isEmpty()) {
+                            				modalQuantity.clear();
+                            				modalQuantity.sendKeys(count);
+                            			}
+                            			if (threeeMonthfrequency)
+                            				freq.selectByVisibleText("Every 3 Months");
+                            			modalcontinue.click();
+                            			
+                            			if (GenericDrug) {
+                            				validate(modalGenericDrug,30);
+                            				threadsleep(2000);
+                            				//Generic modal
+                            				if(switchGeneric) {
+                            					modalGenericSwitch.click();
+                            					drugName = modalGenericDrug.getText();
+                            				}
+                            				modalcontinue.click();
+                            			}
+                            			
+                            			validateAddedDrugname(drugName);
+                            		} catch (Exception e) {
+                            			System.out.println("Unable to add drug");
+                            		}
+                            	}
+                                
+//Validate Added Drug Name
+                                
+                                public void validateAddedDrugname(String drugName) {
+                            		Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),"Added drug name Mistmatch from selected one : "+drugName);
+                            	}
                                 
 //Drugs Page Function Verification     
                                 
@@ -170,153 +477,106 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                                 Assert.assertTrue(errorMessage.getText().contains("No"));
                                 }                                
                                 
-//Drugs Page Function Verification                      
+// Drug Page Error
                                 
-                                public void drugpageFunctional(String drug,String drugsName,String multiDrug) {
-                                                System.out.println("Drugs Page Functional Operations");
-                                                
-                                                if(drug.equalsIgnoreCase("Yes")) {
-                                                	if(multiDrug.equalsIgnoreCase("YES"))
-                                                		drugModellookup(drugsName,3);
-                                    				else
-                                    					drugModellookup(drugsName,1);
-                                                }
-                                                System.out.println("Validating "+page+" page Continue button functionality");
-                                }
-                                
+                                public void drugpagesError(String drugInfo) {
+                            		System.out.println("Drug pages Error validation");
+                            		drugpageOptions("");
+                            		drugpageOptions("Yes");
+                            		continueBtn.click();
+                            		validate(drugsearchBox, 30);
+                            		drugsearchBox.sendKeys("lip");
+                            		drugsearchButton.click();
+                            		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
+                            				"Expected Error Message not displayed");
+                            		drugsearchBox.clear();
+                            		drugsearchButton.click();
+                            		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
+                            				"Expected Error Message not displayed");
 
-                                
-//Drugs Model Popup Window Verification                                
-                                
-                                public void drugModellookup(String search,int count) {
-                                	String curWindow = driver.getWindowHandle();
-                                	validate(modalDescription);
-                        			Assert.assertTrue(modalDescription.getText().contains("Save"));
-                        			validate(modalTitle);
-                        			Assert.assertTrue(modalTitle.getText().contains("browser"));
-                        			validate(modalCancel);
-                        			Assert.assertTrue(modalCancel.getText().contains("Cancel"));
-                        			validate(modalFinddoctors);
-                        			Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
-                        			modalFinddoctors.click();
-                                	validateLinksanotherWindow(curWindow,"Doctors",search, count );
-//                                	getConfimationPopupResults(count);
-//                                	verifyConfirmationmodalResults(count,werallyResults,confirmationResults);
-//                                	doctorConfirmationModellookup();
-                            		if(count>2)
-                            			removeDoctors();
-                            		modalContinuedoctors.click();
-                            		
-                            	}
-                                
-                                
-//Doctors Confirmation Model Popup Window Verification                                
-                                
-                                public void doctorConfirmationModellookup() {
-                                	validate(modalTitle);
-                        			Assert.assertTrue(modalTitle.getText().contains("Your Doctors"));
-                                	validate(modalDoctorsCount);
-                        			Assert.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
-                        			validate(modalCancel);
-                        			Assert.assertTrue(modalCancel.getText().contains("Cancel"));
-                        			validate(modalContinuedoctors);
-                        			Assert.assertTrue(modalContinuedoctors.getText().contains("Continue"));
-                            	}                                
-                                
-//Switch to Werally Window Page
-                                
-                                public void validateLinksanotherWindow(String primaryWindow,String type,String search,int count) {
+                            		// Modal Errors
+                            		String drugName = drugInfo.split(",")[0];
+                            		boolean generic = false;
+                            		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+                            			generic = true;
+                            		String count = drugInfo.split(",")[4];
+                            		boolean GenericDrug = false;
+                            		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+                            			GenericDrug = true;
+                            		System.out.println("Validating Modal Error functionalities");
+
+                            		// Select modal cancel
+                            		drugsearchBox.sendKeys(drugName);
+                            		drugsearchButton.click();
+                            		validate(modalSelcetedDrug, 30);
                             		threadsleep(2000);
-                            		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
-                            		System.out.println(windows);
-                            		if (windows.size() == 2) {
-                            			for (String window : windows) {
-                        					if (!window.equals(primaryWindow)) {
-                        						driver.switchTo().window(window);
-                        						System.out.println(driver.getCurrentUrl());
-/*                        						werallyResults = werally.werallySearch(type,search,count);
-                        						System.out.println("werallyResults Size is : "+werallyResults.size());
-                        						System.out.println("werallyResults Content is : "+werallyResults);*/
+                            		modalcontinue.click();
+                            		modalQuantity.clear();
+                            		modalcontinue.click();
+                            		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
+                            				"Expected Error Message is not displayed");
+                            		modalQuantity.sendKeys(count);
+                            		modalcontinue.click();
+                            		if (GenericDrug) {
+                            			validate(modalGenericDrug, 30);
+                            			threadsleep(2000);
+                            			modalcontinue.click();
                             		}
-                        					driver.switchTo().window(primaryWindow);
-                            			}
-                            		System.out.println(driver.getCurrentUrl());
-                        			threadsleep(1000);
-                        		} else {
-                        			System.out.println("Unexpected windows opened");
-                        			driver.switchTo().window(primaryWindow);
-                        			threadsleep(1000);
-                        			Assert.assertTrue(false);
-                        		}
-                                }
-                                
-/*                                public void getConfimationPopupResults(int count) {
-                            		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
-                            		if(count==modalDoctorsList.size() && count==confirmationSize) {
-                            			for (int i = count; i > 0; i--) {
-                            				confirmationResults.add(driver.findElement(By.cssSelector("#modal .modal-content .row:nth-of-type(2) uhc-list-item:nth-child("+ i +") .list-item-content>div>strong")).getText().trim());
-                            			}
-                            			Collections.sort(confirmationResults);
-                            			System.out.println("confirmationResults Size is : "+confirmationResults.size());
-                            			System.out.println("confirmationResults Content is : "+confirmationResults);
-                            		}
-                            		else {
-                            			System.out.println("Modal Results Count mismatch");
-                            			Assert.assertTrue(false);
-                            		}
-                            	}     */   
-                                
-                                public void verifyConfirmationmodalResults(int count,ArrayList<String> werally,ArrayList<String> confirm) {
+                            		validateAddedDrugname(drugName);
+                            		drugsearchBox.clear();
+                            		drugsearchBox.sendKeys(drugName);
+                            		drugsearchButton.click();
+                            		validate(modalSelcetedDrug, 30);
+                            		threadsleep(2000);
+                            		modalQuantity.clear();
+                            		modalQuantity.sendKeys(count);
+                            		modalcontinue.click();
+                            		Assert.assertTrue(modalError.getText().toUpperCase().contains("ALREADY"),
+                            				"Expected Error Message is not displayed");
 
-                            		if(werally.size()==confirm.size() && count==werally.size()) {
-                            			if(equalsname(werally,confirm)) {
-                            				System.out.println("Werally and Modal Result's Content matched");
-                            			}
-                            			else {
-                            				System.out.println("Werally and Modal Result's Content mismatch");
-                            				Assert.assertTrue(false);
+                            	}
+                                
+//Choosing Drug from Select Model Window                                
+                                
+                                public void drugChoose(String searchText, String drugInfo) {
+                            		String drugName = drugInfo.split(",")[0];
+                            		boolean generic = false;
+                            		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+                            			generic = true;
+                            		validate(drugsearchBox, 30);
+                            		drugsearchBox.sendKeys(searchText);
+                            		drugsearchButton.click();
+                            		chooseDrug(drugName);
+                            		modalcontinue.click();
+                            		threadsleep(2000);
+                            		validate(modalDosageSelect, 30);
+                            		threadsleep(2000);
+                            		modalcontinue.click();
+                            		threadsleep(2000);
+                            		if (generic) {
+                            			validate(modalGenericDrug, 30);
+                            			threadsleep(2000);
+                            			modalcontinue.click();
+                            		}
+
+                            		validateAddedDrugname(drugName);
+                            	}
+                                
+                                public void chooseDrug(String drugName) {
+                            		boolean available=false;
+                            		for(WebElement drug:modalSelcetedDrugsList) {
+                            			if(drug.getText().trim().equalsIgnoreCase(drugName)) {
+                            				drug.click();
+                            				available=true;
+                            				break;
                             			}
                             		}
-                            		else {
-                            			System.out.println("Werally and Modal Results Count mismatch");
-                            			Assert.assertTrue(false);
+                            		if(available==false) {
+                            			System.out.println("Unable to find the given Drug name");
+                            			Assert.assertTrue(false,"Unable to find the given Drug name");
                             		}
                             	}
                                 
-                                public boolean equalsname(ArrayList<String> werally,ArrayList<String> doctorsmodal) {
-                            		boolean result=true;
-                            		for(int i = 0;i<werally.size();i++) {
-                            			String wname[] = werally.get(i).replace(",","").replace(".", "").split(" ");
-                            			Arrays.sort(wname);
-                            			for(int j=0;j<doctorsmodal.size();j++) {
-                            				String dname[] = doctorsmodal.get(j).replace(",","").replace(".", "").split(" ");
-                            				Arrays.sort(dname);
-                            				System.out.println(Arrays.equals(wname, dname));
-                            				if(Arrays.equals(wname, dname)) {
-                            					result=true;
-                            					break;
-                            				}
-                            				else {
-                            					result=false;
-                            				}
-                            			}
-                            		}
-                            		System.out.println("Doctors Name validation Result "+result);
-                            		return result;
-                            	}
-                                
-                                public void removeDoctors() {
-                            		// By default removing 2nd doctor
-                            		int beforeRemove = modalDoctorsList.size();
-                            		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
-                            		int afterRemove = modalDoctorsList.size();
-                            		if(beforeRemove!=afterRemove) {
-                            			System.out.println("Remove Results Count mismatch");                            		
-                            		}else {
-                            			System.out.println("Remove Results Count matching and Remove is not removed");
-                            			Assert.assertTrue(false);
-                            		}
-                            	}
 
                 public void browserBack() {
 
