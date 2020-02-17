@@ -181,7 +181,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
       |   10001 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | add           | Imuran,NO,,,,1,YES,NO                                             |
 
   @PRE @planrecommandonationmobile @drugpagemobile @errorvalidation @drugpageadddrugmobile @F374225
-  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page error function in PRE Mobile
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page error and duplicate function in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
     And runs questionnaire at zipcode page mobile
