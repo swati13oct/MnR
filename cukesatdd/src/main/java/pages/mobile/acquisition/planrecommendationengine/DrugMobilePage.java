@@ -312,9 +312,10 @@ public class DrugMobilePage extends UhcDriver {
 			validate(drugsearchBox,30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			drugsearchBox.sendKeys(drugName);
+			mobileactionsendkeys(drugsearchBox, drugName);
+			hidekeypad();
 			if(searchButtonClick) {
-			drugsearchButton.click();
+			mobileUtils.mobileLocateElementClick(drugsearchButton);
 			validate(modalSelcetedDrug,30);
 			threadsleep(2000);
 			Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),"Drug name is not Matched :"+drugName);
@@ -323,7 +324,7 @@ public class DrugMobilePage extends UhcDriver {
 			threadsleep(2000);
 			}
 			else {
-				drugsAutoList.get(0).click();
+				mobileUtils.mobileLocateElementClick(drugsAutoList.get(0));
 			}
 			
 			validate(modalDosageSelect,30);
@@ -332,17 +333,17 @@ public class DrugMobilePage extends UhcDriver {
 			Select freq = new Select(modalFrequencySelect);
 
 			if (!dosage.isEmpty())
-				dos.selectByVisibleText(dosage);
+				mobileSelectOption(dos,dosage);
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
-				pack.selectByVisibleText(packageName);
+				mobileSelectOption(pack,packageName);
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
-				modalQuantity.sendKeys(count);
+				mobileactionsendkeys(modalQuantity, count);
 			}
 			if (threeeMonthfrequency)
-				freq.selectByVisibleText("Every 3 Months");
+				mobileSelectOption(freq,"Every 3 Months");
 			modalcontinue.click();
 			
 			if (GenericDrug) {
@@ -376,6 +377,7 @@ public class DrugMobilePage extends UhcDriver {
 		boolean available=false;
 		for(WebElement drug:modalSelcetedDrugsList) {
 			if(drug.getText().trim().equalsIgnoreCase(drugName)) {
+				//mobileUtils.mobileLocateElementClick(drug);
 				drug.click();
 				available=true;
 				break;
@@ -425,8 +427,8 @@ public class DrugMobilePage extends UhcDriver {
 		System.out.println("Validating Modal Cancel functionalities");
 
 		// Select modal cancel
-		drugsearchBox.sendKeys(drugName);
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, drugName);
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		validate(modalSelcetedDrug,30);
 		threadsleep(2000);
 		modalBackCancel.click();
@@ -438,15 +440,19 @@ public class DrugMobilePage extends UhcDriver {
 
 		// Drug details modal cancel
 		drugsearchBox.clear();
-		drugsearchBox.sendKeys(drugName);
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, drugName);
+		//drugsearchBox.sendKeys(drugName);
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		validate(modalSelcetedDrug,30);
 		threadsleep(2000);
-		modalcontinue.click();
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		threadsleep(2000);
 		validate(modalDosageSelect,30);
 		threadsleep(2000);
-		modalBackCancel.click();
+		mobileUtils.mobileLocateElementClick(modalBackCancel);
+		//modalBackCancel.click();
 		threadsleep(2000);
 		if (drugsearchBox.isDisplayed() == false) {
 			System.out.println("Drug details modal is not closed");
@@ -456,20 +462,25 @@ public class DrugMobilePage extends UhcDriver {
 		// Generic modal back
 		if (generic) {
 			drugsearchBox.clear();
-			drugsearchBox.sendKeys(drugName);
-			drugsearchButton.click();
+			mobileactionsendkeys(drugsearchBox, drugName);
+			//drugsearchBox.sendKeys(drugName);
+			mobileUtils.mobileLocateElementClick(drugsearchButton);
+			//drugsearchButton.click();
 			validate(modalSelcetedDrug,30);
 			threadsleep(2000);
-			modalcontinue.click();
+			mobileUtils.mobileLocateElementClick(modalcontinue);
+			//modalcontinue.click();
 			threadsleep(2000);
 			validate(modalDosageSelect,30);
 			threadsleep(2000);
-			modalcontinue.click();
+			mobileUtils.mobileLocateElementClick(modalcontinue);
+			//modalcontinue.click();
 			threadsleep(2000);
 			genericElements();
 			validate(modalGenericDrug,30);
 			threadsleep(2000);
-			modalBackCancel.click();
+			mobileUtils.mobileLocateElementClick(modalBackCancel);
+			//modalBackCancel.click();
 			threadsleep(2000);
 			//DE302977
 			/*
@@ -485,13 +496,17 @@ public class DrugMobilePage extends UhcDriver {
 		System.out.println("Drug pages Error validation");
 		chooseOption("");
 		chooseOption("add");
+		mobileUtils.mobileLocateElementClick(continueBtn);
 		validate(drugsearchBox, 30);
-		drugsearchBox.sendKeys("lip");
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, "lip");
+		//drugsearchBox.sendKeys("lip");
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
 				"Expected Error Message not displayed");
 		drugsearchBox.clear();
-		drugsearchButton.click();
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
 				"Expected Error Message not displayed");
 
@@ -507,31 +522,42 @@ public class DrugMobilePage extends UhcDriver {
 		System.out.println("Validating Modal Error functionalities");
 
 		// Select modal cancel
-		drugsearchBox.sendKeys(drugName);
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, drugName);
+		//drugsearchBox.sendKeys(drugName);
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
-		modalcontinue.click();
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		modalQuantity.clear();
-		modalcontinue.click();
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 				"Expected Error Message is not displayed");
-		modalQuantity.sendKeys(count);
-		modalcontinue.click();
+		mobileactionsendkeys(modalQuantity, count);
+		//modalQuantity.sendKeys(count);
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		if (GenericDrug) {
 			validate(modalGenericDrug, 30);
 			threadsleep(2000);
-			modalcontinue.click();
+			mobileUtils.mobileLocateElementClick(modalcontinue);
+			//modalcontinue.click();
 		}
 		validateAddedDrugname(drugName);
 		drugsearchBox.clear();
-		drugsearchBox.sendKeys(drugName);
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, drugName);
+		//drugsearchBox.sendKeys(drugName);
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
 		modalQuantity.clear();
-		modalQuantity.sendKeys(count);
-		modalcontinue.click();
+		mobileactionsendkeys(modalQuantity, count);
+		//modalQuantity.sendKeys(count);
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		Assert.assertTrue(modalError.getText().toUpperCase().contains("ALREADY"),
 				"Expected Error Message is not displayed");
 
@@ -543,19 +569,24 @@ public class DrugMobilePage extends UhcDriver {
 		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
 			generic = true;
 		validate(drugsearchBox, 30);
-		drugsearchBox.sendKeys(searchText);
-		drugsearchButton.click();
+		mobileactionsendkeys(drugsearchBox, searchText);
+		//drugsearchBox.sendKeys(searchText);
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		//drugsearchButton.click();
 		chooseDrug(drugName);
-		modalcontinue.click();
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		threadsleep(2000);
 		validate(modalDosageSelect, 30);
 		threadsleep(2000);
-		modalcontinue.click();
+		mobileUtils.mobileLocateElementClick(modalcontinue);
+		//modalcontinue.click();
 		threadsleep(2000);
 		if (generic) {
 			validate(modalGenericDrug, 30);
 			threadsleep(2000);
-			modalcontinue.click();
+			mobileUtils.mobileLocateElementClick(modalcontinue);
+			//modalcontinue.click();
 		}
 
 		validateAddedDrugname(drugName);
