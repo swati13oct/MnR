@@ -29,6 +29,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab","true");
+			testInputInfoMap.put("headerText","How to read your new statement");
+			testInputInfoMap.put("sampleBodyText","Use this guide to help you read and use your monthly statement");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Electronic Funds Transfer")) {
@@ -37,6 +39,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Electronic Funds Transfer");
+			testInputInfoMap.put("sampleBodyText","Payments made easy");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Premium Deduction from Social Security Payment Form")) {
@@ -45,6 +49,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Social Security or Railroad Retirement Board Payment Form");
+			testInputInfoMap.put("sampleBodyText","You can save time and stamps each month");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medical Reimbursement Form (Online)")) {
@@ -55,6 +61,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","none"); //TODO
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medical Reimbursement Form (PDF)")) {
@@ -63,6 +71,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","MRAMR3088CS"); //note: code has trouble parsing this pdf doc, just validate the footer values for now
+			testInputInfoMap.put("sampleBodyText","IR_170425_143014");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Prescription Drug Reimbursement Form")) {
@@ -75,6 +85,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","MAPD PRESCRIPTION REIMBURSEMENT REQUEST FORM");
+			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement for covered medications purchased at retail cost");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("How to appoint a representative")) {
@@ -83,6 +95,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","How to Appoint a Representative");
+			testInputInfoMap.put("sampleBodyText","An authorized representative is the person you designate to assist or handle affairs related to your health care services");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Appointment of Representative Form")) {
@@ -95,6 +109,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","CMS");
+			testInputInfoMap.put("sampleBodyText","APPOINTMENT OF REPRESENTATIVE");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Authorization to Share Personal Information Form")) {
@@ -103,6 +119,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","none");  //TODO
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Drug-specific Prior Authorization Request Forms")) {
@@ -111,6 +129,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "false");//TODO - this link hang
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","none");
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medication Prior Authorization Request Form")) {
@@ -119,6 +139,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Prior Authorization Request Form");
+			testInputInfoMap.put("sampleBodyText","Member Information");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medicare Part D Coverage Determination Request Form")) {
@@ -127,6 +149,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","REQUEST FOR MEDICARE PRESCRIPTION DRUG COVERAGE DETERMINATION");
+			testInputInfoMap.put("sampleBodyText","You may also ask us for a coverage determination by calling the member services number");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Redetermination Request Form") || docName.equals("Redetermination Request Form (PDF")) {
@@ -137,6 +161,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Request for Redetermination of Medicare Prescription Drug Denial");
+			testInputInfoMap.put("sampleBodyText","You may also ask us for an appeal through our website at");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Appeals and Grievances – Medicare Advantage Plans")) {
@@ -145,6 +171,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Medical Appeals and Grievances Process"); 
+			testInputInfoMap.put("sampleBodyText","The process for coverage decisions and filing appeals deals with problems related to your benefits and coverage for medical services and prescription drugs");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (Online)")) {
@@ -153,6 +181,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","none"); //TODO
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || docName.equals("Medicare Plan Appeals & Grievances Form")) {
@@ -163,6 +193,12 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Appeal and Grievance Form");
+			testInputInfoMap.put("sampleBodyText","Member information");
+			if (memberType.contains("PEEHIP_GROUP")) {
+				testInputInfoMap.put("headerText","Appeal and Grievance Form"); //note: code has trouble parsing the text for this pdf, skip this one for now
+				testInputInfoMap.put("sampleBodyText","Information about you");
+			}
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Commitment to quality")) {
@@ -171,6 +207,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","For Quality Health Plans");
+			testInputInfoMap.put("sampleBodyText","You Can Count On UnitedHealthcare");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
@@ -179,6 +217,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "https://www.uhcprovider.com/?rfid=UHCOContRD");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Hello");
+			testInputInfoMap.put("sampleBodyText","Latest UnitedHealthcare Provider News");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Step Therapy for Part B Drugs")) {
@@ -187,6 +227,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Step Therapy for Part B Drugs");
+			testInputInfoMap.put("sampleBodyText","These drugs within the following category may be subject to Part B step therapy");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Member rights and responsibilities")) {
@@ -195,6 +237,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Member Rights and Responsibilities");
+			testInputInfoMap.put("sampleBodyText","Customer rights and responsibilities");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Potential for Contract Termination")) {
@@ -207,6 +251,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","What happens if Medicare plans from UnitedHealthcare leaves the Medicare Program");
+			testInputInfoMap.put("sampleBodyText","If we leave the Medicare program or discontinue Medicare plans from UnitedHealthcare");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Prescription drug coverage determinations and appeals")) {
@@ -215,6 +261,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Prescription Drug Coverage Determinations, Appeals and Grievances");
+			testInputInfoMap.put("sampleBodyText","Choose from the following topics to learn more about the prescription drug coverage determinations");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Prescription Drug Transition Process")) {
@@ -223,6 +271,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Prescription Drug Transition Process");
+			testInputInfoMap.put("sampleBodyText","What to do if your current prescription drugs are not on the Drug List");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medication Therapy Management (MTM) Program")) {
@@ -233,6 +283,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Medication Therapy Management Program");
+			testInputInfoMap.put("sampleBodyText","How to Qualify");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Declaration of Prior Prescription Drug Coverage Form")) {
@@ -241,6 +293,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Avoid a Late Enrollment Penalty");
+			testInputInfoMap.put("sampleBodyText","Declaration of Prior Prescription Drug Coverage");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Seasonal flu shot information")) {
@@ -249,6 +303,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Seasonal Flu Shot Information");
+			testInputInfoMap.put("sampleBodyText","Seasonal flu shots are a covered benefit for our Medicare Advantage plan members");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Disenrollment Form (Online)")) {
@@ -257,6 +313,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","none");  //note: this page looks different than the rest, will just validate role 'Member' in the code
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Disenrollment Form (PDF)") || docName.equals("Disenrollment Form")) {
@@ -274,6 +332,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Please read the important instructions in this letter regarding requesting disenrollment");
+			testInputInfoMap.put("sampleBodyText","By completing this disenrollment request, I agree to the following");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx")) {
@@ -284,6 +344,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Try home delivery from OptumRx");
+			testInputInfoMap.put("sampleBodyText","How it works");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Appeals and Grievances – Senior Supplement Plans")) {
@@ -292,6 +354,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Appeals and Grievances Process");   
+			testInputInfoMap.put("sampleBodyText","Appealing a Decision Relating to Benefits");
 			return testInputInfoMap; 
 		} 
 		if (docName.equals("Emergency Room Copayment Waiver Request")) {
@@ -300,6 +364,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Emergency Room Copayment Waiver Request");
+			testInputInfoMap.put("sampleBodyText","his form must be completed by an employee seeking a waiver of an Emergency Room Copayment");
 			return testInputInfoMap; 
 		}	
 		if (docName.equals("Naturopathy Provider Directory")) {
@@ -308,6 +374,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Table of Contents");
+			testInputInfoMap.put("sampleBodyText","Naturopathy");
 			return testInputInfoMap; 
 		}	
 
@@ -317,6 +385,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","none");
+			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}	
 		
@@ -326,6 +396,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Electronic Fund Transfer");
+			testInputInfoMap.put("sampleBodyText","INSTRUCTIONS");
 			return testInputInfoMap; 
 		}	
 
@@ -335,6 +407,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Authorization for Alternate Payer on Account");
+			testInputInfoMap.put("sampleBodyText","To help you manage your account");
 			return testInputInfoMap; 
 		}	
 		
@@ -344,6 +418,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Third Party Designee");
+			testInputInfoMap.put("sampleBodyText","You are not required to choose a third party designee");
 			return testInputInfoMap; 
 		}	
 
@@ -353,6 +429,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Part A Deductible Waiver Hospital Program for AARP Medicare Supplement Insurance Policy Holders");
+			testInputInfoMap.put("sampleBodyText","What is a Part A Deductible");
 			return testInputInfoMap; 
 		}	
 
@@ -362,6 +440,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","How to file a claim");
+			testInputInfoMap.put("sampleBodyText","Enjoy the Ease of No Paperwork");
 			return testInputInfoMap; 
 		}	
 
@@ -371,6 +451,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Prescription Drug Coverage Determinations, Appeals and Grievances");
+			testInputInfoMap.put("sampleBodyText","Choose from the following topics to learn more about the prescription drug coverage determinations");
 			return testInputInfoMap; 
 		}	
 		
@@ -380,6 +462,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
+			testInputInfoMap.put("headerText","Disenrollment Rights and Responsibilities");
+			testInputInfoMap.put("sampleBodyText","Potential for contract termination");
 			return testInputInfoMap; 
 		}	
 		
@@ -389,6 +473,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","MAPD OPT-OUT REQUEST");
+			testInputInfoMap.put("sampleBodyText","To opt out of the prescription drug coverage");
 			return testInputInfoMap; 
 		}			
 		

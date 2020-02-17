@@ -525,7 +525,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	
 	@FindBy(xpath="//h1")
 	protected WebElement generalPgHeader;
-	
+
 	//---------------------------------
 	@FindBy(xpath="//input[@id='location']")
 	protected WebElement providerSearchPg_zipcodeInputField;
