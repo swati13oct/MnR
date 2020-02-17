@@ -107,7 +107,7 @@ Feature:To test HSID registration flow
    | MAPD    |  Individual  |  NON LIS       |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
    
-   @hsid2 @Login @US968315
+   @hsid6 @Login @US968315 @regressionMember
    Scenario Outline:Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
