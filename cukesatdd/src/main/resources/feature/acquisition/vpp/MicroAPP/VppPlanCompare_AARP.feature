@@ -187,21 +187,4 @@ Feature: Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype |
       | 00012 |   90210 | No              | Los Angeles County |              80002 | MAPD     |
 
-  @vppPlanCompareAARP12
-  Scenario Outline: <UID> - Plan Type: <plantype> -Validate email and print on plan compare
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    And I select "<plantype>" plans to compare and click on compare plan link in AARP
-    Then user validates print option for selected plan on plan summary page on test site
-    Then user validates print functionality for selected plan on plan summary page on test site
-    Then user validates email option for selected plan on plan summary page on test site
-    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site
-    Then user loads page using email deeplink for plan and validate vpp summary page content on test site
-
-    Examples: 
-      | UID     | site   | plantype | zipcode | isMultiCounty | county           |
-      | 1598166 | Ulayer | PDP      |   80001 | NO            | Jefferson County |
-      | 1598166 | Ulayer | SNP      |   80001 | NO            | Jefferson County |
+  
