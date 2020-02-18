@@ -11,8 +11,11 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
@@ -147,5 +150,22 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			healthnWellnessPage.validateNoRenewActive(planType);
 		}
 	}
+	
+	@Given("^test$")
+	public void checkSecurityFlag() {
+		
+		System.out.println("TEST - Given");
+		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/UCPHealthWellness/wsConfig";
+		System.out.println("TEST - configPgUrl="+configPgUrl);
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		d.get(configPgUrl);
+		d.quit();
+		Assert.assertTrue("TEST - given step", true);
+		
+		//td[text()='enableSecurity']/following-sibling::td
+	}
+
+
 
 }

@@ -1,6 +1,9 @@
 @healthAndWellness @regressionMember
 Feature: 1.09 Member Health and Wellness Page
 
+  Background:
+     Given test
+
   @healthAndWellness01  @regressiongenericpagesH&W @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given login with following details logins in the member portal and validate elements
