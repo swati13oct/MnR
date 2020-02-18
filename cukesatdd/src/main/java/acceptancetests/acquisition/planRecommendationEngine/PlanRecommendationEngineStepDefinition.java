@@ -474,7 +474,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void notselect_prescription_opt_drug_page(DataTable givenAttributes) throws Throwable {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
-                    String drug = inputValues.get("Drugs");
+                    String drug = inputValues.get("Drug Selection");
                     if (drug.isEmpty()) {
                     	planSelectorDrugspage.drugspageerror();
                     }

@@ -79,6 +79,9 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                 @FindBy(css = "#errorMessage>div:nth-child(2)")
                 private WebElement errorMessage;
                 
+                @FindBy(css = "#errorMessage")
+                private WebElement errorMessageMainpage;
+                
                 @FindBy(xpath = "//*[contains(@class,'radio-checked')]")
                 private WebElement radioselect;
                 
@@ -474,7 +477,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 public void drugspageerror() {
                                                 System.out.println("Drugs type not selected - Error Scenario in Drugs Page");
                                                 continueBtn.click();
-                                                Assert.assertTrue(errorMessage.getText().contains("No"));
+                                                Assert.assertTrue(errorMessageMainpage.getText().contains("No"));
                                 }                                
                                 
 // Drug Page Error
