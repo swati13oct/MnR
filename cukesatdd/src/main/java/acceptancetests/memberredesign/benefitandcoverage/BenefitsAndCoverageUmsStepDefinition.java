@@ -1561,16 +1561,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
 		System.out.println(arraycheck);
-		if (arraycheck == true)
-		{
-			Assert.assertTrue("all pdfs are coming correctly",true);
-			System.out.println("all pdfs are coming correctly");
-		}
-		else 
-		{
-			Assert.fail("pdfs not coming correctly");
-			System.out.println("pdfs not coming correctly");
-		}
+		Assert.assertTrue("PROBLEM - not getting expected number and/or name of PDFs", arraycheck);
+		System.out.println("number and/or name of PDFs are coming correctly");
+		
+		boolean contentCheck = benefitsnCoveragepage.verifyDocContent(targetArray);
+		System.out.println(contentCheck);
+		Assert.assertTrue("PROBLEM - PDF content is either null or empty", contentCheck);
+		System.out.println("There is content in PDF docs");
+		
 	}
 
 

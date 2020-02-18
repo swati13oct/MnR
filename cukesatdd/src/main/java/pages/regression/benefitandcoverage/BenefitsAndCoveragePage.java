@@ -3,6 +3,10 @@
  */
 package pages.regression.benefitandcoverage;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -2587,11 +2593,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		else if (plantype.equalsIgnoreCase("Medica"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 		}
 		else if (plantype.equalsIgnoreCase("PCP"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
 
 		validateNew(SearchProvider);
@@ -2621,11 +2627,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		else if (plantype.equalsIgnoreCase("Medica"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 		}
 		else if (plantype.equalsIgnoreCase("PCP"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
 
 
@@ -2967,6 +2973,82 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		return checkflag;
 
 	}
+	
+	/*
+	 * ** To validate pdfs on Benefit&Coverage Page - whether pdf has content or not
+	 */
+	public boolean verifyDocContent(String a[]) {
+
+		boolean checkflag = true;
+		Select langdropdwn = new Select(langdropdown);
+		if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))	{
+			List<WebElement> pdfs = driver.findElements(By.xpath("//div/span/div/ul/li[@class=' clearfix']/a"));
+			validateEachPdfContent(pdfs);
+		} else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL")) {
+			List<WebElement> pdfs = driver.findElements(By.xpath("//div/span/div/ul/li[@class=' clearfix']/a"));
+			validateEachPdfContent(pdfs);
+		} else if(langdropdwn.getFirstSelectedOption().getText().contains("ä¸­æ")) {
+			System.out.println("NO PDFs in chinese yet.if PDFs come then above same code can be used");
+			checkflag = true;
+		}
+		return checkflag;
+
+	}
+	
+	public void validateEachPdfContent(List<WebElement> pdfs) {
+		for (WebElement pdf: pdfs) {
+			String targetDocName=pdf.getText();
+			//note: need to switch tab and then close tab when done with validation
+			String winHandleBefore = driver.getWindowHandle();
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+			pdf.click();
+			
+			CommonUtility.checkPageIsReady(driver);
+			System.out.println("Clicked the doc link...");
+
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
+			String actUrl=driver.getCurrentUrl();
+			//note: validate page content
+			validatePageContent(targetDocName, actUrl);			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+		}
+	}
+	
+	public void validatePageContent(String targetDocName, String actUrl) {
+		//note: validate page content
+		if (actUrl.contains(".pdf")) {
+			try {
+				URL TestURL = new URL(driver.getCurrentUrl());
+				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+				PDDocument document = PDDocument.load(TestFile);
+				String PDFText = new PDFTextStripper().getText(document);
+				System.out.println("PDF text : "+PDFText);
+				Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+			} catch (IOException e) {
+				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+			}
+			System.out.println("Verified PDF '"+targetDocName+"' content is not null or empty");
+		} else {
+			//note: for html or any url that's not pdf related
+			Assert.assertTrue("PROBLEM - unable to locate page header text element on the landing page for doc '"+targetDocName+"'", validate(generalPgHeader,0));
+			System.out.println("Verified page '"+targetDocName+"' content contains some kind of header element, i.e. page is not empty");
+		}							
+	}
+
+	
+	@FindBy(xpath="//h1")
+	protected WebElement generalPgHeader;
 
 	public void validatestaticlinksinpdf(String plantype) {
 		validateWithValue("Link-Medication Therapy Management Program", Medicationlinkinpdfsec);
@@ -2989,11 +3071,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		else if (plantype.equalsIgnoreCase("Medica"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 		}
 		else if (plantype.equalsIgnoreCase("PCP"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
 		try {
 			Thread.sleep(15000);
@@ -3021,11 +3103,11 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		else if (plantype.equalsIgnoreCase("Medica"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 		}
 		else if (plantype.equalsIgnoreCase("PCP"))
 		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
 		else
 		{
@@ -3041,73 +3123,63 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public void validatestaticlinksinpdfpdp(String plantype)
 	{
+		String targetDocName="Medication Therapy management Program";
+		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Medicationlinkinpdfsecpdp);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Medicationlinkinpdfsecpdp.click();
-		if(driver.getCurrentUrl().contains("/documents/medication-program"))
-		{
-			System.out.println(driver.getCurrentUrl());
-			Assert.assertTrue(true);
-		}
-		else
-		{
-			Assert.fail();
-		}
-		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
-		{
+		String expectedUrl="/documents/medication-program";
+		String actualUrl=driver.getCurrentUrl();
+		validatePageContent(targetDocName, actualUrl);
+		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
+		navigateToBenefitsPg(plantype);		System.out.println("Go back to Benefits page...");
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
 			driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		} else if (plantype.equalsIgnoreCase("Medica"))	{
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+		} else if (plantype.equalsIgnoreCase("PCP"))	{
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
 		}
-		else if (plantype.equalsIgnoreCase("Medica"))
-		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
-		}
-		else if (plantype.equalsIgnoreCase("PCP"))
-		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
-		}
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("landing URL is ="+driver.getCurrentUrl());
+
+		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
+		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
 		Viewotherdocsinpdfpdp.click();
-		if(driver.getCurrentUrl().contains("/member/documents/overview.html"))
-		{
-			System.out.println(driver.getCurrentUrl());
-			Assert.assertTrue(true);
-		}
-		else
-		{
-			Assert.fail();
-		}
+		expectedUrl="/member/documents/overview.html";
+		actualUrl=driver.getCurrentUrl();
+		validatePageContent(targetDocName, actualUrl);
+		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP"))
-		{
-			driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
-		}
-		else if (plantype.equalsIgnoreCase("Medica"))
-		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
-		}
-		else if (plantype.equalsIgnoreCase("PCP"))
-		{
-			driver.navigate().to("https://"+MRScenario.environmentMedicare+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
-		}
-
-
+		navigateToBenefitsPg(plantype);
 	}
 
+	public void navigateToBenefitsPg(String plantype) {
+		System.out.println("Go back to Benefits page...");
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+			driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+		} else if (plantype.equalsIgnoreCase("Medica"))	{
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+		} else if (plantype.equalsIgnoreCase("PCP")) {
+			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+		}
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("landing URL is ="+driver.getCurrentUrl());
+
+	}
+	
 	public void validatevillagetabletext1()
 	{
 		String cellText="no more than 37% for generic drugs or 25% for brand name drugs";
-		//tbd  Assert.assertEquals(driver.findElement(By.xpath("(//div[contains(text(),'"+cellText+"')])[1]")).getText(),cellText);
-		//tbd validateWithValue(cellText,driver.findElement(By.xpath("(//div[contains(text(),'"+cellText+"')])[1]")));
 		System.out.println("TEST-"+driver.findElement(By.xpath("//table//tr[2]/td[4]")).getText());
 		Assert.assertEquals(driver.findElement(By.xpath("//table//tr[2]/td[4]")).getText(),cellText);
 		validateWithValue(cellText,driver.findElement(By.xpath("//table//tr[2]/td[4]")));
@@ -5542,6 +5614,15 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	public void clickOrderMaterialsNavTab() {
 		orderMaterialsTab.click();
 		validateNew(orderMaterialsHeader);	
+	}
+	
+	public void sleepBySec(int sec) {
+		System.out.println("Sleeping for '"+sec+"' sec");
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
