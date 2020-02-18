@@ -2,6 +2,7 @@ package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -11,7 +12,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -1964,6 +1968,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	public void clickButtonViewCost() {
 		validateNew(getBtnViewCost());
+		scrollToView(btnViewCost);
 		getBtnViewCost().click();
 		validateNew(getDrugCostCard());
 	}
@@ -2067,6 +2072,56 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		
 	}
 
+	public void validateLocalStorage(Map<String, String> dCEAttributesMap) {
+		
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//CommonUtility.checkPageIsReadyNew(driver);
+		String ZipCode = dCEAttributesMap.get("Zip Code");
+		String DrugName1 = dCEAttributesMap.get("Drug Name1");
+		String DrugName2 = dCEAttributesMap.get("Drug Name2");
+		String DrugName3 = dCEAttributesMap.get("Drug Name3");
+		String PharmacyName = dCEAttributesMap.get("Pharmacy Name");
+		System.out.println(ZipCode);
+		System.out.println(DrugName1);
+		System.out.println(DrugName2);
+		System.out.println(DrugName3);
+		System.out.println(PharmacyName);
 
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		LocalStorage localStorage = webStorage.getLocalStorage();		
+
+		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
+		System.out.println("UHC ACQ info from Local Storage");
+		System.out.println(DCE_uhcacquisition);
+		boolean validation_Flag=false;
+		boolean Validate_ZipPharmacy = false;
+		if(DCE_uhcacquisition.contains(DrugName1) && DCE_uhcacquisition.contains(DrugName2) 
+				&& DCE_uhcacquisition.contains(DrugName3) && DCE_uhcacquisition.contains(PharmacyName)) {
+			Validate_ZipPharmacy = true;
+			validation_Flag=true;
+			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
+		}
+		
+		String DCEDrugList = localStorage.getItem("drugList");
+		System.out.println("UHC DrugList from Local Storage");
+		System.out.println(DCEDrugList);
+		boolean Validate_DrugList = false;
+		if(DCEDrugList.contains(DrugName1) && DCEDrugList.contains(DrugName2) 
+				&& DCEDrugList.contains(DrugName3) && DCEDrugList.contains(PharmacyName)
+				 && DCEDrugList.contains(ZipCode)) {
+			Validate_DrugList = true;
+			validation_Flag = (validation_Flag)?true:false;
+			System.out.println("UHC DrugList from Local Storage validated : "+Validate_DrugList);
+		}
+		System.out.println("UHC Local Storage Validation Status : "+validation_Flag);
+		Assert.assertTrue("UHC Local Storage Validation Failed",validation_Flag);		
+	}
 	
 }

@@ -226,7 +226,6 @@ public class DCEVPPAcqStepDefinitionAARP {
 		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
 		
 		DrugDetails.continueAddDrugDetailsModNoSaving();
-		
 		SavingsOppurtunity savingsOppurtunity=new SavingsOppurtunity(wd);
 		dce = savingsOppurtunity.savedrugbutton();
 		
@@ -250,6 +249,20 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 		Assert.assertTrue("Drug not added", null != dce);
 		dce.validateAddedDrug(drug);*/
+	}
+	
+	// Only for Saver Pop-up from DCE test Harness
+	@When("^user successfully adds drug in the AMS site for TestHarness$")
+	public void user_successfully_adds_drug_TestHarness(DataTable data) throws InterruptedException {
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		DrugCostEstimatorPage dce = savingsOppurtunity.savedrugbutton();
+		
+		if (null != dce) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 	
 	@And("^then user adds other drugs$")
@@ -330,6 +343,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	   for(int i=0;i<dce.getLstPharmacyNames().size();i++)
 	    if(dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
 	    	dce.getLstSelectPharmacy().get(i).click();
+	    	break;
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();
