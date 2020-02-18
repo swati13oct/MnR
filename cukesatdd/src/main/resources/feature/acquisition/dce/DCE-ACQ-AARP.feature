@@ -3,7 +3,7 @@ Feature: 1.10. ACQ-DCE AARP
 
   @acq_drug_cost_estimator_ulayer_flow @dceUlayerSmoke @vbfGate @DCE_Regression_Ulayer_Home1 @prodRegression
   Scenario Outline: To verify DCE flow from Ulayer home page
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
     And I have added a drug to my drug list
       | Drug | <drug> |
@@ -41,7 +41,7 @@ Feature: 1.10. ACQ-DCE AARP
 
   @dce @DCE_Regression_Ulayer_Home1 @ulayer
   Scenario Outline: To verify DCE flow from Ulayer home page hover over
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the AARP medicare site landing page
     When I click on Drug Cost Estimator link from Shop for a plan hover over for AARP site
     And I have added a drug to my drug list
       | Drug | <drug> |
@@ -78,7 +78,7 @@ Feature: 1.10. ACQ-DCE AARP
 
   @switchNowStep3 @dceVBF @DCE_Regression_Ulayer_VPP1_1 @prodRegression
   Scenario Outline: To test the DCE flow from vpp and the switch now option in step 3
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -110,7 +110,7 @@ Feature: 1.10. ACQ-DCE AARP
 
   @defect3235 @DCE_Regression_Ulayer_VPP1_2 @prodRegression
   Scenario Outline: To go through dce flow from prescription drugs tab and verify right message when clicked on add to compare
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |

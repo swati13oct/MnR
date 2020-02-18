@@ -3,7 +3,7 @@ Feature: 2.10. ACQ-DCE - UMS
 
   @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer_Home1 @prodRegression
   Scenario Outline: To verify DCE flow from Blayer home page
-    Given the user is on the uhcmedicaresolutions site landing page
+    Given user is on blue layer landing page
     When I access the acquisition DCE tool from home page on ums site
     And I have added a drug to my drug list on ums site
       | Drug | <drug> |
@@ -39,7 +39,7 @@ Feature: 2.10. ACQ-DCE - UMS
 
   @switchNowStep3Blayer @dceVBF @DCE_Regression_Blayer_VPP1 @prodRegression
   Scenario Outline: To test the dce vpp flow with switch now option
-    Given the user is on the uhcmedicaresolutions site landing page
+    Given user is on blue layer landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -71,7 +71,7 @@ Feature: 2.10. ACQ-DCE - UMS
 
     @dce @regressionMember @blayer @DCE_Regression_Blayer_Home1
   Scenario Outline: To verify DCE flow from Blue Layer home page hover over
-    Given the user is on the uhcmedicaresolutions site landing page
+    Given user is on blue layer landing page
     When I click on Drug Cost Estimator link from Shop for a plan hover over for ums site
     And I have added a drug to my drug list on ums site
       | Drug | <drug> |

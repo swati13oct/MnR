@@ -5,7 +5,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the AARP medicare site landing page
     And the user selects the state drop down value in AARP home page
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
