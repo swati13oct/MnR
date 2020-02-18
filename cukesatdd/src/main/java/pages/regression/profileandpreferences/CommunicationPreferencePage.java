@@ -97,7 +97,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 			savePrefButton.click();
 			System.out.println("paperless button clicked and saved");
 			return true;
-		} else if (validateNew(mailButton) && !(mailButton.isSelected())) {
+		} else if (prefValidate(mailButton) && !(mailButton.isSelected())) {
 			mailButton.click();
 			savePrefButton.click();
 			System.out.println("mail button clicked and saved");
@@ -158,7 +158,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validates the preferences for the SHIP members */
 	public void validateCommunicationPreferencesForShip(String planName) {
-		CommonUtility.waitForPageLoad(driver, claimsLabel, 5);
+		CommonUtility.waitForPageLoad(driver, claimsLabel, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claimsLabel", validate(claimsLabel, 0));
 		Assert.assertTrue("PROBLEM - unable to locate planDocumentsLabel", validate(planDocumentsLabel,0));
 		Assert.assertEquals("PROBLEM planName not as expected.  Expected='"+planName+"' | Actual='"+shipPlanName.getText().trim()+"'", 
@@ -382,17 +382,24 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		btnSavePrefSHIP.click();
 	}
 
-	public void validatePopUp() {
+	public void validatePopUp(String planName) {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, submitBtnForWelcomeKitYES, 5);
-		Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
-				validate(welcomeKitNo));
-		Assert.assertTrue("PROBLEM - unable to locate the 'Yes' radio option on popup after clicking 'Save' button", 
-				validate(welcomeKitYES));
-		welcomeKitYES.click();
-		Assert.assertTrue("PROBLEM - unable to locate the 'submit' button on the popup", 
-				prefValidate(submitBtnForWelcomeKitYES));
-		submitBtnForWelcomeKitYES.click();
+		if (planName.equalsIgnoreCase("AARP GROUP HOSPITAL PLAN")) {
+			CommonUtility.waitForPageLoad(driver, hipOrPhipPlansOkBtn, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
+					prefValidate(hipOrPhipPlansOkBtn));
+			hipOrPhipPlansOkBtn.click();
+		} else {
+			CommonUtility.waitForPageLoad(driver, submitBtnForWelcomeKitYES, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
+					prefValidate(welcomeKitNo));
+			Assert.assertTrue("PROBLEM - unable to locate the 'Yes' radio option on popup after clicking 'Save' button", 
+					prefValidate(welcomeKitYES));
+			welcomeKitYES.click();
+			Assert.assertTrue("PROBLEM - unable to locate the 'submit' button on the popup", 
+					prefValidate(submitBtnForWelcomeKitYES));
+			submitBtnForWelcomeKitYES.click();
+		}
 	}
 
 	public void validateSuccessText() {
@@ -518,6 +525,28 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	}	
+	
+	//note: modify only if scenario is targetting specific for combo tab validation
+	//note: for now only check if combo then click the right tab, don't flag it if it doesn't have combo tab.
+	public void clickCombTab(String plan) {
+		if (plan.equalsIgnoreCase("mapd")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			if (prefValidate(comboTab_MAPD)) 
+				comboTab_MAPD.click();
+		} else if (plan.equalsIgnoreCase("ship")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			if (prefValidate(comboTab_SHIP))
+				comboTab_SHIP.click();
+		} else if (plan.equalsIgnoreCase("pdp")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			if (prefValidate(comboTab_PDP))
+				comboTab_PDP.click();
+		} else if (plan.equalsIgnoreCase("ssup")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			if (prefValidate(comboTab_SSUP)) 
+				comboTab_SSUP.click();
+		} 
+	}
 }
 
 
