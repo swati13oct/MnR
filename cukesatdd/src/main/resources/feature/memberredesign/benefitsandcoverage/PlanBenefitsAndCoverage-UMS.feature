@@ -162,7 +162,6 @@ Feature: 1.01 Member  benefits and Coverage page
    And the user view the Drug Copays & Discounts header
     And the Individual user validates Default drug cost drop down value
     And the Medica user able to see drug table and values in it
-    And the Medica user able to see drug table and values in it
     And the user validates the Learn More section for stage and tier
    And the user validates dropdown selection functionality
     And the user validates Drug coverage header and text under the section

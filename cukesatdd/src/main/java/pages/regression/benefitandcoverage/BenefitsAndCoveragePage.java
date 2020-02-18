@@ -1492,7 +1492,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateWithValue("More Information link", moreinformation);
 		moreinformation.click();
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1504,8 +1504,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		}
 		else
 		{
-			System.err.println("More information are has not been expanded");
-			Assert.fail("More information are has not been expanded");}
+			System.err.println("More information aria has not been expanded");
+			Assert.fail("More information aria has not been expanded");}
 	}
 
 
@@ -1616,6 +1616,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 
 	public void validate_drugCostDropdownzIndividualMAPD_select() {
+		scrollToView(drugCostDropdown);
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		System.out.println(drugCostdropdwn.getFirstSelectedOption().getText());
 		if(drugCostdropdwn.getFirstSelectedOption().getText().equalsIgnoreCase("Standard Retail Pharmacy")){
@@ -2077,7 +2078,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	{
 		validateWithValue("Drug cost drop down ", drugCostDropdown);
 		validateWithValue("Drug Cost Header",DrugCostHeader);
-
+        scrollToView(drugCostDropdown);
 		Select dropdown = new Select(drugCostDropdown);
 		List<WebElement> webElements = dropdown.getOptions();
 
@@ -2185,8 +2186,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 			System.err.println("LEARN MORE ABOUT DRUG PAYMENT STAGES link has not been expanded successfully");
 			Assert.fail("LEARN MORE ABOUT DRUG PAYMENT STAGES link has not been expanded");
 		}
-
+		driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS) ;
 		LearnmorestagelinkForCollapse.click();
+		driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS) ;
 		//validating collapsed stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestagelinkAfterCollapse.getAttribute("aria-expanded").equalsIgnoreCase("false")){
 			System.out.println("LEARN MORE ABOUT DRUG PAYMENT STAGES link has  been collapsed successfully");
@@ -4850,6 +4852,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		validateWithValue("Preferred Retail Pharmacy DrugCosts Text Line", PreferredRetailPharmacyDrugCostsTextLinePDP);
 	}
 	public void preferredMailBenefitTableIndipdp() throws InterruptedException{
+		scrollToView(drugCostDropdown);
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 
@@ -5222,6 +5225,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public void preferredMailBenefitTableIndiMedica() throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
+		Thread.sleep(2000);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 		Thread.sleep(2000);
 
@@ -5267,6 +5271,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public void standardRetailBenefitTableIndiMedica() throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
+		Thread.sleep(2000);
 		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 		Thread.sleep(2000);
 		String TableData= "Additional Drug Coverage\n"
@@ -5314,6 +5319,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public void preferredMailBenefitTableIndiPCP() throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
+		Thread.sleep(2000);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 		Thread.sleep(2000);
 
@@ -5358,6 +5364,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	}
 	public void standardRetailBenefitTableIndiPCP() throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
+		Thread.sleep(2000);
 		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 		Thread.sleep(2000);
 		String TableData= "Additional Drug Coverage\n"
