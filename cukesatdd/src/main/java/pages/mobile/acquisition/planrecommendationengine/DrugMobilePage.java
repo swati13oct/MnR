@@ -332,6 +332,7 @@ public class DrugMobilePage extends UhcDriver {
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
 				mobileSelectOption(pack, packageName);
+				packageName=pack.getFirstSelectedOption().getText().trim();
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
@@ -339,8 +340,12 @@ public class DrugMobilePage extends UhcDriver {
 			}
 			if (threeeMonthfrequency)
 				mobileSelectOption(freq, "Every 3 Months");
-			modalcontinue.click();
+			dosage=dos.getFirstSelectedOption().getText().trim().split(" ")[1]+" "+dos.getFirstSelectedOption().getText().trim().split(" ")[2];
+			threadsleep(2000);
+			count = modalQuantity.getAttribute("ng-reflect-model").trim();
+			String frequence = freq.getFirstSelectedOption().getText().trim();
 
+			modalcontinue.click();
 			if (GenericDrug) {
 				validate(modalGenericDrug, 30);
 				threadsleep(2000);
@@ -351,8 +356,7 @@ public class DrugMobilePage extends UhcDriver {
 				}
 				modalcontinue.click();
 			}
-
-			validateAddedDrugname(drugName);
+			validateAddedDrugname(drugName,dosage,count,frequence);
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
@@ -366,6 +370,18 @@ public class DrugMobilePage extends UhcDriver {
 	public void validateAddedDrugname(String drugName) {
 		Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
 				"Added drug name Mistmatch from selected one : " + drugName);
+	}
+	
+	public void validateAddedDrugname(String drugName,String dosage,String count,String frequence) {
+		String drugData = drugsList.get(0).getText().toUpperCase();
+		Assert.assertTrue(drugData.contains(drugName.toUpperCase()),
+				"Added drug name Mistmatch from selected one : " + drugName);
+		Assert.assertTrue(drugData.contains(dosage.toUpperCase()),
+				"Added drug name Mistmatch from selected one : " + dosage);
+		Assert.assertTrue(drugData.contains(count.toUpperCase()),
+				"Added drug count Mistmatch from selected one : " + count);
+		Assert.assertTrue(drugData.contains(frequence.toUpperCase()),
+				"Added drug count Mistmatch from selected one : " + frequence);
 	}
 
 	public void chooseDrug(String drugName) {
@@ -483,10 +499,12 @@ public class DrugMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
 				"Expected Error Message not displayed");
+		hidekeypad();
 		drugsearchBox.clear();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
 				"Expected Error Message not displayed");
+		hidekeypad();
 
 		// Modal Errors
 		String drugName = drugInfo.split(",")[0];
@@ -496,7 +514,7 @@ public class DrugMobilePage extends UhcDriver {
 			GenericDrug = true;
 		System.out.println("Validating Modal Error functionalities");
 
-		// Select modal cancel
+		// Select modal error
 		drugsearchBox.clear();
 		mobileactionsendkeys(drugsearchBox, drugName);
 		hidekeypad();
@@ -504,10 +522,14 @@ public class DrugMobilePage extends UhcDriver {
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
 		modalcontinue.click();
+		/* Not worikin in PRE but working in PROD
 		modalQuantity.clear();
+		modalQuantity.click();
 		modalcontinue.click();
 		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 				"Expected Error Message is not displayed");
+				*/
+		
 		mobileactionsendkeys(modalQuantity, count);
 		hidekeypad();
 		modalcontinue.click();

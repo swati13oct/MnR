@@ -843,7 +843,7 @@ try {
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
 	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
-		threadsleep(1000);
+		threadsleep(500);
 		if(swipeup)
 			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
