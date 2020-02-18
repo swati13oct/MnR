@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -998,4 +999,61 @@ public class HSIDStepDefinition {
 		}
 
 	}	
+
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@Given("^feature security flag must set to true when testing on stage env$")
+	public void checkSecurityFlag(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String feature=memberAttributesMap.get("Feature");
+		
+		if (!feature.equals("ClaimsMicroApp")
+				&& !feature.equals("UCPProfileAndPreferences")
+				&& !feature.equals("UCPPlanDocuments")
+				&& !feature.equals("UCPMyDocuments")
+				&& !feature.equals("UCPHealthWellness")
+				&& !feature.equals("UCPBenefits")
+				) {
+			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
+		}
+		
+		System.out.println("feature="+feature);
+		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
+		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		System.out.println("Config page URL="+configPgUrl);
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		d.get(configPgUrl);
+		try {
+			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			if (e.isDisplayed()) {
+				System.out.println("Element '"+e.toString()+"' found!!!!");
+				String value=e.getText();
+				if (value.equalsIgnoreCase("false")) {
+					if (MRScenario.environment.toLowerCase().contains("stage")) 
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+", stopping all tests now", false);
+					else
+						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"', not on stage, okay to move on...");
+				} else {
+					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"', okay to move on...");
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+		}
+		d.quit();
+	}
+
 }

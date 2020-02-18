@@ -1,9 +1,10 @@
 @healthAndWellness @regressionMember
 Feature: 1.09 Member Health and Wellness Page
 
-  Background:
-     Given this microapp feature has security flag set to true on test env
-
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPHealthWellness |
+      
   @healthAndWellness01  @regressiongenericpagesH&W @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given login with following details logins in the member portal and validate elements
@@ -16,7 +17,7 @@ Feature: 1.09 Member Health and Wellness Page
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @healthAndWellness01a
+@abc    @healthAndWellness01a
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | MAPD     | RewardsMember     | true      | true           |
