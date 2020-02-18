@@ -165,71 +165,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 				section_note.add("    PASSED - element link in href attribute vs actual link URL after clicked validation");
 				section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName);
-
-				/* tbd 
-				if (actUrl.contains(".pdf")) {
-					try {
-						URL TestURL = new URL(driver.getCurrentUrl());
-						BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-						PDDocument document = PDDocument.load(TestFile);
-						String PDFText = new PDFTextStripper().getText(document);
-						System.out.println("PDF text : "+PDFText);
-						String expectedHeaderText=testInputInfoMap.get("headerText");
-
-						if(PDFText.contains(expectedHeaderText)){
-							section_note.add("    PASSED - validated pdf header text is as expected");
-						} else {
-							section_note.add("    * FAILED - unable to locate pdf header text. Expected='"+expectedHeaderText+"'");
-						}
-						String expectedSampleBodyText=testInputInfoMap.get("sampleBodyText");
-						if(PDFText.contains(expectedSampleBodyText)){
-							section_note.add("    PASSED - validated pdf sample body text is as expected");
-						} else {
-							section_note.add("    * FAILED - unable to locate pdf sample body text. Expected='"+expectedSampleBodyText+"'");
-						}
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					//tbd Assert.assertTrue("PROBLEM - unable to locate page header text on the landing page", planDocValidate(generalPgHeader));
-					if (planDocValidate(generalPgHeader))  {
-						section_note.add("    PASSED - validated there is header text element on landing page after clicked");
-						String expectedHeaderText=testInputInfoMap.get("headerText");
-						String actualHeaderText=generalPgHeader.getText();
-						if (actualHeaderText.contains(expectedHeaderText)) {
-							section_note.add("    PASSED - validated page header text is as expected");
-						} else {
-							if (targetDocName.equals("Appeals and Grievances – Medicare Advantage Plans")
-									|| targetDocName.equals("Prescription drug coverage determinations and appeals")) { //note: this one header is //h2
-								try {
-									driver.findElement(By.xpath("//h2[contains(text(),'"+expectedHeaderText+"')]"));
-									section_note.add("    PASSED - validated page header text is as expectedy");
-								} catch (Exception e) {
-									section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
-								}
-								String expectedSampleBodyText=testInputInfoMap.get("sampleBodyText");
-								try {
-									driver.findElement(By.xpath("//*[contains(text(),'"+expectedSampleBodyText+"')]"));
-									section_note.add("    PASSED - able to locate a sample text from page body");
-								} catch (Exception e) {
-									section_note.add("    * FAILED - unable to locate a sample text from page body.  sample text='"+expectedSampleBodyText+"'");
-								}
-							} else if (targetDocName.equals("Disenrollment Form (Online)")) {
-								try {
-									driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
-									section_note.add("    PASSED - validated page contains expected value 'Member'");
-								} catch (Exception e) {
-									section_note.add("    * FAILED - 'Member' text is not showing as expected.");
-								}
-								
-							} else 
-								section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
-						}
-					} else
-						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-				} */
 			} else {
 				section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
 			}
@@ -277,70 +212,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							+ "Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 						section_note.add("    PASSED - element link in href attribute vs actual link URL after clicked validation");
 						section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName);
-						/* tbd 
-						if (actUrl.contains(".pdf")) {
-							try {
-								URL TestURL = new URL(driver.getCurrentUrl());
-								BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-								PDDocument document = PDDocument.load(TestFile);
-								String PDFText = new PDFTextStripper().getText(document);
-								System.out.println("PDF text : "+PDFText);
-								String expectedHeaderText=testInputInfoMap.get("headerText");
-
-								if(PDFText.contains(expectedHeaderText)){
-									section_note.add("    PASSED - validated pdf header text is as expected");
-								} else {
-									section_note.add("    * FAILED - unable to locate pdf header text. Expected='"+expectedHeaderText+"'");
-								}
-								String expectedSampleBodyText=testInputInfoMap.get("sampleBodyText");
-								if(PDFText.contains(expectedSampleBodyText)){
-									section_note.add("    PASSED - validated pdf sample body text is as expected");
-								} else {
-									section_note.add("    * FAILED - unable to locate pdf sample body text. Expected='"+expectedSampleBodyText+"'");
-								}
-							} catch (MalformedURLException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							//tbd Assert.assertTrue("PROBLEM - unable to locate page header text on the landing page for doc '"+testInputInfoMap.get("docName")+"'", planDocValidate(generalPgHeader));
-							if (planDocValidate(generalPgHeader))  {
-								section_note.add("    PASSED - validated there is header text element on landing page after clicked");
-								String expectedHeaderText=testInputInfoMap.get("headerText");
-								String actualHeaderText=generalPgHeader.getText();
-								if (actualHeaderText.contains(expectedHeaderText)) {
-									section_note.add("    PASSED - validated page header text is as expected");
-								} else {
-									if (targetDocName.equals("Appeals and Grievances – Medicare Advantage Plans")
-											|| targetDocName.equals("Prescription drug coverage determinations and appeals")) { //note: this one header is //h2
-										try {
-											driver.findElement(By.xpath("//h2[contains(text(),'"+expectedHeaderText+"')]"));
-											section_note.add("    PASSED - validated page header text is as expectedy");
-										} catch (Exception e) {
-											section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
-										}
-										String expectedSampleBodyText=testInputInfoMap.get("sampleBodyText");
-										try {
-											driver.findElement(By.xpath("//*[contains(text(),'"+expectedSampleBodyText+"')]"));
-											section_note.add("    PASSED - able to locate a sample text from page body");
-										} catch (Exception e) {
-											section_note.add("    * FAILED - unable to locate a sample text from page body.  sample text='"+expectedSampleBodyText+"'");
-										}
-									} else if (targetDocName.equals("Disenrollment Form (Online)")) {
-										try {
-											driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
-											section_note.add("    PASSED - validated page contains expected value 'Member'");
-										} catch (Exception e) {
-											section_note.add("    * FAILED - 'Member' text is not showing as expected.");
-										}
-										
-									} else 
-										section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
-								}
-							} else
-								section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-						} */
 					}
 				} else {
 					section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
@@ -1104,18 +975,30 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		return sectionResult;
 	}
 	
+	/**
+	 * Further validation depending on whether the page is pdf or html
+	 * @param testInputInfoMap
+	 * @param section_note
+	 * @param actUrl
+	 * @param targetDocName
+	 * @return
+	 */
 	public List<String> validateSubPageContent(HashMap<String, String> testInputInfoMap, List<String> section_note, String actUrl, String targetDocName) {
-		
 		if (actUrl.contains(".pdf")) {
-			if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
-				section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
-			} else {
-				try {
-					URL TestURL = new URL(driver.getCurrentUrl());
-					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-					PDDocument document = PDDocument.load(TestFile);
-					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+			try {
+				URL TestURL = new URL(driver.getCurrentUrl());
+				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+				PDDocument document = PDDocument.load(TestFile);
+				String PDFText = new PDFTextStripper().getText(document);
+				System.out.println("PDF text : "+PDFText);
+				if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
+					section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
+					if(PDFText!=null && !PDFText.equals("")){
+						section_note.add("    PASSED - validated pdf content is not null");
+					} else {
+						section_note.add("    * FAILED - unable to validate pdf content");
+					}
+				} else {
 					String expectedHeaderText=testInputInfoMap.get("headerText");
 
 					if(PDFText.contains(expectedHeaderText)){
@@ -1129,15 +1012,16 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					} else {
 						section_note.add("    * FAILED - unable to locate pdf sample body text. Expected='"+expectedSampleBodyText+"'");
 					}
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
+			} catch (MalformedURLException e) {
+				section_note.add("    * FAILED - unable to validate pdf content - MalformedURLException");
+				e.printStackTrace();
+			} catch (IOException e) {
+				section_note.add("    * FAILED - unable to validate pdf content - IOException");
+				e.printStackTrace();
 			}
 		} else {
 			//note: for html or any url that's not pdf related
-			//tbd Assert.assertTrue("PROBLEM - unable to locate page header text on the landing page for doc '"+testInputInfoMap.get("docName")+"'", planDocValidate(generalPgHeader));
 			if (planDocValidate(generalPgHeader))  {
 				section_note.add("    PASSED - validated there is header text element on landing page after clicked");
 				String expectedHeaderText=testInputInfoMap.get("headerText");
@@ -1167,14 +1051,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						} catch (Exception e) {
 							section_note.add("    * FAILED - 'Member' text is not showing as expected.");
 						}
-						
 					} else 
 						section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
 				}
 			} else
 				section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 		}
-		
 		return section_note;
 	}
 
