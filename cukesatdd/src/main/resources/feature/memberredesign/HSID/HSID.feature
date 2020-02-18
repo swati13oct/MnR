@@ -1,4 +1,4 @@
-@hsid @regressionMember
+@hsid 
 Feature:To test HSID registration flow
 
  
