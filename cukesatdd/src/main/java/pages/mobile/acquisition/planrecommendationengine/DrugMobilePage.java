@@ -417,6 +417,7 @@ public class DrugMobilePage extends UhcDriver {
 
 		// Select modal cancel
 		mobileactionsendkeys(drugsearchBox, drugName);
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
@@ -430,6 +431,7 @@ public class DrugMobilePage extends UhcDriver {
 		// Drug details modal cancel
 		drugsearchBox.clear();
 		mobileactionsendkeys(drugsearchBox, drugName);
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
@@ -448,6 +450,7 @@ public class DrugMobilePage extends UhcDriver {
 		if (generic) {
 			drugsearchBox.clear();
 			mobileactionsendkeys(drugsearchBox, drugName);
+			hidekeypad();
 			mobileUtils.mobileLocateElementClick(drugsearchButton);
 			validate(modalSelcetedDrug, 30);
 			threadsleep(2000);
@@ -476,6 +479,7 @@ public class DrugMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		validate(drugsearchBox, 30);
 		mobileactionsendkeys(drugsearchBox, "lip");
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("CHARACTERS"),
 				"Expected Error Message not displayed");
@@ -495,6 +499,7 @@ public class DrugMobilePage extends UhcDriver {
 		// Select modal cancel
 		drugsearchBox.clear();
 		mobileactionsendkeys(drugsearchBox, drugName);
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
@@ -504,6 +509,7 @@ public class DrugMobilePage extends UhcDriver {
 		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 				"Expected Error Message is not displayed");
 		mobileactionsendkeys(modalQuantity, count);
+		hidekeypad();
 		modalcontinue.click();
 		if (GenericDrug) {
 			validate(modalGenericDrug, 30);
@@ -513,11 +519,13 @@ public class DrugMobilePage extends UhcDriver {
 		validateAddedDrugname(drugName);
 		drugsearchBox.clear();
 		mobileactionsendkeys(drugsearchBox, drugName);
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(drugsearchButton);
 		validate(modalSelcetedDrug, 30);
 		threadsleep(2000);
 		modalQuantity.clear();
 		mobileactionsendkeys(modalQuantity, count);
+		hidekeypad();
 		modalcontinue.click();
 		Assert.assertTrue(modalError.getText().toUpperCase().contains("ALREADY"),
 				"Expected Error Message is not displayed");
