@@ -996,8 +996,8 @@ public class HSIDStepDefinition {
 		} catch (UnhandledAlertException ae) {
 			System.out.println("Exception: "+ae);
 			Assert.assertTrue("PROBLEM - ***** Error in loading  Member Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
-		}
-
+		} 
+		
 	}	
 
 	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
@@ -1029,6 +1029,7 @@ public class HSIDStepDefinition {
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 		System.out.println("Config page URL="+configPgUrl);
+		/* to-be-enable
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -1054,6 +1055,7 @@ public class HSIDStepDefinition {
 			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
 		}
 		d.quit();
+		*/
 	}
 
 }

@@ -17,7 +17,7 @@ Feature: 1.09 Member Health and Wellness Page
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-@abc    @healthAndWellness01a
+    @healthAndWellness01a
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | MAPD     | RewardsMember     | true      | true           |
