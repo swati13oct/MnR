@@ -2,9 +2,12 @@ package acceptancetests.memberredesign.healthandwellness;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -151,19 +154,31 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		}
 	}
 	
-	@Given("^test$")
+	@Given("^this microapp feature has security flag set to true on test env$")
 	public void checkSecurityFlag() {
-		
-		System.out.println("TEST - Given");
+		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/UCPHealthWellness/wsConfig";
-		System.out.println("TEST - configPgUrl="+configPgUrl);
+		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
+		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		d.get(configPgUrl);
+		try {
+			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			if (e.isDisplayed()) {
+				System.out.println("Element '"+e.toString()+"' found!!!!");
+				String value=e.getText();
+				if (value.equalsIgnoreCase("false") && MRScenario.environment.toLowerCase().contains("stage")) {
+					Assert.assertTrue("PROBLEM - stage environment should have security flag = true, right now it is set to "+value+", stopping all tests now", false);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+		}
 		d.quit();
-		Assert.assertTrue("TEST - given step", true);
-		
-		//td[text()='enableSecurity']/following-sibling::td
 	}
 
 

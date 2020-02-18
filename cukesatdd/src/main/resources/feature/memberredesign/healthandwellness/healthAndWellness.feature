@@ -2,7 +2,7 @@
 Feature: 1.09 Member Health and Wellness Page
 
   Background:
-     Given test
+     Given this microapp feature has security flag set to true on test env
 
   @healthAndWellness01  @regressiongenericpagesH&W @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
