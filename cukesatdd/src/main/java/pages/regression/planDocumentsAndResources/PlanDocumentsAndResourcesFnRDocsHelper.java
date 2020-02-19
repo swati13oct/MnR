@@ -30,7 +30,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab","true");
 			testInputInfoMap.put("headerText","How to read your new statement");
-			testInputInfoMap.put("sampleBodyText","Use this guide to help you read and use your monthly statement");
+			testInputInfoMap.put("sampleBodyText","Use this guide to help you read and use");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Electronic Funds Transfer")) {
@@ -40,7 +40,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
 			testInputInfoMap.put("headerText","Electronic Funds Transfer");
-			testInputInfoMap.put("sampleBodyText","Payments made easy");
+			testInputInfoMap.put("sampleBodyText","Please do not send");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Premium Deduction from Social Security Payment Form")) {
@@ -251,7 +251,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","What happens if Medicare plans from UnitedHealthcare leaves the Medicare Program");
+			testInputInfoMap.put("headerText","What happens if Medicare plans from UnitedHealthcare leave");
 			testInputInfoMap.put("sampleBodyText","If we leave the Medicare program or discontinue Medicare plans from UnitedHealthcare");
 			return testInputInfoMap; 
 		}

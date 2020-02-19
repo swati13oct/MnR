@@ -1023,6 +1023,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					e.printStackTrace();
 				}
 			} else {
+				if (targetDocName.equals("Disenrollment Form (Online)")) { //note: this page content is diff than the rest
+					try {
+						driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
+						section_note.add("    PASSED - validated page contains expected value 'Member'");
+					} catch (Exception e) {
+						section_note.add("    * FAILED - 'Member' text is not showing as expected.");
+					}
+				} else 
 				//note: for html or any url that's not pdf related
 				if (planDocValidate(generalPgHeader))  {
 					section_note.add("    PASSED - validated there is header text element on landing page after clicked");
@@ -1045,13 +1053,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 								section_note.add("    PASSED - able to locate a sample text from page body");
 							} catch (Exception e) {
 								section_note.add("    * FAILED - unable to locate a sample text from page body.  sample text='"+expectedSampleBodyText+"'");
-							}
-						} else if (targetDocName.equals("Disenrollment Form (Online)")) {
-							try {
-								driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
-								section_note.add("    PASSED - validated page contains expected value 'Member'");
-							} catch (Exception e) {
-								section_note.add("    * FAILED - 'Member' text is not showing as expected.");
 							}
 						} else 
 							section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
