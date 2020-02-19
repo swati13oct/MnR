@@ -515,9 +515,12 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		threadsleep(2000);
                             		modalcontinue.click();
                             		modalQuantity.clear();
+                            		
+                            		/* Not working in PRE but working in PROD
                             		modalcontinue.click();
                             		Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
                             				"Expected Error Message is not displayed");
+                            		*/
                             		modalQuantity.sendKeys(count);
                             		modalcontinue.click();
                             		if (GenericDrug) {

@@ -424,7 +424,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void select_prescription_drug_page(DataTable givenAttributes) throws Throwable {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
-                    String drug = inputValues.get("Drugs");
+                    String drug = inputValues.get("Drug Selection");
                     	planSelectorDrugspage.skipDrugs(drug);
                     	
     }
