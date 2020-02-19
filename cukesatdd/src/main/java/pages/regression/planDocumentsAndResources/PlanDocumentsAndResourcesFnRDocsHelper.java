@@ -61,8 +61,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
-			testInputInfoMap.put("headerText","none"); //TODO
-			testInputInfoMap.put("sampleBodyText","none");
+			testInputInfoMap.put("headerText","Medical Reimbursement Request Form");
+			testInputInfoMap.put("sampleBodyText","You can use this form to ask us to pay you back for covered medical care and supplies");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medical Reimbursement Form (PDF)")) {
@@ -119,8 +119,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
-			testInputInfoMap.put("headerText","none");  //TODO
-			testInputInfoMap.put("sampleBodyText","none");
+			testInputInfoMap.put("headerText","R Authorization for Release of Personal Information"); 
+			testInputInfoMap.put("sampleBodyText","Fill out this form to give UnitedHealthcare and its affiliates permission to share your personal information with others based on your selections below");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Drug-specific Prior Authorization Request Forms")) {
@@ -181,8 +181,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
-			testInputInfoMap.put("headerText","none"); //TODO
-			testInputInfoMap.put("sampleBodyText","none");
+			testInputInfoMap.put("headerText","UnitedHealthcare Medicare Plan Appeals & Grievances Form"); 
+			testInputInfoMap.put("sampleBodyText","Use this form to file an appeal or grievance about");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || docName.equals("Medicare Plan Appeals & Grievances Form")) {
