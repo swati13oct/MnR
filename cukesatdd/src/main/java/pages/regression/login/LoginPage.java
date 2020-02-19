@@ -106,7 +106,7 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				}  else if(MRScenario.environment.contains("team-a")) {
+				}  else if((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
 					System.out.println("Running on " +MRScenario.environment + " env, teamSpecialCase="+teamSpecialCase);
 					//tbd if (isMicroApp) { //note: microapp run
 					//tbd 	PAGE_URL=MRConstants.MICROAPP_URL;
