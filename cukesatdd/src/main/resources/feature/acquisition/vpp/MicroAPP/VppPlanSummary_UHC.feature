@@ -39,6 +39,7 @@ Feature: Vpp to plan Summary UHC Scenarios
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans in UMS Site
     Then the user clicks on Enroll Now for UMS site and validates the Welcome to OLE Page
 
+
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                       | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible |
       #| 15553 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
@@ -162,7 +163,6 @@ Feature: Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
- 
   @vppPlanSummaryUHC07
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
@@ -210,11 +210,10 @@ Feature: Vpp to plan Summary UHC Scenarios
     #And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
     #And user clicks on Request Assistance and validates modal window bluelayer
     And user verifies home link of agents&brokers page bluelayer
-    
-     Examples: 
+
+    Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
-    
 
   @vppPlanSummaryUHC10
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan summary page on UHC site
@@ -237,3 +236,70 @@ Feature: Vpp to plan Summary UHC Scenarios
       | UID     | site   | plantype | zipcode | isMultiCounty | county           |
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
+
+  @vppPlanSummaryUHC11
+  Scenario Outline: Verify Provider Search  in UHC site from plan summary page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    When user Click on Is my Provider covered link ums
+      | PlanName | <planName> |
+    When user selects a provider and retuns to VPP page in ums
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+      | PlanName | <planName> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | plantype | planName                                            |
+      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+
+  @vppPlanSummaryUHC12
+  Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+    Given user is on blue layer landing page
+    When user performs plan search using following information in the UMS site
+      | Zip Code    | <zipcode>     |
+      | County      | <county>      |
+      | aep         | <aep>         |
+      | currentyear | <currentyear> |
+    Then the user navigates to the plan details for the given plan type in UMS site
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then the user navigates to Plan Costs tab in UMS site
+    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+      | PlanName   | <planName>  |
+      | Drug Name1 | <drugName1> |
+    And selects drug details in UMS site
+      | Drug Name1 | <drugName1> |
+      | Quantity   | <quantity>  |
+      | Frequency  | <frequency> |
+    When user successfully adds drug in the UMS site
+      | Drug Name1 | <drugName1> |
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+    When the user selects the pharmacy type and distance in UMS site
+      | Pharmacy Type | <pharmacyType> |
+      | Distance      | <distance>     |
+    Then the user selects a pharmacy from the list of pharmacies in UMS site
+      | Pharmacy Name | <pharmacyName> |
+    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+      | Drug Name1 | <drugName1> |
+    When the user clicks on Edit Drug List link in UMS site
+    Then Enter your drugs page is displayed to the user in UMS site
+    Then User click on Switch now to select the Generic of the Brand drug added in UMS site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
+    Then the user change the pharmacy type and select new pharmacy in UMS site
+      | New Pharmacy Type | <newPharmacyType> |
+    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+      | Drug Name1 | <genericName1> |
+    And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
+    And user verifies annual drug cost in the Plan Cost tab of UMS site
+      | Plan Type | <plantype> |
+    And the user clicks on Back to All Plans button present on details page in UMS site
+    Then user validates Drug information is reflected on plan summary page in UMS site
+      | PlanName | <planName> |
+
+    Examples: 
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
+      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
