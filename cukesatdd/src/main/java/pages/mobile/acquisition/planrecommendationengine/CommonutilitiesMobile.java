@@ -119,6 +119,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 		element.click();
 	}
 	
+	public void mobileLocateElementSendkeys(WebElement element,String keys)
+	{
+		mobileLocateElement(element);
+		mobileactionsendkeys(element,keys);
+	}
+	
 	public void fixPrivateConnectionMobile() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";
