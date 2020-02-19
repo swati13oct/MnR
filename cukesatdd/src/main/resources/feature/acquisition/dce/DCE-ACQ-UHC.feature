@@ -3,7 +3,7 @@ Feature: 2.10. ACQ-DCE - UMS
 
   @acq_drug_cost_estimator_blayer_flow @dceBlayerSmoke @vbfGate @DCE_Regression_Blayer_Home1 @prodRegression
   Scenario Outline: To verify DCE flow from Blayer home page
-    Given user is on blue layer landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When I access the acquisition DCE tool from home page on ums site
     And I have added a drug to my drug list on ums site
       | Drug | <drug> |
