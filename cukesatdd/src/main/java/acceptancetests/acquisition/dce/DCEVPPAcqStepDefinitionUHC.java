@@ -269,6 +269,20 @@ public class DCEVPPAcqStepDefinitionUHC {
 		dce.validateAddedDrug(drug);*/
 	}
 	
+	// Only for Saver Pop-up from DCE test Harness
+	@When("^user successfully adds drug in the UMS site for TestHarness$")
+	public void user_successfully_adds_drug_TestHarness(DataTable data) throws InterruptedException {
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		DrugCostEstimatorPage dce = savingsOppurtunity.savedrugbutton();
+		
+		if (null != dce) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
 	@And("^user adds other drugs in the UMS site$")
 	public void user_adds_other_drugs(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -347,6 +361,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 	   for(int i=0;i<dce.getLstPharmacyNames().size();i++)
 	    if(dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
 	    	dce.getLstSelectPharmacy().get(i).click();
+	    	break;
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();
