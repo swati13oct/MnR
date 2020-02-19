@@ -1522,6 +1522,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,3000)", "");
 		validateWithValue("Link- More Inforamation", moreinformation);
 		moreinformation.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(moreinformationArea.getAttribute("aria-expanded").equalsIgnoreCase("true"))
 		{
 			Assert.assertTrue("More information are has been expanded", true);
@@ -2181,7 +2187,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Learnmorestagelink);
 		js.executeScript("arguments[0].click();", Learnmorestagelink); 
-
+		driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS) ;
 		System.out.println(LearnmorestageExpandedArea.getAttribute("aria-expanded"));
 		// validating expanded stage of the link-LEARN MORE ABOUT DRUG PAYMENT STAGES
 		if(LearnmorestageExpandedArea.getAttribute("aria-expanded").equalsIgnoreCase("true")){
