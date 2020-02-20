@@ -85,7 +85,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","MAPD PRESCRIPTION REIMBURSEMENT REQUEST FORM");
+			testInputInfoMap.put("headerText","MAPD PRESCRIPTION");
 			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement for covered medications purchased at retail cost");
 			return testInputInfoMap; 
 		}
@@ -150,7 +150,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
 			testInputInfoMap.put("headerText","REQUEST FOR MEDICARE PRESCRIPTION DRUG COVERAGE DETERMINATION");
-			testInputInfoMap.put("sampleBodyText","You may also ask us for a coverage determination by calling the member services number");
+			testInputInfoMap.put("sampleBodyText","You may also ask us for a coverage determination");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Redetermination Request Form") || docName.equals("Redetermination Request Form (PDF")) {
