@@ -1005,7 +1005,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
 					System.out.println("PDF text : "+PDFText);
-					if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") || targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
+					if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") 
+							|| targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
 						section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
 						if(PDFText!=null && !PDFText.equals("")){
 							section_note.add("    PASSED - validated pdf content is not null");
@@ -1058,7 +1059,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						section_note.add("    PASSED - validated page header text is as expected");
 					} else {
 						if ((targetDocName.contains("Appeals and Grievances") &&  targetDocName.contains("Medicare Advantage Plans"))
-								|| targetDocName.equals("Prescription drug coverage determinations and appeals")) { //note: this one header is //h2
+								|| targetDocName.equals("Prescription drug coverage determinations and appeals")
+								|| targetDocName.equals("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies")) { //note: this one header is //h2
 							try {
 								driver.findElement(By.xpath("//h2[contains(text(),'"+expectedHeaderText+"')]"));
 								section_note.add("    PASSED - validated page header text is as expectedy");
@@ -1081,7 +1083,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					}
 				} else {
 					section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-					Assert.assertTrue("DEBUG - doc name="+targetDocName, false);
+					Assert.assertTrue("DEBUG - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
 				}
 			}			
 		} else {
