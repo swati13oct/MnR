@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
@@ -172,7 +174,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 		try {
 			pageloadcomplete();
 			threadsleep(3000);
-			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
+			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName.toUpperCase()),
 					"Previous page name validation failed");
 			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),"Previous page % validation failed");
 		} catch (Exception e) {
@@ -186,9 +188,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 		findPagedetails(pageName);
 		try {
 			pageloadcomplete();
-			threadsleep(5000);
-			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(nextPageName),
-					"Next page name validation failed");
+			threadsleep(1000);
+			try {
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
+			}catch(Exception e) {
+				Assert.assertTrue(false,"Next page name validation failed");
+			}
 			Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),"Next page % validation failed");
 		} catch (Exception e) {
 			System.out.println("Unable to validate Continue button functionality on Next page");
@@ -203,34 +209,39 @@ public class CommonutilitiesMobile extends UhcDriver {
 		nextPagePercentage = new String();
 		// Update the else as else if for each page
 		if (currentPageName.contains("LOCATION")) {
-			nextPageName = "COVERAGE";
+			nextPageName = "Coverage";
 			nextPagePercentage = "8%";
 		}
 		else if (currentPageName.contains("COVERAGE")) {
-			previousPageName = "LOCATION";
+			previousPageName = "Location";
 			previousPagePercentage = "8%";
-			nextPageName = "SPECIAL";
+			nextPageName = "Special";
 			nextPagePercentage = "16%";
 		} else if (currentPageName.contains("SPECIAL")) {
-			previousPageName = "COVERAGE";
+			previousPageName = "Coverage";
 			previousPagePercentage = "16%";
-			nextPageName = "CARE AWAY";
+			nextPageName = "Care";
 			nextPagePercentage = "24%";
 		}else if (currentPageName.contains("TRAVEL")||currentPageName.contains("CARE")) {
-			previousPageName = "SPECIAL";
+			previousPageName = "Special";
 			previousPagePercentage = "24%";
-			nextPageName = "DOCTORS";
+			nextPageName = "Doctor";
 			nextPagePercentage = "32%";
-		}else if (currentPageName.contains("DOCTORS")) {
-			previousPageName = "CARE AWAY";
+		}else if (currentPageName.contains("DOCTOR")) {
+			previousPageName = "Care";
 			previousPagePercentage = "32%";
-			nextPageName = "DRUG";
+			nextPageName = "Drug";
 			nextPagePercentage = "40%";
 		}else if (currentPageName.contains("DRUG")) {
-			previousPageName = "DOCTORS";
+			previousPageName = "Doctor";
 			previousPagePercentage = "40%";
-			nextPageName = "PHARMACY";
+			nextPageName = "Pharmacy";
 			nextPagePercentage = "48%";
+		}else if (currentPageName.contains("PHARMACY")) {
+			previousPageName = "Drug";
+			previousPagePercentage = "48%";
+			nextPageName = "a";
+			nextPagePercentage = "56%";
 		}else {
 			previousPageName = "";
 			previousPagePercentage = "";

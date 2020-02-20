@@ -140,7 +140,7 @@ public class PharmacyMobilePage extends UhcDriver {
 		chooseOption(pharamacySelection);
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		mobileUtils.nextPageValidation(page.toUpperCase());
+		//mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 	
 	
