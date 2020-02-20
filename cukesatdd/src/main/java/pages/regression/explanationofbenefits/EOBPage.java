@@ -619,11 +619,11 @@ public class EOBPage extends UhcDriver{
 		numberOfPageDisplayed(eobCountInt);
 		for(int i=0; i<eobCountInt; i++){
 			if(driver.findElement(By.id("eoblist"+i)).isDisplayed()){
-				System.out.println("EOB at" +i + " displayed correctly" );
+				System.out.println("EOB at - " +i + " displayed correctly" );
 				System.out.println(i%9);
-				if(i%9==0 && i!=0){
+				if(i%9==0 && i!=9 && i!=0){
 					System.out.println("user clicks on next page arrow button");
-					i=0;
+					//i=0;
 					nextPageArrow.click();
 					break;
 				}

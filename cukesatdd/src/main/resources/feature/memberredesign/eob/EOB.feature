@@ -110,8 +110,8 @@ Feature: 1.04 Member EOB on Dashboard page
     #And the user validates how to read medical eob PDF
     Examples: 
       | TID   | planType | memberType   | dateRange      | eobType           | eobCount |
-      | 15140 | MAPD     | NICE_EOB_R   | Last 18 months | Medical           |       17 |
-      | 15140 | MAPD     | NICE_EOB_R   | Last 6 months  | Prescription Drug |        4 |
+ #     | 15140 | MAPD     | NICE_EOB_R   | Last 18 months | Medical           |       17 |
+  #    | 15140 | MAPD     | NICE_EOB_R   | Last 6 months  | Prescription Drug |        4 |
       | 15120 | MA       | COSMOS_EOB_R | Last 12 months | Medical           |       10 |
 
   #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
