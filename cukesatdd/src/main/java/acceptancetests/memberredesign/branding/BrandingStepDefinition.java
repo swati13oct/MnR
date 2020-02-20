@@ -55,7 +55,7 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
      }
 		
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 	//String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
 	//Thread.sleep(3000);
@@ -67,7 +67,7 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 
 	}
 	
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		
 		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
@@ -96,7 +96,7 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 				.get(0), memberAttributesRow.get(i).getCells().get(1));
 	}
 	
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 
 //	String logoToBeDisplayedOnDashboard = memberAttributesMap.get("Dashboard Logo");
@@ -111,7 +111,7 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 	
 	}
 	
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		String logoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page Logo");
 		String cologoToBeDisplayedOnSecondaryPage = memberAttributesMap.get("Secondary Page CoLogo");
@@ -136,7 +136,7 @@ public void verifyCorrectLogoAndCoLogoDisplayedOnDashboardHomePage(DataTable giv
 @Then("^user clicks on benefits and coverage tab on home page or test harness page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 	
 	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -145,7 +145,7 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 	}
 	
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);

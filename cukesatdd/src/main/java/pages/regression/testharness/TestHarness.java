@@ -210,6 +210,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'testharnessHeader')]")
 	private WebElement testHarnessHeader;
 	
+	
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
@@ -1316,7 +1317,10 @@ public class TestHarness extends UhcDriver {
     	public void validateLoginonTestharness() throws InterruptedException {
     		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
     		String Message_text = testHarnessHeader.getText();
-    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    		Assert.assertTrue(Message_text.contains("Test Harness"));
+    		System.out.println(" *** TestHarness message assert is passed on the Testharness *** ");  
+    		System.out.println("***The member is on Test Harness Dashboard & the text is :- "+ Message_text);
+    		    		
     	}
     	
     	@FindBy(xpath = "//*[contains(@id,'home_2')]")
