@@ -429,7 +429,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Part A Deductible Waiver Hospital Program for AARP Medicare Supplement Insurance Policy Holders");
+			testInputInfoMap.put("headerText","Part A Deductible Waiver Hospital Program for AARP Medicare Supplement Insurance");
 			testInputInfoMap.put("sampleBodyText","What is a Part A Deductible");
 			return testInputInfoMap; 
 		}	
