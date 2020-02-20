@@ -385,8 +385,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","none");
-			testInputInfoMap.put("sampleBodyText","none");
+			testInputInfoMap.put("headerText","Electronic Fund Transfer");
+			testInputInfoMap.put("sampleBodyText","INSTRUCTIONS");
 			return testInputInfoMap; 
 		}	
 		
@@ -396,8 +396,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Electronic Fund Transfer");
-			testInputInfoMap.put("sampleBodyText","INSTRUCTIONS");
+			testInputInfoMap.put("headerText","Your Privacy is Important");
+			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
 			return testInputInfoMap; 
 		}	
 
