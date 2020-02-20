@@ -1,4 +1,4 @@
-@hsid @regressionMember
+@hsid 
 Feature:To test HSID registration flow
 
  
@@ -175,3 +175,78 @@ Examples:
       | appendinURL |
       | pcp         |
       | medica      |
+      
+      
+       @hsid7 @regressionMember @Login
+  Scenario Outline: -memberType: <memberType> - Validate that member is successfully getting logged in to Rally Dashboard for memberType <memberType>
+    Given I am a authenticated member on the member redesign site for Direct Login
+      | Member Type | <memberType> |
+    When the above plantype user logs in 
+      | friendname     | <friendname>  |
+      | favouritecolor | <favcolor>    |
+      | PhoneNumber    | <phonenumber> |
+   Then member should navigate to Home pag  
+   Then User should be able to validate Dashboard elemt    
+ 
+ 	@hsid7a
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | MAIndividualCOSMOS_ProfilePref  | name1      | color1   | number1     |
+       | MAPDNICE_ProfilePref            | name1      | color1   | number1     |
+       | MANICE_ProfilePref              | name1      | color1   | number1     |
+       | MAPDCOSMOS_ProfilePref          | name1      | color1   | number1     |
+
+ 	@hsid7b
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | AARPPDP_ProfilePref             | name1      | color1   | number1     |
+       | ACTIVEPCP_ProfilePref           | name1      | color1   | number1     |
+       | ACTIVEMedica_ProfilePref        | name1      | color1   | number1     |
+       | GROUPMA_ProfilePref             | name1      | color1   | number1     |
+
+ 	@hsid7c
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | GROUPMAPD_ProfilePref           | name1      | color1   | number1     |
+       | GROUPDP_ProfilePref             | name1      | color1   | number1     |
+       |  GROUPSSUP_ProfilePref          | name1      | color1   | number1     |
+       |  GROUPDPSSUP_ProfilePref        | name1      | color1   | number1     |
+
+ 	@hsid7d
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       |  PREACTIVEGRP_ProfilePref       | name1      | color1   | number1     |
+       | ACTIVEGOVTSHIPCOMBO_ProfilePref | name1      | color1   | number1     |
+       |  MULTIGOVPRETERM_ProfilePref    | name1      | color1   | number1     |
+       |  ACTIVEPRESHIP_ProfilePref      | name1      | color1   | number1     |
+
+ 	@hsid7e
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       |  ACTIVESHIP_ProfilePref         | name1      | color1   | number1     |
+       |  PRESHIP_ProfilePref            | name1      | color1   | number1     |
+       |ACTIVETERMFEDSHIPCOMBO_ProfilePref | name1    | color1   | number1     |
+       |  MICROMULTIFEDSHIP_ProfilePref  | name1      | color1   | number1     |
+
+ 	@hsid7f
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | MULTIFEDACTIVE_ProfilePref      | name1      | color1   | number1     |         
+       | FEDSHIPPREEFFECTIVE_ProfilePref | name1      | color1   | number1     |    
+       |  MAPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |
+       |  MAPDPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |
+
+ 	@hsid7g
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       | PDPPREFFECTIVE_ProfilePref      | name1      | color1   | number1     |  
+       | GRPMAPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
+       | GRPMAPDPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
+       |  SSUPPREFFECTIVE_ProfilePref    | name1      | color1   | number1     |  
+
+ 	@hsid7h
+    Examples: 
+       | memberType          | friendname | favcolor | phonenumber |
+       |  GRPPDPPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
+       |  GRPDPSSUP_ProfilePref          | name1      | color1   | number1     |  
+  

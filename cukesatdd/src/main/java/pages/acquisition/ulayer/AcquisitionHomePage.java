@@ -25,6 +25,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.bluelayer.KeywordSearch;
+import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -283,6 +284,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sp-close-frame']")
    	private WebElement ChatSamTFNClose;
    	
+   	@FindBy(id = "pharmacy-zip-search")
+	private WebElement thpharmacyzipsearch;
+   	
+   	@FindBy(xpath = "//input/parent::form//button[text()='Go']")
+	private WebElement thpharmacyGoButton;
+   	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -325,7 +332,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static boolean isHealthPlan = false;
 	
 	public String testSiteUrl;
-
+	
+	public String MicroAppSiteUrl;
+	
 	public AcquisitionHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -342,6 +351,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage);
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String siteOrPage,String testharnessurl) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(siteOrPage,testharnessurl);
 	}
 
 	@Override
@@ -417,6 +432,59 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 		}else{
 			openAndValidate();
+		}
+	}
+	
+	public void openAndValidate(String siteOrPage, String testharnessurl) {
+		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
+		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(AARP_ACQISITION_PROD_PAGE_URL+testharurl);
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=AARP_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=AARP_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
+		else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
 		}
 	}
 	
@@ -1509,5 +1577,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(chatsam);		
 			return null;
 		}
+		
+		
+		
+		public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
+			//checkModelPopup(driver);
+			validateNew(thpharmacyzipsearch);
+			thpharmacyzipsearch.sendKeys(zipcode);
+			thpharmacyGoButton.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+				return new PharmacySearchPage(driver);
+			}
+			return null;
+
+		}
+
+		public DCETestHarnessPage GetDCEtestHarnessPage() {
+			return new DCETestHarnessPage(driver);
+		}
 	} 
+
+
 	 

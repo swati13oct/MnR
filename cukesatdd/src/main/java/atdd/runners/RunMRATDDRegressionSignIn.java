@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionSignIn.json", detailedReport = 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSignIn")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/HSID/HSID.feature" }, plugin = {
-		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionSignIn.json" }, tags = { "@hsid2" })
+		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionSignIn.json" }, tags = { "@hsid6" })
 public class RunMRATDDRegressionSignIn {
 
 }

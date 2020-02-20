@@ -843,12 +843,21 @@ public class PlanDetailsPage extends UhcDriver {
 	        return null;
 	}
 	
+
+	public WebElement getvalCostTabEstimatedDrugCost() {
+		return valCostTabEstimatedDrugCost;
+	}
+
+	
+	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valCostTabEstimatedDrugCost;
+
 	/*extracting cost from cost tab*/
 	public String costComparisonCostTabFromDCE() {
 		
 		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
-		scrollToView(getValCostTabEstimatedTotalAnnualCost());
-		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
+		scrollToView(getvalCostTabEstimatedDrugCost());
+		return getvalCostTabEstimatedDrugCost().getText().trim();
 
 	}
 
