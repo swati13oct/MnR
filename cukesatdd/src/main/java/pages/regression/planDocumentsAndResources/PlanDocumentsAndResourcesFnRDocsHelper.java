@@ -62,7 +62,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "false");
 			testInputInfoMap.put("headerText","Medical Reimbursement Request Form");
-			testInputInfoMap.put("sampleBodyText","You can use this form to ask us to pay you back for covered medical care and supplies");
+			testInputInfoMap.put("sampleBodyText","You can use this form to ask us");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Medical Reimbursement Form (PDF)")) {
@@ -165,7 +165,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("sampleBodyText","You may also ask us for an appeal through our website at");
 			return testInputInfoMap; 
 		}
-		if (docName.equals("Appeals and Grievances – Medicare Advantage Plans")) {
+		if (docName.contains("Appeals and Grievances") &&  docName.contains("Medicare Advantage Plans")) {
+			//note: actual doc name looks like this 'Appeals and Grievances - Medicare Advantage Plans', but ATDD has trouble figuring it out.
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/content/medicare/member/documents/appeals-ma.html");
 			testInputInfoMap.put("redirectUrl", "none");
@@ -285,6 +286,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("switchTab", "false");
 			testInputInfoMap.put("headerText","Medication Therapy Management Program");
 			testInputInfoMap.put("sampleBodyText","How to Qualify");
+			if (planType.equals("PCP") || planType.equals("MEDICA")) {
+				testInputInfoMap.put("headerText","Home Delivery");
+				testInputInfoMap.put("sampleBodyText","Make the most of your pharmacy benefits");
+			}
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Declaration of Prior Prescription Drug Coverage Form")) {

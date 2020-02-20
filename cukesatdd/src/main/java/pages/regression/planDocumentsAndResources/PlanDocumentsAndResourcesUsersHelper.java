@@ -1803,7 +1803,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				targetTestDocList.add("Seasonal flu shot information");
-
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {

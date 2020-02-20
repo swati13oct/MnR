@@ -81,6 +81,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		moveMouseToElement(subSectionElement);
 		scrollElementToCenterScreen(subSectionElement);
 		System.out.println("Proceed to expand the section");
+		sleepBySec(1);
 		subSectionElement.click();
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(1);
@@ -123,7 +124,7 @@ public class PlanDocumentsAndResourcesFnR extends PlanDocumentsAndResourcesFnRDo
 		boolean switchTab=Boolean.valueOf(testInputInfoMap.get("switchTab"));
 		System.out.println("Proceed to validate FnR doc='"+docName+"' | checkDestUrl="+checkDestUrl+"'' | switchTab='"+switchTab+"'");
 		WebElement docElement=getItemElementLnk(docName);
-		CommonUtility.waitForPageLoad(driver, docElement, 5);
+		CommonUtility.waitForPageLoad(driver, docElement, 15);
 		section_note.add("    ----- Validation result for document '"+docName+"' in sub-section '"+subSection+"'");
 		if (!planDocValidate(docElement)
 				&& docName.equals("How to appoint a representative") && subSection.equals("Authorization Forms")
