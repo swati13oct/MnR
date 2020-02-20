@@ -985,10 +985,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public List<String> validateSubPageContent(HashMap<String, String> testInputInfoMap, List<String> section_note, String actUrl, String targetDocName) {
+		sleepBySec(3); //note: let the page settle before validating content
 		if (testInputInfoMap.get("section").equals("Forms And Resources")) {
 			if (actUrl.contains(".pdf")) {
 				try {
 					URL TestURL = new URL(driver.getCurrentUrl());
+					sleepBySec(5); //note: let the page settle before validating content
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
