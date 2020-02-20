@@ -129,6 +129,7 @@ public class EOBPage extends UhcDriver{
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
 		checkModelPopup(driver);
+		
 		if(!pageHeader.getText().contains("Explanation of Benefits"))
 			Assert.fail("Page header not validated. Error loading the page");
 
