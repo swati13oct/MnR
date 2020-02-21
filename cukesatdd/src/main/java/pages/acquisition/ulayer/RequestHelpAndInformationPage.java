@@ -96,17 +96,14 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	}
 	
 	public RequestAgentAppointmentPage navigateToAgentAppointmentRequest() {
-		if (currentUrl().contains("aarpmedicareplans")) {
 			switchToNewTabNew(ma_requestAgentAppointmentLink);
-		} else
-			ma_requestAgentAppointmentLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (currentUrl().contains("myuhcagent")) {
-			if (currentUrl().contains("aarpmedicareplans")) {
+			/*if (currentUrl().contains("aarpmedicareplans")) {
 				proceed.click();
 				CommonUtility.checkPageIsReadyNew(driver);
-			}
+			}*/
 			return new RequestAgentAppointmentPage(driver);
 		}
 
