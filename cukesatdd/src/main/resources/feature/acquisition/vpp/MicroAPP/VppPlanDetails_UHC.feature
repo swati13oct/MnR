@@ -152,10 +152,11 @@ Feature: Vpp to plan Details UHC Scenarios
   @vppPlanDetailsUHC08
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+    When user performs plan search using following information in the UMS site
+      | Zip Code    | <zipcode>     |
+      | County      | <county>      |
+      | aep         | <aep>         |
+      | currentyear | <currentyear> |
     Then the user navigates to the plan details for the given plan type in UMS site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
