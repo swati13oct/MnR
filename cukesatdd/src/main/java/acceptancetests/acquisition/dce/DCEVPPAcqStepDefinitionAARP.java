@@ -58,7 +58,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	 */
 	@Given("^the user is on the AARP medicare site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
