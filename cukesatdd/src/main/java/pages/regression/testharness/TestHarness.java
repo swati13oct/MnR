@@ -247,7 +247,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
 	
-	@FindBy(id="pharmacies_5")
+	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
 	
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
@@ -259,8 +259,15 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	@FindBy(xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	/*
+	 * @FindBy(
+	 * xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	 * private WebElement logOut;
+	 */
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
 	private WebElement logOut;
+	
 	
 	@FindBy(xpath="//*[contains(@id,'username')]")
 	private WebElement usernameField;
