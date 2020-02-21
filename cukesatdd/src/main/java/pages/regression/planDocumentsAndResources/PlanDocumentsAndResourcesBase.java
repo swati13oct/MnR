@@ -1059,6 +1059,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						section_note.add("    PASSED - validated page header text is as expected");
 					} else {
 						if ((targetDocName.contains("Appeals and Grievances") &&  targetDocName.contains("Medicare Advantage Plans"))
+								|| targetDocName.equals("Appeals and Grievances – Senior Supplement Plans")
 								|| targetDocName.equals("Prescription drug coverage determinations and appeals")
 								|| targetDocName.equals("Coverage determinations and appeals, drug conditions and limitations and quality assurance policies")) { //note: this one header is //h2
 							try {

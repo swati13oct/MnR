@@ -3273,7 +3273,7 @@ public class AccountHomePage extends UhcDriver {
 			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
 			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
 
-			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			if (MRScenario.environment.equalsIgnoreCase("stage")) {
 				System.out.println("user is on Stage login page");
 				if ((driver.getCurrentUrl().contains("/aarp/dashboard")) 
 						&& ((!memberType.toLowerCase().contains("pcp") && !memberType.toLowerCase().contains("medica"))

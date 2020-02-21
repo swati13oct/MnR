@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -29,12 +28,10 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
-import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
-import pages.regression.benefitandcoverage.*;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -43,8 +40,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
-
-
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -1707,12 +1702,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @author sdwaraka
 	 * 
 	 */
-
 	@Then("^the user navigates to Benefits and Coverage page$")
 	public void the_user_navigates_to_Redesign_BnC_page() throws InterruptedException{
 		System.out.println("***the user navigates to Benefits and Coverage page***");
 		AccountHomePage accountHomePagew = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
 
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsCoveragePage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
@@ -1725,11 +1718,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		else {
 			Assert.fail("Error in loading  EOB Page");
 		}
-
 	}
-
-
-
 
 
 	/**
@@ -1762,7 +1751,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		else{
 			Assert.fail("ERROR Validating Catastrophic Coverage Stage Updated Language");
 		}
-
 	}
 
 	@And("^the user validates the Vas section on benefits and coverage page is not displayed$")

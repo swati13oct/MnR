@@ -1,12 +1,6 @@
-/**
- * 
- */
 package pages.regression.benefitandcoverage;
 
-import java.util.List;
-
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +16,6 @@ import static org.hamcrest.CoreMatchers.*;
 /**
  * @author pjaising
  */
-
 public class ValueAddedServicepage extends UhcDriver {
 
 	@FindBy(className= "atdd-vas-nurselineimage")
@@ -67,9 +60,6 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'Hearing Care Program by HearUSA')]")
 	private WebElement hearingCareProgramByHearUSATile;
 	   
-	       
-	//private PageData valueAddedservicePage; 
-
 	public ValueAddedServicepage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -77,66 +67,51 @@ public class ValueAddedServicepage extends UhcDriver {
 		}
 	
 	public void validatenurseHealthLine() {
-		// TODO Auto-generated method stub
 		validateNew(nurseHealthLine);
 	}
 	public void validatesilverSneaker() {
-		// TODO Auto-generated method stub
 		validateNew(silverSneaker);
 	}
 	public void validatemyCarePath() {
-		// TODO Auto-generated method stub
 		validateNew(mycarepath);
 	}
 	public void validatevisionDiscount() {
-		// TODO Auto-generated method stub
 		validateNew(visionDiscount);
 	}
 	
 	public void validatevasheadertext() {
-		// TODO Auto-generated method stub
 		validateNew(vasheader);
 		validateNew(vastext);
 		validateNew(vastext2);
 	}
 	
 	public void validateviewmorelink() {
-		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
 		validateNew(viewmore);
-		
-		
 	}
 	
 	/**
 	 * @toDo : Validates the vas tiles on vas page
 	 */
-	
 	public void vastiles()
 	{
 		validateNew(atYourBestTile);
 		validateNew(hearingCareProgramByHearUSATile);
-		
-		
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[6]")));
-		
 	}
 	
 	public void validateviewmorelinkexpand() {
-		// TODO Auto-generated method stub
 		viewmore.click();
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -145,7 +120,6 @@ public class ValueAddedServicepage extends UhcDriver {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		validateNew(disclaimers);
@@ -154,7 +128,6 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void fedtabledata()
 	{
-		
 	}
 	
 	public void healthlink() 
@@ -163,7 +136,6 @@ public class ValueAddedServicepage extends UhcDriver {
 		try {
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Assert.assertThat(driver.getCurrentUrl(),containsString("www.healthyourway.com"));
@@ -177,15 +149,7 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 	}
 	
-	
 	public void openAndValidate(){
 		
 	}
 }
-
-
-
-
-
-
-

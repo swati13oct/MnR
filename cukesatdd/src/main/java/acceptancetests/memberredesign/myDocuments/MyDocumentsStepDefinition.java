@@ -11,14 +11,17 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.planDocumentsAndResources.PlanDocumentsAndResourcesCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Step definitions for my Documents Page on the member site.
@@ -70,20 +73,33 @@ public class MyDocumentsStepDefinition {
 	 * This step will let the user navigate to My Documents Page from Forms and Resources page
 	 */
 	@When("^the user navigates to my Documents Page$")
-	public void user_navigates_to_MyDocuments_page() throws InterruptedException {
-		/* tbd 
-		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
-				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		MyDocumentsPage myDocumentsPage = formsAndResourcesPage.navigateToMyDocumentsPage();
-		Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
-		*/
-		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
-		MyDocumentsPage myDocumentsPage = planDocumentsAndResourcesPage.navigateToMyDocumentsPage();
-		Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
-		
+	public void user_navigates_to_MyDocuments_page(DataTable memberAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		String memberType=memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE, memberType);
+
+		if (("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			TestHarness testharnessHomepage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			MyDocumentsPage myDocumentsPage = testharnessHomepage.navigateToMyDocumentsFromTestHarnessPage();
+			Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+		} else {
+			int forceTimeoutInMin=5;
+			System.out.println("Proceeed to Plan Documents & Resources page");
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage = accountHomePage.navigateDirectToPlanDocPage(memberType,planType, forceTimeoutInMin);
+			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
+			if (memberType.toUpperCase().contains("COMBO")) 
+				planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
+			planDocumentsAndResourcesPage.sleepBySec(15);
+			getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
+
+			MyDocumentsPage myDocumentsPage = planDocumentsAndResourcesPage.navigateToMyDocumentsPage();
+			Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+		}
 	}
 	
 	

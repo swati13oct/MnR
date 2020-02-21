@@ -6,11 +6,9 @@ Feature: 1.06.7 Member My Documents Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-    And user navigates to plan documents and resources page validation
+    Then the user navigates to my Documents Page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then validate that My Document section is displayed on Plan And Resources Page
-    Then the user navigates to my Documents Page
     Then user validates header section content on My Documents Page
     And I validate the Note  text on my Documents Page
     And I validate the disclaimer on my Documents Page 
@@ -104,4 +102,4 @@ Feature: 1.06.7 Member My Documents Page
     | TID   | planType | memberType            | documentsExpectedInPast24Months  |            
     | 10000 | MAPD     | Individual_MyDocuments|           Y                      |
     | 10001 | MAPD     | Group_MyDocuments     |           Y                      |
-    | 10002 | COMBO    | FedAndShip_MyDocuments|           N                      |  
+    | 10002 | COMBO    | FedAndShip_MyDocuments|           N                      |      
