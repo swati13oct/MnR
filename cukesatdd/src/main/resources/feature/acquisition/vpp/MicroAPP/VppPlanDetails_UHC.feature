@@ -109,7 +109,7 @@ Feature: Vpp to plan Details UHC Scenarios
       | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     |
 
   @vppPlanDetailsUHC06
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - - OLE Landing from UHC Acquisition site VPP Plan Details
+  Scenario Outline: TCID - <TID> - plan Type: <plantype> - OLE Landing from UHC Acquisition site VPP Plan Details
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
@@ -124,7 +124,7 @@ Feature: Vpp to plan Details UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                                   |
-      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP MedicareComplete SecureHorizons Plan 2 (HMO)          |
+      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)     |
       | 00005 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            |
       | 00006 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  |
       | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |

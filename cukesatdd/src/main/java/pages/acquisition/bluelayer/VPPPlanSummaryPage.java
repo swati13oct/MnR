@@ -1607,6 +1607,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Premium for Plan : " + PlanPremium);
 		return PlanPremium;
 	}
+	
+	/**
+	 * Methods added for OLE Flow validations
+	 * @author sdwaraka
+	 * @param PlanName
+	 * @return
+	 */
+	public String getPlanPremium(String PlanName, String planType) {
+		System.out.println("Plan Name is : "+PlanName);
+		WebElement premiumForPlan = null;
+		if(planType.equalsIgnoreCase("PDP")){
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+		}else
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+PlanName+"')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+		CommonUtility.waitForPageLoadNew(driver,premiumForPlan, 30);
+		String PlanPremium = premiumForPlan.getText();
+
+		System.out.println("Premium for Plan : "+PlanPremium);
+		return PlanPremium;
+	}
 
 	/**
 	 * @author sdwaraka Method Added for OLE Flow - Navigate to OLE from Plan

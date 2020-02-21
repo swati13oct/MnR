@@ -368,10 +368,10 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
