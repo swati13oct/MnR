@@ -504,7 +504,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[1]")
 	private WebElement pcpValue;
 
-	@FindBy(xpath = "(//*[@id='officeVisitTileAtdd']/div//div[1]/span)[2]")
+	@FindBy(xpath = "//*[@id='officeVisitTileAtdd']//*[contains(text(),'Specialist')]/ancestor::p/following-sibling::span")
 	private WebElement specialistValue;
 
 	@FindBy(xpath="//*[@id='plandeductiblecard1']")
@@ -3365,8 +3365,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		+"$10 copay\n"
 		+"$20 copay\n"
 		+"$30 copay\n"
-		+"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-		+"When your out-of-pocket costs reach the $5,100 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+		+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+		+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 		+"The catastrophic coverage will go toward Part D covered medications.\n"
 		+"Tier 2\n"
 		+"$35 copay\n"
@@ -3423,8 +3423,8 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 +"You pay 100% of costs until $50 deductible is met*\n"
 +"$20 copay\n"
 +"$30 copay\n"
-+"After your total drug costs reach $3,820, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-		+"When your out-of-pocket costs reach the $5,100 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
++"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+		+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 		+"The catastrophic coverage will go toward Part D covered medications.\n"
 		+"Tier 2 :\n"
 		+"$70 copay\n"
@@ -3473,7 +3473,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		String input = pcpValue.getText();
 
-		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$"); if
+		Pattern pattern = Pattern.compile("^\\d+(\\.\\d+)%"); if
 		(pattern.matcher(input).matches()) {
 			Assert.assertTrue("PCP values exists", true); } else { throw new
 				IllegalArgumentException("Invalid String"); }
@@ -3511,7 +3511,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 		//String TableData="OUTPATIENT SURGERY CENTER VISITS \n"
 			//	+"Type 1: $75.00\n"
 				//+"Type 2:  $150.00";
-		String TableData="OUTPATIENT SURGERY CENTER VISITS";
+		String TableData="OUTPATIENT HOSPITAL SERVICES";
 		if(outPatientSection.getText().contains(TableData.toString())){
 		//Sardar End
 			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
@@ -3528,7 +3528,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
         //String TableData="OUTPATIENT SURGERY CENTER VISITS\n"
         //            +"20.00%";
         //if(outPatientSection.getText().equals(TableData.toString())){
-        String TableData="OUTPATIENT SURGERY CENTER VISITS";
+        String TableData="OUTPATIENT HOSPITAL SERVICES";
         if(outPatientSection.getText().contains(TableData.toString())){
         //Sardar End
 
@@ -3816,7 +3816,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 		validateNew(federalValueIC);
 		String input = federalValueIC.getText();
-		Pattern pattern = Pattern.compile("^\\$\\d{1,4}\\.\\d{2}$");
+		Pattern pattern = Pattern.compile("^\\d+(\\.\\d+)?%");
 		if (pattern.matcher(input).matches()) {
 			Assert.assertTrue("value  in IC column exists", true);
 
@@ -5188,19 +5188,19 @@ public void standardRetailBenefitTableIndiMedica() throws InterruptedException{
 			+"$0.00\n"
 			+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 			+"-either- coinsurance of 5% of the cost of the drug\n"
-			+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+			+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 			+"Tier 2\n"
 			+"$0.00\n"
 			+"$0.00\n"
 			+"Tier 3\n"
 			+"$30.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+			+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 			+"Tier 4\n"
 			+"$65.00\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+			+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 			+"Tier 5\n"
 			+"33%\n"
-			+"no more than 37% for generic drugs or 25% for brand name drugs";
+			+"no more than 25% for generic drugs or 25% for brand name drugs";
 	System.out.println("The hardcoaded table value is- "+TableData.toString());
 	System.out.println("The table value is- "+standardDetail_Table1PDP.getText());
 

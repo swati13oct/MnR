@@ -78,7 +78,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType       |
-      | 15091 | Combo    | ComboFEDShip_BnC_Sardar |
+      | 15091 | Combo    | ComboFEDShip_BnC |
 
   #TC09_Benefits_for_ALPeehipMember
   @benefitsAndCoverage9 @BenefitsForAlPeehipMember @regression @BnC_Part1_regressionMember
@@ -137,7 +137,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType        | language | PlanBenefitsTable   |
-      | 15094 | HIP      | SHIP_BnC_Sardar   | ENGLISH  | Plan Benefits Table |
+      | 15094 | HIP      | SHIP_BnC   | ENGLISH  | Plan Benefits Table |
 
  #TC12_Benefits_for_MedicaMember
   @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part2_regressionMember
@@ -205,7 +205,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType             | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish  | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        			| language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-       | 15095 | Medica   | Individual_BnC_Sardar | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
+       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits   | Evidence of Coverage      | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2   |                          |                           |                                      |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        |
 
 #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part2_regressionMember

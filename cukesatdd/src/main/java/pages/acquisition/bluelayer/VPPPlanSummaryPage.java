@@ -2891,6 +2891,7 @@ public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, Stri
 	Actions builder = new Actions(driver);
 	Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
 	mouseOverButton.perform();
+	sleepBySec(5);
 	shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 	sleepBySec(1);
 	shopForAPlanOptionFindPlanButton.click();
@@ -2999,8 +3000,9 @@ public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String plan
 			System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
 			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"+savedPlanImgXpath;
 			System.out.println("TEST - initial_savePlanLIconXpath xpath="+savedPlanIconXpath);
+			sleepBySec(5);
 			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
-			expMatch=1;
+			expMatch=0;
 			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 		} else if (i==1) {
 			String plan=listOfTestPlans.get(i);

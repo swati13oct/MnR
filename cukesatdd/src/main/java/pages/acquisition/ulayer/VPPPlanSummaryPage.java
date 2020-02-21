@@ -27,6 +27,8 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -2443,6 +2445,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
+			WebDriverWait d=new WebDriverWait(driver, 20);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
