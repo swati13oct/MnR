@@ -52,7 +52,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
 	private WebElement preEffectiveTechSupportNumber;
 		
-	@FindBy(xpath=  ".//div[@id='cardslideID']/a[2]")
+	@FindBy(xpath=  ".//*[@id='cardslideID']//*[contains(@class,'btn btn--primary message-btn') and contains(@ng-click,'true')]")
 	private WebElement getStartedButton;
 	
 	@FindBy(id = "message-cancel")
