@@ -202,7 +202,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'plan-detail-table')]//*[contains(@ng-if,'PlanContentSuppDetail')]//*[contains(text(),'Yearly')]/ancestor::td//*[contains(@ng-show,'')]//*[contains(@class,'ng-binding')])")
 	private WebElement valCostTabEstimatedTotalAnnualCost;
 	
 	@FindBy(xpath="//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -843,12 +843,21 @@ public class PlanDetailsPage extends UhcDriver {
 	        return null;
 	}
 	
+
+	public WebElement getvalCostTabEstimatedDrugCost() {
+		return valCostTabEstimatedDrugCost;
+	}
+
+	
+	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valCostTabEstimatedDrugCost;
+
 	/*extracting cost from cost tab*/
 	public String costComparisonCostTabFromDCE() {
 		
 		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
-		scrollToView(getValCostTabEstimatedTotalAnnualCost());
-		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
+		scrollToView(getvalCostTabEstimatedDrugCost());
+		return getvalCostTabEstimatedDrugCost().getText().trim();
 
 	}
 

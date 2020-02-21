@@ -46,6 +46,7 @@ import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 //import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import org.apache.commons.lang.time.StopWatch;
@@ -272,8 +273,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//span[contains (text(), 'Look up Drugs')]")
 	private WebElement drugLookup;
 
-	// @FindBy(css = "img.primary-logo")
-	// private WebElement logoImage;
+	@FindBy(xpath = "//a[contains(text(),'Drug Lookup')]")
+	private WebElement drugLookuplink;
 
 	@FindBy(css = ".primary-logo")
 	private WebElement logoImage;
@@ -291,8 +292,17 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 
-	@FindBy(linkText = "FIND CARE & COSTS")
+
+	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
+	
+	
+	
+	/*
+	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
+	 * private WebElement
+	 * findCareCost;
+	 */
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
 	private WebElement findCare;
@@ -398,8 +408,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='moreInfoLinkAtdd2']/a") // tbd
 	private WebElement specificclaimlinkforeob;
 
-	@FindBy(tagName = "arcade-header")
-	private WebElement shadowRootHeader;
+	
+	 @FindBy(tagName = "arcade-shared-header") 
+	 private WebElement shadowRootHeader;
+	 
 
 	@FindBy(tagName = "arcade-footer")
 	private WebElement shadowRootFooter;
@@ -1526,7 +1538,7 @@ public class AccountHomePage extends UhcDriver {
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
 		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
-				|| MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+				|| MRScenario.environmentMedicare.contains("team-a")
 				|| (MRScenario.environmentMedicare.equalsIgnoreCase("team-t")
 						|| MRScenario.environment.equalsIgnoreCase("team-ci1"))) {
 			System.out.println("Go to claims link is present "
@@ -1600,7 +1612,7 @@ public class AccountHomePage extends UhcDriver {
 			waitForHomePage(helloPerson);
 			System.out.println("Go to Pharmacy locator is present " + pharmacySearchLink.isDisplayed());
 			pharmacySearchLink.click();
-		} else if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+		} else if (MRScenario.environment.contains("team-a")) {
 			String Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 					+ "/content/medicare/member/pharmacy-locator/overview.html";
 			if (driver.getCurrentUrl().contains("mymedicareaccount")) {
@@ -1663,7 +1675,7 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, FormRsrceLinkTestHarness, 30);
 			FormRsrceLinkTestHarness.click();
 
-		} else if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a")
+		} else if (MRScenario.environmentMedicare.contains("team-a")
 				|| MRScenario.environmentMedicare.equalsIgnoreCase("test-a")
 				|| MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			System.out.println("Go to claims link is present "
@@ -1908,6 +1920,32 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 	
+	public PaymentHistoryPage navigateToPaymentPageSkipBtnValidation() throws InterruptedException {
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			// driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+		CommonUtility.checkPageIsReady(driver);
+
+		if (noWaitValidate(paymentsLink)) {
+			System.out.println("payment link is displayed on the header");
+			paymentsLink.click();
+			return new PaymentHistoryPage(driver, true);
+		} else if (validate(TestHarnesspaymentsLink)) {
+
+			System.out.println("TestHarness Page Payments Link is displayed");
+			TestHarnesspaymentsLink.click();
+			return new PaymentHistoryPage(driver,true);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Added by Sneha - To Navigate to Order plan Materials page by clicking on
 	 * link on Rally Dashboard mid section
@@ -1924,7 +1962,7 @@ public class AccountHomePage extends UhcDriver {
 				workaroundAttempt("order");
 			} else {
 				String Page_URL = "";
-				if (MRScenario.environment.equalsIgnoreCase("team-a")) {
+				if (MRScenario.environment.contains("team-a")) {
 					Page_URL = "https://www." + MRScenario.environment + "-medicare." + MRScenario.domain
 							+ "/content/medicare/member/order-materials/overview.html";
 				} else {
@@ -2070,15 +2108,25 @@ public class AccountHomePage extends UhcDriver {
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 				dceTestharnessLink.click();
 			} else if (driver.getCurrentUrl().contains("/dashboard")) {
-				System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-				waitforElement(drugLookup);
-				drugLookup.click();
-				try {
-					WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
-					CommonUtility.waitForPageLoad(driver, loadingImage, 15);
-				} catch (Exception e) {
-					System.out.println("Exception e: " + e);
+				if(validate(drugLookup)){
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					waitforElement(drugLookup);
+					drugLookup.click();
+					
+				} else {
+					
+					waitforElement(drugLookuplink);
+					drugLookuplink.click();
 				}
+				
+				try {
+						WebElement loadingImage = driver.findElement(By.className("loading-dialog"));
+						CommonUtility.waitForPageLoad(driver, loadingImage, 15);
+					} catch (Exception e) {
+						System.out.println("Exception e: " + e);
+					}
+				
+				
 			} else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
 				workaroundAttempt("dce");
 			}
@@ -3226,6 +3274,73 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+		
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(String memberType, String planType, int forceTimeoutInMin)
+				throws InterruptedException {
+		checkForIPerceptionModel(driver);
+		StopWatch pageLoad = new StopWatch();
+		pageLoad.start();
+		try {
+			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+				System.out.println("user is on Stage login page");
+				if ((driver.getCurrentUrl().contains("/aarp/dashboard")) 
+						&& ((!memberType.toLowerCase().contains("pcp") && !memberType.toLowerCase().contains("medica"))
+								&& (!planType.toLowerCase().contains("pcp") && !planType.toLowerCase().contains("medica")))) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "aarp/member/documents/overview.html");
+					// https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html
+				} else if ((driver.getCurrentUrl().contains("mymedicareaccount"))
+						&& (memberType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("pcp"))) {
+					System.out.println("User is on pcp dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if (driver.getCurrentUrl().contains("/retiree/dashboard")) {
+					System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "retiree/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if (driver.getCurrentUrl().contains("/medicare/dashboard")) {
+					System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "medicare/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if ((driver.getCurrentUrl().contains("mymedicareaccount"))
+						&& (memberType.toLowerCase().contains("medica") || planType.toLowerCase().contains("medica"))) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
+				}
+			} else {
+				if (driver.getCurrentUrl().contains("mymedicareaccount"))
+					driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-mymedicareaccount.uhc.com/content/medicare/member/documents/overview.html");
+				else {
+					driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
+				}
+			}
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+		} catch (WebDriverException we) {
+			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+		}
+		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+		Thread.sleep(2000); // note: give it a bit more time to settle down
+		pageLoad.stop();
+		long pageLoadTime_ms = pageLoad.getTime();
+		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+
+		if (driver.getTitle().contains("Documents")) {
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+		return null;
+	}		
 
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");

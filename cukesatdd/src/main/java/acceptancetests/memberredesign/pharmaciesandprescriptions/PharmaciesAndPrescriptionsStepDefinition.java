@@ -132,8 +132,11 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		boolean runOnTeamEnv=false;
+		if (MRScenario.environment.contains("team-a"))
+			runOnTeamEnv=true;
 		String tile="Compare drug pricing";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile);
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, runOnTeamEnv);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 
@@ -146,7 +149,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Find a network pharmacy";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
+		boolean runOnTeamEnv=false;
+		if (MRScenario.environment.contains("team-a"))
+			runOnTeamEnv=true;
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, runOnTeamEnv);		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 
@@ -158,8 +164,11 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		boolean runOnTeamEnv=false;
+		if (MRScenario.environment.contains("team-a"))
+			runOnTeamEnv=true;
 		String tile="Order prescription refills";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, runOnTeamEnv);		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, 
 				pnpPg);
 	}	
@@ -173,7 +182,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		String tile="Check home delivery order status";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile);		
+		boolean runOnTeamEnv=false;
+		if (MRScenario.environment.contains("team-a"))
+			runOnTeamEnv=true;
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, runOnTeamEnv);		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 	
@@ -188,7 +200,10 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String  planCategoryId=(String) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLAN_CATEGORY_ID);
 		String tile="Prescription Benefits Information";
-		pnpPg.validateTileLnkDestination(planType, memberType, tile, planCategoryId);		
+		boolean runOnTeamEnv=false;
+		if (MRScenario.environment.contains("team-a"))
+			runOnTeamEnv=true;
+		pnpPg.validateTileLnkDestination(planType, memberType, tile, planCategoryId, runOnTeamEnv);		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}	
 	

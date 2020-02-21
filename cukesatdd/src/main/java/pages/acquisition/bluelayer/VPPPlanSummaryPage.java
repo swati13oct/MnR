@@ -290,7 +290,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 	
 	@FindBy(xpath = "(//div[contains(@class,'mabenefittable')]//li[contains(@class,'ng-scope')]/span[contains(text(),'Estimated Annual Drug Cost')])[1]")
@@ -476,7 +476,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[@id='msVppdpsd']/option[2]")
 		private WebElement startDrpDwnOption;
 		
-		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 		WebElement ViewPlanMedSupPage;
 
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
@@ -576,7 +576,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
-			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+			
 			return valEstimatedAnnualDrugCostValue;
 		}
 		
@@ -1671,7 +1673,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if (validateNew(RightRail_TFN)) {
+		if (validateNew(RightRail_TFN,45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -1958,10 +1960,15 @@ private boolean getSpecificPlanSummary(WebElement element, String planName) {
                     return false;
     }
 }
-public void validateMedicalBenefitDrugSection() {
-    validateNew(drugCoveredInfo);
-    validateNew(estimatedAnnualDrugCostLabel,45);
-    validateNew(estimatedAnnualDrugCostValue);
+public void validateMedicalBenefitDrugSection(String planName) {
+
+	//If any of these elements are not found, the test will fail so no need to add validate method.
+	
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]"));
+	driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]"));
+	 driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+
+
 }
 
 public void validateAndClickAddtoCompareinUMS(String planType , String planName) throws InterruptedException {
@@ -2070,6 +2077,12 @@ public void validateAndClickLearnMoreAboutExtraHelpInUMS(String planType , Strin
 }            
 public void validateIsMyProviderCoveredLinkInUMS(String planType , String planName) {
     int attempts = 0;
+    try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	while(attempts < 2) {
         try {
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -2839,6 +2852,7 @@ public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, Stri
 	Actions builder = new Actions(driver);
 	Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
 	mouseOverButton.perform();
+	sleepBySec(5);
 	shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 	sleepBySec(1);
 	shopForAPlanOptionFindPlanButton.click();
@@ -2947,8 +2961,9 @@ public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String plan
 			System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
 			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"+savedPlanImgXpath;
 			System.out.println("TEST - initial_savePlanLIconXpath xpath="+savedPlanIconXpath);
+			sleepBySec(5);
 			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
-			expMatch=1;
+			expMatch=0;
 			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 		} else if (i==1) {
 			String plan=listOfTestPlans.get(i);
@@ -3138,28 +3153,36 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
 	System.out.println("MedSup page form is displayed");
 	medSupZipcode.sendKeys(zipcode);
+	Thread.sleep(2000);
+	validateNew(DOB);
 	DOB.click();
+	Thread.sleep(2000);
 	DOB.sendKeys(DateOfBirth);
 	System.out.println("Date of birth is entered");
 	jsClickNew(MaleGender);
+	Thread.sleep(2000);
 	jsClickNew(monthDrpDwn_PartA);
+	validateNew(monthDrpDwnOption);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
+	Thread.sleep(2000);
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
+	Thread.sleep(2000);
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
+	Thread.sleep(2000);
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
-	Thread.sleep(3000);
+	Thread.sleep(2000);
 	System.out.println("Plan to start date selected");
 	ViewPlanMedSupPage.click();
 }
@@ -3175,20 +3198,20 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 	jsClickNew(MaleGender);
 	jsClickNew(monthDrpDwn_PartA);
 	monthDrpDwnOption.click();
-	//Thread.sleep(2000);
+	Thread.sleep(2000);
 	System.out.println("Effective date- month value selected");
 	yearDrpDwn_PartA.click();
 	yearDrpDwnOption.click();
 	System.out.println("Effective date- year value selected");
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	monthBDrpDwn.click();
 	monthBDrpDwnOption.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	yearBDrpDwn.click();
 	yearBDrpDwnOption.click();
 	Thread.sleep(2000);
 	startDrpDwn.click();
-//	Thread.sleep(2000);
+	Thread.sleep(2000);
 	startDrpDwnOption.click();
 	Thread.sleep(3000);
 	System.out.println("Plan to start date selected");
@@ -3196,7 +3219,7 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 }
 
 public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
-	Thread.sleep(4000);
+	Thread.sleep(5000);
 	CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 	Start_ApplicationBtn.click();
 	System.out.println("Start application button is clicked on application page");
@@ -3475,5 +3498,14 @@ catch (Exception e) {
 	}
 	//note: end - added for deeplink validaton
 	//--------------------------------------------
+	public void clickOnViewMoreForPlan(String planName) {
+		List<WebElement> viewMoreLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+	
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
+				viewMoreLink.get(0).click();
 
+
+			
+	}
 }

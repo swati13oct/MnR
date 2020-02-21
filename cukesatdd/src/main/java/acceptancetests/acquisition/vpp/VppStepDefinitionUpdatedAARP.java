@@ -345,7 +345,7 @@ public class VppStepDefinitionUpdatedAARP {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		
+		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);

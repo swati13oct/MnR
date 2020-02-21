@@ -40,7 +40,7 @@ public class AddDrugDetails extends UhcDriver {
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
 	
-	@FindBy(xpath = ".//*[@id='dosage-radios']//select")
+	@FindBy(xpath = "//*[contains(@id,'dosage')]//select")
 	public WebElement dosageDropdown;
 
 	@FindBy(id = "frequency")
@@ -88,9 +88,9 @@ public class AddDrugDetails extends UhcDriver {
 	 * 
 	 */
 	public AddDrugDetails selectDosage(String dosage) throws InterruptedException{
-		WebElement e = driver.findElement(By.xpath("//fieldset[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
-		e.click();
-		//selectFromDropDownByText(driver, dosageDropdown, dosage);
+		//WebElement e = driver.findElement(By.xpath("//fieldset[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		//e.click();
+		selectFromDropDownByText(driver, dosageDropdown, dosage);
 		return new AddDrugDetails(driver);
 	}
 

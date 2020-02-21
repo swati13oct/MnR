@@ -91,6 +91,11 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
 	private WebElement emailUsContinueBtn;
 	
+	
+	@FindBy(xpath = "//div[@id='messageModal']//span[contains(@class,'btn--primary')][text()='CONTINUE']")
+	private WebElement goToInboxCtnBtn;
+	
+	
 	@FindBy(id = "message-send")
 	private WebElement sendMessageBtn;
 	
@@ -274,9 +279,29 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 	}
+	
+	public ContactUsPage(WebDriver driver, String memberType) {
+		super(driver);
+		try {
+			PageFactory.initElements(driver, this);
+			checkModelPopup(driver);
+			
+			if ((MRScenario.environment).toLowerCase().contains("offline"))
+				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
+			
+			openAndValidate(memberType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
+		validateNew(heading);
+	}
+
+	public void openAndValidate(String memberType) {
+		if (!memberType.contains("PreEff")) 
 		validateNew(heading);
 	}
 
@@ -651,15 +676,17 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			Thread.sleep(8000);
 			
-		if(EmailForm.isDisplayed()){
+		if(validate(EmailForm)){
 			System.out.println("Get Started Button not visible, So using email Form Link!!!");
 			EmailForm.click();
 			Thread.sleep(2000);
 			waitforElement(cancelLink);
 			cancelLink1.click();
 			Thread.sleep(2000);}
-			
-		else {
+		else if(validate(goToInboxButton)){	
+			validateGoToInbox();
+			}
+		else{		
 			getStartedButton.click();
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
@@ -736,6 +763,8 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			waitforElement(goToInboxButton);
 			Assert.assertTrue(validate(goToInboxButton));
+			goToInboxButton.click();
+			Assert.assertTrue(validateNew(goToInboxCtnBtn));			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

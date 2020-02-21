@@ -19,7 +19,7 @@ import atdd.framework.UhcDriver;
  */
 public class OLEconfirmationPage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[@class='segment']/h3")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
 	private WebElement PlanYear_PlanName;
 	
 	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]/..")
@@ -46,7 +46,7 @@ public class OLEconfirmationPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver,PlanYear_PlanName, 30);
+		validateNew(PlanYear_PlanName);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {

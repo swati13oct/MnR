@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.SavingsOppurtunity;
 import pages.acquisition.bluelayer.AddDrugDetails;
@@ -22,6 +24,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -400,7 +403,7 @@ public class DCEAcqStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
-		planSummaryPage.validateMedicalBenefitDrugSection();
+		planSummaryPage.validateMedicalBenefitDrugSection(planName);
 	}
 	
 	@Then("^user validates drug added on prescription drug benefits tab in UMS$")
@@ -431,6 +434,53 @@ public class DCEAcqStepDefinitionUHC {
 		}
 	}
 	
+	/** user is on the Medicare Site landing page for DCE Testharness*/
+	@Given("^the user is on the UMS Acquisition Site DCE TestHarness page$")
+	public void validateUserIsOnUMS_DCETestharnessPage(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		DCETestHarnessPage dceTestHarnessPage = (DCETestHarnessPage) aquisitionhomepage.GetDCEtestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.DCE_TESTHARNESS_PAGE,dceTestHarnessPage);
+	}
 	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
 	
+	@When("^the user enters following information in the UMS Acquisition Site DCE TestHarness page$")
+	public void the_user_enters_following_information_in_the_UMS_Site_DCE_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String planName = inputAttributesMap.get("Plan Name");
+		DCETestHarnessPage dceTestHarnessPage = (DCETestHarnessPage) loginScenario.getBean(PageConstants.DCE_TESTHARNESS_PAGE);
+		dceTestHarnessPage.enterZipandSearch(ZipCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			dceTestHarnessPage.SelectCounty(CountyName);
+		}
+		dceTestHarnessPage.selectPlan(planName);
+		DrugCostEstimatorPage dce = dceTestHarnessPage.StartDCE();
+		if(dce!=null){
+			loginScenario.saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	@Then("^the user validates Local Storage for Zip, added drugs and Pharmacy details for UHC$")
+	public void the_user_validates_the_added_drugs_on_See_your_Estimated_Costs_page_in_AARP_site(DataTable DCEAttributes) throws Throwable {
+		Map<String, String> DCEAttributesMap=parseInputArguments(DCEAttributes);
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.validateLocalStorage(DCEAttributesMap);
+	}
 }

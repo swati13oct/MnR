@@ -62,7 +62,7 @@ public class PreEffectiveStepDefinition {
 @Given("^verify that preeffective message is displayed on the home page or test harness page$")
 public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throwable {
 	
-	if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 		
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
@@ -72,7 +72,7 @@ public void verifyPreEffectiveMessageDisplayedOnDashboardHomePage() throws Throw
 		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 	}
 	
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		System.out.println("Now checking for pre-effective header text on Team-h or stage test harness page");
@@ -111,7 +111,7 @@ public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttr
 	/* Premium payment tab is always displayed to Individual members, therefore checking only for them*/
 	if (memberType.equalsIgnoreCase("preeffectiveIndMA")|| memberType.equalsIgnoreCase("preeffectiveIndMAPD")|| memberType.equalsIgnoreCase("preeffectiveIndPDP") || memberType.equalsIgnoreCase("preeffectiveSHIPOnly")) 
 	{	
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+		if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 		{
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			
@@ -121,7 +121,7 @@ public void verifyPaymentsTabNotDisplayedOnDashboardHomePage(DataTable givenAttr
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		
-		else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+		else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 		{
 			
 			System.out.println("Now checking for Payments tab on Team-h or stage test harness page");
@@ -159,7 +159,7 @@ public void verifyPaymentsPage() throws Throwable {
 
 @Then("^user clicks on the benefits and coverage tab on the dashboard home page or test harness page$")
 public void userClicksOnBenefitAndCoveragePage() throws Throwable {
-	if (MRScenario.environmentMedicare.contains("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
+	if (MRScenario.environment.contains("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))
 	{
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		Thread.sleep(3000);
@@ -170,7 +170,7 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
 		
 	}
-	else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-f")) || (MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.contains("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+	else if ((MRScenario.environment.equalsIgnoreCase("team-f")) || (MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.contains("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 	{
 		
 		System.out.println("Now clicking on Coverage and Benefits tab from Team-f or Team-h or Stage test harness page");

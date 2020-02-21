@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.junit.Assert;
@@ -51,7 +50,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
 		Thread.sleep(5000); //note: keep this for the page to load
-		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i=0;
@@ -107,7 +106,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public boolean validateNoPharmaciesErrorMessage(){
 		indian_tribal_label_filter.click();
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 10);
-		validateNew(noPharmaciesErrorMessage);
+		Assert.assertTrue("PROBLEM - unable to locate No Pharmacy Error message", pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
 	}
 
@@ -115,7 +114,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		zipcodeField.sendKeys("11111");
 		searchbtn.click();
 		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		validateNew(zipcodeErrorMessage);
+		Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
@@ -357,7 +356,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}	
 
 	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl, 
-			HashMap<String, String> inputMap) throws InterruptedException {
+			HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException {
 		String planName=inputMap.get("planName");
 		String zipcode=inputMap.get("zipcode");
 		String distance=inputMap.get("distance");
@@ -379,7 +378,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
-		selectsPlanName(planName);
+		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}
 
@@ -417,7 +416,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	 */
 	public void validatePharmacyWidgets(
 			boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan, boolean expectPrefMailServPlan,
-			HashMap<String, String> inputMap) throws InterruptedException { 
+			HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException { 
 		String testPlanName=inputMap.get("planName");
 		String language=inputMap.get("language");
 		String testWidget="";
@@ -433,7 +432,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
 			expUrl="health-plans/resources/mail-order-pharmacy.html";
-			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap);
+			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
 		} else {
 			Assert.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
 					pharmacyValidate(widget_preferredMailServicePharmacy));
@@ -450,7 +449,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
 						!pharmacyValidate(widget_walgreens));
 				expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
-				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap);
+				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 			}
 		} else {
 			Assert.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
@@ -463,7 +462,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '"+testWidget+"' widget", 
 							pharmacyValidate(widget_walgreens));
 					expUrl="health-plans/estimate-drug-costs.html#/drug-cost-estimator";
-					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap);
+					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 				} else {
 					System.out.println("INC12081940 - bypassed the Walgreens widget issue for Spanish and Chinese for the time being");
 				}

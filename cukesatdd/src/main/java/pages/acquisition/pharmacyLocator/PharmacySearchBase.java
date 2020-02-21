@@ -1,17 +1,14 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,11 +35,12 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public List<String> enterZipDistanceDetails(String zipcode, String distance, String county) {
+		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
-		validateNew(distanceDropownID);
+		Assert.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
 		if (distance.equals("1")) 
 			distance=distance+" mile";
 		else
@@ -124,23 +122,22 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		return testNote;
 	}
 
-	public void selectsPlanName(String planName) {
+	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
-		try {
-			Thread.sleep(1000); 
-			selectFromDropDownByText(driver, seletPlandropdown, planName);
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		sleepBySec(1); 
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
+		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
+			waitforElementDisapper(By.className("loading-block"), 30);
+		sleepBySec(1); //note: let the page settle down
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getAcqTestEnvSysTime(testSiteUrl);
 				
 				Assert.assertTrue("PROBLEM - Search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
@@ -184,13 +181,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReady(driver);
 	}
 
-	public void validateLtcPdfDoc(String pdfType, String testPlanYear, WebElement pdfLink) throws InterruptedException {
+	public void validateLtcPdfDoc(String pdfType, String testPlanYear, WebElement pdfLink, String testPdfLinkTextDate) throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, pdfLink, 15);
 		Assert.assertTrue("PROBLEM - unable to locate the link for pdf for "+pdfType, 
 				pharmacyValidate(pdfLink));
+		//note: "current year" set of doc will be associated with current real year (e.g. right now is 2019, so "current year" docs are 2019 docs)
+		//note: "next year" set of doc will be associated with next real year (e.g. "next year" docs are 2020 docs)
+		//note: code will determine what is the "current year" and display the right set of doc
+		//note: so if system is on year 2020 (but real time is 2019), 2020 is the current year, therefore, it display the "current year" docs which would still contain 2019 text
+		//note: if planYear dropdown option exists, then 2019 is "current year", 2020 is "next year"
+		//note: then the code would know to display 2020 link text when you select 2020 because that's the "next year" docs
 		Assert.assertTrue("PROBLEM - unable to locate expected year on the link text for pdf for "+pdfType+". "
 				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
-				pdfLink.getText().contains(testPlanYear));
+				pdfLink.getText().contains(testPdfLinkTextDate));
 		String winHandleBefore = driver.getWindowHandle();
 		CommonUtility.checkPageIsReady(driver);
 		pdfLink.click();
@@ -204,8 +207,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
 				currentURL.contains(expectedURL));
 		Assert.assertTrue("PROBLEM - unable to locate expected year on the URL. "
-				+ "URL should contain year '"+testPlanYear+"' | Actual URL='"+currentURL+"'", 
-				currentURL.contains(testPlanYear));
+				+ "URL should contain year '"+testPdfLinkTextDate+"' | Actual URL='"+currentURL+"'", 
+				currentURL.contains(testPdfLinkTextDate));
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		currentURL=driver.getCurrentUrl();
@@ -214,7 +217,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				currentURL.contains(expectedURL));
 	}
 	
-	public void searchesPharmacy(String language, String planName, String testPlanYear) throws InterruptedException {
+	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
@@ -260,13 +263,13 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					selectsPlanYear(testPlanYear);
 					CommonUtility.checkPageIsReady(driver);
 				}
-				selectsPlanName(planName);
+				selectsPlanName(planName, testSiteUrl);
 				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
 				WebElement pdfElement=pdf_otherPlans;
-				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement);
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
 				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				pdfElement=pdf_WalgreenPlans;
-				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement);
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
 				moveMouseToElement(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
@@ -535,6 +538,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		checkModelPopup(driver,5);
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+	}
+
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("slept for '"+sec+"' sec");
 	}
 
 }

@@ -284,6 +284,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		vppPlanSummaryPage.clickOnViewMoreForPlan(planName);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -1593,9 +1594,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		if (applicationType.equalsIgnoreCase("Retrive")) {
+		/*if (applicationType.equalsIgnoreCase("Retrieve")) {
 			ApplicationID = memberAttributesMap.get("ApplicationID");
-		}
+		}*/
 		plansummaryPage.EnterDataForResumeApp(ApplicationID, DOB, zipcode);
 
 	}

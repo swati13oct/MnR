@@ -5,22 +5,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 
 public class PharmacySearchBase extends PharmacySearchWebElements {
 
@@ -143,7 +136,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
 						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
-				Thread.sleep(2000); //note: keep this for the page to load
+				Thread.sleep(5000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";
@@ -160,7 +153,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans", 
 						validateNew(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				pdf_otherPlans.click();
 				Thread.sleep(2000); //note: keep this for the page to load
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -183,7 +176,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
 				pdf_WalgreenPlans.click();
-				Thread.sleep(2000); //note: keep this for the page to load
+				Thread.sleep(5000); //note: keep this for the page to load
 				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 				afterClicked_numTabs=afterClicked_tabs.size();					
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
@@ -234,7 +227,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				driver.switchTo().window(winHandleBefore);
 				*/
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "
@@ -281,7 +274,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			//tbd if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 
-				String currentSysTime=getTestEnvSysTime();
+				String currentSysTime=getMemTestEnvSysTime();
 				Assert.assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 						+ "test expects input data to have search result for remaining validation steps, "
 						+ "please check user data input or env to see if everything is ok. "

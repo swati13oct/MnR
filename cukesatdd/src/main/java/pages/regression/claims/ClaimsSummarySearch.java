@@ -82,6 +82,7 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 				//Assert.assertTrue("PROBLEM - unable to locate Rx Number in claims table for claims type for '"+planType+"' user",
 				//	claimsValidate(RxNumberinthecalimstable));
 				//System.out.println("Element on the Rx table is ===>"+ RxNumberinthecalimstable.getText());
+				sleepBySec(5); //note: force it to slow down to avoid race condition
 				medical.click();
 				waitForClaimPageToLoad();
 				System.out.println("!!! Validated Medical option can be selected !!!");

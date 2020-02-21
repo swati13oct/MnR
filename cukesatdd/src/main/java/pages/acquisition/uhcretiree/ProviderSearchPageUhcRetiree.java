@@ -77,7 +77,7 @@ public class ProviderSearchPageUhcRetiree extends UhcDriver{
 	@FindBy(xpath="//*[@id='mainContent']//button")
 	private WebElement continueButton;
 	
-	@FindBy(xpath="(//*[contains(@class,'searchData')]//*[contains(@data-test-key,'provider-name-link')])[1]")
+	@FindBy(xpath="(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[1]")
 	private WebElement PrimaryCarePhysician;
 	
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")

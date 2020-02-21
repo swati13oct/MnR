@@ -137,7 +137,8 @@ public class ClaimDetailsWebElements extends ClaimsBase{
 	protected WebElement med_amountBilled;
 	@FindBy(xpath="//div[@id='claimDynamicStatus']//span//p")
 	protected WebElement med_claimStatus;
-	@FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../p")
+	//tbd @FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../p")
+	@FindBy(xpath="//div[contains(@class, 'claimstotaltable')]//p[contains(text(),'Your share')]/../../../p")
 	protected WebElement med_yourShare;
 
 	//note: for claim summary drug table

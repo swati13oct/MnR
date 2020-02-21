@@ -29,14 +29,16 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 	 * @throws InterruptedException
 	 */
 	public void validateIDCard(String testFor, String planType, WebElement x) throws InterruptedException {
-		WebElement idCard=idCardLinkOrderConfirmedPage;
-		if (testFor.equalsIgnoreCase("orderPage")) {
+		WebElement idCard=nonship_idCardLinkOrderPage;
+		//note: currently the order page and the confirm page can use the same xpath so no need to do if/else loop
+		//if (testFor.equalsIgnoreCase("orderPage")) {
 			if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) 
 				idCard=ship_idCardLinkOrderPage;
-			else
-				idCard=nonship_idCardLinkOrderPage;
-		}
-		Assert.assertTrue("PROBLEM - not getting expected ID card link element with expected URL",orderValidate(idCard));
+			//else
+			//	idCard=nonship_idCardLinkOrderPage;
+		//}
+		CommonUtility.waitForPageLoad(driver, idCard, 5);
+		Assert.assertTrue("PROBLEM - not getting expected ID card link element",orderValidate(idCard));
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 			System.out.println("For testharness will only validate ID card element exists with expected URL.  UHC user's ID link will get redirect to systest3.");
 			if (!testFor.equalsIgnoreCase("orderPage")) { //note: already order so need to get back to order page to prep for next step

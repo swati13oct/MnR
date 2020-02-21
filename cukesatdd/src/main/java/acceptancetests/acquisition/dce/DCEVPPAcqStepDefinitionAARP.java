@@ -83,13 +83,25 @@ public class DCEVPPAcqStepDefinitionAARP {
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County");
+		String aep = memberAttributesMap.get("aep");
+		String currentyear = memberAttributesMap.get("currentyear");
+		
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-
+		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToVpp(
 				zipcode);
+		
+		if(aep.equalsIgnoreCase("yes")){
+			if(currentyear.equalsIgnoreCase("yes")){
+				
+			}else{
+				
+			}
+			
+		}
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
@@ -133,6 +145,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.viewPlanSummary(plantype);
+		//DrugCostEstimatorPage dce=plansummaryPage.navigateToDCEFromVPP(plantype,planName);
 		DrugCostEstimatorPage dce=plansummaryPage.navigatetoDCEVPP(planName);
 		if(dce!=null){
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
@@ -213,7 +226,6 @@ public class DCEVPPAcqStepDefinitionAARP {
 		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
 		
 		DrugDetails.continueAddDrugDetailsModNoSaving();
-		
 		SavingsOppurtunity savingsOppurtunity=new SavingsOppurtunity(wd);
 		dce = savingsOppurtunity.savedrugbutton();
 		
@@ -237,6 +249,20 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 		Assert.assertTrue("Drug not added", null != dce);
 		dce.validateAddedDrug(drug);*/
+	}
+	
+	// Only for Saver Pop-up from DCE test Harness
+	@When("^user successfully adds drug in the AMS site for TestHarness$")
+	public void user_successfully_adds_drug_TestHarness(DataTable data) throws InterruptedException {
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		DrugCostEstimatorPage dce = savingsOppurtunity.savedrugbutton();
+		
+		if (null != dce) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 	
 	@And("^then user adds other drugs$")
@@ -317,6 +343,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	   for(int i=0;i<dce.getLstPharmacyNames().size();i++)
 	    if(dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
 	    	dce.getLstSelectPharmacy().get(i).click();
+	    	break;
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();

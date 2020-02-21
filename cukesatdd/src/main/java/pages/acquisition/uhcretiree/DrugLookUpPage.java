@@ -65,7 +65,7 @@ public class DrugLookUpPage extends UhcDriver {
 
 	public boolean validateDrugLookUpPage() {
 		String currenturl = "";
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+		if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			currenturl = "/gr/en/drug_lookup.html";
 		} else {
 			currenturl = "drug_lookup.html";

@@ -244,6 +244,7 @@ public class ClaimsBase extends UhcDriver  {
 				claimsValidate(numClaimsElement));
 		}
 		try {
+			sleepBySec(15); //note: force a wait here, sometime it takes long to see the result
 			int numClaims=Integer.valueOf(numClaimsElement.getText().trim());
 			System.out.println("numClaims="+numClaims);	
 			if (numClaims>0)

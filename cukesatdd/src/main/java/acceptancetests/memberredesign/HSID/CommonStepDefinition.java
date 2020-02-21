@@ -284,7 +284,7 @@ public class CommonStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
 
-			testHarness.validateTestHarnessElements(category);
+			testHarness.validateTestHarnessElement(category);
 		} else {
 			RallyDashboardPage rallyDashboard = (RallyDashboardPage) getLoginScenario()
 					.getBean(PageConstants.RALLY_DASHBOARD_PAGE);

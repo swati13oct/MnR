@@ -52,7 +52,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	 */
 	@Given("^the user is on uhcmedicaresolutions site landing page$")
 	public void the_user_on_uhc_medicareplans_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -778,6 +778,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	  VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 		.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); 
 	  String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+	  plansummaryPage.clickOnViewMoreForPlan(planName);
 	  plansummaryPage.validateIsMyProviderCoveredLinkInUMS(planType,planName);	  
 	  }
   }
@@ -828,6 +829,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);		
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validatePlanPremium(planName ,monthlyPremium);
 		plansummaryPage.validatePrimaryCarePhysicianBenefit(planType ,planName , primaryCarePhysician);
 		plansummaryPage.validateSpecialistBenefit(planType ,planName , specialist);

@@ -26,6 +26,8 @@ import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -221,7 +223,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[@id='responsiveplan'])[1]")
 	private WebElement medSuppPlanList;
 
-	@FindBy(xpath = "(//div[contains(@class,'content-secondary plans')]//div[@class='drug-list added']//a)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 
 
@@ -594,7 +596,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 		private WebElement Part_B_yearDrpDwnOption;
 		
-		@FindBy(xpath = "//*[contains(@class,'viewPlans bottomMargin20')]")
+		@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 		WebElement ViewPlanMedSupPage;
 
 		@FindBy(xpath ="(//*[contains(@for,'Gender_1')])[2]")
@@ -605,7 +607,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
-			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
+			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+			
 			return valEstimatedAnnualDrugCostValue;
 		}
 		
@@ -1439,7 +1443,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if(validateNew(RightRail_TFN)){
+		if(validateNew(RightRail_TFN,45)){
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -1650,10 +1654,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public void validateMedicalBenefitDrugSection() {
-		validateNew(drugCoveredInfo);//this field will not show 
-		validateNew(estimatedAnnualDrugCostLabel,45);
-		validateNew(estimatedAnnualDrugCostValue);
+	public void validateMedicalBenefitDrugSection(String planName) {
+	
+		//If any of these elements are not found, the test will fail so no need to add validate method.
+		
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'drug-list-accordion')]"));
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]"));
+		driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(text(),'Estimated Annual Drug Cost')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+
 
 	}
 
@@ -2088,7 +2096,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	/* Navigation to DCE for all plan types having a plan name*/
 	public DrugCostEstimatorPage navigatetoDCEVPP(String planName){
-		WebElement DCELink = driver.findElement(By.xpath("(//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview module')]//*[contains(text(), 'Prescription Drugs, Tier 1')]/span)[2]"));
+		
+	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
+				
+//		dcedropdown.click();
+		
+		//WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class, 'collapse drugs drug-provider-collapse')]//*[contains(@class,'edit-drugs')]"));
+		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
+		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
+		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
@@ -2412,6 +2428,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
+			WebDriverWait d=new WebDriverWait(driver, 20);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -2800,25 +2818,30 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
 		
-		CommonUtility.waitForPageLoadNew(driver, DOB, 20);
+		validateNew(DOB,30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		MaleGender.click();
+		Thread.sleep(2000);
 		part_A_monthDrpDwn.click();
+		Thread.sleep(2000);
 		Part_A_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
 		part_A_yearDrpDwn.click();
+		Thread.sleep(2000);
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
 		part_B_monthDrpDwn.click();
+		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		part_B_yearDrpDwn.click();
+		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
 		startDrpDwn.click();
@@ -2870,9 +2893,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void ResumeApplicationButton() throws InterruptedException{
 		Thread.sleep(5000);
-		String DateOfBirth ="11031950";
+		String DateOfBirth ="11131950";
 		MedSupFormValidation(DateOfBirth);
-		Start_ApplicationBtn.click();
+		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3146,11 +3169,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void clickOnViewMoreForPlan(String planName) {
-		WebElement viewMoreLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'plan-details__flex-container')]"));
-		if(validate(viewMoreLink))
-			viewMoreLink.click();
-
 		
+		List<WebElement> viewMoreLink =  driver.findElements
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+		
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
+				viewMoreLink.get(0).click();
+
+	
 	}
 }

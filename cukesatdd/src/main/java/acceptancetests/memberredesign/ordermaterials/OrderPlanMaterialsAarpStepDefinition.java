@@ -139,11 +139,15 @@ public class OrderPlanMaterialsAarpStepDefinition {
 			boolean flagNonCombo=false;
 			orderPlanMaterialsPage.goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
 		}
-		String result = orderPlanMaterialsPage.selectOption("None");
-		Assert.assertTrue("PROBLEM - user should not be able to navigate to Order Confirmation page when no option is selected", result == null);
-		System.out.println("User is still on Order Materials Page");
-		orderPlanMaterialsPage.validateErrorMessage();
-		getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE, orderPlanMaterialsPage);
+		if (planType.toUpperCase().contains("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+			String result = orderPlanMaterialsPage.selectOption("None");
+			Assert.assertTrue("PROBLEM - user should not be able to navigate to Order Confirmation page when no option is selected", result == null);
+			System.out.println("User is still on Order Materials Page");
+			orderPlanMaterialsPage.validateErrorMessage();
+			getLoginScenario().saveBean(PageConstantsMnR.ORDER_PLAN_MATERIALS_PAGE, orderPlanMaterialsPage);
+		} else {
+			System.out.println("Only replacement ID card option available by default, skipping this validation");
+		}
 	}
 
 	@Then("^user validates ability to submit order for each item individually for all available items$")
