@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPharmacySearchMicroAPPBlayer.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPharmacySearchMicroAPPBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator/PharmacySearchMicroApp_UHC.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacySearchMicroAPPBlayer.json" }, tags = {"@pharmacylocatorMicroAppBlayer01" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacySearchMicroAPPBlayer.json" }, tags = {"@pharmacylocatorMicroAppBlayer" })
 public class RunMRATDDAcquisitionPharmacySearchMicroAPPBlayer{ 
  
 }
