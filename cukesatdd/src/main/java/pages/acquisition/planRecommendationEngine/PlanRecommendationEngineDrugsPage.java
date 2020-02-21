@@ -534,6 +534,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		drugsearchButton.click();
                             		validate(modalSelcetedDrug, 30);
                             		threadsleep(2000);
+                            		modalcontinue.click();
                             		modalQuantity.clear();
                             		modalQuantity.sendKeys(count);
                             		modalcontinue.click();
