@@ -52,7 +52,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
 	private WebElement preEffectiveTechSupportNumber;
 		
-	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
+	@FindBy(xpath=  ".//div[@id='cardslideID']/a[2]")
 	private WebElement getStartedButton;
 	
 	@FindBy(id = "message-cancel")
@@ -225,7 +225,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="question-email")
 	private WebElement email_EmailForm;
 	
-	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	@FindBy(xpath="(//a[@ng-href='tel:1-800-721-0627']")
 	private WebElement connectorModelTFN;
 	
 	@FindBy(id="question-email-confirm")
@@ -755,11 +755,11 @@ public class ContactUsPage extends UhcDriver{
 		Assert.assertTrue(!validate(requestCall));
 		//Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these kind of users
 		 */
-		Assert.assertTrue(!validate(getStartedButton)); 
-		Assert.assertTrue(!validate(fillOutFormButton));
-		Assert.assertTrue(!validate(requestCall));
-		Assert.assertTrue(!validate(getStartedButton)); 
-		Assert.assertTrue(!validate(email_EmailForm));
+		Assert.assertFalse(validate(getStartedButton));
+		Assert.assertFalse(validate(fillOutFormButton));
+		Assert.assertFalse(validate(requestCall));
+		Assert.assertFalse(validate(getStartedButton));
+		Assert.assertFalse(validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
@@ -779,7 +779,7 @@ public class ContactUsPage extends UhcDriver{
 	public void validateConnectroModelTFNNumber() {
 		
 		String tfnNumber = connectorModelTFN.getText();
-		if(tfnNumber.contains("1-844-355-3359"))
+		if(tfnNumber.contains("1-800-721-0627"))
 		{
 			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
 		}else
