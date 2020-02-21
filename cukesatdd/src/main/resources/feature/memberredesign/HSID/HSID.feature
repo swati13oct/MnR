@@ -1,5 +1,5 @@
 @hsid 
-Feature:To test HSID registration flow
+Feature:To Test member Sign in
 
  
    @hsid1 @US968241 @hsidregistration 
