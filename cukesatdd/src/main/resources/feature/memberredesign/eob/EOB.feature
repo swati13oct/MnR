@@ -18,15 +18,25 @@ Feature: 1.04 To Test EOB for Members
     And the user clicks on first eob from the list
 
     #And the user validates how to read medical eob PDF
+ @COSMOS_EOBs
     Examples: 
       | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
       | 15140 | MAPD         | COSMOS_EOB_R | Last 18 months   | Medical           |       17 |
       | 15120 | MA           | COSMOS_EOB_R | Last 12 months   | Medical           |       10 |
       | 15140 | MAPD         | COSMOS_EOB_R | Last 6 months    | Prescription Drug |        4 |
+  @NICE_EOBs
+    Examples: 
+      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
       | 15140 | MAPD         | NICE_EOB_R   | Last 18 months   | Prescription Drug |       12 |
       | 15140 | MAPD         | NICE_EOB_R   | Last 6 months    | Medical           |        3 |
+  @SHIP_EOBs
+    Examples: 
+      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
       | 15165 | SHIP_ACTIVE  | SHIP_EOB     | Last 6-12 months | Medical           |        1 |
       | 15165 | SHIP_ACTIVE2 | SHIP_EOB2    | Last 6-12 months | Medical           |        1 |
+   @Rx_EOBs
+    Examples: 
+      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
       | 15165 | PDP          | Rx_EOB       | Last 12 months   | Prescription Drug |        9 |
       | 15165 | PDP          | RxGrp_EOB    | Last 18 months   | Prescription Drug |       14 |
 
