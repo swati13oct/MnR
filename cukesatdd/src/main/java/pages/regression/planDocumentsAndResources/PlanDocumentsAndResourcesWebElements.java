@@ -533,4 +533,9 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'backToTop') and not(contains(@style,'display: none'))]//a")
 	protected WebElement backToTopLink;
 	
+	@FindBy(xpath="//div[@class='container']//img")
+	protected List<WebElement> currentIssueImgList;
+	
+
+	
 }

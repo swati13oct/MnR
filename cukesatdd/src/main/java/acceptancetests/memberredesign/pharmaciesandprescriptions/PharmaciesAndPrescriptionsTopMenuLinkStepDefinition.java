@@ -229,9 +229,12 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			testHarness.waitForTestharnessTableToShow();
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
+			testHarness.navigateToHealthAndWellnessFromTestHarnessPage();
+			/* WebDriver testDriver=testHarness.driver;
+			String originalUrl=testDriver.getCurrentUrl();
 			HealthAndWellnessPage healthnWellnessPg = new HealthAndWellnessPage(testHarness.driver);
 			healthnWellnessPg.clickHealthnWellnessTab();
-			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null);
+			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, healthnWellnessPg!=null); */
 			result=testHarness.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);

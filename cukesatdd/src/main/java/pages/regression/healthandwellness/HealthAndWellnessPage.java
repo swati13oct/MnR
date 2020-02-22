@@ -272,6 +272,10 @@ public class HealthAndWellnessPage extends UhcDriver{
 			sleepBySec(15);
 			String expectedUrl="rewards/program-overview";
 			String actualUrl=driver.getCurrentUrl();
+			if (!actualUrl.contains(expectedUrl)) { //note: in case sometimes page takes longer to run
+				sleepBySec(15);
+				actualUrl=driver.getCurrentUrl();
+			}
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking Get Reward link.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 
 			//note: click the "Yes! I accept..." button if it shows up in order to move on
