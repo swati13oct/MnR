@@ -59,7 +59,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 	 */
 	@Given("^user is on blue layer landing page$")
 	public void user_on_UHC_Medicaresolutions_Site() {
-		 wd = getLoginScenario().getWebDriver();
+		 wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 

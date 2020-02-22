@@ -613,9 +613,11 @@ public class TestHarness extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if (MRScenario.isTestHarness.equals("YES")) {
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				eobTestharnessLink.click();
+				jsClickNew(eobTestharnessLink);
+				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
+				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
