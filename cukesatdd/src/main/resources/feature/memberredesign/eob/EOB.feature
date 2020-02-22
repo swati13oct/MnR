@@ -3,7 +3,7 @@ Feature: 1.04 To Test EOB for Members
 
   ######################   EOB Regression ###############################
   @eob6 @febRelease2018 @hsideob @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify NICE EOB and click on the pdf
+  Scenario Outline: plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify NICE EOB and click on the pdf
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -20,24 +20,24 @@ Feature: 1.04 To Test EOB for Members
     #And the user validates how to read medical eob PDF
  @COSMOS_EOBs
     Examples: 
-      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
-      | 15140 | MAPD         | COSMOS_EOB_R | Last 18 months   | Medical           |       17 |
-      | 15120 | MA           | COSMOS_EOB_R | Last 12 months   | Medical           |       10 |
-      | 15140 | MAPD         | COSMOS_EOB_R | Last 6 months    | Prescription Drug |        4 |
+    |  planType     | memberType   | dateRange        | eobType           | eobCount |
+     |  MAPD         | COSMOS_EOB_R | Last 18 months   | Medical           |       17 |
+      | MA           | COSMOS_EOB_R | Last 12 months   | Medical           |       10 |
+    | MAPD         | COSMOS_EOB_R | Last 6 months    | Prescription Drug |        4 |
   @NICE_EOBs
     Examples: 
-      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
-      | 15140 | MAPD         | NICE_EOB_R   | Last 18 months   | Prescription Drug |       12 |
-      | 15140 | MAPD         | NICE_EOB_R   | Last 6 months    | Medical           |        3 |
+       | planType     | memberType   | dateRange        | eobType           | eobCount |
+     | MAPD         | NICE_EOB_R   | Last 18 months   | Prescription Drug |       12 |
+       | MAPD         | NICE_EOB_R   | Last 6 months    | Medical           |        3 |
   @SHIP_EOBs
     Examples: 
-      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
-      | 15165 | SHIP_ACTIVE  | SHIP_EOB     | Last 6-12 months | Medical           |        1 |
-      | 15165 | SHIP_ACTIVE2 | SHIP_EOB2    | Last 6-12 months | Medical           |        1 |
+     | planType     | memberType   | dateRange        | eobType           | eobCount |
+      | SHIP_ACTIVE  | SHIP_EOB     | Last 6-12 months | Medical           |        1 |
+     | SHIP_ACTIVE2 | SHIP_EOB2    | Last 6-12 months | Medical           |        1 |
    @Rx_EOBs
     Examples: 
-      | TID   | planType     | memberType   | dateRange        | eobType           | eobCount |
-      | 15165 | PDP          | Rx_EOB       | Last 12 months   | Prescription Drug |        9 |
+       | planType     | memberType   | dateRange        | eobType           | eobCount |
+       | PDP          | Rx_EOB       | Last 12 months   | Prescription Drug |        9 |
       | 15165 | PDP          | RxGrp_EOB    | Last 18 months   | Prescription Drug |       14 |
 
   #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
