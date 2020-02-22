@@ -3,7 +3,7 @@ Feature: 1.04 To Test EOB for Members
 
   ######################   EOB Regression ###############################
   @eob6 @febRelease2018 @hsideob @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify NICE EOB and click on the pdf
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify NICE EOB and click on the pdf
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
