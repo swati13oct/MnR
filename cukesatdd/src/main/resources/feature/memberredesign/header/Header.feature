@@ -27,12 +27,12 @@ Feature: 1.08 Member Header/Navigation validation
 
     Examples: 
       | TID   | planType | memberType    | flow|
-      | 15164 | MAPD     | Individual  | header|
-      | 15164 | PDP     | Individual  | header|
-      | 15164 | MAPD     | PCP  | header|
+      | 15164 | MAPD     | Individual    | header|
+      | 15164 | PDP      | Individual    | header|
+      | 15164 | MAPD     | PCP           | header|
      
 
-  @header2 @premiumpaymentsheader @regressionMember
+  @header2 @premiumpaymentsheader @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check the Premium Payments Tab in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -95,7 +95,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID   | planType | memberType |flow |
 	      | 15251 | SHIP     | Medsupp    | header|
 
-  @header6 @Terminated_view @regressionMember @headerRegression
+  @header6 @Terminated_view @regressionMember @headerRegression 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given login with following details logins in the member portal and validate elements
 	      | Member Type | <memberType> |
@@ -108,4 +108,4 @@ Feature: 1.08 Member Header/Navigation validation
 	    Examples: 
 	      | TID   |   memberType    |
 	      | 15162 | Terminated    |  
-
+	
