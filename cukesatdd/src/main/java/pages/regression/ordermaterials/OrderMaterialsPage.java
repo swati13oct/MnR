@@ -404,9 +404,9 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			} else if (planType.equalsIgnoreCase("MEDICA") && option.equalsIgnoreCase("Member Materials")) { //note: only PDP can order Welcome Guide
 				Assert.assertTrue("PROBLEM - for MEDICA user should have gotten error message when attempting to order 'Membership Materials'",
 						orderValidate(errorMsg_serviceFail));
-			}// else {
-				//Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
-			//}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
+			}
 		} else {
 			System.out.println("Expected - ABLE to order item="+option);
 			validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);

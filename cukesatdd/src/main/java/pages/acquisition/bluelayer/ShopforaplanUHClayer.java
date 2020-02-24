@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.aop.target.SimpleBeanTargetSource;
 
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
 import org.junit.Assert;
 
 import acceptancetests.util.CommonUtility;

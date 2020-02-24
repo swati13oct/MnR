@@ -455,6 +455,7 @@ public class ClaimDetailsPage extends ClaimDetailsBase{
 		CommonUtility.waitForPageLoad(driver, claimsSummLnkOnDetlBtmPg, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claims summary page link",
 				claimsValidate(claimsSummLnkOnDetlBtmPg));
+		moveMouseToElement(claimsSummLnkOnDetlBtmPg);
 		claimsSummLnkOnDetlBtmPg.click();
 		CommonUtility.waitForPageLoad(driver, claimsSummHeader, 10);//need this more time to load SOFL pages 
 		sleepBySec(1);

@@ -32,7 +32,7 @@ Feature: 1.03-VBF-MemRedesign-To test contact us page
       | memberType       | planType |phoneNumber | newEmail       | newConfirmEmail |
       | GroupRetireeMapdContactUs |MAPD   |9999999999|test@optum.com | test@optum.com  |
 
-   @rallyDashboard @testharness @vbfGate
+   @rallyDashboard @testharness
   Scenario Outline: Verify Click to Call and email Widget section on contact us page for Federal member
     Given login with following details logins in the member portal and validate elements
        | Member Type | <memberType> |

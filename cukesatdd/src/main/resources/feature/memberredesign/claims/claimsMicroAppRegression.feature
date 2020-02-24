@@ -34,7 +34,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
 
 #----- beginning of regression section ---------------------------------------------
   @claimsMicroApp01
-  Scenario Outline: -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
+  Scenario Outline: -index: <index> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -90,35 +90,40 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     And I validate the claims summary link on claims detail top page
     Then I validate Claim Details page content with non zero claims value and Learn More and EOB and tooltips
 
-    @mapd_medical_cosmos @devRegression @mocked
+    @mapd_medical_cosmos1 @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 01_1  | 15230 | MAPD-COS-q3_sep_uat4_cosmos_008   | MAPD     | AARP_Individual | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
       | 01_2  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 01_3  | 15235 | MAPD-COS-q2_jun_uhc0009           | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_3  | 15235 | MAPD-UHC-COSMOS-q2_jun_uhc0009    | MAPD     | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+
+    @mapd_medical_cosmos2 @devRegression @mocked
+    Examples: 
+      | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
+      | 01_4  | xxxxx | SSP_CLAIMS_q1_feb_ssp_001         | SSUP     | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_5  | 15268 | MEDICA-COSMOS-q2_jun_sofl0013     | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+      | 01_6  | 15268 | PCP_CLAIMS_q3_sept_UAT4_AARP_032  | PCP      | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
+
+	 # note: don't have a working user that is SSP COMBO
+     #| 01_4  | 15259 | SSP-UHC-GROUP-COSMOS-q2_dec_grp0288 | SSUP   | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
     @ma_medical_cosmos @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 02_1  | 15234 | MA-q2_may_rally017                | MA       | UHC_Individual  | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months |
       | 02_2  | xxxxx | MA-COS-q2_jun_grp0154             | MA       | UHC_GROUP       | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 02_3  | 15259 | PDP+SSP_Group_Username-q2_dec_grp0288| SSUP     | UHC_COMBO_GROUP | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
-      | 02_4  | 15268 | Medica_q2_jun_sofl0013           | MEDICA   | Individual      | COSMOS_CLAIMS   | Medical           | 000       | Last 24 months | 
 
-	#@devRegression  - UUID and mocked BOTH are not ready for dev yet
-    @mapd_medical_nice @mocked
+    @mapd_medical_nice @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
       | 03_1  | 15235 | NICE-q2_jun_aarp0028              | MAPD     | AARP_Individual | NICE_CLAIMS     | Medical           | 000       | Last 24 months | 
 
-    # mocked is not ready for dev yet, UUID is ok
     @ship @devRegression @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 04_1  | 15236 | SHIP-q3_sep_Pre-effective_Ship_005| SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
+      | 04_1  | 15236 | SHIP_CLAIMS_q1_feb_2020SHIP_034   | SHIP     | Individual      | COMPASS_CLAIMS  | NA                | 000       | Last 24 months | 
 
     #These items still pending data
-    # | 15268 | PCP      | Individual          | Last 24 months | COSMOS_CLAIMS   | 000       | Medical           |
     # | 15227 | MA       | AARP_Individual_000 | Last 24 months | NICE_CLAIMS     | 000       | Medical           |
     # | xxxxx | MA       | AARP_Individual_001 | Last 24 months | NICE_CLAIMS     | 001       | Medical           |
 
@@ -126,7 +131,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
   ### note: this scenario is identical to the medical claims, any update related to summary steps need to apply to both scenarios
   ### note: this scenario doesn't contains steps related to detail page because drug case doesn't have detail page 
   @claimsMicroApp02
-  Scenario Outline: -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
+  Scenario Outline: -index: <index> -TID: <TID> -planType: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the DRUG claims Summary page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -137,8 +142,8 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     Then I can validate the claims summary header on claims summary page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    Then I can validate the segment ID value in localStorage on claims summary page
-      | Segment ID   | <segmentId>   |
+    #Then I can validate the segment ID value in localStorage on claims summary page
+    #  | Segment ID   | <segmentId>   |
     #----------------- Test Custom calendar and search error cases --------------------------
     And I can search claims for claim period and claim type on claim summary page
       | Plan Type    | <planType>    |
@@ -179,15 +184,15 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     @mapd_drug @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    | 
-      | 01_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_2  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
-      | 01_3  | 15235 | MAPD-RX-q3_sep_Rx_0009            | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 05_1  | xxxxx | MAPD-q3_sep_UAT4_Group029         | MAPD     | UHC_GROUP       | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 05_2  | 15230 | MAPD-RX-q2_jun_aarp0042           | MAPD     | AARP_Individual | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
+      | 05_3  | 15235 | MAPD-UHC-COSMOS-q2_jun_uhc0009    | MAPD     | UHC_Individual  | RX_CLAIMS       | Prescription drug | 000       | Last 24 months | 
 
     @pdp_drug @devRegression @mocked
     Examples: 
       | index | TID   | userSelection                     | planType | memberType      | claimSystem     | claimType         | segmentId | claimPeriod    |
-      | 02_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
-      | 02_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | 06_1  | 15299 | PDP-RX-q3_sep_UAT4_AARP315        | PDP      | Individual      | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
+      | 06_2  | 15300 | PDP-RX-q3_sep_UAT4_Group217       | PDP      | GROUP           | RX_CLAIMS       | Prescription drug | 000       | Last 24 months |
 
 
   @claimsMicroApp03 @TC_09claimsPHIP @regressionMember
@@ -261,6 +266,7 @@ Feature: 1.12 To validate the claims Summary page and claims Details page on the
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Validate Explanation of benefits Page for group SSUP
 
+    @devRegression @mocked
     Examples: 
       | FID    | userSelection                 | planType | memberType | claimSystem   |
       | 267688 | SSP-GRP-q2_june_Cosmos_Seg233 | SSUP     | EOB_GROUP  | COSMOS_CLAIMS |

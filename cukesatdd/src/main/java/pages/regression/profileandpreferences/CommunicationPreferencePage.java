@@ -18,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.memberrdesignVBF.GoGreenPage;
 import pages.regression.claims.ClaimsSummaryPage;
 
@@ -28,7 +29,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		PageFactory.initElements(driver, this);
 		try {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if (validate(iPerceptionPopUp)) {
+			if (validate(iPerceptionPopUp, 5)) {
 				System.out.println("Iperception popup found");
 				driver.navigate().refresh();
 			}
@@ -39,7 +40,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	@Override
 	public void openAndValidate() {
-		validateNew(profAndPrefLink);
+		Assert.assertTrue("PROBLEM - unable to locate profAndPrefLink", prefValidate(profAndPrefLink));
 	}
 
 	public ProfileandPreferencesPage clickProfAndPrefLink() {
@@ -52,28 +53,33 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	public boolean validatePageNonEPMP() {
 
 		CommonUtility.waitForPageLoadNew(driver, planNameGoGreen, 40);
-		if (validateNew(planNameGoGreen) && validateNew(communicationPreferences)&&validateNew(backLink1)&&validateNew(NoteSection)&&validateNew(GoGreenHeader)&&
-				validateNew(GoGreenText))
+		if (prefValidate(planNameGoGreen) && prefValidate(communicationPreferences) 
+				&& prefValidate(backLink1) && prefValidate(NoteSection) 
+				&& prefValidate(GoGreenHeader) && prefValidate(GoGreenText))
 			return true;
 		else
 			return false;
 	}
 
 	public boolean validatePageForShip() {
-		CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
-		validate(claimsLabel);
-		validate(planDocumentsLabel);
-		if (validateNew(savePrefButtonSHIP))
+		if (MRScenario.environment.contains("team-a")) {
 			return true;
-		else
-			return false;
+		} else {
+			CommonUtility.waitForPageLoad(driver, claimsLabel, 15);
+			Assert.assertTrue("PROBLEM - unable to locate claims doc label", prefValidate(claimsLabel));
+			Assert.assertTrue("PROBLEM - unable to locate plan doc label", prefValidate(planDocumentsLabel));
+			if (prefValidate(savePrefButtonSHIP))
+				return true;
+			else
+				return false;
+		}
 	}
 
 	public boolean changeAndVerifyOnlinePreference() {
 		driver.switchTo().defaultContent(); //note: make sure not on iframe first
 		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
 		System.out.println("validating frame");
-		validateNew(iframeEPMP);
+		Assert.assertTrue("PROBLEM - unable to locate iframe for EPMP", prefValidate(iframeEPMP));
 		System.out.println("frame validated");
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
@@ -82,16 +88,16 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 			CommonUtility.waitForPageLoad(driver, gopaperlessbutton, 5);
 		}
 
-		if (validateNew(gopaperlessbutton) && !(gopaperlessbutton.isSelected())) {
+		if (prefValidate(gopaperlessbutton) && !(gopaperlessbutton.isSelected())) {
 			gopaperlessbutton.click();
-			if (validateNew(agreeCheckBox)) {
+			if (prefValidate(agreeCheckBox)) {
 				agreeCheckBox.click();
 				System.out.println("agree button verified and clicked");
 			}
 			savePrefButton.click();
 			System.out.println("paperless button clicked and saved");
 			return true;
-		} else if (validateNew(mailButton) && !(mailButton.isSelected())) {
+		} else if (prefValidate(mailButton) && !(mailButton.isSelected())) {
 			mailButton.click();
 			savePrefButton.click();
 			System.out.println("mail button clicked and saved");
@@ -103,14 +109,16 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	/** Validate the communications page for ship members */
 	public void validateGoGreenSectionForShip() {
 		CommonUtility.waitForPageLoad(driver, onlineDeliveryRadioButton, 5);
-		validateNew(gogreenleaf);
-		validateNew(goggreenheader);
-		validateNew(onlineDeliveryRadioButton);
-		validateNew(mailRadioButton);
-		validateNew(claimsLabel);
-		validateNew(planDocumentsLabel);
-		validateNew(savePrefButtonSHIP);
-		validateNew(iHavereadCheckboxForShip);
+		Assert.assertTrue("PROBLEM - unable to locate go green leaf", validateNew(gogreenleaf));
+		Assert.assertTrue("PROBLEM - unable to locate go green header", validateNew(goggreenheader));
+		if (!MRScenario.environment.contains("team-a")) {
+			Assert.assertTrue("PROBLEM - unable to locate Online Delivery radio buttons", prefValidate(onlineDeliveryRadioButton));
+			Assert.assertTrue("PROBLEM - unable to locate Mail Radio buttons", prefValidate(mailRadioButton));
+			Assert.assertTrue("PROBLEM - unable to locate claims doc label", prefValidate(claimsLabel));
+			Assert.assertTrue("PROBLEM - unable to locate plan doc label", prefValidate(planDocumentsLabel));
+		}
+		Assert.assertTrue("PROBLEM - unable to locate save preferences button for ship user", prefValidate(savePrefButtonSHIP));
+		Assert.assertTrue("PROBLEM - unable to locate I have read check box for ship user", prefValidate(iHavereadCheckboxForShip));
 	}
 
 	public boolean validateifEPMPIframeIsPresent() {
@@ -150,7 +158,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validates the preferences for the SHIP members */
 	public void validateCommunicationPreferencesForShip(String planName) {
-		CommonUtility.waitForPageLoad(driver, claimsLabel, 5);
+		CommonUtility.waitForPageLoad(driver, claimsLabel, 10);
 		Assert.assertTrue("PROBLEM - unable to locate claimsLabel", validate(claimsLabel, 0));
 		Assert.assertTrue("PROBLEM - unable to locate planDocumentsLabel", validate(planDocumentsLabel,0));
 		Assert.assertEquals("PROBLEM planName not as expected.  Expected='"+planName+"' | Actual='"+shipPlanName.getText().trim()+"'", 
@@ -160,14 +168,14 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	/** Validates the headers on Go green page */
 	public void validateheader() {
 		CommonUtility.waitForPageLoad(driver, gogreenleaf, 7);
-		validateNew(gogreenleaf);
-		validateNew(goggreenheader);
+		Assert.assertTrue("PROBLEM - unable to locate go green leaf", prefValidate(gogreenleaf));
+		Assert.assertTrue("PROBLEM - unable to locate go green header", prefValidate(goggreenheader));
 	}
 
 	/** Validate planName for non-ship */
 	public void validatePlanName(String planName) {
 		String planNameOnProfilePage=planName;
-		validateNew(planNameGoGreen);
+		Assert.assertTrue("PROBLEM - unable to locate plan name for non-ship user", prefValidate(planNameGoGreen));
 		String planNameOnPreferencesPage=planNameGoGreen.getText();
 		Assert.assertTrue("PROBLEM - planName on Profile page is not same as on Preference page. "
 				+ "Profie='"+planNameOnProfilePage+"' | Preference='"+planNameOnPreferencesPage+"'", 
@@ -177,7 +185,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	/** Validate planName for ship */
 	public void validatePlanNameForShip(String planName) {
 		String planNameOnProfilePage=planName;
-		validateNew(shipPlanName);
+		Assert.assertTrue("PROBLEM - unable to locate plan name for ship user", prefValidate(shipPlanName));
 		String planNameOnPreferencesPage=shipPlanName.getText();
 		Assert.assertTrue("PROBLEM - planName on Profile page is not same as on Preference page. "
 				+ "Profie='"+planNameOnProfilePage+"' | Preference='"+planNameOnPreferencesPage+"'", 
@@ -187,7 +195,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	/** Validates the Go green button in Communication Preferences section */
 	public GoGreenPage validategogreenbutton() {
 		CommonUtility.waitForPageLoad(driver, iframeForFederalMembers, 20);
-		validateNew(iframeForFederalMembers);
+		validateNew(iframeForFederalMembers,5);
 		driver.switchTo().frame(0);
 
 		//note: if options are collapsed, need to expand first
@@ -218,11 +226,17 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validates the save preferences functionality on Go green page */
 	public void validateSavePreferences() {
-		validateNew(savePreferencesButton);
+		validateNew(savePreferencesButton,5);
 		if (iHavereadCheckbox.isSelected()) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			savePreferencesButton.click();
-			CommonUtility.waitForPageLoad(driver, EditPreferenceButton, 5);
-			Assert.assertTrue("PROBLEM - EditPreferenceButton is not displayed",EditPreferenceButton.isDisplayed());
+			//note: for iframe case, clicking save will still be in the edit box
+			//tbd CommonUtility.waitForPageLoad(driver, EditPreferenceButton, 5);
+			//tbd Assert.assertTrue("PROBLEM - EditPreferenceButton is not displayed",EditPreferenceButton.isDisplayed());
 		}
 	}
 
@@ -232,12 +246,12 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	 */
 	public ProfileandPreferencesPage validateBacktoPNPlink() {
 		driver.switchTo().defaultContent();
-		validateNew(backLink1);
+		prefValidate(backLink1);
 		///validating back link on the top
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
 		System.out.println("scrolling down");
-		validateNew(backLink2);
+		Assert.assertTrue("PROBLEM - unable to locate link to go back to prior page", prefValidate(backLink2));
 		backLink2.click();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new ProfileandPreferencesPage(driver);
@@ -257,11 +271,11 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public ProfileandPreferencesPage validateBacktoPNPlinkForShip() {
-		validateNew(backLink1);  //validating back link on the top
+		prefValidate(backLink1);  //validating back link on the top
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
 		System.out.println("scrolling down");
-		validateNew(backLink2);  //validating back link at the bottom
+		Assert.assertTrue("PROBLEM - unable to locate link back to prior page", prefValidate(backLink2));  //validating back link at the bottom
 		backLink2.click();
 		CommonUtility.waitForPageLoad(driver, headingTxt, 5);
 		if (driver.getCurrentUrl().contains("profile"))
@@ -272,6 +286,10 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	public void validateUpdatePreferencesForShip() {
 		boolean claimsOnlineDeliverySelected =false;
 		boolean planDocumentsOnlineDeliverySelected=false;
+		if (MRScenario.environment.contains("team-a") && !prefValidate(claimsMailDelivery)) {
+			System.out.println("On lower env if user has mocked data, radio buttons for edit preference may not show, skipp this validation");
+			return;
+		}
 		System.out.println(claimsMailDelivery.isSelected()); 
 		//Validating for Claims 
 		if(claimsMailDelivery.isSelected()){
@@ -296,7 +314,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		if(modalPopupWindow.size()>0) {
 			boolean isYesSelected=modalPopupWindowYesButton.isSelected();
 			if(isYesSelected) {
-				validateNew(modalPopupWindowSubmitButton);
+				validateNew(modalPopupWindowSubmitButton,5);
 				modalPopupWindowSubmitButton.click();
 			} else {
 				modalPopupWindowYesButton.click();
@@ -322,22 +340,22 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(50);
 		String emailAddress = "alisha_kapoor" + randomNumber + "@optum.com";
-		validateNew(emailEditButtonOnIframe);
+		Assert.assertTrue("PROBLEM - unable to locate email edit button", prefValidate(emailEditButtonOnIframe));
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(emailEditButtonOnIframe));
 
 		emailEditButtonOnIframe.click();
-		validateNew(newEmailTextfield);
+		prefValidate(newEmailTextfield);
 		newEmailTextfield.clear();
-		validateNew(saveButtonOnEmailUpdatePopup);
-		validateNew(cancelButtonOnEmailUpdatePopup);
+		Assert.assertTrue("PROBLEM - unable to locate save button on email update popup", prefValidate(saveButtonOnEmailUpdatePopup));
+		Assert.assertTrue("PROBLEM - unable to locate cancel button on email update popup", prefValidate(cancelButtonOnEmailUpdatePopup));
 		newEmailTextfield.sendKeys(emailAddress);
 		saveButtonOnEmailUpdatePopup.click();
 		CommonUtility.waitForPageLoad(driver, emailUpdateSuccTxt, 20);
 		//to close the popup
 		cancelButtonOnEmailUpdatePopup.click();
 		CommonUtility.waitForPageLoad(driver, updatedEmailAfterSave, 5);
-		validateNew(updatedEmailAfterSave);
+		prefValidate(updatedEmailAfterSave);
 		Assert.assertTrue("PROBLEM - not getting expected Email.  Expected='"+emailAddress+"' | Actual='"+updatedEmailAfterSave.getText()+"'", 
 				updatedEmailAfterSave.getText().contains(emailAddress));
 	}
@@ -345,7 +363,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	/** Validates the Note section on Go green page */
 	public void validateNoteSection() {
 		driver.switchTo().defaultContent(); //note: switch out of iframe if necessary
-		validateNew(NoteSection);
+		Assert.assertTrue("PROBLEM - unable to locate Note section", prefValidate(NoteSection));
 		String noteContentActual = NoteSection.getText();
 		String noteContentExpected = "Note: it may take up to two mail cycles for your updated delivery preferences to take effect. Your mailing cycle-the length of time between documents-varies by document. When the paper mailings stop, you will receive an email notification alerting you that a new document has been posted to your online account.";
 		Assert.assertTrue("PROBLEM - not getting expected Note. Expected='"+noteContentExpected+"' | Actual='"+noteContentActual+"'", 
@@ -360,21 +378,28 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	public void clickSaveBtnShip() {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Save' button", 
-				validate(btnSavePrefSHIP));
+				prefValidate(btnSavePrefSHIP));
 		btnSavePrefSHIP.click();
 	}
 
-	public void validatePopUp() {
+	public void validatePopUp(String planName) {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, submitBtnForWelcomeKitYES, 5);
-		Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
-				validate(welcomeKitNo));
-		Assert.assertTrue("PROBLEM - unable to locate the 'Yes' radio option on popup after clicking 'Save' button", 
-				validate(welcomeKitYES));
-		welcomeKitYES.click();
-		Assert.assertTrue("PROBLEM - unable to locate the 'submit' button on the popup", 
-				validate(submitBtnForWelcomeKitYES));
-		submitBtnForWelcomeKitYES.click();
+		if (planName.equalsIgnoreCase("AARP GROUP HOSPITAL PLAN")) {
+			CommonUtility.waitForPageLoad(driver, hipOrPhipPlansOkBtn, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
+					prefValidate(hipOrPhipPlansOkBtn));
+			hipOrPhipPlansOkBtn.click();
+		} else {
+			CommonUtility.waitForPageLoad(driver, submitBtnForWelcomeKitYES, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'No' radio option on popup after clicking 'Save' button", 
+					prefValidate(welcomeKitNo));
+			Assert.assertTrue("PROBLEM - unable to locate the 'Yes' radio option on popup after clicking 'Save' button", 
+					prefValidate(welcomeKitYES));
+			welcomeKitYES.click();
+			Assert.assertTrue("PROBLEM - unable to locate the 'submit' button on the popup", 
+					prefValidate(submitBtnForWelcomeKitYES));
+			submitBtnForWelcomeKitYES.click();
+		}
 	}
 
 	public void validateSuccessText() {
@@ -398,14 +423,14 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public void validatePreferencesPage(){
-		validateNew(iframeForFederalMembers);
-		validateNew(backLink1);
+		Assert.assertTrue("PROBLEM - unable to locate iframe for Federa members", prefValidate(iframeForFederalMembers));
+		Assert.assertTrue("PROBLEM - unable to locate back link to prior page", prefValidate(backLink1));
 	}
 
 	public ClaimsSummaryPage navigateToClaimsPage(){
 		claimsTab.click();
 
-		if(validateNew(claimsHeader))
+		if(prefValidate(claimsHeader))
 			return new ClaimsSummaryPage(driver);
 		return null;
 	}
@@ -470,7 +495,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	 * @return
 	 */
 	public boolean prefValidate(WebElement element) {
-		int timeoutInSec=2;
+		int timeoutInSec=0;
 		return prefValidate(element, timeoutInSec);
 	}
 	
@@ -482,6 +507,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	 * @return
 	 */
 	public boolean prefValidate(WebElement element, int timeoutInSec) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 			wait.until(ExpectedConditions.visibilityOf(element));
@@ -495,8 +521,32 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 			System.out.println("Exception: Element not found/not visible. Exception message - "+e.getMessage());
 
 		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	}	
+	
+	//note: modify only if scenario is targetting specific for combo tab validation
+	//note: for now only check if combo then click the right tab, don't flag it if it doesn't have combo tab.
+	public void clickCombTab(String plan) {
+		if (plan.equalsIgnoreCase("mapd")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", validate(comboTab_MAPD));
+			if (prefValidate(comboTab_MAPD)) 
+				comboTab_MAPD.click();
+		} else if (plan.equalsIgnoreCase("ship")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", validate(comboTab_SHIP));
+			if (prefValidate(comboTab_SHIP))
+				comboTab_SHIP.click();
+		} else if (plan.equalsIgnoreCase("pdp")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_PDP));
+			if (prefValidate(comboTab_PDP))
+				comboTab_PDP.click();
+		} else if (plan.equalsIgnoreCase("ssup")) {
+			//Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", validate(comboTab_SSUP));
+			if (prefValidate(comboTab_SSUP)) 
+				comboTab_SSUP.click();
+		} 
+	}
 }
 
 

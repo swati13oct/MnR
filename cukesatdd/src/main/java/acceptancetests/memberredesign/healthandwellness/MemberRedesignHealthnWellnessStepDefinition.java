@@ -1,4 +1,8 @@
 package acceptancetests.memberredesign.healthandwellness;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +12,13 @@ import pages.memberredesign_deprecated.bluelayer.AccountHomePage;
 import pages.memberredesign_deprecated.bluelayer.HealthAndWellness;
 import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.testharness.TestHarness;
 /**
@@ -32,7 +39,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 	 */
 	@When("^I view the global navigation HW$")
 	public void I_view_the_global_navigation() throws InterruptedException {
-		if (MRScenario.environmentMedicare.contains("team-a")) {
+		if (MRScenario.environment.contains("team-a")) {
 			Assert.assertTrue("Health and Wellness page content won't load on lower environment, fail it to exit", false);
 			return;
 		}
@@ -105,6 +112,26 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		healthnWellnessPage.clicAndValidateRewardsPage();
 	} */
 
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
 
+	@And("^I should see GET REWARD tile if available and be able to click it$")
+	public void getRewardValidation(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		HealthAndWellnessPage healthnWellnessPage = (HealthAndWellnessPage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE);
+		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA")) {
+			healthnWellnessPage.validateGetReward();
+		} else {
+			healthnWellnessPage.validateNoGetReward();
+		}
+	}
 
 }

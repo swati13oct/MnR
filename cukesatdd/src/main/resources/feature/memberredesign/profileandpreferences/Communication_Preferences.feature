@@ -53,9 +53,9 @@ Feature: 1.03 Member Preferences page
     Then the user validates the presence of Communication preferences header
     And the user clicks on edit preferences link
     Then the user validates headers on Preferences page
-    Then I can validate the segment ID value in localStorage on preference page
-      | Plan Type  | <planType>  |
-      | Segment ID | <segmentId> |
+    #Then I can validate the segment ID value in localStorage on preference page
+    #  | Plan Type  | <planType>  |
+    #  | Segment ID | <segmentId> |
     Then the user validates the presence of Plan Name on Communication Preferences Page
     And the user validates the iframe on Communication Preferences Page
     Then the user validates the I have read checkbox and check it
@@ -63,7 +63,7 @@ Feature: 1.03 Member Preferences page
     Then the user validates the Note Section on Preferences Page
     Then the user validates the presence of Back links on Preferences page
 
-    Examples: 
+     Examples: 
       | TID   | userSelection | planType                         | segmentId |  
       | 15311 | xxxxx         | MAPD_AARP_GOGreen_Profilepref    | 000       |
       | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref      | 000       |
@@ -111,10 +111,10 @@ Feature: 1.03 Member Preferences page
     Then the user validates the update preferences functionality for ship
     Then the user validates the presence of Back links on ship Preferences page 
 
-	@devRegression
+	@devRegression @mocked
     Examples: 
-      | TID    | userSelection | planType | memberType       |
-      | 15309  | xxxxxxxxx     | SHIP     | SHIP_ProfilePref |
+      | TID    | userSelection           | planType | memberType       |
+      | 15309  | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref |
 
   @CommunicationPreferences04 @EPMPpreferencesForComboOnProfile @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - memberType: <memberType> - To test end to end regression preferences scenario for combo member
@@ -122,38 +122,38 @@ Feature: 1.03 Member Preferences page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And I should see the combo tabs on Preferences page and user validates the elements on individual tabs
 
     Examples: 
-      | TID   | userSelection | planType       | memberType              |
-   #  | 15310 | xxxxx         | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
-      | 15310 | xxxxx         | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
+      | TID   | planType       | memberType              |
+   #  | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @CommunicationPreferences05 @NoEPMPpreferences @regressionMember
   Scenario Outline: TID: <TID> - plan: <planType> - Verify use doesn't have Communication Preferences section
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-      | User Selection | <userSelection> |
     When the user navigates to Profile and Preferences page
     And the user validates that Communication Preferences section does not display
       | Plan Type   | <planType>   |
 
     Examples: 
-      | TID   | userSelection | planType               |
-      | 15310 | xxxxx         | SSUP_ProfilePref       |
-      | 15376 | xxxxx         | Terminated_ProfilePref |
-      | 15308 | xxxxx         | PCP_ProfilePref        |
-      | 15308 | xxxxx         | MEDICA_ProfilePref     |
+      | TID   | planType               |
+      | 15310 | SSUP_ProfilePref       |
+      | 15376 | Terminated_ProfilePref |
+      | 15308 | PCP_ProfilePref        |
+      | 15308 | MEDICA_ProfilePref     |
       
   @CommunicationPreferences06 @CommunicationPreferencesMicroApp06 @regressionMember @F276629
-  Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP
+  Scenario Outline: FID: <FID> -plan: <planType> - Verify Plan documents for SHIP with plan <planName>
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
-      | User Selection | <userSelection> |
+      | Member Type | <memberType> |
     When the user navigates to Profile and Preferences page
     Then the user navigates to Communication Preferences page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
     Then the user validates that Communication Preferences section for Ship
       | Plan Name | <planName> |
     And the user select "US MAIL" for "Plan Documents"
@@ -165,7 +165,11 @@ Feature: 1.03 Member Preferences page
     And the user click Terms and Conditions check box
     And the user click on the Save Preferences button
     Then a popup is displayed and validate the popup select Yes and submit
+      | Plan Name | <planName> |
     And the user validate the success message
+
     Examples: 
-      | FID    | userSelection | planType                 | planName                      |
-      | 276629 | xxxxx         | SHIP_MedSel_ProfilePref  | AARP MEDICARE SUPPLEMENT PLAN |
+      | FID    | planType                 | memberType             | planName                      |
+      | 276629 | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
+      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
+      

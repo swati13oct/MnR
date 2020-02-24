@@ -11,7 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import atdd.framework.UhcDriver;
 

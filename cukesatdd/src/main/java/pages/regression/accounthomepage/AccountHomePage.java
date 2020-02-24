@@ -47,6 +47,7 @@ import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.pharmacylocator.PharmacySearchPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 //import pages.member_deprecated.bluelayer.BenefitsAndCoveragePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import org.apache.commons.lang.time.StopWatch;
@@ -3300,6 +3301,73 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+		
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(String memberType, String planType, int forceTimeoutInMin)
+				throws InterruptedException {
+		checkForIPerceptionModel(driver);
+		StopWatch pageLoad = new StopWatch();
+		pageLoad.start();
+		try {
+			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+
+			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+				System.out.println("user is on Stage login page");
+				if ((driver.getCurrentUrl().contains("/aarp/dashboard")) 
+						&& ((!memberType.toLowerCase().contains("pcp") && !memberType.toLowerCase().contains("medica"))
+								&& (!planType.toLowerCase().contains("pcp") && !planType.toLowerCase().contains("medica")))) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "aarp/member/documents/overview.html");
+					// https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html
+				} else if ((driver.getCurrentUrl().contains("mymedicareaccount"))
+						&& (memberType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("pcp"))) {
+					System.out.println("User is on pcp dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/pcp/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if (driver.getCurrentUrl().contains("/retiree/dashboard")) {
+					System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "retiree/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if (driver.getCurrentUrl().contains("/medicare/dashboard")) {
+					System.out.println("User is on  dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to(PAGE_URL + "medicare/member/documents/overview.html");
+					System.out.println(driver.getCurrentUrl());
+				} else if ((driver.getCurrentUrl().contains("mymedicareaccount"))
+						&& (memberType.toLowerCase().contains("medica") || planType.toLowerCase().contains("medica"))) {
+					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
+				}
+			} else {
+				if (driver.getCurrentUrl().contains("mymedicareaccount"))
+					driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-mymedicareaccount.uhc.com/content/medicare/member/documents/overview.html");
+				else {
+					driver.navigate().to("https://" + MRScenario.environmentMedicare
+							+ "-medicare.ose-elr-core.optum.com/content/medicare/member/documents/overview.html");
+				}
+			}
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+		} catch (WebDriverException we) {
+			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+		}
+		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+		Thread.sleep(2000); // note: give it a bit more time to settle down
+		pageLoad.stop();
+		long pageLoadTime_ms = pageLoad.getTime();
+		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+
+		if (driver.getTitle().contains("Documents")) {
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+		return null;
+	}		
 
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' login page");

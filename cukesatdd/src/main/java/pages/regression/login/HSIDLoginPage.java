@@ -249,8 +249,10 @@ public class HSIDLoginPage extends UhcDriver {
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		if (MRScenario.environmentMedicare.equals("team-e")
-				|| MRScenario.environmentMedicare.equals("team-ci1")) {
+		//tbd if (MRScenario.environmentMedicare.equals("team-e")
+		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
+		if (MRScenario.environment.equals("team-e")
+				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}

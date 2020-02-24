@@ -426,6 +426,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	   
 	   public static final String ADD_DRUG_DETAILS = "addDrugDetails";
+	   public static final String DCE_TESTHARNESS_PAGE = "dceTestHarnessPage";
 	   
 	   public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	   public static final String SAVING_OPPORTUNITY = "savingopportunity";
@@ -683,4 +684,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	public static final String ACQ_PAGE_DRIVER="acq_page_driver";
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
+	
+	public static final String PLAN_DOCUMENTS_AND_RESOURCES_PAGE="plan_documents_and_resources_page";
+	
 }

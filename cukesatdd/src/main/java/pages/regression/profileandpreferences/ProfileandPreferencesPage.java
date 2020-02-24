@@ -1198,15 +1198,20 @@ private WebElement editEmailAddressArrowbutton;
 	 *       section
 	 */
 	public void validateseemorewaystext() {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,4000)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!validate(contactUs,0)) {
+			//note: if can't see the element, see if you are still on iframe, switch out if need to
+			driver.switchTo().defaultContent();		
+			System.out.println("out of iframe...switched back to default content");
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,4000)", "");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			validateNew(contactUs); //note: validate again now that you are out of the iframe
 		}
-		validateNew(contactUs);
+		//note: if you get to here then it means link is found, moving on.
 	}
 
 	/**
@@ -1319,7 +1324,7 @@ private WebElement editEmailAddressArrowbutton;
 			iframeBackToPriorPageArrow.click();
 
 			driver.switchTo().defaultContent();		
-			System.out.println("out of iframe...switch back to default content");
+			System.out.println("out of iframe...switched back to default content");
 			CommonUtility.checkPageIsReady(driver);
 		}
 	}	
@@ -1383,8 +1388,8 @@ private WebElement editEmailAddressArrowbutton;
 
 	public void validatecommunicationpreferences() {
 		driver.switchTo().defaultContent();
-		validateNew(communicationpreferncessection);
-		validateNew(editPreferencesLink);
+		validateNew(communicationpreferncessection, 5);
+		validateNew(editPreferencesLink, 5);
 	}
 
 
@@ -2290,13 +2295,22 @@ private WebElement editEmailAddressArrowbutton;
 		} */
 
 		saveButtonInPhoneEdit.click();
-		/* tbd 
+		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} */
+		} 
+		System.out.println("1 - validate(enrollTxtMsgQuestion,0)="+validate(enrollTxtMsgQuestion,0));
+		System.out.println("2 - validate(enrollTxtYes,0)="+validate(enrollTxtNo,0));
+		
+		if (validate(enrollTxtMsgQuestion,0)) {
+			CommonUtility.waitForPageLoad(driver, enrollTxtNo, 5);
+			enrollTxtNo.click();
+			CommonUtility.waitForPageLoad(driver, saveButtonInPhoneEdit, 5);
+			saveButtonInPhoneEdit.click();
+		}
 		CommonUtility.waitForPageLoad(driver, homePhoneNumberValue, 5);
 		validateNew(homePhoneNumberValue);
 		Assert.assertTrue("Not able to validate the phone update functionality", 
@@ -2309,6 +2323,12 @@ private WebElement editEmailAddressArrowbutton;
 		} */
 
 	}
+	
+	@FindBy(xpath="//*[contains(text(),'enroll in text')]")
+	private WebElement enrollTxtMsgQuestion;
+	
+	@FindBy(xpath="//label[contains(@for,'enroll-sms-group-N')]")
+	private WebElement enrollTxtNo;
 
 	public void validateEPMPHealthSafeIdLink() {
 
@@ -3227,4 +3247,6 @@ private WebElement cancelButtonOnPhoneSavepre;
 		validateNew(CancelButtontempAddress);
 		validateNew(CancelButtontoptempAddress);
 	}
+	
+
 	}

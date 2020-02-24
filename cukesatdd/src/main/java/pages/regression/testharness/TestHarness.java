@@ -5,8 +5,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -33,6 +35,7 @@ import pages.regression.healthandwellness.*;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
 import pages.regression.pharmacylocator.*;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
@@ -207,6 +210,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'testharnessHeader')]")
 	private WebElement testHarnessHeader;
 	
+	
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
@@ -278,7 +282,7 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
-		if (MRScenario.environmentMedicare.contains("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
+		if (MRScenario.environment.contains("team-a") ||MRScenario.environment.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 			return;
 		}
@@ -1137,6 +1141,56 @@ public class TestHarness extends UhcDriver {
     		return null;
     	}    
     	
+    	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
+    		checkForIPerceptionModel(driver);
+    		StopWatch pageLoad = new StopWatch();
+    		pageLoad.start();
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		scrollToView(formsPageLink);
+    		try {
+    			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+    			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+    			jsClickNew(formsPageLink);
+        		Thread.sleep(5000);
+        		isAlertPresent();
+        		CommonUtility.checkPageIsReady(driver);
+    		} catch (org.openqa.selenium.TimeoutException e) {
+    			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+    			driver.quit(); //note: force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    		} catch (WebDriverException we) {
+    			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+    			//driver.quit(); //force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    		}
+    		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+    		Thread.sleep(2000); // note: give it a bit more time to settle down
+    		pageLoad.stop();
+    		long pageLoadTime_ms = pageLoad.getTime();
+    		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+    		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+    		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+    		if (driver.getTitle().contains("Documents")) {
+    			return new PlanDocumentsAndResourcesPage(driver);
+    		}
+    		return null;
+    	}  
+    	
+    	public boolean isAlertPresent() {
+    		try {
+    				Alert alert = driver.switchTo().alert();
+    				alert.accept();
+    				System.out.println("Detected Alert popup, accept it and move on...");
+    		} catch (NoAlertPresentException Ex) {
+    			System.out.println("DID NOT detect Alert popup, move on...");
+    			return false;
+    		}
+    		return true;
+    	}
+
+
+    	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
@@ -1280,7 +1334,10 @@ public class TestHarness extends UhcDriver {
     	public void validateLoginonTestharness() throws InterruptedException {
     		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
     		String Message_text = testHarnessHeader.getText();
-    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    		Assert.assertTrue(Message_text.contains("Test Harness"));
+    		System.out.println(" *** TestHarness message assert is passed on the Testharness *** ");  
+    		System.out.println("***The member is on Test Harness Dashboard & the text is :- "+ Message_text);
+    		    		
     	}
     	
     	@FindBy(xpath = "//*[contains(@id,'home_2')]")
