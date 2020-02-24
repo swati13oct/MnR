@@ -1815,4 +1815,44 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DCETestHarnessPage GetDCEtestHarnessPage() {
 		return new DCETestHarnessPage(driver);
 	}
+
+	public VPPPlanSummaryPage searchPlansCounty(String countyName) {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+		}
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			System.out.println("County should be selected : " + countyName);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPage searchPlansNoCounty() {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		}
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
 }

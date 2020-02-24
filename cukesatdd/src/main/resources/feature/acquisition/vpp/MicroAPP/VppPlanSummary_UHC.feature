@@ -39,7 +39,6 @@ Feature: Vpp to plan Summary UHC Scenarios
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans in UMS Site
     Then the user clicks on Enroll Now for UMS site and validates the Welcome to OLE Page
 
-
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                       | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible |
       #| 15553 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
@@ -303,3 +302,33 @@ Feature: Vpp to plan Summary UHC Scenarios
     Examples: 
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+  @vppPlanSummaryUHC13
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on the uhcmedicaresolutions site landing page
+    When the user clicks on Lookup zipcode on UHC
+    Then verify find a zipcode popup displpayed and Enter values and click on LookupZipcode on uhc
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user performs plan search using following information in the uhc site
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When user views plans of the below plan type in UMS site for current year
+      | Plan Type | <plantype> |
+    Then the user validates the right rail in UMS Site
+    Then the user validates the Need Help Section in the right rail in ums Site
+    Then the user validates the TFN in the Need Help Section in ums Site
+    And the user validates and clicks on Find an agent in your area link in ums Site
+    Then the user validates Get a free medicare Guide section in the right rail in ums Site
+    Then the user enters the following information in the Get a free medicare Guide section in ums Site
+      | First Name    | <firstName>    |
+      | Last Name     | <lastName>     |
+      | Email Address | <emailAddress> |
+    Then the user validates Plan Selector Tool section in the right rail in ums Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  |
+      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
+      | 15550 |   30606 | YES             | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |
