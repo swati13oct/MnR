@@ -158,7 +158,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 
 	/** Validates the preferences for the SHIP members */
 	public void validateCommunicationPreferencesForShip(String planName) {
-		CommonUtility.waitForPageLoad(driver, claimsLabel, 10);
+		CommonUtility.waitForPageLoad(driver, claimsLabel, 20);
 		Assert.assertTrue("PROBLEM - unable to locate claimsLabel", validate(claimsLabel, 0));
 		Assert.assertTrue("PROBLEM - unable to locate planDocumentsLabel", validate(planDocumentsLabel,0));
 		Assert.assertEquals("PROBLEM planName not as expected.  Expected='"+planName+"' | Actual='"+shipPlanName.getText().trim()+"'", 

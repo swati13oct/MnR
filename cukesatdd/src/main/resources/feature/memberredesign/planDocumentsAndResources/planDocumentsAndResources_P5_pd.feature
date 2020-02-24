@@ -80,7 +80,7 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-#AX      | 18-094 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false | false | false    | false    | false    | false    | false    | false    |
+      | 18-094 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false | false | false    | false    | false    | false    | false    | false    |
 
 	@active_ship @devRegression
 	Examples: 

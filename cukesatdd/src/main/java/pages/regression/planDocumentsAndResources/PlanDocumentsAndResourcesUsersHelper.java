@@ -237,6 +237,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -445,8 +446,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
-				targetTestDocList.add("Disenrollment Form (PDF)");
 				targetTestDocList = new ArrayList<String>();
+				targetTestDocList.add("Disenrollment Form (PDF)");
 				return targetTestDocList;
 			}
 			if (subSection.equals("SHIP")) {
@@ -598,6 +599,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -663,6 +665,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		}
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -861,6 +864,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("EN-nextYear")) {
@@ -876,6 +880,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 		}
@@ -889,20 +894,24 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Reimbursement Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Medication Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("Other Resources")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Appeals and Grievances – Medicare Advantage Plans");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (Online)");
 				targetTestDocList.add("Medicare Plan Appeals & Grievances Form (PDF)");
@@ -914,6 +923,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Disenrollment Form");
 				return targetTestDocList;
 			}
@@ -1134,7 +1144,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Formulary/Drug List - Comprehensive");
+				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				targetTestDocList.add("Prior Authorization Criteria");
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
@@ -1154,7 +1164,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
@@ -1176,7 +1186,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
@@ -1246,6 +1256,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				targetTestDocList.add("Appointment of Representative Form");
 				return targetTestDocList;
@@ -1299,7 +1310,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Privacy Notice");
-				targetTestDocList.add("CDI Long Notice (CA Only)");
+				targetTestDocList.add("CDI Long Notice");
+				//targetTestDocList.add("CDI Long Notice (CA Only)");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1314,7 +1326,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Moving to your new plan");
 				targetTestDocList.add("Your Plan Getting Started");
 				targetTestDocList.add("Schedule of Benefits");
 				targetTestDocList.add("Certificate of Coverage");
@@ -1397,6 +1408,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -1560,6 +1572,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -1762,6 +1775,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -1789,7 +1803,6 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
 				targetTestDocList.add("Seasonal flu shot information");
-
 				return targetTestDocList;
 			}
 			if (subSection.equals("Disenrollment")) {
@@ -1967,6 +1980,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -2291,8 +2305,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
-				//tbd targetTestDocList.add("Medical Reimbursement Form (PDF)"); //TODO - BAD: UI showed this but copy deck expect the 'How to appoint..."
+				//tbd targetTestDocList.add("Medical Reimbursement Form (PDF)"); 
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				return targetTestDocList;
@@ -2390,6 +2405,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		}
 		if (section.equals("Annual Notice of Changes Documents")) {//note: ANOC
 			if (subSection.equals("EN-currentYear")) {
+				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
@@ -2460,6 +2476,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -2583,7 +2600,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Vendor Information Sheet"); //TODO: BAD
+				targetTestDocList.add("Vendor Information Sheet"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -2626,6 +2643,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -2751,7 +2769,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Vendor Information Sheet"); //TODO: BAD
+				targetTestDocList.add("Vendor Information Sheet"); 
 				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
@@ -2799,6 +2817,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
@@ -2855,15 +2874,15 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Getting Started Guide");
 				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Summary of Benefits"); //TODO
+				targetTestDocList.add("Summary of Benefits"); 
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Formulary/Drug List - Comprehensive"); //TODO
-				targetTestDocList.add("Additional Drug Coverage"); //TODO
-				targetTestDocList.add("Prior Authorization Criteria"); //TODO
-				targetTestDocList.add("Step Therapy Criteria"); //TODO
-				targetTestDocList.add("Formulary Additions");//TODO
-				targetTestDocList.add("Formulary Deletions");//TODO
+				targetTestDocList.add("Formulary/Drug List - Comprehensive"); 
+				targetTestDocList.add("Additional Drug Coverage"); 
+				targetTestDocList.add("Prior Authorization Criteria"); 
+				targetTestDocList.add("Step Therapy Criteria"); 
+				targetTestDocList.add("Formulary Additions");
+				targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2946,11 +2965,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Forms And Resources")) { //note: FnR
 			if (subSection.equals("Prescription Drug Mail Order Form")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
 			if (subSection.equals("Premium Payment Information")) {
-				targetTestDocList = new ArrayList<String>();
 				targetTestDocList = new ArrayList<String>();
 				return targetTestDocList;
 			}
@@ -3120,6 +3137,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				targetTestDocList.add("Appointment of Representative Form");
 				return targetTestDocList;
@@ -3279,6 +3297,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
+				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Authorization to Share Personal Information Form");
 				targetTestDocList.add("Appointment of Representative Form");
 				return targetTestDocList;
