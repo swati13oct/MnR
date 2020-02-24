@@ -101,6 +101,11 @@ public class ValueAddedServicepage extends UhcDriver {
 	 */
 	public void vastiles()
 	{
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		validateNew(atYourBestTile);
 		validateNew(hearingCareProgramByHearUSATile);
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));

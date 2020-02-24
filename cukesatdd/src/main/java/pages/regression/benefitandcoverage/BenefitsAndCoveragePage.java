@@ -1344,7 +1344,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validateTownOfGreenwichdrugtable() {
 		sleepBySec(5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-500)", "");
+		jse.executeScript("arguments[0].scrollIntoView(true);", GreenwichTable);
 		validateNew(GreenwichTable);
 		String TableData="Standard Network Pharmacy Retail Drug Costs\n"
 		        +"Copay *\n"
