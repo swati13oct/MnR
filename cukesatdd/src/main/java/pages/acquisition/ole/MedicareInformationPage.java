@@ -198,9 +198,9 @@ public class MedicareInformationPage extends UhcDriver{
 				Assert.fail("Correct Label not displayed for CARD A");
 				/*System.out.println("Correct Label not displayed for CARD A");
 				return null;*/
-			}
-		}*/
-		/*if(CardType.contains("MBI")){  */
+			/*}
+		}
+		if(CardType.contains("MBI")){  */
 			SelectCardB.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
