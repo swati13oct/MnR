@@ -200,7 +200,7 @@ public class MedicareInformationPage extends UhcDriver{
 				return null;*/
 			/*}
 		}
-		if(CardType.contains("MBI")){  */
+		if(CardType.contains("MBI")){  
 			SelectCardB.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
@@ -210,10 +210,10 @@ public class MedicareInformationPage extends UhcDriver{
 			}
 			else{
 				Assert.fail("Correct Label not displayed for CARD B");
-				/*System.out.println("Correct Label not displayed for CARD B");
-				return null;*/
+				System.out.println("Correct Label not displayed for CARD B");
+				//return null;
 			}
-		//}
+		} */
 		sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
 		sendkeysNew(claimNumberField, MedicareNumber);
