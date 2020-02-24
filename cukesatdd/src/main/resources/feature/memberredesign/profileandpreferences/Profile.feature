@@ -172,7 +172,7 @@ Feature: 1.02 Member Profile page
      | Unknown_4 | MAPD     | EPMPEnabled | Individual_ProfilePref |
 
   @accountProfile09 @accountProfileMicroApp09 @EMPMprofilePageForShip @regressionMember
-  Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
+  Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for SHIP members
     Given login with following details logins in the member portal and validate elements 
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |

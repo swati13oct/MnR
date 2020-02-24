@@ -1,31 +1,13 @@
 package pages.regression.planDocumentsAndResources;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang.time.StopWatch;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 
@@ -541,11 +523,19 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement howToFileAClaim_link_SHIP_FnR;
 	//- href="/content/dam/UCP/SHIP/CLMSUPB.pdf"
 	
+	@FindBy(xpath="//h1")
+	protected WebElement generalPgHeader;
+
 	//---------------------------------
 	@FindBy(xpath="//input[@id='location']")
 	protected WebElement providerSearchPg_zipcodeInputField;
 	
 	@FindBy(xpath="//div[contains(@class,'backToTop') and not(contains(@style,'display: none'))]//a")
 	protected WebElement backToTopLink;
+	
+	@FindBy(xpath="//div[@class='container']//img")
+	protected List<WebElement> currentIssueImgList;
+	
+
 	
 }

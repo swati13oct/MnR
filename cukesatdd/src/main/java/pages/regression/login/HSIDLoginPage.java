@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
@@ -100,6 +101,14 @@ public class HSIDLoginPage extends UhcDriver {
 		openAndValidate();
 	}
 
+	public HSIDLoginPage(WebDriver driver, String deepLinkUrl) {
+		// TODO Auto-generated constructor stub
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(deepLinkUrl);
+		
+	}
+
 	public void openAndValidate() {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
 				& "YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) {
@@ -127,6 +136,18 @@ public class HSIDLoginPage extends UhcDriver {
 
 		System.out.println("URL:" + PAGE_URL);
 		startNew(PAGE_URL);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
+			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+		// validateNew(signInButton);
+		else
+			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
+	}
+
+
+	private void openAndValidate(String deepLinkUrl) {
+		// TODO Auto-generated method stub
+		startNew(deepLinkUrl);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))
 			CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
@@ -268,6 +289,9 @@ public class HSIDLoginPage extends UhcDriver {
 		} else if (currentUrl().contains("testharness.html")) {
 			return new TestHarness(driver);
 		}
+		if (driver.getCurrentUrl().contains("/my-documents/")){
+			return new MyDocumentsPage(driver);
+     }
 		return null;
 	}
 
@@ -549,7 +573,7 @@ public class HSIDLoginPage extends UhcDriver {
 	//note: do not remove this wait time
 	public void waitToReachDashboard(String username) {
 		int y=0;
-		while (y < 20) {
+		while (y < 30) {
 			try {
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
 				if (header.size() > 0) {
