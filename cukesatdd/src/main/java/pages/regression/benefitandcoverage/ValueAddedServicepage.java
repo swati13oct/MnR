@@ -54,7 +54,7 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='collapseLargeCard1']/div/div[1]/p[5]/a")
 	private WebElement Healthlink;
 	
-	@FindBy(xpath = "//h2[contains(text(),'At Your Best by UnitedHealthcare™')]")
+	@FindBy(xpath = "//h2[contains(text(),'At Your Best by UnitedHealthcare')]")
 	private WebElement atYourBestTile;
 	
 	@FindBy(xpath = "//h2[contains(text(),'Hearing Care Program by HearUSA')]")

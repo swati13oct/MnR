@@ -461,11 +461,17 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
 		jsClickNew(testHarnessBenefitsPageLink);
-
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
 		System.out.println(driver.getTitle());
-
+		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("second try - "+driver.getTitle());
+		}
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}

@@ -1077,20 +1077,25 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validatePageContent(String targetDocName, String actUrl) {
 		//note: validate page content
 		if (actUrl.contains(".pdf")) {
-			try {
-				URL TestURL = new URL(driver.getCurrentUrl());
-				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-				PDDocument document = PDDocument.load(TestFile);
-				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : "+PDFText);
-				Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
-			} catch (IOException e) {
-				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+			if (MRScenario.environment.contains("team-a")) {
+				System.out.println("lower env will not load certain PDF docs, skip this page content validation");
+				return;
+			} else {
+				try {
+					URL TestURL = new URL(driver.getCurrentUrl());
+					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+					PDDocument document = PDDocument.load(TestFile);
+					String PDFText = new PDFTextStripper().getText(document);
+					System.out.println("PDF text : "+PDFText);
+					Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+				} catch (IOException e) {
+					Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+				}
+				System.out.println("Verified PDF '"+targetDocName+"' content is not null or empty");
 			}
-			System.out.println("Verified PDF '"+targetDocName+"' content is not null or empty");
 		} else {
 			//note: for html or any url that's not pdf related
 			Assert.assertTrue("PROBLEM - unable to locate page header text element on the landing page for doc '"+targetDocName+"'", validate(generalPgHeader,0));
