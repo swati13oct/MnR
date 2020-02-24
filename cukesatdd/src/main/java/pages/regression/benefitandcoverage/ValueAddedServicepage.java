@@ -54,7 +54,7 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='collapseLargeCard1']/div/div[1]/p[5]/a")
 	private WebElement Healthlink;
 	
-	@FindBy(xpath = "//h2[contains(text(),'At Your Best by UnitedHealthcare™')]")
+	@FindBy(xpath = "//h2[contains(text(),'At Your Best by UnitedHealthcare')]")
 	private WebElement atYourBestTile;
 	
 	@FindBy(xpath = "//h2[contains(text(),'Hearing Care Program by HearUSA')]")
@@ -101,6 +101,11 @@ public class ValueAddedServicepage extends UhcDriver {
 	 */
 	public void vastiles()
 	{
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		validateNew(atYourBestTile);
 		validateNew(hearingCareProgramByHearUSATile);
 		//validateNew(driver.findElement(By.xpath("(.//*[@id='servccontroller']/div/section/div/div/div/div)[1]")));
