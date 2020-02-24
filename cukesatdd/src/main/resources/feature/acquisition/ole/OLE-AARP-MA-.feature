@@ -58,6 +58,8 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
+    Then the user validates the Plan details in SEP Page OLE Right Rail
+    Then the user validates SEP options and Required Fields for PlanType in SEP Page
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
