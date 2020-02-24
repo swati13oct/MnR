@@ -191,7 +191,7 @@ medicamember001/Password@1,MEDICA,Individual_BnC,IndEffectiveMedica,NoRider
 ucppcpmapd01/Password@1,PCP,Individual_BnC,IndEffectivePCP,NoRider
 TESTVILLAGEUSER01/Password@1,MAPDVill,Individual_BnC,NON LIS,
 q2_jun_uhc0040/Password@123,MAPD,MakeOneTimeCCTotal_Payments,,
-q2_jun_aarp0141/Password@1,PDP,MakeOneTimeCCOther_Payments,,
+userpayment0011/Password@1,PDP,MakeOneTimeCCOther_Payments,,
 q2_jun_uhc0040/Password@123,MAPD,SetupRecEFT_Payments,,
 q2_jun_aarp0082/Password@1,PDP,SetupRecCC_Payments,,
 q1_aarp_feb532/Password@1,MAPD,UpdateRecurrEFT_Payments, ,
