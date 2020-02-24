@@ -32,6 +32,7 @@ import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
 
 import pages.regression.healthandwellness.*;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
 import pages.regression.pharmacylocator.*;
@@ -272,6 +273,11 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'username')]")
 	private WebElement usernameField;
 	
+	@FindBy(xpath="//a[contains(text(),'Go to Health and wellness')]")
+	private WebElement testHarnessHealthAndWellnessLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to My Documents')]")
+	private WebElement testHarnessMyDocumentsLink;
 	
 	String category = null;
 
@@ -438,8 +444,12 @@ public class TestHarness extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println(driver.getTitle());
-
 		if (driver.getTitle().contains("Benefits")) {
 			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 		}
@@ -603,9 +613,11 @@ public class TestHarness extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if (MRScenario.isTestHarness.equals("YES")) {
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				eobTestharnessLink.click();
+				jsClickNew(eobTestharnessLink);
+				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
+				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
@@ -1409,5 +1421,32 @@ public class TestHarness extends UhcDriver {
 			validateNew(profilePageLink);
 
 		}
+		
+		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessHealthAndWellnessLink);
+			testHarnessHealthAndWellnessLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+			if (driver.getTitle().contains("Health And Wellness")) {
+				return new HealthAndWellnessPage(driver);
+			}
+			return null;
+		}
 
+		public MyDocumentsPage navigateToMyDocumentsFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessMyDocumentsLink);
+			testHarnessMyDocumentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, heading, 5);
+			if (driver.getTitle().contains("My Documents")) {
+				return new MyDocumentsPage(driver);
+			}
+			return null;
+		}
 }

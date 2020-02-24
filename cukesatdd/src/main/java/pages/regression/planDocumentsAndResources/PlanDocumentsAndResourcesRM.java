@@ -29,30 +29,31 @@ public class PlanDocumentsAndResourcesRM extends PlanDocumentsAndResourcesBase  
 		String section="Renew Magazine";
 		String item="CURRENT ISSUE";
 		WebElement lnkElment=currentIssueLink_RM;
-		//note: dev said the link itself has the word '2019' it's not tie to actual year. overwrite it but leave it like this for now in case it changes later
-		currentYear="2019";
-		String expectedUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/index.html";
-		String redirectUrl="https://read.nxtbook.com/united_healthcare/uhccip/renew_fall_"+currentYear+"/user_guide.html";
+		//note: at the beginning of the year when the year switch happens, the doc link may not be updated right away w/ the right year in the link
+		//note: so don't dynamic determine it for now
+		currentYear="2020";
+		String season="winter";
+		String expectedUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/index.html";
+		String redirectUrl="https://read.nxtbook.com/united_healthcare/individual/renew_"+season+"_"+currentYear+"/user_guide.html";
 		if (memberType.toUpperCase().contains("GROUP") && !planType.toUpperCase().contains("PDP")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_fall_"+currentYear+"/user_guide.html";
+			expectedUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/group_retiree/renew_"+season+"_"+currentYear+"/user_guide.html";
 		} else if (planType.toUpperCase().contains("PDP")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_fall_"+currentYear+"/user_guide.html";
-		} else if (planType.toUpperCase().contains("MAPD")) {
-			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/index.html";
-			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_fall_"+currentYear+"/user_guide.html";
+			expectedUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/index.html";
+			redirectUrl="https://read.nxtbook.com/united_healthcare/aarp_pdp/renew_"+season+"_"+currentYear+"/user_guide.html";
+		//} else if (planType.toUpperCase().contains("MAPD")) {
+		//	expectedUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/index.html";
+		///	redirectUrl="https://read.nxtbook.com/united_healthcare/aarp/renew_"+season+"_"+currentYear+"/user_guide.html";
 		}
+		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
 		testInputInfoMap.put("redirectUrl", redirectUrl);
 		testInputInfoMap.put("checkDestUrl", "true");
 		testInputInfoMap.put("switchTab", "true");
-		
 		if (sectionDisplay) {
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElment));
 			String actualUrl=lnkElment.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-			//note: when clicking the link, it will get redirect to the guide instead of index.html
 			validateLinkDest(testInputInfoMap, lnkElment);
 		} else {
 			Assert.assertTrue("PROBLEM - should not see '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElment));
