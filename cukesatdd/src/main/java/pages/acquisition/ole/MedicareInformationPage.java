@@ -147,8 +147,8 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		System.out.println("Validating Medicare Information for OLE");
 		CommonUtility.waitForPageLoadNew(driver, MedicalInfoPageHeader, 30);
-		validateNew(SelectCardA);
-		validateNew(SelectCardB);
+		//validateNew(SelectCardA);
+		//validateNew(SelectCardB);
 	}
 
 	public boolean validate_required_fields() {
