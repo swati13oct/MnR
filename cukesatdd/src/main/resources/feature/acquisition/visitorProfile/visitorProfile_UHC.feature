@@ -5,7 +5,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
 
   @UHCvisitorprofile @addDrugs @addDrugsBLayerSmoke @visitorProfileRegressionUHC @prodRegression @DCE_Regression_Blayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
-    Given the user is on the uhcmedicaresolutions site landing page
+    Given user is on blue layer landing page
     And the user selects the state drop down value in UHC home page
       | State | <state> |
     And the user clicks on the shopping cart icon in UHC site

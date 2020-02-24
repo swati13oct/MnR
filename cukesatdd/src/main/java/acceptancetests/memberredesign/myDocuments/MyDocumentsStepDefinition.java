@@ -11,14 +11,17 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.planDocumentsAndResources.PlanDocumentsAndResourcesCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Step definitions for my Documents Page on the member site.
@@ -70,21 +73,36 @@ public class MyDocumentsStepDefinition {
 	 * This step will let the user navigate to My Documents Page from Forms and Resources page
 	 */
 	@When("^the user navigates to my Documents Page$")
-	public void user_navigates_to_MyDocuments_page() throws InterruptedException {
-		/* tbd 
-		FormsAndResourcesPage formsAndResourcesPage = (FormsAndResourcesPage) getLoginScenario()
-				.getBean(PageConstants.DASHBOARD_FORMS_AND_RESOURCES_PAGE);
-		MyDocumentsPage myDocumentsPage = formsAndResourcesPage.navigateToMyDocumentsPage();
-		Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
-		*/
-		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
-		MyDocumentsPage myDocumentsPage = planDocumentsAndResourcesPage.navigateToMyDocumentsPage();
-		Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
-		
+	public void user_navigates_to_MyDocuments_page(DataTable memberAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		String memberType=memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE, memberType);
+
+		if (("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			TestHarness testharnessHomepage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			MyDocumentsPage myDocumentsPage = testharnessHomepage.navigateToMyDocumentsFromTestHarnessPage();
+			Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+		} else {
+			int forceTimeoutInMin=5;
+			System.out.println("Proceeed to Plan Documents & Resources page");
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage = accountHomePage.navigateDirectToPlanDocPage(memberType,planType, forceTimeoutInMin);
+			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page", planDocumentsAndResourcesPage!=null);
+			if (memberType.toUpperCase().contains("COMBO")) 
+				planDocumentsAndResourcesPage.goToSpecificComboTab(planType);
+			planDocumentsAndResourcesPage.sleepBySec(15);
+			getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
+
+			MyDocumentsPage myDocumentsPage = planDocumentsAndResourcesPage.navigateToMyDocumentsPage();
+			Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+		}
 	}
+	
+	
 
 	/**
 	 * This step will validate few elements on My Documents Page
@@ -108,6 +126,42 @@ public class MyDocumentsStepDefinition {
 		myDocumentsPage.searchDocumentsByTimePeriod(timePeriod);
 	}
 
+	
+	
+	/**
+	 * This steps enables validates if Documents Table is present or not in past 24 months and also compares it to the documents expected flag if it should have the table or not
+	 * If it's present then user validates the doc table else validates the error message
+	 */
+	@And("^then the user validates the Documents Table if present in past twenty four months time frame$")	
+	public void validate_the_Documents_Table24Months(DataTable memberAttributes) throws InterruptedException { 
+		int currentNumberOfRowsInDocumentsTable = 0;
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String documentsExpected=memberAttributesMap.get("Documents Expected");
+
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
+				.getBean(PageConstantsMnR.My_Documents_PAGE);
+		Boolean tableIsPresent=myDocumentsPage.validateDocumentsTable();
+		if(tableIsPresent) {
+			myDocumentsPage.validateTableHeaders();	
+			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
+			myDocumentsPage.validateTableContent();
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
+		}
+		/**
+		 * validating the expected flag versus the flag to validate if table is present
+		 */
+		if(documentsExpected.equalsIgnoreCase("Y")&& !tableIsPresent)
+		{
+		Assert.fail(">>>>>>>>>>>Document table is expected but no document table found.<<<<<<<<<<<<<<<<");
+		}
+		
+	}
+
+	
+	
+	
+	
 	/**
 	 * This steps enables validates if Documents Table is present or not
 	 * If it's present then user validates the doc table else validates the error message
@@ -122,8 +176,23 @@ public class MyDocumentsStepDefinition {
 			myDocumentsPage.validateTableHeaders();	
 			currentNumberOfRowsInDocumentsTable=myDocumentsPage.validateNumberOfRowsInTable();
 			myDocumentsPage.validateTableContent();
-			Assert.assertTrue("Problem with Number of Documents in the Documents Table", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
+			Assert.assertTrue("Problem with Number of Documents in the Documents Table. currentNumberOfRowsInDocumentsTable='"+currentNumberOfRowsInDocumentsTable+"' | previousNumberOfRowsInDocumentsTable='"+previousNumberOfRowsInDocumentsTable+"'", currentNumberOfRowsInDocumentsTable>=previousNumberOfRowsInDocumentsTable);
 			previousNumberOfRowsInDocumentsTable=currentNumberOfRowsInDocumentsTable; 
+		}
+	}
+	
+	/**
+	 * This steps enables validates if Documents Table is present or not
+	 * If it's present then user validates the doc table else validates the error message
+	 */
+	@And("^I validate the Documents Table if present for Current Year$")	
+	public void validate_the_Documents_Table_ForCurrentYear() throws InterruptedException { 
+		MyDocumentsPage myDocumentsPage = (MyDocumentsPage) getLoginScenario()
+				.getBean(PageConstantsMnR.My_Documents_PAGE);
+		Boolean tableIsPresent=myDocumentsPage.validateDocumentsTable();
+		if(tableIsPresent) {
+			myDocumentsPage.validateTableHeaders();	
+			myDocumentsPage.validateTableContent();
 		}
 	}
 	
@@ -134,7 +203,7 @@ public class MyDocumentsStepDefinition {
 	 */
 	@Then("^I can validate the calendar will show up for custom search when user clicks on From and To calendars$")	
 	public void validate_the_Calendar() throws InterruptedException { 
-		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(26).toDate());
+		String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(24).toDate());
 		String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
 		System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
 

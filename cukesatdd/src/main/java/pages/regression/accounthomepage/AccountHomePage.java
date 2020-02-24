@@ -292,8 +292,17 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 
-	@FindBy(linkText = "FIND CARE & COSTS")
+
+	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
+	
+	
+	
+	/*
+	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
+	 * private WebElement
+	 * findCareCost;
+	 */
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Find Care & Costs')]")
 	private WebElement findCare;
@@ -399,8 +408,10 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='moreInfoLinkAtdd2']/a") // tbd
 	private WebElement specificclaimlinkforeob;
 
-	@FindBy(tagName = "arcade-header")
-	private WebElement shadowRootHeader;
+	
+	 @FindBy(tagName = "arcade-shared-header") 
+	 private WebElement shadowRootHeader;
+	 
 
 	@FindBy(tagName = "arcade-footer")
 	private WebElement shadowRootFooter;
@@ -3273,7 +3284,7 @@ public class AccountHomePage extends UhcDriver {
 			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
 			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
 
-			if (MRScenario.environmentMedicare.equalsIgnoreCase("stage")) {
+			if (MRScenario.environment.equalsIgnoreCase("stage")) {
 				System.out.println("user is on Stage login page");
 				if ((driver.getCurrentUrl().contains("/aarp/dashboard")) 
 						&& ((!memberType.toLowerCase().contains("pcp") && !memberType.toLowerCase().contains("medica"))

@@ -73,7 +73,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#AX      | 18-056 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
+      | 18-056 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
 	@active_ship @devRegression
 	Examples: 
