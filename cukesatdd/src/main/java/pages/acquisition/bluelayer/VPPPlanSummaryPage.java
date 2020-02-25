@@ -2864,7 +2864,9 @@ public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, Stri
 		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 	}
-	sleepBySec(3);
+	sleepBySec(5);
+	WebDriverWait d=new WebDriverWait(driver, 60);
+	d.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")));
 	if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
 		return new VPPPlanSummaryPage(driver);
 	}
