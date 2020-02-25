@@ -348,3 +348,71 @@ Feature: Vpp to plan Summary AARP Scenarios
     Examples: 
       | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |
       |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |
+
+  @vppPlanSummaryAARP14 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user clicks on Lookup zipcode on AARP
+    Then verify find a zipcode popup displpayed and Enter values and click on LookupZipcode on AARP
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user performs plan search using following information in the aarp site
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail in aarp Site
+    Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
+    Then the user validates Get a free medicare Guide section in the right rail in aarp Site
+    Then the user enters the following information in the Get a free medicare Guide section in aarp Site
+      | First Name    | <firstName>    |
+      | Last Name     | <lastName>     |
+      | Email Address | <emailAddress> |
+    # Then the user validates Need More Information section in the right rail in aarp Site
+    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
+
+    Examples: 
+      | TID   | zipcode | isMultiCounty | county        | plantype | address                    | city   | state   | firstName | lastName | emailAddress  |
+      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
+      | 15550 |   30606 | YES           | Clarke County | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE | GEORGIA | test      | test     | test@test.com |
+
+  @vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user clicks on Change Zip code link in AARP site
+    Then user clicks on Select by Address and Enter fileds in AARP Site
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user clicks on Find plans on vpp using following information in the AARP site
+      | County Name2     | <county2>        |
+      | Is Multi County2 | <isMultiCounty2> |
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail in aarp Site
+    Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
+    Then the user validates Get a free medicare Guide section in the right rail in aarp Site
+    Then the user enters the following information in the Get a free medicare Guide section in aarp Site
+      | First Name    | <firstName>    |
+      | Last Name     | <lastName>     |
+      | Email Address | <emailAddress> |
+    # Then the user validates Need More Information section in the right rail in aarp Site
+    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
+
+    Examples: 
+      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
+      | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |

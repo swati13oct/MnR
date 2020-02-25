@@ -24,7 +24,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
-import pages.acquisition.bluelayer.KeywordSearch;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -68,6 +67,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookzip;
+	
+	@FindBy(id = "findazip_box")
+	private WebElement zipCodeSearchPopup;
+	
+	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
+	private WebElement zipCodeSearchPopupHeading;
 
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
@@ -289,6 +294,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath = "//input/parent::form//button[text()='Go']")
 	private WebElement thpharmacyGoButton;
+   	
+   	@FindBy(id = "zipcode")
+	private WebElement zipCodeHealthPlans;
+   	
+   	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
+	private WebElement GoBtnHealthPlans;
+   	
+   	
    	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -1595,6 +1608,59 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public DCETestHarnessPage GetDCEtestHarnessPage() {
 			return new DCETestHarnessPage(driver);
+		}
+		
+		public ZipcodeLookupHomePage looksupforZipcodes() {
+
+			lookzip.click();
+
+			CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
+			if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
+				System.out.println("zipCodeSearchPopupHeading");
+				return new ZipcodeLookupHomePage(driver);
+			}
+			return null;
+
+		}
+		
+		public VPPPlanSummaryPage searchPlansCounty(String countyName) {
+			if (isHealthPlan) {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+				GoBtnHealthPlans.click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+			} else {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+				viewPlansButton.click();
+			}
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+
+			}
+			return null;
+		}
+
+		public VPPPlanSummaryPage searchPlansNoCounty() {
+			if (isHealthPlan) {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+				GoBtnHealthPlans.click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+			} else {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+				viewPlansButton.click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+			}
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
 		}
 	} 
 

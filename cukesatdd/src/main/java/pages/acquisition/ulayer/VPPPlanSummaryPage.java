@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -611,6 +612,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//span[@class='multiple-added-text show']")
 		private WebElement multipleCompareText;
 		
+		
+		@FindBy(id = "change-location")
+		private WebElement changeLocationBtn;
+		
+		@FindBy(xpath = "//div[@class='change-zip-link']//a[@class='search-by-address']")
+		private WebElement searchByAddressButton;
+		
+		@FindBy(xpath = "//input[@id='address']")
+		private WebElement addressInput;
+		
+		@FindBy(xpath = "//input[@id='city']")
+		private WebElement cityInput;
+		
+		@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+		private List<WebElement> stateDropDownValues;
+		
+		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
+		private WebElement findPlansButton;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3280,5 +3299,36 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 
 	}	
+	
+	public void clickOnChangeZipCode() {
+		validateNew(changeLocationBtn);
+		changeLocationBtn.click();
+
+	}
+
+	public void enterAddressDetails(String address, String city, String state) {
+		validateNew(searchByAddressButton);
+		searchByAddressButton.click();
+		validateNew(addressInput);
+		sendkeys(addressInput, address);
+		sendkeys(cityInput, city);
+		selectFromDropDown(stateDropDownValues, state.toUpperCase());
+
+	}
+
+	public void searchPlansCounty(String countyName, String ismultiCounty) {
+		findPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+
+		if (ismultiCounty.contains("YES") && validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
+	}
 	
 }
