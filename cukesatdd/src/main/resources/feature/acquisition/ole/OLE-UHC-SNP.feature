@@ -57,7 +57,7 @@ Feature: 2.05.4.ACQ-OLE SNP UMS
     Then the user navigates to SEP Page
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
