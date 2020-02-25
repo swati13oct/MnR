@@ -333,7 +333,7 @@ Feature: Vpp to plan Summary UHC Scenarios
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |
       | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |
 
-  @vppPlanSummaryUHC14
+  @vppPlanSummaryUHC14 @vppPlanSummaryUHCRun02
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Change Zipcode on VPP using Search By Address
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
