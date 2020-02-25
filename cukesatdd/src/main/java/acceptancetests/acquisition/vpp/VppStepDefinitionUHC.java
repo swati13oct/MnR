@@ -2083,41 +2083,7 @@ public class VppStepDefinitionUHC {
 				Assert.fail("Error in Loading the Plan Details Page");
 		
 	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@When("^verify Call sticky action menu icon is visible or not$")
 	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
 				
@@ -2237,5 +2203,57 @@ public class VppStepDefinitionUHC {
 		}
 
 	}	
+	
+	@Then("^user clicks on Change Zip code link in UMS site$")
+	public void user_clicks_on_Change_Zip_code_link_in_UMS_site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnChangeZipCode();
+	}
+
+	@Then("^user clicks on Select by Address and Enter fileds in UMS Site$")
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds_in_UMS_Site(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String address = memberAttributesMap.get("Address");
+		String city = memberAttributesMap.get("City");
+		String state = memberAttributesMap.get("State");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.enterAddressDetails(address, city, state);
+	}
+
+	@When("^the user clicks on Find plans on vpp using following information in the UMS site$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information_in_the_UMS_site(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
 	
 } 
