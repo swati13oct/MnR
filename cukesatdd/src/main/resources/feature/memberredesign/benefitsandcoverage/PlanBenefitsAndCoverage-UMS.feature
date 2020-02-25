@@ -119,7 +119,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
-     Then verify ancillary benefit section is not displayed
+    Then verify ancillary benefit section is not displayed
     And the user validates plan overview and summary on Bnc page for ship members
      | Benefits Expected | <numberOfBenefitCards> |
     And the user validates hand image under discount and services section
@@ -136,7 +136,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user clicks on More Information link for ship
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
-@xyz
+
     Examples: 
       | TID   | planType | memberType        | language | PlanBenefitsTable   | numberOfBenefitCards |  
       | 15094 | HIP      | SHIP_BnC          | ENGLISH  | Plan Benefits Table |  7                  |
@@ -304,9 +304,8 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validates chiropractic section
     Then user validates and clicks on Learn More button under Exclusive hearing section
 
-
     Examples:  
-      | TID   | planType | memberType         | copayCategory |
+      | TID   | planType | memberType          | copayCategory |
       | 15238 | MAPD     | Group_BnC_Ancillary | NON LIS       |
 
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)

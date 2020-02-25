@@ -2,11 +2,14 @@ package pages.regression.claims;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -436,7 +439,13 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 			//tbd 	return true;
 			//tbd } else {
 				System.out.println("Blue Button-DownLoad my Data Button is displayed");
-				dnldMyDataBtn.click();
+				//WebDriverWait wait2 = new WebDriverWait(driver, 10);
+				//wait2.until(ExpectedConditions.elementToBeClickable(By.xpath(".//*[@id='downloadHypLinkAtdd']")));
+				//dnldMyDataBtn.click();
+				
+				WebElement ele = driver.findElement(By.xpath(".//*[@id='downloadHypLinkAtdd']"));
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].click();", ele);
 				CommonUtility.waitForPageLoad(driver, dnldPopup_cancelBtn, 5);
 
 				//note: validate cancel button function
