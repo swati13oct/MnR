@@ -1267,18 +1267,16 @@ public class ProfileandPreferencesUMSStepDefinition {
 		{			
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-			System.out.println("Now validating login on Dashboard");
+			System.out.println("After login validating the element on the Dashboard");
 			accountHomePage.validateLoginonDashboard();	
-			System.out.println(" !!! Member is on Dashboard !!!");
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		
 		else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 		{
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			System.out.println("Now validating login on test-harness page");
+			System.out.println("After login via the TestHarness validaying the element on test Harness");
 			testHarnessPage.validateLoginonTestharness();	
-			System.out.println(" !!! Member is on the Testharness page !!!");
 		    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 		}
 		else {

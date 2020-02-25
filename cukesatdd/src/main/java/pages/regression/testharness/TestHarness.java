@@ -32,6 +32,7 @@ import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
 
 import pages.regression.healthandwellness.*;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
 import pages.regression.pharmacylocator.*;
@@ -210,6 +211,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'testharnessHeader')]")
 	private WebElement testHarnessHeader;
 	
+	
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
@@ -246,7 +248,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
 	
-	@FindBy(id="pharmacies_5")
+	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
 	
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
@@ -258,12 +260,24 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	@FindBy(xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	/*
+	 * @FindBy(
+	 * xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	 * private WebElement logOut;
+	 */
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
 	private WebElement logOut;
+	
 	
 	@FindBy(xpath="//*[contains(@id,'username')]")
 	private WebElement usernameField;
 	
+	@FindBy(xpath="//a[contains(text(),'Go to Health and wellness')]")
+	private WebElement testHarnessHealthAndWellnessLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to My Documents')]")
+	private WebElement testHarnessMyDocumentsLink;
 	
 	String category = null;
 
@@ -430,8 +444,12 @@ public class TestHarness extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println(driver.getTitle());
-
 		if (driver.getTitle().contains("Benefits")) {
 			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 		}
@@ -443,11 +461,17 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
 		jsClickNew(testHarnessBenefitsPageLink);
-
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
 		System.out.println(driver.getTitle());
-
+		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("second try - "+driver.getTitle());
+		}
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
@@ -595,9 +619,11 @@ public class TestHarness extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if (MRScenario.isTestHarness.equals("YES")) {
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				eobTestharnessLink.click();
+				jsClickNew(eobTestharnessLink);
+				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
+				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
@@ -1316,7 +1342,10 @@ public class TestHarness extends UhcDriver {
     	public void validateLoginonTestharness() throws InterruptedException {
     		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
     		String Message_text = testHarnessHeader.getText();
-    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    		Assert.assertTrue(Message_text.contains("Test Harness"));
+    		System.out.println(" *** TestHarness message assert is passed on the Testharness *** ");  
+    		System.out.println("***The member is on Test Harness Dashboard & the text is :- "+ Message_text);
+    		    		
     	}
     	
     	@FindBy(xpath = "//*[contains(@id,'home_2')]")
@@ -1398,5 +1427,32 @@ public class TestHarness extends UhcDriver {
 			validateNew(profilePageLink);
 
 		}
+		
+		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessHealthAndWellnessLink);
+			testHarnessHealthAndWellnessLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+			if (driver.getTitle().contains("Health And Wellness")) {
+				return new HealthAndWellnessPage(driver);
+			}
+			return null;
+		}
 
+		public MyDocumentsPage navigateToMyDocumentsFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessMyDocumentsLink);
+			testHarnessMyDocumentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, heading, 5);
+			if (driver.getTitle().contains("My Documents")) {
+				return new MyDocumentsPage(driver);
+			}
+			return null;
+		}
 }
