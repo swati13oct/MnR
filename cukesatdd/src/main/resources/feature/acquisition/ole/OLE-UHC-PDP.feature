@@ -52,7 +52,7 @@ Feature: 2.05.3.ACQ-OLE PDP UMS
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to SEP Page
     Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
