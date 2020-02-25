@@ -128,7 +128,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch            |
       |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES |
 
-  @PRE @planrecommandonationmobile @drugpagemobile @removedrug @drugpageadddrugmobile @F374225 @PRERegressionMobile
+  @PRE @planrecommandonationmobile @drugpagemobile @removedrug @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with remove drug in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
