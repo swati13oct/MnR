@@ -937,14 +937,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				pdfnames= (pdfs.get(i).getText());
 				System.out.println(">>>>>>>>>>PDF visible<<<<<<<: "+pdfnames);
 			}
-
-			if(a.length==pdfs.size())
-			{
+			Assert.assertTrue("PROBLEM - not getting expected number of PDFs.  Expected='"+a.length+"' | Actual='"+pdfs.size()+"'",a.length==pdfs.size());
+			//tbd if(a.length==pdfs.size())
+			//tbd {
 				for (int i=0;i<pdfs.size();i++)
 				{  
 					String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
-					if(StringUtils.isNotEmpty(pdf1[0]))
-					{
+					Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
+					//tbd if(StringUtils.isNotEmpty(pdf1[0]))
+					//tbd {
 						System.out.println(pdf1[0]);
 						System.out.println(a[i]);
 						if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
@@ -954,17 +955,17 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 							checkflag=false;
 							break;
 						}
-					}
-					else
-					{
-						Assert.fail();
-					}
+						//tbd }
+						//tbd else
+						//tbd {
+						//tbd Assert.fail();
+						//tbd }
 				}
-			}
-			else
-			{
-				Assert.fail();
-			}
+			//tbd }
+			//tbd else
+				//tbd {
+				//tbd 	Assert.fail();
+				//tbd }
 		}
 		else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL"))
 		{
@@ -1494,6 +1495,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
+		Assert.assertTrue("PROBLEM - unable to locate value for the element", !input.equals(""));
 		System.out.println("PCP value to be validated: "+ input);
 
 		Pattern pattern = Pattern.compile("^\\d{1,4}\\.\\d{2}\\%$"); if
