@@ -2729,7 +2729,7 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 	for (String plan: listOfTestPlans) {
 		System.out.println("Proceed to locate plan="+plan);
 
-		String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+		String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 		System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 		List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 		int expMatch=1;
