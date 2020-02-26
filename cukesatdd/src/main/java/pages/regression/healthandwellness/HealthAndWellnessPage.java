@@ -76,6 +76,69 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(tagName="arcade-header")
 	private WebElement shadowRootHeader;
 
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//a[contains(text(),'GET REWARDED')]")
+	protected WebElement getRewardLink;
+
+	@FindBy(xpath="//h1")
+	protected WebElement generalHeader;
+
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[@data-linkdesc='Renew Active']//img")
+	protected WebElement renewActiveIconImg_ship;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
+	protected WebElement cardTitle_ship;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][4]//a[text()='LEARN MORE']")
+	protected WebElement learnMoreBtn_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][5]//a[text()='Find a gym']")
+	protected WebElement findGymLnk_ship;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][6]//a[text()='Brain health tools']")
+	protected WebElement brainHealthToolsLnk_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//strong")
+	protected WebElement yourCode_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//a")
+	protected WebElement tooltipIcon_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]")
+	protected WebElement tooltipText_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
+	protected WebElement closeTooltipX_ship;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[text()='Terms and Conditions']")
+	protected WebElement termsAndConditions_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='FIND YOUR GYM']")
+	protected WebElement findGymLnk;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='TRAIN YOUR BRAIN']")
+	protected WebElement brainHealthToolsLnk;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(text(),'Your code')]//strong")
+	protected WebElement yourCode;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(text(),'Your code')]//a")
+	protected WebElement tooltipIcon;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]")
+	protected WebElement tooltipText;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
+	protected WebElement closeTooltipX;
+	
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='Terms and Conditions']")
+	protected WebElement termsAndConditions;
+
+	boolean testThirdPartyPage=false; //note: consent is to not test 3rd party page, but capable if needs to
+
+
+	
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -220,35 +283,6 @@ public class HealthAndWellnessPage extends UhcDriver{
 		}
 	}
 	
-	/**
-	 * For iPerception Model
-	 * @param driver
-	 */
-	/* tbd
-	public static void XcheckForIPerceptionModel(WebDriver driver) {
-		int counter = 0;
-		do {
-			System.out.println("current value of counter: " + counter);
-			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
-
-			if (IPerceptionsFrame.isEmpty()) {
-				try {
-					Thread.sleep(1500);
-				} catch (InterruptedException e) {
-					System.out.println(e.getMessage());
-				}
-			} else {
-				driver.switchTo().frame(IPerceptionsFrame.get(0));
-				driver.findElement(By.className("btn-no")).click();
-				driver.switchTo().defaultContent();
-			}
-			counter++;
-		} while (counter < 2);
-	} */
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//a[contains(text(),'GET REWARDED')]")
-	protected WebElement getRewardLink;
-	
 	public void validateNoGetReward() {
 		Assert.assertTrue("PROBLEM - expect NOT to see Get Reward link for user", !hwValidate(getRewardLink));
 	}
@@ -266,11 +300,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 	protected WebElement iAcceptButton;
 	
 	public void validateGetReward() {
-			Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
+		Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
+		String expectedUrl="https://member.int.uhc.com/rewards";
+		String actUrlLink=getRewardLink.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate expected href link from element.  Expect to contain '"+expectedUrl+"' | Actual='"+actUrlLink+"'",actUrlLink.contains(expectedUrl));
+		if (testThirdPartyPage) {
 			getRewardLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(15);
-			String expectedUrl="rewards/program-overview";
 			String actualUrl=driver.getCurrentUrl();
 			if (!actualUrl.contains(expectedUrl)) { //note: in case sometimes page takes longer to run
 				sleepBySec(15);
@@ -283,7 +320,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				iAcceptButton.click();
 				sleepBySec(15);
 			}
-			
+
 			//else check this instead
 			CommonUtility.waitForPageLoad(driver, giftCardBalanceText, 30);
 			Assert.assertTrue("PROBLEM - expect to see 'Gift Card Balance Available' element for user", hwValidate(giftCardBalanceText));
@@ -313,67 +350,12 @@ public class HealthAndWellnessPage extends UhcDriver{
 				CommonUtility.checkPageIsReady(driver);
 				sleepBySec(15);
 			}
-			
+
 			actualUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking back arrow from reward-overview page.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-
+		}
 	}
 	
-	@FindBy(xpath="//h1")
-	protected WebElement generalHeader;
-
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[@data-linkdesc='Renew Active']//img")
-	protected WebElement renewActiveIconImg_ship;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
-	protected WebElement cardTitle_ship;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][4]//a[text()='LEARN MORE']")
-	protected WebElement learnMoreBtn_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][5]//a[text()='Find a gym']")
-	protected WebElement findGymLnk_ship;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][6]//a[text()='Brain health tools']")
-	protected WebElement brainHealthToolsLnk_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//strong")
-	protected WebElement yourCode_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(text(),'Your code')]//a")
-	protected WebElement tooltipIcon_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]")
-	protected WebElement tooltipText_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
-	protected WebElement closeTooltipX_ship;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[text()='Terms and Conditions']")
-	protected WebElement termsAndConditions_ship;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='FIND YOUR GYM']")
-	protected WebElement findGymLnk;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='TRAIN YOUR BRAIN']")
-	protected WebElement brainHealthToolsLnk;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(text(),'Your code')]//strong")
-	protected WebElement yourCode;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(text(),'Your code')]//a")
-	protected WebElement tooltipIcon;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]")
-	protected WebElement tooltipText;
-
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
-	protected WebElement closeTooltipX;
-	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='Terms and Conditions']")
-	protected WebElement termsAndConditions;
-
 	public void validateNoRenewActive(String planType) {
 		String targetElement="Find Your Gym";
 		WebElement gymElement=findGymLnk;
@@ -397,14 +379,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 			String targetElement="Renew Active icon image";
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship));
 			String expectedHref="https://member.int.uhc.com/active/overview";
-			renewActiveIconImg_ship.click();
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-			sleepBySec(10);
-			String actualUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
-			goBackToPriorPgViaBack(originalUrl);
+			if (testThirdPartyPage) {
+				renewActiveIconImg_ship.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+				sleepBySec(10);
+				String actualUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+				Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
+				goBackToPriorPgViaBack(originalUrl);
+			}
 
 			//note: card title ------------------
 			targetElement="Card Title";
@@ -420,14 +404,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 			expectedHref="https://member.int.uhc.com/active/overview";
 			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-			renewActiveIconImg_ship.click();
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-			sleepBySec(10);
-			actualUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
-			goBackToPriorPgViaBack(originalUrl);
+			if (testThirdPartyPage) {
+				renewActiveIconImg_ship.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+				sleepBySec(10);
+				String actualUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+				Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
+				goBackToPriorPgViaBack(originalUrl);
+			}
 		}
 		//note: Find A Gym ------------------
 		String targetElement="Find Your Gym";
@@ -440,14 +426,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 		String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		gymElement.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-		sleepBySec(10);
-		String actualUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-		Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
-		goBackToPriorPgViaBack(originalUrl);
+		if (testThirdPartyPage) {
+			gymElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+			sleepBySec(10);
+			String actualUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
+			goBackToPriorPgViaBack(originalUrl);
+		}
 
 		//note: Brain Health Tools ------------------
 		targetElement="Brain Health Tools";
@@ -458,14 +446,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 		expectedHref="https://member.int.uhc.com/active/train-your-brain";
 		actualEleLnkHref=brainElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		brainElement.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-		sleepBySec(10);
-		actualUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-		Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
-		goBackToPriorPgViaBack(originalUrl);
+		if (testThirdPartyPage) {
+			brainElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+			sleepBySec(10);
+			String actualUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
+			goBackToPriorPgViaBack(originalUrl);
+		}
 
 		//note: Confirmation Code ------------------
 		targetElement="Your Code";
@@ -512,14 +502,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 		expectedHref="https://member.int.uhc.com/active/terms";
 		actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
-		termsAndConditionsElement.click();
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, generalHeader, 15);
-		sleepBySec(10);
-		actualUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
-		Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
-		goBackToPriorPgViaBack(originalUrl);
+		if (testThirdPartyPage) {
+			termsAndConditionsElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
+			sleepBySec(10);
+			String actualUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
+			goBackToPriorPgViaBack(originalUrl);
+		}
 	}
 
 	public void scrollElementToCenterScreen(WebElement element) {
