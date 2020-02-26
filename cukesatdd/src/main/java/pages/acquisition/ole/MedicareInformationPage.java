@@ -147,11 +147,11 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		System.out.println("Validating Medicare Information for OLE");
 		CommonUtility.waitForPageLoadNew(driver, MedicalInfoPageHeader, 30);
-		validateNew(SelectCardA);
-		validateNew(SelectCardB);
+		//validateNew(SelectCardA);
+		//validateNew(SelectCardB);
 	}
 
-	public boolean validate_required_fields() {
+	/*public boolean validate_required_fields() {
 		boolean flag = true;
 		
 		if(!RadioCardA.isSelected() && !RadioCardA.isSelected()){
@@ -175,7 +175,7 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		
 		return flag;
-	}
+	} */
 
 	public boolean enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
 		String FirstName = MedicareDetailsMap.get("First Name");
@@ -188,7 +188,7 @@ public class MedicareInformationPage extends UhcDriver{
 		String emailConfirmation = MedicareDetailsMap.get("Email Confirmation");
 		String goGreen = MedicareDetailsMap.get("Go Green");
 		String email = MedicareDetailsMap.get("Email");
-		if(CardType.contains("HICN") || CardType.contains("RRID")){
+		/*if(CardType.contains("HICN") || CardType.contains("RRID")){
 			SelectCardA.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
@@ -198,9 +198,9 @@ public class MedicareInformationPage extends UhcDriver{
 				Assert.fail("Correct Label not displayed for CARD A");
 				/*System.out.println("Correct Label not displayed for CARD A");
 				return null;*/
-			}
+			/*}
 		}
-		if(CardType.contains("MBI")){
+		if(CardType.contains("MBI")){  
 			SelectCardB.click();
 			validateNew(MedicareNumberLabel);
 			if(MedicareNumberLabel.getText().contains("Medicare Number")){
@@ -210,10 +210,10 @@ public class MedicareInformationPage extends UhcDriver{
 			}
 			else{
 				Assert.fail("Correct Label not displayed for CARD B");
-				/*System.out.println("Correct Label not displayed for CARD B");
-				return null;*/
+				System.out.println("Correct Label not displayed for CARD B");
+				//return null;
 			}
-		}
+		} */
 		sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
 		sendkeysNew(claimNumberField, MedicareNumber);

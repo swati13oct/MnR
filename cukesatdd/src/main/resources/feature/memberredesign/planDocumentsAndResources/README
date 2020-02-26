@@ -13,6 +13,9 @@ Sections
 	RM = Renew Magazine
 	NH - Need Help
 
+When this README is written, DOC LOG DB is scheduled to get update every Wednesday.
+So some users could be affected w/ the expected documentation because of the update.
+
 Feature files
 	planDocumentsAndResources_P1_misc.feature
 	- catch-all - cover header, EOB, Renew Magazine, Adobe, Need Help validations
@@ -53,6 +56,9 @@ Specific for Forms and Resousrces section
 	  to indicate which element to click for the newly added document
 	-need to update PlanDocumentsAndResourcesFnRDocsHelper.java 
 	  to indicate the expected items (name, target URL, etc) for this new document
+	  Theses two items will be used to validate if the page content is loaded for the html pages
+	  headerText = the h1 header text for the page
+	  bodyText = random line of text that's in the body of the html page
 
 PlanDocApiResponse.java
 	Obtain and parse API response

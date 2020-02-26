@@ -69,11 +69,8 @@ Feature: 1.15 Member pre-effective functionality
      And the user validates on clicking contact us link it should route to contact us page 
     Examples: 
       | planType  | memberType          | copayCategory |
-      | PDPind    | preeffectiveIndPDP  | NON LIS       |
-    #  | MAGrp  | preeffectiveGrpMA  | NON LIS       |
-     # | IndPDP   | preeffectiveIndPDP   | NON LIS       |
-    #  | GroupPDP | preeffectiveGroupPDP | NON LIS       |
-   #   | GroupSSUP | preeffectiveGroupSSUP | NON LIS     |
+      | IndPDP          | preeffectiveIndPDP        | NON LIS       |
+      
 
   @preEffective3 @preffectiveRegistration
   Scenario Outline: Verify HSID registration.
