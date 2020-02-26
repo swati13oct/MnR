@@ -63,7 +63,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
-
+    
+   @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory |
       | 15090 | MAPD     | Individual_BnC | NON LIS       |
@@ -105,7 +106,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
     Then the user verifies the Mail Order Cost sharing table
-
+   @devRegression
     Examples: 
       | TID   | planType | memberType        |
       | 15093 | PDP      | TEXASERSGroup_BnC |
@@ -303,7 +304,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then the user validates the Dental section
     Then the user validates chiropractic section
     Then user validates and clicks on Learn More button under Exclusive hearing section
-
+    @devRegression
     Examples:  
       | TID   | planType | memberType          | copayCategory |
       | 15238 | MAPD     | Group_BnC_Ancillary | NON LIS       |
@@ -334,6 +335,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
   
+  @devRegression
     Examples: 
       | TID   | planType | memberType             |
       | 15242 | PDP      | Wallgreens_BnC         |
@@ -459,7 +461,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates view and document label
     And the user clicks on More Information link
     And the user validates contactus section
-
+    
+    @devRegression
     Examples: 
       | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 15369 | PDP      | Group_BnC  | LIS 1         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
@@ -665,7 +668,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
-
+    
+   @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealth Passport Program | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | UnitedHealth Passport ProgramSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | UnitedHealth Passport ProgramChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1  | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2      |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |

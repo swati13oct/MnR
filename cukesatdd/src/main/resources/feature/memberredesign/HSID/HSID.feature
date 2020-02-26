@@ -120,16 +120,16 @@ Feature:To Test member Sign in
    | MAPD    |  Individual  |  NON LIS      |
    | PCP     |  Individual  |  NON LIS      |
    | Medica  |  Individual  |  NON LIS      |  
-   | MAGroup |  Individual  |  NON LIS      |
-   | MAPDGroup|  Individual  |  NON LIS      | 
-   | MA        |  Individual  |  NON LIS      |
-   | PDP       |  Individual  |  NON LIS      |   
-   | PDPGroup  |  Group       |  NON LIS      |   
-   | SHIP      |  ShipOnly    |  NON LIS      | 
-   | COMBO     | FedShip      |  NON LIS      |
+   | MAGroup |  Group       |  NON LIS      |
+   | MAPDGroup  Group       |  NON LIS      | 
+   | MA      |  Individual  |  NON LIS      |
+   | PDP     |  Individual  |  NON LIS      |   
+   | PDPGroup|  Group       |  NON LIS      |   
+   | SHIP    |  ShipOnly    |  NON LIS      | 
+   | COMBO   | FedShip      |  NON LIS      |
    | SSUPGroup |Group         |  NON LIS      |
-   | MAPre-effective       |  Individual  |  NON LIS      |
-   | GovtTermless       |  Individual  |  NON LIS      |
+   | MAPre-effective| Individual  |  NON LIS      |
+   | GovtTermless | Individual  |  NON LIS      |
    
 		@hsid3 @validateStep1 @US968241
     Scenario Outline:Verify feilds in HSID registration Step 1 page.
