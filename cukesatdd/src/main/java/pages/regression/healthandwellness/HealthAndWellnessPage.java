@@ -155,11 +155,13 @@ public class HealthAndWellnessPage extends UhcDriver{
 	 * clicks on Health n Wellness Tab
 	 */
 	public void clickHealthnWellnessTab(){
-		String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
-		clickHealthnWellnessTab(defaultCssPath);
+		//note: if none is provided, assume the page has all top menu options and the last one is HW
+		//String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
+		int defaultIndex=7;
+		clickHealthnWellnessTab(defaultIndex);
 	}
 	
-	public void clickHealthnWellnessTab(String cssPath){
+	public void clickHealthnWellnessTab(int index){
 		try {
 			if (MRScenario.environment.contains("team-a")) {
 				Assert.assertTrue("KNOWN BEHAVIOR - The H&W page does not load on Team-A env due to non-availability of lower environment support from Talix (The third party vendor which actually hosts the page). Please validate on stage env", false);
@@ -175,12 +177,10 @@ public class HealthAndWellnessPage extends UhcDriver{
 				healthAndWellness_harness.click();
 				waitforElement(titleText);
 			} else {
-				String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
+				//String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
 				System.out.println("Unable to Able to locate Rally or testharness HW button, last attemp for shadow-root");
-				if (cssPath.equals("none")) 
-					locateAndClickElementWithinShadowRoot(shadowRootHeader, defaultCssPath);
-				else 
-					locateAndClickElementWithinShadowRoot(shadowRootHeader,cssPath);
+				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
+				locateAndClickElementWithinShadowRoot(shadowRootHeader,cssPath);
 			}
 		}
 		hwCheckModelPopup(driver);
@@ -220,20 +220,27 @@ public class HealthAndWellnessPage extends UhcDriver{
 	/**
 	 * validate Header on the  dashborad page
 	 */
-	public String validateHeaderOnDashborad(){
-		String cssPath="none";
+	public int validateHeaderOnDashborad(){
+		int result=-1;
 		if (hwValidate(dashboardHeader)) {
 			System.out.println("Located the expected dashboard header for stage and non-testharness");
+			result=1;
 		} else if (hwValidate(dashboardHeader_harness)) {
 			System.out.println("Located the header for testharness");
+			result=2;
 		} else {
 			System.out.println("Not the usual dashboard header, not testharness header, last attempt to see if it's in shadow-root");
 			//last try to see if it's shadowroot element
-			cssPath="#sticky-main-nav > div > div > div > a[href*='health-and-wellness.html']";
+			//cssPath="#sticky-main-nav > div > div > div > a[href*='health-and-wellness.html']";
 			//tbd locateElementWithinShadowRoot(shadowRootHeader, "#main-nav > div > div > div > a[href*='health-and-wellness.html']");
-			locateElementWithinShadowRoot(shadowRootHeader, cssPath);
+			for (int i=1; i<=7; i++) {
+				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
+				if (!locateElementWithinShadowRoot(shadowRootHeader, cssPath).equals("notFound")) {
+					return i;
+				}
+			}
 		}
-		return cssPath;
+		return result;
 	}
 
 	public WebElement expandRootElement(WebElement element) {
@@ -242,23 +249,30 @@ public class HealthAndWellnessPage extends UhcDriver{
 		return ele;
 	}
 	
-	public void locateElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+	public String locateElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
+		String result="notFound";
 		if (hwValidate(shadowRootElement)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1=expandRootElement(shadowRootElement);
 			try {
 				WebElement element=root1.findElement(By.cssSelector(inputCssSelector));
 				Assert.assertTrue("Dashboard header is not displayed", hwValidate(element));
+				if (hwValidate(element)) 
+					return inputCssSelector;
+				else
+					return result;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
 				Assert.assertTrue("Dashboard header not functioning as expected", false);
+				return result;
 			}
 		} else {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
 			Assert.assertTrue("Dashboard header is not displayed", false);
+			return result;
 		}
 	}
-
+	
 	public void locateAndClickElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
 		hwCheckModelPopup(driver);
 		if (hwValidate(shadowRootElement)) {

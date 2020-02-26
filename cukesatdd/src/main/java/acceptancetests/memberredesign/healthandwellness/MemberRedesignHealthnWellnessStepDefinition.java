@@ -87,7 +87,15 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		} else {
 			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
-			healthnWellnessPage.validateHeaderOnDashborad();
+			int index=healthnWellnessPage.validateHeaderOnDashborad();
+			Assert.assertTrue("PROBLEM - unable to locate Health and Wellness option on dashboard", index!=-1);
+			if (index==1) {
+				System.out.println("located element: xpath=//header[@class='hide-mobile']//*[@id='sticky-nav']");
+			} else if (index==2) {
+				System.out.println("located element: xpath menuL1");
+			} else {
+				System.out.println("Located shadow root element with element index ="+index);
+			}
 			healthnWellnessPage.clickHealthnWellnessTab();
 			getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 		} 
@@ -101,8 +109,16 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		}
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
-		String cssPath=healthnWellnessPage.validateHeaderOnDashborad();
-		healthnWellnessPage.clickHealthnWellnessTab(cssPath);
+		int index=healthnWellnessPage.validateHeaderOnDashborad();
+		Assert.assertTrue("PROBLEM - unable to locate Health and Wellness option on dashboard", index!=-1);
+		if (index==1) {
+			System.out.println("located element: xpath=//header[@class='hide-mobile']//*[@id='sticky-nav']");
+		} else if (index==2) {
+			System.out.println("located element: xpath menuL1");
+		} else {
+			System.out.println("Located shadow root element with element index ="+index);
+		}
+		healthnWellnessPage.clickHealthnWellnessTab();
 		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
 	
