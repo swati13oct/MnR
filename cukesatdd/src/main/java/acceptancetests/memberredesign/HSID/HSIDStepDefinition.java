@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -31,11 +32,14 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.LoginPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -410,6 +414,7 @@ public class HSIDStepDefinition {
 
 	@Given("^the user connect to DB$")
 	public void i_connected_to_Provisional_data_base() {
+		System.out.println("******the user connect to DB*****");
 		Map<String, String> props = new HashMap<String, String>();
 		props = loginScenario.getProperties();
 		loginScenario.getPDBDBConnection(props);
@@ -437,6 +442,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr_portal$")
 	public void i_delete_record_data_base(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr_portal******");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -456,6 +462,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr$")
 	public void i_delete_record_mbrtable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -475,6 +482,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from extreme scale$")
 	public void i_delete_record_extremescaletable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from extreme scale*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -720,6 +728,7 @@ public class HSIDStepDefinition {
 		String category = memberAttributesMap.get("Member Type");
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
@@ -918,4 +927,139 @@ public class HSIDStepDefinition {
 
 	}
 	
+
+	@And("^login with a deeplink in the member portal and validate elements$")
+	public void login_with_deeplink(DataTable memberAttributes)
+			throws Exception {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+		String deepLinkUrl = memberAttributesMap.get("Deeplink");
+		getLoginScenario().saveBean(LoginCommonConstants.DEEPLINK,deepLinkUrl);
+
+	    //----- note: these parameters won't be in csv, take them out of memberAttributesMap before searching csv
+	 	memberAttributesMap.remove("User Selection");
+	 	memberAttributesMap.remove("Deeplink");
+	 	//------------
+	 	
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+		
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		Assert.assertTrue("unable to find a " + desiredAttributes + " member. Member Type data could not be setup !!! ", loginCreds != null);
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		//tbd String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
+		loginPage.validateelements();
+		try {
+			if (deepLinkUrl.contains("my-documents")) {
+				MyDocumentsPage	myDocumentsPage=null;
+				myDocumentsPage =  (MyDocumentsPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", myDocumentsPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+			} else if (deepLinkUrl.contains("rewards/program-overview")) {
+				AccountHomePage accountHomePage=null;
+				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			} else {
+				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
+			}
+		} catch (UnhandledAlertException ae) {
+			System.out.println("Exception: "+ae);
+			Assert.assertTrue("PROBLEM - ***** Error in loading  Member Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
+		} 
+		
+	}	
+
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@Given("^feature security flag must set to true when testing on stage env$")
+	public void checkSecurityFlag(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String feature=memberAttributesMap.get("Feature");
+		
+		if (!feature.equals("ClaimsMicroApp")
+				&& !feature.equals("UCPProfileAndPreferences")
+				&& !feature.equals("UCPPlanDocuments")
+				&& !feature.equals("UCPMyDocuments")
+				&& !feature.equals("UCPHealthWellness")
+				&& !feature.equals("UCPBenefits")
+				) {
+			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
+		}
+		
+		System.out.println("feature="+feature);
+		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
+		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		System.out.println("Config page URL="+configPgUrl);
+		/* to-be-enable
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		d.get(configPgUrl);
+		try {
+			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			if (e.isDisplayed()) {
+				System.out.println("Element '"+e.toString()+"' found!!!!");
+				String value=e.getText();
+				if (value.equalsIgnoreCase("false")) {
+					if (MRScenario.environment.toLowerCase().contains("stage")) 
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+", stopping all tests now", false);
+					else
+						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"', not on stage, okay to move on...");
+				} else {
+					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"', okay to move on...");
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+		}
+		d.quit();
+		*/
+	}
+
 }

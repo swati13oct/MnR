@@ -74,7 +74,8 @@ public class PlanDocumentsAndResourcesFnRDocLinksHelper extends PlanDocumentsAnd
 			return redeterminationReq_link_MA_FnR;
 		}
 		//--- OR_FnR
-		if (itemName.equals("Appeals and Grievances – Medicare Advantage Plans")) {
+		if (itemName.contains("Appeals and Grievances") && itemName.contains("Medicare Advantage Plans")) {
+			//note: 'Appeals and Grievances -– Medicare Advantage Plans' is the actual name of the doc but ATDD has trouble matching that
 			return appealsAndGrievMedAdvPlan_link_OR_FnR;
 		}
 		if (itemName.equals("Medicare Plan Appeals & Grievances Form (Online)")) {
