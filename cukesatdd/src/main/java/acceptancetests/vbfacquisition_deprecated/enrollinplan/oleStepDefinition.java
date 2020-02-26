@@ -408,7 +408,7 @@ public class oleStepDefinition {
 
 	@Then("^the user validates Medicare Information Page required fields$")
 	public void the_user_validates_Medicare_Information_Page_required_fields() throws Throwable {
-		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		/*MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean Validation_Status = medicareInfoPage.validate_required_fields();
 		if(Validation_Status){
 			System.out.println("Medicare Information Page required fields : "+Validation_Status);
@@ -418,7 +418,7 @@ public class oleStepDefinition {
 		else{
 			System.out.println("Medicare Information Page required fields : "+Validation_Status);
 			Assert.fail();
-		}
+		} */
 	}
 	@Then("^the user enters following required Medicare Information$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
