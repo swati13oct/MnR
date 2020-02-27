@@ -414,6 +414,7 @@ public class HSIDStepDefinition {
 
 	@Given("^the user connect to DB$")
 	public void i_connected_to_Provisional_data_base() {
+		System.out.println("******the user connect to DB*****");
 		Map<String, String> props = new HashMap<String, String>();
 		props = loginScenario.getProperties();
 		loginScenario.getPDBDBConnection(props);
@@ -441,6 +442,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr_portal$")
 	public void i_delete_record_data_base(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr_portal******");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -460,6 +462,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr$")
 	public void i_delete_record_mbrtable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -479,6 +482,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from extreme scale$")
 	public void i_delete_record_extremescaletable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from extreme scale*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
