@@ -1040,6 +1040,7 @@ public class HSIDStepDefinition {
 		CommonUtility.checkPageIsReady(d);
 		try {
 			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			CommonUtility.waitForPageLoad(d, e, 5);
 			if (e.isDisplayed()) {
 				System.out.println("Element '"+e.toString()+"' found!!!!");
 				String value=e.getText();
