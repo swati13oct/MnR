@@ -536,6 +536,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[@class='container']//img")
 	protected List<WebElement> currentIssueImgList;
 	
-
+	@FindBy(xpath="//h3[text()='My Documents']")
+	protected WebElement myDocPgHeader;
 	
 }
