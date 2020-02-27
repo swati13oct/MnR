@@ -8,7 +8,7 @@ Feature: 1.04 To Test EOB for Members
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to EOB page_hsid
-    #    Then the user validates site leaving pop up
+    Then the user validates site leaving pop up
     And the user slects the desired date range
       | Plan Type  | <planType>  |
       | Date Range | <dateRange> |

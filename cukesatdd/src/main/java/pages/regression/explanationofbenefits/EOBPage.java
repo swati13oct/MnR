@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
@@ -50,13 +51,13 @@ public class EOBPage extends UhcDriver{
 	@FindBy(id="eobvideoicon")
 	private WebElement eobVideoBox;
 
-	@FindBy(id="adobesitelink")
+	@FindBy(xpath = "//a[contains(text(), 'Adobe')]")
 	private WebElement adobeWebsiteLink;
 
-	@FindBy(id="proceedbtn")
+	@FindBy(xpath = "//a[contains(@id, 'proceedbtn')]")
 	private WebElement siteLeavingProceedButton;
 
-	@FindBy(id="cancelbtn")
+	@FindBy(xpath = "//a[contains(@id, 'cancelbtn')]")
 	private WebElement siteLeavingCancelButton;
 
 	@FindBy(className="modal-body")
@@ -461,36 +462,33 @@ public class EOBPage extends UhcDriver{
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
-		//adobeWebsiteLink.click();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		js.executeScript("arguments[0].click();", adobeWebsiteLink);
-		validate(siteLeavingProceedButton);
-		validate(siteLeavingCancelButton);
-
+		
+		jsClickNew(adobeWebsiteLink);
+		validateNew(siteLeavingProceedButton);
+		validateNew(siteLeavingCancelButton);
+		if(!siteLeavingProceedButton.isDisplayed() || !siteLeavingCancelButton.isDisplayed()) {
+			Assert.fail("Site Leaving Pop-up not displayed");
+		}
 		//now click cancel and validate any element on page
 		siteLeavingCancelButton.click();
 		validate(adobeWebsiteLink);
 
-		//now again validate site leaving popup
-		js.executeScript("arguments[0].click();", adobeWebsiteLink);
-		validate(siteLeavingProceedButton);
-		validate(siteLeavingCancelButton);
-
-		//now click on proceed and validate new tab opens
-		siteLeavingProceedButton.click();
-		switchToNewTab();
-		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-
-		//capture next page title
-		String pageTitle = driver.getTitle();
-		System.out.println(pageTitle);
-		if(pageTitle!=null && pageTitle!=eobPageTitle){
-			System.out.println("Site leaving popup validated and working fine");
-		}else{
-			System.out.println("Site leaving popup validated and working fine");
-			Assert.fail();
-		}
-		return null;
+		/*
+		 * //now again validate site leaving popup
+		 * js.executeScript("arguments[0].click();", adobeWebsiteLink);
+		 * validate(siteLeavingProceedButton); validate(siteLeavingCancelButton);
+		 * 
+		 * //now click on proceed and validate new tab opens
+		 * siteLeavingProceedButton.click(); switchToNewTab();
+		 * driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+		 * 
+		 * //capture next page title String pageTitle = driver.getTitle();
+		 * System.out.println(pageTitle); if(pageTitle!=null &&
+		 * pageTitle!=eobPageTitle){
+		 * System.out.println("Site leaving popup validated and working fine"); }else{
+		 * System.out.println("Site leaving popup validated and working fine");
+		 * Assert.fail(); }
+		 */		return null;
 	}
 
 	/**
@@ -613,7 +611,9 @@ public class EOBPage extends UhcDriver{
 		numberOfPageDisplayed(eobCountInt);
 		for (int i = 0; i < eobCountInt; i++) {
 			if (driver.findElement(By.id("eoblist" + i)).isDisplayed()) {
+				
 				System.out.println("EOB at" + i + " displayed correctly");
+				CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]")), 20);
 				WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]"));
 				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
 				if(pdflink.getText().contains("0kb") || pdflink.getText().contains("0 kb")) {
