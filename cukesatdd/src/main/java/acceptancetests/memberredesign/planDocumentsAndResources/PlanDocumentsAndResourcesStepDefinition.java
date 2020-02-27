@@ -1369,9 +1369,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateSectionHeader_FnR(sectionDisplay);
 		sectionNote.add("PASSED - section header validation");
 
+		boolean allPassed=true;
 		if (sectionDisplay) { //note: list of items
 			//-----------------------------
 			String subSection="Premium Payment Information";
+			boolean sectionPassed=true;
 			testInputInfoMap.put("subSection", subSection);
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(premiumPaymentInfoDisplay));
 			List<String> docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1382,32 +1384,47 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			subSection="Reimbursement Forms";
+			sectionPassed=true; //note: reset - assume the section pass to begin with
 			testInputInfoMap.put("subSection", subSection);
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(reimbursementFormsDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
 			sectionNote.addAll(docSection_note);
-
 			targetDocList=userHelper.getTargetDocList(planType, memberType, section, subSection);
 			for(String doc: targetDocList) {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			subSection="Authorization Forms and Information";
+			sectionPassed=true; //note: reset - assume the section pass to begin with
 			if (memberType.toUpperCase().contains("GROUP")) 
 				subSection="Authorization Forms";
 			testInputInfoMap.put("subSection", subSection);
@@ -1419,14 +1436,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			subSection="Medication Authorization Forms";
+			sectionPassed=true; //note: reset - assume the section pass to begin with
 			testInputInfoMap.put("subSection", subSection);
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(medicationAuthFormsDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1437,14 +1462,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			subSection="Other Resources";
+			sectionPassed=true; //note: reset - assume the section pass to begin with
 			testInputInfoMap.put("subSection", subSection);
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(otherResourcesDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1455,14 +1488,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			subSection="Disenrollment";
+			sectionPassed=true; //note: reset - assume the section pass to begin with
 			testInputInfoMap.put("subSection", subSection);
 			testInputInfoMap.put("expDisplay_FnR", String.valueOf(disenrollmentInfoDisplay));
 			docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1473,15 +1514,23 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 				docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 				sectionNote.addAll(docSection_note);
+				if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+					sectionPassed=false;
 			}
 			planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 			System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-			sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+			if (sectionPassed)
+				sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+			else {
+				sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+				allPassed=false;
+			}
 			sectionNote.add("  ------------------------------------------------------");
 
 			//-----------------------------
 			if (planType.equals("SHIP")) {
 				subSection="SHIP"; //note: ship has no sub-section
+				sectionPassed=true; //note: reset - assume the section pass to begin with
 				testInputInfoMap.put("subSection", subSection);
 				testInputInfoMap.put("expDisplay_FnR", "true"); 
 				//docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1492,16 +1541,24 @@ public class PlanDocumentsAndResourcesStepDefinition {
 					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
 				}
 				//planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-				sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
 				sectionNote.add("  ------------------------------------------------------");
 			}
 
 			//-----------------------------
 			if (planType.equals("PDP")) {
 				subSection="Prescription Drug Mail Order Form";
+				sectionPassed=true; //note: reset - assume the section pass to begin with
 				testInputInfoMap.put("subSection", subSection);
 				testInputInfoMap.put("expDisplay_FnR", String.valueOf(presDrugMailOrderFormDisplay));
 				docSection_note=planDocumentsAndResourcesPage.validate_section_FnR(testInputInfoMap);
@@ -1512,10 +1569,17 @@ public class PlanDocumentsAndResourcesStepDefinition {
 					testInputInfoMap=docHelper_FnR.updateTestInputInfoMap(testInputInfoMap, doc);
 					docSection_note=planDocumentsAndResourcesPage.validateDocs_FnR(testInputInfoMap);
 					sectionNote.addAll(docSection_note);
+					if (!planDocumentsAndResourcesPage.determineSectionResult(docSection_note))
+						sectionPassed=false;
 				}
 				planDocumentsAndResourcesPage.collapse_section_FnR(testInputInfoMap);
 				System.out.println("Finished validation documents in sub-section '"+subSection+"' in '"+section+"' section...moving onto next step...");
-				sectionNote.add("  PASSED - subsection '"+subSection+"' validation");
+				if (sectionPassed)
+					sectionNote.add("  PASSED - subsection '"+subSection+"' documents validation");
+				else {
+					sectionNote.add("  FAILED - subsection '"+subSection+"' documents validation");
+					allPassed=false;
+				}
 				sectionNote.add("  ------------------------------------------------------");
 			}
 		} 
@@ -1524,7 +1588,9 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		if (noteList==null)
 			noteList=new ArrayList<String>();
 		noteList.addAll(sectionNote);
-		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);		
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
+		
+		Assert.assertTrue("PROBLEM - not all FnR documents pass validation, see TEST NOTE in log for detail", allPassed);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -190,6 +190,7 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 	 * For MyDocument testing
 	 */
 	public MyDocumentsPage navigateToMyDocumentsPage() {
+		checkModelPopup(driver,5);
 		myDocumentLink_MD.click();
 		if (MRScenario.environment.contains("team-atest")) {
 			sleepBySec(8);

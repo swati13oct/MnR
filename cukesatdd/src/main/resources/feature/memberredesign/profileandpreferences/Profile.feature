@@ -172,7 +172,7 @@ Feature: 1.02 Member Profile page
      | Unknown_4 | MAPD     | EPMPEnabled | Individual_ProfilePref |
 
   @accountProfile09 @accountProfileMicroApp09 @EMPMprofilePageForShip @regressionMember
-  Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
+  Scenario Outline: Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile page for SHIP members
     Given login with following details logins in the member portal and validate elements 
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
@@ -426,4 +426,34 @@ Feature: 1.02 Member Profile page
        | memberType          | friendname | favcolor | phonenumber |
        |  GRPPDPPREFFECTIVE_ProfilePref  | name1      | color1   | number1     |  
        |  GRPDPSSUP_ProfilePref          | name1      | color1   | number1     |  
+       
+       
+       @accountProfile019  @ShipEndtoEnd @AP_Part1_Regression @codetransformers
+  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    When the user navigates to Profile and Preferences page
+    And the user validates the Plan Name, Member name, Member ID and account section
+	And the ship user validates the need help section
+    Then the user validates permanent address section
+    Then the user validates the Phone section
+      | Plan Type | <memberType> |
+    Then the user Clicks on the the Edit phone Link and validates the elements
+      | Plan Type | <memberType> |
+    Then the Ship user checks the Edit Button changes to Cancel Button
+    Then the user checks the functionality of save Button in Phoneeditsection
+      | Member Type | <memberType> |
+    Then the user validate the functionality of Cancel Button In phoneeditSection
+    Then the user validate the temporary address section for ship member
+    Then the user validates that  Communication Preferences section comes up for Ship Member
+    Then the user validates the Go Green page for a ship member
+    And the user validates see more ways to contact us section
+    And the user validates on clicking contact us link it should route to contact us page
+
+    Examples: 
+	    | TID   | planType | memberType          |
+	    | 15103 | SHIP     | SHIP_ProfilePref    |   
+       
+       
   

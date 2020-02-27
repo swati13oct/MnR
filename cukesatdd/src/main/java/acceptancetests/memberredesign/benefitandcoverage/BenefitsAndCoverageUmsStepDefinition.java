@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
-//import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -29,12 +28,10 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
-import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
 import pages.redesign_deprecated.UlayerHomePage;
-import pages.regression.benefitandcoverage.*;
 
 /**
  * Functionality: Benefits and Coverage page
@@ -43,8 +40,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
-
-
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -123,11 +118,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
            List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
            Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
            for (int i = 0; i < memberAttributesRow.size(); i++) {
-
                   memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
                                memberAttributesRow.get(i).getCells().get(1));
            }
-
            String plantype = memberAttributesMap.get("Plan Type");
            Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
            List<String> desiredAttributes = new ArrayList<String>();
@@ -136,39 +129,34 @@ public class BenefitsAndCoverageUmsStepDefinition {
                         String key = iterator.next();
                         desiredAttributes.add(memberAttributesMap.get(key));
                   }
-
            }
 
      //Sardar Start
-     if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-     TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-     benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
-     }else {
-     //Sardar end
-
-           AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
-           //Sardar Start commented try catch and added "}" for End of else
-           //try {
-                  //Thread.sleep(10000);
-           //} catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
-                  //e.printStackTrace();
-           //}
-           benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
-     }
+           if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+        	   TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+        	   benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
+           }else {
+        	   //Sardar end
+        	   AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+        	   //Sardar Start commented try catch and added "}" for End of else
+        	   //try {
+        	   //Thread.sleep(10000);
+        	   //} catch (InterruptedException e) {
+        	   // TODO Auto-generated catch block
+        	   //e.printStackTrace();
+        	   //}
+        	   benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+           }
            //Sardar End
-
            if (benefitsCoveragePage != null) {
-                  getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+        	   getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
            }
            else
 
            {
-                  System.out.println("Benefits and Coverage page object is Null ");
+        	   System.out.println("Benefits and Coverage page object is Null ");
            }
-
-    }
+	}
 
 
 	@Then("^The user navigate to Benefits and Coverage page$")
@@ -585,9 +573,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.ExclusiveDisclaimers();
 	}
 
-	@And("^user validates VIEW ALL ADDITIONAL BENEFITS link on the rally page and clicks on the link$")
+	@And("^user validates ADDITIONAL BENEFITS Section$")
 	public void VIEW_ALL_ANCILLARY_BENEFITS() throws InterruptedException {
-		System.out.println("***user validates VIEW ALL ANCILLARY BENEFITS link on the rally page and clicks on the link***");
+;
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.VIEW_ALL_ANCILLARY_BENEFITS();
@@ -606,7 +594,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	/** 
 	 * @toDo : The user validates the Leaving popup in  Ancillary section
-	 */
+	 *//*
 
 	@And("^user validates the Leaving  popup$")
 	public void user_validates__leavingpopup() {
@@ -617,9 +605,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
-	/** 
+	*//** 
 	 * @toDo : The user validates the cancel button  of the leaving popup in  Ancillary section
-	 */
+	 *//*
 
 	@And("^user validates and click on Cancel button$")
 	public void user_validates__cacenbutton() {
@@ -627,9 +615,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.Cancelbutton();
 	}
-	/** 
+	*//** 
 	 * @toDo : The user validates the proceed button  of the leaving popup in  Ancillary section
-	 */
+	 *//*
 
 
 	@And("^user validates and clicks on Proceed button and navigate to heathnavigationpage$")
@@ -640,7 +628,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 
-	/** 
+*/	/** 
 	 * @toDo : The user validates the DrugCoverage section headers and text
 	 */
 	@And("^the user validates Drug coverage header and text under the section")
@@ -1230,26 +1218,26 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
 
-	/** 
-	 * @toDo : Validates the headers for ship members
-	 */
-
-	@And("^the user validates headers on Bnc page for ship members$")
-	public void user_validate_Headers_ForShip() {
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeadersShip();
-	}
+	
 
 	/** 
 	 * @toDo : Validates the headers for ship members
 	 */
 
 	@And("^the user validates plan overview and summary on Bnc page for ship members$")
-	public void user_validate_Headers_Ship() {
+	public void user_validate_Headers_Ship(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String benefitsExpectedCount = memberAttributesMap.get("Benefits Expected");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validateHeadersShip();
+		benefitsCoveragePage.validateHeadersShip(benefitsExpectedCount);
 	}
 
 	/** 
@@ -1542,9 +1530,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @author njain112
 	 */
 
-	@And("^the user verifies that the correct pdfs are there in the plan material section$")
+	@And("^the user verifies that the correct pdfs are there in the plan material section of benefits page$")
 	public void verifypdfscoming(DataTable givenAttributes) throws InterruptedException   {
-		System.out.println("***the user verifies that the correct pdfs are there in the plan material section***");
+		System.out.println("***the user verifies that the correct pdfs are there in the plan material section of benefits page***");
 
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
@@ -1558,20 +1546,17 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		Collection<String> values = memberAttributesMap.values();
 		String[] targetArray = values.toArray(new String[values.size()]);
-		System.out.println(values.size());
-		System.out.println(values.size());
+
 		boolean arraycheck = benefitsnCoveragepage.verifypdfname(targetArray);
 		System.out.println(arraycheck);
-		if (arraycheck == true)
-		{
-			Assert.assertTrue("all pdfs are coming correctly",true);
-			System.out.println("all pdfs are coming correctly");
-		}
-		else 
-		{
-			Assert.fail("pdfs not coming correctly");
-			System.out.println("pdfs not coming correctly");
-		}
+		Assert.assertTrue("PROBLEM - not getting expected number and/or name of PDFs", arraycheck);
+		System.out.println("number and/or name of PDFs are coming correctly");
+		
+		boolean contentCheck = benefitsnCoveragepage.verifyDocContent(targetArray);
+		System.out.println(contentCheck);
+		Assert.assertTrue("PROBLEM - PDF content is either null or empty", contentCheck);
+		System.out.println("There is content in PDF docs");
+		
 	}
 
 
@@ -1710,12 +1695,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 * @author sdwaraka
 	 * 
 	 */
-
 	@Then("^the user navigates to Benefits and Coverage page$")
 	public void the_user_navigates_to_Redesign_BnC_page() throws InterruptedException{
 		System.out.println("***the user navigates to Benefits and Coverage page***");
 		AccountHomePage accountHomePagew = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
 
 		UlayerHomePage accountHomePage = (UlayerHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		BenefitsCoveragePage planBenefitsCoverage = accountHomePage.navigateToBenefitsAndCoverage();
@@ -1728,11 +1711,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		else {
 			Assert.fail("Error in loading  EOB Page");
 		}
-
 	}
-
-
-
 
 
 	/**
@@ -1765,7 +1744,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		else{
 			Assert.fail("ERROR Validating Catastrophic Coverage Stage Updated Language");
 		}
-
 	}
 
 	@And("^the user validates the Vas section on benefits and coverage page is not displayed$")
