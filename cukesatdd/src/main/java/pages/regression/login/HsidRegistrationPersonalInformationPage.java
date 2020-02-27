@@ -24,14 +24,14 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	
 	@FindBy(id = "piZipCode")
 	public WebElement zipCode;
-	
+
 	@FindBy(id = "piMemberId4Mnr")
 	public WebElement memberId;
 
-	////button[contains(.,'Register now')]
-    @FindBy(xpath = "html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")
-    public WebElement continuebutton;
-	
+	//// button[contains(.,'Register now')]
+	@FindBy(xpath = "//span[contains(text(),'Continue')]")
+	public WebElement continuebutton;
+
 	@FindBy(xpath = "//label[@for='piFirstName']/span[@class='error']")
 	private WebElement firstNameErrorMsg;
 
@@ -49,13 +49,18 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 
 	@FindBy(xpath = "//label[@for='piZipCode']//span[starts-with(@class,'error')]")
 	private WebElement zipcodeErrorMsg;
-	
+
 	@FindBy(xpath = "//label[starts-with(@for,'piMemberId')]//*[@ng-bind-html='piMemberIdError']|//label[@for='piMemberId']/span[@class='error']")
 	private WebElement memberIdErrorMsg;
-	
+
+	@FindBy(xpath = "//span[contains(text(),\"We're having trouble finding you in our records. P\")]")
+	private WebElement terminatedmemberIdErrorMsg;
+
 	@FindBy(xpath = "//div[contains(@class,'form__step1')]//p[contains(@class,'ng-scope')]|//div[@ng-show='pageError']/p")
-	private WebElement mainErrorMsg;
+	private WebElement mainErrorMsg; 
 	
+	@FindBy(xpath = "//span[contains(text(),'Try Again')]")
+	private WebElement tryAgainButton;
 	
 	public HsidRegistrationPersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -63,9 +68,8 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 	}
 
 	@Override
-	public void openAndValidate()  {
+	public void openAndValidate() {
 
-		
 	}
 
 	public void validateFields() {
@@ -76,33 +80,41 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		validate(memberId);
 		validate(continuebutton);
 	}
-	
-	public void populatefields(String firstName, String lastName, String dob,String zipcode, String memberId){
+
+	public void populatefields(String firstName, String lastName, String dob, String zipcode, String memberId) {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		this.firstName.sendKeys(firstName);
 		this.lastName.sendKeys(lastName);
 		this.dob.sendKeys(dob);
 		this.zipCode.sendKeys(zipcode);
 		this.memberId.sendKeys(memberId);
 	}
-	
-	public HsidRegistrationPersonalCreateAccount clickContinue(){
-		continuebutton.click();
 
-		while(!currentUrl().contains("register/createAccount")){
-			System.out.println("create account page is loading");
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public HsidRegistrationPersonalCreateAccount clickContinue() {
+		continuebutton.click();
+		System.out.println("continue button has been clicked successfully");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(driver.findElements(By.xpath("//span[contains(text(),'Try Again')]")).size()>0) {
+				driver.findElement(By.xpath("//span[contains(text(),'Try Again')]")).click();
+				Thread.sleep(10000);
 			}
+			
+		} catch (InterruptedException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		System.out.println("create account page is loaded");
 		if(currentUrl().contains("register/createAccount")){
@@ -112,11 +124,17 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		}
 		return null;
 	}
-	
-	public void clickContinueAndValidate(){
-		WebDriverWait wait = new WebDriverWait(driver,20);
-		
-		WebElement continuebtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("html/body/div[1]/div/div[2]/flex[2]/flex-content[1]/div/form/div/div[2]/p/button")));
+
+	public HsidRegistrationPersonalCreateAccount clickOnContinue() {
+		continuebutton.click();
+		return null;
+	}
+
+	public void clickContinueAndValidate() {
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+
+		WebElement continuebtn = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Continue')]")));
 		continuebtn.click();
 	}
 	
@@ -146,6 +164,11 @@ public class HsidRegistrationPersonalInformationPage extends UhcDriver {
 		Assert.assertTrue("Error message for member id is not displayed",memberIdErrorMsg.isDisplayed());
 	}
 
+	public void validateTerminateMemberErrorMessage() {
+		Assert.assertTrue("Error message for terminated member is displaying",
+				terminatedmemberIdErrorMsg.isDisplayed());
+		System.out.println("Error message for terminated member is displaying successfully");
+	}
 
 	public void validateMainErrorMessage(){
 		Assert.assertTrue("Main error message is not displayed",mainErrorMsg.isDisplayed());
