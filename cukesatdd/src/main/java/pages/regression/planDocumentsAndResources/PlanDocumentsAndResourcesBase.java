@@ -1134,6 +1134,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 							section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 							Assert.assertTrue("DEBUG - unable to locate page content for doc name="+targetDocName, currentIssueImgList.size()>0);
 						}
+					} else if (targetDocName.equals("PREVIOUS ISSUE")) {
+						//note: header text is //h3 not h1 like others
+						if (planDocValidate(prevIssPgHeader)) {
+							section_note.add("    PASSED - located page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+						} else {
+							section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("DEBUG - unable to locate page content for doc name="+targetDocName, currentIssueImgList.size()>0);
+						}
 					} else if (targetDocName.equals("SEARCH DOCUMENTS")) {
 						//note: header text is //h3 not h1 like others
 						if (planDocValidate(myDocPgHeader)) {
