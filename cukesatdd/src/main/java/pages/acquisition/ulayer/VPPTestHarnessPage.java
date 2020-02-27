@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -54,6 +56,13 @@ public class VPPTestHarnessPage extends UhcDriver{
 		
 		@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
 		private WebElement vppTop;
+		
+		@FindBy(xpath="//input[@id='zipcode']")
+		private WebElement shopForAPlanOptionZipcodeFieldBox;
+		
+		@FindBy(xpath="//button[text()='Go']")
+		private WebElement shopForAPlanOptionFindPlanButton;
+
 		
 		public VPPTestHarnessPage(WebDriver driver) {
 			super(driver);
@@ -113,6 +122,19 @@ public class VPPTestHarnessPage extends UhcDriver{
 			return new VPPPlanSummaryPage(driver);
 		}
 
+		public VPPPlanSummaryPage navigateToShopPlanenterZipcodeToVPP(String zipcode, String countyName, String isMultiCounty) {
+			validateNew(enterVppzipcode);
+			enterVppGoButton.click();
+			CommonUtility.waitForPageLoadNew(driver, shopForAPlanOptionZipcodeFieldBox, 35);
+			validateNew(shopForAPlanOptionZipcodeFieldBox);
+			shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
+			shopForAPlanOptionFindPlanButton.click();
+			SelectCounty(countyName);
+			if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
+		}
 
 
 }
