@@ -2297,6 +2297,7 @@ public class VppStepDefinitionUHC {
 		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
+		
 	}
 	
 	@When("^the user clicks on Lookup zipcode and enters following information in the UHC Acquisition Site VPPZipcode TestHarness page$")
@@ -2319,8 +2320,8 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
-	@When("^the user click on Go botton without entering Zipcode and enters zipcode from shop for a plan on the AARP Acquisition Site VPPZipcode TestHarness page$")
-	public void user_enters_zipcodefromshopforaplan_on_the_AARP_AcquisitionSiteVPPZipcodeTestHarnesspage(DataTable inputAttributes) throws Throwable {
+	@When("^the user click on Go botton without entering Zipcode and enters zipcode from shop for a plan on the UHC Acquisition Site VPPZipcode TestHarness page$")
+	public void user_enters_zipcodefromshopforaplan_on_the_UHC_AcquisitionSiteVPPZipcodeTestHarnesspage(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
