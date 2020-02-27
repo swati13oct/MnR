@@ -118,11 +118,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
            List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
            Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
            for (int i = 0; i < memberAttributesRow.size(); i++) {
-
                   memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
                                memberAttributesRow.get(i).getCells().get(1));
            }
-
            String plantype = memberAttributesMap.get("Plan Type");
            Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
            List<String> desiredAttributes = new ArrayList<String>();
@@ -131,39 +129,34 @@ public class BenefitsAndCoverageUmsStepDefinition {
                         String key = iterator.next();
                         desiredAttributes.add(memberAttributesMap.get(key));
                   }
-
            }
 
      //Sardar Start
-     if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-     TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-     benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
-     }else {
-     //Sardar end
-
-           AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-
-           //Sardar Start commented try catch and added "}" for End of else
-           //try {
-                  //Thread.sleep(10000);
-           //} catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
-                  //e.printStackTrace();
-           //}
-           benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
-     }
+           if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+        	   TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+        	   benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
+           }else {
+        	   //Sardar end
+        	   AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+        	   //Sardar Start commented try catch and added "}" for End of else
+        	   //try {
+        	   //Thread.sleep(10000);
+        	   //} catch (InterruptedException e) {
+        	   // TODO Auto-generated catch block
+        	   //e.printStackTrace();
+        	   //}
+        	   benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag(plantype);
+           }
            //Sardar End
-
            if (benefitsCoveragePage != null) {
-                  getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+        	   getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
            }
            else
 
            {
-                  System.out.println("Benefits and Coverage page object is Null ");
+        	   System.out.println("Benefits and Coverage page object is Null ");
            }
-
-    }
+	}
 
 
 	@Then("^The user navigate to Benefits and Coverage page$")

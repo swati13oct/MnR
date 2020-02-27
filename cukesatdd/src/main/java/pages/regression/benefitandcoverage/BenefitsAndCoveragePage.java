@@ -926,6 +926,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean verifypdfname(String a[]) {
 		boolean checkflag = true;
 		Select langdropdwn = new Select(langdropdown);
+		sleepBySec(5);
 		if(langdropdwn.getFirstSelectedOption().getText().contains("ENGLISH"))
 		{
 			List<WebElement> pdfs = driver.findElements(By.xpath("//div/span/div/ul/li[@class=' clearfix']/a"));
@@ -1077,20 +1078,25 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validatePageContent(String targetDocName, String actUrl) {
 		//note: validate page content
 		if (actUrl.contains(".pdf")) {
-			try {
-				URL TestURL = new URL(driver.getCurrentUrl());
-				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-				PDDocument document = PDDocument.load(TestFile);
-				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : "+PDFText);
-				Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
-			} catch (IOException e) {
-				Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+			if (MRScenario.environment.contains("team-a")) {
+				System.out.println("lower env will not load certain PDF docs, skip this page content validation");
+				return;
+			} else {
+				try {
+					URL TestURL = new URL(driver.getCurrentUrl());
+					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+					PDDocument document = PDDocument.load(TestFile);
+					String PDFText = new PDFTextStripper().getText(document);
+					System.out.println("PDF text : "+PDFText);
+					Assert.assertTrue("PROBLEM - '"+targetDocName+"' PDF content is either null or empty", PDFText!=null && !PDFText.equals(""));
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+				} catch (IOException e) {
+					Assert.assertTrue("PROBLEM - unable to validate pdf '"+targetDocName+"' content - MalformedURLException", false);
+				}
+				System.out.println("Verified PDF '"+targetDocName+"' content is not null or empty");
 			}
-			System.out.println("Verified PDF '"+targetDocName+"' content is not null or empty");
 		} else {
 			//note: for html or any url that's not pdf related
 			Assert.assertTrue("PROBLEM - unable to locate page header text element on the landing page for doc '"+targetDocName+"'", validate(generalPgHeader,0));
@@ -1104,35 +1110,42 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void validatestaticlinksinpdfpdp(String plantype)
 	{
+		String originalUrl=driver.getCurrentUrl();
 		String targetDocName="Medication Therapy management Program";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Medicationlinkinpdfsecpdp);
 		sleepBySec(10);
 		Medicationlinkinpdfsecpdp.click();
 		String expectedUrl="/documents/medication-program";
+		sleepBySec(5);
 		String actualUrl=driver.getCurrentUrl();
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
-		navigateToBenefitsPg(plantype);		
+		driver.get(originalUrl);
+		//tbd navigateToBenefitsPg(plantype);		
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("landing URL is ="+driver.getCurrentUrl());
+		sleepBySec(10);
 
 		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
 		Viewotherdocsinpdfpdp.click();
+		sleepBySec(10);
 		expectedUrl="/member/documents/overview.html";
 		actualUrl=driver.getCurrentUrl();
 		validatePageContent(targetDocName, actualUrl);
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		sleepBySec(20);
-		navigateToBenefitsPg(plantype);
+		//tbd navigateToBenefitsPg(plantype);
+		driver.get(originalUrl);
 	}
 
 	public void navigateToBenefitsPg(String plantype) {
 		System.out.println("Go back to Benefits page...");
 		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
-			driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+			//driver.navigate().to(PAGE_URL+"medicare/member/benefits-coverage.html");
+			driver.navigate().to(PAGE_URL+"content/medicare/member/benefits/overview.html");
 		} else if (plantype.equalsIgnoreCase("Medica"))	{
 			driver.navigate().to("https://"+MRScenario.environment+"-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
 		} else if (plantype.equalsIgnoreCase("PCP")) {
@@ -1344,7 +1357,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validateTownOfGreenwichdrugtable() {
 		sleepBySec(5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-500)", "");
+		jse.executeScript("arguments[0].scrollIntoView(true);", GreenwichTable);
 		validateNew(GreenwichTable);
 		String TableData="Standard Network Pharmacy Retail Drug Costs\n"
 		        +"Copay *\n"
