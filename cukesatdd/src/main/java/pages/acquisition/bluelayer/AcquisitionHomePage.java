@@ -1855,4 +1855,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public VPPTestHarnessPage GetVPPTestHarnessPage() {
+		return new VPPTestHarnessPage(driver);
+	}
 }

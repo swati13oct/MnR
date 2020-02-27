@@ -24,6 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -1661,6 +1662,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				return new VPPPlanSummaryPage(driver);
 			}
 			return null;
+		}
+		
+		public VPPTestHarnessPage GetVPPTestHarnessPage() {
+			return new VPPTestHarnessPage(driver);
 		}
 	} 
 
