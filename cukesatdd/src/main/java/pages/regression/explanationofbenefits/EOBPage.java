@@ -28,7 +28,7 @@ public class EOBPage extends UhcDriver{
 
 	@FindBy(id="date-range")
 	private WebElement eobMonthDateRange;
-	
+
 	@FindBy(id="date-range-1")
 	private WebElement eobMonthDateRange1;
 
@@ -44,7 +44,7 @@ public class EOBPage extends UhcDriver{
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
 
-	@FindBy(className="learnmoreunderline ng-scope")
+	@FindBy(xpath="//a[contains(@class, 'learnmoreeob')]")
 	private WebElement learnMoreLink;
 
 	@FindBy(id="eobvideoicon")
@@ -79,46 +79,46 @@ public class EOBPage extends UhcDriver{
 
 	@FindBy(xpath = "//a[contains(text(),'EOB Search')]")
 	private WebElement eobLink;
-	
+
 	@FindBy(id="toDatepicker")
 	private WebElement toDate;
-	
+
 	@FindBy(id="fromDatepicker")
 	private WebElement fromDate;	
-	
+
 	@FindBy(className=" btn btn—primary")
 	private WebElement customSearchButton;
-	
+
 	@FindBy(xpath="//*[contains(@class,'bold number-title ng-binding')]")
 	private WebElement eobCount;
-		
+
 	@FindBy(className="rightarrow")
 	private WebElement nextPageArrow;
-	
+
 	@FindBy(id="eoblist0")
 	private WebElement eobFirst;
-	
+
 	@FindBy(id="coveragebenefits_2")
 	private WebElement bncTab;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Plan Benefits Summary')]")
 	private WebElement bncPageHeader;
-	
+
 	@FindBy(xpath = "//*[@id='49144037']")
 	protected WebElement pdpNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='15825500']")
 	protected WebElement medsuppNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
-	
+
 	@FindBy(xpath = "//h1")
 	private WebElement pageHeader;
-	
-	
+
+
 	private static String STAGE_DASHBOARD_URL = MRConstants.DASHBOARD_URL;
-	
+
 	public EOBPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -129,14 +129,14 @@ public class EOBPage extends UhcDriver{
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
 		checkModelPopup(driver);
-		
+
 		if(!pageHeader.getText().contains("Explanation of Benefits"))
 			Assert.fail("Page header not validated. Error loading the page");
 
 	}
-	
+
 	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
-        validate(eobMonthDateRange);	
+		validate(eobMonthDateRange);	
 		if(planType.equalsIgnoreCase("MAPD")){
 			Select select = new Select(eobType);
 			eobType.click();
@@ -145,24 +145,24 @@ public class EOBPage extends UhcDriver{
 		}
 		Select select;
 		if(planType.contains("SHIP")){
-		select = new Select(eobMonthDateRange);
-		eobMonthDateRange.click();
+			select = new Select(eobMonthDateRange);
+			eobMonthDateRange.click();
 		}else{
 			select = new Select(eobMonthDateRange1);
 			eobMonthDateRange1.click();
 		}
 		System.out.println(dateRange);
 		//WebElement OPtionSelection = driver.findElement(By.xpath("//option[contains(text(), '"+dateRange+"')]"));
-		
+
 		//OPtionSelection.click();
 		select.selectByVisibleText(dateRange);
 		validateDateRangeContentDisplayed(dateRange);
- 		return new EOBPage(driver);
+		return new EOBPage(driver);
 	}
-	
+
 	/**
-	*@toDO: method to selectDateRange(dateRange, memberType, eobTypeData);
-	*/
+	 *@toDO: method to selectDateRange(dateRange, memberType, eobTypeData);
+	 */
 	public EOBPage validateEOBStatements(String dateRange,String planType,String eobTypeData, String fromDate, String toDate){
 		if(dateRange.contains("Custom")){
 			fromDateInputBox.clear();
@@ -193,11 +193,11 @@ public class EOBPage extends UhcDriver{
 
 		return new EOBPage(driver);
 	}
-	
+
 	/**
-	*@toDo: the method to validate Read PDF
-	*/
-	public EOBPage validateReadPDF(){
+	 *@toDo: the method to validate Read PDF
+	 */
+	public void validateReadPDF(){
 		learnMoreLink.click();
 		if(eobVideoBox.isDisplayed()){
 			System.out.println("Read medical EOB Video Box link displayed correctly");
@@ -208,31 +208,31 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-			/*driver.switchTo().window(tabs.get(1));
+//			driver.switchTo().frame("artEXPOiFrame");
+//			driver.switchTo().window(tabs.get(1));
 			System.out.println(driver.getTitle());
-			if (driver.getTitle().contains("How_to_read_Medical_EOB.pdf")) {
-				System.out.println("PDF successfully displayed");
-				return new EOBPage(driver);
-			}*/
+			if (driver.findElement(By.xpath("//*[contains(@id, 'hl-widget-video-overlay')]")).isDisplayed()) {
+				System.out.println("Video successfully displayed");
+				jsClickNew(driver.findElement(By.xpath("//*[contains(@id, 'widget-video')]//a[contains(@class, 'close')]")));
+			}
 		}else{
 			System.out.println("Read Medical EOB Video Page not displayed");
 			Assert.fail();
 		}
-		return null;
 	}
-	
+
 	/**
-	*@toDo: this method validates size/date/link displayed on UI for each EOB
-	*/
+	 *@toDo: this method validates size/date/link displayed on UI for each EOB
+	 */
 	public EOBPage validateEachEOBonUI(){
-		
+
 		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
 		List<WebElement> pdfIcon = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/img")); 
 		List<WebElement> fileType = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/span"));
@@ -283,11 +283,11 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-	
+
 	/**
-	*@toDo: this method validate the dropdowns on EOB page
-	*/
-	
+	 *@toDo: this method validate the dropdowns on EOB page
+	 */
+
 	public EOBPage validateDropDowns(String planType){
 		if(planType.equals("MAPD")){
 			validate(eobType);
@@ -313,9 +313,9 @@ public class EOBPage extends UhcDriver{
 				System.out.println("EOB Type tab not displayed --- passed");
 			}
 		}
-		 
+
 		Select selectDate;
-		
+
 		if(planType.equals("SHIP") || planType.equals("SSUP") || planType.equals("HIP")){
 			selectDate = new Select(eobMonthDateRangeSHIP);
 			selectDate.getFirstSelectedOption();
@@ -367,10 +367,10 @@ public class EOBPage extends UhcDriver{
 		}	*/	
 		return null;
 	}
-	
+
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
-	/*if(dateRangeValue.contains("custom")){
-		
+		/*if(dateRangeValue.contains("custom")){
+
 	}else{
 		if(eobDetailsHeader.getText().contains(dateRangeValue)){
 			System.out.println(dateRangeValue+" displayed correctly");
@@ -380,12 +380,12 @@ public class EOBPage extends UhcDriver{
 		}
 	}	*/
 	}
-	
+
 	/**
-	*@toDo: this method validates the EOB video link
-	*/
-	
-		public EOBPage validateEobVideo(){
+	 *@toDo: this method validates the EOB video link
+	 */
+
+	public EOBPage validateEobVideo(){
 		learnMoreLink.click();
 		if(eobVideoBox.isDisplayed()){
 			System.out.println("HOW TO READ YOUR MONTHLY MEDICAL EXPLANATION OF BENEFITS (VIDEO) link displayed correctly");
@@ -420,7 +420,7 @@ public class EOBPage extends UhcDriver{
 		}else{
 			start(MRConstants.REDESIGN_LOGIN_URL);
 		}
-		
+
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
 		System.out.println(userName);
 		Thread.sleep(3000);
@@ -434,9 +434,9 @@ public class EOBPage extends UhcDriver{
 	}
 
 	/**
-	*@toDo: the method navigates user to eob page
-	*/
-	
+	 *@toDo: the method navigates user to eob page
+	 */
+
 	public EOBPage navigateDirectToEOBPag(){
 		/*WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
@@ -449,14 +449,14 @@ public class EOBPage extends UhcDriver{
 		}
 
 		validate(eobLink);
-        eobLink.click();
+		eobLink.click();
 		return new EOBPage(driver);
 	}
 
 	/**
-	*@toDo: this method is to validate the site leaving popup on the eob page
-	*/
-			 
+	 *@toDo: this method is to validate the site leaving popup on the eob page
+	 */
+
 	public EOBPage validateSiteLeaveingPopUP(){
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
@@ -492,24 +492,24 @@ public class EOBPage extends UhcDriver{
 		}
 		return null;
 	}
-	
+
 	/**
-	*@toDo: this method is used to navigate plan tabs on the eob page
-	*/
-		public boolean navigatePlanTabs(String PlanType){
-			if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")){
-				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
-				return true;
-			}else if(PlanType.contentEquals("HIP")){
-				HIPplanTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-			return false;
+	 *@toDo: this method is used to navigate plan tabs on the eob page
+	 */
+	public boolean navigatePlanTabs(String PlanType){
+		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")){
+			System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
+			return true;
+		}else if(PlanType.contentEquals("HIP")){
+			HIPplanTab.click();
+			//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
+			System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
+			return true;
 		}
-	
-		/*public boolean navigatePlanTabs(String PlanType){	
+		return false;
+	}
+
+	/*public boolean navigatePlanTabs(String PlanType){	
 		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
 			if (validate(MAPlanTab)){
 				if(MAPlanTab.isEnabled()){
@@ -576,136 +576,142 @@ public class EOBPage extends UhcDriver{
 		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
 		return false;
 	}*/
-	
-		/**
-		*@toDo: this method is used to enter the dates for Custom Search on eob page
-		*/
-			
-		public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
+
+	/**
+	 *@toDo: this method is used to enter the dates for Custom Search on eob page
+	 */
+
+	public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
 		validate(toDate);
 		validate(fromDate);
 		validate(customSearchButton);
-		
-        fromDate.sendKeys(fromDateValue);
-        toDate.sendKeys(toDateValue);
-        
-        customSearchButton.click();
-        
+
+		fromDate.sendKeys(fromDateValue);
+		toDate.sendKeys(toDateValue);
+
+		customSearchButton.click();
+
 		return null;
 	}
-		
-		/**
-		*@toDo: the method is to validate eob display on eob page
-		*/
-		
-		public EOBPage validateEOBStatements(String numberOfEOB){
-			try {
-				Thread.sleep(6000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			validateNew(eobCount);
-			eobCount.click();
-			System.out.println(eobCount.getText());
-			int eobCountInt = Integer.parseInt(eobCount.getText());
-			System.out.println(eobCountInt);
-			numberOfPageDisplayed(eobCountInt);
-			for (int i = 0; i < eobCountInt; i++) {
-				if (driver.findElement(By.id("eoblist" + i)).isDisplayed()) {
-					System.out.println("EOB at" + i + " displayed correctly");
-					WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//a[contains(kb)]"));
-					if(pdflink.getText().contains("0kb") || pdflink.getText().contains("0 kb")) {
-						Assert.fail("EOB at " + i + "displays 0kb PDF size");
-					}
-					System.out.println(i % 9);
-					if (i % 9 == 0 &&i!=9 && i != 0) {
-						System.out.println("user clicks on next page arrow button");
-						i = 0;
-						nextPageArrow.click();
+
+	/**
+	 *@toDo: the method is to validate eob display on eob page
+	 */
+
+	public void validateEOBStatements(String numberOfEOB){
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validateNew(eobCount);
+		eobCount.click();
+		System.out.println(eobCount.getText());
+		int eobCountInt = Integer.parseInt(eobCount.getText());
+		System.out.println(eobCountInt);
+		numberOfPageDisplayed(eobCountInt);
+		for (int i = 0; i < eobCountInt; i++) {
+			if (driver.findElement(By.id("eoblist" + i)).isDisplayed()) {
+				System.out.println("EOB at" + i + " displayed correctly");
+				WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]"));
+				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
+				if(pdflink.getText().contains("0kb") || pdflink.getText().contains("0 kb")) {
+					Assert.fail("EOB at " + i + "displays 0kb PDF size");
+				}
+				System.out.println(i % 10);
+				if (i % 9 == 0 && i != 0) {
+					if(i==(eobCountInt-1))
+					{
+						System.out.println("Last EOB for Member - No Next Page arrow");
 						break;
 					}
-				} else {
-					System.out.println("EOB at " + i + "not displayed");
-					Assert.fail("EOB at " + i + "not displayed");
-				}
+					System.out.println("user clicks on next page arrow button");
+					nextPageArrow.click();
+					break;
+				} 
 			}
-		return null;
-	}
+
+			else {
+				System.out.println("EOB at " + i + "not displayed");
+				Assert.fail("EOB at " + i + "not displayed");
+			}
+		}
+		}
 
 		/**
-		*@toDo: this method is to validate number of pages displayed
-		*/
-			
+		 *@toDo: this method is to validate number of pages displayed
+		 */
+
 		public int numberOfPageDisplayed(int eobCount){
-		float pageCount;
-		int numberOfPageDisplayed;
-		pageCount = eobCount/9;
-		System.out.println(pageCount);
- 		numberOfPageDisplayed = (int)pageCount;
-		if(numberOfPageDisplayed<1){
-			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
-		}else{
-			numberOfPageDisplayed+=1;
-			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+			float pageCount;
+			int numberOfPageDisplayed;
+			pageCount = eobCount/9;
+			System.out.println(pageCount);
+			numberOfPageDisplayed = (int)pageCount;
+			if(numberOfPageDisplayed<1){
+				System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+			}else{
+				numberOfPageDisplayed+=1;
+				System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+			}
+
+			return numberOfPageDisplayed;
 		}
-		
-		return numberOfPageDisplayed;
-	}
-	public void clickOnEob () throws InterruptedException {
-		waitforElement(eobFirst);
-		eobFirst.click();
-		Thread.sleep(5000);
-		//Get the current window handle
-		//String windowHandle = driver.getWindowHandle();
+		public void clickOnEob () throws InterruptedException {
+			waitforElement(eobFirst);
+			eobFirst.click();
+			Thread.sleep(5000);
+			//Get the current window handle
+			//String windowHandle = driver.getWindowHandle();
 
-		//Get the list of window handles
-		  ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
-		System.out.println(newTab.size());
-		//Use the list of window handles to switch between windows
-		driver.switchTo().window(newTab.get(1));
+			//Get the list of window handles
+			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+			System.out.println(newTab.size());
+			//Use the list of window handles to switch between windows
+			driver.switchTo().window(newTab.get(1));
 
-		//Switch back to original window
-		//driver.switchTo().window(mainWindowHandle);
-		String getURL = driver.getCurrentUrl();
-		System.out.println(" pdf url: " + getURL);
-		Assert.assertTrue(getURL.contains(".pdf"));
-	}
-	
-	public void validatePHIPErorrMessage(){
-		
-	}
-	
-	public void validateEOBsDisplayed(){
-		validateNew(eobCount);
-		int eobCountInt = Integer.parseInt(eobCount.getText());System.out.println("EOB Count is: "+eobCount.getText());
-		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
-		if(eobCountInt == listOfEOBs.size()){
-			System.out.println("Validated EOBs are displayed");
-			
-		}else
-			System.out.println("No EOBs are displayed");
-	}
-	
-	public BenefitsAndCoveragePage navigateToBncPage(){
-		bncTab.click();
-		if(validateNew(bncPageHeader))
-			return new BenefitsAndCoveragePage(driver);
-		return null;
-	}
-	
-	public void validatePlanNavTab(String planType) {
+			//Switch back to original window
+			//driver.switchTo().window(mainWindowHandle);
+			String getURL = driver.getCurrentUrl();
+			System.out.println(" pdf url: " + getURL);
+			Assert.assertTrue(getURL.contains(".pdf"));
+		}
 
-		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
-			if(validate(mapdNavTab))
-				mapdNavTab.click();	
-		}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
-			pdpNavTab.click();
-		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
-			if(validate(medsuppNavTab))
-				medsuppNavTab.click();
-		}	
-			
+		public void validatePHIPErorrMessage(){
+
+		}
+
+		public void validateEOBsDisplayed(){
+			validateNew(eobCount);
+			int eobCountInt = Integer.parseInt(eobCount.getText());System.out.println("EOB Count is: "+eobCount.getText());
+			List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
+			if(eobCountInt == listOfEOBs.size()){
+				System.out.println("Validated EOBs are displayed");
+
+			}else
+				System.out.println("No EOBs are displayed");
+		}
+
+		public BenefitsAndCoveragePage navigateToBncPage(){
+			bncTab.click();
+			if(validateNew(bncPageHeader))
+				return new BenefitsAndCoveragePage(driver);
+			return null;
+		}
+
+		public void validatePlanNavTab(String planType) {
+
+			if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+				if(validate(mapdNavTab))
+					mapdNavTab.click();	
+			}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
+				pdpNavTab.click();
+			}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+				if(validate(medsuppNavTab))
+					medsuppNavTab.click();
+			}	
+
+		}
 	}
- }
 
