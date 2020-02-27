@@ -1054,8 +1054,13 @@ public class HSIDStepDefinition {
 				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			if (MRScenario.environment.toLowerCase().contains("stage")) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			} else {
+				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
+			}
+			
 		}
 		d.quit();
 	}
