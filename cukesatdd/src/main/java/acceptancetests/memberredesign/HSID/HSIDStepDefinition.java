@@ -1037,6 +1037,7 @@ public class HSIDStepDefinition {
 		WebDriver d=m.getWebDriverNew();
 		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		d.get(configPgUrl);
+		CommonUtility.checkPageIsReady(d);
 		try {
 			WebElement e=d.findElement(By.xpath(securityFlagXpath));
 			if (e.isDisplayed()) {
