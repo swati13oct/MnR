@@ -605,33 +605,31 @@ public class EOBPage extends UhcDriver{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		System.out.println(eobCount.getText());
-		int eobCountInt = Integer.parseInt(eobCount.getText());
-		int numberOfEOBInt = Integer.parseInt(numberOfEOB);
-		System.out.println("EOB expected count = "+numberOfEOBInt);
-		if(numberOfEOBInt==eobCountInt){
-			System.out.println("count displayed correctly");
-		}else{
-			System.out.println("count not displayed correctly");
-			Assert.fail();
-		}
-		System.out.println(eobCountInt);
-		numberOfPageDisplayed(eobCountInt);
-		for(int i=0; i<eobCountInt; i++){
-			if(driver.findElement(By.id("eoblist"+i)).isDisplayed()){
-				System.out.println("EOB at - " +i + " displayed correctly" );
-				System.out.println(i%9);
-				if(i%9==0 && i!=9 && i!=0){
-					System.out.println("user clicks on next page arrow button");
-					//i=0;
-					nextPageArrow.click();
-					break;
+			validateNew(eobCount);
+			eobCount.click();
+			System.out.println(eobCount.getText());
+			int eobCountInt = Integer.parseInt(eobCount.getText());
+			System.out.println(eobCountInt);
+			numberOfPageDisplayed(eobCountInt);
+			for (int i = 0; i < eobCountInt; i++) {
+				if (driver.findElement(By.id("eoblist" + i)).isDisplayed()) {
+					System.out.println("EOB at" + i + " displayed correctly");
+					WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//a[contains(kb)]"));
+					if(pdflink.getText().contains("0kb") || pdflink.getText().contains("0 kb")) {
+						Assert.fail("EOB at " + i + "displays 0kb PDF size");
+					}
+					System.out.println(i % 9);
+					if (i % 9 == 0 &&i!=9 && i != 0) {
+						System.out.println("user clicks on next page arrow button");
+						i = 0;
+						nextPageArrow.click();
+						break;
+					}
+				} else {
+					System.out.println("EOB at " + i + "not displayed");
+					Assert.fail("EOB at " + i + "not displayed");
 				}
-			}else{
-				System.out.println("EOB at "+ i +"not displayed");
-				Assert.fail();
 			}
-		}
 		return null;
 	}
 

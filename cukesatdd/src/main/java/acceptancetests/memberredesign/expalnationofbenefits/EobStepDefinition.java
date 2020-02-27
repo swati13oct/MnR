@@ -152,9 +152,20 @@ public class EobStepDefinition {
 	 */
 
 	@And("^the user validates how to read medical eob PDF$")
-	public void the_user_validates_how_to_read_medical_eob_PDF() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+	public void the_user_validates_how_to_read_medical_eob_PDF(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String eobTypeData = memberAttributesMap.get("EOB Type");
+			if(eobTypeData.toLowerCase().contains("medical")) {
+					EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateReadPDF();		 
+			}
 	}
 
 	/**
