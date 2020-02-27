@@ -1,5 +1,10 @@
 @benefitsAndCoverage @thePredators @codeMonkeys @regression_06_06_18
 Feature: 1.01 Member  benefits and Coverage page
+
+#  Background: If run on stage then feature security flag needs to be true
+#     Given feature security flag must set to true when testing on stage env
+#      | Feature           | UCPBenefits |
+
 ###############################Regression Scenarios Begin Here ########################################
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
   @benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember

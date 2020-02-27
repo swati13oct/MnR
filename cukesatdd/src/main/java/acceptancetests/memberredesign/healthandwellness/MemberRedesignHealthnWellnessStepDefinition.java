@@ -79,7 +79,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			return;
 		}
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("Running with testharness, go to secondary page like claims then go ot H&W tab");
+			System.out.println("Running with testharness, go to H&W page via link on testharness table");
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			HealthAndWellnessPage healthnWellnessPage = testHarness.navigateToHealthAndWellnessFromTestHarnessPage();
 			Assert.assertTrue("PROBLEM - unable to navigate to the Health and Wellness page", healthnWellnessPage!=null);
