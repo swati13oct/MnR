@@ -1,6 +1,10 @@
 @claims @thePredetors
 Feature: 1.12 Member claims Summary page/claims Details page 
 
+#  Background: If run on stage then feature security flag needs to be true
+#     Given feature security flag must set to true when testing on stage env
+#      | Feature           | ClaimsMicroApp |
+
   #----- beginning of VBF claims scenarios section ------------------------
   # note: runner for sanity is RunMRATDDClaimsVBF
   # note: need to have these user entries in MemberRedesign-VBF.csv (users may need to be updated)
