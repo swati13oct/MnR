@@ -2299,4 +2299,24 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
+	@When("^the user clicks on Lookup zipcode and enters following information in the UHC Acquisition Site VPPZipcode TestHarness page$")
+	public void the_user_clicks_on_Lookup_zipcode_and_enters_following_information_in_the_UHC_Site_VPPZipcode_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String Address = inputAttributesMap.get("Address");
+		String City = inputAttributesMap.get("City");
+		String State = inputAttributesMap.get("State");
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterAddressDetails(Address, City, State);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCounty(CountyName);
+		}
+		VPPPlanSummaryPage planSummaryPage = vppTestHarnessPage.navigateToVPP();
+		if(planSummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
+		}
+	}
+	
 } 

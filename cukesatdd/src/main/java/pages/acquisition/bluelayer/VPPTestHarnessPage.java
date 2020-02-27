@@ -86,7 +86,7 @@ public class VPPTestHarnessPage extends UhcDriver{
 		lookupZipcodeLink.click();
 		validateNew(addressInput);
 		sendkeys(addressInput, address);
-		sendkeys(addressInput, city);
+		sendkeys(cityInput, city);
 		selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		lookupSearchButton.click();
 		validateNew(enterVppGoButton);
