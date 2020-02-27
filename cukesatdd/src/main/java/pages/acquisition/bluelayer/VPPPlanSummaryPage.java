@@ -2904,7 +2904,7 @@ public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 	String unsavePlan=listOfTestPlans.get(0);
 	System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
 
-	String testPlanXpath="//*[contains(text(),'"+unsavePlan+"')]";
+	String testPlanXpath="//*[contains(text(),'"+unsavePlan+"') and contains(@class,'ng-binding')]";
 	List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 	int expMatch=1;
 	Assert.assertTrue("PROBLEM - unable to locate plan='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
