@@ -439,6 +439,7 @@ q3_sep_UAT4_AARP057/Password@1,PDP,AARP_IND_EFF_PDnR
 q2_dec_grp0288/Password@1,PDP,COMBO_GROUP_EFF_PDnR
 q2_dec_grp0288/Password@1,SSP,COMBO_GROUP_EFF_PDnR
 q1_feb_ship_20_001/Password@1,SHIP,IND_EFF_PDnR
+q1_feb_2020SHIP_001/Password@1,SHIP,MULTI_IND_EFF_PDnR
 q3_sep_UAT4_AARP240/Password@1,COMBO,FedAndShip_MyDocuments
 q4_TestData_001/Password@1,MAPD,Group_MyDocuments
 q1_feb_2020SHIP_019/Password@1,SHIP,Medsupp,header,

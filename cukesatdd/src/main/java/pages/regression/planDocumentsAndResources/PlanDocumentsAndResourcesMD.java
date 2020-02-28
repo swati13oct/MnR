@@ -2,6 +2,7 @@ package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
 import org.junit.Assert;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import acceptancetests.util.CommonUtility;
@@ -74,7 +75,16 @@ public class PlanDocumentsAndResourcesMD extends PlanDocumentsAndResourcesBase  
 			Assert.assertTrue("PROBLEM - unable to locate '"+item+"' link in '"+section+"' section", planDocValidate(lnkElement));
 			String actualUrl=lnkElement.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
-			validateLinkDest(testInputInfoMap, lnkElement);
+			String origUrl=driver.getCurrentUrl();
+			try {
+				validateLinkDest(testInputInfoMap, lnkElement);
+			} catch (UnhandledAlertException ua) {
+				System.out.println("Got Alert error, let's try again");
+				driver.get(origUrl);
+				CommonUtility.checkPageIsReady(driver);
+				sleepBySec(10);
+				validateLinkDest(testInputInfoMap, lnkElement);
+			}
 		} else {
 			Assert.assertTrue("PROBLEM - should not locate '"+item+"' link in '"+section+"' section", !planDocValidate(lnkElement));
 		}
