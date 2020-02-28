@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -276,6 +277,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='zip-radios']/div[2]/label")
 	public WebElement countySelection;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugModalPharmacy')]")
+	public WebElement countyPopup;
 
 	@FindBy(xpath = "//*[@id='acqsummary']/div[1]/div/h2")
 	public WebElement summary;
@@ -315,8 +319,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
-
-	@FindBy(name = "county")
+	
+	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	public WebElement findPlansRadioButton;
+	
+	@FindBy(xpath="//button[contains(text(),'Search')]")
+	public WebElement SearchButton;
+	
+	@FindBy(xpath = "//*[contains(@name,'county')]")
 	List<WebElement> counties;
 
 	@FindBy(id = "zipcodebtn")
@@ -531,26 +541,11 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			checkModelPopup(driver, 45);
 		else
 			checkModelPopup(driver, 10);
-		checkProactiveChatPopup();
 		validateNew(addDrug);
 		validateNew(step1);
 		validateNew(step2);
 		validateNew(step3);
 
-	}
-
-	public void checkProactiveChatPopup() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
-																			// we're not trying to fail the test if it
-																			// isn't found
-		try {
-			if (proactiveChatExitBtn.isDisplayed()) {
-				jsClickNew(proactiveChatExitBtn);
-				System.out.println("Proactive chat popup displayed and exited");
-			}
-		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
-		}
 	}
 
 	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
@@ -1664,43 +1659,25 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
-	public void validateMultiCountyPopup(String zipcode, String county) {
-		zipCodeTextBox.sendKeys(zipcode);
+	public VPPPlanSummaryPage validateMultiCountyPopup(String zipCode, String county) {
+		checkModelPopup(driver);
+		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
-		// String myWindowHandle = driver.getWindowHandle();
-		// driver.switchTo().window("drugModalPharmacy");
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(step3searchButton));
+		
 
-		if (counties.size() > 1) {
+		if (validateNew(countyPopup)&& counties.size() > 1) {
 			for (WebElement countyElement : counties) {
 				String elementId = countyElement.getAttribute("id");
 				if (elementId.contains(county)) {
 					countyElement.click();
 					System.out.println("county clicked");
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
 			}
 			step3searchButton.click();
 		}
-		/*
-		 * try { Thread.sleep(9000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
-		// To select a county
-		// countySelection.click();
-		// To search for plans in that county
-		/*
-		 * step3searchButton.click();
-		 * if(driver.getTitle().contains("Our Medicare Plans")){
-		 * Assert.assertTrue(true); } else{
-		 * Assert.assertTrue("Unable to navigate to VPP page",false); }
-		 */
+		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
+		return new VPPPlanSummaryPage(driver);
+		
 	}
 
 	public void populateZipCode(String zipcode) {
@@ -1893,10 +1870,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
-		checkProactiveChatPopup();
+		checkModelPopup(driver);
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
-		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
 	}
