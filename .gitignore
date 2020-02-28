@@ -1,5 +1,4 @@
 target/
-
 .settings/
 .project
 .classpath
@@ -13,3 +12,5 @@ target/
 .reports/
 reports/
 bin/
+cukesatdd/.classpath
+cukesatdd/src/main/resources/config/ci/config.properties

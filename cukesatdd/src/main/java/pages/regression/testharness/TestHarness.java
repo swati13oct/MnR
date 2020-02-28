@@ -633,6 +633,23 @@ public class TestHarness extends UhcDriver {
 		return new pages.regression.explanationofbenefits.EOBPage(driver);
 	}
 
+	public pages.regression.explanationofbenefits.DreamEOBPage navigateDirectToDreamEOBPag() {
+		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			driver.findElement(By.xpath("//a[text()='Eob']")).click();
+
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+
+			if (MRScenario.isTestHarness.equals("YES")) {
+//				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				eobTestharnessLink.click();
+			}
+		} else {
+			System.out.println(
+					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+		}
+
+		return new pages.regression.explanationofbenefits.DreamEOBPage(driver);
+	}
 
 	/***
 	 * 
@@ -1431,11 +1448,11 @@ public class TestHarness extends UhcDriver {
 		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
 			CommonUtility.checkPageIsReady(driver);
 			checkModelPopup(driver,5);
-			validateNew(testHarnessHealthAndWellnessLink);
+			validateNew(testHarnessHealthAndWellnessLink,0);
 			testHarnessHealthAndWellnessLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			checkModelPopup(driver,5);
-			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
 			if (driver.getTitle().contains("Health And Wellness")) {
 				return new HealthAndWellnessPage(driver);
 			}

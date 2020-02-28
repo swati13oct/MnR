@@ -1,6 +1,10 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPPlanDocuments |
+
   #------------------------------------------
   @planAndDocuments01 @header @myDocuments @eob @renewMagazine @adobe @needHelp
   Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp 
@@ -86,6 +90,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 20-115 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 
 

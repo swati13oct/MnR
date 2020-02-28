@@ -249,7 +249,9 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcodeid);
+		waitforElementVisibilityInTime(continueBtn, 45);
 		continueBtn.click();
+		waitforElementVisibilityInTime(errorMessage, 45);
 		validate(errorMessage);
 		int size = zipcodeid.length();
 		System.out.println("ZipCode Size is :"+size);
