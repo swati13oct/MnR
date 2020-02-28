@@ -83,6 +83,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+      | 20-117 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 
      
