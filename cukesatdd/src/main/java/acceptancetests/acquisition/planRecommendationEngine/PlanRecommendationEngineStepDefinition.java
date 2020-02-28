@@ -68,6 +68,7 @@ public class PlanRecommendationEngineStepDefinition {
 		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
 		aquisitionhomepage.openPRE();
+		aquisitionhomepage.fixPrivateConnection();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
