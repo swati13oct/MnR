@@ -1,6 +1,10 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPPlanDocuments |
+
   #------------------------------------------
   @planAndDocuments02 @planMaterials
   Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Plan Materials

@@ -1,6 +1,10 @@
 @accountProfileProfile @thePredators 
 Feature: 1.02 Member Profile page
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPProfileAndPreferences |
+
   @accountProfile01 @accountProfileMicroApp01 @ShipEndtoEnd @AP_Part1_Regression
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given login with following details logins in the member portal and validate elements

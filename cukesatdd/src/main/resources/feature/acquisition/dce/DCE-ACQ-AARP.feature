@@ -36,7 +36,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
 
     Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                            | radius   |
-#      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
+      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | 15 miles |
 
   @dce @DCE_Regression_Ulayer_Home1 @ulayer
   Scenario Outline: 1.10.12 To verify DCE flow from Ulayer home page hover over

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -318,7 +319,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
-
+	
+	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	public WebElement findPlansRadioButton;
+	
+	@FindBy(xpath="//button[contains(text(),'Search')]")
+	public WebElement SearchButton;
+	
 	@FindBy(xpath = "//*[contains(@name,'county')]")
 	List<WebElement> counties;
 

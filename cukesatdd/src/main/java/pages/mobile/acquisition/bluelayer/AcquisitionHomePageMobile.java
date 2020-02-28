@@ -19,10 +19,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	public void openPRE() {
-		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
-			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
+			//startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+			startNewMobile(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2"));
 		} else {
-			startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			//startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
 		}
 		System.out.println("Current mobile page URL: "+driver.getCurrentUrl());
 	}

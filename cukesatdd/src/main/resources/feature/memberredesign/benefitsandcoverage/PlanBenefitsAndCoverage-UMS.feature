@@ -1,5 +1,10 @@
 @benefitsAndCoverage @thePredators @codeMonkeys @regression_06_06_18
 Feature: 1.01 Member  benefits and Coverage page
+
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPBenefits |
+
 ###############################Regression Scenarios Begin Here ########################################
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
   @benefitsAndCoverage6 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
@@ -796,13 +801,9 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
       | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
-      
- ###############################Regression Scenarios END Here ########################################
- 
- 
-###############################Scenarios to be Reviewed ########################################
-  #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @benefitsAndCoverage18 @CMFedNonLisVillage 
+    
+      #TC22_NON LIS Ind Village_member_ Drug Cost table
+  @benefitsAndCoverage18 @CMFedNonLisVillage  @BnC_Part8_regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -817,14 +818,20 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates Drug coverage header and text under the section
     And the user validates copay and CoInsurance section
     Then the Village user validates text in table
+    Then user validates the Optum Rx link in Benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | name                | memberid     | effectivedate | monthlypremium |
-      | 15367 | MAPDVill | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |
+      | 15367 | MAPDVill | Individual_BnC | NON LIS       | FDABEAAA  EAFDBEAAA | 973055947-00 | 01/01/2019    | Not Available  |  
+      
 
+ ###############################Regression Scenarios END Here ########################################
+ 
+ 
+###############################Scenarios to be Removed ########################################
 
-
-  @benefitsAndCoverage17 @CMPdpFedTable
+  ####Already covered as part of  benefitsAndCoverage15
+  @benefitsAndCoverage17 @CMPdpFedTable @toBeRemoved
   Scenario Outline: Verify fed table data on Benefits and Coverage page for PDP nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -838,7 +845,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType     | copayCategory |
       | 15366 | PDP      | Individual_BnC | NON LIS       |
 
-  @benefitsAndCoverage19 @CMvalidatePdfsectiongroupenglish 
+#####Already covered in E2e Scenarios
+  @benefitsAndCoverage19 @CMvalidatePdfsectiongroupenglish @toBeRemoved
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -856,7 +864,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15246 | MAPD     | Group_BnC  | NON LIS       |
       | 15246 | MA       | Group_BnC  | NON LIS       |
 
-  @benefitsAndCoverage20 @CMAncillarysection1
+ #####Already covered in  @benefitsAndCoverage21 
+  @benefitsAndCoverage20 @CMAncillarysection1 @toBeRemoved
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify CMAncillarysection1 section is in place on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -877,8 +886,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15238 | MA       | Group_BnC  | NON LIS       |
 
  
-
-  @benefitsAndCoverage26 @CMGroupTable
+#####Already covered in  @CMGroupmembersTC25  @CMGroupmembersPDPLIS_TC26
+  @benefitsAndCoverage26 @CMGroupTable @toBeRemoved
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group table data on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -893,8 +902,9 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType | copayCategory |
       | 15246 | MAPD     | Group_BnC  | NON LIS       |
       | 15246 | MAPDRX   | Group_BnC  | NON LIS       |
-
-  @benefitsAndCoverage28 @CMvasnegativescenario
+      
+ #####Already covered in @benefitsAndCoverage27
+  @benefitsAndCoverage28 @CMvasnegativescenario @toBeRemoved
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that DisocuntServices section is visible on Benefits and coverage page for PDP nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -924,10 +934,10 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 15241 | PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
 
-
+ #####Already covered in  @benefitsAndCoverage18 
 
   #note: Feature - F230250, User story -  US1410989
-  @benefitsAndCoverage33 @optumRxWidget @Feb_release_2019 
+  @benefitsAndCoverage33 @optumRxWidget @Feb_release_2019 @toBeRemoved
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Verify link to Optum Rx in Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -938,7 +948,33 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | UID     | planType | memberType     |
       | 1410989 | MAPDVill_BnC | Individual_BnC |
+      
+     @benefitsAndCoverage39 @UpdatedTextDocumentsAndResources @dec_release_2018 @toBeRemoved
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify updated text for Pdfs in Documents and Resources
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the UpdatedText
 
+    Examples: 
+      | FID    | planType | memberType                |
+      | 231151 | MAPD     | IndividualUHCPayments_BnC |
+      
+        @benefitsAndCoverage43 @F276093 @Apr_release_2019 @toBeRemoved
+  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Access your drug beneifts block for Univ. Of Kentucky Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates the access your drug benefits block
+    And the user validates the site leaving pop up and click cancel
+    And the user validates the site leaving pop up and click proceed
+
+    Examples: 
+      | UID       | planType | memberType           |
+      | US1615721 | MAPD     | Group_UnivOfKentucky |
+############################### End of Scenarios to be Removed ########################################
   @benefitsAndCoverage34 @PlanBFSJMPLinks @Feb_release_2019 @gladiators
   Scenario Outline: UID: <UID> -plan: <planType> -Identifier: <Identifier> -rider: <rider> - Verify jump links for individual MAPD member
     Given login with following details logins in the member portal and validate elements
@@ -1095,17 +1131,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | UID     | planType | memberType | Identifier       | language | count | rider   |
       | 1417780 | SSUP     | Group_BnC  | GrpEffectiveSSUP | ENGLISH  |     4 | NoRider |
 
-  @benefitsAndCoverage39 @UpdatedTextDocumentsAndResources @dec_release_2018
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Verify updated text for Pdfs in Documents and Resources
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigate to Benefits and Coverage page
-    And the user validates the UpdatedText
 
-    Examples: 
-      | FID    | planType | memberType                |
-      | 231151 | MAPD     | IndividualUHCPayments_BnC |
 
   @benefitsAndCoverage40 @F250386 @MedicalDeductibleCards @GroupNoDeductible @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Deductible cards for no deductible
@@ -1149,28 +1175,4 @@ Feature: 1.01 Member  benefits and Coverage page
       | US1564213 | MAGroup1_BnC | DualDeductible | $150        | $250        |
       | US1564213 | MAGroup2_BnC | DualDeductible | $1,364      | $185        |
 
-  @benefitsAndCoverage43 @F276093 @Apr_release_2019
-  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> - Verify Access your drug beneifts block for Univ. Of Kentucky Member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigate to Benefits and Coverage page
-    And the user validates the access your drug benefits block
-    And the user validates the site leaving pop up and click cancel
-    And the user validates the site leaving pop up and click proceed
 
-    Examples: 
-      | UID       | planType | memberType           |
-      | US1615721 | MAPD     | Group_UnivOfKentucky |
-
-  @benefitsAndCoverage44 @PRB0527882
-  Scenario Outline: UserStory: <UID> -plan: <planType> -memberType: <memberType> -Verify the PRB0527882 PCP - plan benefits correct URL redirection
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigate to Benefits and Coverage page
-    And the user validates the providersearch link
-
-    Examples: 
-      | UID       | planType | memberType       |
-      | US1674924 | MAPD     | PCPProblemTicket |

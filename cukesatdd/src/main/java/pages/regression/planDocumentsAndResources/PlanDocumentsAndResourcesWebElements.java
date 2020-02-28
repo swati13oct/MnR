@@ -539,4 +539,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//h3[text()='My Documents']")
 	protected WebElement myDocPgHeader;
 	
+	@FindBy(xpath="//h1[contains(text(),'Past Issues')]")
+	protected WebElement prevIssPgHeader;
+	
 }
