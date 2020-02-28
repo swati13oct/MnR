@@ -40,6 +40,7 @@ import pages.regression.claims.ClaimDetailsPage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.contactus.ContactUsPage;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
+import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
@@ -2076,6 +2077,43 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 		return new EOBPage(driver);
+	}
+	
+	public DreamEOBPage navigateDirectToDreamEOBPag() {
+		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			driver.findElement(By.xpath("//a[text()='Eob']")).click();
+
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+
+			if (MRScenario.isTestHarness.equals("YES")) {
+				//				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				eobTestharnessLink.click();
+			} else if (driver.getCurrentUrl().contains("/dashboard")) {
+				try {
+					if (iPerceptionPopUp.isDisplayed()) {
+						iPerceptionPopUp.click();
+					}
+				} catch (Exception e) {
+					System.out.println("iPerception Pop Up not displayed");
+				}
+
+				// validate(medicalEobLink);
+				/*
+				 * if(medicalEobLink.isDisplayed()){ medicalEobLink.click();
+				 * }else{
+				 */
+				// scrollToView(medicalEobLinkOther);
+				// medicalEobLinkOther.click();
+				// }
+
+				startNew("https://stage-medicare.uhc.com/member/eob.html");
+			}
+		} else {
+			System.out.println(
+					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+		}
+
+		return new DreamEOBPage(driver);
 	}
 
 	public void validateClaimsL2Tabs() {
