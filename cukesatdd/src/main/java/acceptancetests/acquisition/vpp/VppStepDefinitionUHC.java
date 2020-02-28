@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -219,6 +220,7 @@ public class VppStepDefinitionUHC {
 	
 	@When("user views plans of the below plan type in UMS site for next year$")
 	public void user_performs_planSearch_in_UMS_site_next_year(DataTable givenAttributes) {
+	
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -315,7 +316,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
-
+	
+	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	public WebElement findPlansRadioButton;
+	
+	@FindBy(xpath="//button[contains(text(),'Search')]")
+	public WebElement SearchButton;
+	
 	@FindBy(name = "county")
 	List<WebElement> counties;
 
@@ -1896,6 +1903,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		checkProactiveChatPopup();
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
+		/*threadsleep(8);
+		int size =driver.findElements(By.xpath("//label[@id='Laurens County']")).size();
+		System.out.println("size of Radio button"+size);
+		if(size>0){
+			//driver.switchTo().alert();
+			System.out.println("Inside Radio button click");
+			WebDriverWait d =new WebDriverWait(driver, 60);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='zip-radios']/div[1]")));
+			jsClickNew(findPlansRadioButton);
+			//findPlansRadioButton.click();
+			threadsleep(2);
+			//SearchButton.click();
+			jsClickNew(SearchButton);
+			System.out.println("Clicked Searched button");
+			
+		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
