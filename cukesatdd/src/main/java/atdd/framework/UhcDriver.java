@@ -843,7 +843,7 @@ try {
 	    //x position set to mid-screen horizontally
 	    int startx = (int) size.width / 2;
 	    //System.out.println(size+" "+startx+" "+starty+" "+endy);
-		threadsleep(1000);
+		threadsleep(500);
 		if(swipeup)
 			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(startx, endy)).release().perform();
 		else
@@ -859,13 +859,13 @@ try {
 	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
 		try {
-		threadsleep(1000);
+		threadsleep(2000);
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) //wd.getClass().toString().toUpperCase().contains("IOS")) {
 			((AndroidDriver)driver).hideKeyboard();
 		else {
 			clickTextIOSNative("Done");
 		}
-		threadsleep(1000);
+		threadsleep(2000);
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println(driver.getCurrentUrl());

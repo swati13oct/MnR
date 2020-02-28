@@ -4,6 +4,8 @@
 package pages.regression.contactus;
 
 import gherkin.formatter.model.DataTableRow;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import pages.regression.accounthomepage.AccountHomePage;
 
 import java.util.LinkedHashMap;
@@ -61,7 +63,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='fillContactFormsShow']/form/fieldset/a")
 	private WebElement cancelLink1;
 	
-	@FindBy(xpath = "//a[contains(text(),'EMAIL FORM')]")
+	@FindBy(xpath = "//*[contains(text(),'EMAIL FORM')]")
 	private WebElement EmailForm;
 	
 	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
@@ -209,7 +211,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	@FindBy(css="div#confrmmatchheightonce a.btn.btn--primary.question-btn")
+	@FindBy(css="button[class='btn btn--primary question-btn']")
 	private WebElement btn_EmailForm;
 	
 	@FindBy(id="question-about-ship")
@@ -248,10 +250,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css=".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 	
-	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
+	@FindBy(css="div[ng-show='showConfirmMessage'] div[class='message-block-body'] p")
 	private WebElement successMessage_EmailForm;
 	
-	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
+	@FindBy(css="div[ng-show='showConfirmMessage'] strong")
 	private WebElement successHeader_EmailForm;
 	
 	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
@@ -731,7 +733,7 @@ public class ContactUsPage extends UhcDriver{
 		String date = memberAttributesMap.get("Date");
 		String month = memberAttributesMap.get("Month");
 		String year = memberAttributesMap.get("Year");
-		
+
 		try {
 			btn_EmailForm.click();
 			Thread.sleep(5000);
