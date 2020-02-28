@@ -13,3 +13,4 @@ target/
 reports/
 bin/
 cukesatdd/.classpath
+cukesatdd/src/main/resources/config/ci/config.properties
