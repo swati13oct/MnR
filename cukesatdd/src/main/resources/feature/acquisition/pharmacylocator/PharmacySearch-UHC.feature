@@ -111,7 +111,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | 15586 | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
       | 15586 | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
       | 15586 | Ulayer   |   00602 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15586 | Ulayer   |   96950 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15586 | Ulayer   |   96950 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | False                  | False             | False                 |
 
     @prodRegression
     Examples: 
