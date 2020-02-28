@@ -1448,11 +1448,11 @@ public class TestHarness extends UhcDriver {
 		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
 			CommonUtility.checkPageIsReady(driver);
 			checkModelPopup(driver,5);
-			validateNew(testHarnessHealthAndWellnessLink);
+			validateNew(testHarnessHealthAndWellnessLink,0);
 			testHarnessHealthAndWellnessLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			checkModelPopup(driver,5);
-			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
+			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
 			if (driver.getTitle().contains("Health And Wellness")) {
 				return new HealthAndWellnessPage(driver);
 			}

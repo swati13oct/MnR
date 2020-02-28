@@ -937,14 +937,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				pdfnames= (pdfs.get(i).getText());
 				System.out.println(">>>>>>>>>>PDF visible<<<<<<<: "+pdfnames);
 			}
-
-			if(a.length==pdfs.size())
-			{
+			Assert.assertTrue("PROBLEM - not getting expected number of PDFs.  Expected='"+a.length+"' | Actual='"+pdfs.size()+"'",a.length==pdfs.size());
+			//tbd if(a.length==pdfs.size())
+			//tbd {
 				for (int i=0;i<pdfs.size();i++)
 				{  
 					String pdf1[] = pdfs.get(i).getText().split(Pattern.quote("("));
-					if(StringUtils.isNotEmpty(pdf1[0]))
-					{
+					Assert.assertTrue("PROBLEM - PDF name should not be empty string.  Actual='"+pdf1[0]+"'", StringUtils.isNotEmpty(pdf1[0]));
+					//tbd if(StringUtils.isNotEmpty(pdf1[0]))
+					//tbd {
 						System.out.println(pdf1[0]);
 						System.out.println(a[i]);
 						if((pdf1[0]).toLowerCase().contains((a[i]).toLowerCase())){
@@ -954,17 +955,17 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 							checkflag=false;
 							break;
 						}
-					}
-					else
-					{
-						Assert.fail();
-					}
+						//tbd }
+						//tbd else
+						//tbd {
+						//tbd Assert.fail();
+						//tbd }
 				}
-			}
-			else
-			{
-				Assert.fail();
-			}
+			//tbd }
+			//tbd else
+				//tbd {
+				//tbd 	Assert.fail();
+				//tbd }
 		}
 		else if(langdropdwn.getFirstSelectedOption().getText().contains("ESPAÃOL"))
 		{
@@ -1494,6 +1495,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(specialistValue);
 
 		String input = pcpValue.getText();
+		Assert.assertTrue("PROBLEM - unable to locate value for the element", !input.equals(""));
 		System.out.println("PCP value to be validated: "+ input);
 
 		Pattern pattern = Pattern.compile("^\\d{1,4}\\.\\d{2}\\%$"); if
@@ -2596,29 +2598,30 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
-		String TableData= "Annual Deductible Stage\n"
+		String TableData= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
 				+"Catastrophic Coverage Stage\n"
 				+"Tier 1\n"
 				+"No Deductible\n"
 				+"$3.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$7.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs \n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs \n"
 				+"Tier 3\n"
 				+"$45.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"$95.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs";
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
 		if(RetailDrugCost_TableNONLIS.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2664,17 +2667,18 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void hospitalVisitSection(){
-		String TableData= "INPATIENT HOSPITAL CARE \n"
+		String TableData= "INPATIENT HOSPITAL CARE\n"
 				+"days 1 - 8 : $225.00 Copay per day\n"
 				+"days 9 - 90 : $0.00 Copay per day";
-		System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<<- "+TableData.toString());
-		System.out.println(">>>>>>>>>>The Actual table value is<<<<<<<<<<<<<- "+hospitalVisitSection.getText());
+	
 
 		if(hospitalVisitSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the hospital Visit Section is displaying correctly", true);
 			System.out.println("The data in the hospital Visit Section  is displaying correctly");  
 		}
 		else{
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<<- \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>The Actual table value is<<<<<<<<<<<<<- \n"+hospitalVisitSection.getText());
 			System.err.println(">>>>>>>>>>>The data in the hospital Visit Section  is not displaying correctly<<<<<<<<<");
 			Assert.fail(">>>>>>>>>>>>>>>>>>The data in the hospital Visit Section is not displaying correctly<<<<<<<<<<");
 		}
@@ -2682,32 +2686,35 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 
 	public void outPatientSection(){
-		String TableData="OUTPATIENT\n"
-				+"Type 1: $150.00\n"
-				+"Type 2:  $275.00";
+		String TableData="OUTPATIENT HOSPITAL SERVICES (INCLUDES AMBULATORY SERVICES)\n"
+				+"Type 1: $0.00 - $150.00\n"
+				+"Type 2:  $0.00 - $250.00";
 		if(outPatientSection.getText().contains(TableData.toString())){
 			Assert.assertTrue("The data in the outPatient section is displaying correctly", true);
 			System.out.println("The data in the outPatient section  is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the outPatient section  is not displaying correctly");
-			Assert.fail("The data in the outPatient section is not displaying correctly");
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<<- \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>The Actual table value is<<<<<<<<<<<<<- \n"+outPatientSection.getText());
+			System.err.println(">>>>>>>>>>>>>>>The data in the outPatient section  is not displaying correctly<<<<<<<<<<<<<<");
+			Assert.fail(">>>>>>>>>>>>>>>>>>>>>The data in the outPatient section is not displaying correctl<<<<<<<<<<<<<<<<<<");
 		}
 	}
 
 	public void inNetworkSection(){
 		String TableData= "IN-NETWORK\n"
 				+"$3,400.00";
-		System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-		System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+inNetworkSection.getText());
+		
 
 		if(inNetworkSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the InNetwork section is displaying correctly", true);
 			System.out.println("The data in the InNetwork section  is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the InNetwork section  is not displaying correctly");
-			Assert.fail("The data in the InNetwork Section is not displaying correctly");
+			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+inNetworkSection.getText());
+			System.err.println(">>>>>>>>>>>>>>>>>>>>The data in the InNetwork section  is not displaying correctly<<<<<<<<<<<<<");
+			Assert.fail(">>>>>>>>>>>>>>>>>>>>>>>The data in the InNetwork Section is not displaying correctly<<<<<<<<<<");
 		}
 	}
 
@@ -2715,16 +2722,17 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		String TableData= "OUT-OF-NETWORK\n"
 
 +"N/A";
-		System.out.println(">>>>>>>>>The Expected value is<<<<<<<<<<<< \n"+TableData.toString());
-		System.out.println(">>>>>>>>>>>>>>>>>>>The Actual value is- <<<<<<<<<<<<< \n"+outNetworkSection.getText());
+		
 
 		if(outNetworkSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the out Network Section is displaying correctly", true);
 			System.out.println("The data in the out Network Section  is displaying correctly");  
 		}
 		else{
-			System.err.println("The data in the Oout Network Section  is not displaying correctly");
-			Assert.fail("The data in the out Network Section is not displaying correctly");
+			System.out.println(">>>>>>>>>The Expected value is<<<<<<<<<<<< \n"+TableData.toString());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual value is- <<<<<<<<<<<<< \n"+outNetworkSection.getText());
+			System.err.println(">>>>>>>>>>>>>>>>>>The data in the Oout Network Section  is not displaying correctly<<<<<<<<<");
+			Assert.fail(">>>>>>>>>>>>>>>>>>>>The data in the out Network Section is not displaying correctly<<<<<<<<<<<<<<<<<");
 		}
 	}
 
