@@ -1755,12 +1755,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openPRE() {
-		if(MRScenario.environment.equalsIgnoreCase("digital-uat-uhc")){
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
+			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2"));
 		} else {
-			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			//startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			startNew(AARP_ACQISITION_PAGE_URL);
 		}
-		
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 	}
 	
@@ -1814,5 +1815,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	public DCETestHarnessPage GetDCEtestHarnessPage() {
 		return new DCETestHarnessPage(driver);
+	}
+	
+	public void fixPrivateConnection() {
+		try {
+			//String URL = "https://self-signed.badssl.com/";
+			threadsleep(1000);
+			if (driver.findElement(By.cssSelector("body.ssl h1")).getText().contains("Your connection is not private")) {
+				driver.findElement(By.cssSelector("button#details-button")).click();
+				threadsleep(1000);
+				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				threadsleep(1000);
+				pageloadcomplete();
+			}
+		} catch (Exception e) {
+			System.out.println("No SSL error / Exception");
+		}
 	}
 }

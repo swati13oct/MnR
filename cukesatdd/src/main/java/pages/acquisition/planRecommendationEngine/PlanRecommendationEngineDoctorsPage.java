@@ -266,6 +266,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                         			threadsleep(1000);
                         			Assert.assertTrue(false);
                         		}
+                            		threadsleep(5000);
                                 }
                                 
                                 public void getConfimationPopupResults(int count) {
