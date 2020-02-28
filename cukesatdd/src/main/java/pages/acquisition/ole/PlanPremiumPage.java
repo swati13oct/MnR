@@ -56,7 +56,7 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 	
-	@FindBy(xpath=".//*[@id='ole-form-content']//label[contains(text(),'I have read and agree')]")
+	@FindBy(xpath=".//*[@id='ole-form-content']//span[contains(text(),'I have read and agree')]")
 	private WebElement agreeBtn;
 	
 	public PlanPremiumPage(WebDriver driver) {
