@@ -1,9 +1,10 @@
 package pages.regression.footer;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageData;
@@ -78,14 +79,14 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[2]")
 	private WebElement accountSettingOptionFromDashboard;
-	
-	
+
+
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofile;
 
 	@FindBy(id = "ACCdropdown_1_3")
 	private WebElement accountSettingOption;
-	
+
 	@FindBy(id = "ACCdropdown_0_3")
 	private WebElement accountSettingOptionShip;
 
@@ -100,12 +101,13 @@ public class FooterPage extends UhcDriver {
 	public FooterPage (WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public void openAndValidate(){
-		// TODO Auto-generated method stub
 	}
+
+	/* tbd 
 	public void feebackpopupClose() throws InterruptedException
 	{ //waitForloader(driver,overlay, 20);
 		Thread.sleep(20000);
@@ -118,8 +120,9 @@ public class FooterPage extends UhcDriver {
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-	}
-	
+	} */
+
+	/* tbd 
 	public void feebackpopupClose_shortwait() throws InterruptedException
 	{ //waitForloader(driver,overlay, 20);
 		Thread.sleep(6000);
@@ -132,34 +135,54 @@ public class FooterPage extends UhcDriver {
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-	}
+	} */
 
 	public Object validateFooterLinks() throws InterruptedException{
-		Thread.sleep(5000);
+		sleepBySec(5);
+		//tbd Thread.sleep(5000);
 		//feebackpopupClose();
-		if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
-				&& LegalNoticesAndDisclosures.isDisplayed() 
-				&& Accessibility.isDisplayed() 
-				&& Logout.isDisplayed()){
+		String section="Member support and Quick links";
+		Assert.assertTrue("PROBLEM - unable to locate 'Help and Contact Us' on '"+section+"' section", footerValidate(HelpandContactUs));
+		Assert.assertTrue("PROBLEM - unable to locate 'Account Settings' on '"+section+"' section", footerValidate(AccountSettings));
+		Assert.assertTrue("PROBLEM - unable to locate 'Legal Notices And Disclosures' on '"+section+"' section", footerValidate(LegalNoticesAndDisclosures));
+		Assert.assertTrue("PROBLEM - unable to locate 'Accessibility' on '"+section+"' section", footerValidate(Accessibility));
+		Assert.assertTrue("PROBLEM - unable to locate 'Logout' on '"+section+"' section", footerValidate(Logout));
+		System.out.println("======================"+section+" are displayed =========================");
+
+		//tbd if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
+		//tbd 		&& LegalNoticesAndDisclosures.isDisplayed() 
+		//tbd 		&& Accessibility.isDisplayed() 
+		//tbd 		&& Logout.isDisplayed()){
 			//  Saved.isDisplayed() is not displayed for every page.
-			System.out.println("======================Member support and Quick links are displayed =========================");
-		}
-		else {
-			Assert.assertFalse(false);
-		}
-		if (OtherLanguageLink.isDisplayed() && Asistencia.isDisplayed() 
-				&& LanguageAssistance.isDisplayed() && LastUpdate.isDisplayed() && TearmsOfUse.isDisplayed() &&
-				UnitedHealthcare.isDisplayed()){
-			System.out.println("====================== Bottom links are displayed =========================");
-			return true;
-		}
-		else {
-			Assert.assertFalse(false);
-		}
-		return null;}
-	
+		//tbd 	System.out.println("======================Member support and Quick links are displayed =========================");
+		//tbd }
+		//tbd else {
+			//tbd 	Assert.assertFalse(false);
+		//tbd }
+		
+		section="Bottom links";
+		Assert.assertTrue("PROBLEM - unable to locate 'Other Language' on '"+section+"' section", footerValidate(OtherLanguageLink));
+		Assert.assertTrue("PROBLEM - unable to locate 'Asistencia' on '"+section+"' section", footerValidate(Asistencia));
+		Assert.assertTrue("PROBLEM - unable to locate 'LanguageAssistance' on '"+section+"' section", footerValidate(LanguageAssistance));
+		Assert.assertTrue("PROBLEM - unable to locate 'Last Update' on '"+section+"' section", footerValidate(LastUpdate));
+		Assert.assertTrue("PROBLEM - unable to locate 'Tearms Of Use' on '"+section+"' section", footerValidate(TearmsOfUse));
+		Assert.assertTrue("PROBLEM - unable to locate 'United Healthcare' on '"+section+"' section", footerValidate(UnitedHealthcare));
+		System.out.println("======================"+section+" are displayed =========================");
+		return true;
+		//tbd if (OtherLanguageLink.isDisplayed() && Asistencia.isDisplayed() 
+		//tbd 		&& LanguageAssistance.isDisplayed() && LastUpdate.isDisplayed() && TearmsOfUse.isDisplayed() &&
+		//tbd 		UnitedHealthcare.isDisplayed()){
+		//tbd 	System.out.println("====================== Bottom links are displayed =========================");
+		//tbd 	return true;
+		//tbd }
+		//tbd else {
+		//tbd 	Assert.assertFalse(false);
+			//tbd }
+		//tbd return null;
+	}
+
 	public FooterPage NavigateToClaimsPage(){
-		validate(claimsLink);
+		footerValidate(claimsLink);
 		if(claimsLink.isDisplayed()){
 			System.out.println("Claims link is displayed");
 			claimsLink.click();
@@ -169,7 +192,7 @@ public class FooterPage extends UhcDriver {
 	}	
 
 	public FooterPage NavigateToEOBPage(){
-		validate(EOBLink);
+		footerValidate(EOBLink);
 		if(EOBLink.isDisplayed()){
 			System.out.println("EOB link is displayed");
 			EOBLink.click();
@@ -179,7 +202,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToContactUsPage(){
-		validate(HelpandContactUs);
+		footerValidate(HelpandContactUs);
 		if(HelpandContactUs.isDisplayed()){
 			System.out.println("contactUSLink link is displayed");
 			HelpandContactUs.click();
@@ -189,7 +212,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToBenefitsPage(){
-		validate(benefits);
+		footerValidate(benefits);
 		if(benefits.isDisplayed()){
 			System.out.println("Benefits link is displayed");
 			benefits.click();
@@ -199,7 +222,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToPharmacyLocator(){
-		validate(homeBtn);
+		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
 			homeBtn.click();
@@ -215,7 +238,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToDCE(){
-		validate(homeBtn);
+		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
 			homeBtn.click();
@@ -231,7 +254,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToProfileandPref(){
-		validate(accountprofile);
+		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
@@ -241,14 +264,14 @@ public class FooterPage extends UhcDriver {
 				accountSettingOption.click();
 				System.out.println("Profile and Preferance link is clicked");
 			} 
-			
+
 		}
 		return null;
 	}
-	
-	
+
+
 	public FooterPage NavigateToProfileandPref_ship(){
-		validate(accountprofile);
+		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
@@ -260,11 +283,60 @@ public class FooterPage extends UhcDriver {
 		}
 		return null;
 	}
-	
+
 
 	public FooterPage validatePageFooter(){
 		return new FooterPage(driver);
 	}
+
+	public boolean footerValidate(WebElement element) {
+		long timeoutInSec=0;
+		return footerValidate(element, timeoutInSec);
+	} 
+
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean footerValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+
+
+	public void sleepBySec(int sec) {
+		System.out.println("Sleeping for '"+sec+"' sec");
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void eobCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}
+
 
 }
 

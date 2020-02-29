@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -128,8 +129,7 @@ public class EOBPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		// TODO Auto-generated method stub
-		checkModelPopup(driver);
+		eobCheckModelPopup(driver);
 
 		if(!pageHeader.getText().contains("Explanation of Benefits"))
 			Assert.fail("Page header not validated. Error loading the page");
@@ -137,7 +137,7 @@ public class EOBPage extends UhcDriver{
 	}
 
 	public EOBPage selectDateRange(String dateRange, String planType, String eobTypeData){
-		validate(eobMonthDateRange);	
+		Assert.assertTrue("PROBLEM - unable to locate dateRange element",eobValidate(eobMonthDateRange));	
 		if(planType.equalsIgnoreCase("MAPD")){
 			Select select = new Select(eobType);
 			eobType.click();
@@ -162,7 +162,7 @@ public class EOBPage extends UhcDriver{
 	}
 
 	/**
-	 *@toDO: method to selectDateRange(dateRange, memberType, eobTypeData);
+	 * method to selectDateRange(dateRange, memberType, eobTypeData);
 	 */
 	public EOBPage validateEOBStatements(String dateRange,String planType,String eobTypeData, String fromDate, String toDate){
 		if(dateRange.contains("Custom")){
@@ -194,63 +194,107 @@ public class EOBPage extends UhcDriver{
 
 		return new EOBPage(driver);
 	}
+	@FindBy(xpath="//*[contains(@id, 'hl-widget-video-overlay')]")
+	protected WebElement eobVideo;
+
+	@FindBy(xpath="//*[contains(@id, 'widget-video')]//a[contains(@class, 'close')]")
+	protected WebElement closeVideo;
 
 	/**
-	 *@toDo: the method to validate Read PDF
+	 * the method to validate Read PDF
 	 */
 	public void validateReadPDF(){
+		CommonUtility.waitForPageLoad(driver, learnMoreLink, 5);
+		Assert.assertTrue("PROBLEM - Unable to lcoate Learn More link", eobValidate(learnMoreLink));
 		learnMoreLink.click();
-		if(eobVideoBox.isDisplayed()){
-			System.out.println("Read medical EOB Video Box link displayed correctly");
-			eobVideoBox.click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		CommonUtility.waitForPageLoad(driver, eobVideoBox, 5);
+		Assert.assertTrue("PROBLEM - Unable to locate Read Medical EOB Video Page", eobValidate(eobVideoBox));
+		//tbd if(eobVideoBox.isDisplayed()){
+		System.out.println("Read medical EOB Video Box link displayed correctly");
+		eobVideoBox.click();
+		CommonUtility.checkPageIsReady(driver);
+		sleepBySec(10);
+		System.out.println(driver.getTitle());
+		Assert.assertTrue("PROBLEM - Unable to locate overlay EOB video", eobValidate(eobVideo));
+		Assert.assertTrue("PROBLEM - Unable to locate close EOB video link", eobValidate(closeVideo));
+		System.out.println("Video successfully displayed");
+		jsClickNew(closeVideo);
+		sleepBySec(1);
+		Assert.assertTrue("PROBLEM - should not able to locate overlay EOB video after closing it", !eobValidate(eobVideo));
 
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-//			driver.switchTo().frame("artEXPOiFrame");
-//			driver.switchTo().window(tabs.get(1));
-			System.out.println(driver.getTitle());
-			if (driver.findElement(By.xpath("//*[contains(@id, 'hl-widget-video-overlay')]")).isDisplayed()) {
-				System.out.println("Video successfully displayed");
-				jsClickNew(driver.findElement(By.xpath("//*[contains(@id, 'widget-video')]//a[contains(@class, 'close')]")));
-			}
-		}else{
-			System.out.println("Read Medical EOB Video Page not displayed");
-			Assert.fail();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(5000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	e.printStackTrace();
+		//tbd }
+
+		//tbd try {
+		//tbd 	Thread.sleep(5000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	e.printStackTrace();
+		//tbd }		
+		//			driver.switchTo().frame("artEXPOiFrame");
+		//			driver.switchTo().window(tabs.get(1));
+		System.out.println(driver.getTitle());
+		//tbd if (driver.findElement(By.xpath("//*[contains(@id, 'hl-widget-video-overlay')]")).isDisplayed()) {
+		//tbd 	System.out.println("Video successfully displayed");
+		//tbd 	jsClickNew(driver.findElement(By.xpath("//*[contains(@id, 'widget-video')]//a[contains(@class, 'close')]")));
+		//tbd }
+		//tbd }else{
+		//tbd 	System.out.println("Read Medical EOB Video Page not displayed");
+		//tbd 	Assert.fail();
+		//tbd }
 	}
 
+	@FindBy(xpath=".//*[@id='eoblist0']/a")
+	protected List<WebElement> listOfEOBs;
+
+	@FindBy(xpath=".//*[@id='eoblist0']/a/img")
+	protected List<WebElement> listOfPdfIcon;
+
+	@FindBy(xpath=".//*[@id='eoblist0']/a/span")
+	protected List<WebElement> listOfFileType;
+
+	@FindBy(xpath=".//*[@id='eoblist0']/p")
+	protected List<WebElement> listOfDatesDisplayed;
+
+
+
+
 	/**
-	 *@toDo: this method validates size/date/link displayed on UI for each EOB
+	 * this method validates size/date/link displayed on UI for each EOB
 	 */
 	public EOBPage validateEachEOBonUI(){
 
-		List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
-		List<WebElement> pdfIcon = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/img")); 
-		List<WebElement> fileType = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/span"));
-		List<WebElement> datesDisplayed = driver.findElements(By.xpath(".//*[@id='eoblist0']/p"));
-		if(listOfEOBs.size()==pdfIcon.size()&& listOfEOBs.size()== fileType.size() &&
-				listOfEOBs.size()==datesDisplayed.size()){
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
-			// Code optimization required for same logic
-			for(int i=0; i<=pdfIcon.size()-1;i++){
-				if(pdfIcon.get(i).isDisplayed()){			 
-					System.out.println(pdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
-				}else{
-					System.out.println("Icon "+(i+1)+" not displayed");
-					Assert.fail();
-				}
-			}
-			/*for(int i=0; i<=fileType.size()-1;i++){
+		//tbd List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='eoblist0']/a"));
+		//tbd List<WebElement> pdfIcon = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/img")); 
+		//tbd List<WebElement> fileType = driver.findElements(By.xpath(".//*[@id='eoblist0']/a/span"));
+		//tbd List<WebElement> datesDisplayed = driver.findElements(By.xpath(".//*[@id='eoblist0']/p"));
+		Assert.assertTrue("PROBLEM - Number of EOB and Number of PDF icon elements are not as expected.  "
+				+ "Num of EOB ='"+listOfEOBs.size()+"' | Num of PDF icon displayed ='"+listOfPdfIcon.size()+"'", 
+				listOfEOBs.size()==listOfPdfIcon.size());
+		Assert.assertTrue("PROBLEM - Number of EOB and Number of File Type elements are not as expected.  "
+				+ "Num of EOB ='"+listOfEOBs.size()+"' | Num of File Type displayed='"+listOfFileType.size()+"'", 
+				listOfEOBs.size()==listOfFileType.size());
+		Assert.assertTrue("PROBLEM - Number of EOB and Number of Displayed date elements are not as expected.  "
+				+ "Num of EOB ='"+listOfEOBs.size()+"' | Num of Date displayed ='"+listOfDatesDisplayed.size()+"'", 
+				listOfEOBs.size()==listOfDatesDisplayed.size());
+		//tbd if(listOfEOBs.size()==listOfPdfIcon.size() 
+		//tbd 		&& listOfEOBs.size()== listOfFileType.size() 
+		//tbd 		&& listOfEOBs.size()==listOfDatesDisplayed.size()){
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
+		// Code optimization required for same logic
+		for(int i=0; i<=listOfPdfIcon.size()-1;i++){
+			Assert.assertTrue("PROBLEM - Icon "+(i+1)+" not displayed", eobValidate(listOfPdfIcon.get(i)));
+			System.out.println(listOfPdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
+			//tbd if(listOfPdfIcon.get(i).isDisplayed()){			 
+			//tbd 	System.out.println(listOfPdfIcon.get(i).getAttribute("alt")+" icon at "+(i+1)+" displayed correctly");
+			//tbd }else{
+			//tbd 	System.out.println("Icon "+(i+1)+" not displayed");
+			//tbd 	Assert.fail();
+			//tbd }
+		}
+		/*for(int i=0; i<=fileType.size()-1;i++){
 					 if(fileType.get(i).isDisplayed()){			 
 						 System.out.println(fileType.get(i).getText()+" size at "+(i+1)+" displayed correctly");
 						 if(fileType.get(i).getText().contains("kb") 
@@ -277,42 +321,47 @@ public class EOBPage extends UhcDriver{
 						 Assert.fail();
  				     }
 				   }*/
-			return new EOBPage(driver);
-		}else{
-			System.out.println("Count of PDFs and EOB doesn't match");
-			Assert.fail();
-		}
-		return null;
+		return new EOBPage(driver);
+		//tbd }else{
+		//tbd 		System.out.println("Count of PDFs and EOB doesn't match");
+		//tbd Assert.fail();
+		//tbd }
+		//tbd return null;
 	}
 
 	/**
-	 *@toDo: this method validate the dropdowns on EOB page
+	 * this method validate the dropdowns on EOB page
 	 */
-
 	public EOBPage validateDropDowns(String planType){
-		if(planType.equals("MAPD")){
-			validate(eobType);
+		if(planType.equals("MAPD") || planType.equals("PCP") || planType.equals("MEDICA")){
+			Assert.assertTrue("PROBLEM - Unable to locate EOB tab for planType '"+planType+"'", eobValidate(eobType));
+			//tbd eobValidate(eobType);
 			Select select = new Select(eobType);
 			List<WebElement> eobTypeOptions = select.getOptions();
 			WebElement firstInDropDown = select.getFirstSelectedOption();
 			if(firstInDropDown.getText().equals("Medical")){
 				System.out.println("First element EOB Type dropdown displayed correctly "+firstInDropDown.getText());
 				for(WebElement eobType : eobTypeOptions){
-					if(eobType.getText().equals("Medical") || eobType.getText().equals("Prescription Drug")){
-						System.out.println("Desired value of EOB displayed "+eobType.getText());
-					}else{
-						System.out.println("------Desired values not displayed in EOB Type Dropdown-------");
-						Assert.fail();
-					}
+					Assert.assertTrue("PROBLEM - unable to locate desired value in EOB Type Dropdown. "
+							+ " Expected either 'Medical' or 'Prescription Drug' | Actual='"+eobType.getText()+"'", 
+							eobType.getText().equals("Medical") || eobType.getText().equals("Prescription Drug"));
+					System.out.println("Desired value of EOB displayed "+eobType.getText());
+					//tbd if(eobType.getText().equals("Medical") || eobType.getText().equals("Prescription Drug")){
+					System.out.println("Desired value of EOB displayed "+eobType.getText());
+					//tbd }else{
+					//tbd 	System.out.println("------Desired values not displayed in EOB Type Dropdown-------");
+					//tbd 	Assert.fail();
+					//tbd }
 				}
 			}
 		}else{
-			if(validate(eobType)){
-				System.out.println("EOB tab is displayed for non MAPD plan");
-				Assert.fail();
-			}else{
-				System.out.println("EOB Type tab not displayed --- passed");
-			}
+			Assert.assertTrue("PROBLEM - for planType '"+planType+"' should not display EOB tab", !eobValidate(eobType));
+			//tbd	if(eobValidate(eobType)){
+			//tbd			System.out.println("EOB tab is displayed for non MAPD plan");
+			//tbd			Assert.fail();
+			//tbd		}else{
+			//tbd			System.out.println("EOB Type tab not displayed --- passed");
+			//tbd		}
 		}
 
 		Select selectDate;
@@ -369,6 +418,7 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 
+	//TODO: validate the date range content display after range is selected
 	public void validateDateRangeContentDisplayed(String dateRangeValue){
 		/*if(dateRangeValue.contains("custom")){
 
@@ -406,15 +456,16 @@ public class EOBPage extends UhcDriver{
 		return null;
 	}
 
+	/* tbd
 	public EOBPage loginToDashboardPage(String userName) throws InterruptedException{
 		System.out.println(MRScenario.environment);
-		/*if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
-			System.out.println(EOB_DIRECT_URL);
-			start(EOB_DIRECT_URL);
-		}if(MRScenario.environment.contains("team-ci1")){
-			System.out.println(EOB_CI1_URL);
-			start(EOB_CI1_URL);
-		}*/
+		//if ( MRScenario.environment.contains("stage") || MRScenario.environment.contains("test-a")){
+		//	System.out.println(EOB_DIRECT_URL);
+		//	start(EOB_DIRECT_URL);
+		//}if(MRScenario.environment.contains("team-ci1")){
+		//	System.out.println(EOB_CI1_URL);
+		//	start(EOB_CI1_URL);
+		//}
 		if(MRScenario.environment.contains("stage")){
 			start(STAGE_DASHBOARD_URL);
 			System.out.println(STAGE_DASHBOARD_URL);
@@ -425,7 +476,7 @@ public class EOBPage extends UhcDriver{
 		driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS) ;
 		System.out.println(userName);
 		Thread.sleep(3000);
-		validate(driver.findElement(By.id("username")));
+		eobValidate(driver.findElement(By.id("username")));
 		driver.findElement(By.id("username")).sendKeys(userName);
 		Thread.sleep(1000);
 		driver.findElement(By.id("password")).sendKeys("Password@1");
@@ -433,24 +484,25 @@ public class EOBPage extends UhcDriver{
 		driver.findElement(By.id("sign-in-btn")).click();
 		return new EOBPage(driver);
 	}
-
-	/**
-	 *@toDo: the method navigates user to eob page
 	 */
 
+	/**
+	 * the method navigates user to eob page
+	 */
 	public EOBPage navigateDirectToEOBPag(){
-		/*WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(eobLink));*/
-		try{
-			if (iPerceptionPopUp.isDisplayed()) {
-				iPerceptionPopUp.click();
-			}
-		}catch(Exception e)        {
-			System.out.println("iPerception Pop Up not displayed");
-		}
+		eobCheckModelPopup(driver);
+		//tbd try{
+		//tbd 	if (iPerceptionPopUp.isDisplayed()) {
+		//tbd 		iPerceptionPopUp.click();
+		//tbd 	}
+		//tbd }catch(Exception e)        {
+		//tbd 	System.out.println("iPerception Pop Up not displayed");
+		//tbd }
 
-		validate(eobLink);
+		Assert.assertTrue("PROBLEM - unable to locate EOB link to go to EOB page", eobValidate(eobLink));
+		//tbd eobValidate(eobLink);
 		eobLink.click();
+		CommonUtility.checkPageIsReady(driver);
 		return new EOBPage(driver);
 	}
 
@@ -458,37 +510,27 @@ public class EOBPage extends UhcDriver{
 	 *@toDo: this method is to validate the site leaving popup on the eob page
 	 */
 
-	public EOBPage validateSiteLeaveingPopUP(){
+	public void validateSiteLeaveingPopUP(){
 		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		String eobPageTitle = driver.getTitle();
 		System.out.println(eobPageTitle);
-		
+
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link", eobValidate(adobeWebsiteLink));
 		jsClickNew(adobeWebsiteLink);
-		validateNew(siteLeavingProceedButton);
-		validateNew(siteLeavingCancelButton);
-		if(!siteLeavingProceedButton.isDisplayed() || !siteLeavingCancelButton.isDisplayed()) {
-			Assert.fail("Site Leaving Pop-up not displayed");
-		}
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", eobValidate(siteLeavingProceedButton));
+		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", eobValidate(siteLeavingCancelButton));
+		//tbd validateNew(siteLeavingProceedButton);
+		//tbd validateNew(siteLeavingCancelButton);
+		//tbd if(!siteLeavingProceedButton.isDisplayed() || !siteLeavingCancelButton.isDisplayed()) {
+		//tbd 	Assert.fail("Site Leaving Pop-up not displayed");
+		//tbd }
 		//now click cancel and validate any element on page
 		siteLeavingCancelButton.click();
-		validate(adobeWebsiteLink);
+		sleepBySec(1);
+		Assert.assertTrue("PROBLEM - unable to locate Adobe link after clicking Leave Site Cancel button", eobValidate(adobeWebsiteLink));
+		eobValidate(adobeWebsiteLink);
 
-		/*
-		 * //now again validate site leaving popup
-		 * js.executeScript("arguments[0].click();", adobeWebsiteLink);
-		 * validate(siteLeavingProceedButton); validate(siteLeavingCancelButton);
-		 * 
-		 * //now click on proceed and validate new tab opens
-		 * siteLeavingProceedButton.click(); switchToNewTab();
-		 * driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-		 * 
-		 * //capture next page title String pageTitle = driver.getTitle();
-		 * System.out.println(pageTitle); if(pageTitle!=null &&
-		 * pageTitle!=eobPageTitle){
-		 * System.out.println("Site leaving popup validated and working fine"); }else{
-		 * System.out.println("Site leaving popup validated and working fine");
-		 * Assert.fail(); }
-		 */		return null;
+		//tbd return null;
 	}
 
 	/**
@@ -507,111 +549,49 @@ public class EOBPage extends UhcDriver{
 		return false;
 	}
 
-	/*public boolean navigatePlanTabs(String PlanType){	
-		if (PlanType.contentEquals("MA") || PlanType.contentEquals("MAPD")) {
-			if (validate(MAPlanTab)){
-				if(MAPlanTab.isEnabled()){
-				MAPlanTab.click();}
-				//Assert.assertTrue("Cant navigate to MA / MAPD Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying Medicare Advantage Plan Tab **********");
-				return true;
-			}
-		}
-
-		else if (PlanType.contentEquals("SHIP")) {
-			if (validate(MedSuppPlanTab)){
-				MedSuppPlanTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
-			}
-			else if (validate(HIPplanTab)){
-				HIPplanTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-			else {
-				System.out.println("*************No SHIP Plans available for this Member **********");
-				return false;
-			}
-		}
-
-		else if (PlanType.contentEquals("HIP")) {
-			if (validate(HIPplanTab)){
-				HIPplanTab.click();
-				//Assert.assertTrue("Cant navigate to HIP Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - HIP Plan Tab **********");
-				return true;
-			}
-
-		}
-		else if (PlanType.contentEquals("PDP")) {
-			if (validate(PDPPlanTab)){
-				PDPPlanTab.click();
-				//Assert.assertTrue("Cant navigate to PDP Plan Tab", memberMaterialsfield.isDisplayed());
-				System.out.println("*************Displaying PDP Plan Tab **********");
-				return true;
-			}
-
-		}
-		else if (PlanType.contentEquals("MedSupp")) {
-			if (validate(MedSuppPlanTab)){
-				MedSuppPlanTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying SHIP - Med Supp Plan Tab Plan Tab **********");
-				return true;
-			}
-		}
-		else if (PlanType.contentEquals("SSUP")) {
-			if (validate(SuppTab)){
-				SuppTab.click();
-				//Assert.assertTrue("Cant navigate to Med Supp PlanTab Plan Tab", MemberIDcardField.isDisplayed());
-				System.out.println("*************Displaying UHC Senior Supplement Plan Tab **********");
-				return true;
-			}
-		}
-		System.out.println("@@@@@@@@@@@@ Invalid Plan Type / Plan Tab not found @@@@@@@@@@@@@@");
-		return false;
-	}*/
-
 	/**
-	 *@toDo: this method is used to enter the dates for Custom Search on eob page
+	 * this method is used to enter the dates for Custom Search on eob page
 	 */
-
-	public EOBPage enterCustomSearchDate(String fromDateValue, String toDateValue){
-		validate(toDate);
-		validate(fromDate);
-		validate(customSearchButton);
+	public void enterCustomSearchDate(String fromDateValue, String toDateValue){
+		Assert.assertTrue("PROBLEM - unable to locate 'From' field for custom search", eobValidate(fromDate));
+		Assert.assertTrue("PROBLEM - unable to locate 'To' field for custom search", eobValidate(toDate));
+		Assert.assertTrue("PROBLEM - unable to locate 'Search' button for custom search", eobValidate(customSearchButton));
+		//TODO - validate calendars also
+		//tbd eobValidate(toDate);
+		//tbd eobValidate(fromDate);
+		//tbd eobValidate(customSearchButton);
 
 		fromDate.sendKeys(fromDateValue);
+		sleepBySec(1);
 		toDate.sendKeys(toDateValue);
-
+		sleepBySec(1);
 		customSearchButton.click();
 
-		return null;
+		//tbd return null;
 	}
 
 	/**
-	 *@toDo: the method is to validate eob display on eob page
+	 * the method is to validate eob display on eob page
 	 */
-
 	public void validateEOBStatements(String numberOfEOB){
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validateNew(eobCount);
+		sleepBySec(6);
+		//tbd try {
+		//tbd 	Thread.sleep(6000);
+		//tbd } catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
+		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
+		//tbd validateNew(eobCount);
 		eobCount.click();
+		CommonUtility.checkPageIsReady(driver);
 		System.out.println(eobCount.getText());
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		System.out.println(eobCountInt);
 		numberOfPageDisplayed(eobCountInt);
 		for (int i = 0; i < eobCountInt; i++) {
 			if (driver.findElement(By.id("eoblist" + i)).isDisplayed()) {
-				
+
 				System.out.println("EOB at" + i + " displayed correctly");
 				CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]")), 20);
 				WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]"));
@@ -630,88 +610,149 @@ public class EOBPage extends UhcDriver{
 					nextPageArrow.click();
 					break;
 				} 
-			}
-
-			else {
+			} else {
 				System.out.println("EOB at " + i + "not displayed");
 				Assert.fail("EOB at " + i + "not displayed");
 			}
 		}
+	}
+
+	/**
+	 * this method is to validate number of pages displayed
+	 */
+	public int numberOfPageDisplayed(int eobCount){
+		//TODO: figure out what this one is trying to validate
+		float pageCount;
+		int numberOfPageDisplayed;
+		pageCount = eobCount/9;
+		System.out.println(pageCount);
+		numberOfPageDisplayed = (int)pageCount;
+		if(numberOfPageDisplayed<1){
+			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+		}else{
+			numberOfPageDisplayed+=1;
+			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
 		}
 
-		/**
-		 *@toDo: this method is to validate number of pages displayed
-		 */
+		return numberOfPageDisplayed;
+	}
 
-		public int numberOfPageDisplayed(int eobCount){
-			float pageCount;
-			int numberOfPageDisplayed;
-			pageCount = eobCount/9;
-			System.out.println(pageCount);
-			numberOfPageDisplayed = (int)pageCount;
-			if(numberOfPageDisplayed<1){
-				System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
-			}else{
-				numberOfPageDisplayed+=1;
-				System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
+	public void clickOnEob () {
+		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
+		Assert.assertTrue("PROBLEM - unable to locate eobFirst element", eobValidate(eobFirst));
+		//tbd waitforElement(eobFirst);
+		eobFirst.click();
+		sleepBySec(5);
+		//tbd Thread.sleep(5000);
+		//Get the current window handle
+		//String windowHandle = driver.getWindowHandle();
+
+		//Get the list of window handles
+		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(newTab.size());
+		//Use the list of window handles to switch between windows
+		driver.switchTo().window(newTab.get(1));
+
+		//Switch back to original window
+		//driver.switchTo().window(mainWindowHandle);
+		String getURL = driver.getCurrentUrl();
+		System.out.println(" pdf url: " + getURL);
+		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+getURL+"'", getURL.contains(".pdf"));
+	}
+
+	public void validatePHIPErorrMessage(){
+		//TODO
+	}
+
+	@FindBy(xpath=".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li")
+	protected List<WebElement> listOfEobs;
+	public void validateEOBsDisplayed(){
+		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
+		//tbd validateNew(eobCount);
+		int eobCountInt = Integer.parseInt(eobCount.getText());
+		System.out.println("EOB Count is: "+eobCount.getText());
+		//tbd List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
+		if(eobCountInt == listOfEobs.size()){
+			System.out.println("Validated EOBs are displayed");
+		}else
+			System.out.println("No EOBs are displayed");
+	}
+
+	public BenefitsAndCoveragePage navigateToBncPage(){
+		Assert.assertTrue("PROBLEM - unable to locate Benefits and Coverage Tab", eobValidate(bncTab));
+		bncTab.click();
+		CommonUtility.waitForPageLoad(driver, bncPageHeader, 30);
+		Assert.assertTrue("PROBLEM - unable to locate Benefits and Coverage header after navigating to Benefits and Coverage page", eobValidate(bncPageHeader));
+		//tbd if(validateNew(bncPageHeader))
+			return new BenefitsAndCoveragePage(driver);
+			//tbd return null;
+	}
+
+	public void validatePlanNavTab(String planType) {
+		if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
+			if(eobValidate(mapdNavTab))
+				mapdNavTab.click();	
+		}else if(planType.equalsIgnoreCase("PDP")&&eobValidate(pdpNavTab)){
+			pdpNavTab.click();
+		}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
+			if(eobValidate(medsuppNavTab))
+				medsuppNavTab.click();
+		}	
+	}
+
+	public boolean eobValidate(WebElement element) {
+		long timeoutInSec=0;
+		return eobValidate(element, timeoutInSec);
+	} 
+
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean eobValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
 			}
-
-			return numberOfPageDisplayed;
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
-		public void clickOnEob () throws InterruptedException {
-			waitforElement(eobFirst);
-			eobFirst.click();
-			Thread.sleep(5000);
-			//Get the current window handle
-			//String windowHandle = driver.getWindowHandle();
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
 
-			//Get the list of window handles
-			ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
-			System.out.println(newTab.size());
-			//Use the list of window handles to switch between windows
-			driver.switchTo().window(newTab.get(1));
 
-			//Switch back to original window
-			//driver.switchTo().window(mainWindowHandle);
-			String getURL = driver.getCurrentUrl();
-			System.out.println(" pdf url: " + getURL);
-			Assert.assertTrue(getURL.contains(".pdf"));
-		}
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
 
-		public void validatePHIPErorrMessage(){
-
-		}
-
-		public void validateEOBsDisplayed(){
-			validateNew(eobCount);
-			int eobCountInt = Integer.parseInt(eobCount.getText());System.out.println("EOB Count is: "+eobCount.getText());
-			List<WebElement> listOfEOBs = driver.findElements(By.xpath(".//*[@id='medical-prescription-results']//*[contains(@class,'document-list-new margin-large')]//li"));
-			if(eobCountInt == listOfEOBs.size()){
-				System.out.println("Validated EOBs are displayed");
-
-			}else
-				System.out.println("No EOBs are displayed");
-		}
-
-		public BenefitsAndCoveragePage navigateToBncPage(){
-			bncTab.click();
-			if(validateNew(bncPageHeader))
-				return new BenefitsAndCoveragePage(driver);
-			return null;
-		}
-
-		public void validatePlanNavTab(String planType) {
-
-			if(planType.equalsIgnoreCase("MAPD")||planType.equalsIgnoreCase("MA")){
-				if(validate(mapdNavTab))
-					mapdNavTab.click();	
-			}else if(planType.equalsIgnoreCase("PDP")&&validate(pdpNavTab)){
-				pdpNavTab.click();
-			}else if((planType.equalsIgnoreCase("MEDSUPP")||planType.equalsIgnoreCase("SHIP"))){
-				if(validate(medsuppNavTab))
-					medsuppNavTab.click();
-			}	
-
+	public void sleepBySec(int sec) {
+		System.out.println("Sleeping for '"+sec+"' sec");
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
+
+	public void eobCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}
+
+}
+
 

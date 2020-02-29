@@ -68,6 +68,7 @@ Feature: 1.04 To Test EOB for Members
       | Plan Tab | <planTab1> |
     And the user gets the error message for PHIP member
 
+    @SHIP_EOBs
     Examples: 
       | TID   | planType | memberType |
       | 15174 | PHIP     | SHIP_EOB       |
