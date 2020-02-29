@@ -2,8 +2,8 @@
 Feature: 1.04 To Test EOB for Members
 
   ######################   EOB Regression ###############################
-  @eob6 @febRelease2018 @hsideob @regressionMember
-  Scenario Outline: plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify NICE EOB and click on the pdf
+  @eob01 @febRelease2018 @hsideob @regressionMember
+  Scenario Outline: plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -32,6 +32,7 @@ Feature: 1.04 To Test EOB for Members
       | MAPD     | NICE_EOB_R | Last 18 months | Prescription Drug |       12 |
       | MAPD     | NICE_EOB_R | Last 6 months  | Medical           |        3 |
 
+    #Q: what's the different between these two ship
     @SHIP_EOBs
     Examples: 
       | planType     | memberType | dateRange        | eobType | eobCount |
@@ -44,10 +45,38 @@ Feature: 1.04 To Test EOB for Members
       | PDP      | Rx_EOB     | Last 12 months | Prescription Drug |        9 | 
       | PDP      | RxGrp_EOB  | Last 18 months | Prescription Drug |       14 | 
 
+  # need to add coverage for
+  # combo - fed+ship
+  # combo - ship + fed
+  # multi ship
+  # term
+  # pre-eff
+  # move the two claims tests about EOB navigation for SSUP to here
+  
   #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
   #     |15166    | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
   #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
+  
+  # need to check this one
+  @eob02 @regression_06_06_18FnF @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page_hsid
+    Then the user validates content displayed on EOB page
+      | Plan Tab | <planTab1> |
+    And the user gets the error message for PHIP member
+
+    Examples: 
+      | TID   | planType | memberType |
+      | 15174 | PHIP     | SHIP_EOB       |
+  
+  
   ########################### END EOB  Regression #######################################
+
+  ##### TO BE REMOVED 
+  # duplicated
   @eob1 @Eobsiteleavingpopup
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType>- Allowed Domains – Authors need ability to define messages and domains for leaving member sites (ATDD)
     Given login with following details logins in the member portal and validate elements
@@ -61,6 +90,7 @@ Feature: 1.04 To Test EOB for Members
       | 15140 | MAPD     | IndividualAARPWOEOB |
       | 15120 | MA       | IndividualAARPWOEOB |
 
+  # duplicated
   @eob2 @eobCountdaterange
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> -To verify EOB result list
     Given login with following details logins in the member portal and validate elements
@@ -85,6 +115,7 @@ Feature: 1.04 To Test EOB for Members
       | 15140 | MAPD     | aarpWithEOB | 12 Months | Prescription Drug |        1 |
       | 15140 | MAPD     | aarpWithEOB | 18 Months | Prescription Drug |        1 |
 
+  # what does this one mean?
   @eob3 @planTypeValidation @hsideob2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -  To verify different plan types under combo tabs
     Given login with following details logins in the member portal and validate elements
@@ -97,8 +128,9 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | TID   | planType | memberType |
       | 15140 | MAPD     | NICE_EOB   |
-
   # |15120 | MA          | IndividualAARPWOEOB						 |
+
+  # duplicated
   @eob4 @dropDownFuntion
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange> - To validate page functionality with different dropdowns
     Given login with following details logins in the member portal and validate elements
@@ -121,6 +153,7 @@ Feature: 1.04 To Test EOB for Members
       | 15165 | SHIP     | Individual          | Medical           | 6-12 Months |
       | 15165 | SHIP     | Individual          | Medical           | 90 Days     |
 
+  # duplicated
   @eob5 @learnAboutMedicalEOB
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -daterange: <dateRange>- To verify How to read a medical EOB PDF
     Given login with following details logins in the member portal and validate elements
@@ -140,6 +173,7 @@ Feature: 1.04 To Test EOB for Members
       | 15140 | MAPD     | aarpWithEOB | 12 Months | Medical     |
       | 15140 | MAPD     | aarpWithEOB | 18 Months | Medical     |
 
+  # duplicate
   @eob7 @regression_06_06_18FnF
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -To verify EOB accessible for PDP + MEDSup Plan
     Given login with following details logins in the member portal and validate elements
@@ -155,16 +189,3 @@ Feature: 1.04 To Test EOB for Members
       | TID   | planType | memberType     | dateRange      | eobType | eobCount | planTab1 | planTab2 |
       | 15167 | PDP      | comboEOBMedSup | Last 18 Months | Medical |        0 | PDP      | MedSup   |
 
-  @eob11 @regression_06_06_18FnF
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - TC010_Check EOB displays error message_ PHIP- Active Plan member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates content displayed on EOB page
-      | Plan Tab | <planTab1> |
-    And the user gets the error message for PHIP member
-
-    Examples: 
-      | TID   | planType | memberType |
-      | 15174 | PHIP     | SHIP       |

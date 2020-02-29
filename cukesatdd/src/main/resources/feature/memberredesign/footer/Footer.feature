@@ -25,11 +25,11 @@ Feature: 1.05 Member Footer validation
 
     Examples: 
      | TID   | planType | memberType                 |
-     | 15347 | MAPD     | IndMAPDUHC_Pharmacylocator |
+     | 15347 | MAPD     | IndMAPDUHC_footer |
     # | 15347 | MAPD     | CALPERSGroup_ContactUs     |
       
       
-     @footer2 @IncrediblesFooter @shipFooter
+  @footer2 @IncrediblesFooter @shipFooter
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -50,4 +50,4 @@ Feature: 1.05 Member Footer validation
 
     Examples: 
       | TID   | planType | memberType          |
-      | 15347 | SHIP     | FooterValidation    |
+      | 15347 | SHIP     | IND_footer    |

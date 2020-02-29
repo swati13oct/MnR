@@ -2,7 +2,7 @@
 Feature: 1.08 Member Header/Navigation validation
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
-  @header1 @member_redesign_header @IncrediblesHeader @regressionMember @headerRegression
+  @header01 @mapd_header @member_redesign_header @IncrediblesHeader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify HSID login functionality and header
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -26,13 +26,13 @@ Feature: 1.08 Member Header/Navigation validation
     Then I should be able to see and use the Account/Profile dropdown and logout
 
     Examples: 
-      | TID   | planType | memberType    | flow|
+      | TID   | planType | memberType    | flow  |
       | 15164 | MAPD     | Individual    | header|
       | 15164 | PDP      | Individual    | header|
-      | 15164 | MAPD     | PCP           | header|
+      | 15164 | PCP     | Individual     | header|
      
 
-  @header2 @premiumpaymentsheader @regressionMember 
+  @header02 @premiumpaymentsheader @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check the Premium Payments Tab in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -50,7 +50,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
 	      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
 
-  @header3 @premiumpaymentsheader_100%subisdy @regressionMember 
+  @header03 @premiumpaymentsheader_100%subisdy @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -67,7 +67,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID       | planType    | memberType                |
 	      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
 
-  @header4 @findcarecostsheader @regressionMember
+  @header04 @findcarecostsheader @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -82,7 +82,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | 15171 | MAPD     | PCP_header              |
 	      | 15171 | MAPD     | Medica_Pharmacylocator  |
 
-  @header5 @no_findcareheader @regressionMember @headerRegression
+  @header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -92,10 +92,10 @@ Feature: 1.08 Member Header/Navigation validation
 	    Then I should not be able to see the Find Care & Costs tab Header
 			
 	    Examples: 
-	      | TID   | planType | memberType |flow |
-	      | 15251 | SHIP     | Medsupp    | header|
+	      | TID   | planType | memberType | flow   |
+	      | 15251 | SHIP     | Medsupp    | header |
 
-  @header6 @Terminated_view @regressionMember @headerRegression 
+  @header06 @terminated @regressionMember @headerRegression 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given login with following details logins in the member portal and validate elements
 	      | Member Type | <memberType> |
@@ -106,6 +106,6 @@ Feature: 1.08 Member Header/Navigation validation
 	    Then I should be able to see and use the health and wellness tab in the header
 	
 	    Examples: 
-	      | TID   |   memberType    |
-	      | 15162 | Terminated    |  
+	      | TID   | memberType           |
+	      | 15162 | Terminated_header    |  
 	
