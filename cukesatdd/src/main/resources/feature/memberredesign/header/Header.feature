@@ -7,7 +7,7 @@ Feature: 1.08 Member Header/Navigation validation
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-      |Flow | <flow> |
+      |Flow         | <flow>       |
     #When the above plantype user logs in UMS Site Desktop Header
     #And I view the global navigation Header
     #Then I should be able to see and use the Home tab Header
@@ -29,7 +29,7 @@ Feature: 1.08 Member Header/Navigation validation
       | TID   | planType | memberType    | flow  |
       | 15164 | MAPD     | Individual    | header|
       | 15164 | PDP      | Individual    | header|
-      | 15164 | PCP     | Individual     | header|
+      | 15164 | PCP      | Individual    | header|
      
 
   @header02 @premiumpaymentsheader @regressionMember 
@@ -76,11 +76,11 @@ Feature: 1.08 Member Header/Navigation validation
 	    Then I should be able to see and use the Find Care & Costs tab Header
 	
 	    Examples: 
-	      | TID   | planType | memberType              |
-	      | 15171 | MAPD     | Group_BnC               |
-	      | 15171 | MAPD     | IndividualMember_header |
-	      | 15171 | MAPD     | PCP_header              |
-	      | 15171 | MAPD     | Medica_Pharmacylocator  |
+	      | TID   | planType | memberType   |
+	      | 15171 | MAPD     | GROUP_header |
+	      | 15171 | MAPD     | IND_header   |
+	      | 15171 | PCP      | IND_header   |
+	      | 15171 | MEDICA   | IND_header   |
 
   @header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
@@ -96,7 +96,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | 15251 | SHIP     | Medsupp    | header |
 
   @header06 @terminated @regressionMember @headerRegression 
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
+  Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given login with following details logins in the member portal and validate elements
 	      | Member Type | <memberType> |
 	    Then I should be able to see and use the Find Care & Costs tab Header
