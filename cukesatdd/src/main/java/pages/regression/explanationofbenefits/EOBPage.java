@@ -517,6 +517,7 @@ public class EOBPage extends UhcDriver{
 
 		Assert.assertTrue("PROBLEM - unable to locate Adobe link", eobValidate(adobeWebsiteLink));
 		jsClickNew(adobeWebsiteLink);
+		CommonUtility.waitForPageLoad(driver, siteLeavingProceedButton, 10);
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", eobValidate(siteLeavingProceedButton));
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", eobValidate(siteLeavingCancelButton));
 		//tbd validateNew(siteLeavingProceedButton);
