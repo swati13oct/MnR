@@ -71,6 +71,24 @@ public class VPPTestHarnessPage extends UhcDriver{
 	@FindBy(xpath="//a[@class='custom_deeplink_anchor' and attribute::href]")
 	private WebElement createDeepLinkURL;
 	
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='ZIPcode']")
+	private WebElement connMdlZIPcode;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='originatingsite']")
+	private WebElement connMdlOrgSite;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='wtmcid']")
+	private WebElement connlMdlwtmcid;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='subdomain']")
+	private WebElement connlMdlsubdomain;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='countycode']")
+	private WebElement connlMdlCountyCode;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='coverageperson']")
+	private WebElement connlMdlCovaragePerson;
+	@FindBy(xpath="//h4[contains(text(),'Connector modal plans')]//parent::div//input[@name='statecode']")
+	private WebElement connlMdlStateCode;	
+	
+	
+	@FindBy(xpath="//button[contains(@ng-click,'connectormodal')]")
+	private WebElement connectorModalCreateButton;
 	
 	
 	
@@ -156,4 +174,21 @@ public class VPPTestHarnessPage extends UhcDriver{
 		jsClickNew(createDeepLinkURL);
 	}
 
+	
+	public void enterMandatoryforConnectorModelDeepLink(String zipcode,String stateCode,String CountyCode,String OrgSite,
+			String wtmcid,String subdomain){
+
+		validateNew(connMdlZIPcode);
+		sendkeys(connMdlZIPcode, zipcode);
+		sendkeys(connMdlOrgSite, OrgSite+subdomain);
+		sendkeys(connlMdlwtmcid, wtmcid);
+		sendkeys(connlMdlsubdomain, subdomain);
+		sendkeys(connlMdlCountyCode, CountyCode);
+		sendkeys(connlMdlStateCode, stateCode);
+		validateNew(connectorModalCreateButton);
+		jsClickNew(connectorModalCreateButton);
+		validateNew(createDeepLinkURL);
+		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
+		jsClickNew(createDeepLinkURL);
+	}
 }

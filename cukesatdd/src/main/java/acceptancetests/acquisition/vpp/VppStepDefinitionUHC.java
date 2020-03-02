@@ -2351,5 +2351,27 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
+	@When("^the user enters Mandatory fields on Connector Model and clik on deeplink navigates to VPP plan summary for UHC$")
+	public void user_enters_Mandatory_fields_on_Connector_Model_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String CountyCode = inputAttributesMap.get("CountyCode");
+		String StateCode = inputAttributesMap.get("StateCode");
+		String WTMCID = inputAttributesMap.get("WTMCID");
+		String OrgSite = inputAttributesMap.get("OrgSite");
+		String Subdomain = inputAttributesMap.get("Subdomain");
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterMandatoryforConnectorModelDeepLink(ZipCode, StateCode, CountyCode, OrgSite, WTMCID, Subdomain);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCounty(CountyName);
+		}
+		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+	}
 	
 } 

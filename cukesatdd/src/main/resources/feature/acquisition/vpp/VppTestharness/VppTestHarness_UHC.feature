@@ -157,4 +157,26 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                            |
       | 00007 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | 00008 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
-      | 00008 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
+      | 00009 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
+
+  @vppTestharnessUHC05
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Connector modal plans Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on Connector Model and clik on deeplink navigates to VPP plan summary for UHC
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | CountyCode      | <countyCode>      |
+      | StateCode       | <stateCode>       |
+      | WTMCID          | <wtmcid>          |
+      | OrgSite         | <orgsite>         |
+      | Subdomain       | <subdomain>       |
+    And the user validates plan summary for the below plan in UMS site
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid  | orgsite                                     | subdomain |
+      | 00010 | vppdeeplink | Blayer   |   10001 | NO              | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 |  897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
+      #| 00011 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kholer    |

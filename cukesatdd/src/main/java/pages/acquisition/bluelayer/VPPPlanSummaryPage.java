@@ -306,6 +306,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 	
+	@FindBy(xpath = "//h3[contains(@class,'acquired-plan ng-binding')]")
+	private WebElement connectorModelPlan;
+
 	@FindBy(xpath = "(//*[contains(@class,'content-secondary plans')]//*[contains(@class,'drug-list')])[1]")
 	private WebElement drugCoveredInfo;
 	
@@ -1932,26 +1935,33 @@ public boolean validateAllPlansChecked() {
 
 	}
 
-    public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
-        boolean isSpecificPlanInfoPresent = false;
-        if (planName.contains("SNP")) {
-            //ElementData elementData = new ElementData("id", "viewDetailsMA");
-        Thread.sleep(5000);
-isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-           // element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
-}
-        else if(planName.contains("HMO")) {
-                        isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
-        }
-        else if (planName.contains("PDP")) {
-            //ElementData elementData = new ElementData("id", "viewDetailsPDP");
-            //element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
- isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
-} 
-        
+	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
+		boolean isSpecificPlanInfoPresent = false;
+		if (planName.contains("SNP")) {
+			// ElementData elementData = new ElementData("id", "viewDetailsMA");
+			Thread.sleep(5000);
+			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
+			// element = getSpecificPlanSummary(findChildElements(elementData,
+			// snpPlanList), planName);
+		} else if (planName.contains("HMO")) {
+			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
+		} else if (planName.contains("PDP")) {
+			// ElementData elementData = new ElementData("id",
+			// "viewDetailsPDP");
+			// element = getSpecificPlanSummary(findChildElements(elementData,
+			// pdpPlanList), planName);
+			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 
-        return isSpecificPlanInfoPresent;
-}
+		} else if (planName.contains("PPO")) {
+			// ElementData elementData = new ElementData("id",
+			// "viewDetailsPDP");
+			// element = getSpecificPlanSummary(findChildElements(elementData,
+			// pdpPlanList), planName);
+			isSpecificPlanInfoPresent = getSpecificPlanSummary(connectorModelPlan, planName);
+		}
+
+		return isSpecificPlanInfoPresent;
+	}
 
 /*private boolean getSpecificPlanSummary(WebElement element, String planName) {
         if (element.getText().contains(planName)) {
