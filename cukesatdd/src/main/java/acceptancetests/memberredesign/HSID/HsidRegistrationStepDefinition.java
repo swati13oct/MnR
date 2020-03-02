@@ -195,7 +195,7 @@ public class HsidRegistrationStepDefinition {
 	public void check_the_terms_and_click_on_create_my_ID_button() throws Throwable {
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
 				(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
-		hsidRegistrationPersonalCreateAccount.clickRememberThisDeviceCheckBox();
+		//hsidRegistrationPersonalCreateAccount.clickRememberThisDeviceCheckBox();
 		hsidRegistrationPersonalCreateAccount.clicktermsOfUseCheckBox();
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformation = 
 										hsidRegistrationPersonalCreateAccount.clickCreateMyIDButton();
