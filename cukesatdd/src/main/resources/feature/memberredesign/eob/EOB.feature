@@ -51,6 +51,7 @@ Feature: 1.04 To Test EOB for Members
     Then the user clicks on first eob from the list to validate pdf
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
+      | Flag Zero EOB User | <flagZeroEob> |
 
     @COSMOS_EOBs
     Examples: 
@@ -122,21 +123,19 @@ Feature: 1.04 To Test EOB for Members
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Claim System | <claimSystem> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Explanation of benefits sub navigation under Claims tab is not displayed
     Then Explanation of benefits deep link is invoked and validate the Page
 
     Examples: 
-      | FID    | planType | memberType              | claimSystem   |
-      | 267688 | SSUP     | EOB_Deeplink_Individual | COSMOS_CLAIMS |
+      | FID    | planType | memberType              |
+      | 267688 | SSUP     | EOB_Deeplink_Individual |
 
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Claim System | <claimSystem> |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Validate Explanation of benefits Page for group SSUP
 
