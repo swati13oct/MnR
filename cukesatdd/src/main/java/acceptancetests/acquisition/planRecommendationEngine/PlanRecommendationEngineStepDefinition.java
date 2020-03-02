@@ -20,7 +20,9 @@ import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.PlanSelectorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
@@ -517,6 +519,46 @@ public class PlanRecommendationEngineStepDefinition {
    		planSelectorPharmacyepage.pharmacypagePreviousButton(inputValues.get("Pharmacy Type"));
    	}
 	
+   	@Then("^user validate elements in additional services page$")
+   	public void elements_additional_page() {
+   		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
+   		planSelectorAdditionalpage.additionalpage();
+   	}
+   	
+	@Then("^user selects additional services option in additional services page$")
+   	public void select_additionalServiceOption_additional_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+   		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
+   		planSelectorAdditionalpage.additionalpageFunctional(inputValues.get("Dental Option"),inputValues.get("Hearing Option"),inputValues.get("Vision Option"),inputValues.get("Fitness Option"));
+   	}
 	
+	@Then("^user validates additional services error function in additional services page$")
+   	public void noselect_additionalServiceOption_additional_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+   		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
+   		planSelectorAdditionalpage.additionalpageerror(inputValues.get("Dental Option"),inputValues.get("Hearing Option"),inputValues.get("Vision Option"),inputValues.get("Fitness Option"));
+   	}
 
+	@Then("^user validate elements in cost preferences page$")
+   	public void elements_costpreferences_page() {
+		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
+   		planSelectorPreferencespage.costpreferencepage();
+   	}
+	
+	@Then("^user selects cost preferences option in cost preferences page$")
+   	public void select_costPreferenceOption_costpreferences_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
+   		planSelectorPreferencespage.costPreferencepageFunctional(inputValues.get("Preference Option"));
+   	}
+	
+	@Then("^user validates cost preferences error function in cost preferences page$")
+	public void noselect_costPreferenceOption_costpreferences_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage = new PlanRecommendationEngineCostPreferencesPage(wd);
+		String preference = inputValues.get("Preference Option");
+		if (preference.isEmpty()) {
+			planSelectorPreferencespage.costPreferencepageerror();
+		}
+	}
 }

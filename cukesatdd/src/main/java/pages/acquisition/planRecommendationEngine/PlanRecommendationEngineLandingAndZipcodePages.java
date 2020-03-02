@@ -172,7 +172,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);
-		validate(countyInfo);
+		validate(countyInfo,30);
 		continueBtn.click();
 		validate(coverageTitle);
 		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
