@@ -616,8 +616,8 @@ public class TestHarness extends UhcDriver {
 	public pages.regression.explanationofbenefits.EOBPage navigateDirectToEOBPag() {
 		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
 			driver.findElement(By.xpath("//a[text()='Eob']")).click();
-
-		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+		} else if (MRScenario.environment.equalsIgnoreCase("stage") 
+				|| MRScenario.environment.contains("team-a")) {
 
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
