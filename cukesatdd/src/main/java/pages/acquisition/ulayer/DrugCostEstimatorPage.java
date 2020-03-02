@@ -1665,7 +1665,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		findPlansButton.click();
 		
 
-		if (validateNew(countyPopup)&& counties.size() > 1) {
+		if (validate(countyPopup)&& counties.size() > 1) {
 			for (WebElement countyElement : counties) {
 				String elementId = countyElement.getAttribute("id");
 				if (elementId.contains(county)) {
