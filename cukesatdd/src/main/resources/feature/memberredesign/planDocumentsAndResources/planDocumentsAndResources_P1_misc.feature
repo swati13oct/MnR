@@ -90,6 +90,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 20-115 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 
 
