@@ -64,6 +64,15 @@ public class VPPTestHarnessPage extends UhcDriver{
 		private WebElement shopForAPlanOptionFindPlanButton;
 
 		
+		@FindBy(xpath="//input[@name='planSummaryZIP']")
+		private WebElement planSummaryZIP;
+		
+		@FindBy(xpath="//button[contains(@ng-click,'plansummary') and not (contains(@ng-click,'email'))]")
+		private WebElement planSummaryCreateButton;
+		
+		@FindBy(xpath="//a[@class='custom_deeplink_anchor' and attribute::href]")
+		private WebElement createDeepLinkURL;
+		
 		public VPPTestHarnessPage(WebDriver driver) {
 			super(driver);
 			PageFactory.initElements(driver, this);
@@ -134,6 +143,16 @@ public class VPPTestHarnessPage extends UhcDriver{
 				return new VPPPlanSummaryPage(driver);
 			}
 			return null;
+		}
+		
+		public void enterZipcodeforPlanSummaryDeepLink(String zipcode){
+			validateNew(planSummaryZIP);
+			sendkeys(planSummaryZIP, zipcode);
+			validateNew(planSummaryCreateButton);
+			jsClickNew(planSummaryCreateButton);
+			validateNew(createDeepLinkURL);
+			System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
+			jsClickNew(createDeepLinkURL);
 		}
 
 
