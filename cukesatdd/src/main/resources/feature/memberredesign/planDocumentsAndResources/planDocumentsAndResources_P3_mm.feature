@@ -1,6 +1,10 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPPlanDocuments |
+
   #------------------------------------------
   @planAndDocuments03 @membershipMaterials 
   Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Membership Materials
@@ -79,6 +83,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+      | 20-117 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 
      

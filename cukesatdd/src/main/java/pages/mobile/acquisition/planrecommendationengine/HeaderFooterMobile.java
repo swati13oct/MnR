@@ -254,7 +254,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	public WebElement footerCallbannerPopupclose;
     
 	// Landing page
-	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	@FindBy(css = "h1[class^='text-display']")
 	private WebElement landingpageHeader;
 	
 	//Shop page

@@ -1115,13 +1115,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				//note: for html or any url that's not pdf related
 				if (planDocValidate(generalPgHeader)) {
 					if (targetDocName.equals("PREVIOUS ISSUE")) { //note: for PREVIOUS ISSUE, do additional check for now until problem is fixed
-						if ((generalPgHeader.getText()).trim().length() >0) {
-							System.out.println("header text is NOT empty or white space fpr doc name="+targetDocName);
-							section_note.add("    PASSED - validated there is header text element on landing page after clicked");
+						//note: header text is //h3 not h1 like others
+						if (planDocValidate(prevIssPgHeader)) {
+							section_note.add("    PASSED - located page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 						} else {
-							System.out.println("header text IS empty or white space for doc name="+targetDocName);
-							section_note.add("    * FAILED - unable to locate page content on the landing page");
-							Assert.assertTrue("DEBUG - unable to locate header text element on landing page after clicked for doc name="+targetDocName, false);
+							section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("DEBUG - unable to locate page content for doc name="+targetDocName, currentIssueImgList.size()>0);
 						}
 					} else {
 						section_note.add("    PASSED - validated there is header text element on landing page after clicked");

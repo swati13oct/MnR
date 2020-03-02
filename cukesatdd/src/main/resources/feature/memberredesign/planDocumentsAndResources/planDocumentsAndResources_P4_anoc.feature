@@ -1,6 +1,10 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes Documents
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPPlanDocuments |
+
   #------------------------------------------
   @planAndDocuments04 @anoc 
   Scenario Outline: index: <index> -TID: <TID> -planType <planType> -memberType <memberType> - To validate the plan documents and resources page content for section: Annual Notice of Changes Documents 
@@ -84,5 +88,6 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
     Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 19-076 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 20-118 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 

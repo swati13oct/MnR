@@ -26,6 +26,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -917,8 +919,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
                             CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
                             sleepBySec(2);
-							jsClickNew(maPlansViewLink);
-                           // maPlansViewLink.click();
+//							jsClickNew(maPlansViewLink);
+                           maPlansViewLink.click();
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MS")) {
             			driver.navigate().refresh();
@@ -2794,7 +2796,7 @@ public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 	for (String plan: listOfTestPlans) {
 		System.out.println("Proceed to locate plan="+plan);
 
-		String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+		String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 		System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 		List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 		int expMatch=1;
@@ -2927,7 +2929,9 @@ public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, Stri
 		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 	}
-	sleepBySec(3);
+	sleepBySec(5);
+	WebDriverWait d=new WebDriverWait(driver, 60);
+	d.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")));
 	if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
 		return new VPPPlanSummaryPage(driver);
 	}
@@ -2969,7 +2973,7 @@ public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
 	String unsavePlan=listOfTestPlans.get(0);
 	System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
 
-	String testPlanXpath="//*[contains(text(),'"+unsavePlan+"')]";
+	String testPlanXpath="//*[contains(text(),'"+unsavePlan+"') and contains(@class,'ng-binding')]";
 	List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 	int expMatch=1;
 	Assert.assertTrue("PROBLEM - unable to locate plan='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
@@ -3460,6 +3464,9 @@ catch (Exception e) {
 	public void CheckClick_NextYear_Plans() {
 
 		try {
+//			WebDriverWait d=new WebDriverWait(driver, 60);
+//			d.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[contains(@for, 'next_Year')]")));
+			sleepBySec(10);
 			WebElement NextYearRadio = driver.findElement(By.xpath("//label[contains(@for, 'next_Year')]"));
 			WebElement SelectYearGoBtn = driver.findElement(By.xpath("//*[contains(@id, 'GoBtnText')]"));
 			System.out.println("AEP Year Toggle link is displayed on VPP Page : "+NextYearRadio.getText());
