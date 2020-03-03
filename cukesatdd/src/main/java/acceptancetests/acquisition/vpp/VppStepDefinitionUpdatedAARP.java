@@ -20,6 +20,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
@@ -2464,6 +2465,30 @@ public class VppStepDefinitionUpdatedAARP {
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
 	}
+	
+	@When("^the user enters Mandatory fields on plan compare deeplink and clik on deeplink navigates to VPP plan Compare for AARP$")
+	public void user_enters_Mandatory_fields_on_plan_compare_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_AARP(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String ExpiryDate = inputAttributesMap.get("Expiry Date");
+		String ContractPBP = inputAttributesMap.get("ContractPBP");
+		String PlanYear = inputAttributesMap.get("Plan Year");
+		String PlanType = inputAttributesMap.get("Plan Type");
+		String fisCountyCode = inputAttributesMap.get("fisCountyCode");
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanCompareDeepLink(ZipCode, ContractPBP, ExpiryDate, PlanType, PlanYear, fisCountyCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCounty(CountyName);
+		}
+		ComparePlansPage planComparePage = vppTestHarnessPage.navigateToPlanCompare();
+		if(planComparePage!=null){
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+	}
+	
 	
 	
 	

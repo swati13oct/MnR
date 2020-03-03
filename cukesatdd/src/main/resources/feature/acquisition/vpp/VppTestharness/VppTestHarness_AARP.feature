@@ -183,5 +183,44 @@ Feature: VPP Testharness flow Navigations for AARP Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | deeplink         | Year |
       | 00012 | vppdeeplink | Ulayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
-      | 00013 | vppdeeplink | Ulayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | favPlansDeepLink | 2020 |
-      | 00014 | vppdeeplink | Ulayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+      | 00013 | vppdeeplink | Ulayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+
+  @vppTestharnessAARP07
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on plan summary email deeplink and clik on deeplink navigates to VPP plan summary for AARP
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Deeplink        | <deeplink>        |
+      | Plan Type       | <plantype>        |
+      | Year            | <year>            |
+    And the user validates plan summary for the below plan in AARP site
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county       | plantype | planName                        | deeplink         | Year |
+      | 00014 | vppdeeplink | Ulayer   |   78006 | YES             | Bexar County | PDP      | AARP MedicareRx Walgreens (PDP) | favPlansDeepLink | 2020 |
+
+  @vppTestharnessAARP08
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Compare Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on plan compare deeplink and clik on deeplink navigates to VPP plan Compare for AARP
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Expiry Date     | <expDate>         |
+      | ContractPBP     | <hnpbpb>          |
+      | Plan Type       | <plantype>        |
+      | Plan Year       | <year>            |
+      | fisCountyCode   | <ficcode>         |
+    Then verify plan compare page is loaded on AARP
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | expDate       | hnpbpb                              | year | ficcode |
+      | 00015 | vppdeeplink | Ulayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 1590058773320 | H0543168000,H0543001000             | 2020 |     037 |
+      | 00016 | vppdeeplink | Ulayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | 1590058773320 | S5921403000,S5820021000,S5921367000 | 2020 |     029 |

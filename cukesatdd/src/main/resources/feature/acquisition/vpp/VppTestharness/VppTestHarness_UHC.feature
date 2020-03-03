@@ -201,5 +201,44 @@ Feature: VPP Testharness flow Navigations for UHC Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | deeplink         | Year |
       | 00012 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
-      | 00013 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | favPlansDeepLink | 2020 |
-      | 00014 | vppdeeplink | Blayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+      | 00013 | vppdeeplink | Blayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+
+  @vppTestharnessUHC07
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on plan summary email deeplink and clik on deeplink navigates to VPP plan summary for UHC
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Deeplink        | <deeplink>        |
+      | Plan Type       | <plantype>        |
+      | Year            | <year>            |
+    And the user validates plan summary for the below plan in UMS site
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county       | plantype | planName                        | deeplink         | Year |
+      | 00014 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County | PDP      | AARP MedicareRx Walgreens (PDP) | favPlansDeepLink | 2020 |
+
+  @vppTestharnessUHC08
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Compare Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on plan compare deeplink and clik on deeplink navigates to VPP plan Compare for UHC
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Expiry Date     | <expDate>         |
+      | ContractPBP     | <hnpbpb>          |
+      | Plan Type       | <plantype>        |
+      | Plan Year       | <year>            |
+      | fisCountyCode   | <ficcode>         |
+    Then verify plan compare page is loaded on UHC
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | expDate       | hnpbpb                              | year | ficcode |
+      | 00015 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 1590058773320 | H0543168000,H0543001000             | 2020 |     037 |
+      | 00016 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | 1590058773320 | S5921403000,S5820021000,S5921367000 | 2020 |     029 |

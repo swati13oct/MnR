@@ -2397,4 +2397,27 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
+	@When("^the user enters Mandatory fields on plan compare deeplink and clik on deeplink navigates to VPP plan Compare for UHC$")
+	public void user_enters_Mandatory_fields_on_plan_compare_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String ExpiryDate = inputAttributesMap.get("Expiry Date");
+		String ContractPBP = inputAttributesMap.get("ContractPBP");
+		String PlanYear = inputAttributesMap.get("Plan Year");
+		String PlanType = inputAttributesMap.get("Plan Type");
+		String fisCountyCode = inputAttributesMap.get("fisCountyCode");
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanCompareDeepLink(ZipCode, ContractPBP, ExpiryDate, PlanType, PlanYear, fisCountyCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCounty(CountyName);
+		}
+		ComparePlansPageBlayer planComparePage = vppTestHarnessPage.navigateToPlanCompare();
+		if(planComparePage!=null){
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+	}
+	
 } 

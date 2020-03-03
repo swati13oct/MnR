@@ -170,6 +170,9 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@ng-click,'plandetails')]")
 	private WebElement planDetailsCreateButton;
+	
+	@FindBy(id = "backtoplansummarypage")
+	private WebElement backToAllPlansLink;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -284,18 +287,14 @@ public class VPPTestHarnessPage extends UhcDriver {
 	}
 
 	public void enterEmailPlanCompareDeepLink(String zipcode, String Plans, String ExpDate, String product,
-			String PlanYear, String WTmcid, String fiscountyCode, String mrcid) {
+			String PlanYear, String fiscountyCode) {
 		validateNew(planCompZIPcode);
 		sendkeys(planCompZIPcode, zipcode);
 		sendkeys(planCompPlans, Plans);
 		sendkeys(planCompPlanYear, PlanYear);
 		sendkeys(planCompFisCounty, fiscountyCode);
-
 		sendkeys(planCompexpirydate, ExpDate);
 		sendkeys(planCompProduct, product);
-		sendkeys(planCompWtmcid, WTmcid);
-		sendkeys(planCompMcrid, mrcid);
-
 		validateNew(planCompCreateButton);
 		jsClickNew(planCompCreateButton);
 
@@ -326,6 +325,20 @@ public class VPPTestHarnessPage extends UhcDriver {
 		validateNew(createDeepLinkURL);
 		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
 		jsClickNew(createDeepLinkURL);
+	}
+
+	
+	
+public ComparePlansPageBlayer navigateToPlanCompare(){
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			validate(backToAllPlansLink);
+			return new ComparePlansPageBlayer(driver);
 	}
 
 }
