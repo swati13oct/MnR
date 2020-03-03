@@ -349,16 +349,11 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Job started*******");
 		Connection con = null;
 		String env = props.get(CommonConstants.HSID_ENV);
-		System.out.println("env is -"+env);
 		String user = props.get(CommonConstants.HSIDDB_USERNAME);
-		System.out.println("user is -"+user);
 		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
-		System.out.println("pwd is -"+pwd);
 		String url = props.get(CommonConstants.HSIDDB_URL);
-		System.out.println("url is -"+url);
 		
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
@@ -551,6 +546,7 @@ System.out.println("Con established*********");
 			System.out.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
+		}
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
 			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
@@ -572,39 +568,10 @@ System.out.println("Con established*********");
 				domain = null;
 			}
 			return props;
-		} else {
-			if (environment.equals("stage") || environment.equals("offline-stage")) {
-				domain = "uhc.com";
-			// Read properties from classpath
-			StringBuffer propertyFilePath = new StringBuffer(
-					CommonConstants.PROPERTY_FILE_FOLDER);
-			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-			.append(CommonConstants.PROPERTY_FILE_NAME);
-			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
-					.toString());
-			try {
-				prop.load(is);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			for (String key : prop.stringPropertyNames()) {
-				String value = prop.getProperty(key);
-				props.put(key, value);
-			}
-			return props;
-			}
-			else if (environment.equals("team-atest") || environment.equals("team-e") || environment.equals("team-t")
-					|| environment.equals("team-v1") || environment.contains("digital-uat"))
-				domain = "ocp-elr-core-nonprod.optum.com";
-			else
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
-			System.out.println("env chosen is: " + environment);
-			System.out.println("domain chosen is: " + domain);
+		} 
+		
 
-			return null;
-		}
 
-	}
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		formCompositeDesiredAttributes(desiredAttributes);

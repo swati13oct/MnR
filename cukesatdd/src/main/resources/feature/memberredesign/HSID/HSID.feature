@@ -4,7 +4,7 @@ Feature: To test HSID registration flow
  
    @hsid1 @US968241 @hsidregistration @regressionMember12
    Scenario Outline:Verify HSID registration.
-        Given the user connect to DB
+       Given the user connect to DB
      And the user select record from database
        | Firstname  | <firstname>  |
        | Lastname   | <lastname>   |
@@ -19,7 +19,6 @@ Feature: To test HSID registration flow
        | Lastname   | <lastname>   |
     #And the user deregister from M&R LDAP
        #| Username  | <userName>  |
-   
     And the user is on medicare sign in page
     When the user clicks on Register now link
     And HSID registration page is displayed with all the fields

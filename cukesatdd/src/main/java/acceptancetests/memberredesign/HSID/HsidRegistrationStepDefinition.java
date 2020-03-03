@@ -264,6 +264,7 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^user should see a latest unread mail recieved in provided email address$")
 	public void user_should_see_a_latest_unread_mail_recieved_in_provided_email_address() throws Throwable {
+		System.out.println("*****user should see a latest unread mail recieved in provided email address*****");
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		String[] mailParts = hsidRegistrationConfirmInformationPage.getConfirmRegistrationURLWithSubjectandEmailContent();
