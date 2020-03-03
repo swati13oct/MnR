@@ -223,6 +223,19 @@ public class EobStepDefinition {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateHeaderSectionContent(planType);
 	}
+	
+	@Then("^the user validates the eob page content for SSP$")
+	public void validate_sspContent() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateSspContent();
+	}
+
+	@Then("^the user validates the eob page content for PHIP$")
+	public void validate_phipContent() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validatePhipContent();
+	}
+	
 	@Then("^the user validates Need Help section$")
 	public void validateNeedHelpSection() throws InterruptedException{ 
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);

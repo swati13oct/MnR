@@ -67,6 +67,8 @@ Feature: 1.04 To Test EOB for Members
       | MAPD     | NICE_EOB_R        | Medical           | true        |      
       | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
 
+    #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
+    #note: adobe links won't come up till very very late
     @Rx_EOBs
     Examples: 
       | planType | memberType        | eobType           | flagZeroEob | 
@@ -123,8 +125,7 @@ Feature: 1.04 To Test EOB for Members
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to EOB page
-    Then the user validates the header section content
-    And the user gets the error message for PHIP member
+    Then the user validates the eob page content for PHIP
 
     @SHIP_EOBs
     Examples: 
@@ -154,6 +155,7 @@ Feature: 1.04 To Test EOB for Members
       | Member Type  | <memberType>  |
     When I navigate to the claims Summary page from dashboard or testharness page
     Then Validate Explanation of benefits Page for group SSUP
+    Then the user validates the eob page content for SSP
 
     @SHIP_EOBs
     Examples: 

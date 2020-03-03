@@ -42,6 +42,28 @@ public class EOBPage extends EOBBase{
 
 	}
 	
+	public void validateSspContent() {
+		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
+		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for SSP user", eobValidate(sspError));
+		String expText="EOBs for your plan are currently not available on this site. We apologize for the inconvenience.";
+		String actText=sspError.getText();
+		Assert.assertTrue("PROBLEM - unable to locate the expected error message for SSP user.  "
+				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
+	}
+	
+	public void validatePhipContent() {
+		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
+		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
+		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for PHIP user", eobValidate(phipError));
+		String expText="You can view your AARP Personal Health Insurance Plan Explanation of Benefits information by logging in to myuhc.com";
+		String actText=phipError.getText();
+		Assert.assertTrue("PROBLEM - unable to locate the expected error message for PHIP user.  "
+				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
+	}
+	
 	public void validateHeaderSectionContent(String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
@@ -420,7 +442,7 @@ public class EOBPage extends EOBBase{
 		if (eobType.equals("Prescription Drug") && memberType.contains("GROUP")) {
 			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type 'Prescription Drug''", eobValidate(optumRxLnk));
 		} else {
-			if (!planType.equals("SHIP") && !planType.equals("PDP")) {
+			if (!planType.equals("SHIP") && !planType.equals("PDP") && !eobType.equals("Prescription Drug")) {
 				Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 			}
 			Assert.assertTrue("PROBLEM - should not be able to locate OPTUMRX.COM link on EOB page for EOB Type 'MEDICAL'", !eobValidate(optumRxLnk));
@@ -495,8 +517,15 @@ public class EOBPage extends EOBBase{
 				}
 				System.out.println("user clicks on next page arrow button");
 				Assert.assertTrue("PROBLEM - unable to locate the active next page arrow", eobValidate(nextPageArrow));
+				Assert.assertTrue("PROBLEM - unable to locate the disabled prev page arrow", eobValidate(prevPageArrow_disabled));
 				nextPageArrow.click();
 				sleepBySec(1);
+				CommonUtility.checkPageIsReady(driver);
+				Assert.assertTrue("PROBLEM - unable to locate the enabled prev page arrow after clicking next page arrow", eobValidate(prevPageArrow_enabled));
+				prevPageArrow_enabled.click();
+				sleepBySec(1);
+				CommonUtility.checkPageIsReady(driver);
+				Assert.assertTrue("PROBLEM - unable to locate the disabled prev page arrow after clicking prev page arrow", eobValidate(prevPageArrow_disabled));
 				break;
 			} 
 		}

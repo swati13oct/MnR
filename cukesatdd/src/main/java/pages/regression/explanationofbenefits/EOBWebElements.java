@@ -84,6 +84,12 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(className="rightarrow")
 	protected WebElement nextPageArrow;
 
+	@FindBy(xpath="//li[contains(@class,'disabled')]//i[contains(@class,'leftarrow')]")
+	protected WebElement prevPageArrow_disabled;
+
+	@FindBy(xpath="//li[not(contains(@class,'disabled'))]//i[contains(@class,'leftarrow')]")
+	protected WebElement prevPageArrow_enabled;
+
 	@FindBy(id="eoblist0")
 	protected WebElement eobFirst;
 
@@ -280,6 +286,13 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSP;
+	
+	@FindBy(xpath="//div[contain(@ng-show,'SSP') and not(contains(@class,'ng-hide'))]//p[@cass='color-red']")
+	protected WebElement sspError;
+	
+	@FindBy(xpath="//div[contain(@ng-show,'PHIP') and not(contains(@class,'ng-hide'))]//p[@cass='color-red']")
+	protected WebElement phipError;
+	
 
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
