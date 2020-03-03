@@ -2,7 +2,7 @@
 Feature: 1.04 To Test EOB for Members
 
   @eob01 @E2E @regressionMember 
-  Scenario Outline: -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -55,31 +55,32 @@ Feature: 1.04 To Test EOB for Members
 
     @COSMOS_EOBs
     Examples: 
-      | planType | memberType        | eobType           | flagZeroEob |
-      | MAPD     | COSMOS_EOB_R      | Medical           | true        |
-      | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
-      | MA       | COSMOS_EOB_R      | Medical           | true        |
-     # | SSP      | PDP_SSP_COMBO_EOB | Medical           | true        |
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
+      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
+      | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
+     # | 04    | SSP      | PDP_SSP_COMBO_EOB | Medical           | true        |
 
     @NICE_EOBs
     Examples: 
-      | planType | memberType        | eobType           | flagZeroEob |
-      | MAPD     | NICE_EOB_R        | Medical           | true        |      
-      | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 05    | MA       | NICE_EOB_R        | Medical           | true        |      
+      | 06    | MAPD     | NICE_EOB_R        | Medical           | true        |      
+      | 07    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
 
     #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
     #note: adobe links won't come up till very very late
     @Rx_EOBs
     Examples: 
-      | planType | memberType        | eobType           | flagZeroEob | 
-      | PDP      | Rx_EOB            | Prescription Drug | true        |
-      | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
-      | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
-      | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
+      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | 08    | PDP      | Rx_EOB            | Prescription Drug | true        |
+      | 09    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
+      | 10    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
+      | 11    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
 
   @eob02 @regressionMember
-  Scenario Outline: -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -115,12 +116,12 @@ Feature: 1.04 To Test EOB for Members
 
     @SHIP_EOBs
     Examples: 
-      | planType | memberType         | eobType | flagZeroEob |
-      | SHIP     | SHIP_EOB           | Medical | true        | 
-      | SHIP     | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | index | planType | memberType         | eobType | flagZeroEob |
+      | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
+      | 13    | SHIP     | PDP_SHIP_COMBO_EOB | Medical | false       |
 
   @eob02 @regression_06_06_18FnF @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
+  Scenario Outline: -index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -129,14 +130,14 @@ Feature: 1.04 To Test EOB for Members
 
     @SHIP_EOBs
     Examples: 
-      | TID   | planType | memberType |
-      | 15174 | PHIP     | SHIP_EOB   |
+      | index | TID   | planType | memberType |
+      | 14    | 15174 | PHIP     | SHIP_EOB   |
   
 
 
   #note: pending coverage until SSUP individual user is available
   @eob03 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP member accessing EOB page via top menu sub link
+  Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP member accessing EOB page via top menu sub link
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -145,11 +146,11 @@ Feature: 1.04 To Test EOB for Members
     Then Explanation of benefits deep link is invoked and validate the Page
 
     Examples: 
-      | FID    | planType | memberType              |
-      | 267688 | SSUP     | EOB_Deeplink_Individual |
+      | index | FID    | planType | memberType              |
+      | 15    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
+  Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -159,8 +160,8 @@ Feature: 1.04 To Test EOB for Members
 
     @SHIP_EOBs
     Examples: 
-      | FID    | planType | memberType | 
-      | 267688 | SSUP     | GROUP_EOB  | 
+      | index | FID    | planType | memberType | 
+      | 16    | 267688 | SSUP     | GROUP_EOB  | 
 
 
   ######################   KEEP FOR NOW EOB Regression ###############################

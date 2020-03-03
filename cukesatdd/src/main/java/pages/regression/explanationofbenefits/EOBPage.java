@@ -439,13 +439,10 @@ public class EOBPage extends EOBBase{
 	
 	public void validateTextElements(String planType, String memberType, String eobType) {
 		Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
-		if (eobType.equals("Prescription Drug") && memberType.contains("GROUP")) {
-			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type 'Prescription Drug''", eobValidate(optumRxLnk));
+		if (eobType.equals("Prescription Drug")) {
+			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type '"+eobType+"''", eobValidate(optumRxLnk));
 		} else {
-			if (!planType.equals("SHIP") && !planType.equals("PDP") && !eobType.equals("Prescription Drug")) {
-				Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
-			}
-			Assert.assertTrue("PROBLEM - should not be able to locate OPTUMRX.COM link on EOB page for EOB Type 'MEDICAL'", !eobValidate(optumRxLnk));
+			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 		}
 	}
 	

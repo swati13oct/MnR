@@ -106,6 +106,9 @@ public class EobStepDefinition {
 		if (searchNote==null) {
 			searchNote=new ArrayList<String>();
 			searchNote.add("----- TEST NOTE ------------------------------");
+			String tmp=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+			searchNote.add("EOB TYPE="+tmp);
+
 		}
 		searchNote.add("Date range='"+dateRange+"' has EOB count="+searchResultMap.get(dateRange));
 		getLoginScenario().saveBean(EobCommonConstants.TEST_RESULT_NOTE,searchNote);
@@ -291,6 +294,7 @@ public class EobStepDefinition {
 		} else {
 			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
 		}
+
 	}
 
 	@And("^the user clicks on first eob from the list to validate pdf$") //keep
@@ -414,6 +418,7 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.selectDateRange(dateRange);
+
 	}
 
 
