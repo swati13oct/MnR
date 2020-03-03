@@ -177,10 +177,10 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid | orgsite                                     | subdomain |
-      | 00010 | vppdeeplink | Blayer   |   10001 | NO              | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 | 897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid  | orgsite                                     | subdomain |
+      | 00010 | vppdeeplink | Blayer   |   10001 | NO              | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 |  897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
       | 00011 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
-  
+
   @vppTestharnessUHC06
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
@@ -193,13 +193,13 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | Deeplink        | <deeplink>        |
       | Plan Type       | <plantype>        |
       | Year            | <year>            |
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
     And the user validates plan summary for the below plan in UMS site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | Deeplink         | Plan Type | Year |
-      | 00012 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | MA        | 2020 |
-      | 00013 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | favPlansDeepLink | MA        | 2020 |
-      | 00014 | vppdeeplink | Blayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | MA        | 2020 |
-
-  
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | deeplink         | Year |
+      | 00012 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
+      | 00013 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | favPlansDeepLink | 2020 |
+      | 00014 | vppdeeplink | Blayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |

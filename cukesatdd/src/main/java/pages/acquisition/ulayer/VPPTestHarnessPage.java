@@ -234,7 +234,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 	}
 
 	public void enterEmailPlanSummaryDeepLink(String zipcode, String DeepLink, String PlanType, String PlayYear) {
-		validateNew(planSummaryZIP);
+		validateNew(planSummZipCode);
 		sendkeys(planSummZipCode, zipcode);
 		sendkeys(planSummDeepLink, DeepLink);
 		sendkeys(planSummPlanType, PlanType);
