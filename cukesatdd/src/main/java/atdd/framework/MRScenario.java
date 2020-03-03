@@ -349,15 +349,20 @@ public class MRScenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("Job started*******");
 		Connection con = null;
 		String env = props.get(CommonConstants.HSID_ENV);
+		System.out.println("env is -"+env);
 		String user = props.get(CommonConstants.HSIDDB_USERNAME);
+		System.out.println("user is -"+user);
 		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
+		System.out.println("pwd is -"+pwd);
 		String url = props.get(CommonConstants.HSIDDB_URL);
+		System.out.println("url is -"+url);
+		
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
-
+System.out.println("Con established*********");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
