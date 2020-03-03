@@ -573,8 +573,26 @@ System.out.println("Con established*********");
 			}
 			return props;
 		} else {
-			if (environment.equals("stage") || environment.equals("offline-stage"))
+			if (environment.equals("stage") || environment.equals("offline-stage")) {
 				domain = "uhc.com";
+			// Read properties from classpath
+			StringBuffer propertyFilePath = new StringBuffer(
+					CommonConstants.PROPERTY_FILE_FOLDER);
+			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+			.append(CommonConstants.PROPERTY_FILE_NAME);
+			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+					.toString());
+			try {
+				prop.load(is);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			for (String key : prop.stringPropertyNames()) {
+				String value = prop.getProperty(key);
+				props.put(key, value);
+			}
+			return props;
+			}
 			else if (environment.equals("team-atest") || environment.equals("team-e") || environment.equals("team-t")
 					|| environment.equals("team-v1") || environment.contains("digital-uat"))
 				domain = "ocp-elr-core-nonprod.optum.com";
