@@ -51,7 +51,7 @@ Feature: To test HSID registration flow
   #Then user should see a latest unread mail recieved  in mail server
    Examples:
    | planType|  memberType  | copayCategory | firstname | lastname    |   dob 	         | memberid 	  | zipcode  | userName 	        | password   |   email	  			          | question1 | question2 | question3 |
-      | MAPD    |  Individual  |  NON LIS      | KIL   | GONZALIS        | 08/31/1950      | 016792516-1  | 11420	 | q1_feb_uhc04290       | Password@1 | codetransformertesting@gmail.com     | number1   | name1     | color1    |
+   | MAPD    |  Individual  |  NON LIS      | KIL   | GONZALIS        | 08/31/1950      | 016792516-1  | 11420	 | q1_feb_uhc04290       | Password@1 | codetransformertesting@gmail.com     | number1   | name1     | color1    |
      
    
 

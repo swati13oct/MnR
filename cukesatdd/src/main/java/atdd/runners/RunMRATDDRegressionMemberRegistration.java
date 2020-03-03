@@ -20,6 +20,6 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionR
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/HSID" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRegistration.json" }, tags = { "@regressionMember12" })
-public class RunMRATDDRegressionRegistration {
+public class RunMRATDDRegressionMemberRegistration {
 
 }
