@@ -42,7 +42,7 @@ public class DeregisterPage extends UhcDriver {
     public DeregisterPage(WebDriver driver) {
 	super(driver);
 	PageFactory.initElements(driver, this);
-	openAndValidate();
+	//openAndValidate();
     }
 
     /**
