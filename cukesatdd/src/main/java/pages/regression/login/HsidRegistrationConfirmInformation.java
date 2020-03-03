@@ -64,8 +64,8 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	public  String[] getConfirmRegistrationURLWithSubjectandEmailContent()
 			throws MessagingException, IOException, InterruptedException {
 
-		String username = "codetransformers@gmail.com";
-        String pwd = "CodeTransformers@1";
+		String username = "codetransformertesting@gmail.com";
+        String pwd = "codetransformer@1";
         
         Thread.sleep(44000);
 	
@@ -73,6 +73,7 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		props.setProperty("mail.store.protocol", "imaps");
 		Session session = Session.getDefaultInstance(props, null);
 		Store store = session.getStore("imaps");
+		System.out.println("The value of the store element is --"+store);
 		store.connect("imap.gmail.com", username, pwd);
 		Folder inbox = store.getFolder("Inbox");
 
@@ -148,8 +149,8 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 	public  void getregistrationflowcompleteemail()
 			throws MessagingException, IOException, InterruptedException {
 
-		String username = "codetransformers@gmail.com";
-        String pwd = "CodeTransformers@1";
+		String username = "codetransformertesting@gmail.com";
+        String pwd = "codetransformer@1";
         
         Thread.sleep(44000);
 	
