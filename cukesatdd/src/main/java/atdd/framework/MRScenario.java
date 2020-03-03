@@ -961,7 +961,16 @@ System.out.println("Con established*********");
 
 			webDriver.get("google.com");
 
-			return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				//chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				//System.setProperty("webdriver.chrome.driver", pathToBinary);
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_79.0.3945.16\\chromedriver.exe");
+				webDriver = new ChromeDriver();
+				saveBean(CommonConstants.WEBDRIVER, webDriver);
+				return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1109,6 +1118,8 @@ System.out.println("Con established*********");
 		String findDeviceName = "iPhone X"; // Default device
 		String mobileOSName;
 		mobileDeviceName = System.getenv("DEVICE_NAME");
+		if(mobileDeviceName==null)
+			mobileDeviceName =props.get("SaucslabDeviceName");
 		String deviceName = mobileDeviceName.toUpperCase().trim();
 		System.out.println("Given device : " + deviceName);
 		isSauceLabSelected = true;

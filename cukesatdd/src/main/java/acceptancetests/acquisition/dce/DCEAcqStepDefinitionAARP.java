@@ -341,9 +341,17 @@ public class DCEAcqStepDefinitionAARP {
 	@Then("^user enters zipcode on step3 and validate plan summary page$")
 	public void user_enters_zipcode_on_step3_and_validate_plan_summary_aarp(DataTable data){
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String zip = memberAttributesRow.get(0).getCells().get(1);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String zip = givenAttributesMap.get("Zipcode");
+		String county = givenAttributesMap.get("County");
 		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		VPPPlanSummaryPage vppPlanSummaryPage= dcePage.enterZipcodeAndNavigateToPlanSummary(zip);
+		VPPPlanSummaryPage vppPlanSummaryPage= dcePage.validateMultiCountyPopup(zip,county);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 	}
 	
