@@ -21,6 +21,8 @@ import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobile
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -320,6 +322,45 @@ public class PlanRecommendationStepDefinitionMobile {
 		String status = "Negative";
 		pharmacypage.pharmacyFunctional(inputValues.get("Pharmacy Selection"),status);	
 	}
+	
+	@Then("^user validate elements in additional services page mobile$")
+   	public void elements_additional_page() {
+   		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
+   		additionalpage.additionalpage();
+   	}
+   	
+	@Then("^user selects additional services option in additional services page mobile$")
+   	public void select_additionalServiceOption_additional_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+   		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
+   		additionalpage.additionalpageFunctional(inputValues.get("Additional Option"));
+   	}
+	
+	@Then("^user validates additional services error function in additional services page mobile$")
+   	public void select_additional_page_errorvalidation(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+   		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
+   		additionalpage.additionalpageerror(inputValues.get("Additional Option"));
+   	}
+
+	@Then("^user validate elements in cost preferences page mobile$")
+   	public void elements_costpreferences_page() {
+		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
+   		costpage.costpreferencepage();
+   	}
+	
+	@Then("^user selects cost preferences option in cost preferences page mobile$")
+   	public void select_costPreferenceOption_costpreferences_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
+   		costpage.costPreferencepageFunctional(inputValues.get("Preference Option"));
+   	}
+	
+	@Then("^user validates cost preferences error function in cost preferences page mobile$")
+   	public void select_costpreferences_page_errorvalidation() {
+		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
+   		costpage.costPreferencepageerror();
+   	}
 	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());

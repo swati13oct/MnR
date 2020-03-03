@@ -529,14 +529,14 @@ public class PlanRecommendationEngineStepDefinition {
    	public void select_additionalServiceOption_additional_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
-   		planSelectorAdditionalpage.additionalpageFunctional(inputValues.get("Dental Option"),inputValues.get("Hearing Option"),inputValues.get("Vision Option"),inputValues.get("Fitness Option"));
+   		planSelectorAdditionalpage.additionalpageFunctional(inputValues.get("Additional Option"));
    	}
 	
 	@Then("^user validates additional services error function in additional services page$")
    	public void noselect_additionalServiceOption_additional_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
-   		planSelectorAdditionalpage.additionalpageerror(inputValues.get("Dental Option"),inputValues.get("Hearing Option"),inputValues.get("Vision Option"),inputValues.get("Fitness Option"));
+   		planSelectorAdditionalpage.additionalpageerror(inputValues.get("Additional Option"));
    	}
 
 	@Then("^user validate elements in cost preferences page$")

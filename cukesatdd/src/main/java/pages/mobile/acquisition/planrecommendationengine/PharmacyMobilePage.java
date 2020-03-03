@@ -3,18 +3,10 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
@@ -91,7 +83,6 @@ public class PharmacyMobilePage extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
 	private WebElement pharmacyRetailOption;
 
-	
 	// Drugs Page Element Verification Method
 	public void pharmacypageElements() {
 		System.out.println("Pharmacy Validating Page: ");
@@ -119,8 +110,6 @@ public class PharmacyMobilePage extends UhcDriver {
 		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 	
-	
-
 	public void chooseOption(String pharamacySelection) {
 		if (!(pharamacySelection.isEmpty())) {
 			if (pharamacySelection.equalsIgnoreCase("Online")) {
@@ -143,6 +132,4 @@ public class PharmacyMobilePage extends UhcDriver {
 		//mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 	
-	
-
 }

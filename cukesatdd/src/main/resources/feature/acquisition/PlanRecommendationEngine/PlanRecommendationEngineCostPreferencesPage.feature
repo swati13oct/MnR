@@ -24,15 +24,12 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     And user selects pharmacy option in pharmacy page
       | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
-      | Dental Option  | <dentalOption>  |
-      | Hearing Option | <hearingOption> |
-      | Vision Option  | <visionOption>  |
-      | Fitness Option | <fitnessOption> |
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validate elements in cost preferences page
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | dentalOption | hearingOption | visionOption | fitnessOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes          | No            | Yes          | Yes           |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness |
+      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  |
 
   @PRE @planrecommendation @costpreferencespage @costpreferencespageselection @regression @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
@@ -57,16 +54,13 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     And user selects pharmacy option in pharmacy page
       | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
-      | Dental Option  | <dentalOption>  |
-      | Hearing Option | <hearingOption> |
-      | Vision Option  | <visionOption>  |
-      | Fitness Option | <fitnessOption> |
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | dentalOption | hearingOption | visionOption | fitnessOption | costPreferenceOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes          | No            | Yes          | Yes           | Higher               |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @costpreferencespage @costpreferenceserror @regression @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
@@ -91,13 +85,10 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     And user selects pharmacy option in pharmacy page
       | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
-      | Dental Option  | <dentalOption>  |
-      | Hearing Option | <hearingOption> |
-      | Vision Option  | <visionOption>  |
-      | Fitness Option | <fitnessOption> |
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validates cost preferences error function in cost preferences page
       | Preference Option | <costPreferenceOption> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | dentalOption | hearingOption | visionOption | fitnessOption | costPreferenceOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes          | No            | Yes          | Yes           |                      |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  |                      |

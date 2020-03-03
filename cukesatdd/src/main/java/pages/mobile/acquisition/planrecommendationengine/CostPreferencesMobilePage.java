@@ -1,7 +1,7 @@
 /**
 * 
  */
-package pages.acquisition.planRecommendationEngine;
+package pages.mobile.acquisition.planrecommendationengine;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +12,9 @@ import org.testng.Assert;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 
-public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
+public class CostPreferencesMobilePage extends UhcDriver {
 
-	public PlanRecommendationEngineCostPreferencesPage(WebDriver driver) {
+	public CostPreferencesMobilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -28,50 +28,58 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 
 	String page = "Cost";
 
-	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
-
+	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
 
-// Cost Preferences page Elements
+	// --- From here Common for all page starts ---
+		@FindBy(css = ".progress-bar-title>h1")
+		private WebElement planSelectorPageTilte;
 
-	@FindBy(xpath = "//*[@class='progress-bar-title']/h1")
-	private WebElement planSelectorPageTilte;
+		@FindBy(css = ".progress-bar-info>h2")
+		private WebElement pageStepsNumberName;
 
-	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
-	private WebElement pageStepsNumberName;
+		@FindBy(css = "div.progress-bar-value-background")
+		private WebElement progressbar;
 
-	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
-	private WebElement pageProgressPercentage;
+		@FindBy(css = "div.progress-bar-info>p")
+		private WebElement pageProgressPercentage;
 
-	@FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(2)")
-	private WebElement pharmacyTitle;
+		@FindBy(css = "div>.all-fields-marked-wi")
+		private WebElement pageRequiredInfo;
 
-	@FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(3)")
-	private WebElement pharmacyTitleInfo;
+		@FindBy(css = ".all-fields-marked-wi>sup")
+		private WebElement pageRequiredInfoAsteriskMark;
 
-	@FindBy(xpath = "//button[contains(text(),'Continue')]")
-	private WebElement continueBtn;
+		@FindBy(css = "div.sam")
+		public WebElement footerCallbannerSection;
 
-	@FindBy(xpath = "//button[contains(text(),'Previous')]")
-	private WebElement previousBtn;
+		@FindBy(css = "#errorMessage")
+		private WebElement errorMessage;
 
-	// --- Common elements Ends above ---
+		@FindBy(css = ".container div>button[class*='primary button']")
+		private WebElement continueBtn;
 
-	@FindBy(css = "p.all-fields-marked-wi")
-	private WebElement pageRequiredInfo;
+		@FindBy(css = ".container div>button[class*='secondary']")
+		private WebElement previousBtn;
+
+		// --- Common elements Ends above ---
+		
+		@FindBy(css = "div legend.primary-question-tex")
+		private WebElement costPagePrimaryQuestion;
+
+		@FindBy(css = "div legend.primary-question-tex span>sup")
+		private WebElement costPagePrimaryQuestionMark;
+
+		@FindBy(css = "div legend.primary-question-tex .description-text")
+		private WebElement costPagePrimaryQuestionDecsription;
 
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
 	private WebElement lowerPremium;
 
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
 	private WebElement higherPremium;
-
-	@FindBy(css = "#errorMessage")
-	private WebElement errorMessage;
-
-	@FindBy(xpath = "//*[contains(@class,'radio-checked')]")
-	private WebElement radioselect;
 
 //Cost Preferences Page Element Verification Method 
 
@@ -87,17 +95,19 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		Assert.assertTrue(pageProgressPercentage.getText().contains("64% Complete"));
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
-		validate(pharmacyTitle);
-		Assert.assertTrue(pharmacyTitle.getText().contains("cost"));
-		validate(pharmacyTitleInfo);
-		Assert.assertTrue(pharmacyTitleInfo.getText().contains("cost"));
+		validate(costPagePrimaryQuestion);
+		Assert.assertTrue(costPagePrimaryQuestion.getText().contains("cost"));
+		validate(costPagePrimaryQuestionMark);
+		validate(costPagePrimaryQuestionDecsription);
+		Assert.assertTrue(costPagePrimaryQuestionDecsription.getText().contains("cost"));
 		validate(lowerPremium, 30);
 		Assert.assertTrue(lowerPremium.getText().contains("lower"));
 		validate(higherPremium, 30);
 		Assert.assertTrue(higherPremium.getText().contains("higher"));
-		previousBtn.click();
+		mobileUtils.mobileLocateElementClick(higherPremium);
+		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		mobileUtils.previouspageValidation(page.toUpperCase());
 	}
 
 // Selecting Cost preference options
@@ -106,11 +116,11 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preferences option selection in Cost Preferences Page");
 		if (costpreferenceoption.equalsIgnoreCase("Lower")) {
 			validate(lowerPremium);
-			lowerPremium.click();
+			mobileUtils.mobileLocateElementClick(lowerPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		} else if (costpreferenceoption.equalsIgnoreCase("Higher")) {
 			validate(higherPremium);
-			higherPremium.click();
+			mobileUtils.mobileLocateElementClick(higherPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		}
 	}
@@ -119,16 +129,16 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 	public void costPreferencepageFunctional(String preference) {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
-		continueBtn.click();
+		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		//mobileUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Cost Preference Page Error Function Verification     
 
 	public void costPreferencepageerror() {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
-		continueBtn.click();
+		mobileUtils.mobileLocateElementClick(continueBtn);
 		Assert.assertTrue(errorMessage.getText().contains("No"));
 	}
 

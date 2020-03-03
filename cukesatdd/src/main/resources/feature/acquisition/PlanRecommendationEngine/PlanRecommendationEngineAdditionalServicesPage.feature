@@ -52,14 +52,11 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
     And user selects pharmacy option in pharmacy page
       | Pharmacy Type | <pharmacyoption> |
     Then user selects additional services option in additional services page
-      | Dental Option  | <dentalOption>  |
-      | Hearing Option | <hearingOption> |
-      | Vision Option  | <visionOption>  |
-      | Fitness Option | <fitnessOption> |
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | dentalOption | hearingOption | visionOption | fitnessOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes          | No            | Yes          | Yes           |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness |
+      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,Yes,Yes                |
 
   @PRE @planrecommendation @additionalservicespage @additionalserviceserror @regression @F374227
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Additional services using Single County in Plan Recommendation Engine
@@ -84,11 +81,8 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
     And user selects pharmacy option in pharmacy page
       | Pharmacy Type | <pharmacyoption> |
     Then user validates additional services error function in additional services page
-      | Dental Option  | <dentalOption>  |
-      | Hearing Option | <hearingOption> |
-      | Vision Option  | <visionOption>  |
-      | Fitness Option | <fitnessOption> |
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | dentalOption | hearingOption | visionOption | fitnessOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | No           | Yes           | No           | Yes           |
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness |
+      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  |
