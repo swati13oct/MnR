@@ -120,6 +120,11 @@ public class MRScenario {
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
 	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	
+	public static final String HSID_ENV="PDB_STAGE";
+	public static final String HSIDDB_USERNAME="njain112";
+	public static final String HSIDDB_PASSWORD="aK6-VBYn";
+	public static final String HSIDDB_URL="jdbc:mysql://dbsls0495:3306/ogns";
 
 	// public static final String USERNAME = System.getenv("SAUCE_USERNAME");
 
@@ -341,7 +346,7 @@ public class MRScenario {
 
 	}
 
-	public static Connection getPDBDBConnection(Map<String, String> props) {
+	public static Connection getPDBDBConnection() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -350,11 +355,16 @@ public class MRScenario {
 			e.printStackTrace();
 		}
 		Connection con = null;
-		String env = props.get(CommonConstants.HSID_ENV);
-		String user = props.get(CommonConstants.HSIDDB_USERNAME);
-		String pwd = props.get(CommonConstants.HSIDDB_PASSWORD);
-		String url = props.get(CommonConstants.HSIDDB_URL);
-		
+		/*
+		 * String env = props.get(CommonConstants.HSID_ENV); String user =
+		 * props.get(CommonConstants.HSIDDB_USERNAME); String pwd =
+		 * props.get(CommonConstants.HSIDDB_PASSWORD); String url =
+		 * props.get(CommonConstants.HSIDDB_URL);
+		 */
+		String env = HSID_ENV;
+		String user = HSIDDB_USERNAME;
+		String pwd = HSIDDB_PASSWORD;
+		String url = HSIDDB_URL;
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
 System.out.println("Con established*********");
@@ -370,7 +380,8 @@ System.out.println("Con established*********");
 	}
 
 	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		Connection con = getPDBDBConnection(props);
+	//	Connection con = getPDBDBConnection(props);
+		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 
 		stmt = con.createStatement();
@@ -386,7 +397,8 @@ System.out.println("Con established*********");
 	}
 
 	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
+		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
@@ -419,7 +431,8 @@ System.out.println("Con established*********");
 
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
+		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
@@ -451,7 +464,8 @@ System.out.println("Con established*********");
 			throws SQLException {
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
+		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
@@ -541,36 +555,49 @@ System.out.println("Con established*********");
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
-		System.out.println("Using properties for environment ...." + propertiesFileToPick);
+		System.out.println("Using properties for environment ...."
+		+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-			System.out.println("Using CI as default since environment was not passed in !!!");
-			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+		System.out
+		.println("Using CI as default since environment was not passed in !!!");
+		propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
+		// Read properties from classpath
+		StringBuffer propertyFilePath = new StringBuffer(
+		CommonConstants.PROPERTY_FILE_FOLDER);
+		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+		.append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+		.toString());
+		try {
+		prop.load(is);
+		} catch (IOException e) {
+		e.printStackTrace();
 		}
-			// Read properties from classpath
-			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
-			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-					.append(CommonConstants.PROPERTY_FILE_NAME);
-			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
-			try {
-				prop.load(is);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			for (String key : prop.stringPropertyNames()) {
-				String value = prop.getProperty(key);
-				props.put(key, value);
-			}
+		for (String key : prop.stringPropertyNames()) {
+		String value = prop.getProperty(key);
+		props.put(key, value);
+		}
 
-			if (props.containsKey("Domain")) {
-				domain = props.get("Domain");
-			} else {
-				domain = null;
-			}
-			return props;
-		} 
-		
+		if (props.containsKey("Domain")) {
+		domain = props.get("Domain");
+		} else {
+		domain = null;
+		}
+		return props;
+		}else{
+		if(environment.equals("stage")||environment.equals("offline-stage"))
+		domain = "uhc.com";
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.contains("digital-uat"))
+		domain = "ocp-elr-core-nonprod.optum.com";
+		else 
+		domain = "ocp-ctc-dmz-nonprod.optum.com";
+		System.out.println("env chosen is: "+ environment);
+		System.out.println("domain chosen is: "+ domain);
 
+		return null;
+		}
+	}
 
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {

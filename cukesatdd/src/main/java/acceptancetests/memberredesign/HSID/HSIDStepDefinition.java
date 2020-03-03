@@ -415,9 +415,9 @@ public class HSIDStepDefinition {
 	@Given("^the user connect to DB$")
 	public void i_connected_to_Provisional_data_base() {
 		System.out.println("******the user connect to DB*****");
-		Map<String, String> props = new HashMap<String, String>();
-		props = loginScenario.getProperties();
-		loginScenario.getPDBDBConnection(props);
+//		Map<String, String> props = new HashMap<String, String>();
+		//props = loginScenario.getProperties();	
+		loginScenario.getPDBDBConnection();
 	}
 
 	@And("^the user select record from database$")
