@@ -71,6 +71,7 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | planType | memberType        | eobType           | flagZeroEob | 
       | PDP      | Rx_EOB            | Prescription Drug | true        |
+      | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
       | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
@@ -115,6 +116,21 @@ Feature: 1.04 To Test EOB for Members
       | planType | memberType         | eobType | flagZeroEob |
       | SHIP     | SHIP_EOB           | Medical | true        | 
       | SHIP     | PDP_SHIP_COMBO_EOB | Medical | false       |
+
+  @eob02 @regression_06_06_18FnF @regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    Then the user validates the header section content
+    And the user gets the error message for PHIP member
+
+    @SHIP_EOBs
+    Examples: 
+      | TID   | planType | memberType |
+      | 15174 | PHIP     | SHIP_EOB   |
+  
 
 
   #note: pending coverage until SSUP individual user is available
@@ -203,21 +219,6 @@ Feature: 1.04 To Test EOB for Members
   #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
 
   # need to get user
-  @eob02 @regression_06_06_18FnF @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to EOB page_hsid
-    Then the user validates content displayed on EOB page
-      | Plan Tab | <planTab1> |
-    And the user gets the error message for PHIP member
-
-    @SHIP_EOBs
-    Examples: 
-      | TID   | planType | memberType |
-      | 15174 | PHIP     | SHIP_EOB   |
-  
   
   ########################### END EOB  Regression #######################################
 

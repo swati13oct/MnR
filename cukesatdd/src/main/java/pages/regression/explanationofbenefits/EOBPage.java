@@ -415,12 +415,12 @@ public class EOBPage extends EOBBase{
 		customSearchButton.click();
 	}
 	
-	public void validateTextElements(String planType, String eobType) {
+	public void validateTextElements(String planType, String memberType, String eobType) {
 		Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
-		if (eobType.equals("Prescription Drug")) {
+		if (eobType.equals("Prescription Drug") && memberType.contains("GROUP")) {
 			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type 'Prescription Drug''", eobValidate(optumRxLnk));
 		} else {
-			if (!planType.contains("SHIP")) {
+			if (!planType.equals("SHIP") && !planType.equals("PDP")) {
 				Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 			}
 			Assert.assertTrue("PROBLEM - should not be able to locate OPTUMRX.COM link on EOB page for EOB Type 'MEDICAL'", !eobValidate(optumRxLnk));
@@ -567,6 +567,14 @@ public class EOBPage extends EOBBase{
 		}else
 			System.out.println("No EOBs are displayed");
 		return eobCountInt;
+	}
+	
+	public void validateLearnMoreText() {
+		CommonUtility.waitForPageLoad(driver, learnMoreLink, 10);
+		Assert.assertTrue("PROBLEM - Unable to locate Learn More link", eobValidate(learnMoreLink));
+		learnMoreLink.click();
+		CommonUtility.waitForPageLoad(driver, drugText, 5);
+		Assert.assertTrue("PROBLEM - Unable to locate Learn More text related to Prescription Drug", eobValidate(drugText));
 	}
 	
 

@@ -33,6 +33,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//a[contains(@class, 'learnmoreeob')]")
 	protected WebElement learnMoreLink;
 
+	@FindBy(xpath="//div[contains(@ng-if, 'Prescription Drug') and not(contains(@class,'ng-hide'))]")
+	protected WebElement drugText;
+	
 	@FindBy(id="eobvideoicon")
 	protected WebElement eobVideoBox;
 

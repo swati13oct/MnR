@@ -52,9 +52,11 @@ public class EobStepDefinition {
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 
 		if (eobCount>0) {
+			EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 			if(eobTypeData.toLowerCase().contains("medical")) {
-				EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 				eobPage.validateReadPDF();		 
+			} else {
+				eobPage.validateLearnMoreText();
 			}
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
@@ -266,11 +268,12 @@ public class EobStepDefinition {
 	@Then("^the user validates search result section content$")
 	public void user_validate_searchResult() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		int eobResultCount=eobPage.getNumEobAfterSearch();
 		if (eobResultCount>0) {
-			eobPage.validateTextElements(planType, eobTypeData);
+			eobPage.validateTextElements(planType, memberType, eobTypeData);
 			eobPage.validateEOBStatements(eobResultCount);
 		} else {
 			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
