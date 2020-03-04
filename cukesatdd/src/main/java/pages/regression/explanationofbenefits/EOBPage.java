@@ -55,9 +55,8 @@ public class EOBPage extends EOBBase{
 	
 	public void validatePhipContent() {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
-		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for PHIP user", eobValidate(phipError));
-		String expText="You can view your AARP Personal Health Insurance Plan Explanation of Benefits information by logging in to myuhc.com";
+		String expText="You can view your AARP Personal Health Insurance Plan Explanation of Benefits information by logging in to Myuhc.com.";
 		String actText=phipError.getText();
 		Assert.assertTrue("PROBLEM - unable to locate the expected error message for PHIP user.  "
 				+ "Expected='"+expText+"' | Actual='"+actText+"'", 

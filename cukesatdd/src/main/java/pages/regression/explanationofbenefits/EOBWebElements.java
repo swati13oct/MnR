@@ -287,10 +287,10 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSP;
 	
-	@FindBy(xpath="//div[contain(@ng-show,'SSP') and not(contains(@class,'ng-hide'))]//p[@cass='color-red']")
+	@FindBy(xpath="//div[contains(@ng-show,'SSP') and not(contains(@class,'ng-hide'))]//p[@class='color-red']")
 	protected WebElement sspError;
 	
-	@FindBy(xpath="//div[contain(@ng-show,'PHIP') and not(contains(@class,'ng-hide'))]//p[@cass='color-red']")
+	@FindBy(xpath="//div[contains(@ng-show,'PHIP') and not(contains(@class,'ng-hide'))]//p[@class='color-red']")
 	protected WebElement phipError;
 	
 
