@@ -301,6 +301,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.continueNextpage();
 	}
 	
+	@Then("^user search and not found a drug in Drug page mobile$")
+	public void notfound_drugs_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		DrugMobilePage drugpage = new DrugMobilePage(wd);
+		drugpage.drugsInitiate(inputValues.get("Drug Selection"));
+		drugpage.drugNotFound(inputValues.get("Search Text"));
+	}
+	
 	@Then("^user validate elements in Pharmacy page mobile$")
 	public void elements_pharmacy_page() {
 		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
