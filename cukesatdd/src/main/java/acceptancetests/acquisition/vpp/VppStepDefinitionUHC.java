@@ -2478,4 +2478,41 @@ public class VppStepDefinitionUHC {
 	}
 	
 	
+	@When("^the user enters Mandatory fields on MedSup deeplink and clik on deeplink navigates to VPP plan details for UHC$")
+	public void user_enters_Mandatory_fields_on_MedSup_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String uri = inputAttributesMap.get("URI");
+		String mpbed = inputAttributesMap.get("MPBED");
+		String ebrc = inputAttributesMap.get("EBRC");
+		String dpsd = inputAttributesMap.get("DPSD");
+		String intref  = inputAttributesMap.get("Intref");
+		String mpaed = inputAttributesMap.get("MPAED");
+		String genderCode = inputAttributesMap.get("GenderCode");
+		String tobaccoUser = inputAttributesMap.get("TobaccoUser");
+		String dob = inputAttributesMap.get("DOB");		
+				
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterMedSupDetailsDeepLink(ZipCode, ebrc, intref, mpbed, dpsd, mpaed, dob, uri, genderCode, tobaccoUser);
+		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToMedSupPlans();
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
 } 

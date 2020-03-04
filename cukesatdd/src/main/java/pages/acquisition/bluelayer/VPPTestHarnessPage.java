@@ -206,6 +206,37 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@ng-click,'planselector')]")
 	private WebElement planSelectorCreateButton;
+	
+	
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupZIPcode']")
+	private WebElement MedsupZipcode;
+
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupproduct']")
+	private WebElement MedsupProduct;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='ebrc']")
+	private WebElement MedsupEbrc;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='intref']")
+	private WebElement MedsupIntref;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='mpbed']")
+	private WebElement MedsupBED;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='dpsd']")
+	private WebElement MedsupPSD;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='mpaed']")
+	private WebElement MedsupAED;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupwtmcid']")
+	private WebElement MedsupMCID;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='dob']")
+	private WebElement MedsupDOB;
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='medsupuri']/option") })
+	private List<WebElement> urlValues;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='gendercode']/option") })
+	private List<WebElement> genderValues;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='tobaccouser']/option") })
+	private List<WebElement> userValues;
+	
+	@FindBy(xpath = "//button[contains(@ng-click,'medsup')]")
+	private WebElement medsupCreateButton;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -383,6 +414,28 @@ public class VPPTestHarnessPage extends UhcDriver {
 	
 	}
 	
+	public void enterMedSupDetailsDeepLink(String zipcode, String ebrc, 
+			String intref, String mpbed,String dpsd,String mpaed,String dob,
+			String uri,String genderCode,String tobaccoUser) {
+		validateNew(planDetailsZipCode);
+		sendkeys(MedsupZipcode, zipcode);
+		sendkeys(MedsupEbrc, ebrc);
+		sendkeys(MedsupIntref, intref);
+		sendkeys(MedsupBED, mpbed);
+		sendkeys(MedsupPSD, dpsd);
+		sendkeys(MedsupAED, mpaed);
+		sendkeys(MedsupDOB, dob);
+		selectFromDropDown(urlValues, uri);
+		selectFromDropDown(genderValues, genderCode);
+		selectFromDropDown(userValues, tobaccoUser);
+		validateNew(medsupCreateButton);
+		jsClickNew(medsupCreateButton);	
+		
+		validateNew(createDeepLinkURL);
+		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
+		jsClickNew(createDeepLinkURL);
+	}
+
 	
 public ComparePlansPageBlayer navigateToPlanCompare(){
 		try {
@@ -398,17 +451,31 @@ public ComparePlansPageBlayer navigateToPlanCompare(){
 
 
 
-public PlanDetailsPage navigateToPlanDetails() {
+	public PlanDetailsPage navigateToPlanDetails() {
 
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("#/details")) {
+			return new PlanDetailsPage(driver);
+		}
+		return null;
 	}
-	if (driver.getCurrentUrl().contains("#/details")) {	
-		return new PlanDetailsPage(driver);
+
+	public VPPPlanSummaryPage navigateToMedSupPlans() {
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("medicare-supplement-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
-	return null;
-}
 }
