@@ -2420,8 +2420,8 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
-	@When("^the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan Compare for UHC$")
-	public void user_enters_Mandatory_fields_on_plan_details_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_UHC(DataTable inputAttributes) throws Throwable {
+	@When("^the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan details for UHC$")
+	public void user_enters_Mandatory_fields_on_plan_details_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");

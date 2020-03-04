@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPTestHarnessUHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPTestHarnessUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/VppTestharness" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPTestHarnessUHC.json" }, tags = { "@vppMicroAppUHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPTestHarnessUHC.json" }, tags = { "@vppTestharnessUHCRun01" })
 public class RunMRATDDAcquisitionVPPTestHarnessUHC { 
  
 }

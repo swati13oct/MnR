@@ -1,7 +1,7 @@
 @vppMicroAppUHC
 Feature: VPP Testharness flow Navigations for UHC Site
 
-  @vppTestharnessUHC01
+  @vppTestharnessUHC01 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Enter Zipcode on testharness page and Verify Navigation to VPP page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -46,7 +46,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00001 | vppzipcode | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
       | 00002 | vppzipcode | Blayer   |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
-  @vppTestharnessUHC02
+  @vppTestharnessUHC02 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Lookup Zipcode on testharness page and Verify Navigation to VPP page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -94,7 +94,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00003 | vppzipcode | Blayer   |   06851 | NO              | Fairfield County | MAPD     | UnitedHealthcare Medicare Advantage Plan 3 (HMO)           | $0             | $15  copay           | $45  copay | No               | $6,700.00          | $3  copay              |                  | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT |
       | 00004 | vppzipcode | Blayer   |   30606 | YES             | Clarke County    | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | 25% of the cost        |                  | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     |
 
-  @vppTestharnessUHC03
+  @vppTestharnessUHC03 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Testharness without zipcode to VPP
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -139,7 +139,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00005 | vppzipcode | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
       | 00006 | vppzipcode | Blayer   |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
-  @vppTestharnessUHC04
+  @vppTestharnessUHC04 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -159,7 +159,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00008 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       | 00009 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
 
-  @vppTestharnessUHC05
+  @vppTestharnessUHC05 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Connector modal plans Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -181,7 +181,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00010 | vppdeeplink | Blayer   |   10001 | NO              | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 |  897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
       | 00011 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
 
-  @vppTestharnessUHC06
+  @vppTestharnessUHC06 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -203,7 +203,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00012 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
       | 00013 | vppdeeplink | Blayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 
-  @vppTestharnessUHC07
+  @vppTestharnessUHC07 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -222,7 +222,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | TID   | THPage      | siteName | zipcode | isMultutiCounty | county       | plantype | planName                        | deeplink         | Year |
       | 00014 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County | PDP      | AARP MedicareRx Walgreens (PDP) | favPlansDeepLink | 2020 |
 
-  @vppTestharnessUHC08
+  @vppTestharnessUHC08 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Compare Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -243,12 +243,12 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00015 | vppdeeplink | Blayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 1590058773320 | H0543168000,H0543001000             | 2020 |     037 |
       | 00016 | vppdeeplink | Blayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | 1590058773320 | S5921403000,S5820021000,S5921367000 | 2020 |     029 |
 
-  @vppTestharnessUHC09
+  @vppTestharnessUHC09 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Details Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-    When the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan Compare for UHC
+    When the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan details for UHC
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
