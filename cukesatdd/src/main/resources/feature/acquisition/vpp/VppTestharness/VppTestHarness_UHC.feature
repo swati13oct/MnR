@@ -199,7 +199,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | Year |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | year |
       | 00012 | vppdeeplink | Blayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
       | 00013 | vppdeeplink | Blayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 

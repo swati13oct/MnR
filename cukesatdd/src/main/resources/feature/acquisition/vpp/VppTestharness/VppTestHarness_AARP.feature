@@ -159,7 +159,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
 
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                            |
-      | 00007 | vppzipcode  | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | 00007 | vppdeeplink  | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | 00008 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       | 00008 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
 
@@ -181,7 +181,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | Year |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | year |
       | 00012 | vppdeeplink | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
       | 00013 | vppdeeplink | Ulayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 
