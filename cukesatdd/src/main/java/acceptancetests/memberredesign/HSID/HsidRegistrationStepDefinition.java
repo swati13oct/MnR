@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,7 @@ import pages.regression.login.DeregisterPage;
 import pages.regression.login.HsidRegistrationConfirmInformation;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.HsidRegistrationPersonalInformationPage;
+import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -282,6 +284,7 @@ public class HsidRegistrationStepDefinition {
 
 	@Then("^user should be at Sign In page$")
 	public void user_should_be_at_Sign_In_page(DataTable memberAttributes) throws Throwable {
+		System.out.println("*****user should be at Sign In page*****");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -300,6 +303,27 @@ public class HsidRegistrationStepDefinition {
 		loginPage.validateelements();
 
 		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
+		
+		System.out.println("New user name is-"+userName);
+		
+        if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+            TestHarness testHarnessPage=null;
+            try {
+                  testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, password);
+            } catch (UnhandledAlertException ae) {
+                  System.out.println("Exception: "+ae);
+                  Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
+            }
+            if (testHarnessPage != null) {
+                   getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
+                  return;
+            } else {
+                  Assert.fail("Login not successful...");
+            }
+     }
+
+        else {
+		
 		pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
 
 	
@@ -311,7 +335,7 @@ public class HsidRegistrationStepDefinition {
 		else {
 			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
 		}
-
+        }
 
 	}
 
