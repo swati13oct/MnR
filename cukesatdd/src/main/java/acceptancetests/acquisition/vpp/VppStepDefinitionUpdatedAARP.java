@@ -2546,7 +2546,43 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
+	@When("^the user enters Mandatory fields on MedSup deeplink and clik on deeplink navigates to VPP plan details for AARP$")
+	public void user_enters_Mandatory_fields_on_MedSup_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_AARP(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String uri = inputAttributesMap.get("URI");
+		String mpbed = inputAttributesMap.get("MPBED");
+		String ebrc = inputAttributesMap.get("EBRC");
+		String dpsd = inputAttributesMap.get("DPSD");
+		String intref  = inputAttributesMap.get("Intref");
+		String mpaed = inputAttributesMap.get("MPAED");
+		String genderCode = inputAttributesMap.get("GenderCode");
+		String tobaccoUser = inputAttributesMap.get("TobaccoUser");
+		String dob = inputAttributesMap.get("DOB");		
+				
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterMedSupDetailsDeepLink(ZipCode, ebrc, intref, mpbed, dpsd, mpaed, dob, uri, genderCode, tobaccoUser);
+		vppTestHarnessPage.navigateToMedSupPlans();
+		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE,vppTestHarnessPage);
+	}
 	
+	@And("^the user validates plan summary for the below plan in AARP site for Medsup Deeplink$")
+	public void user_validates_plan_summary_AARP_for_medsup_deepLink(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
+		}
 	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton

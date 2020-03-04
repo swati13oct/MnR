@@ -2,6 +2,7 @@ package pages.acquisition.ulayer;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -152,39 +153,72 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@ng-click,'plandetails')]")
 	private WebElement planDetailsCreateButton;
-	
+
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='contractnumber']")
 	private WebElement planSelectorcontractnumber;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='countycode']")
 	private WebElement planSelectorcountycode;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='pbpnumber']")
 	private WebElement planSelectorpbpnumber;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='wtsrch']")
 	private WebElement planSelectorwtsrch;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='segmentid']")
 	private WebElement planSelectorsegmentid;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='planselectoryear']")
 	private WebElement planSelectorplanselectoryear;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='ZIPcode']")
 	private WebElement planSelectorZIPcode;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='wtmcid']")
 	private WebElement planSelectorwtmcid;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='usergroup']")
 	private WebElement planSelectorusergroup;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'planselector')]")
 	private WebElement planSelectorCreateButton;
+
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupZIPcode']")
+	private WebElement MedsupZipcode;
+
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupproduct']")
+	private WebElement MedsupProduct;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='ebrc']")
+	private WebElement MedsupEbrc;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='intref']")
+	private WebElement MedsupIntref;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='mpbed']")
+	private WebElement MedsupBED;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='dpsd']")
+	private WebElement MedsupPSD;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='mpaed']")
+	private WebElement MedsupAED;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='medsupwtmcid']")
+	private WebElement MedsupMCID;
+	@FindBy(xpath = "//h4[contains(text(),'Medsup Deeplink')]//parent::div//input[@name='dob']")
+	private WebElement MedsupDOB;
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='medsupuri']/option") })
+	private List<WebElement> urlValues;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='gendercode']/option") })
+	private List<WebElement> genderValues;
+	@FindBys(value = { @FindBy(xpath = "//select[@id='tobaccouser']/option") })
+	private List<WebElement> userValues;
+
+	@FindBy(xpath = "//button[contains(@ng-click,'medsup')]")
+	private WebElement medsupCreateButton;
+
+	@FindBy(xpath = "//div[@id='Plan F']//h2")
+	private WebElement medsupPlanF;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -299,7 +333,8 @@ public class VPPTestHarnessPage extends UhcDriver {
 		jsClickNew(createDeepLinkURL);
 	}
 
-	public void enterEmailPlanDetailsDeepLink(String zipcode, String hnpbp, String PlanYear, String DeepLink, String fiscountyCode) {
+	public void enterEmailPlanDetailsDeepLink(String zipcode, String hnpbp, String PlanYear, String DeepLink,
+			String fiscountyCode) {
 		validateNew(planDetailsZipCode);
 		sendkeys(planDetailsZipCode, zipcode);
 		sendkeys(planDetailsPlanIds, hnpbp);
@@ -313,9 +348,10 @@ public class VPPTestHarnessPage extends UhcDriver {
 		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
 		jsClickNew(createDeepLinkURL);
 	}
-	
-	public void enterEmailPlanSelectorDeepLink(String contractnum, String countyCode, String pbpnumber, 
-			String segId,String year,String zipcode,String usergroup,String Mutlicounty,String countyName) throws InterruptedException {
+
+	public void enterEmailPlanSelectorDeepLink(String contractnum, String countyCode, String pbpnumber, String segId,
+			String year, String zipcode, String usergroup, String Mutlicounty, String countyName)
+			throws InterruptedException {
 		validateNew(planSelectorcontractnumber);
 		sendkeys(planSelectorcontractnumber, contractnum);
 		sendkeys(planSelectorcountycode, countyCode);
@@ -324,7 +360,7 @@ public class VPPTestHarnessPage extends UhcDriver {
 		sendkeys(planSelectorplanselectoryear, year);
 		sendkeys(planSelectorZIPcode, zipcode);
 		sendkeys(planSelectorusergroup, usergroup);
-		
+
 		validateNew(planSelectorCreateButton);
 		jsClickNew(planSelectorCreateButton);
 
@@ -332,21 +368,42 @@ public class VPPTestHarnessPage extends UhcDriver {
 		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
 		jsClickNew(createDeepLinkURL);
 		Thread.sleep(10000);
-		if(Mutlicounty.equalsIgnoreCase("YES")) {
-				CommonUtility.waitForPageLoad(driver, countyModal, 45);
-				System.out.println("County should be selected : " + countyName);
-				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-				Thread.sleep(10000);
-				driver.getCurrentUrl().contains("#/details");
+		if (Mutlicounty.equalsIgnoreCase("YES")) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			Thread.sleep(10000);
+			driver.getCurrentUrl().contains("#/details");
 
-			} else {
-				System.out.println("No County to be selected ");
-			
+		} else {
+			System.out.println("No County to be selected ");
+
 		}
-	
+
 	}
 
-	public ComparePlansPage navigateToPlanCompare(){
+	public void enterMedSupDetailsDeepLink(String zipcode, String ebrc, String intref, String mpbed, String dpsd,
+			String mpaed, String dob, String uri, String genderCode, String tobaccoUser) {
+		validateNew(planDetailsZipCode);
+		sendkeys(MedsupZipcode, zipcode);
+		sendkeys(MedsupEbrc, ebrc);
+		sendkeys(MedsupIntref, intref);
+		sendkeys(MedsupBED, mpbed);
+		sendkeys(MedsupPSD, dpsd);
+		sendkeys(MedsupAED, mpaed);
+		sendkeys(MedsupDOB, dob);
+		selectFromDropDown(urlValues, uri);
+		selectFromDropDown(genderValues, genderCode);
+		selectFromDropDown(userValues, tobaccoUser);
+		validateNew(medsupCreateButton);
+		jsClickNew(medsupCreateButton);
+
+		validateNew(createDeepLinkURL);
+		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
+		jsClickNew(createDeepLinkURL);
+	}
+
+	public ComparePlansPage navigateToPlanCompare() {
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -355,9 +412,9 @@ public class VPPTestHarnessPage extends UhcDriver {
 		}
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			validate(backToAllPlansLink);
-			return new ComparePlansPage(driver);
+		return new ComparePlansPage(driver);
 	}
-	
+
 	public PlanDetailsPage navigateToPlanDetails() {
 
 		try {
@@ -366,10 +423,30 @@ public class VPPTestHarnessPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("#/details")) {	
+		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPage(driver);
 		}
 		return null;
 	}
-	
+
+	public void navigateToMedSupPlans() {
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("medicare-supplement-plans")) {
+			System.out.println("Medsup plans loaded");
+		}
+
+	}
+
+	public void validateMedSupSpecificPlanInfo(String PlanName) throws InterruptedException {
+		Assert.assertTrue("Not anble to See medsup plan", medsupPlanF.getText().contains(PlanName));
+		System.out.println("Validate we are on medsup page from deeplink");
+
+	}
+
 }

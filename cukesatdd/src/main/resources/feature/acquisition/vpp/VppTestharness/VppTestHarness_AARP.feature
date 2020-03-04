@@ -159,7 +159,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
 
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                            |
-      | 00007 | vppdeeplink  | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | 00007 | vppdeeplink | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | 00008 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)          |
       | 00008 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
 
@@ -264,9 +264,36 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | Plan Year       | <year>          |
       | CountyCode      | <Countyccode>   |
       | User Group      | <userGroup>     |
-    Then the user view plan details of the above selected plan in AARP site and validates from Deeplink
+    And the user validates plan summary for the below plan in UMS site for Medsup Deeplink
       | Plan Name | <planName> |
 
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName                                     | contractNum | pbpNumber | segmentID | year | Countyccode | userGroup |
       | 00020 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons (HMO) | H4590       |       010 |       000 | 2020 |       48029 | DST       |
+
+  @vppTestharnessAARP11 @vppTestharnessAARPRun02
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Med Sup Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page for AARP
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on MedSup deeplink and clik on deeplink navigates to VPP plan details for AARP
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | Plan Type       | <plantype>      |
+      | URI             | <uri>           |
+      | MPBED           | <mpbed>         |
+      | EBRC            | <ebrc>          |
+      | DPSD            | <dpsd>          |
+      | Intref          | <intref>        |
+      | MPAED           | <mpaed>         |
+      | GenderCode      | <genderCode>    |
+      | TobaccoUser     | <tobaccoUser>   |
+      | DOB             | <dob>           |
+    And the user validates plan summary for the below plan in AARP site for Medsup Deeplink
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
+      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |

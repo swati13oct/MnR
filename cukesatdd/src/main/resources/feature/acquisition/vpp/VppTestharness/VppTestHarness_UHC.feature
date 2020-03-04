@@ -289,7 +289,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName                                     | contractNum | pbpNumber | segmentID | year | Countyccode | userGroup |
       | 00020 | vppdeeplink | Blayer   |   78006 | YES           | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons (HMO) | H4590       |       010 |       000 | 2020 |       48029 | DST       |
 
-  @vppTestharnessUHC11
+  @vppTestharnessUHC11 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Med Sup Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
       | Site Name       | <siteName> |
@@ -308,9 +308,10 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | GenderCode      | <genderCode>    |
       | TobaccoUser     | <tobaccoUser>   |
       | DOB             | <dob>           |
-    Then the user view plan details of the above selected plan in UMS site and validates from Deeplink
+    And the user validates plan summary for the below plan in UMS site for Medsup Deeplink
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName                                     | uri               | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
-      | 00021 | vppdeeplink | Blayer   |   10001 | No           | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons (HMO) | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
+      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |

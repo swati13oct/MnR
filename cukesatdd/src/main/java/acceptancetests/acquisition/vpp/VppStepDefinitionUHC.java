@@ -2496,18 +2496,25 @@ public class VppStepDefinitionUHC {
 				
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterMedSupDetailsDeepLink(ZipCode, ebrc, intref, mpbed, dpsd, mpaed, dob, uri, genderCode, tobaccoUser);
-		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToMedSupPlans();
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
+		vppTestHarnessPage.navigateToMedSupPlans();
+		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE,vppTestHarnessPage);
 	}
 	
-	
-	
-	
+	@And("^the user validates plan summary for the below plan in UMS site for Medsup Deeplink$")
+	public void user_validates_plan_summary_ums_for_medsup_deepLink(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
+		}
 	
 	
 	
