@@ -312,7 +312,7 @@ public class EobStepDefinition {
 	public void user_views_EOBpagehsid() throws InterruptedException {   
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		System.out.println("****the user navigates to EOB page_hsid****");
+		System.out.println("****the user navigates to EOB page****");
 		pages.regression.explanationofbenefits.EOBPage eobPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()

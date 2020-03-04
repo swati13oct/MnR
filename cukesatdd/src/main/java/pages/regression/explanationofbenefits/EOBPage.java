@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.regression.explanationofbenefits;
 
 import java.text.DateFormat;
@@ -18,12 +15,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
 public class EOBPage extends EOBBase{
 
@@ -559,15 +554,15 @@ public class EOBPage extends EOBBase{
 		System.out.println(newTab.size());
 		//note: Use the list of window handles to switch between windows
 		driver.switchTo().window(newTab.get(1));
-
-		//note: Switch back to original window
+		CommonUtility.checkPageIsReady(driver);
+		
 		String pdfUrl = driver.getCurrentUrl();
-		System.out.println(" pdf url: " + pdfUrl);
+		System.out.println(" pdf url: '" + pdfUrl+"'");
 		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
-		driver.close();
-		driver.switchTo().window(newTab.get(0));
-		/* KEEP TBD - getting 500 response code with the pdfUrl right now, not sure why
+
+		/* keep - haven't figure out how to get this not to get 500 for URL yet
 		try {
+
 			URL TestURL = new URL(pdfUrl);
 			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 			PDDocument document = PDDocument.load(TestFile);
@@ -576,8 +571,13 @@ public class EOBPage extends EOBBase{
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.assertTrue("PROBLEM - Unable to parse PDF content", false);
-		} */
-	
+		} 
+		*/
+		
+		//note: Switch back to original window
+		driver.close();
+		driver.switchTo().window(newTab.get(0));
+		// KEEP TBD - getting 500 response code with the pdfUrl right now, not sure why
 	}
 
 	public void validatePHIPErorrMessage(){
