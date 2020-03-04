@@ -2524,6 +2524,28 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	}
 	
+	@When("^the user enters Mandatory fields on plan selector deeplink and clik on deeplink navigates to VPP plan details for AARP$")
+	public void user_enters_Mandatory_fields_on_plan_selector_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_AARP(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String ContractNum = inputAttributesMap.get("ContractNum");
+		String SegmentID = inputAttributesMap.get("Segment ID");
+		String PbpNumber = inputAttributesMap.get("PbpNumber");
+		String PlanYear = inputAttributesMap.get("Plan Year");
+		String CountyCode = inputAttributesMap.get("CountyCode");
+		String UserGroup  = inputAttributesMap.get("User Group");
+		String plantype = inputAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanSelectorDeepLink(ContractNum, CountyCode, PbpNumber, SegmentID, PlanYear, ZipCode, UserGroup,isMultutiCounty,CountyName);
+		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
+		if(vppPlanDetailsPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		}
+	}
+	
 	
 	
 	//--------------------------------------------

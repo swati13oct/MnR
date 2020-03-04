@@ -50,6 +50,9 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
+	
+	@FindBy(xpath = "//div[@id='changes-submitted']//h3")
+	private WebElement countyModalDetails;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
 	private WebElement vppTop;
@@ -173,6 +176,36 @@ public class VPPTestHarnessPage extends UhcDriver {
 	
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='contractnumber']")
+	private WebElement planSelectorcontractnumber;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='countycode']")
+	private WebElement planSelectorcountycode;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='pbpnumber']")
+	private WebElement planSelectorpbpnumber;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='wtsrch']")
+	private WebElement planSelectorwtsrch;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='segmentid']")
+	private WebElement planSelectorsegmentid;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='planselectoryear']")
+	private WebElement planSelectorplanselectoryear;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='ZIPcode']")
+	private WebElement planSelectorZIPcode;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='wtmcid']")
+	private WebElement planSelectorwtmcid;
+	
+	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='usergroup']")
+	private WebElement planSelectorusergroup;
+
+	@FindBy(xpath = "//button[contains(@ng-click,'planselector')]")
+	private WebElement planSelectorCreateButton;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -318,6 +351,37 @@ public class VPPTestHarnessPage extends UhcDriver {
 		jsClickNew(createDeepLinkURL);
 	}
 
+	public void enterEmailPlanSelectorDeepLink(String contractnum, String countyCode, String pbpnumber, 
+			String segId,String year,String zipcode,String usergroup,String Mutlicounty,String countyName) throws InterruptedException {
+		validateNew(planSelectorcontractnumber);
+		sendkeys(planSelectorcontractnumber, contractnum);
+		sendkeys(planSelectorcountycode, countyCode);
+		sendkeys(planSelectorpbpnumber, pbpnumber);
+		sendkeys(planSelectorsegmentid, segId);
+		sendkeys(planSelectorplanselectoryear, year);
+		sendkeys(planSelectorZIPcode, zipcode);
+		sendkeys(planSelectorusergroup, usergroup);
+		
+		validateNew(planSelectorCreateButton);
+		jsClickNew(planSelectorCreateButton);
+
+		validateNew(createDeepLinkURL);
+		System.out.println("Genertated Deeplink url : " + createDeepLinkURL.getText());
+		jsClickNew(createDeepLinkURL);
+		Thread.sleep(10000);
+		if(Mutlicounty.equalsIgnoreCase("YES")) {
+				CommonUtility.waitForPageLoad(driver, countyModal, 45);
+				System.out.println("County should be selected : " + countyName);
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				Thread.sleep(10000);
+				driver.getCurrentUrl().contains("#/details");
+
+			} else {
+				System.out.println("No County to be selected ");
+			
+		}
+	
+	}
 	
 	
 public ComparePlansPageBlayer navigateToPlanCompare(){
