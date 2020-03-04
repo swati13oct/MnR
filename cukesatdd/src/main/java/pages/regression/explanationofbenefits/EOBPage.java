@@ -442,7 +442,8 @@ public class EOBPage extends EOBBase{
 		if (eobType.equals("Prescription Drug")) {
 			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type '"+eobType+"''", eobValidate(optumRxLnk));
 		} else {
-			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
+			if (!planType.equals("SHIP")) 
+				Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 		}
 	}
 	
