@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -268,22 +269,13 @@ public class VPPTestHarnessPage extends UhcDriver {
 		jsClickNew(createDeepLinkURL);
 	}
 
-	public void enterEmailPlanDetailsDeepLink(String zipcode, String PlanIds, String PlanYear, String PlanSYSYear,
-			String DeepLink, String WTmcid, String fiscountyCode, String mrcid, String YearDisclaimer, String Month,
-			String YearToggle) {
+	public void enterEmailPlanDetailsDeepLink(String zipcode, String hnpbp, String PlanYear, String DeepLink, String fiscountyCode) {
 		validateNew(planDetailsZipCode);
 		sendkeys(planDetailsZipCode, zipcode);
-		sendkeys(planDetailsPlanIds, PlanIds);
+		sendkeys(planDetailsPlanIds, hnpbp);
 		sendkeys(planDetailsPlanYear, PlanYear);
-		sendkeys(planDetailsPlanSYSYear, PlanSYSYear);
 		sendkeys(planDetailsDeepLink, DeepLink);
-		sendkeys(planDetailsMrcid, mrcid);
 		sendkeys(planDetailsFips, fiscountyCode);
-		sendkeys(planDetailsYearID, YearDisclaimer);
-		sendkeys(planDetailsMonth, Month);
-		sendkeys(planDetailsYearToggle, YearToggle);
-		sendkeys(planDetailsWtmcid, WTmcid);
-
 		validateNew(planDetailsCreateButton);
 		jsClickNew(planDetailsCreateButton);
 
@@ -303,4 +295,19 @@ public class VPPTestHarnessPage extends UhcDriver {
 			validate(backToAllPlansLink);
 			return new ComparePlansPage(driver);
 	}
+	
+	public PlanDetailsPage navigateToPlanDetails() {
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("#/details")) {	
+			return new PlanDetailsPage(driver);
+		}
+		return null;
+	}
+	
 }

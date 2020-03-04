@@ -47,7 +47,6 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-//import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -247,6 +246,10 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
 	private WebElement planDocs;
+	
+	@FindBy(xpath = "//h2[@class='ng-binding']")
+	private WebElement planNameValue;
+	
 	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
@@ -1209,6 +1212,18 @@ public class PlanDetailsPage extends UhcDriver {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		}
 		return Validation_Flag;
+	}
+	
+	public void verifyPlanName(String PlanName) {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Plan Name is : " + PlanName);		
+		Assert.assertTrue("Message not Landed on PlanDetails Page", planNameValue.getText().contains(PlanName));
 	}
 
 }

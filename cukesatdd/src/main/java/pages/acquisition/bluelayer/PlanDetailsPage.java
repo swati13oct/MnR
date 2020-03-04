@@ -242,6 +242,11 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
 	private WebElement planDocs;
 	
+	@FindBy(xpath = "//h2[@class='ng-binding']")
+	private WebElement planNameValue;
+	
+	
+	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
 	}
@@ -1175,4 +1180,16 @@ public class PlanDetailsPage extends UhcDriver {
 		 }
 			
 	 }
+	
+	public void verifyPlanName(String PlanName) {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Plan Name is : " + PlanName);
+		Assert.assertTrue(planNameValue.getText().contains(PlanName), "Message not Landed on PlanDetails Page");
+	}
 }

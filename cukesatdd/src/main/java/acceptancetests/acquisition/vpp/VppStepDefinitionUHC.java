@@ -2420,4 +2420,40 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
+	@When("^the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan Compare for UHC$")
+	public void user_enters_Mandatory_fields_on_plan_details_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String Deeplink = inputAttributesMap.get("Deeplink");
+		String ContractPBP = inputAttributesMap.get("ContractPBP");
+		String PlanYear = inputAttributesMap.get("Plan Year");
+		String fisCountyCode = inputAttributesMap.get("fisCountyCode");
+		String plantype = inputAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCounty(CountyName);
+		}
+		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
+		if(vppPlanDetailsPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		}
+	}
+	
+	@Then("^the user view plan details of the above selected plan in UMS site and validates from Deeplink$")
+	public void user_views_plandetails_selected_plan_ums_form_deepLink(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String planName = memberAttributesRow.get(0).getCells().get(1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.verifyPlanName(planName);
+		
+	}
+	
+	
 } 

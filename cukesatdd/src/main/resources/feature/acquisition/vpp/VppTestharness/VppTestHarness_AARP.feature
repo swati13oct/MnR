@@ -224,3 +224,26 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | expDate       | hnpbpb                              | year | ficcode |
       | 00015 | vppdeeplink | Ulayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 1590058773320 | H0543168000,H0543001000             | 2020 |     037 |
       | 00016 | vppdeeplink | Ulayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | 1590058773320 | S5921403000,S5820021000,S5921367000 | 2020 |     029 |
+
+  @vppTestharnessAARP10
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Details Deeplink with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan Compare for AARP
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Plan Type       | <plantype>        |
+      | ContractPBP     | <hnpbpb>          |
+      | Plan Year       | <year>            |
+      | fisCountyCode   | <ficcode>         |
+      | Deeplink        | <deeplink>        |
+    Then the user view plan details of the above selected plan in AARP site and validates from Deeplink
+      | Plan Name | <planName> |
+
+    Examples: 
+      | TID   | THPage      | siteName | zipcode | isMultutiCounty | county             | plantype | planName                                           | hnpbpb      | year | ficcode | deeplink   |
+      | 00017 | vppdeeplink | Ulayer   |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543168000 | 2020 |     037 | plandetail |
+      | 00018 | vppdeeplink | Ulayer   |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | S5921403000 | 2020 |     029 | plandetail |
+      | 00019 | vppdeeplink | Ulayer   |   10001 | NO              | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | H3387010000 | 2020 |     061 | plandetail |
