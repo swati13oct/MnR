@@ -2609,15 +2609,8 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	@And("^user click on LaunhVPP on testharness page and navigated to VPP on AARP$")
-	public void user_click_on_LaunhVPP_on_testharness_page_and_navigated_to_VPP_on_AARP(DataTable planAttributes)
+	public void user_click_on_LaunhVPP_on_testharness_page_and_navigated_to_VPP_on_AARP()
 			throws InterruptedException {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.clickOnLaunchVVP();

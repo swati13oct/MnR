@@ -325,7 +325,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
     Given the user is on VPP TestHarness page for AARP
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-    And user selects helper mode for Navigate to VPP with Providers data on UHC
+    And user selects helper mode for Navigate to VPP with Providers data on AARP
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
