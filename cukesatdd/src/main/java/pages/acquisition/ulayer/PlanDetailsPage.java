@@ -1151,7 +1151,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public void clickCompareBox() {
 		validateNew(compareBox);
-		compareBox.click();
+		jsClickNew(compareBox);
 	}
 
 	public boolean ClickValidatePDFText_URL_ForDocCode(String pDFtype, String documentCode) {

@@ -406,7 +406,6 @@ public class VppStepDefinitionUpdatedAARP {
 		PlanDetailsPage planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
 		if (planDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
-			planDetailsPage.clickCompareBox();
 		}
 	}
 	
