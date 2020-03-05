@@ -220,21 +220,27 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='Plan F']//h2")
 	private WebElement medsupPlanF;
-	
+
 	@FindBy(xpath = "//input[@id='vpp-zip-search']")
 	private WebElement providerZipInput;
-	
+
 	@FindBy(xpath = "//input[@id='vpp-planid']")
 	private WebElement providerPlanID;
-	
+
 	@FindBy(xpath = "//input[@id='vpp-planYear']")
 	private WebElement ProviderYear;
-	
+
 	@FindBy(xpath = "//button[text()='Go']")
 	private WebElement ProviderGo;
-	
+
 	@FindBy(xpath = "//button[@id='launch_vpp']")
 	private WebElement ProviderLaunchVPP;
+
+	@FindBy(xpath = "//input[@id='helperModeCheckboxLaunchVpp']")
+	private WebElement scen4Helper;
+
+	@FindBy(xpath = "//a[text()='Launch VPP with Providers data']")
+	private WebElement launchVPPwithProvidersdata;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -464,8 +470,9 @@ public class VPPTestHarnessPage extends UhcDriver {
 		System.out.println("Validate we are on medsup page from deeplink");
 
 	}
-	
-	public ProviderSearchPage enterMandatoryFieldsToProviderSearch(String zipcode,String planId,String planyear) throws Exception {
+
+	public ProviderSearchPage enterMandatoryFieldsToProviderSearch(String zipcode, String planId, String planyear)
+			throws Exception {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		validateNew(providerZipInput);
 		sendkeys(providerZipInput, zipcode);
@@ -475,14 +482,21 @@ public class VPPTestHarnessPage extends UhcDriver {
 		switchToNewTabNew(ProviderGo);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
-				}
+		}
 		return null;
-			}
-	
+	}
+
 	public void clickOnLaunchVVP() {
 		validateNew(ProviderLaunchVPP);
 		ProviderLaunchVPP.isEnabled();
 		ProviderLaunchVPP.click();
+	}
+
+	public void navigatetoVPPwithProvidersdata() throws Exception {
+		validateNew(scen4Helper);
+		jsClickNew(scen4Helper);
+		validate(launchVPPwithProvidersdata);
+		jsClickNew(launchVPPwithProvidersdata);
 	}
 
 }

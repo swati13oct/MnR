@@ -2548,5 +2548,16 @@ public class VppStepDefinitionUHC {
 	
 	}
 	
+	@And("^user selects helper mode for Navigate to VPP with Providers data on UHC$")
+	public void user_selects_helper_mode_for_NavigatetoVPPwith_Providers_data_on_UHC() throws Exception {
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.navigatetoVPPwithProvidersdata();
+		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+		}
+	
 	
 } 
