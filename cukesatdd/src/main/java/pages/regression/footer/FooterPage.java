@@ -1,13 +1,19 @@
 package pages.regression.footer;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
 
 public class FooterPage extends UhcDriver {
 
@@ -18,8 +24,14 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(id = "contact-help")
 	private WebElement HelpandContactUs;
+	
+	@FindBy(xpath = "//*[@id='share-feedback']")
+	private WebElement shareFeedback;
 
-	@FindBy(id= "notices")
+	@FindBy(linkText= "Account Settings")
+	private WebElement AccountSettings;
+
+	@FindBy(xpath= "//*[@id='notices']")
 	private WebElement NoticesAndDisclosures;
 
 	@FindBy(linkText= "Saved")
@@ -33,11 +45,30 @@ public class FooterPage extends UhcDriver {
 	
 	@FindBy(id= "legal-entities")
 	private WebElement LegalEntities;
+
+
+	@FindBy(xpath= "//*[@id='accessibility']")
+	private WebElement Accessibility;
+
+	@FindBy(linkText= "Logout")
+	private WebElement Logout;
+
+	@FindBy(xpath= "//*[@id='copyrightUHC']/p")
+	private WebElement copyrightUnitedHealthcare;
+
+	@FindBy(xpath= "//a[contains(text(),'Terms of Use')]")
+	private WebElement TearmsOfUse;
 	
-	@FindBy(id= "share-feedback")
-	private WebElement ShareFeedback  ;
+	@FindBy(xpath= "//a[contains(text(),'Privacy Policy')]")
+	private WebElement privacyPolicy;
+
+	@FindBy(xpath = "//div[@class='row footerLinks']//*[@id='lastupdated']")
+	private WebElement LastUpdate;
 	
-	@FindBy(id= "language-assistance")
+	@FindBy(xpath = "//a[contains(text(),'About United HealthCare')]")
+	private WebElement aboutUnitedHealthCare;
+
+	@FindBy(xpath= "//*[@id='language-assistance']")
 	private WebElement LanguageAssistance;
 	
 	@FindBy(id= "language-assistance-spanish")
@@ -88,6 +119,25 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(id = "IPerceptionsEmbed")
 	public WebElement iPerceptionframe;
+	
+	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
+	private WebElement healthAndWellnessHeader;
+	
+	@FindBy(id="healthwellness_6")
+	private WebElement healthAndWellness;
+	
+	@FindBy(id="pharmacies_5")
+	private WebElement pharmaciesAndPrescriptions;
+	
+	@FindBy(xpath="//h1[contains(text(),'Pharmacies & Prescriptions' )]")
+	private WebElement pharmaciesAndPrescriptionsHeader;
+
+	@FindBy(xpath="//h1[contains(text(),'Order Plan Materials' )]")
+	private WebElement orderPlanMaterialsHeader;
+	
+	@FindBy(id="ordermaterials")
+	private WebElement orderPlanMaterials;
+
 
 	private PageData footer;
 
@@ -129,31 +179,39 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public Object validateFooterLinks() throws InterruptedException{
-		Thread.sleep(5000);
-		if (HelpandContactUs.isDisplayed()
-				&& NoticesAndDisclosures.isDisplayed() 
-				&& AccessibilityStatement.isDisplayed()
-				&& ProviderDataInformation.isDisplayed()
-				&& LegalEntities.isDisplayed()
-				&& ShareFeedback.isDisplayed()){
-			System.out.println("======================Member support and Quick links are displayed =========================");
-		}
-		else {
-			Assert.assertFalse(false);
-		}
+		sleepBySec(5);
 		
-		if (LanguageAssistance.isDisplayed() && LanguageAssistanceSpanish.isDisplayed() && LanguageAssistanceChinese.isDisplayed())
-		{
-			System.out.println("====================== Bottom links are displayed =========================");
-			return true;
+		//feebackpopupClose();
+		String section="LEFT COLUMN CONTENT";
+		
+		Assert.assertTrue("PROBLEM - unable to locate 'Provider Data Information' on '"+section+"' section", footerValidate(ProviderDataInformation));
+		Assert.assertTrue("PROBLEM - unable to locate 'Notices And Disclosures' on '"+section+"' section", footerValidate(NoticesAndDisclosures));
+		Assert.assertTrue("PROBLEM - unable to locate 'legal Entities' on '"+section+"' section", footerValidate(LegalEntities));
+
+	    section="MIDDLE COLUMN CONTENT";
+		
+	    Assert.assertTrue("PROBLEM - unable to locate 'Help and Contact Us' on '"+section+"' section", footerValidate(HelpandContactUs));
+	    Assert.assertTrue("PROBLEM - unable to locate 'Share Feedback' on '"+section+"' section", footerValidate(shareFeedback));
+	    
+	    section="RIGHT COLUMN CONTENT";
+	
+		Assert.assertTrue("PROBLEM - unable to locate 'Accessibility' on '"+section+"' section", footerValidate(Accessibility));
+		Assert.assertTrue("PROBLEM - unable to locate 'LanguageAssistance' on '"+section+"' section", footerValidate(LanguageAssistance));
+		Assert.assertTrue("PROBLEM - unable to locate 'Asistencia' on '"+section+"' section", footerValidate(LanguageAssistanceSpanish));
+		Assert.assertTrue("PROBLEM - unable to locate 'LanguageAssistanceChinese' on '"+section+"' section", footerValidate(LanguageAssistanceChinese));
+
+	     section="Bottom links";
+		
+		Assert.assertTrue("PROBLEM - unable to locate 'Last Update' on '"+section+"' section", footerValidate(LastUpdate));
+		Assert.assertTrue("PROBLEM - unable to locate 'Terms Of Use' on '"+section+"' section", footerValidate(TearmsOfUse));
+		Assert.assertTrue("PROBLEM - unable to locate 'Privacy Policy' on '"+section+"' section", footerValidate(privacyPolicy));
+		Assert.assertTrue("PROBLEM - unable to locate 'CopyRight United Healthcare' on '"+section+"' section", footerValidate(copyrightUnitedHealthcare));
+		Assert.assertTrue("PROBLEM - unable to locate 'About United Healthcare' on '"+section+"' section", footerValidate(aboutUnitedHealthCare));
+		return null;
 		}
-		else {
-			Assert.assertFalse(false);
-		}
-		return null;}
 	
 	public FooterPage NavigateToClaimsPage(){
-		validate(claimsLink);
+		footerValidate(claimsLink);
 		if(claimsLink.isDisplayed()){
 			System.out.println("Claims link is displayed");
 			claimsLink.click();
@@ -163,7 +221,7 @@ public class FooterPage extends UhcDriver {
 	}	
 
 	public FooterPage NavigateToEOBPage(){
-		validate(EOBLink);
+		footerValidate(EOBLink);
 		if(EOBLink.isDisplayed()){
 			System.out.println("EOB link is displayed");
 			EOBLink.click();
@@ -173,7 +231,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToContactUsPage(){
-		validate(HelpandContactUs);
+		footerValidate(HelpandContactUs);
 		if(HelpandContactUs.isDisplayed()){
 			System.out.println("contactUSLink link is displayed");
 			HelpandContactUs.click();
@@ -183,7 +241,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToBenefitsPage(){
-		validate(benefits);
+		footerValidate(benefits);
 		if(benefits.isDisplayed()){
 			System.out.println("Benefits link is displayed");
 			benefits.click();
@@ -193,7 +251,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToPharmacyLocator(){
-		validate(homeBtn);
+		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
 			homeBtn.click();
@@ -209,7 +267,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToDCE(){
-		validate(homeBtn);
+		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
 			homeBtn.click();
@@ -225,15 +283,15 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToProfileandPref(){
-		validate(accountprofile);
+		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
 
 			if(accountSettingOption.isDisplayed()) {
-				System.out.println("Profile and Preferance link is displayed");
+				System.out.println("Profile and Preferences link is displayed");
 				accountSettingOption.click();
-				System.out.println("Profile and Preferance link is clicked");
+				System.out.println("Profile and Preferences link is clicked");
 			} 
 			
 		}
@@ -242,7 +300,7 @@ public class FooterPage extends UhcDriver {
 	
 	
 	public FooterPage NavigateToProfileandPref_ship(){
-		validate(accountprofile);
+		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
@@ -259,6 +317,104 @@ public class FooterPage extends UhcDriver {
 	public FooterPage validatePageFooter(){
 		return new FooterPage(driver);
 	}
+
+	public boolean footerValidate(WebElement element) {
+		long timeoutInSec=0;
+		return footerValidate(element, timeoutInSec);
+	} 
+
+	/**
+	 * to validate whether element exists with input timeout value control
+	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
+	 * @param element
+	 * @param timeoutInSec
+	 * @return
+	 */
+	public boolean footerValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
+
+
+	public void sleepBySec(int sec) {
+		System.out.println("Sleeping for '"+sec+"' sec");
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void eobCheckModelPopup(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		checkModelPopup(driver,5);
+		//note: UhcDriver default is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+	}
+	public void NavigateToHealthAndWelnessPage() {
+		    footerValidate(healthAndWellness);
+			healthAndWellness.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
+			if (driver.getTitle().contains("Health And Wellness")) {
+				System.out.println("Health and wellness Page is Loaded");
+			}
+			else{
+				Assert.fail(">>>>>>>>>Health and Wellness page not loaded<<<<<<<<<<<<,");
+			}
+
+	}
+	
+	public void NavigateToPharmaciesAndPrescriptionsPage() {
+
+		 footerValidate(pharmaciesAndPrescriptions);
+		    pharmaciesAndPrescriptions.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, pharmaciesAndPrescriptionsHeader, CommonConstants.TIMEOUT_90);
+			if (driver.getCurrentUrl().contains("pharmacy/overview.html")){
+				System.out.println("Pharmacies and Prescriptions Page is Loaded");
+			}
+			else{
+				Assert.fail(">>>>>>>>>Pharmacies and Prescriptions Page not loaded<<<<<<<<<<<<,");
+			}
+		
+	}
+	public void NavigateToOrderPlanMaterialsPage() {
+	
+		footerValidate(benefits);
+		sleepBySec(3);
+		footerValidate(orderPlanMaterials);
+		orderPlanMaterials.click();
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+		CommonUtility.waitForPageLoad(driver, orderPlanMaterialsHeader, CommonConstants.TIMEOUT_90);
+		if (driver.getCurrentUrl().contains("order-materials/overview.html")){
+			System.out.println("Order Plan Materials Page is Loaded");
+		}
+		else{
+			Assert.fail(">>>>>>>>>Order Plan Materials Page not loaded<<<<<<<<<<<<,");
+		}
+		
+		
+	}
+	
+
 
 }
 

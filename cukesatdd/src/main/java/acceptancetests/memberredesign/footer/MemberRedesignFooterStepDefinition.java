@@ -206,20 +206,6 @@ public class MemberRedesignFooterStepDefinition {
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
 
-	@Then("^the user navigates to Pharmacy locator page$")
-	public void user_navigates_to_PharmacyLocator_page(){
-		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
-		footerPage.NavigateToPharmacyLocator();
-		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-	}
-
-	@And("^the user validates the footer section in pharmacy locator page$")
-	public void user_validates_footer_in_pharmacyLocatorPage() throws InterruptedException{
-		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
-		footerPage.validateFooterLinks();
-		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-	}
-
 	@Then("^the user navigates to DCE home page$")
 	public void user_navigates_to_DCE_page(){
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
@@ -280,6 +266,62 @@ public class MemberRedesignFooterStepDefinition {
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
+	
+	@Then("^the user navigates to the Health and Wellness page$")
+	public void user_navigates_to_health_and_wellness_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToHealthAndWelnessPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Health and Wellness page$")
+	public void user_validates_footer_in_health_and_wellness_page() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	@Then("^the user navigates to the Pharmacies and Prescriptions page$")
+	public void user_navigates_to_PharmaciesAndPrescriptionsPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToPharmaciesAndPrescriptionsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Pharmacies and Prescriptions page$")
+	public void user_validates_footer_in_PharmaciesAndPrescriptionsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	@Then("^the user navigates to the Order Plan Materials page$")
+	public void user_navigates_to_OrderPlanMaterialsPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToOrderPlanMaterialsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Order Plan Materials page$")
+	public void user_validates_footer_in_OrderPlanMaterialsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	
+	@Then("^the user navigates to the Pharmacy Locator Page$")
+	public void user_navigates_to_PharmacyLocatorPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToPharmacyLocator();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Pharmacy Locator Page$")
+	public void user_validates_footer_in_PharmacyLocatorPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	
 }
 
 

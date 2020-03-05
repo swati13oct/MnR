@@ -522,7 +522,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn, 5);
 		validateNew(paymentHistoryApp);
-		validateNew(oneTimePaymentBtn);
+		//validateNew(oneTimePaymentBtn);
 		
 
 	}

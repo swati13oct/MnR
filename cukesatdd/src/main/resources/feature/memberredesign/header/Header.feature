@@ -15,7 +15,6 @@ Feature: 1.08 Member Header/Navigation validation
     Then I should be able to see and use the Claims tab Header
     And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
     And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
-    #Then I should be able to see and use the Coverage & Benefits tab Header
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
@@ -67,22 +66,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID       | planType    | memberType                |
 	      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
 
-  @header04 @findcarecostsheader @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
-	    Given login with following details logins in the member portal and validate elements
-	      | Plan Type   | <planType>   |
-	      | Member Type | <memberType> |
-	    And I view the global navigation Header
-	    Then I should be able to see and use the Find Care & Costs tab Header
-	
-	    Examples: 
-	      | TID   | planType | memberType   |
-	      | 15171 | MAPD     | GROUP_header |
-	      | 15171 | MAPD     | IND_header   |
-	      | 15171 | PCP      | IND_header   |
-	      | 15171 | MEDICA   | IND_header   |
-
-  @header05 @no_findcareheader @regressionMember @headerRegression
+@header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -109,3 +93,22 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID   | memberType           |
 	      | 15162 | Terminated_header    |  
 	
+	
+	############End of regression scenarios###################
+	
+#############################TO Be deleted###################################################
+######################Already covered in   @header01 #######################
+	  @header04 @findcarecostsheader 
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
+	    Given login with following details logins in the member portal and validate elements
+	      | Plan Type   | <planType>   |
+	      | Member Type | <memberType> |
+	    And I view the global navigation Header
+	    Then I should be able to see and use the Find Care & Costs tab Header
+	
+	    Examples: 
+	      | TID   | planType | memberType   |
+	      | 15171 | MAPD     | GROUP_header |
+	      | 15171 | MAPD     | IND_header   |
+	      | 15171 | PCP      | IND_header   |
+	      | 15171 | MEDICA   | IND_header   |
