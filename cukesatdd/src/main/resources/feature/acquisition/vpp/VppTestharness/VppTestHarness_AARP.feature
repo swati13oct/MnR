@@ -183,7 +183,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | year |
       | 00012 | vppdeeplink | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
-      | 00013 | vppdeeplink | Ulayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
+      #| 00013 | vppdeeplink | Ulayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 
   @vppTestharnessAARP07 @vppTestharnessAARPRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
@@ -225,7 +225,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | 00015 | vppdeeplink | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | 1590058773320 | H0543168000,H0543001000             | 2020 |     037 |
       | 00016 | vppdeeplink | Ulayer   |   78006 | YES           | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                    | 1590058773320 | S5921403000,S5820021000,S5921367000 | 2020 |     029 |
 
-  @vppTestharnessAARP10 @vppTestharnessAARPRun02
+  @vppTestharnessAARP09 @vppTestharnessAARPRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Details Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page for AARP
       | Site Name       | <siteName> |
@@ -264,7 +264,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | Plan Year       | <year>          |
       | CountyCode      | <Countyccode>   |
       | User Group      | <userGroup>     |
-    And the user validates plan summary for the below plan in UMS site for Medsup Deeplink
+    Then the user view plan details of the above selected plan in AARP site and validates from Deeplink
       | Plan Name | <planName> |
 
     Examples: 

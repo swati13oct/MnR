@@ -179,7 +179,7 @@ Feature: VPP Testharness flow Navigations for UHC Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid  | orgsite                                     | subdomain |
       | 00010 | vppdeeplink | Blayer   |   10001 | NO            | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 |  897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
-      | 00011 | vppdeeplink | Blayer   |   78006 | YES           | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
+      #| 00011 | vppdeeplink | Blayer   |   78006 | YES           | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
 
   @vppTestharnessUHC06 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
