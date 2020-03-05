@@ -179,7 +179,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			hidekeypad();
 			validate(countyInfo, 20);
-			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()));
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()),"County Name Error");
 		} else {
 			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn,"50%",5,true);
 			validate(multicountyText, 20);
