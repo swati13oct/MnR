@@ -442,7 +442,8 @@ public class HsidRegistrationStepDefinition {
 	
 	 public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
 	    	System.out.println("Getting records from MBR table");
-	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	  	  // Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	    	Connection con = MRScenario.getPDBDBConnection();
 	   	   Statement stmt = null;
 	        
 	          stmt = con.createStatement();
@@ -468,7 +469,8 @@ public class HsidRegistrationStepDefinition {
 	 public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
 	 		// The following steps will return no. of selected records based on
 	 		// first name and last name
-	 		Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+		// Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	 		Connection con = MRScenario.getPDBDBConnection();
 		   Statement stmt = null;
 	      ResultSet rs = null;
 	      stmt = con.createStatement();
@@ -511,7 +513,8 @@ public class HsidRegistrationStepDefinition {
 
 	 		// The following steps will return no. of selected records based on
 	 		// first name and last name
-	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+		// Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+	  	   Connection con = MRScenario.getPDBDBConnection();
 	  	   Statement stmt = null;
 	         ResultSet rs = null;
 	         stmt = con.createStatement();
@@ -548,7 +551,8 @@ public class HsidRegistrationStepDefinition {
 	 	}
 	 
 	 public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-	  	   Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());
+		// Connection con = MRScenario.getPDBDBConnection(MRScenario.getProperties());  
+		 Connection con = MRScenario.getPDBDBConnection();
 	  	   Statement stmt = null;
 	         ResultSet rs = null;
 	         stmt = con.createStatement();   

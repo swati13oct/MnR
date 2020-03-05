@@ -37,15 +37,15 @@ Feature: 1.09 Member Health and Wellness Page
     @healthAndWellness01c
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | false          |
-      | 15343 | SHIP_FED_COMBO    | RewardsMember     | true     | true          |
+      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false    | false  |
+      | 15343 | SHIP_FED_COMBO    | RewardsMember     | true     | true   |
  
   @healthAndWellness02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated UHC member on the new Member site, I want to validate health and wellness page content via UHC deeplink
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Deeplink     | http://stage-myuhcmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
+      | Deeplink     | https://stage-myuhcmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
     And I navigate to the Health and Wellness page from Rally
     And I should see the H&W Generic dashboard
     And I should see GET REWARD tile if available and be able to click it
@@ -62,7 +62,7 @@ Feature: 1.09 Member Health and Wellness Page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Deeplink     | http://stage-myaarpmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
+      | Deeplink     | https://stage-myaarpmedicare.uhc.com/rewards/program-overview?utm_campaign=website&utm_source=sendgrid.com&utm_medium=email |
     And I navigate to the Health and Wellness page from Rally
     And I should see the H&W Generic dashboard
     And I should see GET REWARD tile if available and be able to click it

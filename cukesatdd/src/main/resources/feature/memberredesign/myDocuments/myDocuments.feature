@@ -1,6 +1,10 @@
 @myDocuments  @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.7 Member My Documents Page
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPMyDocuments |
+
   @myDocuments01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
     Given login with following details logins in the member portal and validate elements

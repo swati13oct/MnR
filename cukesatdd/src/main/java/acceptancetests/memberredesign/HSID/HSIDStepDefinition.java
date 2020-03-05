@@ -415,9 +415,9 @@ public class HSIDStepDefinition {
 	@Given("^the user connect to DB$")
 	public void i_connected_to_Provisional_data_base() {
 		System.out.println("******the user connect to DB*****");
-		Map<String, String> props = new HashMap<String, String>();
-		props = loginScenario.getProperties();
-		loginScenario.getPDBDBConnection(props);
+//		Map<String, String> props = new HashMap<String, String>();
+		//props = loginScenario.getProperties();	
+		loginScenario.getPDBDBConnection();
 	}
 
 	@And("^the user select record from database$")
@@ -1033,13 +1033,14 @@ public class HSIDStepDefinition {
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
 		System.out.println("Config page URL="+configPgUrl);
-		/* to-be-enable
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
 		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		d.get(configPgUrl);
+		CommonUtility.checkPageIsReady(d);
 		try {
 			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			CommonUtility.waitForPageLoad(d, e, 5);
 			if (e.isDisplayed()) {
 				System.out.println("Element '"+e.toString()+"' found!!!!");
 				String value=e.getText();
@@ -1055,11 +1056,15 @@ public class HSIDStepDefinition {
 				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			if (MRScenario.environment.toLowerCase().contains("stage")) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			} else {
+				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
+			}
+			
 		}
 		d.quit();
-		*/
 	}
 
 }

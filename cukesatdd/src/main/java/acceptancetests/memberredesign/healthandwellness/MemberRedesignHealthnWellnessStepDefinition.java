@@ -79,7 +79,7 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 			return;
 		}
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
-			System.out.println("Running with testharness, go to secondary page like claims then go ot H&W tab");
+			System.out.println("Running with testharness, go to H&W page via link on testharness table");
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			HealthAndWellnessPage healthnWellnessPage = testHarness.navigateToHealthAndWellnessFromTestHarnessPage();
 			Assert.assertTrue("PROBLEM - unable to navigate to the Health and Wellness page", healthnWellnessPage!=null);
@@ -87,7 +87,15 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		} else {
 			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
-			healthnWellnessPage.validateHeaderOnDashborad();
+			int index=healthnWellnessPage.validateHeaderOnDashborad();
+			Assert.assertTrue("PROBLEM - unable to locate Health and Wellness option on dashboard", index!=-1);
+			if (index==1) {
+				System.out.println("located element: xpath=//header[@class='hide-mobile']//*[@id='sticky-nav']");
+			} else if (index==2) {
+				System.out.println("located element: xpath menuL1");
+			} else {
+				System.out.println("Located shadow root element with element index ="+index);
+			}
 			healthnWellnessPage.clickHealthnWellnessTab();
 			getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 		} 
@@ -101,8 +109,16 @@ public class MemberRedesignHealthnWellnessStepDefinition {
 		}
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		HealthAndWellnessPage healthnWellnessPage = new HealthAndWellnessPage(wd);
-		String cssPath=healthnWellnessPage.validateHeaderOnDashborad();
-		healthnWellnessPage.clickHealthnWellnessTab(cssPath);
+		int index=healthnWellnessPage.validateHeaderOnDashborad();
+		Assert.assertTrue("PROBLEM - unable to locate Health and Wellness option on dashboard", index!=-1);
+		if (index==1) {
+			System.out.println("located element: xpath=//header[@class='hide-mobile']//*[@id='sticky-nav']");
+		} else if (index==2) {
+			System.out.println("located element: xpath menuL1");
+		} else {
+			System.out.println("Located shadow root element with element index ="+index);
+		}
+		healthnWellnessPage.clickHealthnWellnessTab();
 		getLoginScenario().saveBean(PageConstantsMnR.MEM_REDESIGN_HEALTH_AND_WELLNESS_PAGE, healthnWellnessPage);
 	}
 	
