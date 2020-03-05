@@ -61,6 +61,7 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  | Higher               |
+      |   90201 | NO            |        | MA            | Medicaid          | another         | outnetwork |             |               | No             | Retail         | Yes,No,Yes,Yes                | Lower                |
 
   @PRE @planrecommendation @costpreferencespage @costpreferenceserror @regression @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine

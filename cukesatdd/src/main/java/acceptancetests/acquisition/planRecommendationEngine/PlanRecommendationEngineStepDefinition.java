@@ -522,6 +522,8 @@ public class PlanRecommendationEngineStepDefinition {
    	@Then("^user validate elements in additional services page$")
    	public void elements_additional_page() {
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
+   		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+   		headerAndFooter.breadCrumbs();
    		planSelectorAdditionalpage.additionalpage();
    	}
    	
@@ -542,6 +544,8 @@ public class PlanRecommendationEngineStepDefinition {
 	@Then("^user validate elements in cost preferences page$")
    	public void elements_costpreferences_page() {
 		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+   		headerAndFooter.breadCrumbs();
    		planSelectorPreferencespage.costpreferencepage();
    	}
 	
