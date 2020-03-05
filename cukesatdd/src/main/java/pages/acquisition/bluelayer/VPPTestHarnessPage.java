@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
@@ -240,6 +241,24 @@ public class VPPTestHarnessPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='Plan F']//h2")
 	private WebElement medsupPlanF;
+	
+	@FindBy(xpath = "//input[@id='vpp-zip-search']")
+	private WebElement providerZipInput;
+	
+	@FindBy(xpath = "//input[@id='vpp-planid']")
+	private WebElement providerPlanID;
+	
+	@FindBy(xpath = "//input[@id='vpp-planYear']")
+	private WebElement ProviderYear;
+	
+	@FindBy(xpath = "//button[text()='Go']")
+	private WebElement ProviderGo;
+	
+	@FindBy(xpath = "//button[@id='launch_vpp']")
+	private WebElement ProviderLaunchVPP;	
+	
+	@FindBy(xpath="//*[contains(text(),'Get Started')]")
+	private WebElement GetStarted;
 
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -484,5 +503,25 @@ public class VPPTestHarnessPage extends UhcDriver {
 		Assert.assertTrue("Not anble to See medsup plan", medsupPlanF.getText().contains(PlanName));
 		System.out.println("Validate we are on medsup page from deeplink");
 
+	}
+	
+	public ProviderSearchPage enterMandatoryFieldsToProviderSearch(String zipcode,String planId,String planyear) throws Exception {
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		validateNew(providerZipInput);
+		sendkeys(providerZipInput, zipcode);
+		sendkeys(providerPlanID, planId);
+		sendkeys(ProviderYear, planyear);
+		validateNew(ProviderGo);
+		switchToNewTabNew(ProviderGo);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+				}
+		return null;
+			}
+	
+	public void clickOnLaunchVVP() {
+		validateNew(ProviderLaunchVPP);
+		ProviderLaunchVPP.isEnabled();
+		ProviderLaunchVPP.click();
 	}
 }

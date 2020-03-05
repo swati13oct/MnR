@@ -177,10 +177,10 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid  | orgsite                                     | subdomain |
-      | 00010 | vppdeeplink | Blayer   |   10001 | NO            | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 |  897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
-      #| 00011 | vppdeeplink | Blayer   |   78006 | YES           | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county          | plantype | planName                                        | countyCode | stateCode | wtmcid | orgsite                                     | subdomain |
+      | 00010 | vppdeeplink | Blayer   |   10001 | NO            | New York County | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        420 |        36 | 897576 | https%253A%252F%252Fwww.myuhcplans.com%252F | eaton     |
 
+  #| 00011 | vppdeeplink | Blayer   |   78006 | YES           | Bexar County    | MAPD     | UnitedHealthcare Group Medicare Advantage (PPO) |        130 |        48 | 8003093 | https%253A%252F%252Fwww.myuhcplans.com%252F | kohler    |
   @vppTestharnessUHC06 @vppTestharnessUHCRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
@@ -312,6 +312,28 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
-      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
-      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
+      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+
+  @vppTestharnessUHC12 @vppTestharnessUHCRun02
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Provider Search with below parameters to plan summary page
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on ProviderSearch Navigates to provider Page for UHC
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | Plan Year       | <planyear>      |
+      | Plan ID         | <planid>        |
+    When user selects a provider and retuns to TestHarness page for UHC
+    And user click on LaunhVPP on testharness page and navigated to VPP on UHC
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
+      | PlanName | <planName> |
+
+    Examples: 
+      | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | planid      | planyear |
+      | 00023 | providersearch | Blayer   |   90210 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543168000 |     2020 |

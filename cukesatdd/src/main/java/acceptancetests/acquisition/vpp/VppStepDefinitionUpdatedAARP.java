@@ -2583,6 +2583,45 @@ public class VppStepDefinitionUpdatedAARP {
 		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
 		}
 	
+	@And("^the user enters Mandatory fields on ProviderSearch Navigates to provider Page for AARP$")
+	public void user_enters_Mandatory_fields_on_ProviderSearch_Navigates_to_provider_Page_for_AARP(DataTable planAttributes) throws Exception {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipCode = givenAttributesMap.get("Zip Code");
+		String planYear = givenAttributesMap.get("Plan Year");
+		String planID = givenAttributesMap.get("Plan ID");
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		ProviderSearchPage providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode,planID,planYear);
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+		}
+	
+	
+	@And("^user click on LaunhVPP on testharness page and navigated to VPP on AARP$")
+	public void user_click_on_LaunhVPP_on_testharness_page_and_navigated_to_VPP_on_AARP(DataTable planAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.clickOnLaunchVVP();
+		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+	
+	}
+	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

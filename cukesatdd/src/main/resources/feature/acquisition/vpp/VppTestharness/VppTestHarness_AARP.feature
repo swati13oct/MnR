@@ -183,8 +183,8 @@ Feature: VPP Testharness flow Navigations for AARP Site
     Examples: 
       | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | deeplink         | year |
       | 00012 | vppdeeplink | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | favPlansDeepLink | 2020 |
-      #| 00013 | vppdeeplink | Ulayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
 
+  #| 00013 | vppdeeplink | Ulayer   |   10001 | NO            | New York County    | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)         | favPlansDeepLink | 2020 |
   @vppTestharnessAARP07 @vppTestharnessAARPRun02
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page for AARP
@@ -294,6 +294,28 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | Plan Name | <planName> |
 
     Examples: 
-      | TID   | THPage      | siteName | zipcode | isMultiCounty | county       | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
-      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
-      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Bexar County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | TID   | THPage      | siteName | zipcode | isMultiCounty | county             | plantype | planName | uri                                         | mpbed      | ebrc                                                                       | dpsd       | intref                     | mpaed      | genderCode | tobaccoUser | dob        |
+      | 00021 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+      | 00022 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
+
+  @vppTestharnessAARP11 @vppTestharnessAARPRun02
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Provider Search with below parameters to plan summary page
+    Given the user is on VPP TestHarness page for AARP
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters Mandatory fields on ProviderSearch Navigates to provider Page for AARP
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | Plan Year       | <planyear>      |
+      | Plan ID         | <planid>        |
+    When user selects a provider and retuns to TestHarness page for AARP
+    And user click on LaunhVPP on testharness page and navigated to VPP on AARP
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
+
+    Examples: 
+      | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | planid      | planyear |
+      | 00023 | providersearch | Blayer   |   90210 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543168000 |     2020 |
