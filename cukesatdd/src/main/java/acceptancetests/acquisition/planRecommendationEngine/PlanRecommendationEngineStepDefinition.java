@@ -483,6 +483,14 @@ public class PlanRecommendationEngineStepDefinition {
                     }
     }
        
+       @Then("^user search and not found a drug in Drug Page$")
+   	public void notfound_drugs_page(DataTable givenAttributes) {
+   		readfeaturedata(givenAttributes);
+   		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+   		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+   		planSelectorDrugspage.drugNotFound(inputValues.get("Search Text"));
+   	}
+       
        @And("^user validate elements in pharmacy page$")
    	public void elements_pharmacy_page() {
     	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);

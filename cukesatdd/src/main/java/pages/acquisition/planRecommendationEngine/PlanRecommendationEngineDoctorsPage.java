@@ -218,6 +218,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                         			Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
                         			modalFinddoctors.click();
                                 	validateLinksanotherWindow(curWindow,"Doctors",search, count );
+                                	threadsleep(5000);
                                 	getConfimationPopupResults(count);
                                 	verifyConfirmationmodalResults(count,werallyResults,confirmationResults);
 //                                	doctorConfirmationModellookup();

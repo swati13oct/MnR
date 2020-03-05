@@ -105,7 +105,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
 	private WebElement zipcodePageQuestionMark;
 	
-	@FindBy(xpath = "//*[@class='mt-3']/p")
+	@FindBy(css = "#referenceTxt")
 	private WebElement zipcodeTextLabel;
 	
 	@FindBy(xpath = "//*[@for='MultipleCounty']")
