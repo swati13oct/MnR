@@ -364,7 +364,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(text(),'Start application')])[2]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -2853,11 +2853,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		
+		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 60);
 		Start_ApplicationBtn.click();
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
 		insuredStatus.click();
 		Thread.sleep(2000);
 		nextButton.click();
