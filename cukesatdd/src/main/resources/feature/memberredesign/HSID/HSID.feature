@@ -1,5 +1,5 @@
 @hsid 
-Feature: To test HSID registration flow
+Feature: To test HSID registration flow & member SignIn
 
    @hsid1 @US968241 @hsidregistration123
    Scenario Outline:Verify HSID registration.

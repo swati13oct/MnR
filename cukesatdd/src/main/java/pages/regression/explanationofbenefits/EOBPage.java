@@ -44,7 +44,7 @@ public class EOBPage extends UhcDriver{
 
 	@FindBy(className="btn custom-date-search-btn")
 	private WebElement searchButton;
-
+	
 	@FindBy(xpath="//a[contains(@class, 'learnmoreeob')]")
 	private WebElement learnMoreLink;
 
@@ -157,7 +157,8 @@ public class EOBPage extends UhcDriver{
 
 		//OPtionSelection.click();
 		select.selectByVisibleText(dateRange);
-		validateDateRangeContentDisplayed(dateRange);
+		waitforElementDisapper(By.className("loading-block eobloadingimage"), 10);
+		//validateDateRangeContentDisplayed(dateRange);
 		return new EOBPage(driver);
 	}
 
@@ -597,6 +598,7 @@ public class EOBPage extends UhcDriver{
 	 */
 
 	public void validateEOBStatements(String numberOfEOB){
+		String path;
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -615,6 +617,9 @@ public class EOBPage extends UhcDriver{
 				System.out.println("EOB at" + i + " displayed correctly");
 				CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]")), 20);
 				WebElement pdflink = driver.findElement(By.xpath("//*[contains(@id, eoblist"+i+")]//*[contains(text(), 'kb')]"));
+				//path = "//*[contains(@id, 'eoblist"+i+"')]//*[contains(text(), 'kb')]";
+				//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath(path)), 20);
+				//WebElement pdflink = driver.findElement(By.xpath(path));
 				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
 				if(pdflink.getText().contains("0kb") || pdflink.getText().contains("0 kb")) {
 					Assert.fail("EOB at " + i + "displays 0kb PDF size");

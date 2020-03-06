@@ -49,9 +49,9 @@ q2_jun_grp0076/Password@6,MAPD,TEXASERS_Branding,NON LIS,
 q1_feb_ship_20_001/Password@1,SHIP,SHIPOnly_Branding,NON LIS,
 ma_nice_term/Password@1,MA,Terminated_Group_MA_NICE_ContactUs,,
 q2_jun_grp0440/Password@1,MAPD,Terminated_Group_MAPD_COSMOS_ContactUs,,
-q2_jun_ssup001/Password@1,SSP,Terminated_Group_SSP_ContactUs,,
-q3_sep_uhc0061/Password@1,MA,Terminated_Individual_MA_COSMOS_ContactUs,,
-q2_jun_aarp0059/Password@2,MAPD,Terminated_Individual_MAPD_NICE_ContactUs,,
+q3_sep_UAT4_UHC003/Password@1,SSP,Terminated_Group_SSP_ContactUs,,
+q3_sep_UAT4_UHC067/Password@1,MA,Terminated_Individual_MA_COSMOS_ContactUs,,
+q3_sept_UAT4_AARP_013/Password@2,MAPD,Terminated_Individual_MAPD_NICE_ContactUs,,
 q2_jun_grp008/Password@1,MAPD,CALPERSGroup_ContactUs,,
 q2_jun_grp0090/Password@1,MAPD,GEORGIAGroup_ContactUs,,
 q4_grp_dec0003/Password@1,MAPD,TEXASERSGroup_ContactUs,,
@@ -443,3 +443,4 @@ q1_feb_2020SHIP_001/Password@1,SHIP,MULTI_IND_EFF_PDnR
 q3_sep_UAT4_AARP240/Password@1,COMBO,FedAndShip_MyDocuments
 q4_TestData_001/Password@1,MAPD,Group_MyDocuments
 q1_feb_2020SHIP_019/Password@1,SHIP,Medsupp,header,
+mapdtest1/Password@1,GrpMAPD,preeffectiveIndMAPD001,NON LIS,

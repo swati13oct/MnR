@@ -68,8 +68,9 @@ Feature: 1.15 Member pre-effective functionality
 	   And the user validates see more ways to contact us section                                          
      And the user validates on clicking contact us link it should route to contact us page 
     Examples: 
-      | planType  | memberType          | copayCategory |
-      | IndPDP          | preeffectiveIndPDP        | NON LIS       |
+      | planType  | memberType                 | copayCategory |
+      | IndPDP    | preeffectiveIndPDP         | NON LIS       |
+      | GrpMAPD   | preeffectiveIndMAPD001     | NON LIS       |
       
 
   @preEffective3 @preffectiveRegistration
