@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionEOBRx.json",detailedReport = tr
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBRx")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBRx.json" }, tags = { " @Rx_EOBs" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBRx.json" }, tags = { "@Rx_EOBs" })
 public class RunMRATDDRegressionEOBRx {
 
 }

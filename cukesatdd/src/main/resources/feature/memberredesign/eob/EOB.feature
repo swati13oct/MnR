@@ -19,46 +19,63 @@ Feature: 1.04 To Test EOB for Members
     Then the user validates To Date older than From Date errors
     When the user selects Custom Search with Date Range greater than 18 months
     Then the user validates greater than 18 months error
+    Then the user selects Custom Search with future date for From and To Date values
+    Then the user validates future Date errors
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     #Then the user validates Learn More how to read medical eob PDF
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6 months ----  
     And the user selects the desired date range
       | Date Range | Last 6 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     #Then the user validates Learn More how to read medical eob PDF
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12 months ----  
     And the user selects the desired date range
       | Date Range | Last 12 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     #Then the user validates Learn More how to read medical eob PDF
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 18 months ----  
     And the user selects the desired date range
       | Date Range | Last 18 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
-    #Then the user validates Learn More how to read medical eob PDF
+    Then the user validates Learn More how to read medical eob PDF
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Custom Search ----  
     And the user selects the desired date range
       | Date Range | Custom Search |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     #Then the user validates Learn More how to read medical eob PDF
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
-    @COSMOS_EOBs
+    @COSMOS_EOBs @devRegression
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
+
+    @COSMOS_EOBs
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
       | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
+     #note: SSP EOB is disabled
      # | 04    | SSP      | PDP_SSP_COMBO_EOB | Medical           | true        |
 
     @NICE_EOBs
@@ -93,23 +110,31 @@ Feature: 1.04 To Test EOB for Members
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
       | Date Range | Last 3-6 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
       | Date Range | Last 6-12 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Validate Date Range Last 12- months ----  
     And the user selects the desired date range
       | Date Range | Last 12-18 months |
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
@@ -325,3 +350,54 @@ Feature: 1.04 To Test EOB for Members
       | TID   | planType | memberType     | dateRange      | eobType | eobCount | planTab1 | planTab2 |
       | 15167 | PDP      | comboEOBMedSup | Last 18 Months | Medical |        0 | PDP      | MedSup   |
 
+#------------ clean up later
+   #experiment
+  @eob01 @E2E @regressionMember 
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    And the user selects the eob type
+      | EOB Type | <eobType> |
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 6-12 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+##    Then the user validates Learn More how to read medical eob PDF
+    Then the user clicks on first eob from the list to validate pdf
+    Then the user validates EOB count between API and UI are the same
+
+    @COSMOS_EOBs
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+      | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
+
+
+
+ #experiment DREAM EOB
+  @eob01 @E2E @regressionMember 
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+   # Then the user validates the header section content on DREAM EOB
+   # Then the user validates site leaving pop up after clicking Adobe link
+   # Then the user validates Need Help section
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 6-12 months |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content for DREAM EOB
+    Then the user clicks on first eob from the list to validate pdf for DREAM EOB
+    Then the user validates EOB count between API and UI are the same
+
+    @COSMOS_EOBs
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
+#      | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
+      | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
+
+#--------------------------------------------------

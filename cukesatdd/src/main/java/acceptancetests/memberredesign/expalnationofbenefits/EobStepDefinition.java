@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
+import pages.regression.explanationofbenefits.EobApiResponse;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -107,7 +108,10 @@ public class EobStepDefinition {
 			searchNote=new ArrayList<String>();
 			searchNote.add("----- TEST NOTE ------------------------------");
 			String tmp=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
-			searchNote.add("EOB TYPE="+tmp);
+			if (tmp==null) 
+				searchNote.add("DREAM EOB");
+			else
+				searchNote.add("EOB TYPE="+tmp);
 
 		}
 		searchNote.add("Date range='"+dateRange+"' has EOB count="+searchResultMap.get(dateRange));
@@ -123,6 +127,22 @@ public class EobStepDefinition {
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT_MAP, eobCountMap);
 	}
 
+	@Then("^the user obtains API response info for validation$")
+	public void getApiResponse() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		String eobType="dream";
+		if (eobTypeData!=null) 
+			eobType=eobTypeData;
+		String apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
+		
+		EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+		Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+		getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Then("^the user validates the eob count for all available search ranges$") 
 	public void validateEobCountForAllSearchRanges(DataTable givenAttributes) {
@@ -196,6 +216,18 @@ public class EobStepDefinition {
 		eobPage.validateBlankDateFieldError();
 	}
 
+	@When("^the user selects Custom Search with future date for From and To Date values$") //keep
+	public void user_selects_date_range_invalidCustSearch_futureDates(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.doInvalidCustomSearchFutureDate();
+	}
+
+	@Then("^the user validates future Date errors$") //keep
+	public void validate_date_range_invalidCustSearch_futureDates_error(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateFutureDateError();
+	}
+
 	@When("^the user selects Custom Search with To Date older From Date values$") //keep
 	public void user_selects_date_range_invalidCustSearch_ToOlderThanFrom(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
@@ -227,10 +259,18 @@ public class EobStepDefinition {
 		eobPage.validateHeaderSectionContent(planType);
 	}
 	
+	@Then("^the user validates the header section content on DREAM EOB$")
+	public void validate_headerSection_DREAMEOB() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateHeaderSectionContent_DREAMEOB(planType);
+	}
+	
 	@Then("^the user validates the eob page content for SSP$")
 	public void validate_sspContent() {
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateSspContent();
+		Assert.assertTrue("PROBLEM - currently SSP EOB is disabled, should not be able to bring up the EOB page content for SSP user", eobPage==null); 
+		//keep  eobPage.validateSspContent();
 	}
 
 	@Then("^the user validates the eob page content for PHIP$")
@@ -287,27 +327,71 @@ public class EobStepDefinition {
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		int eobResultCount=eobPage.getNumEobAfterSearch();
-		if (eobResultCount>0) {
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
+
+		if (ui_eobResultCount>0) {
+			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
 			eobPage.validateTextElements(planType, memberType, eobTypeData);
-			eobPage.validateEOBStatements(eobResultCount);
+			eobPage.validateEOBStatements(ui_eobResultCount, eobApiResponse);
 		} else {
 			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
 		}
-
+	}
+	
+	@Then("^the user validates EOB count between API and UI are the same$")
+	public void user_validate_api_ui_count_match() {
+		int eobResultCount= (Integer) getLoginScenario().getBean(EobCommonConstants.UI_EOB_COUNT);
+		EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
+		int eobCountFromApi=eobApiResponse.getNumEobs();
+		Assert.assertTrue("PROBLEM - number of EOB count is not the same between API and UI.  UI has '"+eobResultCount+"' | API has '"+eobCountFromApi+"' ", eobResultCount==eobCountFromApi);
+	}
+	
+	
+	@Then("^the user validates search result section content for DREAM EOB$")
+	public void user_validate_searchResult_dream() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
+		
+		if (ui_eobResultCount>0) {
+			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
+			//TODO comment out for now b/c current UI not working as copy deck version
+			//eobPage.validateTextElements(planType, memberType, eobTypeData);
+			eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse);
+		} else {
+			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
+		}
 	}
 
 	@And("^the user clicks on first eob from the list to validate pdf$") //keep
 	public void the_user_clicks_on_first_eob_from_the_list() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.clickOnEob();
+			eobPage.clickOnEob(planType);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}
 	}
 
+	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$") //keep
+	public void the_user_clicks_on_first_eob_from_the_list_dream() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
+		if (eobCount>0) {
+			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+			eobPage.clickOnEob_dream(planType);
+		} else {
+			System.out.println("Skip step because there is 0 EOB");
+		}
+	}
+	
 	@Then("^the user navigates to EOB page$") //keep
 	public void user_views_EOBpagehsid() throws InterruptedException {   
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
@@ -334,11 +418,6 @@ public class EobStepDefinition {
 			Assert.assertTrue("Issue : EOB Page is not Displayed", eobPage!=null);
 	}
 
-	@And("^the user gets the error message for PHIP member$") //keep
-	public void user_gets_error_message_PHIP(){
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validatePHIPErorrMessage();	
-	}
 
 
 
