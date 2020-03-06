@@ -523,9 +523,9 @@ public class HealthAndWellnessPage extends UhcDriver{
 			termsAndConditionsElement=termsAndConditions_ship;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(termsAndConditionsElement));
-		expectedHref="https://member.int.uhc.com/active/terms";
+		expectedHref="active/terms";
 		actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
+		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
 			termsAndConditionsElement.click();
 			CommonUtility.checkPageIsReady(driver);
