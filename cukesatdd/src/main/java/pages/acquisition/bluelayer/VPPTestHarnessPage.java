@@ -266,6 +266,27 @@ public class VPPTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Launch VPP with Providers data']")
 	private WebElement launchVPPwithProvidersdata;
 
+	@FindBy(xpath = "//input[contains(@ng-model, 'Zip')]")
+	public WebElement ZipCode;
+
+	@FindBy(xpath = "//button[contains(@type ,'submit') and contains(text(), 'Search')]")
+	public WebElement ZipSearch;
+
+	@FindBy(xpath = "//select[contains(@id ,'dce-county-select')]")
+	public WebElement CountyDropDown;
+
+	@FindBy(xpath = "//select[contains(@id ,'plan-select')]")
+	public WebElement PlanDropDown;
+
+	@FindBy(xpath = "//button[contains(@type ,'submit') and contains(text(), 'DCE')]")
+	public WebElement DCEbutton_StartDCE;
+
+	@FindBy(xpath = "//input[@id='helperModeCheckbox1']")
+	private WebElement scen3HelperDCE;
+
+	@FindBy(xpath = "//a[text()='Redirect to VPP from DCE']")
+	private WebElement redirecttoVPPfromDCE;
+
 	public VPPTestHarnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -537,5 +558,32 @@ public class VPPTestHarnessPage extends UhcDriver {
 		validateNew(ProviderLaunchVPP);
 		ProviderLaunchVPP.isEnabled();
 		ProviderLaunchVPP.click();
+	}
+
+	public void enterZipandSearch(String ZIP) {
+		ZipCode.sendKeys(ZIP);
+		jsClickNew(ZipSearch);
+	}
+
+	public void SelectCountyDCE(String countyName) {
+		validateNew(CountyDropDown);
+		jsClickNew(CountyDropDown);
+		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '" + countyName + "')]"));
+		CountySelection.click();
+
+	}
+
+	public void selectPlan(String planName) {
+		validateNew(PlanDropDown);
+		jsClickNew(PlanDropDown);
+		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '" + planName + "')]"));
+		CountySelection.click();
+	}
+
+	public void redirecttoVPPfromDCE() throws Exception {
+		validateNew(scen3HelperDCE);
+		jsClickNew(scen3HelperDCE);
+		validate(redirecttoVPPfromDCE);
+		jsClickNew(redirecttoVPPfromDCE);
 	}
 }

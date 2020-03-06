@@ -3658,4 +3658,16 @@ catch (Exception e) {
 		}
 	}
 	
+	public boolean druginfo(String planName) {
+
+		WebElement EdidrugLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+		String mpdruginfo=EdidrugLink.getText();
+        System.out.println(mpdruginfo);
+		if (mpdruginfo.toLowerCase().contains("drugs covered")) {
+			return true;
+		}
+		return false;
+	}
+	
 }

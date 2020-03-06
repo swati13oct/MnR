@@ -1,6 +1,9 @@
 @vppMicroAppUHC
 Feature: VPP Testharness flow Navigations for UHC Site
 
+  ##############
+  ##Testharness vppzipcode Scenarios
+  ##############
   @vppTestharnessUHC01 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Enter Zipcode on testharness page and Verify Navigation to VPP page
     Given the user is on VPP TestHarness page
@@ -139,6 +142,9 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00005 | vppzipcode | Blayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
       | 00006 | vppzipcode | Blayer   |   28105 | YES           | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
+  ##############
+  ##Testharness vppdeeplink Scenarios
+  ##############
   @vppTestharnessUHC04 @vppTestharnessUHCRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Plan Summary Deeplink with below parameters to plan summary page
     Given the user is on VPP TestHarness page
@@ -316,6 +322,9 @@ Feature: VPP Testharness flow Navigations for UHC Site
       | 00021 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
       | 00022 | vppdeeplink | Blayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
 
+  ##############
+  ##Testharness providersearch Scenarios
+  ##############
   @vppTestharnessUHC12 @vppTestharnessUHCRun03
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Provider Search with below parameters to plan summary page
     Given the user is on VPP TestHarness page
@@ -352,3 +361,26 @@ Feature: VPP Testharness flow Navigations for UHC Site
     Examples: 
       | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           |
       | 00024 | providersearch | Blayer   |   90002 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+  ##############
+  ##Testharness vppdce Scenarios
+  ##############
+  @vppTestharnessUHC14 @vppTestharnessUHCRun03
+  Scenario Outline: TID: TID> -zipcode: <zipcode> - Navigation Redirect to VPP from DCE default from Testharness page to VPP
+    Given the user is on VPP TestHarness page
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters following information in the UMS Acquisition Site VPPDCE TestHarness page
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Plan Name       | <planName>        |
+    And user selects helper mode for Redirect to VPP from DCE on UHC
+    When user views plans of the below plan type in UMS site for next year
+      | Plan Type | <plantype> |
+    Then Verify X out of Y drugs covered information is displayed on Plan Summary page ums
+      | PlanName | <planName> |
+
+    Examples: 
+      | TID   | THPage | siteName | zipcode | isMultiCounty | county         | plantype | planName                             |
+      | 00025 | vppdce | Blayer   |   35616 | No            | Colbert County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |

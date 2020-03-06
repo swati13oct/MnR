@@ -2633,6 +2633,49 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
+	@When("^the user enters following information in the AARP Acquisition Site VPPDCE TestHarness page$")
+	public void the_user_enters_following_information_in_the_AARP_Site_VPPDCE_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String ZipCode = inputAttributesMap.get("Zip Code");
+		String CountyName = inputAttributesMap.get("County Name");
+		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
+		String planName = inputAttributesMap.get("Plan Name");
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterZipandSearch(ZipCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
+			vppTestHarnessPage.SelectCountyDCE(CountyName);
+		}
+		vppTestHarnessPage.selectPlan(planName);
+		}	
+	
+	
+	@And("^user selects helper mode for Redirect to VPP from DCE on AARP$")
+	public void user_selects_helper_mode_for_Redirect_to_VPP_from_DCE_on_AARP() throws Exception {
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.redirecttoVPPfromDCE();
+		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
+		if(plansummaryPage!=null){
+			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		}
+		}
+	
+	@Then("^Verify X out of Y drugs covered information is displayed on Plan Summary page AARP$")
+	public void verify_drugs_covered_AARP(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
+	}
+	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

@@ -1,6 +1,9 @@
 @vppMicroAppAARP
 Feature: VPP Testharness flow Navigations for AARP Site
 
+  ##############
+  ##Testharness vppzipcode Scenarios
+  ##############
   @vppTestharnessAARP01 @vppTestharnessAARPRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Enter Zipcode on testharness page and Verify Navigation to VPP page
     Given the user is on VPP TestHarness page for AARP
@@ -142,6 +145,9 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | 00005 | vppzipcode | Ulayer   |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  |
       | 00006 | vppzipcode | Ulayer   |   28105 | YES           | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |
 
+  ##############
+  ##Testharness vppdeeplink Scenarios
+  ##############
   @vppTestharnessAARP04 @vppTestharnessAARPRun01
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Enter Zipcode on testharness page and Verify Navigation to VPP page
     Given the user is on VPP TestHarness page for AARP
@@ -298,6 +304,9 @@ Feature: VPP Testharness flow Navigations for AARP Site
       | 00021 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans/medicare-supplement-plans.html | 2018-01-01 | https://www.aarpmedicaresupplement.uhc.com/medicare-information-guide.html | 2020-04-01 | AARPMedicareSupplement.com | 2018-01-01 | Male       | Yes         | 1950-03-25 |
       | 00022 | vppdeeplink | Ulayer   |   10001 | No            | Los Angeles County | MAPD     | Plan F   | health-plans.html                           | 2018-01-01 |                                                                            | 2020-04-01 |                            | 2018-01-01 | Male       | Yes         | 1950-03-25 |
 
+  ##############
+  ##Testharness providersearch Scenarios
+  ##############
   @vppTestharnessAARP12 @vppTestharnessAARPRun03
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Navigation from Provider Search with below parameters to plan summary page
     Given the user is on VPP TestHarness page for AARP
@@ -334,3 +343,26 @@ Feature: VPP Testharness flow Navigations for AARP Site
     Examples: 
       | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           |
       | 00024 | providersearch | Ulayer   |   90002 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+  ##############
+  ##Testharness vppdce Scenarios
+  ##############
+  @vppTestharnessAARP14 @vppTestharnessAARPRun03
+  Scenario Outline: TID: TID> -zipcode: <zipcode> - Navigation Redirect to VPP from DCE default from Testharness page to VPP
+    Given the user is on VPP TestHarness page for AARP
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    When the user enters following information in the AARP Acquisition Site VPPDCE TestHarness page
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+      | Plan Name       | <planName>        |
+    And user selects helper mode for Redirect to VPP from DCE on AARP
+    And the user views the plans of the below plan type in AARP site and select Next year
+      | Plan Type | <plantype> |
+    Then Verify X out of Y drugs covered information is displayed on Plan Summary page AARP
+      | PlanName | <planName> |
+
+    Examples: 
+      | TID   | THPage | siteName | zipcode | isMultiCounty | county         | plantype | planName                             |
+      | 00025 | vppdce | Blayer   |   35616 | No            | Colbert County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
