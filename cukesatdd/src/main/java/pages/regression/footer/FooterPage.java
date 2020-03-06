@@ -5,15 +5,12 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.regression.healthandwellness.HealthAndWellnessPage;
 
 public class FooterPage extends UhcDriver {
 
@@ -138,18 +135,17 @@ public class FooterPage extends UhcDriver {
 	@FindBy(id="ordermaterials")
 	private WebElement orderPlanMaterials;
 
-
-	private PageData footer;
-
 	public FooterPage (WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public void openAndValidate(){
 		// TODO Auto-generated method stub
 	}
+
+	/* tbd 
 	public void feebackpopupClose() throws InterruptedException
 	{ //waitForloader(driver,overlay, 20);
 		Thread.sleep(20000);
@@ -164,8 +160,8 @@ public class FooterPage extends UhcDriver {
 		}
 	}
 	
-	public void feebackpopupClose_shortwait() throws InterruptedException
-	{ //waitForloader(driver,overlay, 20);
+	    public void feebackpopupClose_shortwait() throws InterruptedException {
+		//waitForloader(driver,overlay, 20);
 		Thread.sleep(6000);
 		if (iPerceptionframe.isDisplayed()) {
 
@@ -176,12 +172,11 @@ public class FooterPage extends UhcDriver {
 		} else {
 			System.out.println("iPerception Pop Up not displayed");
 		}
-	}
+	} */
 
 	public Object validateFooterLinks() throws InterruptedException{
 		sleepBySec(5);
 		
-		//feebackpopupClose();
 		String section="LEFT COLUMN CONTENT";
 		
 		Assert.assertTrue("PROBLEM - unable to locate 'Provider Data Information' on '"+section+"' section", footerValidate(ProviderDataInformation));
@@ -298,7 +293,6 @@ public class FooterPage extends UhcDriver {
 		return null;
 	}
 	
-	
 	public FooterPage NavigateToProfileandPref_ship(){
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
@@ -312,7 +306,6 @@ public class FooterPage extends UhcDriver {
 		}
 		return null;
 	}
-	
 
 	public FooterPage validatePageFooter(){
 		return new FooterPage(driver);
@@ -358,13 +351,14 @@ public class FooterPage extends UhcDriver {
 		}
 	}
 
-	public void eobCheckModelPopup(WebDriver driver) {
+	public void footerCheckModelPopup(WebDriver driver) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
 		checkModelPopup(driver,5);
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
 	}
+	
 	public void NavigateToHealthAndWelnessPage() {
 		    footerValidate(healthAndWellness);
 			healthAndWellness.click();
@@ -377,11 +371,9 @@ public class FooterPage extends UhcDriver {
 			else{
 				Assert.fail(">>>>>>>>>Health and Wellness page not loaded<<<<<<<<<<<<,");
 			}
-
 	}
 	
 	public void NavigateToPharmaciesAndPrescriptionsPage() {
-
 		 footerValidate(pharmaciesAndPrescriptions);
 		    pharmaciesAndPrescriptions.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -393,10 +385,9 @@ public class FooterPage extends UhcDriver {
 			else{
 				Assert.fail(">>>>>>>>>Pharmacies and Prescriptions Page not loaded<<<<<<<<<<<<,");
 			}
-		
 	}
+
 	public void NavigateToOrderPlanMaterialsPage() {
-	
 		footerValidate(benefits);
 		sleepBySec(3);
 		footerValidate(orderPlanMaterials);
@@ -410,12 +401,7 @@ public class FooterPage extends UhcDriver {
 		else{
 			Assert.fail(">>>>>>>>>Order Plan Materials Page not loaded<<<<<<<<<<<<,");
 		}
-		
-		
 	}
-	
-
-
 }
 
 

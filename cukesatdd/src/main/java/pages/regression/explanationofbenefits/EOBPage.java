@@ -17,6 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.joda.time.DateTime;
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -304,6 +305,7 @@ public class EOBPage extends EOBBase{
 			customSearchBtn.click();
 		}
 		waitForEobPageToLoad();
+		sleepBySec(3);
 
 		int totalEob=getNumEobAfterSearch();
 		
@@ -831,7 +833,7 @@ public class EOBPage extends EOBBase{
 		return numberOfPageDisplayed;
 	}
 
-	public void clickOnEob (String planType) {
+	public void clickOnEob (String planType, String memberId) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
 		eobFirst.click();
@@ -861,6 +863,14 @@ public class EOBPage extends EOBBase{
 				int responseCode;
 				responseCode = urlConnection.getResponseCode();
 				System.out.println("TEST - responseCode="+ urlConnection.getResponseCode());
+				if (urlConnection.getResponseCode()!=200) {
+					System.out.println("TEST - retry one more time as last attempt");
+					TestURL = new URL(pdfUrl);
+					urlConnection = (HttpURLConnection) TestURL.openConnection();        
+					urlConnection.setRequestProperty("uuid", targetUuid);      
+					responseCode = urlConnection.getResponseCode();
+				}
+				
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 ("+urlConnection.getResponseCode()+") response code.  "
 						+ "PDF link='"+pdfUrl+"'",
@@ -874,6 +884,16 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
 						+ "Do not expect to see '"+error+"'", 
 						!PDFText.contains(error));
+				
+				//note: check to see if EOB contains memebr ID
+				String memberId_portion=memberId;
+				if (memberId.contains("-")) {
+					String[] tmp=memberId.split("-");
+					memberId_portion=tmp[0];
+				}
+				Assert.assertTrue("PROBLEM : pdf content does not contain the exected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+						PDFText.contains(memberId_portion));
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - got exception when opening pdf link, unable to validate pdf content",false);
@@ -886,10 +906,10 @@ public class EOBPage extends EOBBase{
 		//note: Switch back to original window
 		driver.close();
 		driver.switchTo().window(newTab.get(0));
-		// KEEP TBD - getting 500 response code with the pdfUrl right now, not sure why
+		
 	}
 
-	public void clickOnEob_dream(String planType) {
+	public void clickOnEob_dream(String planType, String memberId) {
 		CommonUtility.waitForPageLoad(driver, eobFirst_dream, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst_dream));
 		eobFirst_dream.click();
@@ -931,6 +951,14 @@ public class EOBPage extends EOBBase{
 						+ "Do not expect to see '"+error+"'", 
 						!PDFText.contains(error));
 					
+				//note: check to see if EOB contains memebr ID
+				String memberId_portion=memberId;
+				if (memberId.contains("-")) {
+					String[] tmp=memberId.split("-");
+					memberId_portion=tmp[0];
+				}
+				Assert.assertTrue("PROBLEM : pdf content does not contain the exected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+						PDFText.contains(memberId_portion));
 			} catch (IOException e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - got exception when opening pdf link, unable to validate pdf content",false);
@@ -942,7 +970,7 @@ public class EOBPage extends EOBBase{
 		//note: Switch back to original window
 		driver.close();
 		driver.switchTo().window(newTab.get(0));
-		// KEEP TBD - getting 500 response code with the pdfUrl right now, not sure why
+		
 	}
 	
 	public String getInfoFromApi(String planType, String memberType, String eobType) {
@@ -1013,11 +1041,16 @@ public class EOBPage extends EOBBase{
 		return consumerDetails;
 	}
 	
+	public String getMemberId(Boolean isComboUser, String lookForPlanCategory) {
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String memberId = getMemberIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		return memberId;
+	}
+	
 	public String getUuidInConsumerDetails(String consumerDetails) {
 		String actualUuid=null;
 		try {
 			JSONParser parser = new JSONParser();
-		
 			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
 			actualUuid = (String) apiResponseJsobObj.get("userTag");
 		} catch (ParseException e) {
@@ -1034,6 +1067,36 @@ public class EOBPage extends EOBBase{
 		
 		return actualUuid;
 	}
+	
+	public String getMemberIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		String actualMemberId=null;
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
+			JSONArray planProfilesArrayObj=(JSONArray) apiResponseJsobObj.get("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", planProfilesArrayObj.size()>1);
+			for (int i = 0; i < planProfilesArrayObj.size(); i++) {
+				JSONObject planProfilesObj= (JSONObject) planProfilesArrayObj.get(i);
+				String actualPlanCategory = (String) planProfilesObj.get("planCategory");
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualMemberId = (String) planProfilesObj.get("memberNumber");
+				}
+			}			
+			Assert.assertTrue("PROBLEM - unable to locate actualMemberId from localStorage.consumerDetails, "
+					+ "please double check input data planType matches user's actual planType", 
+					actualMemberId!=null);
+			
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualMemberId;
+	}
+
 	
 	
 	public String getApiRequestUrl(String planType, String memberType, String eobType) {
@@ -1104,9 +1167,6 @@ public class EOBPage extends EOBBase{
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		
-		//note: this particular user on lower env is getting stale element exception, refresh the page at this point to get it going
-		//if (MRScenario.environment.contains("team-a") && planType.equals("PDP") && memberType.contains("COMBO")) 
-		//	refreshPage(planType, memberType, origUrlBeforeClick);
 		return apiResponseJsonStr;
 	}
 

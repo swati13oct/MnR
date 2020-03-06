@@ -24,11 +24,12 @@ Feature: 1.08 Member Header/Navigation validation
     Then I should be able to see the help button Header
     Then I should be able to see and use the Account/Profile dropdown and logout
 
+    @devRegression
     Examples: 
-      | TID   | planType | memberType    | flow  |
-      | 15164 | MAPD     | Individual    | header|
-      | 15164 | PDP      | Individual    | header|
-      | 15164 | PCP      | Individual    | header|
+      | TID         | planType | memberType    | flow  |
+      | 15164,15171 | MAPD     | Individual    | header|
+      | 15164,15171 | PDP      | Individual    | header|
+      | 15164,15171 | PCP      | Individual    | header|
      
 
   @header02 @premiumpaymentsheader @regressionMember 
@@ -38,7 +39,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | Member Type | <memberType> |
 	    Then I should be able to see and use the Premium Payments tab Header
 		
-			@headerRegression
+		@headerRegression
 	    Examples: 
 	      | TID   | planType | memberType              |
 	      | 15252 | MAPD     | GroupLessSubsidy_header |
@@ -56,7 +57,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | Member Type | <memberType> |
 	    Then I should not be able to see the Premium Payments tab Header
 	 
-	 		@headerRegression
+	 	@headerRegression
 	    Examples: 
 	      | TID   | planType | memberType | 
 	      | 15253 | MAPD     | IndividualGroup_header  | 
@@ -66,7 +67,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID       | planType    | memberType                |
 	      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
 
-@header05 @no_findcareheader @regressionMember @headerRegression
+  @header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -94,12 +95,12 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID   | memberType           |
 	      | 15162 | Terminated_header    |  
 	
-	
-	############End of regression scenarios###################
+############End of regression scenarios###################
 	
 #############################TO Be deleted###################################################
 ######################Already covered in   @header01 #######################
-	  @header04 @findcarecostsheader 
+# moved the TID into ones in header01 already
+  @header04 @findcarecostsheader 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed in the header
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |

@@ -1,7 +1,7 @@
 @footer @member_redesign_footer @regressionMember
 Feature: 1.05 Member Footer validation
 
-  @footer1 @thePredators
+  @footer01 @thePredators
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
     # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
     # note: if system is in future date, payment page may not show for user and this test will end up failing
@@ -22,21 +22,21 @@ Feature: 1.05 Member Footer validation
     And the user validates the footer section in contact us page
     Then the user navigates to Benefits page
     And the user validates the footer section in Benefits page
+    Then the user navigates to the Order Plan Materials page
+    And the user validates the footer section in Order Plan Materials page
     Then the user navigates to the Health and Wellness page
     And the user validates the footer section in Health and Wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
     And the user validates the footer section in Pharmacies and Prescriptions page
-    Then the user navigates to the Order Plan Materials page
-    And the user validates the footer section in Order Plan Materials page
 
-
+    @devRegression
     Examples: 
      | TID   | planType | memberType                 |
-     | 15347 | MAPD     | IndMAPDUHC_footer |
+     | 15347 | MAPD     | IndMAPDUHC_footer          |
     #| 15347 | MAPD     | CALPERSGroup_ContactUs     |
       
       
-  @footer2 @thePredators @shipFooter
+  @footer02 @thePredators @shipFooter
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -54,13 +54,13 @@ Feature: 1.05 Member Footer validation
     And the user validates the footer section in contact us page
     Then the user navigates to Benefits page
     And the user validates the footer section in Benefits page
+    Then the user navigates to the Order Plan Materials page
+    And the user validates the footer section in Order Plan Materials page
     Then the user navigates to the Health and Wellness page
     And the user validates the footer section in Health and Wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
     And the user validates the footer section in Pharmacies and Prescriptions page
-    Then the user navigates to the Order Plan Materials page
-    And the user validates the footer section in Order Plan Materials page
 
     Examples: 
-      | TID   | planType | memberType          |
+      | TID   | planType | memberType    |
       | 15347 | SHIP     | IND_footer    |

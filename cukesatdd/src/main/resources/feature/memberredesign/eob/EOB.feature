@@ -145,6 +145,7 @@ Feature: 1.04 To Test EOB for Members
       | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
       | 13    | SHIP     | PDP_SHIP_COMBO_EOB | Medical | false       |
 
+
   @eob02 @regression_06_06_18FnF @regressionMember
   Scenario Outline: -index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - To validate EOB displays error message for user with SHIP PHIP active plan
     Given login with following details logins in the member portal and validate elements
@@ -157,7 +158,6 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | index | TID   | planType | memberType |
       | 14    | 15174 | PHIP     | SHIP_EOB   |
-  
 
 
   #note: pending coverage until SSUP individual user is available
@@ -174,6 +174,7 @@ Feature: 1.04 To Test EOB for Members
       | index | FID    | planType | memberType              |
       | 15    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
+
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
   Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
     Given login with following details logins in the member portal and validate elements
@@ -189,7 +190,7 @@ Feature: 1.04 To Test EOB for Members
       | 16    | 267688 | SSUP     | GROUP_EOB  | 
 
 
-  ######################   KEEP FOR NOW EOB Regression ###############################
+######################   KEEP FOR NOW OLD EOB Regression ###############################
   @eob01 @febRelease2018 @hsideob @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements

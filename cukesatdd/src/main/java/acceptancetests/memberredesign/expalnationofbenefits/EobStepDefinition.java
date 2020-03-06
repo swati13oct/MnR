@@ -97,6 +97,7 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		getLoginScenario().saveBean(EobCommonConstants.DATE_RANGE, dateRange);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,dateRange);
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT, searchResultMap.get(dateRange));
@@ -141,6 +142,12 @@ public class EobStepDefinition {
 		EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
 		Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
 		getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+		
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO")) 
+			isComboUser=true;
+		String memberId=eobPage.getMemberId(isComboUser, planType);
+		getLoginScenario().saveBean(EobCommonConstants.MEMBERID, memberId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -371,10 +378,11 @@ public class EobStepDefinition {
 	@And("^the user clicks on first eob from the list to validate pdf$") //keep
 	public void the_user_clicks_on_first_eob_from_the_list() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.clickOnEob(planType);
+			eobPage.clickOnEob(planType, memberId);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}
@@ -383,10 +391,11 @@ public class EobStepDefinition {
 	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$") //keep
 	public void the_user_clicks_on_first_eob_from_the_list_dream() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.clickOnEob_dream(planType);
+			eobPage.clickOnEob_dream(planType, memberId);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}
