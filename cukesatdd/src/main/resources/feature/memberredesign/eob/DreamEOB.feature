@@ -65,4 +65,3 @@ Then the user validates EOB PDF size is not 0kb on Dream EOB Page
 Examples:
 	 |UID | planType    | memberType                |dateRange					   |eobCount |
  	 |15134 | PDP         | withEOB                   | 18 Months          |		4		 |
-

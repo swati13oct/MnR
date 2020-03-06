@@ -302,8 +302,8 @@ public class MemberRedesignHeaderStepDefinition {
 	 *  @toDo : Clicks on Coverage & Benefits tab and see links for the Forms & Resources tab on the second level navigation for a terminated member
 	 */
 
-@Then("^clicking on the Coverage & Benefits tab should allow me to see link of for the Forms & Resources tab on the second level navigation Header$")
-public void clicking_on_the_Coverage_Benefits_tab_should_allow_me_to_see_link_of_for_the_Forms_Resources_tab_on_the_second_level_navigation_Header() throws Throwable {
+     @Then("^clicking on the Coverage & Benefits tab should allow me to see link of for the Forms & Resources tab on the second level navigation Header$")
+     public void clicking_on_the_Coverage_Benefits_tab_should_allow_me_to_see_link_of_for_the_Forms_Resources_tab_on_the_second_level_navigation_Header() throws Throwable {
  
 	// Express the Regexp above with the code you wish you had
 	if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {

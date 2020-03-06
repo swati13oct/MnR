@@ -399,5 +399,3 @@ Feature: 1.04 To Test EOB for Members
       | index | planType | memberType        | eobType           | flagZeroEob |
 #      | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
       | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
-
-#--------------------------------------------------
