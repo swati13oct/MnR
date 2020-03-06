@@ -18,7 +18,7 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'dropdown') and not(contains(@class,'ng-hide'))]//select[contains(@id,'date-range')]")
 	protected WebElement eobDateRangeDropdown;
 	
-	@FindBy(xpath="//div[contains(@ng-show,'Plan') and not(contains(@class,'ng-hide'))] //label[contains(@for,'date-range')]")
+	@FindBy(xpath="//div[contains(@ng-show,'Plan') and not(contains(@class,'ng-hide'))]//label[contains(@for,'date-range')]")
 	protected WebElement eobDateRangeLabel;
 
 	@FindBy(id="custom-from2")
@@ -120,8 +120,11 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'EOBpagedescription') and not(contains(@class,'ng-hide'))]")
 	protected WebElement eobSubSectionDescription;
 
-	@FindBy(xpath="//div[@id='futureDateErrornvda']")
+	@FindBy(xpath="//div[@id='invalidFromOrToDateErrornvda']")
 	protected WebElement futureDateErr;
+	
+	@FindBy(xpath="//div[@id='futureDateErrornvda']")
+	protected WebElement beforeDateErr;
 	
 	@FindBy(xpath="//div[@id='maxDateRangeExceedednvda']")
 	protected WebElement rangeExceedErr;
@@ -293,6 +296,16 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@ng-show,'PHIP') and not(contains(@class,'ng-hide'))]//p[@class='color-red']")
 	protected WebElement phipError;
 	
+	//note: specific for dream
+	@FindBy(xpath="//label[contains(@for,'date-range') and contains(text(),'View EOBs From')]")
+	protected WebElement eobDateRangeLabel_dream;
+
+	@FindBy(xpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]'][1]//td[3]")
+	protected WebElement eobFirst_dream;
+	
+	@FindBy(xpath="//body")
+	protected WebElement apiResponseJson;
+
 
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
