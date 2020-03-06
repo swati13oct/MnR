@@ -18,8 +18,8 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionRegistration.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRegistration")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/HSID" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRegistration.json" }, tags = { "@hsidregistration" })
+features = { "src/main/resources/feature/memberredesign/HSIDRegistration" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionRegistration.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionMemberRegistration  {
 
 }
