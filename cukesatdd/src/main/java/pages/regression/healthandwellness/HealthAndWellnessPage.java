@@ -178,9 +178,19 @@ public class HealthAndWellnessPage extends UhcDriver{
 				waitforElement(titleText);
 			} else {
 				//String defaultCssPath="#main-nav > div > div > div > a[href*='health-and-wellness.html']";
-				System.out.println("Unable to Able to locate Rally or testharness HW button, last attemp for shadow-root");
-				String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
-				locateAndClickElementWithinShadowRoot(shadowRootHeader,cssPath);
+				System.out.println("Unable to locate Rally or testharness HW button, last attemp for shadow-root");
+				String targetCssPath="notFound";
+				for(int i=index; i>=1; i--) {
+					String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+i+")";
+					System.out.println("TEST - check cssPath="+cssPath);
+					targetCssPath=locateElementWithinShadowRoot(shadowRootHeader,cssPath);
+					if (!targetCssPath.equals("notFound")) {
+						break;
+					}
+				}
+				System.out.println("Will use cssPath='"+targetCssPath+"'");
+				//String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
+				locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
 			}
 		}
 		hwCheckModelPopup(driver);
@@ -263,12 +273,12 @@ public class HealthAndWellnessPage extends UhcDriver{
 					return result;
 			} catch (Exception e) {
 				System.out.println("can't locate element. Exception e="+e);
-				Assert.assertTrue("Dashboard header not functioning as expected", false);
+				//Assert.assertTrue("Dashboard header not functioning as expected", false);
 				return result;
 			}
 		} else {
 			System.out.println("no shadow-root element either, not sure what's going on w/ the header on rally");
-			Assert.assertTrue("Dashboard header is not displayed", false);
+			//Assert.assertTrue("Dashboard header is not displayed", false);
 			return result;
 		}
 	}
