@@ -2449,6 +2449,24 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
+
+	/**
+	 * Validate Coverage and Benefits Level 2 Tabs
+	 */
+	public void validateCoverageBenefitsL2TabsForTerminated() {
+		waitforElement(coverageBenefits);
+		if (coverageBenefits.isDisplayed()) {
+			coverageBenefits.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Assert.assertTrue("formsAndResources is displayed", formsAndResources.isDisplayed());
+
+		}
+	}
 	/**
 	 * click on Benefits Summary
 	 */

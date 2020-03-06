@@ -905,6 +905,21 @@ public class TestHarness extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public FormsAndResourcesPage validateBnCNavigationForTerminated() {
+		validateNew(coverageBenefits);
+		coverageBenefits.click();
+
+		if (driver.getTitle().contains("Documents")) {
+			try {
+				return new FormsAndResourcesPage(driver);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 
 	/***
 	 * 
