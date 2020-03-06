@@ -1,7 +1,7 @@
 @hsid 
-Feature: To test HSID registration flow & member SignIn
+Feature: To test HSID registration flow
 
-   @hsid1 @US968241 @hsidregistration123
+   @hsid1 @US968241 @hsidregistration @regressionMember
    Scenario Outline:Verify HSID registration.
    Given the user connect to DB
      And the user select record from database
@@ -60,7 +60,7 @@ Feature: To test HSID registration flow & member SignIn
    | Termed<12 |  Individual |  NON LIS      | NICOLETTE      | HINT      | 08/19/1950 | 019743661-1  | 60454	 | q3_sep_UAT4_AARP266      | Password@1 | codetransformertesting@gmail.com      | number1   | name1     | color1    |
 
 
-    	@hsid3 @validateStep1 @US968241 @hsidregistrationErrorMsg @hsidregistration
+    	@hsid3 @validateStep1 @US968241 @hsidregistrationErrorMsg @hsidregistration @regressionMember
     Scenario Outline:Verify feilds in HSID registration Step 1 page.
     Given the user is on medicare sign in page
     When the user clicks on Register now link
@@ -77,7 +77,7 @@ Examples:
    | planType|  memberType    | copayCategory  | firstName | lastName        |   dob 	             | memberid 	  | zipcode  | userName 	         | password   |   email	  			           | question1 | question2 | question3 |
    | MAPD    |  Individual  |  NON LIS         | BBABFAD   | BEDD            | 09/17/1946            | 002238311-1    | 92024	 |AUTO_q2_apr_uhc100     | Password@1 | codetransformers@gmail.com     | number1   | name1     | color1    |
    
-   	 @hsidregistrationErrorMsgForTerminatedMember @hsidregistration
+   	 @hsidregistrationErrorMsgForTerminatedMember @hsidregistration @regressionMember
     Scenario Outline:Verify Error messages in HSID registration page for terminated member
  	And the user is on medicare sign in page
     When the user clicks on Register now link
@@ -139,56 +139,7 @@ Examples:
    | MAPD    |  Individual  |  NON LIS       |AUTO_q2_apr_uhc100   | Password@1 | codetransformers@gmail.com | number1   | name1     | color1    |
    
    
-   @hsid6 @Login @US968315 @regressionMember
-   Scenario Outline:Verify HSID login functionality.
-   Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>  |
-      | Member Type    | <memberType>|
-      | Copay Category | <copayCategory>|
-   Then I validate that login is successfull     
-      
-   Examples:
-   | planType|  memberType  | copayCategory | 
-   | MAPD    |  Individual  |  NON LIS      |
-   | PCP     |  Individual  |  NON LIS      |
-   | Medica  |  Individual  |  NON LIS      |  
-   | MAGroup |  Group       |  NON LIS      |
-   | MAPDGroup | Group      |  NON LIS      | 
-   | MA      |  Individual  |  NON LIS      |
-   | PDP     |  Individual  |  NON LIS      |   
-   | PDPGroup|  Group       |  NON LIS      |   
-   | SHIP    |  ShipOnly    |  NON LIS      | 
-   | COMBO   | FedShip      |  NON LIS      |
-   | SSUPGroup |Group         |  NON LIS      |
-   | MAPre-effective| Individual  |  NON LIS      |
-   | GovtTermless | Individual  |  NON LIS      |
    
-
-   
-  @hsid4 @codetransformers
-  Scenario Outline: To verify that iperception smiley survey is displayed on medicare.uhc.com signin pages
-    Given User is on the sign-in page of medicare.uhc.com of the environment mentioned in config file
-      | URL | <appendinURL> |
-    Then Iperception smiley survey is displayed after waiting for 20 seconds
-    And User is able to successfully submit the survey
-
-    Examples: 
-      | appendinURL |
-      |             |
-      | aarp        |
-      | retiree     |
-
-  @hsid5 @codetransformers
-  Scenario Outline: To verify that iperception smiley survey is displayed on mymedicareaccount.uhc.com signin pages
-    Given User is on the sign-in page of mymedicareaccount.uhc.com of the environment mentioned in config file
-      | URL | <appendinURL> |
-    Then Iperception smiley survey is displayed after waiting for 20 seconds
-    And User is able to successfully submit the survey
-
-    Examples: 
-      | appendinURL |
-      | pcp         |
-      | medica      |
       
       
       

@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
@@ -263,6 +264,7 @@ public class HSIDLoginPage extends UhcDriver {
 		}
 			else if (currentUrl().contains("testharness.html")) {
 				System.out.println(driver.getCurrentUrl());
+				System.out.println("First Post login current Url is-->"+currentUrl());
 				return new TestHarness(driver);
 		}
 		else {
@@ -287,7 +289,12 @@ public class HSIDLoginPage extends UhcDriver {
 		} else if (currentUrl().contains("terminated-plan.html")) {
 			return new TerminatedHomePage(driver);
 		} else if (currentUrl().contains("testharness.html")) {
+			System.out.println("Post login current Url is-->"+currentUrl());
 			return new TestHarness(driver);
+		}
+		else if (currentUrl().contains("gogreen-splash")) {
+			System.out.println("Post login current Url is-->"+currentUrl());
+			return new GoGreenPage(driver);
 		}
 		if (driver.getCurrentUrl().contains("/my-documents/")){
 			return new MyDocumentsPage(driver);
