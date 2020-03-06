@@ -114,7 +114,7 @@ Feature: 1.02 Member Profile page
       | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
+  @accountProfile06 @regressionAccountProf&Pref @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -327,7 +327,7 @@ Feature: 1.02 Member Profile page
       | TID			   | planType | memberType        | copayCategory   |
       | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
       
-   @accountProfile17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
+   @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
