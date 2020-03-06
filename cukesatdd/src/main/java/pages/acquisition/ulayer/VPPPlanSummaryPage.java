@@ -364,7 +364,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
