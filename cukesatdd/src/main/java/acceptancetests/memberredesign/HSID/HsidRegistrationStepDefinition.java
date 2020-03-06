@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.regression.login.HSIDLoginPage;
+import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HsidRegistrationConfirmInformation;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
@@ -43,6 +44,7 @@ public class HsidRegistrationStepDefinition {
 	
 	@Given("^the user is on medicare sign in page$")
 	public void the_user_is_on_medicare_sign_in_page() throws Throwable {
+		System.out.println("*****the user is on medicare sign in page*****");
 		WebDriver wd = getLoginScenario().getWebDriver();
 		HSIDLoginPage hsidLoginPage = new HSIDLoginPage(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -51,7 +53,7 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^the user clicks on Register now link$")
 	public void the_user_clicks_on_Register_now_link() throws Throwable {
-		
+		System.out.println("*****the user clicks on Register now link****");		
 		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
 		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = hsidLoginPage.clickRegister();
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE, hsidRegistrationPersonalInfoPage);
@@ -60,6 +62,7 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^HSID registration page is displayed with all the fields$")
 	public void hsid_registration_page_is_displayed_with_all_the_fields() throws Throwable {
+		System.out.println("*****HSID registration page is displayed with all the fields****");
 		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = 
 				(HsidRegistrationPersonalInformationPage) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE);
 		hsidRegistrationPersonalInfoPage.validateFields();
@@ -68,6 +71,7 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^enter first name, last name, date of birth, zip code, member id and click continue$")
 	public void enter_first_name_last_name_date_of_birth_zip_code_member_id_and_click_continue(DataTable memberAttributes) throws Throwable {
+		System.out.println("*****enter first name, last name, date of birth, zip code, member id and click continue*****");
 	    // Write code here that turns the phrase above into concrete actions
 	    // For automatic transformation, change DataTable to one of
 	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
@@ -95,6 +99,37 @@ public class HsidRegistrationStepDefinition {
 		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
 		
 	}
+	
+	@When("^enter members first name, last name, date of birth, zip code, member id and click on continue$")
+	public void enter_first_name_last_name_date_of_birth_zip_code_member_id_and_click_On_continue(DataTable memberAttributes) throws Throwable {
+		System.out.println("*****enter first name, last name, date of birth, zip code, member id and click continue*****");
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = 
+				(HsidRegistrationPersonalInformationPage) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE);
+		
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String firstName = memberAttributesMap.get("firstName");
+		String lastName = memberAttributesMap.get("lastName");
+		String dob = memberAttributesMap.get("dob");
+		String zipcode = memberAttributesMap.get("zipcode");
+		String memberId = memberAttributesMap.get("memberid");
+		System.out.println("firstName: "+firstName +"lastName: "+lastName +"dob: "+dob+"memberId: "+memberId +"zipcode: " + zipcode);
+		hsidRegistrationPersonalInfoPage.populatefields(firstName, lastName, dob,zipcode, memberId);
+		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount 
+										= hsidRegistrationPersonalInfoPage.clickOnContinue();
+		getLoginScenario().saveBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT, hsidRegistrationPersonalCreateAccount);
+		
+	}
 
 	@When("^user is navigated to step two:create account page$")
 	public void user_is_navigated_to_step_two_create_account_page() throws Throwable {
@@ -107,7 +142,8 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^enter username, password, re-enter password, email, re-enter email$")
 	public void enter_username_password_re_enter_password_email_re_enter_email(DataTable memberAttributes) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	    System.out.println("******enter username, password, re-enter password, email, re-enter email*****");
+		// Write code here that turns the phrase above into concrete actions
 	    // For automatic transformation, change DataTable to one of
 	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
 	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
@@ -195,6 +231,7 @@ public class HsidRegistrationStepDefinition {
 
 	@When("^check the terms and click on create my ID button$")
 	public void check_the_terms_and_click_on_create_my_ID_button() throws Throwable {
+	System.out.println("*****check the terms and click on create my ID button*****");
 		HsidRegistrationPersonalCreateAccount hsidRegistrationPersonalCreateAccount = 
 				(HsidRegistrationPersonalCreateAccount) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALCREATEACCOUNT);
 		//hsidRegistrationPersonalCreateAccount.clickRememberThisDeviceCheckBox();
@@ -257,8 +294,17 @@ public class HsidRegistrationStepDefinition {
 	    
 	}
 	
+	@When("^I should see error message \"([^\"]*)\" for terminated member$")
+	public void i_should_see_error_message_for_terminated_member(String arg1) throws Throwable {
+		HsidRegistrationPersonalInformationPage hsidRegistrationPersonalInfoPage = 
+				(HsidRegistrationPersonalInformationPage) loginScenario.getBean(PageConstants.HSID_REGISTRATION_PERSONALINFOPAGE);
+		hsidRegistrationPersonalInfoPage.validateTerminateMemberErrorMessage();
+	    
+	}
+	
 	@When("^user is navigated to Confirm email page$")
 	public void user_is_navigated_to_Confirm_email_page() throws Throwable {
+		System.out.println("*****user is navigated to Confirm email page*****");
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		hsidRegistrationConfirmInformationPage.verifyConfirmInformationPage();
@@ -275,13 +321,14 @@ public class HsidRegistrationStepDefinition {
 
 	@Then("^user should copy the confirm email url to browser$")
 	public void user_should_copy_the_confirm_email_url_to_browser() throws Throwable {
+		System.out.println("*****user should copy the confirm email url to browser****");
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		
 		hsidRegistrationConfirmInformationPage.confirmEmail();
 		
 	}
-
+	
 	@Then("^user should be at Sign In page$")
 	public void user_should_be_at_Sign_In_page(DataTable memberAttributes) throws Throwable {
 		System.out.println("*****user should be at Sign In page*****");
@@ -295,7 +342,6 @@ public class HsidRegistrationStepDefinition {
 		
 		
 		String password = memberAttributesMap.get("password");
-		
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
@@ -303,7 +349,6 @@ public class HsidRegistrationStepDefinition {
 		loginPage.validateelements();
 
 		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
-		
 		System.out.println("New user name is-"+userName);
 		
         if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -326,8 +371,6 @@ public class HsidRegistrationStepDefinition {
 		
 		pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
 
-	
-
         if (accountHomePage!= null) {
         	loginScenario.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			Assert.assertTrue(true);
@@ -342,7 +385,7 @@ public class HsidRegistrationStepDefinition {
 	
 	@Then("^user should see the email confirmation message \"[^\"]*\" in Sign In form$" ) 
 	public void i_should_see_a_Username_or_email_address_label_with_textbox_in_Sign_In_page() throws Throwable {
-		
+		System.out.println("*****user should see the email confirmation message****");
 		HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
 		hsidLoginPage.emailconfirmed();
 	}
@@ -358,6 +401,7 @@ public class HsidRegistrationStepDefinition {
 	
 	@Then("^user after landing on sign in page get navigated to the go green splash page$")
 	public void user_should_be_at_Splash_page1 (DataTable memberAttributes) throws Throwable {
+		System.out.println("*****user after landing on sign in page get navigated to the go green splash page*****");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -387,8 +431,62 @@ public class HsidRegistrationStepDefinition {
 		}
 		
 	}
+	@Then("^Validate registered user should be at Sign In page$")
+	public void Registered_user_should_be_at_Sign_In_page(DataTable memberAttributes) throws Throwable {
+		System.out.println("*****user should be at Sign In page*****");
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		
+		String password = memberAttributesMap.get("password");
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd);
+		loginPage.validateelements();
 
+		String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
+		System.out.println("New user name is-"+userName);
+		
+        if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+            GoGreenPage GoGreenPage=null;
+            try {
+            	GoGreenPage = (GoGreenPage) loginPage.doLoginWith(userName, password);
+            } catch (UnhandledAlertException ae) {
+                  System.out.println("Exception: "+ae);
+                  Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
+            }
+            if (GoGreenPage != null) {
+                   getLoginScenario().saveBean(PageConstantsMnR.GO_GREEN_SPLASH_PAGE, GoGreenPage);
+                  return;
+            } else {
+                  Assert.fail("Login not successful...");
+            }
+     }
+
+        else {
+        	GoGreenPage GoGreenPage = (GoGreenPage) loginPage.doLoginWith(userName, password);
+		//pages.regression.accounthomepage.AccountHomePage accountHomePage = (pages.regression.accounthomepage.AccountHomePage) loginPage.doLoginWith(userName, password);
+
+	
+
+        if (GoGreenPage!= null) {
+        	loginScenario.saveBean(PageConstantsMnR.GO_GREEN_SPLASH_PAGE,GoGreenPage);
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("***** Error in loading  Redesign Account Landing Page *****");
+		}
+        }
+
+	}
+	
+	
 }
   
 
