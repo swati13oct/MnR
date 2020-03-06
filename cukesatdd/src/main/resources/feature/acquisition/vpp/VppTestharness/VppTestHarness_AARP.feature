@@ -323,7 +323,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
-      | PlanName | <planname> |
+      | PlanName | <planName> |
 
     Examples: 
       | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           | planid      | planyear |
@@ -338,7 +338,7 @@ Feature: VPP Testharness flow Navigations for AARP Site
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
-      | PlanName | <planname> |
+      | PlanName | <planName> |
 
     Examples: 
       | TID   | THPage         | siteName | zipcode | isMultiCounty | county             | plantype | planName                                           |
