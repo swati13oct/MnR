@@ -183,15 +183,15 @@ Feature: T1.1To validate the claims Summary page and claims Details page on the 
 
   #----- beginning of claims test for offline prod - local run only ------------------
   # DO NOT REMOVE this scenario
-  # This scenario is not part of the regular regression run BUT is for aiding the team to do offline prod testing if needed
-  # note: this setup is for the case when we need to validate on offline prod environment
-  # note: this is intended for local run where you can put in your own member auth username/password and offline username
-  # note: run with environment variable set to offline. -Denvironment="offline"
+  # This scenario is not part of the regular regression run BUT is for aiding the team to do offline-prod testing if needed
+  # note: this setup is for the case when we need to validate on offline-prod environment
+  # note: this is intended for local run where you can put in your own member auth username/password and prod username
+  # note: run with environment variable set to offline. -Denvironment="prod"
   # note: *** DO NOT save your login or test username to github ***
   # note: replace the following fields with valid value -
   # note:   username = your memAuth page login username
   # note:   password = your memAuth page login password
-  # note:   MemUsername =  username of the user on offline prod that you want to test
+  # note:   MemUsername =  username of the user on offline-prod that you want to test
   # note:   planType = the type of plan this test user has e.g. MAPD/MA/SHIP, etc
   # note:   memberType = e.g. Individual / GROUP/ COMBO, etc
   # note:   claimSystem = e.g. COSMOS / NICE / RX / COMPASS

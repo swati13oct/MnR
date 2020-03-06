@@ -1,6 +1,10 @@
 @CommunicationPreferences @thePredators 
 Feature: 1.03 Member Preferences page
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPProfileAndPreferences |
+
   #----- beginning of VBF preferences scenarios section ------------------
   @vbfGate
   Scenario Outline:Plan Type: <planType> -To verify Edit preferences section for Go Green
