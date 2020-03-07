@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HttpsURLConnection;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.joda.time.DateTime;
@@ -891,11 +893,15 @@ public class EOBPage extends EOBBase{
 				
 				//note: check to see if EOB contains memebr ID
 				String memberId_portion=memberId;
+				//note: strip the leading 0 
+				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+				memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
 				if (memberId.contains("-")) {
 					String[] tmp=memberId.split("-");
 					memberId_portion=tmp[0];
 				}
-				Assert.assertTrue("PROBLEM : pdf content does not contain the exected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
 						PDFText.contains(memberId_portion));
 				
 			} catch (IOException e) {
@@ -959,11 +965,15 @@ public class EOBPage extends EOBBase{
 					
 				//note: check to see if EOB contains memebr ID
 				String memberId_portion=memberId;
+				//note: strip the leading 0 
+				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+				memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
 				if (memberId.contains("-")) {
 					String[] tmp=memberId.split("-");
 					memberId_portion=tmp[0];
 				}
-				Assert.assertTrue("PROBLEM : pdf content does not contain the exected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
 						PDFText.contains(memberId_portion));
 			} catch (IOException e) {
 				e.printStackTrace();
