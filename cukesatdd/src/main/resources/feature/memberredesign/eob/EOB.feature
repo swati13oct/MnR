@@ -235,19 +235,13 @@ Feature: 1.04 To Test EOB for Members
       | PDP      | Rx_EOB     | Last 12 months | Prescription Drug |        9 | 
       | PDP      | RxGrp_EOB  | Last 18 months | Prescription Drug |       14 | 
 
-  # need to add coverage for (if has EOB)
-  # combo - fed+ship
-  # combo - ship + fed
-  # multi ship
-  # term
-  # pre-eff
   # move the two claims tests about EOB navigation for SSUP to here
   
   #     |15167    | PDPI         | COSMOS_EOB_R     | Last 18 months |Medical  |     0     |
   #     |15166    | SHIP_Termnated| SHIP_EOB     | Last 12-18 months |Medical  |     1     |
   #      |15141   | MAPD          | NICETermin_EOB_R | Last 18 months |Medical  |     1     |
 
-  # need to get user
+ 
   
   ########################### END EOB  Regression #######################################
 
@@ -370,7 +364,7 @@ Feature: 1.04 To Test EOB for Members
     Then the user clicks on first eob from the list to validate pdf
     Then the user validates EOB count between API and UI are the same
 
-    @COSMOS_EOBs
+    #@COSMOS_EOBs
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
@@ -395,7 +389,7 @@ Feature: 1.04 To Test EOB for Members
     Then the user clicks on first eob from the list to validate pdf for DREAM EOB
     Then the user validates EOB count between API and UI are the same
 
-    @COSMOS_EOBs
+    #@COSMOS_EOBs
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
 #      | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |

@@ -134,14 +134,60 @@ public class EobStepDefinition {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
-		String eobType="dream";
-		if (eobTypeData!=null) 
-			eobType=eobTypeData;
-		String apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
 		
-		EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
-		Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
-		getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+		String eobType="";
+		String apiResponseJson="";
+		if (eobTypeData==null) {
+			eobType="dream";
+			//note: there are two requests for dream, need to fix up the string
+			List<String> tmpResponsJson=eobPage.getApiRequestUrl(planType, memberType, eobType);
+			String m_requestUrl=tmpResponsJson.get(0);
+			String r_requestUrl=tmpResponsJson.get(1);
+			System.out.println("TEST - m_requestUrl="+m_requestUrl);
+			System.out.println("TEST - r_requestUrl="+r_requestUrl);
+			
+			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
+			String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
+
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+
+			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", r_eobResponseObj!=null);
+
+			//note: merge the two into one
+			if (r_eobResponseObj.getNumEobs()>0) 
+			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			
+			eobResponseObj.sortListOfEob();
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+			
+			/* tbd 
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+
+			eobType="dream-r";
+			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
+
+			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", r_eobResponseObj!=null);
+
+			//note: merge the two into one
+			if (r_eobResponseObj.getNumEobs()>0) 
+			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			
+			eobResponseObj.sortListOfEob();
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+			*/
+		} else {
+			eobType=eobTypeData;
+			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
+
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+		}
+		
 		
 		boolean isComboUser=false;
 		if (memberType.toUpperCase().contains("COMBO")) 

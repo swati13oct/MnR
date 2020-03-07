@@ -145,10 +145,10 @@ public class EOBWebElements extends UhcDriver{
 	protected WebElement toTxtField;
 
 	
-	@FindBy(xpath="//button[@aria-label='calendar' and contains(@class,'fromDatepicker')]")
+	@FindBy(xpath="//button[contains(@aria-label,'calendar') and contains(@class,'fromDatepicker')]")
 	protected WebElement fromCalendarIconBtn;
 
-	@FindBy(xpath="//button[@aria-label='calendar' and contains(@class,'toDatepicker')]")
+	@FindBy(xpath="//button[contains(@aria-label,'calenda') and contains(@class,'toDatepicker')]")
 	protected WebElement toCalendarIconBtn;
 	
 	@FindBy(xpath="//ul[@ng-model='date'][1]//button[contains(@class,'btn-sm') and contains(@class,'active')]")

@@ -1,6 +1,9 @@
 package pages.regression.explanationofbenefits;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,14 +40,48 @@ public class EobApiResponse {
 		listOfEob.add(inputEob);
 	}
 	
-	public void addEob(String eobDate, String esp) {
-		Eob e=new Eob(eobDate, esp);
+	public void addEob(String eobDateStr, String esp) {
+		try {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date eobDate= sdf.parse(eobDateStr);
+			Eob e=new Eob(eobDate, esp);
+			listOfEob.add(e);
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void addEob(Date eobDate, String esp) {
+			Eob e=new Eob(eobDate, esp);
+			listOfEob.add(e);
+	}
+	
+	public void addEob(String eobDateStr, String esp, String eobType) {
+		try {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date eobDate=sdf.parse(eobDateStr);
+			Eob e=new Eob(eobDate, esp, eobType);
+			listOfEob.add(e);
+		} catch (java.text.ParseException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void addEob(Date eobDate, String esp, String eobType) {
+		Eob e=new Eob(eobDate, esp, eobType);
 		listOfEob.add(e);
 	}
 	
-	public void addEob(String eobDate, String esp, String eobType) {
-		Eob e=new Eob(eobDate, esp, eobType);
-		listOfEob.add(e);
+	public void addListofEob(List<Eob> eobList) {
+		listOfEob.addAll(eobList);
+	}
+	
+	public void sortListOfEob() {
+		System.out.println("TEST - before sort: ");
+		printApiResponse();
+		Collections.sort(listOfEob);
+		System.out.println("TEST - after sort: ");
+		printApiResponse();
 	}
 	
 	public boolean isSuccess() {
