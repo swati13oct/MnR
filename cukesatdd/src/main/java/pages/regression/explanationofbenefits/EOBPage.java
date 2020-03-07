@@ -542,7 +542,7 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public void validateTextElements(String planType, String memberType, String eobType) {
-		if(planType.equals("MAPD") || planType.equals("MA")) {
+		if(eobType.equals("Medical")) {
 			Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
 			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 		}
