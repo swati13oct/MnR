@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
@@ -106,7 +107,11 @@ public class HSIDLoginPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(deepLinkUrl);
-		
+	}
+	
+	public void validateFooter() {
+		FooterPage footerPg=new FooterPage(driver);
+		footerPg.validateSignInPgFooter();
 	}
 
 	public void openAndValidate() {

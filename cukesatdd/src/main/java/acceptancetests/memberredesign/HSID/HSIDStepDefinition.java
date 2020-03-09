@@ -32,6 +32,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
@@ -711,12 +712,9 @@ public class HSIDStepDefinition {
 	//^^^ note: added for 'sorry' login error workaround	
 
 	//----------- updated to handle microapp
-	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
-	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
-		//tbd boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -731,6 +729,12 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
+
+		//note: use this to determine if need to validate footer on sign-in page
+		//note: after obtaining the value, remove it so it will not look for it on csv
+		String validateFooter = memberAttributesMap.get("Validate Footer");
+		memberAttributesMap.remove("Validate Footer");
+
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
@@ -812,6 +816,11 @@ public class HSIDStepDefinition {
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
 			loginPage.validateelements();
 
+			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+				loginPage.validateFooter();
+				System.out.println("Finished validating sign-in page footer");
+			}
+
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage=null;
 				try {
@@ -848,6 +857,12 @@ public class HSIDStepDefinition {
 				} else {
 					loginPage = new LoginPage(wd);
 				}
+				
+				if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
+					loginPage.validateFooter();
+					System.out.println("Finished validating sign-in page footer");
+				}
+				
 				TestHarness testHarnessPage=null;
 				try {
 					if (testHarnessUseDropdown) {

@@ -9,6 +9,7 @@ Feature: 1.05 Member Footer validation
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | Validate Footer | yes      |
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
@@ -41,6 +42,7 @@ Feature: 1.05 Member Footer validation
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+      | Validate Footer | yes      |
     Then the user navigates to payment history
     Then the user navigates to the footer section
     And the user validates the footer section in payments page

@@ -134,6 +134,61 @@ public class FooterPage extends UhcDriver {
 	
 	@FindBy(id="ordermaterials")
 	private WebElement orderPlanMaterials;
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']")
+	protected WebElement unauthFooter_section;
+
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'ABOUT US')]")
+	protected WebElement unauthFooter_aboutUs;
+	//href="/content/medicare/about/about-us.html"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'CONTACT US')]")
+	protected WebElement unauthFooter_contactUs;
+	//href="/content/medicare/about/contact-us/overview.html"
+
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'PRIVACY POLICY')]")
+	protected WebElement unauthFooter_privacyPolicy;
+	//href="/content/medicare/about/privacy-policy.html"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'TERMS OF USE')]")
+	protected WebElement unauthFooter_termsOfUse;
+	//href="/content/medicare/about/terms-of-use.html"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'DISCLOSURES')]")
+	protected WebElement unauthFooter_disclosures;
+	//href="/content/medicare/about/disclaimers.html"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'ACCESSIBILITY')]")
+	protected WebElement unauthFooter_accessibility;
+	//href="https://www.uhc.com/legal/accessibility"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'LANGUAGE')]")
+	protected WebElement unauthFooter_languageAssitance;
+	//href="https://www.uhc.com/legal/medicare-plans"
+
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'ASISTENCIA')]")
+	protected WebElement unauthFooter_assistenciaDeIdiomas;
+	//href="https://www.uhc.com/legal/medicare-plans"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(@href,'medicare-plans') and not(contains(text(),'LANGUAGE ASSISTANCE')) and not(contains(text(),'ASISTENCIA'))]")
+	protected WebElement unauthFooter_assistChinese;
+	//href="https://www.uhc.com/legal/medicare-plans"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'MEDICARE COMPLAINT FORM')]")
+	protected WebElement unauthFooter_medicareComplaintForm;
+	//href="https://www.medicare.gov/MedicareComplaintForm/home.aspx"
+	
+	@FindBy(xpath="//ul[@class='unauth-footer-list']//a[contains(text(),'DISASTER AND EMERGENCY SUPPORT')]")
+	protected WebElement unauthFooter_disasterAndEmergencySupport;
+	//href="/content/medicare/about/disaster-declaration.html" 
+	
+	@FindBy(xpath="//div[@data-ng-controller='dashboardGlobalController']//*[contains(text(),'Last update')]")
+	protected WebElement unauthFooter_lastUpdate;
+
+	@FindBy(xpath="//div[@data-ng-controller='dashboardGlobalController']//*[contains(text(),'All rights reserved')]")
+	protected WebElement unauthFooter_allRightReserved;
+
+
 
 	public FooterPage (WebDriver driver) {
 		super(driver);
@@ -142,37 +197,7 @@ public class FooterPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate(){
-		// TODO Auto-generated method stub
 	}
-
-	/* tbd 
-	public void feebackpopupClose() throws InterruptedException
-	{ //waitForloader(driver,overlay, 20);
-		Thread.sleep(20000);
-		if (validate(iPerceptionframe)) {
-
-			switchToNewIframe(iPerceptionframe);
-			iPerceptionclosebtn.click();
-			driver.switchTo().defaultContent();
-			//iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
-		}
-	}
-	
-	    public void feebackpopupClose_shortwait() throws InterruptedException {
-		//waitForloader(driver,overlay, 20);
-		Thread.sleep(6000);
-		if (iPerceptionframe.isDisplayed()) {
-
-			switchToNewIframe(iPerceptionframe);
-			iPerceptionclosebtn.click();
-			driver.switchTo().defaultContent();
-			//iPerceptionAutoPopUp.click();
-		} else {
-			System.out.println("iPerception Pop Up not displayed");
-		}
-	} */
 
 	public Object validateFooterLinks() throws InterruptedException{
 		sleepBySec(5);
@@ -402,6 +427,99 @@ public class FooterPage extends UhcDriver {
 			Assert.fail(">>>>>>>>>Order Plan Materials Page not loaded<<<<<<<<<<<<,");
 		}
 	}
+	
+	public void validateSignInPgFooter() {
+		Assert.assertTrue("PROBLEM - unable to locate footer section on sign-in page", footerValidate(unauthFooter_section));
+		
+		String testLinkName="ABOUT US";
+		WebElement testElement=unauthFooter_aboutUs;
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		String expLink="/content/medicare/about/about-us.html";
+		String actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+		
+		testLinkName="PRIVACY POLICY";
+		testElement=unauthFooter_privacyPolicy;
+		expLink="/content/medicare/about/privacy-policy.html";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));		
+		
+		testLinkName="TERMS OF USE";
+		testElement=unauthFooter_termsOfUse;
+		expLink="/content/medicare/about/terms-of-use.html";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+
+		testLinkName="DISCLOSURES";
+		testElement=unauthFooter_disclosures;
+		expLink="/content/medicare/about/disclaimers.html";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+
+		testLinkName="ACCESSIBILITY";
+		testElement=unauthFooter_accessibility;
+		expLink="/legal/accessibility";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+		
+		
+		testLinkName="LANGUAGE ASSISTANCE / NON-DISCRIMINATION";
+		testElement=unauthFooter_languageAssitance;
+		expLink="/legal/medicare-plans";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+	
+		
+		testLinkName="ASISTENCIA DE IDIOMAS / AVISO DE NO DISCRIMINACIÓN";
+		testElement=unauthFooter_assistenciaDeIdiomas;
+		expLink="/legal/medicare-plans";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+
+		testLinkName="Chinese LANGUAGE ASSISTANCE";
+		testElement=unauthFooter_assistChinese;
+		expLink="/legal/medicare-plans";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+
+		testLinkName="MEDICARE COMPLAINT FORM";
+		testElement=unauthFooter_medicareComplaintForm;
+		expLink="https://www.medicare.gov/MedicareComplaintForm/home.aspx";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
+
+		testLinkName="DISASTER AND EMERGENCY SUPPORT";
+		testElement=unauthFooter_disasterAndEmergencySupport;
+		expLink="/content/medicare/about/disaster-declaration.html";
+		actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
+				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));		
+	
+		Assert.assertTrue("PROBLEM - unable to locate footer element 'Last Update' on sign-in page", footerValidate(unauthFooter_lastUpdate));
+
+		Assert.assertTrue("PROBLEM - unable to locate footer element 'All Right Reserved' on sign-in page", footerValidate(unauthFooter_allRightReserved));
+
+	
+	}
+	
 }
 
 

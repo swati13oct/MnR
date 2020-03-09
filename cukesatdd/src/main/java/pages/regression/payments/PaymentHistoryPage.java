@@ -28,6 +28,7 @@ import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -521,7 +522,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn, 5);
-		validateNew(paymentHistoryApp);
+		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
+			validateNew(paymentHistoryApp);
+		}
 		//validateNew(oneTimePaymentBtn);
 		
 

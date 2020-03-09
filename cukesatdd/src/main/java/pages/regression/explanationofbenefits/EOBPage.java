@@ -1149,13 +1149,19 @@ public class EOBPage extends EOBBase{
 		if (eobType.equals("dream")) {
 			//note: need to do two search
 			String lookForText1="/dreamEob/search?memberNumber=";
-			
 			String lookForText2="responseReceived";
+			String lookForText3="/medical";
+			if (planType.equals("PDP")) {
+				lookForText3="/rx";
+			} else if (planType.equals("SHIP")) {
+				lookForText3="/ship";
+			}
+
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
-				//tbd System.out.println("TEST each line="+line);
+				System.out.println("TEST each line="+line);
 				if (memberType.contains("COMBO")) {
-					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
 						apiReqeust=line;
 						System.out.println("TEST found line="+line);
 						//break;  //note: only break if looking for the first response, otherwise always take the latest line
@@ -1177,19 +1183,11 @@ public class EOBPage extends EOBBase{
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
 				//tbd System.out.println("TEST each line="+line);
-				if (memberType.contains("COMBO")) {
-					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
-						apiReqeust=line;
-						System.out.println("TEST found line="+line);
-						//break;  //note: only break if looking for the first response, otherwise always take the latest line
-					}
-				} else {
-					if (line.contains(lookForText1) && line.contains(lookForText2)) {
-						apiReqeust=line;
-						System.out.println("TEST found line="+line);
-						//break; //note: only break if looking for the first response, otherwise always take the latest line
-					}
-				} 
+				if (line.contains(lookForText1) && line.contains(lookForText2)) {
+					apiReqeust=line;
+					System.out.println("TEST found line="+line);
+					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				}
 			}
 			String r_urlStr=parseLine(apiReqeust);
 			System.out.println("TEST - r_urlStr="+r_urlStr);
@@ -1197,13 +1195,19 @@ public class EOBPage extends EOBBase{
 			return urlList; 
 		} else {
 			String lookForText1="/member/claims/eob/search";  //note: non-Dream case
-			
 			String lookForText2="responseReceived";
+			String lookForText3="/medical";
+			if (planType.equals("PDP")) {
+				lookForText3="/rx";
+			} else if (planType.equals("SHIP")) {
+				lookForText3="/ship";
+			}
+			
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
-				//tbd System.out.println("TEST each line="+line);
+				//System.out.println("TEST each line="+line);
 				if (memberType.contains("COMBO")) {
-					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
 						apiReqeust=line;
 						System.out.println("TEST found line="+line);
 						//break;  //note: only break if looking for the first response, otherwise always take the latest line

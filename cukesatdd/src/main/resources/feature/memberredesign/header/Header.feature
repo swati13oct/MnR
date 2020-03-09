@@ -65,7 +65,7 @@ Feature: 1.08 Member Header/Navigation validation
 	    @F287624 @US2037783 @US2037945 
 	    Examples: 
 	      | TID       | planType    | memberType                |
-	      | US2037783 | PDP_SSP     | comboAll100Subsidy_header |
+	      | US2037783 | PDP_MAPD     | comboAll100Subsidy_header |
 
   @header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header

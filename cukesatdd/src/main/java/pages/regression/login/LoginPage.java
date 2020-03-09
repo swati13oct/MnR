@@ -17,6 +17,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.SecurityQuestionsPage;
 import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
@@ -81,6 +82,12 @@ public class LoginPage extends UhcDriver {
 			
 		}
 
+		public void validateFooter() {
+			FooterPage footerPg=new FooterPage(driver);
+			footerPg.validateSignInPgFooter();
+		}
+
+		
 		private boolean teamSpecialCase;
 		//tbd private boolean isMicroApp;
 		//tbd public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
@@ -90,7 +97,6 @@ public class LoginPage extends UhcDriver {
 			teamSpecialCase=input_teamSpecialCase;
 			//tbd this.isMicroApp=isMicroApp;
 			openAndValidate();
-			
 		}
 
 		public void openAndValidate() {
