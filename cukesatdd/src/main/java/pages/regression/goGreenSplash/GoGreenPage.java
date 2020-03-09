@@ -40,8 +40,8 @@ public class GoGreenPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		//validateNew(goGreenLeaf);
-		if (currentUrl().contains("gogreen-splash")) {
-		System.out.println("GoGreen splash page loaded and validated");
+		if (currentUrl().contains("gogreen-splash") || currentUrl().contains("testharness.html")) {
+		System.out.println("Login success full with URL-" +currentUrl());
 		}
 	}
 
