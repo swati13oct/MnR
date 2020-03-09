@@ -36,7 +36,7 @@ public class GoGreenPage extends UhcDriver {
 		openAndValidate();
 
 	}
-
+//below is validating only for newly registered member 
 	@Override
 	public void openAndValidate() {
 		//validateNew(goGreenLeaf);
