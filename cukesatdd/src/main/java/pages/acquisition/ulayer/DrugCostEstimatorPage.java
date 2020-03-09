@@ -320,7 +320,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
 	
-	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	@FindBy(xpath="(//*[@id='zip-radios']/div/label)[1]")
 	public WebElement findPlansRadioButton;
 	
 	@FindBy(xpath="//button[contains(text(),'Search')]")
@@ -1871,7 +1871,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
 		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeTextBox, 60);
 		sendkeys(zipCodeTextBox, zipCode);
+		CommonUtility.waitForPageLoadNewForClick(driver, findPlansButton, 60);
 		findPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
