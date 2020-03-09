@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.MemberRegression;
 
 import org.junit.runner.RunWith;
 

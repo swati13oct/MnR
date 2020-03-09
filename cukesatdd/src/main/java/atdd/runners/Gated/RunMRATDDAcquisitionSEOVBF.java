@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.Gated;
 
 import org.junit.runner.RunWith;
 

@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression;
+package atdd.runners.MemberRegression.SSOBranding;
 
 import org.junit.runner.RunWith;
 

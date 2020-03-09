@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.runners.MemberRegression.Payments;
 
 import org.junit.runner.RunWith;
 

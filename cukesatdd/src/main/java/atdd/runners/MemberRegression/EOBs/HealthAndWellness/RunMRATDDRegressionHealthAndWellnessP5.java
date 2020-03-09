@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.HealthAndWellness;
+package atdd.runners.MemberRegression.EOBs.HealthAndWellness;
 
 import org.junit.runner.RunWith;
 
