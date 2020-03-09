@@ -100,8 +100,7 @@ public class FooterPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='dropdown-options--1']/a[2]")
 	private WebElement accountSettingOptionFromDashboard;
-	
-	
+		
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofile;
 
@@ -235,6 +234,7 @@ public class FooterPage extends UhcDriver {
 		if(claimsLink.isDisplayed()){
 			System.out.println("Claims link is displayed");
 			claimsLink.click();
+			footerCheckModelPopup(driver);
 			System.out.println("Claims link is clicked");
 		}
 		return null;
@@ -245,6 +245,7 @@ public class FooterPage extends UhcDriver {
 		if(EOBLink.isDisplayed()){
 			System.out.println("EOB link is displayed");
 			EOBLink.click();
+			footerCheckModelPopup(driver);
 			System.out.println("EOB link is clicked");
 		}
 		return null;
@@ -255,6 +256,7 @@ public class FooterPage extends UhcDriver {
 		if(HelpandContactUs.isDisplayed()){
 			System.out.println("contactUSLink link is displayed");
 			HelpandContactUs.click();
+			footerCheckModelPopup(driver);
 			System.out.println("contactUS link is clicked");
 		}
 		return null;
@@ -265,6 +267,7 @@ public class FooterPage extends UhcDriver {
 		if(benefits.isDisplayed()){
 			System.out.println("Benefits link is displayed");
 			benefits.click();
+			footerCheckModelPopup(driver);
 			System.out.println("Benefits link is clicked");
 		}
 		return null;
@@ -291,11 +294,13 @@ public class FooterPage extends UhcDriver {
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
 			homeBtn.click();
+			footerCheckModelPopup(driver);
 			System.out.println("Home button is clicked");
 			waitforElement(LookUpDrug);
 			if(LookUpDrug.isDisplayed()){
 				System.out.println("DCE link is displayed");
 				LookUpDrug.click();
+				footerCheckModelPopup(driver);
 				System.out.println("DCE link is displayed");
 			}
 		}
@@ -307,10 +312,11 @@ public class FooterPage extends UhcDriver {
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
-
+			footerCheckModelPopup(driver);
 			if(accountSettingOption.isDisplayed()) {
 				System.out.println("Profile and Preferences link is displayed");
 				accountSettingOption.click();
+				footerCheckModelPopup(driver);
 				System.out.println("Profile and Preferences link is clicked");
 			} 
 			
@@ -323,9 +329,11 @@ public class FooterPage extends UhcDriver {
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
 			accountprofile.click();
+			footerCheckModelPopup(driver);
 			if (accountSettingOptionShip.isDisplayed()) {
 				System.out.println("Profile and Preferance link is displayed");
 				accountSettingOptionShip.click();
+				footerCheckModelPopup(driver);
 				System.out.println("Profile and Preferance link is clicked");
 			}
 		}
@@ -388,7 +396,7 @@ public class FooterPage extends UhcDriver {
 		    footerValidate(healthAndWellness);
 			healthAndWellness.click();
 			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
+			footerCheckModelPopup(driver);
 			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
 			if (driver.getTitle().contains("Health And Wellness")) {
 				System.out.println("Health and wellness Page is Loaded");
@@ -402,7 +410,7 @@ public class FooterPage extends UhcDriver {
 		 footerValidate(pharmaciesAndPrescriptions);
 		    pharmaciesAndPrescriptions.click();
 			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
+			footerCheckModelPopup(driver);
 			CommonUtility.waitForPageLoad(driver, pharmaciesAndPrescriptionsHeader, CommonConstants.TIMEOUT_90);
 			if (driver.getCurrentUrl().contains("pharmacy/overview.html")){
 				System.out.println("Pharmacies and Prescriptions Page is Loaded");
@@ -418,7 +426,7 @@ public class FooterPage extends UhcDriver {
 		footerValidate(orderPlanMaterials);
 		orderPlanMaterials.click();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
+		footerCheckModelPopup(driver);
 		CommonUtility.waitForPageLoad(driver, orderPlanMaterialsHeader, CommonConstants.TIMEOUT_90);
 		if (driver.getCurrentUrl().contains("order-materials/overview.html")){
 			System.out.println("Order Plan Materials Page is Loaded");
@@ -516,9 +524,8 @@ public class FooterPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate footer element 'Last Update' on sign-in page", footerValidate(unauthFooter_lastUpdate));
 
 		Assert.assertTrue("PROBLEM - unable to locate footer element 'All Right Reserved' on sign-in page", footerValidate(unauthFooter_allRightReserved));
-
-	
 	}
+
 	
 }
 
