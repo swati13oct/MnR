@@ -364,7 +364,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[2]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -2361,7 +2361,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
@@ -2619,7 +2619,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("Plan '"+plan+"' should be saved");
 				System.out.println("Proceed to locate plan="+plan);
 
-				String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+				String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 				System.out.println("TEST - testPlanXpath xpath="+testPlanXpath);
 				List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 				System.out.println("TEST - size="+listOfPlans.size());
@@ -2636,7 +2636,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				String plan=listOfTestPlans.get(i);
 				System.out.println("Plan '"+plan+"' should be unsaved");
 
-				String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+				String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 				List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 				int expMatch=1;
 				Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);

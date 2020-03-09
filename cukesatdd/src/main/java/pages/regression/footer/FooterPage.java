@@ -16,42 +16,36 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath= "(.//*[@class='col-md-12'])[13]")
 	private WebElement MemberSupportFrame;
 
-	@FindBy(linkText = "Help & Contact Us")
+	@FindBy(id = "contact-help")
 	private WebElement HelpandContactUs;
 
-	@FindBy(linkText= "Account Settings")
-	private WebElement AccountSettings;
-
-	@FindBy(linkText= "Legal Notices & Disclosures")
-	private WebElement LegalNoticesAndDisclosures;
+	@FindBy(id= "notices")
+	private WebElement NoticesAndDisclosures;
 
 	@FindBy(linkText= "Saved")
 	private WebElement Saved;
 
-	@FindBy(linkText= "Accessibility")
-	private WebElement Accessibility;
-
-	@FindBy(linkText= "Logout")
-	private WebElement Logout;
-
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[1]//div[@class='row footerLinks']")
-	private WebElement UnitedHealthcare;
-
-	@FindBy(xpath= "//*[@id='termsofuseID']")
-	private WebElement TearmsOfUse;
-
-	@FindBy(xpath = "//div[@class='row footerLinks']//*[@id='lastupdated']")
-	private WebElement LastUpdate;
-
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[1]")
+	@FindBy(id= "accessibility")
+	private WebElement AccessibilityStatement;
+	
+	@FindBy(id= "provider-data")
+	private WebElement ProviderDataInformation;
+	
+	@FindBy(id= "legal-entities")
+	private WebElement LegalEntities;
+	
+	@FindBy(id= "share-feedback")
+	private WebElement ShareFeedback  ;
+	
+	@FindBy(id= "language-assistance")
 	private WebElement LanguageAssistance;
-
-	@FindBy(xpath= "//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[2]")
-	private WebElement Asistencia;
-
-	@FindBy(xpath ="//footer//div[contains(@class,'iparys_inherited')]/div/div/div[2]//div[@class='row footerLinks']//p[3]")
-	private WebElement OtherLanguageLink;
-
+	
+	@FindBy(id= "language-assistance-spanish")
+	private WebElement LanguageAssistanceSpanish;
+	
+	@FindBy(id= "language-assistance-chinese")
+	private WebElement LanguageAssistanceChinese;
+	
 	@FindBy(id= "claims_1")
 	private  WebElement claimsLink;
 
@@ -83,12 +77,12 @@ public class FooterPage extends UhcDriver {
 	@FindBy(id = "accountprofile")
 	private WebElement accountprofile;
 
-	@FindBy(id = "ACCdropdown_1_3")
+	@FindBy(id = "accsettings_3")
 	private WebElement accountSettingOption;
 	
-	@FindBy(id = "ACCdropdown_0_3")
+	@FindBy(linkText = "Account Settings") 
 	private WebElement accountSettingOptionShip;
-
+	
 	@FindBy(id = "closeButton")
 	public WebElement iPerceptionclosebtn;
 
@@ -136,20 +130,20 @@ public class FooterPage extends UhcDriver {
 
 	public Object validateFooterLinks() throws InterruptedException{
 		Thread.sleep(5000);
-		//feebackpopupClose();
-		if (HelpandContactUs.isDisplayed() && AccountSettings.isDisplayed() 
-				&& LegalNoticesAndDisclosures.isDisplayed() 
-				&& Accessibility.isDisplayed() 
-				&& Logout.isDisplayed()){
-			//  Saved.isDisplayed() is not displayed for every page.
+		if (HelpandContactUs.isDisplayed()
+				&& NoticesAndDisclosures.isDisplayed() 
+				&& AccessibilityStatement.isDisplayed()
+				&& ProviderDataInformation.isDisplayed()
+				&& LegalEntities.isDisplayed()
+				&& ShareFeedback.isDisplayed()){
 			System.out.println("======================Member support and Quick links are displayed =========================");
 		}
 		else {
 			Assert.assertFalse(false);
 		}
-		if (OtherLanguageLink.isDisplayed() && Asistencia.isDisplayed() 
-				&& LanguageAssistance.isDisplayed() && LastUpdate.isDisplayed() && TearmsOfUse.isDisplayed() &&
-				UnitedHealthcare.isDisplayed()){
+		
+		if (LanguageAssistance.isDisplayed() && LanguageAssistanceSpanish.isDisplayed() && LanguageAssistanceChinese.isDisplayed())
+		{
 			System.out.println("====================== Bottom links are displayed =========================");
 			return true;
 		}

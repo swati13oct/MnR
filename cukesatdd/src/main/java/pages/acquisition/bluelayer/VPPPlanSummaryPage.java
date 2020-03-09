@@ -439,7 +439,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//MedSupp Resume application
 	
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 		
 		@FindBy(id = "msVppZipCode")
@@ -2686,7 +2686,7 @@ public void validateDefaultNoSavedPlan(String planType) {
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 	
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
@@ -2955,7 +2955,7 @@ public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String plan
 			System.out.println("Plan '"+plan+"' should be saved");
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			System.out.println("TEST - testPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			System.out.println("TEST - size="+listOfPlans.size());
@@ -2973,7 +2973,7 @@ public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String plan
 			String plan=listOfTestPlans.get(i);
 			System.out.println("Plan '"+plan+"' should be unsaved");
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
@@ -3192,8 +3192,7 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 }
 
 public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
-	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+	checkModelPopup(driver,25);
 	System.out.println("MedSup page form is displayed");
 	//medSupZipcode.sendKeys(zipcode);
 	DOB.click();

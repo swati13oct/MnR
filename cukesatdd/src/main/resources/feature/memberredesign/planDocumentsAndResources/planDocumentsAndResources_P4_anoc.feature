@@ -88,5 +88,6 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
     Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 19-076 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 20-118 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 

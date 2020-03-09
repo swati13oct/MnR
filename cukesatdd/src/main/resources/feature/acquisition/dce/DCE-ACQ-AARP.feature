@@ -23,7 +23,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
     Then user enters zipcode on step3 and validate plan summary page
-      | Zip | <zipcode> |
+      | Zipcode | <zipcode> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     #Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
@@ -61,6 +61,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
       | Drug | <drug> |
     Then user enters zipcode on step3 and validate plan summary page
       | Zip | <zipcode> |
+      | County |<county> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then user validates drug cost in medical benefit section in the AARP site
@@ -72,8 +73,8 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
 
     #Test Id V1.0: 15615
     Examples: 
-      | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                          | radius   |
-      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   31042 | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP) | 15 miles |
+      | drug    | dosage   | quantity | frequency     | branded | zipcode | county |plantype | planName                                          | radius   |
+      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   31042 | Laurens County |SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP) | 15 miles |
 
  
   ######################### End of Regression ATDDs #############################
