@@ -482,7 +482,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public ClaimsSummaryPage navigateToClaimsSummaryPage() {
-		validateNew(claimsTab);
+		validateNew(claimsTab,0);
 		claimsTab.click();
 		checkForIPerceptionModel(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_90);
@@ -897,7 +897,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public BenefitsAndCoveragePage validateBnCNavigation() {
-		validateNew(coverageBenefits);
+		validateNew(coverageBenefits,0);
 		coverageBenefits.click();
 
 		if (driver.getTitle().contains("Benefits")) {
@@ -995,8 +995,8 @@ public class TestHarness extends UhcDriver {
 	public void validateAccountProfile() {
 		Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
 		jsClickNew(accountProfile);
-		validateNew(NavAccountProfSignOut);
-		validateNew(NavAccountProfSetting);
+		validateNew(NavAccountProfSignOut,0);
+		validateNew(NavAccountProfSetting,0);
 		scrollToView(accountProfile);
 		jsClickNew(accountProfile);
 	}
@@ -1399,16 +1399,16 @@ public class TestHarness extends UhcDriver {
     	}
 		public void validateFindCareCostTab(String memberType) {
 			if(memberType.equalsIgnoreCase("TERMINATED"))
-				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab));
+				Assert.assertTrue("See find care cost tab when not expected", !validate(findCareCostTab,0));
 			else
-				validateNew(findCareCostTab);
+				validateNew(findCareCostTab,0);
 
 		}
 		public void clickOnPharmaciesNavTab() {
 			
-			validateNew(pharmaciesTab);
+			validateNew(pharmaciesTab,0);
 			pharmaciesTab.click();
-			validateNew(pharmaciesHeader);
+			validateNew(pharmaciesHeader,0);
 			
 		}
 		public ContactUsPage clickOnHelpLink() {
@@ -1417,9 +1417,9 @@ public class TestHarness extends UhcDriver {
 		}
 		
 		public void clickLogout() {
-			if (logOut.isDisplayed()) {
+			if (validate(logOut,0)) {
 				logOut.click();
-				validateNew(usernameField);
+				validateNew(usernameField,0);
 				if (driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
 					Assert.assertTrue("user is logged out", true);
 
@@ -1428,21 +1428,21 @@ public class TestHarness extends UhcDriver {
 		}
 
 		public void validatePaymentsTabNotDisplayed() {
-			if(validate(premiumPayment))
+			if(validate(premiumPayment,0))
 				Assert.fail("Payments tab not expected but still displayed");
 		}
 		public void validatePharmaciesTabNotDisplayed() {
-			if(validate(pharmaciesTab))
+			if(validate(pharmaciesTab,0))
 				Assert.fail("Pharmacies Tab is not expected but still displayed");
 			
 		}
 		public void validateHealthAndWellnessTabNotDisplayed() {
-			if(validate(healthAndWellnessTab))
+			if(validate(healthAndWellnessTab,0))
 				Assert.fail("H&W Tab is not expected but still displayed");
 			
 		}
 		public void validateFindCareCostTabNotAvailable() {
-			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab));			
+			Assert.assertTrue("find care cost tab displayed when not expected", !validate(findCareCostTab,0));			
 		}
 		
 		/***
