@@ -16,8 +16,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to claims page
     And the user validates the footer section in claims page
     Then the user navigates to EOB page to validate footer
-    #And the user validates the footer section in EOB page
-    #Then the user navigates to profile and pref page
+    And the user validates the footer section in EOB page
+    Then the user navigates to profile and pref page
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
     And the user validates the footer section in contact us page
@@ -53,8 +53,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to claims page
     And the user validates the footer section in claims page
     Then the user navigates to EOB page to validate footer
-    #And the user validates the footer section in EOB page
-    #Then the user navigates to profile and pref page for Ship member
+    And the user validates the footer section in EOB page
+    Then the user navigates to profile and pref page for Ship member
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
     And the user validates the footer section in contact us page
