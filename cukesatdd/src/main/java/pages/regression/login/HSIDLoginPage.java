@@ -644,5 +644,102 @@ public class HSIDLoginPage extends UhcDriver {
 		}  
 
 	}
+	
+	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
+
+		System.out.println(driver.getCurrentUrl());
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		signInButton.click();
+
+		//wait for some form of header to show
+
+		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
+		if (!validate(authQuestionlabel)) {
+			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			emailAddressRequiredWorkaround(username);
+		}
+		/* tbd try {
+			Thread.sleep(35000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} */
+
+		if (driver.getCurrentUrl().contains("=securityQuestion")) {
+			System.out.println("Landed on security question page...");
+
+			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+			try {
+				cs.enterValidSecurityAnswer();
+				System.out.println(driver.getCurrentUrl());
+				System.out.println("Check to see if document.readyState is ready...");
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+			try {
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (NullPointerException  e) {
+				System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+			waitToReachDashboard(username);	//note: after page is completed state, still need this wait for the page to finish loading
+
+			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
+			}
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			emailAddressRequiredWorkaround(username);
+		}
+		else if (currentUrl().contains("/dashboard")) {
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		}
+			else if (currentUrl().contains("testharness.html")) {
+				System.out.println(driver.getCurrentUrl());
+				System.out.println("First Post login current Url is-->"+currentUrl());
+				return new TestHarness(driver);
+		}
+		else {
+			System.out.println("Security question page "
+					+ "or test harness page "
+					+ "or Rally Account Home Page didn't load , please check");
+		}
+		//tbd if (MRScenario.environmentMedicare.equals("team-e")
+		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
+		if (MRScenario.environment.equals("team-e")
+				|| MRScenario.environment.equals("team-ci1")) {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		}
+
+		if (currentUrl().contains("/dashboard")) {
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("home/my-account-home.html")
+				|| currentUrl().contains("/login.html")) {
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		} /*
+			 * else if (currentUrl().contains("testharness.html")) {
+			 * System.out.println("Post login current Url is-->"+currentUrl()); return new
+			 * TestHarness(driver); }
+			 */
+		else if (currentUrl().contains("gogreen-splash") || currentUrl().contains("testharness.html")) {
+			System.out.println("Post login current Url is-->"+currentUrl());
+			return new GoGreenPage(driver);
+		}
+		if (driver.getCurrentUrl().contains("/my-documents/")){
+			return new MyDocumentsPage(driver);
+     }
+		return null;
+	}
 
 }
