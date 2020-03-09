@@ -73,7 +73,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
     #Test Id V1.0: 15615
     Examples: 
       | drug    | dosage   | quantity | frequency     | branded | zipcode | plantype | planName                                          | radius   |
-      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   31021 | SNP      | UnitedHealthcare Medicare Gold (Regional PPO SNP) | 15 miles |
+      | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   31042 | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP) | 15 miles |
 
  
   ######################### End of Regression ATDDs #############################

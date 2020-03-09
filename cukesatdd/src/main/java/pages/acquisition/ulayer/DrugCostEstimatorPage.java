@@ -317,7 +317,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
 	
-	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	@FindBy(xpath="(//*[@id='zip-radios']/div/label)[1]")
 	public WebElement findPlansRadioButton;
 	
 	@FindBy(xpath="//button[contains(text(),'Search')]")
@@ -1901,24 +1901,26 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
 		checkProactiveChatPopup();
+		CommonUtility.waitForPageLoadNew(driver, zipCodeTextBox, 60);
 		sendkeys(zipCodeTextBox, zipCode);
+		CommonUtility.waitForPageLoadNewForClick(driver, findPlansButton, 60);
 		findPlansButton.click();
-		/*threadsleep(8);
-		int size =driver.findElements(By.xpath("//label[@id='Laurens County']")).size();
-		System.out.println("size of Radio button"+size);
+		threadsleep(8);
+		//int size =driver.findElements(By.xpath("//label[@id='Laurens County']")).size();
+		int size =driver.findElements(By.xpath("//div[@id='drugModalPharmacy']")).size();
+		System.out.println("size ofdialogue box"+size);
 		if(size>0){
-			//driver.switchTo().alert();
 			System.out.println("Inside Radio button click");
-			WebDriverWait d =new WebDriverWait(driver, 60);
-			d.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='zip-radios']/div[1]")));
+			CommonUtility.waitForPageLoadNewForClick(driver, findPlansRadioButton, 60);
 			jsClickNew(findPlansRadioButton);
 			//findPlansRadioButton.click();
 			threadsleep(2);
+			CommonUtility.waitForPageLoadNewForClick(driver, SearchButton, 60);
 			//SearchButton.click();
 			jsClickNew(SearchButton);
 			System.out.println("Clicked Searched button");
 			
-		}*/
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
