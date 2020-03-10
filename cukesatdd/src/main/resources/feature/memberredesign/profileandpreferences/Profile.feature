@@ -111,10 +111,10 @@ Feature: 1.02 Member Profile page
     @devRegression @mocked
     Examples: 
       | TID   | userSelection                           | planType | memberType                      |
-      | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
+    #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
+  @accountProfile06 @regressionAccountProf&Pref @AP_Part2_Regression @regressionMember
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -192,7 +192,7 @@ Feature: 1.02 Member Profile page
     | TID   | userSelection           | planType | memberType          |
     | xxxxx | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |   
 
-  @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
+  @accountProfile10 @EPMPProfilePageContactusGroup 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
