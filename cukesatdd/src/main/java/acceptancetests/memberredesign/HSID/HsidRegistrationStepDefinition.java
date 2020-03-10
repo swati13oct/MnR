@@ -456,7 +456,7 @@ public class HsidRegistrationStepDefinition {
         if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
             GoGreenPage GoGreenPage=null;
             try {
-            	GoGreenPage = (GoGreenPage) loginPage.doLoginWith(userName, password);
+            	GoGreenPage = (GoGreenPage) loginPage.newRegistereddoLoginWith(userName, password);
             } catch (UnhandledAlertException ae) {
                   System.out.println("Exception: "+ae);
                   Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" Got Alert error");
