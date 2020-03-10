@@ -23,7 +23,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
     Then user enters zipcode on step3 and validate plan summary page
-      | Zip | <zipcode> |
+      | Zipcode | <zipcode> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     #Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP

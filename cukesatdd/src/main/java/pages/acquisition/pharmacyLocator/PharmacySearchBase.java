@@ -45,9 +45,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			distance=distance+" mile";
 		else
 			distance=distance+" miles";
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		selectFromDropDownByText(driver, distanceDropownID, distance);
+		sleepBySec(3);
 		String initialZipVal=zipcodeField.getAttribute("value");
+		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		sendkeysNew(zipcodeField, zipcode);
+		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 		searchbtn.click();
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
@@ -504,7 +509,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec=0;
+		long timeoutInSec=10;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 	
