@@ -1,7 +1,6 @@
 @eob @fastandfurious
 Feature: 1.04 To Test EOB for Members
 
-
   @eob01 @E2E @regressionMember 
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
