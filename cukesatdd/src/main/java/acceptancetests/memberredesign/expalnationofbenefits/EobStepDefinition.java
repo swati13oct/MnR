@@ -308,8 +308,11 @@ public class EobStepDefinition {
 	@Then("^the user validates the header section content$")
 	public void validate_headerSection() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateHeaderSectionContent(planType);
+		//note: if multiple plans of the same planType, no tab will be shown
+		eobPage.validateComboTab(memberType);
 	}
 	
 	@Then("^the user validates the header section content on DREAM EOB$")

@@ -206,17 +206,18 @@ public class EOBBase extends EOBWebElements{
 	 * @param planType
 	 */
 	public void goToSpecificComboTab(String planType) {
+		//TODO: need to enhance it to handle multi plans of the same plan type, e.g. multiple ship plans each w/ different ship plan category name
 		try {
-			if (planType.equalsIgnoreCase("mapd")) {
+			if (planType.toLowerCase().contains("mapd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", eobValidate(comboTab_MAPD));
 				comboTab_MAPD.click();
-			} else if (planType.equalsIgnoreCase("ship")) {
+			} else if (planType.toLowerCase().contains("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", eobValidate(comboTab_SHIP));
 				comboTab_SHIP.click();
-			} else if (planType.equalsIgnoreCase("pdp")) {
+			} else if (planType.toLowerCase().contains("pdp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", eobValidate(comboTab_PDP));
 				comboTab_PDP.click();
-			} else if (planType.equalsIgnoreCase("ssp")) {
+			} else if (planType.toLowerCase().contains("ssp")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SSP", eobValidate(comboTab_SSP));
 				comboTab_SSP.click();
 			} else {

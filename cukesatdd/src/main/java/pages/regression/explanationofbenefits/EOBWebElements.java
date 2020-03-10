@@ -305,7 +305,9 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//body")
 	protected WebElement apiResponseJson;
-
+	
+	@FindBy(xpath="//ul[contains(@class, 'nav-tabs')]//li//a")
+	protected List<WebElement> comboTabList;
 
 	public EOBWebElements(WebDriver driver) {
 		super(driver);

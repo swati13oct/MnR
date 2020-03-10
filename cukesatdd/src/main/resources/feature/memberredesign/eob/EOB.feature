@@ -1,6 +1,7 @@
 @eob @fastandfurious
 Feature: 1.04 To Test EOB for Members
 
+
   @eob01 @E2E @regressionMember 
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
@@ -139,11 +140,12 @@ Feature: 1.04 To Test EOB for Members
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
+    # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @SHIP_EOBs
     Examples: 
       | index | planType | memberType         | eobType | flagZeroEob |
-      | 12    | SHIP     | SHIP_EOB           | Medical | true        | 
-      | 13    | SHIP     | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | 12    | SHIP_MEDICARE SUPPLEMENT     | SHIP_EOB           | Medical | true        | 
+      | 13    | SHIP_MEDICARE SUPPLEMENT     | PDP_SHIP_COMBO_EOB | Medical | false       |
 
 
   @eob02 @regression_06_06_18FnF @regressionMember

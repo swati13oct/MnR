@@ -542,7 +542,7 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public void validateTextElements(String planType, String memberType, String eobType) {
-		if(eobType.equals("Medical")) {
+		if(eobType.equals("Medical") && !planType.contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
 			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 		}
@@ -858,7 +858,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		if (MRScenario.environment.contains("stage") && !planType.equals("SHIP")) {
+		if (MRScenario.environment.contains("stage") && !planType.contains("SHIP")) {
 			
 			try {
 				URL TestURL = new URL(pdfUrl);
@@ -941,7 +941,7 @@ public class EOBPage extends EOBBase{
 		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
-		if (MRScenario.environment.contains("stage") && !planType.equals("SHIP")) {
+		if (MRScenario.environment.contains("stage") && !planType.contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
 			try {
 				URL TestURL = new URL(pdfUrl);
@@ -1062,7 +1062,14 @@ public class EOBPage extends EOBBase{
 		return consumerDetails;
 	}
 	
-	public String getMemberId(Boolean isComboUser, String lookForPlanCategory) {
+	public String getMemberId(Boolean isComboUser, String planType) {
+		//note: if planType is for SHIP, parse the value to get the actual plan category name
+		String lookForPlanCategory= planType;
+		if (planType.contains("SHIP")) {
+			String[] tmp=planType.split("SHIP_");
+			Assert.assertTrue("PROBLEM - input setup for planType for SHIP needs to include planCategory which is used for validation, e.g. SHIP_<planCategory>", tmp.length>1);
+			lookForPlanCategory=tmp[1];
+		}
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
 		String memberId = getMemberIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
 		return memberId;
@@ -1102,6 +1109,8 @@ public class EOBPage extends EOBBase{
 			for (int i = 0; i < planProfilesArrayObj.size(); i++) {
 				JSONObject planProfilesObj= (JSONObject) planProfilesArrayObj.get(i);
 				String actualPlanCategory = (String) planProfilesObj.get("planCategory");
+				System.out.println("TEST - lookForPlanCategory="+lookForPlanCategory);
+				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
 				if (lookForPlanCategory.equals(actualPlanCategory)) {
 					actualMemberId = (String) planProfilesObj.get("memberNumber");
 				}
@@ -1157,7 +1166,7 @@ public class EOBPage extends EOBBase{
 			String lookForText3="/medical";
 			if (planType.equals("PDP")) {
 				lookForText3="/rx";
-			} else if (planType.equals("SHIP")) {
+			} else if (planType.contains("SHIP")) {
 				lookForText3="/ship";
 			}
 
@@ -1203,7 +1212,7 @@ public class EOBPage extends EOBBase{
 			String lookForText3="/medical";
 			if (planType.equals("PDP")) {
 				lookForText3="/rx";
-			} else if (planType.equals("SHIP")) {
+			} else if (planType.contains("SHIP")) {
 				lookForText3="/ship";
 			}
 			
@@ -1269,6 +1278,19 @@ public class EOBPage extends EOBBase{
 		Assert.assertTrue("PROBLEM - Unable to locate Learn More text related to Prescription Drug", eobValidate(drugText));
 	}
 	
+	public void validateComboTab(String memberType) {
+		if (memberType.contains("COMBO")) {
+			if (memberType.contains("MULTI_SHIP")) {
+				Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
+				Assert.assertTrue("PROBLEM - user with multiple ship plans should not have tab that has text",!comboTabList.get(0).getText().equals(""));
+				//should not see tabs
+			} else if (memberType.contains("SSP")) {
+				Assert.assertTrue("PROBLEM - user with SSP as one of the combo plan SHOULD NOT have SSP tab showing on EOB page",!eobValidate(comboTab_SSP));
+			} else {
+				Assert.assertTrue("PROBLEM - user with combo plan should have more than one tab, please check input user if it's really a combo plan user",comboTabList.size()>1);
+			}
+		}
+	}
 
 	
 	/**
