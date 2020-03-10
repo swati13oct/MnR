@@ -28,6 +28,9 @@ public class keywordSearchAARP extends GlobalWebElements {
 	@FindBy(xpath="//input[@type='button']")
 	private WebElement searchButton;
 	
+	@FindBy(xpath="//a[contains(text(),'AARP® Medicare Plans - What does Medicare cover? |')]")
+	private WebElement textonpage;
+	
 	
 	
 	public void url(){
@@ -44,9 +47,17 @@ public class keywordSearchAARP extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
 		validateNew(search);
+		 
+		if(driver.getTitle().contains("Medicare")) {
 		validateNew(searchButton);
-		searchButton.getText();		
+		searchButton.getText();	
+		}else if(driver.getTitle().contains("medicare")) {
+			validateNew(textonpage);
+			textonpage.getText();	
+		}
+			
 	}
 	
 }
