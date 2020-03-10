@@ -230,6 +230,7 @@ public class FooterPage extends UhcDriver {
 		}
 	
 	public FooterPage NavigateToClaimsPage(){
+		footerCheckModelPopup(driver);
 		footerValidate(claimsLink);
 		if(claimsLink.isDisplayed()){
 			System.out.println("Claims link is displayed");
@@ -241,6 +242,7 @@ public class FooterPage extends UhcDriver {
 	}	
 
 	public FooterPage NavigateToEOBPage(){
+		footerCheckModelPopup(driver);
 		footerValidate(EOBLink);
 		if(EOBLink.isDisplayed()){
 			System.out.println("EOB link is displayed");
@@ -252,6 +254,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToContactUsPage(){
+		footerCheckModelPopup(driver);
 		footerValidate(HelpandContactUs);
 		if(HelpandContactUs.isDisplayed()){
 			System.out.println("contactUSLink link is displayed");
@@ -263,6 +266,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToBenefitsPage(){
+		footerCheckModelPopup(driver);
 		footerValidate(benefits);
 		if(benefits.isDisplayed()){
 			System.out.println("Benefits link is displayed");
@@ -274,6 +278,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToPharmacyLocator(){
+		footerCheckModelPopup(driver);
 		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
@@ -290,6 +295,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToDCE(){
+		footerCheckModelPopup(driver);
 		footerValidate(homeBtn);
 		if(homeBtn.isDisplayed()){
 			System.out.println("Home button is displayed");
@@ -308,6 +314,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public FooterPage NavigateToProfileandPref(){
+		footerCheckModelPopup(driver);
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
@@ -325,6 +332,7 @@ public class FooterPage extends UhcDriver {
 	}
 	
 	public FooterPage NavigateToProfileandPref_ship(){
+		footerCheckModelPopup(driver);
 		footerValidate(accountprofile);
 		if(accountprofile.isDisplayed()){
 			System.out.println("accountprofile button is displayed");
