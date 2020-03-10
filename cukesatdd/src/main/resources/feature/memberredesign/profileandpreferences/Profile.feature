@@ -114,7 +114,7 @@ Feature: 1.02 Member Profile page
       | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile06 @regressionAccountProf&Pref @AP_Part2_Regression
+  @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -266,7 +266,7 @@ Feature: 1.02 Member Profile page
       | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS_ProfilePref       |
       | Unknown_10  | MA        | MA_UHCGroup             | NON LIS_ProfilePref       |
       | Unknown_11  | MAPD      | MAPD_Group              | NON LIS_ProfilePref       |
-      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
+    #  | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
       
       
     @accountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
@@ -460,4 +460,4 @@ Feature: 1.02 Member Profile page
 	    | 15103 | SHIP     | SHIP_ProfilePref    |   
        
        
-  
+ 
