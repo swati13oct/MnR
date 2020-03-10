@@ -30,6 +30,8 @@ public class keywordSearchAARP extends GlobalWebElements {
 	
 	public void url(){
 		System.out.println("PageTitle " + driver.getTitle());
+		threadsleep(8);
+		System.out.println("after wait");
 		Assert.assertTrue(driver.getTitle().contains("medicare"));
 		/*String expectedTitle = "medicare";
         String actualTitle = driver.getTitle();
