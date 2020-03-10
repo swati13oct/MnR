@@ -25,14 +25,16 @@ public class keywordSearchAARP extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement search;
 	
-	@FindBy(xpath="//a[contains(text(),'AARP® Medicare Plans - What does Medicare cover? |')]")
-	private WebElement textonpage;
+	@FindBy(xpath="//input[@type='button']")
+	private WebElement searchButton;
+	
+	
 	
 	public void url(){
 		System.out.println("PageTitle " + driver.getTitle());
 		threadsleep(8);
 		System.out.println("after wait");
-		Assert.assertTrue(driver.getTitle().contains("medicare"));
+		Assert.assertTrue(driver.getTitle().contains("edicare"));
 		/*String expectedTitle = "medicare";
         String actualTitle = driver.getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);*/
@@ -43,8 +45,8 @@ public class keywordSearchAARP extends GlobalWebElements {
 			e.printStackTrace();
 		}
 		validateNew(search);
-		validateNew(textonpage);
-		textonpage.getText();		
+		validateNew(searchButton);
+		searchButton.getText();		
 	}
 	
 }
