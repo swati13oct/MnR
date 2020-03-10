@@ -41,6 +41,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private PageData savedrugpage;
 
 	public JSONObject savedrugpageJson;
+	
+	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
+	private WebElement dceplanname;
 
 	@FindBy(id = "add-drug")
 	public WebElement addDrug;
@@ -644,6 +647,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void backwardToStep1() {
 		step1.click();
+	}
+	
+	/**
+	 * @toDo: verify the plan name is coming or not
+	 * @param plantype
+	 * @return
+	 */
+	public DrugCostEstimatorPage verifyplanname(String planname) {
+
+		if(dceplanname.equals(planname)){
+				return new DrugCostEstimatorPage(driver);
+		}else{
+
+			return null;
+			}
+
 	}
 
 	public void validatePharmacyForm() {

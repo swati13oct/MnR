@@ -36,6 +36,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
+	private WebElement dceplanname;
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
 	@FindBy(id = "add-drug")
@@ -674,6 +677,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);
 		validateNew(mapToggle);
+	}
+	
+	/**
+	 * @toDo: verify the plan name is coming or not
+	 * @param plantype
+	 * @return
+	 */
+	public DrugCostEstimatorPage verifyplanname(String planname) {
+
+		if(dceplanname.equals(planname)){
+				return new DrugCostEstimatorPage(driver);
+		}else{
+
+			return null;
+			}
+
 	}
 
 	public boolean validatemesgmoredrugsothertext(String otherscount) {
