@@ -45,6 +45,8 @@ Feature: 2.10.2 ACQ-DCE-VPP_1 UHC - To test DCE to VPP Plan Summary in AARP site
     And user access DCE tool on UMS site
       | Plan Type | <plantype> |
       | PlanName  | <planName> |
+		And I verify the plan name in UMS site
+     | PlanName   | <planName>  |
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
