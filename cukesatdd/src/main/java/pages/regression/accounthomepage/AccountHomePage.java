@@ -1857,14 +1857,18 @@ public class AccountHomePage extends UhcDriver {
 		Thread.sleep(6000);
 
 		if (validate(paymentsLink)) {
-
+			checkModelPopup(driver,5);
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			return new PaymentHistoryPage(driver);
 		} else if (validate(TestHarnesspaymentsLink)) {
 
 			System.out.println("TestHarness Page Payments Link is displayed");
 			TestHarnesspaymentsLink.click();
+			checkModelPopup(driver,5);
 			return new PaymentHistoryPage(driver);
 		}	else {
 			// NOTE:
@@ -1873,8 +1877,14 @@ public class AccountHomePage extends UhcDriver {
 			// go to secondary page first then locate the payment tab.
 			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");
 			navigateDirectToBnCPag();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			Assert.assertTrue("PROBLEM - unable to locate the payment link on secondary page", validate(paymentsLink3));
 			paymentsLink3.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			/* tbd 
 			try {
 				String Page_URL = "https://" + MRScenario.environment
