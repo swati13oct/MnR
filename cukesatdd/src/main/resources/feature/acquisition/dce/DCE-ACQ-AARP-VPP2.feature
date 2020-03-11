@@ -14,6 +14,8 @@ Feature: 1.10.3 ACQ-DCE-VPP_2 AARP To test DCE to VPP Plan Details in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then the user navigates to Presciption Drug Benefits tab in AARP site
+    And I verify the plan name in AARP
+     | Plan Name | <planname> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
@@ -40,6 +42,8 @@ Feature: 1.10.3 ACQ-DCE-VPP_2 AARP To test DCE to VPP Plan Details in AARP site
     When user successfully adds drug in the ums site
       | Drug Name3 | <drugName3> |
     Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+     And I verify the plan name in AARP
+     | Plan Name | <planname> |
     When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
@@ -55,6 +59,8 @@ Feature: 1.10.3 ACQ-DCE-VPP_2 AARP To test DCE to VPP Plan Details in AARP site
     Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
     Then the user change the pharmacy type and select new pharmacy in AARP site
       | New Pharmacy Type | <newPharmacyType> |
+    And I verify the plan name in AARP
+     | Plan Name | <planname> |
     Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <genericName1> |
       | Drug Name2 | <drugName2>    |

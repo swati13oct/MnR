@@ -12,12 +12,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import pages.acquisition.uhcretiree.DrugLookUpPage;
 import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -287,6 +289,16 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
+	@When("^user selects a provider and retuns to TestHarness page for AARP$")
+	public void user_selects_a_provider_and_retuns_to_TestHarness_page_for_AARP() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPTestHarnessPage vppTestHarnessPage = providerSearchPage.selectsProviderNavigateBacktoTestharness();
+			Assert.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
+
+		}
+	}
 	
 
 }		

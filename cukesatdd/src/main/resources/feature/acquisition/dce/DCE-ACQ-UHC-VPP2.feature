@@ -13,6 +13,8 @@ Feature: 2.10.3 To test DCE to VPP plan Summary flow  in UMS site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then the user navigates to Presciption Drug Benefits tab in UMS site
+		And I verify the plan name in UMS site
+			| PlanName   | <planName>  |
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
@@ -90,6 +92,8 @@ Feature: 2.10.3 To test DCE to VPP plan Summary flow  in UMS site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then the user navigates to Plan Costs tab in UMS site
+    And I verify the plan name in UMS site
+			| PlanName   | <planName>  |
     Then user adds drug to drug cost estimator flow for the given plan name in UMS site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
