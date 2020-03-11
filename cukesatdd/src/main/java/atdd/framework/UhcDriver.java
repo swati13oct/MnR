@@ -729,7 +729,7 @@ try {
 	}
 	
 	public void checkModelPopup(WebDriver driver) {
-		 checkModelPopup(driver, defaultTimeoutInSec);
+		 checkModelPopup(driver,defaultTimeoutInSec);
 	}
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {

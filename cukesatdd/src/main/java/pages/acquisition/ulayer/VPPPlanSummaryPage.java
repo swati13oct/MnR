@@ -5,22 +5,26 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -149,8 +153,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[@id='mainWrapper']/div/table/tbody/tr[2]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[3]/div/div[1]/a")
 	private WebElement previousYearLink;
 
-	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//input[contains(@id,'compare-plan-')]/following-sibling::label")
-	private List<WebElement> planCompareList;
 
 	@FindBy(css="#pdpplans_container .planCompareBtn")
 	private WebElement comparePDPPlanChkBox;
@@ -158,7 +160,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(css="#maplans_container .compareHeading>p")
 	private WebElement compareUpto3PlansPopup;
 
-	@FindBy(xpath="//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label")
+	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//span[@class='cpcheckbox']/input")
 	private WebElement compareChkBox;
 
 	@FindBy(xpath="//div[@data-ng-repeat='plan in maplans'][1]//div[contains(@id,'showcompare')][1]/div[@class='compareHeading']/p[1]/b")
@@ -362,7 +364,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -922,13 +924,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 
-	
-	public boolean verifyCompareCheckBoxesAreUnchecked(){
-		if (!planCompareList.get(0).isSelected())
-			return true;
-		return false;
+	public void verifyCompareCheckBoxesAreUnchecked(){
+
+		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
 
 	}
+
 	public void UncheckAndVerifyCompareChkBox(){
 		compareChkBox.click();
 		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
@@ -945,6 +946,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", Checkbox);
+
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
@@ -2126,10 +2128,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
 				
 //		dcedropdown.click();
-		
-		//WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class, 'collapse drugs drug-provider-collapse')]//*[contains(@class,'edit-drugs')]"));
-		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
-		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
+    	WebElement DCELink = null;
+
+		if(planName.contains("SNP")){
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+		}else if(planName.contains("PDP")){
+			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')])"));
+		}else
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+
 		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2172,7 +2179,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		else
 			Assert.fail("Unable to load Myuhcagent Page");                    
-	}                         
+	}                          
 
 	public void validateMedicareGuideRightRail() {
 		validateNew(MedicareGuideRightRail);
@@ -2198,12 +2205,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		System.out.println("Page navigation successful");
 		//  driver.switchTo().window(parentHandle);
-
-
-
-
-
-
 
 
 		/* validateNew(ChooseAVideo); 
@@ -2883,11 +2884,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		
+		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 60);
 		Start_ApplicationBtn.click();
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
 		insuredStatus.click();
 		Thread.sleep(2000);
 		nextButton.click();
@@ -3003,8 +3005,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return new PlanDetailsPage(driver);
 		return null;
 	}
-	
-
 
 
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
@@ -3220,127 +3220,126 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void verifyPlanComapreCheckboxIsUnchecked() {
-	validate(planCompareCheckBox);
-	JavascriptExecutor js = (JavascriptExecutor) driver;
-	String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
-	System.out.println("Plan compare checkbox status:" + CheckStatus);
-	Assert.assertEquals("false", CheckStatus.trim());
-	System.out.println("Verified Plan Compare checkbox is unchecked");
-
-	}
-	
-	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
 		validate(planCompareCheckBox);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
 		Assert.assertEquals("false", CheckStatus.trim());
 		System.out.println("Verified Plan Compare checkbox is unchecked");
 
 		}
+		
+		public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
+			validate(planCompareCheckBox);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assert.assertEquals("false", CheckStatus.trim());
+			System.out.println("Verified Plan Compare checkbox is unchecked");
 
-	public void checkMAPlansOnly(int counter) {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<WebElement> allMAPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+			}
 
-		if (allMAPlans != null) {
-			for (int i = 0; i < allMAPlans.size(); i++) {
-				allMAPlans.get(i).click();
-				if (i == counter) {
-					break;
+		public void checkMAPlansOnly(int counter) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			List<WebElement> allMAPlans = driver
+					.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+			if (allMAPlans != null) {
+				for (int i = 0; i < allMAPlans.size(); i++) {
+					allMAPlans.get(i).click();
+					if (i == counter) {
+						break;
+					}
 				}
+			}
+
+		}
+
+		public void clickon3rdPlan() {
+			WebElement Checkbox = driver.findElement(By
+					.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", Checkbox);
+			// js.executeScript("document.getElementById('compare-plan-3').click;");
+			System.out.println("checked third plan for plan compare");
+		}
+
+		public void checkOneCheckboxVerifyAutoSelection(String Status) {
+			WebElement Checkbox = driver.findElement(By
+					.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", Checkbox);
+			System.out.println("checked One plan for plan compare");
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			if (Status.contains("true")) {
+				Assert.assertEquals(Status, CheckStatus.trim());
+				System.out.println("Verified checkbox is checked");
+				String text = multipleCompareText.getText();
+				System.out.println(text);
+			} else {
+				Assert.assertEquals(Status, CheckStatus.trim());
+				System.out.println("Verified checkbox is un checked");
 			}
 		}
 
-	}
+		public boolean verifyPlanCompareCheckboxNotVisible() {
+			try {
+				boolean blnDisplay = planCompareCheckBox.isDisplayed();
+				System.out.println("Plan compare checkbox is Displayed");
+				return blnDisplay;
+			} catch (NoSuchElementException ex) {
+				System.out.println("Plan compare checkbox is Not Displayed");
+				return false;
+			}
 
-	public void clickon3rdPlan() {
-		WebElement Checkbox = driver.findElement(By
-				.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", Checkbox);
-		// js.executeScript("document.getElementById('compare-plan-3').click;");
-		System.out.println("checked third plan for plan compare");
-	}
+		}	
+		
+		public void clickOnChangeZipCode() {
+			validateNew(changeLocationBtn);
+			changeLocationBtn.click();
 
-	public void checkOneCheckboxVerifyAutoSelection(String Status) {
-		WebElement Checkbox = driver.findElement(By
-				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", Checkbox);
-		System.out.println("checked One plan for plan compare");
-		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
-		System.out.println("Plan compare checkbox status:" + CheckStatus);
-		if (Status.contains("true")) {
-			Assert.assertEquals(Status, CheckStatus.trim());
-			System.out.println("Verified checkbox is checked");
-			String text = multipleCompareText.getText();
-			System.out.println(text);
-		} else {
-			Assert.assertEquals(Status, CheckStatus.trim());
-			System.out.println("Verified checkbox is un checked");
 		}
-	}
 
-	public boolean verifyPlanCompareCheckboxNotVisible() {
-		try {
-			boolean blnDisplay = planCompareCheckBox.isDisplayed();
-			System.out.println("Plan compare checkbox is Displayed");
-			return blnDisplay;
-		} catch (NoSuchElementException ex) {
-			System.out.println("Plan compare checkbox is Not Displayed");
+		public void enterAddressDetails(String address, String city, String state) {
+			validateNew(searchByAddressButton);
+			searchByAddressButton.click();
+			validateNew(addressInput);
+			sendkeys(addressInput, address);
+			sendkeys(cityInput, city);
+			selectFromDropDown(stateDropDownValues, state.toUpperCase());
+
+		}
+
+		public void searchPlansCounty(String countyName, String ismultiCounty) {
+			findPlansButton.click();
+			CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+
+			if (ismultiCounty.contains("YES") && validate(countyModal)) {
+				CommonUtility.waitForPageLoad(driver, countyModal, 45);
+				System.out.println("County should be selected : " + countyName);
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+			} else {
+				System.out.println("No County to be selected ");
+			}
+		}
+		
+		public boolean druginfo(String planName) {
+
+			WebElement EdidrugLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+			String mpdruginfo=EdidrugLink.getText();
+	        System.out.println(mpdruginfo);
+			if (mpdruginfo.toLowerCase().contains("drugs covered")) {
+				return true;
+			}
 			return false;
 		}
-
-	}	
-	
-	public void clickOnChangeZipCode() {
-		validateNew(changeLocationBtn);
-		changeLocationBtn.click();
-
-	}
-
-	public void enterAddressDetails(String address, String city, String state) {
-		validateNew(searchByAddressButton);
-		searchByAddressButton.click();
-		validateNew(addressInput);
-		sendkeys(addressInput, address);
-		sendkeys(cityInput, city);
-		selectFromDropDown(stateDropDownValues, state.toUpperCase());
-
-	}
-
-	public void searchPlansCounty(String countyName, String ismultiCounty) {
-		findPlansButton.click();
-		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
-
-		if (ismultiCounty.contains("YES") && validate(countyModal)) {
-			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			System.out.println("County should be selected : " + countyName);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
-
-		} else {
-			System.out.println("No County to be selected ");
-		}
-	}
-	
-	public boolean druginfo(String planName) {
-
-		WebElement EdidrugLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
-		String mpdruginfo=EdidrugLink.getText();
-        System.out.println(mpdruginfo);
-		if (mpdruginfo.toLowerCase().contains("drugs covered")) {
-			return true;
-		}
-		return false;
-	}
-	
 }

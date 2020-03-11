@@ -36,6 +36,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
+	private WebElement dceplanname;
 
 	// @FindBy(xpath = "//div[@id='drugs-tab']//a[@id='add-drug']")
 	@FindBy(id = "add-drug")
@@ -320,7 +323,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
 	
-	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+	@FindBy(xpath="(//*[@id='zip-radios']/div/label)[1]")
 	public WebElement findPlansRadioButton;
 	
 	@FindBy(xpath="//button[contains(text(),'Search')]")
@@ -674,6 +677,22 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, firstPharmacyName, 45);
 		validateNew(mapToggle);
+	}
+	
+	/**
+	 * @toDo: verify the plan name is coming or not
+	 * @param plantype
+	 * @return
+	 */
+	public DrugCostEstimatorPage verifyplanname(String planname) {
+
+		if(dceplanname.equals(planname)){
+				return new DrugCostEstimatorPage(driver);
+		}else{
+
+			return null;
+			}
+
 	}
 
 	public boolean validatemesgmoredrugsothertext(String otherscount) {
@@ -1871,7 +1890,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
 		checkModelPopup(driver);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeTextBox, 60);
 		sendkeys(zipCodeTextBox, zipCode);
+		CommonUtility.waitForPageLoadNewForClick(driver, findPlansButton, 60);
 		findPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);

@@ -458,7 +458,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	//MedSupp Resume application
 	
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 		
 		@FindBy(id = "msVppZipCode")
@@ -3257,8 +3257,7 @@ public void MedSupFormValidation(String DateOfBirth, String zipcode) throws Inte
 }
 
 public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
-	Thread.sleep(4000);
-	CommonUtility.waitForPageLoadNew(driver, medSupZipcode, 20);
+	checkModelPopup(driver,25);
 	System.out.println("MedSup page form is displayed");
 	//medSupZipcode.sendKeys(zipcode);
 	DOB.click();

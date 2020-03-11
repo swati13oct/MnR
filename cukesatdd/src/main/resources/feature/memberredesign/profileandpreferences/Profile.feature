@@ -266,7 +266,7 @@ Feature: 1.02 Member Profile page
       | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS_ProfilePref       |
       | Unknown_10  | MA        | MA_UHCGroup             | NON LIS_ProfilePref       |
       | Unknown_11  | MAPD      | MAPD_Group              | NON LIS_ProfilePref       |
-      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
+    #  | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
       
       
     @accountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
@@ -327,7 +327,7 @@ Feature: 1.02 Member Profile page
       | TID			   | planType | memberType        | copayCategory   |
       | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
       
-   @accountProfile17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
+   @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
@@ -460,4 +460,4 @@ Feature: 1.02 Member Profile page
 	    | 15103 | SHIP     | SHIP_ProfilePref    |   
        
        
-  
+ 
