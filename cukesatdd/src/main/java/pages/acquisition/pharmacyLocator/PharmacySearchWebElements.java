@@ -156,7 +156,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	/*@FindBy(id="indian-tribal-label")
 	protected WebElement indian_tribal_label_filter;*/
 	
-	@FindBy(xpath="//label[contains(text(),'Indian/Tribal/Urban')]")
+	@FindBy(xpath="//label[@id='Indian/Tribal/Urban')]")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy (id= "noResultsFoundErrorMessage")

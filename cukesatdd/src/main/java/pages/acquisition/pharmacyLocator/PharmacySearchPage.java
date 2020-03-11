@@ -106,7 +106,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public boolean validateNoPharmaciesErrorMessage(){
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		indian_tribal_label_filter.click();
-		sleepBySec(8);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		if(!noPharmaciesErrorMessage.isDisplayed()) {
+			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+			indian_tribal_label_filter.click();
+		}
+		sleepBySec(5);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		Assert.assertTrue("PROBLEM - unable to locate No Pharmacy Error message", pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
