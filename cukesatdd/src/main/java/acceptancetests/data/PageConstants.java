@@ -686,5 +686,9 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	//--------------------------------------------
 	
 	public static final String PLAN_DOCUMENTS_AND_RESOURCES_PAGE="plan_documents_and_resources_page";
+
+	public static final String CQ_LOGIN_PAGE = "cqLoginPage";
+
+	public static final String CQ_PAGE = "cqPage";
 	
 }
