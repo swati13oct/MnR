@@ -199,7 +199,7 @@ public class FooterPage extends UhcDriver {
 	}
 
 	public Object validateFooterLinks() throws InterruptedException{
-		sleepBySec(5);
+		CommonUtility.waitForPageLoad(driver, LastUpdate, 10);
 		
 		String section="LEFT COLUMN CONTENT";
 		
