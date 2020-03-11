@@ -1766,7 +1766,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
-		String testharurl = "content/"+testharnessurl+"testharnesspage.html";
+		String testharurl = "content/"+testharnessurl+"testharness.html";
 		//String testharurl = "content/pharmacysearchtestharnesspage.html";
 		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
@@ -1831,5 +1831,50 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("No SSL error / Exception");
 		}
+
 	}
+	
+	public VPPPlanSummaryPage searchPlansCounty(String countyName) {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+		}
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			System.out.println("County should be selected : " + countyName);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPage searchPlansNoCounty() {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		}
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public VPPTestHarnessPage GetVPPTestHarnessPage() {
+		return new VPPTestHarnessPage(driver);
+		}
 }
