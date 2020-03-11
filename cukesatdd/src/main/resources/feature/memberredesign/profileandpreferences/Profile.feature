@@ -458,6 +458,5 @@ Feature: 1.02 Member Profile page
     Examples: 
 	    | TID   | planType | memberType          |
 	    | 15103 | SHIP     | SHIP_ProfilePref    |   
-       
-       
- 
+	    
+	    
