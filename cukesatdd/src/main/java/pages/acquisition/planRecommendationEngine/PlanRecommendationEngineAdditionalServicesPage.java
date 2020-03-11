@@ -61,52 +61,52 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement dentalQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
 	private WebElement dentalYes;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement dentalNo;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement dentalError;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2)>legend.primary-question-tex")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement hearingQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
 	private WebElement hearingYes;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement hearingNo;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-alert")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement hearingError;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3)>legend.primary-question-tex")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement visionQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
 	private WebElement visionYes;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement visionNo;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-alert")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement visionError;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4)>legend.primary-question-tex")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement fitnessQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
 	private WebElement fitnessYes;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement fitnessNo;
 	
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-alert")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement fitnessError;
 	
 //Additional Page Element Verification Method 
