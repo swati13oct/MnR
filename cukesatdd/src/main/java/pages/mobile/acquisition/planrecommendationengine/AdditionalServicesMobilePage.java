@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class AdditionalServicesMobilePage extends UhcDriver {
 
@@ -21,17 +20,11 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
-		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
 	String page = "Additional";
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
-
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst;
 
 // Additional Services page Elements
 
@@ -77,52 +70,52 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	@FindBy(css = "div>p.description-text")
 	private WebElement additionalPagePrimaryQuestionDecsription;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
+	@FindBy(css = "div>div:nth-of-type(1)>fieldset.radioGroupOpt>legend.primary-question-tex")
 	private WebElement dentalQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div>div:nth-of-type(1)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(1)>label")
 	private WebElement dentalYes;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div>div:nth-of-type(1)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(2)>label")
 	private WebElement dentalNo;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
+	@FindBy(css = "div>div:nth-of-type(1)>fieldset.radioGroupOpt uhc-alert")
 	private WebElement dentalError;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2)>legend.primary-question-tex")
+	@FindBy(css = "div>div:nth-of-type(2)>fieldset.radioGroupOpt>legend.primary-question-tex")
 	private WebElement hearingQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div>div:nth-of-type(2)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(1)>label")
 	private WebElement hearingYes;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div>div:nth-of-type(2)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(2)>label")
 	private WebElement hearingNo;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(2) uhc-alert")
+	@FindBy(css = "div>div:nth-of-type(2)>fieldset.radioGroupOpt uhc-alert")
 	private WebElement hearingError;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3)>legend.primary-question-tex")
+	@FindBy(css = "div>div:nth-of-type(3)>fieldset.radioGroupOpt>legend.primary-question-tex")
 	private WebElement visionQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div>div:nth-of-type(3)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(1)>label")
 	private WebElement visionYes;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div>div:nth-of-type(3)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(2)>label")
 	private WebElement visionNo;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(3) uhc-alert")
+	@FindBy(css = "div>div:nth-of-type(3)>fieldset.radioGroupOpt uhc-alert")
 	private WebElement visionError;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4)>legend.primary-question-tex")
+	@FindBy(css = "div>div:nth-of-type(4)>fieldset.radioGroupOpt>legend.primary-question-tex")
 	private WebElement fitnessQuestion;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-radio[ng-reflect-value='Yes']>label")
+	@FindBy(css = "div>div:nth-of-type(4)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(1)>label")
 	private WebElement fitnessYes;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-radio[ng-reflect-value='No']>label")
+	@FindBy(css = "div>div:nth-of-type(4)>fieldset.radioGroupOpt>uhc-radio-group>uhc-radio:nth-of-type(2)>label")
 	private WebElement fitnessNo;
 
-	@FindBy(css = "fieldset.radioGroupOpt:nth-of-type(4) uhc-alert")
+	@FindBy(css = "div>div:nth-of-type(4)>fieldset.radioGroupOpt uhc-alert")
 	private WebElement fitnessError;
 
 //Additional Page Element Verification Method 
