@@ -1767,7 +1767,6 @@ private WebElement editEmailAddressArrowbutton;
 				Assert.assertTrue("PROBLEM - still see the edit field for evening phone after clicking SAVE button", !validate(ePhone,2));
 				/* tbd if (validate(ePhone,2)) {
 					//tbd if (eveningTimePhoneTextField.isDisplayed()) {
-
 					Assert.fail();
 				} */
 
