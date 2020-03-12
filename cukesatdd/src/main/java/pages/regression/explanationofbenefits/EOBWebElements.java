@@ -308,7 +308,10 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//ul[contains(@class, 'nav-tabs')]//li//a")
 	protected List<WebElement> comboTabList;
-
+	
+	@FindBy(xpath="//li[contains(@data-ng-class,'header')]//a[contains(@href,'eob.html') and text()='Explanation of Benefits']")
+	protected WebElement eobOptionUnderClaimsMenu;
+	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

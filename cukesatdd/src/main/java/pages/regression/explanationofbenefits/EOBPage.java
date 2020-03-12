@@ -47,6 +47,13 @@ public class EOBPage extends EOBBase{
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	public EOBPage(WebDriver driver, boolean doBasicPgValidation) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		if (doBasicPgValidation)
+			openAndValidate();
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -55,6 +62,10 @@ public class EOBPage extends EOBBase{
 		if(!pageHeader.getText().contains("Explanation of Benefits"))
 			Assert.fail("Page header not validated. Error loading the page");
 
+	}
+	
+	public boolean findEobOptionUnderClaims() {
+		return eobValidate(eobOptionUnderClaimsMenu);
 	}
 	
 	public void validateSspContent() {

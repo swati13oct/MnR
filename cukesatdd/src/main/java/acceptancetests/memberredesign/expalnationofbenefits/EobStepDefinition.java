@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
@@ -24,6 +25,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class EobStepDefinition {
 	@Autowired
@@ -322,10 +324,18 @@ public class EobStepDefinition {
 		eobPage.validateHeaderSectionContent_DREAMEOB(planType);
 	}
 	
-	@Then("^the user validates the eob page content for SSP$")
+	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")
 	public void validate_sspContent() {
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		Assert.assertTrue("PROBLEM - currently SSP EOB is disabled, should not be able to bring up the EOB page content for SSP user", eobPage==null); 
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		WebDriver d=claimsSummPg.driver;
+		boolean doBasicPgValidation=false;
+		EOBPage eobPage =  new EOBPage(d, doBasicPgValidation);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if(memberType.contains("GROUP"))
+			Assert.assertTrue("PROBLEM - SSP Group user should be able to see the EOB sub tab on top menu for Claims option", eobPage.findEobOptionUnderClaims()); 
+		else
+			Assert.assertTrue("PROBLEM - SSP Individual user should NOT be able to see the EOB sub tab on top menu for Claims option", !eobPage.findEobOptionUnderClaims()); 
 		//keep  eobPage.validateSspContent();
 	}
 
