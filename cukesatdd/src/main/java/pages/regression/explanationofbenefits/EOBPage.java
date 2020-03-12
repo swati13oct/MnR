@@ -1260,6 +1260,7 @@ public class EOBPage extends EOBBase{
 	}
 
 	public int getNumEobAfterSearch(){
+		sleepBySec(5); //note: wait for page to settle before storing the count just in case
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		System.out.println("EOB Count is: "+eobCount.getText());
