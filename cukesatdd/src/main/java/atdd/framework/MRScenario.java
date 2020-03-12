@@ -383,17 +383,24 @@ System.out.println("Con established*********");
 	//	Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
-
 		stmt = con.createStatement();
 		String sql;
-		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-		ResultSet rs1 = stmt.executeQuery(sql);
-		rs1.first();
-		String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-		System.out.println(HLTHSF_ID);
-		rs1.close();
-		stmt.close();
-		con.close();
+		ResultSet rs1=null;
+		try {
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
+			rs1 = stmt.executeQuery(sql);
+			rs1.first();
+			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
+			System.out.println(HLTHSF_ID);
+		} catch (Exception e) {
+		System.out.println("Already data not available in the mbr DB");
+		}
+		finally {
+			rs1.close();
+			stmt.close();
+			con.close();	
+		}
+		
 	}
 
 	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
@@ -402,29 +409,32 @@ System.out.println("Con established*********");
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
-		rs = stmt.executeQuery(
-				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
-		int initialrowcount = 0;
-		while (rs.next()) {
-			initialrowcount = rs.getInt(1);
-		}
-		System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
-		stmt.executeUpdate(
-				"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+		try {
+			rs = stmt.executeQuery(
+					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			int initialrowcount = 0;
+			while (rs.next()) {
+				initialrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr table are: " + initialrowcount);
+			stmt.executeUpdate(
+					"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 
-		rs = stmt.executeQuery(
-				"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
-		int finalrowcount = 0;
-		while (rs.next()) {
-			finalrowcount = rs.getInt(1);
+			rs = stmt.executeQuery(
+					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
+			int finalrowcount = 0;
+			while (rs.next()) {
+				finalrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
+			if (finalrowcount == 0) {
+				System.out.println("Records deleted successfully from table: mbr");
+			} else {
+				System.out.println("Still Records exist in the table: mbr");
+			}
+		} catch (Exception e) {
+			System.out.println("Nothing to delete from the mbr DB");
 		}
-		System.out.println("Total selected records to delete from mbr table are: " + finalrowcount);
-		if (finalrowcount == 0) {
-			System.out.println("Records deleted successfully from table: mbr");
-		} else {
-			System.out.println("Still Records exist in the table: mbr");
-		}
-
 	}
 
 	public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
@@ -436,28 +446,36 @@ System.out.println("Con established*********");
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
-		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
-		int initialrowcount = 0;
-		while (rs.next()) {
-			initialrowcount = rs.getInt(1);
-		}
-		System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
+		try {
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+			int initialrowcount = 0;
+			while (rs.next()) {
+				initialrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
 
-		stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
-				+ lastName + "'");
-		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-				+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
-		int finalrowcount = 0;
-		while (rs.next()) {
-			finalrowcount = rs.getInt(1);
+			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
+					+ lastName + "'");
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
+					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+			int finalrowcount = 0;
+			while (rs.next()) {
+				finalrowcount = rs.getInt(1);
+			}
+			System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
+			if (finalrowcount == 0) {
+				System.out.println("Records deleted successfully from table: mbr_prtl");
+			} else {
+				System.out.println("Still Records exist in the table: mbr_prtl");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Nothing to delete from the mbr_portal DB");
 		}
-		System.out.println("Total selected records to delete from mbr_prtl table are: " + finalrowcount);
-		if (finalrowcount == 0) {
-			System.out.println("Records deleted successfully from table: mbr_prtl");
-		} else {
-			System.out.println("Still Records exist in the table: mbr_prtl");
-		}
+	
+		
+		
 	}
 
 	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
@@ -470,29 +488,35 @@ System.out.println("Con established*********");
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		String sql;
-		sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
-		ResultSet rs1 = stmt.executeQuery(sql);
-		rs1.first();
-		String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-		System.out.println(HLTHSF_ID);
-		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-		int initialrowcount = 0;
-		while (rs.next()) {
-			initialrowcount = rs.getInt(1);
+try {
+	sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
+	ResultSet rs1 = stmt.executeQuery(sql);
+	rs1.first();
+	String HLTHSF_ID = rs1.getString("HLTHSF_ID");
+	System.out.println(HLTHSF_ID);
+	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	int initialrowcount = 0;
+	while (rs.next()) {
+		initialrowcount = rs.getInt(1);
+	}
+	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+	stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	int finalrowcount = 0;
+	while (rs.next()) {
+		finalrowcount = rs.getInt(1);
+	}
+	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+	if (finalrowcount == 0) {
+		System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+	} else {
+		System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+	}	
+		} catch (Exception e) {
+			System.out.println("Nothing to delete from the DB");
 		}
-		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
-		stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-		rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-		int finalrowcount = 0;
-		while (rs.next()) {
-			finalrowcount = rs.getInt(1);
-		}
-		System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
-		if (finalrowcount == 0) {
-			System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
-		} else {
-			System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
-		}
+		
+		
 	}
 
 	public void removeMember() {
