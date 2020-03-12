@@ -242,42 +242,74 @@ public class ProviderSearchPage extends UhcDriver {
 		
 		
 		}
-
+	
 	public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		// TODO Auto-generated method stub
-		
-		   CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-			GetStarted.click();
 
-			CommonUtility.waitForPageLoadNew(driver, People, 30);
-			People.click();
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		GetStarted.click();
 
-			CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-			Primary.click();
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
 
-			CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
 
-			Physician.click();
-			CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
-			SaveBtn.click();
-			
-			if(validate(selectLocationOption)){
-				selectLocationOption.click();
-				validateNew(saveBtn2);
-				saveBtn2.click();
-			}
-			
-			CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
-			jsClickNew(Viewsavebtn);
+		Physician.click();
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		SaveBtn.click();
 
-			validateNew(Checkcoverage);
-			
-			Checkcoverage.click();
-			waitForCountDecrement(2);
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		if (validate(selectLocationOption)) {
+			selectLocationOption.click();
+			validateNew(saveBtn2);
+			saveBtn2.click();
+		}
 
-			return new PlanDetailsPage(driver);
-		
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+		jsClickNew(Viewsavebtn);
+
+		validateNew(Checkcoverage);
+
+		Checkcoverage.click();
+		waitForCountDecrement(2);
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new PlanDetailsPage(driver);
+
+	}
+	public VPPTestHarnessPage selectsProviderNavigateBacktoTestharness() {
+		GetStarted.click();
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+
+		jsClickNew(Physician);
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		jsClickNew(SaveBtn);
+
+		if (validate(selectLocationOption)) {
+			selectLocationOption.click();
+			validateNew(saveBtn2);
+			saveBtn2.click();
+		}
+
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+		jsClickNew(Viewsavebtn);
+		validateNew(providerNameText);
+		validateNew(Checkcoverage);
+		jsClickNew(Checkcoverage);
+		waitForCountDecrement(2);
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new VPPTestHarnessPage(driver);
 	}
 }
