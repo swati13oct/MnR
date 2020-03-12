@@ -77,7 +77,7 @@ public class EOBBase extends EOBWebElements{
 	 */
 	public String validateNeedHelpSection(String planType, String memberType) throws InterruptedException {
 		handleComboTabIfComboUser(planType, memberType);
-		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
+		if (planType.contains("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",eobValidate(needHelp_SectionHeader));
 
