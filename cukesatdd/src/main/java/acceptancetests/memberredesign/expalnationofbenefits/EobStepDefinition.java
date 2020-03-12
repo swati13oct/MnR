@@ -476,14 +476,12 @@ public class EobStepDefinition {
 			eobPage = accountHomePage.navigateDirectToEOBPag();
 		}
 
-		if (eobPage!=null){
-			if (memberType.contains("COMBO")) 
-				eobPage.goToSpecificComboTab(planType);
-			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-			System.out.println("user is on the EOB page"); 
-		}     
-		else
-			Assert.assertTrue("Issue : EOB Page is not Displayed", eobPage!=null);
+		Assert.assertTrue("PROBLEM - EOB Page is not Displayed", eobPage!=null);
+		if (memberType.contains("COMBO")) 
+			eobPage.goToSpecificComboTab(planType);
+		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		System.out.println("user is on the EOB page"); 
+		eobPage.waitForEobPageToLoad();
 	}
 
 
