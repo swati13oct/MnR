@@ -75,10 +75,30 @@ public class CQStepDefinition {
 	}
 	
 	@And("^the user navigates to ole pages on AEM and validates$")
-	public void validateCQPages(){
+	public void validateCQ_OLEPages(){
 		CQPage cqPage = (CQPage) getLoginScenario().getBean(PageConstants.CQ_PAGE);
 		cqPage.validateOLEPages();
 	}
+	
+	@And("^the user navigates to vpp pages on AEM and validates$")
+	public void validateCQ_VPPPages(){
+		CQPage cqPage = (CQPage) getLoginScenario().getBean(PageConstants.CQ_PAGE);
+		cqPage.validateVPPPages();
+	}
+	
+	@And("^the user navigates to acquisition pages on AEM and validates$")
+	public void validateCQ_AcqPages(){
+		CQPage cqPage = (CQPage) getLoginScenario().getBean(PageConstants.CQ_PAGE);
+		cqPage.validateAcqPages();
+	}
+
+	@And("^the user navigates to member pages on AEM and validates$")
+	public void validateCQ_member_Pages(){
+		CQPage cqPage = (CQPage) getLoginScenario().getBean(PageConstants.CQ_PAGE);
+		cqPage.validateMemberPages();
+	}
+	
+
 
 
 	
