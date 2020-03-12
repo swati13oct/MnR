@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HttpsURLConnection;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.joda.time.DateTime;
@@ -858,7 +857,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		if (MRScenario.environment.contains("stage") && !planType.contains("SHIP")) {
+		if (MRScenario.environment.contains("stage")) {
 			
 			try {
 				URL TestURL = new URL(pdfUrl);

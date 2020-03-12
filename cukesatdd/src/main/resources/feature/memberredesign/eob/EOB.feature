@@ -142,9 +142,9 @@ Feature: 1.04 To Test EOB for Members
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
     @SHIP_EOBs
     Examples: 
-      | index | planType | memberType         | eobType | flagZeroEob |
-      | 12    | SHIP_MEDICARE SUPPLEMENT     | SHIP_EOB           | Medical | true        | 
-      | 13    | SHIP_MEDICARE SUPPLEMENT     | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | index | planType                 | memberType         | eobType | flagZeroEob |
+      | 12    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 13    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
 
   @eob02 @regression_06_06_18FnF @regressionMember
@@ -185,7 +185,7 @@ Feature: 1.04 To Test EOB for Members
     Then Validate Explanation of benefits Page for group SSUP
     Then the user validates the eob page content for SSP
 
-    @SHIP_EOBs
+@abc    @SHIP_EOBs
     Examples: 
       | index | FID    | planType | memberType | 
       | 16    | 267688 | SSUP     | GROUP_EOB  | 

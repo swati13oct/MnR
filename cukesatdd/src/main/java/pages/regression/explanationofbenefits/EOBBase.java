@@ -3,25 +3,12 @@
  */
 package pages.regression.explanationofbenefits;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.joda.time.DateTime;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 
@@ -59,7 +46,7 @@ public class EOBBase extends EOBWebElements{
 	}
 
 	public int waitForEobPageToLoad() {
-		int maxTry=10;
+		int maxTry=180;
 		int numberOfSeconds=1;
 		return waitForEobPageToLoad(maxTry, numberOfSeconds);
 	}
