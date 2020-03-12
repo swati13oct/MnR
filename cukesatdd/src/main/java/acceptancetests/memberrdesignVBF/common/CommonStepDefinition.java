@@ -44,7 +44,7 @@ public class CommonStepDefinition {
 	 * 
 	 * @param memberAttributes
 	 */
-	/*@Given("^I am a authenticated member on the member redesign site for Direct Login$")
+	@Given("^I am a authenticated member on the member redesign site for Direct Login$")
 	public void I_am_a_authenticated_member_on_the_member_redesign_site(DataTable memberAttributes) {
 		memberAttributesMap.clear();
 
@@ -66,13 +66,13 @@ public class CommonStepDefinition {
 			getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
 			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 		}
-	}/*
+	}
 
 	/***
 	 * 
 	 * @throws InterruptedException
 	 */
-	/*@When("^the above plantype user logs in member redesign for Direct Login$")
+	@When("^the above plantype user logs in member redesign for Direct Login$")
 	public void plantype_user_logs_in(DataTable memberattributes) throws InterruptedException {
 		String userName = (String) getLoginScenario().getBean(LoginCommonConstants.USERNAME);
 		String pwd = (String) getLoginScenario().getBean(LoginCommonConstants.PASSWORD);
@@ -193,12 +193,12 @@ public class CommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		CommonStepDefinition commonStepDefinition = new CommonStepDefinition(loginScenario);
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
-
-	}*/
+		}
+	}
 	/***
 	 * 
 	 */
-	/*@Then("^I should see Need Help section at the bottom$")
+	@Then("^I should see Need Help section at the bottom$")
 	public void I_should_see_nned_help_section_at_botom() {
 		// Express the Regexp above with the code you wish you had
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
@@ -211,5 +211,5 @@ public class CommonStepDefinition {
 		rallyDashboard.validateNeedHelpSection();
 		}
 
-	}*/
+	}
 }
