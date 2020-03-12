@@ -778,18 +778,18 @@ public class HSIDStepDefinition {
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 		if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
 			if ((planType != null) && (category == null)) { //note: input has planType only
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("1 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType == null) && (category != null)) { //note: input has memberType only
-				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+				if (category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))) {
 					teamSpecialCase=true;		
 					System.out.println("2 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			} else if ((planType != null) && (category != null)) { //note: input has both planType and memberType
-				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
-						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+				if (planType.toLowerCase().contains("pcp") || (planType.toLowerCase().contains("medica") && !planType.toLowerCase().contains("medicare supplement"))
+						|| category.toLowerCase().contains("pcp") || (category.toLowerCase().contains("medica") && !category.toLowerCase().contains("medicare supplement"))
 						) {
 					teamSpecialCase=true;		
 					System.out.println("3 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
