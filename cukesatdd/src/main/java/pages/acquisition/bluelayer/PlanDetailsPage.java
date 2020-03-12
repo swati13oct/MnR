@@ -1,11 +1,19 @@
 package pages.acquisition.bluelayer;
 
+import java.awt.AWTException;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /*@author pagarwa5*/
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,7 +101,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	private WebElement compareBoxMessage;
-
+	
+	@FindBy(xpath = "//span[@class='single-added-text ng-scope show']")
+	private WebElement compareBoxChecked;
+	
 	@FindBy(xpath = ".//*[@id='highlights']//span[contains(@class,'added-num ng-scope')]")
 	private WebElement compareBoxMessagePDP;
 
@@ -169,10 +180,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public JSONObject planDocPDFAcqJson;
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryTop']")
 	private WebElement topbackToPlanslink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryBottom']")
 	private WebElement downbackToPlanslink;
 
 	@FindBy(id = "medicalbenefits")
@@ -186,6 +197,12 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
+	
+	@FindBy(xpath = ".//*[@id='drugBenefits']")
+	private WebElement drugBenefitsSection;
 	
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
@@ -221,6 +238,14 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement riderYearlyPremium;
+	
+	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
+	private WebElement planDocs;
+	
+	@FindBy(xpath = "//h2[@class='ng-binding']")
+	private WebElement planNameValue;
+	
+	
 	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabEstimatedTotalAnnualCost;
@@ -481,19 +506,19 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public boolean validateCompareBox() {
-		if (compareBoxMessage.getText().contains("plan added")) {
-			clickCompareBox();
-			Assert.assertTrue(compareBoxMessage.getText().contains("Add to compare"),
+		if(validateNew(compareBoxChecked)){
+			Assert.assertTrue(compareBoxMessage.getText().contains("1 plan added, please select another plan to continue"),
 					"Message not changed to Add to Compare");
 			return true;
-		} else {
-			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
-			return false;
 		}
-
+		 else {
+				Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
+				return false;
+			}
 	}
 
 	public void clickCompareBox() {
+		validateNew(compareBox);
 		compareBox.click();
 	}
 
@@ -540,17 +565,15 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
-
 		waitforElement(downbackToPlanslink);
-		downbackToPlanslink.click();
-		Thread.sleep(3000);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", downbackToPlanslink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", downbackToPlanslink);
+		Thread.sleep(7000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 			Assert.assertTrue(true);
 		}
-
 		else
 			Assert.assertTrue(false);
-
 	}
 
 	public void browserBack() {
@@ -621,7 +644,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("enrollment")) {
+		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
 		}
@@ -822,6 +845,126 @@ public class PlanDetailsPage extends UhcDriver {
 		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
 
 	}
+	
+	public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+		validateNew(planDocs);
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+		String PdfHref = PDFlink.getAttribute("href");
+		System.out.println("href for the PDF is : "+PdfHref);
+		if(PdfHref.contains(documentCode)){
+			System.out.println("Expected Document code :"+documentCode+"-  is mathing the PDF link :  "+PdfHref);
+			return true;
+		}
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+		validateNew(planDocs);
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+
+		String parentHandle = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
+		executor.executeScript("arguments[0].click();", PDFlink);
+
+		//PDFlink.click();
+
+		waitForCountIncrement(initialCount);
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			System.out.println("Switching Window");
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(parentHandle)){
+				System.out.println("In Parent Window : FAILED");
+				break;
+
+			}
+
+		}
+		System.out.println("Switched to new window : Passed");
+
+		try {
+			driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if(driver.getCurrentUrl().contains(documentCode))	{
+			System.out.println("PDF url has the correct document code.. : "+documentCode);
+			System.out.println("PDF url : "+driver.getCurrentUrl());
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean ClickValidatePDFText_ForDocCode(String pDFtype, String documentCode) throws AWTException {
+		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+
+		String parentHandle = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
+		executor.executeScript("arguments[0].click();", PDFlink);
+
+		//PDFlink.click();
+
+		waitForCountIncrement(initialCount);
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			System.out.println("Switching Window");
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(parentHandle)){
+				System.out.println("In Parent Window : FAILED");
+				break;
+
+			}
+		}
+		System.out.println("Switched to new window : Passed");
+		try {
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			System.out.println("Current URL is : " + TestURL);
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			System.out.println("PDF text : "+PDFText);
+
+			if(PDFText.contains(documentCode)){
+				System.out.println("PDF text contains expected Document code : "+documentCode);
+				return true;
+			}
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		System.out.println("****************Copy and validate document code failed*************");
+
+		return false;
+	}
+
 
 	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
 			driver.manage().window().maximize();    
@@ -972,6 +1115,17 @@ public class PlanDetailsPage extends UhcDriver {
 			bValidation = false;
 		return bValidation;
 	}
+	
+	public void clickAndValidatePrescriptionDrugBenefits() {
+		prescriptiondrugTab.click();
+		if(drugBenefitsSection.isDisplayed()){	
+				Assert.assertTrue(true);
+				System.out.println("We are on prescriptiondrugTab");
+		}
+		else
+				Assert.assertTrue(false);
+	}
+	
 	/**
 	 * @author bnaveen4
 	 * Add the optional rider
@@ -1026,4 +1180,16 @@ public class PlanDetailsPage extends UhcDriver {
 		 }
 			
 	 }
+	
+	public void verifyPlanName(String PlanName) {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Plan Name is : " + PlanName);
+		Assert.assertTrue(planNameValue.getText().contains(PlanName), "Message not Landed on PlanDetails Page");
+	}
 }

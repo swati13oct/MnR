@@ -111,10 +111,10 @@ Feature: 1.02 Member Profile page
     @devRegression @mocked
     Examples: 
       | TID   | userSelection                           | planType | memberType                      |
-      | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
+    #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
       | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
 
-  @accountProfile06 @regressionAccountProf&Pref @regressionMember @AP_Part2_Regression
+  @accountProfile06 @regressionAccountProf&Pref @AP_Part2_Regression @regressionMember
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
     Given login with following details logins in the member portal and validate elements
       | User Type   | <userType>   |
@@ -192,7 +192,7 @@ Feature: 1.02 Member Profile page
     | TID   | userSelection           | planType | memberType          |
     | xxxxx | SHIP-q1_feb_ship_20_001 | SHIP     | SHIP_ProfilePref    |   
 
-  @accountProfile10 @EPMPProfilePageContactusGroup @regressionMember
+  @accountProfile10 @EPMPProfilePageContactusGroup 
   Scenario Outline: To test end to end regression scenario for EPMP profile page for group members
     #Removed from Regression as EPMP is still in the pipeline for development
     Given login with following details logins in the member portal and validate elements
@@ -266,7 +266,7 @@ Feature: 1.02 Member Profile page
       | Unknown_9   | MA        | MA_UHCIndividual        | NON LIS_ProfilePref       |
       | Unknown_10  | MA        | MA_UHCGroup             | NON LIS_ProfilePref       |
       | Unknown_11  | MAPD      | MAPD_Group              | NON LIS_ProfilePref       |
-      | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
+    #  | Unknown_12  | MAPD      | MAPD_Individual         | NON LIS_ProfilePref       | 
       
       
     @accountProfile14  @RegressionAccountProfile_PCP_MEDICA @regressionMember @codetransformers @AP_Part4_Regression
@@ -327,7 +327,7 @@ Feature: 1.02 Member Profile page
       | TID			   | planType | memberType        | copayCategory   |
       | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
       
-   @accountProfile17 @HsidLogin @regressionMember @codetransformers  @AP_Part5_Regression
+   @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>  |
@@ -458,6 +458,5 @@ Feature: 1.02 Member Profile page
     Examples: 
 	    | TID   | planType | memberType          |
 	    | 15103 | SHIP     | SHIP_ProfilePref    |   
-       
-       
-  
+	    
+	    

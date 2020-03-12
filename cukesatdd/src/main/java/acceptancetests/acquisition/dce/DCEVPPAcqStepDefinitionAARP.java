@@ -152,6 +152,29 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 	}
 	
+	/**
+	 * @toDo:
+	 */
+	@And("^I verify the plan name in AARP$")
+	public void verifyPlanName(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planname = memberAttributesMap.get("Plan Name");
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyplanname(planname);
+		if(dce!=null){
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
 	@Then("^user adds drug to drug cost estimator flow for the given plan name in AARP site$")
 	public void the_user_adds_below_drugs_to_drug_cost_estimator_flow_for_the_given_plan_name_on_AARP_site(DataTable data) throws Throwable {
 		

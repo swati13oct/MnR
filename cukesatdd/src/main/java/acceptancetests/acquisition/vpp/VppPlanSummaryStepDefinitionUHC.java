@@ -997,7 +997,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	 */
 	@Given("^the potential user is on the uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
