@@ -69,11 +69,11 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
+      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
 
     @COSMOS_EOBs
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
       | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
      #note: SSP EOB is disabled
      # | 04    | SSP      | PDP_SSP_COMBO_EOB | Medical           | true        |
@@ -140,10 +140,14 @@ Feature: 1.04 To Test EOB for Members
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs
+    @SHIP_EOBs @devRegression
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 12    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+
+    @SHIP_EOBs
+    Examples: 
+      | index | planType                 | memberType         | eobType | flagZeroEob |
       | 13    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
 
