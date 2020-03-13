@@ -61,13 +61,13 @@ public class GlobalWebElements  extends UhcDriver{
 	public static WebElement footnotesContent;
 	
 			
-	@FindBy(id = "gfn_lnk_row2_1")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Advantage')]")
 	 public static WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_2")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'medicare-supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_4")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")

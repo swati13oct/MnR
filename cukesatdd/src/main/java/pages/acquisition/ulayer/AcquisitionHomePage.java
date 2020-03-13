@@ -1123,7 +1123,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		//validateNew(footerRequestforAssistancelink);
 		validateNew(footerAccessibilitylink);
-		//validateNew(aarpOrgLink);
+		validateNew(aarpOrgLink);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
@@ -1170,7 +1170,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
 		return null;
@@ -1666,6 +1666,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public VPPTestHarnessPage GetVPPTestHarnessPage() {
 			return new VPPTestHarnessPage(driver);
+		}
+
+		public void validateStateDropDown() {
+			validateNew(stateDropDown);
+			selectFromDropDownByValue(stateDropDown, "Guam");
+
+			// TODO Auto-generated method stub
+			
 		}
 	} 
 
