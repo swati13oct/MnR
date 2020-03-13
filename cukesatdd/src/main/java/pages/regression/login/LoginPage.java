@@ -207,10 +207,6 @@ public class LoginPage extends UhcDriver {
 				System.out.println("No Such alert displayed");
 			}
 			// CommonUtility.checkPageIsReady(driver);
-			if (validate(tmpBtn,0)) {
-				tmpBtn.click();
-				CommonUtility.checkPageIsReady(driver);
-			}
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			Alert alert;
 			int counter = 0;
@@ -232,6 +228,10 @@ public class LoginPage extends UhcDriver {
 				}
 				if (counter < 35) {
 					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
+						if (validate(tmpBtn,0)) {
+							tmpBtn.click();
+							CommonUtility.checkPageIsReady(driver);
+						}
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
