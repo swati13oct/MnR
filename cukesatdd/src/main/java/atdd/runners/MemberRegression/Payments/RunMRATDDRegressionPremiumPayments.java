@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPremiumPayments.json",detailedR
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPremiumPayments")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/payments" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPremiumPayments.json" }, tags = { "@tup" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPremiumPayments.json" }, tags = { "@paymentsMarch" })
 public class RunMRATDDRegressionPremiumPayments {
 
 }
