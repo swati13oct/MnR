@@ -85,7 +85,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","PRESCRIPTION");
+			testInputInfoMap.put("headerText","Member Information"); //note: use random text on the page, header text wasn't able to parsed successfully
 			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement for covered medications purchased at retail cost");
 			return testInputInfoMap; 
 		}
