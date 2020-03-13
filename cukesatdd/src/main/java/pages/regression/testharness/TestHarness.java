@@ -1405,7 +1405,7 @@ public class TestHarness extends UhcDriver {
 
 		}
 		public void clickOnPharmaciesNavTab() {
-			
+			CommonUtility.waitForPageLoad(driver, pharmaciesTab, 10);
 			validateNew(pharmaciesTab,0);
 			pharmaciesTab.click();
 			validateNew(pharmaciesHeader,0);

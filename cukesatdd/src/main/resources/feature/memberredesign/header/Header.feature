@@ -29,7 +29,10 @@ Feature: 1.08 Member Header/Navigation validation
       | TID         | planType | memberType    | flow  |
       | 15164,15171 | MAPD     | Individual    | header|
       | 15164,15171 | PDP      | Individual    | header|
-      | 15164,15171 | PCP      | Individual    | header|
+
+    Examples: 
+      | TID         | planType | memberType    | flow  |
+      | 15164,15171 | MEDICA   | Individual    | header|
      
 
   @header02 @premiumpaymentsheader @regressionMember 
