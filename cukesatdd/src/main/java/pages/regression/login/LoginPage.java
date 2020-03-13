@@ -190,6 +190,9 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
+		@FindBy(xpath="//button/span[text()='Home Page']")
+		protected WebElement tmpBtn;
+		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
@@ -225,6 +228,10 @@ public class LoginPage extends UhcDriver {
 				}
 				if (counter < 35) {
 					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
+						if (validate(tmpBtn,0)) {
+							tmpBtn.click();
+							CommonUtility.checkPageIsReady(driver);
+						}
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
