@@ -51,7 +51,8 @@ Feature: 1.08 Member Header/Navigation validation
 	    Examples: 
 	      | TID       | planType    | memberType                    |
 	      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
-	      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
+	    # disable for now without suitable user - covered by comboAll100Subsidy_header case where SHIP payment tab is showing
+	    #  | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
 
  
   # note: DO NOT REMOVE - info on how to pick the right user to test comboAll100Subsidy_header case
