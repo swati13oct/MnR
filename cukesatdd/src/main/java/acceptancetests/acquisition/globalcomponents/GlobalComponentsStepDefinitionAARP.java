@@ -50,14 +50,23 @@ public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwab
 
 @When("^user clicks on View all disclaimer information link on home page$")
 public void user_clicks_on_View_all_disclaimer_information_link_on_home_page() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateDisclaimer();
 }
 
 @When("^user verifies visit aarp\\.org link on home page ulayer$")
 public void user_verifies_visit_aarp_org_link_on_home_page_ulayer() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateVisitAarpOrglink();
 }
 
 @Then("^user clicks on back to top link on home page$")
 public void user_clicks_on_back_to_top_link_on_home_page() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.backToToplink();
 }
 
 }

@@ -1,5 +1,5 @@
 @globalHeader
-Feature:2.04-VBF-Acq-To test global footer links in AARP site
+Feature: 2.04-VBF-Acq-To test global footer links in AARP site
 
 @globalfooterULayer
 Scenario: To verify links displayed in the global footer of AARP site
@@ -25,9 +25,9 @@ Scenario: To verify links displayed in the global footer of AARP site
 Scenario: To verify links displayed in the global header of AARP site 
       Given the user is on AARP medicare acquisition site landing page
       When user accesses global header of the AARP Medicare Plans home page
-      And user verifies the AARP logo on home page
-      And user clicks on Sign in link on home page
-      And user clicks on register link on home page
-      And user hovers over the heart icon and verifies the visitor profile section
-      And user clicks on visit aarp.org link in the ulayer header
+     # And user verifies the AARP logo on home page
+      And user clicks on Sign in link on home page in aarp
+      And user clicks on register link on home page in aarp
+    #  And user hovers over the heart icon and verifies the visitor profile section
+     # And user clicks on visit aarp.org link in the ulayer header
 	

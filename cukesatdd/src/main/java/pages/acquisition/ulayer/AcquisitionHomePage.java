@@ -245,6 +245,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="state-select")
     private WebElement stateDropDown;
     
+    @FindBy(xpath="//a[contains(@class, 'backtotop1')]")
+    private WebElement backToTop_Disclaimer;
+    
+    @FindBy(xpath="//a[contains(@dtmname, 'Footer:Visit AARP')]")
+    private WebElement visitAARPFooterLink;
+    
+    @FindBy(xpath="//a[contains(@class, 'back-to-top')]")
+    private WebElement backToTop;
+    
+    @FindBy(xpath="//a[contains(@class, 'viewLink disclaimer')]")
+    private WebElement disclaimerInformation;
+    
     @FindBy(css=".icon-search")
 	private WebElement searchbutton;
     
@@ -301,6 +313,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
+   	
    	
    	
    	
@@ -1673,6 +1686,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			selectFromDropDownByValue(stateDropDown, "Guam");
 
 			// TODO Auto-generated method stub
+			
+		}
+
+		public void validateDisclaimer() {
+		  validateNew(disclaimerInformation);
+		  disclaimerInformation.click();
+		  validateNew(backToTop_Disclaimer);	
+		}
+
+		public void validateVisitAarpOrglink() {
+		  validateNew(visitAARPFooterLink);
+		  visitAARPFooterLink.isEnabled();
+		}
+
+		public void backToToplink() {
+		 validateNew(backToTop);
+		 backToTop.click();	
+		}
+
+		public void validateHeaderLinks() {
+			  validateNew(headerSignInLink);
+			  validateNew(headerRegisterLink);
+			  validateNew(visitAARPLink);
+			  validateNew(logoLink);	
+			}
+
+		public void signInheader() {
+			headerSignInLink.click();
+			CommonUtility.waitForPageLoad(driver, signIn, 30);
+			if(driver.getCurrentUrl().contains("medicare.uhc.com/aarp")){
+				Assert.assertTrue(true);
+				System.out.println("Signin page is loaded");
+				driver.navigate().back();
+				CommonUtility.waitForPageLoad(driver, healthPlansZipcode, 30);
+				System.out.println("Home Page is loaded");
+			}
+			else
+			{
+				Assert.fail("Unable to navigate to signin page");
+			}	
 			
 		}
 	} 

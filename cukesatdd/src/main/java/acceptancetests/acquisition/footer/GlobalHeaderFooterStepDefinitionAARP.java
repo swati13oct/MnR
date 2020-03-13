@@ -12,6 +12,7 @@ import pages.acquisition.ulayer.ContactUsAARPPage;
 import pages.acquisition.ulayer.DisclaimersAARPPage;
 import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
 import pages.acquisition.ulayer.SiteMapAARPPage;
+import pages.acquisition.ulayer.GlobalWebElements;
 import pages.acquisition.ulayer.TermsnConditionsAARPPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -19,6 +20,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+
 
 /**
  *Functionality:Global Header Footer 
@@ -206,5 +208,29 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickRequestAsistancce();
+	}
+	
+	@When("^user accesses global header of the AARP Medicare Plans home page$")
+	public void access_global_header_aarp() {
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			aquisitionhomepage.validateHeaderLinks();
+		} else {
+			Assert.fail("Home page not found");
+		}
+	}
+	
+	@And("^user clicks on Sign in link on home page in aarp$")
+	public void click_signIn_aarp() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.signInheader();		
+	}
+	
+	@And("^user clicks on register link on home page in aarp$")
+	public void click_register_aarp() {
+		
 	}
 }
