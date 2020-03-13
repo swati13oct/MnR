@@ -1427,10 +1427,42 @@ public class TestHarness extends UhcDriver {
 
 		}
 
-		public void validatePaymentsTabNotDisplayed() {
-			if(validate(premiumPayment,0))
-				Assert.fail("Payments tab not expected but still displayed");
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+		protected WebElement comboTab_MAPD;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 
+		protected WebElement comboTab_SHIP;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
+		protected WebElement comboTab_PDP;
+
+		@FindBy(xpath="//ul[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
+		protected WebElement comboTab_SSP;
+
+		public void validatePaymentsTabNotDisplayed(String planType, String memberType) {
+			if(validate(premiumPayment,0)) {
+				if (memberType.toLowerCase().contains("combo")) {
+					//note: has payment tab, check payment page to see if the plan tab show up or not
+					premiumPayment.click();
+					CommonUtility.checkPageIsReady(driver);
+					WebElement targetTab=null;
+					if (planType.equalsIgnoreCase("MAPD"))
+						targetTab=comboTab_MAPD;
+					else if (planType.equalsIgnoreCase("PDP")) 
+						targetTab=comboTab_PDP;
+					else if (planType.equalsIgnoreCase("SHIP")) 
+						targetTab=comboTab_SHIP;
+					else if (planType.equalsIgnoreCase("SSP") || planType.equalsIgnoreCase("SSUP")) 
+						targetTab=comboTab_SSP;
+					else  
+						Assert.assertTrue("PROBLEM - ATDD hasn't code this condition yet", false);;
+					Assert.assertTrue("PROBLEM - planType '"+planType+"' tab should not show up on payment page if it has 100% subsidy", !validate(targetTab,0));
+				} else {
+					Assert.fail("Payments tab not expected but still displayed");
+				}
+			}
 		}
+
 		public void validatePharmaciesTabNotDisplayed() {
 			if(validate(pharmaciesTab,0))
 				Assert.fail("Pharmacies Tab is not expected but still displayed");

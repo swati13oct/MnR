@@ -50,6 +50,18 @@ Feature: 1.08 Member Header/Navigation validation
 	      | US2037787 | PDP_SSP     | comboAllNot100Subsidy_header  |
 	      | US2037966 | PDP_SSP     | comboSomeHas100Subsidy_header |
 
+ 
+  # note: DO NOT REMOVE - info on how to pick the right user to test comboAll100Subsidy_header case
+  # note: for this to work, 100 percent subsidy - not the LIS type - for Employer - or Group plans - applicable to Premium Payment
+  # note: Only Group Member would be having subsidies in Premium payment, as the plans are purchased by the Employer for 
+  # note: certain group of members he has employed and depending on the subsidy percentage he pays the complete - 
+  # note: in case of 100 subsidy or partial premium for the member.
+  # note: SHIP plans are like any other plans with some additional benefits and its member irrespective of their LIS status, 
+  # note: would have to pay some premium amount
+  # note: You need a Combo member which should not see Premium Payment option. That should be the Group and SHIP Plan combo.
+  # note: Since SHIP member cannot be given any subsidy on premium, only Group plan will be applicable for 100 subsidy.
+  # note: You will still see Payments option in Header for this combo member, because of SHIP plan.
+  # note: Under premium payments tab, you will see premium payment option for SHIP member but not Group Member.
   @header03 @premiumpaymentsheader_100%subisdy @regressionMember 
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
 	    Given login with following details logins in the member portal and validate elements
@@ -59,13 +71,25 @@ Feature: 1.08 Member Header/Navigation validation
 	 
 	 	@headerRegression
 	    Examples: 
-	      | TID   | planType | memberType | 
-	      | 15253 | MAPD     | IndividualGroup_header  | 
-	
-	    @F287624 @US2037783 @US2037945 
+	      | TID       | planType    | memberType                | 
+	      | 15253     | MAPD        | IndividualGroup_header    | 
+
+        #note: in this case at the time of test, this PDP SHIP combo user has 100 percent subsidy on PDP
+        #note: user will see payment tab because of ship plan 
+        #note: but when user is on payment tab, only SHIP plan tab should be available
+        @F287624 @US2037783 @US2037945 
 	    Examples: 
 	      | TID       | planType    | memberType                |
-	      | US2037783 | PDP_MAPD     | comboAll100Subsidy_header |
+	      | US2037783 | PDP         | comboAll100Subsidy_header |
+	    
+	    #note: in this case at the time of test, this combo user has both plans with false premiumPayment
+	    #note: therefore, no payment tab should be showing  
+	    @premiumPaymentFalse
+	    Examples: 
+	      | TID       | planType    | memberType                |
+	      | US2037783 | PDP_SSP     | comboNoPremiumPayment     |
+	      
+	      
 
   @header05 @no_findcareheader @regressionMember @headerRegression
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header

@@ -363,11 +363,12 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@Then("^I should be able to see and use the Premium Payments tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Premium_Payments_tab() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 			if(memberType.equalsIgnoreCase("TERMINATED"))
-				testHarness.validatePaymentsTabNotDisplayed();
+				testHarness.validatePaymentsTabNotDisplayed(planType, memberType);
 			else{
 				PaymentHistoryPage paymentsPage = (PaymentHistoryPage) testHarness.validatePremiumPaymentPage();
 				getLoginScenario().saveBean(PageConstantsMnR.PAYMENT_HISTORY_PAGE, paymentsPage);
@@ -389,9 +390,11 @@ public class MemberRedesignHeaderStepDefinition {
 	
 	@Then("^I should not be able to see the Premium Payments tab Header$")
 	public void upon_clicking_the_Premium_Payments_tab_I_should_navigate_to_the_Premium_Payments_Overview_Page() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-				testHarness.validatePaymentsTabNotDisplayed();
+				testHarness.validatePaymentsTabNotDisplayed(planType, memberType);
 		}else{
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
 				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
