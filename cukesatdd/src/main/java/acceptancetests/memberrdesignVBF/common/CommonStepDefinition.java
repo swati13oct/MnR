@@ -185,15 +185,15 @@ public class CommonStepDefinition {
 	}
 
 	public void launchBrowser() {
-		/*if ("offline-stage".equalsIgnoreCase(MRScenario.environment)){
+		if ("offline-stage".equalsIgnoreCase(MRScenario.environment)){
 			wd = getLoginScenario().getWebDriverNew();
-		}else{*/
+		}else{
 		wd = getLoginScenario().getWebDriverNew();
 	
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		CommonStepDefinition commonStepDefinition = new CommonStepDefinition(loginScenario);
 		getLoginScenario().saveBean(CommonConstants.COMMONSTEPDEFINITIONMEMVBF, commonStepDefinition);
-
+		}
 	}
 	/***
 	 * 
