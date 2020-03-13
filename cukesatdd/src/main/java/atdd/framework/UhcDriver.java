@@ -550,14 +550,14 @@ try {
 	 * @return : boolean
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
-		scrollToView(element);
+		//scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
 			waitforElementNew(element,timeoutInSec);
 			if (element.isDisplayed()) {
 				Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
-				System.out.println("@@@The element " + element.getText() + "is found@@@");
+				//System.out.println("@@@The element " + element.getText() + "is found@@@");
 			}
 		} catch (Exception e) {
 
