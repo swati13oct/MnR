@@ -50,7 +50,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		viewsearchpdf.click();
 		Thread.sleep(5000); //note: keep this for the page to load
-		if (MRScenario.environment.equalsIgnoreCase("team-a")) 
+		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i=0;
@@ -104,9 +104,16 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public boolean validateNoPharmaciesErrorMessage(){
+		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		indian_tribal_label_filter.click();
-		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 10);
-		validateNew(noPharmaciesErrorMessage);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		if(!noPharmaciesErrorMessage.isDisplayed()) {
+			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+			indian_tribal_label_filter.click();
+		}
+		sleepBySec(5);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		Assert.assertTrue("PROBLEM - unable to locate No Pharmacy Error message", pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
 	}
 
@@ -114,7 +121,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		zipcodeField.sendKeys("11111");
 		searchbtn.click();
 		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		validateNew(zipcodeErrorMessage);
+		Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
@@ -363,7 +370,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String county=inputMap.get("county");
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link should show for '"+widgetName+"' widget", 
 				pharmacyValidate(learnMoreElement));
+		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
 		learnMoreElement.click();
+		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
@@ -515,20 +524,29 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				if (!pharmacyValidate(contactUnitedHealthCare)) 
 					contactUsLink=contactUnitedHealthCare_ol;
 				moveMouseToElement(contactUsLink);
+				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
+				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
 						pharmacyValidate(leftArrow));
+				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
 						pharmacyValidate(rightArrow));
 				try {
+					sleepBySec(2);
+					CommonUtility.waitForPageLoadNewForClick(driver, rightArrow, 60);
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.waitForPageLoadNewForClick(driver, leftArrow, 60); 
 					leftArrow.click();
+					sleepBySec(5);
 					CommonUtility.checkPageIsReady(driver);
 				} catch (Exception e) {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
+				sleepBySec(8);
+				CommonUtility.waitForPageLoadNew(driver, resultNavTooltip, 60);
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
 						pharmacyValidate(resultNavTooltip));
 				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element

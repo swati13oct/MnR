@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -362,7 +366,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -462,6 +466,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 	
+		@FindBy(xpath = "//span[contains(@class,'single-added-text show')]/following::a[contains(text(),'View Plan')][1]")
+		private WebElement ViewPlanLink_AddedToCompare;
+		
 		@FindBy(id = "mpbed-month")
 		private WebElement medSuppMonthDrpdwn;
 		
@@ -602,6 +609,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 		private WebElement medicareGuidePopup;
+		
+		@FindBy(xpath="//label[contains(@for,'compare-plan')]")
+		private WebElement planCompareCheckBox;
+		
+		@FindBy(xpath="//span[@class='multiple-added-text show']")
+		private WebElement multipleCompareText;
+		
+		
+		@FindBy(id = "change-location")
+		private WebElement changeLocationBtn;
+		
+		@FindBy(xpath = "//div[@class='change-zip-link']//a[@class='search-by-address']")
+		private WebElement searchByAddressButton;
+		
+		@FindBy(xpath = "//input[@id='address']")
+		private WebElement addressInput;
+		
+		@FindBy(xpath = "//input[@id='city']")
+		private WebElement cityInput;
+		
+		@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+		private List<WebElement> stateDropDownValues;
+		
+		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
+		private WebElement findPlansButton;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -912,10 +944,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox(){
-		if(validate(compareChkBox)){
-			waitforElement(compareChkBox);
-			compareChkBox.click();
-		}
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
 
 	}
 
@@ -1686,7 +1718,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan')]"));
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan Details')]"));
 		validateNew(MAmoreDetailsLink);
 		validateNew(promoWidject);
 
@@ -2098,10 +2130,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//	WebElement dcedropdown =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id, 'drug-list-title')]"));
 				
 //		dcedropdown.click();
-		
-		//WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class, 'collapse drugs drug-provider-collapse')]//*[contains(@class,'edit-drugs')]"));
-		WebElement DCELink = driver.findElement(By.xpath("//*[contains(text(),'"+planName +"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'add-drug ng-scope')]"));
-		//WebElement DCELink = driver.findElement(By.xpath("//*[@id='accordion-arrow-H0543001000']/div[2]/div/div[1]/div[2]/div/div/a"));
+    	WebElement DCELink = null;
+
+		if(planName.contains("SNP")){
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+		}else if(planName.contains("PDP")){
+			DCELink = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')])"));
+		}else
+			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
+
 		
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2126,11 +2163,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
 		RightRail_AgentInYourArea.click();
+		ArrayList<String> tabs_windows = new ArrayList<String> (driver.getWindowHandles());
+		 driver.switchTo().window(tabs_windows.get(1));
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("agentebrc")) {
-			System.out.println("Agent EBRC Page is displayed");
+		if (driver.getCurrentUrl().contains("myuhcagent")) {
+			System.out.println("myuhcagent Page is displayed");
 			Assert.assertTrue(true);
-			driver.navigate().back();
+			//driver.navigate().back();
+			driver.switchTo().window(tabs_windows.get(0));
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");
@@ -2140,8 +2180,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.fail("Unable to load VPP Plan Summary Page");
 		}
 		else
-			Assert.fail("Unable to load Agent EBRC Page");                    
-	}                         
+			Assert.fail("Unable to load Myuhcagent Page");                    
+	}                          
 
 	public void validateMedicareGuideRightRail() {
 		validateNew(MedicareGuideRightRail);
@@ -2167,12 +2207,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		System.out.println("Page navigation successful");
 		//  driver.switchTo().window(parentHandle);
-
-
-
-
-
-
 
 
 		/* validateNew(ChooseAVideo); 
@@ -2360,7 +2394,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
@@ -2403,7 +2437,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
@@ -2426,6 +2460,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
+			WebDriverWait d=new WebDriverWait(driver, 20);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -2568,7 +2604,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		String unsavePlan=listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
 
-		String testPlanXpath="//*[contains(text(),'"+unsavePlan+"')]";
+		String testPlanXpath="//*[contains(text(),'"+unsavePlan+"') and contains(@class,'ng-binding')]";
 		List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 		int expMatch=1;
 		Assert.assertTrue("PROBLEM - unable to locate plan='"+unsavePlan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
@@ -2616,7 +2652,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				System.out.println("Plan '"+plan+"' should be saved");
 				System.out.println("Proceed to locate plan="+plan);
 
-				String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+				String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 				System.out.println("TEST - testPlanXpath xpath="+testPlanXpath);
 				List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 				System.out.println("TEST - size="+listOfPlans.size());
@@ -2633,7 +2669,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				String plan=listOfTestPlans.get(i);
 				System.out.println("Plan '"+plan+"' should be unsaved");
 
-				String testPlanXpath="//*[contains(text(),'"+plan+"')]";
+				String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
 				List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 				int expMatch=1;
 				Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
@@ -2850,11 +2886,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		
+		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 60);
 		Start_ApplicationBtn.click();
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
 		insuredStatus.click();
 		Thread.sleep(2000);
 		nextButton.click();
@@ -2961,6 +2998,15 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	}
 
+	public PlanDetailsPage clickViewDetails_AddedToCompare() {
+
+		validateNew(ViewPlanLink_AddedToCompare);
+		ViewPlanLink_AddedToCompare.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
 
 
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
@@ -3165,10 +3211,137 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 
 	public void clickOnViewMoreForPlan(String planName) {
+		
 		List<WebElement> viewMoreLink =  driver.findElements
 				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
-		if(viewMoreLink.size()>0)
-			viewMoreLink.get(0).click();
+		
+		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
+				viewMoreLink.get(0).click();
+
 	
 	}
+	
+	public void verifyPlanComapreCheckboxIsUnchecked() {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
+
+		}
+		
+		public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
+			validate(planCompareCheckBox);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assert.assertEquals("false", CheckStatus.trim());
+			System.out.println("Verified Plan Compare checkbox is unchecked");
+
+			}
+
+		public void checkMAPlansOnly(int counter) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			List<WebElement> allMAPlans = driver
+					.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+			if (allMAPlans != null) {
+				for (int i = 0; i < allMAPlans.size(); i++) {
+					allMAPlans.get(i).click();
+					if (i == counter) {
+						break;
+					}
+				}
+			}
+
+		}
+
+		public void clickon3rdPlan() {
+			WebElement Checkbox = driver.findElement(By
+					.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", Checkbox);
+			// js.executeScript("document.getElementById('compare-plan-3').click;");
+			System.out.println("checked third plan for plan compare");
+		}
+
+		public void checkOneCheckboxVerifyAutoSelection(String Status) {
+			WebElement Checkbox = driver.findElement(By
+					.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", Checkbox);
+			System.out.println("checked One plan for plan compare");
+			String CheckStatus = js.executeScript("return document.getElementById('compare-plan-2').checked;").toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			if (Status.contains("true")) {
+				Assert.assertEquals(Status, CheckStatus.trim());
+				System.out.println("Verified checkbox is checked");
+				String text = multipleCompareText.getText();
+				System.out.println(text);
+			} else {
+				Assert.assertEquals(Status, CheckStatus.trim());
+				System.out.println("Verified checkbox is un checked");
+			}
+		}
+
+		public boolean verifyPlanCompareCheckboxNotVisible() {
+			try {
+				boolean blnDisplay = planCompareCheckBox.isDisplayed();
+				System.out.println("Plan compare checkbox is Displayed");
+				return blnDisplay;
+			} catch (NoSuchElementException ex) {
+				System.out.println("Plan compare checkbox is Not Displayed");
+				return false;
+			}
+
+		}	
+		
+		public void clickOnChangeZipCode() {
+			validateNew(changeLocationBtn);
+			changeLocationBtn.click();
+
+		}
+
+		public void enterAddressDetails(String address, String city, String state) {
+			validateNew(searchByAddressButton);
+			searchByAddressButton.click();
+			validateNew(addressInput);
+			sendkeys(addressInput, address);
+			sendkeys(cityInput, city);
+			selectFromDropDown(stateDropDownValues, state.toUpperCase());
+
+		}
+
+		public void searchPlansCounty(String countyName, String ismultiCounty) {
+			findPlansButton.click();
+			CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+
+			if (ismultiCounty.contains("YES") && validate(countyModal)) {
+				CommonUtility.waitForPageLoad(driver, countyModal, 45);
+				System.out.println("County should be selected : " + countyName);
+				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+			} else {
+				System.out.println("No County to be selected ");
+			}
+		}
+		
+		public boolean druginfo(String planName) {
+
+			WebElement EdidrugLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+			String mpdruginfo=EdidrugLink.getText();
+	        System.out.println(mpdruginfo);
+			if (mpdruginfo.toLowerCase().contains("drugs covered")) {
+				return true;
+			}
+			return false;
+		}
 }

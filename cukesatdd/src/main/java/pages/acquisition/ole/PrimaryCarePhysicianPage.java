@@ -156,6 +156,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	@FindBy(id = "hsptlZip")
 	private WebElement Hospital_Zip;
+	
+	@FindBy(xpath = "//*[contains(@name,'primary-search')]")
+	private WebElement filterBtn;
 
 	public PrimaryCarePhysicianPage(WebDriver driver) {
 		super(driver);
@@ -233,7 +236,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						SelectPCPLink.click();
 						
-						CommonUtility.waitForPageLoadNew(driver,AssinPCPLinks.get(0), 30);
+						validateNew(filterBtn);
 			
 						if (AssinPCPLinks.size()>0){
 						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());

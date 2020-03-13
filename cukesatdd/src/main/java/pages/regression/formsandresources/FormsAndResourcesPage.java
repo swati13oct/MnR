@@ -9,8 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,8 +26,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimsSummaryPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -134,7 +136,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	private WebElement renewMagazineMAPDGroup;
 	/** My DocumentSection - Forms And Resources page */
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']//*[@id='myDocHeader']")
+	@FindBy(xpath = "//*[@id='myDocButtonText']")
 	private WebElement myDocumentSection;
 
 	/** Plan Material Section **/
@@ -514,6 +516,9 @@ public class FormsAndResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='plan_material_fnr']//a[contains(@href,'order-materials')]")
 	private WebElement preEffecShipOrderPlan;
 
+	@FindBy(xpath = "//a[@id='myDocButtonText']")
+	public WebElement myDocumentsButton;
+
 	public WebElement getEobSectionall() {
 		return eobSectionall;
 	}
@@ -655,6 +660,7 @@ public class FormsAndResourcesPage extends UhcDriver {
 	public WebElement getPreEffectivePharmacyLocatorLinkPDP() {
 		return preEffectivePharmacyLocatorLinkPDP;
 	}
+	
 
 	public WebElement getHome() {
 		return home;
@@ -2610,5 +2616,40 @@ System.out.println(memberType);
 
 		}
 		return false;
+	}
+/* tbd 
+	@FindBy(xpath = "//a[@id='myDocButtonText']")
+	public WebElement myDocumentsButton;
+
+	public MyDocumentsPage navigateToMyDocumentsPage() {
+	
+		myDocumentsButton.click();
+		if (MRScenario.environment.contains("team-atest")) {
+			try {
+				Thread.sleep(8000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Check if Alert popup present...if yes, handle it...");
+			isAlertPresent();
+		}
+		CommonUtility.checkPageIsReady(driver);
+		if (driver.getCurrentUrl().contains("/my-documents/")){
+				return new MyDocumentsPage(driver);
+	     }
+			 return null;
+			
+	}
+*/	
+	public boolean isAlertPresent() {
+		try {
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+				System.out.println("Detected Alert popup, accept it and move on...");
+		} catch (NoAlertPresentException Ex) {
+			System.out.println("DID NOT detect Alert popup, move on...");
+			return false;
+		}
+		return true;
 	}
 }

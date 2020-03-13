@@ -136,7 +136,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
 						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
-				Thread.sleep(2000); //note: keep this for the page to load
+				Thread.sleep(5000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReady(driver);
 				String currentURL=driver.getCurrentUrl();
 				String expectedURL="contact-us.html";

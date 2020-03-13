@@ -5,8 +5,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -30,9 +32,11 @@ import pages.regression.drugcostestimator.*;
 import pages.memberrdesignVBF.EOBPage;
 
 import pages.regression.healthandwellness.*;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.*;
 import pages.memberrdesignVBF.PaymentsOverview;
 import pages.regression.pharmacylocator.*;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.profileandpreferences.*;
 import pages.memberrdesignVBF.ProviderSearchPage;
 import pages.memberrdesignVBF.RallyDashboardPage;
@@ -207,6 +211,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'testharnessHeader')]")
 	private WebElement testHarnessHeader;
 	
+	
 	@FindBy(id = "premiumpayment_4")
 	private WebElement premPaymentsTab;
 	
@@ -243,7 +248,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
 	
-	@FindBy(id="pharmacies_5")
+	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
 	
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
@@ -255,12 +260,24 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	@FindBy(xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	/*
+	 * @FindBy(
+	 * xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
+	 * private WebElement logOut;
+	 */
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
 	private WebElement logOut;
+	
 	
 	@FindBy(xpath="//*[contains(@id,'username')]")
 	private WebElement usernameField;
 	
+	@FindBy(xpath="//a[contains(text(),'Go to Health and wellness')]")
+	private WebElement testHarnessHealthAndWellnessLink;
+	
+	@FindBy(xpath="//a[contains(text(),'Go to My Documents')]")
+	private WebElement testHarnessMyDocumentsLink;
 	
 	String category = null;
 
@@ -278,7 +295,7 @@ public class TestHarness extends UhcDriver {
 	public void openAndValidate() {
 		AccountHomePage.checkForIPerceptionModel(driver);
 		//vvv note: temp-workaround for team-a env, by-pass this for now
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("team-a") ||MRScenario.environmentMedicare.equalsIgnoreCase("team-f") ) {
+		if (MRScenario.environment.contains("team-a") ||MRScenario.environment.equalsIgnoreCase("team-f") ) {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 			return;
 		}
@@ -331,6 +348,20 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 	
+	public PaymentHistoryPage navigateToPaymentOverviewSkipBtnValidation() throws InterruptedException {
+		
+		CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(premPaymentsTab))
+			premPaymentsTab.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
+		}
+		
+		return null;
+	}
+	
 	public PaymentHistoryPage navigateToPaymentFromTestHarnessPage() throws InterruptedException {
 		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
 		if(validateNew(PaymentPageLink))
@@ -339,6 +370,18 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
+		}
+		return null;
+	}
+	
+	public PaymentHistoryPage navigateToPaymentFromTestHarnessPageSkipBtnValidation() throws InterruptedException {
+		//tbd CommonUtility.waitForPageLoad(driver, premPaymentsTab, 30);
+		if(validateNew(PaymentPageLink))
+			PaymentPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
+		if (driver.getCurrentUrl().contains("payments")) {
+			return new PaymentHistoryPage(driver, true);
 		}
 		return null;
 	}
@@ -401,8 +444,12 @@ public class TestHarness extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println(driver.getTitle());
-
 		if (driver.getTitle().contains("Benefits")) {
 			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 		}
@@ -414,11 +461,17 @@ public class TestHarness extends UhcDriver {
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
 		jsClickNew(testHarnessBenefitsPageLink);
-
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, 60);
 		System.out.println(driver.getTitle());
-
+		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("second try - "+driver.getTitle());
+		}
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
 		}
@@ -479,7 +532,11 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public ContactUsPage navigateToContactUsPageFromTestHarnessPage() {
-
+		String memberType="doesntMatter";
+		return navigateToContactUsPageFromTestHarnessPage(memberType);
+	}
+	
+	public ContactUsPage navigateToContactUsPageFromTestHarnessPage(String memberType) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoadNew(driver, contactUsPageLink, 30);
@@ -489,9 +546,13 @@ public class TestHarness extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
-			return new ContactUsPage(driver);
+			if(memberType.equals("memberType")) {
+				return new ContactUsPage(driver);
+			} else {
+				return new ContactUsPage(driver, memberType);
+			}
+			//tbd return new ContactUsPage(driver);
 		}
-		System.out.println("TEST - 2");
 		return null;
 	}
 
@@ -558,9 +619,11 @@ public class TestHarness extends UhcDriver {
 
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 
-			if (MRScenario.isTestHarness.equals("YES")) {
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				eobTestharnessLink.click();
+				jsClickNew(eobTestharnessLink);
+				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
+				//eobTestharnessLink.click();
 			}
 		} else {
 			System.out.println(
@@ -570,6 +633,23 @@ public class TestHarness extends UhcDriver {
 		return new pages.regression.explanationofbenefits.EOBPage(driver);
 	}
 
+	public pages.regression.explanationofbenefits.DreamEOBPage navigateDirectToDreamEOBPag() {
+		if (MRScenario.environment.equalsIgnoreCase("team-ci1")) {
+			driver.findElement(By.xpath("//a[text()='Eob']")).click();
+
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+
+			if (MRScenario.isTestHarness.equals("YES")) {
+//				startNew("https://stage-medicare.uhc.com/member/eob.html");
+				eobTestharnessLink.click();
+			}
+		} else {
+			System.out.println(
+					"This script is only intended to be run using test harness on team-b or team-h. Update condition for your own environment");
+		}
+
+		return new pages.regression.explanationofbenefits.DreamEOBPage(driver);
+	}
 
 	/***
 	 * 
@@ -1086,6 +1166,56 @@ public class TestHarness extends UhcDriver {
     		return null;
     	}    
     	
+    	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPage(int forceTimeoutInMin) throws InterruptedException {
+    		checkForIPerceptionModel(driver);
+    		StopWatch pageLoad = new StopWatch();
+    		pageLoad.start();
+    		JavascriptExecutor jse = (JavascriptExecutor) driver;
+    		jse.executeScript("window.scrollBy(0,50)", "");
+    		scrollToView(formsPageLink);
+    		try {
+    			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+    			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+    			jsClickNew(formsPageLink);
+        		Thread.sleep(5000);
+        		isAlertPresent();
+        		CommonUtility.checkPageIsReady(driver);
+    		} catch (org.openqa.selenium.TimeoutException e) {
+    			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+    			driver.quit(); //note: force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    		} catch (WebDriverException we) {
+    			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+    			//driver.quit(); //force the test to fail instead of waiting time
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    		}
+    		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+    		Thread.sleep(2000); // note: give it a bit more time to settle down
+    		pageLoad.stop();
+    		long pageLoadTime_ms = pageLoad.getTime();
+    		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+    		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+    		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+    		if (driver.getTitle().contains("Documents")) {
+    			return new PlanDocumentsAndResourcesPage(driver);
+    		}
+    		return null;
+    	}  
+    	
+    	public boolean isAlertPresent() {
+    		try {
+    				Alert alert = driver.switchTo().alert();
+    				alert.accept();
+    				System.out.println("Detected Alert popup, accept it and move on...");
+    		} catch (NoAlertPresentException Ex) {
+    			System.out.println("DID NOT detect Alert popup, move on...");
+    			return false;
+    		}
+    		return true;
+    	}
+
+
+    	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
@@ -1229,7 +1359,10 @@ public class TestHarness extends UhcDriver {
     	public void validateLoginonTestharness() throws InterruptedException {
     		CommonUtility.waitForPageLoadNew(driver, testHarnessHeader, 20);
     		String Message_text = testHarnessHeader.getText();
-    		Assert.assertTrue(Message_text.contains("Test Harness"));    		
+    		Assert.assertTrue(Message_text.contains("Test Harness"));
+    		System.out.println(" *** TestHarness message assert is passed on the Testharness *** ");  
+    		System.out.println("***The member is on Test Harness Dashboard & the text is :- "+ Message_text);
+    		    		
     	}
     	
     	@FindBy(xpath = "//*[contains(@id,'home_2')]")
@@ -1311,5 +1444,32 @@ public class TestHarness extends UhcDriver {
 			validateNew(profilePageLink);
 
 		}
+		
+		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessHealthAndWellnessLink,0);
+			testHarnessHealthAndWellnessLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
+			if (driver.getTitle().contains("Health And Wellness")) {
+				return new HealthAndWellnessPage(driver);
+			}
+			return null;
+		}
 
+		public MyDocumentsPage navigateToMyDocumentsFromTestHarnessPage() {
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			validateNew(testHarnessMyDocumentsLink);
+			testHarnessMyDocumentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.waitForPageLoad(driver, heading, 5);
+			if (driver.getTitle().contains("My Documents")) {
+				return new MyDocumentsPage(driver);
+			}
+			return null;
+		}
 }

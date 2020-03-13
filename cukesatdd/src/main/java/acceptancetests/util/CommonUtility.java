@@ -408,6 +408,26 @@ public class CommonUtility {
 		}
 
 	}
+	
+	public static void waitForPageLoadNewForClick(WebDriver driver, WebElement element, long timeout) {
+
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		try {
+			WebElement elementExpected = wait.until(ExpectedConditions.elementToBeClickable(element));
+			if (elementExpected.isDisplayed()) {
+				System.out.println("The element: " + elementExpected + " is visible");
+			} else {
+				System.out.println("The element: " + elementExpected + " is not visible");
+				Assert.fail("The element: " + elementExpected + " is not visible");
+			}
+
+		} catch (Exception e) {
+			Assert.fail("Not able to locate this element -- " + element + " on page");
+			System.out.println(e.getMessage());
+		}
+
+	}
+
 
 	/***
 	 * the waits till page state becomes complete

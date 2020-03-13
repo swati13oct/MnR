@@ -95,7 +95,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			CommonUtility.waitForPageLoad(driver, selectionInstruction_fed, 5);
 			Assert.assertTrue("PROBLEM - unable to locate the selection instruction on Order Plan Materials",orderValidate(selectionInstruction_fed));
 
-			Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
+			//tbd Assert.assertTrue("PROBLEM - unable to locate 'Welcome Guide' selection option on Order Plan Materials",orderValidate(option_fed_memberMaterialsfield));
 			Assert.assertTrue("PROBLEM - unable to locate 'Replacement ID card' selection option on Order Plan Materials",orderValidate(option_fed_replacementIdField));
 			Assert.assertTrue("PROBLEM - unable to locate 'VIEW MEMBER ID CARD' link on Order Plan Materials",orderValidate(link_fed_memberIDcardLink));
 		}
@@ -193,10 +193,10 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			itemToOrderElement=option_fed_memberMaterialsfield;
 		} 
 		
-		//else if (option.contains("Replacement ID card")) {
-		//	itemType="Replacement ID card";
-		//	itemToOrderElement=option_fed_replacementIdField;
-		//}
+		else if (option.contains("Replacement ID card")) {
+			itemType="Replacement ID card";
+			itemToOrderElement=option_fed_replacementIdField;
+		}
 		
 		else if (option.contains("Member ID Card")) {
 			itemType="Member ID Card";
@@ -232,17 +232,19 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		
 		else {
 			System.out.println("************* Selecting "+itemType+" Radio***************");
-			//itemToOrderElement.click();
-			//if (!itemToOrderElement.isEnabled()) {
-				//System.out.println("************* NOT ABLE to SELECT "+itemType+" Radio***************");
-			//}
+			CommonUtility.checkPageIsReady(driver);
+			itemToOrderElement.click();
+			CommonUtility.checkPageIsReady(driver);
+			if (!itemToOrderElement.isEnabled()) {
+				System.out.println("************* NOT ABLE to SELECT "+itemType+" Radio***************");
+			}
 			if (option.contains("Medicare Select Hospital Directory")) {
 				//note: extra checking for this option
 				Assert.assertTrue("PROBLEM - unable to locate the state dropdown element", orderValidate(option_ship_hospitalDirectory_stateDropdown));
 				Select ship_hopspitalStateDropdown = new Select(option_ship_hospitalDirectory_stateDropdown);
 				Assert.assertTrue("PROBLEM - there should be total of 58 options from dropdown.  Actual="+ship_hopspitalStateDropdown.getOptions().size(), ship_hopspitalStateDropdown.getOptions().size()==58);
 			}
-			//result=itemToOrderElement.getText();
+			result=itemToOrderElement.getText();
 		}
 
 		CommonUtility.waitForPageLoad(driver, submitButton, 5);
@@ -326,8 +328,8 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			listOfItems.add("Member ID Card");
 			listOfItems.add("Electronic Funds Transfer (EFT) Brochure");
-			listOfItems.add("Medicare Select Hospital Directory");
 			listOfItems.add("Coupon Book");
+			listOfItems.add("Medicare Select Hospital Directory");
 			listOfItems.add("Claims Envelope");
 			listOfItems.add("Certificate of Insurance");
 		} else {
@@ -402,17 +404,17 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 			} else if (planType.equalsIgnoreCase("MEDICA") && option.equalsIgnoreCase("Member Materials")) { //note: only PDP can order Welcome Guide
 				Assert.assertTrue("PROBLEM - for MEDICA user should have gotten error message when attempting to order 'Membership Materials'",
 						orderValidate(errorMsg_serviceFail));
-			}// else {
-				//Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
-			//}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to order this material: "+option, false);
+			}
 		} else {
 			System.out.println("Expected - ABLE to order item="+option);
-			//validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
-			//if (orderedItem.contains("Replacement ID card") || orderedItem.contains("Member ID Card")) {
+			validateSuccessmessage(planType, memberType, orderedItem, skipIdCheck);
+			if (orderedItem.contains("Replacement ID card") || orderedItem.contains("Member ID Card")) {
 				System.out.println("After validating success result for Replacement ID card, would be landing back on the order page instead, so no need to look for order additional item link in this case");
-			//} else {
-			//	navigateToOrderMore();
-			//}
+			} else {
+				navigateToOrderMore();
+			}
 		}
 		return orderedItem;
 	}

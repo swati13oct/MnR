@@ -21,7 +21,7 @@ public class MRConstants {
 	public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/login.html";
 	public static final String UHCM_URL_OFFLINE = "https://member.offline.uhcmedicaresolutions.com";
 	//public static final String UHC_URL = "https://www."+MRScenario.environment+"-uhcmedicarsolutions." + getDomain() + "/";
-	
+	public static final String AUTHOR_URL = "http://author-"+MRScenario.environment+"." + getDomain() + "/";
 	public static final String AARP_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/plan-preview.html";
 	
 	public static final String UHC_PLANPREVIEW_URL= "https://www."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/plan-preview.html";
@@ -233,7 +233,7 @@ public class MRConstants {
   
   public static final String TEAM_MEDICARE_TESTHARNESS="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/?testharness=true";
   
-  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/";
+  public static final String STAGE_DASHBOARD_NEW_DOMAIN_URL="https://"+MRScenario.environment+"-medicare.uhc.com/";
   
   public static final String TEAM_CI1_NEW_DASBOARD_URL = "https://team-ci1-medicare.ose-elr-core.optum.com/";
 
@@ -250,6 +250,12 @@ public class MRConstants {
   public static final String STAGE_URL_TESTHARNES ="https://"+MRScenario.environmentMedicare+"-medicare.uhc.com/?testharness=true";
 
   public static String TeamC_VPP_PAGE_AARPM_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
+  
+  public static String Local_URL = "https://www.aarpmedicareplans.com/";
+  
+  public static final String TeamDigital_AARP_URL="https://digital-uat-"+MRScenario.environment+".ocp-elr-core-nonprod.optum.com/";
+  
+  public static final String TeamDigital_UHC_URL="https://digital-uat-"+MRScenario.environment+".ocp-elr-core-nonprod.optum.com/";
   
   public static final String TeamC_ULayer_Member_URL = "https://member."+MRScenario.environment+"-aarpmedicareplans.uhc.com";
   

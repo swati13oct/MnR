@@ -44,8 +44,11 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')])[1]")
+	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
+	
+	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	private WebElement selectLocationOption;
 	
 	@FindBy(xpath="//a[contains(text(),'View Saved')]")
 	private WebElement Viewsavebtn;
@@ -75,14 +78,14 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='mainContent']//button")
 	private WebElement continueButton;
 	
-	@FindBy(xpath="(//*[contains(@data-test-key,'provider-name-link')])[1]")
+	@FindBy(xpath="(//*[contains(@data-test-id,'provider-name-link')])[2]")
 	private WebElement PrimaryCarePhysician;
 	
 	@FindBy(xpath="//span[contains(text(),'Print / Email Providers')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath="//button[contains(@class,'cta-header-button')]//span[text()='Save']")
-	private WebElement SaveBtn2;
+	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
+	private WebElement saveBtn2;
 	
 	@FindBy(xpath="//li[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]/a[text()]")
 	private WebElement providerNameText;
@@ -162,6 +165,13 @@ public class ProviderSearchPage extends UhcDriver {
 	jsClickNew(Physician);
 	CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 	jsClickNew(SaveBtn);
+	
+	if(validate(selectLocationOption)){
+		selectLocationOption.click();
+		validateNew(saveBtn2);
+		saveBtn2.click();
+	}
+	
 	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 	jsClickNew(Viewsavebtn);
@@ -187,8 +197,8 @@ public class ProviderSearchPage extends UhcDriver {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
-			validateNew(nextYrTile);
-			nextYrTile.click();
+			if (validate(nextYrTile))
+				nextYrTile.click();
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
 		validateNew(planNameToBeSelected);
@@ -211,8 +221,15 @@ public void selectsProviderFromGlobaHeader() {
 		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		PrimaryCarePhysician.click();
 		
-		CommonUtility.waitForPageLoadNew(driver, SaveBtn2, 45);
-		SaveBtn2.click();
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		SaveBtn.click();
+		
+		if(validate(selectLocationOption)){
+			selectLocationOption.click();
+			validateNew(saveBtn2);
+			saveBtn2.click();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 		Viewsavebtn.click();
 		validateNew(providerNameText);
@@ -241,6 +258,12 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 		jsClickNew(SaveBtn);
+		
+		if(validate(selectLocationOption)){
+			selectLocationOption.click();
+			saveBtn2.click();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
 
 		jsClickNew(Viewsavebtn);
@@ -253,4 +276,37 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 
 		return new PlanDetailsPage(driver);
 }
+
+	public VPPTestHarnessPage selectsProviderNavigateBacktoTestharness() {
+		GetStarted.click();
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+
+		jsClickNew(Physician);
+		CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		jsClickNew(SaveBtn);
+
+		if (validate(selectLocationOption)) {
+			selectLocationOption.click();
+			validateNew(saveBtn2);
+			saveBtn2.click();
+		}
+
+		CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+
+		jsClickNew(Viewsavebtn);
+		validateNew(providerNameText);
+		validateNew(Checkcoverage);
+		jsClickNew(Checkcoverage);
+		waitForCountDecrement(2);
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new VPPTestHarnessPage(driver);
+	}
 }

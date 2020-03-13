@@ -13,8 +13,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEMedSupBlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome=true,features = { "src/main/resources/feature/acquisition/oleMedSup" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json" }, tags = { "@oleMedSupBlayer" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome=true,features = { "src/main/resources/feature/acquisition/oleMedSup/MedSupp-OLE-UHC.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json" }, tags = { "@OLE_Regression" })
 public class RunMRATDDAcquisitionOLEMedSupBlayer { 
  
 }

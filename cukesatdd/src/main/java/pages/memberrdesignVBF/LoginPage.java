@@ -94,6 +94,8 @@ public class LoginPage extends UhcDriver {
 				}
 			} else if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
 				PAGE_URL = MRConstants.OSE_NEW_URL;
+			} else if ("team-atest".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.MICROAPP_URL;			
 			}else if (("offline-stage".equalsIgnoreCase(MRScenario.environment))) {
 				PAGE_URL = MRConstants.OFFLINE_STAGE_TESTHARNESS;
 			}else {

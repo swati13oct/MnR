@@ -58,7 +58,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	 */
 	@Given("^the user is on the AARP medicare site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -152,6 +152,29 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 	}
 	
+	/**
+	 * @toDo:
+	 */
+	@And("^I verify the plan name in AARP$")
+	public void verifyPlanName(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planname = memberAttributesMap.get("Plan Name");
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyplanname(planname);
+		if(dce!=null){
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
 	@Then("^user adds drug to drug cost estimator flow for the given plan name in AARP site$")
 	public void the_user_adds_below_drugs_to_drug_cost_estimator_flow_for_the_given_plan_name_on_AARP_site(DataTable data) throws Throwable {
 		
@@ -226,7 +249,6 @@ public class DCEVPPAcqStepDefinitionAARP {
 		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
 		
 		DrugDetails.continueAddDrugDetailsModNoSaving();
-		
 		SavingsOppurtunity savingsOppurtunity=new SavingsOppurtunity(wd);
 		dce = savingsOppurtunity.savedrugbutton();
 		
@@ -250,6 +272,20 @@ public class DCEVPPAcqStepDefinitionAARP {
 		}
 		Assert.assertTrue("Drug not added", null != dce);
 		dce.validateAddedDrug(drug);*/
+	}
+	
+	// Only for Saver Pop-up from DCE test Harness
+	@When("^user successfully adds drug in the AMS site for TestHarness$")
+	public void user_successfully_adds_drug_TestHarness(DataTable data) throws InterruptedException {
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		DrugCostEstimatorPage dce = savingsOppurtunity.savedrugbutton();
+		
+		if (null != dce) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 	
 	@And("^then user adds other drugs$")
@@ -330,6 +366,7 @@ public class DCEVPPAcqStepDefinitionAARP {
 	   for(int i=0;i<dce.getLstPharmacyNames().size();i++)
 	    if(dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
 	    	dce.getLstSelectPharmacy().get(i).click();
+	    	break;
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();

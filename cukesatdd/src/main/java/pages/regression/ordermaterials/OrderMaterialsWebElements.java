@@ -44,10 +44,12 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='ORDER_MATERIALS']")
 	protected WebElement orderMaterial_Dashboard;
 
-	@FindBy(xpath="//div[@id='notShipRadio']//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
+	//note: if changing this xpath, make sure it works for both order and confirm pages
+	@FindBy(xpath="//div[@id='notShipRadio' or contains(@class,'success')]//a[contains(@onclick,'/dashboard/modal/id-cards')]")
 	protected WebElement nonship_idCardLinkOrderPage;
 
-	@FindBy(xpath="//div[@id='shipRadio']//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
+	//note: if changing this xpath, make sure it works for both order and confirm pages
+	@FindBy(xpath="//div[@id='shipRadio'  or contains(@class,'success')]//a[contains(@onclick,'/dashboard/modal/id-cards')]")
 	protected WebElement ship_idCardLinkOrderPage;
 
 	@FindBy(xpath="//a[contains(@onclick,'https://member.int.uhc.com') and contains(@onclick,'https://member.int.mymedicareaccount.uhc.com') and contains(@onclick,'/dashboard/modal/id-cards')]")
@@ -126,7 +128,7 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 	@FindBy(xpath = "//*[@id = 'member-materials']/..")
 	protected WebElement option_fed_memberMaterialsfield;
 
-	@FindBy(xpath = "//*[@id='replacement-id']/..")
+	@FindBy(xpath = "//*[@for='replacement-id']/..")
 	protected WebElement option_fed_replacementIdField;
 
 	@FindBy(xpath="//form[@id='ordermaterial_form_id']//div[contains(@class,'ship')]//p")

@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -31,11 +32,14 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.DeregisterPage;
 import pages.regression.login.HSIDLoginPage;
 import pages.regression.login.HsidRegistrationPersonalCreateAccount;
 import pages.regression.login.LoginPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -52,6 +56,7 @@ public class HSIDStepDefinition {
 		return loginScenario;
 	}
 
+	/* tbd 
 	@And("^login with following details logins in the member portal and validate elements$")
 	public void login_with_member(DataTable memberAttributes)
 			throws Exception {
@@ -208,19 +213,20 @@ public class HSIDStepDefinition {
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
 				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
+					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} 
 				
 				else {
 					loginPage = new LoginPage(wd);
 				}
-/*
-				AccountHomePage accountHomePage = (AccountHomePage) loginPage
-						.loginWithLegacy(userName, pwd);
-						if (accountHomePage != null) {
-					getLoginScenario()
-							.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
-									accountHomePage);*/
+
+				//AccountHomePage accountHomePage = (AccountHomePage) loginPage
+				//		.loginWithLegacy(userName, pwd);
+				//		if (accountHomePage != null) {
+				//	getLoginScenario()
+				//			.saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,
+				//					accountHomePage);
 				TestHarness testHarnessPage=null;
 				try {
 					testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
@@ -248,20 +254,20 @@ public class HSIDStepDefinition {
 					Assert.fail("Login not successful...");
 				}
 			}
-		}
+		} 
 
-		/*
-		 * AssistiveRegistrationPage assistiveregistration =
-		 * (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
-		 * (assistiveregistration != null) {
-		 * getLoginScenario().saveBean(PageConstantsMnR
-		 * .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
-		 * Assert.assertTrue(true); } else {
-		 * Assert.fail("***** Error in loading  Assistive Registration Page *****"
-		 * ); }
-		 */
+		
+		 // AssistiveRegistrationPage assistiveregistration =
+		 // (AssistiveRegistrationPage) loginPage.doLoginWith(userName, pwd); if
+		 // (assistiveregistration != null) {
+		 // getLoginScenario().saveBean(PageConstantsMnR
+		 // .ASSISTIVE_REGISTRATION_PAGE,assistiveregistration);
+		 // Assert.assertTrue(true); } else {
+		 // Assert.fail("***** Error in loading  Assistive Registration Page *****"
+		 // ); }
+		 
 
-	}
+	}*/
 
 	@And("^login with following details logins in the member portal and validate elements and route to assistive flow$")
 	public void login_with_memberassistive(DataTable memberAttributes)
@@ -408,9 +414,10 @@ public class HSIDStepDefinition {
 
 	@Given("^the user connect to DB$")
 	public void i_connected_to_Provisional_data_base() {
-		Map<String, String> props = new HashMap<String, String>();
-		props = loginScenario.getProperties();
-		loginScenario.getPDBDBConnection(props);
+		System.out.println("******the user connect to DB*****");
+//		Map<String, String> props = new HashMap<String, String>();
+		//props = loginScenario.getProperties();	
+		loginScenario.getPDBDBConnection();
 	}
 
 	@And("^the user select record from database$")
@@ -435,6 +442,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr_portal$")
 	public void i_delete_record_data_base(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr_portal******");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -454,6 +462,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from mbr$")
 	public void i_delete_record_mbrtable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from mbr*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -473,6 +482,7 @@ public class HSIDStepDefinition {
 	@And("^the user delete record from extreme scale$")
 	public void i_delete_record_extremescaletable(DataTable givenAttributes)
 			throws SQLException {
+		System.out.println("*****the user delete record from extreme scale*****");
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -700,11 +710,13 @@ public class HSIDStepDefinition {
     }
 	//^^^ note: added for 'sorry' login error workaround	
 
-	//----------- microapp
-	@And("^login with following details logins in the member portal and validate elements for microapp$")
-	public void login_with_member_microapp(DataTable memberAttributes)
+	//----------- updated to handle microapp
+	//tbd @And("^login with following details logins in the member portal and validate elements for microapp$")
+	@And("^login with following details logins in the member portal and validate elements$")
+	public void login_with_member(DataTable memberAttributes)
+	//tbd public void login_with_member_microapp(DataTable memberAttributes)
 			throws Exception {
-		boolean isMicroApp=true;
+		//tbd boolean isMicroApp=true;
 		List<DataTableRow> memberAttributesRow = memberAttributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -716,12 +728,29 @@ public class HSIDStepDefinition {
 		String category = memberAttributesMap.get("Member Type");
 		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
 		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
 		String testDataType = memberAttributesMap.get("Claim System");
 		String userSelection = memberAttributesMap.get("User Selection");
 		//note: use the Member Type field to store the user info selection option from MicroApp testharness sign-in page
 		//note: if run on team-a, then the user selection is for the dropdown option
 		//note: if run on stage or stage-testharness, then ignore the user selection field
-		if (!"team-a".equalsIgnoreCase(MRScenario.environment)) { //note: need to do this so the same script can be run on stage
+		String useDropdown=System.getProperty("useDropdown");
+		boolean testHarnessUseDropdown=false;
+		if (useDropdown==null) 
+			System.out.println("use UUID for sign-in");
+		else {
+			if (useDropdown.equalsIgnoreCase("YES")) { //note: need to do this so the same script can be run on stage
+				if (MRScenario.environment.contains("team-atest") && (userSelection!=null)) {
+					testHarnessUseDropdown = true;
+					System.out.println("useDropdown=YES and env is team-atest, will use dropdown for sign-in");
+				} else {
+					System.out.println("useDropdown=YES but this is either not team-atest env or feature file has no userSelection field, so will default back to use UUID for sign-in");
+				}
+			} else 		
+				System.out.println("use UUID for sign-in");
+		}
+
+		if (!MRScenario.environment.contains("team-atest")) { //note: need to do this so the same script can be run on stage
 		 	userSelection = category;
 		} 
 	 	memberAttributesMap.remove("User Selection");
@@ -743,11 +772,23 @@ public class HSIDStepDefinition {
 		boolean teamSpecialCase=false;
 		//note: to be able to run for other team env, need to update the if condition. not sure if others want it so comment out for now
 		//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-			if ((planType != null) || (category != null)) {
+		if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+			if ((planType != null) && (category == null)) { //note: input has planType only
 				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")) {
 					teamSpecialCase=true;		
-					System.out.println("This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+					System.out.println("1 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType == null) && (category != null)) { //note: input has memberType only
+				if (category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")) {
+					teamSpecialCase=true;		
+					System.out.println("2 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
+				}
+			} else if ((planType != null) && (category != null)) { //note: input has both planType and memberType
+				if (planType.toLowerCase().contains("pcp") || planType.toLowerCase().contains("medica")
+						|| category.toLowerCase().contains("pcp") || category.toLowerCase().contains("medica")
+						) {
+					teamSpecialCase=true;		
+					System.out.println("3 - This is a PCP / Medica case - need to use different URL on "+MRScenario.environment+" env");
 				}
 			}
 		}
@@ -762,9 +803,6 @@ public class HSIDStepDefinition {
 		System.out.println("Password is..." + pwd);
 		//note: for team-a microapp env, the username is the userselection
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
-		if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-		 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userSelection+" or "+userName);
-		}
 		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -804,19 +842,23 @@ public class HSIDStepDefinition {
 				LoginPage loginPage=null;
 				//note: to be able to run on other team env will need to update if condition, not sure if others want it so comment it for now
 				//note: if (MRScenario.environment.toLowerCase().contains("team-")) {
-				if ("team-a".equalsIgnoreCase(MRScenario.environment)) {
-					loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
+				if ((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h"))) {
+					loginPage = new LoginPage(wd, teamSpecialCase);
+					//tbd loginPage = new LoginPage(wd, teamSpecialCase, isMicroApp);
 				} else {
 					loginPage = new LoginPage(wd);
 				}
 				TestHarness testHarnessPage=null;
 				try {
-					if (isMicroApp) {
+					if (testHarnessUseDropdown) {
 						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userSelection);
-						testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
+						//tbd testHarnessPage = (TestHarness) loginPage.loginWithMicroApp(userName, pwd, userSelection);
+						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd, userSelection, testHarnessUseDropdown);
+						if (MRScenario.environment.contains("team-a") && (userSelection !=null)) {
+						 	getLoginScenario().saveBean(LoginCommonConstants.USERNAME, "use dropdown " + userSelection);
+						}
 					} else {
 						testHarnessPage = (TestHarness) loginPage.loginWithLegacy(userName, pwd);
-				
 					}
 				} catch (UnhandledAlertException ae) {
 					System.out.println("Exception: "+ae);
@@ -885,4 +927,144 @@ public class HSIDStepDefinition {
 
 	}
 	
+
+	@And("^login with a deeplink in the member portal and validate elements$")
+	public void login_with_deeplink(DataTable memberAttributes)
+			throws Exception {
+
+		List<DataTableRow> memberAttributesRow = memberAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+		String deepLinkUrl = memberAttributesMap.get("Deeplink");
+		getLoginScenario().saveBean(LoginCommonConstants.DEEPLINK,deepLinkUrl);
+
+	    //----- note: these parameters won't be in csv, take them out of memberAttributesMap before searching csv
+	 	memberAttributesMap.remove("User Selection");
+	 	memberAttributesMap.remove("Deeplink");
+	 	//------------
+	 	
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+				.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+		
+		Map<String, String> loginCreds = loginScenario
+				.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		Assert.assertTrue("unable to find a " + desiredAttributes + " member. Member Type data could not be setup !!! ", loginCreds != null);
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		//tbd String deepLinkUrl="https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html";
+		HSIDLoginPage loginPage = new HSIDLoginPage(wd, deepLinkUrl);
+		loginPage.validateelements();
+		try {
+			if (deepLinkUrl.contains("my-documents")) {
+				MyDocumentsPage	myDocumentsPage=null;
+				myDocumentsPage =  (MyDocumentsPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", myDocumentsPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+			} else if (deepLinkUrl.contains("rewards/program-overview")) {
+				AccountHomePage accountHomePage=null;
+				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			} else {
+				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
+			}
+		} catch (UnhandledAlertException ae) {
+			System.out.println("Exception: "+ae);
+			Assert.assertTrue("PROBLEM - ***** Error in loading  Member Account Landing Page with deeplink '"+deepLinkUrl+"' ***** username: "+userName+" - Got Alert error", false);
+		} 
+		
+	}	
+
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@Given("^feature security flag must set to true when testing on stage env$")
+	public void checkSecurityFlag(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String feature=memberAttributesMap.get("Feature");
+		
+		if (!feature.equals("ClaimsMicroApp")
+				&& !feature.equals("UCPProfileAndPreferences")
+				&& !feature.equals("UCPPlanDocuments")
+				&& !feature.equals("UCPMyDocuments")
+				&& !feature.equals("UCPHealthWellness")
+				&& !feature.equals("UCPBenefits")
+				) {
+			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
+		}
+		
+		System.out.println("feature="+feature);
+		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
+		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		System.out.println("Config page URL="+configPgUrl);
+		MRScenario m=new MRScenario();
+		WebDriver d=m.getWebDriverNew();
+		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		d.get(configPgUrl);
+		CommonUtility.checkPageIsReady(d);
+		try {
+			WebElement e=d.findElement(By.xpath(securityFlagXpath));
+			CommonUtility.waitForPageLoad(d, e, 5);
+			if (e.isDisplayed()) {
+				System.out.println("Element '"+e.toString()+"' found!!!!");
+				String value=e.getText();
+				if (value.equalsIgnoreCase("false")) {
+					if (MRScenario.environment.toLowerCase().contains("stage")) 
+						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+", stopping all tests now", false);
+					else
+						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"', not on stage, okay to move on...");
+				} else {
+					System.out.println("feature '"+feature+"' security flag is true on env '"+MRScenario.environment+"', okay to move on...");
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			}
+		} catch (Exception e) {
+			if (MRScenario.environment.toLowerCase().contains("stage")) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+			} else {
+				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
+			}
+			
+		}
+		d.quit();
+	}
+
 }

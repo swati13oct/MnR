@@ -278,4 +278,6 @@ public static final String DASHBOARD_PAGE = "dashboardPage";public static final 
 	public static final String Payments_History_Page = "PaymentsHistoryPage";
 	
 	public static final String ComboTab =  "ComboTab";
+
+	public static final String My_Documents_PAGE = "myDocumentsPage";
 }

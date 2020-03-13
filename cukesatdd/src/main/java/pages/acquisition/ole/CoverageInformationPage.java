@@ -43,6 +43,9 @@ public class CoverageInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
+	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	private WebElement pedHeader;
+	
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
 	
@@ -134,7 +137,7 @@ public class CoverageInformationPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Proposed Effective Date')]")))){
+		if(validateNew(pedHeader)){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePage(driver);
 		}

@@ -269,8 +269,8 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
-					&& validate(ChangeLIS) && validate(Assignment) && validate(Both_Medicare_Medicaid)&& validate(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)){
+				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(Disaster) /*&& validate(DualSEP)*/ /*&& validate(ChangeDual)*/
+					&& validate(ChangeLIS) && validate(Assignment) /*&& validate(Both_Medicare_Medicaid)&& validate(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)*/){
 			
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 
@@ -283,9 +283,9 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MAPD")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(Disaster) && validate(DualSEP) && validate(ChangeDual)
+				&& validate(Into_LongTerm)/* && validate(OutOf_LongTerm) */&& validate(Disaster)/* && validate(DualSEP)*/ /*&& validate(ChangeDual)*/
 				  && validate(ChangeLIS) && validate(Assignment) 
-				 && validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug) && validate(LoSS_LIS)){
+				 /*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug) && validate(LoSS_LIS)*/){
 			
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
@@ -297,9 +297,9 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("PDP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) && validate(OutOf_LongTerm) && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
-				 && validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)
-				&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)){// && validateNonPresenceOfElement(LoSS_LIS)
+				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
+				 && validate(Disaster) /*&& validate(DualSEP) && validate(ChangeDual)*/ && validate(ChangeLIS) && validate(Assignment)
+				/*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)*/){// && validateNonPresenceOfElement(LoSS_LIS)
 			
 			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
@@ -310,8 +310,7 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		}
 	}
 	if(planType.contentEquals("SNP")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				&& validate(Disaster) && validate(DualSEP) && validate(ChangeDual) && validate(ChangeLIS) && validate(Assignment)){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)){
 			System.out.println("All Options for SNP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
 		}

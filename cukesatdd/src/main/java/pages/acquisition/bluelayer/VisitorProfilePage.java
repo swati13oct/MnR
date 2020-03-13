@@ -42,6 +42,12 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@class,'pharminfo')]")
 	private WebElement pharmacyAddress;
 	
+	@FindBy(xpath="//button[contains(@dtmname,'2019')]")
+	private WebElement planYearBtn2019;
+	
+	@FindBy(xpath="//button[contains(@dtmname,'2020')]")
+	private WebElement planYearBtn2020;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -104,11 +110,15 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAndChoosePlanYear(String planYear) {
-		WebElement planYearBtn = driver.findElement(By.xpath("//button[contains(@dtmname,'"+planYear+"')]"));
-		if(validate(planYearBtn)){
-			planYearBtn.click();
+		
+		if(planYear.equalsIgnoreCase("2019")){
+			if(validate(planYearBtn2019))
+				planYearBtn2019.click();
+		}else if(planYear.equalsIgnoreCase("2020")){
+			if(validate(planYearBtn2020))
+				planYearBtn2020.click();
 		}else
-			System.out.println("No plan year buttons were present");
+			System.out.println("No plan buttons were present");
 
 		
 	}

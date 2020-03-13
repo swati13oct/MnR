@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -263,6 +264,17 @@ public class ProviderSearchStepDefinitionUHC {
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			if(!vppPlanDetailsPage.providerinfo()){
 				Assert.fail("Failed in validating the provider link on plan details page");
+			}
+		}
+		
+		@When("^user selects a provider and retuns to TestHarness page for UHC$")
+		public void user_selects_a_provider_and_retuns_to_TestHarness_page_for_UHC() {
+			{
+				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+				VPPTestHarnessPage vppTestHarnessPage = providerSearchPage.selectsProviderNavigateBacktoTestharness();
+				Assert.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
+
 			}
 		}
 	

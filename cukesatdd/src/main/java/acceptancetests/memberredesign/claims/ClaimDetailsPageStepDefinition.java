@@ -286,7 +286,7 @@ public class ClaimDetailsPageStepDefinition {
 
 			if (!claimDetlPg.getOnlyTestUiFlag()) {
 				System.out.println("Proceed to validate 'Need Help' section on detail page");
-				if (MRScenario.environment.equalsIgnoreCase("team-a"))
+				if (MRScenario.environment.contains("team-a"))
 					System.out.println("NOTE: MRREST product summary call (used for Need Help) is disabled on team env, will skip this validation on team-a env");
 				else {
 					String currentURL=claimDetlPg.validateSectionInNeedHelp(planType,memberType);

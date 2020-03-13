@@ -28,6 +28,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
@@ -310,6 +311,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
     
 	  @FindBy(id="dupIconFlyOut")
 	  private WebElement shoppingCartIcon;
+	  
+	  @FindBy(id = "pharmacy-zip-search")
+		private WebElement thpharmacyzipsearch;
+	   	
+	  @FindBy(xpath = "//input/parent::form//button[text()='Go']")
+	  private WebElement thpharmacyGoButton;
+	   	
 	
 	public JSONObject homePageDisclaimerJson;
 	public JSONObject homePageDisclaimerHideJson;
@@ -333,10 +341,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public JSONObject cobrowseJson;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
-	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;	
-	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;	
+	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
+	
+	public String MicroAppSiteUrl;
+	
+	public String testSiteUrl;
 
 	public static boolean isHealthPlan = false;
 	
@@ -367,6 +379,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage);
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String siteOrPage,String testharnessurl) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(siteOrPage,testharnessurl);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -425,7 +443,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else if (MRScenario.environment.equals("prod")) {
 			startNew(UMS_ACQISITION_PROD_PAGE_URL);
 			checkModelPopup(driver,45);
-		} else {
+		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
 			checkModelPopup(driver,10);
 		}
@@ -449,7 +467,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver);
+			checkModelPopup(driver,45);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 			
 			/*CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
@@ -464,7 +482,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			isHealthPlan = true;
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver);
+			checkModelPopup(driver,45);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try{
 				if(proactiveChatExitBtn!=null)
@@ -1258,7 +1276,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		return new PlanSelectorNewPage(driver);
 	}
-
+	
 	public PlanSelectorNewPage PSTButton() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		PageFactory.initElements(driver, this);
@@ -1735,5 +1753,128 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return null;
 	}
+
+	public void openPRE() {
+		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
+			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2"));
+		} else {
+			//startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+			startNew(AARP_ACQISITION_PAGE_URL);
+		}
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+	}
 	
+	public void openAndValidate(String siteOrPage, String testharnessurl) {
+		String testharurl = "content/"+testharnessurl+"testharness.html";
+		//String testharurl = "content/pharmacysearchtestharnesspage.html";
+		if ("BLayer".equalsIgnoreCase(siteOrPage)) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL+testharurl;
+			} else if (MRScenario.environment.equals("prod")) {
+				startNew(UMS_ACQISITION_PROD_PAGE_URL+testharurl);
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PROD_PAGE_URL+testharurl;
+			} else {
+				startNew(UMS_ACQISITION_PAGE_URL+testharurl);
+				testSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				driver.get(testSiteUrl+testharurl);
+				MicroAppSiteUrl=UMS_ACQISITION_PAGE_URL+testharurl;
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+		}
+	}
+	
+	public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
+		//checkModelPopup(driver);
+		validateNew(thpharmacyzipsearch);
+		thpharmacyzipsearch.sendKeys(zipcode);
+		thpharmacyGoButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+
+	}
+	
+	public String getTestSiteUrl() {
+		return testSiteUrl;
+	}
+	public DCETestHarnessPage GetDCEtestHarnessPage() {
+		return new DCETestHarnessPage(driver);
+	}
+	
+	public void fixPrivateConnection() {
+		try {
+			//String URL = "https://self-signed.badssl.com/";
+			threadsleep(1000);
+			if (driver.findElement(By.cssSelector("body.ssl h1")).getText().contains("Your connection is not private")) {
+				driver.findElement(By.cssSelector("button#details-button")).click();
+				threadsleep(1000);
+				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				threadsleep(1000);
+				pageloadcomplete();
+			}
+		} catch (Exception e) {
+			System.out.println("No SSL error / Exception");
+		}
+
+	}
+	
+	public VPPPlanSummaryPage searchPlansCounty(String countyName) {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+		}
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			System.out.println("County should be selected : " + countyName);
+		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPage searchPlansNoCounty() {
+		if (isHealthPlan) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			GoBtnHealthPlans.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			viewPlansButton.click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		}
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public VPPTestHarnessPage GetVPPTestHarnessPage() {
+		return new VPPTestHarnessPage(driver);
+		}
 }

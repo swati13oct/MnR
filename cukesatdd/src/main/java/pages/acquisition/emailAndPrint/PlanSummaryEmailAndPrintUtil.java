@@ -23,52 +23,6 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 	public void openAndValidate() {
 	}
 
-	/* tbd 
-	public void validatePrintFunctionOnSummaryPage(String planType) {
-		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
-		// for now will only validate the print button will bring up the print preview page
-		CommonUtility.checkPageIsReady(driver);
-		WebElement printButton=null;
-		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
-			printButton=summary_maPrintOption;
-		} else if (planType.equalsIgnoreCase("pdp")) {
-			printButton=summary_pdpPrintOption;
-		} else if (planType.equalsIgnoreCase("snp")) {
-			printButton=summary_snpPrintOption;
-		} else {
-			Assert.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
-		}
-		System.out.println("Proceed to validate print popup screen for cancel option");
-		printButton.click();
-
-		// Store the current window handle
-		String winHandleBefore = driver.getWindowHandle();
-		//System.out.println("TEST --------------- before handler="+driver.getWindowHandle());
-		String originalPageTitle=driver.getTitle();
-
-		//switch to handle the new print window
-		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
-		}
-		sleepBySec(5); //note: keep for the print page to load
-		//CommonUtility.checkPageIsReady(driver);
-		// Perform the actions on new window
-		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
-		System.out.println("Proceed to validate the new window content for print");
-		String printPreviewPageTitle=driver.getTitle();
-		Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
-
-		System.out.println("Proceed to close the print preview window");
-		driver.close();
-
-		// note: Switch back to original browser (first window)
-		driver.switchTo().window(winHandleBefore);
-
-		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
-		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
-	} */
-
 	public void validateEmailOptionExistOnSummaryPage(String planType) {
 		WebElement emailElement=null;
 		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
@@ -190,6 +144,9 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		result.put("PDP Plan Count", pdpPlans);
 		result.put("SNP Plan Count", snpPlans);
 		result.put("Saved Heart Count", planSummary_listOfSavedHearts.size());
+		result.put("Enroll Button Count", planSummary_listOfEnrollInPlanButtons.size());
+		result.put("View Plan Details Button Count", planSummary_listOfViewPlanDetailsButtons.size());
+		
 		System.out.println("collected result="+result);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return result;
@@ -262,6 +219,20 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		if (failedMessage.contains("BYPASS")) 
 			testNote.add(failedMessage);
 
+		targetKey="Enroll Button Count";
+		failedMessage=summary_comparePageItem(targetKey, origPage, emailPage);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
+		targetKey="View Plan Details Button Count";
+		failedMessage=summary_comparePageItem(targetKey, origPage, emailPage);
+		if (failedMessage.contains("mismatch")) 
+			listOfFailure.add(failedMessage);	
+		if (failedMessage.contains("BYPASS")) 
+			testNote.add(failedMessage);
+		
 		System.out.println("Finished validation for original page content vs page content from email deeplnk for plan summary ============");
 		if (summary_finalResult) { 
 			if (testNote.size()==0) {

@@ -551,6 +551,21 @@ public class ProfileandPreferencesUMSStepDefinition {
 		profilePreferencesPage.validatePhoneElements(memberType);
 
 	}
+	
+	/**
+	 * @toDo : Validates the elements of Phone section
+	 */
+
+	@Then("^the user validates the Phone section with iframe$")
+	public void UserValidatesPhoneSectionIframe(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
+
+		profilePreferencesPage.validatePhoneElementsWithIframe(memberType);
+
+	}
 
 	/**
 	 * @toDo : Validates the elements on clicking the Phone edit Button
@@ -595,11 +610,12 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 
 	@Then("^the user checks the functionality of save Button in Phoneeditsection$")
-	public void UserValidatesPhoneSaveButton() {
+	public void UserValidatesPhoneSaveButton(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		String memberType = memberAttributesRow.get(0).getCells().get(1);
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
-
-		profilePreferencesPage.validatePhoneSave();
+		profilePreferencesPage.validatePhoneSave(memberType);
 
 	}
 
@@ -845,7 +861,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@When("^I click the HEALTHSAFE ID PASSWORD link and validate username and password and verify edit password link$")
 	public void i_click_the_HEALTHSAFE_ID_PASSWORD_link() throws InterruptedException {
-
+		if(MRScenario.environment.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -876,6 +895,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I should see the breadcrumb  in the upper left side of the page$")
 	public void i_should_see_the_breadcrumb_in_the_upper_left_side_of_the_page() throws InterruptedException {
+		if(MRScenario.environment.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -888,6 +911,10 @@ public class ProfileandPreferencesUMSStepDefinition {
 	 */
 	@And("^clicking the link should lead me back to the Account Settings page of the member site$")
 	public void clicking_the_link_should_lead_me_back_to_the_Account_Settings_page_of_the_Medica_member_site() {
+		if(MRScenario.environment.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
 				.getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
@@ -904,12 +931,15 @@ public class ProfileandPreferencesUMSStepDefinition {
 
 	@Then("^I click the HEALTHSAFE ID ACCOUNT RECOVERY AND SECURITY link$")
     public void i_click_the_HEALTHSAFE_ID_ACCOUNT_RECOVERY_AND_SECURITY_link() throws InterruptedException {
-           ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
+		if(MRScenario.environment.contains("team-a")) {
+			System.out.println("HSID password related step is not supported on lower env, skipping...");
+			return;
+		}
+		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario()
                         .getBean(PageConstantsMnR.PROFILE_AND_PREFERENCES_PAGE);
 
-           profilePreferencesPage.validateHealthSafeAccountLink();
-           profilePreferencesPage.validateBreadCrumbClick();
-
+		profilePreferencesPage.validateHealthSafeAccountLink();
+		profilePreferencesPage.validateBreadCrumbClick();
     }
 
 	@And("^I should see the EPMP i frame on profile page$")
@@ -1095,9 +1125,18 @@ public class ProfileandPreferencesUMSStepDefinition {
 	}
 	
 	@Then("^the user navigates to Communication Preferences page$")
-	public void user_navigate_toCommunicationPreferencespage() throws InterruptedException {
+	public void user_navigate_toCommunicationPreferencespage(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("Plan Type");
+		String memberType = memberAttributesMap.get("Member Type");
 		ProfileandPreferencesPage profilePreferencesPage = (ProfileandPreferencesPage) getLoginScenario().getBean(PageConstants.PROFILE_AND_PREFERENCES_PAGE);
 		CommunicationPreferencePage communicationPreferencePage = profilePreferencesPage.navigateToCommunicationPreferencePage();
+		if (memberType.toLowerCase().contains("combo"))
+			communicationPreferencePage.clickCombTab(planType);
 		getLoginScenario().saveBean(PageConstants.COMMUNICATION_PREFERENCE_PAGE, communicationPreferencePage);
 	}
 	
@@ -1224,22 +1263,20 @@ public class ProfileandPreferencesUMSStepDefinition {
 	@Then("^I validate that login is successfull$")
 	public void verifyloginOnDashboardHomePage() throws Throwable {
 		
-		if (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))	
+		if (MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))	
 		{			
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 			AccountHomePage.checkForIPerceptionModel(accountHomePage.driver);
-			System.out.println("Now validating login on Dashboard");
+			System.out.println("After login validating the element on the Dashboard");
 			accountHomePage.validateLoginonDashboard();	
-			System.out.println(" !!! Member is on Dashboard !!!");
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, accountHomePage);
 		}
 		
-		else if ((MRScenario.environmentMedicare.equalsIgnoreCase("team-h")) || (MRScenario.environmentMedicare.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
+		else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)))
 		{
 			TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			System.out.println("Now validating login on test-harness page");
+			System.out.println("After login via the TestHarness validaying the element on test Harness");
 			testHarnessPage.validateLoginonTestharness();	
-			System.out.println(" !!! Member is on the Testharness page !!!");
 		    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 		}
 		else {

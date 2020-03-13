@@ -59,7 +59,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 	 */
 	@Given("^user is on blue layer landing page$")
 	public void user_on_UHC_Medicaresolutions_Site() {
-		 wd = getLoginScenario().getWebDriver();
+		 wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
@@ -136,6 +136,29 @@ public class DCEVPPAcqStepDefinitionUHC {
 		plansummaryPage.viewPlanSummary(plantype);
 		plansummaryPage.navigatetoDCEPage(planName);
 		DrugCostEstimatorPage dce=new DrugCostEstimatorPage(wd);
+		if(dce!=null){
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
+	/**
+	 * @toDo:
+	 */
+	@And("^I verify the plan name in UMS site$")
+	public void verifyPlanName(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planname = memberAttributesMap.get("Plan Name");
+
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyplanname(planname);
 		if(dce!=null){
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
@@ -269,6 +292,20 @@ public class DCEVPPAcqStepDefinitionUHC {
 		dce.validateAddedDrug(drug);*/
 	}
 	
+	// Only for Saver Pop-up from DCE test Harness
+	@When("^user successfully adds drug in the UMS site for TestHarness$")
+	public void user_successfully_adds_drug_TestHarness(DataTable data) throws InterruptedException {
+
+		AddDrugDetails DrugDetails = (AddDrugDetails) getLoginScenario().getBean(PageConstants.ADD_DRUG_DETAILS);
+		//SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		SavingsOppurtunity savingsOppurtunity = DrugDetails.continueAddDrugDetailsModWithSaving();
+		DrugCostEstimatorPage dce = savingsOppurtunity.savedrugbutton();
+		
+		if (null != dce) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
 	@And("^user adds other drugs in the UMS site$")
 	public void user_adds_other_drugs(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
@@ -347,6 +384,7 @@ public class DCEVPPAcqStepDefinitionUHC {
 	   for(int i=0;i<dce.getLstPharmacyNames().size();i++)
 	    if(dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
 	    	dce.getLstSelectPharmacy().get(i).click();
+	    	break;
 	    	    }	    	
 	   
 	   dce.clickButtonViewCost();

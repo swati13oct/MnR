@@ -44,7 +44,7 @@ Feature: 1.15 Member pre-effective functionality
       | GroupSSUP       | preeffectiveGroupSSUP     | NON LIS       | 1-888-980-8125| 000       |
       | GroupPDP        | preeffectiveGroupPDP      | NON LIS       | 1-888-980-8125| 000       |
       | SHIPPreffective | preeffectiveSHIPOnly      | NON LIS       | 1-866-254-3132| 000       |
-      | IndMAPD         | preeffectiveIndMAPD_002   | NON LIS       | 1-888-980-8125| 002       |
+#     | IndMAPD         | preeffectiveIndMAPD_002   | NON LIS       | 1-888-980-8125| 002       |
       
       
       
@@ -68,12 +68,10 @@ Feature: 1.15 Member pre-effective functionality
 	   And the user validates see more ways to contact us section                                          
      And the user validates on clicking contact us link it should route to contact us page 
     Examples: 
-      | planType  | memberType          | copayCategory |
-      | PDPind    | preeffectiveIndPDP  | NON LIS       |
-    #  | MAGrp  | preeffectiveGrpMA  | NON LIS       |
-     # | IndPDP   | preeffectiveIndPDP   | NON LIS       |
-    #  | GroupPDP | preeffectiveGroupPDP | NON LIS       |
-   #   | GroupSSUP | preeffectiveGroupSSUP | NON LIS     |
+      | planType  | memberType                 | copayCategory |
+      | IndPDP    | preeffectiveIndPDP         | NON LIS       |
+      | GrpMAPD   | preeffectiveIndMAPD001     | NON LIS       |
+      
 
   @preEffective3 @preffectiveRegistration
   Scenario Outline: Verify HSID registration.

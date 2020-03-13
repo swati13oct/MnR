@@ -73,7 +73,7 @@ Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
@@ -176,7 +176,7 @@ Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
@@ -268,7 +268,7 @@ Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -600,7 +600,7 @@ Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     #Then the user Validates Ancillary benfit widget for "<DentalFlag>" "<VisionFlag>" "<FitnessFlag>" and "<HearingFlag>"
     Then the user navigates to Optional Benefits Page for following plans with available Riders
@@ -898,5 +898,5 @@ Feature: 2.05-VBF-ACQ-To test OLE common tool flow flow UMS site
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | HICN     | John      | Doe      | 987654333C     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO      | NO           | true      | NO                | NO      |
+      |   90210 | NO              | Los Angeles County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) | MBI     | John      | Doe      | 3A33C22YK22     | false   |  01012010 |  01012010 |      231665465 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | NO      | NO           | true      | NO                | NO      |
       

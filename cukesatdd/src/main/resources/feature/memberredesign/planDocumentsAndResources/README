@@ -1,0 +1,65 @@
+README for planDocumentsAndResouces feature
+
+NOTE
+
+Sections
+	PM = Plan Materials 
+	MM = Membership Materials 
+	ANOC = Annual Notice of Changes Documents 
+	PD = Provider Directory / Pharmacy Directory / Provider and Pharmacy Directories
+	MD = My Documents
+	EOB = Explanation of Benefits (EOB)
+	FnR = Forms and Resousrces
+	RM = Renew Magazine
+	NH - Need Help
+
+When this README is written, DOC LOG DB is scheduled to get update every Wednesday.
+So some users could be affected w/ the expected documentation because of the update.
+
+Feature files
+	planDocumentsAndResources_P1_misc.feature
+	- catch-all - cover header, EOB, Renew Magazine, Adobe, Need Help validations
+	planDocumentsAndResources_P2_pm.feature
+	- cover 'Plan Materials' section validation
+	planDocumentsAndResources_P3_mm.feature
+	- cover 'Membership Materials' section validation
+	planDocumentsAndResources_P4_anoc.feature
+	- cover 'Annual Notice of Changes Documents' section validation
+	planDocumentsAndResources_P5_pd.feature
+	- cover 'Provider Directory / Pharmacy Directory / Provider and Pharmacy Directories' section validation
+	planDocumentsAndResources_P6_fnr.feature
+	- cover 'Forms and Resousrces' section validation
+
+If you want to update whether a section should show or not show for a user
+	- update the appropriate feature file, 
+	  turn the column value true or false accordingly for the target section
+
+If you want to update what are the expected documents for the user for different sections
+	-update the PlanDocumentsAndResourcesUsersHelper.java 
+	  by looking up method that's for the planType and memberType you need
+
+All the WebElements are in PlanDocumentsAndResourcesWebElements.java
+
+Validations specific to the target section
+	PlanDocumentsAndResourcesANOC.java
+	PlanDocumentsAndResourcesEOB.java
+	PlanDocumentsAndResourcesFnR.java
+	PlanDocumentsAndResourcesMD.java
+	PlanDocumentsAndResourcesNH.java
+	PlanDocumentsAndResourcesPD.java
+	PlanDocumentsAndResourcesPM.java
+	PlanDocumentsAndResourcesRM.java
+
+Specific for Forms and Resousrces section
+	If need to add FnR related documnet:
+	-need to update PlanDocumentsAndResourcesFnRDocLinksHelper.java 
+	  to indicate which element to click for the newly added document
+	-need to update PlanDocumentsAndResourcesFnRDocsHelper.java 
+	  to indicate the expected items (name, target URL, etc) for this new document
+	  Theses two items will be used to validate if the page content is loaded for the html pages
+	  headerText = the h1 header text for the page
+	  bodyText = random line of text that's in the body of the html page
+
+PlanDocApiResponse.java
+	Obtain and parse API response
+	Only applicable if attempting API valiation against UI result

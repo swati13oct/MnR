@@ -9,7 +9,7 @@
 
 
 	<properties>
-		<selenium.version>2.53.0</selenium.version>
+		<selenium.version>3.141.59</selenium.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -33,8 +33,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<debug>true</debug>
 					<debuglevel>lines,vars,source</debuglevel>
 				</configuration>
@@ -429,6 +429,11 @@
 			<artifactId>pdfbox</artifactId>
 			<version>2.0.16</version>
 		</dependency>
+	<dependency>
+    <groupId>io.appium</groupId>
+    <artifactId>java-client</artifactId>
+    <version>7.3.0</version>
+	</dependency>
 	</dependencies>
 	
 </project>

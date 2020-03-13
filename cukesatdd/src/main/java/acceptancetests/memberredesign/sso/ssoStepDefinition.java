@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import pages.member_deprecated.bluelayer.ProfilePageHsid;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
+import pages.regression.sso.CQLoginPage;
 import pages.regression.sso.bswiftPage;
-import pages.regression.sso.cqLoginPage;
 import pages.regression.sso.ssoTestHarnessPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -56,7 +56,7 @@ public class ssoStepDefinition{
 	    public void the_user_is_on_member_auth_login_page(DataTable givenAttributes) throws InterruptedException{
 		WebDriver wd = getLoginScenario().getWebDriver();	
 
-		cqLoginPage cqloginpage = new cqLoginPage(wd);
+		CQLoginPage cqloginpage = new CQLoginPage(wd);
 		cqloginpage.navigateToLoginURL();
 		
 		/* Reading the given attribute from feature file */

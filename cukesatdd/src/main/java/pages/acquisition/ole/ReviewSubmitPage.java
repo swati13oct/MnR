@@ -44,8 +44,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-review')]")
 	private WebElement PageHeader;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Confirmation')]")
-	private WebElement confirmationPageHeader;
+	@FindBy(xpath = "//*[contains(@id,'ole-form-submitted')]")
+	private WebElement confirmationForm;
 
 	//Right Rail Elements
 
@@ -301,7 +301,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
-		jsClickNew(SubmitApplicationBtn);
+		SubmitApplicationBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -309,7 +309,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		//waitforElementDisapper(By.xpath("//*[@class = 'cta-button confirm-button']"), 45);
 /*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
-		if(validateNew(confirmationPageHeader,45)){
+		
+		if(validate(confirmationForm,30)){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}

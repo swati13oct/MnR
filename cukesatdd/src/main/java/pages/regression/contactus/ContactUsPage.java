@@ -4,6 +4,8 @@
 package pages.regression.contactus;
 
 import gherkin.formatter.model.DataTableRow;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import pages.regression.accounthomepage.AccountHomePage;
 
 import java.util.LinkedHashMap;
@@ -52,7 +54,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath=  "//a[contains(@ng-href,'tel:')]") 
 	private WebElement preEffectiveTechSupportNumber;
 		
-	@FindBy(xpath=  "//*[@id='cardslideID']/a[1]") 
+	@FindBy(xpath=  ".//*[@id='cardslideID']//*[contains(@class,'btn btn--primary message-btn') and contains(@ng-click,'true')]")
 	private WebElement getStartedButton;
 	
 	@FindBy(id = "message-cancel")
@@ -61,7 +63,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='fillContactFormsShow']/form/fieldset/a")
 	private WebElement cancelLink1;
 	
-	@FindBy(xpath = "//a[contains(text(),'EMAIL FORM')]")
+	@FindBy(xpath = "//*[contains(text(),'EMAIL FORM')]")
 	private WebElement EmailForm;
 	
 	@FindBy(xpath="//*[@id='message-form']/fieldset/div[2]/div")
@@ -90,6 +92,11 @@ public class ContactUsPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='message-submit']//*[contains(text(),'CONTINUE')]")
 	private WebElement emailUsContinueBtn;
+	
+	
+	@FindBy(xpath = "//div[@id='messageModal']//span[contains(@class,'btn--primary')][text()='CONTINUE']")
+	private WebElement goToInboxCtnBtn;
+	
 	
 	@FindBy(id = "message-send")
 	private WebElement sendMessageBtn;
@@ -204,7 +211,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'request-email')]/div[not (contains(@class,'ng-hide'))]//div[contains(@class,'message-block-body')][1]//h3")
 	private WebElement memberAuthNotAuthorizedToSendUsQuestionMessage;
 	
-	@FindBy(css="div#confrmmatchheightonce a.btn.btn--primary.question-btn")
+	@FindBy(css="button[class='btn btn--primary question-btn']")
 	private WebElement btn_EmailForm;
 	
 	@FindBy(id="question-about-ship")
@@ -225,7 +232,7 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(id="question-email")
 	private WebElement email_EmailForm;
 	
-	@FindBy(xpath="(.//*[@id='globalContentIdForSkipLink']//div[@ng-controller='phoneHoursAddressCtrl'])[2]//a[@ng-href='tel:1-844-355-3359']")
+	@FindBy(xpath="(//a[@ng-href='tel:1-800-721-0627']")
 	private WebElement connectorModelTFN;
 	
 	@FindBy(id="question-email-confirm")
@@ -243,10 +250,10 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(css=".question-submit>span")
 	private WebElement btnSubmit_EmailForm;
 	
-	@FindBy(css="div#confrmmatchheightonce div.message-block-body p:nth-child(2)")
+	@FindBy(css="div[ng-show='showConfirmMessage'] div[class='message-block-body'] p")
 	private WebElement successMessage_EmailForm;
 	
-	@FindBy(css="div#confrmmatchheightonce div.message-block-header p>b")
+	@FindBy(css="div[ng-show='showConfirmMessage'] strong")
 	private WebElement successHeader_EmailForm;
 	
 	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
@@ -274,9 +281,29 @@ public class ContactUsPage extends UhcDriver{
 			e.printStackTrace();
 		}
 	}
+	
+	public ContactUsPage(WebDriver driver, String memberType) {
+		super(driver);
+		try {
+			PageFactory.initElements(driver, this);
+			checkModelPopup(driver);
+			
+			if ((MRScenario.environment).toLowerCase().contains("offline"))
+				CommonUtility.waitForPageLoadNew(driver, topHeaderContactUs, CommonConstants.TIMEOUT_30);
+			
+			openAndValidate(memberType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void openAndValidate() {
+		validateNew(heading);
+	}
+
+	public void openAndValidate(String memberType) {
+		if (!memberType.contains("PreEff")) 
 		validateNew(heading);
 	}
 
@@ -651,15 +678,17 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			Thread.sleep(8000);
 			
-		if(EmailForm.isDisplayed()){
+		if(validate(EmailForm)){
 			System.out.println("Get Started Button not visible, So using email Form Link!!!");
 			EmailForm.click();
 			Thread.sleep(2000);
 			waitforElement(cancelLink);
 			cancelLink1.click();
 			Thread.sleep(2000);}
-			
-		else {
+		else if(validate(goToInboxButton)){	
+			validateGoToInbox();
+			}
+		else{		
 			getStartedButton.click();
 			waitforElement(useDifferentEmailRadioButton);
 			useDifferentEmailRadioButton.click();
@@ -704,7 +733,7 @@ public class ContactUsPage extends UhcDriver{
 		String date = memberAttributesMap.get("Date");
 		String month = memberAttributesMap.get("Month");
 		String year = memberAttributesMap.get("Year");
-		
+
 		try {
 			btn_EmailForm.click();
 			Thread.sleep(5000);
@@ -736,6 +765,8 @@ public class ContactUsPage extends UhcDriver{
 		try {
 			waitforElement(goToInboxButton);
 			Assert.assertTrue(validate(goToInboxButton));
+			goToInboxButton.click();
+			Assert.assertTrue(validateNew(goToInboxCtnBtn));			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -755,11 +786,11 @@ public class ContactUsPage extends UhcDriver{
 		Assert.assertTrue(!validate(requestCall));
 		//Assert.assertTrue(!validate(email_EmailForm)); // doesn't exist for these kind of users
 		 */
-		Assert.assertTrue(!validate(getStartedButton)); 
-		Assert.assertTrue(!validate(fillOutFormButton));
-		Assert.assertTrue(!validate(requestCall));
-		Assert.assertTrue(!validate(getStartedButton)); 
-		Assert.assertTrue(!validate(email_EmailForm));
+		Assert.assertFalse(validate(getStartedButton));
+		Assert.assertFalse(validate(fillOutFormButton));
+		Assert.assertFalse(validate(requestCall));
+		Assert.assertFalse(validate(getStartedButton));
+		Assert.assertFalse(validate(email_EmailForm));
 	}
 	
 	public void feebackpopupClose() throws InterruptedException
@@ -779,7 +810,7 @@ public class ContactUsPage extends UhcDriver{
 	public void validateConnectroModelTFNNumber() {
 		
 		String tfnNumber = connectorModelTFN.getText();
-		if(tfnNumber.contains("1-844-355-3359"))
+		if(tfnNumber.contains("1-800-721-0627"))
 		{
 			System.out.println("Connector Model TFN dsiplayed    >" +connectorModelTFN.isDisplayed() );
 		}else

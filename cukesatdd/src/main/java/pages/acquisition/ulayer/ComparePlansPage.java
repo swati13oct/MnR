@@ -21,8 +21,16 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import pages.acquisition.ole.WelcomePage;
 import atdd.framework.UhcDriver;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.interactions.Actions;
 public class ComparePlansPage extends UhcDriver {
 
+	
+	@FindBy(id = "backtoplansummarypage")
+	private WebElement BackToAllPlan;
+	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
 	
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
@@ -69,7 +77,58 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
 	private WebElement closeButtonthankyoumessagepopup;
 
+	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+   	private WebElement callsam;
+   	
+   	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
+   	private WebElement callsamtooltip;
+   	
+   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
+   	private WebElement callSamPopup;
+   	
+   	
+   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	private WebElement CallSamModel;
+   	
+   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	private WebElement CallSamTFN;
+   	
+   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	private WebElement CallSamTFNClose;
+   	
+   	String CallSam= "Call a Licensed Insurance Agent";
+   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[2]/img")
+   	private WebElement chatsam;
+   	
+   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
+   	private WebElement chatsamtooltip;
+   	
+   	@FindBy(xpath ="//*[@id='inner-chat']")
+   	private WebElement chatSamPopup;
+   	
+   	
+   	@FindBy(xpath ="//*[@id='agent-name']")
+   	private WebElement ChatSamHead;
+   	
+   	@FindBy(xpath ="//*[@id='sp-close-frame']")
+   	private WebElement ChatSamTFNClose;
 	
+   	String ChatSamText= "Chat with a Licensed Insurance Agent";
+   	
+   	@FindBy(xpath="//*[contains(@class,'remove')]")
+	private WebElement removeLink;
+	
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplan;
+
+	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+	private WebElement remove4thplanName;
+	
+	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
+	private WebElement add3Plan;
+	
+	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
+	private WebElement plan3added;
 		
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -311,5 +370,201 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Thank you Message pop up is closed");
 	}
 	
+  	public WelcomePage Enroll_OLE_Plan() throws InterruptedException {
+	WebElement enrollForPlan = null;
+	enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/span"));
+	if(enrollForPlan!=null){
+		//validateNew(enrollForPlan);
+		enrollForPlan.click();
+	}
+	CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+	System.out.println(driver.getCurrentUrl());
+	if(driver.getCurrentUrl().contains("welcome"))
+	{
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+  	}
+  	
+	public PlanDetailsPage navigateToPlanDetails() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View details')])[1]"));
+				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
+				PlanDetailsLink.click();
+				System.out.println("View Plan Details Link is clicked");
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("#/details")) 
+		{	
+			return new PlanDetailsPage(driver);
+		}
+		return null;
+	}
+		
+	public VPPPlanSummaryPage navigateBackToAllPlans() {
+		CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
+				BackToAllPlan.click();
+				System.out.println("Back to all plan is clicked");
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("#/plan-summary")) 
+		{	
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+		
+    public ComparePlansPage validateCallSam() throws InterruptedException {
+        boolean present;
+        try {
+        validateNew(callsam);
+        present = true;
+        } catch (NoSuchElementException e) {
+        present = false;
+        }
+        if (present) {
+          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+          return new ComparePlansPage(driver);
+        }
+        else
+        	System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+       return null;
+	}
+	
+	public ComparePlansPage validateCallSamContent() throws InterruptedException {
+		
+		Actions action = new Actions(driver);
+		WebElement element = callsam;
+		action.moveToElement(element).perform();
+		String toolTipText = callsamtooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(toolTipText);
+		System.out.println("====================================================================");
+		
+        if (CallSam.equalsIgnoreCase(toolTipText)) {
+          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+          return new ComparePlansPage(driver);
+        }
+        else
+        	System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+       return null;
+	}
+	
+	public ComparePlansPage  validateCallpopup() throws InterruptedException {
+		//CommonUtility.checkPageIsReady(driver);
+		callsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+		driver.switchTo().activeElement();
+		System.out.println(CallSamTFN.getText());
+		CallSamTFNClose.click();
+		validateNew(callsam);		
+		return null;
+	}
+	
+	public ComparePlansPage validateChatSam() throws InterruptedException {
+        boolean present;
+        try {
+        validateNew(chatsam);
+        present = true;
+        } catch (NoSuchElementException e) {
+        present = false;
+        }
+        if (present) {
+          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+          return new ComparePlansPage(driver);
+        }
+        else
+        	System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+       return null;
+	}
+	
+	public ComparePlansPage validateChatSamContent() throws InterruptedException {
+		
+		Actions action = new Actions(driver);
+		WebElement element = chatsam;
+		action.moveToElement(element).perform();
+		String ChattoolTipText = chatsamtooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(ChattoolTipText);
+		System.out.println("====================================================================");
+		
+        if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+          System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+          return new ComparePlansPage(driver);
+        }
+        else
+        	System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+       return null;
+	}
+	
+	public ComparePlansPage  validateChatpopup() throws InterruptedException {
+		//CommonUtility.checkPageIsReady(driver);
+		chatsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
+		chatsamtooltip.click();
+		driver.switchTo().activeElement();
+		System.out.println(ChatSamHead.getText());
+		ChatSamTFNClose.click();
+		validateNew(chatsam);		
+		return null;
+	}
+	public void validatePlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		//validateNew(viewDetailslink);
+		//validateNew(savePlanIcon);
+		System.out.println("Validated all links plan compare");
+		
+	}
+	
+	public void clickOnRemoveLink(){
+		validateNew(removeLink);
+		String PlanName=remove4thplanName.getText();
+		System.out.println("4th plan name is : " + PlanName );
+		remove4thplan.click();
+		System.out.println("Clicked on Remove Link on plan Compare page");
+
+	}
+	
+	public void clickOnBacktoPlans(){
+		validateNew(backToAllPlansLink);
+		backToAllPlansLink.click();
+		System.out.println("Clicked on Back to plans");
+	}
+	
+	public VPPPlanSummaryPage clickOnAddIcon(){
+   	 
+    	//a[@class='planNameVisibility']//h3
+    	 
+    	 validateNew(add3Plan);
+    	 add3Plan.click();
+ 		try {
+ 			Thread.sleep(4000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		if(currentUrl().contains("#/plan-summary"))
+ 			return new VPPPlanSummaryPage(driver);
+ 		return null;
+     }
+	
+	public void validatenewlyAddPlan() {
+   	 
+   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//a[@class='planNameVisibility']//h3"));	
+		int plansForCompare=allMAPlans.size();
+		if (plansForCompare == 3) {
+			Assert.assertTrue(true);
+			System.out.println("Verified Three plans Added on plan compare");
+		}
+		else Assert.assertTrue(false); 		
+	}
+		
 }
 

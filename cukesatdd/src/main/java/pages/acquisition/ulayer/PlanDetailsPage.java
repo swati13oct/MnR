@@ -47,7 +47,6 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-//import org.testng.Assert;
 
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -121,12 +120,15 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
 
 	// Right Rail Element - TFN
 	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 
-	@FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan;
 
 	@FindBy(xpath = "//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
@@ -137,10 +139,10 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryTop']")
 	private WebElement topbackToPlanslink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	@FindBy(xpath = "//a[@id='backToPlanSummaryBottom']")
 	private WebElement downbackToPlanslink;
 
 	@FindBy(xpath = ".//*[@id='printdetails']")
@@ -179,8 +181,11 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valPrescritionDrugEstimatedTotalAnnualCost;
 
-	@FindBy(xpath = "(//*[contains(text(),'Annual Total')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
-	private WebElement valCostTabEstimatedTotalAnnualCost;
+	@FindBy(xpath = "(//*[contains(@class,'plan-detail-table')]//*[contains(@ng-if,'PlanContentSuppDetail')]//*[contains(text(),'Yearly')]/ancestor::td//*[contains(@ng-show,'')]//*[contains(@class,'ng-binding')])")
+	private WebElement valCostTabYearlyCost; 
+	
+	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
+	private WebElement valCostTabEstimatedDrugCost;
 
 	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
 	private WebElement editProviderButtonOnPlanDetails;
@@ -238,15 +243,27 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
+	
+	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
+	private WebElement planDocs;
+	
+	@FindBy(xpath = "//h2[@class='ng-binding']")
+	private WebElement planNameValue;
+	
+	
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
-		return valCostTabEstimatedTotalAnnualCost;
+		return valCostTabYearlyCost;
+	}
+
+	public WebElement getvalCostTabEstimatedDrugCost() {
+		return valCostTabEstimatedDrugCost;
 	}
 
 	@FindBy(id="backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
 
-
-
+	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
+	private WebElement compareBox;
 
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -490,8 +507,8 @@ public class PlanDetailsPage extends UhcDriver {
 	public String costComparisonCostTabFromDCE() {
 
 		CommonUtility.waitForPageLoad(driver, getValCostTabEstimatedTotalAnnualCost(), 30);
-		scrollToView(getValCostTabEstimatedTotalAnnualCost());
-		return getValCostTabEstimatedTotalAnnualCost().getText().trim();
+		scrollToView(getvalCostTabEstimatedDrugCost());
+		return getvalCostTabEstimatedDrugCost().getText().trim();
 
 	}
 	//
@@ -555,7 +572,7 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
-
+		validateNew(downbackToPlanslink);
 		waitforElement(downbackToPlanslink);
 		downbackToPlanslink.click();
 		Thread.sleep(3000);
@@ -631,7 +648,7 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("enrollment")) {
+		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
 		}
@@ -805,6 +822,7 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return null;
 	}
+	
 
 	/**
 	 * @author bnaveen4
@@ -883,6 +901,19 @@ public class PlanDetailsPage extends UhcDriver {
 			bValidation = false;
 		return bValidation;
 	}
+	
+	
+	public void clickAndValidatePrescriptionDrugBenefits() {
+		prescriptiondrugTab.click();
+		validateNew(drugBenefitsSection);
+		if(drugBenefitsSection.isDisplayed()){	
+				Assert.assertTrue(true);
+				System.out.println("We are on prescriptiondrugTab");
+		}
+		else
+				Assert.assertTrue(false);
+	}
+	
 	/**
 	 * @author bnaveen4
 	 * Add the optional rider
@@ -999,6 +1030,7 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 
 	}public boolean ValidatePDFlinkIsDisplayed(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 		String PdfHref = PDFlink.getAttribute("href");
 		System.out.println("href for the PDF is : "+PdfHref);
@@ -1012,6 +1044,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 
 	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
+		validateNew(planDocs);
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 
 		String parentHandle = driver.getWindowHandle();
@@ -1116,6 +1149,10 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
+	public void clickCompareBox() {
+		validateNew(compareBox);
+		jsClickNew(compareBox);
+	}
 
 	public boolean ClickValidatePDFText_URL_ForDocCode(String pDFtype, String documentCode) {
 		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
@@ -1175,6 +1212,18 @@ public class PlanDetailsPage extends UhcDriver {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		}
 		return Validation_Flag;
+	}
+	
+	public void verifyPlanName(String PlanName) {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Plan Name is : " + PlanName);		
+		Assert.assertTrue("Message not Landed on PlanDetails Page", planNameValue.getText().contains(PlanName));
 	}
 
 }
