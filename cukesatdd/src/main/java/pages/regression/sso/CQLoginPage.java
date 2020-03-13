@@ -11,14 +11,18 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.AEM.CQPage;
 
 /**
  * @author jkuma14
  *
  */
-public class cqLoginPage extends UhcDriver {
+public class CQLoginPage extends UhcDriver {
 
+	
+	
 	@FindBy(id="username")
 	private WebElement cqusername;
 	
@@ -28,30 +32,27 @@ public class cqLoginPage extends UhcDriver {
 	@FindBy(xpath="//*[@id='login']/button")
 	private WebElement submitButton;
 	
-	
-	
-	
-	public cqLoginPage(WebDriver driver) {
+	public CQLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
+	private static String AUTHOR_URL = MRConstants.AUTHOR_URL;
+	
 	private static String STAGE_SSO_TESTHANESS_URL = MRConstants.STAGE_SSO_TESTHANESS_URL;
 	
 	 /*This method will open CQ SSO Test Harness page */
-	public cqLoginPage navigateToLoginURL(){
-		start(STAGE_SSO_TESTHANESS_URL);
-		driver.manage().deleteAllCookies();
-		//driver.get("http://apsr8048:4500/cf#/content/admin-tools/sso-test.html");
-		CommonUtility.waitForPageLoad(driver, cqusername, 60);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public CQLoginPage navigateToLoginURL(){
 		
+		if(MRScenario.environment.contains("ucpcontent")){
+			start(AUTHOR_URL);
+		}else{
+			start(STAGE_SSO_TESTHANESS_URL);
+			driver.manage().deleteAllCookies();
+			//driver.get("http://apsr8048:4500/cf#/content/admin-tools/sso-test.html");
+			CommonUtility.waitForPageLoad(driver, cqusername, 60);
+		}
 		return null;
 	}
 	
@@ -63,11 +64,6 @@ public class cqLoginPage extends UhcDriver {
 		sendkeys(cqusername, username);
 		cqpassword.click();
 		sendkeys(cqpassword, password);
-		try {
-		    Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
 		submitButton.click();
 		return new ssoTestHarnessPage(driver);
 	}
@@ -75,6 +71,19 @@ public class cqLoginPage extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-			
+		navigateToLoginURL();
+		validateNew(cqusername);
+		validateNew(cqpassword);
+		validateNew(submitButton);
+	}
+
+	public CQPage login(String username, String password) {
+
+		cqusername.click();
+		sendkeys(cqusername, username);
+		cqpassword.click();
+		sendkeys(cqpassword, password);
+		submitButton.click();
+		return new CQPage(driver);
 	}
 }
