@@ -152,10 +152,10 @@ public class EobStepDefinition {
 			String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
 
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
 
 			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", r_eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
 
 			//note: merge the two into one
 			if (r_eobResponseObj.getNumEobs()>0) 
@@ -186,7 +186,7 @@ public class EobStepDefinition {
 			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
 
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing. apiResponseJson="+apiResponseJson, eobResponseObj!=null);
 			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
 		}
 		

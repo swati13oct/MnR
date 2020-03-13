@@ -190,8 +190,12 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
-		@FindBy(xpath="//button/span[text()='Home Page']")
+		@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
 		protected WebElement tmpBtn;
+		
+		@FindBy(xpath="//a[contains(text(),'Home Page')]")
+		protected WebElement tmpBtn2;
+		
 		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
 			sendkeysNew(userNameField, username);
@@ -230,6 +234,9 @@ public class LoginPage extends UhcDriver {
 					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
 						if (validate(tmpBtn,0)) {
 							tmpBtn.click();
+							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(tmpBtn2,0)) {
+							tmpBtn2.click();
 							CommonUtility.checkPageIsReady(driver);
 						}
 						Thread.sleep(3000);

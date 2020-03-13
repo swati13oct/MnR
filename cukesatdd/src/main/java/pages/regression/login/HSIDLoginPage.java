@@ -205,6 +205,12 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement tmpBtn;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement tmpBtn2;
+
 	@FindBy(id="authQuestiontextLabelId")
 	private WebElement authQuestionlabel;
 	/**
@@ -262,6 +268,7 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
+			
 		}
 		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
@@ -587,6 +594,15 @@ public class HSIDLoginPage extends UhcDriver {
 		int y=0;
 		while (y < 30) {
 			try {
+				
+				if (validate(tmpBtn,0)) {
+					tmpBtn.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (validate(tmpBtn2,0)) {
+					tmpBtn2.click();
+					CommonUtility.checkPageIsReady(driver);
+				}
+
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
 				if (header.size() > 0) {
 					System.out.println("Located some sort of header, assume page is comming");
