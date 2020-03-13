@@ -550,7 +550,7 @@ try {
 	 * @return : boolean
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
-		scrollToView(element);
+		//scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
