@@ -608,17 +608,18 @@ public class EOBPage extends EOBBase{
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i+1)+" from display", false);
 			}
-			String eobXpath="//*[contains(@id, 'eoblist"+i+"')]//*[contains(text(), 'kb')]";
+			String eobXpath="//*[contains(@id, 'eoblist"+i+"')]//*[contains(text(), 'kb') or contains(text(), 'KB')]";
 			try {
 				WebElement pdflink=driver.findElement(By.xpath(eobXpath));
 				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
 				//note: bypass for now, it's not stable, need to ask developer
-				//keep Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
-				//keep 		+ "Expect to NOT contains '0kb' and '0 kb' | Actual='"+pdflink.getText()+"'",
-				//keep 		!pdflink.getText().contains(", 0kb") && !pdflink.getText().contains(", 0 kb"));
+				Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
+				 		+ "Expect to NOT contains '0kb' and '0 kb' and '0KB' and '0 KB' | Actual='"+pdflink.getText()+"'",
+				 		!pdflink.getText().contains(", 0kb") && !pdflink.getText().contains(", 0 kb") 
+				 		&& !pdflink.getText().contains(", 0KB") && !pdflink.getText().contains(", 0 KB"));
 			} catch (NoSuchElementException e) {
 				//note: bypass for now, it's not stable, need to ask developer
-				//keep Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+eobXpath, false);
+				Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+eobXpath, false);
 			}
 			System.out.println(i % 10);
 			if (i % 9 == 0 && i != 0) {
@@ -792,17 +793,18 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM - unable to locate the Date element on target EOB line entry '"+i+"'", false);
 			}
 
-			String targetEobXpath_kb=eobStmtItemXpath+"//*[contains(text(), 'kb')]";
+			String targetEobXpath_kb=eobStmtItemXpath+"//*[contains(text(), 'kb') or contains(text(), 'KB')]";
 			try {
 				WebElement pdflink=driver.findElement(By.xpath(targetEobXpath_kb));
 				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
 				//note: bypass for now, it's not stable, need to ask developer, UI behavior is not stable
-				//keep Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
-				//keep 		+ "Expect to NOT contains '0kb' and '0 kb' | Actual='"+pdflink.getText()+"'",
-				//keep 		!pdflink.getText().contains(", 0kb") && !pdflink.getText().contains(", 0 kb"));
+				Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
+				 		+ "Expect to NOT contains '0kb' and '0 kb' and '0 KB' and '0 KB' | Actual='"+pdflink.getText()+"'",
+						!pdflink.getText().contains(", 0kb") && !pdflink.getText().contains(", 0 kb")
+						&& !pdflink.getText().contains(", 0KB") && !pdflink.getText().contains(", 0 KB"));
 			} catch (NoSuchElementException e) {
 				//note: bypass for now, it's not stable, need to ask developer
-				//keep Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+eobXpath, false);
+				Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+targetEobXpath_kb, false);
 			}
 			//--------------------------------
 
@@ -834,18 +836,26 @@ public class EOBPage extends EOBBase{
 	 */
 	public int numberOfPageDisplayed(int eobCount){
 		//TODO: figure out what this one is trying to validate
+		double pageCount= eobCount/10.0;
+		System.out.println("TEST - pageCount="+pageCount+" = "+eobCount+"/10.0");
+		int numberOfPageDisplayed = (int) Math.ceil(pageCount);
+		System.out.println("TEST - numberOfPageDisplayed="+numberOfPageDisplayed+" = Math.ceil("+pageCount+")");
+		System.out.println(numberOfPageDisplayed + " Page displayed for EOBs");
+		/* tbd
 		float pageCount;
 		int numberOfPageDisplayed;
 		pageCount = eobCount/9;
+		System.out.println("TEST - pageCount="+pageCount+" = "+eobCount+"/9");
 		System.out.println(pageCount);
 		numberOfPageDisplayed = (int)pageCount;
-		if(numberOfPageDisplayed<1){
+		System.out.println("TEST - numberOfPageDisplayed="+numberOfPageDisplayed+" = (int)"+pageCount);
+		if(numberOfPageDisplayed>1){
 			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
 		}else{
 			numberOfPageDisplayed+=1;
 			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
 		}
-
+	*/
 		return numberOfPageDisplayed;
 	}
 
@@ -1127,7 +1137,7 @@ public class EOBPage extends EOBBase{
 				}
 			}			
 			Assert.assertTrue("PROBLEM - unable to locate actualMemberId from localStorage.consumerDetails, "
-					+ "please double check input data planType matches user's actual planType", 
+					+ "please double check input data planType matches user's actual planType, consumerDetails="+consumerDetails, 
 					actualMemberId!=null);
 			
 
@@ -1264,7 +1274,13 @@ public class EOBPage extends EOBBase{
 		}
 		String apiResponseJsonStr=apiResponseJson.getText();
 		System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
-
+		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
+			System.out.println("Retry one more time before giving up...");
+			driver.get(inputUrl);
+			apiResponseJsonStr=apiResponseJson.getText();
+			System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+		}
+		
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
 		return apiResponseJsonStr;
