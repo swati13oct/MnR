@@ -222,6 +222,13 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 		}
 	}
 	
+	@When("^user verifies the AARP logo on home page$")
+	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAARPlogo();		
+	}
+
 	@And("^user clicks on Sign in link on home page in aarp$")
 	public void click_signIn_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()

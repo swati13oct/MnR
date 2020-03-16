@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -1683,10 +1685,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
-			selectFromDropDownByValue(stateDropDown, "Guam");
-
-			// TODO Auto-generated method stub
-			
+			selectFromDropDownByValue(stateDropDown, "California");
+			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage","geotrackingState" );
+			System.out.println("State selected : California");
+			System.out.println("State GeoSessionStorage value : "+StateSessionStorage);
+			Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
 		}
 
 		public void validateDisclaimer() {
@@ -1697,6 +1700,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateVisitAarpOrglink() {
 		  validateNew(visitAARPFooterLink);
+		  String hRef = visitAARPFooterLink.getAttribute("href");
+		  System.out.println("href for Visit AARP.org link : "+hRef);
+		  Assert.assertTrue("Incorrect href for Visit AARP.org : "+hRef,hRef.contains("www.aarp.org"));
 		  visitAARPFooterLink.isEnabled();
 		}
 
@@ -1726,6 +1732,141 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			{
 				Assert.fail("Unable to navigate to signin page");
 			}	
+			
+		}
+
+		public void validateAARPlogo() {
+			// TODO Auto-generated method stub
+			  validateNew(logoLink);	
+			  WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
+			  WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+				if(AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()){
+					Assert.assertTrue(true);
+					System.out.println("Correct AARP Logo is Displayed");
+				}
+				else
+				{
+					Assert.fail("AARP logo is not dispalyed for Ulayer");
+				}	
+
+		}
+
+		public void navigateToPath(String path) {
+
+			String CurrentURL = driver.getCurrentUrl();
+			String NavigateToURL = CurrentURL+path;
+			System.out.println("Navigating to URL : "+NavigateToURL);
+			driver.navigate().to(NavigateToURL);
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='headerRow']")), 30);
+			System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
+
+			
+		}
+
+		public void validateGlobalFooterLinks() {
+			validateNew(footerHomeLink);
+			validateNew(footerAboutUsLink);
+			validateNew(footerContactUsLink);
+			validateNew(footerSiteMapLink);
+			validateNew(footerPrivacyPolicyLink);
+			validateNew(footerTermsnConditionsLink);
+			validateNew(footerDisclaimersLink);
+			validateNew(footerAgentsnBrokersLink);
+			validateNew(footerAccessibilitylink);
+			validateNew(aarpOrgLink);
+			validateNew(medicareAdvantagePlansLink);
+			validateNew(medicareSupplementInsurancePlansLink);
+			validateNew(medicarePrescriptionDrug_PlansLink);
+			validateNew(learnAboutMedicareLink);
+		}
+
+		public void validateTFNelement(String tfnXpath) {
+			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+			validateNew(TFNelement);	
+			if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+				System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
+			}
+			else {
+				Assert.fail("TFN elemnet is not found / displayed on page : "+tfnXpath);
+			}
+		}
+
+		public void validateSubNavShopPlanLinks() {
+			
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(ShopForaplan);
+				actions.build().perform();
+				System.out.println("Hover over Shop for a Plan completed");
+
+//				waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
+//				System.out.println("Submit button is displayed");
+		    }
+			WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
+			WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
+			WebElement RequestMoreInfoLink = driver.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
+			WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
+			WebElement ShopLink = driver.findElement(By.xpath("//a[contains(@href,'shop.html')]"));
+			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
+
+			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+
+			WebElement PlanSelectorLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
+			WebElement DCELink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
+			WebElement PharmacySearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
+			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
+
+
+
+			if(ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
+					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
+					&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
+					&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
+			}
+			else {
+				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : "); 
+			}
+		 			
+		}
+
+		public void validateSubNavMedEdLinks() {
+			
+			waitforElement(lnkLearnAboutMedicare);
+			if (lnkLearnAboutMedicare.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(lnkLearnAboutMedicare);
+				actions.build().perform();
+				System.out.println("Hover over Learn about Medicare completed");
+		    }
+			WebElement EligibilityTxt = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
+			WebElement ChoicesBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
+			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
+			WebElement CostbasicsLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
+
+			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+
+			WebElement EnrollmentBasicsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
+			WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
+
+		
+		  if(EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() &&
+				  PresProvidersBenefitsLink.isDisplayed() && CostbasicsLink.isDisplayed() &&
+				  MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() &&
+				  PDPplansLink.isDisplayed() &&
+				  EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) { 
+			  Assert.assertTrue(true); System.out.
+		  println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "
+		  ); } else { Assert.
+		  fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : "
+		  ); }
+		 
 			
 		}
 	} 

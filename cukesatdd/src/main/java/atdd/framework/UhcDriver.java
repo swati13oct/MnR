@@ -23,7 +23,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -981,6 +985,21 @@ try {
 	public void fixFormResubmission(boolean positive) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
+	}
+	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
+		String ReturnValue = "";
+		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
+			LocalStorage localStorage = webStorage.getLocalStorage();		
+			ReturnValue = localStorage.getItem(StorageKey);
+			System.out.println("Local Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		else if(StorageType.equalsIgnoreCase("session storage") || StorageType.equalsIgnoreCase("sessionstorage") ) {
+			SessionStorage sessionStorage = webStorage.getSessionStorage();
+			ReturnValue = sessionStorage.getItem(StorageKey);
+			System.out.println("Session Storage - Key: "+StorageKey+"; Value: "+ReturnValue);
+		}
+		return ReturnValue;
 	}
 	
 	public void threadsleep(int sec) {
