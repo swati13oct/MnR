@@ -584,6 +584,16 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		}
                             	}
                                 
+// Drug Not found Functionality
+                                
+                                public void drugNotFound(String searchText) {
+                            		validate(drugsearchBox, 30);
+                            		drugsearchBox.sendKeys(searchText);
+                            		drugsearchButton.click();
+                            		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("NO"),
+                            				"Expected Error Message not displayed");
+                            	}
+                                
 
                 public void browserBack() {
 
