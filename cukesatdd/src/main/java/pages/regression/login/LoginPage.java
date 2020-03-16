@@ -67,6 +67,16 @@ public class LoginPage extends UhcDriver {
 	    
 	    @FindBy(xpath="//*[@class='ng-scope nav-ready']//a[contains(text(),'Coverage & Benefits')]")
 		private WebElement bencovtab;
+
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
+
 	    
 	    MRScenario loginScenario;
 		
@@ -190,13 +200,6 @@ public class LoginPage extends UhcDriver {
 			return null;
 		}
 		
-		@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
-		protected WebElement tmpBtn;
-		
-		@FindBy(xpath="//a[contains(text(),'Home Page')]")
-		protected WebElement tmpBtn2;
-		
-		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
@@ -232,11 +235,14 @@ public class LoginPage extends UhcDriver {
 				}
 				if (counter < 35) {
 					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
-						if (validate(tmpBtn,0)) {
-							tmpBtn.click();
+						if (validate(homePageNotice,0)) {
+							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
-						} else if (validate(tmpBtn2,0)) {
-							tmpBtn2.click();
+						} else if (validate(homePageNotice2,0)) {
+							homePageNotice2.click();
+							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(homePageNotice3,0)) {
+							homePageNotice3.click();
 							CommonUtility.checkPageIsReady(driver);
 						}
 						Thread.sleep(3000);
@@ -322,6 +328,10 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+					if (validate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;

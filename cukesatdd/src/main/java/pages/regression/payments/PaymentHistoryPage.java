@@ -473,7 +473,6 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public PaymentHistoryPage navigateToPaymentHistoryPage() throws InterruptedException {
 
-		feebackpopupClose();
 
 		Thread.sleep(6000);
 

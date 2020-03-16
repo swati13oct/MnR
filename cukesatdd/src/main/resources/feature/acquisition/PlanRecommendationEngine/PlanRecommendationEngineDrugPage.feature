@@ -281,3 +281,29 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds                | travel                 | doctors   | DoctorsName | isMultiDoctor | Drug Selection |
       |   90201 | NO            |        | MAPD          | Medicaid,condition,facility | within,another,primary | innetwork |             |               | Yes            |
+
+  @PRE @planrecommendation @drugpage @drugnotfound @drugpageadddrug @F374225 @US2405205
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <Search Text> - To validate Drug page choose no drug function in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site landing page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects Travel options in Care Away From Home Page
+      | Travel Options | <travel> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user search and not found a drug in Drug Page
+      | Drug Selection | <Drug Selection> |
+      | Search Text    | <Search Text>    |
+
+    Examples: 
+      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds                | travel                 | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Search Text |
+      |   90201 | NO            |        | MAPD          | Medicaid,condition,facility | within,another,primary | innetwork |             |               | Yes            | fedp        |

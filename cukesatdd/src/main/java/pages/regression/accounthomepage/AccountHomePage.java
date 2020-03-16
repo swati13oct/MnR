@@ -1844,15 +1844,17 @@ public class AccountHomePage extends UhcDriver {
 		 * WebDriverWait wait = new WebDriverWait(driver, 30);
 		 * wait.until(ExpectedConditions.elementToBeClickable(paymentslink));
 		 */
-//		try {
-//			System.out.println("iPerception Pop Up is Present");
-//			driver.switchTo().frame("IPerceptionsEmbed");
-//			iPerceptionCloseButton.click();
-//			// driver.switchTo().defaultContent();
-//			Thread.sleep(5000);
-//		} catch (Exception e) {
-//			System.out.println("iPerception Pop Up is not Present");
-//		}
+		try {
+			System.out.println("iPerception Pop Up is Present");
+			driver.switchTo().frame("IPerceptionsEmbed");
+			iPerceptionCloseButton.click();
+			// driver.switchTo().defaultContent();
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			System.out.println("iPerception Pop Up is not Present");
+		}
+
+		CommonUtility.checkPageIsReady(driver);
 
 		Thread.sleep(6000);
 

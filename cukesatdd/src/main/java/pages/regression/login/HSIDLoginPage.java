@@ -5,11 +5,7 @@ package pages.regression.login;
 
 import java.util.List;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
@@ -88,6 +84,17 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[1]")
 	private WebElement iPerceptionPopUp;
 
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
+
+
+	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
@@ -205,12 +212,6 @@ public class HSIDLoginPage extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
-	protected WebElement tmpBtn;
-	
-	@FindBy(xpath="//a[contains(text(),'Home Page')]")
-	protected WebElement tmpBtn2;
-
 	@FindBy(id="authQuestiontextLabelId")
 	private WebElement authQuestionlabel;
 	/**
@@ -251,6 +252,15 @@ public class HSIDLoginPage extends UhcDriver {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+
+
+
+
+			if(validate(homePageNotice)) {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView();", homePageNotice);
+				homePageNotice.click();
 			}
 			
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
@@ -594,12 +604,14 @@ public class HSIDLoginPage extends UhcDriver {
 		int y=0;
 		while (y < 30) {
 			try {
-				
-				if (validate(tmpBtn,0)) {
-					tmpBtn.click();
+				if (validate(homePageNotice,0)) {
+					homePageNotice.click();
 					CommonUtility.checkPageIsReady(driver);
-				} else if (validate(tmpBtn2,0)) {
-					tmpBtn2.click();
+				} else	if (validate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (validate(homePageNotice3,0)) {
+					homePageNotice3.click();
 					CommonUtility.checkPageIsReady(driver);
 				}
 

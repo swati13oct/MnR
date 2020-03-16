@@ -124,6 +124,16 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				previousPagePercentage = "48%";
 				nextPageName = "ADDITIONAL";
 				nextPagePercentage = "56%";
+			}else if (currentPageName.contains("ADDITIONAL")) {
+				previousPageName = "PHARMACY";
+				previousPagePercentage = "56%";
+				nextPageName = "COST";
+				nextPagePercentage = "64%";
+			}else if (currentPageName.contains("COST")) {
+				previousPageName = "ADDITIONAL";
+				previousPagePercentage = "64%";
+				nextPageName = "";
+				nextPagePercentage = "";
 			}else {
 				previousPageName = "";
 				previousPagePercentage = "";

@@ -1429,7 +1429,10 @@ public class OneTimePaymentAarpStepDefintion {
 	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
 		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+		PaymentHistoryPage paymentHistoryPage = null;
+		if (null != accountHomePage){
+			paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+		}
 		if (paymentHistoryPage != null) {
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("User is on Payment overview screen");
@@ -1440,7 +1443,12 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page() throws Throwable {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		OneTimePaymentPage oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePayment();
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePayment();
+		}
+
 		if (oneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
 			System.out.println("User is on Make one time payment screen");
@@ -1452,9 +1460,13 @@ public class OneTimePaymentAarpStepDefintion {
 			String otherAmountvalue) throws Throwable {
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.One_Time_Payments_Page);
-		oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
-		oneTimePaymentPage.selectCreditCardOption();
-		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+
+		CreditCardUPGPage creditCardPaymentPage=null;
+		if(oneTimePaymentPage!=null) {
+			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+			oneTimePaymentPage.selectCreditCardOption();
+			creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		}
 		if (creditCardPaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
 			System.out.println("User is on UPG Credit cards page");
@@ -1481,9 +1493,21 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_selects_Amount_due_today_and_selects_credit_card_and_click_on_Next_button() throws Throwable {
 		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.One_Time_Payments_Page);
-		oneTimePaymentPage.selectAmountDueToday();
-		oneTimePaymentPage.selectCreditCardOption();
-		CreditCardUPGPage creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+
+		CreditCardUPGPage creditCardPaymentPage=null;
+
+		if(oneTimePaymentPage!=null){
+
+			oneTimePaymentPage.selectAmountDueToday();
+			oneTimePaymentPage.selectCreditCardOption();
+
+			creditCardPaymentPage = oneTimePaymentPage.clickOnNextButton();
+		}
+
+
+
+
+
 		if (creditCardPaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
 			System.out.println("User is on UPG Credit cards page");
@@ -1502,7 +1526,12 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		CreditCardUPGPage creditCardPaymentPage = (CreditCardUPGPage) getLoginScenario()
 				.getBean(PageConstants.Credit_Card_Payments_Page);
-		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = creditCardPaymentPage.EnterFiledsOnCC(memberAttributesMap);
+
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage=null;
+		if(creditCardPaymentPage!=null) {
+
+		 reviewOneTimePaymentsPage = creditCardPaymentPage.EnterFiledsOnCC(memberAttributesMap);
+		}
 		if (reviewOneTimePaymentsPage != null) {
 			getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
 			System.out.println("User is on Review One time payments page");
@@ -1534,8 +1563,12 @@ public class OneTimePaymentAarpStepDefintion {
 			throws Throwable {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.Review_OneTime_Payments_Page);
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
-				.selectAgreeAndClickOnMakePayment();
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage =null;
+		if(reviewOneTimePaymentsPage!=null) {
+			 confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+					.selectAgreeAndClickOnMakePayment();
+		}
 		if (confirmOneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 			System.out.println("User is on Review One time payments page");
@@ -1547,7 +1580,12 @@ public class OneTimePaymentAarpStepDefintion {
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
-		confirmOneTimePaymentPage.OneTimeCCverification();
+
+		 confirmOneTimePaymentPage=null;
+
+		if(confirmOneTimePaymentPage!=null) {
+			confirmOneTimePaymentPage.OneTimeCCverification();
+		}
 	}
 
 	@Given("^user clicks on Set up Automatic payments on payment overview page$")
