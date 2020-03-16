@@ -1844,30 +1844,40 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Hover over Learn about Medicare completed");
 		    }
 			WebElement EligibilityTxt = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
-			WebElement ChoicesBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
-			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
-			WebElement CostbasicsLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
+			WebElement ChoicesBtn = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
+			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+			WebElement CostbasicsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-costs')]"));
 
-			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-advantage-plans')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-part-d')]"));
 
-			WebElement EnrollmentBasicsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
-			WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
+			WebElement EnrollmentBasicsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+//			WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-faq')]"));
 
-		
+		validateNew(EligibilityTxt);
+		validateNew(ChoicesBtn);
+		validateNew(PresProvidersBenefitsLink);
+		validateNew(CostbasicsLink);
+
+		validateNew(MAplansLink);
+		validateNew(MedSuppPlansLink);
+		validateNew(PDPplansLink);
+
+		validateNew(EnrollmentBasicsLink);
+
 		  if(EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() &&
 				  PresProvidersBenefitsLink.isDisplayed() && CostbasicsLink.isDisplayed() &&
 				  MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() &&
 				  PDPplansLink.isDisplayed() &&
-				  EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) { 
-			  Assert.assertTrue(true); System.out.
-		  println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "
-		  ); } else { Assert.
-		  fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : "
-		  ); }
-		 
-			
+				  EnrollmentBasicsLink.isDisplayed()) { 
+			  //&& FAQLink.isDisplayed()
+			  Assert.assertTrue(true); 
+			  System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
+		  } 
+		  else { 
+			  Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page"); 
+			  }
 		}
 	} 
 
