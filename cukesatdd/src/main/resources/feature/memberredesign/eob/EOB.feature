@@ -75,37 +75,37 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
-      | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
+      | 02    | MA       | COSMOS_EOB_R      | Medical           | true        |
 
     @COSMOS_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
+      | 03    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
 
     @NICE_MEDICAL
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
+      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |      
       | 05    | MA       | NICE_EOB_R        | Medical           | true        |      
-      | 06    | MAPD     | NICE_EOB_R        | Medical           | true        |      
 
     @NICE_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 07    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
+      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
 
     #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
     #note: adobe links won't come up till very very late
     @RX_PDP
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob | 
-      | 08    | PDP      | Rx_EOB            | Prescription Drug | true        |
-      | 09    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
+      | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
+      | 08    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
 
     @RX_PDP_COMBO
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob | 
-      | 10    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
-      | 11    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
+      | 09    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
+      | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
 
   @eob02 @regressionMember
@@ -155,12 +155,12 @@ Feature: 1.04 To Test EOB for Members
     @SHIP_EOBs @devRegression
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 12    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
+      | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
 
     @SHIP_EOBs
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
-      | 13    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false       |
 
 
   @eob02 @regression_06_06_18FnF @regressionMember
@@ -174,7 +174,7 @@ Feature: 1.04 To Test EOB for Members
     @PHIP_EOBs
     Examples: 
       | index | TID   | planType | memberType |
-      | 14    | 15174 | PHIP     | SHIP_EOB   |
+      | 13    | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -189,7 +189,7 @@ Feature: 1.04 To Test EOB for Members
   #
   #  Examples: 
   #    | index | FID    | planType | memberType              |
-  #    | 15    | 267688 | SSUP     | EOB_Deeplink_Individual |
+  #    | 14    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
 
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
@@ -203,4 +203,4 @@ Feature: 1.04 To Test EOB for Members
     @SSP_EOBs
     Examples: 
       | index | FID    | planType | memberType | 
-      | 16    | 267688 | SSUP     | GROUP_EOB  | 
+      | 15    | 267688 | SSUP     | GROUP_EOB  | 
