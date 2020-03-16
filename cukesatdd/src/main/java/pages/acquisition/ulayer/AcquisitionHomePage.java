@@ -276,7 +276,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
-   	
+
+    
+	@FindBy(xpath = "//*[contains(@class,'proactive-offer')]")
+   	private WebElement ProActivePopup;
+
+	@FindBy(xpath = "//*[contains(@class,'proactive-offer__close') and contains(@class, 'close-icon')]")
+   	private WebElement ProActivePopup_Close;
+
+	@FindBy(xpath = "//button[contains(@class,'proactive-offer__close') and contains(text(), 'Exit')]")
+   	private WebElement ProActivePopup_ExitBtn;
+
+	@FindBy(xpath = "//button[contains(@class,'proactive-offer__button_type_chat') and contains(text(), 'Chat')]")
+   	private WebElement ProActivePopup_ChatBtn;
+
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
@@ -296,8 +309,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[@id='inner-chat']")
    	private WebElement chatSamPopup;
-   	
-   	
+
+   	@FindBy(xpath ="//*[@id='sp-chat-frame']")
+   	private WebElement ProActivechatPopup;
+
+  
    	@FindBy(xpath ="//*[@id='agent-name']")
    	private WebElement ChatSamHead;
    	
@@ -1597,13 +1613,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
-			chatsam.click();
+			validateNew(chatsam);
+			jsClickNew(chatsam);
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-			chatsamtooltip.click();
+			validateandcloseChat();
+/*			chatsamtooltip.click();
 			driver.switchTo().activeElement();
 			System.out.println(ChatSamHead.getText());
 			ChatSamTFNClose.click();
-			validateNew(chatsam);		
+			validateNew(chatsam);		*/
 			return null;
 		}
 		
@@ -1820,7 +1838,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement PharmacySearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
 
-
+			validateNew(ZipCodeTxt);
+			validateNew(FindPlansBtn);
+			validateNew(RequestMoreInfoLink);
+			
+			validateNew(EnrollLink);
+			validateNew(ShopLink);
+			validateNew(ResourceLink);
+			
+			validateNew(MAplansLink);
+			validateNew(MedSuppPlansLink);
+			validateNew(PDPplansLink);
+			
+			validateNew(PlanSelectorLink);
+			validateNew(DCELink);
+			validateNew(PharmacySearchLink);
+			validateNew(ProviderSearchLink);
 
 			if(ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
@@ -1921,6 +1954,44 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			driver.navigate().back();
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+		}
+
+		public void validateChatProActive() {
+	        boolean present;
+	        try {
+	        validateNew(ProActivePopup);
+	        validateNew(ProActivePopup_Close);
+	        validateNew(ProActivePopup_ExitBtn);
+	        validateNew(ProActivePopup_ChatBtn);
+	        present = true;
+	        } catch (NoSuchElementException e) {
+	        present = false;
+	        }
+	        if (present) {
+	          System.out.println("@@@@@@@@@ Able to find Pro-Active Chat widget @@@@@@@@@");
+	        }
+	        else {
+	        	System.out.println("@@@@@@@@@ No Pro-Active widget @@@@@@@@@");
+	        	Assert.fail();
+	        }			
+		}
+
+		public void validateProActiveChatpopup() {
+	        validateNew(ProActivePopup_ChatBtn);
+			jsClickNew(ProActivePopup_ChatBtn);
+			System.out.println("@@@@@@@@@@@@@@@ Pro-Avtive Chat Button Clicked @@@@@@@@@@@@@@@");	
+			validateandcloseChat();
+		}
+
+		private void validateandcloseChat() {
+			driver.switchTo().activeElement();
+			validateNew(ProActivechatPopup);
+			validateNew(ChatSamTFNClose);
+			System.out.println(ProActivechatPopup.getText());
+			jsClickNew(ChatSamTFNClose);
+			System.out.println("Exiting Chat");
+			validateNew(chatsam);		
+		
 		}
 	} 
 

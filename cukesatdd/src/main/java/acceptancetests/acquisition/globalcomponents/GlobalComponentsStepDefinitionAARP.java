@@ -134,13 +134,22 @@ public class GlobalComponentsStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
+		String tfnFlag = memberAttributesMap.get("TFNflag");
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateTFNelement(tfnXpath);
+		if(tfnFlag.equalsIgnoreCase("true")) {
+			aquisitionhomepage.validateTFNelement(tfnXpath);
+		}
 	}
 
 	@Then("^the user validates Pro-active Chat$")
 	public void the_user_validates_Pro_active_Chat() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatProActive();
+		aquisitionhomepage.validateProActiveChatpopup();	
+		
 	}
 
 	@Then("^the user validates SAM Call Icon$")
