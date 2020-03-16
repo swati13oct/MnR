@@ -1,6 +1,11 @@
 @eob @fastandfurious
 Feature: 1.04 To Test EOB for Members
 
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on stage env
+  #    | Feature           | UCPEob |
+
+
   #note: skip the API and UI count comparison for now because service is unstable
   @eob01 @E2E @regressionMember 
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
@@ -66,33 +71,39 @@ Feature: 1.04 To Test EOB for Members
     #Then the user validates the eob count for all available search ranges
     #  | Flag Zero EOB User | <flagZeroEob> |
 
-    @COSMOS_EOBs @devRegression
+    @COSMOS_MEDICAL @devRegression
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
-      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
+      | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
 
-    @COSMOS_EOBs
+    @COSMOS_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 03    | MA       | COSMOS_EOB_R      | Medical           | true        |
-     #note: SSP EOB is disabled
-     # | 04    | SSP      | PDP_SSP_COMBO_EOB | Medical           | true        |
+      | 02    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
 
-    @NICE_EOBs
+    @NICE_MEDICAL
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 05    | MA       | NICE_EOB_R        | Medical           | true        |      
       | 06    | MAPD     | NICE_EOB_R        | Medical           | true        |      
+
+    @NICE_DRUG
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 07    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
 
     #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
     #note: adobe links won't come up till very very late
-    @Rx_EOBs
+    @RX_PDP
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob | 
       | 08    | PDP      | Rx_EOB            | Prescription Drug | true        |
       | 09    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
+
+    @RX_PDP_COMBO
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob | 
       | 10    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | 11    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
@@ -141,7 +152,7 @@ Feature: 1.04 To Test EOB for Members
     #  | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs
+    @SHIP_EOBs @devRegression
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 12    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
@@ -160,25 +171,25 @@ Feature: 1.04 To Test EOB for Members
     Then the user navigates to EOB page
     Then the user validates the eob page content for PHIP
 
-    @SHIP_EOBs
+    @PHIP_EOBs
     Examples: 
       | index | TID   | planType | memberType |
       | 14    | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
-  @eob03 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
-  Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP member accessing EOB page via top menu sub link
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-    When I navigate to the claims Summary page from dashboard or testharness page
-    #Then Explanation of benefits sub navigation under Claims tab is not displayed
-    Then Explanation of benefits deep link is invoked and validate the Page
-
-    Examples: 
-      | index | FID    | planType | memberType              |
-      | 15    | 267688 | SSUP     | EOB_Deeplink_Individual |
+  #@eob03 @US1662790 @US1673123 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
+  #Scenario Outline: -index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - To validate that SSUP member accessing EOB page via top menu sub link
+  #  Given login with following details logins in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #  When I navigate to the claims Summary page from dashboard or testharness page
+  #  #Then Explanation of benefits sub navigation under Claims tab is not displayed
+  #  Then Explanation of benefits deep link is invoked and validate the Page
+  #
+  #  Examples: 
+  #    | index | FID    | planType | memberType              |
+  #    | 15    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
 
   @eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan @regressionMember
@@ -189,7 +200,7 @@ Feature: 1.04 To Test EOB for Members
     When I navigate to the claims Summary page from dashboard or testharness page
     Then the user validate sub option EXPLANATION OF BENEFITS under Claims option
 
-    @SHIP_EOBs
+    @SSP_EOBs
     Examples: 
       | index | FID    | planType | memberType | 
       | 16    | 267688 | SSUP     | GROUP_EOB  | 
