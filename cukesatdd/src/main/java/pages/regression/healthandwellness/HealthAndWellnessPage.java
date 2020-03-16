@@ -325,7 +325,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	
 	public void validateGetReward() {
 		Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
-		String expectedUrl="https://member.int.uhc.com/rewards";
+		String expectedUrl="uhc.com/rewards";
 		String actUrlLink=getRewardLink.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate expected href link from element.  Expect to contain '"+expectedUrl+"' | Actual='"+actUrlLink+"'",actUrlLink.contains(expectedUrl));
 		if (testThirdPartyPage) {

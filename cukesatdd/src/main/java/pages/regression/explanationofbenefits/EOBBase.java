@@ -64,7 +64,7 @@ public class EOBBase extends EOBWebElements{
 			System.out.println("slept total of '"+(total)+"' seconds...");
 		}
 		System.out.println("waited total of '"+(total)+"' seconds for the eobLoadingimage to disappear...");
-		sleepBySec(5);
+		sleepBySec(15); //note: keep to let the page settle down w/ the pdf loading in the background
 		return total;
 	}
 	
