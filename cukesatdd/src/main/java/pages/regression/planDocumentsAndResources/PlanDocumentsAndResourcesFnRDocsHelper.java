@@ -218,8 +218,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "https://www.uhcprovider.com/?rfid=UHCOContRD");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Latest UnitedHealthcare Provider News");
-			testInputInfoMap.put("sampleBodyText","See Full List of Recent News");
+			testInputInfoMap.put("headerText","informed");
+			testInputInfoMap.put("sampleBodyText","Latest UnitedHealthcare Provider News");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Step Therapy for Part B Drugs")) {
