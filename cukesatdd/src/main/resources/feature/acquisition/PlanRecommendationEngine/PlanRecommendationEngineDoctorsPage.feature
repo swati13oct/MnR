@@ -113,6 +113,6 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds                | travel                 | doctors   | DoctorsName | isMultiDoctor |
-      |   90201 | NO            |          | MA            | Medicaid,condition,facility | within,another,primary | mydoctors | John        | YES           |
-      |   10002 | NO            | New York | MAPD          | facility                    | primary                | mydoctors | sue         | YES           |
+			|   90201 | NO            |          | MA            | Medicaid,condition,facility | within,another,primary | mydoctors | John        | YES           |
+      |   10002 | NO            | New York | MAPD          | facility                    | primary                | mydoctors | John         | YES           |
 #      |   35034 | YES           |Bibb County |MAPD         | Medicaid,condition,facility|within,another,primary|mydoctors  |John|NO|
