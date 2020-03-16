@@ -224,7 +224,7 @@ public class LoginPage extends UhcDriver {
 				}
 				if (counter < 35) {
 					if (!(null==MRScenario.environment)&& (MRScenario.environment.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
-						if (validate(homePageNotice,30)) {
+						if (validate(homePageNotice,0)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
 						}
@@ -312,6 +312,10 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+					if (validate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;
@@ -324,10 +328,6 @@ public class LoginPage extends UhcDriver {
 					System.out.println("NoAlertPresentException - No Aert Presernt...");
 				} catch (TimeoutException ex) {
 					System.out.println("TimeoutException - No Aert Presernt...");
-				}
-				if (validate(homePageNotice,30)) {
-					homePageNotice.click();
-					CommonUtility.checkPageIsReady(driver);
 				}
 
 				if (driver.getTitle().contains("Internal Error") || driver.getTitle().contains("Sign In")) {
