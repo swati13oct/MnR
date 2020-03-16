@@ -604,14 +604,14 @@ public class EOBPage extends EOBBase{
 			try {
 				WebElement eob=driver.findElement(By.id("eoblist" + i));
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i+1)+" from display", eobValidate(eob));
-				System.out.println("EOB at" + i + " displayed correctly");
+				System.out.println("EOB at " + i + " displayed correctly");
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i+1)+" from display", false);
 			}
 			String eobXpath="//*[contains(@id, 'eoblist"+i+"')]//*[contains(text(), 'kb') or contains(text(), 'KB')]";
 			try {
 				WebElement pdflink=driver.findElement(By.xpath(eobXpath));
-				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
+				System.out.println("EOB at " + i + " PDF Link text : "+pdflink.getText());
 				//note: bypass for now, it's not stable, need to ask developer
 				Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
 				 		+ "Expect to NOT contains '0kb' and '0 kb' and '0KB' and '0 KB' | Actual='"+pdflink.getText()+"'",
@@ -689,7 +689,7 @@ public class EOBPage extends EOBBase{
 			try {
 				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", eobValidate(eob));
-				System.out.println("EOB at" + i + " displayed correctly");
+				System.out.println("EOB at " + i + " displayed correctly");
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
 			}
@@ -1117,7 +1117,7 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public String getMemberIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
-		System.out.println("TEST - consumerDetails="+consumerDetails);
+		//System.out.println("TEST - consumerDetails="+consumerDetails);
 		String actualMemberId=null;
 		try {
 			JSONParser parser = new JSONParser();
@@ -1273,7 +1273,7 @@ public class EOBPage extends EOBBase{
 			driver.switchTo().window(winHandle);
 		}
 		String apiResponseJsonStr=apiResponseJson.getText();
-		System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
 		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
 			System.out.println("Retry one more time before giving up...");
 			driver.get(inputUrl);
