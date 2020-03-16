@@ -995,6 +995,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public List<String> validateSubPageContent(HashMap<String, String> testInputInfoMap, List<String> section_note, String actUrl, String targetDocName) {
+		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(3); //note: let the page settle before validating content
 		if (testInputInfoMap.get("section").equals("Forms And Resources")) {
 			if (actUrl.contains(".pdf")) {
