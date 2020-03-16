@@ -288,10 +288,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
-   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[2]/img")
+   	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
-   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
+   	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]/div/a[1]")
    	private WebElement chatsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='inner-chat']")
@@ -1568,11 +1568,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	        present = false;
 	        }
 	        if (present) {
-	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+	          System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
 	          return new AcquisitionHomePage(driver);
 	        }
 	        else
-	        	System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+	        	System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
 	       return null;
 		}
 		
@@ -1715,7 +1715,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			  validateNew(headerSignInLink);
 			  validateNew(headerRegisterLink);
 			  validateNew(visitAARPLink);
-			  validateNew(logoLink);	
+			  validateNew(AARPlogo);
+			  validateNew(visitorprofileicon);
 			}
 
 		public void signInheader() {
@@ -1737,7 +1738,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateAARPlogo() {
 			// TODO Auto-generated method stub
-			  validateNew(logoLink);	
+			  validateNew(AARPlogo);	
 			  WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
 			  WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
 				if(AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()){
@@ -1878,6 +1879,48 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		  else { 
 			  Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page"); 
 			  }
+		}
+
+		public void headerRegisterLink() {
+			if(headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
+				Assert.assertTrue(true);
+				System.out.println("Register link is displayed on home page");
+			}
+			else {
+				Assert.fail("Register link is not found/ displayed on home page");
+			}
+			
+		}
+
+		public void validatevisitorprofile() {
+			if(visitorprofileicon.isDisplayed()){
+				Actions actions = new Actions(driver);
+				actions.moveToElement(visitorprofileicon).perform();
+				System.out.println("Hover over visitor profile completed");
+			}
+			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+			WebElement VPSignIn = driver.findElement(By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+			validateNew(CreateProfile);
+			validateNew(VPSignIn);
+			if(CreateProfile.isEnabled() && VPSignIn.isEnabled()){
+				Assert.assertTrue(true);
+				System.out.println("Visitor Profile elements are present on home page");
+			}
+			else {
+				Assert.fail("Visitor Profile elements are not present on home page");
+			}	
+			visitorprofileicon.click();
+			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
+			if(driver.getCurrentUrl().contains("profile/guest")){
+		      Assert.assertTrue(true);
+		      System.out.println("Visitor Profile Page opens successsfully");
+			}
+			else {
+				Assert.fail("Visitor Profile page is not opening up");
+			}
+			driver.navigate().back();
+			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 		}
 	} 
 

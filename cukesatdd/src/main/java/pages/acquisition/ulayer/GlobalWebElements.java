@@ -110,9 +110,15 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gfn_lnk_row2_5")
 	 public static WebElement medicareSpecialNeedPlansLink;
 	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
 	//@FindBy(xpath = "//h1[@class='logo']/a")
 	@FindBy(id = "logo")
 	 public static WebElement logoLink;
+	
+	@FindBy(id = "aarpSVGLogo")
+	 public static WebElement AARPlogo;
 	
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	 public static WebElement importantDisclosuresLink;

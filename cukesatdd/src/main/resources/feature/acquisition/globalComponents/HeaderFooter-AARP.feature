@@ -25,6 +25,7 @@ Feature: 2.04--Acq-To test global footer links in AARP site
     And user verifies the AARP logo on home page
     And user clicks on Sign in link on home page in aarp
     And user clicks on register link on home page in aarp
+    Then user validates visitor profile on home page in aarp
 
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
@@ -39,9 +40,11 @@ Feature: 2.04--Acq-To test global footer links in AARP site
     Then the user validates TFN on page
     | TFNxpath | <tfnXpath> |
 #    Then the user validates Pro-active Chat
-#    Then the user validates SAM Call Icon
-#    Then the user validates SAM re-active Chat
+     Then the user validates SAM Call Icon
+     Then the user validates SAM re-active Chat
 
     Examples: 
       | path                    | pageName      | tfnXpath |
       | medicare-education.html | MedEd Landing | //*[@class='amp']//a[contains(@href, 'callto')] | 
+      
+     

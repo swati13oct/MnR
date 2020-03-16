@@ -238,6 +238,8 @@ public class GlobalHeaderFooterStepDefinitionAARP {
 	
 	@And("^user clicks on register link on home page in aarp$")
 	public void click_register_aarp() {
-		
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.headerRegisterLink();
 	}
 }

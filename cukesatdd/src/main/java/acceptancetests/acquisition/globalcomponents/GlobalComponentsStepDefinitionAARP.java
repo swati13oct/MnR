@@ -145,10 +145,28 @@ public class GlobalComponentsStepDefinitionAARP {
 
 	@Then("^the user validates SAM Call Icon$")
 	public void the_user_validates_SAM_Call_Icon() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSam();
+		aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallpopup();	
 	}
 
 	@Then("^the user validates SAM re-active Chat$")
 	public void the_user_validates_SAM_re_active_Chat() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateChatSamContent();
+		aquisitionhomepage.validateChatpopup();	
+		
+	}
+	
+	@Then("^user validates visitor profile on home page in aarp$")
+	public void the_user_validates_visitor_profile_aarp() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validatevisitorprofile();
 	}
 
 }
