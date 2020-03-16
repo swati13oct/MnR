@@ -1756,7 +1756,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void openPRE() {
 		if(MRScenario.environment.equalsIgnoreCase("digital-uatv2-uhc")){
-			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uat-uhc", "digital-uat").replace("www.", ""));
+			startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2").replace("www.", ""));
 			//startNew(UMS_ACQISITION_PAGE_URL.replace("digital-uatv2-uhc", "digital-uatv2"));
 		} else {
 			startNew(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
