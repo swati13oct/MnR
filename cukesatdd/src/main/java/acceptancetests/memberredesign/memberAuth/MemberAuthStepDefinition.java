@@ -591,7 +591,7 @@ public class MemberAuthStepDefinition{
 		String planType = memberAttributesMap.get("Plan Type");
 		eobPage.validatePlanNavTab(planType);
 		eobPage.selectEobType(planType, eobTypeData); 
-		eobPage.selectDateRange(planType, dateRange); 
+		eobPage.selectDateRange(planType, dateRange,eobTypeData); 
 		eobPage.validateEachEOBonUI();
 		BenefitsAndCoveragePage bncPage = eobPage.navigateToBncPage();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
