@@ -1,33 +1,32 @@
 @globalHeader
 Feature: 2.04--Acq-To test global footer links in AARP site
 
-  @globalfooterULayer
-  Scenario: To verify links displayed in the global footer of AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When user accesses global footer of the AARP Medicare Plans home page
-    And user vaidates the state drop down link on home page
-    And user clicks on View all disclaimer information link on home page
-    And user verifies visit aarp.org link on home page ulayer
-    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
-    And user clicks on contactus link of aboutus page
-    And user clicks on sitemap link of contactus page
-    And user clicks on privacypolicy link of sitemap page
-    And user clicks on termsOfuse link of privacypolicy page
-    And user clicks on disclaimers link of terms&conditions page
-    And user clicks on agents&brokers link of disclaimers page
-    And user verifies and clicks on home link of agents&brokers page ulayer
-    Then user clicks on back to top link on home page
+  @globalfooterBLayer
+  Scenario: To verify links displayed in the global footer of UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When user accesses global footer UHC Medicaresolutions Site
+    And user vaidates the state drop down link on home page in UHC
+    And user clicks on View all disclaimer information link on home page in UHC
+    And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
+    And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
+    And the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site
+    And the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site
+    And the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site
+    And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
+    And user verifies home link of agents&brokers page bluelayer
+    And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
+   # Then user clicks on back to top link on home page
 
-  @globalheaderULayer
+  @globalheaderBLayer
   Scenario: To verify links displayed in the global header of AARP site
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on the uhcmedicaresolutions site landing page
     When user accesses global header of the AARP Medicare Plans home page
     And user verifies the AARP logo on home page
     And user clicks on Sign in link on home page in aarp
     And user clicks on register link on home page in aarp
     Then user validates visitor profile on home page in aarp
 
-  @GlobalComponentsAARPPages
+  @GlobalComponentsUHCPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
@@ -35,8 +34,8 @@ Feature: 2.04--Acq-To test global footer links in AARP site
       | PagePath | <path>     |
     When user accesses global header of the AARP Medicare Plans home page
     When user accesses global footer of the AARP Medicare Plans All page
-    Then the USer validates Shop for a Plan Navigation links
-    Then the user validates Medicare Education Navigation links
+    #    Then the USer validates Shop for a Plan Navigation links
+    #    Then the user validates Medicare Education Navigation links
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -44,7 +43,7 @@ Feature: 2.04--Acq-To test global footer links in AARP site
     Then the user validates SAM Call Icon
     Then the user validates SAM re-active Chat
 
-    @MedEdPages_GlobalCompsAARP
+    @MedEdPages_GlobalCompsUHC
     Examples: 
       | path                                                     | pageName                                   | tfnXpath                                        | tfnFlag |
       | medicare-education.html                                  | MedEd: Landing                             | //*[@class='amp']//a[contains(@href, 'callto')] | true    |
@@ -58,7 +57,7 @@ Feature: 2.04--Acq-To test global footer links in AARP site
       | medicare-education/enrollment-and-changing-plans.html    | MedEd: Enrollment                          | //*[@class='amp']//a[contains(@href, 'callto')] | true    |
       | medicare-education/medicare-faq.html                     | MedEd: FAQ                                 | //*[@class='amp']//a[contains(@href, 'callto')] | true    |
 
-    @ShopPlan_GlobalCompsAARP
+    @ShopPlan_GlobalCompsUHC
     Examples: 
       | path                                                                      | pageName                           | tfnXpath                                                       | tfnFlag |
       | health-plans/shop/connect                                                 | ShopPlan: Request more Info        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -78,8 +77,8 @@ Feature: 2.04--Acq-To test global footer links in AARP site
       | health-plans/resources/ma-resources-materials/ma-information-forms.html   | ShopPlan: Resources MA Plans Info  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/pdp-resources-materials.html                       | ShopPlan: Resources PDP Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/pdp-resources-materials/pdp-information-forms.html | ShopPlan: Resources PDP Plans Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-    
-    @VPP_GlobalCompsAARP
+ 
+     @VPP_GlobalCompsUHC
      Examples: 
       | path                                                                                                                                                                                                                                        | pageName                 | tfnXpath                     | tfnFlag |
       | health-plans.html#/details?planIds=H0543168000&planYear=2020&systemYear=2020&zip=90210&fipsCode=037&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details MAPD   | //a[contains(@class, 'tel')] | true    |
@@ -87,5 +86,5 @@ Feature: 2.04--Acq-To test global footer links in AARP site
       | health-plans.html#/details?planIds=S5921370000&planYear=2020&systemYear=2020&zip=55344&fipsCode=053&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details PDP    | //a[contains(@class, 'tel')] | true    |
       | health-plans.html#/details?planIds=H3307018000&planYear=2020&systemYear=2020&zip=10011&fipsCode=061&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details MA     | //a[contains(@class, 'tel')] | true    |
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary                  | VPP: Plan Summary        | //a[contains(@class, 'tel')] | false   | 
+ 
       
-    */ 
