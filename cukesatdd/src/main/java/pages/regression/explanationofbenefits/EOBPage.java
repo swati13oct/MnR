@@ -1001,7 +1001,7 @@ public class EOBPage extends EOBBase{
 		String apiRequestUrl=getApiRequestUrl(planType, memberType, eobType).get(0);
 		System.out.println("TEST - apiRequestUrl="+apiRequestUrl);
 		String apiResponseJson=getApiResponse(planType, memberType, apiRequestUrl);
-		System.out.println("TEST - apiResponseJson="+apiResponseJson);
+		//System.out.println("TEST - apiResponseJson="+apiResponseJson);
 		return apiResponseJson;
 		
 	}
