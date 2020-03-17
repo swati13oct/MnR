@@ -329,6 +329,7 @@ public class EOBPage extends EOBBase{
 				if (count < maxRetry) {
 					System.out.println("Going to refresh the page and retry the search again before givng up...");
 					driver.navigate().refresh();
+					CommonUtility.checkPageIsReady(driver);
 				} else
 					Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue, abort test now", false);
 			} else {
