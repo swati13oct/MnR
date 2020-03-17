@@ -578,5 +578,14 @@ public class DrugMobilePage extends UhcDriver {
 		}
 		validateAddedDrugname(drugName);
 	}
+	
+	public void drugNotFound(String searchText) {
+		validate(drugsearchBox, 30);
+		mobileUtils.mobileLocateElementSendkeys(drugsearchBox, searchText);
+		hidekeypad();
+		mobileUtils.mobileLocateElementClick(drugsearchButton);
+		Assert.assertTrue(drugsearchError.getText().toUpperCase().contains("NO"),
+				"Expected Error Message not displayed");
+	}
 
 }
