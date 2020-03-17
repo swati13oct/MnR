@@ -46,7 +46,7 @@ public class EOBBase extends EOBWebElements{
 	}
 
 	public int waitForEobPageToLoad() {
-		int maxTry=180;
+		int maxTry=90;
 		int numberOfSeconds=1;
 		return waitForEobPageToLoad(maxTry, numberOfSeconds);
 	}
@@ -64,7 +64,7 @@ public class EOBBase extends EOBWebElements{
 			System.out.println("slept total of '"+(total)+"' seconds...");
 		}
 		System.out.println("waited total of '"+(total)+"' seconds for the eobLoadingimage to disappear...");
-		sleepBySec(15); //note: keep to let the page settle down w/ the pdf loading in the background
+		sleepBySec(5); //note: keep to let the page settle down w/ the pdf loading in the background
 		return total;
 	}
 	
