@@ -599,7 +599,6 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("Unable to locate '"+eobCountInt+" items found' text", false);
 		}
 		
-		waitForEobPageToLoad();
 		for (int i = 0; i < eobCountInt; i++) {
 			try {
 				WebElement eob=driver.findElement(By.id("eoblist" + i));

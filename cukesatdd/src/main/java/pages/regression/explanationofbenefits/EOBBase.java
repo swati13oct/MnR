@@ -46,8 +46,8 @@ public class EOBBase extends EOBWebElements{
 	}
 
 	public int waitForEobPageToLoad() {
-		int maxTry=90;
-		int numberOfSeconds=1;
+		int maxTry=30;
+		int numberOfSeconds=5;
 		return waitForEobPageToLoad(maxTry, numberOfSeconds);
 	}
 	
