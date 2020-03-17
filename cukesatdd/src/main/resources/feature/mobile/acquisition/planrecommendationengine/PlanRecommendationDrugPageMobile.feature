@@ -257,3 +257,29 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection |
       |   10001 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | add           |
+
+  @PRE @planrecommandonationmobile @drugpagemobile @drugnotfound @drugpageadddrugmobile @F374225 @US2405205
+  Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page drug not found function in PRE Mobile
+    Given the user is on UHC medicare acquisition site mobile
+    And user navigates to Zip Code page mobile
+    And runs questionnaire at zipcode page mobile
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <County>        |
+    And user selects plan type in coverage options page mobile
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page mobile
+      | SNP Options | <SpecialNeeds> |
+    And user selects Travel options in Travel Page mobile
+      | Travel Options | <TravelOption> |
+    When user selects Doctors in Doctors page mobile
+      | Doctors Selection   | <DoctorsSelection> |
+      | Doctors Search Text | <DoctorsName>      |
+      | Multi Doctor        | <isMultiDoctor>    |
+    Then user search and not found a drug in Drug page mobile
+      | Drug Selection | <DrugSelection> |
+      | Search Text    | <SearchText>    |
+
+    Examples: 
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | SearchText | 
+      |   10001 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | add           | fedp       | 

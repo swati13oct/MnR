@@ -68,7 +68,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@class='signup']/a[1]")
 	private WebElement headerSigninLink;
 	
-	@FindBy(xpath = "//*[@class='signup']/a[2]")
+	@FindBy(css = "#RegisterSignupSeperator")
 	private WebElement headerRegisterLink;
 	
 	@FindBy(xpath = "//a[@id='dupIconFlyOut']//img[@dtmid='acq_visitor_profile']")
@@ -286,7 +286,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerSigninLink, 30);
 		Assert.assertTrue(headerSigninLink.getText().contains("Sign in"));
 		validate(headerRegisterLink, 30);
-		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
+//		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
 		validate(headerHeartNumberofPlan, 30);
 		validate(headerNavigationBar, 30);
 		validate(headerNavigationBarHomeTab, 30);

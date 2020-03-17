@@ -223,7 +223,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (!(null==MRScenario.environmentMedicare)&& (MRScenario.environmentMedicare.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
+					if (!(null==MRScenario.environment)&& (MRScenario.environment.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
 						if (validate(homePageNotice,0)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
@@ -312,6 +312,10 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+					if (validate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;

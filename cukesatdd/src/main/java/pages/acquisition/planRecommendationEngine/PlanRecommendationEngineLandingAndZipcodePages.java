@@ -93,10 +93,10 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
 	private WebElement pageProgressPercentage;
 	
-	@FindBy(xpath = "//*[@class='all-fields-marked-wi']")
+	@FindBy(css = "div>.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 	
-	@FindBy(xpath = "//*[@class='all-fields-marked-wi']/sup")
+	@FindBy(css = ".all-fields-marked-wi>sup")
 	private WebElement pageRequiredInfoMark;
 	
 	@FindBy(css = ".row>div>div:nth-child(3)>label.primary-question-tex")
@@ -105,7 +105,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(xpath = "//*[@for='zip-code']/sup")
 	private WebElement zipcodePageQuestionMark;
 	
-	@FindBy(xpath = "//*[@class='mt-3']/p")
+	@FindBy(css = "#referenceTxt")
 	private WebElement zipcodeTextLabel;
 	
 	@FindBy(xpath = "//*[@for='MultipleCounty']")
@@ -172,7 +172,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);
-		validate(countyInfo);
+		validate(countyInfo,30);
 		continueBtn.click();
 		validate(coverageTitle);
 		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
