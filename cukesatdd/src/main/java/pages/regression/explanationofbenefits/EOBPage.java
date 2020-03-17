@@ -328,7 +328,7 @@ public class EOBPage extends EOBBase{
 			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError)) {
 				count=count+1;
 				if (count < maxRetry) {
-					System.out.println("Going to refresh the page and retry the search again before givng up...");
+					System.out.println("Going to refresh the page and retry the search again before giving up...");
 					driver.navigate().refresh();
 					CommonUtility.checkPageIsReady(driver);
 					selectEobType(planType, targetEobType);
@@ -400,7 +400,7 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - waited for more than 4 min and the loading spinner still on screen, seemed to be taking unusual amount of time to load the result, aborting test", !eobValidate(eobLoadingimage));
 		}
 		*/
-		Assert.assertTrue("PROBLEM - getting internal server problem", eobValidate(internalServerError));
+		Assert.assertTrue("PROBLEM - getting internal server problem", !eobValidate(internalServerError));
 		sleepBySec(3);
 
 		int totalEob=getNumEobAfterSearch();
