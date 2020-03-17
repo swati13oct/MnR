@@ -266,7 +266,7 @@ public class EOBPage extends EOBBase{
 	}
 
 	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange){
-		int maxRetry=2;
+		int maxRetry=3;
 		int count=0;
 		while (count < maxRetry) {
 			System.out.println("Proceed to do search range - try# "+count);
@@ -323,7 +323,7 @@ public class EOBPage extends EOBBase{
 				CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 				customSearchBtn.click();
 			}
-			waitForEobPageToLoad(30, 5);
+			waitForEobPageToLoad(15, 5);
 			if (eobValidate(eobLoadingimage)) {
 				count=count+1;
 				if (count < maxRetry) {
