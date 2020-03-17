@@ -1784,6 +1784,73 @@ try {
 				return true;
 			return false;
 		}
+		
+		public void addDrug(String drug, String dosage, String quantity, String frequency ) throws InterruptedException {
+			this.clickOnAddDrug();
+			AddNewDrugModal addNewDrugModal = new AddNewDrugModal(driver);
+			addNewDrugModal.typeDrugName(drug);
+			addNewDrugModal.submit();
+			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			//addDrugDetails.selectDosage(dosage);
+			addDrugDetails.selectQnty(quantity);
+			addDrugDetails.selectFrequency(frequency);
+            addDrugDetails.continueAddDrugDetailsGeneric();
+
+		}
+		
+		@FindBy(xpath = "//a[contains(@class,'cta-button pharmacy-tab-show ng-scope')]") 
+		public WebElement Slect_PharmacyBttn; 
+		
+		@FindBy(xpath = "//a[contains(@id,'select-pharmacy-buttons_0')]") 
+		public WebElement Selct_Button;
+		
+		@FindBy(xpath = "//a[contains(@dtmname,'dce:step 2 pharmacy:select pharmacy:next:view costs')]") 
+		public WebElement view_CostButtn;
+		
+		@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
+		public WebElement stepTherpayPDFLink;
+		
+		@FindBy(xpath = "//a[contains(@href,'Step_Therapy_PWAG')]") 
+		public WebElement priorAuthPDFLink;
+
+		public void viewSTandPALink() {
+			Slect_PharmacyBttn.click();
+			validateNew(Selct_Button);
+			Selct_Button.click();
+			validateNew(view_CostButtn);
+			view_CostButtn.click();
+			validateNew(stepTherpayPDFLink);
+			if(stepTherpayPDFLink.isDisplayed()) {
+				Assert.assertTrue("Step Therapy PDF Link Displayed",true);
+			} else {
+				Assert.assertTrue("Step Therapy PDF Link DID NOT Displayed",false);
+			}
+			if(priorAuthPDFLink.isDisplayed()) {
+				Assert.assertTrue("Prior Authorization PDF Link Displayed",true);
+			} else {
+				Assert.assertTrue("Prior Authorization PDF Link DID NOT Displayed",false);
+			}
+
+
+		}
+
+		public void openPAandSTPDF() {
+
+			stepTherpayPDFLink.click();
+			switchToNewTab();
+			if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
+				System.out.println("The PDF page opened");
+			}
+			
+			driver.switchTo().defaultContent();
+			
+			priorAuthPDFLink.click();
+			switchToNewTab();
+			if(driver.getCurrentUrl().contains("Step_Therapy_PWAG_2019.pdf")) {
+				System.out.println("The PDF page opened");
+			}
+		}
+
 
 		/**
 		 * to validate whether element exists, default up to 2 seconds timeout

@@ -188,7 +188,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		//plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
