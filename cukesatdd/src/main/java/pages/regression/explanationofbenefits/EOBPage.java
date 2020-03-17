@@ -266,6 +266,78 @@ public class EOBPage extends EOBBase{
 	}
 
 	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange){
+		int maxRetry=2;
+		int count=0;
+		while (count < maxRetry) {
+			System.out.println("Proceed to do search range - try# "+count);
+			Select dateRangeOptions = new Select(eobDateRangeDropdown);
+			dateRangeOptions.selectByVisibleText(targetDateRange);
+			CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
+			if (targetDateRange.equals("Custom Search")) {
+				DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+				Date date = new Date();
+				String todayDate=dateFormat.format(date); 
+				Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", eobValidate(fromCalendarIconBtn));
+				Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", eobValidate(toCalendarIconBtn));
+				Assert.assertTrue("PROBLEM - unable to locate From text field", eobValidate(fromTxtField));
+				Assert.assertTrue("PROBLEM - unable to locate To text field", eobValidate(toTxtField));
+				Assert.assertTrue("PROBLEM - unable to locate Search button", eobValidate(customSearchBtn));
+				System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
+				fromCalendarIconBtn.click();
+				CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);
+				Assert.assertTrue("PROBLEM - date picker for 'From' calendar button should have been shown today's date clicked", eobValidate(fromCalendarDatePicker_today));
+				fromCalendarDatePicker_today.click();
+
+				System.out.println("Proceed to validate 'To' date calendar will hide and show accordingly");
+				toCalendarIconBtn.click();
+				CommonUtility.waitForPageLoad(driver, toCalendarDatePicker_today, 5);
+				Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", eobValidate(toCalendarDatePicker_today));
+				toCalendarDatePicker_today.click();
+				
+				//TODO : system time may not be in-sync w/ local time
+				//note: system time could have been next day already when you run this locally
+				/* keep 
+				String actualFromTxt=fromTxtField.getAttribute("value");
+				String actualToTxt=toTxtField.getAttribute("value");
+				Assert.assertTrue("PROBLEM - 'From' text not as expected.  Should have been today's date.  "
+						+ "Expected='"+todayDate+"' | Actual='"+actualFromTxt+"'", 
+						actualFromTxt.equals(todayDate));
+				Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
+						+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
+						actualToTxt.equals(todayDate));
+				*/ 
+				
+				//note: custom search range for last 18 months
+				String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
+				String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+				System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
+
+				//note: clear the fields just in case
+				fromTxtField.sendKeys(Keys.CONTROL + "a");
+				fromTxtField.sendKeys(Keys.DELETE);
+				toTxtField.sendKeys(Keys.CONTROL + "a");
+				toTxtField.sendKeys(Keys.DELETE);
+				
+				sendkeys(fromTxtField,fromDate);
+				sendkeys(toTxtField,toDate);
+				CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
+				customSearchBtn.click();
+			}
+			waitForEobPageToLoad(30, 5);
+			if (eobValidate(eobLoadingimage)) {
+				count=count+1;
+				if (count < maxRetry) {
+					System.out.println("Going to refresh the page and retry the search again before givng up...");
+					driver.navigate().refresh();
+				} else
+					Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue, abort test now", false);
+			} else {
+				System.out.println("TEST - EOB finished loading, moving on to next step...");
+				break;
+			}
+			
+		}
+/* tbd		
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
 		dateRangeOptions.selectByVisibleText(targetDateRange);
 		CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
@@ -292,16 +364,16 @@ public class EOBPage extends EOBBase{
 			
 			//TODO : system time may not be in-sync w/ local time
 			//note: system time could have been next day already when you run this locally
-			/* keep 
-			String actualFromTxt=fromTxtField.getAttribute("value");
-			String actualToTxt=toTxtField.getAttribute("value");
-			Assert.assertTrue("PROBLEM - 'From' text not as expected.  Should have been today's date.  "
-					+ "Expected='"+todayDate+"' | Actual='"+actualFromTxt+"'", 
-					actualFromTxt.equals(todayDate));
-			Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
-					+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
-					actualToTxt.equals(todayDate));
-			*/ 
+			
+			// keep String actualFromTxt=fromTxtField.getAttribute("value");
+			// keep String actualToTxt=toTxtField.getAttribute("value");
+			// keep Assert.assertTrue("PROBLEM - 'From' text not as expected.  Should have been today's date.  "
+			// keep 		+ "Expected='"+todayDate+"' | Actual='"+actualFromTxt+"'", 
+			// keep 		actualFromTxt.equals(todayDate));
+			// keep Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
+			// keep 		+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
+			// keep 		actualToTxt.equals(todayDate));
+			 
 			
 			//note: custom search range for last 18 months
 			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
@@ -324,6 +396,7 @@ public class EOBPage extends EOBBase{
 			waitForEobPageToLoad(30, 5);
 			Assert.assertTrue("PROBLEM - waited for more than 4 min and the loading spinner still on screen, seemed to be taking unusual amount of time to load the result, aborting test", !eobValidate(eobLoadingimage));
 		}
+		*/
 		sleepBySec(3);
 
 		int totalEob=getNumEobAfterSearch();
@@ -1013,7 +1086,7 @@ public class EOBPage extends EOBBase{
 			apiResponseJsobObj = (JSONObject) parser.parse(apiResponseJson);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object. inputStr="+apiResponseJson, false);
 		}
 		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null", apiResponseJsobObj!=null);
 		boolean success = (Boolean) apiResponseJsobObj.get("success");
