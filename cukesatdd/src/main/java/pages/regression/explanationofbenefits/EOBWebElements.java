@@ -313,6 +313,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//li[contains(@data-ng-class,'header')]//a[contains(@href,'eob.html') and text()='Explanation of Benefits']")
 	protected WebElement eobOptionUnderClaimsMenu;
 	
+	@FindBy(xpath="//*[contatins(text(),'We are currently experiencing an internal server problem')]")
+	protected WebElement internalServerError;
+	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

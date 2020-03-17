@@ -99,9 +99,10 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		getLoginScenario().saveBean(EobCommonConstants.DATE_RANGE, dateRange);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		
+		String eobTypeData=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,dateRange);
+		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,dateRange, eobTypeData);
 		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT, searchResultMap.get(dateRange));
 
 		//note: store info to display at end of test

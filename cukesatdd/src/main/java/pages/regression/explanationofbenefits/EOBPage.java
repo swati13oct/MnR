@@ -265,7 +265,7 @@ public class EOBPage extends EOBBase{
 		
 	}
 
-	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange){
+	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange, String targetEobType){
 		int maxRetry=3;
 		int count=0;
 		while (count < maxRetry) {
@@ -324,12 +324,14 @@ public class EOBPage extends EOBBase{
 				customSearchBtn.click();
 			}
 			waitForEobPageToLoad(15, 5);
-			if (eobValidate(eobLoadingimage)) {
+			//note: for the case either spinner still spining or getting internal server error, try again before aborting test
+			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError)) {
 				count=count+1;
 				if (count < maxRetry) {
 					System.out.println("Going to refresh the page and retry the search again before givng up...");
 					driver.navigate().refresh();
 					CommonUtility.checkPageIsReady(driver);
+					selectEobType(planType, targetEobType);
 				} else
 					Assert.assertTrue("PROBLEM - retried '"+maxRetry+"' times and still unable to get the EOB search result, likely run into infinite spinner issue, abort test now", false);
 			} else {
@@ -398,6 +400,7 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - waited for more than 4 min and the loading spinner still on screen, seemed to be taking unusual amount of time to load the result, aborting test", !eobValidate(eobLoadingimage));
 		}
 		*/
+		Assert.assertTrue("PROBLEM - getting internal server problem", eobValidate(internalServerError));
 		sleepBySec(3);
 
 		int totalEob=getNumEobAfterSearch();
@@ -529,6 +532,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("Read medical EOB Video Box link displayed correctly");
 		eobVideoBox.click();
 		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, eobVideo, 30);
 		sleepBySec(10);
 		System.out.println(driver.getTitle());
 		Assert.assertTrue("PROBLEM - Unable to locate overlay EOB video", eobValidate(eobVideo));
@@ -1332,6 +1336,7 @@ public class EOBPage extends EOBBase{
 		String apiResponseJsonStr=apiResponseJson.getText();
 		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
 		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
+			sleepBySec(5);
 			System.out.println("Retry one more time before giving up...");
 			driver.get(inputUrl);
 			apiResponseJsonStr=apiResponseJson.getText();
