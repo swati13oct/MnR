@@ -319,7 +319,11 @@ public class EOBPage extends EOBBase{
 			CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
 			customSearchBtn.click();
 		}
-		waitForEobPageToLoad();
+		waitForEobPageToLoad(30, 5);
+		if (eobValidate(eobLoadingimage)) {
+			waitForEobPageToLoad(30, 5);
+			Assert.assertTrue("PROBLEM - waited for more than 4 min and the loading spinner still on screen, seemed to be taking unusual amount of time to load the result, aborting test", !eobValidate(eobLoadingimage));
+		}
 		sleepBySec(3);
 
 		int totalEob=getNumEobAfterSearch();
@@ -711,11 +715,6 @@ public class EOBPage extends EOBBase{
 				String ui_eobDate=dateItemElement.getText();
 				Assert.assertTrue("PROBLEM - date value should not be empty. Expected format 'month yyyy'", !ui_eobDate.equals(""));
 
-				//tbd String api_eobDate=targetEobFromApi.getEobDate();
-				//tbd System.out.println("TEST - UI date="+ui_eobDate);
-				//tbd System.out.println("TEST - API EOB date="+api_eobDate);
-				//tbd SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-				//tbd Date date = sdf.parse(api_eobDate);
 				Date date = targetEobFromApi.getEobDate();
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(date);
@@ -840,21 +839,6 @@ public class EOBPage extends EOBBase{
 		int numberOfPageDisplayed = (int) Math.ceil(pageCount);
 		System.out.println("TEST - numberOfPageDisplayed="+numberOfPageDisplayed+" = Math.ceil("+pageCount+")");
 		System.out.println(numberOfPageDisplayed + " Page displayed for EOBs");
-		/* tbd
-		float pageCount;
-		int numberOfPageDisplayed;
-		pageCount = eobCount/9;
-		System.out.println("TEST - pageCount="+pageCount+" = "+eobCount+"/9");
-		System.out.println(pageCount);
-		numberOfPageDisplayed = (int)pageCount;
-		System.out.println("TEST - numberOfPageDisplayed="+numberOfPageDisplayed+" = (int)"+pageCount);
-		if(numberOfPageDisplayed>1){
-			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
-		}else{
-			numberOfPageDisplayed+=1;
-			System.out.println(numberOfPageDisplayed + "Page displayed for EOBs");
-		}
-	*/
 		return numberOfPageDisplayed;
 	}
 

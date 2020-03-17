@@ -115,7 +115,6 @@ public class EobStepDefinition {
 				searchNote.add("DREAM EOB");
 			else
 				searchNote.add("EOB TYPE="+tmp);
-
 		}
 		searchNote.add("Date range='"+dateRange+"' has EOB count="+searchResultMap.get(dateRange));
 		getLoginScenario().saveBean(EobCommonConstants.TEST_RESULT_NOTE,searchNote);

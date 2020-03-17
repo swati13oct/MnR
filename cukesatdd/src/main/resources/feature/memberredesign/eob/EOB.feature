@@ -75,9 +75,13 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
+
+    @COSMOS_MEDICAL
+    Examples: 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 02    | MA       | COSMOS_EOB_R      | Medical           | true        |
 
-    @COSMOS_DRUG
+    @COSMOS_DRUG  @devRegression
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
       | 03    | MAPD     | COSMOS_EOB_R      | Prescription Drug | true        |
