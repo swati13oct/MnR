@@ -35,8 +35,8 @@ Feature: 2.04--Acq-To test global footer links in AARP site
       | PagePath | <path>     |
     When user accesses global header of the AARP Medicare Plans home page
     When user accesses global footer of the AARP Medicare Plans All page
-    #    Then the USer validates Shop for a Plan Navigation links
-    #    Then the user validates Medicare Education Navigation links
+    Then the USer validates Shop for a Plan Navigation links
+    Then the user validates Medicare Education Navigation links
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |

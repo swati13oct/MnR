@@ -1958,16 +1958,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void validateChatProActive() {
 	        boolean present;
-	        try {
+	        CommonUtility.waitForPageLoadNew(driver, ProActivePopup, 30);
 	        validateNew(ProActivePopup);
 	        validateNew(ProActivePopup_Close);
 	        validateNew(ProActivePopup_ExitBtn);
 	        validateNew(ProActivePopup_ChatBtn);
 	        present = true;
-	        } catch (NoSuchElementException e) {
-	        present = false;
-	        }
-	        if (present) {
+	        if (ProActivePopup.isEnabled() && ProActivePopup_Close.isEnabled()
+	        		&& ProActivePopup_ExitBtn.isEnabled() && ProActivePopup_ChatBtn.isEnabled()) {
 	          System.out.println("@@@@@@@@@ Able to find Pro-Active Chat widget @@@@@@@@@");
 	        }
 	        else {
