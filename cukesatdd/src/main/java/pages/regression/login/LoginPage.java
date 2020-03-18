@@ -66,6 +66,11 @@ public class LoginPage extends UhcDriver {
 	    
 	    @FindBy(xpath="//*[@class='ng-scope nav-ready']//a[contains(text(),'Coverage & Benefits')]")
 		private WebElement bencovtab;
+
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+
+
 	    
 	    MRScenario loginScenario;
 		
@@ -218,7 +223,12 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (!(null==MRScenario.environmentMedicare)&& (MRScenario.environmentMedicare.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
+					if (!(null==MRScenario.environment)&& (MRScenario.environment.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
+						if (validate(homePageNotice,0)) {
+							homePageNotice.click();
+							CommonUtility.checkPageIsReady(driver);
+						}
+
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
@@ -302,6 +312,10 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
+					if (validate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
 				} else {
 					System.out.println("TimeOut!!!");
 					return null;

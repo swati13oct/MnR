@@ -24,7 +24,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(xpath= "//*[contains(@id,'ole-form-next-button')]")
 	private WebElement NextBtn;
 	
 	@FindBy(id = "ole-form-back-button")
