@@ -51,7 +51,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec=30;
+	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -431,23 +431,12 @@ try {
             return jsonObject;
     }
 
-	/***
-	 * the method clicks on an element using javaScriptExecutor
-	 * 
-	 * @param element
-	 */
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("Element Clicked");
+		System.out.println("The WebElement ===  " +element.getText() + "  : is Clicked");
 	}
 
-	/***
-	 * the method scrolls page upto element's location
-	 * 
-	 * @param element
-	 * @return
-	 */
 	public boolean scrollToView(WebElement element) {
 		try {
 
@@ -550,7 +539,7 @@ try {
 	 * @return : boolean
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
-		scrollToView(element);
+		//scrollToView(element);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
@@ -728,7 +717,7 @@ try {
 		}
 	}
 	
-	public void checkModelPopup(WebDriver driver) {
+	public  void checkModelPopup(WebDriver driver) {
 		 checkModelPopup(driver,defaultTimeoutInSec);
 	}
 	
