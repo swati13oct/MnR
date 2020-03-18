@@ -441,7 +441,7 @@ public class EobStepDefinition {
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.clickOnEob(planType, memberId);
+			eobPage.validateEobEntries(planType, memberId);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}
@@ -454,7 +454,7 @@ public class EobStepDefinition {
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.clickOnEob_dream(planType, memberId);
+			eobPage.validateEobEntries_dream(planType, memberId);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}

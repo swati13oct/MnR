@@ -3,11 +3,25 @@
  */
 package pages.regression.explanationofbenefits;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
@@ -291,6 +305,298 @@ public class EOBBase extends EOBWebElements{
 				medsuppNavTab.click();
 		}	
 	}
+	
+	public String getUuid() {
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String uuid=getUuidInConsumerDetails(consumerDetails);
+		return uuid;
+	}
+	
+	public String getConsumerDetailsFromlocalStorage() {
+		//WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		 RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		 RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+	
+	public String getMemberId(Boolean isComboUser, String planType) {
+		//note: if planType is for SHIP, parse the value to get the actual plan category name
+		String lookForPlanCategory= planType;
+		if (planType.contains("SHIP")) {
+			String[] tmp=planType.split("SHIP_");
+			Assert.assertTrue("PROBLEM - input setup for planType for SHIP needs to include planCategory which is used for validation, e.g. SHIP_<planCategory>", tmp.length>1);
+			lookForPlanCategory=tmp[1];
+		}
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String memberId = getMemberIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		return memberId;
+	}
+	
+	public String getUuidInConsumerDetails(String consumerDetails) {
+		String actualUuid=null;
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
+			actualUuid = (String) apiResponseJsobObj.get("userTag");
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		//note: clean up the string
+		if (actualUuid!=null) {
+			if (actualUuid.contains("[")) {
+				String[] tmp=actualUuid.split("\\[");
+				actualUuid=tmp[0];
+			}
+		}
+		
+		return actualUuid;
+	}
+	
+	public String getMemberIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		//System.out.println("TEST - consumerDetails="+consumerDetails);
+		String actualMemberId=null;
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
+			JSONArray planProfilesArrayObj=(JSONArray) apiResponseJsobObj.get("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", planProfilesArrayObj.size()>1);
+			for (int i = 0; i < planProfilesArrayObj.size(); i++) {
+				JSONObject planProfilesObj= (JSONObject) planProfilesArrayObj.get(i);
+				String actualPlanCategory = (String) planProfilesObj.get("planCategory");
+				System.out.println("TEST - lookForPlanCategory="+lookForPlanCategory);
+				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					actualMemberId = (String) planProfilesObj.get("memberNumber");
+				}
+			}			
+			Assert.assertTrue("PROBLEM - unable to locate actualMemberId from localStorage.consumerDetails, "
+					+ "please double check input data planType matches user's actual planType, consumerDetails="+consumerDetails, 
+					actualMemberId!=null);
+			
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return actualMemberId;
+	}
+
+	public String parseLine(String apiReqeust) {
+		JSONParser parser = new JSONParser();
+		JSONObject jsobObj=null;
+		try {
+			jsobObj = (JSONObject) parser.parse(apiReqeust);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+		}
+		JSONObject messageObj;
+		messageObj = (JSONObject) jsobObj.get("message");
+		Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+		JSONObject paramsObj = (JSONObject) messageObj.get("params");
+		Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+		JSONObject responseObj = (JSONObject) paramsObj.get("response");
+		Assert.assertTrue("PROBLEM - unable to locate message json object", responseObj!=null);
+		System.out.println("TEST - responseObj="+responseObj.toString());
+		Long statusValue = (Long) responseObj.get("status");
+		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
+		String urlStr = (String) responseObj.get("url");
+		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
+		System.out.println("TEST - urlStr="+urlStr);
+		return urlStr;
+
+	}
+	
+	public List<String> getApiRequestUrl(String planType, String memberType, String eobType) {
+		List<String> urlList=new ArrayList<String>();
+		String apiReqeust=null;
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+		
+		if (eobType.equals("dream")) {
+			//note: need to do two search
+			String lookForText1="/dreamEob/search?memberNumber=";
+			String lookForText2="responseReceived";
+			String lookForText3="/medical";
+			if (planType.equals("PDP")) {
+				lookForText3="/rx";
+			} else if (planType.contains("SHIP")) {
+				lookForText3="/ship";
+			}
+
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				System.out.println("TEST each line="+line);
+				if (memberType.contains("COMBO")) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						//break;  //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				} else {
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				} 
+			}
+			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+			String m_urlStr=parseLine(apiReqeust);
+			System.out.println("TEST - m_urlStr="+m_urlStr);
+			urlList.add(m_urlStr);
+			
+			lookForText1="/dreamEob/rx/search?medicareId";
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				//tbd System.out.println("TEST each line="+line);
+				if (line.contains(lookForText1) && line.contains(lookForText2)) {
+					apiReqeust=line;
+					System.out.println("TEST found line="+line);
+					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				}
+			}
+			String r_urlStr=parseLine(apiReqeust);
+			System.out.println("TEST - r_urlStr="+r_urlStr);
+			urlList.add(r_urlStr);
+			return urlList; 
+		} else {
+			String lookForText1="/member/claims/eob/search";  //note: non-Dream case
+			String lookForText2="responseReceived";
+			String lookForText3="/medical";
+			if (planType.equals("PDP")) {
+				lookForText3="/rx";
+			} else if (planType.contains("SHIP")) {
+				lookForText3="/ship";
+			}
+			
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				//System.out.println("TEST each line="+line);
+				if (memberType.contains("COMBO")) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						//break;  //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				} else {
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				} 
+			}
+			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+			String urlStr=parseLine(apiReqeust);
+			urlList.add(urlStr);
+			System.out.println("TEST - urlStr="+urlStr);
+			return urlList; 
+		}
+	}
+	
+	public String getApiResponse(String planType, String memberType, String inputUrl)  {
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to get API response");
+		System.out.println("test URL= "+inputUrl);
+		//open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('"+inputUrl+"','_blank');");
+		for(String winHandle : driver.getWindowHandles()){
+			driver.switchTo().window(winHandle);
+		}
+		String apiResponseJsonStr=apiResponseJson.getText();
+		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
+			sleepBySec(5);
+			System.out.println("Retry one more time before giving up...");
+			driver.get(inputUrl);
+			apiResponseJsonStr=apiResponseJson.getText();
+			System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
+		}
+		
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return apiResponseJsonStr;
+	}
+
+	public String getInfoFromApi(String planType, String memberType, String eobType) {
+		//note: if calling this then assume it's non-dream, only one api call
+		String apiRequestUrl=getApiRequestUrl(planType, memberType, eobType).get(0);
+		System.out.println("TEST - apiRequestUrl="+apiRequestUrl);
+		String apiResponseJson=getApiResponse(planType, memberType, apiRequestUrl);
+		//System.out.println("TEST - apiResponseJson="+apiResponseJson);
+		return apiResponseJson;
+		
+	}
+	
+	public EobApiResponse parseApiResponse(String apiResponseJson) {
+		JSONParser parser = new JSONParser();
+		JSONObject apiResponseJsobObj=null;
+		try {
+			apiResponseJsobObj = (JSONObject) parser.parse(apiResponseJson);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to convert target string into json object. inputStr="+apiResponseJson, false);
+		}
+		Assert.assertTrue("PROBLEM - apiResponseJsobObj should not be null", apiResponseJsobObj!=null);
+		boolean success = (Boolean) apiResponseJsobObj.get("success");
+		String errorCode = (String) apiResponseJsobObj.get("errorCode");
+
+		if (!success) {
+			System.out.println("Unable to get a successful API response");
+			return null;
+		}
+		EobApiResponse apiResponse=new EobApiResponse();
+		apiResponse.setSuccess(success);
+		apiResponse.setErrorCode(errorCode);
+
+
+		JSONArray dataListArrayObj = (JSONArray) apiResponseJsobObj.get("data");
+		if (dataListArrayObj==null) {
+			System.out.println("TEST - API dataListArrayObj is null - there is no EOB in this search range");
+			return apiResponse;
+		} 
+		for (int i=0; i<dataListArrayObj.size(); i++) {
+			JSONObject eachObj = (JSONObject) dataListArrayObj.get(i);
+			String eobDate = (String) eachObj.get("eobDate");
+			String esp = (String) eachObj.get("esp");
+			String eobType = (String) eachObj.get("eobType");
+			if (eobType!=null && !eobType.equals("")) { 
+				System.out.println("TEST - this is DREAM EOB");
+				apiResponse.addEob(eobDate, esp, eobType);
+			} else {
+				System.out.println("TEST - this is NON-DREAM EOB");
+				apiResponse.addEob(eobDate, esp);
+			}
+		} 
+		return apiResponse;
+	}
+
+	/**
+	 * this method is to validate number of pages displayed
+	 */
+	public int numberOfPageDisplayed(int eobCount){
+		//TODO: figure out what this one is trying to validate
+		double pageCount= eobCount/10.0;
+		System.out.println("TEST - pageCount="+pageCount+" = "+eobCount+"/10.0");
+		int numberOfPageDisplayed = (int) Math.ceil(pageCount);
+		System.out.println("TEST - numberOfPageDisplayed="+numberOfPageDisplayed+" = Math.ceil("+pageCount+")");
+		System.out.println(numberOfPageDisplayed + " Page displayed for EOBs");
+		return numberOfPageDisplayed;
+	}
+
+	public boolean findEobOptionUnderClaims() {
+		return eobValidate(eobOptionUnderClaimsMenu);
+	}
+	
+
 }
 
 
