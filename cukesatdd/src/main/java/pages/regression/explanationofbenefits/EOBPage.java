@@ -323,7 +323,7 @@ public class EOBPage extends EOBBase{
 			}
 			waitForEobPageToLoad(15, 5);
 			//note: for the case either spinner still spining or getting internal server error, try again before aborting test
-			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError)) {
+			if (eobValidate(eobLoadingimage) || eobValidate(internalServerError) || !eobValidate(eobCount)) {
 				count=count+1;
 				if (count < maxRetry) {
 					System.out.println("Going to refresh the page and retry the search again before giving up...");
@@ -400,6 +400,7 @@ public class EOBPage extends EOBBase{
 		*/
 		Assert.assertTrue("PROBLEM - getting internal server problem (already retried the search '"+count+"' times and still getting server problem error)", !eobValidate(internalServerError));
 		sleepBySec(3);
+		Assert.assertTrue("PROBLEM - unable to locate EOB count element (already retried the search '"+count+"' times)", eobValidate(eobCount));
 
 		int totalEob=getNumEobAfterSearch();
 		
