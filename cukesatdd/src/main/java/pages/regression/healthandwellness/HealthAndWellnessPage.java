@@ -402,7 +402,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 			//note: that shoe icon ------------------
 			String targetElement="Renew Active icon image";
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship));
-			String expectedHref="https://member.int.uhc.com/active/overview";
+			String expectedHref="/active/overview";
+			//String expectedHref="https://member.int.uhc.com/active/overview";
 			if (testThirdPartyPage) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
@@ -425,7 +426,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 			//note: Learn More button ------------------
 			targetElement="Learn More buttone";
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(learnMoreBtn_ship));
-			expectedHref="https://member.int.uhc.com/active/overview";
+			//expectedHref="https://member.int.uhc.com/active/overview";
+			expectedHref="/active/overview";
 			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
 			if (testThirdPartyPage) {
@@ -447,6 +449,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			gymElement=findGymLnk_ship;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(gymElement));
+		//String expectedHref="/active/fitness-location-search";
 		String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
@@ -467,7 +470,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 		if (planType.equalsIgnoreCase("SHIP")) 
 			brainElement=brainHealthToolsLnk_ship;
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(brainElement));
-		expectedHref="https://member.int.uhc.com/active/train-your-brain";
+		//expectedHref="https://member.int.uhc.com/active/train-your-brain";
+		expectedHref="/active/train-your-brain";
 		actualEleLnkHref=brainElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
 		if (testThirdPartyPage) {

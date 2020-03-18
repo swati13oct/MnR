@@ -156,7 +156,7 @@ Feature: 1.04 To Test EOB for Members
     #  | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs @devRegression
+    @SHIP_EOBs
     Examples: 
       | index | planType                 | memberType         | eobType | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | MULTI_SHIP_EOB     | Medical | true        | 
