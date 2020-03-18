@@ -84,6 +84,8 @@ public class GlobalComponentsStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String path = memberAttributesMap.get("PagePath");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : "+path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);

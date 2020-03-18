@@ -1773,10 +1773,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void navigateToPath(String path) {
 
 			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : "+CurrentURL);
+
 			String NavigateToURL = CurrentURL+path;
 			System.out.println("Navigating to URL : "+NavigateToURL);
 			driver.navigate().to(NavigateToURL);
-			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//*[@id='headerRow']")), 30);
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 			System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 
 			
@@ -1861,7 +1863,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
-			}
+				Actions actions = new Actions(driver);
+				actions.moveToElement(AARPlogo);
+				actions.build().perform();
+}
 			else {
 				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : "); 
 			}
@@ -1908,9 +1913,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			  //&& FAQLink.isDisplayed()
 			  Assert.assertTrue(true); 
 			  System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
+				Actions actions = new Actions(driver);
+				actions.moveToElement(AARPlogo);
+				actions.build().perform();
 		  } 
 		  else { 
-			  Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page"); 
+			  Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page"); 
 			  }
 		}
 
