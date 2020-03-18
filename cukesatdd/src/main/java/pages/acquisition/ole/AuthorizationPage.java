@@ -171,7 +171,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	public ReviewSubmitPage navigate_to_Review_Submit_Page() {
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		NextBtn.click();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
