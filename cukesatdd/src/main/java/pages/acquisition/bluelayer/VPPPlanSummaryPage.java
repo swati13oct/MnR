@@ -913,7 +913,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
             if (planType.equalsIgnoreCase("PDP")) {
                             CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
                             sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-                            jsClickNew(pdpPlansViewLink);
+                            pdpPlansViewLink.click();
                             System.out.println("PDP Plan Type Clicked");
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
