@@ -29,6 +29,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsP
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
@@ -573,4 +574,12 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorPreferencespage.costPreferencepageerror();
 		}
 	}
+	
+	@Then("^user validate elements in loading results page$")
+   	public void elements_results_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+   		headerAndFooter.breadCrumbs();
+   		planSelectorResultspage.resultsloadingpage();
+   	}
 }
