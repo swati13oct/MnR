@@ -18,6 +18,7 @@ import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
@@ -368,6 +369,12 @@ public class PlanRecommendationStepDefinitionMobile {
    	public void select_costpreferences_page_errorvalidation() {
 		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
    		costpage.costPreferencepageerror();
+   	}
+	
+	@Then("^user validate elements in loading page mobile$")
+   	public void elements_loading_page() {
+		LoadingMobilePage loadingpage =  new LoadingMobilePage(wd);
+		loadingpage.loadingresultspage();
    	}
 	
 	public void readfeaturedata(DataTable data) {
