@@ -1946,7 +1946,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void signInheader() {
 		headerSignInLink.click();
 		CommonUtility.waitForPageLoad(driver, signIn, 30);
-		if(driver.getCurrentUrl().contains("medicare.uhc.com/aarp")){
+		if(driver.getCurrentUrl().contains("medicare.uhc.com") && driver.findElement(By.xpath("//img[contains(@alt, 'United Health Care')]")).isDisplayed()){
 			Assert.assertTrue(true);
 			System.out.println("Signin page is loaded");
 			driver.navigate().back();
@@ -1963,11 +1963,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateUHClogo() {
 		  if(UHC_Logo.isDisplayed() && UHC_Logo.isEnabled() && !AARP_Logo.isDisplayed()){
 				Assert.assertTrue(true);
-				System.out.println("Correct AARP Logo is Displayed");
+				System.out.println("Correct UHC Logo is Displayed");
 			}
 			else
 			{
-				Assert.fail("AARP logo is not dispalyed for Ulayer");
+				Assert.fail("UHC logo is not dispalyed for Ulayer");
 			}	
 
 	}
