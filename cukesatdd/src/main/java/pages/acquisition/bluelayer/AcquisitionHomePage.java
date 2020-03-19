@@ -1452,7 +1452,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsOfUseUmsPage(driver);
 		}
 		return null;
@@ -1960,8 +1960,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 
-	public void validateAARPlogo() {
-		  if(AARP_Logo.isDisplayed() && AARP_Logo.isEnabled() && !UHC_Logo.isDisplayed()){
+	public void validateUHClogo() {
+		  if(UHC_Logo.isDisplayed() && UHC_Logo.isEnabled() && !AARP_Logo.isDisplayed()){
 				Assert.assertTrue(true);
 				System.out.println("Correct AARP Logo is Displayed");
 			}
@@ -2065,7 +2065,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.assertTrue(true);
 			System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
 			Actions actions = new Actions(driver);
-			actions.moveToElement(AARP_Logo);
+			actions.moveToElement(UHC_Logo);
 			actions.build().perform();
 }
 		else {

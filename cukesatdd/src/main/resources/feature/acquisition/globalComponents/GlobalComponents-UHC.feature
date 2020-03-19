@@ -16,7 +16,7 @@ Feature: 2.12 ACQ - Global Components UHC
     And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
     And user verifies home link of agents&brokers page bluelayer
     And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
-   Then user clicks on back to top link on home page
+   Then user clicks on back to top link on home page on UHC site
 
   @globalheaderBLayer
   Scenario: To verify links displayed in the global header of UHC site
