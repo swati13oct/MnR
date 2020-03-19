@@ -1,5 +1,5 @@
-@globalHeader
-Feature: 2.04--Acq-To test global footer links in AARP site
+@GlobalComponentsAARP
+Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
   Scenario: To verify links displayed in the global footer of AARP site

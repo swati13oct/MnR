@@ -58,6 +58,18 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement footnotesContent;
 	
 	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public static WebElement headerSignInLink;
+	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public static WebElement headerRegisterLink;
+	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
+	@FindBy(id = "hsid-submit")
+	public static WebElement signIn;
+
 	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	

@@ -8,15 +8,15 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionHeader
+ * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsShopPlanUHC
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsAARP")
+outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShopPlanUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsAARP.json" }, tags = { "@GlobalComponentsAARPPages" })
-public class RunMRATDDAcquisitionGlobalComponentsAARP {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanUHC.json" }, tags = { "@ShopPlan_GlobalCompsUHC" })
+public class RunMRATDDAcquisitionGlobalComponentsShopPlanUHC {
 
 }

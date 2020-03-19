@@ -1,5 +1,6 @@
-@globalHeader
-Feature: 2.04--Acq-To test global footer links in AARP site
+@GlobalComponentsUHC
+Feature: 2.12 ACQ - Global Components UHC
+
 
   @globalfooterBLayer
   Scenario: To verify links displayed in the global footer of UHC site
@@ -15,33 +16,33 @@ Feature: 2.04--Acq-To test global footer links in AARP site
     And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
     And user verifies home link of agents&brokers page bluelayer
     And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
-   # Then user clicks on back to top link on home page
+   Then user clicks on back to top link on home page
 
   @globalheaderBLayer
-  Scenario: To verify links displayed in the global header of AARP site
+  Scenario: To verify links displayed in the global header of UHC site
     Given the user is on the uhcmedicaresolutions site landing page
-    When user accesses global header of the AARP Medicare Plans home page
-    And user verifies the AARP logo on home page
-    And user clicks on Sign in link on home page in aarp
-    And user clicks on register link on home page in aarp
-    Then user validates visitor profile on home page in aarp
+    When user accesses global header of the UHC Medicare Solutions home page
+    And user verifies the UHC logo on home page on UHC site
+    And user clicks on Sign in link on home page on UHC site
+    And user clicks on register link on home page on UHC site
+    Then user validates visitor profile on home page on UHC site
 
   @GlobalComponentsUHCPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on AARP medicare acquisition site landing page
-    Given the user navigates to following AARP medicare acquisition site page
+    Given the user is on the uhcmedicaresolutions site landing page
+    Given the user navigates to following UHC medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the AARP Medicare Plans home page
-    When user accesses global footer of the AARP Medicare Plans All page
-    #    Then the USer validates Shop for a Plan Navigation links
-    #    Then the user validates Medicare Education Navigation links
-    Then the user validates TFN on page
+    When user accesses global header of the UHC Medicare Solutions home page
+    When user accesses global footer of the UHC Medicare Solutions All page
+    Then the USer validates Shop for a Plan Navigation links on UHC site
+    Then the user validates Medicare Education Navigation links on UHC site
+    Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-    Then the user validates Pro-active Chat
-    Then the user validates SAM Call Icon
-    Then the user validates SAM re-active Chat
+    Then the user validates Pro-active Chat on UHC site
+    Then the user validates SAM Call Icon on UHC site
+    Then the user validates SAM re-active Chat on UHC site
 
     @MedEdPages_GlobalCompsUHC
     Examples: 
@@ -81,10 +82,10 @@ Feature: 2.04--Acq-To test global footer links in AARP site
      @VPP_GlobalCompsUHC
      Examples: 
       | path                                                                                                                                                                                                                                        | pageName                 | tfnXpath                     | tfnFlag |
-      | health-plans.html#/details?planIds=H0543168000&planYear=2020&systemYear=2020&zip=90210&fipsCode=037&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details MAPD   | //a[contains(@class, 'tel')] | true    |
-      | health-plans.html#/details?planIds=H5253041000&planYear=2020&systemYear=2020&zip=28035&fipsCode=119&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details DSNP   | //a[contains(@class, 'tel')] | true    |  
-      | health-plans.html#/details?planIds=S5921370000&planYear=2020&systemYear=2020&zip=55344&fipsCode=053&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details PDP    | //a[contains(@class, 'tel')] | true    |
-      | health-plans.html#/details?planIds=H3307018000&planYear=2020&systemYear=2020&zip=10011&fipsCode=061&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details MA     | //a[contains(@class, 'tel')] | true    |
-      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary                  | VPP: Plan Summary        | //a[contains(@class, 'tel')] | false   | 
+      | health-plans.html!/details?planIds=H0543168000&planYear=2020&systemYear=2020&zip=90210&fipsCode=037&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details MAPD   | //a[contains(@class, 'tel')] | true    |
+      | health-plans.html!/details?planIds=H5253041000&planYear=2020&systemYear=2020&zip=28035&fipsCode=119&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details DSNP   | //a[contains(@class, 'tel')] | true    |  
+      | health-plans.html!/details?planIds=S5921370000&planYear=2020&systemYear=2020&zip=55344&fipsCode=053&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details PDP    | //a[contains(@class, 'tel')] | true    |
+      | health-plans.html!/details?planIds=H3307018000&planYear=2020&systemYear=2020&zip=10011&fipsCode=061&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details MA     | //a[contains(@class, 'tel')] | true    |
+      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                  | VPP: Plan Summary        | //a[contains(@class, 'tel')] | false   | 
  
       
