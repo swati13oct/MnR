@@ -1,5 +1,5 @@
 @payments @paymentsMarch
-Feature: New payment flows with Credit card funtionality for Make one time setup and update flows
+Feature: 1.19 New payment flows with Credit card funtionality for Make one time setup and update flows
 
   @MakOneTimeCCTotal @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card total amount
