@@ -8,15 +8,15 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsMiscellaneousLinksAARP
+ * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsShopPlanShop1UHC
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsMiscellaneousLinksAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanShop1UHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsMiscellaneousLinksAARP")
+outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShopPlanShop1UHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsMiscellaneousLinksAARP.json" }, tags = { "@MiscellaneousLinks_GlobalCompsAARP" })
-public class RunMRATDDAcquisitionGlobalComponentsMiscellaneousLinksAARP {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanShop1UHC.json" }, tags = { "@ShopPlan_Shop1_GlobalCompsUHC" })
+public class RunMRATDDAcquisitionGlobalComponentsShopPlanShop1UHC {
 
 }
