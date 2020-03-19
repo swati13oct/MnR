@@ -434,15 +434,8 @@ try {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("The WebElement ===  " + getidentifier(element) + "  : is Clicked");
+		System.out.println("The WebElement ===  " +element.getText() + "  : is Clicked");
 	}
-
-	public static String getidentifier(WebElement element) {
-		String elementStr = element.toString();
-		return "[" + elementStr.substring(elementStr.indexOf(">") + 3);
-
-	}
-
 
 	public boolean scrollToView(WebElement element) {
 		try {
