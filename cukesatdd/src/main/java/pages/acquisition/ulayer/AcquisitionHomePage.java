@@ -222,7 +222,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 	
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Privacy Policy')]")
+	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 	
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
