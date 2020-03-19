@@ -366,7 +366,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+	/*	@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+		private WebElement Start_ApplicationBtn;*/
+		
+		@FindBy(xpath = "(//*[contains(text(),'Start application')])[2]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -2894,16 +2897,23 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
 		insuredStatus.click();
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNewForClick(driver, nextButton, 30);
 		nextButton.click();
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNewForClick(driver, nextButton, 30);
 		nextButton.click();
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNewForClick(driver, nextButton, 30);
 		nextButton.click();
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNewForClick(driver, nextButton, 30);
 		nextButton.click();
 		Thread.sleep(2000);
+		CommonUtility.waitForPageLoadNew(driver, firstName, 30);
 		firstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, lastName, 30);
 		lastName.sendKeys(LastName);
+		CommonUtility.waitForPageLoadNewForClick(driver, nextButton, 30);
 		nextButton.click();
 		CommonUtility.waitForPageLoadNew(driver, address1, 20);
 		address1.sendKeys("TestAddress1");
@@ -2928,7 +2938,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		String DateOfBirth ="11131950";
 		MedSupFormValidation(DateOfBirth);
-		jsClickNew(Start_ApplicationBtn);
+		Thread.sleep(8000);
+		System.out.println("At start Applciation click");
+		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 30);
+		/*jsClickNew(Start_ApplicationBtn);*/
+		Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
