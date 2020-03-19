@@ -86,6 +86,21 @@ Feature: 1.12 ACQ - Global Components AARP
       | health-plans.html!/details?planIds=H5253041000&planYear=2020&systemYear=2020&zip=28035&fipsCode=119&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details DSNP   | //a[contains(@class, 'tel')] | true    |  
       | health-plans.html!/details?planIds=S5921370000&planYear=2020&systemYear=2020&zip=55344&fipsCode=053&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR:Federal:EGEM3011:::8016371   | VPP: Plan Details PDP    | //a[contains(@class, 'tel')] | true    |
       | health-plans.html!/details?planIds=H3307018000&planYear=2020&systemYear=2020&zip=10011&fipsCode=061&yearDisclaimer=undefined&month=1&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR:Federal:EGEM3011:::897749     | VPP: Plan Details MA     | //a[contains(@class, 'tel')] | true    |
-      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                  | VPP: Plan Summary        | (//a[contains(@class, 'tel')])[1] | false   | 
+      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                  | VPP: Plan Summary        | (//a[contains(@class, 'tel')])[1] | false   |
+      
+    @MiscellaneousLinks_GlobalCompsAARP
+      Examples: 
+      | path                                                                                                                                                                                                    | pageName                       | tfnXpath                                                    | tfnFlag |
+      | health-plans/estimate-drug-costs.html!/drug-cost-estimator                                                                                                                                              | Drug Cost Estimator            | //a[contains(@class, 'tel')]                                | false   |
+      | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                                                                                                                                                | Pharmacy Search                | //a[contains(@href ,'tel')]                                 | true    |
+      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary     | Connector Modal                | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |  
+      | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true                                                                                                                               | Decision Guide                 | //*[@id='tfn']                                              | true    |
+      | health-plans/medicare-supplement-plans/agent-appointment.html                                                                                                                                           | Agent Appointment              | //*[@id='tfn']                                              | true    |
+      | health-plans/resources/mail-order-pharmacy.html                                                                                                                                                         | Mail Order Pharmacy            | (//*[contains(@class,'tel')])[2]                            | true    |
+      | health-plans/resources/prescription_drug_appeals.html                                                                                                                                                   | Prescription Drug Appeal       | //*[contains(@class,'tel')]                                 | true    |
+      | health-plans/resources/prescription-drug-transition.html                                                                                                                                                | Prescription Drug Transition   | //*[contains(@class,'tel')]                                 | true    |
+     
+    
+      
       
   

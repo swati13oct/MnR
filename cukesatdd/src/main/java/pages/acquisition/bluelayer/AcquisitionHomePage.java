@@ -2185,7 +2185,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateProActiveChatpopup() {
         validateNew(ProActivePopup_ChatBtn);
-		jsClickNew(ProActivePopup_ChatBtn);
+        ProActivePopup_ChatBtn.click();
+	//	jsClickNew(ProActivePopup_ChatBtn);
 		System.out.println("@@@@@@@@@@@@@@@ Pro-Avtive Chat Button Clicked @@@@@@@@@@@@@@@");	
 		validateandcloseChat();
 	}
