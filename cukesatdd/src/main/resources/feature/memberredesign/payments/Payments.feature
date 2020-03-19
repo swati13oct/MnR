@@ -19,13 +19,13 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
 
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
-      | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2019 |
-      | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2019 |
+      | F243897   | MAPD     | MakeOneTimeCCTotal_Payments      | Test | 4111111111111111 |         04 |      2020 |
+      | US1588469 | PDP      | ComboMakeOneTimeCCTotal_Payments | Test | 4111111111111111 |         04 |      2020 |
 
 	@oneTimeCCPerformance
 	Examples:
 	| TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
-	| Performace| MAPD	| OneTimePaymentPerformance			  | Test | 4111111111111111 | 04        |2019  |
+	| Performace| MAPD	| OneTimePaymentPerformance			  | Test | 4111111111111111 | 04        |2020  |
 
   @paymentsMarch @MakOneTimeCCOther @Feb_release_2019 @Spartans @F243897
   Scenario Outline: TID: <TID> - Verify MakeOne time Payment submission for Credit card Other amount
@@ -45,8 +45,8 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
 
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear |
-      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2019 |
-      | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2019 |
+      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2020 |
+      | US1588469 | PDP      | ComboMakeOneTimeCCOther_Payments | Test | 4111111111111111 |         04 |      2020 |
 
   @paymentsMarch @SetupRecurrEFT @Feb_release_2019 @Spartans @F238525
   Scenario Outline: TID: <TID> - Verify Setup Recurring for Checking Account
@@ -90,8 +90,8 @@ Feature: New payment flows with Credit card funtionality for Make one time setup
 
     Examples: 
       | TID       | planType | memberType               | Name | CreditCardNumber | validMonth | validYear |
-      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2019 |
-      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2019 |
+      | F238525   | PDP      | SetupRecCC_Payments      | Test | 4111111111111111 |         04 |      2020 |
+      | US1588469 | PDP      | ComboStepuRecCC_Payments | Test | 4111111111111111 |         04 |      2020 |
 
   @paymentsMarch @UpdateRecurrEFT @Feb_release_2019 @Spartans @F242866
   Scenario Outline: TID: <TID> - Verify Update Recurring for Checking Account
