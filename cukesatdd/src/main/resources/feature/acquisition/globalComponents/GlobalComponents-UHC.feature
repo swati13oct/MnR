@@ -29,7 +29,6 @@ Feature: 2.12 ACQ - Global Components UHC
   @GlobalComponentsUHCPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on the uhcmedicaresolutions site landing page
-    And user vaidates the state drop down link on home page in UHC
     Given the user navigates to following UHC medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -41,8 +40,8 @@ Feature: 2.12 ACQ - Global Components UHC
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user validates SAM Call Icon on UHC site
-    Then the user validates Pro-active Chat on UHC site
-    Then the user validates SAM re-active Chat on UHC site
+ #   Then the user validates Pro-active Chat on UHC site
+ #   Then the user validates SAM re-active Chat on UHC site
 
     @MedEdPages_1_GlobalCompsUHC
     Examples: 

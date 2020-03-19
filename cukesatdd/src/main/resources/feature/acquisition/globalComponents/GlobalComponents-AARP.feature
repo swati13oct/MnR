@@ -30,7 +30,6 @@ Feature: 1.12 ACQ - Global Components AARP
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
-    And user vaidates the state drop down link on home page
     Given the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -42,8 +41,8 @@ Feature: 1.12 ACQ - Global Components AARP
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user validates SAM Call Icon
-    Then the user validates Pro-active Chat
-    Then the user validates SAM re-active Chat
+#    Then the user validates Pro-active Chat
+#    Then the user validates SAM re-active Chat
 
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
