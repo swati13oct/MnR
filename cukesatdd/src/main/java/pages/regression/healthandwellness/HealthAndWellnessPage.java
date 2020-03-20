@@ -410,7 +410,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 				sleepBySec(10);
 				String actualUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 				Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 				goBackToPriorPgViaBack(originalUrl);
 			}
@@ -429,14 +429,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 			//expectedHref="https://member.int.uhc.com/active/overview";
 			expectedHref="/active/overview";
 			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 			if (testThirdPartyPage) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 				sleepBySec(10);
 				String actualUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+				Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 				Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 				goBackToPriorPgViaBack(originalUrl);
 			}
@@ -452,14 +452,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//String expectedHref="/active/fitness-location-search";
 		String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
+		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
 			gymElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 			sleepBySec(10);
 			String actualUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
 		}
@@ -473,14 +473,14 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//expectedHref="https://member.int.uhc.com/active/train-your-brain";
 		expectedHref="/active/train-your-brain";
 		actualEleLnkHref=brainElement.getAttribute("href");
-		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.equals(expectedHref));
+		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
 			brainElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 			sleepBySec(10);
 			String actualUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
 		}
@@ -536,7 +536,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 			sleepBySec(10);
 			String actualUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.equals(expectedHref));
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
 		}
