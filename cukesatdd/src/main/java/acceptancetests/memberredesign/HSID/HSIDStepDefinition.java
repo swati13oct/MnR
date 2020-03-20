@@ -1040,6 +1040,7 @@ public class HSIDStepDefinition {
 				&& !feature.equals("UCPMyDocuments")
 				&& !feature.equals("UCPHealthWellness")
 				&& !feature.equals("UCPBenefits")
+				&& !feature.equals("UCPEob")
 				) {
 			Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '"+feature+"' yet or make sure it's spelled correctly", false);
 		}
