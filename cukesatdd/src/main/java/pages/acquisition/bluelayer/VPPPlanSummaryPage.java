@@ -281,7 +281,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//a[@class='trigger-closed'][text()='View Plans']")
 	private WebElement msPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
@@ -808,21 +808,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			jsClickNew(MAmoreDetailsLink);
+			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
             WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
                     + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			jsClickNew(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			jsClickNew(SNPmoreDetailsLink);
+			SNPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
 
 		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
@@ -830,7 +830,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
 					validate(MAmoreDetailsLink);
 					
-					jsClickNew(MAmoreDetailsLink);
+					MAmoreDetailsLink.click();
 					System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -913,7 +913,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
             if (planType.equalsIgnoreCase("PDP")) {
                             CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
                             sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-                            jsClickNew(pdpPlansViewLink);
+                            pdpPlansViewLink.click();
                             System.out.println("PDP Plan Type Clicked");
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -926,12 +926,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
             			driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
                             sleepBySec(2);
-                            jsClickNew(msPlansViewLink);
+                            msPlansViewLink.click();
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
             			sleepBySec(5);
         	            CommonUtility.checkPageIsReady(driver);
-        	            jsClickNew(snpPlansViewLink);
+        	            snpPlansViewLink.click();
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             }
           }
@@ -3126,7 +3126,7 @@ public void validateEmailOption(String planType) {
 	emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-	jsClickNew(emailPlanSummarySendButton);
+	emailPlanSummarySendButton.click();
 	validateNew(emailPlanSummarySuccessText, 15);
 	String expectedSuccess1="Thank you!";
 	String expectedSuccess2="The email with your information will arrive shortly.";

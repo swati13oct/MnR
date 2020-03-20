@@ -90,7 +90,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
 	private WebElement pdpPlansNumber;	
 
-	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
@@ -1231,7 +1231,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
@@ -2757,7 +2757,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-		jsClickNew(emailPlanSummarySendButton);
+		emailPlanSummarySendButton.click();
 		validateNew(emailPlanSummarySuccessText, 15);
 		String expectedSuccess1="Thank you!";
 		String expectedSuccess2="The email with your information will arrive shortly.";
@@ -2928,7 +2928,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		String DateOfBirth ="11131950";
 		MedSupFormValidation(DateOfBirth);
-		jsClickNew(Start_ApplicationBtn);
+		Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3110,7 +3110,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed()) {
-				jsClickNew(proactiveChatExitBtn);
+				proactiveChatExitBtn.click();
 				System.out.println("Clicked Exit button on chat");
 			}
 		}catch(Exception e){

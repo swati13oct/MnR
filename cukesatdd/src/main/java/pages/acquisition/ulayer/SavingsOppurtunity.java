@@ -59,7 +59,7 @@ public class SavingsOppurtunity extends UhcDriver{
 	
 	public DrugCostEstimatorPage savedrugbutton() throws InterruptedException {
 		validateNew(savedrugbutton);
-		jsClickNew(savedrugbutton);
+		savedrugbutton.click();
 		//savedrugbutton.click();
 		return new DrugCostEstimatorPage(driver);
 	}

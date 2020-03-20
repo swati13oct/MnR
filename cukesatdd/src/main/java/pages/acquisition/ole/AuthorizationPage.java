@@ -24,7 +24,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(xpath= "//*[contains(@id,'ole-form-next-button')]")
 	private WebElement NextBtn;
 	
 	@FindBy(id = "ole-form-back-button")
@@ -171,7 +171,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	public ReviewSubmitPage navigate_to_Review_Submit_Page() {
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		NextBtn.click();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
