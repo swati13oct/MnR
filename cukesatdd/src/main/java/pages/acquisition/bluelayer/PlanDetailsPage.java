@@ -971,7 +971,7 @@ public class PlanDetailsPage extends UhcDriver {
 			driver.navigate().refresh();
 			CommonUtility.waitForPageLoad(driver, backToPlansBtn, 60);
 			validateNew(backToPlansBtn);
-			backToPlansBtn.click();
+			jsClickNew(backToPlansBtn);
 	        CommonUtility.checkPageIsReadyNew(driver);
 	        try {
 				Thread.sleep(6000);
