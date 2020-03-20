@@ -1999,7 +1999,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(chatsam);		
 		
 		}
-	} 
+		
+		//***** below functions are used to validate SAM Call Icon on All of the Acquisition Pages
+		public void validateCallSamAcq() throws InterruptedException {
+			boolean present;
+			try {
+				validateNew(callsam);
+				present = true;
+				} catch (NoSuchElementException e) {
+				present = false;
+				}
+				if (present) {
+				  System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+				}
+			else
+				System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");		
+		}
+		
+		public void validateCallSamContentAcq() throws InterruptedException {
+		
+		Actions action = new Actions(driver);
+		WebElement element = callsam;
+		action.moveToElement(element).perform();
+		String toolTipText = callsamtooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(toolTipText);
+		System.out.println("====================================================================");
+		
+		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		  System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+		}
+		else
+			System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+		}
+
+	}
+
+	 
 
 
 	 

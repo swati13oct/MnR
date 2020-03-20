@@ -142,3 +142,16 @@ Feature: 2.12 ACQ - Global Components UHC
       | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |
       | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |
       | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      | profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |  
+    
+     @FooterLinks_GlobalCompsUHC
+     Examples: 
+      | path                           | pageName                    | tfnXpath                             | tfnFlag |
+      | about-us.html                  | Footer: About Us            | //a[contains(@class, 'tel')]         | false   |
+      | sitemap.html                   | Footer: Site Map            | //a[contains(@href ,'tel')]          | false   |
+      | terms-of-use.html              | Footer: Terms of Use        | //a[contains(@href ,'tel')]          | false   |
+      | disclaimer.html                | Footer: Disclaimers         | //a[contains(@href ,'tel')]          | false   |
+      | health-insurance-brokers.html  | Footer: Agents and Brokers  | //a[contains(@href ,'tel')]          | false   |
+      | contact-us.html                | Footer: Contact Us          | //a[contains(@href ,'tel')]          | false   |
+      | privacy-policy.html            | Footer: Privacy Policy      | //a[contains(@href ,'tel')]          | false   |
+        

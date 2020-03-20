@@ -369,8 +369,8 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	public void the_user_validates_SAM_Call_Icon_uhc() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallSamAcq();
+		aquisitionhomepage.validateCallSamContentAcq();
 		aquisitionhomepage.validateCallpopup();
 	}
 

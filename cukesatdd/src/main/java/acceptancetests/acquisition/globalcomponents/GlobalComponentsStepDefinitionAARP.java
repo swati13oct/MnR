@@ -364,8 +364,8 @@ public class GlobalComponentsStepDefinitionAARP {
 	public void the_user_validates_SAM_Call_Icon() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallSamAcq();
+		aquisitionhomepage.validateCallSamContentAcq();
 		aquisitionhomepage.validateCallpopup();	
 	}
 
