@@ -466,7 +466,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[text()='Welcome to Online Enrollment']")
 		private WebElement welcomepage;
 	
-		@FindBy(xpath = "//span[contains(@class,'single-added-text show')]/following::a[contains(text(),'View Plan')][1]")
+		@FindBy(xpath = "//span[contains(@class,'single-added-text ng-binding show')]/following::a[contains(text(),'View Plan Details')][1]")
 		private WebElement ViewPlanLink_AddedToCompare;
 		
 		@FindBy(id = "mpbed-month")
