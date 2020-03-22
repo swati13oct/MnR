@@ -41,9 +41,9 @@ Feature: 1.12 ACQ - Global Components AARP
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user validates SAM Call Icon
-#    Then the user validates Pro-active Chat
-#    Then the user validates SAM re-active Chat
 
+    #    Then the user validates Pro-active Chat
+    #    Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
       | path                                                     | pageName                                   | tfnXpath                                        | tfnFlag |
@@ -91,6 +91,14 @@ Feature: 1.12 ACQ - Global Components AARP
       | health-plans/shop/estimate/ma-costs.html   | ShopPlan: Estimate MA Plan  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/shop/estimate/pdp-costs.html  | ShopPlan: Estimate PDP Plan | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
+    @ShopPlan_Shop4_GlobalCompsAARP
+    Examples: 
+      | path                                                                   | pageName                        | tfnXpath                                                       | tfnFlag |
+      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html     | ShopPlan: Welness Discount      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/shop/medicare-advantage-plans/health-care-management.html | ShopPlan: Healthcare management | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html       | ShopPlan: MA Plan benefits      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/shop/renew-active.html                                    | ShopPlan: Renew-Active          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+
     @ShopPlan_Enroll1_GlobalCompsAARP
     Examples: 
       | path                                    | pageName                   | tfnXpath                                                       | tfnFlag |
@@ -100,11 +108,12 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @ShopPlan_Resources1_GlobalCompsAARP
     Examples: 
-      | path                                                              | pageName                         | tfnXpath                                                       | tfnFlag |
-      | health-plans/resources.html                                       | ShopPlan: Resources              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | health-plans/resources/medication-therapy-management-program.html | ShopPlan: Resources Therapy      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | health-plans/resources/how-to-appoint-a-representative.html       | ShopPlan: Resources Appoint Rep  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | health-plans/resources/prescription-drug-costs-help.html          | ShopPlan: Resources Rx cost Help | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | path                                                              | pageName                             | tfnXpath                                                       | tfnFlag |
+      | health-plans/resources.html                                       | ShopPlan: Resources                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      | health-plans/resources/medication-therapy-management-program.html | ShopPlan: Resources Therapy          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/how-to-appoint-a-representative.html       | ShopPlan: Resources Appoint Rep      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/prescription-drug-costs-help.html          | ShopPlan: Resources Rx cost Help     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/healthcare-fraud.html                      | ShopPlan: Resources Healthcare Fraud | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Resources2_GlobalCompsAARP
     Examples: 
@@ -118,11 +127,12 @@ Feature: 1.12 ACQ - Global Components AARP
 
     @ShopPlan_Resources3_GlobalCompsAARP
     Examples: 
-      | path                                                                                    | pageName                             | tfnXpath                                                       | tfnFlag |
-      | health-plans/resources/ma-resources-materials.html                                      | ShopPlan: Resources MA Plans         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | health-plans/resources/ma-resources-materials/ma-information-forms.html                 | ShopPlan: Resources MA Plans Info    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html   | ShopPlan: Resources MA Member Rights | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html | ShopPlan: Resources MA Appeals       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | path                                                                                             | pageName                              | tfnXpath                                                       | tfnFlag |
+      | health-plans/resources/ma-resources-materials.html                                               | ShopPlan: Resources MA Plans          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/ma-resources-materials/ma-information-forms.html                          | ShopPlan: Resources MA Plans Info     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html            | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     # Replace any "#" chars in the deeplink with "!"
     @VPP_Deeplinks_GlobalCompsAARP
@@ -144,18 +154,14 @@ Feature: 1.12 ACQ - Global Components AARP
       | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |
       | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
-       
-     @FooterLinks_GlobalCompsAARP
-     Examples: 
-      | path                           | pageName                    | tfnXpath                             | tfnFlag |
-      | about-us.html                  | Footer: About Us            | //a[contains(@class, 'tel')]         | false   |      
-      | sitemap.html                   | Footer: Site Map            | //a[contains(@href ,'tel')]          | false   |
-      | terms-of-use.html              | Footer: Terms of Use        | //a[contains(@href ,'tel')]          | false   |
-      | disclaimer.html                | Footer: Disclaimers         | //a[contains(@href ,'tel')]          | false   |
-      | health-insurance-brokers.html  | Footer: Agents and Brokers  | //a[contains(@href ,'tel')]          | false   |
-      | contact-us.html                | Footer: Contact Us          | //a[contains(@href ,'tel')]          | false   |
-      | privacy-policy.html            | Footer: Privacy Policy      | //a[contains(@href ,'tel')]          | false   |
-      
-     
-     
-       
+
+    @FooterLinks_GlobalCompsAARP
+    Examples: 
+      | path                          | pageName                   | tfnXpath                     | tfnFlag |
+      | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
+      | sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
+      | terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
+      | disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
+      | health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
+      | contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
+      | privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
