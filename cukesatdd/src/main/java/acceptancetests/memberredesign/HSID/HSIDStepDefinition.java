@@ -1047,8 +1047,9 @@ public class HSIDStepDefinition {
 		
 		System.out.println("feature="+feature);
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
-		//String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
-		String configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
+		String configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		if (MRScenario.environment.equals("stage")) 
+			configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
