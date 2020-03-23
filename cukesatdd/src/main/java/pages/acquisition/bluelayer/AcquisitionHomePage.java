@@ -1913,7 +1913,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateStateDropDown() {
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, "California");
-		String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage","geotrackingState" );
+		String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage","ucp_geotrackingState" );
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : "+StateSessionStorage);
 		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
