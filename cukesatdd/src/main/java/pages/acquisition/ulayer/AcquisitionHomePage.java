@@ -1156,6 +1156,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAccessibilitylink);
 		validateNew(aarpOrgLink);
 		validateNew(medicareAdvantagePlansLink);
+		validateNew(medicareSpecialNeedsPlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
@@ -1798,6 +1799,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(medicareAdvantagePlansLink);
 			validateNew(medicareSupplementInsurancePlansLink);
 			validateNew(medicarePrescriptionDrug_PlansLink);
+			validateNew(medicareSpecialNeedsPlansLink);
 			validateNew(learnAboutMedicareLink);
 		}
 
@@ -1834,6 +1836,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement MAplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
 			WebElement MedSuppPlansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+			WebElement SNPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
 
 			WebElement PlanSelectorLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-plans.html')]"));
 			WebElement DCELink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
@@ -1851,6 +1854,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(MAplansLink);
 			validateNew(MedSuppPlansLink);
 			validateNew(PDPplansLink);
+			validateNew(SNPplansLink);
 			
 			validateNew(PlanSelectorLink);
 			validateNew(DCELink);
@@ -1860,7 +1864,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
 					&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
-					&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
+					&& SNPplansLink.isDisplayed() && PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : "); 
 				Actions actions = new Actions(driver);
