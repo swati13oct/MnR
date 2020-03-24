@@ -1442,7 +1442,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
 			return new PrivacyPolicyUmsPage(driver);
 		}
 		return null;
