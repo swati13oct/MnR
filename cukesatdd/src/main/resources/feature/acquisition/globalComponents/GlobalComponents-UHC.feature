@@ -39,9 +39,9 @@ Feature: 2.12 ACQ - Global Components UHC
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-    Then the user validates Pro-active Chat on UHC site
+   # Then the user validates Pro-active Chat on UHC site
     Then the user validates SAM Call Icon on UHC site
-    Then the user validates SAM re-active Chat on UHC site
+   # Then the user validates SAM re-active Chat on UHC site
 
     @MedEdPages_1_GlobalCompsUHC
     Examples: 
