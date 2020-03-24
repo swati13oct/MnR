@@ -46,24 +46,24 @@ Feature: 2.12 ACQ - Global Components UHC
     @MedEdPages_1_GlobalCompsUHC
     Examples: 
       | path                                                     | pageName                                   | tfnXpath                                        | tfnFlag |
-      | medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
+      | medicare-education.html                                  | MedEd: Landing                             | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-eligibility.html             | MedEd: Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-parts-and-medigap-plans.html | MedEd: Coverage Choices                    | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-benefits.html                | MedEd: Prescriptions, Providers & Benefits | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | path                                              | pageName              | tfnXpath                                        | tfnFlag |
-      | medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
+      | medicare-education/medicare-advantage-plans.html  | MedEd: MA Plans       | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-supplement-plans.html | MedEd: Med Supp plans | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-part-d.html           | MedEd: PDP Plans      | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
       | path                                                  | pageName                    | tfnXpath                                        | tfnFlag |
-      | medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
-      | medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@href, 'callto')] | true    |
+      | medicare-education/medicare-costs.html                | MedEd: Medicare Cost Basics | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/enrollment-and-changing-plans.html | MedEd: Enrollment           | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
+      | medicare-education/medicare-faq.html                  | MedEd: FAQ                  | //*[@class='ums']//a[contains(@class, 'tel')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsUHC
     Examples: 
