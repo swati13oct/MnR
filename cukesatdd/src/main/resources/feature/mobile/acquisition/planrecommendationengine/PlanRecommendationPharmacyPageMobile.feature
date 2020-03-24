@@ -25,7 +25,7 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          |
+      |   10003 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | skip          |
 
   @PRE @planrecommandonationmobile @pharmacypagemobile @pharmacypagepageoptionselectionmobile @F374226
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Pharmacy page funtions in Plan Recommendation Engine Mobile
@@ -52,8 +52,8 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Online            |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Retail            |
+      |   10003 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | skip          | Online            |
+      |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | skip          | Retail            |
 
   @PRE @planrecommandonationmobile @pharmacypagemobile @pharmacypagepageoptionerrorscemobile @F374226
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Pharmacy page funtions Error Scenario in Plan Recommendation Engine Mobile
@@ -80,4 +80,4 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          |                   |
+      |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | skip          |                   |

@@ -30,5 +30,6 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
     Then user validate elements in loading page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 | Higher               |
+      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York    | MAPD          | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 | Higher               |
+      |   35034 | YES           | Bibb County | NA            | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 | Higher               |

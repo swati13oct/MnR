@@ -210,46 +210,46 @@ public class CommonutilitiesMobile extends UhcDriver {
 		// Update the else as else if for each page
 		if (currentPageName.contains("LOCATION")) {
 			nextPageName = "Coverage";
-			nextPagePercentage = "8%";
+			nextPagePercentage = "10%";
 		}
 		else if (currentPageName.contains("COVERAGE")) {
 			previousPageName = "Location";
-			previousPagePercentage = "8%";
+			previousPagePercentage = "10%";
 			nextPageName = "Special";
-			nextPagePercentage = "16%";
+			nextPagePercentage = "20%";
 		} else if (currentPageName.contains("SPECIAL")) {
 			previousPageName = "Coverage";
-			previousPagePercentage = "16%";
+			previousPagePercentage = "20%";
 			nextPageName = "Care";
-			nextPagePercentage = "24%";
+			nextPagePercentage = "30%";
 		}else if (currentPageName.contains("TRAVEL")||currentPageName.contains("CARE")) {
 			previousPageName = "Special";
-			previousPagePercentage = "24%";
+			previousPagePercentage = "30%";
 			nextPageName = "Doctor";
-			nextPagePercentage = "32%";
+			nextPagePercentage = "40%";
 		}else if (currentPageName.contains("DOCTOR")) {
 			previousPageName = "Care";
-			previousPagePercentage = "32%";
+			previousPagePercentage = "50%";
 			nextPageName = "Drug";
-			nextPagePercentage = "40%";
+			nextPagePercentage = "50%";
 		}else if (currentPageName.contains("DRUG")) {
 			previousPageName = "Doctor";
-			previousPagePercentage = "40%";
+			previousPagePercentage = "50%";
 			nextPageName = "Pharmacy";
-			nextPagePercentage = "48%";
+			nextPagePercentage = "60%";
 		}else if (currentPageName.contains("PHARMACY")) {
 			previousPageName = "Drug";
-			previousPagePercentage = "48%";
+			previousPagePercentage = "60%";
 			nextPageName = "Additional";
-			nextPagePercentage = "56%";
+			nextPagePercentage = "70%";
 		}else if (currentPageName.contains("ADDITIONAL")) {
 			previousPageName = "Pharmacy";
-			previousPagePercentage = "56%";
+			previousPagePercentage = "70%";
 			nextPageName = "Cost";
-			nextPagePercentage = "64%";
+			nextPagePercentage = "80%";
 		}else if (currentPageName.contains("COST")) {
 			previousPageName = "Additional";
-			previousPagePercentage = "64%";
+			previousPagePercentage = "80%";
 			nextPageName = "";
 			nextPagePercentage = "";
 		}else {

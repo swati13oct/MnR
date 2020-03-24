@@ -27,7 +27,7 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page funct
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection |
-      |   10001 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Online            |
+      |   10001 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | skip          | Online            |
 
   @PRE @planrecommandonationmobile @additionalservicespagemobile @additionalservicespageselectionmobile @F374227
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Additional Services page functions in PRE Mobile
@@ -56,9 +56,9 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page funct
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection | Dental-Hearing-Vision-Fitness |
-      |   10003 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 |
+      |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 |
 
-      @PRE @planrecommandonationmobile @additionalservicespagemobile @additionalserviceserrormobile @F374227
+  @PRE @planrecommandonationmobile @additionalservicespagemobile @additionalserviceserrormobile @F374227
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate Additional Services error page functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -85,6 +85,4 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page funct
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | PharmacySelection | Dental-Hearing-Vision-Fitness |
-      |   10001 | NO            | New York | MA            | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 |
-      
-      
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | skip          | Retail            | Yes,No,No,Yes                 |
