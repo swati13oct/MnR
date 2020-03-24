@@ -45,6 +45,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	AppiumDriver wd;
 	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
+	public static String PREflow="";
 
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
@@ -138,6 +139,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
 		readfeaturedata(inputdata);
 		prezipcodemobile.zipcodepageValidationmobile(inputValues);
+		System.out.println("hell");
 	}
 
 	@Then("^runs questionnaire at zipcode page with invalid data mobile$")
@@ -383,6 +385,9 @@ public class PlanRecommendationStepDefinitionMobile {
 		for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
 		}
+		String temp = inputValues.get("Plan Type");
+		if (temp != null && PREflow == "")
+			PREflow = temp;
 	}
 
 }

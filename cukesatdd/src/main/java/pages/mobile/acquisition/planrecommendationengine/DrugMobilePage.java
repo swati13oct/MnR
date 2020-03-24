@@ -212,7 +212,7 @@ public class DrugMobilePage extends UhcDriver {
 		chooseOption(drugsSelection);
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		mobileUtils.nextPageValidation(page.toUpperCase());
+		mobileUtils.nextPageValidation(page.toUpperCase()+"skip");
 	}
 
 	public void drugsInitiate(String drugSelection) {
@@ -264,7 +264,7 @@ public class DrugMobilePage extends UhcDriver {
 		threadsleep(2000);
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		mobileUtils.nextPageValidation(page.toUpperCase());
+		mobileUtils.nextPageValidation(page.toUpperCase()+"skip");
 	}
 
 	// Drugs Search Page Element Verification Method
@@ -276,7 +276,6 @@ public class DrugMobilePage extends UhcDriver {
 		validate(pageStepsNumberName, 30);
 		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
 		validate(progressbar);
 		validate(drugsearchbuildpres);
 		validate(drugsearchdescription);
