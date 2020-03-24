@@ -222,7 +222,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id="nav-zipcode")
 	public static WebElement zipcodeField;
 	
-	@FindBy(className="zip-button")
+	@FindBy(id="zipcodebtn")
 	public static WebElement findPlansButton;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")
