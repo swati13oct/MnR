@@ -2757,7 +2757,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-		jsClickNew(emailPlanSummarySendButton);
+		emailPlanSummarySendButton.click();
 		validateNew(emailPlanSummarySuccessText, 15);
 		String expectedSuccess1="Thank you!";
 		String expectedSuccess2="The email with your information will arrive shortly.";
@@ -2928,7 +2928,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		Thread.sleep(5000);
 		String DateOfBirth ="11131950";
 		MedSupFormValidation(DateOfBirth);
-		jsClickNew(Start_ApplicationBtn);
+		Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3110,7 +3110,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed()) {
-				jsClickNew(proactiveChatExitBtn);
+				proactiveChatExitBtn.click();
 				System.out.println("Clicked Exit button on chat");
 			}
 		}catch(Exception e){

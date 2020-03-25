@@ -241,7 +241,13 @@ public class HSIDLoginPage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-
+			try{
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			}catch (NoAlertPresentException e){
+				System.out.println("No alert present");
+			}
+			
 
 
 			if(validate(homePageNotice)) {

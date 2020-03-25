@@ -1427,15 +1427,25 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@When("^the user clicks on Premium Payments on Header$")
 	public void the_user_clicks_on_Premium_Payments_on_Header() throws Throwable {
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
-				.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = null;
-		if (null != accountHomePage){
-			paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
-		}
-		if (paymentHistoryPage != null) {
-			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
-			System.out.println("User is on Payment overview screen");
+
+		AccountHomePage accountHomePage;
+
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstants.TEST_HARNESS_PAGE);
+			PaymentHistoryPage paymentHistoryPage = testHarness.navigateToPaymentFromTestHarnessPage();
+			if (paymentHistoryPage != null) {
+				getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				System.out.println("User is on Payment overview screen");
+			}
+		}else {
+
+			accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+			if (paymentHistoryPage != null) {
+				getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+				System.out.println("User is on Payment overview screen");
+			}
 		}
 	}
 
@@ -1564,11 +1574,8 @@ public class OneTimePaymentAarpStepDefintion {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.Review_OneTime_Payments_Page);
 
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage =null;
-		if(reviewOneTimePaymentsPage!=null) {
-			 confirmOneTimePaymentPage = reviewOneTimePaymentsPage
-					.selectAgreeAndClickOnMakePayment();
-		}
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.selectAgreeAndClickOnMakePayment();
 		if (confirmOneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 			System.out.println("User is on Review One time payments page");
@@ -1581,11 +1588,7 @@ public class OneTimePaymentAarpStepDefintion {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
-		 confirmOneTimePaymentPage=null;
-
-		if(confirmOneTimePaymentPage!=null) {
-			confirmOneTimePaymentPage.OneTimeCCverification();
-		}
+		confirmOneTimePaymentPage.OneTimeCCverification();
 	}
 
 	@Given("^user clicks on Set up Automatic payments on payment overview page$")
