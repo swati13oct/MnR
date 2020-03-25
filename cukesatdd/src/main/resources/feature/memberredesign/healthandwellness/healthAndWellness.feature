@@ -20,13 +20,13 @@ Feature: 1.09 Member Health and Wellness Page
     @devRegression @healthAndWellness01a
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
-      | 15340 | MAPD     | RewardsMember     | true      | true           |
+      | 15340 | MAPD     | RewardsMember     | true      | false          |
 
     @healthAndWellness01a
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
-      | 15341 | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | MA       | UHC_RewardsMember | true      | true           |
+      | 15341 | MA       | AARP_RewardsMember| true      | false          |
+      | 15341 | MA       | UHC_RewardsMember | true      | false          |
 
     @healthAndWellness01b
     Examples: 
