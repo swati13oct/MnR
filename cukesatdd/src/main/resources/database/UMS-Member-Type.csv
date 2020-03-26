@@ -153,7 +153,7 @@ q2_jun_grp0443/Password@1,MAGroup2_BnC,DualDeductible,,
 q1_feb_uhc_eft011/Password@1,MAPDGroup_BnC,NoDeductible,,
 q2_jun_grp0019/Password@1,MAPD,Group_BnC,LIS 4,
 q3_sep_UAT4_Group224/Password@1,MAPD,Group_BnC,NON LIS,
-q3_sep_UAT4_Group231/Password@1,MAPD,Group_BnC_Ancillary,NON LIS,
+mapd_group_user/Password@1,MAPD,Group_BnC_Ancillary,NON LIS,
 q2_jun_grp0372/Password@1,MAPDGroup_BnC,SingleDeductible,,
 q2_jun_grp0434/Password@1,MAPD,Group_BnC,GrpEffectiveUHC,NoRider
 q3_sept_UAT4_AARP_001/Password@1,MAPD,Individual_BnC,,
