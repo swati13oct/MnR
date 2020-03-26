@@ -926,7 +926,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		
+		/* keep re-enable when download API is stable
 		if (MRScenario.environment.contains("stage")) {
 			
 			try {
@@ -981,7 +981,7 @@ public class EOBPage extends EOBBase{
 			}    
 		} else {
 			System.out.println("Having' figure out how to work on team env yet");
-		}
+		} */
 
 
 		//note: Switch back to original window
