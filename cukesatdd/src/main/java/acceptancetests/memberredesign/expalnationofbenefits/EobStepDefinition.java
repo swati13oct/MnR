@@ -424,6 +424,7 @@ public class EobStepDefinition {
 		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
 		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
 		
+		/* keep - re-active validation when download API is stable
 		if (ui_eobResultCount>0) {
 			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
 			//TODO comment out for now b/c current UI not working as copy deck version
@@ -431,7 +432,7 @@ public class EobStepDefinition {
 			eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse);
 		} else {
 			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
-		}
+		} */
 	}
 
 	@And("^the user clicks on first eob from the list to validate pdf$") //keep
