@@ -688,7 +688,6 @@ public class EOBPage extends EOBBase{
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i+1)+" from display", false);
 			}
-			/* keep - re-enable this valiation when PDF download is stable
 			String eobXpath="//*[contains(@id, 'eoblist"+i+"')]//*[contains(text(), 'kb') or contains(text(), 'KB')]";
 			try {
 				WebElement pdflink=driver.findElement(By.xpath(eobXpath));
@@ -701,7 +700,7 @@ public class EOBPage extends EOBBase{
 			} catch (NoSuchElementException e) {
 				//note: bypass for now, it's not stable, need to ask developer
 				Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+eobXpath, false);
-			} */
+			}
 			System.out.println(i % 10);
 			if (i % 9 == 0 && i != 0) {
 				if(i==(eobCountInt-1))
@@ -926,7 +925,6 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		/* keep re-enable when download API is stable
 		if (MRScenario.environment.contains("stage")) {
 			
 			try {
@@ -981,7 +979,7 @@ public class EOBPage extends EOBBase{
 			}    
 		} else {
 			System.out.println("Having' figure out how to work on team env yet");
-		} */
+		}
 
 
 		//note: Switch back to original window

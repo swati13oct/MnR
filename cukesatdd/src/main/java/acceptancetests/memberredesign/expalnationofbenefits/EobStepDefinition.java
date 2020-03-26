@@ -49,7 +49,7 @@ public class EobStepDefinition {
 	/**
 	 * This method is to validate the How to read Medical EOB link and Video link is working
 	 */
-	@Then("^the user validates Learn More how to read medical eob PDF$") //keep
+	@Then("^the user validates Learn More how to read medical eob PDF$")
 	public void the_user_validates_how_to_read_medical_eob_PDF() {
 		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
@@ -69,7 +69,7 @@ public class EobStepDefinition {
 	/**
 	 * the method validates site leaving popup on EOB page
 	 */
-	@Then("^the user validates site leaving pop up after clicking Adobe link$") //keep
+	@Then("^the user validates site leaving pop up after clicking Adobe link$")
 	public void user_validates_site_leaving_poup(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateSiteLeaveingPopUP();
@@ -93,7 +93,7 @@ public class EobStepDefinition {
 	 * the method validates the date range functionality on EOB page
 	 */	
 	@SuppressWarnings("unchecked")
-	@And("^the user selects the desired date range$") //keep
+	@And("^the user selects the desired date range$")
 	public void user_selects_date_range(DataTable givenAttributes){
 		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
 		String dateRange = memberAttributesMap.get("Date Range");
@@ -259,49 +259,49 @@ public class EobStepDefinition {
 		}
 	}
 
-	@When("^the user selects Custom Search with blank From and To Date values$") //keep
+	@When("^the user selects Custom Search with blank From and To Date values$")
 	public void user_selects_date_range_invalidCustSearch_blankDates(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.doInvalidCustomSearchBlankDate();
 	}
 
-	@Then("^the user validates blank Date errors$") //keep
+	@Then("^the user validates blank Date errors$")
 	public void validate_date_range_invalidCustSearch_blankDates_error(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateBlankDateFieldError();
 	}
 
-	@When("^the user selects Custom Search with future date for From and To Date values$") //keep
+	@When("^the user selects Custom Search with future date for From and To Date values$")
 	public void user_selects_date_range_invalidCustSearch_futureDates(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.doInvalidCustomSearchFutureDate();
 	}
 
-	@Then("^the user validates future Date errors$") //keep
+	@Then("^the user validates future Date errors$")
 	public void validate_date_range_invalidCustSearch_futureDates_error(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateFutureDateError();
 	}
 
-	@When("^the user selects Custom Search with To Date older From Date values$") //keep
+	@When("^the user selects Custom Search with To Date older From Date values$")
 	public void user_selects_date_range_invalidCustSearch_ToOlderThanFrom(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.doInvalidCustomSearchToDateOlderThanFromDate();
 	}
 
-	@Then("^the user validates To Date older than From Date errors$") //keep
+	@Then("^the user validates To Date older than From Date errors$")
 	public void validate_date_range_invalidCustSearch_ToOlderThanFrom_error(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateToDateOlderThanFromDateError();
 	}
 
-	@When("^the user selects Custom Search with Date Range greater than 18 months") //keep
+	@When("^the user selects Custom Search with Date Range greater than 18 months")
 	public void user_selects_date_range_invalidCustSearch_rangeGreaterThanEighteenMonths(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.doInvalidCustomSearchRangeGreaterThanEighteenMonths();
 	}
 
-	@Then("^the user validates greater than 18 months error$") //keep
+	@Then("^the user validates greater than 18 months error$")
 	public void validate_date_range_invalidCustSearch_rangeGreaterThanEighteenMonths_error(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateRangeGreaterThanEighteenMonthsError();
@@ -354,7 +354,7 @@ public class EobStepDefinition {
 		eobPage.validateNeedHelpSection(planType, memberType);
 	}
 
-	@And("^the user selects the eob type$") //keep
+	@And("^the user selects the eob type$")
 	public void user_selects_eobType(DataTable givenAttributes){
 		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
 		String eobTypeData   = memberAttributesMap.get("EOB Type");
@@ -368,19 +368,7 @@ public class EobStepDefinition {
 	/**
 	 * the method validates the content displayed on EOB page
 	 */
-	/* tbd 
-	@Then("^the user validates content displayed on EOB page$") //keep
-	public void user_validates_content_displayed_on_EOB_page(){
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.navigatePlanTabs(planType);
-		eobPage.validateEobTypeDropDowns(planType);
-	} */
-
-	/**
-	 * the method validates the content displayed on EOB page
-	 */
-	@Then("^the user validates content displayed on EOB page without EOB type dropdown$") //keep
+	@Then("^the user validates content displayed on EOB page without EOB type dropdown$")
 	public void user_validates_content_displayed_on_EOB_page_without_combo_tabs(){
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
@@ -434,7 +422,7 @@ public class EobStepDefinition {
 		}
 	}
 
-	@And("^the user clicks on first eob from the list to validate pdf$") //keep
+	@And("^the user clicks on first eob from the list to validate pdf$")
 	public void the_user_clicks_on_first_eob_from_the_list() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
@@ -447,7 +435,7 @@ public class EobStepDefinition {
 		}
 	}
 
-	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$") //keep
+	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$")
 	public void the_user_clicks_on_first_eob_from_the_list_dream() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
@@ -460,7 +448,7 @@ public class EobStepDefinition {
 		}
 	}
 	
-	@Then("^the user navigates to EOB page$") //keep
+	@Then("^the user navigates to EOB page$")
 	public void user_views_EOBpagehsid() throws InterruptedException {   
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
