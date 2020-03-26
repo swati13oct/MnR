@@ -11,6 +11,7 @@ Feature: 1.16 Member Contact us Page
     And user clicks on Request Confirmation Click
       | Phone Number | <phoneNumber> |
     Then user validates cancel click on secure email widget in redesign contact us page
+    	
       | New Email        | <newEmail>        |
       | NewConfirm Email | <newConfirmEmail> |
 
@@ -19,15 +20,17 @@ Feature: 1.16 Member Contact us Page
       | MAPD     | Ind_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
       | MAPD     | Grp_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
 
-  @contactUs1 @secureEmailWidgetCancel @regressionMember
+  @contactUs1 @secureEmailWidgetCancel @regressionMember123
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Widget section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
+    Then user should see Help With This Website and Help With Your Plan sections
     Then user validates cancel click on secure email widget in redesign contact us page
       | New Email        | <newEmail>        |
       | NewConfirm Email | <newConfirmEmail> |
+      
 
     Examples: 
       | TID   | plantype | memberType                 | newEmail       | newConfirmEmail |
@@ -85,6 +88,7 @@ Feature: 1.16 Member Contact us Page
       | Plan Type   | <plantype>   |
       | Member Type | <memberType> |
     When the user navigates to contact us page in UHC site
+    Then validates labels on the contactUS page for SHIP member
     Then user fill all the email Form details and submit
       | Enquiry Type          | <enquiryType>          |
       | Message               | <message>              |
@@ -174,7 +178,7 @@ Feature: 1.16 Member Contact us Page
       | 15214 | MA       | Terminated_Individual_MA_COSMOS_ContactUs |
       | 15217 | MAPD     | Terminated_Individual_MAPD_NICE_ContactUs |
 
-  @contactUs10 @secureEmailMessageSSOpage @GroupMember @F282564
+  @contactUs10 @secureEmailMessageSSOpage @GroupMember @F282564 @regressionMember
   Scenario Outline: UID: <UID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Message Page from contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -188,7 +192,9 @@ Feature: 1.16 Member Contact us Page
       | US1742688 | MAPD     | CALPERSGroup_ContactUs_SendMessage  | test@optum.com | test@optum.com  |
       | US1742688 | MAPD     | GEORGIAGroup_ContactUs_SendMessage  | test@optum.com | test@optum.com  |
       | US1742688 | MAPD     | TEXASERSGroup_ContactUs_SendMessage | test@optum.com | test@optum.com  |
-
+      |	 152201   | MAPD     | Ind_ContactUs                       | test@optum.com | test@optum.com  | 
+      |  152201   | MAPD     | Grp_ContactUs                       | test@optum.com | test@optum.com  |  
+      
   @contactUs11 @secureEmailWidgetCancel @GroupMember @F282564
   Scenario Outline: UID: <UID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Widget section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
@@ -204,3 +210,24 @@ Feature: 1.16 Member Contact us Page
       | US1742771 | MAPD     | CALPERSGroup_ContactUs_GetStarted  | test@optum.com | test@optum.com  |
       | US1742771 | MAPD     | GEORGIAGroup_ContactUs_GetStarted  | test@optum.com | test@optum.com  |
       | US1742771 | MAPD     | TEXASERSGroup_ContactUs_GetStarted | test@optum.com | test@optum.com  |
+      
+      
+       @contactUs7 @validateLabelsonContactUsPage @rgressionMember
+  Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    Then the user validates the labels and contact numebers on the page
+    Then user validates clickToCallButton display on contactUS redesign page
+    And user clicks on Request Confirmation Click
+      | Phone Number | <phoneNumber> |
+    And UI should be replaced by a success confirmation display
+      | Format Phone Number | <formatPhoneNumber> |
+      | Expected Message    | <expectedMessage>   |
+      And the user click on view questions button and validate the questions links
+
+    Examples: 
+      | TID   | plantype | memberType  | phoneNumber | formatPhoneNumber | expectedMessage                                                                                                                                                      |
+      | 152243 | PCP    | ContactUsPCP |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
+      | 15224 | Medica  | Individual_BnC |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |

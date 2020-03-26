@@ -259,6 +259,94 @@ public class ContactUsPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'contactuscomponent')]/section[not(contains(@class,'ng-hide'))][2]//a[contains(text(),'View Questions')]")
 	private WebElement commonQuestionViewQuestionsBtn;
 	
+	@FindBy(xpath=  "(//p[contains(text(),'Help With This Website')])[2]")
+	private WebElement helpWithThisWebsite;
+	
+	@FindBy(xpath = "//p[contains(text(),'Help With Your Plan')]")
+	private WebElement HelpWithYourPlan;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Learn How to Use the Website')]")
+	private WebElement LearnHowtoUsetheWebsite;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Plan Support')]")
+	private WebElement PlanSupport;
+	
+	@FindBy(xpath="//h3[contains(text(),'Technical Support')]")
+	private WebElement TechnicalSupport;
+	
+	@FindBy(xpath = "//a[contains(text(),'See how-to guides')]")
+	private WebElement Seehowtoguides;
+	
+	@FindBy(xpath="(//div[@class='technical-tele ng-scope']//a)[1]")
+	private WebElement technicalSupportContactNumber;
+	
+	@FindBy(xpath = "//*[contains(@class,'medical-tele')]//a[contains(@class,'display-inline')]")
+	private WebElement helpWithYourPlanContactNumber;
+	
+	@FindBy(xpath=  "//p[contains(text(),'Website Technical Support')]")
+	private WebElement WebsiteTechnicalSupport;
+	
+	@FindBy(xpath = "//p[contains(text(),'General Questions')]")
+	private WebElement GeneralQuestions;
+	
+	@FindBy(xpath = "//p[contains(text(),'Claims Questions')]")
+	private WebElement ClaimsQuestions;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Call Us')]")
+	private WebElement callUs;
+	
+	@FindBy(xpath="(//div[@class='claim-tele ng-scope']//a)[1]")
+	private WebElement claimTelephonenumber;
+	
+	@FindBy(xpath = "//b[contains(text(),'Need help navigating the website?')]")
+	private WebElement Need_helpNavigatingTheWebsite;
+	
+	
+	@FindBy(xpath="//h3//p[contains(text(),'Plan Support')]")
+	private WebElement PlanSupportPCP;
+	
+	@FindBy(xpath = "//p[contains(text(),'Help With This Website')]")
+	private WebElement HelpWithThisWebsitePCP;
+	
+	//View question
+	
+	@FindBy(xpath = "//span[contains(text(),'What browsers are required for this website?')]")
+	private WebElement browsersRequiredQuestion;
+	
+	@FindBy(xpath="//span[contains(text(),'I see my plan information?')]")
+	private WebElement palnInformationQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'How do I add my spouse to my online account?')]")
+	private WebElement onlineAccountQuestion;
+	
+	@FindBy(xpath=  "(//span[contains(text(),'Where can I find my plan name?')])[1]")
+	private WebElement planNameQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'How do I find out if my drugs are covered?')]")
+	private WebElement drugCoveredQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'How do I find a provider?')]")
+	private WebElement findProviderQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'Where can I find forms or other plan materials?')]")
+	private WebElement planMaterialQuestion;
+	
+	@FindBy(xpath="//span[contains(text(),'How do I make a payment, set up automatic payments and view payment history?')]")
+	private WebElement paymentHistoryQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'Where do I find information about plan changes for the upcoming year?')]")
+	private WebElement upcomngYearQuestion;
+	
+	@FindBy(xpath = "(//span[contains(text(),'How do I disenroll from my plan?')])[1]")
+	private WebElement disenrollplan;
+	
+	@FindBy(xpath="//span[contains(text(),'Where do I find information about Renew Rewards?)]")
+	private WebElement renewRewardsQuestion;
+	
+	@FindBy(xpath = "//span[contains(text(),'How do I add or remove a Rider from my plan coverage?')]")
+	private WebElement planCoverageQuestion;
+	
+	
 	public JSONObject contactUsJson;
 	
 	private JSONObject secureemailwidgetDataJson;
@@ -916,7 +1004,71 @@ public class ContactUsPage extends UhcDriver{
     	 commonQuestionViewQuestionsBtn.click();
     	 CommonUtility.checkPageIsReady(driver);
      }
-
-
      
+	public void validatelabelAndLinks() {
+		Assert.assertFalse(validate(helpWithThisWebsite));
+		Assert.assertFalse(validate(HelpWithYourPlan));
+		Assert.assertFalse(validate(LearnHowtoUsetheWebsite));
+		Assert.assertFalse(validate(PlanSupport));
+		Assert.assertFalse(validate(TechnicalSupport));
+		Assert.assertFalse(validate(Seehowtoguides));
+		Assert.assertFalse(validate(technicalSupportContactNumber));
+		Assert.assertFalse(validate(helpWithYourPlanContactNumber));
+		
+		System.out.println("All the labels and links for individual federal mamber validated and passed");
+	}
+	public void validateSHIPlabelAndLinks() {
+		Assert.assertFalse(validate(WebsiteTechnicalSupport));
+		Assert.assertFalse(validate(GeneralQuestions));
+		Assert.assertFalse(validate(ClaimsQuestions));
+		Assert.assertFalse(validate(callUs));
+		Assert.assertFalse(validate(claimTelephonenumber));
+		Assert.assertFalse(validate(Need_helpNavigatingTheWebsite));
+		Assert.assertFalse(validate(Seehowtoguides));
+		Assert.assertFalse(validate(technicalSupportContactNumber));
+		Assert.assertFalse(validate(helpWithYourPlanContactNumber));
+		
+		System.out.println("All the labels-WebsiteTechnicalSupport,GeneralQuestions,ClaimsQuestions,callUs,claimTelephonenumber,Need_helpNavigatingTheWebsite"
+				+ "Seehowtoguides,technicalSupportContactNumber,helpWithYourPlanContactNumber for SHIP member validated");
+	}
+	
+	
+			public void validatePCPMedicalabelAndLinks() {
+				Assert.assertFalse(validate(HelpWithThisWebsitePCP));
+				Assert.assertFalse(validate(PlanSupportPCP));
+				Assert.assertFalse(validate(technicalSupportContactNumber));
+				Assert.assertFalse(validate(helpWithYourPlanContactNumber));
+				
+				System.out.println("All the labels validated");
+			} 
+			
+			
+			public void validateviewQuestions() {
+				try {
+					
+					commonQuestionViewQuestionsBtn.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+					Thread.sleep(5000);
+					
+					validate(browsersRequiredQuestion);
+					validate(palnInformationQuestion);
+					validate(onlineAccountQuestion);
+					validate(planNameQuestion);
+					validate(drugCoveredQuestion);
+					validate(findProviderQuestion);
+					validate(planMaterialQuestion);
+					validate(browsersRequiredQuestion);
+					validate(paymentHistoryQuestion);
+					validate(upcomngYearQuestion);
+					validate(disenrollplan);
+					System.out.println("All the labels validated");
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				
+			} 
+			
+			
+			
 }

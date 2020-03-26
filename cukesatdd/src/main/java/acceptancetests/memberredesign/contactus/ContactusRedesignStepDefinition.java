@@ -143,10 +143,59 @@ public class ContactusRedesignStepDefinition {
 	}
 
 
+	/**
+	 *  @toDO : the user validates cancel link on secure email widget on contact us page
+	 */
+	@Then("^user should see Help With This Website and Help With Your Plan sections$")
+	public void user_should_see_Help_With_This_Website_and_Help_With_Your_Plan_sections()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
+		contactusPage.validatelabelAndLinks();
 
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
 
+	}
+	
+	@Then("^validates labels on the contactUS page for SHIP member$")
+	public void validates_labels_on_the_contactUS_page_for_SHIP_member()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 
+		contactusPage.validateSHIPlabelAndLinks();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	
+	@Then("^the user validates the labels and contact numebers on the page$")
+	public void validates_labels_on_the_contactUS_page_for_PCP_Medica_member()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validatePCPMedicalabelAndLinks();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
+	@Then("^the user click on view questions button and validate the questions links$")
+	public void Click_on_view_questions_Link_and_validate_Links()
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateviewQuestions();
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+
+	}
 	/**
 	 *  @toDO : the user validates cancel link on secure email widget on contact us page
 	 */
