@@ -926,6 +926,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
+		
 		if (MRScenario.environment.contains("stage")) {
 			
 			try {
