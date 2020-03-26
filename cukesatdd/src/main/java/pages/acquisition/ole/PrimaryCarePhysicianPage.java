@@ -65,7 +65,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	//Rally - ProviderLookup
 	
-	@FindBy(xpath = "//button[contains(@data-test-id,'AllPrimaryCare')]")
+	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement SelectPCPLink;
 
 	@FindBy(xpath = "//span[@class='pcp']//button")
