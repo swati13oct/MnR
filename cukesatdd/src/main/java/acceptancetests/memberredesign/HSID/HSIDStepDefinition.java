@@ -1076,7 +1076,7 @@ public class HSIDStepDefinition {
 		} catch (Exception e) {
 			if (MRScenario.environment.toLowerCase().contains("stage")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now", false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. configPgUrl="+configPgUrl, false);
 			} else {
 				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
 			}
