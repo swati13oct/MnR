@@ -1132,6 +1132,21 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
 	
+	@Then("^user saves two ms plans as favorite on AARP site$")
+	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+		//----- MA plan type ----------------------------
+		String planType="MS";
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ms_savePlanNames, planType);
+	}
+	
 	@Then("^user gets a create profile prompt on AARP site$")
 	public void user_saves_two_plans_as_favorite_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
