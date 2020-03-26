@@ -444,7 +444,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//note: Find A Gym ------------------
 		String targetElement="Find Your Gym";
 		WebElement gymElement=findGymLnk;
-		if (planType.equalsIgnoreCase("SHIP")) {
+		if (planType.toUpperCase().contains("SHIP")) {
 			targetElement="Find a Gym";
 			gymElement=findGymLnk_ship;
 		}
@@ -467,7 +467,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//note: Brain Health Tools ------------------
 		targetElement="Brain Health Tools";
 		WebElement brainElement=brainHealthToolsLnk;
-		if (planType.equalsIgnoreCase("SHIP")) 
+		if (planType.toUpperCase().contains("SHIP")) 
 			brainElement=brainHealthToolsLnk_ship;
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(brainElement));
 		//expectedHref="https://member.int.uhc.com/active/train-your-brain";
@@ -488,7 +488,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//note: Confirmation Code ------------------
 		targetElement="Your Code";
 		WebElement codeElement=yourCode;
-		if (planType.equalsIgnoreCase("SHIP")) 
+		if (planType.toUpperCase().contains("SHIP")) 
 			codeElement=yourCode_ship;
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(codeElement));
 		String actualText=codeElement.getText();
@@ -500,7 +500,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		WebElement tooltipIconElement=tooltipIcon;
 		WebElement tooltipTextElement=tooltipText;
 		WebElement closeTooltipXElement=closeTooltipX;
-		if (planType.equalsIgnoreCase("SHIP")) {
+		if (planType.toUpperCase().contains("SHIP")) {
 			tooltipIconElement=tooltipIcon_ship;
 			tooltipTextElement=tooltipText_ship;
 			closeTooltipXElement=closeTooltipX_ship;
@@ -523,7 +523,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//note: Terms and Conditions ------------------
 		targetElement="Terms and Conditions";
 		WebElement termsAndConditionsElement=termsAndConditions;
-		if (planType.equalsIgnoreCase("SHIP")) {	
+		if (planType.toUpperCase().contains("SHIP")) {	
 			termsAndConditionsElement=termsAndConditions_ship;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(termsAndConditionsElement));
