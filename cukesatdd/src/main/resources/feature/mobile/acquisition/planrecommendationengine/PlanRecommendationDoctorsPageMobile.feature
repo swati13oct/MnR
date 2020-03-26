@@ -42,7 +42,7 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | willing to use   |             |               |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | willing to use   |             |               |
       |   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageoptionselectionmobile @doctorslookupmobile @F372731
@@ -66,8 +66,8 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor |
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | lookup           | sue         | NO            |
-      |   10002 | NO            | New York | MAPD            | None         | Travel       | lookup           | sue         | YES           |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | lookup           | sue         | NO            |
+      |   10002 | NO            | New York | MAPD          | None         | Travel       | lookup           | sue         | YES           |
 
   @PRE @planrecommandonationmobile @doctorspagemobile @doctorspagepageerrorvalidationmobile @F372731
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> - To validate Doctors page error functions in Plan Recommendation Engine Mobile

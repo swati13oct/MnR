@@ -301,7 +301,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.drugsInitiate(inputValues.get("Drug Selection"));
-		drugpage.continueNextpage();
+		drugpage.continueNextpageZeroDrug();
 	}
 	
 	@Then("^user search and not found a drug in Drug page mobile$")

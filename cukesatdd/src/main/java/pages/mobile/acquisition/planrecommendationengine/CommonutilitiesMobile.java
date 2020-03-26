@@ -166,7 +166,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	}
 
 	// Current page percentage validation Mobile
-	public void currentpageValidation(String pageName) {
+	public void currentPageValidation(String pageName) {
 		System.out.println("Current page Validation Mobile");
 		findPagedetails(pageName);
 		try {
@@ -182,7 +182,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	}
 
 	// Previous Button Functionality Mobile
-	public void previouspageValidation(String pageName) {
+	public void previousPageValidation(String pageName) {
 		System.out.println("Previous page Validation Mobile");
 		findPagedetails(pageName);
 		try {

@@ -48,7 +48,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection |
-      |   10003 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | skip          |
+      |   10003 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | skip          |
 
   @PRE @planrecommandonationmobile @drugpagemobile @drugautoSuggestion @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with auto search in PRE Mobile
@@ -74,7 +74,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | add           | Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES                             |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | add           | Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES                             |
 
   @PRE @planrecommandonationmobile @drugpagemobile @drugmanualSuggestion @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with manual search in PRE Mobile
@@ -100,7 +100,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch     |
-      |   35034 | YES           | Bibb County | MAPD            | None         | Travel       | want to use      |             |               | add           | Actiq,NO,Actiq LOZ 400MCG,Box of 30.0(sold in a package of 1),3,3,YES,NO |
+      |   35034 | YES           | Bibb County | MAPD          | None         | Travel       | want to use      |             |               | add           | Actiq,NO,Actiq LOZ 400MCG,Box of 30.0(sold in a package of 1),3,3,YES,NO |
 
   @PRE @planrecommandonationmobile @drugpagemobile @multipledrug @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page function with multiple drug in PRE Mobile
@@ -178,7 +178,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | add           | Imuran,NO,,,,1,YES,NO                                                |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | add           | Imuran,NO,,,,1,YES,NO                                                |
 
   @PRE @planrecommandonationmobile @drugpagemobile @drugerrorvalidation @drugpageadddrugmobile @F374225
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -DrugOption: <DrugSelection> - To validate Drug page error and duplicate function in PRE Mobile
@@ -203,7 +203,7 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | Imuran,YES,,,25,1,YES,NO                                             |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | Imuran,YES,,,25,1,YES,NO                                             |
 
   #|   10003 | NO            | New York | NA            | None         | Travel       | want to use      |             |               | Lazanda,NO,,,25,1,NO,NO                                             |
   @PRE @planrecommandonationmobile @drugpagemobile @choosedrug @drugpageadddrugmobile @F374225
@@ -281,5 +281,5 @@ Feature: Plan Recommendation Engine flow - Verify Drugs page functionalities in 
       | Search Text    | <SearchText>    |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | SearchText | 
-      |   10001 | NO            | New York | MAPD            | None         | Travel       | want to use      |             |               | add           | fedp       | 
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | SearchText |
+      |   10001 | NO            | New York | MAPD          | None         | Travel       | want to use      |             |               | add           | fedp       |

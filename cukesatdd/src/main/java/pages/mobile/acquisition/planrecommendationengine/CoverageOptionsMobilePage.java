@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 
 public class CoverageOptionsMobilePage extends UhcDriver {
 
@@ -21,18 +20,11 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
-		waitTillFrameAvailabeAndSwitch(iframePst, 45);
-
 	}
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
-	
-	String page = "Coverage";
-	
-	@FindBy(id = "planSelectorTool")
-	private WebElement iframePst;
+
+	String page = "Step 2: Coverage Options";
 
 	// Coverage Option page Elements
 
@@ -48,16 +40,16 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div.progress-bar-info>p")
 	private WebElement pageProgressPercentage;
-	
+
 	@FindBy(css = "div>.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
 	@FindBy(css = ".all-fields-marked-wi>sup")
 	private WebElement pageRequiredInfoAsteriskMark;
-	
+
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
-	
+
 	@FindBy(css = ".container div[class*='buttonPanel']>button[class*='primary button']")
 	private WebElement continueBtn;
 
@@ -88,25 +80,22 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
 	private WebElement plantypeNone;
 
-	// Coverage actions elements
-
+	// Coverage Options Page Elements
 	@FindBy(css = "div .radio-checked")
 	private WebElement radioselect;
 
 	// Coverage Option Page Element Verification Method
-
 	public void coverageOptionpageElementsMobile() {
 		System.out.println("Coverage Option Validating Page: ");
-		validate(planSelectorPageTilte,30);
+		validate(planSelectorPageTilte, 30);
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Coverage Option"));
 		validate(progressbar, 30);
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("8% Complete"));
-		validate(pageRequiredInfo,30);
-		validate(coveragePagePrimaryQuestion,30);
+		mobileUtils.currentPageValidation(page.toUpperCase());
+		validate(pageRequiredInfo, 30);
+		validate(coveragePagePrimaryQuestion, 30);
 		Assert.assertTrue(coveragePagePrimaryQuestion.getText().contains("coverage"));
-		validate(coveragePagePrimaryQuestionAsteriskMark,30);
+		validate(coveragePagePrimaryQuestionAsteriskMark, 30);
 		Assert.assertTrue(coveragePagePrimaryQuestionAsteriskMark.getText().contains("*"));
 		validate(plantypeMAPD, 30);
 		Assert.assertTrue(plantypeMAPD.getText().contains("and"));
@@ -122,7 +111,6 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	}
 
 	// Coverage Option Page Function Verification
-
 	public void coverageOptionpageFunctionalMobile(String planType, boolean proceed) {
 		System.out.println("Coverage Page Selections");
 		if (planType.equalsIgnoreCase("MAPD")) {
@@ -137,7 +125,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		System.out.println("Plan Type " + planType + " Clicked");
 		if (proceed) {
 			mobileUtils.mobileLocateElementClick(continueBtn);
-			System.out.println("Validating "+page+" page Continue button functionality");
+			System.out.println("Validating " + page + " page Continue button functionality");
 			mobileUtils.nextPageValidation(page.toUpperCase());
 		}
 	}
@@ -150,12 +138,12 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	}
 
 	// Previous Button Functionality for Coverage Options Page
-		public void previouspageValidation() {
-			System.out.println("Previous page Validation");
-			if (radioselect.isDisplayed()) {
-				mobileUtils.mobileLocateElementClick(previousBtn);
-				System.out.println("Validationg "+page+" page Previous button functionality");
-				mobileUtils.previouspageValidation(page.toUpperCase());
-			}
+	public void previouspageValidation() {
+		System.out.println("Previous page Validation");
+		if (radioselect.isDisplayed()) {
+			mobileUtils.mobileLocateElementClick(previousBtn);
+			System.out.println("Validationg " + page + " page Previous button functionality");
+			mobileUtils.previousPageValidation(page.toUpperCase());
 		}
+	}
 }

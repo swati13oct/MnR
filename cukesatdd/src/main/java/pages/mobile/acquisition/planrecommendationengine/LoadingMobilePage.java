@@ -33,8 +33,7 @@ public class LoadingMobilePage extends UhcDriver {
 	@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
 	private WebElement loadingLoaderImage;
 
-//Loading Page Element Verification Method 
-
+	// Loading Page Element Verification Method
 	public void loadingresultspage() {
 		System.out.println("Validating Loading Page: ");
 		String currentPageUrl = driver.getCurrentUrl();

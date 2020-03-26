@@ -48,7 +48,7 @@ Feature: Plan Recommendation Engine flow - Verify Pharmacy page functionalities 
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-		Then user selects Pharmacy in Pharmacy page mobile
+    Then user selects Pharmacy in Pharmacy page mobile
       | Pharmacy Selection | <PharmacySelection> |
 
     Examples: 
