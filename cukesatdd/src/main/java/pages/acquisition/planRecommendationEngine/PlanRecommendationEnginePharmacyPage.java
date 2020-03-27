@@ -26,7 +26,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Pharmacy";
+                String page = "Step 7: Pharmacy";
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -82,9 +82,8 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 validate(planSelectorPageTilte);
                                                 Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 7: Pharmacy"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("48% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(pharmacyTitle);
@@ -97,7 +96,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 Assert.assertTrue(retailPharmacy.getText().contains("Retail"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
                                 
@@ -122,7 +121,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                 	pharmacypageOptions(pharmacy);
                                     continueBtn.click();
                                     System.out.println("Validating " + page + " page Continue button functionality");
-//                            		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+                                    desktopCommonUtils.nextPageValidation(page.toUpperCase());
                                 }  
                                 
 //Pharmacy Page Function Verification     
@@ -147,7 +146,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 }
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
                 public void browserBack() {

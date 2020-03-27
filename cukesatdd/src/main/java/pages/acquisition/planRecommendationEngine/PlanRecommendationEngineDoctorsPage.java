@@ -34,7 +34,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
-                String page = "Doctors";
+                String page = "Step 5: Doctors";
                 
                 PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
             	ArrayList<String> werallyResults = new ArrayList<String>();
@@ -129,9 +129,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 validate(planSelectorPageTilte);
                                                 Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
-                                                Assert.assertTrue(pageStepsNumberName.getText().contains("Step 5: Doctors"));
                                                 validate(pageProgressPercentage, 30);
-                                                Assert.assertTrue(pageProgressPercentage.getText().contains("32% Complete"));
+                                                desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(doctorsTitle);
@@ -144,7 +143,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 Assert.assertTrue(mydoctors.getText().contains("current doctors"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 // Selecting doctor options in Doctor Page
@@ -194,7 +193,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                                 }
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
-                                                desktopCommonUtils.previouspageValidation(page.toUpperCase());
+                                                desktopCommonUtils.previousPageValidation(page.toUpperCase());
                                 }
                                 
 //Doctors Page Function Verification                                      

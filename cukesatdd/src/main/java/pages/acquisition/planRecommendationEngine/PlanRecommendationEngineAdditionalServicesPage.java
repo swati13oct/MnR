@@ -26,7 +26,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Additional";
+	String page = "Step 8: Additional Services";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -118,9 +118,8 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		validate(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 8: Additional"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("56% Complete"));
+		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(additionalTitle);
@@ -139,7 +138,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 // Selecting additional options in additional Page
@@ -196,7 +195,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 //Additional Page Error Function Verification     
 
 	public void additionalpageerror(String additionalOptions) {
-		System.out.println("Additional option is not selected - Error Scenario in additional Page");
+		System.out.println("Additional option is not selected - Error Scenario in Additional Page");
 		continueBtn.click();
 		Assert.assertTrue(dentalError.getText().contains("No"));
 		Assert.assertTrue(hearingError.getText().contains("No"));

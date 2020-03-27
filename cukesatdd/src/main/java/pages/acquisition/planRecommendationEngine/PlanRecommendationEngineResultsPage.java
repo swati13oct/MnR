@@ -36,10 +36,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#loadingText")
 	private WebElement resultsloadingTitle;
 
-	@FindBy(css = "p.loading-copy")
-	private WebElement resultsloadingText;
-
-	@FindBy(css = "div:nth-child(3)>img")
+	@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
 	private WebElement svgAnimation;
 
 	@FindBy(css = "div>img[alt*='Loading Plan Recommendations']")
@@ -52,9 +49,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(resultsloadingTitle);
-		Assert.assertTrue(resultsloadingTitle.getText().contains("Thanks"));
-		validate(resultsloadingText, 30);
-		Assert.assertTrue(resultsloadingText.getText().contains("We are pulling together your personalized plan recommendations."));
+		Assert.assertTrue(resultsloadingTitle.getText().contains("Plans Loading!"));
 		validate(svgAnimation, 30);
 		validate(loadingImage, 30);
 	}

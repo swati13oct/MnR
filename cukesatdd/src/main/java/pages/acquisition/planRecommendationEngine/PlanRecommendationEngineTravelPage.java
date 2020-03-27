@@ -28,7 +28,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
-	String page = "Care";
+	String page = "Step 4: Care Away From Home";
 	
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
@@ -89,9 +89,8 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			validate(planSelectorPageTilte);
 			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
-			Assert.assertTrue(pageStepsNumberName.getText().contains("Step 4: Care Away From Home"));
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("24% Complete"));
+			desktopCommonUtils.currentPageValidation(page.toUpperCase());
 			validate(pageRequiredInfo);
 			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			validate(travelWithin);
@@ -104,7 +103,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			Assert.assertTrue(travelNone.getText().contains("None"));
 			previousBtn.click();
 			System.out.println("Validationg "+page+" page Previous button functionality");
-			desktopCommonUtils.previouspageValidation(page.toUpperCase());
+			desktopCommonUtils.previousPageValidation(page.toUpperCase());
 		}
 		
 // Splitting the input options and selecting it and Clicking on Continue Button 		

@@ -26,7 +26,7 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Cost";
+	String page = "Step 9: Health Care Cost Preferences";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -82,9 +82,8 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		validate(planSelectorPageTilte);
 		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 9: Health"));
 		validate(pageProgressPercentage, 30);
-		Assert.assertTrue(pageProgressPercentage.getText().contains("64% Complete"));
+		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(pharmacyTitle);
@@ -97,7 +96,7 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		Assert.assertTrue(higherPremium.getText().contains("higher"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previouspageValidation(page.toUpperCase());
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 // Selecting Cost preference options
@@ -121,7 +120,7 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		costPreferencepageOptions(preference);
 		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Cost Preference Page Error Function Verification     

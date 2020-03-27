@@ -56,6 +56,7 @@ public class PlanRecommendationEngineStepDefinition {
 	WebDriver wd;
 	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
+	public static String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
@@ -64,6 +65,9 @@ public class PlanRecommendationEngineStepDefinition {
 			inputValues.put(inputRow.get(i).getCells().get(0),
 			inputRow.get(i).getCells().get(1));
 		}
+		String temp = inputValues.get("Plan Type");
+		if (temp != null && PREflow == "")
+			PREflow = temp;
 	}
 	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
@@ -471,7 +475,7 @@ public class PlanRecommendationEngineStepDefinition {
    		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
    		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
-   		planSelectorDrugspage.continueNextpage();
+   		planSelectorDrugspage.continueNextpageZeroDrug();
    	}
     
        @And("^user not selects prescription options in drug page$")

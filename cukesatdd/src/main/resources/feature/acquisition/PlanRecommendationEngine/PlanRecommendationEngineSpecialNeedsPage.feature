@@ -32,8 +32,8 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds                |
       |   90201 | NO            |              | MAPD          | Medicaid,condition,facility |
-      |   78006 | YES           | Bexar County | MA            | Medicaid,condition,facility |
-      |   45634 | NO            |              | PDP           | condition,facility          |
+      |   78006 | YES           | Bexar County | NA            | Medicaid,condition,facility |
+      |   45634 | NO            |              | MAPD          | condition,facility          |
       |   10001 | NO            |              | NA            | facility                    |
       |   12345 | NO            |              | MAPD          | None                        |
 
@@ -53,4 +53,4 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
     Examples: 
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds                     |
       |   90201 | NO            |                  | MAPD          | Medicaid,condition,facility,None |
-      |   21212 | YES           | Baltimore County | MA            |                                  |
+      |   21212 | YES           | Baltimore County | NA            |                                  |

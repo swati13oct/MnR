@@ -31,4 +31,4 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            |        | MA            | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  | Higher               |
+      |   10001 | NO            |        | MAPD          | Medicaid,facility | another,primary | outnetwork |             |               | No             | Retail         | Yes,No,No,No                  | Higher               |
