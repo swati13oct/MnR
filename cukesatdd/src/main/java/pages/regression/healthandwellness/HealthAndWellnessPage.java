@@ -84,7 +84,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	protected WebElement generalHeader;
 
 	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[@data-linkdesc='Renew Active']//img")
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[contains(@data-linkdesc,'Renew Active')]//img")
 	protected WebElement renewActiveIconImg_ship;
 	
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
@@ -420,7 +420,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(cardTitle_ship));
 			String expectedText="Renew Active";
 			String actualText=cardTitle_ship.getText();
-			Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected='"+expectedText+"' | Actual='"+actualText+"'", actualText.equals(expectedText));
+			Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected='"+expectedText+"' | Actual='"+actualText+"'", actualText.contains(expectedText));
 
 
 			//note: Learn More button ------------------
