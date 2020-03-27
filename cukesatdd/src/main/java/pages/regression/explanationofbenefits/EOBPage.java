@@ -1021,9 +1021,9 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - responseCode="+ urlConnection.getResponseCode());
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				//note: keep - re-enable when download API is more stable
-				//Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 response code.  "
-				//		+ "PDF link='"+pdfUrl+"'",
-				//		responseCode==200);
+				Assert.assertTrue("PROBLEM - attempted to run the download API again seperately to obtain the PDF content for validation but is getting non-200 ("+responseCode+") response code in this seperate run. You will have to check screen capture to see if the doc is loaded successfully..."
+						+ "PDF link='"+pdfUrl+"'",
+						responseCode==200);
 				System.out.println("TEST - is able to open pdf url, proceed to validate content");
 				PDDocument document = PDDocument.load(urlConnection.getInputStream());
 				String PDFText = new PDFTextStripper().getText(document);
