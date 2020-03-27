@@ -398,7 +398,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	
 	public void validateRenewActive(String planType) {
 		String originalUrl=driver.getCurrentUrl();
-		if (planType.equalsIgnoreCase("SHIP")) { 
+		if (planType.toUpperCase().contains("SHIP")) { 
 			//note: that shoe icon ------------------
 			String targetElement="Renew Active icon image";
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship));
