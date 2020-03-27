@@ -1864,7 +1864,7 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 public ComparePlansPageBlayer clickOnCompareLink(){
 		
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath("//*[contains(@class,'added-text')]//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 		try {
