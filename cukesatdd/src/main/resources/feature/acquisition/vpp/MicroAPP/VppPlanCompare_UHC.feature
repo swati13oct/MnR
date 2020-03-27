@@ -1,7 +1,7 @@
-@vppPlanCompareUHC @vppPlanCompareUHCRegression
+@vppPlanCompareUHC 
 Feature: Vpp to plan Compare UHC Scenarios
 
-  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01
+  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> Plan Type: <plantype> - Verify Rally Tool from plan compare for UHC
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -17,7 +17,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype |
       | 00001 |   90210 | NO              | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC02 @vppPlanCompareUHCRun01
+  @vppPlanCompareUHC02 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -34,7 +34,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype |
       | 00002 |   90210 | NO              | Los Angeles County | MAPD     |
 
-  @vppPlanCompareUHC03 @vppPlanCompareUHCRun01
+  @vppPlanCompareUHC03 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -51,7 +51,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | count |
       | 00003 |   90210 | NO              | Los Angeles County | MAPD     |     1 |
 
-  @vppPlanCompareUHC04 @vppPlanCompareUHCRun01
+  @vppPlanCompareUHC04 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> -  Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -69,7 +69,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | 00006 |   90265 | YES             | Ventura County   | MAPD     |
       | 00007 |   70072 | NO              | Jefferson Parish | MAPD     |
 
-  @vppPlanCompareUHC05 @vppPlanCompareUHCRun01
+  @vppPlanCompareUHC05 @vppPlanCompareUHCRun01 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -84,7 +84,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county         | plantype |
       | 00008 |   35616 | NO              | Colbert County | MAPD     |
 
-  @vppPlanCompareUHC06 @vppPlanCompareUHCRun02
+  @vppPlanCompareUHC06 @vppPlanCompareUHCRun02 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Verify Call sticky action menu on AARP site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -116,7 +116,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
       | 00010 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
 
-  @vppPlanCompareUHC08 @vppPlanCompareUHCRun02
+  @vppPlanCompareUHC08 @vppPlanCompareUHCRun02 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - To verify links displayed in the global footer of UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -138,7 +138,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
       | 00011 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
 
-  @vppPlanCompareUHC09 @vppPlanCompareUHCRun02
+  @vppPlanCompareUHC09 @vppPlanCompareUHCRun02 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Navigation for plan comapre to OLE
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -152,7 +152,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count |
       | 00012 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 |
 
-  @vppPlanCompareUHC10 @vppPlanCompareUHCRun02
+  @vppPlanCompareUHC10 @vppPlanCompareUHCRun02 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> -  Navigation for plan comapre to Plan Detail
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -166,7 +166,7 @@ Feature: Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode | plantype | count | pdfType               | docCode                 |
       | 00013 |   90210 | No              | Los Angeles County |              80002 | MAPD     |     2 | Step Therapy Criteria | Step_Therapy_MCORE_2020 |
 
-  @vppPlanCompareUHC11 @vppPlanCompareUHCRun02
+  @vppPlanCompareUHC11 @vppPlanCompareUHCRun02 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Navigation for plan comapre to Back to summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

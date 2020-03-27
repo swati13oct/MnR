@@ -560,7 +560,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void validatetopbacktoplanslink() throws InterruptedException {
 
 		waitforElement(topbackToPlanslink);
-		topbackToPlanslink.click();
+		jsClickNew(topbackToPlanslink);
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 			Assert.assertTrue(true);
@@ -574,7 +574,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void validatedownbacktoplanslink() throws InterruptedException {
 		validateNew(downbackToPlanslink);
 		waitforElement(downbackToPlanslink);
-		downbackToPlanslink.click();
+		jsClickNew(downbackToPlanslink);
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 			Assert.assertTrue(true);
@@ -891,10 +891,12 @@ public class PlanDetailsPage extends UhcDriver {
 	 * @param monthlyPremium
 	 * @param yearlyPremium
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
+	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) throws Exception {
 		boolean bValidation = false;
 		planCostsTab.click();
+		Thread.sleep(4000);
 		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
 			bValidation = true;
 		else
