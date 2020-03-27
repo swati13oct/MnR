@@ -293,6 +293,8 @@ public class PersonalInformationPage extends UhcDriver{
 		String FirstName = memberDetailsMap.get("First Name");
 		String LastName = memberDetailsMap.get("Last Name");
 		String ZipCode = memberDetailsMap.get("Zip Code");
+		String state = memberDetailsMap.get("Mailing_State");
+		
 		boolean Validation_Flag = true;
 		
 		String FirstNameDisplayText = FirstNameDisplay.getText();
@@ -308,13 +310,13 @@ public class PersonalInformationPage extends UhcDriver{
 		else{
 			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
 			StateSelected.click();
-			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='NC']"));
+			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
 		
 			StateSelectNC.click();
-			WebElement EnterZip = driver.findElement(By.xpath("//input[@id='zipCode']"));
-			EnterZip.sendKeys("28035");
+			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
+			EnterZip.sendKeys(ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
-			StateDisplayText = "NC";
+			StateDisplayText = state;
 			ZipDisplayText = EnterZip.getText();
 		}
 		
@@ -323,7 +325,7 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("State Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
-		if(FirstNameDisplayText.contains(FirstName) && LastNameDisplayText.contains(LastName) && ZipDisplayText.contains(ZipCode)){
+		if(FirstNameDisplayText.contains(FirstName) && LastNameDisplayText.contains(LastName)){
 			System.out.println("Member Details Validated on Personal Information Page");
 			Validation_Flag = true;
 		}

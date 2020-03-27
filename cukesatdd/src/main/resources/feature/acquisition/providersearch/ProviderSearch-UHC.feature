@@ -53,7 +53,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | planname                                          | year		  |
-      |   90002 | AARP Medicare Advantage Plan 2 (HMO) |nextYear |
+      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear |
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
@@ -109,4 +109,4 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | planname                                          |  year		  |
-      |   90002 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
+      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | nextYear |
