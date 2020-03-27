@@ -1723,6 +1723,23 @@ public class OneTimePaymentAarpStepDefintion {
 		if (recurringConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
 			System.out.println("User is on recurring confirmation page for Checking account");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewAutomaticPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
 		}
 	}
 
@@ -1752,10 +1769,18 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT() throws Throwable {
-		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.Recurring_Confirmation_Page);
-		recurringConfirmationPage.validateEFTRecurrVerification();
 
+		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Only one payment request message is Displayed  : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}else {
+			RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+					.getBean(PageConstants.Recurring_Confirmation_Page);
+			recurringConfirmationPage.validateEFTRecurrVerification();
+		}
 	}
 	
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for One time$")
