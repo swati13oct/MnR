@@ -490,7 +490,7 @@ try {
 	public void switchToNewTabNew(WebElement Element) {
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		Element.click();
+		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
