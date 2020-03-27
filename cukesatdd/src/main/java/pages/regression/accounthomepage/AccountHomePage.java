@@ -763,7 +763,9 @@ public class AccountHomePage extends UhcDriver {
 					// inside shadow-root element
 					try {
 						locateAndClickElementWithinShadowRoot(shadowRootHeader,
-								"#dropdown-toggle-2 > span > span:nth-child(2)");
+								"#dropdown-toggle-2");
+						locateAndClickElementWithinShadowRoot(shadowRootHeader,
+								"#dropdown-options-2 > a:nth-child(2)");
 						System.out.println("clicked account setting dropdown");
 						if (validate(accountLabel,0) && (accountLabel.getText().toLowerCase().contains("supplement")
 								|| accountLabel.getText().toLowerCase().contains("medicare prescription drug"))

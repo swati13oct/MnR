@@ -440,7 +440,7 @@ public class TestHarness extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(benefitsPageLink);
-		benefitsPageLink.click();
+		jsClickNew(benefitsPageLink);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
@@ -460,7 +460,7 @@ public class TestHarness extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
-		testHarnessBenefitsPageLink.click();
+		jsClickNew(testHarnessBenefitsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, 60);
 		System.out.println(driver.getTitle());
@@ -621,7 +621,7 @@ public class TestHarness extends UhcDriver {
 
 			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) {
 //				startNew("https://stage-medicare.uhc.com/member/eob.html");
-				eobTestharnessLink.click();
+				jsClickNew(eobTestharnessLink);
 				System.out.println("EOB linked Clicked on Test Harness Dashboard page");
 				//eobTestharnessLink.click();
 			}
@@ -844,7 +844,7 @@ public class TestHarness extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(formsPageLink);
-		formsPageLink.click();
+		jsClickNew(formsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, formsPageHeading, CommonConstants.TIMEOUT_90);
 
@@ -994,11 +994,11 @@ public class TestHarness extends UhcDriver {
 	 */
 	public void validateAccountProfile() {
 		Assert.assertTrue("Account/Profile tab is not displayed", accountProfile.isDisplayed());
-		accountProfile.click();
+		jsClickNew(accountProfile);
 		validateNew(NavAccountProfSignOut);
 		validateNew(NavAccountProfSetting);
 		scrollToView(accountProfile);
-		accountProfile.click();
+		jsClickNew(accountProfile);
 	}
 
 	/***
@@ -1157,7 +1157,7 @@ public class TestHarness extends UhcDriver {
     		try {
     			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
     			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
-    			formsPageLink.click();
+    			jsClickNew(formsPageLink);
         		CommonUtility.checkPageIsReady(driver);
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
@@ -1191,7 +1191,7 @@ public class TestHarness extends UhcDriver {
     		try {
     			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
     			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
-    			formsPageLink.click();
+    			jsClickNew(formsPageLink);
         		Thread.sleep(5000);
         		isAlertPresent();
         		CommonUtility.checkPageIsReady(driver);
@@ -1386,7 +1386,7 @@ public class TestHarness extends UhcDriver {
     	public AccountHomePage navigateDirectToAcccntHomePage() {
     		JavascriptExecutor jse = (JavascriptExecutor) driver;
     		jse.executeScript("window.scrollBy(0,50)", "");
-    		HomeButton.click();
+    		jsClickNew(HomeButton);
     		CommonUtility.checkPageIsReadyNew(driver);
     		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
     		System.out.println(driver.getTitle());
