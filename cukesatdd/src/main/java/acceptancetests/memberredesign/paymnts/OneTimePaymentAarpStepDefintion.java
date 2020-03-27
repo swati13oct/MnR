@@ -1579,22 +1579,58 @@ public class OneTimePaymentAarpStepDefintion {
 		if (confirmOneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 			System.out.println("User is on Review One time payments page");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewOneTimePaymentsPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
 
 		}
+
+
+
+
+
+
+
 	}
 
 	@Then("^User navigates to payment confirmation page for CC flow$")
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
-				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 
-		confirmOneTimePaymentPage.OneTimeCCverification();
+		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Only one payment request message is Displayed in in review one time PAGE : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}else {
+
+
+			ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+
+			confirmOneTimePaymentPage.OneTimeCCverification();
+		}
 	}
 
 	@Given("^user clicks on Set up Automatic payments on payment overview page$")
 	public void user_clicks_on_Set_up_Automatic_payments_on_payment_overview_page() throws Throwable {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
+
+
 		SetUpRecurringPage setupRecurringPage = paymentHistoryPage.clickOnSetUPAutomaticPayment();
 		if (setupRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.SetUp_Recurring_Page, setupRecurringPage);
@@ -1687,6 +1723,23 @@ public class OneTimePaymentAarpStepDefintion {
 		if (recurringConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Recurring_Confirmation_Page, recurringConfirmationPage);
 			System.out.println("User is on recurring confirmation page for Checking account");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewAutomaticPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_Automatic_Page, reviewAutomaticPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
 		}
 	}
 
@@ -1716,10 +1769,18 @@ public class OneTimePaymentAarpStepDefintion {
 
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT() throws Throwable {
-		RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.Recurring_Confirmation_Page);
-		recurringConfirmationPage.validateEFTRecurrVerification();
 
+		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Only one payment request message is Displayed  : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}else {
+			RecurringConfirmationPage recurringConfirmationPage = (RecurringConfirmationPage) getLoginScenario()
+					.getBean(PageConstants.Recurring_Confirmation_Page);
+			recurringConfirmationPage.validateEFTRecurrVerification();
+		}
 	}
 	
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for One time$")

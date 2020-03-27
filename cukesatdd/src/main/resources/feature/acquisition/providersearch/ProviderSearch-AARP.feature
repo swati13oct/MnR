@@ -19,7 +19,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      |   10001 | NO              | New York County | MAPD       | AARP Medicare Advantage Plan 2 (HMO) |
       
 
   @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer @prodRegression
@@ -34,7 +34,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | planname                                          |year		  |
-      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear  |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) |nextYear  |
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
@@ -53,7 +53,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      |   10001 | NO              | New York County | MAPD       | AARP Medicare Advantage Plan 2 (HMO) |
 
   @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
@@ -73,7 +73,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
-      |   90210 | NO              | Los Angeles County | MA       |AARP Medicare Advantage SecureHorizons Essential (HMO)|
+      |   10001 | NO              | New York County | MA       |AARP Medicare Advantage Essential (HMO)|
 
       
  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
@@ -88,7 +88,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | planname                                          | year		  |
-      |   90002 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |nextYear	  |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) |nextYear	  |
       
   @PlancompareProviderSearchAARP @AcqRegressionProviderSearchUlayer @prodRegression
   Scenario Outline: TID: <TID> - TC01_RallyTool_Through_Plan Compare_Page
@@ -106,4 +106,4 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype |
-      | 15489 |   90210 | NO              | Los Angeles County |	MAPD	|
+      | 15489 |   10001 | NO              |New York County |	MAPD	|
