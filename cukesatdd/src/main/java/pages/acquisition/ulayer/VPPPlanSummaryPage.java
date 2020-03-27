@@ -1763,7 +1763,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		try{
 			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='ng-scope']"));
 			WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
-			addToCompareCheck.click();
+			jsClickNew(addToCompareCheck);
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
 		}
