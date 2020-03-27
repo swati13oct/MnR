@@ -1,9 +1,9 @@
 @eob @fastandfurious
 Feature: 1.04 To Test EOB for Members
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPEob |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPEob |
 
 
   #note: skip the API and UI count comparison for now because service is unstable
