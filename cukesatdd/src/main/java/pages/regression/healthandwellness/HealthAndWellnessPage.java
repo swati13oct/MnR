@@ -449,8 +449,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 			gymElement=findGymLnk_ship;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(gymElement));
-		//String expectedHref="/active/fitness-location-search";
-		String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
+		String expectedHref="/active/fitness-location-search";
+		//String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
