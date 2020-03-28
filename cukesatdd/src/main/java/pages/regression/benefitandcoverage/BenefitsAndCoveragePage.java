@@ -1975,7 +1975,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validateOrderPlanMaterialsSubNavNotDisplayed() {
 		System.out.println("Now checking for Order Plan Materials sub navigation of Benefits and Coverage");
 
-		if (!orderMaterialsTab.isDisplayed())
+		if (!validate(orderMaterialsTab,0))
 		{
 			System.out.println("Order Plan Materials Sub Navigation Link under Benefits and Coverage was NOT displayed");
 		}
