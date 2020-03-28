@@ -2410,7 +2410,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
 			if(planType.equalsIgnoreCase("MS")) {
 				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
-				initial_savePlanIconXpath="//*[@id='responsiveplan']/div[2]/div/div/div[@aria-describedby='"+plan+"']";
+				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
 			}else {
 			initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 			}
@@ -2422,7 +2422,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
 			if(planType.equalsIgnoreCase("MS")) {
-				savedPlanIconXpath="//*[@id='responsiveplan']/div[2]/div/div/div[@aria-describedby='"+plan+"' and @aria-selected='true']";
+				savedPlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"+plan+"']";
 						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
 					
 			}else {
