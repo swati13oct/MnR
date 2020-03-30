@@ -1316,7 +1316,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
@@ -1761,8 +1761,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	public void deselectAddToCompareinAARP(String planName){
 		try{
-			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='ng-scope']"));
-			WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
+	    	WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
 			jsClickNew(addToCompareCheck);
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
