@@ -270,7 +270,7 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 
 		validateNew(Checkcoverage);
 		
-		jsClickNew(Checkcoverage);
+		Checkcoverage.click();
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
