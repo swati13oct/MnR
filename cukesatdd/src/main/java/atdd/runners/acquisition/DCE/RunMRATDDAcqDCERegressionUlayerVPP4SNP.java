@@ -1,4 +1,4 @@
-package atdd.runners.acquisition;
+package atdd.runners.acquisition.DCE;
 
 
 import org.junit.runner.RunWith;
