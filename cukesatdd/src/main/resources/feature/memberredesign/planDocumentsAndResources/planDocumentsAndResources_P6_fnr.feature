@@ -29,23 +29,6 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	  | Other Resources                    | <fnr_or>   | 
 	  | Disenrollment Information          | <fnr_di>   | 
 
-	#@preeffective_ma
-	#Examples: 
-    #  | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-    #  | 01-096 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | false   | true   | true   | 
-    #  | 02-097 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true   | false    | false   | true   | true   | false   | true   | true   |
-
-	#@preeffective_mapd
-	#Examples: 
-    #  | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-    #  | 03-098 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true   | false    | true    | true   | true   | true    | true   | true   | 
-
-	#@preeffective_pdp
-	#Examples: 
-    #  | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-    #  | 04-099 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true   | true     | true    | true   | true   | true    | true   | true   |
-    #  | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true   | true     | false   | true   | true   | true    | true   | true   |
-
 	@preeffective_ma
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
