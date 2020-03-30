@@ -590,8 +590,9 @@ public class MemberAuthStepDefinition{
 		String dateRange = memberAttributesMap.get("Date Range");
 		String planType = memberAttributesMap.get("Plan Type");
 		eobPage.validatePlanNavTab(planType);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData); 
-		eobPage.validateEOBsDisplayed();
+		eobPage.selectEobType(planType, eobTypeData); 
+		eobPage.selectDateRange(planType, dateRange,eobTypeData); 
+		eobPage.validateEachEOBonUI();
 		BenefitsAndCoveragePage bncPage = eobPage.navigateToBncPage();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, bncPage);
 	}

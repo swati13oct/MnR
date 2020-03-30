@@ -1861,14 +1861,18 @@ public class AccountHomePage extends UhcDriver {
 		Thread.sleep(6000);
 
 		if (validate(paymentsLink)) {
-
+			checkModelPopup(driver,5);
 			System.out.println("payment link is displayed on the header");
 			paymentsLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			return new PaymentHistoryPage(driver);
 		} else if (validate(TestHarnesspaymentsLink)) {
 
 			System.out.println("TestHarness Page Payments Link is displayed");
 			TestHarnesspaymentsLink.click();
+			checkModelPopup(driver,5);
 			return new PaymentHistoryPage(driver);
 		}	else {
 			// NOTE:
@@ -1877,8 +1881,14 @@ public class AccountHomePage extends UhcDriver {
 			// go to secondary page first then locate the payment tab.
 			System.out.println("payment link is not displayed on the dashboard header - attempt the workaround");
 			navigateDirectToBnCPag();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			Assert.assertTrue("PROBLEM - unable to locate the payment link on secondary page", validate(paymentsLink3));
 			paymentsLink3.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			CommonUtility.checkPageIsReady(driver);
 			/* tbd 
 			try {
 				String Page_URL = "https://" + MRScenario.environment
@@ -2238,8 +2248,8 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateFindCareCostTab() {
-		if (validate(findCareCost)) {
-			Assert.assertTrue("Find Care and Cost tab is not displayed", findCareCost.isDisplayed());
+		if (validate(findCareCost,0)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", validate(findCareCost,0));
 		} else {
 			System.out.println(
 					"Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
@@ -2353,7 +2363,7 @@ public class AccountHomePage extends UhcDriver {
 	 */
 
 	public void validateHeader() {
-		Assert.assertTrue("Header is not displayed", header.isDisplayed());
+		Assert.assertTrue("Header is not displayed", validate(header,0));
 		/**
 		 * Wait till page is loaded button is enabled.
 		 */
@@ -2364,7 +2374,7 @@ public class AccountHomePage extends UhcDriver {
 	 * Validate claims Tab
 	 */
 	public void validateClaims() {
-		Assert.assertTrue("Claims tab is not displayed", claims.isDisplayed());
+		Assert.assertTrue("Claims tab is not displayed", validate(claims,0));
 	}
 
 	/**
@@ -2439,6 +2449,25 @@ public class AccountHomePage extends UhcDriver {
 	 */
 	public void validateCoverageBenefitsL2Tabs() {
 		waitforElement(coverageBenefits);
+		if (validate(coverageBenefits,0)) {
+			coverageBenefits.click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Assert.assertTrue("benefitsSummary is displayed", validate(benefitsSummary,0));
+			Assert.assertTrue("formsAndResources is displayed", validate(formsAndResources,0));
+			Assert.assertTrue("orderMaterials is displayed", validate(orderMaterials,0));
+		}
+	}
+
+
+	/**
+	 * Validate Coverage and Benefits Level 2 Tabs
+	 */
+	public void validateCoverageBenefitsL2TabsForTerminated() {
+		waitforElement(coverageBenefits);
 		if (coverageBenefits.isDisplayed()) {
 			coverageBenefits.click();
 			try {
@@ -2447,12 +2476,10 @@ public class AccountHomePage extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Assert.assertTrue("benefitsSummary is displayed", benefitsSummary.isDisplayed());
 			Assert.assertTrue("formsAndResources is displayed", formsAndResources.isDisplayed());
-			Assert.assertTrue("orderMaterials is displayed", orderMaterials.isDisplayed());
+
 		}
 	}
-
 	/**
 	 * click on Benefits Summary
 	 */
@@ -2532,16 +2559,16 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void validateHelp() {
-		Assert.assertTrue("Help tab is displayed", help.isDisplayed());
+		Assert.assertTrue("Help tab is displayed", validate(help,0));
 	}
 
 	public void validateAccountProfile() {
-		if (logOut.isDisplayed()) {
-			Assert.assertTrue("Account/Profile tab is displayed", accountProfile.isDisplayed());
+		if (validate(logOut,0)) {
+			Assert.assertTrue("Account/Profile tab is displayed",validate(accountProfile,0));
 			clickAccountProfile();
 			clickLogout();
 		} else
-			Assert.assertFalse("Account/Profile tab is not displayed", !accountProfile.isDisplayed());
+			Assert.assertFalse("Account/Profile tab is not displayed", !validate(accountProfile,0));
 
 	}
 
@@ -2560,7 +2587,7 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void clickLogout() {
-		if (logOut.isDisplayed()) {
+		if (validate(logOut,0)) {
 			logOut.click();
 			if (driver.getTitle().equals("UnitedHealthcare Medicare Member Sign In"))
 				Assert.assertTrue("user is logged out", true);

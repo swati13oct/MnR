@@ -28,6 +28,7 @@ import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.testharness.TestHarness;
 
 /**
  * Functionality : Covers all step definition methods related to member redesign footer section.
@@ -133,9 +134,10 @@ public class MemberRedesignFooterStepDefinition {
 	 *  @toDo : On member page and checks for footer sections - check model popup, validate claims level 2 tab, validate footer section
 	 */
 	@Then("^the user navigates to payment history page$")
-	public void user_views_payment_history() throws InterruptedException {		
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-		PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
+	public void user_views_payment_history() throws InterruptedException {	
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			AccountHomePage accountHomePage = new AccountHomePage(wd);
+			PaymentHistoryPage paymentHistoryPage = accountHomePage.navigateToPaymentHistoryPage();
 		if (paymentHistoryPage!=null){
 			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
 			System.out.println("user is on one time payment page"); 
@@ -148,25 +150,20 @@ public class MemberRedesignFooterStepDefinition {
 
 	@Then("^the user navigates to the footer section$")
 	public void user_validates_footer(){
-	
-			PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-					
-				try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			paymentHistoryPage.scrollToBottom();
-			FooterPage footer = paymentHistoryPage.validatePageFooter();
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		paymentHistoryPage.scrollToBottom();
+		FooterPage footer = paymentHistoryPage.validatePageFooter();
 
-			if (footer!=null){
-				getLoginScenario().saveBean(PageConstants.footer_page,footer);
-
-			}else{
-				Assert.fail();
-			}
-		
+		if (footer!=null){
+			getLoginScenario().saveBean(PageConstants.footer_page,footer);
+		}else{
+			Assert.fail();
+		}
 	}
 	
 	@And("^the user validates the footer section in payments page$")
@@ -201,20 +198,6 @@ public class MemberRedesignFooterStepDefinition {
 
 	@And("^the user validates the footer section in EOB page$")
 	public void user_validates_footer_in_EobPage() throws InterruptedException{
-		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
-		footerPage.validateFooterLinks();
-		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-	}
-
-	@Then("^the user navigates to Pharmacy locator page$")
-	public void user_navigates_to_PharmacyLocator_page(){
-		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
-		footerPage.NavigateToPharmacyLocator();
-		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
-	}
-
-	@And("^the user validates the footer section in pharmacy locator page$")
-	public void user_validates_footer_in_pharmacyLocatorPage() throws InterruptedException{
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
@@ -280,6 +263,62 @@ public class MemberRedesignFooterStepDefinition {
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
+	
+	@Then("^the user navigates to the Health and Wellness page$")
+	public void user_navigates_to_health_and_wellness_page(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToHealthAndWelnessPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Health and Wellness page$")
+	public void user_validates_footer_in_health_and_wellness_page() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	@Then("^the user navigates to the Pharmacies and Prescriptions page$")
+	public void user_navigates_to_PharmaciesAndPrescriptionsPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToPharmaciesAndPrescriptionsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Pharmacies and Prescriptions page$")
+	public void user_validates_footer_in_PharmaciesAndPrescriptionsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	@Then("^the user navigates to the Order Plan Materials page$")
+	public void user_navigates_to_OrderPlanMaterialsPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToOrderPlanMaterialsPage();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Order Plan Materials page$")
+	public void user_validates_footer_in_OrderPlanMaterialsPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+	
+	@Then("^the user navigates to the Pharmacy Locator Page$")
+	public void user_navigates_to_PharmacyLocatorPage(){
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.NavigateToPharmacyLocator();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@And("^the user validates the footer section in Pharmacy Locator Page$")
+	public void user_validates_footer_in_PharmacyLocatorPage() throws InterruptedException{
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		footerPage.validateFooterLinks();
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	
 }
 
 
