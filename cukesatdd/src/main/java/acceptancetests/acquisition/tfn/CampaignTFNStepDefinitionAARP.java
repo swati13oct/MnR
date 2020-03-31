@@ -1,10 +1,8 @@
 package acceptancetests.acquisition.tfn;
 
 /**
- * @author Tamzid
- *
+ * @author sdwaraka
  */
-
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -111,7 +109,21 @@ public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSup
 public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
 	
 }
-	
+@Given("^user is on Google and search AARP Medicare Advantage Plan to navigate to AARP home page$")
+public void user_is_on_Google_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Exception  {
+
+	String url = "https://www.google.com/";
+	WebDriver driver = getLoginScenario().getWebDriverNew();
+
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.openUrl(url);
+	tfnPage.googleSearchAARP();
+
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
+
 }
 
 

@@ -1,4 +1,4 @@
-package atdd.runners.tfn;
+package atdd.runners.acquisition.tfn;
 
 import org.junit.runner.RunWith;
 
