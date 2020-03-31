@@ -17,7 +17,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
-      |   10003 | NO            | New York | PDP           | skip           |
+      |   10003 | NO            | New York | PDP           | No             |
 
   @PRE @planrecommendation @PDPFlow @PDPnodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> - To validate Loading page functions using add drug option without adding drug in PRE
@@ -35,7 +35,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
-      |   35034 | YES           | Bibb County | PDP           | add            |
+      |   35034 | YES           | Bibb County | PDP           | Yes            |
 
   @PRE @planrecommendation @PDPFlow @PDPdrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate Loading page functions using add drug option with adding drug in PRE
@@ -56,9 +56,9 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption |
-      |   10003 | NO            | New York | PDP           | add            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         |
+      |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         |
 
-  @PRE @planrecommendation @MAFlow @F384284
+  @PRE @planrecommendation @MAFlow @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -83,11 +83,11 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors     | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOptioncostPreferenceOption |
-      |   10003 | NO            | New York    | MA            | None         | Travel    | lookup      | sue         | YES           | Yes,No,No,Yes                 | Lower                                    |
-      |   35034 | YES           | Bibb County | MA            | Medicaid     | Care Away | want to use |             |               | No,No,No,No                   | Higher                                   |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10002 | NO            | New York    | MA            | None         | None   | mydoctors | john        | YES           | Yes,No,No,Yes                 | Lower                |
+      |   35034 | YES           | Bibb County | MA            | Medicaid     | within | innetwork |             |               | No,No,No,No                   | Higher               |
 
-  @PRE @planrecommendation @MAPDFlow @F384284
+  @PRE @planrecommendation @MAPDFlow @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -117,10 +117,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | Facility     | Travel | lookup  | sue         | YES           | add            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York | MAPD          | Facility     | None   | mydoctors | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @MAPDFlow @MAPDskipdrug @F384284
+  @PRE @planrecommendation @MAPDFlow @MAPDskipdrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -147,10 +147,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel       | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup  | sue         | YES           | skip           | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   21212 | YES           | Baltimore County | MAPD          | None         | within,another | mydoctors | John        | YES           | No             | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @F384284
+  @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -177,10 +177,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors     | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | MAPD          | Condition    | Care Away | want to use |             |               | add            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | New York | MAPD          | Condition    | within | innetwork |             |               | Yes            | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @DKFlow @F384284
+  @PRE @planrecommendation @DKFlow1 @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate DK flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -210,10 +210,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | NA            | Facility     | Travel | lookup  | sue         | YES           | add            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York | NA            | Facility     | within,another | mydoctors | john         | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @DKFlow @DKskipdrug @F384284
+  @PRE @planrecommendation @DKFlow @DKskipdrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -240,10 +240,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel       | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | NA            | None         | Another Part | lookup  | sue         | YES           | skip           | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   35034 | YES           | Bibb County | NA            | None         | another | mydoctors | John         | YES           | No             | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @DKlow @DKzerodrug @F384284
+  @PRE @planrecommendation @DKFlow1 @DKzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -270,5 +270,5 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors     | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | NA            | Condition    | Care Away | want to use |             |               | add            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | New York | NA            | condition    | primary | innetwork |             |               | Yes            | Yes,No,No,Yes                 | Lower                |

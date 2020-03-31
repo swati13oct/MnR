@@ -66,8 +66,10 @@ public class PlanRecommendationEngineStepDefinition {
 			inputRow.get(i).getCells().get(1));
 		}
 		String temp = inputValues.get("Plan Type");
-		if (temp != null && PREflow == "")
+		if (temp != null && PREflow != temp) {
 			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
+		}
 	}
 	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
@@ -75,7 +77,7 @@ public class PlanRecommendationEngineStepDefinition {
 		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
 		aquisitionhomepage.openPRE();
-//		aquisitionhomepage.fixPrivateConnection();
+		aquisitionhomepage.fixPrivateConnection();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
@@ -211,7 +213,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 	}
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -226,7 +228,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 		planSelectorhomepage.landingpage();
 }
 	
@@ -285,7 +287,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void elements_coverage_page() {
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 		
 	}
@@ -372,7 +374,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_doctor_page() {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDoctorspage.doctorspage();
                     
     }
@@ -423,7 +425,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_drugs_page() {
     				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDrugspage.drugspage();
                     
     }
@@ -500,7 +502,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_pharmacy_page() {
     	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPharmacyepage.pharmacypage();
    		
    	}
@@ -536,7 +538,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_additional_page() {
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorAdditionalpage.additionalpage();
    	}
    	
@@ -558,7 +560,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_costpreferences_page() {
 		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPreferencespage.costpreferencepage();
    	}
 	
@@ -583,7 +585,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
    	}
 }

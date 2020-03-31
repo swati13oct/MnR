@@ -49,7 +49,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(resultsloadingTitle);
-		Assert.assertTrue(resultsloadingTitle.getText().contains("Plans Loading!"));
+		Assert.assertTrue(resultsloadingTitle.getText().contains("Thanks!"));
 		validate(svgAnimation, 30);
 		validate(loadingImage, 30);
 	}

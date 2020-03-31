@@ -99,20 +99,20 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			System.out.println("Next page Validation Desktop");
 			findPagedetails(pageName);
 			if (nextPageName.contains("NULL") == false) {
-			try {
-				pageloadcomplete();
-				threadsleep(1000);
 				try {
-					WebDriverWait wait = new WebDriverWait(driver, 20);
-					wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
+					pageloadcomplete();
+					threadsleep(1000);
+					try {
+						WebDriverWait wait = new WebDriverWait(driver, 20);
+						wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
+					} catch (Exception e) {
+						Assert.assertTrue(false, "Next page name validation failed");
+					}
+					Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),
+							"Next page % validation failed");
 				} catch (Exception e) {
-					Assert.assertTrue(false, "Next page name validation failed");
+					System.out.println("Unable to validate Continue button functionality on Next page");
 				}
-				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(nextPagePercentage),
-						"Next page % validation failed");
-			} catch (Exception e) {
-				System.out.println("Unable to validate Continue button functionality on Next page");
-			}
 			}
 		}
 
@@ -172,7 +172,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 					if (flow.equalsIgnoreCase("MA")) {
 						nextPagePercentage = "33%";
 					}
-				} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE")) {
+				} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE AWAY")) {
 					previousPageName = "Special";
 					previousPagePercentage = "30%";
 					nextPageName = "Doctor";
@@ -201,7 +201,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 					nextPageName = "Pharmacy";
 					nextPagePercentage = "60%";
 					currrentPagePercentage = "50%";
-					if (currentPageName.contains("DRUGSKIP"))
+					if (currentPageName.contains("DRUG COSTSSKIP"))
 						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NA"))) {
 							nextPageName = "Additional";
 							nextPagePercentage = "70%";
