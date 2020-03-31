@@ -386,8 +386,9 @@ public class PlanRecommendationStepDefinitionMobile {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
 		}
 		String temp = inputValues.get("Plan Type");
-		if (temp != null && PREflow == "")
+		if (temp != null && PREflow != temp) {
 			PREflow = temp;
+		}
 	}
 
 }
