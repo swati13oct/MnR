@@ -119,8 +119,8 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
 		continueBtn.click();
-		System.out.println("Validating " + page + " page Continue button functionality");
-//	desktopCommonUtils.nextPageValidation(page.toUpperCase());	}
+		System.out.println("Validating " + page + " page Continue button functionality");	
+		}
 
 //Cost Preference Page Error Function Verification     
 
