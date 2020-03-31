@@ -536,10 +536,9 @@ public class oleStepDefinition {
 		}
 		else{
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-			
-			String plantype = PreliminaryFlagsMap.get("plan_type");
+			String PlanName = PreliminaryFlagsMap.get("PlanName");
 			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, plantype);
+			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, PlanName);
 						
 			if (useranddisclosure!= null){
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
@@ -822,8 +821,7 @@ public class oleStepDefinition {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
 
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
-					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,prelimineryQuestionsPage);
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
