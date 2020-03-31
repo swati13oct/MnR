@@ -107,7 +107,17 @@ public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSup
 
 @Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
 public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
-	
+	WebDriver wd = getLoginScenario().getWebDriverNew();
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = new CampaignTFNPage(wd);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 }
 @Given("^user is on Google and search AARP Medicare Advantage Plan to navigate to AARP home page$")
 public void user_is_on_Google_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Exception  {

@@ -8,16 +8,16 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionCampaignTFNAARP
+ * this file is to run test cases for RunMRATDDAcquisitionOrganicSearchTFNAARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARP.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionCampaignTFNAARP")
+outputFolder = "target/RunMRATDDAcquisitionOrganicSearchTFNAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json" }, tags = {"@Scenario_2_CampaignTraffic"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARP.json" }, tags = {"@Scenario6B_GoogleSearch"})
 
-public class RunMRATDDAcquisitionCampaignTFNAARP {
+public class RunMRATDDAcquisitionOrganicSearchTFNAARP {
 
 }

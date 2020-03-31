@@ -21,6 +21,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 
 
 
@@ -249,6 +250,16 @@ public class CampaignTFNPage extends UhcDriver {
 			Assert.fail("TFN displayed is INCORRECT for Med Supp Page : "+tFN_Xpath);
 		}
 	}
+	
+	public void navigateToCampaignURL(String campaignUrl , String envUrl) {
+		System.out.println("Environment URL : "+envUrl);
+		String NavigateToURL = envUrl+campaignUrl;
+		System.out.println("Campaign URL : "+NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));		
+	}
+	
 
 	public void googleSearchAARP() {
 		validateNew(GoogleSearchField);
