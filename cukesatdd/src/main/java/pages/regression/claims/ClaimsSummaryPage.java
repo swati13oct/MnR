@@ -527,8 +527,8 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 	}
 
 	public void validateSubTabs() {
-		validateNew(claimsTabTopMenu); 
-		validateNew(eob_claims);
+		validateNew(claimsTabTopMenu,0); 
+		validateNew(eob_claims,0);
 	}
 	
 	public EOBPage clickOnEOBNavTab(){

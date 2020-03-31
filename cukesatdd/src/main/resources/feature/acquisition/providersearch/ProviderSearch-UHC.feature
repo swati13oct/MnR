@@ -19,7 +19,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planname                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) |
       
        
   @PlancompareProviderSearch @AcqRegressionProviderSearchBlayer @prodRegression
@@ -38,7 +38,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype |
-      | 15488 |   90210 | NO              | Los Angeles County | MAPD	|
+      | 15488 |   10001 | NO              | New York County | MAPD	|
       
       
      @ProviderSearchFromGlobalHeaderBlayer  @AcqRegressionProviderSearchBlayer @prodRegression
@@ -72,7 +72,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) |
 
 
 
@@ -94,7 +94,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                          |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)|
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO)|
 
       
       @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @prodRegression

@@ -64,7 +64,7 @@ public class PlanDocumentsAndResourcesNH extends PlanDocumentsAndResourcesBase  
 				goToSpecificComboTab(planType, flagNonCombo); 
 			}
 			String expContactUsTitle="Help & Contact Us";
-			String expContactUsUrl="content/medicare/member/contact-us/overview.html#/contact-us-three";
+			String expContactUsUrl="contact-us-three";
 			System.out.println("New window URL = "+driver.getCurrentUrl()+" | New window title = "+driver.getTitle());
 			Assert.assertTrue("PROBLEM - not getting expected contact us URL. "
 					+ "Expected to contains='"+expContactUsUrl+"' | Actual URL='"+driver.getCurrentUrl()+"'", 

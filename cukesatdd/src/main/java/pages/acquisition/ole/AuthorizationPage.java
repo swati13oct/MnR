@@ -112,7 +112,7 @@ public class AuthorizationPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, PageHeader,30);
-		if(PageHeader.getText().contains("Authorizations"))
+		if(PageHeader.getText().contains("Authorization"))
 			System.out.println("Page header is Displayed : "+PageHeader.getText());
 		else
 			Assert.fail("Error in validating the Authorization page loaded");
@@ -171,7 +171,7 @@ public class AuthorizationPage extends UhcDriver{
 
 	public ReviewSubmitPage navigate_to_Review_Submit_Page() {
 		validateNew(NextBtn);
-		NextBtn.click();
+		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
