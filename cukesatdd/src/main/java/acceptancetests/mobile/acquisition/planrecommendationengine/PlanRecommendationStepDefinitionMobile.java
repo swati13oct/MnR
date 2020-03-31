@@ -388,6 +388,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 
