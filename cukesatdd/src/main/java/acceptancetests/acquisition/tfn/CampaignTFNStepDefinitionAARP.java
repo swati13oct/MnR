@@ -107,8 +107,11 @@ public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSup
 	tfnPage.validateMedSuppTFN(TFN_Xpath);
 }
 
-
-
+@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
+public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+	
+}
+	
 }
 
 
