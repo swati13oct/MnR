@@ -2018,10 +2018,10 @@ public class VppStepDefinitionUpdatedAARP {
 		if (Aquisitionhomepage != null) {
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, Aquisitionhomepage);
 			Assert.assertTrue(true);
-			System.out.println("TFN Widget is Displayed");
+			System.out.println("Chat Widget is Displayed");
 		}
 		else{
-			Assert.fail("TFN Widget is NOT Displayed");
+			Assert.fail("Chat Widget is NOT Displayed");
 		}
 	}
 	

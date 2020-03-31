@@ -28,6 +28,7 @@ import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -136,7 +137,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(@class,'btn btn--secondary ng-scope greyedout')]//span[text()='Cancel Existing Automatic Payments']")
 	private WebElement cancelExistingAutomaticPaymentsButton;
-	
+
 	@FindBy(id = "paymentOverviewApp")
 	private WebElement paymentOverviewSection;
 
@@ -175,7 +176,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
 	private WebElement RemainingAmountSummary;
-	
+
 	@FindBy(xpath = "//*[@class='dl-horizontal'][2]//dd[@class='onetime-bill ng-binding']")
 	private WebElement RemainingAmount;
 
@@ -196,8 +197,8 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payments']//div[@class='container']//div[@class='col-md-12']//div/h2")
 	private WebElement AutoPayHeading;
-	
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+
+	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(xpath = "//*[@class='col-md-9 col-xs-12']//div/p[@class='textfontsize']")
@@ -215,16 +216,15 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Set Up Automatic Payments']")
 	private WebElement SetUpAutomaticPaymentsButton;
-	
+
 	@FindBy(xpath = "//a[text()='Set Up Recurring Payments']")
 	private WebElement SetUpRecurringPaymentsButtonShip;
-	
-	
+
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
-	private WebElement EditAutomaticPaymentsButton;	
-	
+	private WebElement EditAutomaticPaymentsButton;
+
 	@FindBy(xpath = "//a[text()='Edit Recurring Payments']")
-	private WebElement EditRecurringPaymentsButton;	
+	private WebElement EditRecurringPaymentsButton;
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
 	private WebElement HelpfulRemindersPanel;
@@ -232,73 +232,73 @@ public class PaymentHistoryPage extends UhcDriver {
 	// vvv note: added for F247601 Payment History SHIP testing
 	@FindBy(xpath = "//h2[contains(text(),'Payment History')]")
 	private WebElement PaymentHistorySectionHeader;
-	
+
 	@FindBy(xpath = "//div[@ng-click='togglePaymentHistFlag = !togglePaymentHistFlag']")
 	private WebElement showPaymentHistoryForShipLink;
-	
+
 	@FindBy(xpath = "//button[@id='menubutton']")
 	private WebElement DateRangerDropDown;
-	
+
 	@FindBy(xpath = "//span[@for='paymentStatusPaid2' and contains(text(), 'All')]")
 	private WebElement paymentStatusAllRadioLabel;
 
 	@FindBy(xpath = "//input[@type='radio' and @name='paymentStatus' and @value='all']")
 	private WebElement paymentStatusAllRadio;
-	
+
 	@FindBy(xpath = "//label[@for='paymentStatusPaid2']")
 	private WebElement paidCheckboxLabel;
 
-	@FindBy(css="#paymentStatusPaid2") 
+	@FindBy(css="#paymentStatusPaid2")
 	private WebElement paidCheckbox;
 
 	@FindBy(xpath = "//label[@for='paymentStatusUnpaid2']")
 	private WebElement unpaidCheckboxLabel;
 
-	@FindBy(css="#paymentStatusUnpaid2") 
+	@FindBy(css="#paymentStatusUnpaid2")
 	private WebElement unpaidCheckbox;
 
 	@FindBy(xpath = "//span[@for='paymentStatusPaid2']")
 	private WebElement paidRadioLabel;
 
-	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='paid']") 
+	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='paid']")
 	private WebElement paidRadio;
-	
+
 	@FindBy(xpath = "//span[@for='paymentStatusUnpaid2']")
 	private WebElement unpaidRadioLabel;
 
-	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']") 
+	@FindBy(xpath="//input[@type='radio' and @name='paymentStatus' and @value='unpaid']")
 	private WebElement unpaidRadio;
-	
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table") 
+
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table")
 	private WebElement paymentTable;
-	
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]") 
+
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[1]")
 	private WebElement paymentTablePremiumDueDateHeader;
 
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[1]/span[2]") 
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[1]/span[2]")
 	private WebElement paymentTablePremiumDueDateRow1Value;
-	
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[2]") 
+
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[2]")
 	private WebElement paymentTablePremiumAmountHeader;
 
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[2]/span[2]") 
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[2]/span[2]")
 	private WebElement paymentTablePremiumAmounRow1Value;
 
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[3]") 
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table//tr//th[3]")
 	private WebElement paymentTablePaymentStatusHeader;
-	
-	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[3]/span[2]") 
+
+	@FindBy(xpath = "//*[@id='paymentTable1']/div/div/table/tbody/tr[2]/td[3]/span[2]")
 	private WebElement paymentTablePaymentStatusRow1Value;
-	
+
 	@FindBy(xpath = "//ul[@id='menu2']//li[1]//a")
 	private WebElement last90DaysOption;
 
 	@FindBy(xpath = "//ul[@id='menu2']//li[2]//a")
 	private WebElement last6MonthsOption;
-	
+
 	@FindBy(xpath = "//ul[@id='menu2']//li[3]//a")
 	private WebElement last12MonthsOption;
-	
+
 	@FindBy(xpath = "//ul[@id='menu2']//li[4]//a")
 	private WebElement last24MonthsOption;
 
@@ -307,17 +307,17 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//ul[@id='menu2']//li[6]//a")
 	private WebElement customSearchOption;
-	
+
 	@FindBy(xpath = "//input[@id='custom-from']")
 	private WebElement customSearchFrom;
-	
+
 	@FindBy(xpath = "//table[@class='table-responsive']//tr//td//a[text()='Download']")
 	private WebElement downloadLink;
-	
+
 	@FindBy(xpath = "//embed[@id='plugin']")
 	private WebElement pDFDoc;
-	
-	
+
+
 	@FindBy(xpath="//ul[@class='dropdown-menu ng-valid ng-valid-date-disabled'][1]//button[@class='btn btn-default btn-sm pull-left']")
 	private WebElement customSearchFromLeftButton;
 
@@ -338,66 +338,66 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='otherPages ResultsTextwhenyouselectfromdropdown']//p")
 	private WebElement nonCustomSearchResultText;
-	
+
 	@FindBy(xpath = "//div[@ng-show='shiphistory == null' and not(contains(@class,'ng-hide'))]//p[contains(text(),'There are no premium payments available for the time period entered')]")
 	private WebElement noPremiumPaymentsText;
-	
+
 	@FindBy(xpath = "//div[@class='otherPages ResultsTextwhencustomsearch']//p")
 	private WebElement customSearchResultText;
 
 	@FindBy(xpath = "//a[@class='display-block collapse-expand learnmore' and @aria-controls='ShipTooltips' and contains(text(),'LEARN MORE ABOUT YOUR PAYMENT HISTORY')]")
 	private WebElement learnMoreLinkInitial;
-	
+
 	@FindBy(xpath = "//*[@id=\"paymentHistoryApp1\"]/div[1]/div/div/div/div[12]/div[2]/div/div/h3/a")
 	private WebElement learnMoreLinkExpanded;
-	
+
 	@FindBy(xpath= "//div[@id='ShipTooltips' and @aria-expanded='false']")
 	private WebElement learnMoreContentText_hidden;
 
 	@FindBy(xpath= "//div[@id='ShipTooltips' and @aria-expanded='true']")
 	private WebElement learnMoreContentText_shown;
-	
+
 	@FindBy(xpath ="//div[@id='datesEmptyError']//p")
 	private WebElement datesEmptyError;
-	
+
 	@FindBy(xpath ="//div[@id='futureDateError']//p")
 	private WebElement futureDateError;
-	
+
 	@FindBy(xpath = "//div[@id='dateRangeError']//p")
 	private WebElement dateRangeError;
-	
+
 	@FindBy(xpath = "//div[@ng-if='noCheckboxSelected == true']")
 	private WebElement noCheckboxSelected;
-	
+
 	@FindBy(xpath = "//div[@id='servicefailure']")
 	private WebElement paymentHistoryServerError;
 	// ^^^ note: added for F247601 Payment History SHIP testing	
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsTab;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Coverage & Benefits')]")
 	private WebElement coverageBenefitsHeader;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'VIEW PLAN DOCUMENTS')]")
 	private WebElement planDocumentsBtn;
-	
+
 	@FindBy(xpath = "//*[@id='49144037']")
 	protected WebElement pdpNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='15825500']")
 	protected WebElement medsuppNavTab;
-	
+
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
-	
+
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		CommonUtility.waitForPageLoad(driver, paymentOverviewSection,20);
 		 openAndValidate();
 	}
-	
+
 	public PaymentHistoryPage(WebDriver driver, boolean skipOpenAndValidation) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -520,10 +520,10 @@ public class PaymentHistoryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn, 5);
-		validateNew(paymentHistoryApp);
-		validateNew(oneTimePaymentBtn);
-		
-
+		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
+			validateNew(paymentHistoryApp);
+			validateNew(oneTimePaymentBtn);
+		}
 	}
 
 	public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -561,12 +561,12 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	/*
 	 * public OneTimePaymentPage OTPbtn1() throws InterruptedException{
-	 * 
+	 *
 	 * feebackpopupClose(); Thread.sleep(2000); onetimepaymentbtn.click();
 	 * System.out.println("clicked on make OTP button"); return new
 	 * OneTimePaymentPage(driver);
-	 * 
-	 * 
+	 *
+	 *
 	 * }
 	 */
 
@@ -760,11 +760,11 @@ public class PaymentHistoryPage extends UhcDriver {
 		/*
 		 * tbd waitforElement(MemAuthEditPay); if(!(MemAuthEditPay.isEnabled()))
 		 * { System.out.println("Edit/Setup Pay buton disabled");
-		 * 
+		 *
 		 * //waitforElement(SetUpNewPayment); //if (validate(SetUpNewPayment)){
 		 * // SetUpNewPayment.click(); // System.out.println(
 		 * "clicked on Setup New Payment button");
-		 * 
+		 *
 		 * return new OneTimePaymentPage(driver); } else return null;
 		 */
 
@@ -955,9 +955,9 @@ public class PaymentHistoryPage extends UhcDriver {
 
 		/*
 		 * waitforElement(AutoPayButton); AutoPayButton.click();
-		 * 
+		 *
 		 * waitforElement(SetUpNewPayment);
-		 * 
+		 *
 		 * if (validate(SetUpNewPayment)){ SetUpNewPayment.click();
 		 * System.out.println("clicked on Setup New Payment button"); return new
 		 * PaymentHistoryPage(driver); } else return null;
@@ -977,6 +977,7 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	public SetUpRecurringPage clickOnSetUPAutomaticPayment() throws Exception {
 		Thread.sleep(20000);
+		
 		waitforElement(SetUpAutomaticPaymentsButton);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Automatic Button");

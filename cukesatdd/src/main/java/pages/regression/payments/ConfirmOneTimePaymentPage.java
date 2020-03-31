@@ -53,9 +53,12 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(id = "closeButton")
 	private WebElement iPerceptionCloseButton;
-	
+
 	@FindBy(xpath = "//a[normalize-space(text())='Make a One-Time Payment']")
 	private WebElement MakeOneTimePaymentLink;
+
+	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
+	private WebElement OnlyOnePaymentRequestMessage;
 
 	public ConfirmOneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -79,7 +82,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 			}
 		}
 	}
-	
+
 	public OneTimePaymentSuccessPage confirmsPayment() {
 
 		try {
@@ -282,9 +285,11 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	}
 
 	public void OneTimeCCverification() {
-		validate(ConfirmationNumber);
-		PaymentsDataVerificationonConfirmationPage();
-		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+
+
+			validate(ConfirmationNumber);
+			PaymentsDataVerificationonConfirmationPage();
+			System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 
 	}
 	

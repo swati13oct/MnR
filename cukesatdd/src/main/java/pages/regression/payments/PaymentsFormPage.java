@@ -11,7 +11,7 @@ import atdd.framework.UhcDriver;
 
 public class PaymentsFormPage extends UhcDriver {
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(id = "routing-number")
