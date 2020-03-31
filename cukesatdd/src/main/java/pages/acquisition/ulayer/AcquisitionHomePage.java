@@ -403,7 +403,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage,testharnessurl);
 	}
-
+    
+	public String fetchEnvironmentUrls () {
+		if (MRScenario.environment.equals("offline")) {
+		  testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+		  return testSiteUrl;
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+			 return testSiteUrl;
+		}
+		else
+			testSiteUrl = AARP_ACQISITION_PAGE_URL;
+		    return testSiteUrl;
+	  }
+	
 	@Override
 	public void openAndValidate() {
 
