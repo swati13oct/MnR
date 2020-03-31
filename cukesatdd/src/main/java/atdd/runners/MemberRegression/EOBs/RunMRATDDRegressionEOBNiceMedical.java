@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionEOBShip.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBShip")
+jsonReport = "target/cucumber-RunMRATDDRegressionEOBNiceMedical.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBNiceMedical")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBShip.json" }, tags = { "@regressionMember", "@SHIP_EOBs" })
-public class RunMRATDDRegressionEOBShip {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBNiceMedical.json" }, tags = { "@regressionMember", "@NICE_MEDICAL" })
+public class RunMRATDDRegressionEOBNiceMedical {
 
 }

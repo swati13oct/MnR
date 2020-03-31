@@ -79,13 +79,13 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("docName", docName);
 			testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			if (planType.equals("PDP")) 
-				testInputInfoMap.put("expectedUrl", "/Individual/Direct_Member_Reimbursement_Form_PDP.pdf");
+				testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_PDP.pdf");
 			if (planType.equals("MAPD") && (memberType.contains("PREEFF") || memberType.contains("IND_EFF"))) 
 				testInputInfoMap.put("expectedUrl", "/Individual/Drug_Reimbursement_Form_MAPD.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","MAPD PRESCRIPTION");
+			testInputInfoMap.put("headerText","Member Information"); //note: use random text on the page, header text wasn't able to parsed successfully
 			testInputInfoMap.put("sampleBodyText","Use this form to request reimbursement for covered medications purchased at retail cost");
 			return testInputInfoMap; 
 		}
@@ -218,7 +218,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "https://www.uhcprovider.com/?rfid=UHCOContRD");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Hello");
+			testInputInfoMap.put("headerText","informed");
 			testInputInfoMap.put("sampleBodyText","Latest UnitedHealthcare Provider News");
 			return testInputInfoMap; 
 		}
