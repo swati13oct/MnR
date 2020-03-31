@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
@@ -86,6 +87,14 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
 	private WebElement homePageNotice;
 
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
+
+
+	
 	private static String REGIRATION_URL = "https://st1.healthsafe-id.com/protected/register?HTTP_TARGETPORTAL=MNR&HTTP_ERRORURL=https://stage-medicare.uhc.com/&HTTP_TARGETURL=https%3A%2F%2Fstage-medicare.uhc.com%2Fmember%2Fpost-sign-in.html%3Ftarget%3Drallydashboard%26portalIndicator%3DUHC&HTTP_ELIGIBILITY=P&HTTP_GRADIENTCOLOR1=%23003DA1&HTTP_GRADIENTCOLOR2=%2300A8F7&HSID_DOMAIN_URL=https://st1.healthsafe-id.com&USE_TEST_RECAPTCHA=true";
 
 	MRScenario loginScenario;
@@ -106,7 +115,11 @@ public class HSIDLoginPage extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(deepLinkUrl);
-		
+	}
+	
+	public void validateFooter() {
+		FooterPage footerPg=new FooterPage(driver);
+		footerPg.validateSignInPgFooter();
 	}
 
 	public void openAndValidate() {
@@ -241,7 +254,13 @@ public class HSIDLoginPage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-
+			try{
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+			}catch (NoAlertPresentException e){
+				System.out.println("No alert present");
+			}
+			
 
 
 			if(validate(homePageNotice)) {
@@ -265,6 +284,7 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
+			
 		}
 		else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
@@ -590,9 +610,14 @@ public class HSIDLoginPage extends UhcDriver {
 		int y=0;
 		while (y < 30) {
 			try {
-
 				if (validate(homePageNotice,0)) {
 					homePageNotice.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else	if (validate(homePageNotice2,0)) {
+					homePageNotice2.click();
+					CommonUtility.checkPageIsReady(driver);
+				} else if (validate(homePageNotice3,0)) {
+					homePageNotice3.click();
 					CommonUtility.checkPageIsReady(driver);
 				}
 

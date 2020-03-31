@@ -23,6 +23,8 @@ public class RecurringConfirmationPage extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(@class,'confirmation__number')]")
 	private WebElement ConfirmationNumber;
+	@FindBy(xpath = "//*[contains(text(),'Payment Method:')]")
+	private WebElement PaymentMethod;
 
 	public RecurringConfirmationPage(WebDriver driver) {
 		super(driver);
@@ -47,15 +49,15 @@ public class RecurringConfirmationPage extends UhcDriver {
 		}
 	}
 	public void validateEFTRecurrVerification() {
-		validate(ConfirmationNumber);
+		validate(PaymentMethod);
 		PaymentsDataVerificationonConfirmationPage();
-		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		System.out.println("Your Confimation Number is : " + PaymentMethod.getText());
 	}
 
 	public void validateCCRecurrVerification() {
-		validate(ConfirmationNumber);
+		validate(PaymentMethod);
 		PaymentsDataVerificationonConfirmationPage();
-		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		System.out.println("Your Confimation Number is : " + PaymentMethod.getText());
 	}
 
 	@Override

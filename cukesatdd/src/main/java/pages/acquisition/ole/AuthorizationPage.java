@@ -24,7 +24,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(xpath= "//*[contains(@id,'ole-form-next-button')]")
 	private WebElement NextBtn;
 	
 	@FindBy(id = "ole-form-back-button")
@@ -112,7 +112,7 @@ public class AuthorizationPage extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, PageHeader,30);
-		if(PageHeader.getText().contains("Authorizations"))
+		if(PageHeader.getText().contains("Authorization"))
 			System.out.println("Page header is Displayed : "+PageHeader.getText());
 		else
 			Assert.fail("Error in validating the Authorization page loaded");
