@@ -113,4 +113,4 @@ Feature: Plan Recommendation Engie flow - Verify Doctors page functionalities in
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsName | isMultiDoctor |
       |   10001 | NO            | New York    | NA            | None         | Travel       |             |               |
-      |   35034 | YES           | Bibb County | NA            | None         | Travel       | robert      | YES           |
+      |   35034 | YES           | Bibb County | NA            | None         | Travel       | robert      | NO            |

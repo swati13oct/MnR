@@ -304,7 +304,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 				nextPageName = "Pharmacy";
 				nextPagePercentage = "60%";
 				currrentPagePercentage = "50%";
-				if (currentPageName.contains("DRUGSKIP"))
+				if (currentPageName.contains("DRUG COSTSSKIP"))
 					if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NA"))) {
 						nextPageName = "Additional";
 						nextPagePercentage = "70%";

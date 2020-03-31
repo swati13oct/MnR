@@ -122,7 +122,8 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(2)>a")
 	private WebElement headerPrescriptionLink;
 
-	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(3)>a")
+	//@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(3)>a")
+	@FindBy(linkText = "Get a Plan Recommendation")
 	private WebElement headerGetaplanrecommendationLink;
 
 	@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(4)>a")

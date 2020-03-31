@@ -148,7 +148,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup           | sue         | YES           | skip          | Yes,No,No,Yes                 | Lower                |
+      |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup           | robert      | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F384284
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD zero drug flow functions in PRE Mobile
@@ -211,7 +211,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | MA            | Medicaid     | Care Away    | lookup           | sue         | YES           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Higher               |
+      |   35034 | YES           | Bibb County | NA            | Medicaid     | Care Away    | lookup           | robert      | NO           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Higher               |
 
   @PRE @planrecommandonationmobile @DKmobile @DKskipdrugmobile @F384284
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont know skip drug flow functions in PRE Mobile
@@ -240,8 +240,8 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
     Then user validate elements in loading page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup           | sue         | YES           | skip          | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | New York | NA            | None         | Another Part | lookup           | sue         | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @DKmobile @DKzerodrugmobile @F384284
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont know zero drug flow functions in PRE Mobile
@@ -271,4 +271,4 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | MAPD          | Condition    | Care Away    | willing to use   |             |               | add           | Yes,No,No,Yes                 | Lower                |
+      |   10001 | NO            | New York | NA            | Condition    | Care Away    | willing to use   |             |               | add           | Yes,No,No,Yes                 | Lower                |
