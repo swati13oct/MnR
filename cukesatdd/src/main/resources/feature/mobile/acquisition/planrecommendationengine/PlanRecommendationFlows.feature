@@ -58,7 +58,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
       |   10003 | NO            | New York | PDP           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            |
 
-  @PRE @planrecommandonationmobile @MAmobile @F384284
+  @PRE @planrecommandonationmobile @MAmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MA flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -87,7 +87,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       |   10003 | NO            | New York    | MA            | None         | Travel       | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                |
       |   35034 | YES           | Bibb County | MA            | Medicaid     | Care Away    | want to use      |             |               | No,No,No,No                   | Higher               |
 
-  @PRE @planrecommandonationmobile @MAPDmobile @F384284
+  @PRE @planrecommandonationmobile @MAPDmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -120,7 +120,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10003 | NO            | New York | MAPD          | Facility     | Travel       | lookup           | sue         | YES           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonationmobile @MAPDmobile @MAPDskipdrugmobile @F384284
+  @PRE @planrecommandonationmobile @MAPDmobile @MAPDskipdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD skip drug flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -150,7 +150,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup           | robert      | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F384284
+  @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD zero drug flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -180,7 +180,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | New York | MAPD          | Condition    | Care Away    | want to use      |             |               | add           | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonationmobile @DKmobile @F384284
+  @PRE @planrecommandonationmobile @DKmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont Know flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -213,7 +213,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   35034 | YES           | Bibb County | NA            | Medicaid     | Care Away    | lookup           | robert      | NO           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Higher               |
 
-  @PRE @planrecommandonationmobile @DKmobile @DKskipdrugmobile @F384284
+  @PRE @planrecommandonationmobile @DKmobile @DKskipdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont know skip drug flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -243,7 +243,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | New York | NA            | None         | Another Part | lookup           | sue         | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonationmobile @DKmobile @DKzerodrugmobile @F384284
+  @PRE @planrecommandonationmobile @DKmobile @DKzerodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont know zero drug flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile

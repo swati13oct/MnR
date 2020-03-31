@@ -247,7 +247,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 				nextPageName = "Pharmacy";
 				nextPagePercentage = "53%";
 				currrentPagePercentage = "20%";
-				if (currentPageName.contains("DRUGSKIP")) {
+				if (currentPageName.contains("DRUG COSTSSKIP")) {
 					nextPageName = "NULL";
 					nextPagePercentage = "NULL";
 				}
