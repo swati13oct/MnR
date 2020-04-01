@@ -2,35 +2,30 @@ package acceptancetests.memberredesign.expalnationofbenefits;
 
 import gherkin.formatter.model.DataTableRow;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
+import pages.regression.explanationofbenefits.EobApiResponse;
 import pages.regression.testharness.TestHarness;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-//import gherkin.formatter.model.DataTableRow;
+import cucumber.api.java.en.When;
 import pages.regression.accounthomepage.AccountHomePage;
-//import pages.regression.explanationofbenefits.EOBPage;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class EobStepDefinition {
 	@Autowired
@@ -40,318 +35,424 @@ public class EobStepDefinition {
 		return loginScenario;
 	}
 
-	/**
-	 *@throws InterruptedException 
-	 * @toDo: get the required parameters from the feature files
-	 */
-
-	@Given("^registered AMP with for EOB flow$")
-	public void registered_AMP_with_attribute_eob_aarp(DataTable memberAttributes) throws InterruptedException{
-		//get the required parameters from the feature files
-		WebDriver wd = getLoginScenario().getWebDriver();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		List<DataTableRow> memberAttributesRow = memberAttributes
-				.getGherkinRows();
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
 		}
-
-		String category = memberAttributesMap.get("Member Type");
-
-		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
-		List<String> desiredAttributes = new ArrayList<String>();
-		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
-				.hasNext();) {
-			{
-				String key = iterator.next();
-				desiredAttributes.add(memberAttributesMap.get(key));
-			}
-
-		}
-		System.out.println("desiredAttributes.." + desiredAttributes);
-
-		Map<String, String> loginCreds = loginScenario
-				.getUMSMemberWithDesiredAttributes(desiredAttributes);
-
-		String userName = null;
-		String pwd = null;
-		if (loginCreds == null) {
-			// no match found
-			System.out.println("Member Type data could not be setup !!!");
-			Assert.fail("unable to find a " + desiredAttributes + " member");
-		} else {
-			userName = loginCreds.get("user");
-			pwd = loginCreds.get("pwd");
-			System.out.println("User is..." + userName);
-			System.out.println("Password is..." + pwd);
-			getLoginScenario()
-			.saveBean(LoginCommonConstants.USERNAME, userName);
-			getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
-			getLoginScenario().saveBean(LoginCommonConstants.CATOGERY, category);
-		}
-		EOBPage eobPage = new EOBPage(wd);
-		eobPage.loginToDashboardPage(userName);
-		if (eobPage != null) {
-			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-		}
-
-	}
+		return memberAttributesMap;
+	}	
 
 
 	/**
-	 *@toDo: get the required parameters from the feature files 
+	 * This method is to validate the How to read Medical EOB link and Video link is working
 	 */
+	@Then("^the user validates Learn More how to read medical eob PDF$")
+	public void the_user_validates_how_to_read_medical_eob_PDF() {
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 
-	@Then("^the user navigates to EOB page and validates the page$")
-	public void the_user_navigates_to_EOB_page_and_validates_the_page(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String dateRange = memberAttributesMap.get("Date Range");
-		String planType  = memberAttributesMap.get("Plan Type");
-		String eobTypeData = memberAttributesMap.get("EOB Type");
-
-		getLoginScenario().saveBean(CommonConstants.PLAN_TYPE, planType);
-
-		//Pass the direct URL to validate the page
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.navigateDirectToEOBPag();		 
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);
-		if(eobPage!=null){
-			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-			System.out.println("user is on EOB page");
-		} 
-	}
-
-	/**
-	 *@toDo: This method is to validate that user navigates to EOB page
-	 */
-
-	@Then("^the user navigates to EOB page$")
-	public void the_user_navigates_to_EOB_page() {
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.navigateDirectToEOBPag();
-		if(eobPage!=null){
-			getLoginScenario().saveBean(PageConstants.MEDICAL_EOB_PAGE,
-					eobPage);
-		} 
-	}
-
-	/**
-	 *@toDo: This method is to validate the How to read Medical EOB link and Video link is working
-	 */
-
-	@And("^the user validates how to read medical eob PDF$")
-	public void the_user_validates_how_to_read_medical_eob_PDF(DataTable givenAttributes) {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}
-
-			String eobTypeData = memberAttributesMap.get("EOB Type");
+		if (eobCount>0) {
+			EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 			if(eobTypeData.toLowerCase().contains("medical")) {
-					EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateReadPDF();		 
+				eobPage.validateReadPDF();		 
+			} else {
+				eobPage.validateLearnMoreText();
 			}
-	}
-
-	/**
-	 *@toDo:  this method validates size/date/link displayed on UI for each EOB
-	 */
-
-	@Then("^the user validates EOB statments displayed$")
-	public void the_user_validates_EOB_statments_displayed() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-		eobPage.validateEachEOBonUI();		 
-	}
-
-	/**
-	 *@toDo: the method validates the EOB Type and Date range for MAPD members
-	 */
-
-	@Then("^the user validates EOB type and Date Range for MAPD$")
-	public void the_user_validates_EOB_type_and_Date_Range_for_MAPD(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		} else {
+			System.out.println("Skip step because there is 0 EOB");
 		}
-		String planType  = memberAttributesMap.get("Plan Type");
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-		System.out.println(planType);
-		eobPage.validateDropDowns(planType);		 
 	}
 
 	/**
-	 *@toDo: the method validates EOB video link on EOB page
+	 * the method validates site leaving popup on EOB page
 	 */
-
-	@And("^the user validates How to read your Medical EOB video$")
-	public void the_user_validates_how_to_read_medical_eob_Video() {
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.MEDICAL_EOB_PAGE);
-		eobPage.validateEobVideo();
-	}
-
-	/**
-	 *@toDo: the method validates Pagination functionality on EOB page
-	 */
-
-	@And("the user validates pagination functionality")
-	public void validate_pagination(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-	}
-
-	/**
-	 *@toDo: the method validates site leaving popup on EOB page
-	 */
-
-	@Then("^the user validates site leaving pop up$")
+	@Then("^the user validates site leaving pop up after clicking Adobe link$")
 	public void user_validates_site_leaving_poup(){
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateSiteLeaveingPopUP();
 	}
 
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(EobCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario()
+			.getBean(EobCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
+
 	/**
-	 *@toDo: the method validates the date range functionality on EOB page
+	 * the method validates the date range functionality on EOB page
 	 */	
-
-	@And("^the user slects the desired date range$")
-	public void user_selects_date_range(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		String dateRange = memberAttributesMap.get("Date Range");
-		String planType  = memberAttributesMap.get("Plan Type");
-		String eobTypeData   = memberAttributesMap.get("EOB Type");
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);
-	}
-
-	/**
-	 *@toDo:  the method validates the content displayed on EOB page
-	 */
-
-	@Then("^the user validates content displayed on EOB page$")
-	public void user_validates_content_displayed_on_EOB_page(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		String planType = memberAttributesMap.get("Plan Tab");
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-
-		eobPage.navigatePlanTabs(planType);
-		eobPage.validateDropDowns(planType);
-
-	}
-
-	/**
-	 *@toDo: the method validates the content displayed on EOB page
-	 */
-
-	@Then("^the user validates content displayed on EOB page without combo tabs$")
-	public void user_validates_content_displayed_on_EOB_page_without_combo_tabs(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		String planType = memberAttributesMap.get("Plan Type");
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateDropDowns(planType);
-	}
-
-	/**
-	 *@toDo: the method is used to select the date range
-	 */
-
+	@SuppressWarnings("unchecked")
 	@And("^the user selects the desired date range$")
-	public void user_selects_the_desired_date_range(DataTable givenAttributes){
-		/*List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
-		String planType = memberAttributesMap.get("Plan Type");
-		String eobTypeData = memberAttributesMap.get("EOB Type");
+	public void user_selects_date_range(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
 		String dateRange = memberAttributesMap.get("Date Range");
+		getLoginScenario().saveBean(EobCommonConstants.DATE_RANGE, dateRange);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String eobTypeData=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.selectDateRange(dateRange, planType, eobTypeData);*/
+		HashMap<String, Integer> searchResultMap=eobPage.selectDateRange(planType,dateRange, eobTypeData);
+		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT, searchResultMap.get(dateRange));
 
+		//note: store info to display at end of test
+		List<String> searchNote=(List<String>) getLoginScenario()
+				.getBean(EobCommonConstants.TEST_RESULT_NOTE);
+		if (searchNote==null) {
+			searchNote=new ArrayList<String>();
+			searchNote.add("----- TEST NOTE ------------------------------");
+			String tmp=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+			if (tmp==null) 
+				searchNote.add("DREAM EOB");
+			else
+				searchNote.add("EOB TYPE="+tmp);
+		}
+		searchNote.add("Date range='"+dateRange+"' has EOB count="+searchResultMap.get(dateRange));
+		getLoginScenario().saveBean(EobCommonConstants.TEST_RESULT_NOTE,searchNote);
+
+		//note: track the eob count for each search range for later validation
+		HashMap<String, Integer> eobCountMap=(HashMap<String, Integer>) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT_MAP);
+		if (eobCountMap==null) {
+			eobCountMap=new HashMap<String, Integer>();
+		}
+		eobCountMap.putAll(searchResultMap);
+		System.out.println("TEST - back from search: hashMap="+Arrays.asList(eobCountMap)); 
+		getLoginScenario().saveBean(EobCommonConstants.EOB_COUNT_MAP, eobCountMap);
+	}
+
+	@Then("^the user obtains API response info for validation$")
+	public void getApiResponse() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		
+		String eobType="";
+		String apiResponseJson="";
+		if (eobTypeData==null) {
+			eobType="dream";
+			//note: there are two requests for dream, need to fix up the string
+			List<String> tmpResponsJson=eobPage.getApiRequestUrl(planType, memberType, eobType);
+			String m_requestUrl=tmpResponsJson.get(0);
+			String r_requestUrl=tmpResponsJson.get(1);
+			System.out.println("TEST - m_requestUrl="+m_requestUrl);
+			System.out.println("TEST - r_requestUrl="+r_requestUrl);
+			
+			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
+			String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
+
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
+
+			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
+
+			//note: merge the two into one
+			if (r_eobResponseObj.getNumEobs()>0) 
+			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			
+			eobResponseObj.sortListOfEob();
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+			
+			/* tbd 
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", eobResponseObj!=null);
+
+			eobType="dream-r";
+			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
+
+			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing", r_eobResponseObj!=null);
+
+			//note: merge the two into one
+			if (r_eobResponseObj.getNumEobs()>0) 
+			eobResponseObj.addListofEob(r_eobResponseObj.getListOfEob());
+			
+			eobResponseObj.sortListOfEob();
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+			*/
+		} else {
+			eobType=eobTypeData;
+			apiResponseJson=eobPage.getInfoFromApi(planType, memberType, eobType);
+
+			EobApiResponse eobResponseObj=eobPage.parseApiResponse(apiResponseJson);
+			Assert.assertTrue("PROBLEM - unable to parse API response successfully for further testing. apiResponseJson="+apiResponseJson, eobResponseObj!=null);
+			getLoginScenario().saveBean(EobCommonConstants.API_EOB_RESPONSE, eobResponseObj);
+		}
+		
+		
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO")) 
+			isComboUser=true;
+		String memberId=eobPage.getMemberId(isComboUser, planType);
+		getLoginScenario().saveBean(EobCommonConstants.MEMBERID, memberId);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Then("^the user validates the eob count for all available search ranges$") 
+	public void validateEobCountForAllSearchRanges(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String flagZeoEob_str = memberAttributesMap.get("Flag Zero EOB User");
+		Assert.assertTrue("PROBLEM - 'Flag Zero EOB User' input should either be 'true' or 'false' | Actual='"+flagZeoEob_str+"'", 
+				flagZeoEob_str.equalsIgnoreCase("true")|| flagZeoEob_str.equalsIgnoreCase("false")); 
+		boolean flagZeoEob=Boolean.valueOf(flagZeoEob_str);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		HashMap<String, Integer> eobCountMap=(HashMap<String, Integer>) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT_MAP);
+		System.out.println("TEST - FINAL : hashMap="+Arrays.asList(eobCountMap)); 
+
+		if (planType.contains("SHIP")) {
+			int last90Days=eobCountMap.get("Last 90 Days");
+			int last3_6months=eobCountMap.get("Last 3-6 months");
+			int last6_12months=eobCountMap.get("Last 6-12 months");
+			int last12_18months=eobCountMap.get("Last 12-18 months");
+
+			if (flagZeoEob) { 
+				Assert.assertTrue("PROBLEM - this test user has no EOB on any Search Range, while the UI validation is completed, it may not be able to validate all coverage", 
+						(last90Days>0)	|| (last3_6months>0)
+						|| (last6_12months>0) 
+						|| (last12_18months>0));
+			} else {
+				System.out.println("TEST - flagZeoEob=false - this test user has no EOB on any Search Range, while the UI validation is completed, it may not be able to validate all coverage");
+			}
+
+		} else {
+			int last90Days=eobCountMap.get("Last 90 Days");
+			int last6months=eobCountMap.get("Last 6 months");
+			int last12months=eobCountMap.get("Last 12 months");
+			int last18months=eobCountMap.get("Last 18 months");
+			int customSearch=eobCountMap.get("Custom Search");
+
+			if (flagZeoEob) { 
+				Assert.assertTrue("PROBLEM - this test user has no EOB on any Search Range, while the UI validation is completed, it may not be able to validate all coverage", 
+						(last90Days>0)	|| (last6months>0)
+						|| (last12months>0) || (last18months>0)
+						|| (customSearch>0));
+			} else {
+				System.out.println("TEST - flagZeoEob=false - this test user has no EOB on any Search Range, while the UI validation is completed, it may not be able to validate all coverage");
+			}
+			Assert.assertTrue("PROBLEM - EOB count for 'last90Days' result should be less than or equal to 'last6months' result.  "
+					+ "Actual: last90Days='"+last90Days+"' | last6months='"+last6months+"'", 
+					(last90Days<=last6months));
+
+			Assert.assertTrue("PROBLEM - EOB count for 'last6months' result should be less than or equal to 'last12months' result.  "
+					+ "Actual: last6months='"+last6months+"' | last12months='"+last12months+"'", 
+					(last6months<=last12months));
+
+			Assert.assertTrue("PROBLEM - EOB count for 'last12months' result should be less than or equal to 'last18months' result.  "
+					+ "Actual: last12months='"+last12months+"' | last18months='"+last18months+"'", 
+					(last12months<=last18months));
+
+			Assert.assertTrue("PROBLEM - EOB count for 'customSearch' result should be less than or equal to 'last18months' result.  "
+					+ "Actual: customSearch='"+customSearch+"' | last18months='"+last18months+"'", 
+					(customSearch<=last18months));
+		}
+	}
+
+	@When("^the user selects Custom Search with blank From and To Date values$")
+	public void user_selects_date_range_invalidCustSearch_blankDates(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.doInvalidCustomSearchBlankDate();
+	}
+
+	@Then("^the user validates blank Date errors$")
+	public void validate_date_range_invalidCustSearch_blankDates_error(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateBlankDateFieldError();
+	}
+
+	@When("^the user selects Custom Search with future date for From and To Date values$")
+	public void user_selects_date_range_invalidCustSearch_futureDates(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.doInvalidCustomSearchFutureDate();
+	}
+
+	@Then("^the user validates future Date errors$")
+	public void validate_date_range_invalidCustSearch_futureDates_error(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateFutureDateError();
+	}
+
+	@When("^the user selects Custom Search with To Date older From Date values$")
+	public void user_selects_date_range_invalidCustSearch_ToOlderThanFrom(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.doInvalidCustomSearchToDateOlderThanFromDate();
+	}
+
+	@Then("^the user validates To Date older than From Date errors$")
+	public void validate_date_range_invalidCustSearch_ToOlderThanFrom_error(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateToDateOlderThanFromDateError();
+	}
+
+	@When("^the user selects Custom Search with Date Range greater than 18 months")
+	public void user_selects_date_range_invalidCustSearch_rangeGreaterThanEighteenMonths(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.doInvalidCustomSearchRangeGreaterThanEighteenMonths();
+	}
+
+	@Then("^the user validates greater than 18 months error$")
+	public void validate_date_range_invalidCustSearch_rangeGreaterThanEighteenMonths_error(){
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateRangeGreaterThanEighteenMonthsError();
+	}
+
+	@Then("^the user validates the header section content$")
+	public void validate_headerSection() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateHeaderSectionContent(planType);
+		//note: if multiple plans of the same planType, no tab will be shown
+		eobPage.validateComboTab(memberType);
+	}
+	
+	@Then("^the user validates the header section content on DREAM EOB$")
+	public void validate_headerSection_DREAMEOB() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateHeaderSectionContent_DREAMEOB(planType);
+	}
+	
+	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")
+	public void validate_sspContent() {
+		ClaimsSummaryPage claimsSummPg = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE);
+		WebDriver d=claimsSummPg.driver;
+		boolean doBasicPgValidation=false;
+		EOBPage eobPage =  new EOBPage(d, doBasicPgValidation);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if(memberType.contains("GROUP"))
+			Assert.assertTrue("PROBLEM - SSP Group user should be able to see the EOB sub tab on top menu for Claims option", eobPage.findEobOptionUnderClaims()); 
+		else
+			Assert.assertTrue("PROBLEM - SSP Individual user should NOT be able to see the EOB sub tab on top menu for Claims option", !eobPage.findEobOptionUnderClaims()); 
+		//keep  eobPage.validateSspContent();
+	}
+
+	@Then("^the user validates the eob page content for PHIP$")
+	public void validate_phipContent() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validatePhipContent();
+	}
+	
+	@Then("^the user validates Need Help section$")
+	public void validateNeedHelpSection() throws InterruptedException{ 
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateNeedHelpSection(planType, memberType);
+	}
+
+	@And("^the user selects the eob type$")
+	public void user_selects_eobType(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String eobTypeData   = memberAttributesMap.get("EOB Type");
+		getLoginScenario().saveBean(EobCommonConstants.EOB_TYPE, eobTypeData);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.selectEobType(planType, eobTypeData);
 	}	
 
 
 	/**
-	 *@toDo: the method validates the eob count
+	 * the method validates the content displayed on EOB page
 	 */
+	@Then("^the user validates content displayed on EOB page without EOB type dropdown$")
+	public void user_validates_content_displayed_on_EOB_page_without_combo_tabs(){
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateEobTypeDropDowns(planType);
+	}
 
-	@Then("^the user validates EOB count$")
-	public void user_validated_EOB_Count(DataTable givenAttributes){
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
+	@Then("^the user validates search result section content$")
+	public void user_validate_searchResult() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		if (ui_eobResultCount>0) {
+			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
+			eobPage.validateTextElements(planType, memberType, eobTypeData);
+			eobPage.validateEOBStatements(ui_eobResultCount, eobApiResponse);
+		} else {
+			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
+		} 
+	}
+	
+	@Then("^the user validates EOB count between API and UI are the same$")
+	public void user_validate_api_ui_count_match() {
+		int eobResultCount= (Integer) getLoginScenario().getBean(EobCommonConstants.UI_EOB_COUNT);
+		EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
+		int eobCountFromApi=eobApiResponse.getNumEobs();
+		Assert.assertTrue("PROBLEM - number of EOB count is not the same between API and UI.  UI has '"+eobResultCount+"' | API has '"+eobCountFromApi+"' ", eobResultCount==eobCountFromApi);
+	}
+	
+	
+	@Then("^the user validates search result section content for DREAM EOB$")
+	public void user_validate_searchResult_dream() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String eobTypeData = (String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
+		
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
+		
+		if (ui_eobResultCount>0) {
+			EobApiResponse eobApiResponse=(EobApiResponse) getLoginScenario().getBean(EobCommonConstants.API_EOB_RESPONSE);
+			//TODO comment out for now b/c current UI not working as copy deck version
+			//eobPage.validateTextElements(planType, memberType, eobTypeData);
+			eobPage.validateEOBStatements_dream(ui_eobResultCount, eobApiResponse);
+		} else {
+			System.out.println("TEST - EOB has no EOB for this search period, skip the text validation");
 		}
-		String eobCount = memberAttributesMap.get("EOB COUNT");
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateEOBStatements(eobCount);
 	}
 
-	@And("^the user clicks on first eob from the list$")
-	public void the_user_clicks_on_first_eob_from_the_list() throws InterruptedException {
-
-		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-
-		eobPage.clickOnEob();
+	@And("^the user clicks on first eob from the list to validate pdf$")
+	public void the_user_clicks_on_first_eob_from_the_list() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
+		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
+		if (eobCount>0) {
+			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+			eobPage.validateEobEntries(planType, memberId);
+		} else {
+			System.out.println("Skip step because there is 0 EOB");
+		}
 	}
 
-	@Then("^the user navigates to EOB page_hsid$")
+	@And("^the user clicks on first eob from the list to validate pdf for DREAM EOB$")
+	public void the_user_clicks_on_first_eob_from_the_list_dream() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
+		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
+		if (eobCount>0) {
+			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+			eobPage.validateEobEntries_dream(planType, memberId);
+		} else {
+			System.out.println("Skip step because there is 0 EOB");
+		}
+	}
+	
+	@Then("^the user navigates to EOB page$")
 	public void user_views_EOBpagehsid() throws InterruptedException {   
-		System.out.println("****the user navigates to EOB page_hsid****");
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		System.out.println("****the user navigates to EOB page****");
 		pages.regression.explanationofbenefits.EOBPage eobPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
@@ -363,23 +464,18 @@ public class EobStepDefinition {
 			eobPage = accountHomePage.navigateDirectToEOBPag();
 		}
 
-		if (eobPage!=null){
-			getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
-			System.out.println("user is on the EOB page"); 
-		}     
-		else
-			Assert.assertTrue("Issue : EOB Page is not Displayed", eobPage!=null);
-	}
-
-	@And("^the user gets the error message for PHIP member$")
-	public void user_gets_error_message_PHIP(){
-		EOBPage eobPage = (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validatePHIPErorrMessage();	
+		Assert.assertTrue("PROBLEM - EOB Page is not Displayed", eobPage!=null);
+		if (memberType.contains("COMBO")) 
+			eobPage.goToSpecificComboTab(planType);
+		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		System.out.println("user is on the EOB page"); 
+		eobPage.waitForEobPageToLoad();
 	}
 
 
 
 
+	//--------------------------------------------------------------
 	/**
 	 * DREAM EOB Step Definition
 	 */
@@ -426,7 +522,7 @@ public class EobStepDefinition {
 		eobPage.validate_MedicalOnlyEOB();
 
 	}
-	
+
 	@Then("^the user validates the EOB table for Rx only EOBs$")
 	public void the_user_validates_the_EOB_table_for_Rx_only_EOBs() throws Throwable {
 		DreamEOBPage eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
@@ -455,6 +551,24 @@ public class EobStepDefinition {
 		String dateRange = memberAttributesMap.get("Date Range");
 		eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.selectDateRange(dateRange);
+
+	}
+
+
+	@Then("^the user selects the desired eob type on Dream EOB Page$")
+	public void the_user_slects_the_desired_eobType_on_Dream_EOB_Page(DataTable arg1) throws Throwable {
+		DreamEOBPage eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String dateRange = memberAttributesMap.get("Date Range");
+		eobPage = (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.selectDateRange(dateRange);
 	}
 
 	@Then("^the user validates EOB count on Dream EOB Page$")
@@ -470,20 +584,11 @@ public class EobStepDefinition {
 		String eobCount = memberAttributesMap.get("EOB COUNT");
 		DreamEOBPage eobPage =  (DreamEOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateEOBStatements(eobCount);
-}
+	}
 
 	@Then("^the user validates EOB PDF size is not (\\d+)kb on Dream EOB Page$")
 	public void the_user_validates_EOB_PDF_size_is_not_kb_on_Dream_EOB_Page(int arg1) throws Throwable {
 	}
-
-	/*@After
-	public void tearDown() {
-
-		WebDriver wd = (WebDriver) getLoginScenario().getBean("webDriver");
-		if(wd!=null){
-		wd.quit();
-		}*/
-
 
 }
 

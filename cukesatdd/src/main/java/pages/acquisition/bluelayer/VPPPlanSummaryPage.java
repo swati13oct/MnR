@@ -299,7 +299,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//input[contains(@id,'compare-plan-')]/following-sibling::label")
 	private List<WebElement> planCompareList;
 
-	@FindBy(xpath = "//span[contains(@class,'single-added-text show')]/following::a[contains(text(),'View Plan')][1]")
+	@FindBy(xpath = "//span[contains(@class,'single-added-text ng-binding show')]/following::a[contains(text(),'View Plan Details')][1]")
 	private WebElement ViewPlanLink_AddedToCompare;
 	
 	@FindBy(xpath = "//div[contains(@class,'plan-overview-list')]//div[contains(@id,'plan-list-')][not (contains(@class,'ng-hide'))]//div[contains(@class,'module-plan-overview')]//div[not (contains(@class,'ng-hide'))]//a[contains(text(),'View Plan Details')]")
@@ -815,14 +815,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
             WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
                     + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			jsClickNew(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 			
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			jsClickNew(SNPmoreDetailsLink);
+			SNPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for SNP plan"+planName);
 
 		}else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
@@ -830,7 +830,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);	
 					validate(MAmoreDetailsLink);
 					
-					jsClickNew(MAmoreDetailsLink);
+					MAmoreDetailsLink.click();
 					System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -913,7 +913,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
             if (planType.equalsIgnoreCase("PDP")) {
                             CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
                             sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-                            pdpPlansViewLink.click();
+                            jsClickNew(pdpPlansViewLink);
                             System.out.println("PDP Plan Type Clicked");
                             CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -926,12 +926,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
             			driver.navigate().refresh();
                             CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
                             sleepBySec(2);
-                            jsClickNew(msPlansViewLink);
+                            msPlansViewLink.click();
                            // CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
             } else if (planType.equalsIgnoreCase("SNP")) {
             			sleepBySec(5);
         	            CommonUtility.checkPageIsReady(driver);
-        	            jsClickNew(snpPlansViewLink);
+        	            snpPlansViewLink.click();
         	            CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
             }
           }
@@ -1864,7 +1864,7 @@ public WelcomePage EnrollmentValidationChronic(String PlanName) throws Interrupt
 public ComparePlansPageBlayer clickOnCompareLink(){
 		
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 		try {
@@ -2421,8 +2421,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
     	}
     public void deselectAddToCompareinAARP(String planName){
     	try{
-    	//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='ng-scope']"));
-    	WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
+    	WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+    	//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
     		addToCompareCheck.click();
     		System.out.println("Add to compare checkbox has been deselected");
     		Assert.assertTrue("deselected add to compare ", true);
@@ -3126,7 +3126,7 @@ public void validateEmailOption(String planType) {
 	emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 	emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 	emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
-	jsClickNew(emailPlanSummarySendButton);
+	emailPlanSummarySendButton.click();
 	validateNew(emailPlanSummarySuccessText, 15);
 	String expectedSuccess1="Thank you!";
 	String expectedSuccess2="The email with your information will arrive shortly.";

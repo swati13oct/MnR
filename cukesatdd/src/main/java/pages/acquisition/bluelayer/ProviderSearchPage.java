@@ -63,7 +63,7 @@ public class ProviderSearchPage extends UhcDriver {
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
@@ -177,7 +177,8 @@ public class ProviderSearchPage extends UhcDriver {
 	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
 	validateNew(Checkcoverage);
-	jsClickNew(Checkcoverage);
+	Checkcoverage.click();
+	//jsClickNew(Checkcoverage);
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
@@ -269,8 +270,8 @@ public PlanDetailsPage selectsProviderFromVppPlanDetailsPage() {
 		jsClickNew(Viewsavebtn);
 
 		validateNew(Checkcoverage);
-		
-		jsClickNew(Checkcoverage);
+		Checkcoverage.click();
+		//jsClickNew(Checkcoverage);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

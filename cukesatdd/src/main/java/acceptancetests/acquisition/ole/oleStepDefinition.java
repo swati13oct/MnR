@@ -1279,7 +1279,7 @@ public class oleStepDefinition {
 			MemberDetailsMap.put("First Name", (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME));
 			MemberDetailsMap.put("Last Name", (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME));
 			MemberDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-
+			MemberDetailsMap.put("Mailing_State", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE));
 			boolean Validation_Status = personalInformationPage.validate_member_details(MemberDetailsMap);
 			if(Validation_Status){
 				System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Passed");

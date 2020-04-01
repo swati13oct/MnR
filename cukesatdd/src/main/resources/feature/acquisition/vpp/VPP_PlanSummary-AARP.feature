@@ -34,8 +34,8 @@ Feature: 1.01. ACQ- VPP Plan Summary Page in AARP
     Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in AARP Site
     Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
     Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
-#    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
-#    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
+    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
+    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
     Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans
     Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans
     Then the user clicks on Enroll Now for AARP site and validates the Welcome to OLE Page

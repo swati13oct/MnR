@@ -22,8 +22,8 @@ public class KeywordSearch extends GlobalWebElements {
 	private WebElement textonpage ;
 	
 	public void url(){
-		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare"));
+		System.out.println("PageTitle " + driver.getCurrentUrl());
+		Assert.assertTrue(driver.getCurrentUrl().contains("q=medicare"));
         try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
