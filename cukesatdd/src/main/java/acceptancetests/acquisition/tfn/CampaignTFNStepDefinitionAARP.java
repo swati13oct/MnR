@@ -273,6 +273,89 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	tfnPage.navigateToPDPPlans();
 	tfnPage.validateFederalTFN(TFN_Xpath);
 	}
+	
+
+@Then("^the user navigates to MA Plan Details Page and validates Federal TFN$")
+public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = "90210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "MA";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user navigates to PDP Plan Details Page and validates Federal TFN$")
+public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = "90210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "PDP";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user navigates to SNP Plan Details Page and validates Federal TFN$")
+public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = "80210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "SNP";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user navigates to MA OLE Page and validates Federal TFN$")
+public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	String Zip = "90210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "MA";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToOLE(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+}
+
+@Then("^the user navigates to PDP OLE Page and validates Federal TFN$")
+public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	String Zip = "90210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "PDP";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToOLE(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user navigates to SNP OLE Page and validates Federal TFN$")
+public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	String Zip = "80210";
+	tfnPage.SubNavPlanSearch(Zip);
+	String PlanType = "SNP";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToOLE(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+
 }
 
 

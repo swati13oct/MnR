@@ -14,6 +14,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -22,6 +23,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.PlanDetailsPage;
 
 
 
@@ -384,6 +386,160 @@ public class CampaignTFNPage extends UhcDriver {
 	public void navigateToPDPPlans() {
 	(driver.findElement(By.xpath("//a[contains(@dtmname,'PDP:View Plans')]"))).click();;
 	System.out.println("Navigated to PDP Plan Summary Page");	
+	}
+
+	
+
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	private WebElement OurPlansLink1;
+
+	@FindBy(id = "zipcodebtn")
+	private WebElement findPlansButton;
+
+	@FindBy(id = "nav-zipcode")
+	private WebElement OurPlans_zipfield;
+
+	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
+	public WebElement OurPlans_viewPlansButton;
+	
+
+	public void SubNavPlanSearch(String zip) {
+		validateNew(OurPlansLink1);
+		// Hover over text
+		Actions action = new Actions(driver);
+		action.moveToElement(OurPlansLink1).build().perform();
+		// action.click().build().perform();
+		validateNew(OurPlansLink1);
+		validate(OurPlans_zipfield);
+		OurPlans_zipfield.click();
+		OurPlans_zipfield.sendKeys(zip);
+		validate(OurPlans_viewPlansButton);
+		OurPlans_viewPlansButton.click();
+		CheckPageLoad();
+	}
+	
+	
+	@FindBy(id = "plan-list-1")
+	private WebElement maPlanList;
+
+	@FindBy(id = "plan-list-3")
+	private WebElement pdpPlanList;
+
+	@FindBy(id = "plan-list-4")
+	private WebElement snpPlanList;
+
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+	private WebElement maPlansViewLink;
+
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[@class='trigger-closed']")
+	private WebElement snpPlansViewLink;
+
+	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
+	private WebElement msPlansViewLink;
+
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
+	private WebElement pdpPlansViewLink;
+
+	@FindBy(id="msVppZipCode")
+	private WebElement medSuppZipCode;
+
+
+	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
+	private WebElement planListContainer;
+
+	public void ViewPlanSummary(String planType) {
+		if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+//			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+			pdpPlansViewLink.click();
+			System.out.println("PDP Plan Type Clicked");
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+//			sleepBySec(2);
+			maPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			//sleepBySec(2);
+			msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			/*msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
+		} else if (planType.equalsIgnoreCase("SNP")) {
+//			sleepBySec(5);
+			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
+			snpPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+	
+		}	
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
+	private WebElement firstPlanDetailsLink;
+
+	public void NavigateToPlanDetails(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		firstPlanDetailsLink.click();
+		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("#/details")) {	
+					Assert.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
+				}
+				else {
+					Assert.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
+				}
+	
+	}
+
+	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'enroll')]//*[contains(text(), 'Enroll in ')and (not(contains(@class,'ng-hide')))]")
+	private WebElement firstEnrollPlanLink;
+
+	public void NavigateToOLE(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, firstEnrollPlanLink, 30);
+		firstEnrollPlanLink.click();
+		System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("welcome")) {	
+					Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+				}
+				else {
+					Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+				}
+	}
+
+	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	private WebElement HomeLogo;
+
+
+	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
+	private WebElement LeaveOLE;
+	
+	public void NavigateToHome() {
+		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
+		HomeLogo.click();
+		System.out.println("Home Logo is clicked to navigate to Home Page");
+		try {
+			if(validateNew(LeaveOLE)) {
+				LeaveOLE.click();
+				System.out.println("Leave OLE is clicked to navigate to Home Page");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		if(!validateNew(zipCodeField)){
+			Assert.assertTrue("Home Page NOT Diaplyed", false);
+		}
 	}
 
 }

@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionPrecedenceTFNAARP.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionPrecedenceTFNAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPrecedenceTFNAARP.json" }, tags = {"@Scenario_6_Precedence_AARP"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPrecedenceTFNAARP.json" }, tags = {"@Scenario_1_2_DirectTraffic"})
 
 //@Scenario6B_GoogleSearch_AARP,@Scenario6G_YahooSearch_AARP
 public class RunMRATDDAcquisitionPrecedenceTFNAARP {

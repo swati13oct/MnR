@@ -70,3 +70,4 @@ Feature: To test Organic SearchCampaign TFN on AARP site
     Examples: 
       | site   | pscCode | campaignUrl                                                                | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     | 
       | ulayer | 8001038 | /health-plans/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | 
+      
