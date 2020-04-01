@@ -228,7 +228,7 @@ public class CampaignTFNPage extends UhcDriver {
 		String NavigateToURL = SiteURL+uRLpath;
 		System.out.println("Navigating to URL : "+NavigateToURL);
 		driver.navigate().to(NavigateToURL);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 35);
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 	}
 
@@ -275,7 +275,7 @@ public class CampaignTFNPage extends UhcDriver {
 		String NavigateToURL = envUrl+campaignUrl;
 		System.out.println("Campaign URL : "+NavigateToURL);
 		driver.navigate().to(NavigateToURL);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 40);
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));		
 	}
 	
@@ -380,4 +380,10 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
+
+	public void navigateToPDPPlans() {
+	(driver.findElement(By.xpath("//a[contains(@dtmname,'PDP:View Plans')]"))).click();;
+	System.out.println("Navigated to PDP Plan Summary Page");	
+	}
+
 }
