@@ -150,9 +150,8 @@ public class AuthorizationPage extends UhcDriver{
 				System.out.println("Next Button is enabled : Required Field Validation Failed");
 				validation_Flag = false;
 			}
-			CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
-			jsClickNew(ApplicantRadio);
+			validateNew(ApplicantRadio);
+			ApplicantRadio.click();
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
