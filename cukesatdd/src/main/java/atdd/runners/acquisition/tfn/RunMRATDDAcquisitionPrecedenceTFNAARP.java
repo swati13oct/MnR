@@ -8,17 +8,17 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionOrganicSearchTFNAARP
+ * this file is to run test cases for RunMRATDDAcquisitionPrecedenceTFNAARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionPrecedenceTFNAARP.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionOrganicSearchTFNAARP")
+outputFolder = "target/RunMRATDDAcquisitionPrecedenceTFNAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARP.json" }, tags = {"@Scenario6B_GoogleSearch_AARP,@Scenario6G_YahooSearch_AARP,@Scenario3b_BingSearch_AARP"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPrecedenceTFNAARP.json" }, tags = {"@Scenario_6_Precedence_AARP"})
 
 //@Scenario6B_GoogleSearch_AARP,@Scenario6G_YahooSearch_AARP
-public class RunMRATDDAcquisitionOrganicSearchTFNAARP {
+public class RunMRATDDAcquisitionPrecedenceTFNAARP {
 
 }

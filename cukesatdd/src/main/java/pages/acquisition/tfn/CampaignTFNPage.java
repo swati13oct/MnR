@@ -54,18 +54,38 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
-	@FindBy(xpath = "//*[@id='uh-search-box']")
+	@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
+	public WebElement UHCSearchLinkfromGoogle;
+
+	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
+	public WebElement UHCSearchLinkfromGoogle1;
+
+//	@FindBy(xpath = "//*[@id='uh-search-box']")
+	@FindBy(xpath = "//input[@id='header-search-input']")
 	public WebElement YahooSearchField;
 
-	@FindBy(xpath = "//*[@id='uh-search-button']")
+	
+//	@FindBy(xpath = "//*[@id='uh-search-button']")
+	@FindBy(xpath = "//button[contains(@id,'search-button')]")
 	public WebElement YahooSearchBttn;
 
-	@FindBy(xpath = "//*[contains(text(),'AARP® Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
 	public WebElement YahooSearchResult;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
 	public WebElement YahooSearchResultUHC;
 
+	@FindBy(xpath = "//*[@id='sb_form_q']")
+	public WebElement bingSearchField;
+
+	@FindBy(xpath = "//*[@class='b_searchboxSubmit']")
+	public WebElement bingSearchBttn;
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')]")
+	public WebElement AARPSearchLinkfromBing;
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
+	public WebElement UHCSearchLinkfromBing;
 
 
 	public CampaignTFNPage(WebDriver driver) {
@@ -140,7 +160,6 @@ public class CampaignTFNPage extends UhcDriver {
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		String testSiteUrl=driver.getCurrentUrl();
 		checkModelPopup(driver);
 	
 	}
@@ -243,7 +262,7 @@ public class CampaignTFNPage extends UhcDriver {
 			Assert.fail("TFN elemnet is not found / displayed on page : "+tFN_Xpath);
 		}
 		String TFNonPage = TFNelement.getText();
-		if(TFNonPage.contains(FEDERAL_TFN)) {
+		if(TFNonPage.contains(MEDSUPP_TFN)) {
 			System.out.println("Correct Med Supp TFN is Displayed on Page : "+TFNelement.getText());
 		}
 		else {
@@ -271,5 +290,94 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 	}
 
+	public void YahooSearchAARP() {
+		
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys("AARP Medicare Advantage Plan");
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for : AARP Medicare Advantage Plan");
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResult, 30);
+		if(YahooSearchResult.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assert.assertFalse("no yahoo search result found", false);
+		}
+		YahooSearchResult.click();
+		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
+		switchToNewTab();
+		CheckPageLoad();
+	}
+
+	public void BingSearchAARP() {
+		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
+
+		bingSearchField.click();
+		bingSearchField.clear();
+		bingSearchField.sendKeys("AARP Medicare Advantage Plan"+Keys.ENTER);
+		System.out.println("Looking for AARP medicare Plans link , please bear with me :) ");
+		System.out.println("Current URL is ==  "+driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, AARPSearchLinkfromBing, 30);
+		if(AARPSearchLinkfromBing.isDisplayed())
+			System.out.println("Bing search result found");
+		else {
+			Assert.assertFalse("Bing search result not found", false);
+		}
+		AARPSearchLinkfromBing.click();		
+		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
+	}
+
+	public void googleSearchUHC() {
+		validateNew(GoogleSearchField);
+		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
+		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
+		validateNew(UHCSearchLinkfromGoogle);
+		UHCSearchLinkfromGoogle.click();
+		System.out.println("Google Results - UHC Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
+	}
+
+	public void YahooSearchUHC() {
+		
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys("UHC Medicare Advantage Plan");
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for : UHC Medicare Advantage Plan");
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResultUHC, 30);
+		if(YahooSearchResultUHC.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assert.assertFalse("no yahoo search result found", false);
+		}
+		YahooSearchResultUHC.click();
+		System.out.println("Yahoo Results - UHC Medicare Advantage Plan - Link Clicked");
+		switchToNewTab();
+		CheckPageLoad();
+	}
+
 	
+	public void BingSearchUHC() {
+		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
+
+		bingSearchField.click();
+		bingSearchField.clear();
+		bingSearchField.sendKeys("UHC Medicare Advantage Plan"+Keys.ENTER);
+		System.out.println("Looking for UHC medicare Plans link , please bear with me :) ");
+		System.out.println("Current URL is ==  "+driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 30);
+		if(UHCSearchLinkfromBing.isDisplayed())
+			System.out.println("Bing search result found");
+		else {
+			Assert.assertFalse("Bing search result not found", false);
+		}
+		UHCSearchLinkfromBing.click();		
+		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
+	}
 }
