@@ -179,8 +179,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	jsClickNew(Viewsavebtn);
 	validateNew(providerNameText);
-	validateNew(Checkcoverage);
 	Checkcoverage.click();
+	/*validateNew(Checkcoverage);
+	jsClickNew(Checkcoverage);*/
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
