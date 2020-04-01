@@ -148,7 +148,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   21212 | YES           | Baltimore County | MAPD          | None         | within,another | mydoctors | John        | YES           | No             | Yes,No,No,Yes                 | Lower                |
+      |   21212 | YES           | Baltimore County | MAPD          | None         | within,another | mydoctors | John        | No            | No             | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
@@ -211,7 +211,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | NA            | Facility     | within,another | mydoctors | john         | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      |   10003 | NO            | New York | NA            | Facility     | within,another | mydoctors | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommendation @DKFlow @DKskipdrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug in PRE
@@ -241,7 +241,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | NA            | None         | another | mydoctors | John         | YES           | No             | Yes,No,No,Yes                 | Lower                |
+      |   35034 | YES           | Bibb County | NA            | None         | another | mydoctors | John        | No            | No             | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommendation @DKFlow1 @DKzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE

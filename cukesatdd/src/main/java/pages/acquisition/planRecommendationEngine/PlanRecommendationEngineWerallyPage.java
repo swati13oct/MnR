@@ -77,7 +77,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "#savedProviders>.export-saved-providers button")
 	private WebElement checkProviderCoveragebutton;
-
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
