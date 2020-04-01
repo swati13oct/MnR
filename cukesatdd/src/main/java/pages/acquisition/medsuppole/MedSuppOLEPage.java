@@ -151,7 +151,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//span[contains(@class,'globalTitle')][contains(text(),'Confirmation')]")
 		private WebElement OleMS_ConfirmationHeading;
 		
-		@FindBy(xpath = "//button[contains(text(),'Enroll in AARP')]")
+		@FindBy(xpath = "//button[contains(text(),'Join AARP')]")
 		private WebElement OleMS_EnrollInAppBtn;
 		
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
@@ -185,7 +185,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		
 		insuredStatus.click();
 		nextButton.click();
-		waitforElementVisibilityInTime(medSuppOlePlanSection, 30);
+		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
@@ -204,8 +204,8 @@ public class MedSuppOLEPage extends UhcDriver {
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		//waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
-		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
+		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
+		sendkeys(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
 		nextButton.click();
 		validateNew(medSuppOlePartABYesRadioBtn);

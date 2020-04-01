@@ -420,7 +420,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else {
 			start(AARP_ACQISITION_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PAGE_URL;
-			checkModelPopup(driver,10);		
+			checkModelPopup(driver,30);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());

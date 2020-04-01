@@ -3333,7 +3333,7 @@ public void ResumeApplicationButton() throws InterruptedException{
 	System.out.println("Resume application link clicked successfully");
 }
 public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-	CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 30);
+	CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
 	validateNew(resumeApplicationBtn);
 	
 	applicationID.sendKeys(ApplicationID);
