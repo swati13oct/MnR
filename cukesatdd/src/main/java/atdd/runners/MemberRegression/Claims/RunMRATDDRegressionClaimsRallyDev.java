@@ -15,5 +15,4 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionC
 features = { "src/main/resources/feature/memberredesign/claims/claimsRegressionRally.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionClaimsRallyDev.json" }, tags = { "@devRegression" })
 public class RunMRATDDRegressionClaimsRallyDev {
-//note: use this runner for drug claims
 }
