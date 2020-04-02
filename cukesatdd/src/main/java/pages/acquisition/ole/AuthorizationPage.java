@@ -100,7 +100,7 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(id= "icon-alert-sign")
 	private WebElement SoU_DisagreeError;
 	
-	@FindBy(id = "ole-form-cancel-button1")
+	@FindBy(xpath = "//*[@id='ole-form-cancel-button1'] | //*[@id='ole-force-cancel-button']")
 	private WebElement CancelEnrollButton;
 
 	
