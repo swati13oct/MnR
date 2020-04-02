@@ -96,10 +96,10 @@ public class AuthorizationPage extends UhcDriver{
 	@FindBy(xpath = "//input[contains(@id,'Disagree')]")
 	private WebElement SoU_DisagreeRadio;
 	
-	@FindBy(id= "icon-alert-sign")
+	@FindBy(xpath= "//*[contains(@id,'icon-alert-sign')]")
 	private WebElement SoU_DisagreeError;
 	
-	@FindBy(id = "ole-form-cancel-button1")
+	@FindBy(xpath = "//*[contains(@id,'cancel-button')]")
 	private WebElement CancelEnrollButton;
 
 	
@@ -125,7 +125,7 @@ public class AuthorizationPage extends UhcDriver{
 			System.out.println("Next Button is Enabled : Required fields present");
 			//validateNew(SoU_DisagreeRadio);
 			jsClickNew(SoU_DisagreeRadio);
-			if(validate(SoU_DisagreeError) && validate(CancelEnrollButton)){
+			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
 				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
 				validation_Flag = true;
 			}
@@ -151,8 +151,9 @@ public class AuthorizationPage extends UhcDriver{
 				System.out.println("Next Button is enabled : Required Field Validation Failed");
 				validation_Flag = false;
 			}
-			validateNew(ApplicantRadio);
-			ApplicantRadio.click();
+			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
+			Thread.sleep(6000);
+			jsClickNew(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
