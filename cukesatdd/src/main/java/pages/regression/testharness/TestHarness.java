@@ -1079,7 +1079,6 @@ public class TestHarness extends UhcDriver {
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
 		coverageandbenefitslink.click();
-		System.out.println("Now waiting for 20 seconds");
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
 	}
