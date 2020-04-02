@@ -47,10 +47,16 @@ public class CampaignTFNStepDefinitionAARP {
 		return memberAttributesMap;
 	}
 
+	WebDriver driver;
+	@Given("^the user Starts WebDriver$")
+	public void Start_WebDriver() {
+		driver = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+
+	}
 	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
 	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
-		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 		tfnPage.retrieveTFNcookie();
@@ -117,15 +123,15 @@ public class CampaignTFNStepDefinitionAARP {
 
 	@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
 	public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("Campaign URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
-		CampaignTFNPage tfnPage = new CampaignTFNPage(wd);
+		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 	}
@@ -136,7 +142,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String Acq_Site = inputAttributesMap.get("Site");
 	String CampaignPath = inputAttributesMap.get("Campaign URL");
-	WebDriver driver = getLoginScenario().getWebDriverNew();
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 	//wd.manage().deleteAllCookies();
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -149,11 +155,9 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Google_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Exception  {
 
 		String url = "https://www.google.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
 		tfnPage.googleSearchAARP();
 
@@ -164,7 +168,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Throwable {
 
 		String url = "https://www.Yahoo.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -183,7 +187,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Bing_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Throwable {
 
 		String url = "https://www.bing.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -200,7 +204,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Google_and_search_UHC_Medicare_Advantage_Plan_to_navigate_to_UHC_page() throws Exception  {
 
 		String url = "https://www.google.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -215,8 +219,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Yahoo_and_search_UHC_Medicare_Advantage_Plan_to_navigate_to_UHC_page() throws Throwable {
 
 		String url = "https://www.Yahoo.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
@@ -234,9 +237,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	public void user_is_on_Bing_and_search_UHC_Medicare_Advantage_Plan_to_navigate_to_UHC_page() throws Throwable {
 
 		String url = "https://www.bing.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
-		//wd.manage().deleteAllCookies();
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);

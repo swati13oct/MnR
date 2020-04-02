@@ -71,6 +71,7 @@ Feature: To test Campaign TFN in all flows on AARP site
     
       @Scenario_4_ReferralTraffic @tfn_Referral_Traffic
   Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+   Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN

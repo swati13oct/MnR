@@ -107,6 +107,19 @@ public class CampaignTFNPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		start(url);}
 	
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		}catch(Exception e){
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
 	/**
 	 * 
 	 * @param site - ulayer or blayer
@@ -334,7 +347,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void googleSearchUHC() {
 		validateNew(GoogleSearchField);
-		GoogleSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
+		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);
 		UHCSearchLinkfromGoogle.click();
@@ -407,6 +420,8 @@ public class CampaignTFNPage extends UhcDriver {
 	
 
 	public void SubNavPlanSearch(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
 		validateNew(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
@@ -418,10 +433,12 @@ public class CampaignTFNPage extends UhcDriver {
 		OurPlans_zipfield.sendKeys(zip);
 		validate(OurPlans_viewPlansButton);
 		OurPlans_viewPlansButton.click();
-		CheckPageLoad();
 	}
 	
 	public void HomepagePlanSearch(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
 		//validateNew(OurPlansLink1);
 		// Hover over text
 		//Actions action = new Actions(driver);
@@ -433,7 +450,6 @@ public class CampaignTFNPage extends UhcDriver {
 		HomePage_EnterZip.sendKeys(zip);
 		validate(findPlansButton);
 		findPlansButton.click();
-		CheckPageLoad();
 	}
 	
 	@FindBy(id = "plan-list-1")
@@ -465,6 +481,9 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement planListContainer;
 
 	public void ViewPlanSummary(String planType) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 //			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
@@ -492,14 +511,13 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 	
 		}	
-		checkModelPopup(driver,30);
-
 	}
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;
 
 	public void NavigateToPlanDetails(String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
+		CheckPageLoad();
+		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
 		firstPlanDetailsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -518,7 +536,8 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement firstEnrollPlanLink;
 
 	public void NavigateToOLE(String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
+		CheckPageLoad();
+		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstEnrollPlanLink, 30);
 		firstEnrollPlanLink.click();
 		System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
@@ -539,6 +558,8 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement LeaveOLE;
 	
 	public void NavigateToHomeFromPlanDetails() {
+		CheckPageLoad();
+		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
 		HomeLogo.click();
 		System.out.println("Home Logo is clicked to navigate to Home Page");
@@ -550,6 +571,8 @@ public class CampaignTFNPage extends UhcDriver {
 
 	
 	public void NavigateToHome() {
+		CheckPageLoad();
+		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
 		HomeLogo.click();
 		System.out.println("Home Logo is clicked to navigate to Home Page");
