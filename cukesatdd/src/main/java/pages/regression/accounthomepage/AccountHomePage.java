@@ -188,6 +188,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
 	private WebElement iPerceptionPopUp;
 
+	@FindBy(xpath = "//button[@class='btn btn-no']")
+	private WebElement iPerceptionPopUpNoButton;
+	
 	@FindBy(xpath = "//dashboard//a[contains(text(),'Contact')]")
 	private WebElement linkContactUs;
 
@@ -981,30 +984,40 @@ public class AccountHomePage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			String StageProfilePageURL = "https://stage-medicare.uhc.com//member/account/profile.html";
-			System.out.println("Direct navigate to Profile Page url");
+			String StageProfilePageURL = "https://stage-medicare.uhc.com/member/account/profile.html";
+			System.out.println("Directly navigating to the Profile Page by passing the URL");
 			driver.navigate().to(StageProfilePageURL);
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto generated catch block
 				e.printStackTrace();
 			}
 
-			if (validate(iPerceptionPopUp)) {
-				iPerceptionPopUp.click();
-				System.out.println("iPerception Pop Up displayed");
+			
+			try 
+				{
+				System.out.println("Trying to switch to iPerception iframe if it is present");	
+				driver.switchTo().frame("IPerceptionsEmbed");
+				if (validate(iPerceptionPopUpNoButton)) {
+					iPerceptionPopUpNoButton.click();
+					System.out.println("iPerception Pop Up No button was clicked");
+					driver.switchTo().defaultContent();
+				}
+				
+			} catch (Exception e) {
+				System.out.println("iPerception Pop Up was not displayed");
 			}
 
 			CommonUtility.waitForPageLoad(driver, heading, 5);
 			if (driver.getTitle().contains("Profile")) {
-				System.out.println("here : " + heading.getText());
+				System.out.println("Header (h1) of the page is : " + heading.getText());
 				return new ProfileandPreferencesPage(driver);
 			}
 		}
 		return null;
 	}
-
+	
 	public ProfileandPreferencesPage navigateDirectToProfilePageHsid() throws InterruptedException {
 		// TODO Auto-generated method stub
 		if (MRScenario.environment.equalsIgnoreCase("stage")) {
@@ -1088,16 +1101,26 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public void verifyPageTitle() throws InterruptedException {
-		System.out.println("Checking for Hello Name element after waiting for 20 seconds");
-		Thread.sleep(20000);
-		waitForHomePage(helloPerson);
-		System.out.println("Hello Name element was displayed : " + helloPerson.getText());
+		System.out.println("Now trying to locate Hello Name element on Dashboard home page");
+		
+		try {
+			//waitForHomePage(helloPerson);
+			CommonUtility.waitForPageLoad(driver, helloPerson, 20);
+			System.out.println("Hello Name element was displayed : " + helloPerson.getText());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Hello Name element was not displayed after wait, failing the test case");
+			Assert.fail();
+			}
 		String title = driver.getTitle();
 		System.out.println(title);
-		Assert.assertTrue(title.contains("UnitedHealthcare"));
-		System.out.println("Assert condition on title of dashboard page was passed");
-
-	}
+		System.out.println("Checking if title of dashboard page contains Home | UnitedHealthcare ");
+		Assert.assertTrue(title.contains("Home | UnitedHealthcare"));
+		System.out.println("Assert condition on title of dashboard page that it contains Home | UnitedHealthcare in it was passed");
+		System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
+			}
+	
+	
 
 	public AccountHomePage navigateToAutoPaymentHistoryPage() {
 
@@ -3256,26 +3279,6 @@ public class AccountHomePage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 	}
 
-	// This method validates login for bswift SSO
-	public void validatebswiftSSO() throws InterruptedException {
-		Thread.sleep(10000);
-		System.out.println(" @@@ The title of the page is " + driver.getTitle());
-		if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {
-			System.out.println("On the dashboard ");
-		}
-		Thread.sleep(10000);
-		System.out.println("@@@ The URL of the page is ==>" + driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("https://member.int.uhc.com/retiree/dashboard"))
-			;
-		System.out.println("****CE member is on the dashboard****");
-
-		if (getTitle().equalsIgnoreCase("Home | UnitedHealthcare")) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue(false);
-		}
-	}
-	
 		public FormsAndResourcesPage navigatetoFormsnResourcesWithTimeout(String memberType, String planType)
 			throws InterruptedException {
 		checkForIPerceptionModel(driver);
