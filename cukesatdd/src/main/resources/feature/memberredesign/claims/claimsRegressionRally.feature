@@ -6,7 +6,7 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of Regression claims scenarios section ------------------------
-  @rallyClaims01 @E2EClaimsMedicalCase @segmentId @regressionMember
+  @rallyClaims01 @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> -Segment ID: <segmentId> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
