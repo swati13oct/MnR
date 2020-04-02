@@ -416,6 +416,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage,testharnessurl);
 	}
+	
+	public String fetchEnvironmentUrlsUMS () {
+		if (MRScenario.environment.equals("offline")) {
+		  testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
+		  return testSiteUrl;
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			 testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
+			 return testSiteUrl;
+		}
+		else
+			testSiteUrl = UMS_ACQISITION_PAGE_URL;
+		    return testSiteUrl;
+	  }
 
 	@SuppressWarnings("deprecation")
 	public void openAndValidate(boolean alreadyOnSite) {

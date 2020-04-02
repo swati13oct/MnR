@@ -162,7 +162,7 @@ public class CampaignTFNPage extends UhcDriver {
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver);
+		checkModelPopup(driver, 30);
 	
 	}
 	
@@ -395,6 +395,9 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
+	
+	@FindBy(id="cta-zipcode")
+	private WebElement HomePage_EnterZip;
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement OurPlans_zipfield;
@@ -418,6 +421,20 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 	}
 	
+	public void HomepagePlanSearch(String zip) {
+		//validateNew(OurPlansLink1);
+		// Hover over text
+		//Actions action = new Actions(driver);
+		//action.moveToElement(OurPlansLink1).build().perform();
+		// action.click().build().perform();
+		//validateNew(OurPlansLink1);
+		validate(HomePage_EnterZip);
+		HomePage_EnterZip.click();
+		HomePage_EnterZip.sendKeys(zip);
+		validate(findPlansButton);
+		findPlansButton.click();
+		CheckPageLoad();
+	}
 	
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
@@ -458,6 +475,7 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 //			sleepBySec(2);
 			maPlansViewLink.click();
+			System.out.println("MA Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
@@ -470,15 +488,11 @@ public class CampaignTFNPage extends UhcDriver {
 //			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
+			System.out.println("SNP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 	
 		}	
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		checkModelPopup(driver,30);
 
 	}
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
@@ -488,6 +502,7 @@ public class CampaignTFNPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
 		firstPlanDetailsLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("#/details")) {	
@@ -523,12 +538,23 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
 	private WebElement LeaveOLE;
 	
+	public void NavigateToHomeFromPlanDetails() {
+		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
+		HomeLogo.click();
+		System.out.println("Home Logo is clicked to navigate to Home Page");
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		if(!validateNew(zipCodeField)){
+			Assert.assertTrue("Home Page NOT Diaplyed", false);
+		}
+	}
+
+	
 	public void NavigateToHome() {
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
 		HomeLogo.click();
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		try {
-			if(validateNew(LeaveOLE)) {
+			if(LeaveOLE.isDisplayed()) {
 				LeaveOLE.click();
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
@@ -538,7 +564,7 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
-			Assert.assertTrue("Home Page NOT Diaplyed", false);
+			Assert.assertTrue("Home Page NOT Displayed", false);
 		}
 	}
 

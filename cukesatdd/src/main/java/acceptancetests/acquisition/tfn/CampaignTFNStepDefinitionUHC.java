@@ -24,12 +24,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.GlobalWebElements;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.GlobalWebElements;
 import pages.acquisition.ulayer.UlayerTFNPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
-public class CampaignTFNStepDefinitionAARP {
+public class CampaignTFNStepDefinitionUHC {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -47,8 +47,8 @@ public class CampaignTFNStepDefinitionAARP {
 		return memberAttributesMap;
 	}
 
-	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
-	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
+	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC$")
+	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN_in_UHC() throws Throwable {
 		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -56,8 +56,8 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.retrieveTFNcookie();
 	}
 
-	@Then("^the user validates PSC code$")
-	public void the_user_validates_PSC_code(DataTable inputAttributes) throws Throwable {
+	@Then("^the user validates PSC code in UHC$")
+	public void the_user_validates_PSC_code_in_UHC(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String pscCode = inputAttributesMap.get("PSC Code");
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -65,8 +65,8 @@ public class CampaignTFNStepDefinitionAARP {
 	}
 
 
-	@Then("^the user navigates to following MA Plan Page URL and validate Federal TFN$")
-	public void the_user_navigates_to_following_MA_Plan_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	@Then("^the user navigates to following MA Plan Page URL and validate Federal TFN in UHC$")
+	public void the_user_navigates_to_following_MA_Plan_Page_URL_and_validate_Federal_TFN_in_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MA URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -75,8 +75,8 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 	
-	@Then("^the user navigates to following MedEd Plan Page URL and validate Federal TFN$")
-	public void the_user_navigates_MedEd_Page_and_validates_federal_TFN(DataTable arg1) throws Throwable {
+	@Then("^the user navigates to following MedEd Plan Page URL and validate Federal TFN in UHC$")
+	public void the_user_navigates_MedEd_Page_and_validates_federal_TFN_in_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MedEd URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -85,8 +85,8 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.validateFederalTFN(TFN_Xpath);	
 	}
 
-	@Then("^the user navigate to following PDP Plan Page URL and validate Federal TFN$")
-	public void the_user_navigate_to_following_PDP_Plan_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	@Then("^the user navigate to following PDP Plan Page URL and validate Federal TFN in UHC$")
+	public void the_user_navigate_to_following_PDP_Plan_Page_URL_and_validate_Federal_TFN_in_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("PDP URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -95,8 +95,8 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 
-	@Then("^the user navigate to following SNP Plan page URL and validate Federal TFN$")
-	public void the_user_navigate_to_following_SNP_Plan_page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	@Then("^the user navigate to following SNP Plan page URL and validate Federal TFN in UHC$")
+	public void the_user_navigate_to_following_SNP_Plan_page_URL_and_validate_Federal_TFN_in_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("SNP URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -105,8 +105,8 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 
-	@Then("^the user navigate to following Med Supp Plan URL and validate MedSupp TFN$")
-	public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSupp_TFN(DataTable arg1) throws Throwable {
+	@Then("^the user navigate to following Med Supp Plan URL and validate MedSupp TFN in UHC$")
+	public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSupp_TFN_in_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MedSupp URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -115,13 +115,13 @@ public class CampaignTFNStepDefinitionAARP {
 		tfnPage.validateMedSuppTFN(TFN_Xpath);
 	}
 
-	@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
-	public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+	@Given("^the user is on UHC medicare solutions acquisition site from Campaign Traffic$")
+	public void the_user_lands_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrlsUMS();
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("Campaign URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
@@ -131,7 +131,7 @@ public class CampaignTFNStepDefinitionAARP {
 	}
 	
 
-@Given("^the user is on following acquisition site from Campaign Traffic$")
+/*@Given("^the user is on following acquisition site from Campaign Traffic$")
 public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String Acq_Site = inputAttributesMap.get("Site");
@@ -255,16 +255,17 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.OpenPath(Acq_Site, URLpath);
 		tfnPage.validateFederalTFN(TFN_Xpath);
-	}
+	}*/
 	
-	@Then("^the user validates TFN on the particular deeplink URL page$")
+	@Then("^the user validates TFN on the particular deeplink URL page in UHC$")
 	public void the_user_validates_TFN_on_deeplink(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-		tfnPage.validateMedSuppTFN(TFN_Xpath);
+		tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 	
+	/*
 	@Then("^the user validates Federal TFN for PDP Plan Summary Page$")
 	public void the_user_validates_TFN_on_PDP_PlanSummary(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
@@ -272,11 +273,11 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToPDPPlans();
 	tfnPage.validateFederalTFN(TFN_Xpath);
-	}
+	}*/
 	
 
-@Then("^the user navigates to MA Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to MA Plan Details Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String Zip = "90210";
 	tfnPage.HomepagePlanSearch(Zip);
@@ -288,8 +289,8 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 
 }
 
-@Then("^the user navigates to PDP Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to PDP Plan Details Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	String Zip = "90210";
@@ -302,8 +303,8 @@ public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TF
 
 }
 
-@Then("^the user navigates to SNP Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to SNP Plan Details Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	String Zip = "80210";
@@ -316,8 +317,8 @@ public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TF
 
 }
 
-@Then("^the user navigates to MA OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to MA OLE Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	String Zip = "90210";
@@ -329,8 +330,8 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 }
 
-@Then("^the user navigates to PDP OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to PDP OLE Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	String Zip = "90210";
@@ -343,8 +344,8 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throw
 
 }
 
-@Then("^the user navigates to SNP OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+@Then("^the user navigates to SNP OLE Page and validates Federal TFN in UHC$")
+public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN_in_UHC() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	String Zip = "80210";
@@ -357,7 +358,7 @@ public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throw
 
 }
 
-@Then("^the user navigates to Medsupp Plans in VPP and validates Medsupp TFN$")
+@Then("^the user navigates to Medsupp Plans in VPP and validates Medsupp TFN in UHC$")
 public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
@@ -370,6 +371,8 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 			
 		
 }
+
+
 }
 
 

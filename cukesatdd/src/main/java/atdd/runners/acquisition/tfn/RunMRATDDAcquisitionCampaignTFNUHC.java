@@ -12,12 +12,12 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionCampaignTFNAARP")
+outputFolder = "target/RunMRATDDAcquisitionCampaignTFNUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json" }, tags = {"@Scenario_1_2_DirectTraffic"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json" }, tags = {"@Scenario_1_2_DirectTraffic_UHC"})
 
-public class RunMRATDDAcquisitionCampaignTFNAARP {
+public class RunMRATDDAcquisitionCampaignTFNUHC {
 
 }
