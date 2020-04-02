@@ -1752,7 +1752,29 @@ public class OneTimePaymentAarpStepDefintion {
 		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Update confirmation page for Checking account");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		} else {
+
+			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
 		}
+
+
+
+
+
 	}
 
 	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for CC$")
@@ -1870,10 +1892,18 @@ public class OneTimePaymentAarpStepDefintion {
 	@Then("^User navigates to payment confirmation page and verifies ConfirmationNo for EFT for Update Recurring$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_ConfirmationNo_for_EFT_for_Update_Recurring()
 			throws Throwable {
-		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
-				.getBean(PageConstants.Update_Confirmation_Page);
-		updateConfirmationPage.validateEFTUpdateVerification();
+		String alreadyEnrolled = (String) getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		if(alreadyEnrolled_Flag){
+			System.out.println("Only one payment request message is Displayed  : "+alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+			Assert.assertTrue(true);
+		}else {
 
+			UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+					.getBean(PageConstants.Update_Confirmation_Page);
+			updateConfirmationPage.validateEFTUpdateVerification();
+		}
 	}
 
 	@Given("^user selects CreditDebit Card on Update Automatic recurring payments page and Click on Next$")
