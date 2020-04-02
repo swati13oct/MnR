@@ -90,7 +90,7 @@ public class AuthorizationPage extends UhcDriver{
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
-	@FindBy(xpath = "//input[contains(@id,'Agree')]")
+	@FindBy(xpath= "//input[contains(@id,'Agree')]")
 	private WebElement SoU_AgreeRadio;
 
 	@FindBy(xpath = "//input[contains(@id,'Disagree')]")

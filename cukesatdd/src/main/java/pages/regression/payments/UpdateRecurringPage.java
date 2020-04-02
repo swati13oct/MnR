@@ -33,7 +33,7 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='Back To Overview']")
 	private WebElement BackToOverviewButton;
 
-	@FindBy(xpath = "//p[text()='Checking Account Information']")
+	@FindBy(xpath = "//*[text()='Checking Account Information']")
 	private WebElement CheckingAccountInformationHeader;
 
 	@FindBy(xpath = "//p[text()='Checking Account Information']")

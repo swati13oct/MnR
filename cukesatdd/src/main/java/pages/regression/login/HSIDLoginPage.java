@@ -51,10 +51,10 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='Finish']")
 	private WebElement doneButtonInIperceptionSmileySurvey;
 
-	@FindBy(id = "hsid-username")
+	@FindBy(xpath = "//*[@id='hsid-username']")
 	private WebElement userNameField;
 
-	@FindBy(id = "hsid-password")
+	@FindBy(xpath = "//*[@id='hsid-password']")
 	private WebElement passwordField;
 
 	@FindBy(id = "hsid-submit")
