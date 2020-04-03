@@ -2852,7 +2852,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		validateNew(DOB,30);
 		System.out.println("MedSup page form is displayed");
-		DOB.click();
+		jsClickNew(DOB);
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);

@@ -94,14 +94,29 @@ public class ssoTestHarnessPage extends UhcDriver {
 	
 	
 	/*This method will click on SSO Link on test harness page , and then switch to Home Page window */
-	public AccountHomePage clickSSOLink() throws InterruptedException {
-			ssoLink.click();
-		    Thread.sleep(10000);
-		   switchToNewTab();
-		   Thread.sleep(10000);
-		   return new AccountHomePage(driver);
-    
-	}
+   public AccountHomePage clickSSOLink() throws InterruptedException {
+		ssoLink.click();
+	    Thread.sleep(10000);
+	   switchToNewTab();
+	   String oldURLwithttp = driver.getCurrentUrl();
+	   System.out.println("SSO link generated is  "+oldURLwithttp);
+	   if(oldURLwithttp.contains("https://"))
+	   {
+		   System.out.println("Now clicking on the SSO link");
+		   driver.navigate().to(oldURLwithttp);  
+	   }
+	   else
+	   {
+	  System.out.println("SSO Link doesn't contain https:// , therefore replacing http:// with https://");
+	   String newURLwithttps = oldURLwithttp.replace("http://", "https://");
+	   System.out.println("Updated SSO link with https is  "+newURLwithttps);
+	   System.out.println("Now clicking on the SSO link");
+	   driver.navigate().to(newURLwithttps);
+	   }
+	   Thread.sleep(5000);
+	   return new AccountHomePage(driver);
+
+}
 	
 
 	@Override

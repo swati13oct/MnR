@@ -40,6 +40,12 @@ public class UpdateReviewPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-12']//h1")
 	private WebElement ConfirmationPageHeading;
 
+	@FindBy(xpath = "//*[contains(text(),'Only one payment request')]")
+	private WebElement OnlyOnePaymentRequestMessage;
+
+
+
+
 	public UpdateReviewPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -221,6 +227,17 @@ public class UpdateReviewPage extends UhcDriver {
 
 		if(validate(CSR_Error_Message) && CSR_Error_Message.getText().contains(errorMessageExpected)){
 			System.out.println("Expected Member Auth Error Message is displayed : "+CSR_Error_Message.getText());
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean validate_onlyOnePaymentRequest_Message() {
+
+		// TODO Auto-generated method stub
+		if(validate(OnlyOnePaymentRequestMessage)){
+			System.out.println("Only one payment request message displayed :  ===>  "+OnlyOnePaymentRequestMessage.getText());
 			return true;
 		}
 		return false;

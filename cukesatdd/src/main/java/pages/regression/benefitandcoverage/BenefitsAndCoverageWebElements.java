@@ -1017,6 +1017,15 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath="//h1")
 	protected WebElement generalPgHeader;
+	
+	@FindBy(linkText = "Express Scripts")
+	protected WebElement expressScriptsLink;
+	
+	@FindBy(id = "proceedbtn")
+	protected WebElement proceedButtonExpressScriptsSSOSiteLeavingPopup;
+	
+	@FindBy(xpath = "//div[@class='intlogo']")
+	protected WebElement ExpressScriptsLogo;
 
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

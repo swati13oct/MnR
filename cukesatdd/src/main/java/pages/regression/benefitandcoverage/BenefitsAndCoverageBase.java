@@ -2,6 +2,7 @@ package pages.regression.benefitandcoverage;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -15,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.payments.PaymentHistoryPage;
-
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 /**
  * @Functionality : To check Benefits and Coverage page
  */
@@ -39,6 +40,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		orderMaterialsTab.click();
 		validateNew(orderMaterialsHeader,0);	
 	}
+	
 	
 	public void sleepBySec(int sec) {
 		System.out.println("Sleeping for '"+sec+"' sec");
@@ -842,6 +844,62 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 
+	public void scrollToViewexpressScriptsLink() {
+		// TODO Auto-generated method stub
+		System.out.println("Scrolling to Express Scripts Link");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", expressScriptsLink); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void clickExpressScriptsLink() {
+		// TODO Auto-generated method stub
+		System.out.println("Clicking on Express Scripts Link");
+		expressScriptsLink.click();   	
+		System.out.println("Now clicking on proceed button of site leaving popup");
+		proceedButtonExpressScriptsSSOSiteLeavingPopup.click();
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//switching to Kentucky SSO window
+		
+		String mainwindow = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("URL opened in new windi]ow is:   "+driver.getCurrentUrl());
+		System.out.println("Now waiting for Express Scripts logo to show up");
+		CommonUtility.waitForPageLoad(driver, ExpressScriptsLogo, 20);
+		if (driver.getCurrentUrl().contains("https://wwwuat.express-scripts.com/medco/consumer/SSO") && 
+				ExpressScriptsLogo.isDisplayed())
+		{
+			System.out.println("Express Scripts logo was displayed and SSO URL was correct");
+		}
+		else
+		{
+			System.out.println("Either Express Scripts SSO URL was incorrect or Express Scripts logo was not displayed, failing test script");
+			Assert.fail();
+		}
+		
+	}
 
 
 

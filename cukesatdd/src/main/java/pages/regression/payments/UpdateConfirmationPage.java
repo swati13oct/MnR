@@ -24,6 +24,9 @@ public class UpdateConfirmationPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@class,'confirmation__number')]")
 	private WebElement ConfirmationNumber;
 
+	@FindBy(xpath = "//*[contains(text(),'Payment Method:')]")
+	private WebElement PaymentMethod;
+
 	public UpdateConfirmationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -47,15 +50,15 @@ public class UpdateConfirmationPage extends UhcDriver {
 	}
 
 	public void validateEFTUpdateVerification() {
-		validate(ConfirmationNumber);
+		validate(PaymentMethod);
 		UpdatePaymentsDataVerificationonConfirmationPage();
-		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		System.out.println("Your Confimation Number is : " + PaymentMethod.getText());
 	}
 
 	public void validateCCUpdateVerification() {
-		validate(ConfirmationNumber);
+		validate(PaymentMethod);
 		UpdatePaymentsDataVerificationonConfirmationPage();
-		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		System.out.println("Your Confimation Number is : " + PaymentMethod.getText());
 	}
 
 	public void validateEFTUpdateVerificationforShip() {
@@ -72,7 +75,7 @@ public class UpdateConfirmationPage extends UhcDriver {
 
 	public void validateStopRevurringVerificationforFed() {
 		validate(MakeOneTimePaymentLink);
-		validate(ConfirmationNumber);
+		validate(PaymentMethod);
 		UpdatePaymentsDataVerificationonConfirmationPage();
 		System.out.println("User has sucessfully canceled recurring payment for Federal");
 	}
