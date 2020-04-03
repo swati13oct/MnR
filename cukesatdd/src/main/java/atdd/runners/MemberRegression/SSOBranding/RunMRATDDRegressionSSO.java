@@ -14,13 +14,13 @@ import cucumber.api.CucumberOptions;
  */
  
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionSSO.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSSO")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 
 features = { "src/main/resources/feature/memberredesign/sso" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSO.json" }, tags = { "@regressionMember" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSO.json" }, tags = { "@regressionMember5" })
 public class RunMRATDDRegressionSSO {
 
 }

@@ -103,7 +103,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	//tbd @FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//div[contains(@class,'header') and not(contains(@class,'hide'))]//h1")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -1079,7 +1080,6 @@ public class TestHarness extends UhcDriver {
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
 		coverageandbenefitslink.click();
-		System.out.println("Now waiting for 20 seconds");
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
 	}

@@ -92,6 +92,11 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the claims page to validate Pharamcies and Prescriptions link$")
 	public void validate_claims_page() throws InterruptedException { 
+		//note: claims page will be updated and owned by Rally, team-atest env may not be setup to handle that
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("SKIP this validation if running on team-atest env.");
+			return;
+		} 
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="claims";
 		boolean result=false;
