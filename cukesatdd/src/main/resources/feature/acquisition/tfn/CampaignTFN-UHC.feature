@@ -1,7 +1,7 @@
 @tfnulayer
 Feature: To test Campaign TFN in all flows on AARP site
 
-  @Scenario_1_DirectTraffic_UHC @tfn_Direct_Traffic
+  @Scenario_1_DirectTraffic_UHC @tfn_Direct_Traffic_UHC
   Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC
@@ -24,7 +24,7 @@ Feature: To test Campaign TFN in all flows on AARP site
       | pscCode | maUrl                                  | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     |  
       |  880180 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | 
 
-   @Scenario_2_CampaignTraffic_UHC @tfn_Campaign_Traffic
+   @Scenario_2_CampaignTraffic_UHC @tfn_Campaign_Traffic_UHC
   Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
     Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
@@ -53,49 +53,8 @@ Feature: To test Campaign TFN in all flows on AARP site
       | pscCode  | campaignUrl                                                                                 | campaignTFN                    |  maUrl                                    |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |
       | 8003728  | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&zipcode=90210  | //a[contains(@class , 'tel')]  |  health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   | health-plans/enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |
    
-     @Scenario_5_Portfolio_CampaignTraffic_MedEd @tfn_Campaign_Traffic_MedEd
-  Scenario Outline: 1.0 Verify TFN in MedEd Pages and VPP
-    Given the user is on AARP medicare acquisition site from Campaign Traffic
-      | Campaign URL | <campaignUrl>  |    
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user navigates to following MedEd Plan Page URL and validate Federal TFN in UHC
-      | MedEd URL    | <medEdURL> |
-      | TFN Xpath | <medEdTFN> |
-    Then the user navigates to following MA Plan Page URL and validate Federal TFN in UHC
-      | MA URL    | <maUrl> |
-      | TFN Xpath | <maTFN> |
-   
-    Examples: 
-      | pscCode  | campaignUrl                                | medEdURL                                     |     medEdTFN                                           | maUrl                                    |   maTFN                                                       |                                                                                                                                                                                                      
-      |  8001277 | /medicare-education.html?WT.mc_id=8001277  | medicare-education/medicare-eligibility.html | //*[contains(@class,'amp')]//a[contains(@class,'tel')] | health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   |
-    
-      @Scenario_4_ReferralTraffic @tfn_Referral_Traffic
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
-    Given the user is on AARP medicare acquisition site from Campaign Traffic
-      | Campaign URL | <campaignUrl>  |    
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates TFN on the particular deeplink URL page in UHC
-       | TFN Xpath | <campaignTFN> |
-     Then the user validates Federal TFN for PDP Plan Summary Page in UHC
-      | TFN Xpath | <pdpTFN> |
-     Then the user opens MA Plan Page URL and validates federal TFN in UHC
-        | Site      | <site>  | 
-        | MA URL    | <maUrl> |
-        | TFN Xpath | <maTFN> |
-     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN in UHC
-      | MedSupp URL | <agentApptUrl> |
-      | TFN Xpath   | <agentApptTFN> |
-   
-    Examples: 
-  | site    | pscCode  | campaignUrl                                                                                                                                                                               | campaignTFN                       |  maUrl                                    |   maTFN                                                       | pdpTFN                      | agentApptUrl                                                     | agentApptTFN   |
-  | ulayer  |  8003093 | /health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=5K5#/plan-summary  | //*[contains(@class,'tel right')] | /health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   | //a[contains(@class,'tel')] | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |
  
- 
-   @Scenario_1_2_DirectTraffic_UHC @tfn_Direct_Traffic
+   @Scenario_1_2_DirectTraffic_UHC @tfn_Direct_Traffic_UHC
   Scenario Outline: 1.0 Verify TFN in VPP Plan Details and OLE pages for Federal Plans
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC

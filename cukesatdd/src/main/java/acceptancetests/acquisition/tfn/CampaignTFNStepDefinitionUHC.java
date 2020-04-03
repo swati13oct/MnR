@@ -145,57 +145,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 
 }
 
-	@Given("^user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page$")
-	public void user_is_on_Google_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Exception  {
-
-		String url = "https://www.google.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
-		//wd.manage().deleteAllCookies();
-		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-		tfnPage.openUrl(url);
-		tfnPage.googleSearchAARP();
-
-		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-	}
-
-	@Given("^user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page$")
-	public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Throwable {
-
-		String url = "https://www.Yahoo.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
-		//wd.manage().deleteAllCookies();
-		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-		tfnPage.openUrl(url);
-		tfnPage.YahooSearchAARP();
-
-		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-
-	}
-	
-	
-	
-
-	@Given("^user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page$")
-	public void user_is_on_Bing_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Throwable {
-
-		String url = "https://www.bing.com/";
-		WebDriver driver = getLoginScenario().getWebDriverNew();
-
-		//wd.manage().deleteAllCookies();
-		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-		tfnPage.openUrl(url);
-		tfnPage.BingSearchAARP();
-
-		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-
-	}
-	
-	
+		
 	@Given("^user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page$")
 	public void user_is_on_Google_and_search_UHC_Medicare_Advantage_Plan_to_navigate_to_UHC_page() throws Exception  {
 
