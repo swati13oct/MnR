@@ -180,7 +180,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | New York | MAPD          | Condition    | within | innetwork |             |               | Yes            | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @DKFlow1 @F358830
+  @PRE @planrecommendation @DKFlow @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate DK flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -243,7 +243,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   35034 | YES           | Bibb County | NA            | None         | another | mydoctors | John        | No            | No             | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @DKFlow1 @DKzerodrug @F358830
+  @PRE @planrecommendation @DKFlow @DKzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
