@@ -240,8 +240,8 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | NA            | None         | another | mydoctors | John        | No            | No             | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | New York | NA            | None         | another | mydoctors | sue         | No            | No             | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommendation @DKFlow @DKzerodrug @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
