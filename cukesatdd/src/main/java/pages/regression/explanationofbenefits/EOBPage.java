@@ -1097,6 +1097,13 @@ public class EOBPage extends EOBBase{
 		}
 	}
 
+	public void validateSpendingCostSummaryTab(boolean expectTab) {
+		if (expectTab) {
+			Assert.assertTrue("PROBLEM - input exepct to see 'Spending Cost Summary' on top sub menu for this user but unable to locate the 'Spending Cost Summary' tab on top sub menu", eobValidate(spendingCostSummaryTab_topSubMenu));
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu));
+		}
+	}
 }
 
 

@@ -73,7 +73,7 @@ Feature: 1.04 To Test EOB for Members
 
     @COSMOS_MEDICAL @devRegression
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob |
+      | index | planType | memberType        | eobType           | flagZeroEob | 
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
 
     @COSMOS_MEDICAL
@@ -89,25 +89,25 @@ Feature: 1.04 To Test EOB for Members
     @NICE_MEDICAL
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |      
-      | 05    | MA       | NICE_EOB_R        | Medical           | true        |      
+      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |  
+      | 05    | MA       | NICE_EOB_R        | Medical           | true        | 
 
     @NICE_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
+      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        | 
 
     #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
     #note: adobe links won't come up till very very late
     @RX_PDP
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
       | 08    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
 
     @RX_PDP_COMBO
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 09    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
@@ -208,3 +208,32 @@ Feature: 1.04 To Test EOB for Members
     Examples: 
       | index | FID    | planType | memberType | 
       | 15    | 267688 | SSUP     | GROUP_EOB  | 
+
+  # note: for SSUP case, there will be no EOB page
+  @eob05 @speCosSumSup @regressionMember
+  Scenario Outline: -index: <index> -UID: <UID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then the user navigates to EOB page
+    Then the user validate Spending Cost Summary tab on top sub menu
+      | Expect Tab  | <expectTab>  |
+
+    @speCosSumSuppressed	
+    Examples: 
+      | index | UID       | planType  | memberType         | expectTab | note                                      | 
+      | 17    | US2382272 | SHIP_FED  | COMBO_EOB          | false     | medicaidDualStatusCode either 01,02,04,08 |
+      | 18    | US2382272 | SSUP      | SSUP_ONLY_EOB      | false     | planCode SSP                              |
+      | 19    | US2382272 | SHIP      | MULTI_SHIP_EOB     | false     | ship user                                 |
+      | 20    | US2382272 | PDP       | LIS_EOB            | false     | PDP blacklist LIS either 1,2,3,4          |
+      | 21    | US2382272 | PDP_SSUP  | LIS_COMBO_EOB      | false     | PDP has LIS                               |
+      | 22    | US2382272 | MAPD  | TERM_EOB      | false     | suppress                             |
+
+    @speCosSumNotSuppressed
+    Examples: 
+      | index | UID       | planType  | memberType         | expectTab | note                                      | 
+      | 23    | US2382272 | PDP_SHIP  | NON_LIS_COMBO_EOB  | true      | PDP is non list                           |
+      | 24    | US2382272 | PDP_SSUP  | NON_LIS_COMBO_EOB  | true      | PDP LIS 0                                 |
+      | 25    | US2382272 | MAPD      | COSMOS_EOB_R       | true      | medicaidDualStatusCode is not 01,02,04,08 |
+      | 26    | US2382272 | MA        | COSMOS_EOB_R       | true      | medicaidDualStatusCode is not 01,02,04,08 |
+      | 27    | US2382272 | SHIP_MAPD | COMBO_EOB          | true      | medicaidDualStatusCode is not 01,02,04,08 |

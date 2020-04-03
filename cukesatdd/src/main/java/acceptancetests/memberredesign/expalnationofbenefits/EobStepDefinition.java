@@ -472,7 +472,17 @@ public class EobStepDefinition {
 		eobPage.waitForEobPageToLoad();
 	}
 
-
+	@Then("^the user validate Spending Cost Summary tab on top sub menu$")
+	public void user_validate_spendingCostSummaryTab(DataTable givenAttributes) throws InterruptedException {   
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String expectTabStr = memberAttributesMap.get("Expect Tab");
+		Assert.assertTrue("PROBLEM - input value for 'Expect Tab' in feature file should either be true or false.  Actual='"+expectTabStr+"'",expectTabStr.equalsIgnoreCase("true") || expectTabStr.equalsIgnoreCase("false"));
+		boolean expectTab=Boolean.valueOf(expectTabStr);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateSpendingCostSummaryTab(expectTab);
+	}
 
 
 	//--------------------------------------------------------------
