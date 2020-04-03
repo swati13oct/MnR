@@ -63,6 +63,7 @@ public class PaymentsFormPage extends UhcDriver {
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
 
+		
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -228,7 +229,7 @@ public class PaymentsFormPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(CheckingAccountInformationHeader);
+		validate(routingNumberField);
 
 	}
 
