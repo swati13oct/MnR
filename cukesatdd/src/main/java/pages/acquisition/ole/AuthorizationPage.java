@@ -90,17 +90,16 @@ public class AuthorizationPage extends UhcDriver{
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
-	@FindBy(xpath = "//input[@id='StatementOfUnderstandingAgree'] | //input[@id='AgreeAgree']")
-
+	@FindBy(xpath= "//input[contains(@id,'Agree')]")
 	private WebElement SoU_AgreeRadio;
 
-	@FindBy(xpath = "//input[@id='StatementOfUnderstandingDisagree'] | //input[@id='AgreeDisagree']")
+	@FindBy(xpath = "//input[contains(@id,'Disagree')]")
 	private WebElement SoU_DisagreeRadio;
 	
 	@FindBy(id= "icon-alert-sign")
 	private WebElement SoU_DisagreeError;
 	
-	@FindBy(xpath = "//*[@id='ole-form-cancel-button1'] | //*[@id='ole-force-cancel-button']")
+	@FindBy(xpath = "//*[contains(@id,'cancel-button')]")
 	private WebElement CancelEnrollButton;
 
 	

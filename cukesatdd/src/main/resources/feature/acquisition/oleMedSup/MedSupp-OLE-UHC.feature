@@ -29,7 +29,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
+      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
@@ -60,7 +60,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
      
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
-     |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrieve         |
+     |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrieve         |
    
       
            @MedSuppOLEBLayerSmoke
@@ -81,7 +81,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       Then User navigates to plan summary page of AARP site 
    Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  | 
-     |   90002 | NO              | Los Angeles County | MS       | 11/11/1949 | test     | test   |
+     |   90002 | NO              | Los Angeles County | MS       | 11/11/1940 | test     | test   |
       
       
       

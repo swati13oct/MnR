@@ -1651,7 +1651,7 @@ public class VppStepDefinitionUHC {
 
 		String applicationType = memberAttributesMap.get("applicationType");
 		String DOB = memberAttributesMap.get("DOB");
-		String zipcode = memberAttributesMap.get("zipcode");
+		String zipcode = memberAttributesMap.get("Zipcode");
 
 		String ApplicationID = (String) getLoginScenario().getBean(VPPCommonConstants.RESUMEKEY);
 
