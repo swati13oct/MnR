@@ -1,7 +1,7 @@
-@organicSearchTFN_UHC
+@organicSearchTFN
 Feature: To test Organic Search Campaign TFN on UHC site
 
-  @Scenario3_1_GoogleSearch_UHC
+  @Scenario3_1_GoogleSearch_UHC @organicSearchTFN_UHC
   Scenario Outline: - 3.2 Google and search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
@@ -19,7 +19,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
       |  880188 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
-  @Scenario3_2_BingSearch_UHC
+  @Scenario3_2_BingSearch_UHC  @organicSearchTFN_UHC
   Scenario Outline: - 3.2 Bing  search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Bing and search UHC Medicare Advantage Plan to navigate to navigate to UHC page
@@ -37,7 +37,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
       |  880187 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
-  @Scenario3_3_YahooSearch_UHC
+  @Scenario3_3_YahooSearch_UHC  @organicSearchTFN_UHC
   Scenario Outline: - 3.3 Yahoo and search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Yahoo and search UHC Medicare Advantage Plan to navigate to UHC page

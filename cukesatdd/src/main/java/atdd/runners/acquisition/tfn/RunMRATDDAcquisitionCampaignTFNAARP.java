@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionCampaignTFNAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json" }, tags = {"@Scenario_1_2_DirectTraffic"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARP.json" }, tags = {"@tfn_Direct_Traffic,@tfn_Campaign_Traffic,@tfn_Campaign_Traffic_MedEd,@tfn_Referral_Traffic"})
 
 public class RunMRATDDAcquisitionCampaignTFNAARP {
 

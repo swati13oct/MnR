@@ -1,7 +1,7 @@
-@organicSearchTFN_AARP
+@organicSearchTFN
 Feature: To test Organic SearchCampaign TFN on AARP site
 
-  @Scenario3_1_GoogleSearch_AARP
+  @Scenario3_1_GoogleSearch_AARP @organicSearchTFN_AARP
   Scenario Outline: - 3.1 Google search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
@@ -19,7 +19,7 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | pscCode | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
       |  810106 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
-  @Scenario3_2_BingSearch_AARP
+  @Scenario3_2_BingSearch_AARP @organicSearchTFN_AARP
   Scenario Outline: - 3.2 Bing search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page
@@ -38,7 +38,7 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       |  810104 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 
 
-  @Scenario3_3_YahooSearch_AARP
+  @Scenario3_3_YahooSearch_AARP @organicSearchTFN_AARP
   Scenario Outline: - 3.3 Yahoo and search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page
