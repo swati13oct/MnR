@@ -376,10 +376,13 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
 				if (lookForPlanCategory.equals(actualPlanCategory)) {
 					actualMemberId = (String) planProfilesObj.get("memberNumber");
-				}
+					Assert.assertTrue("PROBLEM - unable to locate memberNumber from localStorage.consumerDetails, "
+							+ "please check to see if getConsumerInfo API response contains non-null memberNumber, consumerDetails="+consumerDetails, 
+							actualMemberId!=null);
+				} 
 			}			
-			Assert.assertTrue("PROBLEM - unable to locate actualMemberId from localStorage.consumerDetails, "
-					+ "please double check input data planType matches user's actual planType, consumerDetails="+consumerDetails, 
+			Assert.assertTrue("PROBLEM - unable to locate the expected planType from localStorage.consumerDetails, "
+					+ "please check to see if feature file input parameter planType contains the actual planType that is in getConsumerInfo API, consumerDetails="+consumerDetails, 
 					actualMemberId!=null);
 			
 

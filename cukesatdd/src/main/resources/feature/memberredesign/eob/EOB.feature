@@ -213,7 +213,7 @@ Feature: 1.04 To Test EOB for Members
 
   # note: for SSUP case, there will be no EOB page
   @eob05 @speCosSumSup @regressionMember
-  Scenario Outline: -index: <index> -UID: <UID> -plan: <planType> -memberType: <memberType> - To validate that SSUP GROUP member accessing EOB page via top menu sub link
+  Scenario Outline: -index: <index> -UID: <UID> -plan: <planType> -memberType: <memberType> - To validate Spending Cost Summary tab suppression on EOB page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
