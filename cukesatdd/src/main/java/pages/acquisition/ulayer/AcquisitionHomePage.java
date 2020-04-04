@@ -28,6 +28,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -1702,6 +1703,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public OLETestHarnessPage GetOLETestHarnessPage() {
+			return new OLETestHarnessPage(driver);
+		}
+		
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
