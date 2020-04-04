@@ -238,4 +238,4 @@ Feature: 1.04 To Test EOB for Members
       | 24    | US2382272 | PDP_SSUP  | NON_LIS_COMBO_EOB  | true      | PDP LIS 0                                 |
       | 25    | US2382272 | MAPD      | COSMOS_EOB_R       | true      | medicaidDualStatusCode is not 01,02,04,08 |
       | 26    | US2382272 | MA        | COSMOS_EOB_R       | true      | medicaidDualStatusCode is not 01,02,04,08 |
-      | 27    | US2382272 | SHIP_MAPD | COMBO_EOB          | true      | medicaidDualStatusCode is not 01,02,04,08 |
+      | 27    | US2382272 | SHIP_MA  | COMBO_EOB          | true      | medicaidDualStatusCode is not 01,02,04,08 |

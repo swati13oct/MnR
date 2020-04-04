@@ -278,6 +278,9 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[not(contains(text(),'Supplement')) and not(contains(text(),'Prescription')) and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MA;
 	
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medicare')]") 
 	protected WebElement comboTab_MAPD;
@@ -288,7 +291,7 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Hospital Indemnity')]") 
 	protected WebElement comboTab_SHIP_HIP;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
@@ -321,6 +324,9 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//nav[@id='sub-nav']//a[contains(@href,'spending-and-cost-summary')]")
 	protected WebElement spendingCostSummaryTab_topSubMenu;
+	
+	@FindBy(xpath="//div[contains(@class,'dropdown-menu')]//a[contains(@href,'spending-and-cost-summary')]")
+	protected WebElement spendingCostSummaryTab_topSubMenu2;
 	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
