@@ -10,13 +10,13 @@ Feature: 1.05 Member Footer validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Validate Footer | yes      |
+    Then the user navigates to EOB page
+    And the user validates the footer section in EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
     Then the user navigates to claims page
     And the user validates the footer section in claims page
-    Then the user navigates to EOB page to validate footer
-    And the user validates the footer section in EOB page
     Then the user navigates to profile and pref page
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
@@ -47,13 +47,13 @@ Feature: 1.05 Member Footer validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Validate Footer | yes      |
+    Then the user navigates to EOB page
+    And the user validates the footer section in EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
     Then the user navigates to claims page
     And the user validates the footer section in claims page
-    Then the user navigates to EOB page to validate footer
-    And the user validates the footer section in EOB page
     Then the user navigates to profile and pref page for Ship member
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
@@ -79,13 +79,13 @@ Feature: 1.05 Member Footer validation
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     Then user validates Need Help section content for payment page
     Then the user navigates to claims page
     Then user validates Need Help section content for claims page
-    Then the user navigates to EOB page to validate footer
-    Then user validates Need Help section content for EOB page
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
@@ -111,13 +111,13 @@ Feature: 1.05 Member Footer validation
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Validate Footer | yes      |
+    Then the user navigates to EOB page
+    Then user validates Need Help section content for EOB page
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     Then user validates Need Help section content for payment page
     Then the user navigates to claims page
     Then user validates Need Help section content for claims page
-    Then the user navigates to EOB page to validate footer
-    Then user validates Need Help section content for EOB page
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page

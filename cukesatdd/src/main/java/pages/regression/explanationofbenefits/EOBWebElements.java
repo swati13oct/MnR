@@ -279,7 +279,7 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
 	
-	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medicare')]") 
 	protected WebElement comboTab_MAPD;
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 

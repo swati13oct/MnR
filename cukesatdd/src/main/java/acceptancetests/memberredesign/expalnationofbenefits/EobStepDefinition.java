@@ -24,6 +24,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.regression.footer.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 
@@ -468,6 +469,8 @@ public class EobStepDefinition {
 		if (memberType.contains("COMBO")) 
 			eobPage.goToSpecificComboTab(planType);
 		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		FooterPage footerPage=new FooterPage(eobPage.driver);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 		System.out.println("user is on the EOB page"); 
 		eobPage.waitForEobPageToLoad();
 	}
