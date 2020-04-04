@@ -72,7 +72,7 @@ Feature: 1.05 Member Footer validation
       | 15347 | SHIP     | IND_footer             |
 
   @footer03 @thePredators @regressionMember @needHelp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
     # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
     # note: if system is in future date, payment page may not show for user and this test will end up failing
     # note: this scenario covers multiple testcases: TID 15347,15348,15349,15350,15351
@@ -106,7 +106,7 @@ Feature: 1.05 Member Footer validation
      | 15347 | PCP      | Ind_footer                 |
       
   @footer04 @thePredators @shipFooter @regressionMember @needHelp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

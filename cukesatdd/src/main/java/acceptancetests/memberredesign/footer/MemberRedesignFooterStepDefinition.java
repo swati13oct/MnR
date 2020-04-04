@@ -353,7 +353,10 @@ public class MemberRedesignFooterStepDefinition {
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		if (MRScenario.environment.contains("team-a")) 
+			System.out.println("team-atest payment page is not yet integrate w/ microapp payment yet, combo tab will not show until then");
+		else
+			footerPage.goToSpecificComboTabOnTargetPage(planType);
 		footerPage.validateNeedHelpSection(planType, memberType);
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
