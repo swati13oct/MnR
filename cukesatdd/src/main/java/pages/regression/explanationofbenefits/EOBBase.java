@@ -212,6 +212,9 @@ public class EOBBase extends EOBWebElements{
 			if (planType.toLowerCase().contains("mapd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", eobValidate(comboTab_MAPD));
 				comboTab_MAPD.click();
+			} else if (planType.toLowerCase().contains("ship_hip")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", eobValidate(comboTab_SHIP));
+				comboTab_SHIP_HIP.click();
 			} else if (planType.toLowerCase().contains("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", eobValidate(comboTab_SHIP));
 				comboTab_SHIP.click();

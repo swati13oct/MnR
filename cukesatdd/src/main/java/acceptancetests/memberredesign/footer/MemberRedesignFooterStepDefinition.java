@@ -15,6 +15,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.memberredesign.expalnationofbenefits.EobCommonConstants;
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -28,6 +30,7 @@ import pages.memberredesign_deprecated.bluelayer.LoginPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.payments.PaymentHistoryPage;
+import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -44,7 +47,7 @@ public class MemberRedesignFooterStepDefinition {
 	}
 
 	/**
-	 * @toDo : Finds authenticated user to login
+	 * Finds authenticated user to login
 	 * @param memberAttributes
 	 */
 	@Given("^I am a authenticated member on the member redesign site Footer$")
@@ -66,10 +69,8 @@ public class MemberRedesignFooterStepDefinition {
 		List<String> desiredAttributes = new ArrayList<String>();
 		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
 				.hasNext();) {
-			{
 				String key = iterator.next();
 				desiredAttributes.add(memberAttributesMap.get(key));
-			}
 
 		}
 		System.out.println("desiredAttributes.." + desiredAttributes);
@@ -99,7 +100,7 @@ public class MemberRedesignFooterStepDefinition {
 	}
 
 	/**
-	 * @toDo : user gets logged in to new member site
+	 * user gets logged in to new member site
 	 */
 	@When("^the above plantype user logs in UMS Site Desktop Footer$")
 	public void plantype_user_logs_in() {
@@ -116,7 +117,7 @@ public class MemberRedesignFooterStepDefinition {
 	}
 
 	/**
-	 * @toDo : View global navigation Footer
+	 * View global navigation Footer
 	 * @throws InterruptedException
 	 */
 	@When("^I view the global navigation Footer$")
@@ -131,7 +132,7 @@ public class MemberRedesignFooterStepDefinition {
 	}
 
 	/**
-	 *  @toDo : On member page and checks for footer sections - check model popup, validate claims level 2 tab, validate footer section
+	 *  On member page and checks for footer sections - check model popup, validate claims level 2 tab, validate footer section
 	 */
 	@Then("^the user navigates to payment history page$")
 	public void user_views_payment_history() throws InterruptedException {	
@@ -175,7 +176,10 @@ public class MemberRedesignFooterStepDefinition {
 
 	@Then("^the user navigates to claims page$")
 	public void user_navigates_to_claims_page(){
-
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.NavigateToClaimsPage();
 
@@ -184,6 +188,10 @@ public class MemberRedesignFooterStepDefinition {
 
 	@And("^the user validates the footer section in claims page$")
 	public void user_validates_footer_in_claimsPage() throws InterruptedException{
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
@@ -266,6 +274,10 @@ public class MemberRedesignFooterStepDefinition {
 	
 	@Then("^the user navigates to the Health and Wellness page$")
 	public void user_navigates_to_health_and_wellness_page(){
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.NavigateToHealthAndWelnessPage();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
@@ -273,12 +285,22 @@ public class MemberRedesignFooterStepDefinition {
 
 	@And("^the user validates the footer section in Health and Wellness page$")
 	public void user_validates_footer_in_health_and_wellness_page() throws InterruptedException{
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
 	@Then("^the user navigates to the Pharmacies and Prescriptions page$")
 	public void user_navigates_to_PharmaciesAndPrescriptionsPage(){
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if (planType.toLowerCase().contains("ship")) {
+			System.out.println("SHIP user doesn't have PnP page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.NavigateToPharmaciesAndPrescriptionsPage();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
@@ -286,6 +308,12 @@ public class MemberRedesignFooterStepDefinition {
 
 	@And("^the user validates the footer section in Pharmacies and Prescriptions page$")
 	public void user_validates_footer_in_PharmaciesAndPrescriptionsPage() throws InterruptedException{
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if (planType.toLowerCase().contains("ship") && !memberType.toLowerCase().contains("combo")) {
+			System.out.println("SHIP user doesn't have PnP page, skip step...");
+			return;
+		}
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
@@ -314,52 +342,117 @@ public class MemberRedesignFooterStepDefinition {
 	@And("^the user validates the footer section in Pharmacy Locator Page$")
 	public void user_validates_footer_in_PharmacyLocatorPage() throws InterruptedException{
 		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
 		footerPage.validateFooterLinks();
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
 
+	@Then("^user validates Need Help section content for payment page$")
+	public void validate_need_help_section_payment() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for claims page$")
+	public void validate_need_help_section_claims() throws InterruptedException {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for EOB page$")
+	public void validate_need_help_section_eob() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for account setting page$")
+	public void validate_need_help_section_accountSetting() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
 	
+	@Then("^user validates Need Help section content for contact us page$")
+	public void validate_need_help_section_countUs() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for benefits page$")
+	public void validate_need_help_section_benefits() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for order plan materials page$")
+	public void validate_need_help_section_orderPlan() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		footerPage.goToSpecificComboTabOnTargetPage(planType);
+		footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for health and wellness page$")
+	public void validate_need_help_section_healthWellness() throws InterruptedException {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team-atest env doesn't support rally claims page, skip step...");
+			return;
+		}
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if (memberType.toLowerCase().contains("combo") && memberType.toLowerCase().startsWith("ship_")) 
+			footerPage.validateNeedHelpSection("SHIP", memberType);
+		else
+			footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
+	@Then("^user validates Need Help section content for pharmacies and prescriptions page$")
+	public void validate_need_help_section_pnp() throws InterruptedException {
+		FooterPage footerPage = (FooterPage) getLoginScenario().getBean(PageConstants.footer_page);
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if (planType.toLowerCase().contains("ship") && !memberType.toLowerCase().contains("combo")) {
+			System.out.println("SHIP user doesn't have PnP page, skip step...");
+			return;
+		}
+		//if combo and ship priority
+		if (memberType.toLowerCase().contains("combo") && memberType.toLowerCase().startsWith("ship_")) 
+			footerPage.validateNeedHelpSection("SHIP", memberType);
+		else
+			footerPage.validateNeedHelpSection(planType, memberType);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- *  @toDo : Checks for Member support and links under it
- */
-/*@When("^Member Support and links under it should be displayed Footer$")
-	public void Member_Support_and_links_under_it_should_be_displayed() {
-		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateMemberSupport();
-	}
-
- *//**
- *  @toDo : Checks quick links and links under it
- *//*
-	@When("^Quick links and links under it should be displayed Footer$")
-	public void Quick_links_and_links_under_it_should_be_displayed() {
-		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateQuickLinks();
-	}
-
-  *//**
-  *  @toDo : Access to Rally Provider Search Tool and check for saved option under quick links
-  *//*
-	@When("^I have access to the Rally Provider Search Tool and I see the Saved option under Quick Links Footer$")
-	public void I_have_access_to_the_Rally_Provider_Search_Tool_and_I_see_the_Saved_option_under_Quick_Links() {
-		// Express the Regexp above with the code you wish you had
-		AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.MEM_REDESIGN_ACCOUNT_HOME_PAGE);
-		accountHomePage.validateSavedLink();
-	}*/
-
-

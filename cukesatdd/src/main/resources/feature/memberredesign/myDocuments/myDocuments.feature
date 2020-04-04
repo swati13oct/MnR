@@ -47,7 +47,8 @@ Feature: 1.06.7 Member My Documents Page
     #----------------- Test Misc--------------------------
     And I validate the Note  text on my Documents Page
     And I validate the disclaimer on my Documents Page 
-    Then I validate Need Help section on my Documents Page
+    #note: moved to footer feature
+    #Then I validate Need Help section on my Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     @devRegression
@@ -101,7 +102,8 @@ Feature: 1.06.7 Member My Documents Page
     #----------------- Test Misc--------------------------
     And I validate the Note  text on my Documents Page
     And I validate the disclaimer on my Documents Page 
-    Then I validate Need Help section on my Documents Page
+    #note: moved to footer feature
+    #Then I validate Need Help section on my Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     Examples: 

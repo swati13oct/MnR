@@ -215,16 +215,4 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 	
-	@Then("^user validates Need Help section content$")
-	public void validate_need_help_section() throws InterruptedException {
-		String  planType=(String) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
-		String  memberType=(String) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
-		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNeedHelpSection(planType, memberType);
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-	
 }

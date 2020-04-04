@@ -51,7 +51,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates pharmacies tile Check home delivery order status page
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
-    Then user validates Need Help section content
+    #note: moved to footer feature
+    #Then user validates Need Help section content
 
     @pharmaciesandprescriptions01a @devRegression
     Examples: 
@@ -171,7 +172,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates pharmacies tile Check home delivery order status page
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
-    Then user validates Need Help section content
+    #note: moved to footer feature
+    #Then user validates Need Help section content
 
     @forLocalTestOnly01_pharmaciesandprescriptions01a
     Examples: 
@@ -198,7 +200,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
 
 
   @forLocalTestOnly02
-  Scenario Outline: To validate via member authorization access for claims
+  Scenario Outline: To validate via member authorization access for PnP
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

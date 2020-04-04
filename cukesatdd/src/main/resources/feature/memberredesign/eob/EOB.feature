@@ -15,7 +15,8 @@ Feature: 1.04 To Test EOB for Members
     Then the user navigates to EOB page
     Then the user validates the header section content
     Then the user validates site leaving pop up after clicking Adobe link
-    Then the user validates Need Help section
+    #note: moved to footer feature
+    #Then the user validates Need Help section
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Custom Search invalid cases ----  
@@ -120,7 +121,8 @@ Feature: 1.04 To Test EOB for Members
     Then the user navigates to EOB page
     Then the user validates the header section content
     Then the user validates site leaving pop up after clicking Adobe link
-    Then the user validates Need Help section
+    #note: moved to footer feature
+    #Then the user validates Need Help section
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
@@ -222,12 +224,12 @@ Feature: 1.04 To Test EOB for Members
     @speCosSumSuppressed	
     Examples: 
       | index | UID       | planType  | memberType         | expectTab | note                                      | 
-      | 17    | US2382272 | SHIP_FED  | COMBO_EOB          | false     | medicaidDualStatusCode either 01,02,04,08 |
+      | 17    | US2382272 | SHIP_HIP_FED | COMBO_EOB       | false     | medicaidDualStatusCode either 01,02,04,08 |
       | 18    | US2382272 | SSUP      | SSUP_ONLY_EOB      | false     | planCode SSP                              |
       | 19    | US2382272 | SHIP      | MULTI_SHIP_EOB     | false     | ship user                                 |
       | 20    | US2382272 | PDP       | LIS_EOB            | false     | PDP blacklist LIS either 1,2,3,4          |
       | 21    | US2382272 | PDP_SSUP  | LIS_COMBO_EOB      | false     | PDP has LIS                               |
-      | 22    | US2382272 | MAPD  | TERM_EOB      | false     | suppress                             |
+      | 22    | US2382272 | MAPD      | TERM_EOB           | false     | suppress                                  |
 
     @speCosSumNotSuppressed
     Examples: 

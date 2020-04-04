@@ -285,6 +285,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 
 	protected WebElement comboTab_SHIP;
 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Hospital Indemnity')]") 
+	protected WebElement comboTab_SHIP_HIP;
+
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
 	protected WebElement comboTab_PDP;
 
