@@ -403,7 +403,7 @@ public class MemberRedesignFooterStepDefinition {
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if (memberType.toLowerCase().contains("combo")) 
 			footerPage.goToSpecificComboTabOnTargetPage(planType);
-		footerPage.validateNeedHelpSection(planType, memberType);
+		footerPage.validateContactUsChatWithUs(planType, memberType);
 		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 	}
 
