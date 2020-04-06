@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -642,6 +643,11 @@ public class FooterPage extends UhcDriver {
 
 		Assert.assertTrue("PROBLEM - unable to locate footer element 'All Right Reserved' on sign-in page", footerValidate(unauthFooter_allRightReserved));
 	}
+	
+	public void moveMouseToElement(WebElement targetElement) {
+		Actions action = new Actions(driver);
+		action.moveToElement(targetElement).build().perform(); 
+	}
 
 	/**
 	 * Validate Need Help section content
@@ -661,6 +667,8 @@ public class FooterPage extends UhcDriver {
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
 					footerValidate(needHelp_SectionHeader));
 
+			moveMouseToElement(needHelp_SectionHeader);
+			
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
 					needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, 
@@ -703,6 +711,8 @@ public class FooterPage extends UhcDriver {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
 					footerValidate(needHelp_SectionHeader));
+
+			moveMouseToElement(needHelp_SectionHeader);
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
