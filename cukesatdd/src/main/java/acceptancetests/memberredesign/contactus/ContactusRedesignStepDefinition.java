@@ -184,18 +184,7 @@ public class ContactusRedesignStepDefinition {
 					contactusPage);
 
 	}
-	@Then("^the user click on view questions button and validate the questions links$")
-	public void Click_on_view_questions_Link_and_validate_Links()
-	{
-		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
-
-		contactusPage.validateviewQuestions();
-
-		if(contactusPage != null)				
-			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
-					contactusPage);
-
-	}
+	
 	/**
 	 *  @toDO : the user validates cancel link on secure email widget on contact us page
 	 */
@@ -212,6 +201,26 @@ public class ContactusRedesignStepDefinition {
 
 	}
 	
+	@Then("^the user click on view questions button and validate the questions links$")
+	public void Click_on_view_questions_Link_and_validate_Links(DataTable givenAttributes)throws Exception {
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("Plan type is - "+plantype);
+	{
+		ContactUsPage contactusPage=(ContactUsPage)getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+
+		contactusPage.validateviewQuestions(plantype);
+
+		if(contactusPage != null)				
+			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE,
+					contactusPage);
+	}
+	}
 
 	/**
 	 *  @toDO : the user fills the fill out contact form and submit on contact us page
@@ -462,12 +471,37 @@ public class ContactusRedesignStepDefinition {
 		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactus.clickOnSendMessage_SecureEmail();
 	}
-
+	
+	@Then("^user click on account Profile dropdown and click the messages link$")
+	public void user_click_on_account_Profile_dropdown_and_click_the_messages_link() throws Throwable {
+		System.out.println("****user click on account Profile dropdown and click the messages link*****");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.clickonmessagesLink();
+	}
+	
+	@Then("^user navigate to rally dashboard page and click on account Profile dropdown$")
+	public void user_navigate_to_rally_dashboard_page_and_clickonaccount_Profile_dropdown() throws Throwable {
+		System.out.println("****user navigate to rally dashboard page and click on account Profile dropdown*****");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.NavigateRallyandclickonmessagesLink();
+	}
+	
+	
 	@Then("^the user validates that the SSO secure message Page opens in a new window$")
 	public void the_user_validates_that_the_SSO_secure_message_Page_opens_in_a_new_window() throws Throwable {
+		System.out.println("the user validates that the SSO secure message Page opens in a new window");
 		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
 		contactus.validateSSOInbox();
 	}
-
+	
+	@Then("^the user validates SSO secure message Page via messages link from secondry pages opens in a new window$")
+	public void the_user_validates_SSO_secure_message_Page_via_messages_link_from_secondry_pages_opens_in_a_new_window() throws Throwable {
+		System.out.println("the user validates that the SSO secure message Page opens in a new window");
+		ContactUsPage contactus = (ContactUsPage) getLoginScenario().getBean(PageConstants.CONTACT_US_PAGE);
+		contactus.validateSSOInboxViaMessengerLink();
+	}
+	
+	
+	
 }
 

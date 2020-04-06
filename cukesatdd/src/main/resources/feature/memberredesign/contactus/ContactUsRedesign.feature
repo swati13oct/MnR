@@ -20,7 +20,7 @@ Feature: 1.16 Member Contact us Page
       | MAPD     | Ind_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
       | MAPD     | Grp_ContactUs | test@optum.com | test@optum.com  |  9999999999 |
 
-  @contactUs1 @secureEmailWidgetCancel @regressionMember123
+  @contactUs1 @secureEmailWidgetCancel @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Widget section in contact us redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -34,7 +34,7 @@ Feature: 1.16 Member Contact us Page
 
     Examples: 
       | TID   | plantype | memberType                 | newEmail       | newConfirmEmail |
-      | 15220 | PDP      | IndAARPPDP_Pharmacylocator | test@optum.com | test@optum.com  |
+     # | 15220 | PDP      | IndAARPPDP_Pharmacylocator | test@optum.com | test@optum.com  |
       | 15221 | MAPD     | Ind_ContactUs              | test@optum.com | test@optum.com  |
 
   #Below scenario @contactUs2  and @contactUs3 for CalPERs, Texas ERS and GA DCH are obsolete. Replaced with @contactUs10 and @contactUs11
@@ -189,11 +189,35 @@ Feature: 1.16 Member Contact us Page
 
     Examples: 
       | UID       | plantype | memberType                          | newEmail       | newConfirmEmail |
-      | US1742688 | MAPD     | CALPERSGroup_ContactUs_SendMessage  | test@optum.com | test@optum.com  |
+     | US1742688 | MAPD     | CALPERSGroup_ContactUs_SendMessage  | test@optum.com | test@optum.com  |
       | US1742688 | MAPD     | GEORGIAGroup_ContactUs_SendMessage  | test@optum.com | test@optum.com  |
       | US1742688 | MAPD     | TEXASERSGroup_ContactUs_SendMessage | test@optum.com | test@optum.com  |
       |	 152201   | MAPD     | Ind_ContactUs                       | test@optum.com | test@optum.com  | 
-      |  152201   | MAPD     | Grp_ContactUs                       | test@optum.com | test@optum.com  |  
+      
+        @contactUs10 @secureEmailMessageViaMessagesLink @regressionMember
+  Scenario Outline: UID: <UID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Message Page secondry pages via messengers link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+	When the user navigates to contact us page in UHC site
+    Then user click on account Profile dropdown and click the messages link
+    Then the user validates SSO secure message Page via messages link from secondry pages opens in a new window
+
+    Examples: 
+      | UID       | plantype | memberType                          | newEmail       | newConfirmEmail |
+      |	 152202   | MAPD     | Ind_ContactUs                       | test@optum.com | test@optum.com  |
+       @contactUs10 @secureMessageFromRally @regressionMember12
+      Scenario Outline: UID: <UID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Message Page from Rally dashboard page via messengers link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+	When the user navigates to contact us page in UHC site
+    Then user navigate to rally dashboard page and click on account Profile dropdown 
+    Then the user validates SSO secure message Page via messages link from secondry pages opens in a new window
+
+    Examples: 
+      | UID       | plantype | memberType                          | newEmail       | newConfirmEmail |
+      |	 152203   | MAPD     | Ind_ContactUs                       | test@optum.com | test@optum.com  |
       
   @contactUs11 @secureEmailWidgetCancel @GroupMember @F282564
   Scenario Outline: UID: <UID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Secure Email Us Widget section in contact us redesign page
@@ -212,7 +236,7 @@ Feature: 1.16 Member Contact us Page
       | US1742771 | MAPD     | TEXASERSGroup_ContactUs_GetStarted | test@optum.com | test@optum.com  |
       
       
-       @contactUs7 @validateLabelsonContactUsPage @rgressionMember
+       @contactUs7  @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify Click to Call Widget Drop-Down Request Routing and Confirmation message functionality on contactUS redesign page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <plantype>   |
@@ -225,9 +249,29 @@ Feature: 1.16 Member Contact us Page
     And UI should be replaced by a success confirmation display
       | Format Phone Number | <formatPhoneNumber> |
       | Expected Message    | <expectedMessage>   |
-      And the user click on view questions button and validate the questions links
 
     Examples: 
       | TID   | plantype | memberType  | phoneNumber | formatPhoneNumber | expectedMessage                                                                                                                                                      |
       | 152243 | PCP    | ContactUsPCP |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
-      | 15224 | Medica  | Individual_BnC |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
+      | 15224 | Medica  | Individual_needHelp |  9999999999 | 999-999-9999      | We value your input and will be happy to answer your questions. A UnitedHealthcare® Customer Service representative will call you shortly at the number you provided |
+
+        @contactUs8 @validateLabelsonContactUsPage @regressionMember
+  Scenario Outline: TID: <TID> -Plan Type: <plantype> -Member Type: <memberType> - Verify View qquestion button and common questions on the contactUS redesign page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <plantype>   |
+      | Member Type | <memberType> |
+    When the user navigates to contact us page in UHC site
+    And the user click on view questions button and validate the questions links
+   | Plan Type   | <plantype>   |
+    
+    Examples: 
+     | TID     | plantype | memberType  | 
+     | 152244 | PCP      | ContactUsPCP |  
+     | 152255  | MEDICA   | Individual_needHelp | 
+     | 152201  | MAPD     | Ind_ContactUs |
+     | US2438941 | MAPD     | TEXASERSGroup_ContactUs_SendMessage |
+     | US2438941 | PHIP     | SHIPCLAIMS_ContactUs |
+      
+      
+     
+     
