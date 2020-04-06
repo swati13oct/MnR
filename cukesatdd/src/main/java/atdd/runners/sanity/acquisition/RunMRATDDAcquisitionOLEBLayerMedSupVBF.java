@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEBLayerMedSupVBF.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEBLayerMedSupVBF")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
