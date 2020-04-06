@@ -110,16 +110,31 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | Bristol Myers | DIMITRIOS | FELLENBAUM |    08161935 | 5KP7H08MG55 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell |
       | canopyhealth  | DSKFJ     | LDSKFJOWE  |    11111945 | 6MT8NY0CV01 | https://stage-medicare.uhc.com/sso/inbound/canopy         |
 
-  @regressionMember5
+  @regressionMember
   Scenario Outline: Verify that user is able to perfom Outbound SSO - University of Kentucky
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
-     And user clicks on benefits and coverage tab on home page or test harness page
-     And user scrolls down to Express Scripts link to perform outbound SSO
+    And user clicks on benefits and coverage tab on home page or test harness page
+    And user scrolls down to Express Scripts link to perform outbound SSO
     Then user clicks on Express Scripts link and lands on Express Scripts SSO page in new window
-     
+
     Examples: 
-      | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Scenario             |
-      | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | images/branding/aarp.svg     | dam/UCP/Images/logo/AARP.svg     | TC_University Of Kentucky |
+      | TID   | planType | memberType              | copayCategory | Test Scenario             |
+      | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | TC_University Of Kentucky |
+
+  @regressionMember
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - MyHCE
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    And user directly access the SSO link for myhce
+    And user enters zip code on myhce page and clicks on continue button
+      | Zip Code | <zipCode> |
+    Then user lands on hceestimator landing page
+
+    Examples: 
+      | TID   | planType | memberType | copayCategory | zipCode | Test Scenario         |
+      | XXXXX | MAPD     | myhce      | NON LIS       |   30736 | TC_SHBP_Georgia_myHCE |

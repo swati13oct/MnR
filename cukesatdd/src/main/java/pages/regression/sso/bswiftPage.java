@@ -4,6 +4,7 @@
 package pages.regression.sso;
 
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -58,6 +59,10 @@ public class bswiftPage extends UhcDriver {
 		
 	@FindBy(xpath="//input[@name='submit']")
 	private WebElement submitButton;
+	
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+	
 	
 	public bswiftPage(WebDriver driver) {
 		super(driver);
@@ -142,6 +147,21 @@ public class bswiftPage extends UhcDriver {
 		   submitButton.click();
 		   Thread.sleep(2000);
 		       }
+
+	public void checkCovid19Page() {
+		// TODO Auto-generated method stub
+		 if(validate(homePageNotice)) {
+			   System.out.println("User landed on covid-19 banner page, clicking continue/home button"); 
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView();", homePageNotice);
+				homePageNotice.click();
+				 System.out.println("Continue/home button was clicked"); 
+			}
+		 else
+		 {
+		   System.out.println("Either Covid-19 banner page was not displayed or the Continue/Home button was not displayed, returing AccountHomePage"); 
+	}
+	}
 
 	
 }
