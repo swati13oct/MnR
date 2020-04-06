@@ -1,5 +1,5 @@
-@tfnulayer
-Feature: To test Campaign TFN in all flows on AARP site
+@tfnbluelayer
+Feature: To test Campaign TFN in all flows on UHC site
 
   @Scenario_1_DirectTraffic_UHC @tfn_Direct_Traffic_UHC
   Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
