@@ -535,4 +535,12 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		eob_claims.click();
 		return new EOBPage(driver);
 	}
+	
+	public void validateRallyClaims() {
+		String expUrl="claims";
+		String actUrl=driver.getCurrentUrl();
+		Assert.assertTrue("PROBLEM - unable to land on expected claims page.  Expected landing URL to contains '"+expUrl+"' | Actual Url='"+actUrl+"'", actUrl.contains(expUrl));
+		Assert.assertTrue("PROBLEM - Should not be able to locate 'Claims Summary' header on Rally Claims, this claims page is likely the old claims page",!pgHeader.getText().contains("Claims Summary"));
+
+	}
 }

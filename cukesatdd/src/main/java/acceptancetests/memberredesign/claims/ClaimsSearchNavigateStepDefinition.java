@@ -17,6 +17,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -357,5 +358,11 @@ public class ClaimsSearchNavigateStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);	
 	}
-
+	
+	@Then("^user validates landing on Rally Claims Page$")
+	public void landOnRallyClaims() {
+		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateRallyClaims();
+	}
 }

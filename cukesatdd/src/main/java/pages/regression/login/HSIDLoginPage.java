@@ -4,12 +4,15 @@
 package pages.regression.login;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.member_deprecated.ulayer.TerminatedHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
@@ -324,9 +327,14 @@ public class HSIDLoginPage extends UhcDriver {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new GoGreenPage(driver);
 		}
-		if (driver.getCurrentUrl().contains("/my-documents/")){
+		if (driver.getCurrentUrl().contains("/my-documents/")) { //note: for deeplink validation
 			return new MyDocumentsPage(driver);
-     }
+		}
+		if (driver.getCurrentUrl().contains("/claims")) { //note: for deeplink validation
+			System.out.println("OMG - 2");
+			return new ClaimsSummaryPage(driver);
+		}
+
 		return null;
 	}
 
@@ -610,13 +618,13 @@ public class HSIDLoginPage extends UhcDriver {
 		int y=0;
 		while (y < 30) {
 			try {
-				if (validate(homePageNotice,0)) {
+				if (noWaitValidate(homePageNotice,0)) {
 					homePageNotice.click();
 					CommonUtility.checkPageIsReady(driver);
-				} else	if (validate(homePageNotice2,0)) {
+				} else	if (noWaitValidate(homePageNotice2,0)) {
 					homePageNotice2.click();
 					CommonUtility.checkPageIsReady(driver);
-				} else if (validate(homePageNotice3,0)) {
+				} else if (noWaitValidate(homePageNotice3,0)) {
 					homePageNotice3.click();
 					CommonUtility.checkPageIsReady(driver);
 				}
@@ -775,10 +783,28 @@ public class HSIDLoginPage extends UhcDriver {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new GoGreenPage(driver);
 		}
-		if (driver.getCurrentUrl().contains("/my-documents/")){
+		if (driver.getCurrentUrl().contains("/my-documents/")) { //note: for deeplink validation
 			return new MyDocumentsPage(driver);
-     }
+		}
 		return null;
 	}
+
+	public boolean noWaitValidate(WebElement element, long timeoutInSec) {
+		//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		try {
+			if (element.isDisplayed()) {
+				System.out.println("Element '"+element.toString()+"' found!!!!");
+				return true;
+			} else {
+				System.out.println("Element '"+element.toString()+"' not found/not visible");
+			}
+		} catch (Exception e) {
+			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+		}
+		//note: default in UhcDriver is 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		return false;
+	} 
 
 }

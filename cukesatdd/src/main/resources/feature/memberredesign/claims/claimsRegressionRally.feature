@@ -1,5 +1,5 @@
 @claims @thePredetors
-Feature: 1.12 Member claims Summary page/claims Details page 
+Feature: 1.12.1 Member Rally claims
 
   Background: If run on stage then feature security flag needs to be true
      Given feature security flag must set to true when testing on stage env
@@ -45,6 +45,4 @@ Feature: 1.12 Member claims Summary page/claims Details page
       | TID   | planType | memberType          | claimSystem     | 
       | 15299 | PDP      | Individual          | RX_CLAIMS       | 
       | 15300 | PDP      | GROUP               | RX_CLAIMS       | 
-
   #----- end of Regression claims scenarios section ------------------------
-

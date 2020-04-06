@@ -32,6 +32,7 @@ import gherkin.formatter.model.DataTableRow;
 
 import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
@@ -1009,6 +1010,12 @@ public class HSIDStepDefinition {
 				accountHomePage =  (AccountHomePage) loginPage.doLoginWith(userName, pwd);
 				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
+			} else if (deepLinkUrl.contains("member/claims.html")) {
+				System.out.println("OMG - 1");
+				ClaimsSummaryPage claimsSummaryPage=null;
+				claimsSummaryPage =  (ClaimsSummaryPage) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", claimsSummaryPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE,claimsSummaryPage);
 			} else {
 				Assert.assertTrue("PROBLEM - need to code behavior for deeplink='"+deepLinkUrl+"'", false);
 			}
