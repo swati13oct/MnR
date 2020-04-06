@@ -234,6 +234,10 @@ public class ClaimsSearchNavigateStepDefinition {
 	 */
 	@When("^I navigate to the claims Summary page from dashboard or testharness page$")
 	public void navigate_Claims_Summary_page() { 
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("SKIP validation on team-atest env, does not support Rally page");
+			return;
+		}
 		ClaimsSummaryPage newClaimsSummaryPage;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()

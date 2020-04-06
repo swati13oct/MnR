@@ -478,7 +478,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
 		private WebElement medSuppOlePlanSection;
 		
-		@FindBy(id = "importantdocuments_0")
+		@FindBy(xpath = "(//*[contains(@id,'importantdocuments_')])[1]")
 		private WebElement medSuppImpDoc_PlanOverview;
 		
 		@FindBy(xpath = "//img[@title='aarp-card']")
@@ -2852,7 +2852,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		validateNew(DOB,30);
 		System.out.println("MedSup page form is displayed");
-		DOB.click();
+		jsClickNew(DOB);
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
@@ -2885,36 +2885,34 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
-		Thread.sleep(4000);
 		
-		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 60);
-		Start_ApplicationBtn.click();
+		
+		waitTillElementClickableInTime(Start_ApplicationBtn,60);
+		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
-		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
+		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
-		Thread.sleep(2000);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
 		nextButton.click();
-		Thread.sleep(2000);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		waitforElementVisibilityInTime(firstName,30);
+		sendkeysNew(firstName,FirstName);
+		sendkeysNew(lastName,LastName);
 		nextButton.click();
-		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
-		Thread.sleep(2000);
+		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		String ResumeKey= resumeKey.getText();
 		System.out.println("The return to the application code is- "+ResumeKey);
 		cancelButton.click();
@@ -2924,19 +2922,20 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return ResumeKey;
 	}
 
-	public void ResumeApplicationButton() throws InterruptedException{
+	public void ResumeApplicationButton(String DateOfBirth) throws InterruptedException{
 		Thread.sleep(5000);
-		String DateOfBirth ="11131950";
+		//String DateOfBirth ="11/13/1940";
 		MedSupFormValidation(DateOfBirth);
-		Start_ApplicationBtn.click();
+		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
+		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 30);
+		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
 		validateNew(resumeApplicationBtn);
-
+		waitTillElementClickableInTime(applicationID, 30);
 		applicationID.sendKeys(ApplicationID);
 		ResumeDOB.sendKeys(DOB);
 		ResumeZipCode.sendKeys(zipcode);

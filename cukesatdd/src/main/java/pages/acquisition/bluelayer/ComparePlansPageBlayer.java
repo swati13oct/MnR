@@ -67,7 +67,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
 
-	@FindBy(xpath = "//a[text()='Edit provider list']")
+	@FindBy(xpath = "//a[contains(text(),'Edit') and contains(text(),'Provider')]")
 	public WebElement EditproviderlistLink;
 
 	@FindBy(xpath="//*[contains(@class,'remove')]")
@@ -340,11 +340,8 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	}
 
 	public void verifyProvidercount() {
-		validate(VerifyProviderCount);
-		System.out.println("Verified Provider Count Displayed");
-		validate(EditproviderlistLink);
-		System.out.println("Verified Edit Provider Link Displayed");
-
+		Assert.assertTrue(validate(VerifyProviderCount), "Verified Provider Count not Displayed");
+		Assert.assertTrue(validate(EditproviderlistLink), "Verified Edit Provider Link not Displayed");
 	}
 	
 	public void verifyDCEAmount() {
