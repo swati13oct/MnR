@@ -570,8 +570,6 @@ public class FooterPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 		
-		moveMouseToElement(testElement);
-		
 		testLinkName="PRIVACY POLICY";
 		testElement=unauthFooter_privacyPolicy;
 		expLink="/content/medicare/about/privacy-policy.html";
@@ -683,8 +681,6 @@ public class FooterPage extends UhcDriver {
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
 					footerValidate(needHelp_SectionHeader));
 
-			moveMouseToElement(needHelp_SectionHeader);
-			
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
 					needHelp_TechicalSupport_img, needHelp_TechicalSupport_phone, 
@@ -727,8 +723,6 @@ public class FooterPage extends UhcDriver {
 			System.out.println("Proceed to validate the Need Help section header");
 			Assert.assertTrue("PROBLEM - unable to locate the Need Help section header element",
 					footerValidate(needHelp_SectionHeader));
-
-			moveMouseToElement(needHelp_SectionHeader);
 
 			String validateSection="Need Help - Technical Support";
 			validateNeedHelpSectionContent(validateSection, needHelp_TechicalSupportSection, 
