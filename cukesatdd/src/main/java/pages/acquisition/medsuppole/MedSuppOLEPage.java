@@ -151,7 +151,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		@FindBy(xpath = "//span[contains(@class,'globalTitle')][contains(text(),'Confirmation')]")
 		private WebElement OleMS_ConfirmationHeading;
 		
-		@FindBy(xpath = "//button[contains(text(),'Enroll in AARP')]")
+		@FindBy(xpath = "//button[contains(text(),'Join AARP')]")
 		private WebElement OleMS_EnrollInAppBtn;
 		
 		@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
@@ -176,7 +176,7 @@ public class MedSuppOLEPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 30);
+		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 45);
 	}
 
 
@@ -185,16 +185,16 @@ public class MedSuppOLEPage extends UhcDriver {
 		
 		insuredStatus.click();
 		nextButton.click();
-		waitforElementVisibilityInTime(medSuppOlePlanSection, 30);
-		nextButton.click();
+		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
+		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
-		nextButton.click();
+		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
-		nextButton.click();
+		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(firstName,30);
 		sendkeysNew(firstName,FirstName);
 		sendkeysNew(lastName,LastName);
-		nextButton.click();
+		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
@@ -203,52 +203,52 @@ public class MedSuppOLEPage extends UhcDriver {
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
 		validateNew(medSuppOleDobHeading);
-		nextButton.click();
-		//waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
-		sendkeysNew(medSuppOleHospitalPartA , "01/01/2019");
+		jsClickNew(nextButton);
+		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
+		sendkeys(medSuppOleHospitalPartA , "01/01/2019");
 		medSuppOleMaleCheckbox.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(medSuppOlePartABYesRadioBtn);
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(medSuppOlePlanEffIn6OfEligibleYesRadioBtn);
 		medSuppOleGI30dayBdayYesRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(medSuppOleInsuranceLink);
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_MedCoveredNoRadioBtn);
 		OleMS_MedCoveredNoRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_ExistingMedicareNoRadioBtn);
 		OleMS_ExistingMedicareNoRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_ExistMedSuppNoRadioBtn);
 		OleMS_ExistMedSuppNoRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_OtherInsCoverNoRadioBtn);
 		OleMS_OtherInsCoverNoRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_CpaSignatureIndChkBox);
 		OleMS_CpaSignatureIndChkBox.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_PaymentChoiceYesRadioBtn);
 		OleMS_PaymentChoiceYesRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		
 		validateNew(OleMS_UsMailRadioBtn);
 		OleMS_UsMailRadioBtn.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_ProceedToAuthBtn);
 		OleMS_ProceedToAuthBtn.click();
 		validateNew(OleMS_SignatureIndCheckBox);
 		OleMS_SignatureIndCheckBox.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_MedRelAuthSignCheckBox);
 		OleMS_MedRelAuthSignCheckBox.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		
 		validateNew(OleMS_MedRelClaimSigCheckBox);
 		OleMS_MedRelClaimSigCheckBox.click();
-		nextButton.click();
+		jsClickNew(nextButton);
 		validateNew(OleMS_SubmitAppBtn);
 		
 		

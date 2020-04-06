@@ -17,6 +17,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.memberrdesignVBF.SecurityQuestionsPage;
 import pages.regression.testharness.*;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.login.AssistiveRegistrationPage;
 import pages.regression.login.ConfirmSecurityQuestion;
 import pages.regression.login.TerminatedHomePage;
@@ -70,6 +71,11 @@ public class LoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
 	private WebElement homePageNotice;
 
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
 
 	    
 	    MRScenario loginScenario;
@@ -86,6 +92,12 @@ public class LoginPage extends UhcDriver {
 			
 		}
 
+		public void validateFooter() {
+			FooterPage footerPg=new FooterPage(driver);
+			footerPg.validateSignInPgFooter();
+		}
+
+		
 		private boolean teamSpecialCase;
 		//tbd private boolean isMicroApp;
 		//tbd public LoginPage(WebDriver driver, boolean input_teamSpecialCase, boolean isMicroApp) {
@@ -95,7 +107,6 @@ public class LoginPage extends UhcDriver {
 			teamSpecialCase=input_teamSpecialCase;
 			//tbd this.isMicroApp=isMicroApp;
 			openAndValidate();
-			
 		}
 
 		public void openAndValidate() {
@@ -223,12 +234,17 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if (!(null==MRScenario.environment)&& (MRScenario.environment.contains("team-atest"))) { //note: sometimes take longer to load page on this team env
+					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
 						if (validate(homePageNotice,0)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(homePageNotice2,0)) {
+							homePageNotice2.click();
+							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(homePageNotice3,0)) {
+							homePageNotice3.click();
+							CommonUtility.checkPageIsReady(driver);
 						}
-
 						Thread.sleep(3000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {

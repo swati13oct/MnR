@@ -1073,6 +1073,21 @@ public class VppStepDefinitionUHC {
 		//plansummaryPage.CheckClick_CurrentYear_Plans();
 		plansummaryPage.savePlans(ma_savePlanNames, planType);
 	}
+	
+	@Then("^user saves two MS plans as favorite on UHC site$")
+	public void user_saves_two_MS_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ma_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+		// ----- MS plan type ----------------------------
+		String planType = "MS";
+		//plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.CheckClick_CurrentYear_Plans();
+		plansummaryPage.savePlans(ma_savePlanNames, planType);
+	}
 
 	@Then("^user gets a create profile prompt on UHC site$")
 	public void user_saves_two_plans_as_favorite_on_UHC_site() {
@@ -1094,6 +1109,20 @@ public class VppStepDefinitionUHC {
 
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 
+	}
+	
+	@And("^user validate pdf link on UHC Site$")
+	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("MS Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansPDFLinks(savePlanNames);
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site$")
@@ -1637,6 +1666,24 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.ResumeApplicationButton();
 
 	}
+	
+	@Then("^the user will proceed to next pages")
+	public void the_user_will_proceed_to_next_pages(DataTable givenAttributes)throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipcode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth, zipcode);
+
+	}
 
 	@Then("^the user enters data to resume the application")
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
@@ -1651,7 +1698,7 @@ public class VppStepDefinitionUHC {
 
 		String applicationType = memberAttributesMap.get("applicationType");
 		String DOB = memberAttributesMap.get("DOB");
-		String zipcode = memberAttributesMap.get("zipcode");
+		String zipcode = memberAttributesMap.get("Zipcode");
 
 		String ApplicationID = (String) getLoginScenario().getBean(VPPCommonConstants.RESUMEKEY);
 

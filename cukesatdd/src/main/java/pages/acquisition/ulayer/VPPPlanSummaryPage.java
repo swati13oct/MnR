@@ -478,7 +478,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
 		private WebElement medSuppOlePlanSection;
 		
-		@FindBy(id = "importantdocuments_0")
+		@FindBy(xpath = "(//*[contains(@id,'importantdocuments_')])[1]")
 		private WebElement medSuppImpDoc_PlanOverview;
 		
 		@FindBy(xpath = "//img[@title='aarp-card']")
@@ -1316,7 +1316,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
-				.findElements(By.xpath(".//span[contains(@class,'added-text show')]//button[contains(text(),'Compare plans')]"));
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 		try {
 			Thread.sleep(6000);
@@ -1761,8 +1761,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	public void deselectAddToCompareinAARP(String planName){
 		try{
-			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope compare-add']//div[@class='compare-box']/span[@class='ng-scope']"));
-			WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
+	    	WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
 			jsClickNew(addToCompareCheck);
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
@@ -2388,20 +2388,32 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void savePlans(String savePlanNames, String planType){
+		String testPlanXpath="";
+		String initial_savePlanIconXpath = "";
+		String savedPlanIconXpath = "";
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
 
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			if(planType.equalsIgnoreCase("MS")) {
+				 testPlanXpath="//h2[text()='"+plan+"']";
+			} else {
+			 testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			}
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
 			
 			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
-			String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			if(planType.equalsIgnoreCase("MS")) {
+				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
+			}else {
+			initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			}
 			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 		
 			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
@@ -2409,7 +2421,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 
 			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
-			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			if(planType.equalsIgnoreCase("MS")) {
+				savedPlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"+plan+"']";
+						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+					
+			}else {
+			savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			}
 			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
 			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
 			expMatch=0;
@@ -2852,7 +2870,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		validateNew(DOB,30);
 		System.out.println("MedSup page form is displayed");
-		DOB.click();
+		jsClickNew(DOB);
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
@@ -2885,36 +2903,34 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
-		Thread.sleep(4000);
 		
-		CommonUtility.waitForPageLoadNewForClick(driver, Start_ApplicationBtn, 60);
-		Start_ApplicationBtn.click();
+		
+		waitTillElementClickableInTime(Start_ApplicationBtn,60);
+		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
-		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNewForClick(driver, insuredStatus, 60);
+		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
-		Thread.sleep(2000);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
 		nextButton.click();
-		Thread.sleep(2000);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		waitforElementVisibilityInTime(firstName,30);
+		sendkeysNew(firstName,FirstName);
+		sendkeysNew(lastName,LastName);
 		nextButton.click();
-		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
-		Thread.sleep(2000);
+		validateNew(medSuppOleDobHeading);
 		nextButton.click();
-		Thread.sleep(2000);
+		waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 		String ResumeKey= resumeKey.getText();
 		System.out.println("The return to the application code is- "+ResumeKey);
 		cancelButton.click();
@@ -2924,19 +2940,20 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return ResumeKey;
 	}
 
-	public void ResumeApplicationButton() throws InterruptedException{
+	public void ResumeApplicationButton(String DateOfBirth) throws InterruptedException{
 		Thread.sleep(5000);
-		String DateOfBirth ="11131950";
+		//String DateOfBirth ="11/13/1940";
 		MedSupFormValidation(DateOfBirth);
-		Start_ApplicationBtn.click();
+		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
+		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 30);
+		CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 45);
 		validateNew(resumeApplicationBtn);
-
+		waitTillElementClickableInTime(applicationID, 30);
 		applicationID.sendKeys(ApplicationID);
 		ResumeDOB.sendKeys(DOB);
 		ResumeZipCode.sendKeys(zipcode);
@@ -3120,6 +3137,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public MedSuppOLEPage fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode,zipCode); 
+		Thread.sleep(1000);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
@@ -3154,7 +3172,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		Start_ApplicationBtn.click();
+		
+		if(!driver.findElement(By.xpath("//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
+			Start_ApplicationBtn.click();
+		}
+		
 		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 			return new MedSuppOLEPage(driver);
 		else

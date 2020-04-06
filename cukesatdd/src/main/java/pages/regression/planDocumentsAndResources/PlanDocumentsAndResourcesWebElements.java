@@ -542,4 +542,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//h1[contains(text(),'Past Issues')]")
 	protected WebElement prevIssPgHeader;
 	
+	@FindBy(xpath="//div[contains(@class,'three-bounce')]")
+	protected WebElement spinLoader;
+	
 }
