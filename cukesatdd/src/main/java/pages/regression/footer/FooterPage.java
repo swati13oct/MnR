@@ -285,6 +285,11 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
 
+	//note: contact us - chat with us
+	@FindBy(xpath="//div[contains(@class,'OMNIChatGroup') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Chat With Us')]")
+	protected WebElement contactUs_chatWithUs;
+
+	//note: combo tabs
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
 	protected WebElement comboTab_MAPD;
 
@@ -650,6 +655,15 @@ public class FooterPage extends UhcDriver {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
 	}
+	
+	public void validateContactUsChatWithUs(String planType, String memberType) {
+		if (planType.toUpperCase().contains("SHIP") || planType.toUpperCase().contains("MEDSUPP") || memberType.toUpperCase().startsWith("SHIP_FED_COMBO")) 
+			Assert.assertTrue("PROBLEM - should not be able to locate the Chat With Us section on Contact Us page that is for SHIP user or with SHIP plan priority",
+				!footerValidate(contactUs_chatWithUs));
+		else 
+			Assert.assertTrue("PROBLEM - unable to locate the Chat With Us section on Contact Us page that is for Federal user",
+					footerValidate(contactUs_chatWithUs));
+		}
 
 	/**
 	 * Validate Need Help section content
