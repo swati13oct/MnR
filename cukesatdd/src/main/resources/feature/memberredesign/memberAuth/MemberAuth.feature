@@ -432,6 +432,6 @@ Feature: S1.1 To test Member Auth Dashboard page.
       	
       Examples:
       | UID     | username  | password  | memUserName | planType | claimPeriod | dateRange |
-     | F243897 | ashah120 | Life1628 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |
-      | F243897 | ashah120 | Life1628 |  TARA9 |PDP| Last 24 months| Last 18 months |
-       | F243897 | ashah120 | Life1628 |  TARA9 |SHIP| Last 24 months| Last 12-18 months |
+     | F243897 | ashah120 | Mnrqa001 |  DSOADY17 | MAPD| Last 24 months| Last 18 months |
+      | F243897 | ashah120 | Mnrqa001 |  TARA9 |PDP| Last 24 months| Last 18 months |
+       | F243897 | ashah120 | Mnrqa001 |  TARA9 |SHIP| Last 24 months| Last 12-18 months |

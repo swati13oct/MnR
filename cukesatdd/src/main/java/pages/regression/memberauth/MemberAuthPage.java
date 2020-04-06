@@ -90,6 +90,8 @@ public class MemberAuthPage extends UhcDriver {
        public MemberAuthPage navigateToLoginURL(){
     	   if(MRScenario.environment.equalsIgnoreCase("prod"))
     		   MEMBER_AUTH =  MRConstants.ONLINE_PROD_MEMBER_AUTH;
+    	   else if(MRScenario.environment.equalsIgnoreCase("offline"))
+    		   MEMBER_AUTH =  MRConstants.OFFLINE_PROD_MEMBER_AUTH;
     	   
               start(MEMBER_AUTH);
               System.out.println("Member Auth URL - "+MEMBER_AUTH);
