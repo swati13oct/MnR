@@ -13,10 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mysql.jdbc.Driver;
 
 //import pages.member_deprecated.bluelayer.AccountHomePage;
 //import pages.member_deprecated.bluelayer.ProfilePageHsid;
@@ -226,6 +228,9 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
 	 bswiftpage.clickSubmit();
      Thread.sleep(2000);
      System.out.println("Submit button has been clicked");
+     //
+     System.out.println("Now Checking if user landed on covid-19 banner page");
+     bswiftpage.checkCovid19Page();	  
   AccountHomePage accountHomePage = new AccountHomePage(bswiftpage.driver);
   getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
    
@@ -259,4 +264,44 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
  		
  
 }
+ @And("^user directly access the SSO link for myhce$")
+ public void userdirectlyaccessesmyhcesso() throws Throwable {
+ 	
+ 	System.out.println("Now directly accessing the SSO link for myhce");
+ 	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+ 	testHarnessPage.userdirectlyaccessesmyhcesso();	
+ 	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 }
+ 
+ @And("^user enters zip code on myhce page and clicks on continue button$")
+ /*This method will enter zip code during myhce SSO */
+ public void userenterszipcode (DataTable givenAttributes) throws InterruptedException{
+		/* Reading the given attribute from feature file */
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipCode = memberAttributesMap.get("Zip Code");	
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		testHarnessPage.userEntersZipCode(zipCode);
+		testHarnessPage.clickContinueonZipEntryPage();
+		getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+ }
+ 
+ @Then("^user lands on hceestimator landing page$")
+ public void userlandsonhceestimatorpage() throws Throwable {
+ 	
+ 	System.out.println("Now checking if user landed on myhce page");
+ 	TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+ 	testHarnessPage.checkuserlandsonhceestimatorpage();	
+ 	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
+}
+ 
+ 
+}
+ 
