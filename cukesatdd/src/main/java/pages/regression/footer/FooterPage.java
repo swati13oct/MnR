@@ -565,6 +565,8 @@ public class FooterPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 		
+		moveMouseToElement(testElement);
+		
 		testLinkName="PRIVACY POLICY";
 		testElement=unauthFooter_privacyPolicy;
 		expLink="/content/medicare/about/privacy-policy.html";
