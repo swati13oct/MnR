@@ -96,8 +96,6 @@ Feature: 1.05 Member Footer validation
     Then user validates Need Help section content for health and wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
     Then user validates Need Help section content for pharmacies and prescriptions page
-    Then the user navigates to Contact us page
-    Then user validates Need Help section content for contact us page
 
     Examples: 
      | TID   | planType | memberType                 |
@@ -128,8 +126,6 @@ Feature: 1.05 Member Footer validation
     Then user validates Need Help section content for health and wellness page
     Then the user navigates to the Pharmacies and Prescriptions page
     Then user validates Need Help section content for pharmacies and prescriptions page
-    Then the user navigates to Contact us page
-    Then user validates Need Help section content for contact us page
 
     Examples: 
       | TID   | planType | memberType             |
