@@ -2388,20 +2388,32 @@ for (int i = 0; i < initialCount + 1; i++) {
 	}
 	
 	public void savePlans(String savePlanNames, String planType){
+		String testPlanXpath="";
+		String initial_savePlanIconXpath = "";
+		String savedPlanIconXpath = "";
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
 
 		for (String plan: listOfTestPlans) {
 			System.out.println("Proceed to locate plan="+plan);
 
-			String testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			if(planType.equalsIgnoreCase("MS")) {
+				 testPlanXpath="//h2[text()='"+plan+"']";
+			} else {
+			 testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			}
 			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
 			
 			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
-			String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			if(planType.equalsIgnoreCase("MS")) {
+				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
+			}else {
+			initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+			}
 			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 		
 			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
@@ -2409,7 +2421,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
 
 			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
-			String savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			if(planType.equalsIgnoreCase("MS")) {
+				savedPlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"+plan+"']";
+						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+					
+			}else {
+			savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			}
 			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
 			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
 			expMatch=0;
@@ -3119,6 +3137,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public MedSuppOLEPage fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode,zipCode); 
+		Thread.sleep(1000);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
@@ -3153,7 +3172,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		Start_ApplicationBtn.click();
+		
+		if(!driver.findElement(By.xpath("//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
+			Start_ApplicationBtn.click();
+		}
+		
 		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 			return new MedSuppOLEPage(driver);
 		else
