@@ -170,7 +170,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 		System.out.println("Current page Validation Mobile");
 		findPagedetails(pageName);
 		try {
-			pageloadcomplete();
+			//pageloadcomplete();
 			threadsleep(3000);
 			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pageName.toUpperCase()),
 					"Current page name validation failed");
@@ -275,7 +275,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 				if (flow.equalsIgnoreCase("MA")) {
 					nextPagePercentage = "33%";
 				}
-			} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE")) {
+			} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE AWAY")) {
 				previousPageName = "Special";
 				previousPagePercentage = "30%";
 				nextPageName = "Doctor";
