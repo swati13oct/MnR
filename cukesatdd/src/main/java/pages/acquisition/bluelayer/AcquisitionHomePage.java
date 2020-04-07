@@ -475,7 +475,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			checkModelPopup(driver,45);
 		}else {
 			startNew(UMS_ACQISITION_PAGE_URL);
-			checkModelPopup(driver,10);
+			checkModelPopup(driver,30);
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
