@@ -15,8 +15,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
-    Then the user navigates to claims page
-    And the user validates the footer section in claims page
+    #Then the user navigates to claims page
+    #And the user validates the footer section in claims page
     Then the user navigates to profile and pref page
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
@@ -52,8 +52,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
-    Then the user navigates to claims page
-    And the user validates the footer section in claims page
+    #Then the user navigates to claims page
+    #And the user validates the footer section in claims page
     Then the user navigates to profile and pref page for Ship member
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
@@ -84,8 +84,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     Then user validates Need Help section content for payment page
-    Then the user navigates to claims page
-    Then user validates Need Help section content for claims page
+    #Then the user navigates to claims page
+    #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
@@ -114,8 +114,8 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     Then user validates Need Help section content for payment page
-    Then the user navigates to claims page
-    Then user validates Need Help section content for claims page
+    #Then the user navigates to claims page
+    #Then user validates Need Help section content for claims page
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
