@@ -124,6 +124,20 @@ public class VisitorProfileStepDefinition_UHC {
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 	
+	@And("^user validates the added MS plans on visitor profile page of UHC site$")
+	public void user_validates_the_MS_added_plans_on_visitor_profile_page_of_UHC_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("MS Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedMsPlans(savePlanNames);
+	}
+	
 	@And("^the user clicks on the shopping cart icon on DCE page$")
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page() {
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
