@@ -85,7 +85,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			try {
 				pageloadcomplete();
 				threadsleep(3000);
-				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName),
+				Assert.assertTrue(pageStepsNumberName.getText().contains(previousPageName),
 						"Previous page name validation failed");
 				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),
 						"Previous page % validation failed");
