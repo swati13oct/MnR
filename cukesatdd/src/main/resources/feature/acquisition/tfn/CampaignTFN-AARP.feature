@@ -2,7 +2,7 @@
 Feature: To test Campaign TFN in all flows on AARP site
 
   @Scenario_1_DirectTraffic @tfn_Direct_Traffic
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+  Scenario Outline: 1.0 Verify TFN for different plan types through Direct Traffic
     Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -25,7 +25,7 @@ Feature: To test Campaign TFN in all flows on AARP site
       |  810027 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | 
 
    @Scenario_2_CampaignTraffic @tfn_Campaign_Traffic
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+  Scenario Outline: 1.0 Verify TFN for different plan types through Campaign Traffic
     Given the user is on AARP medicare acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -70,7 +70,7 @@ Feature: To test Campaign TFN in all flows on AARP site
       |  8001277 | /medicare-education.html?WT.mc_id=8001277  | medicare-education/medicare-eligibility.html | //*[contains(@class,'amp')]//a[contains(@class,'tel')] | health-plans/enroll/ma-enrollment.html   |  //*[contains(@class,'call-us')]//a[contains(@class,'tel')]   |
     
       @Scenario_4_ReferralTraffic @tfn_Referral_Traffic
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+  Scenario Outline: 1.0 Verify TFN in VPP Tabs through Referral Traffic
    Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    

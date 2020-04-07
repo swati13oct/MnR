@@ -2,7 +2,7 @@
 Feature: To test Campaign TFN in all flows on UHC site
 
   @Scenario_1_DirectTraffic_UHC @tfn_Direct_Traffic_UHC
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+  Scenario Outline: 1.0 Verify TFN for different plan types through Direct Traffic
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC
     Then the user validates PSC code in UHC
@@ -25,7 +25,7 @@ Feature: To test Campaign TFN in all flows on UHC site
       |  880180 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | 
 
    @Scenario_2_CampaignTraffic_UHC @tfn_Campaign_Traffic_UHC
-  Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
+  Scenario Outline: 1.0 Verify TFN for different plan types through Campaign Traffic
     Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN in UHC
