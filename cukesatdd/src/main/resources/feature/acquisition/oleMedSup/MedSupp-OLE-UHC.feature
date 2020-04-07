@@ -29,7 +29,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
        Examples: 
       | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |
+      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |
      
   
 @UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
@@ -60,10 +60,28 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
      
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
-     |   90210 | NO              | Los Angeles County | MS       | 11/13/1950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrieve         |
+     |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrieve         |
    
       
-      
+           @MedSuppOLEBLayerSmoke
+ Scenario Outline: MedSup OLE End to end from UHC Acquisition site VPP Plan Summary
+ Given the user is on UHC medicare acquisition site page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+     Then user clicks on Start Application Button proceed to next pages
+      | Zip Code        | <zipcode>         |
+       | DOB           | <DOB>         |
+      When user fill medsupp form details and proceed to next pages  
+       | Firstname     | <Firstname>   |
+       | Lastname      | <Lastname>    | 
+      Then User navigates to plan summary page of AARP site 
+   Examples: 
+     | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  | 
+     |   90002 | NO              | Los Angeles County | MS       | 11/11/1940 | test     | test   |
       
       
       

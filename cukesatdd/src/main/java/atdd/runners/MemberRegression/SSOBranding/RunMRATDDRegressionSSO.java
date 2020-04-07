@@ -20,7 +20,7 @@ overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionS
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 
 features = { "src/main/resources/feature/memberredesign/sso" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSO.json" }, tags = { "@regressionMember5" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSO.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionSSO {
 
 }
