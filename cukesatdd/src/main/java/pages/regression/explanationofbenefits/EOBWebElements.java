@@ -328,6 +328,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'dropdown-menu')]//a[contains(@href,'spending-and-cost-summary')]")
 	protected WebElement spendingCostSummaryTab_topSubMenu2;
 	
+	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(text(),'My Claims')]")
+	protected WebElement myClaimsSubTopMenu;
+	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

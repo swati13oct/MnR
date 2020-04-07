@@ -481,12 +481,26 @@ public class EobStepDefinition {
 		String expectTabStr = memberAttributesMap.get("Expect Tab");
 		Assert.assertTrue("PROBLEM - input value for 'Expect Tab' in feature file should either be true or false.  Actual='"+expectTabStr+"'",expectTabStr.equalsIgnoreCase("true") || expectTabStr.equalsIgnoreCase("false"));
 		boolean expectTab=Boolean.valueOf(expectTabStr);
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
 		eobPage.validateSpendingCostSummaryTab(expectTab);
 	}
 
+	@Then("^the user validate MyClaims top menu sub option$")
+	public void validateMyClaimsTopMenuOption() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateMyClaimsTopSubMenu();
+		
+	}
+	
+	@Then("the user click MyClaims top menu sub option")
+	public void clickMyClaimsTopMenuOption() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.clickMyClaimsTopSubMenu();
+	}
 
 	//--------------------------------------------------------------
 	/**

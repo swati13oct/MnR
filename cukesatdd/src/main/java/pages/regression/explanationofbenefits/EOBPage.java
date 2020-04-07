@@ -1104,6 +1104,17 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
 		}
 	}
+	
+	public void validateMyClaimsTopSubMenu() {
+		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
+	}
+	
+	public void clickMyClaimsTopSubMenu() {
+		if(eobValidate(myClaimsSubTopMenu)) {
+			myClaimsSubTopMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+		}
+	}
 }
 
 

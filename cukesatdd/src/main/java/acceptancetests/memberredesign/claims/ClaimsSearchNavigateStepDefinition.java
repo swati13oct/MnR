@@ -361,6 +361,10 @@ public class ClaimsSearchNavigateStepDefinition {
 	
 	@Then("^user validates landing on Rally Claims Page$")
 	public void landOnRallyClaims() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
 		claimsSummaryPage.validateRallyClaims();
