@@ -89,6 +89,22 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 	
+	public void validateAddedMsPlans(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+			//Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::a[1]")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		}
+	}
+	
+	public void validateAddedPlansPDFLinks(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		for (String plan: listOfTestPlans) {
+			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		}
+	}
+	
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
