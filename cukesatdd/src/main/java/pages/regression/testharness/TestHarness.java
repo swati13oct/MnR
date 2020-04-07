@@ -554,6 +554,12 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {

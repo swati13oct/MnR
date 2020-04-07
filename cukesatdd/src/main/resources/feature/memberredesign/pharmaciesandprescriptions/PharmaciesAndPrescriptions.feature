@@ -54,7 +54,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     #note: moved to footer feature
     #Then user validates Need Help section content
 
-@abc    @pharmaciesandprescriptions01a @devRegression
+    @pharmaciesandprescriptions01a @devRegression
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | AARP_Individual_PnP | yes        |

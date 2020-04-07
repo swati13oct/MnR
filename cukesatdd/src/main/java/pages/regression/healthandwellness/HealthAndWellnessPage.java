@@ -441,6 +441,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 				goBackToPriorPgViaBack(originalUrl);
 			}
 		}
+		//note: temperary disable this validation due to COVID related update
+		/*
 		//note: Find A Gym ------------------
 		String targetElement="Find Your Gym";
 		WebElement gymElement=findGymLnk;
@@ -483,10 +485,11 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
-		}
+		} 
+		*/
 
 		//note: Confirmation Code ------------------
-		targetElement="Your Code";
+		String targetElement="Your Code";
 		WebElement codeElement=yourCode;
 		if (planType.toUpperCase().contains("SHIP")) 
 			codeElement=yourCode_ship;
@@ -527,8 +530,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 			termsAndConditionsElement=termsAndConditions_ship;
 		}
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(termsAndConditionsElement));
-		expectedHref="active/terms";
-		actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
+		String expectedHref="active/terms";
+		String actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
 			termsAndConditionsElement.click();

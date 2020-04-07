@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -96,6 +97,11 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 		//note: claims page will be updated and owned by Rally, team-atest env may not be setup to handle that
 		if (MRScenario.environment.contains("team-a")) {
 			System.out.println("SKIP this validation if running on team-atest env.");
+			return;
+		} 
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		if (memberType.contains("PreEff")) {
+			System.out.println("SKIP this validation if running with pre-effective user, no EOB page");
 			return;
 		} 
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
