@@ -21,6 +21,7 @@ import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.contactus.ContactUsPage;
+import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
@@ -90,7 +91,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 		Assert.assertTrue("PROBLEM - user '"+planType+"' '"+memberType+"' should have Pharmacies & Prescriptions link on dashboard", result);
 	}
 
-	@Then("^user navigates to the claims page to validate Pharamcies and Prescriptions link$")
+	@Then("^user navigates to the eob page to validate Pharamcies and Prescriptions link$")
 	public void validate_claims_page() throws InterruptedException { 
 		//note: claims page will be updated and owned by Rally, team-atest env may not be setup to handle that
 		if (MRScenario.environment.contains("team-a")) {
@@ -98,7 +99,7 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			return;
 		} 
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
-		String page="claims";
+		String page="eob";
 		boolean result=false;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
@@ -108,8 +109,9 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 			testHarness.waitForTestharnessTableToShow();
 			WebDriver testDriver=testHarness.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			ClaimsSummaryPage claimsPg=testHarness.navigateToClaimsSummaryFromTestHarnessPage();
-			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, claimsPg!=null);
+			
+			EOBPage eobPg=testHarness.navigateDirectToEOBPag();
+			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, eobPg!=null);
 			result=testHarness.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);
@@ -121,8 +123,8 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			WebDriver testDriver=accountHomePage.driver;
 			String originalUrl=testDriver.getCurrentUrl();
-			ClaimsSummaryPage claimsPg=accountHomePage.navigateToClaimsSummaryPage();
-			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, claimsPg!=null);
+			EOBPage eobPg=accountHomePage.navigateDirectToEOBPag();
+			Assert.assertTrue("PROBLEM - Unable to navigate to secondary page: "+page, eobPg!=null);
 			result=accountHomePage.findPnPLinksExistOnPg();
 			if (expectLink.equalsIgnoreCase("yes")) 
 				Assert.assertTrue("PROBLEM - user should have Pharmacies & Prescriptions link on "+page+" page", result);

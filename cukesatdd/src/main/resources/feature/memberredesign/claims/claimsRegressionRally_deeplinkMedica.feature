@@ -7,7 +7,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
 
   #----- beginning of bookmark or deeplink validation for MEDICA
   @rallyClaims06 @deeplink_medica
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page bookmark
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -20,7 +20,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
   @rallyClaims07 @deeplink_medica
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims detail page bookmark
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -33,12 +33,14 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
   @rallyClaims08 @deeplink_medica
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page deeplink
-    Given login with a deeplink in the member portal and validate elements
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim System | <claimSystem> |
-      | Deeplink     | https://stage-mymedicareaccount.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/overview |
+     Then the user navigates to EOB page
+     Then user invokes bookmark URL
+      | Deeplink     | https://stage-mymedicareaccount.uhc.com/medica/member/claims.html |
     Then user validates landing on Rally Claims Page
 
     Examples: 
@@ -46,15 +48,42 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
   @rallyClaims09 @deeplink_medica
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims detail page deeplink
-    Given login with a deeplink in the member portal and validate elements
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim System | <claimSystem> |
-      | Deeplink     | https://stage-mymedicareaccount.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details |
+     Then the user navigates to EOB page
+     Then user invokes bookmark URL
+      | Deeplink     | https://stage-mymedicareaccount.uhc.com/medica/member/claims.html#/details |
     Then user validates landing on Rally Claims Page
 
     Examples: 
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
+
+  ##### note: deeplink related to SMSR is out of scope for now
+  #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page deeplink
+  #  Given login with a deeplink in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #    | Claim System | <claimSystem> |
+  #    | Deeplink     | https://stage-mymedicareaccount.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/overview |
+  #  Then user validates landing on Rally Claims Page
+  #
+  #  Examples: 
+  #    | TID   | planType | memberType          | claimSystem     |         
+  #    | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
+  #
+  #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims detail page deeplink
+  #  Given login with a deeplink in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #    | Claim System | <claimSystem> |
+  #    | Deeplink     | https://stage-mymedicareaccount.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details |
+  #  Then user validates landing on Rally Claims Page
+  #
+  #  Examples: 
+  #    | TID   | planType | memberType          | claimSystem     |         
+  #    | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
   #----- end of bookmark or deeplink validation for MEDICA

@@ -478,6 +478,11 @@ public class EobStepDefinition {
 	@Then("^the user validate Spending Cost Summary tab on top sub menu$")
 	public void user_validate_spendingCostSummaryTab(DataTable givenAttributes) throws InterruptedException {   
 		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String fromPage = memberAttributesMap.get("From Page");
+		if (MRScenario.environment.contains("team-a") && fromPage.equalsIgnoreCase("claims")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
 		String expectTabStr = memberAttributesMap.get("Expect Tab");
 		Assert.assertTrue("PROBLEM - input value for 'Expect Tab' in feature file should either be true or false.  Actual='"+expectTabStr+"'",expectTabStr.equalsIgnoreCase("true") || expectTabStr.equalsIgnoreCase("false"));
 		boolean expectTab=Boolean.valueOf(expectTabStr);

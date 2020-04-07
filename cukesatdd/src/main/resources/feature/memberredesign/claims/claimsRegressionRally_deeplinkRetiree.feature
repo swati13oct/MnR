@@ -7,7 +7,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
 
   #----- beginning of bookmark or deeplink validation for RETIREE aka GROUP
   @rallyClaims18 @deeplink_retireeGrp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page bookmark
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -20,7 +20,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
   @rallyClaims19 @deeplink_retireeGrp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims detail page bookmark
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
@@ -33,12 +33,14 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
   @rallyClaims20 @deeplink_retireeGrp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page deeplink
-    Given login with a deeplink in the member portal and validate elements
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim System | <claimSystem> |
-      | Deeplink     | https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/overview |
+    Then the user navigates to EOB page
+    Then user invokes bookmark URL
+      | Deeplink     | https://www.stage-medicare.uhc.com/retiree/member/claims.html#/overview |
     Then user validates landing on Rally Claims Page
 
     Examples: 
@@ -46,15 +48,42 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
   @rallyClaims21 @deeplink_retireeGrp
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details
-    Given login with a deeplink in the member portal and validate elements
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
+    Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Claim System | <claimSystem> |
-      | Deeplink     | https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details |
+    Then the user navigates to EOB page
+    Then user invokes bookmark URL
+      | Deeplink     | https://www.stage-medicare.uhc.comretiree/member/claims.html#/details |
     Then user validates landing on Rally Claims Page
 
     Examples: 
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
+
+  ##### note: deeplink related to SMSR is out of scope for now
+  #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the Rally Claims page via old claims overview page deeplink
+  #  Given login with a deeplink in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #    | Claim System | <claimSystem> |
+  #    | Deeplink     | https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/overview |
+  #  Then user validates landing on Rally Claims Page
+  #
+  #  Examples: 
+  #    | TID   | planType | memberType          | claimSystem     |         
+  #    | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
+  #
+  #Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details
+  #  Given login with a deeplink in the member portal and validate elements
+  #    | Plan Type    | <planType>    |
+  #    | Member Type  | <memberType>  |
+  #    | Claim System | <claimSystem> |
+  #    | Deeplink     | https://www.stage-medicare.uhc.com/?TARGET=SMSR/member/claims.html%3fdeeplink=true#/details |
+  #  Then user validates landing on Rally Claims Page
+  #
+  #  Examples: 
+  #    | TID   | planType | memberType          | claimSystem     |         
+  #    | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
   #----- end of bookmark or deeplink validation for RETIREE aka GROUP

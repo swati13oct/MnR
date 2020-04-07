@@ -10,7 +10,10 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
@@ -368,5 +371,16 @@ public class ClaimsSearchNavigateStepDefinition {
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
 		claimsSummaryPage.validateRallyClaims();
+	}
+	
+	@Then("^user invokes bookmark URL$")
+	public void navigateWithBookmarkUrl(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String bookmarkUrl=memberAttributesMap.get("Deeplink");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		ClaimsSummaryPage claimsSummaryPage = new ClaimsSummaryPage(wd);
+		claimsSummaryPage.navigateWithBookmark(bookmarkUrl);
+		getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE, claimsSummaryPage);	
 	}
 }

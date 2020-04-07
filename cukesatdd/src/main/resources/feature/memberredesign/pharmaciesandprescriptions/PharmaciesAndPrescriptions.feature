@@ -33,7 +33,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Expect Link | <expectLink> |
    #note: uncomment payment page when one-time payment button is showing again
    # Then user navigates to the payment page to validate Pharamcies and Prescriptions link
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -54,7 +54,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     #note: moved to footer feature
     #Then user validates Need Help section content
 
-    @pharmaciesandprescriptions01a @devRegression
+@abc    @pharmaciesandprescriptions01a @devRegression
     Examples: 
 	  | FID    | planType | memberType          | expectLink |
 	  | 313410 | MAPD     | AARP_Individual_PnP | yes        |
@@ -107,7 +107,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
@@ -153,7 +153,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
@@ -213,7 +213,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
