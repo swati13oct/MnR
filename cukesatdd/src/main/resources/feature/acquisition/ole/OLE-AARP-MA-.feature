@@ -1,8 +1,7 @@
 @fastandfurious @OLE @MA_OLE_Ulayer @prodRegression
 Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
 
-  @acquisitionRegression
-  @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
+  @acquisitionRegression @MA_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_PCP_Medica_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -166,4 +165,4 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
 
     Examples: 
       | TID   | PlanType | zipcode | isMultutiCounty | county       | plantype | planName                                               | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | 15515 | MA-MBI   |   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
+      | 15515 | MA-MBI   |   80002 | YES             | Adams County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
