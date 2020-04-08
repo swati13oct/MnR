@@ -1,7 +1,7 @@
 @tfnulayer
 Feature: To test TFN in all flows on AARP site
 
-	@Scenario_1  @tfn_Direct_Traffic @tfn_aarp
+	@Scenario_1  @tfn_Direct_Traffic_old @tfn_aarp
 Scenario Outline: 1.0 Verify TFN in VPP Tabs and PDP OLE
 Given the user is on AARP medicare acquisition site page
 					|  URL   			 | <url>  |
