@@ -335,9 +335,10 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 	
 	@Then("^user validate elements in additional services page mobile$")
-   	public void elements_additional_page() {
+   	public void elements_additional_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
    		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
-   		additionalpage.additionalpage();
+   		additionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
 	@Then("^user selects additional services option in additional services page mobile$")

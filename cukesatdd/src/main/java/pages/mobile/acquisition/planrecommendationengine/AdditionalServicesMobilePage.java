@@ -119,7 +119,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	private WebElement fitnessError;
 
 	// Additional Page Element Verification Method
-	public void additionalpage() {
+	public void additionalpage(String drugInfo) {
 		System.out.println("Validating Additional Services Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
@@ -146,7 +146,10 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(dentalYes);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
-		mobileUtils.previousPageValidation(page.toUpperCase());
+		if(drugInfo.toUpperCase().contains("SKIP"))
+			mobileUtils.previousPageValidation(page.toUpperCase()+"skip");
+		else
+			mobileUtils.previousPageValidation(page.toUpperCase());
 	}
 
 	// Selecting additional options in Additional Page
