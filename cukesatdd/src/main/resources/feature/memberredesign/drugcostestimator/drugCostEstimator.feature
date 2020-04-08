@@ -216,7 +216,6 @@ Feature: 1.07 Member DCE Page
   Then I will verify the Formulary pdf link
   When I navigate to costs tab
   Then I will verify the Formulary pdf link
-  And the link will open the relevant PDF in a new tab    
   Examples: 
       | planType | memberType | drug  | dosage        | quantity | frequency        | Medicine | dose                 |quantity2 | frequency2    |
       | MAPD|MAPD_DCE  		| FANAPT | FANAPT TAB 1MG |       60  | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
