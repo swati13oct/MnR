@@ -112,7 +112,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public static WebElement proactiveChatExitBtn;
 	
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
