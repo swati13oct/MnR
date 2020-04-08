@@ -146,3 +146,29 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | plantype | county           | MA_testPlans                                                                                            | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+     
+   @vPPMSSavedPlan 
+    Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+    Given the user is on the uhcmedicaresolutions site landing page
+   When the user performs plan search using following information in UMS site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+     When user views plans of the below plan type in UMS site
+      | Plan Type | <plantype> |
+      Then the user will proceed to next pages
+      | Zip Code        | <zipcode>         |
+      | DOB           | <DOB>               |
+    Then user saves two MS plans as favorite on UHC site
+      | MS Test Plans | <MS_testPlans>      |
+    Then user gets a create profile prompt on UHC site
+    Then user click on continue as guest button on UHC site
+    And user validates the added MS plans on visitor profile page of UHC site
+      | MS Test Plans | <MS_testPlans>       |
+    And user validate pdf link on UHC Site
+      | MS Test Plans | <MS_testPlans> |
+   
+      Examples: 
+      | zipcode | isMultiCounty | plantype |  DOB      |county           | MS_testPlans                                                        |                                                                      
+      |   90210 | NO            | MS       | 11/11/1949 |Jefferson County | Plan G,Plan A                             |
+   
