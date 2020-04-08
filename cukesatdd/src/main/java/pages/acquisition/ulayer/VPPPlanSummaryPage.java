@@ -635,6 +635,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(css = "div#currPlansBanner>div>a")
 		private WebElement enrolledPlansBanner;
 		
+		@FindBy(id="dupIconFlyOut")
+		private WebElement shoppingCartIcon;
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3377,5 +3379,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
 			Assert.assertEquals(planName, enrolledPlansBanner.getText().trim());
 			
+		}
+		/**
+		 * Navigate to Visitor Profile Page
+		 * @return
+		 */
+		public VisitorProfilePage navigateToVisitorProfilePage() {
+			shoppingCartIcon.click();
+			if(driver.getCurrentUrl().contains("profile")) {
+				return new VisitorProfilePage(driver);
+			}else {
+				System.out.println("Navigation to visitor profile is failed");
+				return null;
+			}
 		}
 }

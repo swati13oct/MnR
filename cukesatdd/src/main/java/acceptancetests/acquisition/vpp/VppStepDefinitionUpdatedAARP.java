@@ -2701,6 +2701,14 @@ public class VppStepDefinitionUpdatedAARP {
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
 	
+	@Then("^Navigate to Visitor Profile page on AARP site$")
+	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

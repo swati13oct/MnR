@@ -118,4 +118,17 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		return null;
 	}
+	
+	/**
+	 * Deletes the specified plans
+	 * @param plans
+	 */
+	public void deletePlans(String plans) {
+		
+		List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+		for (String plan: listOfTestPlans) {
+			driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+		}
+		Assert.assertFalse(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0);
+	}
 }
