@@ -35,7 +35,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
       | Alabama | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
 
-  @addDrugsDCE 
+  @addDrugsDCE
   Scenario Outline: Verify user is able to add drug and pharmacy information to the unauthenticated visitor profile
     Given the user is on AARP medicare acquisition site landing page
     And the user selects the state drop down value in AARP home page
@@ -158,31 +158,30 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
 
     Examples: 
-      | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                                | PlanType     | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
-      | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA-MBI        | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI     | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / /   | yes     | no           | true     | false      | true       | true        | true        | NO                | NO      |
-      
+      | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PlanType | plantype | planName                                               | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |
+      | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA-MBI   | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | false      | true       | true        | true        | NO                | NO      |
+
   @vpMSSavePlan
-   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
-   Given the user is on AARP medicare acquisition site landing page
+  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+    Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-     Then user clicks on Start Application Button proceed to next pages
-      | Zip Code        | <zipcode>       |
-      | DOB             | <DOB>           |
+    Then user clicks on Start Application Button proceed to next pages
+      | Zip Code | <zipcode> |
+      | DOB      | <DOB>     |
     Then user saves two ms plans as favorite on AARP site
-      | MS Test Plans | <MS_testPlans>    |
+      | MS Test Plans | <MS_testPlans> |
     Then user gets a create profile prompt on AARP site
     Then user click on continue as guest button on AARP site
     And user validates the added Ms plans on visitor profile page of AARP site
-      | MS Test Plans | <MS_testPlans>    |
-     And user validate pdf link on AARP Site
-     | MS Test Plans | <MS_testPlans>     |
-      
-     Examples: 
-      | zipcode | isMultiCounty | plantype |  DOB      |county           | MS_testPlans                            |            
-      |   90210 | NO            | MS       | 11/11/1949 |Jefferson County | Plan G,Plan A |
-     
+      | MS Test Plans | <MS_testPlans> |
+    And user validate pdf link on AARP Site
+      | MS Test Plans | <MS_testPlans> |
+
+    Examples: 
+      | zipcode | isMultiCounty | plantype | DOB        | county           | MS_testPlans  |
+      |   90210 | NO            | MS       | 11/11/1949 | Jefferson County | Plan G,Plan A |

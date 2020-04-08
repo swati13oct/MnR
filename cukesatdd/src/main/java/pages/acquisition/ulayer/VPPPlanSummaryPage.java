@@ -5,14 +5,10 @@ package pages.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,8 +19,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -634,6 +628,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 		private WebElement findPlansButton;
+		
+		@FindBy(css = "div#CSRLoginAlert>span")
+		private WebElement agentModeBanner;
+		
+		@FindBy(css = "div#currPlansBanner>div>a")
+		private WebElement enrolledPlansBanner;
+		
 		
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -3365,5 +3366,16 @@ for (int i = 0; i < initialCount + 1; i++) {
 				return true;
 			}
 			return false;
+		}
+		/**
+		 * Validate the Agent Mode Banners and Enrolled Plan overlay
+		 * @param planName
+		 */
+		public void validateAgentModeBanners(String planName) {
+			validatePlanSummary();
+			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
+			Assert.assertEquals(planName, enrolledPlansBanner.getText().trim());
+			
 		}
 }
