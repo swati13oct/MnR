@@ -403,7 +403,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage,testharnessurl);
 	}
-
+    
+	public String fetchEnvironmentUrls () {
+		if (MRScenario.environment.equals("offline")) {
+		  testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+		  return testSiteUrl;
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+			 return testSiteUrl;
+		}
+		else
+			testSiteUrl = AARP_ACQISITION_PAGE_URL;
+		    return testSiteUrl;
+	  }
+	
 	@Override
 	public void openAndValidate() {
 
@@ -1814,8 +1828,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 
+		
+		private void CheckPageLoad() {
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver, 30);
+		
+		}
+		
+		public void CheckiPerseptions() {
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+			}
+		}
+		
+		
 		public void validateSubNavShopPlanLinks() {
-			
+			CheckPageLoad();
+			CheckiPerseptions();
+		
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
 				Actions actions = new Actions(driver);
@@ -1878,7 +1913,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		public void validateSubNavMedEdLinks() {
-			
+			CheckPageLoad();
+			CheckiPerseptions();
+		
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
 				Actions actions = new Actions(driver);
@@ -1956,6 +1993,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}	
 			visitorprofileicon.click();
 			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			CheckPageLoad();
+			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
 			if(driver.getCurrentUrl().contains("profile/guest")){
 		      Assert.assertTrue(true);
@@ -1965,6 +2004,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("Visitor Profile page is not opening up");
 			}
 			driver.navigate().back();
+			CheckPageLoad();
+			CheckiPerseptions();
+
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 		}
 
