@@ -22,6 +22,7 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
     And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
     Then user validate elements in additional services page
+    	| Drug Selection | <Drug Selection> |
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds      | travel          | doctors    | DoctorsName | isMultiDoctor | Drug Selection |

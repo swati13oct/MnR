@@ -62,9 +62,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 	public String currentPageName, currrentPagePercentage, previousPageName, previousPagePercentage, nextPageName,
 	nextPagePercentage;
 	
-// 	Current page percentage validation Mobile
+// 	Current page percentage validation Desktop
 		public void currentPageValidation(String pageName) {
-			System.out.println("Current page Validation Mobile");
+			System.out.println("Current page Validation Desktop");
 			findPagedetails(pageName);
 			try {
 				pageloadcomplete();
@@ -78,14 +78,14 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			}
 		}	
 		
-// Previous Button Functionality Mobile
+// Previous Button Functionality Desktop
 		public void previousPageValidation(String pageName) {
-			System.out.println("Previous page Validation Mobile");
+			System.out.println("Previous page Validation Desktop");
 			findPagedetails(pageName);
 			try {
 				pageloadcomplete();
 				threadsleep(3000);
-				Assert.assertTrue(pageStepsNumberName.getText().contains(previousPageName),
+				Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(previousPageName.toUpperCase()),
 						"Previous page name validation failed");
 				Assert.assertTrue(pageProgressPercentage.getText().toUpperCase().contains(previousPagePercentage),
 						"Previous page % validation failed");
@@ -94,7 +94,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 			}
 		}
 
-// Continue Button Functionality Mobile
+// Continue Button Functionality Desktop
 		public void nextPageValidation(String pageName) {
 			System.out.println("Next page Validation Desktop");
 			findPagedetails(pageName);
@@ -223,6 +223,10 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						previousPagePercentage = "59%";
 						nextPagePercentage = "72%";
 						currrentPagePercentage = "59%";
+					}
+					if (currentPageName.contains("SKIP")) {
+						previousPageName = "Drug";
+						previousPagePercentage = "60%";
 					}
 				} else if (currentPageName.contains("COST")) {
 					previousPageName = "Additional";

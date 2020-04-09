@@ -535,11 +535,12 @@ public class PlanRecommendationEngineStepDefinition {
    	}
 	
    	@Then("^user validate elements in additional services page$")
-   	public void elements_additional_page() {
+   	public void elements_additional_page(DataTable givenAttributes) {
+   		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 //   		headerAndFooter.breadCrumbs();
-   		planSelectorAdditionalpage.additionalpage();
+   		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
 	@Then("^user selects additional services option in additional services page$")

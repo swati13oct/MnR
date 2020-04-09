@@ -44,8 +44,11 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                 @FindBy(xpath = "//*[@class='progress-bar-info']/p")
                 private WebElement pageProgressPercentage;
                 
-                @FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(2)")
+                @FindBy(css = "div legend.primary-question-tex")
                 private WebElement pharmacyTitle;
+                
+                @FindBy(css = "div legend.primary-question-tex span>sup")
+            	private WebElement pharmacyPagePrimaryQuestionMark;
                 
                 @FindBy(css = "div.row.pb-1>div>uhc-radio-group>fieldset>legend.primary-question-tex>span:nth-child(3)")
                 private WebElement pharmacyTitleInfo;
@@ -88,8 +91,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(pharmacyTitle);
                                                 Assert.assertTrue(pharmacyTitle.getText().contains("pharmacy"));
-                                                validate(pharmacyTitleInfo);
-                                                Assert.assertTrue(pharmacyTitleInfo.getText().contains("pharmacy"));
+                                                validate(pharmacyPagePrimaryQuestionMark);
                                                 validate(onlinePharmacy, 30);
                                                 Assert.assertTrue(onlinePharmacy.getText().contains("Online"));
                                                 validate(retailPharmacy, 30);
@@ -140,7 +142,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 pharmacypageOptions(pharmacy);
                                                 if(radioselect.isDisplayed()) {
                                                                 validate(pageProgressPercentage, 30);
-                                                                Assert.assertTrue(pageProgressPercentage.getText().contains("48% Complete"));
+                                                                Assert.assertTrue(pageProgressPercentage.getText().contains("60% Complete"));
                                                 }else {
                                                                 System.out.println("Pharmacy Type not selected in Doctors Page");
                                                 }

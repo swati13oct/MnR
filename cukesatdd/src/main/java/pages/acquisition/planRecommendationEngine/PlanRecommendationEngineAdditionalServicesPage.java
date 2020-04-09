@@ -111,7 +111,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 	
 //Additional Page Element Verification Method 
 
-	public void additionalpage() {
+	public void additionalpage(String drugInfo) {
 		System.out.println("Validating Additional Services Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
@@ -138,7 +138,10 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previousPageValidation(page.toUpperCase());
+		if(drugInfo.toUpperCase().contains("NO"))
+			desktopCommonUtils.previousPageValidation(page.toUpperCase()+"skip");
+		else
+			desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
 // Selecting additional options in additional Page
@@ -189,7 +192,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Additional Page Error Function Verification     
