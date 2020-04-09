@@ -76,12 +76,18 @@ public class ShopperProfileStepDefinition {
 	@Then("^the profile is found and i click on the CLOAK IN button$")
 	public void the_profile_is_found_and_i_click_on_the_CLOAK_IN_button(){
 		
-		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
-				.getBean(PageConstants.PROFILE_SEARCH);
-		
-		VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
-		
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+		try {
+			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
+					.getBean(PageConstants.PROFILE_SEARCH);
+			
+			VPPPlanSummaryPage vppPlanSumamry = profileSeacrh.doCloakIn();
+			
+			Thread.sleep(15000);
+			
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSumamry);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Then("^I land on the plan summary page of VPP$")
