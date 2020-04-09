@@ -144,6 +144,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void deleteAllDrugs() {
 		expandDrugBlock.click();
+		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
 		for (WebElement drug: savedDrugs) {
 			drug.findElement(By.xpath("//button")).click();
 		}
