@@ -693,4 +693,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 
 	public static final String CQ_PAGE = "cqPage";
 	
+	public static final String CAMPAIGN_TFN_PAGE = "campaigntfnpage";
+
+	
 }
