@@ -131,10 +131,14 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param plans
 	 */
 	public void deletePlans(String plans) {
-		
-		List<String> listOfTestPlans = Arrays.asList(plans.split(","));
-		for (String plan: listOfTestPlans) {
-			driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+		try {
+			List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+			for (String plan: listOfTestPlans) {
+				driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+			}
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
@@ -148,6 +152,7 @@ public class VisitorProfilePage extends UhcDriver {
 		/*for (WebElement drug: savedDrugs) {
 			drug.findElement(By.xpath("//button")).click();
 		}*/
-		Assert.assertTrue(!(driver.findElements(By.xpath("//div[contains(@class,'drug--block card')]//ul")).size()>0));
+		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
+		Assert.assertTrue(addrugs.isDisplayed());
 	}
 }
