@@ -173,6 +173,12 @@ public class VisitorProfileStepDefinition_AARP {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
+	
+	@And("^user delets all the added drugs on visitor profile page of AARP site$")
+	public void user_delets_all_the_added_drugs_on_visitor_profile_page_of_AARP_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteAllDrugs();
+	}
 } 
 
 

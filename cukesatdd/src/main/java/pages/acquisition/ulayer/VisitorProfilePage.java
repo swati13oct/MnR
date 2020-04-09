@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -41,6 +42,12 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'pharminfo')]")
 	private WebElement pharmacyAddress;
+	
+	@FindAll({@FindBy(xpath = "//li[@class='drug']")})
+	private List<WebElement> savedDrugs;
+	
+	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
+	private WebElement drugBlock;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -131,4 +138,16 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
+	
+	/**
+	 * Delete all the drugs from the profile
+	 */
+	public void deleteAllDrugs() {
+		
+		for (WebElement drug: savedDrugs) {
+			drug.findElement(By.xpath("//button")).click();
+		}
+		Assert.assertTrue(!(driver.findElements(By.xpath("//div[contains(@class,'drug--block card')]//ul")).size()>0));
+	}
+	
 }
