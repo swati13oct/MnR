@@ -129,6 +129,6 @@ public class VisitorProfilePage extends UhcDriver {
 		for (String plan: listOfTestPlans) {
 			driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
 		}
-		Assert.assertFalse(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0);
+		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
 }
