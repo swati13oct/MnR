@@ -135,8 +135,8 @@ public class VisitorProfilePage extends UhcDriver {
 			List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 			for (String plan: listOfTestPlans) {
 				driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+				Thread.sleep(5000);
 			}
-			Thread.sleep(5000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
