@@ -1,4 +1,3 @@
-#Author: Naveen BK
 #created Date:04/06/2020
 @ShopperProfile
 Feature: 1.08. ACQ- Shopper Profile
@@ -66,7 +65,7 @@ Feature: 1.08. ACQ- Shopper Profile
     And the profile is found and i click on the CLOAK IN button
     And user access DCE tool on aarp site
       | Plan Type | <plantype> |
-      | PlanName  | <planName> |
+      | PlanName  | <plan>     |
     And I have added a drug to my drug list
       | Drug | <drug> |
     And user selects drug details
@@ -87,5 +86,5 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added drugs on visitor profile page of AARP site
 
     Examples: 
-      | username  | password  | email                  | planName                                             | plantype | drug    | dosage   | quantity | frequency     | branded |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
+      | username  | password  | email                  | planName                                             | plan                                                | plantype | drug    | dosage   | quantity | frequency     | branded |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |
