@@ -145,10 +145,10 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deleteAllDrugs() {
 		expandDrugBlock.click();
 		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
-		for (WebElement drug: savedDrugs) {
+		driver.findElement(By.xpath("//li[@class='drug']//button")).click();
+		/*for (WebElement drug: savedDrugs) {
 			drug.findElement(By.xpath("//button")).click();
-		}
+		}*/
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[contains(@class,'drug--block card')]//ul")).size()>0));
 	}
-	
 }
