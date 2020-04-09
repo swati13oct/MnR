@@ -143,7 +143,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 * Delete all the drugs from the profile
 	 */
 	public void deleteAllDrugs() {
-		
+		expandDrugBlock.click();
 		for (WebElement drug: savedDrugs) {
 			drug.findElement(By.xpath("//button")).click();
 		}
