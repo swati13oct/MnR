@@ -1781,6 +1781,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	validateNew(chatsam);		
 	return null;
 	}
+	
+	
+	public AcquisitionHomePage  verifyChatpopup() throws InterruptedException {
+			//CommonUtility.checkPageIsReady(driver);
+			chatsam.click();
+			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
+				
+			return null;
+		}
+		
+	
 
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty){
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
@@ -2282,4 +2293,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 	}
 
+public AcquisitionHomePage  navigateToPage(String page) {
+		String pageURL = driver.getCurrentUrl()+page;
+		System.out.println("==pageURL=="+pageURL);
+		driver.navigate().to(pageURL);
+		
+		
+		return null;
+		
+	}
 }
