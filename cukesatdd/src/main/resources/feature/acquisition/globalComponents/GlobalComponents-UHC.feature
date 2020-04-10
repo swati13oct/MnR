@@ -39,7 +39,7 @@ Feature: 2.12 ACQ - Global Components UHC
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-    Then the user validates Pro-active Chat on UHC site
+   # Then the user validates Pro-active Chat on UHC site
     Then the user validates SAM Call Icon on UHC site
     Then the user validates SAM re-active Chat on UHC site
 
@@ -149,8 +149,6 @@ Feature: 2.12 ACQ - Global Components UHC
       | path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |
       | health-plans/estimate-drug-costs.html!/drug-cost-estimator                | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
       | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |
-      | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |
       | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | profile/guest                                                             | Visitor Profile: Guest  | //*[@class='tel']                                              | true    |
 
