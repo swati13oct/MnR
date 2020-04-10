@@ -151,8 +151,7 @@ public void userClicksOnBenefitAndCoveragePage() throws Throwable {
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		BenefitsAndCoveragePage coverageandbenefitsPage = testHarnessPage.clickOnBenefitsandCoverageTab();
 		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, coverageandbenefitsPage);
-		System.out.println("Now waiting for 20 seconds");
-		
+				
 	}
 	
 	else 

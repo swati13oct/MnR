@@ -2,7 +2,7 @@
 Feature: To test HSID registration flow
 
    @hsid1 @US968241 @hsidregistration @regressionMember
-   Scenario Outline:Verify HSID registration.
+   Scenario Outline:Plan Type: <planType>-Verify HSID registration.
    Given the user connect to DB
      And the user select record from database
        | Firstname  | <firstname>  |

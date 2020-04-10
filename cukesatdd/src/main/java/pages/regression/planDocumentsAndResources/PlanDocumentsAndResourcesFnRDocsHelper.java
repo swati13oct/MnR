@@ -218,7 +218,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "https://www.uhcprovider.com/?rfid=UHCOContRD");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","informed");
+			testInputInfoMap.put("headerText","Latest");
 			testInputInfoMap.put("sampleBodyText","Latest UnitedHealthcare Provider News");
 			return testInputInfoMap; 
 		}

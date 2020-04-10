@@ -2,8 +2,8 @@
 Feature: 1.06. ACQ- MedSupp OLE flow AARP
 
   @OLE_VPP_UHC @UHC_Resume_App_AARP @OLE_Regression @oleMedSupUlayer @prodRegression
- Scenario Outline: MedSup Resume Application with Application ID
- Given the user is on AARP medicare acquisition site landing page
+Scenario Outline: MedSup Resume Application with Application ID
+Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -31,8 +31,8 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
      
   
 @UHC_Retrive_App_AARP @oleMedSupUlayer
- Scenario Outline: MedSup Retrieve Application with Application ID
- Given the user is on AARP medicare acquisition site landing page
+Scenario Outline: MedSup Retrieve Application with Application ID
+Given the user is on AARP medicare acquisition site landing page
    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -56,10 +56,10 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
        Examples: 
      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname  |  ApplicationID   | applicationType |
      |   90210 | NO              | Los Angeles County | MS       | 11131950 | Donald     | Abrahm   |   E-PMO6-T5HH-78  | Retrive          |
- 
+
 @MedSuppOLEULayerSmoke
- Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
- Given the user is on AARP medicare acquisition site landing page
+Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
+Given the user is on AARP medicare acquisition site landing page
   When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -79,8 +79,8 @@ Feature: 1.06. ACQ- MedSupp OLE flow AARP
      
      
      @MedSuppOLEBLayerSmoke
- Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
- Given the user is on UHC medicare acquisition site page
+Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
+Given the user is on UHC medicare acquisition site page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |

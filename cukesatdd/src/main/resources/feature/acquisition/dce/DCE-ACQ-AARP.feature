@@ -60,7 +60,7 @@ Feature: 1.10.1 ACQ-DCE AARP - To test Acq Home to DCE Flows
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
     Then user enters zipcode on step3 and validate plan summary page
-      | Zip | <zipcode> |
+      | Zipcode | <zipcode> |
       | County |<county> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
