@@ -38,7 +38,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] span.ng-binding")
 	private WebElement MAPlanCount;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
 
@@ -50,10 +50,10 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) .enroll-details>a:nth-of-type(2)")
 	private WebElement MA1stPlanEnroll;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-2']")
 	private WebElement MSPlanInfo;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-2'] span.ng-binding")
 	private WebElement MSPlanCount;
 
@@ -92,13 +92,13 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) .swiper-content>a")
 	private WebElement MS1stPlanEnroll;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-3']")
 	private WebElement PDPPlanInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-3'] span.ng-binding")
 	private WebElement PDPPlanCount;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-3'] a")
 	private WebElement PDPViewPlansLink;
 
@@ -107,10 +107,10 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview:nth-of-type(1) h3")
 	private WebElement PDP1stPlanName;
-	
+
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview:nth-of-type(1) .enrollment>div>a")
 	private WebElement PDP1stPlanEnroll;
-	
+
 	@FindBy(css = "div[data-rel='#plan-list-4']")
 	private WebElement SNPPlanInfo;
 
@@ -128,125 +128,138 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) .enroll-details>a:nth-of-type(2)")
 	private WebElement SNP1stPlanEnroll;
-	
+
 	@FindBy(xpath = "//h2[contains(text(),'Need Help?')]")
 	private WebElement needhelptxt;
-	
-	public void resultsUI(String zip,String county,String R1,String plan,String R2) {
+
+	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
-		validate(planZipInfo,60);
+		validate(planZipInfo, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip));
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()));
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(planBasedInfo.getText().contains("Based on"));
-		validateRecommendations(R1,R2);
-		validateRecommendationPlan(R1,plan);
+		String recom = "Recommendation";
+		String recom1 = "#1Recommendation";
+		String recom2 = "#2Recommendation";
+		if (tie == false) {
+			checkRecommendationCount(R1, recom1, R2, recom2);
+			validateRecommendations(R1, recom1, R2, recom2);
+			validateRecommendationPlan(R1, plan);
+		} else {
+			checkTieRecommendationCount(R1, recom, R2);
+			validateRecommendations(R1, recom, R2, recom);
 		}
+	}
 
-	public void validateRecommendations(String R1, String R2) {
-		System.out.println("Validating Recommendations in Results Page");		
-		checkRecommendationCount(R1,R2);
+	public void validateRecommendations(String R1, String rcom1, String R2, String rcom2) {
+		System.out.println("Validating Recommendations in Results Page");
 		if (R1.equalsIgnoreCase("MA")) {
-			Assert.assertTrue(MAPlanInfo.getText().contains("#1Recommendation"),"MA Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(MAPlanCount.getText())>0,"MA Plan count is less than 1");	
+			Assert.assertTrue(MAPlanInfo.getText().contains(rcom1), "MA Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(MAPlanCount.getText()) > 0, "MA Plan count is less than 1");
 		}
 		if (R1.equalsIgnoreCase("MS")) {
-			Assert.assertTrue(MSPlanInfo.getText().contains("#1Recommendation"),"MS Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(MSPlanCount.getText())>0,"MS Plan count is less than 1");	
+			Assert.assertTrue(MSPlanInfo.getText().contains(rcom1), "MS Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(MSPlanCount.getText()) > 0, "MS Plan count is less than 1");
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
-			Assert.assertTrue(PDPPlanInfo.getText().contains("#1Recommendation"),"PDP Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(PDPPlanCount.getText())>0,"PDP Plan count is less than 1");	
+			Assert.assertTrue(PDPPlanInfo.getText().contains(rcom1), "PDP Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(PDPPlanCount.getText()) > 0, "PDP Plan count is less than 1");
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
-			Assert.assertTrue(SNPPlanInfo.getText().contains("#1Recommendation"),"SNP Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(SNPPlanCount.getText())>0,"SNP Plan count is less than 1");	
+			Assert.assertTrue(SNPPlanInfo.getText().contains(rcom1), "SNP Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(SNPPlanCount.getText()) > 0, "SNP Plan count is less than 1");
 		}
 		// Verify 2nd Recommendation
 		if (R2.equalsIgnoreCase("MA")) {
-			Assert.assertTrue(MAPlanInfo.getText().contains("#2Recommendation"),"MA Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(MAPlanCount.getText())>0,"MA Plan count is less than 1");	
+			Assert.assertTrue(MAPlanInfo.getText().contains(rcom2), "MA Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(MAPlanCount.getText()) > 0, "MA Plan count is less than 1");
 		}
 		if (R2.equalsIgnoreCase("MS")) {
-			Assert.assertTrue(MSPlanInfo.getText().contains("#2Recommendation"),"MS Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(MSPlanCount.getText())>0,"MS Plan count is less than 1");	
+			Assert.assertTrue(MSPlanInfo.getText().contains(rcom2), "MS Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(MSPlanCount.getText()) > 0, "MS Plan count is less than 1");
 		}
 		if (R2.equalsIgnoreCase("PDP")) {
-			Assert.assertTrue(PDPPlanInfo.getText().contains("#2Recommendation"),"PDP Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(PDPPlanCount.getText())>0,"PDP Plan count is less than 1");	
+			Assert.assertTrue(PDPPlanInfo.getText().contains(rcom2), "PDP Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(PDPPlanCount.getText()) > 0, "PDP Plan count is less than 1");
 		}
 		if (R2.equalsIgnoreCase("SNP")) {
-			Assert.assertTrue(SNPPlanInfo.getText().contains("#2Recommendation"),"SNP Invalid Recommendations");
-			Assert.assertTrue(Integer.parseInt(SNPPlanCount.getText())>0,"SNP Plan count is less than 1");	
+			Assert.assertTrue(SNPPlanInfo.getText().contains(rcom2), "SNP Invalid Recommendations");
+			Assert.assertTrue(Integer.parseInt(SNPPlanCount.getText()) > 0, "SNP Plan count is less than 1");
 		}
 	}
-	
-	public void checkRecommendationCount(String R1,String R2) {
-		int R1Count=0,R2Count=0;
-		if(MAPlanInfo.getText().contains("#1Recommendation"))
+
+	public void checkRecommendationCount(String R1, String rcom1, String R2, String rcom2) {
+		int R1Count = 0, R2Count = 0;
+		if (MAPlanInfo.getText().contains(rcom1))
 			R1Count++;
-		if(MSPlanInfo.getText().contains("#1Recommendation"))
+		if (MSPlanInfo.getText().contains(rcom1))
 			R1Count++;
-		if(PDPPlanInfo.getText().contains("#1Recommendation"))
+		if (PDPPlanInfo.getText().contains(rcom1))
 			R1Count++;
-		if(SNPPlanInfo.getText().contains("#1Recommendation"))
+		if (SNPPlanInfo.getText().contains(rcom1))
 			R1Count++;
-		if(MAPlanInfo.getText().contains("#2Recommendation"))
+		if (MAPlanInfo.getText().contains(rcom2))
 			R2Count++;
-		if(MSPlanInfo.getText().contains("#2Recommendation"))
+		if (MSPlanInfo.getText().contains(rcom2))
 			R2Count++;
-		if(PDPPlanInfo.getText().contains("#2Recommendation"))
+		if (PDPPlanInfo.getText().contains(rcom2))
 			R2Count++;
-		if(SNPPlanInfo.getText().contains("#2Recommendation"))
+		if (SNPPlanInfo.getText().contains(rcom2))
 			R2Count++;
-		Assert.assertTrue(R1Count==1,"#1Recommendation presents more than once");
-		if(R2.isEmpty()||R2=="") 
-			Assert.assertTrue(R2Count==0,"#2Recommendation presents");
-		else	
-			Assert.assertTrue(R2Count==1,"#2Recommendation presents more than once");
+		Assert.assertTrue(R1Count == 1, "#1Recommendation presents more than once");
+		if (R2.isEmpty() || R2 == "")
+			Assert.assertTrue(R2Count == 0, "#2Recommendation presents");
+		else
+			Assert.assertTrue(R2Count == 1, "#2Recommendation presents more than once");
 	}
 
-	public void validateRecommendationPlan(String R1,String plan) {
+	public void validateRecommendationPlan(String R1, String plan) {
 		String currentPageUrl = driver.getCurrentUrl();
 		if (R1.equalsIgnoreCase("MA")) {
 			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
-			validate(MA1stPlanName,60);
-			Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MA Invalid Plan Ranking");
-			//mobileUtils.mobileLocateElementClick(MA1stPlanEnroll);
+			validate(MA1stPlanName, 60);
+			Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+					"MA Invalid Plan Ranking");
+			// mobileUtils.mobileLocateElementClick(MA1stPlanEnroll);
 			clickEnrollmobile(MA1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("MS")) {
 			mobileUtils.mobileLocateElementClick(MSViewPlansLink);
 			submitMSform();
-			validate(MS1stPlanName,60);
-			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MS Invalid Plan Ranking");
-			//mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
+			validate(MS1stPlanName, 60);
+			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+					"MS Invalid Plan Ranking");
+			// mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
 			clickEnrollmobile(MS1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
-			validate(PDP1stPlanName,60);
-			Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"PDP Invalid Plan Ranking");
-			//mobileUtils.mobileLocateElementClick(PDP1stPlanEnroll);
+			validate(PDP1stPlanName, 60);
+			Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+					"PDP Invalid Plan Ranking");
+			// mobileUtils.mobileLocateElementClick(PDP1stPlanEnroll);
 			clickEnrollmobile(PDP1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
-			validate(SNP1stPlanName,60);
-			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"SNP Invalid Plan Ranking");
-			//mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
+			validate(SNP1stPlanName, 60);
+			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+					"SNP Invalid Plan Ranking");
+			// mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
 			clickEnrollmobile(SNP1stPlanEnroll);
 		}
 		threadsleep(5000);
 		pageloadcomplete();
-		Assert.assertTrue(currentPageUrl != driver.getCurrentUrl(),"Enroll Plan URL is not working");
+		Assert.assertTrue(currentPageUrl != driver.getCurrentUrl(), "Enroll Plan URL is not working");
 	}
-	
-	//Filling MS form with default value
+
+	// Filling MS form with default value
 	public void submitMSform() {
-		//Zip value is pre-populated by default
-		MSPlanDOB.sendKeys("01/01/1940");
+		// Zip value is pre-populated by default
+		mobileactionsendkeys(MSPlanDOB, "01/01/1940");
+		hidekeypad();
 		mobileUtils.mobileLocateElementClick(MSPlanGender);
 		Select temp = new Select(MSPlanPartAMonth);
 		mobileSelectOption(temp, "January 1");
@@ -275,6 +288,19 @@ public class ResultsMobilePage extends UhcDriver {
 			}
 		}
 		Assert.assertTrue(click, "Unable to click the Enroll button");
+	}
+
+	public void checkTieRecommendationCount(String R1, String rcom, String R2) {
+		int RCount = 0;
+		if (MAPlanInfo.getText().contains(rcom))
+			RCount++;
+		if (MSPlanInfo.getText().contains(rcom))
+			RCount++;
+		if (PDPPlanInfo.getText().contains(rcom))
+			RCount++;
+		if (SNPPlanInfo.getText().contains(rcom))
+			RCount++;
+		Assert.assertTrue(RCount == 2, "Recommendation is not equals to Two");
 	}
 
 }

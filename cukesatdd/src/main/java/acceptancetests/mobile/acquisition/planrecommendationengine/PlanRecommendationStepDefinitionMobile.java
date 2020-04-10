@@ -390,7 +390,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String r1 = inputValues.get("1st Recommendation");
 		String plan = inputValues.get("1st Ranking plan");
 		String r2 = inputValues.get("2nd Recommendation");
-		resultpage.resultsUI(zip,county,r1,plan,r2);
+		resultpage.resultsUI(zip,county,r1,plan,r2,false);
    	}
 	
 	public void readfeaturedata(DataTable data) {
