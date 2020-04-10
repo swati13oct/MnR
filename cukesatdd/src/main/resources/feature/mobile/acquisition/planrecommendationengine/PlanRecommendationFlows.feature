@@ -11,13 +11,19 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | County Name     | <County>        |
     And user selects plan type in coverage options page mobile
       | Plan Type | <isCoverageOpt> |
-    And user selects skip option in Drug page mobile
+    When user selects skip option in Drug page mobile
       | Drug Selection | <DrugSelection> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection |
-      |   10003 | NO            | New York | PDP           | skip          |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10003 | NO            | New York | PDP           | skip          | PDP               | Walgreens   | MS                |
 
   @PRE @planrecommandonationmobile @PDPmobile @PDPnodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> - To validate PDP flow with zero drug functions in PRE Mobile
@@ -29,13 +35,19 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | County Name     | <County>        |
     And user selects plan type in coverage options page mobile
       | Plan Type | <isCoverageOpt> |
-    Then user selects add drug option without drugs in Drug page mobile
+    When user selects add drug option without drugs in Drug page mobile
       | Drug Selection | <DrugSelection> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County      | isCoverageOpt | DrugSelection |
-      |   35034 | YES           | Bibb County | PDP           | add           |
+      | Zipcode | isMultiCounty | County      | isCoverageOpt | DrugSelection | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   35034 | YES           | Bibb County | PDP           | add           | PDP               | Walgreens   | MS                |
 
   @PRE @planrecommandonationmobile @PDPmobile @PDPdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> -PharmacySelection: <PharmacySelection> - To validate PDP flow with drug functions in PRE Mobile
@@ -47,16 +59,22 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | County Name     | <County>        |
     And user selects plan type in coverage options page mobile
       | Plan Type | <isCoverageOpt> |
-    Then user selects add drug option in Drug page mobile
+    And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
+    When user selects Pharmacy in Pharmacy page mobile
       | Pharmacy Selection | <PharmacySelection> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
-      |   10003 | NO            | New York | PDP           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10003 | NO            | New York | PDP           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | PDP               | Walgreens   | MA                |
 
   @PRE @planrecommandonationmobile @MAmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MA flow functions in PRE Mobile
@@ -80,14 +98,20 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York    | MA            | None         | Travel       | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                |
-      |   35034 | YES           | Bibb County | MA            | Medicaid     | Care Away    | want to use      |             |               | No,No,No,No                   | Higher               |
+      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10003 | NO            | New York    | MA            | None         | Travel       | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                | MA                | Plan 1      | MS                |
+      |   35034 | YES           | Bibb County | MA            | Medicaid     | Care Away    | want to use      |             |               | No,No,No,No                   | Higher               | SNP               | D-SNP       | MS                |
 
-  @PRE @planrecommandonationmobile @MAPDmobile @F358830
+  @PRE @planrecommandonationmobile @MAPDmobile @MAPDdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -114,11 +138,16 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
-
+    And user validate elements in loading page mobile
+		Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | Facility     | Travel       | lookup           | sue         | YES           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10003 | NO            | New York | MAPD          | None     | Travel       | lookup           | sue         | YES           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,No                 | Lower                |MA|Plan 1|MS|
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDskipdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD skip drug flow functions in PRE Mobile
@@ -144,11 +173,17 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | MAPD          | None         | Another Part | lookup           | robert      | NO            | skip          | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   35034 | YES           | Bibb County | MAPD          | Facility         | Another Part | lookup           | robert      | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD zero drug flow functions in PRE Mobile
@@ -174,13 +209,19 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
       |   10001 | NO            | New York | MAPD          | Condition    | Care Away    | want to use      |             |               | add           | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonationmobile @DKmobile @F358830
+  @PRE @planrecommandonationmobile @DKmobile @DKdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont Know flow functions in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -207,11 +248,17 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   35034 | YES           | Bibb County | NA            | Medicaid     | Care Away    | lookup           | robert      | NO           | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Higher               |
+      | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   35034 | YES           | Bibb County | NA            | Medicaid     | Care Away    | lookup           | robert      | NO            | add           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Higher               |
 
   @PRE @planrecommandonationmobile @DKmobile @DKskipdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont know skip drug flow functions in PRE Mobile
@@ -237,10 +284,16 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
       |   10001 | NO            | New York | NA            | None         | Another Part | lookup           | sue         | NO            | skip          | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @DKmobile @DKzerodrugmobile @F358830
@@ -267,8 +320,14 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading page mobile
+    And user validate elements in loading page mobile
+    Then user validate recommendations in results page mobile
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <County>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 1st Ranking plan   | <Rankingplan>       |
+      | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |1stRecommendation | Rankingplan | 2ndRecommendation |
       |   10001 | NO            | New York | NA            | Condition    | Care Away    | willing to use   |             |               | add           | Yes,No,No,Yes                 | Lower                |

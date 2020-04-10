@@ -20,6 +20,7 @@ import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
@@ -378,6 +379,18 @@ public class PlanRecommendationStepDefinitionMobile {
    	public void elements_loading_page() {
 		LoadingMobilePage loadingpage =  new LoadingMobilePage(wd);
 		loadingpage.loadingresultspage();
+   	}
+	
+	@Then("^user validate recommendations in results page mobile$")
+   	public void view_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		resultpage.resultsUI(zip,county,r1,plan,r2);
    	}
 	
 	public void readfeaturedata(DataTable data) {

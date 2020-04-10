@@ -113,6 +113,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 		mobileFindElementBeforeCallBanner(element, "50%", 8, true);
 		mobileFindElementAfterHeader(element, "50%", 4, false);
 	}
+	public void mobileLocateElement(WebElement element,String swipepercentage) {
+		mobileFindElementBeforeCallBanner(element, swipepercentage, 8, true);
+		mobileFindElementAfterHeader(element, swipepercentage, 4, false);
+	}
 
 	public void mobileLocateElementClick(WebElement element, int swipeup, int swipedown) {
 		mobileFindElementBeforeCallBanner(element, "50%", swipeup, true);

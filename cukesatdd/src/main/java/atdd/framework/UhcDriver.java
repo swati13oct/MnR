@@ -991,4 +991,29 @@ try {
 		}
 	}
 
+	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
+		AppiumDriver mobiledriver = (AppiumDriver) driver;
+		TouchAction mact = new TouchAction(mobiledriver);
+		Dimension size = mobiledriver.manage().window().getSize();
+		//Starting x location set to % of the width (near left end)
+	    percentage = "0.".concat(percentage.replace("%", ""));
+	    int startx = (int) (size.width * Float.valueOf(1-Float.valueOf(percentage)));
+		//Ending x location set to 90% of the width (near right end)
+	    int endx = (int) (size.width * 0.90);
+	    //Y position set to 30% of height Vertically
+	    int starty = (int) (size.height * 0.3);
+	    System.out.println(size+" "+startx+" "+endx+" "+starty);
+		threadsleep(500);
+		if(swiperight)
+			mact.longPress(PointOption.point(startx, starty)).moveTo(PointOption.point(endx, starty)).release().perform();
+		else
+			mact.longPress(PointOption.point(endx, starty)).moveTo(PointOption.point(startx, starty)).release().perform();
+	}
+
+	public void mobileswipeHorizantal(String percentage, int count,boolean swiperight) {
+		for (int i = 1; i <= count; i++) {
+			mobileswipeHorizantal(percentage,swiperight);
+		}
+	}
+	
 }
