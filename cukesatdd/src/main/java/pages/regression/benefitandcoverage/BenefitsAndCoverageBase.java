@@ -885,7 +885,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("URL opened in new windi]ow is:   "+driver.getCurrentUrl());
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Now waiting for Express Scripts logo to show up");
 		CommonUtility.waitForPageLoad(driver, ExpressScriptsLogo, 20);
 		if (driver.getCurrentUrl().contains("https://wwwuat.express-scripts.com/medco/consumer/SSO") && 
@@ -901,7 +901,148 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		
 	}
 
-
+	public void scrollToOptumRxSSOLink(String optumrxssolink ) {
+		// TODO Auto-generated method stub
+		String linktobetested = optumrxssolink;
+		if (linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM"))
+		{
+		System.out.println("Scrolling to VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM");
+		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+		jse2.executeScript("arguments[0].scrollIntoView()", viewYourCurrentPrescriptionDrugCostSummaryLink); 
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{
+		System.out.println("Scrolling to LookUpDrugs Button");
+		JavascriptExecutor jse3 = (JavascriptExecutor)driver;
+		jse3.executeScript("arguments[0].scrollIntoView()", LookUpDrugsButton); 
+		try {
+			Thread.sleep(2000);
+		    } 
+		catch (InterruptedException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		}
+		
+		if (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink"))
+		{
+		System.out.println("Scrolling to view Details At Optumrx Link");
+		JavascriptExecutor jse4 = (JavascriptExecutor)driver;
+		jse4.executeScript("arguments[0].scrollIntoView()", viewDetailsAtOptumrxLink); 
+		try {
+			Thread.sleep(2000);
+		    } 
+		catch (InterruptedException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		
+	}
+			
+	
+	
+	public void clicksToOptumRxSSOLink(String optumrxssolink ) {
+		// TODO Auto-generated method stub
+		
+		String linktobetested = optumrxssolink;
+		if (linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM"))
+		{	
+		System.out.println("Clicking on VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link");
+		viewYourCurrentPrescriptionDrugCostSummaryLink.click();   	
+		System.out.println("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM Link has been clicked");
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{	
+		System.out.println("Clicking on LookUpDrugs Button");
+		LookUpDrugsButton.click();   	
+		System.out.println("LookUpDrugs Button has been clicked");
+		}
+		
+		if (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink"))
+		{	
+		System.out.println("Clicking on View Details At Optumrx Link");
+		viewDetailsAtOptumrxLink.click();   	
+		System.out.println("View Details At Optumrx Link has been clicked");
+		}
+		
+		try {
+			System.out.println("Now waiting for 4 seconds");
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("switching to OptumRx  window");		
+		String mainwindow = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for (String currentWindowHandle : allWindowHandles) {
+			if (!currentWindowHandle.equals(mainwindow)) {
+				driver.switchTo().window(currentWindowHandle);
+			}
+		}
+		try {
+			System.out.println("Now waiting for 20 seconds");
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		if ((linktobetested.equalsIgnoreCase("VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM")) 
+				|| (linktobetested.equalsIgnoreCase("viewDetailsAtOptumrxLink")))
+		{
+		System.out.println("Now waiting for Benefits Information header to show up");
+		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 20);
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
+		System.out.println("Page title is:   "+driver.getTitle());
+		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
+		System.out.println("Header text of page is  "+getHeaderText);
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/benefits-and-claims/benefits-information") 
+				&& BenefitsInformationHeaderOptumRx.getText().contains("Benefits Information"))
+		{
+			System.out.println("Benefit Information Header was displayed on page and OptumRx SSO URL was correct");
+		}
+		else
+		{
+			System.out.println("OptumRx SSO URL was incorrect or Benefit Information header was not displayed, failing test script");
+			Assert.fail();
+		}
+		}
+		
+		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
+		{
+		System.out.println("Now waiting for Search for a drug header to show up");
+		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 20);
+		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
+		System.out.println("Page title is:   "+driver.getTitle());
+		String getHeaderText = searchForADrugHeaderOptumRx.getText();
+		System.out.println("Header text of page is  "+getHeaderText);
+		if (driver.getCurrentUrl().contains("https://chp-stage.optumrx.com/secure/member-tools/drug-search-bpe") 
+				&& BenefitsInformationHeaderOptumRx.getText().contains("Search for a drug"))
+		{
+			System.out.println("Search for a drug Header was displayed on page and OptumRx SSO URL was correct");
+		}
+		else
+		{
+			System.out.println("OptumRx SSO URL was incorrect or Search for a drug header was not displayed, failing test script");
+			Assert.fail();
+		}
+		}
+	}
 
 }
 

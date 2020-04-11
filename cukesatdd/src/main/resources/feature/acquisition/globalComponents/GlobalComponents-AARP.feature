@@ -40,7 +40,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-    Then the user validates Pro-active Chat
+   # Then the user validates Pro-active Chat
     Then the user validates SAM Call Icon
     Then the user validates SAM re-active Chat
 
