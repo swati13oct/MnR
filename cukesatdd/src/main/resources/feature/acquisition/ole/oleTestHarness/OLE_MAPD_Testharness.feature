@@ -7,24 +7,38 @@ Feature: OLE Testharness page for AARP for MAPD
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
     When the user navigates to OLE WelcomePage using following information
-      | SiteId          | <siteId>          |
-      | PBPNumber       | <pBPNumber>       |
-      | ClientCode      | <clientCode>      |
-      | SegmentId       | <segmentId>       |
-      | PlanTypeTH      | <PlanTypeTH>      |
-      | TFN             | <TFN>             |
-      | Plan Name       | <planName>        |
-      | psc             | <psc>             |
-      | Plan Year       | <planYear>        |
-      | env             | <env>             |
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | FipsCode        | <FipsCode>        |
-      | StateCode       | <StateCode>       |
-      | CMScode         | <CMScode>         |
-      | HNumber         | <HNumber>         |
-      | Is Multi County | <isMultutiCounty> |
-      | Plan Type       | <plantype>        |
+      | SiteId           | <siteId>          |
+      | PBPNumber        | <pBPNumber>       |
+      | ClientCode       | <clientCode>      |
+      | SegmentId        | <segmentId>       |
+      | PlanTypeTH       | <PlanTypeTH>      |
+      | TFN              | <TFN>             |
+      | Plan Name        | <planName>        |
+      | psc              | <psc>             |
+      | Plan Year        | <planYear>        |
+      | env              | <env>             |
+      | Zip Code         | <zipcode>         |
+      | County Name      | <county>          |
+      | FipsCode         | <FipsCode>        |
+      | StateCode        | <StateCode>       |
+      | CMScode          | <CMScode>         |
+      | HNumber          | <HNumber>         |
+      | Is Multi County  | <isMultutiCounty> |
+      | Plan Type        | <plantype>        |
+      | Rider Flag       | <RiderFlag>       |
+      | PrefferedPlan Id | <PrefferedPlanId> |
+      | Plan Code        | <PlanCode>        |
+      | maps PlanType    | <mapsPlanType>    |
+      | OLEis CNS        | <OLEisCNS>        |
+      | client ProdCode  | <clientProdCode>  |
+      | lineOf Business  | <lineOfBusiness>  |
+      | OLEis CSNP       | <OLEisCSNP>       |
+      | Fitness          | <fitness>         |
+      | Vision           | <vision>          |
+      | Hearing          | <hearing>         |
+      | Dental           | <dental>          |
+      | salesagent id    | <salesagentid>    |
+      | Premium          | <premium>         |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
@@ -78,7 +92,7 @@ Feature: OLE Testharness page for AARP for MAPD
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -90,6 +104,6 @@ Feature: OLE Testharness page for AARP for MAPD
     Then the user clicks on Submit Enrollment to complete enrollment
 
     Examples: 
-      | TID   | isMultutiCounty | plantype | siteName | THPage | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                                  | psc    | planYear | env     | zipcode | county        | FipsCode | StateCode | CMScode | HNumber | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | 00001 | NO              | MAPD     | Ulayer   | ole    | aarp   |       024 | UHCMS1     |       000 | MAPD       | 1-877-596-3258 | UnitedHealthcare MedicareDirect Rx (PFFS) | 880180 |     2020 | nonProd |   85923 | Navajo County |      017 | AZ        |     080 | H5435   | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | false     | NO                | NO      |
-      | 00002 | NO              | MAPD     | Blayer   | ole    | uhc    |       024 | UHCMS1     |       000 | MAPD       | 1-877-596-3258 | UnitedHealthcare MedicareDirect Rx (PFFS) | 880180 |     2020 | nonProd |   85923 | Navajo County |      017 | AZ        |     080 | H5435   | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | false     | NO                | NO      |
+      | TID   | isMultutiCounty | plantype | siteName | THPage | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                                  | psc    | planYear | env     | zipcode | county        | FipsCode | StateCode | CMScode | HNumber | RiderFlag | PrefferedPlanId | PlanCode  | mapsPlanType | OLEisCNS | clientProdCode | lineOfBusiness | OLEisCSNP | fitness | vision | hearing | dental | salesagentid | premium | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
+      | 00001 | NO              | MAPD     | Ulayer   | ole    | aarp   |       024 | AARP1      |       000 | MAPD       | 1-877-699-5710 | UnitedHealthcare MedicareDirect Rx (PFFS) | 810027 |     2020 | nonProd |   85923 | Navajo County |      017 | AZ        |     080 | H5435   | false     | H5435024000     | undefined | PFFS         | false    | undefined      | undefined      | false     | false   | true   | true    | false  |              |   64.00 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | false     | NO                | NO      |
+      | 00002 | NO              | MAPD     | Blayer   | ole    | uhc    |       024 | UHCMS1     |       000 | MAPD       | 1-877-596-3258 | UnitedHealthcare MedicareDirect Rx (PFFS) | 880180 |     2020 | nonProd |   85923 | Navajo County |      017 | AZ        |     080 | H5435   | false     | H5435024000     | undefined | PFFS         | false    | undefined      | undefined      | false     | false   | true   | true    | false  |              |   64.00 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | false     | NO                | NO      |

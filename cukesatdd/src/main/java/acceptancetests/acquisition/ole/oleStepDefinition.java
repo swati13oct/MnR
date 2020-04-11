@@ -2323,8 +2323,20 @@ public class oleStepDefinition {
 		String ZipCode = givenAttributesMap.get("Zip Code");
 		String IsMultiCounty = givenAttributesMap.get("Is Multi County");
 		String StateCode = givenAttributesMap.get("StateCode");
-
+		String RiderFlag = givenAttributesMap.get("Rider Flag");
+		String PrefferedPlanId = givenAttributesMap.get("PrefferedPlan Id");
+		String PlanCode = givenAttributesMap.get("Plan Code");
+		String mapsPlanType = givenAttributesMap.get("maps PlanType");
+		String OLEisCNS = givenAttributesMap.get("OLEis CNS");
+		String clientProdCode = givenAttributesMap.get("client ProdCode");
+		String OLEisCSNP = givenAttributesMap.get("OLEis CSNP");
+		String Fitness = givenAttributesMap.get("Fitness");
+		String Vision = givenAttributesMap.get("Vision");
+		String Hearing = givenAttributesMap.get("Hearing");
+		String Dental = givenAttributesMap.get("Dental");
+		String salesagentid = givenAttributesMap.get("salesagent id");
 		String PlanPremium = givenAttributesMap.get("Premium");
+		String lineOfBusiness = givenAttributesMap.get("lineOf Business");
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -2355,21 +2367,23 @@ public class oleStepDefinition {
 
 			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
 					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
-					FipsCode, CMScode);
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
 
 		} else if (SiteName.contains("aarp")) {
 			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
 					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
 			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
 					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
-					FipsCode, CMScode);
-
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
 		} else {
 			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
 					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
 			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
 					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
-					FipsCode, CMScode);
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
 
 		}
 		if (welcomePage != null) {

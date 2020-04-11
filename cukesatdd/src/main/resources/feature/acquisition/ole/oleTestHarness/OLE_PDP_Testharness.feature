@@ -7,24 +7,38 @@ Feature: OLE Testharness page for AARP for MAPD
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
     When the user navigates to OLE WelcomePage using following information
-      | SiteId          | <siteId>          |
-      | PBPNumber       | <pBPNumber>       |
-      | ClientCode      | <clientCode>      |
-      | SegmentId       | <segmentId>       |
-      | PlanTypeTH      | <PlanTypeTH>      |
-      | TFN             | <TFN>             |
-      | Plan Name       | <planName>        |
-      | psc             | <psc>             |
-      | Plan Year       | <planYear>        |
-      | env             | <env>             |
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | FipsCode        | <FipsCode>        |
-      | StateCode       | <StateCode>       |
-      | CMScode         | <CMScode>         |
-      | HNumber         | <HNumber>         |
-      | Is Multi County | <isMultutiCounty> |
-      | Plan Type       | <plantype>        |
+      | SiteId           | <siteId>          |
+      | PBPNumber        | <pBPNumber>       |
+      | ClientCode       | <clientCode>      |
+      | SegmentId        | <segmentId>       |
+      | PlanTypeTH       | <PlanTypeTH>      |
+      | TFN              | <TFN>             |
+      | Plan Name        | <planName>        |
+      | psc              | <psc>             |
+      | Plan Year        | <planYear>        |
+      | env              | <env>             |
+      | Zip Code         | <zipcode>         |
+      | County Name      | <county>          |
+      | FipsCode         | <FipsCode>        |
+      | StateCode        | <StateCode>       |
+      | CMScode          | <CMScode>         |
+      | HNumber          | <HNumber>         |
+      | Is Multi County  | <isMultutiCounty> |
+      | Plan Type        | <plantype>        |
+      | Rider Flag       | <RiderFlag>       |
+      | PrefferedPlan Id | <PrefferedPlanId> |
+      | Plan Code        | <PlanCode>        |
+      | maps PlanType    | <mapsPlanType>    |
+      | OLEis CNS        | <OLEisCNS>        |
+      | client ProdCode  | <clientProdCode>  |
+      | lineOf Business  | <lineOfBusiness>  |
+      | OLEis CSNP       | <OLEisCSNP>       |
+      | Fitness          | <fitness>         |
+      | Vision           | <vision>          |
+      | Hearing          | <hearing>         |
+      | Dental           | <dental>          |
+      | salesagent id    | <salesagentid>    |
+      | Premium          | <premium>         |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
@@ -78,7 +92,7 @@ Feature: OLE Testharness page for AARP for MAPD
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -90,6 +104,6 @@ Feature: OLE Testharness page for AARP for MAPD
     Then the user clicks on Submit Enrollment to complete enrollment
 
     Examples: 
-      | TID   | isMultutiCounty | plantype | siteName | THPage | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                        | psc    | planYear | env     | zipcode | county             | FipsCode | StateCode | CMScode | HNumber | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | 00001 | NO              | PDP      | Ulayer   | ole    | aarp   |       413 | UHCMS1     |       000 | PDP        | 1-877-596-3258 | AARP MedicareRx Walgreens (PDP) | 880180 |     2020 | nonProd |   90210 | Los Angeles County |      037 | CA        |     200 | S5921   | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
-      | 00002 | NO              | PDP      | Blayer   | ole    | uhc    |       413 | UHCMS1     |       000 | PDP        | 1-877-596-3258 | AARP MedicareRx Walgreens (PDP) | 880180 |     2020 | nonProd |   90210 | Los Angeles County |      037 | CA        |     200 | S5921   | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
+      | TID   | isMultutiCounty | plantype | siteName | THPage | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                        | psc    | planYear | env     | zipcode | county             | FipsCode | StateCode | CMScode | HNumber | RiderFlag | PrefferedPlanId | PlanCode  | mapsPlanType | OLEisCNS | clientProdCode | lineOfBusiness | OLEisCSNP | fitness | vision | hearing | dental | salesagentid | premium | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
+      | 00001 | NO              | PDP      | Ulayer   | ole    | aarp   |       413 | AARP1      |       000 | PDP        | 1-877-699-5710 | AARP MedicareRx Walgreens (PDP) | 810027 |     2020 | nonProd |   90210 | Los Angeles County |      037 | CA        |     200 | S5921   | false     | S5921413000     | undefined | PDP          | false    | undefined      | undefined      | false     | false   | false  | false   | false  |              |   34.20 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
+      | 00002 | NO              | PDP      | Blayer   | ole    | uhc    |       413 | UHCMS1     |       000 | PDP        | 1-877-596-3258 | AARP MedicareRx Walgreens (PDP) | 880180 |     2020 | nonProd |   90210 | Los Angeles County |      037 | CA        |     200 | S5921   | false     | S5921413000     | undefined | PDP          | false    | undefined      | undefined      | false     | false   | false  | false   | false  |              |   34.20 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |                | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |

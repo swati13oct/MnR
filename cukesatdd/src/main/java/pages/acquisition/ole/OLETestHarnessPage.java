@@ -37,7 +37,7 @@ public class OLETestHarnessPage extends UhcDriver {
 	private WebElement YearTH;
 	@FindBy(id = "zip")
 	private WebElement ZipTH;
-	@FindBy(id = "county")
+	@FindBy(id = "countyname")
 	private WebElement countyTH;
 	@FindBy(id = "premium")
 	private WebElement premiumTH;
@@ -45,7 +45,7 @@ public class OLETestHarnessPage extends UhcDriver {
 	private WebElement StatecodeTH;
 	@FindBy(id = "hnumber")
 	private WebElement HnumberTH;
-	@FindBy(id = "pbpnum")
+	@FindBy(id = "pbpnumber")
 	private WebElement pbpnumTH;
 	@FindBy(id = "segmentid")
 	private WebElement SegmentidTH;
@@ -63,6 +63,35 @@ public class OLETestHarnessPage extends UhcDriver {
 	private WebElement FipscodeTH;
 	@FindBy(id = "cmscode")
 	private WebElement CmscodeTH;
+	
+	@FindBy(id = "riderflag")
+	private WebElement riderflagTH;
+	@FindBy(id = "prefferedplanid")
+	private WebElement prefferedplanidTH;
+	@FindBy(id = "plancode")
+	private WebElement plancodeTH;
+	@FindBy(id = "mapsplantype")
+	private WebElement mapsplantypeTH;
+	@FindBy(id = "oleiscns")
+	private WebElement oleiscnsTH;
+	@FindBy(id = "clientprodcode")
+	private WebElement clientprodcodeTH;
+	@FindBy(id = "lineofbusiness")
+	private WebElement lineofbusinessTH;
+	@FindBy(id = "oleiscsnp")
+	private WebElement oleiscsnpTH;
+	@FindBy(id = "fitness")
+	private WebElement fitnessTH;
+	@FindBy(id = "vision")
+	private WebElement visionTH;
+	@FindBy(id = "hearing")
+	private WebElement hearingTH;
+	@FindBy(id = "dental")
+	private WebElement dentalTH;
+	@FindBy(id = "salesagentid")
+	private WebElement salesagentidTH;
+	
+
 
 	@FindBy(xpath = "//table//button[text()='Launch OLE']")
 	private WebElement LaunchOLEButton;
@@ -95,7 +124,10 @@ public class OLETestHarnessPage extends UhcDriver {
 
 	public WelcomePage navigateFromOLETestharnessToWelcomeOLE(String Siteid, String Clientcode, String Plantype,
 			String Planname, String Year, String Zip, String county, String State, String Hnumber, String pbpnum,
-			String Segmentid, String Tfn, String Psc, String Env, String Fipscode, String Cmscode) {
+			String Segmentid, String Tfn, String Psc, String Env, String Fipscode, String Cmscode,
+			String riderflag, String prefferedplanid, String plancode, String mapsplantype,String oleiscns, String clientprodcode,
+			String lineofbusiness, String oleiscsnp, String fitness, String vision, 
+			String hearing, String dental, String salesagentid, String premium) {
 
 		validateNew(SiteidTH);
 		System.out.println("Validated OLE TestHarness Page Landed !!!");
@@ -115,6 +147,22 @@ public class OLETestHarnessPage extends UhcDriver {
 		sendkeys(EnvTH, Env);
 		sendkeys(FipscodeTH, Fipscode);
 		sendkeys(CmscodeTH, Cmscode);
+		sendkeys(riderflagTH, riderflag);
+		
+		sendkeys(prefferedplanidTH, prefferedplanid);
+		sendkeys(plancodeTH, plancode);
+		sendkeys(mapsplantypeTH, mapsplantype);
+		sendkeys(oleiscnsTH, oleiscns);
+		sendkeys(clientprodcodeTH, clientprodcode);
+		sendkeys(lineofbusinessTH, lineofbusiness);
+		sendkeys(oleiscsnpTH, oleiscsnp);
+		sendkeys(fitnessTH, fitness);
+		sendkeys(visionTH, vision);
+		sendkeys(hearingTH, hearing);
+		sendkeys(dentalTH, dental);
+		sendkeys(salesagentidTH, salesagentid);
+		sendkeys(premiumTH, premium);
+		
 		jsClickNew(LaunchOLEButton);
 		System.out.println("Clicked on Launch OLE Button on Testharness page !!!");
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
