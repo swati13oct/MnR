@@ -32,8 +32,10 @@ import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.GlobalTearDown;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -349,7 +351,6 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
  	benefitsCoveragePage.clicksToOptumRxSSOLink(optumrxssolink);
  	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
  		
- 
 }
  
 }
