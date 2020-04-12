@@ -1136,6 +1136,10 @@ public class VppStepDefinitionUpdatedAARP {
 			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
 		case "SNP":
 			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.savePlans(savePlanNames, planType);

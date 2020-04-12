@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -51,6 +52,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(css="div.signupCTA.signupContainer a")
 	private WebElement signOut;
+	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -199,5 +203,20 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
 		CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+	}
+	
+	public WelcomePage Enroll_OLE_Plan(String planName) {
+		WebElement enrollForPlan = null;
+		
+		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
+		if(enrollForPlan!=null){
+			enrollForPlan.click();
+		}
+		validateNew(NextBtn);
+		if(driver.getCurrentUrl().contains("welcome")){
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
 	}
 }

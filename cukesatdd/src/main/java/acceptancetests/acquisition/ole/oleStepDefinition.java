@@ -1,7 +1,5 @@
 package acceptancetests.acquisition.ole;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,16 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
@@ -32,16 +40,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.OLE_PageConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -258,19 +257,21 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
-		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-
+		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
-		String PlanPremium = "";
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String SiteName;
+		String PlanPremium = "";
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
 		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 			//TFN = visitorProfilePage.GetTFNforPlanType();
 			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 		//--------------------------------------------------------------------------------------------------------------------
