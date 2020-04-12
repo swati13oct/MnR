@@ -45,12 +45,12 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I land on the plan summary page of VPP
       | Plan Name | <planName> |
     Then user saves two plans as favorite on AARP site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
     And user validates the added plans on visitor profile page of AARP site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     And user delets the added plans on visitor profile page of AARP site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
 
     Examples: 
       | username  | password  | email                  | planName                                             | MA_testPlans                                                                                            |

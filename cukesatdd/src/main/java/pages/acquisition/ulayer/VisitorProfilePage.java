@@ -155,4 +155,18 @@ public class VisitorProfilePage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
 		Assert.assertTrue(addrugs.isDisplayed());
 	}
+	
+	public boolean providerinfo(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'\"+planName+\"')]/following::div[contains(@class, 'provider-accordion')]//button[contains(@class,'provider-toggle')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+		if(mproviderinfo.toLowerCase().contains("providers covered"))
+		{
+			return true;
+		}
+		return false;
+
+	}
 }
