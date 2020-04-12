@@ -2434,8 +2434,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
 			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
 			expMatch=0;
-			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
-
 			//----------------------------------------
 			System.out.println("Proceed to click to save plan");
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
