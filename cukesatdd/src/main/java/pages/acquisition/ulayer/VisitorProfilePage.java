@@ -49,6 +49,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 	
+	@FindBy(css="div.signupCTA.signupContainer a")
+	private WebElement signOut;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -159,7 +162,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'\"+planName+\"')]/following::div[contains(@class, 'provider-accordion')]//button[contains(@class,'provider-toggle')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')]//button[contains(@class,'provider-toggle')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("providers covered"))
@@ -168,5 +171,33 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return false;
 
+	}
+	
+	/**
+	 * Sign In with Optum Id credentials
+	 * @param username
+	 * @param password
+	 */
+	public void signIn(String username,String password) {
+		signIn.click();
+		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+		driver.findElement(By.cssSelector("input#SignIn")).click();
+		String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+		WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+			System.out.println("Question is related to friendname");
+			securityAnswer.sendKeys("name1");
+		}
+
+		else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+			System.out.println("Question is related to color");
+			securityAnswer.sendKeys("color1");
+		} else {
+			System.out.println("Question is related to phone");
+			securityAnswer.sendKeys("number1");
+		}
+		driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+		CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 	}
 }

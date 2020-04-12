@@ -58,8 +58,8 @@ public class VisitorProfileStepDefinition_AARP {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
-	@And("^the user clicks on the add drugs button in the guest profile in AARP site$")
-	public void the_user_clicks_on_the_add_drugs_button_in_the_guest_profile_in_AARP_site() {
+	@And("^the user clicks on the add drugs button in the profile in AARP site$")
+	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_in_AARP_site() {
 		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -69,8 +69,8 @@ public class VisitorProfileStepDefinition_AARP {
 		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 	}
 	
-	@And("^the user clicks on the add plans button in the guest profile in AARP site$")
-	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_AARP_site() {
+	@And("^the user clicks on the add plans button in the profile in AARP site$")
+	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() {
 		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -197,6 +197,22 @@ public class VisitorProfileStepDefinition_AARP {
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", visitorProfile.providerinfo(planName));
+	}
+	
+	@And("^the user signs in with optum Id credentials in AARP site$")
+	public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.signIn(username, password);
 	}
 } 
 

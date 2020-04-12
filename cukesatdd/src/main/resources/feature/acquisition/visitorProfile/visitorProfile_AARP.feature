@@ -9,7 +9,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And the user selects the state drop down value in AARP home page
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
-    And the user clicks on the add drugs button in the guest profile in AARP site
+    And the user clicks on the add drugs button in the profile in AARP site
     And I have added a drug to my drug list
       | Drug | <drug> |
     And user selects drug details
@@ -72,7 +72,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And the user selects the state drop down value in AARP home page
       | State | <state> |
     And the user clicks on the shopping cart icon in AARP site
-    And the user clicks on the add plans button in the guest profile in AARP site
+    And the user clicks on the add plans button in the profile in AARP site
     When the user enters zipcode on health plans page in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -205,7 +205,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then user click on continue as guest button on AARP site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the guest profile in AARP site
+    And the user clicks on the add plans button in the profile in AARP site
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
     When the user Click on Is my Provider covered link Ulayer
@@ -220,3 +220,69 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planname                             | testPlans                                                                 |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+
+  @addDrugAuthenticated
+  Scenario Outline: Verify user is able to add drug and pharmacy information to the authenticated visitor profile
+    Given the user is on the AARP medicare site landing page
+    And the user selects the state drop down value in AARP home page
+      | State | <state> |
+    And the user clicks on the shopping cart icon in AARP site
+    Then the user signs in with optum Id credentials in AARP site
+      | User Name | <userName> |
+      | Password  | <password> |
+    And the user clicks on the add drugs button in the profile in AARP site
+    And I have added a drug to my drug list
+      | Drug | <drug> |
+    And user selects drug details
+      | Drug      | <drug>      |
+      | Quantity  | <quantity>  |
+      | Frequency | <frequency> |
+      | Dosage    | <dosage>    |
+    When user successfully adds drug
+      | Is Branded Drug | <branded> |
+      | Drug            | <drug>    |
+    And I navigate to step2 page
+    And the user selects the pharmacy tab information like miles, zipcode and pharmacy type
+      | Zipcode | <zipcode> |
+      | Radius  | <radius>  |
+    And I select the first pharmacy
+    And I navigate to step3 page and validate for DCE homepage flow
+      | Drug | <drug> |
+    And the user returns to the visitor profile page
+    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+      | Drugname | <drug> |
+    And user delets all the added drugs on visitor profile page of AARP site
+
+    Examples: 
+      | state   | userName | password   | drug    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
+      | Alabama | mnrqavd  | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
+
+  @providerFlowAuthenticated
+  Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
+    Given the user is on the AARP medicare site landing page
+    And the user clicks on the shopping cart icon in AARP site
+    Then the user signs in with optum Id credentials in AARP site
+      | User Name | <userName> |
+      | Password  | <password> |
+    And the user clicks on the add plans button in the profile in AARP site
+    When the user enters zipcode on health plans page in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user saves two plans as favorite on AARP site
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    When the user Click on Is my Provider covered link Ulayer
+      | PlanName | <planname> |
+    When user selects a provider and retuns to VPP page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
+    Then Navigate to Visitor Profile page on AARP site
+    Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
+      | PlanName | <planname> |
+    And user delets the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+
+    Examples: 
+      | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |

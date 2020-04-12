@@ -1187,6 +1187,17 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	}
 
+	@And("^user click on Sign In from the Popup on AARP site$")
+	public void user_click_on_Sign_In_On_Popup_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
+	}
+	
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site$")
 	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Home_on_AARP_site(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
