@@ -203,6 +203,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
+    Then Navigate to Visitor Profile page on AARP site
+    And the user clicks on the add plans button in the guest profile in AARP site
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
