@@ -214,7 +214,6 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
     Then Navigate to Visitor Profile page on AARP site
-    Then user click on continue as guest button on AARP site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
 
