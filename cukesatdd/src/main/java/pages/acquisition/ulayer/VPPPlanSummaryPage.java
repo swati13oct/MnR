@@ -2415,7 +2415,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
 			}else {
-			initial_savePlanIconXpath="//a[contains(text(),'\"+plan+\"')]/following::a[contains(@aria-selected,'false')][1]"+savePlanImgXpath;
+			initial_savePlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savePlanImgXpath;
 			}
 			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
 		
@@ -2429,7 +2429,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
 					
 			}else {
-			savedPlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+			savedPlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savedPlanImgXpath;
 			}
 			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
 			List<WebElement>  listOfSavedPlanIcons=driver.findElements(By.xpath(savedPlanIconXpath));
