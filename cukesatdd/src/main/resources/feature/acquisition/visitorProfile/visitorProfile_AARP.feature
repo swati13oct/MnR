@@ -201,6 +201,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
+    Then user gets a create profile prompt on AARP site
+    Then user click on continue as guest button on AARP site
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
     And the user clicks on the add plans button in the guest profile in AARP site
@@ -213,7 +215,6 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | PlanName | <planname> |
     Then Navigate to Visitor Profile page on AARP site
     Then user click on continue as guest button on AARP site
-    
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
 
