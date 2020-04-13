@@ -1,7 +1,7 @@
 @tfn_blayer
 Feature: To test TFN in all flows on UHC site
 
-@Scenario1  @tfn_Direct_Traffic @tfn_uhc 
+@Scenario1  @tfn_Direct_Traffic_old @tfn_uhc 
 Scenario Outline: 1.0 Verify TFN in all VPP Tabs and PDP OLE with Direct Traffic on UHC site
 Given user is on UMS Prod and varify TFN
 	|  URL   	| <url>  |

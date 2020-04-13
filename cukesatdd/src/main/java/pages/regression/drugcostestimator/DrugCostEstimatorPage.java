@@ -305,6 +305,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath="//a[@role='button' and contains(@class,'pharmacy-tab-show')]")
 	public WebElement nextSelectPharmacyBtn;
+	
+	@FindBy(xpath="//*[@id='plan-name-div']/div/div/div/p/a")
+	public WebElement formularypdf;
 
 	@Override
 	public void openAndValidate() {
@@ -1891,6 +1894,26 @@ try {
 			Actions action = new Actions(driver);
 			action.moveToElement(targetElement).build().perform(); 
 		}
+		
+		public boolean isformularyPDF() {
+
+			if(validate(formularypdf)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		public void openFormularyPDF() {
+
+			formularypdf.click();
+			switchToNewTab();
+			if(driver.getCurrentUrl().contains(".pdf")) {
+				System.out.println("The PDF page opened");
+			}
+		
+		}
+		
 	}
 
 
