@@ -331,7 +331,6 @@ public class HSIDLoginPage extends UhcDriver {
 			return new MyDocumentsPage(driver);
 		}
 		if (driver.getCurrentUrl().contains("/claims")) { //note: for deeplink validation
-			System.out.println("OMG - 2");
 			return new ClaimsSummaryPage(driver);
 		}
 

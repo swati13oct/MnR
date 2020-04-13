@@ -1010,7 +1010,6 @@ public class HSIDStepDefinition {
 				Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
 			} else if (deepLinkUrl.contains("member/claims.html")) {
-				System.out.println("OMG - 1");
 				ClaimsSummaryPage claimsSummaryPage=null;
 				claimsSummaryPage =  (ClaimsSummaryPage) loginPage.doLoginWith(userName, pwd);
 				Assert.assertTrue("PROBLEM - Login not successful...", claimsSummaryPage != null);
