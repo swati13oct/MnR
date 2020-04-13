@@ -1464,7 +1464,7 @@ public class TestHarness extends UhcDriver {
 					WebElement targetTab=null;
 					if (planType.equalsIgnoreCase("MAPD"))
 						targetTab=comboTab_MAPD;
-					else if (planType.equalsIgnoreCase("PDP")) 
+					else if (planType.equalsIgnoreCase("PDP") || planType.toUpperCase().startsWith("PDP")) 
 						targetTab=comboTab_PDP;
 					else if (planType.equalsIgnoreCase("SHIP")) 
 						targetTab=comboTab_SHIP;
