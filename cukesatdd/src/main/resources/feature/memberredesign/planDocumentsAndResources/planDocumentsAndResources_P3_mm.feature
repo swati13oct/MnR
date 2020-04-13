@@ -41,7 +41,7 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 06-044 | xxxxx       | MA       | IND_TERM_PDnR         | true  | true  | false | false |
-      | 07-045 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | false | false | false |
+      | 07-045 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | true  | false | false |
       | 08-046 | xxxxx       | MAPD     | IND_TERM_PDnR         | true  | true  | true  | false |
 
 	@active_ma

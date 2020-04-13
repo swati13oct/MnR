@@ -858,7 +858,6 @@ public class HSIDStepDefinition {
 				} else {
 					loginPage = new LoginPage(wd);
 				}
-				
 				if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
 					loginPage.validateFooter();
 					System.out.println("Finished validating sign-in page footer");

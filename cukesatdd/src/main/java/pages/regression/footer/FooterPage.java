@@ -567,6 +567,7 @@ public class FooterPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
 		String expLink="/content/medicare/about/about-us.html";
 		String actLink=testElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 		
@@ -575,6 +576,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/content/medicare/about/privacy-policy.html";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));		
 		
@@ -583,6 +585,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/content/medicare/about/terms-of-use.html";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 
@@ -591,6 +594,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/content/medicare/about/disclaimers.html";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 
@@ -599,6 +603,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/legal/accessibility";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 		
@@ -608,6 +613,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/legal/medicare-plans";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 	
@@ -617,6 +623,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/legal/medicare-plans";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 
@@ -625,6 +632,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/legal/medicare-plans";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 
@@ -633,6 +641,7 @@ public class FooterPage extends UhcDriver {
 		expLink="https://www.medicare.gov/MedicareComplaintForm/home.aspx";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));
 
@@ -641,6 +650,7 @@ public class FooterPage extends UhcDriver {
 		expLink="/content/medicare/about/disaster-declaration.html";
 		actLink=testElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate footer element '"+testLinkName+"' on sign-in page", footerValidate(testElement));
+		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href attribute should not be null", actLink!=null);
 		Assert.assertTrue("PROBLEM - ufooter element '"+testLinkName+"' href does not contain expected href. "
 				+ "Expected to contain '"+expLink+"' | Actual ='"+actLink+"'", actLink.contains(expLink));		
 	
