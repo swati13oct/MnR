@@ -1100,6 +1100,16 @@ public class EOBPage extends EOBBase{
 	public void validateSpendingCostSummaryTab(boolean expectTab) {
 		if (expectTab) {
 			Assert.assertTrue("PROBLEM - input exepct to see 'Spending Cost Summary' on top sub menu for this user but unable to locate the 'Spending Cost Summary' tab on top sub menu", eobValidate(spendingCostSummaryTab_topSubMenu) || eobValidate(spendingCostSummaryTab_topSubMenu2));
+			if (eobValidate(spendingCostSummaryTab_topSubMenu)) { 
+				spendingCostSummaryTab_topSubMenu.click();
+			} else if (eobValidate(spendingCostSummaryTab_topSubMenu2)) {
+				spendingCostSummaryTab_topSubMenu2.click();
+			}
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(2);
+			String expUrl="spending-and-cost-summary";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - Actual landing of Spending Cost Summary page url is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
 		}

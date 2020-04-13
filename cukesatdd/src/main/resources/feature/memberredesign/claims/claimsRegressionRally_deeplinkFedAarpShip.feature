@@ -6,7 +6,21 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of bookmark or deeplink validation for Fed-AARP INDIVIDUAL and Ship
-  @rallyClaims02 @deeplink_fedAarpIndAndShip
+  @rallyClaims02a @deeplink_fedAarpIndAndShip
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
+    Given login with a deeplink in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim System | <claimSystem> |
+      | Deeplink     | https://www.stage-medicare.uhc.com/aarp/member/claims.html |
+    Then user validates landing on Rally Claims Page
+
+    Examples: 
+      | TID   | planType | memberType          | claimSystem     |         
+      | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
+      | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
+
+  @rallyClaims02b @deeplink_fedAarpIndAndShip
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -20,7 +34,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims03 @deeplink_fedAarpIndAndShip
+  @rallyClaims02c @deeplink_fedAarpIndAndShip
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -34,7 +48,23 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims04 @deeplink_fedAarpIndAndShip
+  @rallyClaims02d @deeplink_fedAarpIndAndShip
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark  without hastag to reach Rally Claims page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Claim System | <claimSystem> |
+    Then the user navigates to EOB page
+    Then user invokes bookmark URL
+      | Deeplink     | https://www.stage-medicare.uhc.com/aarp/member/claims.html |
+    Then user validates landing on Rally Claims Page
+
+    Examples: 
+      | TID   | planType | memberType          | claimSystem     |         
+      | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
+      | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
+
+  @rallyClaims02e @deeplink_fedAarpIndAndShip
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -50,7 +80,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims05 @deeplink_fedAarpIndAndShip
+  @rallyClaims02f @deeplink_fedAarpIndAndShip
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
