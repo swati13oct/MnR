@@ -58,7 +58,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And I select the first pharmacy
     And I navigate to step3 page and validate for DCE homepage flow
       | Drug | <drug> |
-    And the user clicks on the shopping cart icon on DCE page
+    And the user clicks on the shopping cart icon on DCE page in AARP
     Then the user should be able to see the Drug and pharmacy information in the guest profile page
       | Drugname | <Drugname> |
 
@@ -110,8 +110,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Test Plans | <testPlans> |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                                   |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP MedicareComplete SecureHorizons Essential (HMO)_Test,AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
+      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
