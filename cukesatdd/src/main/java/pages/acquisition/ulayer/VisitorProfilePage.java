@@ -112,13 +112,21 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 	
+	/**
+	 * Validate the pdf links available
+	 * @param planNames
+	 */
 	public void validateAddedPlansPDFLinks(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		for (String plan: listOfTestPlans) {
 			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
 		}
 	}
-	
+	/**
+	 * Navigate to the plan details page
+	 * @param planName
+	 * @return
+	 */
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
@@ -163,6 +171,11 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertTrue(addrugs.isDisplayed());
 	}
 	
+	/**
+	 * Get the added provider information
+	 * @param planName
+	 * @return
+	 */
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
@@ -183,28 +196,39 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param password
 	 */
 	public void signIn(String username,String password) {
-		signIn.click();
-		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-		driver.findElement(By.cssSelector("input#SignIn")).click();
-		String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-		WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
-		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-			System.out.println("Question is related to friendname");
-			securityAnswer.sendKeys("name1");
-		}
+		try {
+			
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
 
-		else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-			System.out.println("Question is related to color");
-			securityAnswer.sendKeys("color1");
-		} else {
-			System.out.println("Question is related to phone");
-			securityAnswer.sendKeys("number1");
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
 		}
-		driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-		CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+		
 	}
-	
+	/**
+	 * Enroll in a plan 
+	 * @param planName
+	 * @return
+	 */
 	public WelcomePage Enroll_OLE_Plan(String planName) {
 		WebElement enrollForPlan = null;
 		
