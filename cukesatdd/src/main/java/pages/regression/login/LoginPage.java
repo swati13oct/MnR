@@ -246,7 +246,9 @@ public class LoginPage extends UhcDriver {
 						homePageNotice3.click();
 						CommonUtility.checkPageIsReady(driver);
 					}
-					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
+					if (null!=MRScenario.environment 
+							&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
+						//note: sometimes take longer to load page on team env
 						Thread.sleep(4000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
