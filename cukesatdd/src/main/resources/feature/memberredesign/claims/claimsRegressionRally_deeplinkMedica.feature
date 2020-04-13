@@ -6,7 +6,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of bookmark or deeplink validation for MEDICA
-  @rallyClaims03a @deeplink_medica
+  @rallyClaims03a @deeplink_medica @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -19,7 +19,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
-  @rallyClaims03b @deeplink_medica
+  @rallyClaims03b @deeplink_medica @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -32,7 +32,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
-  @rallyClaims03c @deeplink_medica
+  @rallyClaims03c @deeplink_medica @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -45,7 +45,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
-  @rallyClaims03d @deeplink_medica
+  @rallyClaims03d @deeplink_medica @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -60,7 +60,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
-  @rallyClaims03e @deeplink_medica
+  @rallyClaims03e @deeplink_medica @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -75,7 +75,7 @@ Feature: 1.12.3 Member Rally claims deeplink - MEDICA
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MEDICA   | Individual          | COSMOS_CLAIMS   | 
 
-  @rallyClaims03f @deeplink_medica
+  @rallyClaims03f @deeplink_medica @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |

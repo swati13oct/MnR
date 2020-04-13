@@ -6,7 +6,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of bookmark or deeplink validation for RETIREE aka GROUP
-  @rallyClaims05a @deeplink_retireeGrp
+  @rallyClaims05a @deeplink_retireeGrp @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -19,7 +19,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-  @rallyClaims05b @deeplink_retireeGrp
+  @rallyClaims05b @deeplink_retireeGrp @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -32,7 +32,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-  @rallyClaims05c @deeplink_retireeGrp
+  @rallyClaims05c @deeplink_retireeGrp @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -45,7 +45,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-  @rallyClaims05d @deeplink_retireeGrp
+  @rallyClaims05d @deeplink_retireeGrp @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -60,7 +60,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-  @rallyClaims05e @deeplink_retireeGrp
+  @rallyClaims05e @deeplink_retireeGrp @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -75,7 +75,7 @@ Feature: 1.12.1 Member Rally claims deeplink - RETIREE
       | TID   | planType | memberType          | claimSystem     |         
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-  @rallyClaims05f @deeplink_retireeGrp
+  @rallyClaims05f @deeplink_retireeGrp @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |

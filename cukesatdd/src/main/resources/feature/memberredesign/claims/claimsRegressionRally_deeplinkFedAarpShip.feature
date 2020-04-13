@@ -6,7 +6,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of bookmark or deeplink validation for Fed-AARP INDIVIDUAL and Ship
-  @rallyClaims02a @deeplink_fedAarpIndAndShip
+  @rallyClaims02a @deeplink_fedAarpIndAndShip @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark without hastag to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -20,7 +20,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims02b @deeplink_fedAarpIndAndShip
+  @rallyClaims02b @deeplink_fedAarpIndAndShip @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -34,7 +34,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims02c @deeplink_fedAarpIndAndShip
+  @rallyClaims02c @deeplink_fedAarpIndAndShip @preAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PreAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -48,7 +48,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims02d @deeplink_fedAarpIndAndShip
+  @rallyClaims02d @deeplink_fedAarpIndAndShip @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark  without hastag to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -64,7 +64,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims02e @deeplink_fedAarpIndAndShip
+  @rallyClaims02e @deeplink_fedAarpIndAndShip @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims overview page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -80,7 +80,7 @@ Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
       | xxxxx | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
       | xxxxx | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
-  @rallyClaims02f @deeplink_fedAarpIndAndShip
+  @rallyClaims02f @deeplink_fedAarpIndAndShip @postAuth
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - PostAuthorization - To validate using old claims detail page bookmark to reach Rally Claims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
