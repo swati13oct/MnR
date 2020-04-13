@@ -1710,7 +1710,8 @@ public class FormsAndResourcesPage extends UhcDriver {
 
 	public ClaimsSummaryPage clickonClaimsTab() throws InterruptedException {
 		System.out.println("Now clicking on Claims Tab on Forms and Resources Page");
-		driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
+		//driver.findElement(By.xpath("//a[contains(text(),'Claims')]")).click();
+		driver.navigate().to("https://stage-medicare.uhc.com/medicare/member/claims/overview.html");
 		System.out.println("Now waiting for 10 seconds");
 		try {
 			Thread.sleep(10000);

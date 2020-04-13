@@ -169,7 +169,32 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'planmaterials')]//a")
 	protected WebElement viewPlanMaterialsLnk;
-
+	
+	@FindBy(css=".DRUG_PRICING_TILE_Group #pharmacyTileLinkId")
+	protected WebElement LookUpDrugsButton;
+	
+	@FindBy(css=".MEDICINE_CABINET_TILE #pharmacyTileLinkId")
+	protected WebElement orderPrescriptionsButton;
+	
+	@FindBy(css=".ORDER_STATUS_TILE #pharmacyTileLinkId")
+	protected WebElement checkDelieryStatusButton;
+	
+	@FindBy(css=".BENEFITS_INFORMATION #pharmacyTileLinkId")
+	protected WebElement drugCostSummaryButton;
+	
+	@FindBy(id ="page_title")
+	protected WebElement BenefitsInformationHeaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement searchForADrugHeaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement welcometextinheaderOptumRx;
+	
+	@FindBy(id ="page_title")
+	protected WebElement orderStatusTextInHeaderOptumRx;
+	
+	
 	public PharmaciesAndPrescriptionsWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
