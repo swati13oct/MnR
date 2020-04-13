@@ -138,3 +138,43 @@ Feature: 1.13 Member SSO functionality for SSO groups
     Examples: 
       | TID   | planType | memberType | copayCategory | zipCode | Test Scenario         |
       | XXXXX | MAPD     | myhce      | NON LIS       |   30736 | TC_SHBP_Georgia_myHCE |
+
+  @regressionMember
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Benefits and Coverage Page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    And user clicks on benefits and coverage tab on home page or test harness page
+    And user scrolls down to OptumRx SSO link to perform outbound OptumRx SSO
+      | OptumRx SSO Link | <optumrxssolink> |
+    And user clicks on OptumRx SSO link and lands on OptumRx SSO Page in new window
+      | OptumRx SSO Link | <optumrxssolink> |
+
+    Examples: 
+      | TID   | planType | memberType | copayCategory | Test Scenario   | optumrxssolink                                                  |
+      | TC001 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM |
+      | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               |
+      | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        |
+
+  @regressionMember
+  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+      | Expect Link | <expectLink> |
+    And user scrolls down to OptumRx SSO link on Pharmacies and Prescriptions Page to perform outbound OptumRx SSO
+      | OptumRx SSO Link | <optumrxssolink> |
+    And user clicks on OptumRx SSO link on Pharmacies and Prescriptions Page and lands on OptumRx SSO Page in new window
+      | OptumRx SSO Link | <optumrxssolink> |
+
+    Examples: 
+      | TID   | planType | memberType | copayCategory | Test Scenario   | optumrxssolink           | expectLink |
+      | TC004 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        | yes        |
+      | TC005 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton | yes        |
+      | TC006 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton | yes        |
+      | TC007 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    | yes        |

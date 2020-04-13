@@ -32,8 +32,10 @@ import pages.regression.testharness.TestHarness;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.GlobalTearDown;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -301,7 +303,55 @@ public void the_user_is_on_testharnessPage(DataTable givenAttributes) throws Int
  	testHarnessPage.checkuserlandsonhceestimatorpage();	
  	getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);
 }
+
+ @Then("^user scrolls down to OptumRx SSO link to perform outbound OptumRx SSO$")
+ public void userScrollstoOptumRxSSOLink (DataTable givenAttributes) throws InterruptedException {
+ 	
+	 BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	
+	 List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String optumrxssolink = memberAttributesMap.get("OptumRx SSO Link");
+		System.out.println("Optum Rx SSO Link being tested in this test case is "+optumrxssolink);
+ 	
+		
+ 	benefitsCoveragePage.scrollToOptumRxSSOLink(optumrxssolink);
+ 	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+ 		
+ 		
+ 		
+ }
  
+ @Then("^user clicks on OptumRx SSO link and lands on OptumRx SSO Page in new window$")
+ public void clicksToOptumRxSSOLink(DataTable givenAttributes) throws InterruptedException {
+ 	
+	 BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+	 
+	 List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String optumrxssolink = memberAttributesMap.get("OptumRx SSO Link");
+		System.out.println("Optum Rx SSO Link being tested in this test case is "+optumrxssolink);
+ 		
+ 	benefitsCoveragePage.clicksToOptumRxSSOLink(optumrxssolink);
+ 	getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+ 		
+}
  
 }
  
