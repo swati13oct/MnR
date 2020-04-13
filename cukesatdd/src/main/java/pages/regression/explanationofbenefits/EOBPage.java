@@ -1110,6 +1110,7 @@ public class EOBPage extends EOBBase{
 			String expUrl="spending-and-cost-summary";
 			String actUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROBLEM - Actual landing of Spending Cost Summary page url is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			Assert.assertTrue("PROBLEM - unable to locate the header for Spending Cost Summary page. Please check if page content is loading properly", eobValidate(spendingCostSummaryPgHeader));
 		} else {
 			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
 		}
