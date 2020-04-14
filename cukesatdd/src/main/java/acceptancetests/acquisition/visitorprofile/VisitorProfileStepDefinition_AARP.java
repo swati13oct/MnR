@@ -239,12 +239,14 @@ public class VisitorProfileStepDefinition_AARP {
 	
 	@And("^user switch back to Vp Testharness Page on AARP site$")
 	public void user_switch_back_to_Vp_Testharness_Page_on_AARP_site() {
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfilePage.switchBackToVPTestharness();
 	}
-	
+
 	@And("^user Enters Plan id and click on delete plan to Delete plan in Visitor Profile on AARP site$")
-	public void user_EntersPlanidandclickondeleteplantoDeleteplaninVisitorProfile_on_AARP_site(DataTable givenAttributes) {
+	public void user_EntersPlanidandclickondeleteplantoDeleteplaninVisitorProfile_on_AARP_site(
+			DataTable givenAttributes) {
 		List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {

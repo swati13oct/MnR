@@ -183,4 +183,66 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public VisitorProfilePage NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink() {
+		validateNew(HelperModeCheckboxAddDrugs);
+		jsClickNew(HelperModeCheckboxAddDrugs);
+		validateNew(LaunchVPwithDrugandPharmacyInfo);
+		switchToNewTabNew(LaunchVPwithDrugandPharmacyInfo);
+		System.out.println("Clicked on LaunchVPwithDrugandPharmacyInfoLink");
+
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public VisitorProfilePage NavigateToVP_from_LaunchVPwithProvidersLink() {
+		validateNew(HelperModeCheckboxLaunchVp);
+		jsClickNew(HelperModeCheckboxLaunchVp);
+		validateNew(LaunchVPwithProvidersdata);
+		switchToNewTabNew(LaunchVPwithProvidersdata);
+		System.out.println("Clicked on LaunchVPwithProvidersdataLink");		
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public VisitorProfilePage NavigateToPlanCompareFromVpTest(String PlanIds) {
+		validateNew(PlanIdInput);
+		sendkeys(PlanIdInput, PlanIds);
+		System.out.println("Selected plans for Plan Comapre : " + PlanIds);
+		jsClickNew(ComparePlansLink);
+		System.out.println("Clicked on ComparePlansLink");
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public VisitorProfilePage NavigateToPlanDetailsFromVpTest(String CNum,String Pnum,String Snum,String CC,String Prod,String year) {
+		validateNew(ContractNum);
+		sendkeys(ContractNum, CNum);
+		sendkeys(PbPNum, Pnum);
+		sendkeys(SegmentID, Snum);
+		sendkeys(CountyCode, CC);
+		sendkeys(Product, Prod);
+		sendkeys(PlanYear, year);
+		System.out.println("Entered all plans details info for Plan Details ");
+		jsClickNew(PlanDetailsLink);
+		System.out.println("Clicked on PlanDetailsLink");
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

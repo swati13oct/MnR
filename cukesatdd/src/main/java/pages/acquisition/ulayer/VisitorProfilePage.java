@@ -98,9 +98,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
 		expandDrugBlock.click();
-		
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
 		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
 	}
 	
 	public void validateAddedPlans(String planNames) {
@@ -286,5 +286,15 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 
+	}
+	
+	public void validatePlansAddedonPlancompare() {
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		int plansForCompare = allMAPlans.size();
+		if (plansForCompare == 2) {
+			Assert.assertTrue(true);
+			System.out.println("Verified Three plans Added on plan compare");
+		} else
+			Assert.assertTrue(false);
 	}
 }

@@ -2784,6 +2784,73 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
+	@And("^user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on AARP site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithDrugsandPharmacyinVisitorProfile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+	}
+
+	@And("^user selects helper mode for Launch Visitor Profile with Providers in Visitor Profile on AARP site$")
+	public void user_selects_helper_mode_for_LaunchVisitorProfilewithProvidersinVisitorProfile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_LaunchVPwithProvidersLink();
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+	}
+
+	@And("^user selects plan to compare from visitor Profile on AARP site$")
+	public void user_selectsplantoComparefromVisitorProfile_on_AARP(DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Plancompare = inputAttributesMap.get("Plan compare");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Plancompare);
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+	}
+
+	@Then("^verify plans added in plan compare on visitor Profile for AARP$")
+	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forAARP() throws Throwable {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validatePlansAddedonPlancompare();
+	}
+
+	@And("^user Enters plan info to land on plan details from visitor Profile on AARP site$")
+	public void user_EntersplaninfotolandonplandetailsfromvisitorProfileonAARPsite(DataTable inputAttributes)
+			throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String ContractNo = inputAttributesMap.get("Contract Number");
+		String PbpNo = inputAttributesMap.get("PBP Number");
+		String SegId = inputAttributesMap.get("Segment ID");
+		String CountyCD = inputAttributesMap.get("County code");
+		String product = inputAttributesMap.get("Product");
+		String year = inputAttributesMap.get("Plan Year");
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(ContractNo, PbpNo,
+				SegId, CountyCD, product, year);
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+	}
+	
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 
