@@ -234,7 +234,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
+					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-h")||(MRScenario.environment.contains("team-a")))) { //note: sometimes take longer to load page on this team env
 						if (validate(homePageNotice,0)) {
 							homePageNotice.click();
 							CommonUtility.checkPageIsReady(driver);
