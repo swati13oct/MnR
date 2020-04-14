@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -55,6 +57,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
+	
+	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
+	private WebElement enrollInPlan;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -242,5 +247,21 @@ public class VisitorProfilePage extends UhcDriver {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public boolean validateEnrollInPlanIsClickable() {
+		boolean enrollInNotPossible = false;
+		try
+	    {
+	        WebDriverWait wait = new WebDriverWait(driver, 5);
+	        wait.until(ExpectedConditions.elementToBeClickable(enrollInPlan));
+	        enrollInNotPossible = true;
+	        return enrollInNotPossible;
+	    }
+	    catch (Exception e)
+	    {
+	    	e.printStackTrace();
+	        return enrollInNotPossible;
+	    }		
 	}
 }

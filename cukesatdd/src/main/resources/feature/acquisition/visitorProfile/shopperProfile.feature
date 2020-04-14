@@ -131,11 +131,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
-    And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
-      | Plan Name | <planName> |
-      | Plan Type | <plantype> |
-    Then the user validates the Plan details on OLE
-    And next button should not be clickable on OLE welcome page in Agent mode
+    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
 
     Examples: 
       | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |

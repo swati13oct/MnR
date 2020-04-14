@@ -2264,12 +2264,6 @@ public class oleStepDefinition {
  		}
  
  	}
-	
-	@And("^next button should not be clickable on OLE welcome page in Agent mode$")
-	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		Assert.assertTrue(welcomePage.validateNextButtonIsClickable());
-	}
 } 
 
 
