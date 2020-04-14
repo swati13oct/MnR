@@ -3372,7 +3372,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		 * @param planName
 		 */
 		public void validateAgentModeBanners(String planName) {
-			validatePlanSummary();
+			//validatePlanSummary();
 			System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 			Assert.assertEquals("You are in Agent mode", agentModeBanner.getText().trim());
 			Assert.assertEquals(planName, enrolledPlansBanner.getText().trim());

@@ -2,6 +2,9 @@ package pages.acquisition.shopperprofile;
 
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -36,6 +39,7 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(xpath="//table//button")
 	private WebElement btnCloakIn;
 
+	public static final String DELETE_PROFILE_URL = "http://digital-checkout-team-e.ocp-elr-core-nonprod.optum.com/digital-checkout/guest/profile";
 	
 	
 	public ProfileSearch(WebDriver driver) {
@@ -106,4 +110,52 @@ public class ProfileSearch extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public void deleteAProfile(String email, String dob, String MBI) {
+		try {
+			
+			HttpClient httpClient = HttpClients.createDefault();
+			
+			HttpDelete req = new HttpDelete(DELETE_PROFILE_URL);
+			
+			req.setHeader("Accept", "application/json");
+			req.setHeader("Content-type", "application/json");
+			String inputJson = "{\n" +
+					"  \"email\": \""+email+"\",\n" +
+					"  \"dob\": \""+dob+"\",\n" +
+					"  \"mbi\": \""+MBI+"\"\n" +
+					"}";
+			 /*StringEntity input = new StringEntity(PARAMS, ContentType.APPLICATION_JSON);
+		        httpDelete.addHeader("header", header);
+		        httpDelete.setEntity(input); */ 
+			
+			//req.setEntity(stringEntity);
+			
+			System.out.println(inputJson);
+			
+			System.out.println("####Response Code = "+httpClient.execute(req).getStatusLine().getStatusCode());
+			
+			
+			/*URL url = new URL(DELETE_PROFILE_URL);
+			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+			httpCon.setDoOutput(true);
+			httpCon.setRequestProperty(
+			                "Content-Type", "application/json");
+			httpCon.setRequestMethod("DELETE");
+			OutputStreamWriter out = new OutputStreamWriter(
+			                httpCon.getOutputStream());
+			ObjectMapper objectMapper = new ObjectMapper();
+			out.write(objectMapper.writeValueAsString(stringEntity));
+			out.close();
+			httpCon.connect();*/
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	
+	
+	
+	
 }

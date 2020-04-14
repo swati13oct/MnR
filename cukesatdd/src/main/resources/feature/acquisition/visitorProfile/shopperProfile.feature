@@ -117,8 +117,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
       | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
-	@searchProfileAndEnroll
-  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow which shouldn't be done
+  @searchProfileAndEnroll
+  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -130,11 +130,27 @@ Feature: 1.08. ACQ- Shopper Profile
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
+    Then Navigate to Visitor Profile page on AARP site
     And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
       | Plan Name | <planName> |
       | Plan Type | <plantype> |
     Then the user validates the Plan details on OLE
-		And next button should not be clickable on OLE welcome page in Agent mode
+    And next button should not be clickable on OLE welcome page in Agent mode
+
     Examples: 
-      | zipcode | isMultiCounty | county          | testPlans                                                                                            | plantype |    |
-      |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) |          | MA |
+      | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+
+  #@createProfile
+  #Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
+    #Given I am an agent logged into the cloak in tool
+      #| User Name | <username> |
+      #| Password  | <password> |
+    #Then I ask the shopper calling in to provide me with the Email Address and Search
+      #| Email | <email> |
+      #| DOB   | <dob>   |
+      #| MBI   | <mbi>   |
+#
+    #Examples: 
+      #| username  | password  | email                    | dob        | mbi           |
+      #| qavgogine | qavgogine | Q2_JUN_UHC0044@GMAIL.COM | 08/22/1992 | 3WA7-V41-NM78 |
