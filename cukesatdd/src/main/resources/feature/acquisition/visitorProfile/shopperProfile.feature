@@ -114,7 +114,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | PlanName | <planname> |
 
     Examples: 
-      | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
+      | username  | password  | email                  | plantype | planname                                             | testPlans                                                                                               |
       | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileAndEnroll
