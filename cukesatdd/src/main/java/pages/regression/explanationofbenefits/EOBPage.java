@@ -28,6 +28,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class EOBPage extends EOBBase{
 
@@ -1122,11 +1123,16 @@ public class EOBPage extends EOBBase{
 		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
 	}
 	
-	public void clickMyClaimsTopSubMenu() {
+	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
 		if(eobValidate(myClaimsSubTopMenu)) {
 			myClaimsSubTopMenu.click();
 			CommonUtility.checkPageIsReady(driver);
+			String expUrl="claim";
+			String actUrl=driver.getCurrentUrl();
+			if (actUrl.contains(expUrl)) 
+				return new ClaimsSummaryPage(driver);
 		}
+		return null;
 	}
 }
 

@@ -18,6 +18,7 @@ import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
@@ -504,7 +505,10 @@ public class EobStepDefinition {
 			return;
 		}
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.clickMyClaimsTopSubMenu();
+		ClaimsSummaryPage claimsSummaryPage=eobPage.clickMyClaimsTopSubMenu();
+		Assert.assertTrue("PROBLEM - unable to navigate to MyClaims page from EOB page using top sub menu MyClaims", claimsSummaryPage!=null);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+
 	}
 
 	//--------------------------------------------------------------
