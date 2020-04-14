@@ -100,7 +100,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
     Then I land on the plan summary page of VPP
-      | Plan Name | <planName> |
+      | Plan Name | <planname> |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
