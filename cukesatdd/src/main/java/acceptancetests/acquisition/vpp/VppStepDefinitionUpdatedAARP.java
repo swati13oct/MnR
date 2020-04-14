@@ -34,6 +34,7 @@ import pages.acquisition.ulayer.RequestMailedInformation;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 
 /**
@@ -2740,6 +2741,47 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	@Given("^the user is on VistorProfile TestHarness page for AARP$")
+	public void validateUserIsOnAARP_VPTestharnessPage_for_AARP(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage.GetVisitorProfileTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE,vpTestHarnessPage);
+	}
+	
+	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on AARP$")
+	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP() throws Exception {
+		
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinGuestprofileLink();
+		
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+	}
+	
+	@And("^user Enters Fields and selects helper mode for Save plans in Authenticated profile to VP with plans data on AARP$")
+	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP(DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String uuid = inputAttributesMap.get("UUID");
+		String isguest = inputAttributesMap.get("IsGuest");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid,isguest);
+		
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
 	}
 	
 	//--------------------------------------------

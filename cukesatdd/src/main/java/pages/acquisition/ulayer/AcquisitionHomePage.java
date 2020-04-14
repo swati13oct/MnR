@@ -1716,6 +1716,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
+			return new VisitorProfileTestHarnessPage(driver);
+		}
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");

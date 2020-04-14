@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
@@ -61,6 +62,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
 	private WebElement enrollInPlan;
 	
+	@FindBy(id = "header-number")
+	private WebElement shoppingCartNumber;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -105,6 +109,7 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::div[@class='provider-list'][1]/a")).isDisplayed());
+			System.out.println("Verified plans are added on vistior profile page");
 		}
 	}
 	
@@ -263,5 +268,23 @@ public class VisitorProfilePage extends UhcDriver {
 	    	e.printStackTrace();
 	        return enrollInNotPossible;
 	    }		
+	}
+	
+	public void validatePlanCountOnCartIcon(String plancount) {
+		Assert.assertEquals(plancount, shoppingCartNumber.getText());
+		System.out.println("count mapped on Shopping cart icon with : " + plancount);
+
+	}
+
+	public VPPTestHarnessPage switchBackToVPTestharness() {
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		System.out.println("Switching back to MainWindow");
+		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
+			System.out.println("visitorprofiletestharness Page is Displayed");
+			return new VPPTestHarnessPage(driver);
+		}
+		return null;
+
 	}
 }

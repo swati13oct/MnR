@@ -19,6 +19,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -220,6 +221,42 @@ public class VisitorProfileStepDefinition_AARP {
 	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assert.assertTrue(visitorProfile.validateEnrollInPlanIsClickable());
+	}
+	
+	@And("^user verifies plan count on shopping cart Icon on AARP site$")
+	public void user_validates_plan_count_on_shopping_cart_Icon_on_AARP_site(DataTable givenAttributes) {
+		List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planCount = plannameAttributesMap.get("Plans Count");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validatePlanCountOnCartIcon(planCount);
+	}
+	
+	@And("^user switch back to Vp Testharness Page on AARP site$")
+	public void user_switch_back_to_Vp_Testharness_Page_on_AARP_site() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.switchBackToVPTestharness();
+	}
+	
+	@And("^user Enters Plan id and click on delete plan to Delete plan in Visitor Profile on AARP site$")
+	public void user_EntersPlanidandclickondeleteplantoDeleteplaninVisitorProfile_on_AARP_site(DataTable givenAttributes) {
+		List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planID = plannameAttributesMap.get("Plan ID");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteplaninVisitorProfile(planID);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 } 
 

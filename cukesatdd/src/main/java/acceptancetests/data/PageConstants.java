@@ -432,6 +432,7 @@ public static final String PORTFOLIO_PAGE_UHC = "ourPlans";
 	   public static final String ADD_DRUG_DETAILS = "addDrugDetails";
 	   public static final String DCE_TESTHARNESS_PAGE = "dceTestHarnessPage";
 	   public static final String VPP_TESTHARNESS_PAGE = "vppTestHarnessPage";
+	   public static final String VP_TESTHARNESS_PAGE = "vpTestHarnessPage";
 	   
 	   public static final String BENEFITS_SUMMARY_PAGE = "benefitsSummaryPage";
 	   public static final String SAVING_OPPORTUNITY = "savingopportunity";
