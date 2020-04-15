@@ -212,6 +212,12 @@ public class EOBBase extends EOBWebElements{
 			if (planType.toLowerCase().contains("mapd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MAPD", eobValidate(comboTab_MAPD));
 				comboTab_MAPD.click();
+			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", eobValidate(comboTab_MA));
+				comboTab_MA.click();
+			} else if (planType.toLowerCase().contains("ship_hip")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", eobValidate(comboTab_SHIP_HIP));
+				comboTab_SHIP_HIP.click();
 			} else if (planType.toLowerCase().contains("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", eobValidate(comboTab_SHIP));
 				comboTab_SHIP.click();
@@ -373,10 +379,13 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
 				if (lookForPlanCategory.equals(actualPlanCategory)) {
 					actualMemberId = (String) planProfilesObj.get("memberNumber");
-				}
+					Assert.assertTrue("PROBLEM - unable to locate memberNumber from localStorage.consumerDetails, "
+							+ "please check to see if getConsumerInfo API response contains non-null memberNumber, consumerDetails="+consumerDetails, 
+							actualMemberId!=null);
+				} 
 			}			
-			Assert.assertTrue("PROBLEM - unable to locate actualMemberId from localStorage.consumerDetails, "
-					+ "please double check input data planType matches user's actual planType, consumerDetails="+consumerDetails, 
+			Assert.assertTrue("PROBLEM - unable to locate the expected planType from localStorage.consumerDetails, "
+					+ "please check to see if feature file input parameter planType contains the actual planType that is in getConsumerInfo API, consumerDetails="+consumerDetails, 
 					actualMemberId!=null);
 			
 

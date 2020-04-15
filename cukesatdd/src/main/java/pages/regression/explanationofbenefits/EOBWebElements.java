@@ -278,14 +278,20 @@ public class EOBWebElements extends UhcDriver{
 
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[not(contains(text(),'Supplement')) and not(contains(text(),'Prescription')) and contains(text(),'Medicare')]") 
+	protected WebElement comboTab_MA;
 	
-	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and contains(text(),'Medicare')]") 
 	protected WebElement comboTab_MAPD;
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Supplement')]") 
 	protected WebElement comboTab_SHIP;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Hospital Indemnity')]") 
+	protected WebElement comboTab_SHIP_HIP;
+
+	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Prescription') and not(contains(text(),'Medicare'))]") 
 	protected WebElement comboTab_PDP;
 
 	@FindBy(xpath="//div[contains(@class,'tabs')]//a[contains(text(),'Senior Supplement Plan')]") 
@@ -315,6 +321,18 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//*[contatins(text(),'We are currently experiencing an internal server problem')]")
 	protected WebElement internalServerError;
+	
+	@FindBy(xpath="//nav[@id='sub-nav']//a[contains(@href,'spending-and-cost-summary')]")
+	protected WebElement spendingCostSummaryTab_topSubMenu;
+	
+	@FindBy(xpath="//div[contains(@class,'dropdown-menu')]//a[contains(@href,'spending-and-cost-summary')]")
+	protected WebElement spendingCostSummaryTab_topSubMenu2;
+	
+	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(text(),'My Claims')]")
+	protected WebElement myClaimsSubTopMenu;
+	
+	@FindBy(xpath="//h2[contains(text(),'Spending')]")
+	protected WebElement spendingCostSummaryPgHeader;
 	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
