@@ -272,7 +272,7 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'chatwithus')]//img")
 	protected WebElement needHelp_Chat_img;
 
-	@FindBy(xpath="//div[contains(@class,'chatwithus')]//h3//text()[contains(translate(., 'Chat', 'chat'), 'chat')]")
+	@FindBy(xpath="//div[contains(@class,'chatwithus')]//h3[contains(text(),'Chat with Us') or contains(text(),'Chat With Us')]")
 	protected WebElement needHelp_Chat_header;
 
 	@FindBy(xpath="//div[contains(@class,'chatwithus')]//div[contains(@class,'omniChat')]")
