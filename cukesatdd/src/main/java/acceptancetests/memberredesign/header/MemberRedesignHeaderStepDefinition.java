@@ -209,6 +209,10 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@Then("^I should be able to see and use the Claims tab Header$")
 	public void I_should_be_able_to_see_and_use_the_Claims_tab() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
 		// Express the Regexp above with the code you wish you had
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -232,6 +236,10 @@ public class MemberRedesignHeaderStepDefinition {
 	 */
 	@Then("^clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header$")
 	public void clicking_on_the_Claims_tab_should_allow_me_to_see_links_for_the_Claims_Summary_tab_and_Explanation_of_Benefits_tab_on_the_second_level_navigation() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
 		// Express the Regexp above with the code you wish you had
 		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario().getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
 		claimsSummaryPage.validateSubTabs();

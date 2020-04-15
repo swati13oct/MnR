@@ -29,7 +29,8 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
 	Then user validate Renew Magazine section
 	  | Section Display                    | <rm_sd>  | 
 	Then user validate Adobe section
-	Then user validate Need Help section
+    #note: moved to footer feature
+	#Then user validate Need Help section
 
 	@preeffective_ma_mapd
 	Examples: 

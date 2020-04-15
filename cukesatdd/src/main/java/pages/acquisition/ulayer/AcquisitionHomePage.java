@@ -2091,6 +2091,40 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return null;
 		}
 		
+		public AcquisitionHomePage validateChatSamAcq() throws InterruptedException {
+	        boolean present;
+	        try {
+	        validateNew(chatsam);
+	        present = true;
+	        } catch (NoSuchElementException e) {
+	        present = false;
+	        }
+	        if (present) {
+	          System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+	        }
+	        else
+	        	System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+	       return null;
+		}
+		
+		public AcquisitionHomePage validateChatSamContentAcq() throws InterruptedException {
+			
+			Actions action = new Actions(driver);
+			WebElement element = chatsam;
+			action.moveToElement(element).perform();
+			String ChattoolTipText = chatsamtooltip.getText();
+			System.out.println("====================================================================");
+			System.out.println(ChattoolTipText);
+			System.out.println("====================================================================");
+			
+	        if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+	          System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+	        }
+	        else
+	        	System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	       return null;
+		}
+		
 	public AcquisitionHomePage  navigateToPage(String page) {
 		String pageURL = driver.getCurrentUrl()+page;
 		System.out.println("==pageURL=="+pageURL);

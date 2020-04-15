@@ -215,9 +215,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				if (expUrl.contains("sso")) {
 					if (!runOnTeamEnv) {
 					String expUrlAlternative="https://hsid11-st1.optum.com/register/personalInfo";
+					String expUrlAlternative2="https://chp-stage.optumrx.com/secure/my-medicine-cabinet";
 					Assert.assertTrue("PROBLEM - '"+tile+"' tile link destination URL is not as expected. "
-							+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' | Actual URL='"+actUrl+"'", 
-							actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative));
+							+ "Expect to contain '"+expUrl+"' or '"+expUrlAlternative+"' or '"+expUrlAlternative2+" | Actual URL='"+actUrl+"'", 
+							actUrl.contains(expUrl) || actUrl.contains(expUrlAlternative) || actUrl.contains(expUrlAlternative2));
 					} else {
 						System.out.println("Test run on team env, sso is not supported, skip expected URL validation");
 					}

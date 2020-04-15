@@ -373,8 +373,8 @@ public class GlobalComponentsStepDefinitionAARP {
 	public void the_user_validates_SAM_re_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.validateChatSamContent();
+		aquisitionhomepage.validateChatSamAcq();
+		aquisitionhomepage.validateChatSamContentAcq();
 		aquisitionhomepage.validateChatpopup();	
 		
 	}
