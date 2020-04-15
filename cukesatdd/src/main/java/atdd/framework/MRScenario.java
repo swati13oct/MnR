@@ -1161,15 +1161,6 @@ try {
 			findDeviceName = "iPhone X";
 		if (deviceName.contains("IPHONE8") || deviceName.contains("IPHONE 8"))
 			findDeviceName = "iPhone 8";
-		if (deviceName.contains("IPHONE7+") || deviceName.contains("IPHONE 7 PLUS") || deviceName.contains("IPHONE 7+")
-				|| deviceName.contains("IPHONE 7PLUS"))
-			findDeviceName = "iPhone 7 Plus";
-		if (deviceName.contains("IPAD AIR 1") || deviceName.equals("IPAD AIR") || deviceName.equals("IPAD")
-				|| deviceName.contains("IPAD AIR1") || deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
-			findDeviceName = "iPad Air";
-		if (deviceName.contains("IPAD AIR 2") || deviceName.contains("IPAD AIR2") || deviceName.contains("IPAD AIR1")
-				|| deviceName.contains("IPAD1") || deviceName.contains("IPAD 1"))
-			findDeviceName = "iPad Air 2";
 		if (deviceName.contains("S9") || deviceName.equals("SAMSUNG") || deviceName.contains("GALAXY"))
 			findDeviceName = "Samsung Galaxy S9";
 		if (deviceName.contains("S8+") || deviceName.contains("S8 +") || deviceName.contains("S8PLUS")
@@ -1187,15 +1178,7 @@ try {
 		} else {
 			mobileOSName = "iOS";
 			capabilities.setCapability("phoneOnly", "true");
-			capabilities.setCapability("platformVersion", "12");
-
-			if (findDeviceName.toUpperCase().contains("IPAD")) {
-				capabilities.setCapability("tabletOnly", "true");
-				capabilities.setCapability("phoneOnly", "false");
-			}
-			if (findDeviceName.toUpperCase().equals("IPAD AIR")) {
-				capabilities.setCapability("platformVersion", "11");
-			}
+			capabilities.setCapability("platformVersion", "13");
 		}
 		capabilities.setCapability("platformName", mobileOSName);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));

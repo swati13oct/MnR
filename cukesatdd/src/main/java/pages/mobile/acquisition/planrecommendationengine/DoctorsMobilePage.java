@@ -224,7 +224,7 @@ public class DoctorsMobilePage extends UhcDriver {
 			confirmationResults = new ArrayList<String>();
 			for (int i = 0; i < count; i++)
 				confirmationResults.add(
-						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().trim());
+						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content")).getText().replace("\n", " ").trim());
 			Collections.sort(confirmationResults);
 			System.out.println(confirmationResults);
 		} else {

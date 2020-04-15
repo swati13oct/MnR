@@ -91,7 +91,8 @@ public class WerallyMobilePage extends UhcDriver {
 			if (actualResultscount >= count) {
 				for (int i = count-1; i >= 0; i--) {
 					threadsleep(1000);
-					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+					doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim()+" "
+					+searchResults.get(i).findElement(By.cssSelector("div[class='section']")).getText().trim());
 					WebElement save = searchResults.get(i).findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
 					save.click();
 					threadsleep(1000);

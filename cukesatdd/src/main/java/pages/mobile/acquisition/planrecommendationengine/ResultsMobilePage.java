@@ -63,7 +63,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#msVppDOB")
 	private WebElement MSPlanDOB;
 
-	@FindBy(css = "label[for='Gender_1']")
+	@FindBy(xpath = "//form/div/div[@class='inputcomponent section'][3]//label[contains(text(),'Male')]")
 	private WebElement MSPlanGender;
 
 	@FindBy(css = "#mpaed-month")
@@ -136,6 +136,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
 		validate(planZipInfo, 60);
+		threadsleep(8000);// Plan loader
 		Assert.assertTrue(planZipInfo.getText().contains(zip));
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()));
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
@@ -212,7 +213,7 @@ public class ResultsMobilePage extends UhcDriver {
 		if (R2.isEmpty() || R2 == "")
 			Assert.assertTrue(R2Count == 0, "#2Recommendation presents");
 		else
-			Assert.assertTrue(R2Count == 1, "#2Recommendation presents more than once");
+			Assert.assertTrue(R2Count == 1, "#2Recommendation presents more than once or not available");
 	}
 
 	public void validateRecommendationPlan(String R1, String plan) {
@@ -247,12 +248,15 @@ public class ResultsMobilePage extends UhcDriver {
 			validate(SNP1stPlanName, 60);
 			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 					"SNP Invalid Plan Ranking");
-			// mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
-			clickEnrollmobile(SNP1stPlanEnroll);
+			//System.out.println("Ranking Plan Name : "+SNP1stPlanName.getText());
+			//mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
+			if(plan.contains("D-SNP"))
+				clickEnrollmobile(SNP1stPlanEnroll);
 		}
 		threadsleep(5000);
 		pageloadcomplete();
-		Assert.assertTrue(currentPageUrl != driver.getCurrentUrl(), "Enroll Plan URL is not working");
+		if(plan.equals("I-SNP")==false || plan.equals("C-SNP")==false)
+			Assert.assertTrue(currentPageUrl != driver.getCurrentUrl(), "Enroll Plan URL is not working");
 	}
 
 	// Filling MS form with default value
@@ -260,6 +264,8 @@ public class ResultsMobilePage extends UhcDriver {
 		// Zip value is pre-populated by default
 		mobileactionsendkeys(MSPlanDOB, "01/01/1940");
 		hidekeypad();
+		mobileUtils.mobileLocateElementClick(MSPlanGender);
+		threadsleep(8000);
 		mobileUtils.mobileLocateElementClick(MSPlanGender);
 		Select temp = new Select(MSPlanPartAMonth);
 		mobileSelectOption(temp, "January 1");
@@ -284,7 +290,7 @@ public class ResultsMobilePage extends UhcDriver {
 				click = true;
 				break;
 			} catch (Exception e) {
-				mobileswipeHorizantal("40%", 1, false);
+				mobileswipeHorizantal("45%", 1, false);
 			}
 		}
 		Assert.assertTrue(click, "Unable to click the Enroll button");
