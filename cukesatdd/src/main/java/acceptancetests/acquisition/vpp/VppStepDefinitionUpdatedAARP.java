@@ -2870,13 +2870,34 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 
 	@And("^user selects helper mode for Launch OLE for Guest profile on AARP$")
-	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_AARP() throws Exception {
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_AARP(DataTable givenAttributes) throws Exception {
 
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		String PlanName = memberAttributesMap.get("Plan Name");
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanType = memberAttributesMap.get("Plan Type");
+		
+		
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		WelcomePage welcomeOLEPage = vpTestHarnessPage.NavigateToOLEfromVP();
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		WelcomePage welcomePage = vpTestHarnessPage.NavigateToOLEfromVP();
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 		} else {
 			Assert.fail("Error Loading OLE Welcome page");
 		}
