@@ -2903,6 +2903,35 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
+	@And("^user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site$")
+	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteDrugAndPharamacy();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
+	
+	@And("^user selects Delete Provider on the Authenticated profile on AARP site$")
+	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
+			throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteProvider();
+
+		if (visitorProfilePage != null) {
+			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
+		}
+	}
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
 	/* tbd 

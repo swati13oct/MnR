@@ -132,6 +132,14 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
+	
+	@FindBy(id = "helperModeCheckboxDeleteDrugsandPharmacy")
+	private WebElement HelperModeCheckboxDeleteDrugsandPharmacy;
+	
+	@FindBy(xpath = " //*[text()='Delete drugs and Pharmacy Info']")
+	private WebElement DeletedrugsandPharmacyInfo;
+	
+	
 
 	public VisitorProfileTestHarnessPage(WebDriver driver) {
 		super(driver);
@@ -279,4 +287,38 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public VisitorProfilePage DeleteDrugAndPharamacy() {
+		validateNew(HelperModeCheckboxDeleteDrugsandPharmacy);
+		jsClickNew(HelperModeCheckboxDeleteDrugsandPharmacy);
+		validateNew(DeletedrugsandPharmacyInfo);
+		switchToNewTabNew(DeletedrugsandPharmacyInfo);
+		System.out.println("Clicked on LaunchVPwithDrugandPharmacyInfoLink");
+
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	
+	
+	public VisitorProfilePage DeleteProvider() {
+		validateNew(HelperModeCheckboxDeleteProviderinVP);
+		jsClickNew(HelperModeCheckboxDeleteProviderinVP);
+		validateNew(DeleteproviderinVPpage);
+		switchToNewTabNew(DeleteproviderinVPpage);
+		System.out.println("Clicked on LaunchVPwithDrugandPharmacyInfoLink");
+
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	
 }

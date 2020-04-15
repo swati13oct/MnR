@@ -115,6 +115,9 @@ Feature: VP Testharness flow Navigations for AARP Site
     Then the user should be able to see the Drug and pharmacy information in the guest profile page
       | Drugname | <drug> |
     Then user switch back to Vp Testharness Page on AARP site
+    And user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
 
     Examples: 
       | TID   | THPage         | siteName | uuid                                 | isGuest | plancount | testPlans                                                                                              | drug             |  |
@@ -155,6 +158,10 @@ Feature: VP Testharness flow Navigations for AARP Site
     And user selects helper mode for Launch Visitor Profile with Providers in Visitor Profile on AARP site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
+    Then user switch back to Vp Testharness Page on AARP site
+    And user selects Delete Provider on the Authenticated profile on AARP site
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
 
     Examples: 
       | TID   | THPage         | siteName | uuid                                 | isGuest | plancount | testPlans                                                                                              | drug             | planname                                            |
@@ -235,7 +242,7 @@ Feature: VP Testharness flow Navigations for AARP Site
       | TID   | THPage         | siteName | ContractNumber | PBPNumber | SegmentID | countycode | product | PlanYear | plancount | testPlans                                                                                              | zipcode | monthlyPremium | yearlyPremium |
       | 00011 | visitorprofile | Ulayer   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |   91020 | $0             | $0            |
 
-  @vpTestharnessAARP12 @vpTestharnessAARPRun01 @PlanDetailsForGuest
+  @vpTestharnessAARP12 @vpTestharnessAARPRun01 @PlanDetailsForAuthenticated
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Plan Details from Vistor from VP Testharness page for Authenticated
     Given the user is on VistorProfile TestHarness page for AARP
       | Site Name       | <siteName> |
@@ -267,7 +274,7 @@ Feature: VP Testharness flow Navigations for AARP Site
       | 00012 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |   91020 | $0             | $0            |
 
   @vpTestharnessAARP13 @vpTestharnessAARPRun01 @OLEForGuest
-  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Save Plans to Guest from VP Testharness page
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch OLE from Visitor Profile Guest from VP Testharness page
     Given the user is on VistorProfile TestHarness page for AARP
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
@@ -348,4 +355,4 @@ Feature: VP Testharness flow Navigations for AARP Site
 
     Examples: 
       | TID   | isMultutiCounty | plantype | siteName | THPage         | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                                           | psc    | planYear | env     | zipcode | county             | FipsCode | StateCode | CMScode | HNumber | RiderFlag | PrefferedPlanId | PlanCode  | mapsPlanType | OLEisCNS | clientProdCode | lineOfBusiness | OLEisCSNP | fitness | vision | hearing | dental | salesagentid | premium | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | 00012 | NO              | MAPD     | Ulayer   | visitorprofile | aarp   |       168 | AARP1      |       000 | MAPD       | 1-877-699-5710 | AARP Medicare Advantage SecureHorizons Focus (HMO) | 810027 |     2020 | nonProd |   91020 | Los Angeles County |      037 | CA        |     200 | H0543   | true      | H0543168000     | undefined | HMO          | false    | undefined      | undefined      | false     | true    | true   | true    | true   |              |    0.00 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | true      | NO                | NO      |
+      | 00013 | NO              | MAPD     | Ulayer   | visitorprofile | aarp   |       168 | AARP1      |       000 | MAPD       | 1-877-699-5710 | AARP Medicare Advantage SecureHorizons Focus (HMO) | 810027 |     2020 | nonProd |   91020 | Los Angeles County |      037 | CA        |     200 | H0543   | true      | H0543168000     | undefined | HMO          | false    | undefined      | undefined      | false     | true    | true   | true    | true   |              |    0.00 | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | CA           |      90210 | test@test.com | None apply    |            | yes     | no           | true      | NO                | NO      |
