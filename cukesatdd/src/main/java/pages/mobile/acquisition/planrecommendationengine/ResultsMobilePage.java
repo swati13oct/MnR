@@ -149,8 +149,14 @@ public class ResultsMobilePage extends UhcDriver {
 			validateRecommendations(R1, recom1, R2, recom2);
 			validateRecommendationPlan(R1, plan);
 		} else {
-			checkTieRecommendationCount(R1, recom, R2);
-			validateRecommendations(R1, recom, R2, recom);
+			if (R2.isEmpty()) {
+				checkTieRecommendationCount(R1, recom1, "");
+				validateRecommendations(R1, recom1, "", "");
+			} else {
+
+				checkTieRecommendationCount(R1, recom, R2);
+				validateRecommendations(R1, recom, R2, recom);
+			}
 		}
 	}
 
@@ -306,7 +312,10 @@ public class ResultsMobilePage extends UhcDriver {
 			RCount++;
 		if (SNPPlanInfo.getText().contains(rcom))
 			RCount++;
-		Assert.assertTrue(RCount == 2, "Recommendation is not equals to Two");
+		if(R2=="")
+			Assert.assertTrue(RCount == 1, "Recommendation Count is not equal to One");
+		else
+			Assert.assertTrue(RCount == 2, "Recommendation is not equals to Two");
 	}
 
 }

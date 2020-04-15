@@ -393,6 +393,18 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.resultsUI(zip,county,r1,plan,r2,false);
    	}
 	
+	@Then("^user validate tie recommendations in results page mobile$")
+   	public void view_tie_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		resultpage.resultsUI(zip,county,r1,plan,r2,true);
+   	}
+	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
