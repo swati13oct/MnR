@@ -1892,7 +1892,6 @@ public class AccountHomePage extends UhcDriver {
 			CommonUtility.checkPageIsReady(driver);
 			return new PaymentHistoryPage(driver);
 		} else if (validate(TestHarnesspaymentsLink)) {
-
 			System.out.println("TestHarness Page Payments Link is displayed");
 			TestHarnesspaymentsLink.click();
 			checkModelPopup(driver,5);
@@ -3619,4 +3618,5 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue(idCard.contains("VIEW & PRINT MEMBER ID CARDS"));
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
 	}
+	
 }

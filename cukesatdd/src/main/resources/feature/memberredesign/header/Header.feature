@@ -12,9 +12,10 @@ Feature: 1.08 Member Header/Navigation validation
     #And I view the global navigation Header
     #Then I should be able to see and use the Home tab Header
     Then I should be able to see and use the Find Care & Costs tab Header
-    Then I should be able to see and use the Claims tab Header
-    And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
-    And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
+    Then the user navigates to EOB page
+    #Then I should be able to see and use the Claims tab Header
+    #And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
+    #And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
@@ -112,9 +113,10 @@ Feature: 1.08 Member Header/Navigation validation
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
 	    Given login with following details logins in the member portal and validate elements
 	      | Member Type | <memberType> |
-	    Then I should be able to see and use the Claims tab Header
-	     And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
-       And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
+	    Then the user navigates to EOB page
+	    #Then I should be able to see and use the Claims tab Header
+	     #And clicking on the Claims tab should allow me to see links for the Claims Summary tab and Explanation of Benefits tab on the second level navigation Header
+       #And then click the Explanation of Benefits tab and I should be directed to the Explanation of Benefits Page Header
        And clicking on the Coverage & Benefits tab should allow me to see link of for the Forms & Resources tab on the second level navigation Header
 	     Then I should be able to see the help button Header
        Then I should be able to see and use the Account/Profile dropdown and logout
