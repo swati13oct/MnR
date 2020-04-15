@@ -2759,31 +2759,38 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on AARP$")
-	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP() throws Exception {
-		
+	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP()
+			throws Exception {
+
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
 		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinGuestprofileLink();
-		
+
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-	
+
 	@And("^user Enters Fields and selects helper mode for Save plans in Authenticated profile to VP with plans data on AARP$")
-	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP(DataTable inputAttributes) throws Exception {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+	public void user_Enters_Fields_and_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_AARP(
+			DataTable inputAttributes) throws Exception {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String uuid = inputAttributesMap.get("UUID");
 		String isguest = inputAttributesMap.get("IsGuest");
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid,isguest);
-		
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage
+				.NavigateToVP_from_SaveplansinauthenticatedprofileLink(uuid, isguest);
+
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-	
+
 	@And("^user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on AARP site$")
 	public void user_selects_helper_mode_for_LaunchVisitorProfilewithDrugsandPharmacyinVisitorProfile_on_AARP()
 			throws Exception {
@@ -2795,6 +2802,8 @@ public class VppStepDefinitionUpdatedAARP {
 
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2807,6 +2816,8 @@ public class VppStepDefinitionUpdatedAARP {
 		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToVP_from_LaunchVPwithProvidersLink();
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		} else {
+			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2814,20 +2825,24 @@ public class VppStepDefinitionUpdatedAARP {
 	public void user_selectsplantoComparefromVisitorProfile_on_AARP(DataTable inputAttributes) throws Exception {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String Plancompare = inputAttributesMap.get("Plan compare");
+		String Zipcode = inputAttributesMap.get("Zip Code");
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Plancompare);
+		ComparePlansPage planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
 
-		if (visitorProfilePage != null) {
-			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		if (planComparePage != null) {
+			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		} else {
+			Assert.fail("Error Loading on Plan Compare page");
 		}
+
 	}
 
 	@Then("^verify plans added in plan compare on visitor Profile for AARP$")
 	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forAARP() throws Throwable {
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfilePage.validatePlansAddedonPlancompare();
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
 	}
 
 	@And("^user Enters plan info to land on plan details from visitor Profile on AARP site$")
@@ -2840,14 +2855,30 @@ public class VppStepDefinitionUpdatedAARP {
 		String CountyCD = inputAttributesMap.get("County code");
 		String product = inputAttributesMap.get("Product");
 		String year = inputAttributesMap.get("Plan Year");
+		String Zipcode = inputAttributesMap.get("Zip Code");
 
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(ContractNo, PbpNo,
-				SegId, CountyCD, product, year);
+		PlanDetailsPage vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode, ContractNo,
+				PbpNo, SegId, CountyCD, product, year);
 
-		if (visitorProfilePage != null) {
-			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		if (vppPlanDetailsPage != null) {
+			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+		} else {
+			Assert.fail("Error Loading on Plan Details Page page");
+		}
+	}
+
+	@And("^user selects helper mode for Launch OLE for Guest profile on AARP$")
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_AARP() throws Exception {
+
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		WelcomePage welcomeOLEPage = vpTestHarnessPage.NavigateToOLEfromVP();
+		if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading OLE Welcome page");
 		}
 	}
 	

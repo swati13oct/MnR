@@ -285,16 +285,5 @@ public class VisitorProfilePage extends UhcDriver {
 			return new VPPTestHarnessPage(driver);
 		}
 		return null;
-
-	}
-	
-	public void validatePlansAddedonPlancompare() {
-		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
-		int plansForCompare = allMAPlans.size();
-		if (plansForCompare == 2) {
-			Assert.assertTrue(true);
-			System.out.println("Verified Three plans Added on plan compare");
-		} else
-			Assert.assertTrue(false);
 	}
 }

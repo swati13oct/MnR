@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
@@ -51,6 +52,9 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 
 	@FindBy(id = "js-ole-zip-search")
 	private WebElement oleZipsearch;
+
+	@FindBy(xpath = "//button[text()='Search']")
+	private WebElement SearchButton;
 
 	// Launch Visitor Profile with Drugs and Pharmacy
 
@@ -126,6 +130,9 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='OLE Data']")
 	private WebElement OLEDataLink;
 
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
+
 	public VisitorProfileTestHarnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -183,7 +190,7 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public VisitorProfilePage NavigateToVP_from_LaunchVPwithDrugandPharmacyInfoLink() {
 		validateNew(HelperModeCheckboxAddDrugs);
 		jsClickNew(HelperModeCheckboxAddDrugs);
@@ -198,13 +205,13 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public VisitorProfilePage NavigateToVP_from_LaunchVPwithProvidersLink() {
 		validateNew(HelperModeCheckboxLaunchVp);
 		jsClickNew(HelperModeCheckboxLaunchVp);
 		validateNew(LaunchVPwithProvidersdata);
 		switchToNewTabNew(LaunchVPwithProvidersdata);
-		System.out.println("Clicked on LaunchVPwithProvidersdataLink");		
+		System.out.println("Clicked on LaunchVPwithProvidersdataLink");
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
@@ -212,22 +219,33 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 			return null;
 		}
 	}
-	
-	public VisitorProfilePage NavigateToPlanCompareFromVpTest(String PlanIds) {
+
+	public ComparePlansPage NavigateToPlanCompareFromVpTest(String Zipcode, String PlanIds) {
+		validateNew(oleZipsearch);
+		sendkeys(oleZipsearch, Zipcode);
+		jsClickNew(SearchButton);
+		System.out.println("Entered Zipcode and clicked on Search" + Zipcode);
 		validateNew(PlanIdInput);
 		sendkeys(PlanIdInput, PlanIds);
 		System.out.println("Selected plans for Plan Comapre : " + PlanIds);
 		jsClickNew(ComparePlansLink);
 		System.out.println("Clicked on ComparePlansLink");
-		if (driver.getCurrentUrl().contains("profile")) {
-			return new VisitorProfilePage(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("/plan-compare")) {
+			System.out.println("Navigation to Plan Compare page is Passed");
+			return new ComparePlansPage(driver);
 		} else {
-			System.out.println("Navigation to visitor profile is failed");
-			return null;
+			Assert.fail("Navigation to Plan Compare page is failed");
 		}
+		return null;
 	}
-	
-	public VisitorProfilePage NavigateToPlanDetailsFromVpTest(String CNum,String Pnum,String Snum,String CC,String Prod,String year) {
+
+	public PlanDetailsPage NavigateToPlanDetailsFromVpTest(String Zipcode, String CNum, String Pnum, String Snum,
+			String CC, String Prod, String year) {
+		validateNew(oleZipsearch);
+		sendkeys(oleZipsearch, Zipcode);
+		jsClickNew(SearchButton);
+		System.out.println("Entered Zipcode and clicked on Search" + Zipcode);
 		validateNew(ContractNum);
 		sendkeys(ContractNum, CNum);
 		sendkeys(PbPNum, Pnum);
@@ -238,11 +256,29 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 		System.out.println("Entered all plans details info for Plan Details ");
 		jsClickNew(PlanDetailsLink);
 		System.out.println("Clicked on PlanDetailsLink");
-		if (driver.getCurrentUrl().contains("profile")) {
-			return new VisitorProfilePage(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("#/details")) {
+			System.out.println("Navigation to Plan Details page is Passed");
+			return new PlanDetailsPage(driver);
 		} else {
-			System.out.println("Navigation to visitor profile is failed");
-			return null;
+			Assert.fail("Navigation to Plan Details page is failed");
 		}
+		return null;
 	}
-}
+
+	public WelcomePage NavigateToOLEfromVP() {
+		validateNew(jsonHelperChkOLE);
+		jsClickNew(jsonHelperChkOLE);
+		validateNew(LaunchOLEButton);
+		jsClickNew(LaunchOLEButton);
+		System.out.println("Clicked on LaunchOLEButton");
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		if (driver.getCurrentUrl().contains("enrollment")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}else {
+			Assert.fail("Navigation to Welcome page is failed");
+		}
+		return null;
+	}
+	}

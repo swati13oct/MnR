@@ -172,13 +172,14 @@ Feature: VP Testharness flow Navigations for AARP Site
     Then user switch back to Vp Testharness Page on AARP site
     And user selects plan to compare from visitor Profile on AARP site
       | Plan compare | <planToCompare> |
+      | Zip Code     | <zipcode>       |
     Then user verifies plan count on shopping cart Icon on AARP site
       | Plans Count | <plancount> |
     Then verify plans added in plan compare on visitor Profile for AARP
 
     Examples: 
-      | TID   | THPage         | siteName | plancount | testPlans                                                                                              | planToCompare           |
-      | 00009 | visitorprofile | Ulayer   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543001000,H0543168000 |
+      | TID   | THPage         | siteName | plancount | testPlans                                                                                              | planToCompare           | zipcode |
+      | 00009 | visitorprofile | Ulayer   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543001000,H0543168000 |   91020 |
 
   @vpTestharnessAARP10 @vpTestharnessAARPRun01 @PlanCompareForAuthenticated
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Plan Compare from Vistor from VP Testharness page for Authenticated
@@ -195,13 +196,14 @@ Feature: VP Testharness flow Navigations for AARP Site
     Then user switch back to Vp Testharness Page on AARP site
     And user selects plan to compare from visitor Profile on AARP site
       | Plan compare | <planToCompare> |
+      | Zip Code     | <zipcode>       |
     Then user verifies plan count on shopping cart Icon on AARP site
       | Plans Count | <plancount> |
     Then verify plans added in plan compare on visitor Profile for AARP
 
     Examples: 
-      | TID   | THPage         | siteName | uuid                                 | isGuest | plancount | testPlans                                                                                              | planToCompare           |
-      | 00010 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543001000,H0543168000 |
+      | TID   | THPage         | siteName | uuid                                 | isGuest | plancount | testPlans                                                                                              | planToCompare           | zipcode |
+      | 00010 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) | H0543001000,H0543168000 |   91020 |
 
   @vpTestharnessAARP11 @vpTestharnessAARPRun01 @PlanDetailsForGuest
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Plan Details from Vistor from VP Testharness page for Guest
@@ -221,13 +223,16 @@ Feature: VP Testharness flow Navigations for AARP Site
       | County code     | <countycode>     |
       | Product         | <product>        |
       | Plan Year       | <PlanYear>       |
+      | Zip Code        | <zipcode>        |
     Then user verifies plan count on shopping cart Icon on AARP site
       | Plans Count | <plancount> |
-    Then verify plans added in plan compare on visitor Profile for AARP
+    Then the user click on Plan costs tab and validates in AARP site
+      | Monthly Premium | <monthlyPremium> |
+      | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | THPage         | siteName | ContractNumber | PBPNumber | SegmentID | countycode | product | PlanYear | plancount | testPlans                                                                                              |
-      | 00011 | visitorprofile | Ulayer   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | TID   | THPage         | siteName | ContractNumber | PBPNumber | SegmentID | countycode | product | PlanYear | plancount | testPlans                                                                                              | zipcode | monthlyPremium | yearlyPremium |
+      | 00011 | visitorprofile | Ulayer   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |   91020 | $0             | $0            |
 
   @vpTestharnessAARP12 @vpTestharnessAARPRun01 @PlanDetailsForGuest
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Launch Plan Details from Vistor from VP Testharness page for Authenticated
@@ -249,10 +254,28 @@ Feature: VP Testharness flow Navigations for AARP Site
       | County code     | <countycode>     |
       | Product         | <product>        |
       | Plan Year       | <PlanYear>       |
+      | Zip Code        | <zipcode>        |
     Then user verifies plan count on shopping cart Icon on AARP site
       | Plans Count | <plancount> |
-    Then verify plans added in plan compare on visitor Profile for AARP
+    Then the user click on Plan costs tab and validates in AARP site
+      | Monthly Premium | <monthlyPremium> |
+      | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | THPage         | siteName | uuid                                 | isGuest | ContractNumber | PBPNumber | SegmentID | countycode | product | PlanYear | plancount | testPlans                                                                                              |
-      | 00012 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | TID   | THPage         | siteName | uuid                                 | isGuest | ContractNumber | PBPNumber | SegmentID | countycode | product | PlanYear | plancount | testPlans                                                                                              | zipcode | monthlyPremium | yearlyPremium |
+      | 00012 | visitorprofile | Ulayer   | 200b4216-15a8-4b11-9879-30c13f270de6 | false   | H0543          |       001 |       000 |        037 | ma      |     2020 |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |   91020 | $0             | $0            |
+
+  @vpTestharnessAARP13 @vpTestharnessAARPRun01 @OLEForGuest
+  Scenario Outline: TID: <TID> -zipcode: <zipcode> - Save Plans to Guest from VP Testharness page
+    Given the user is on VistorProfile TestHarness page for AARP
+      | Site Name       | <siteName> |
+      | TestHarnessPage | <THPage>   |
+    And user selects helper mode for Launch OLE for Guest profile on AARP
+    Then user verifies plan count on shopping cart Icon on AARP site
+      | Plans Count | <plancount> |
+    And user validates the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
+
+    Examples: 
+      | TID   | THPage         | siteName | plancount | testPlans                                                                                              |
+      | 00013 | visitorprofile | Ulayer   |         2 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Focus (HMO) |
