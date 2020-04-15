@@ -108,7 +108,8 @@ public class FooterPage extends UhcDriver {
 	@FindBy(id = "accsettings_3")
 	private WebElement accountSettingOption;
 	
-	@FindBy(linkText = "Account Settings") 
+	//@FindBy(linkText = "Account Settings") 
+	@FindBy(xpath="//li[@class='accountSettings']//a[contains(text(),'Account Settings') or contains(text(),'ACCOUNT SETTINGS')]")
 	private WebElement accountSettingOptionShip;
 	
 	@FindBy(id = "closeButton")

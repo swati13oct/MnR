@@ -508,7 +508,7 @@ public class EobStepDefinition {
 		ClaimsSummaryPage claimsSummaryPage=eobPage.clickMyClaimsTopSubMenu();
 		Assert.assertTrue("PROBLEM - unable to navigate to MyClaims page from EOB page using top sub menu MyClaims", claimsSummaryPage!=null);
 		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
-
+		getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
 	}
 
 	//--------------------------------------------------------------
