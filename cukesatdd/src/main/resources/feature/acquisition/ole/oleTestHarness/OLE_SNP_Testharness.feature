@@ -41,7 +41,7 @@ Feature: OLE Testharness page for AARP for SNP
       | Premium          | <premium>         |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Medicare Information Page
@@ -60,9 +60,15 @@ Feature: OLE Testharness page for AARP for SNP
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd fields for Preliminary Questions Page
+    Then the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage
+      | PlanName       | <planName>       |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+    Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
+      | Provider Name           | <providername>    |
+      | Provider Street Address | <provideraddress> |
+      | City                    | <providercity>    |
+      | Zip                     | <providerzipcode> |
+      | Provider Phone Number   | <providernumber>  |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
