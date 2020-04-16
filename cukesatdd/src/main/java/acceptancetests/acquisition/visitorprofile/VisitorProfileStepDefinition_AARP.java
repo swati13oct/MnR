@@ -72,7 +72,7 @@ public class VisitorProfileStepDefinition_AARP {
 	}
 	
 	@And("^the user clicks on the add plans button in the profile in AARP site$")
-	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() {
+	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() throws Exception {
 		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);

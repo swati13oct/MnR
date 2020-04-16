@@ -86,8 +86,9 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
-	public AcquisitionHomePage addPlan() {
+	public AcquisitionHomePage addPlan() throws Exception {
 		addPlans.click();
+		Thread.sleep(10000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("zipcode")){
 			String page = "health-plans";
@@ -246,7 +247,7 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
 		if(enrollForPlan!=null){
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
 		}
 		validateNew(NextBtn);
 		if(driver.getCurrentUrl().contains("welcome")){

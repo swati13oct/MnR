@@ -62,7 +62,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Drug | <drug> |
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
-      | Drugname | <Drugname> |
+      | Drugname | <drug> |
 
     Examples: 
       | state   | drug    | dosage   | quantity | frequency     | zipcode | radius   | drug             | quantity | frequency     | branded |

@@ -258,7 +258,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
 
     Examples: 
       | zipcode | isMultiCounty | plantype | DOB        | county           | MS_testPlans  |
-      |   90210 | NO            | MS       | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      |   90210 | NO            | MS       | 11111949 | Jefferson County | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for Visitor Profile page
