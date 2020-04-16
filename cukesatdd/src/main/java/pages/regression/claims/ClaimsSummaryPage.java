@@ -543,6 +543,7 @@ public class ClaimsSummaryPage extends ClaimsSummaryBase{
 		
 		Assert.assertTrue("PROBLEM - unable to land on expected claims page.  Expected landing URL to contains '"+expUrl+"' | Actual Url='"+actUrl+"'", actUrl.contains(expUrl) || actUrl.contains(expUrl2));
 		if (actUrl.contains(expUrl)) //note: if able to land on claims then verify it is the rally claims, not the old claims page
+			CommonUtility.waitForPageLoad(driver, pgHeader, 10);
 			Assert.assertTrue("PROBLEM - Should not be able to locate 'Claims Summary' header on Rally Claims, this claims page is likely the old claims page",!pgHeader.getText().contains("Claims Summary"));
 	}
 	
