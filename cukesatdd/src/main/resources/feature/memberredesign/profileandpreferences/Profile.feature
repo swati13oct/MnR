@@ -12,7 +12,8 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType>       |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
-	And the ship user validates the need help section
+    #note: moved to footer feature
+	#And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <memberType> |
@@ -439,7 +440,8 @@ Feature: 1.02 Member Profile page
       | Member Type | <memberType>       |
     When the user navigates to Profile and Preferences page
     And the user validates the Plan Name, Member name, Member ID and account section
-	And the ship user validates the need help section
+    #note: moved to footer feature
+	#And the ship user validates the need help section
     Then the user validates permanent address section
     Then the user validates the Phone section
       | Plan Type | <memberType> |

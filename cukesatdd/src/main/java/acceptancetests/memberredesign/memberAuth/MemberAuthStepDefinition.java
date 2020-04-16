@@ -168,6 +168,34 @@ public class MemberAuthStepDefinition{
 
 	}
 	
+	@And("^Member Enters the memberid and dob he wants to search$")
+	public void member_enters_memberidanddob_and_searches(DataTable givenAttributes) throws InterruptedException{
+
+
+		MemberAuthPage memberauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_Login);
+
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String memberid = memberAttributesMap.get("Member ID");
+		String month  = memberAttributesMap.get("Month");
+		String day = memberAttributesMap.get("Day");
+		String year  = memberAttributesMap.get("Year");
+	
+		MemberAuthPage mauthPage =  memberauth.enterMemberIDAndDob(memberid, month, day, year);
+		if(mauthPage!=null){
+			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
+		}
+	}
+	
 	@And("^User Clicks on the Pop up displayed$")
 	public void member_clicks_popup() throws InterruptedException{
 

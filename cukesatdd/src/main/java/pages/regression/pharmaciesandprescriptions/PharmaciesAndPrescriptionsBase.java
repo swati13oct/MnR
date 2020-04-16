@@ -99,7 +99,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		}
 		System.out.println("Main window = "+driver.getTitle());
 		return driver.getCurrentUrl();
-	}
+	} 
 
 	/**
 	 * Helper method for validating Need Help section
@@ -122,7 +122,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		if (hrsOperationElement2!=null) {
 			Assert.assertTrue("PROBLEM - unable to locate the hours of operation for week elemnt in "+section+" section", pnpValidate(hrsOperationElement2));
 		}
-	}
+	} 
 
 	/**
 	 * Helper method to click on the target test plan on combo tab
@@ -134,7 +134,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			throws InterruptedException {
 		if (memberType.toLowerCase().contains("combo")) {
 			System.out.println("This test is for combo plans, select the tab accordingly");
-			goToSpecificComboTabOnOrderPlanPage(planType);
+			goToSpecificComboTabOnTargetPage(planType);
 		} else {
 			boolean flagNonCombo=false;
 			goToSpecificComboTabOnOrderPlanPage(planType,flagNonCombo);
@@ -167,7 +167,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	 * Navigate to specific plan for combo user, default will fail it if user doesn't have combo
 	 * @param planType
 	 */
-	public void goToSpecificComboTabOnOrderPlanPage(String planType) throws InterruptedException{
+	public void goToSpecificComboTabOnTargetPage(String planType) throws InterruptedException{
 		CommonUtility.checkPageIsReady(driver);
 		WebElement targetTab=null;
 		if (planType.equalsIgnoreCase("MAPD")) {
@@ -205,7 +205,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 	public void goToSpecificComboTabOnOrderPlanPage(String planType, boolean flagNonCombo) 
 			throws InterruptedException {
 		if (flagNonCombo) 
-			goToSpecificComboTabOnOrderPlanPage(planType);
+			goToSpecificComboTabOnTargetPage(planType);
 		else {
 			CommonUtility.checkPageIsReady(driver);
 			WebElement targetTab=null;

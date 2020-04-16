@@ -378,8 +378,8 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	public void the_user_validates_SAM_re_active_Chat_uhc() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.validateChatSamContent();
+		aquisitionhomepage.validateChatSamAcq();
+		aquisitionhomepage.validateChatSamContentAcq();
 		aquisitionhomepage.validateChatpopup();
 
 	}
