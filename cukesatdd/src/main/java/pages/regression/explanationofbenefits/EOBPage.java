@@ -1124,12 +1124,15 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
 		if(eobValidate(myClaimsSubTopMenu)) {
 			myClaimsSubTopMenu.click();
 			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 			String expUrl="claim";
+			String expUrl2="systest3.myuhc.com";
 			String actUrl=driver.getCurrentUrl();
-			if (actUrl.contains(expUrl)) 
+			if (actUrl.contains(expUrl)|| actUrl.contains(expUrl2)) 
 				return new ClaimsSummaryPage(driver);
 		}
 		return null;
