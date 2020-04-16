@@ -97,7 +97,9 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
-		expandDrugBlock.click();
+		validateNew(expandDrugBlock);
+		jsClickNew(expandDrugBlock);
+		System.out.println("Drug Name Text : " + drugName.getText().trim());
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
 		Assert.assertTrue(pharmacyAddress.isDisplayed());
 		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );

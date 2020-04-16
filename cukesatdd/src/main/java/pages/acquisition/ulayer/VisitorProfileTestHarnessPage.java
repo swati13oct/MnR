@@ -294,7 +294,6 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 		validateNew(DeletedrugsandPharmacyInfo);
 		switchToNewTabNew(DeletedrugsandPharmacyInfo);
 		System.out.println("Clicked on LaunchVPwithDrugandPharmacyInfoLink");
-
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
