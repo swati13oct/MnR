@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -47,6 +48,24 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath="//button[contains(@dtmname,'2020')]")
 	private WebElement planYearBtn2020;
+	
+	@FindBy(css="div.signupCTA.signupContainer a")
+	private WebElement signOut;
+	
+	@FindBy(id = "enrollment-next-button")
+	private WebElement NextBtn;
+	
+	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
+	private WebElement enrollInPlan;
+	
+	@FindBy(id = "header-number")
+	private WebElement shoppingCartNumber;
+	
+	@FindAll({@FindBy(xpath = "//li[@class='drug']")})
+	private List<WebElement> savedDrugs;
+	
+	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
+	private WebElement drugBlock;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -138,4 +157,70 @@ public class VisitorProfilePage extends UhcDriver {
 
 		
 	}
+	
+	/**
+	 * Sign In with Optum Id credentials
+	 * @param username
+	 * @param password
+	 */
+	public void signIn(String username,String password) {
+		try {
+			
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+		
+	}
+	
+	/**
+	 * Delete all the drugs from the profile
+	 */
+	public void deleteAllDrugs() {
+		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
+		driver.findElement(By.xpath("//li[@class='drug']//button")).click();
+		/*for (WebElement drug: savedDrugs) {
+			drug.findElement(By.xpath("//button")).click();
+		}*/
+		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
+		Assert.assertTrue(addrugs.isDisplayed());
+	}
+	
+	/**
+	 * Deletes the specified plans
+	 * @param plans
+	 */
+	public void deletePlans(String plans) {
+		try {
+			List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+			for (String plan: listOfTestPlans) {
+				driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+				Thread.sleep(5000);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
+	}
+	
 }

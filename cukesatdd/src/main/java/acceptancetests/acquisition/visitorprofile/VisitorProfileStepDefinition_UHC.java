@@ -102,7 +102,7 @@ public class VisitorProfileStepDefinition_UHC {
 	}
 	
 	
-	@And("^the user should be able to see the Drug and pharmacy information in the guest profile page on UHC$")
+	@And("^the user should be able to see the Drug and pharmacy information in the profile page on UHC$")
 	public void the_user_should_be_able_to_see_the_Drug_and_pharmacy_information_in_the_guest_profile_page_on_UHC(DataTable data) {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
@@ -158,6 +158,42 @@ public class VisitorProfileStepDefinition_UHC {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		PlanDetailsPage planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
+	}
+	
+	@And("^the user signs in with optum Id credentials in UHC site$")
+	public void the_user_signs_in_with_optum_Id_credentials_in_UHC_site(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.signIn(username, password);
+	}
+	
+	@And("^user delets all the added drugs on visitor profile page of UHC site$")
+	public void user_delets_all_the_added_drugs_on_visitor_profile_page_of_UHC_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteAllDrugs();
+	}
+	
+	@And("^user delets the added plans on visitor profile page of UHC site$")
+	public void user_delets_the_added_plans_on_visitor_profile_page_of_UHC_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savedPlanNames = givenAttributesMap.get("MA_testPlans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deletePlans(savedPlanNames);
 	}
 } 
 
