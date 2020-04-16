@@ -108,7 +108,8 @@ public class FooterPage extends UhcDriver {
 	@FindBy(id = "accsettings_3")
 	private WebElement accountSettingOption;
 	
-	@FindBy(linkText = "Account Settings") 
+	//@FindBy(linkText = "Account Settings") 
+	@FindBy(xpath="//li[@class='accountSettings']//a[contains(text(),'Account Settings') or contains(text(),'ACCOUNT SETTINGS')]")
 	private WebElement accountSettingOptionShip;
 	
 	@FindBy(id = "closeButton")
@@ -272,7 +273,7 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'chatwithus')]//img")
 	protected WebElement needHelp_Chat_img;
 
-	@FindBy(xpath="//div[contains(@class,'chatwithus')]//h3[text()='Chat With Us']")
+	@FindBy(xpath="//div[contains(@class,'chatwithus')]//h3[contains(text(),'Chat with Us') or contains(text(),'Chat With Us')]")
 	protected WebElement needHelp_Chat_header;
 
 	@FindBy(xpath="//div[contains(@class,'chatwithus')]//div[contains(@class,'omniChat')]")
@@ -745,10 +746,10 @@ public class FooterPage extends UhcDriver {
 					needHelp_PlanSupport_wkDayHrs, null);
 			
 			validateSection="Need Help - Chat With Us";
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element", footerValidate(needHelp_ChatSection));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element", footerValidate(needHelp_Chat_img));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element", footerValidate(needHelp_Chat_header));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element", footerValidate(needHelp_Chat_txt));
+			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat Section", footerValidate(needHelp_ChatSection));
+			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat img", footerValidate(needHelp_Chat_img));
+			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat section header", footerValidate(needHelp_Chat_header));
+			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat txt", footerValidate(needHelp_Chat_txt));
 		}
 		System.out.println("Main window = "+driver.getTitle());
 		return driver.getCurrentUrl();
