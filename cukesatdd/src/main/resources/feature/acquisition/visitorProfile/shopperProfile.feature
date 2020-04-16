@@ -137,16 +137,61 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email                  | plantype | planName                                             | testPlans                                                                                               |
       | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
-  #@createProfile
-  #Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
-    #Given I am an agent logged into the cloak in tool
-      #| User Name | <username> |
-      #| Password  | <password> |
-    #Then I ask the shopper calling in to provide me with the Email Address and Search
-      #| Email | <email> |
-      #| DOB   | <dob>   |
-      #| MBI   | <mbi>   |
-#
-    #Examples: 
-      #| username  | password  | email                    | dob        | mbi           |
-      #| qavgogine | qavgogine | Q2_JUN_UHC0044@GMAIL.COM | 08/22/1992 | 3WA7-V41-NM78 |
+  @searchProfileEmptyFields
+  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then validate empty email firstname and lastname
+
+    Examples: 
+      | username  | password  |
+      | qavgogine | qavgogine |
+
+  @searchProfileInvalidEmail
+  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then validate invalid email
+      | Email | <email> |
+
+    Examples: 
+      | username  | password  | email     |
+      | qavgogine | qavgogine | yy!ue.com |
+
+  @searchProfileInvalidFnameLname
+  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then validate invalid first name and last name
+      | First Name | <fname> |
+      | Last Name  | <lname> |
+
+    Examples: 
+      | username  | password  | fname    | lname     |
+      | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
+
+  @createProfile
+  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address
+      | Email | <email> |
+      | DOB   | <dob>   |
+      | MBI   | <mbi>   |
+    And click on Create Profile button
+    Then create a profile with the following details
+      | Email      | <email> |
+      | DOB        | <dob>   |
+      | MBI        | <mbi>   |
+      | First Name | <fname> |
+      | Last Name  | <lname> |
+    Then I land on the plan summary page of VPP
+      | Plan Name | <planName> |
+
+    Examples: 
+      | username  | password  | email                      | dob        | mbi           | fname  | lname  | planName                                         |
+      | qavgogine | qavgogine | q4_rx_claims_056@gmail.com | 08/10/1933 | 2QY5-RF1-FJ55 | LIDIJA | MASONE | UnitedHealthcare Medicare Advantage Assure (HMO) |
