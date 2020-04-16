@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionFooter.json",detailedReport = t
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionFooter")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
 features = { "src/main/resources/feature/memberredesign/footer" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooter.json" }, tags = { "@regressionMember" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionFooter.json" }, tags = { "@footer01,@footer02","@regressionMember" })
 public class RunMRATDDRegressionFooter {
 
 }

@@ -43,7 +43,7 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 06-025 | xxxxx       | MA       | IND_TERM_PDnR         | true  | false | true  | true  | true  | false |
-      | 07-026 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | false | true  | false | false | false |
+      | 07-026 | xxxxx       | MA       | GROUP_TERM_PDnR       | true  | false | true  | true  | false | false |
       | 08-027 | xxxxx       | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
 
 	@active_ma

@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,6 +226,56 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateNeedHelpSection(planType, memberType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	
+	@Then("^user scrolls down to OptumRx SSO link on Pharmacies and Prescriptions Page to perform outbound OptumRx SSO$")
+	 public void userScrollstoOptumRxSSOLink (DataTable givenAttributes) throws InterruptedException {
+	 	
+		PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		
+		 List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String optumrxssolink = memberAttributesMap.get("OptumRx SSO Link");
+			System.out.println("Optum Rx SSO Link being tested in this test case is "+optumrxssolink);
+	 	
+			
+			pnpPg.scrollToOptumRxSSOLink(optumrxssolink);
+			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	 		
+	 		
+	 		
+	 }
+	 
+	 @Then("^user clicks on OptumRx SSO link on Pharmacies and Prescriptions Page and lands on OptumRx SSO Page in new window$")
+	 public void clicksToOptumRxSSOLink(DataTable givenAttributes) throws InterruptedException {
+	 	
+			PharmaciesAndPrescriptionsPage pnpPg=(PharmaciesAndPrescriptionsPage) getLoginScenario()
+					.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		 
+		 List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String optumrxssolink = memberAttributesMap.get("OptumRx SSO Link");
+			System.out.println("Optum Rx SSO Link being tested in this test case is "+optumrxssolink);
+	 		
+			pnpPg.clicksToOptumRxSSOLink(optumrxssolink);
+			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	 		
 	}
 	
 }

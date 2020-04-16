@@ -28,6 +28,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class EOBPage extends EOBBase{
 
@@ -1097,6 +1098,42 @@ public class EOBPage extends EOBBase{
 		}
 	}
 
+	public void validateSpendingCostSummaryTab(boolean expectTab) {
+		if (expectTab) {
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(2);
+			Assert.assertTrue("PROBLEM - input exepct to see 'Spending Cost Summary' on top sub menu for this user but unable to locate the 'Spending Cost Summary' tab on top sub menu", eobValidate(spendingCostSummaryTab_topSubMenu) || eobValidate(spendingCostSummaryTab_topSubMenu2));
+			if (eobValidate(spendingCostSummaryTab_topSubMenu)) { 
+				spendingCostSummaryTab_topSubMenu.click();
+			} else if (eobValidate(spendingCostSummaryTab_topSubMenu2)) {
+				spendingCostSummaryTab_topSubMenu2.click();
+			}
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(2);
+			String expUrl="spending-and-cost-summary";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - Actual landing of Spending Cost Summary page url is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			Assert.assertTrue("PROBLEM - unable to locate the header for Spending Cost Summary page. Please check if page content is loading properly", eobValidate(spendingCostSummaryPgHeader));
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
+		}
+	}
+	
+	public void validateMyClaimsTopSubMenu() {
+		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
+	}
+	
+	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
+		if(eobValidate(myClaimsSubTopMenu)) {
+			myClaimsSubTopMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+			String expUrl="claim";
+			String actUrl=driver.getCurrentUrl();
+			if (actUrl.contains(expUrl)) 
+				return new ClaimsSummaryPage(driver);
+		}
+		return null;
+	}
 }
 
 

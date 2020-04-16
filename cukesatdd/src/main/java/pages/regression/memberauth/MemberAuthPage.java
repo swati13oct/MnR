@@ -1,5 +1,7 @@
 package pages.regression.memberauth;
 
+import java.util.Set;
+
 import org.json.JSONObject;
 //import junit.framework.Assert;
 import org.junit.Assert;
@@ -57,6 +59,18 @@ public class MemberAuthPage extends UhcDriver {
        
        @FindBy(id="super-user-banner")
        private WebElement SuperUser_DashboardBanner;
+       
+       @FindBy(id="memberId")
+       private WebElement memberId; 
+       
+       @FindBy(id="date-mm")
+       private WebElement datemm; 
+       
+       @FindBy(id="date-dd")
+       private WebElement datedd; 
+       
+       @FindBy(id="date-yyyy")
+       private WebElement dateyyyy; 
 
        private static String MEMBER_AUTH = MRConstants.MEMBER_AUTH;
        
@@ -72,6 +86,14 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='sticky-nav']/sticky-content/nav/div/div/div/div/a[4]")
 	private WebElement dashboard_coverageBenefits;
    
+	@FindBy(xpath = "//*[contains(@class,'btn btn-outline-primary')]")
+	private WebElement homePageNotice;
+
+	@FindBy(xpath="//button/span[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice2;
+	
+	@FindBy(xpath="//a[contains(text(),'Home Page')]")
+	protected WebElement homePageNotice3;
    	
        public MemberAuthPage(WebDriver driver) {
               super(driver);
@@ -93,7 +115,7 @@ public class MemberAuthPage extends UhcDriver {
     	   else if(MRScenario.environment.equalsIgnoreCase("offline"))
     		   MEMBER_AUTH =  MRConstants.OFFLINE_PROD_MEMBER_AUTH;
     	   
-              start(MEMBER_AUTH);
+    	     start(MEMBER_AUTH);
               System.out.println("Member Auth URL - "+MEMBER_AUTH);
               //driver.get("https://www.team-c-generic.uhc.com/content/dashboard/guest/memberauth.html#/memberAuthLogin");
               CommonUtility.waitForPageLoad(driver, username, 60);
@@ -152,6 +174,7 @@ public class MemberAuthPage extends UhcDriver {
               return null;               
        }
        
+      
        public AccountHomePage PopupClick() throws InterruptedException{
               
               waitforElement(MemberPopUpLogin);
@@ -244,10 +267,36 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
               Thread.sleep(2000);
               MemberPopUpLogin.click();  
               System.out.println("popup login button clicked");
-              Thread.sleep(2000);        
-              switchToNewTab();
+              System.out.println("wait for 5 seconds");
+              Thread.sleep(5000);        
+             // switchToNewTab();              
+              String mainwindow = driver.getWindowHandle();
+      		Set<String> allWindowHandles = driver.getWindowHandles();
+      		for (String currentWindowHandle : allWindowHandles) {
+      			if (!currentWindowHandle.equals(mainwindow)) {
+      				driver.switchTo().window(currentWindowHandle);
+      			}
+      		}
+      		
               System.out.println("Switched to new tab");
               if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")){
+            	  try {
+					if (validate(homePageNotice,0)) {
+							homePageNotice.click();
+							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(homePageNotice2,0)) {
+							homePageNotice2.click();
+							CommonUtility.checkPageIsReady(driver);
+						} else if (validate(homePageNotice3,0)) {
+							homePageNotice3.click();
+							CommonUtility.checkPageIsReady(driver);
+						}
+						Thread.sleep(3000);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+									
             	  waitforElement(SuperUser_DashboardBanner);
             	  if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()){
             		  System.out.println("CSR Dashboard Page is displayed for the Member");      
@@ -279,6 +328,31 @@ public AccountHomePage userSelectsMemberEntered() throws InterruptedException{
        
 }
 
+public MemberAuthPage enterMemberIDAndDob(String memberid , String month , String day ,String year) throws InterruptedException{
+	memberId.clear();
+	memberId.sendKeys(memberid); 
+    
+	datemm.clear();
+	datemm.sendKeys(month); 
+	
+	datedd.clear();
+	datedd.sendKeys(day); 
+	
+	dateyyyy.clear();
+	dateyyyy.sendKeys(year);     
+    
+    FinalSearchButton.click();
+    
+    waitforElement(MemberTableUserName);
+    if (MemberTableUserName.isDisplayed()){
+           System.out.println("member Username under the table is displayed");  
+           MemberTableUserName.click();
+           return new MemberAuthPage(driver);       
+           }
+    else
+           System.out.println("Member UserName Not found");
+    return null;               
+}
 
 }
 
