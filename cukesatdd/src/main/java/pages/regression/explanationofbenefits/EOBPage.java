@@ -612,6 +612,7 @@ public class EOBPage extends EOBBase{
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", eobValidate(siteLeavingProceedButton));
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", eobValidate(siteLeavingCancelButton));
 		//note: click cancel and validate any element on page
+		eobCheckModelPopup(driver);
 		siteLeavingCancelButton.click();
 		sleepBySec(1);
 		Assert.assertTrue("PROBLEM - unable to locate Adobe link after clicking Leave Site Cancel button", eobValidate(adobeWebsiteLink));
@@ -1085,12 +1086,14 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public void validateComboTab(String memberType) {
+		if (memberType.contains("MULTI_SHIP")) {
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
+			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
+			//should not see tabs
+		} else 
 		if (memberType.contains("COMBO")) {
-			if (memberType.contains("MULTI_SHIP")) {
-				Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
-				Assert.assertTrue("PROBLEM - user with multiple ship plans should not have tab that has text",!comboTabList.get(0).getText().equals(""));
-				//should not see tabs
-			} else if (memberType.contains("SSP")) {
+			if (memberType.contains("SSP")) {
 				Assert.assertTrue("PROBLEM - user with SSP as one of the combo plan SHOULD NOT have SSP tab showing on EOB page",!eobValidate(comboTab_SSP));
 			} else {
 				Assert.assertTrue("PROBLEM - user with combo plan should have more than one tab, please check input user if it's really a combo plan user",comboTabList.size()>1);
@@ -1124,13 +1127,22 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
 		if(eobValidate(myClaimsSubTopMenu)) {
 			myClaimsSubTopMenu.click();
 			CommonUtility.checkPageIsReady(driver);
-			String expUrl="claim";
-			String actUrl=driver.getCurrentUrl();
-			if (actUrl.contains(expUrl)) 
-				return new ClaimsSummaryPage(driver);
+			int count=0;
+			int max=3;
+			while (count <max) {
+				count=count+1;
+				sleepBySec(3);
+				String expUrl="claim";
+				String expUrl2="systest3.myuhc.com";
+				String actUrl=driver.getCurrentUrl();
+				if (actUrl.contains(expUrl)|| actUrl.contains(expUrl2)) {
+					return new ClaimsSummaryPage(driver);
+				}
+			}
 		}
 		return null;
 	}

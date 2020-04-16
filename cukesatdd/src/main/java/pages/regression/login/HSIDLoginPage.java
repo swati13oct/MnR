@@ -17,6 +17,7 @@ import pages.regression.footer.FooterPage;
 import pages.regression.goGreenSplash.GoGreenPage;
 import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.testharness.TestHarness;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -221,27 +222,19 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @throws Exception 
 	 * @toDo : To login through hsid via entering security questions
 	 */
-	public Object doLoginWith(String username, String password) throws Exception {
+	public Object doLoginWith(String username, String password) {
 
-		System.out.println(driver.getCurrentUrl());
-		sendkeys(userNameField, username);
-		sendkeys(passwordField, password);
-		signInButton.click();
+			System.out.println(driver.getCurrentUrl());
+			sendkeys(userNameField, username);
+			sendkeys(passwordField, password);
+			signInButton.click();
 
 		//wait for some form of header to show
-
-		//tbd CommonUtility.waitForPageLoad(driver, authQuestionlabel, 35);
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
 		}
-		/* tbd try {
-			Thread.sleep(35000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} */
 
 		if (driver.getCurrentUrl().contains("=securityQuestion")) {
 			System.out.println("Landed on security question page...");
@@ -257,21 +250,6 @@ public class HSIDLoginPage extends UhcDriver {
 				e.printStackTrace();
 			}
 
-			try{
-				Alert alert = driver.switchTo().alert();
-				alert.accept();
-			}catch (NoAlertPresentException e){
-				System.out.println("No alert present");
-			}
-			
-
-
-			if(validate(homePageNotice)) {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].scrollIntoView();", homePageNotice);
-				homePageNotice.click();
-			}
-			
 			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
 			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
 			try {
@@ -287,24 +265,19 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			emailAddressRequiredWorkaround(username);
-			
-		}
-		else if (currentUrl().contains("/dashboard")) {
+		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
-		}
-			else if (currentUrl().contains("testharness.html")) {
-				System.out.println(driver.getCurrentUrl());
-				System.out.println("First Post login current Url is-->"+currentUrl());
-				return new TestHarness(driver);
-		}
-		else {
+		} else if (currentUrl().contains("testharness.html")) {
+			System.out.println(driver.getCurrentUrl());
+			System.out.println("First Post login current Url is-->"+currentUrl());
+			return new TestHarness(driver);
+		} else {
 			System.out.println("Security question page "
 					+ "or test harness page "
 					+ "or Rally Account Home Page didn't load , please check");
 		}
-		//tbd if (MRScenario.environmentMedicare.equals("team-e")
-		//tbd 		|| MRScenario.environmentMedicare.equals("team-ci1")) {
+
 		if (MRScenario.environment.equals("team-e")
 				|| MRScenario.environment.equals("team-ci1")) {
 			Alert alert = driver.switchTo().alert();
@@ -322,8 +295,7 @@ public class HSIDLoginPage extends UhcDriver {
 		} else if (currentUrl().contains("testharness.html")) {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new TestHarness(driver);
-		}
-		else if (currentUrl().contains("gogreen-splash")) {
+		} else if (currentUrl().contains("gogreen-splash")) {
 			System.out.println("Post login current Url is-->"+currentUrl());
 			return new GoGreenPage(driver);
 		}
@@ -614,6 +586,8 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	//note: do not remove this wait time
 	public void waitToReachDashboard(String username) {
+		//note: need this to handle timing until the MEDICA/PCP extra alert goes away
+		CommonUtility.waitForPageLoad(driver, homePageNotice, 5);
 		int y=0;
 		while (y < 30) {
 			try {
@@ -641,8 +615,14 @@ public class HSIDLoginPage extends UhcDriver {
 				y=y+1;
 				System.out.println("Waiting for some form of header to show up... waited total of "+y+" sec");
 			} catch (UnhandledAlertException ae) {  //if getting alert error, stop and get out
-				System.out.println("Exception: "+ae); 
-				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert error");
+				Alert alert = driver.switchTo().alert();
+				System.out.println("Alert text="+alert.getText());
+				if (alert.getText().contains("an error while processing your information")) {
+					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert message: "+alert.getText(), false);
+				} else {
+					alert.accept();
+				}
+				waitToReachDashboard(username);
 			} catch (Exception e) { 
 				//e.printStackTrace();
 			}
