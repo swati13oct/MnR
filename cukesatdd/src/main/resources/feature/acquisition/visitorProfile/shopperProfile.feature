@@ -99,8 +99,6 @@ Feature: 1.08. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then I land on the plan summary page of VPP
-      | Plan Name | <planname> |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -114,8 +112,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | PlanName | <planname> |
 
     Examples: 
-      | username  | password  | email                  | plantype | planname                                             | testPlans                                                                                               |
-      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | AARP Medicare Advantage SecureHorizons Premier (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
+      | username  | password  | email                  | plantype | planname                                            | testPlans                                                                                               |
+      | qavgogine | qavgogine | UXEBLA_6547@MASKED.COM | MAPD     | Sharp SecureHorizons Plan by UnitedHealthcare (HMO) | Sharp SecureHorizons Plan by UnitedHealthcare (HMO),AARP Medicare Advantage SecureHorizons Plan 4 (HMO) |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
@@ -149,7 +147,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine |
 
   @searchProfileInvalidEmail
-  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+  Scenario Outline: Telesales agent searching for the profile using invalid Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -161,7 +159,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | yy!ue.com |
 
   @searchProfileInvalidFnameLname
-  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+  Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -174,7 +172,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
   @createProfile
-  Scenario Outline: Telesales agent searching for the profile using Email and validate OLE flow is not allowed
+  Scenario Outline: Telesales agent searching for the Creating a profile
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
