@@ -3,6 +3,8 @@
  */
 package pages.regression.login;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -234,22 +236,24 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
-					if ((null!=MRScenario.environment) && (MRScenario.environment.contains("team-a"))) { //note: sometimes take longer to load page on this team env
-						if (validate(homePageNotice,0)) {
-							homePageNotice.click();
-							CommonUtility.checkPageIsReady(driver);
-						} else if (validate(homePageNotice2,0)) {
-							homePageNotice2.click();
-							CommonUtility.checkPageIsReady(driver);
-						} else if (validate(homePageNotice3,0)) {
-							homePageNotice3.click();
-							CommonUtility.checkPageIsReady(driver);
-						}
-						Thread.sleep(3000);
+					if (noWaitValidate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice2,0)) {
+						homePageNotice2.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice3,0)) {
+						homePageNotice3.click();
+						CommonUtility.checkPageIsReady(driver);
+					}
+					if (null!=MRScenario.environment 
+							&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
+						//note: sometimes take longer to load page on team env
+						Thread.sleep(4000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
 					} else {
-					Thread.sleep(2000);
-					System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
+						Thread.sleep(2000);
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
 					}
 				} else {
 					System.out.println("TimeOut!!!");
@@ -328,7 +332,7 @@ public class LoginPage extends UhcDriver {
 				if (counter <= 20) {
 					Thread.sleep(5000);
 					System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");
-					if (validate(homePageNotice,0)) {
+					if (noWaitValidate(homePageNotice,0)) {
 						homePageNotice.click();
 						CommonUtility.checkPageIsReady(driver);
 					}
@@ -459,4 +463,22 @@ public class LoginPage extends UhcDriver {
 			}
 			return null;
 		}
+		
+		public boolean noWaitValidate(WebElement element, long timeoutInSec) {
+			//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+			try {
+				if (element.isDisplayed()) {
+					System.out.println("Element '"+element.toString()+"' found!!!!");
+					return true;
+				} else {
+					System.out.println("Element '"+element.toString()+"' not found/not visible");
+				}
+			} catch (Exception e) {
+				System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+			}
+			//note: default in UhcDriver is 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+			return false;
+		} 
 }
