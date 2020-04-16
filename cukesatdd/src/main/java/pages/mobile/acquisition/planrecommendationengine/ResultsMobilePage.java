@@ -135,8 +135,9 @@ public class ResultsMobilePage extends UhcDriver {
 	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
+		threadsleep(5000);
 		validate(planZipInfo, 60);
-		threadsleep(8000);// Plan loader
+		threadsleep(5000);// Plan loader
 		Assert.assertTrue(planZipInfo.getText().contains(zip));
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()));
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
