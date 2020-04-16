@@ -109,8 +109,8 @@ Feature: OLE Testharness page for AARP for SNP
       | TID   | isMultutiCounty | plantype | siteName | THPage | siteId | pBPNumber | clientCode | segmentId | PlanTypeTH | TFN            | planName                                   | psc    | planYear | env     | zipcode | county            | FipsCode | StateCode | CMScode | HNumber | RiderFlag | PrefferedPlanId | PlanCode  | mapsPlanType | OLEisCNS | clientProdCode | lineOfBusiness | OLEisCSNP | fitness | vision | hearing | dental | salesagentid | premium | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
       | 00001 | NO              | SNP      | Ulayer   | ole    | aarp   |       012 | AARP1      |       000 | SNP        | 1-877-699-5710 | Preferred Medicare Assist (HMO D-SNP)      | 810027 |     2020 | nonProd |   33143 | Miami-Dade County |      120 | FL        |     000 | H1045   | false     | H1045012000     | undefined | HMO          | false    | undefined      | undefined      | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
       | 00002 | NO              | SNP      | Blayer   | ole    | uhc    |       012 | UHCMS1     |       000 | SNP        | 1-877-596-3258 | Preferred Medicare Assist (HMO D-SNP)      | 880180 |     2020 | nonProd |   33143 | Miami-Dade County |      120 | FL        |     000 | H1045   | false     | H1045012000     | undefined | HMO          | false    | undefined      | undefined      | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
-      | 00003 | NO              | SNP      | Ulayer   | ole    | uhccp  |       022 | UHCCP1     |       000 | SNP       | 1-877-699-5710 | UnitedHealthcare Dual Complete (HMO D-SNP) | 810027 |     2020 | nonProd |   78006 | Bexar County      |      029 | TX        |     130 | H4590   | false     | H4590022000     | undefined | HMO          | true     |                | MEDICARE       | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
-      | 00004 | NO              | SNP      | Blayer   | ole    | uhccp  |       022 | UHCCP1     |       000 | SNP       | 1-877-596-3258 | UnitedHealthcare Dual Complete (HMO D-SNP) | 880180 |     2020 | nonProd |   78006 | Bexar County      |      029 | TX        |     130 | H4590   | false     | H4590022000     | undefined | HMO          | true     |                | MEDICARE       | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | true    |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
+      | 00003 | NO              | SNP      | Ulayer   | ole    | uhccp  |       022 | UHCCP1     |       000 | SNP        | 1-877-699-5710 | UnitedHealthcare Dual Complete (HMO D-SNP) | 810027 |     2020 | nonProd |   78006 | Bexar County      |      029 | TX        |     130 | H4590   | false     | H4590022000     | undefined | HMO          | true     |                | MEDICARE       | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
+      | 00004 | NO              | SNP      | Blayer   | ole    | uhccp  |       022 | UHCCP1     |       000 | SNP        | 1-877-596-3258 | UnitedHealthcare Dual Complete (HMO D-SNP) | 880180 |     2020 | nonProd |   78006 | Bexar County      |      029 | TX        |     130 | H4590   | false     | H4590022000     | undefined | HMO          | true     |                | MEDICARE       | false     | true    | true   | true    | true   |              |   20.00 | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |
 
   @OLEMicoAppSNP02
   Scenario Outline: TID: <TID> -plan Name: <planName> - Ole Testharness page to confirmation page for SNP
@@ -118,24 +118,38 @@ Feature: OLE Testharness page for AARP for SNP
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
     When the user navigates to OLE WelcomePage using following information
-      | SiteId          | <siteId>          |
-      | PBPNumber       | <pBPNumber>       |
-      | ClientCode      | <clientCode>      |
-      | SegmentId       | <segmentId>       |
-      | PlanTypeTH      | <PlanTypeTH>      |
-      | TFN             | <TFN>             |
-      | Plan Name       | <planName>        |
-      | psc             | <psc>             |
-      | Plan Year       | <planYear>        |
-      | env             | <env>             |
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | FipsCode        | <FipsCode>        |
-      | StateCode       | <StateCode>       |
-      | CMScode         | <CMScode>         |
-      | HNumber         | <HNumber>         |
-      | Is Multi County | <isMultutiCounty> |
-      | Plan Type       | <plantype>        |
+      | SiteId           | <siteId>          |
+      | PBPNumber        | <pBPNumber>       |
+      | ClientCode       | <clientCode>      |
+      | SegmentId        | <segmentId>       |
+      | PlanTypeTH       | <PlanTypeTH>      |
+      | TFN              | <TFN>             |
+      | Plan Name        | <planName>        |
+      | psc              | <psc>             |
+      | Plan Year        | <planYear>        |
+      | env              | <env>             |
+      | Zip Code         | <zipcode>         |
+      | County Name      | <county>          |
+      | FipsCode         | <FipsCode>        |
+      | StateCode        | <StateCode>       |
+      | CMScode          | <CMScode>         |
+      | HNumber          | <HNumber>         |
+      | Is Multi County  | <isMultutiCounty> |
+      | Plan Type        | <plantype>        |
+      | Rider Flag       | <RiderFlag>       |
+      | PrefferedPlan Id | <PrefferedPlanId> |
+      | Plan Code        | <PlanCode>        |
+      | maps PlanType    | <mapsPlanType>    |
+      | OLEis CNS        | <OLEisCNS>        |
+      | client ProdCode  | <clientProdCode>  |
+      | lineOf Business  | <lineOfBusiness>  |
+      | OLEis CSNP       | <OLEisCSNP>       |
+      | Fitness          | <fitness>         |
+      | Vision           | <vision>          |
+      | Hearing          | <hearing>         |
+      | Dental           | <dental>          |
+      | salesagent id    | <salesagentid>    |
+      | Premium          | <premium>         |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
