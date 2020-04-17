@@ -110,6 +110,8 @@ Feature: 1.08. ACQ- Shopper Profile
     Then Navigate to Visitor Profile page on AARP site
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
+    And user delets the added plans on visitor profile page of AARP site
+      | Test Plans | <testPlans> |
 
     Examples: 
       | username  | password  | email                  | plantype | planname                                            | testPlans                                                                                               |
