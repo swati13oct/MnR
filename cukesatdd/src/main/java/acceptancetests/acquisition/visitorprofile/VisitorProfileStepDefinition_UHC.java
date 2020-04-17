@@ -119,7 +119,7 @@ public class VisitorProfileStepDefinition_UHC {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String savePlanNames = givenAttributesMap.get("MA Test Plans");
+		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
@@ -154,7 +154,7 @@ public class VisitorProfileStepDefinition_UHC {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String planName = givenAttributesMap.get("MA Test Plans");
+		String planName = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		PlanDetailsPage planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
@@ -191,7 +191,7 @@ public class VisitorProfileStepDefinition_UHC {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String savedPlanNames = givenAttributesMap.get("MA_testPlans");
+		String savedPlanNames = givenAttributesMap.get("testPlans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}

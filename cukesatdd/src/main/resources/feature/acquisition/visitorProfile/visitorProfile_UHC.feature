@@ -83,15 +83,15 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
-      | MA Test Plans | <MA_testPlans> |
-      | Plan Type     | <plantype>     |
+      | Test Plans | <testPlans> |
+      | Plan Type  | <plantype>  |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | plantype | planYear |
+      | state   | UID       | zipcode | isMultiCounty | county           | testPlans                                                                                              | plantype | planYear |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |     2020 |
 
   @addPlansVPP
@@ -103,14 +103,14 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           |
+      | state   | UID       | zipcode | isMultiCounty | county           | testPlans                                                                                              |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionUHC @prodRegression
@@ -123,14 +123,14 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     Then user saves two plans as favorite on UHC site
-      | Plan Type     | <plantype>     |
-      | MA Test Plans | <MA_testPlans> |
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     And user clicks on plan name of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     Then the user validates the following Additional Benefits of Plan for the plan in UMS
       | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |
       | Eye Wear Expected Text                                    | <eyeWearExpectedText>                             |
@@ -144,7 +144,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | plantype | county           | MA_testPlans                                                                                            | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      | state   | UID       | zipcode | isMultiCounty | plantype | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
   @vPPMSSavedPlan
@@ -175,8 +175,6 @@ Feature: 2.08. ACQ-Visitor profile - UMS
   @vpOLEUHC
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile
     Given the user is on the uhcmedicaresolutions site landing page
-    And the user selects the state drop down value in UHC home page
-      | State | <state> |
     And the user clicks on the shopping cart icon in UHC site
     And the user validates the plan year buttons are present or not and chooses the plan year in UHC
       | Plan Year | <planYear> |
@@ -187,12 +185,12 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
-      | MA Test Plans | <MA_testPlans> |
-      | Plan Type     | <plantype>     |
+      | Test Plans | <testPlans> |
+      | Plan Type  | <plantype>  |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
       | Plan Name | <planName> |
       | Plan Type | <plantype> |
@@ -281,12 +279,12 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
-      | MA Test Plans | <MA_testPlans> |
-      | Plan Type     | <plantype>     |
+      | Test Plans | <testPlans> |
+      | Plan Type  | <plantype>  |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     And the user clicks on the add plans button in the guest profile in UHC site
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
@@ -297,7 +295,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                             | MA_testPlans                                                              |
+      | zipcode | isMultutiCounty | county          | plantype | planName                             | testPlans                                                                 |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @AddDrugsAuthenticated
@@ -352,12 +350,12 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
-      | MA Test Plans | <MA_testPlans> |
-      | Plan Type     | <plantype>     |
+      | Test Plans | <testPlans> |
+      | Plan Type  | <plantype>  |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
-      | MA Test Plans | <MA_testPlans> |
+      | Test Plans | <testPlans> |
     And the user clicks on the add plans button in the guest profile in UHC site
     When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
@@ -368,5 +366,5 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | MA_testPlans                                                              |
+      | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | testPlans                                                                 |
       |   10001 | NO              | New York County | mnrqavd  | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |

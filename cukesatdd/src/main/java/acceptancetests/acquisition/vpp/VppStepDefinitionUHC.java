@@ -1065,13 +1065,31 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
+		String savePlanNames = memberAttributesMap.get("Test Plans");
 
 		// ----- MA plan type ----------------------------
 		String planType = memberAttributesMap.get("Plan Type");
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		switch (planType) {
+		case "MAPD":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	@Then("^user saves two MS plans as favorite on UHC site$")
