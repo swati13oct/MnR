@@ -15,6 +15,7 @@ import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -194,6 +195,44 @@ public class VisitorProfileStepDefinition_UHC {
 		String savedPlanNames = givenAttributesMap.get("testPlans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
+	}
+	
+	@And("^user verifies plan count on shopping cart Icon on UHC site$")
+	public void user_validates_plan_count_on_shopping_cart_Icon_on_UHC_site(DataTable givenAttributes) {
+		List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planCount = plannameAttributesMap.get("Plans Count");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validatePlanCountOnCartIcon(planCount);
+	}
+	
+	@And("^user switch back to Vp Testharness Page on UHC site$")
+	public void user_switch_back_to_Vp_Testharness_Page_on_UHC_site() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.switchBackToVPTestharness();
+	}
+
+	@And("^user Enters Plan id and click on delete plan to Delete plan in Visitor Profile on UHC site$")
+	public void user_EntersPlanidandclickondeleteplantoDeleteplaninVisitorProfile_on_UHC_site(
+			DataTable givenAttributes) {
+		List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planID = plannameAttributesMap.get("Plan ID");
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
+				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
+		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteplaninVisitorProfile(planID);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 } 
 

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -222,4 +223,20 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
 	
+	public void validatePlanCountOnCartIcon(String plancount) {
+		Assert.assertEquals(plancount, shoppingCartNumber.getText());
+		System.out.println("count mapped on Shopping cart icon with : " + plancount);
+
+	}
+
+	public VPPTestHarnessPage switchBackToVPTestharness() {
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		System.out.println("Switching back to MainWindow");
+		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
+			System.out.println("visitorprofiletestharness Page is Displayed");
+			return new VPPTestHarnessPage(driver);
+		}
+		return null;
+	}
 }

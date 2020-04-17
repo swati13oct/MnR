@@ -26,7 +26,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.ulayer.PageTitleConstants;;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 
@@ -1936,6 +1936,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new VPPTestHarnessPage(driver);
 		}
 	
+	public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
+		return new VisitorProfileTestHarnessPage(driver);
+	}
+	
 
 	public void validateStateDropDown() {
 		validateNew(stateDropDown);
@@ -2338,4 +2342,6 @@ public AcquisitionHomePage  navigateToPage(String page) {
 		return null;
 		
 	}
+
+
 }
