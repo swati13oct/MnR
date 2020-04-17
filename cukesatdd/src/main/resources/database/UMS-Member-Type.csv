@@ -191,7 +191,7 @@ q3_sep_Active_combo_002/Password@1,Combo,ComboFEDShip_BnC,,
 q1_feb_2020SHIP_003/Password@1,HIP,SHIP_BnC,,
 q2_june_combo0017/Password@1,Combo,MAPDANDSHIP_BnC,,
 q3_Sep_UAT4_Sofl020/Password@1,Medica,Individual_BnC,NON LIS,
-medicamember001/Password@1,MEDICA,Individual_BnC,IndEffectiveMedica,NoRider
+q3_Sep_UAT4_Sofl020/Password@1,MEDICA,Individual_BnC,IndEffectiveMedica,NoRider
 ucppcpmapd01/Password@1,PCP,Individual_BnC,IndEffectivePCP,NoRider
 TESTVILLAGEUSER01/Password@1,MAPDVill,Individual_BnC,NON LIS,
 q3_sep_UAT4_UHC017/Password@1,MAPD,MakeOneTimeCCTotal_Payments,,
