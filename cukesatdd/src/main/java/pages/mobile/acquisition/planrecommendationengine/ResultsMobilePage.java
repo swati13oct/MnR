@@ -27,10 +27,13 @@ public class ResultsMobilePage extends UhcDriver {
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+	
 	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
 	private WebElement planZipInfo;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>div:nth-of-type(1)")
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>p")
 	private WebElement planBasedInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-1']")
@@ -135,16 +138,16 @@ public class ResultsMobilePage extends UhcDriver {
 	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
-		threadsleep(5000);
 		validate(planZipInfo, 60);
+		waitforElementInvisibilityInTime(planLoaderscreen,60);
 		threadsleep(5000);// Plan loader
-		Assert.assertTrue(planZipInfo.getText().contains(zip));
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()));
+		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
+		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(planBasedInfo.getText().contains("Based on"));
 		String recom = "Recommendation";
-		String recom1 = "#1Recommendation";
-		String recom2 = "#2Recommendation";
+		String recom1 = "#1 Recommendation";
+		String recom2 = "#2 Recommendation";
 		if (tie == false) {
 			checkRecommendationCount(R1, recom1, R2, recom2);
 			validateRecommendations(R1, recom1, R2, recom2);
@@ -199,6 +202,7 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void checkRecommendationCount(String R1, String rcom1, String R2, String rcom2) {
+		System.out.println("Verifying Recommendation counts");
 		int R1Count = 0, R2Count = 0;
 		if (MAPlanInfo.getText().contains(rcom1))
 			R1Count++;

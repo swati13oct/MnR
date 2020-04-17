@@ -758,8 +758,8 @@ try {
 	 */
 	@FindBy(xpath="//body")
 	protected WebElement timeJson;
-	public String getMemTestEnvSysTime() {
 		String timeStr = "";
+		public String getMemTestEnvSysTime() {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		String urlGetSysTime="https://www." + MRScenario.environment + "-medicare." + MRScenario.domain+ "/MRRestWAR/rest/time/getSystemTime";
@@ -1016,4 +1016,10 @@ try {
 		}
 	}
 	
+	public void waitforElementInvisibilityInTime(WebElement element, long timeout) {
+		System.out.println("Checking Element Invisibility");
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+
 }
