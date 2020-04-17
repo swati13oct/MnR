@@ -18,7 +18,7 @@ Feature: 1.12.1 Member Rally claims
     Then the user click MyClaims top menu sub option
     Then user validates landing on Rally Claims Page
     
-    @rallyClaims01a
+    @rallyClaims01a @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     |
       | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
@@ -39,7 +39,7 @@ Feature: 1.12.1 Member Rally claims
       | TID   | planType | memberType          | claimSystem     | 
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-    @rallyClaims01d
+    @rallyClaims01d @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15236 | SHIP     | Individual          | COMPASS_CLAIMS  | 
