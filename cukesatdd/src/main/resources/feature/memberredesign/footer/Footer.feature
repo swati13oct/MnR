@@ -34,8 +34,7 @@ Feature: 1.05 Member Footer validation
     Examples: 
      | TID   | planType | memberType                 |
      | 15347 | MAPD     | IndMAPDUHC_footer          |
-    #| 15347 | MAPD     | CALPERSGroup_ContactUs     |
-      
+
     Examples: 
      | TID   | planType | memberType                 |
      | 15347 | MEDICA   | Ind_footer                 |
