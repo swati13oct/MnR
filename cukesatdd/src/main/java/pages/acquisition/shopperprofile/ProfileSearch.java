@@ -1,5 +1,6 @@
 package pages.acquisition.shopperprofile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,7 +181,11 @@ public class ProfileSearch extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
 			btnCloakIn.click();
 			Thread.sleep(5000);
-			switchToNewTab();
+			ArrayList<String> tabs = new ArrayList<String>(
+                    driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(1));
+			driver.switchTo().window(tabs.get(0)).close();
+			driver.switchTo().window(tabs.get(1));
 			Thread.sleep(10000);
 			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);

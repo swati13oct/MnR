@@ -91,8 +91,8 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Test Plans | <testPlans> |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | testPlans                                                                                              | plantype | planYear |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |     2020 |
+      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              | plantype | planYear |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County |MAPD| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |     2020 |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -104,14 +104,15 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
       | Test Plans | <testPlans> |
+      | Plan Type  | <plantype>  |
     Then user gets a create profile prompt on UHC site
     Then user click on continue as guest button on UHC site
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
 
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD|AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionUHC @prodRegression
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -120,8 +121,6 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
     Then user saves two plans as favorite on UHC site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
