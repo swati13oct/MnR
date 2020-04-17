@@ -119,7 +119,7 @@ public class MRScenario {
 
 	public static final String ACCESS_KEY = "2817affd-616e-4c96-819e-4583348d7b37";
 
-	public static final String TESTOBJECTAPIKEY = "B4242E614F4F47A094EC92A0606BBAC8";
+	public static final String TESTOBJECTAPIKEY = "637645B4ECE7428FB7787B7F6757E431";
 	
 	public static final String HSID_ENV="PDB_STAGE";
 	public static final String HSIDDB_USERNAME="njain112";
