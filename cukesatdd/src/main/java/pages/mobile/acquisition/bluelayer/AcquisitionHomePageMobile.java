@@ -16,6 +16,7 @@ import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 
+
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
@@ -90,11 +91,22 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		}
 	}
 
+	/**
+	 * @author Rathulya
+	 * This method is used to open the URL on the mobile device
+	 */
 	public void openMobileURL() {
 		startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
+	
+	/**
+	 * @author Rathulya
+	 * This method is used to navigate to the page/URL passed from the feature file examples
+	 * @param page
+	 * @return
+	 */
 	public AcquisitionHomePageMobile navigateToPage(String page) {
 		String pageURL = driver.getCurrentUrl() + page;
 		System.out.println("==pageURL==" + pageURL);
@@ -198,8 +210,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		boolean present;
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
-		//driver.switchTo().frame(chatSamPopupFrame);
-		driver.switchTo().frame(1);
+		driver.switchTo().frame(chatSamPopupFrame);
+		//driver.switchTo().frame(1);
 		try {
 			validateNew(chatSamPopupTitle);
 			present = true;
