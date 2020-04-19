@@ -221,7 +221,7 @@ Feature: VP Testharness flow Navigations for UHC Site
     Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
       | Drugname | <drug> |
     Then user switch back to Vp Testharness Page on UHC site
-    And user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site
+    And user selects Delete Drug and Pharamcy on the Authenticated profile on UHC site
     And user validates the added plans on visitor profile page of UHC site
       | Test Plans | <testPlans> |
 
