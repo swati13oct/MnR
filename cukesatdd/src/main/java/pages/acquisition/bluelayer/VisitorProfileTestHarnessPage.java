@@ -88,7 +88,7 @@ public class VisitorProfileTestHarnessPage extends UhcDriver {
 	private WebElement HelperModeCheckboxLaunchVp;
 
 	// Delete a provider in Visitor Profile page
-	@FindBy(xpath = "//*[text()='Delete provider in VP page']")
+	@FindBy(xpath = "//*[text()='Delete Providers in VP page']")
 	private WebElement DeleteproviderinVPpage;
 
 	// Naviagte to Plan Compare page from Visitor Profile

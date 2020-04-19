@@ -197,7 +197,7 @@ Feature: VP Testharness flow Navigations for UHC Site
       | Test Plans | <testPlans> |
     Then user switch back to Vp Testharness Page on UHC site
     And user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on UHC site
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
       | Drugname | <drug> |
 
     Examples: 
@@ -218,7 +218,7 @@ Feature: VP Testharness flow Navigations for UHC Site
       | Test Plans | <testPlans> |
     Then user switch back to Vp Testharness Page on UHC site
     And user selects helper mode for Launch Visitor Profile with Drugs and Pharmacy in Visitor Profile on UHC site
-    Then the user should be able to see the Drug and pharmacy information in the guest profile page
+    Then the user should be able to see the Drug and pharmacy information in the profile page on UHC
       | Drugname | <drug> |
     Then user switch back to Vp Testharness Page on UHC site
     And user selects Delete Drug and Pharamcy on the Authenticated profile on AARP site
@@ -234,7 +234,7 @@ Feature: VP Testharness flow Navigations for UHC Site
     Given the user is on VistorProfile TestHarness page for UHC
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-    And user selects helper mode for Save plans in Guest profile to VP with plans data on AARP
+    And user selects helper mode for Save plans in Guest profile to VP with plans data on UHC
     Then user verifies plan count on shopping cart Icon on UHC site
       | Plans Count | <plancount> |
     And user validates the added plans on visitor profile page of UHC site
