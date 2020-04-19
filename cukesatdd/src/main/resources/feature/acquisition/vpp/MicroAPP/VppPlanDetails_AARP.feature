@@ -220,7 +220,7 @@ Feature: Vpp to plan Details AARP Scenarios
       | 00014 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
       | 00015 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
-  @vppPlanDetailsAARP10 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  @vppPlanDetailsAARP10 @vppPlanDetailsAARPRun03
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - To verify links displayed in the global footer on plan details page for AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
