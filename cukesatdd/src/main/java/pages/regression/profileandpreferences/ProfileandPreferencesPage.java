@@ -1528,7 +1528,7 @@ private WebElement editEmailAddressArrowbutton;
 		iframePhoneEdit.click();
 		
 		validateNew(iframeHomePhone);
-		validateNew(iframeAdditionalPhone);
+		//validateNew(iframeAdditionalPhone);
 		validateNew(iframeWorkPhone);
 		validateNew(iframeMobilePhone);
 		
@@ -1538,7 +1538,7 @@ private WebElement editEmailAddressArrowbutton;
 		CommonUtility.checkPageIsReady(driver);
 		
 		validateNew(iframeEditPhoneInputField_homePhone);
-		validateNew(iframeEditPhoneInputField_additionalPhone);
+		//validateNew(iframeEditPhoneInputField_additionalPhone);
 		validateNew(iframeEditPhoneInputField_workPhone);
 		validateNew(iframeEditPhoneInputField_mobilePhone);
 		
@@ -1569,10 +1569,10 @@ private WebElement editEmailAddressArrowbutton;
 		iframeEditPhoneInputField_homePhone.sendKeys(homePhone);
 		Thread.sleep(500);
 		
-		iframeEditPhoneInputField_additionalPhone.clear();
+		/*iframeEditPhoneInputField_additionalPhone.clear();
 		Thread.sleep(500);
 		iframeEditPhoneInputField_additionalPhone.sendKeys(additionalPhone);
-		Thread.sleep(500);
+		Thread.sleep(500);*/
 
 		iframeEditPhoneInputField_workPhone.clear();
 		Thread.sleep(500);
