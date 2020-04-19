@@ -10,13 +10,17 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
@@ -357,5 +361,26 @@ public class ClaimsSearchNavigateStepDefinition {
 		if(newClaimsSummaryPage != null)
 			getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, newClaimsSummaryPage);	
 	}
+	
+	@Then("^user validates landing on Rally Claims Page$")
+	public void landOnRallyClaims() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
+		ClaimsSummaryPage claimsSummaryPage = (ClaimsSummaryPage) getLoginScenario()
+				.getBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE);
+		claimsSummaryPage.validateRallyClaims();
+	}
+	
+	@Then("^user invokes bookmark URL$")
+	public void navigateWithBookmarkUrl(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String bookmarkUrl=memberAttributesMap.get("Deeplink");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
+		ClaimsSummaryPage claimsSummaryPage = new ClaimsSummaryPage(wd);
+		claimsSummaryPage.navigateWithBookmark(bookmarkUrl);
+		getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE, claimsSummaryPage);	
+	}
 }

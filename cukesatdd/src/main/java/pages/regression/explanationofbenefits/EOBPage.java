@@ -28,6 +28,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.regression.claims.ClaimsSummaryPage;
 
 public class EOBPage extends EOBBase{
 
@@ -611,6 +612,7 @@ public class EOBPage extends EOBBase{
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Proceed button", eobValidate(siteLeavingProceedButton));
 		Assert.assertTrue("PROBLEM - unable to locate Leaving Site Cancel button", eobValidate(siteLeavingCancelButton));
 		//note: click cancel and validate any element on page
+		eobCheckModelPopup(driver);
 		siteLeavingCancelButton.click();
 		sleepBySec(1);
 		Assert.assertTrue("PROBLEM - unable to locate Adobe link after clicking Leave Site Cancel button", eobValidate(adobeWebsiteLink));
@@ -1084,12 +1086,14 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public void validateComboTab(String memberType) {
+		if (memberType.contains("MULTI_SHIP")) {
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
+			System.out.println("comboTabList.get(0)="+comboTabList.get(0).getText());
+			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
+			//should not see tabs
+		} else 
 		if (memberType.contains("COMBO")) {
-			if (memberType.contains("MULTI_SHIP")) {
-				Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
-				Assert.assertTrue("PROBLEM - user with multiple ship plans should not have tab that has text",!comboTabList.get(0).getText().equals(""));
-				//should not see tabs
-			} else if (memberType.contains("SSP")) {
+			if (memberType.contains("SSP")) {
 				Assert.assertTrue("PROBLEM - user with SSP as one of the combo plan SHOULD NOT have SSP tab showing on EOB page",!eobValidate(comboTab_SSP));
 			} else {
 				Assert.assertTrue("PROBLEM - user with combo plan should have more than one tab, please check input user if it's really a combo plan user",comboTabList.size()>1);
@@ -1097,6 +1101,51 @@ public class EOBPage extends EOBBase{
 		}
 	}
 
+	public void validateSpendingCostSummaryTab(boolean expectTab) {
+		if (expectTab) {
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(2);
+			Assert.assertTrue("PROBLEM - input exepct to see 'Spending Cost Summary' on top sub menu for this user but unable to locate the 'Spending Cost Summary' tab on top sub menu", eobValidate(spendingCostSummaryTab_topSubMenu) || eobValidate(spendingCostSummaryTab_topSubMenu2));
+			if (eobValidate(spendingCostSummaryTab_topSubMenu)) { 
+				spendingCostSummaryTab_topSubMenu.click();
+			} else if (eobValidate(spendingCostSummaryTab_topSubMenu2)) {
+				spendingCostSummaryTab_topSubMenu2.click();
+			}
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(2);
+			String expUrl="spending-and-cost-summary";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - Actual landing of Spending Cost Summary page url is not as expected.  Expected to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			Assert.assertTrue("PROBLEM - unable to locate the header for Spending Cost Summary page. Please check if page content is loading properly", eobValidate(spendingCostSummaryPgHeader));
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
+		}
+	}
+	
+	public void validateMyClaimsTopSubMenu() {
+		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
+	}
+	
+	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
+		eobCheckModelPopup(driver);
+		if(eobValidate(myClaimsSubTopMenu)) {
+			myClaimsSubTopMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+			int count=0;
+			int max=3;
+			while (count <max) {
+				count=count+1;
+				sleepBySec(3);
+				String expUrl="claim";
+				String expUrl2="systest3.myuhc.com";
+				String actUrl=driver.getCurrentUrl();
+				if (actUrl.contains(expUrl)|| actUrl.contains(expUrl2)) {
+					return new ClaimsSummaryPage(driver);
+				}
+			}
+		}
+		return null;
+	}
 }
 
 

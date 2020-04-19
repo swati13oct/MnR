@@ -1,5 +1,5 @@
 @eob @fastandfurious
-Feature: 1.04 To Test EOB for Members
+Feature: 1.04.1 To Test EOB for Members - E2E
 
   Background: If run on stage then feature security flag needs to be true
      Given feature security flag must set to true when testing on stage env
@@ -15,7 +15,8 @@ Feature: 1.04 To Test EOB for Members
     Then the user navigates to EOB page
     Then the user validates the header section content
     Then the user validates site leaving pop up after clicking Adobe link
-    Then the user validates Need Help section
+    #note: moved to footer feature
+    #Then the user validates Need Help section
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Custom Search invalid cases ----  
@@ -73,7 +74,7 @@ Feature: 1.04 To Test EOB for Members
 
     @COSMOS_MEDICAL @devRegression
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob |
+      | index | planType | memberType        | eobType           | flagZeroEob | 
       | 01    | MAPD     | COSMOS_EOB_R      | Medical           | true        |
 
     @COSMOS_MEDICAL
@@ -89,25 +90,25 @@ Feature: 1.04 To Test EOB for Members
     @NICE_MEDICAL
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |      
-      | 05    | MA       | NICE_EOB_R        | Medical           | true        |      
+      | 04    | MAPD     | NICE_EOB_R        | Medical           | true        |  
+      | 05    | MA       | NICE_EOB_R        | Medical           | true        | 
 
     @NICE_DRUG
     Examples: 
       | index | planType | memberType        | eobType           | flagZeroEob |
-      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        |      
+      | 06    | MAPD     | NICE_EOB_R        | Prescription Drug | true        | 
 
     #note: PDP GROUP has 1000+ eobs, check to see if they can put the img loader while loading
     #note: adobe links won't come up till very very late
     @RX_PDP
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 07    | PDP      | Rx_EOB            | Prescription Drug | true        |
       | 08    | PDP      | GROUP_Rx_EOB      | Prescription Drug | true        |
 
     @RX_PDP_COMBO
     Examples: 
-      | index | planType | memberType        | eobType           | flagZeroEob | 
+      | index | planType | memberType        | eobType           | flagZeroEob |
       | 09    | PDP      | PDP_SSP_COMBO_EOB | Prescription Drug | true        |
       | 10    | PDP      | PDP_SHIP_COMBO_EOB| Prescription Drug | true        |
 
@@ -120,7 +121,8 @@ Feature: 1.04 To Test EOB for Members
     Then the user navigates to EOB page
     Then the user validates the header section content
     Then the user validates site leaving pop up after clicking Adobe link
-    Then the user validates Need Help section
+    #note: moved to footer feature
+    #Then the user validates Need Help section
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
