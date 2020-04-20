@@ -132,7 +132,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) .enroll-details>a:nth-of-type(2)")
 	private WebElement SNP1stPlanEnroll;
 
-	@FindBy(xpath = "//h2[contains(text(),'Need Help?')]")
+	@FindBy(xpath = "//div[@class='uhc-container']//*[contains(text(),'Need Help?')]")
 	private WebElement needhelptxt;
 
 	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
@@ -243,7 +243,7 @@ public class ResultsMobilePage extends UhcDriver {
 			validate(MS1stPlanName, 60);
 			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 					"MS Invalid Plan Ranking");
-			// mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
+			//mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
 			clickEnrollmobile(MS1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
@@ -293,7 +293,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public void clickEnrollmobile(WebElement enrollButton) {
 		boolean click = false;
-		mobileUtils.mobileLocateElement(needhelptxt, "30%");
+		boolean needswipe=true;
 		for (int i = 0; i < 5; i++) {
 			try {
 				validate(enrollButton, 5);
@@ -301,7 +301,12 @@ public class ResultsMobilePage extends UhcDriver {
 				click = true;
 				break;
 			} catch (Exception e) {
-				mobileswipeHorizantal("45%", 1, false);
+				if(!needswipe)
+					mobileswipeHorizantal("40%", 1, false);
+				if(needswipe) {
+					mobileUtils.mobileLocateElement(needhelptxt, "20%");
+					needswipe=false;
+				}
 			}
 		}
 		Assert.assertTrue(click, "Unable to click the Enroll button");
