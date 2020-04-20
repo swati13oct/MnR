@@ -597,8 +597,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath="//label[contains(@for,'compare-plan')]")
 		private WebElement planCompareCheckBox;
 		
+		@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
+		private WebElement medSuppOlePlanSection;
 		
-
+		@FindBy(xpath = "(//*[contains(@id,'importantdocuments_')])[1]")
+		private WebElement medSuppImpDoc_PlanOverview;
+		
+		@FindBy(xpath = "//img[@title='aarp-card']")
+		private WebElement medSuppOleAarpCardImg;
+		
+		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
+		private WebElement medSuppOleDobHeading;
+		
+		@FindBy(id = "MPAED")
+		private WebElement medSuppOleHospitalPartA;
 		public WebElement getLoadingIndicator() {
 			return loadingIndicator;
 		}
@@ -1665,11 +1677,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		else
-			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(text(),'Enroll in Plan') and not(attribute::data-ng-show)]"));
 		
 		if(enrollForPlan!=null){
 			validateNew(enrollForPlan);
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
 		}
 		
 
@@ -3306,35 +3318,32 @@ public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) thr
 }
 
 public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
-	Thread.sleep(5000);
-	CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
-	Start_ApplicationBtn.click();
+	waitTillElementClickableInTime(Start_ApplicationBtn,60);
+	jsClickNew(Start_ApplicationBtn);
 	System.out.println("Start application button is clicked on application page");
-	Thread.sleep(8000);
-	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+	waitTillElementClickableInTime(insuredStatus, 60);
 	insuredStatus.click();
-	Thread.sleep(2000);
 	nextButton.click();
-	Thread.sleep(2000);
+	waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
 	nextButton.click();
-	Thread.sleep(2000);
+	waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 	nextButton.click();
-	Thread.sleep(2000);
+	waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
 	nextButton.click();
-	Thread.sleep(2000);
-	firstName.sendKeys(FirstName);
-	lastName.sendKeys(LastName);
+	waitforElementVisibilityInTime(firstName,30);
+	sendkeysNew(firstName,FirstName);
+	sendkeysNew(lastName,LastName);
 	nextButton.click();
-	CommonUtility.waitForPageLoadNew(driver, address1, 20);
+	waitforElementVisibilityInTime(address1, 30);
 	address1.sendKeys("TestAddress1");
 	cityName.sendKeys("TestCity");
 	alternatemailingAddressBtn.click();
 	emailAddress.sendKeys("John_Kerry@test.com");
 	phoneNumber.sendKeys("1234567890");
 	nextButton.click();
-	Thread.sleep(2000);
+	validateNew(medSuppOleDobHeading);
 	nextButton.click();
-	Thread.sleep(2000);
+	waitforElementVisibilityInTime(medSuppOleHospitalPartA,30);
 	String ResumeKey= resumeKey.getText();
 	System.out.println("The return to the application code is- "+ResumeKey);
 	cancelButton.click();
@@ -3352,14 +3361,14 @@ public void ResumeApplicationButton() throws InterruptedException{
 	System.out.println("Resume application link clicked successfully");
 }
 public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
-	CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 30);
+	CommonUtility.waitForPageLoadNew(driver, resumeApplicationBtn, 60);
 	validateNew(resumeApplicationBtn);
 	
 	applicationID.sendKeys(ApplicationID);
 	ResumeDOB.sendKeys(DOB);
 	ResumeZipCode.click();
 	Thread.sleep(2000);
-	ResumeZipCode.sendKeys("90210");
+	ResumeZipCode.sendKeys(zipcode);
 	resumeApplicationBtn.click();
 	
 	System.out.println("Resume application button has been clicked successfully after entering the data on resume application page");

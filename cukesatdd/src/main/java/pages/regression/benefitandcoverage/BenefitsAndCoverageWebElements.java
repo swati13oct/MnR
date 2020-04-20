@@ -147,6 +147,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Look up Drugs')]")
 	protected WebElement LookUpDrugsButton;
 
+	@FindBy(xpath = "//a[contains(text(),'VIEW DETAILS AT OPTUMRX.COM')]")
+	protected WebElement viewDetailsAtOptumrxLink;	
+	
 	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")
 	protected WebElement DrugCopayHeader;
 
@@ -1017,7 +1020,25 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath="//h1")
 	protected WebElement generalPgHeader;
+	
+	@FindBy(linkText = "Express Scripts")
+	protected WebElement expressScriptsLink;
+	
+	@FindBy(id = "proceedbtn")
+	protected WebElement proceedButtonExpressScriptsSSOSiteLeavingPopup;
+	
+	@FindBy(xpath = "//div[@class='intlogo']")
+	protected WebElement ExpressScriptsLogo;
 
+	@FindBy(xpath = "//h1")
+	protected WebElement BenefitsInformationHeaderOptumRx;
+	
+	@FindBy(xpath = "//h1")
+	protected WebElement searchForADrugHeaderOptumRx;
+	
+	@FindBy(linkText = "VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM")
+	protected WebElement viewYourCurrentPrescriptionDrugCostSummaryLink;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

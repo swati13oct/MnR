@@ -136,7 +136,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Language | <language> |
     And the user verifies that the correct pdfs are coming in the plan material section
       | Plan Benefits Table | <PlanBenefitsTable> |
-    And the user validates ship the need help section
+    #note: moved to footer feature
+    #And the user validates ship the need help section
     And the user validates for ship see more ways to contact us section
     And the user validates for ship member on clicking contact us link it should route to contact us page
     And the user clicks on More Information link for ship
@@ -206,7 +207,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Evidence of Coverage                | <EvidenceofCoverageChinies>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug ListChinies> |
       | Alternative Drug List               | <AlternativeDrug ListChinies>            |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -285,7 +287,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Evidence of Coverage                | <EvidenceofCoverageChinies>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug ListChinies> |
       | Alternative Drug List               | <AlternativeDrug ListChinies>            |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -394,7 +397,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -429,7 +433,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates view and document label
     And the user validates spanish and chinese should not display in dropdown
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -461,7 +466,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates static links
       | Plan Type | <planType> |
     And the user validates spanish and chinese should not display in dropdown
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the drugcost dropdown should not display
     And the user validates view and document label
     And the user clicks on More Information link
@@ -507,7 +513,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
      # | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -549,7 +556,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
      # | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -601,7 +609,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -670,7 +679,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | UnitedHealth Passport Program       | <UnitedHealth Passport ProgramChinies>   |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug ListChinies> |
       | Alternative Drug List               | <AlternativeDrug ListChinies>            |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
     
@@ -719,7 +729,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Evidence of Coverage                | <EvidenceofCoverage>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -794,7 +805,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Evidence of Coverage                | <EvidenceofCoverage>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
       | Alternative Drug List               | <AlternativeDrugList>             |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
@@ -926,7 +938,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
       | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-    And the user validates Needhelp section
+    #note: moved to footer feature
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 

@@ -1082,8 +1082,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 								Assert.assertTrue("DEBUG - unable to locate a sample text from page body.  sample text='"+expectedSampleBodyText+"'- doc name="+targetDocName, false);
 							}
 						} else {
-							section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
-							Assert.assertTrue("DEBUG - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'- doc name="+targetDocName, false);
+							if (targetDocName.contains("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
+								 if( actualHeaderText.equals("")) {
+										section_note.add("    * FAILED - page header text is not as expected. Expected to contain some text | Actual='"+actualHeaderText+"'");
+										Assert.assertTrue("DEBUG - page header text is not as expected. Expected to contain some text | Actual='"+actualHeaderText+"'- doc name="+targetDocName, false);
+								 }
+							} else {
+								section_note.add("    * FAILED - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'");
+								Assert.assertTrue("DEBUG - page header text is not as expected. Expected to contain='"+expectedHeaderText+"' | Actual='"+actualHeaderText+"'- doc name="+targetDocName, false);
+							}
 						}
 					}
 				} else {

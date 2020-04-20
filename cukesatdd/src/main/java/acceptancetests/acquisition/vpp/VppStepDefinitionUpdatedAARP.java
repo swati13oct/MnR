@@ -1684,10 +1684,20 @@ public class VppStepDefinitionUpdatedAARP {
 
 	}
 	@Then("^user clicks on resume application button in the AARP site")
-	public void click_resume_application() throws Throwable{
+	public void click_resume_application(DataTable givenAttributes) throws Throwable{
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.ResumeApplicationButton();
+		plansummaryPage.ResumeApplicationButton(DateOfBirth);
 
 	}
 

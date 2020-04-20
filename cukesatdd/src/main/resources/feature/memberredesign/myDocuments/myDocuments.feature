@@ -14,9 +14,6 @@ Feature: 1.06.7 Member My Documents Page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then user validates header section content on My Documents Page
-    And I validate the Note  text on my Documents Page
-    And I validate the disclaimer on my Documents Page 
-    Then I validate Need Help section on my Documents Page
 	#----------------- Test for 90 days----------
     And then the user searches documents for a valid Period on My documents page
       | Search Range | Last 90 days |
@@ -47,6 +44,11 @@ Feature: 1.06.7 Member My Documents Page
     And I custom search documents for the following invalid time interval on my Documents page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
+    #----------------- Test Misc--------------------------
+    And I validate the Note  text on my Documents Page
+    And I validate the disclaimer on my Documents Page 
+    #note: moved to footer feature
+    #Then I validate Need Help section on my Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     @devRegression
@@ -67,9 +69,6 @@ Feature: 1.06.7 Member My Documents Page
       | Member Type  | <memberType>  |
       | Deeplink     | https://stage-medicare.uhc.com/content/medicare/member/my-documents/overview.html |
     Then user validates header section content on My Documents Page
-    And I validate the Note  text on my Documents Page
-    And I validate the disclaimer on my Documents Page 
-    Then I validate Need Help section on my Documents Page
 	#----------------- Test for 90 days----------
     And then the user searches documents for a valid Period on My documents page
       | Search Range | Last 90 days |
@@ -100,6 +99,11 @@ Feature: 1.06.7 Member My Documents Page
     And I custom search documents for the following invalid time interval on my Documents page
       | From Date | 12/12/2019 |
       | To Date   | 12/12/2018 |
+    #----------------- Test Misc--------------------------
+    And I validate the Note  text on my Documents Page
+    And I validate the disclaimer on my Documents Page 
+    #note: moved to footer feature
+    #Then I validate Need Help section on my Documents Page
       
     #------------Pass documents expected flag as Y or N only--------------
     Examples: 

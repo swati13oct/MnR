@@ -18,12 +18,14 @@ import pages.regression.testharness.TestHarness;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.regression.footer.*;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 
@@ -468,12 +470,46 @@ public class EobStepDefinition {
 		if (memberType.contains("COMBO")) 
 			eobPage.goToSpecificComboTab(planType);
 		getLoginScenario().saveBean(PageConstants.EOB_Page, eobPage);
+		FooterPage footerPage=new FooterPage(eobPage.driver);
+		getLoginScenario().saveBean(PageConstants.footer_page,footerPage);
 		System.out.println("user is on the EOB page"); 
 		eobPage.waitForEobPageToLoad();
 	}
 
+	@Then("^the user validate Spending Cost Summary tab on top sub menu$")
+	public void user_validate_spendingCostSummaryTab(DataTable givenAttributes) throws InterruptedException {   
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String fromPage = memberAttributesMap.get("From Page");
+		if (MRScenario.environment.contains("team-a") && fromPage.equalsIgnoreCase("claims")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
+		String expectTabStr = memberAttributesMap.get("Expect Tab");
+		Assert.assertTrue("PROBLEM - input value for 'Expect Tab' in feature file should either be true or false.  Actual='"+expectTabStr+"'",expectTabStr.equalsIgnoreCase("true") || expectTabStr.equalsIgnoreCase("false"));
+		boolean expectTab=Boolean.valueOf(expectTabStr);
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateSpendingCostSummaryTab(expectTab);
+	}
 
-
+	@Then("^the user validate MyClaims top menu sub option$")
+	public void validateMyClaimsTopMenuOption() {
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		eobPage.validateMyClaimsTopSubMenu();
+		
+	}
+	
+	@Then("the user click MyClaims top menu sub option")
+	public void clickMyClaimsTopMenuOption() {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("team env doesn't support Rally claims, skipping this step...");
+			return;
+		}
+		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
+		ClaimsSummaryPage claimsSummaryPage=eobPage.clickMyClaimsTopSubMenu();
+		Assert.assertTrue("PROBLEM - unable to navigate to MyClaims page from EOB page using top sub menu MyClaims", claimsSummaryPage!=null);
+		getLoginScenario().saveBean(PageConstantsMnR.NEW_CLAIMS_SUMMARY_PAGE, claimsSummaryPage);
+		getLoginScenario().saveBean(PageConstantsMnR.CLAIM_SUMMARY_PAGE, claimsSummaryPage);
+	}
 
 	//--------------------------------------------------------------
 	/**

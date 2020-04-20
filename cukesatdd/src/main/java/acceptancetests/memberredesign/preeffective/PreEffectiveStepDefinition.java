@@ -289,39 +289,14 @@ public void userClicksonClaimsTab() throws Throwable {
 }
 
 @Then("^verify that subnavigation is supressed on the claims page$")
-public void verifySubnavigationIsSuppressedOnClaimsPage(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes
-			.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-				.get(0), memberAttributesRow.get(i).getCells().get(1));
-	}
-
-	String memberType = memberAttributesMap.get("Member Type");
-	/* Claim Support number is not displayed to SHIP members as pert of May 1 2019 release*/
-	if (memberType.equalsIgnoreCase("preeffectiveGroupSSUP")) 
-	{
+public void verifySubnavigationIsSuppressedOnClaimsPage() throws Throwable {
+	
 		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
 				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE); 
 		newclaimsSummarypage.checkModelPopup(newclaimsSummarypage.driver);
-		//tbd newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
-		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
-		newclaimsSummarypage.validateExpOfBenSubNavNotDispForSsup();
-	}
-	else 
-	{
-		ClaimsSummaryPage newclaimsSummarypage = (ClaimsSummaryPage) getLoginScenario()
-				.getBean(PageConstants.NEW_CLAIMS_SUMMARY_PAGE);   
-		//write code for handling iperception pop-up
-		//newclaimsSummarypage.feebackpopupClose();
-		newclaimsSummarypage.checkModelPopup(newclaimsSummarypage.driver);
-		//tbd newclaimsSummarypage.checkForIPerceptionModel(newclaimsSummarypage.driver);
 		newclaimsSummarypage.validateClaimsSummarySubNavNotDisplayed();
 		newclaimsSummarypage.validateExplanationOfBenefitsSubNavNotDisplayed();
 	}
-}
   
 
 @Then("^verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on Claims Page$")

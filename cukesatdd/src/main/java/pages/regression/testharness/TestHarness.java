@@ -103,7 +103,8 @@ public class TestHarness extends UhcDriver {
 	@FindBy(linkText = "Go to payment link page")
 	private WebElement TeamCPaymentPage;
 
-	@FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	//tbd @FindBy(xpath = "//div[contains(@class,'header') or contains(@class,'testharness')]/h1[normalize-space()=contains(text(),' ')][not (contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//div[contains(@class,'header') and not(contains(@class,'hide'))]//h1")
 	private WebElement heading;
 
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
@@ -260,7 +261,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	/*
+		/*
 	 * @FindBy(
 	 * xpath="//*[contains(@id,'ACCdropdown') and contains(text(),'Log Out')]")
 	 * private WebElement logOut;
@@ -278,6 +279,16 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath="//a[contains(text(),'Go to My Documents')]")
 	private WebElement testHarnessMyDocumentsLink;
+	
+	@FindBy(name="zipCode")
+	private WebElement zipCodeTextBox;
+	
+	@FindBy(xpath="//button[@name='Update']")
+	private WebElement continueButton;
+	
+	@FindBy(xpath="//h1")
+	private WebElement hcePageText;
+	
 	
 	String category = null;
 
@@ -543,6 +554,12 @@ public class TestHarness extends UhcDriver {
 		validateNew(testHarnessContactUsPageLink);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CommonUtility.waitForPageLoad(driver, panelHome, CommonConstants.TIMEOUT_90);
 		System.out.println("TEST - driver.getTitle().trim()="+driver.getTitle().trim());
 		if (driver.getTitle().trim().contains("Contact Us")) {
@@ -1078,8 +1095,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
+		Thread.sleep(5000);
+		checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
-		System.out.println("Now waiting for 20 seconds");
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
 	}
@@ -1448,7 +1466,7 @@ public class TestHarness extends UhcDriver {
 					WebElement targetTab=null;
 					if (planType.equalsIgnoreCase("MAPD"))
 						targetTab=comboTab_MAPD;
-					else if (planType.equalsIgnoreCase("PDP")) 
+					else if (planType.equalsIgnoreCase("PDP") || planType.toUpperCase().startsWith("PDP")) 
 						targetTab=comboTab_PDP;
 					else if (planType.equalsIgnoreCase("SHIP")) 
 						targetTab=comboTab_SHIP;
@@ -1519,4 +1537,76 @@ public class TestHarness extends UhcDriver {
 			}
 			return null;
 		}
+		
+		   public void userdirectlyaccessesmyhcesso() {
+				// TODO Auto-generated method stub
+			   System.out.println("Accessing https://stage-medicare.uhc.com/myhce");
+			   driver.navigate().to("https://stage-medicare.uhc.com/myhce");
+			   try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			   System.out.println("Current URL is :  "+driver.getCurrentUrl());
+			   
+			   }
+
+		 
+		   public void userEntersZipCode(String zipCode) {
+			   
+			   	try {
+			   		if (driver.getTitle().contains("Zip Code Entry Page"))
+			   				{
+			   			System.out.println("Zip code Page / zip entry text box field was displayed");
+			   			CommonUtility.waitForPageLoad(driver, zipCodeTextBox, 20);
+			   			System.out.println("Now entering Zip code fetched from feature file");
+			   			sendkeys(zipCodeTextBox, zipCode);
+			   			System.out.println("Zip code was enetered");
+			   				}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Zip code Page / zip entry text box field was not displayed, failing this test script");
+					Assert.fail("Zip code text box fiels was not displayed");
+				}
+			       }	
+		   
+	public void clickContinueonZipEntryPage() {
+				// TODO Auto-generated method stub
+			   System.out.println("Now clicking Continue button");
+			   continueButton.click();
+			   System.out.println("Continue button was clicked");
+			   try {
+				   System.out.println("Waiting for 5 seconds");
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		   
+		   
+		public void checkuserlandsonhceestimatorpage() {
+			 System.out.println("Current URL is :  "+driver.getCurrentUrl());
+			 System.out.println("Now checking for header element h1 of the page");
+			 
+				try {
+					String gethcePageText = hcePageText.getText();
+					System.out.println("Now checking if header element h1 of the page contains myHealthcare Cost Estimator text");
+			   		if (gethcePageText.contains("myHealthcare Cost Estimator"))
+			   				{
+			   			System.out.println("myHealthcare Cost Estimator Text was displayed");
+			   			
+			   				}
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("myHealthcare Cost Estimator Text was not displayed in h1 header of myhce page, failing this test script");
+					Assert.fail("myHealthcare Cost Estimator Text was not displayed");
+				}
+			
+			
+		}
+		   
 }

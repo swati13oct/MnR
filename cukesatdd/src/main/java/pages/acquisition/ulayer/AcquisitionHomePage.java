@@ -28,6 +28,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -403,7 +404,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage,testharnessurl);
 	}
-
+    
+	public String fetchEnvironmentUrls () {
+		if (MRScenario.environment.equals("offline")) {
+		  testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+		  return testSiteUrl;
+		}
+		else if (MRScenario.environment.equals("prod")) {
+			 testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+			 return testSiteUrl;
+		}
+		else
+			testSiteUrl = AARP_ACQISITION_PAGE_URL;
+		    return testSiteUrl;
+	  }
+	
 	@Override
 	public void openAndValidate() {
 
@@ -420,7 +435,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}else {
 			start(AARP_ACQISITION_PAGE_URL);
 			testSiteUrl=AARP_ACQISITION_PAGE_URL;
-			checkModelPopup(driver,10);		
+			checkModelPopup(driver,30);		
 		}
 	//	CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
@@ -449,7 +464,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
-			checkModelPopup(driver,15);
+			checkModelPopup(driver,30);
 			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 45);
 			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 			try{
@@ -463,7 +478,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				CommonUtility.checkPageIsReadyNew(driver);
 				System.out.println("Current page URL: "+driver.getCurrentUrl());
 				testSiteUrl=driver.getCurrentUrl();
-				checkModelPopup(driver,15);
+				checkModelPopup(driver,30);
 				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 				try{
 					if(proactiveChatExitBtn!=null)
@@ -561,7 +576,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
 		testSiteUrl=driver.getCurrentUrl();
-		checkModelPopup(driver,15);
+		checkModelPopup(driver,30);
 		CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 		try{
 			if(proactiveChatExitBtn!=null)
@@ -1702,6 +1717,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public OLETestHarnessPage GetOLETestHarnessPage() {
+			return new OLETestHarnessPage(driver);
+		}
+		
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
@@ -1814,8 +1833,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 
+		
+		private void CheckPageLoad() {
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: "+driver.getCurrentUrl());
+			checkModelPopup(driver, 30);
+		
+		}
+		
+		public void CheckiPerseptions() {
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			try{
+				if(proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			}catch(Exception e){
+				System.out.println("Proactive chat popup not displayed");
+			}
+		}
+		
+		
 		public void validateSubNavShopPlanLinks() {
-			
+			CheckPageLoad();
+			CheckiPerseptions();
+		
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
 				Actions actions = new Actions(driver);
@@ -1878,7 +1918,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		public void validateSubNavMedEdLinks() {
-			
+			CheckPageLoad();
+			CheckiPerseptions();
+		
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
 				Actions actions = new Actions(driver);
@@ -1956,6 +1998,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}	
 			visitorprofileicon.click();
 			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			CheckPageLoad();
+			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
 			if(driver.getCurrentUrl().contains("profile/guest")){
 		      Assert.assertTrue(true);
@@ -1965,6 +2009,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("Visitor Profile page is not opening up");
 			}
 			driver.navigate().back();
+			CheckPageLoad();
+			CheckiPerseptions();
+
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 		}
 
@@ -2036,6 +2083,59 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			System.out.println("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 		}
+		
+		
+		public AcquisitionHomePage  verifyChatpopup() throws InterruptedException {
+			//CommonUtility.checkPageIsReady(driver);
+			chatsam.click();
+			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
+				
+			return null;
+		}
+		
+		public AcquisitionHomePage validateChatSamAcq() throws InterruptedException {
+	        boolean present;
+	        try {
+	        validateNew(chatsam);
+	        present = true;
+	        } catch (NoSuchElementException e) {
+	        present = false;
+	        }
+	        if (present) {
+	          System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+	        }
+	        else
+	        	System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+	       return null;
+		}
+		
+		public AcquisitionHomePage validateChatSamContentAcq() throws InterruptedException {
+			
+			Actions action = new Actions(driver);
+			WebElement element = chatsam;
+			action.moveToElement(element).perform();
+			String ChattoolTipText = chatsamtooltip.getText();
+			System.out.println("====================================================================");
+			System.out.println(ChattoolTipText);
+			System.out.println("====================================================================");
+			
+	        if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+	          System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+	        }
+	        else
+	        	System.out.println("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	       return null;
+		}
+		
+	public AcquisitionHomePage  navigateToPage(String page) {
+		String pageURL = driver.getCurrentUrl()+page;
+		System.out.println("==pageURL=="+pageURL);
+		driver.navigate().to(pageURL);
+		
+		
+		return null;
+		
+	}
 
 	}
 

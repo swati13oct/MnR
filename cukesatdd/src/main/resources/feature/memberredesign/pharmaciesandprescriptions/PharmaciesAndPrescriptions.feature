@@ -33,7 +33,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Expect Link | <expectLink> |
    #note: uncomment payment page when one-time payment button is showing again
    # Then user navigates to the payment page to validate Pharamcies and Prescriptions link
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -51,7 +51,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates pharmacies tile Check home delivery order status page
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
-    Then user validates Need Help section content
+    #note: moved to footer feature
+    #Then user validates Need Help section content
 
     @pharmaciesandprescriptions01a @devRegression
     Examples: 
@@ -106,7 +107,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
@@ -152,7 +153,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
@@ -171,7 +172,8 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
     Then user validates pharmacies tile Check home delivery order status page
     Then user validates pharmacies tile Prescription Benefits Information page
     Then user validates Plan Materials link
-    Then user validates Need Help section content
+    #note: moved to footer feature
+    #Then user validates Need Help section content
 
     @forLocalTestOnly01_pharmaciesandprescriptions01a
     Examples: 
@@ -198,7 +200,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
 
 
   @forLocalTestOnly02
-  Scenario Outline: To validate via member authorization access for claims
+  Scenario Outline: To validate via member authorization access for PnP
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -211,7 +213,7 @@ Feature: 1.18 Member Pharamcies And Prescriptions page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the claims page to validate Pharamcies and Prescriptions link
+    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
