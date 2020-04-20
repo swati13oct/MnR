@@ -39,6 +39,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                 PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
             	ArrayList<String> werallyResults = new ArrayList<String>();
             	ArrayList<String> confirmationResults = new ArrayList<String>();
+            	ArrayList<String> confirmationSpecialtyResults = new ArrayList<String>();
                 
                 PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
                 
@@ -272,12 +273,21 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
                                 public void getConfimationPopupResults(int count) {
                             		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
                             		if(count==modalDoctorsList.size() && count==confirmationSize) {
-                            			for (int i = count; i > 0; i--) {
-                            				confirmationResults.add(driver.findElement(By.cssSelector("#modal .modal-content .row:nth-of-type(2) uhc-list-item:nth-child("+ i +") .list-item-content>div>strong")).getText().trim());
+                            			confirmationResults = new ArrayList<String>();
+                            			confirmationSpecialtyResults = new ArrayList<String>();
+                            			for (int i = 0; i < count; i++) {
+                            				confirmationResults.add(
+                            						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content p:nth-child(1)")).getText().replace("\n", " ").trim());
+                            			confirmationSpecialtyResults.add(
+                        						modalDoctorsList.get(i).findElement(By.cssSelector(".list-item-content p:nth-child(2)")).getText().replace("\n", " ").trim());
                             			}
                             			Collections.sort(confirmationResults);
+                            			Collections.sort(confirmationSpecialtyResults);
                             			System.out.println("confirmationResults Size is : "+confirmationResults.size());
                             			System.out.println("confirmationResults Content is : "+confirmationResults);
+                            			System.out.println("confirmationSpecialtyResults Size is : "+confirmationSpecialtyResults.size());
+                            			System.out.println("confirmationSpecialtyResults Content is : "+confirmationSpecialtyResults);
+                            			
                             		}
                             		else {
                             			System.out.println("Modal Results Count mismatch");

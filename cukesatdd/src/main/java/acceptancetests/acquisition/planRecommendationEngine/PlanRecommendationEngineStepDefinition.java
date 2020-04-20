@@ -77,7 +77,7 @@ public class PlanRecommendationEngineStepDefinition {
 		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
 		aquisitionhomepage.openPRE();
-		aquisitionhomepage.fixPrivateConnection();
+//		aquisitionhomepage.fixPrivateConnection();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
@@ -212,7 +212,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-//		headerAndFooter.navigationToPlanRecommendationEngine();
+		headerAndFooter.navigationToPlanRecommendationEngine();
 //		headerAndFooter.breadCrumbs();
 	}
 	
@@ -588,5 +588,29 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 //   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
+   	}
+	
+	@Then("^user validate recommendations in results page$")
+   	public void view_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		planSelectorResultspage.resultsUI(zip,county,r1,plan,r2,false);
+   	}
+	
+	@Then("^user validate tie recommendations in results page$")
+   	public void view_tie_recommendations_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		String zip = inputValues.get("Zip Code");
+		String county = inputValues.get("County Name");
+		String r1 = inputValues.get("1st Recommendation");
+		String plan = inputValues.get("1st Ranking plan");
+		String r2 = inputValues.get("2nd Recommendation");
+		planSelectorResultspage.resultsUI(zip,county,r1,plan,r2,true);
    	}
 }
