@@ -185,6 +185,12 @@ public class VisitorProfileStepDefinition_AARP {
 		visitorProfile.deleteAllDrugs();
 	}
 	
+	@And("^user delets all the added providers on visitor profile page of AARP site$")
+	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteAllProviders();
+	}
+	
 	@Then("^Verify X out of Y provider covered information is displayed on visitor profile page of AARP site$")
 	public void verify_providers_covered_ulayer_visitor_profile(DataTable Planname) {
 

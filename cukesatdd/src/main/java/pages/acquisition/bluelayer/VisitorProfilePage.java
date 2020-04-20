@@ -38,6 +38,9 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
 	
+	@FindBy(xpath="//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
+	private WebElement expandProviderBlock;
+	
 	@FindBy(xpath="//*[contains(@id,'DrugName-noplan-0')]")
 	private WebElement drugName;
 	
@@ -238,5 +241,36 @@ public class VisitorProfilePage extends UhcDriver {
 			return new VPPTestHarnessPage(driver);
 		}
 		return null;
+	}
+	
+	/**
+	 * Get the added provider information
+	 * @param planName
+	 * @return
+	 */
+	public boolean providerinfo(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')]//button[contains(@class,'provider-toggle')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+		if(mproviderinfo.toLowerCase().contains("providers covered"))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Delete all the providers from the profile
+	 */
+	public void deleteAllProviders() {
+		CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
+		expandProviderBlock.click();
+		driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+		/*for (WebElement drug: savedDrugs) {
+			drug.findElement(By.xpath("//button")).click();
+		}*/
+		Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
 	}
 }

@@ -36,7 +36,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -608,6 +607,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 		private WebElement medSuppOleDobHeading;
+		
+		@FindBy(id="dupIconFlyOut")
+		private WebElement shoppingCartIcon;
 		
 		@FindBy(id = "MPAED")
 		private WebElement medSuppOleHospitalPartA;
@@ -3695,6 +3697,20 @@ catch (Exception e) {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 	
 }

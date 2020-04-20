@@ -4,16 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 /**
@@ -233,6 +236,32 @@ public class VisitorProfileStepDefinition_UHC {
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
 		VisitorProfilePage visitorProfilePage = vpTestHarnessPage.DeleteplaninVisitorProfile(planID);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	/**
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify X out of Y provider covered information is displayed on visitor profile page of UHC site$")
+	public void verify_providers_covered_ulayer_visitor_profile(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", visitorProfile.providerinfo(planName));
+	}
+	
+	@And("^user delets all the added providers on visitor profile page of UHC site$")
+	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_UHC_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteAllProviders();
 	}
 } 
 

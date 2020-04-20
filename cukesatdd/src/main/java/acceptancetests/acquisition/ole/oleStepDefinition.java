@@ -20,6 +20,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -40,7 +41,6 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -271,7 +271,6 @@ public class oleStepDefinition {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 			//TFN = visitorProfilePage.GetTFNforPlanType();
 			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 		//--------------------------------------------------------------------------------------------------------------------

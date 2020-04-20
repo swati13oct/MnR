@@ -2858,4 +2858,12 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
+	
+	@Then("^Navigate to Visitor Profile page on UMS site$")
+	public void navigate_to_Visitor_Profile_page_on_UMS_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 } 

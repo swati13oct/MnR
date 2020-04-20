@@ -112,6 +112,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | PlanName | <planname> |
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
+    And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
       | username  | password  | email                  | plantype | planname                                            | testPlans                                                                                               |

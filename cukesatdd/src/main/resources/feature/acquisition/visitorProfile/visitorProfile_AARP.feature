@@ -258,7 +258,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
 
     Examples: 
       | zipcode | isMultiCounty | plantype | DOB        | county           | MS_testPlans  |
-      |   90210 | NO            | MS       | 11111949 | Jefferson County | Plan G,Plan A |
+      |   90210 | NO            | MS       | 11/11/1949 | Jefferson County | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for Visitor Profile page
@@ -334,10 +334,6 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | User Name | <userName> |
       | Password  | <password> |
     And the user clicks on the add plans button in the profile in AARP site
-    When the user enters zipcode on health plans page in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
     Then user saves two plans as favorite on AARP site
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -350,7 +346,8 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
     And user delets the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
+    	| Test Plans | <testPlans> |
+    And user delets all the added providers on visitor profile page of AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | testPlans                                                                 |

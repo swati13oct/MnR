@@ -334,7 +334,7 @@ Feature: 2.08. ACQ-Visitor profile - UMS
       | Alabama | mnrqavd  | Password@1 | Lipitor | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |     2020 |
 
   @providerFlowUHCAuthenticated
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
+  Scenario Outline:  Verify Provider Search functional flow for Visitor Profile page
     Given the user is on the uhcmedicaresolutions site landing page
     And the user clicks on the shopping cart icon in UHC site
     Then the user signs in with optum Id credentials in UHC site
@@ -343,26 +343,20 @@ Feature: 2.08. ACQ-Visitor profile - UMS
     And the user validates the plan year buttons are present or not and chooses the plan year in UHC
       | Plan Year | <planYear> |
     And the user clicks on the add plans button in the guest profile in UHC site
-    When the user enters zipcode on health plans page in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user saves two plans as favorite on UHC site
       | Test Plans | <testPlans> |
       | Plan Type  | <plantype>  |
-    Then user gets a create profile prompt on UHC site
-    Then user click on continue as guest button on UHC site
-    And user validates the added plans on visitor profile page of UHC site
-      | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the guest profile in UHC site
-    When user views plans of the below plan type in UMS site for next year
-      | Plan Type | <plantype> |
     When user Click on Is my Provider covered link ums
       | PlanName | <planName> |
     When user selects a provider and retuns to VPP page in ums
     Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
       | PlanName | <planName> |
+     Then Navigate to Visitor Profile page on UMS site
+    Then Verify X out of Y provider covered information is displayed on visitor profile page of UHC site
+      | PlanName | <planname> |
+    And user delets the added plans on visitor profile page of UHC site
+      | Test Plans | <testPlans> |
+    And user delets all the added providers on visitor profile page of UHC site
 
     Examples: 
       | zipcode | isMultutiCounty | county          | userName | password   | plantype | planName                             | testPlans                                                                 |

@@ -1,7 +1,5 @@
 package acceptancetests.acquisition.vpp;
 
-import gherkin.formatter.model.DataTableRow;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,29 +8,23 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.KeywordSearch;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.MultiCountyModalPage;
-import pages.acquisition.ulayer.OurPlansPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.keywordSearchAARP;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-//import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+//import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.KeywordSearch;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.ole.WelcomePage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -1004,4 +996,13 @@ public class VppPlanSummaryStepDefinitionUHC {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+	
+	@Then("^Navigate to Visitor Profile page on UMS site$")
+	public void navigate_to_Visitor_Profile_page_on_UMS_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
 } 
