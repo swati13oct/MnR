@@ -16,7 +16,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	public void openAndValidate() throws InterruptedException {
 	}
 
-	@FindBy(id="claimsummaryC1")
+	@FindBy(xpath="//a[contains(text(),'My Claims')]")
 	protected WebElement claimsTabTopMenu;
 
 	@FindBy(xpath="//a[contains(text(),'Premium Payments')]")
@@ -34,7 +34,7 @@ public class ClaimsSummaryWebElements extends ClaimsBase {
 	@FindBy(xpath="//button[@id='all-claims-print-claims-btn']")
 	protected WebElement claimsSummPrntBtn;
 
-	@FindBy(xpath="//a[@id='eobC1']")
+	@FindBy(xpath="//a[contains(text(),'Explanation of Benefits')]")
 	protected WebElement eob_claims;
 
 	@FindBy(xpath="//h1[contains(text(),'Explanation of Benefits')]")
