@@ -45,7 +45,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@href,'pdp-enrollment')]")
 	private WebElement pdpLeanHowToEnrollLink;
 	
-	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
+	@FindBy(xpath = "//span[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 	
 	@FindBy(id = "js-ole-zip-search")

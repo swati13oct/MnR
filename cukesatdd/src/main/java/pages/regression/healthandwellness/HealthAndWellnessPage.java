@@ -111,7 +111,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][7]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
 	protected WebElement closeTooltipX_ship;
 	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[text()='Terms and Conditions']")
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][8]//a[contains(@href,'term')]")
 	protected WebElement termsAndConditions_ship;
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='FIND YOUR GYM']")
@@ -132,7 +132,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//div[contains(@class,'tooltip') and contains(@style,'display')]//a[@class='close-tooltip']")
 	protected WebElement closeTooltipX;
 	
-	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[text()='Terms and Conditions']")
+	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')]//a[contains(@href,'term')]")
 	protected WebElement termsAndConditions;
 
 	boolean testThirdPartyPage=false; //note: consent is to not test 3rd party page, but capable if needs to
@@ -441,6 +441,8 @@ public class HealthAndWellnessPage extends UhcDriver{
 				goBackToPriorPgViaBack(originalUrl);
 			}
 		}
+		//note: temperary disable this validation due to COVID related update
+		/*
 		//note: Find A Gym ------------------
 		String targetElement="Find Your Gym";
 		WebElement gymElement=findGymLnk;
@@ -483,13 +485,16 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' landing page URL is not as expected. Expected='"+expectedHref+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedHref));
 			Assert.assertTrue("PROBLEM - unable to locate general header on landing page URL for link from "+targetElement, hwValidate(generalHeader));
 			goBackToPriorPgViaBack(originalUrl);
-		}
+		} 
+		*/
 
 		//note: Confirmation Code ------------------
-		targetElement="Your Code";
+		String targetElement="Your Code";
 		WebElement codeElement=yourCode;
-		if (planType.toUpperCase().contains("SHIP")) 
-			codeElement=yourCode_ship;
+		//note: temperary disable the following if condition until gym and brain test is displaying again
+		//keep if (planType.toUpperCase().contains("SHIP")) 
+		//keep 	codeElement=yourCode_ship;
+		CommonUtility.waitForPageLoad(driver, codeElement, 10);
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(codeElement));
 		String actualText=codeElement.getText();
 		System.out.println("TEST - yourCode="+actualText);
@@ -500,11 +505,12 @@ public class HealthAndWellnessPage extends UhcDriver{
 		WebElement tooltipIconElement=tooltipIcon;
 		WebElement tooltipTextElement=tooltipText;
 		WebElement closeTooltipXElement=closeTooltipX;
-		if (planType.toUpperCase().contains("SHIP")) {
-			tooltipIconElement=tooltipIcon_ship;
-			tooltipTextElement=tooltipText_ship;
-			closeTooltipXElement=closeTooltipX_ship;
-		}
+		//note: temperary disable the following if condition until gym and brain test is displaying again
+		//keep if (planType.toUpperCase().contains("SHIP")) {
+		//keep 	tooltipIconElement=tooltipIcon_ship;
+		//keep 	tooltipTextElement=tooltipText_ship;
+		//keep 	closeTooltipXElement=closeTooltipX_ship;
+		//keep }
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(tooltipIconElement));
 		scrollElementToCenterScreen(tooltipIconElement);
 		moveMouseToElement(tooltipIconElement);
@@ -523,12 +529,13 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//note: Terms and Conditions ------------------
 		targetElement="Terms and Conditions";
 		WebElement termsAndConditionsElement=termsAndConditions;
-		if (planType.toUpperCase().contains("SHIP")) {	
-			termsAndConditionsElement=termsAndConditions_ship;
-		}
+		//note: temperary disable the following if condition until gym and brain test is displaying again
+		//keep if (planType.toUpperCase().contains("SHIP")) {	
+		//keep 	termsAndConditionsElement=termsAndConditions_ship;
+		//keep }
 		Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(termsAndConditionsElement));
-		expectedHref="active/terms";
-		actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
+		String expectedHref="active/terms";
+		String actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 		if (testThirdPartyPage) {
 			termsAndConditionsElement.click();

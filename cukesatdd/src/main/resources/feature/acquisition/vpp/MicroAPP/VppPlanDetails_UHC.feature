@@ -217,7 +217,7 @@ Feature: Vpp to plan Details UHC Scenarios
       | 00012 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     |
       | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       |
 
-  @vppPlanDetailsUHC10 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC10 @vppPlanDetailsUHCRun03
   Scenario Outline: TCID - <TCID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

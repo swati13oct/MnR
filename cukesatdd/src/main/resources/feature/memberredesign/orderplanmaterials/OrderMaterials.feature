@@ -83,6 +83,7 @@ Feature: 1.10 Member  order materials Page
     Then user validates header section of page content on order materials page
     And user validates selection section of page content on order materials page
     And user validates printable documentations section of page content on order materials page
+    #note: moved to footer feature
     # And user validates need help section of page content on order materials page
     And user validates error message when submit without any selection
     Then user validates ability to submit order for each item individually for all available items
