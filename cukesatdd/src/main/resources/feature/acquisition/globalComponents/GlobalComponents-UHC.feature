@@ -41,7 +41,7 @@ Feature: 2.12 ACQ - Global Components UHC
       | TFNflag  | <tfnFlag>  |
    # Then the user validates Pro-active Chat on UHC site
     Then the user validates SAM Call Icon on UHC site
-    Then the user validates SAM re-active Chat on UHC site
+   # Then the user validates SAM re-active Chat on UHC site
 
     @MedEdPages_1_GlobalCompsUHC
     Examples: 
@@ -113,7 +113,8 @@ Feature: 2.12 ACQ - Global Components UHC
       | health-plans/resources/how-to-appoint-a-representative.html       | ShopPlan: Resources Appoint Rep      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/prescription-drug-costs-help.html          | ShopPlan: Resources Rx cost Help     | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/healthcare-fraud.html                      | ShopPlan: Resources Healthcare Fraud | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | health-plans/resources/how-to-pay-your-premium.html               | ShopPlan: Resources Pay Premium      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+       
     @ShopPlan_Resources2_GlobalCompsUHC
     Examples: 
       | path                                                                                           | pageName                                         | tfnXpath                                                       | tfnFlag |
@@ -132,7 +133,8 @@ Feature: 2.12 ACQ - Global Components UHC
       | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html            | ShopPlan: Resources MA Member Rights  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          | ShopPlan: Resources MA Appeals        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | ShopPlan: Resources PDP Disenrollment | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-
+      | health-plans/resources/disenrollment-information.html                                            | ShopPlan: Resources Disenrollment Page| //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+    
     # Replace any "#" chars in the deeplink with "!"
     @VPP_Deeplinks_GlobalCompsUHC
     Examples: 
