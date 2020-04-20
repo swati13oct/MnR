@@ -6,6 +6,7 @@ package pages.acquisition.ole;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -207,18 +208,26 @@ public class ReviewSubmitPage extends UhcDriver{
 			}else flag =false;
 
 		}
-		String PartADisplayed = PartADisplay.getText().replaceAll("-", "");
-		if(PartADisplayed.contains(PartAeffectiveDate)){
-			flag = (!flag)?false:true;
-			System.out.println(PartAeffectiveDate+" : "+PartADisplayed+" : "+flag);
-		}else flag =false;
-		
-		String PartBDisplayed = PartBDisplay.getText().replaceAll("-", "");
-		if(PartBDisplayed.contains(PartBeffectiveDate)){
-			flag = (!flag)?false:true;
-			System.out.println(PartBeffectiveDate+" : "+PartBDisplayed+" : "+flag);
-		}else flag =false;
-
+		if (StringUtils.isEmpty(PartAeffectiveDate)) {
+			System.out.println("PartAeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
+		} else {
+			String PartADisplayed = PartADisplay.getText().replaceAll("-", "");
+			if (PartADisplayed.contains(PartAeffectiveDate)) {
+				flag = (!flag) ? false : true;
+				System.out.println(PartAeffectiveDate + " : " + PartADisplayed + " : " + flag);
+			} else
+				flag = false;
+		}
+		if (StringUtils.isEmpty(PartBeffectiveDate)) {
+			System.out.println("PartBeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
+		} else {
+			String PartBDisplayed = PartBDisplay.getText().replaceAll("-", "");
+			if (PartBDisplayed.contains(PartBeffectiveDate)) {
+				flag = (!flag) ? false : true;
+				System.out.println(PartBeffectiveDate + " : " + PartBDisplayed + " : " + flag);
+			} else
+				flag = false;
+		}
 		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
 		if(DOBDisplayed.contains(DOB)){
 			flag = (!flag)?false:true;
@@ -231,51 +240,54 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println(Gender+" : "+GenderDisplayed+" : "+flag);
 		}else flag =false;
 		
-		String PermStreetDisplayed = StreetDisplays.get(0).getText();
-		if(PermStreetDisplayed.contains(Perm_Street)){
-			flag = (!flag)?false:true;
-			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
-		}else flag =false;
-		
-		String PermCityDisplayed = CityDisplays.get(0).getText();
-		if(PermCityDisplayed.contains(Perm_city)){
-			flag = (!flag)?false:true;
-			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
-		}else flag =false;
+        if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
+        	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
+        }else{
+        	String PermStreetDisplayed = StreetDisplays.get(0).getText();
+    		if(PermStreetDisplayed.contains(Perm_Street)){
+    			flag = (!flag)?false:true;
+    			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
+    		}else flag =false;
+    		
+    		String PermCityDisplayed = CityDisplays.get(0).getText();
+    		if(PermCityDisplayed.contains(Perm_city)){
+    			flag = (!flag)?false:true;
+    			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
+    		}else flag =false;
 
-		
-		String MailAddQuestionDisplayed = MailingQiuestionDisplay.getText();
-		if(MailAddQuestionDisplayed.contains(MailingQuestion)){
-			flag = (!flag)?false:true;
-			System.out.println(MailingQuestion+" : "+MailAddQuestionDisplayed+" : "+flag);
-		}else flag =false;
+    		
+    		String MailAddQuestionDisplayed = MailingQiuestionDisplay.getText();
+    		if(MailAddQuestionDisplayed.contains(MailingQuestion)){
+    			flag = (!flag)?false:true;
+    			System.out.println(MailingQuestion+" : "+MailAddQuestionDisplayed+" : "+flag);
+    		}else flag =false;
 
-		if(MailingQuestion.equalsIgnoreCase("no")){
-			String StateDisplayed = MailStateDisplay.getText();
-			if(StateDisplayed.contains(Mailing_State)){
-				flag = (!flag)?false:true;
-				System.out.println(Mailing_State+" : "+StateDisplayed+" : "+flag);
-			}else flag =false;
-			
-			String ZipDisplayed = MailZipDisplay.getText();
-			if(ZipDisplayed.contains(Mailing_Zip)){
-				flag = (!flag)?false:true;
-				System.out.println(Mailing_Zip+" : "+ZipDisplayed+" : "+flag);
-			}else flag =false;
-			
-			String MailStreetDisplayed = StreetDisplays.get(1).getText();
-			if(MailStreetDisplayed.contains(Mailing_Street)){
-				flag = (!flag)?false:true;
-				System.out.println(Mailing_Street+" : "+MailStreetDisplayed+" : "+flag);
-			}else flag =false;
+    		if(MailingQuestion.equalsIgnoreCase("no")){
+    			String StateDisplayed = MailStateDisplay.getText();
+    			if(StateDisplayed.contains(Mailing_State)){
+    				flag = (!flag)?false:true;
+    				System.out.println(Mailing_State+" : "+StateDisplayed+" : "+flag);
+    			}else flag =false;
+    			
+    			String ZipDisplayed = MailZipDisplay.getText();
+    			if(ZipDisplayed.contains(Mailing_Zip)){
+    				flag = (!flag)?false:true;
+    				System.out.println(Mailing_Zip+" : "+ZipDisplayed+" : "+flag);
+    			}else flag =false;
+    			
+    			String MailStreetDisplayed = StreetDisplays.get(1).getText();
+    			if(MailStreetDisplayed.contains(Mailing_Street)){
+    				flag = (!flag)?false:true;
+    				System.out.println(Mailing_Street+" : "+MailStreetDisplayed+" : "+flag);
+    			}else flag =false;
 
-			String MailCityDisplayed = CityDisplays.get(1).getText();
-			if(MailCityDisplayed.contains(Mailing_City)){
-				flag = (!flag)?false:true;
-				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
-			}else flag =false;
-
-		}
+    			String MailCityDisplayed = CityDisplays.get(1).getText();
+    			if(MailCityDisplayed.contains(Mailing_City)){
+    				flag = (!flag)?false:true;
+    				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
+    			}else flag =false;
+    		}
+        }
 
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
 			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
