@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -23,12 +24,10 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import junit.framework.Assert;
+import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.PageTitleConstants;;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 public class AcquisitionHomePage extends GlobalWebElements {
