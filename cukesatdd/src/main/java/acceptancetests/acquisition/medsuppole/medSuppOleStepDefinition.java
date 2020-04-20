@@ -49,8 +49,10 @@ public class medSuppOleStepDefinition {
 			getLoginScenario().saveBean(PageConstants.MEDSUPP_OLE_PAGE, medSuppOLEPage);
 			System.out.println("OLE Welcome Page is Displayed");
 			Assert.assertTrue(true);
-		} //else
-		//	Assert.fail("Error in validating the OLE Welcome Page");
+		} 
+		else{
+		Assert.fail("Error in validating the OLE Welcome Page");
+		}
 	}
 
 	@When("^user fill medsupp form details and proceed to next pages")
