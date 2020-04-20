@@ -2448,6 +2448,27 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 
+	/**
+	 * Save the given Medsupp plans
+	 * @param savePlanNames
+	 */
+	public void saveMSPlans(String savePlanNames) {
+		
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan: listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));

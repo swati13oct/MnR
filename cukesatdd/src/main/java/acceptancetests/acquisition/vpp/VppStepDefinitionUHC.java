@@ -1099,13 +1099,10 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-		String ma_savePlanNames = memberAttributesMap.get("MS Test Plans");
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
 
 		// ----- MS plan type ----------------------------
-		String planType = "MS";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ma_savePlanNames, planType);
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
 	}
 
 	@Then("^user gets a create profile prompt on UHC site$")

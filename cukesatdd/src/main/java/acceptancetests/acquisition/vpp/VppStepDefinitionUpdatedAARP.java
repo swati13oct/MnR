@@ -1163,11 +1163,9 @@ public class VppStepDefinitionUpdatedAARP {
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
 
-		//----- MA plan type ----------------------------
-		String planType="MS";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.CheckClick_CurrentYear_Plans();
-		plansummaryPage.savePlans(ms_savePlanNames, planType);
+		//----- MS plan type ----------------------------
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
+
 	}
 	
 	@Then("^user gets a create profile prompt on AARP site$")
