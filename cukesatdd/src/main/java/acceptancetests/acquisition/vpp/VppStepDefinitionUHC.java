@@ -38,7 +38,6 @@ import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
 
 /**
  * Functionality: VPP UHC site
@@ -2766,7 +2765,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^verify plans added in plan compare on visitor Profile for UHC$")
 	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forUHC() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
 	}
