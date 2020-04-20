@@ -189,7 +189,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	public AcquisitionHomePageMobile validateChatSamContentOnTablet() throws InterruptedException {
 		Actions action = new Actions(driver);
-		// WebElement element = chatsam;
 		action.moveToElement(chatsam).perform();
 		String toolTipText = chatSamTooltip.getText();
 		System.out.println("====================================================================");
@@ -207,23 +206,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	public AcquisitionHomePageMobile verifyChatpopupOnTablet() {
-		boolean present;
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().frame(chatSamPopupFrame);
-		//driver.switchTo().frame(1);
-		try {
-			validateNew(chatSamPopupTitle);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
-		}
-		System.out.println(chatSamPopupTitle.getText()+"             "+ChatSamPopupTitle);
-		if (present && (chatSamPopupTitle.getText().equalsIgnoreCase(ChatSamPopupTitle))) {
-			System.out.println("@@@@@@@@@ Pre chat survey displayed @@@@@@@@@");
-			return new AcquisitionHomePageMobile(driver);
-		} else
-			System.out.println("@@@@@@@@@ pre chat survey is not displayed @@@@@@@@@");
 		return null;
 	}
 

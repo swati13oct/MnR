@@ -75,12 +75,7 @@ public class SAMIconsStepDefinitionAARPTablet {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSamOnTablet();
 		aquisitionhomepage.validateChatSamContentOnTablet();
-		AcquisitionHomePageMobile returnval=aquisitionhomepage.verifyChatpopupOnTablet();
-		if (returnval == null) {
-			Assert.fail("No Chat SAM found");
-		} else {
-			Assert.assertTrue(true);
-		}
+		aquisitionhomepage.verifyChatpopupOnTablet();
 	}
 
 }

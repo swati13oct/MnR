@@ -9,8 +9,6 @@ Feature: 1.19.1 ACQ UHC- To test Home Page in UHC site on Tablet
     Then the user validates whether call icon is visible on UHC Tablet
     Then the user validates whether chat icon is visible on UHC Tablet
 
-    @header_1
     Examples: 
       | pagename            |
       | /                   |
-#      | medicare-plans.html |
