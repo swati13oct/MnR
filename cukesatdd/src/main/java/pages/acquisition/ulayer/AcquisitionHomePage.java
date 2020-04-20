@@ -1,7 +1,5 @@
 package pages.acquisition.ulayer;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +10,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,11 +23,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import junit.framework.Assert;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 /**
  * @author pperugu
@@ -1720,6 +1716,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public VisitorProfileTestHarnessPage GetVisitorProfileTestHarnessPage() {
 			return new VisitorProfileTestHarnessPage(driver);
 		}
+		public OLETestHarnessPage GetOLETestHarnessPage() {
+			return new OLETestHarnessPage(driver);
+		}
+		
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");

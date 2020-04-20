@@ -1679,11 +1679,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(planType.equalsIgnoreCase("PDP"))
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		else
-			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(text(),'Enroll in Plan') and not(attribute::data-ng-show)]"));
 		
 		if(enrollForPlan!=null){
 			validateNew(enrollForPlan);
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
 		}
 		
 

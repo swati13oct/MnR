@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -18,6 +19,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -27,6 +29,7 @@ import pages.acquisition.ole.CoverageInformationPage;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PlanPremiumPage;
@@ -38,6 +41,7 @@ import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -536,10 +540,9 @@ public class oleStepDefinition {
 		}
 		else{
 			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-			
-			String plantype = PreliminaryFlagsMap.get("plan_type");
+			String PlanName = PreliminaryFlagsMap.get("PlanName");
 			PrelimineryQuestionsPage prelimineryQuestionsPage = (PrelimineryQuestionsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
-			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, plantype);
+			UseAndDisclosureAuthorizationPage useranddisclosure = prelimineryQuestionsPage.validate_Required_Fields_CSNP(MedicaidNumber, PlanName);
 						
 			if (useranddisclosure!= null){
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
@@ -822,8 +825,7 @@ public class oleStepDefinition {
 		PrelimineryQuestionsPage prelimineryQuestionsPage = medicareInfoPage.navigate_to_Preliminary_Questions_page();
 		if (prelimineryQuestionsPage != null) {
 
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,
-					prelimineryQuestionsPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE,prelimineryQuestionsPage);
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"false");
@@ -2263,6 +2265,134 @@ public class oleStepDefinition {
  		}
  
  	}
+	
+	/** user Lands on the OLe Testharness Page */
+	@Given("^the user is on OLE TestHarness page$")
+	public void validateUserIsOnOLETestharnessPage(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, siteName, TestharnessPage);
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) aquisitionhomepage.GetOLETestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.OLE_TESTHARNESS_PAGE, oleTestHarnessPage);
+
+	}
+
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@When("^the user navigates to OLE WelcomePage using following information$")
+	public void user_navigates_toOLEWelcomePageusingfollowinginformation(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String SiteId = givenAttributesMap.get("SiteId");
+		String PBPNumber = givenAttributesMap.get("PBPNumber");
+		String ClientCode = givenAttributesMap.get("ClientCode");
+		String SegmentId = givenAttributesMap.get("SegmentId");
+		String PlanTypeTH = givenAttributesMap.get("PlanTypeTH");
+		String TFN = givenAttributesMap.get("TFN");
+		String psc = givenAttributesMap.get("psc");
+		String PlanYear = givenAttributesMap.get("Plan Year");
+		String env = givenAttributesMap.get("env");
+		String FipsCode = givenAttributesMap.get("FipsCode");
+		String CMScode = givenAttributesMap.get("CMScode");
+		String HNumber = givenAttributesMap.get("HNumber");
+		String PlanType = givenAttributesMap.get("Plan Type");
+		String PlanName = givenAttributesMap.get("Plan Name");
+		String County = givenAttributesMap.get("County Name");
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String IsMultiCounty = givenAttributesMap.get("Is Multi County");
+		String StateCode = givenAttributesMap.get("StateCode");
+		String RiderFlag = givenAttributesMap.get("Rider Flag");
+		String PrefferedPlanId = givenAttributesMap.get("PrefferedPlan Id");
+		String PlanCode = givenAttributesMap.get("Plan Code");
+		String mapsPlanType = givenAttributesMap.get("maps PlanType");
+		String OLEisCNS = givenAttributesMap.get("OLEis CNS");
+		String clientProdCode = givenAttributesMap.get("client ProdCode");
+		String OLEisCSNP = givenAttributesMap.get("OLEis CSNP");
+		String Fitness = givenAttributesMap.get("Fitness");
+		String Vision = givenAttributesMap.get("Vision");
+		String Hearing = givenAttributesMap.get("Hearing");
+		String Dental = givenAttributesMap.get("Dental");
+		String salesagentid = givenAttributesMap.get("salesagent id");
+		String PlanPremium = givenAttributesMap.get("Premium");
+		String lineOfBusiness = givenAttributesMap.get("lineOf Business");
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteId);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("Plan Year is : " + PlanYear);
+
+		// String PlanPremium = "";
+		// String TFN;
+		// String SiteName;
+		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
+		// -----------------------------------------------------------------------------------------------------
+		WelcomePage welcomePage;
+		if (SiteName.contains("uhc")) {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+
+		} else if (SiteName.contains("aarp")) {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+		} else {
+			OLETestHarnessPage oleTestHarnessPage = (OLETestHarnessPage) loginScenario
+					.getBean(PageConstants.OLE_TESTHARNESS_PAGE);
+			welcomePage = oleTestHarnessPage.navigateFromOLETestharnessToWelcomeOLE(SiteId, ClientCode, PlanTypeTH,
+					PlanName, PlanYear, ZipCode, County, StateCode, HNumber, PBPNumber, SegmentId, TFN, psc, env,
+					FipsCode, CMScode, RiderFlag, PrefferedPlanId, PlanCode, mapsPlanType, OLEisCNS, clientProdCode,
+					lineOfBusiness, OLEisCSNP, Fitness, Vision, Hearing, Dental, salesagentid, PlanPremium);
+
+		}
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the OLE Welcome Page");
+	}
+	
 } 
 
 
