@@ -133,7 +133,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 		}
 		
 		
-//Special Needs Page Function Verification		
+//Care Away Page Function Verification		
 		
 		public void travelpageFunctional(String TravelType) {
 			System.out.println("SNP Option "+TravelType+ " Selection");

@@ -150,7 +150,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1) .enroll-details>a:nth-of-type(2)")
 	private WebElement SNP1stPlanEnroll;
 	
-	@FindBy(xpath = "//h2[contains(text(),'Need Help?')]")
+	@FindBy(xpath = "//div[@class='uhc-container']//*[contains(text(),'Need Help?')]")
 	private WebElement needhelptxt;
 	
 	
@@ -261,7 +261,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void validateRecommendationPlan(String R1,String plan) {
 		String currentPageUrl = driver.getCurrentUrl();
 		if (R1.equalsIgnoreCase("MA")) {
-			MAViewPlansLink.click();
+//			MAViewPlansLink.click();
 			validate(MA1stPlanName, 60);
 			Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 					"MA Invalid Plan Ranking");
@@ -269,7 +269,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			clickEnrolldesktop(MA1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("MS")) {
-			MSViewPlansLink.click();
+//			MSViewPlansLink.click();
 			submitMSform();
 			validate(MS1stPlanName, 60);
 			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
@@ -278,7 +278,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			clickEnrolldesktop(MS1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
-			PDPViewPlansLink.click();
+//			PDPViewPlansLink.click();
 			validate(PDP1stPlanName, 60);
 			Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 					"PDP Invalid Plan Ranking");
@@ -286,7 +286,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			clickEnrolldesktop(PDP1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
-			SNPViewPlansLink.click();
+//			SNPViewPlansLink.click();
 			validate(SNP1stPlanName, 60);
 			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 					"SNP Invalid Plan Ranking");

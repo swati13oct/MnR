@@ -1,8 +1,8 @@
 @PlanRecommendationEngine
-Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommendation Engine Using PDP flow
+Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with recommendation
 
   @PRE @planrecommendation @PDPFlow @PDPskipdrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> , <1stRecommendation> ,  <Rankingplan> , <2ndRecommendation> - To validate Loading page functions using skip drug option in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> , <1stRecommendation> ,  <Rankingplan> , <2ndRecommendation> - To validate Loading page functions using skip drug option for PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -26,7 +26,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       |   10003 | NO            | New York | PDP           | No             | PDP               | Walgreens   | MS                |
 
   @PRE @planrecommendation @PDPFlow @PDPnodrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> - To validate Loading page functions using add drug option without adding drug in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> - To validate Loading page functions using add drug option without adding drug for PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -47,10 +47,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   35034 | YES           | Bibb County | PDP           | Yes            | PDP               | Walgreens   | MS                |
+      |   35034 | YES           | Bibb County | PDP           | Yes            | PDP               | Walgreens   | MA                |
 
   @PRE @planrecommendation @PDPFlow @PDPdrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate Loading page functions using add drug option with adding drug in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate Loading page functions using add drug option with adding drug for PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -77,7 +77,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | PDP               | Walgreens   | MA                |
 
   @PRE @planrecommendation @MAFlow @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -107,12 +107,12 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   10002 | NO            | New York    | MA            | None         | None   | mydoctors | john        | YES           | Yes,No,No,Yes                 | Lower                | MA                | Plan 1      | MS                |
-      |   35034 | YES           | Bibb County | MA            | Medicaid     | within | innetwork |             |               | No,No,No,No                   | Higher               | MS                | Plan F      | PDP               |
+      | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10003 | NO            | New York       | MA            | None         | within  | mydoctors  | sue         | YES           | Yes,No,No,Yes                 | Lower                | MA                | Plan 1      | MS                |
+      |   25813 | NO            | Raleigh County | MA            | Medicaid     | primary | outnetwork |             |               | No,No,No,No                   | Higher               | MS                | Plan F      |                   |
 
   @PRE @planrecommendation @MAPDFlow @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with drug functions for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -148,10 +148,10 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   10003 | NO            | New York | MAPD          | Facility     | None   | mydoctors | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | Plan 1      | MS                |
+      |   10003 | NO            | New York | MAPD          | None         | within | mydoctors | sue         | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | Plan 1      | MS                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDskipdrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug for MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -183,8 +183,8 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   21212 | YES           | Baltimore County | MAPD          | None         | within,another | mydoctors | John        | No            | No             | Yes,No,No,Yes                 | Higher               | MS                | Plan F      | MA                |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   35034 | YES           | Bibb County | MAPD          | None         | another | mydoctors | robert      | No            | No             | Yes,No,No,Yes                 | Higher               | MS                | Plan F      | MA                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @PRERegressionFlows @F358830
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
@@ -219,11 +219,11 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   10001 | NO            | New York | MAPD          | facility     | primary | innetwork |             |               | Yes            | No,No,No,No                   | Higher               | SNP               | I-SNP       | MS                |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   55001 | NO            | Washington | MAPD          | facility     | primary | outnetwork |             |               | Yes            | Yes,No,No,Yes                 | Higher               | SNP               | I-SNP       | MS                |
 
   @PRE @planrecommendation @DKFlow @DKdrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate DK flow functions in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate DK flow functions with drug and DSNP in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -258,11 +258,11 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel         | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   10003 | NO            | New York | NA            | Facility     | within,another | mydoctors | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | SNP               | D-SNP       | MA                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors   | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   10001 | NO            | New York | NA            | Medicaid     | primary | mydoctors | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | SNP               | D-SNP       | MA                |
 
   @PRE @planrecommendation @DKFlow @DKskipdrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug with CSNP in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -298,7 +298,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
       |   10001 | NO            | New York | NA            | None         | None   | mydoctors | sue         | No            | No             | No,No,No,No                   | Lower                | MA                | Plan 1      | MS                |
 
   @PRE @planrecommendation @DKFlow @DKzerodrug @PRERegressionFlows @F358830
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug Tie Scenarios in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -365,6 +365,6 @@ Feature: Plan Recommendation Engine flow - Verify Loading page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   10002 | NO            | New York | MA            | None         | within  | innetwork  |             |               | Yes,No,No,No                  | Lower                | MA                |             | MS                |
-      |   10003 | NO            | New York | MA            | Medicaid     | primary | innetwork  |             |               | Yes,No,No,No                  | Lower                | SNP               |             |                   |
-      |   10001 | NO            | New York | MA            | None         | None    | outnetwork |             |               | No,No,No,No                   | Lower                | MA                |             |                   |
+      |   10003 | NO            | New York | MA            | None         | within  | outnetwork |             |               | Yes,No,No,No                  | Lower                | MA                |             | MS                |
+      |   10001 | NO            | New York | MA            | Medicaid     | primary | outnetwork |             |               | Yes,No,No,No                  | Lower                | SNP               |             |                   |
+      |   10002 | NO            | New York | MA            | None         | None    | innetwork  |             |               | No,No,No,No                   | Lower                | MA                |             |                   |
