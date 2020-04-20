@@ -10,10 +10,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -22,7 +22,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -45,6 +44,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -269,14 +269,27 @@ public class oleStepDefinition {
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String SiteName;
 		String PlanPremium = "";
-		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
-		WelcomePage welcomePage;
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		
-			//TFN = visitorProfilePage.GetTFNforPlanType();
-			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+		WelcomePage welcomePage;			
+			if(SiteName.contains("UHC_ACQ")){
+				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+				//TFN = planSummaryPage.GetTFNforPlanType();
+
+				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+
+			}
+			else{
+				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+				//TFN = planSummaryPage.GetTFNforPlanType();
+
+				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+
+			}
+			
 		//--------------------------------------------------------------------------------------------------------------------
 		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
