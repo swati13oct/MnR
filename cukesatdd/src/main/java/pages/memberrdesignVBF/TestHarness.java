@@ -331,6 +331,7 @@ public class TestHarness extends UhcDriver {
 		}
 		checkForIPerceptionModel(driver);
 		validateNew(contactUsPageLink);
+		checkForIPerceptionModel(driver);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
