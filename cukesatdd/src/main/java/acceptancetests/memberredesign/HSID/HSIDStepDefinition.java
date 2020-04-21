@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -824,12 +825,13 @@ public class HSIDStepDefinition {
 
 			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
 				TestHarness testHarnessPage=null;
-				try {
+				//try {
 					testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
-				} catch (UnhandledAlertException ae) {
+				/* } catch (Exception ae) {
 					System.out.println("Exception: "+ae);
 					Assert.assertTrue("PROBLEM - ***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
-				}
+					
+				} */
 				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
 				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
 				return;
@@ -837,9 +839,9 @@ public class HSIDStepDefinition {
 			AccountHomePage accountHomePage=null;
 			try {
 				accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
-			} catch (UnhandledAlertException ae) {
+			} catch (Exception ae) {
 				System.out.println("Exception: "+ae);
-				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Alert error", false);
+				Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+userName+" - Got Exception", false);
 			}
 			
 			if (accountHomePage != null) {
