@@ -1729,9 +1729,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 	driver.switchTo().activeElement();
 	System.out.println(CallSamTFN.getText());
-	CallSamTFNClose.click();
-	validateNew(callsam);		
-	return null;
+	//CallSamTFNClose.click();
+	//validateNew(callsam);		
+	//return null;
+		if(CallSamTFN.getText().isEmpty()){
+				return null;
+			}else{
+			CallSamTFNClose.click();
+			validateNew(callsam);	
+			 return new AcquisitionHomePage(driver);
+			}
 	}
 	
 	public AcquisitionHomePage validateChatSam() throws InterruptedException {
