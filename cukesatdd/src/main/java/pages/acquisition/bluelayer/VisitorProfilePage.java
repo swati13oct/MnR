@@ -251,7 +251,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')]//button[contains(@class,'provider-toggle')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')][1]//button[contains(@class,'provider-toggle')]"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("providers covered"))
