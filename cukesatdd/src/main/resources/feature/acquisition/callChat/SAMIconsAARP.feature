@@ -1,7 +1,7 @@
 @acq_CALLCHAT_AARP
 Feature: 1.19.1 ACQ AARP- To test Home Page in AARP site
 @samChatCall
-Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site
+Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site on <pagename>
 Given the user is on the AARP medicare site landing page
 And user opens the page to validate on AARP
  | pagename | <pagename> |

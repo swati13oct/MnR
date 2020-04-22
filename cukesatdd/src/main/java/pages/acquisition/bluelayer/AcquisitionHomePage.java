@@ -282,7 +282,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
-	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
    	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -308,10 +308,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[contains(@class,'tfn')]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
