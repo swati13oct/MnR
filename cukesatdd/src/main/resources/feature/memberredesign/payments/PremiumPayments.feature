@@ -1,4 +1,3 @@
-@regressionMember
 Feature: 1.19 Verify the premium payment flows on member portal
 
   @DONOTRUNTOTALAMOUNTDUE
