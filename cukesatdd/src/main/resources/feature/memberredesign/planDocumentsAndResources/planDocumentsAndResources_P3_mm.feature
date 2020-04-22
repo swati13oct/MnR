@@ -37,11 +37,11 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
       | 04-042 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
       | 05-043 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
 
-@abc	@terminated_ma_mapd
+	@terminated_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-#      | 06-044 | xxxxx       | MA       | IND_TERM_PDnR         | false | false | false | false |
-#      | 07-045 | xxxxx       | MA       | GROUP_TERM_PDnR       | false | false | false | false |
+      | 06-044 | xxxxx       | MA       | IND_TERM_PDnR         | false | false | false | false |
+      | 07-045 | xxxxx       | MA       | GROUP_TERM_PDnR       | false | false | false | false |
       | 08-046 | xxxxx       | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
 	@active_ma
