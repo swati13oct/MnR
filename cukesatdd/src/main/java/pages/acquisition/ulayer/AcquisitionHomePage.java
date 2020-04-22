@@ -28,6 +28,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -294,7 +295,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@class,'tfn')]")
    	private WebElement CallSamTFN;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
@@ -1585,9 +1586,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
+			if(CallSamTFN.getText().isEmpty()){
+				return null;
+			}else{
 			CallSamTFNClose.click();
-			validateNew(callsam);		
-			return null;
+			validateNew(callsam);	
+			 return new AcquisitionHomePage(driver);
+			}
+			//CallSamTFNClose.click();
+			//validateNew(callsam);		
+			//return null;
 		}
 		
 		public AcquisitionHomePage validateChatSam() throws InterruptedException {
@@ -1716,6 +1724,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public OLETestHarnessPage GetOLETestHarnessPage() {
+			return new OLETestHarnessPage(driver);
+		}
+		
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
