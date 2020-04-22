@@ -150,11 +150,7 @@ Feature: 2.05.4.ACQ-OLE SNP UMS
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-    Then the user navigates to Coverage and Health Information Page
-    Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
-    Then the user answers following questions in Coverage and Health Information Page
-      | PDP Question      | <pdpFlag>      |
-      | LongTerm Question | <longTermFlag> |
+#    Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
