@@ -18,27 +18,10 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
-    Then the user enters following required Medicare Information
+     Then the user navigates to Personal Information Page
+    Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
       | Last Name          | <lastname>          |
-      | Medicare Number    | <medicarenumber>    |
-      | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
-      | Card Type          | <cardtype>          |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd fields for Preliminary Questions Page
-      | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
-    Then the user navigates to Personal Information Page
-    Then the user enters following required information in Personal Information Page
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
@@ -52,16 +35,32 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
+    Then the user navigates to Medicare Information Page
+    Then the user validates Medicare Information Page required fields
+    Then the user enters following required Medicare Information    
+      | Medicare Number    | <medicarenumber>    |
+      | SSN Flag           | <ssnflag>           |
+      | PartA Date         | <partadate>         |
+      | PartB Date         | <partbdate>         |
+      | Card Type          | <cardtype>          |
+      | Email Confirmation | <emailConfirmation> |
+      | Go Green           | <goGreen>           |
+      | Email              | <email>             |
+    Then the user validates the Plan details in Medicare Info OLE Right Rail
+#    Then the user navigates to Preliminary Questions Page
+    Then the user validates requierd ESRD on Medicare Info Page
+      | MedicaidNumber | <medicaidnumber> |
+#    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
+    Then the user answers following questions in Medicare Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
     Then the user navigates to SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-    Then the user navigates to Coverage and Health Information Page
-    Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
-    Then the user answers following questions in Coverage and Health Information Page
-      | PDP Question      | <pdpFlag>      |
-      | LongTerm Question | <longTermFlag> |
+#    Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
@@ -107,33 +106,10 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
     #Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
-    Then the user enters following required Medicare Information
-      | First Name         | <firstname>         |
-      | Last Name          | <lastname>          |
-      | Medicare Number    | <medicarenumber>    |
-      | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
-      | Card Type          | <cardtype>          |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd fields for Preliminary Questions Page for CSNP and navigates to User and Disclosure plage
-      | PlanName       | <planName>       |
-      | MedicaidNumber | <medicaidnumber> |
-    Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
-      | Provider Name           | <providername>    |
-      | Provider Street Address | <provideraddress> |
-      | City                    | <providercity>    |
-      | Zip                     | <providerzipcode> |
-      | Provider Phone Number   | <providernumber>  |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
+      | First Name         | <firstname>         |
+      | Last Name          | <lastname>          |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
@@ -147,12 +123,38 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP AARP
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
+    Then the user navigates to Medicare Information Page
+    Then the user validates Medicare Information Page required fields
+    Then the user enters following required Medicare Information    
+      | Medicare Number    | <medicarenumber>    |
+      | SSN Flag           | <ssnflag>           |
+      | PartA Date         | <partadate>         |
+      | PartB Date         | <partbdate>         |
+      | Card Type          | <cardtype>          |
+      | Email Confirmation | <emailConfirmation> |
+      | Go Green           | <goGreen>           |
+      | Email              | <email>             |
+    Then the user validates the Plan details in Medicare Info OLE Right Rail
+#    Then the user navigates to Preliminary Questions Page
+    Then the user validates requierd ESRD on Medicare Info Page
+      | MedicaidNumber | <medicaidnumber> |
+#    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
+		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
+    Then the user answers following questions in Medicare Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
+#    Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
+#      | Provider Name           | <providername>    |
+#      | Provider Street Address | <provideraddress> |
+#      | City                    | <providercity>    |
+#      | Zip                     | <providerzipcode> |
+#      | Provider Phone Number   | <providernumber>  |
     Then the user navigates to SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-    Then the user navigates to Coverage and Health Information Page
+#    Then the user navigates to Coverage and Health Information Page
     Then the user validates the dispalyed sections for the Plan Type in Coverage and Health Information Page
     Then the user answers following questions in Coverage and Health Information Page
       | PDP Question      | <pdpFlag>      |
