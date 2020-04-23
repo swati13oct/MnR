@@ -20,7 +20,9 @@ public class ConfirmSecurityQuestion extends UhcDriver {
                 @FindBy(how = How.CLASS_NAME, using = "rememberThisDevice")
                 private WebElement rememberThisDeviceSection;
                 
-                
+            	@FindBy(id = "continueSubmitButton")
+            	private static WebElement submitbutton;
+               
 
     public ConfirmSecurityQuestion(WebDriver driver) {
                 super(driver);
@@ -36,9 +38,9 @@ public class ConfirmSecurityQuestion extends UhcDriver {
      */
     @Override
     public void openAndValidate() {
-                
-                WebDriverWait wait = new WebDriverWait(driver,40);
-                wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
+		validateNew(submitbutton);
+               // WebDriverWait wait = new WebDriverWait(driver,40);
+                //wait.until(ExpectedConditions.visibilityOf(rememberThisDeviceSection));
     }
 
     
@@ -67,7 +69,7 @@ public class ConfirmSecurityQuestion extends UhcDriver {
                                 JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,50)", "");
                                 
-                                WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
+                                //WebElement submitbutton = driver.findElement(By.id("continueSubmitButton"));
                                 submitbutton.click();
                                 
                 }
