@@ -109,7 +109,7 @@ Feature: 1.02 Member Profile page
     And the user validates the address section
       | Member Type | <memberType> |
 
-    @devRegression @mocked
+    @mocked
     Examples: 
       | TID   | userSelection                           | planType | memberType                      |
     #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |

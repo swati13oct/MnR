@@ -488,10 +488,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
 	private WebElement phoneSectionArrowIframe;
 
-	@FindBy(xpath = "(//*[@class='phone ng-scope']/p/span[@class='ng-binding'])[1]")
+	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[1]/div/span[2]")
 	private WebElement updatedHomePhoneAfterSave;
 	
-	@FindBy(xpath = "//*[@class='phone ng-scope']/p/span[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
 	private WebElement updatedMobilePhoneAfterSave;
 
 	@FindBy(id = "main")
@@ -2020,7 +2020,7 @@ private WebElement editEmailAddressArrowbutton;
 			cs.enterValidSecurityAnswer();
 			System.out.println(driver.getCurrentUrl());
 			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReadyNew(driver); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

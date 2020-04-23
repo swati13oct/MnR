@@ -1282,10 +1282,10 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				//targetTestDocList.add("Prior Authorization Criteria");
+				//targetTestDocList.add("Step Therapy Criteria");
+				//targetTestDocList.add("Formulary Additions");
+				//targetTestDocList.add("Formulary Deletions");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2517,22 +2517,22 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
-				targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("Alternative Drug List");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("UnitedHealth Passport Program");
+				//targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Alternative Drug List");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("UnitedHealth Passport Program");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
-				targetTestDocList.add("Beneficios Importantes");
-				targetTestDocList.add("Formulario completo");
-				targetTestDocList.add("Lista de Medicamentos");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport");
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Beneficios Importantes");
+				//targetTestDocList.add("Formulario completo");
+				//targetTestDocList.add("Lista de Medicamentos");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Programa UnitedHealth Passport");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {

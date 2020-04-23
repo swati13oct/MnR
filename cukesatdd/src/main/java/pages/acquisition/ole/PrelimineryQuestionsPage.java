@@ -393,11 +393,11 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 		
 	}
 	
-	public UseAndDisclosureAuthorizationPage validate_Required_Fields_CSNP( String medicaidNumber, String plantype) {
+	public UseAndDisclosureAuthorizationPage validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
 		//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
 		
-				if(plantype.contains("CSNP")){
-					System.out.println("Medicaid Question is displayed for "+plantype+" : "+validate(MedicaidQuestion));
+				if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
+					System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 					medicaiddno.click();
 					System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 					
@@ -435,6 +435,31 @@ public PersonalInformationPage Validate_use_and_disclosure_page() {
 						waitforElement(disclosureBox);
 						return new UseAndDisclosureAuthorizationPage(driver);
 			            
+		    }else if(PlanName.contains("Silver")){
+				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
+				medicaiddno.click();
+				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+				
+					//Diabetes questions
+					Assert.assertTrue(validate(diabetesQuestion1), "diabetes questions are present");
+					validate(diabetesQuestions1Yes);
+					diabetesQuestions1Yes.click();
+					validate(diabetesQuestions2No);
+					diabetesQuestions2No.click();
+					Assert.assertTrue(validate(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
+					validate(chronicHeartFailureQuestion1No);
+					chronicHeartFailureQuestion1No.click();	
+					validate(chronicHeartFailureQuestion2No);
+					chronicHeartFailureQuestion2No.click();	
+					validate(chronicHeartFailureQuestion3No);
+					chronicHeartFailureQuestion3No.click();	
+					Assert.assertTrue(validate(ESRDQuestion), "End Stage Renal Disease Question are present");
+					validate(esrdNo);
+					esrdNo.click();						
+					validate(NextBtn);
+					NextBtn.click();
+					waitforElement(disclosureBox);
+					return new UseAndDisclosureAuthorizationPage(driver);
 		    }
 		
 				else return null;	

@@ -28,6 +28,7 @@ import atdd.framework.MRScenario;
 import junit.framework.Assert;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -268,7 +269,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
-	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[2]/img")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
    	private WebElement callsam;
    	
    	@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -294,10 +295,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
    	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[1]/a")
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
@@ -1585,9 +1586,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
+			if(CallSamTFN.getText().isEmpty()){
+				return null;
+			}else{
 			CallSamTFNClose.click();
-			validateNew(callsam);		
-			return null;
+			validateNew(callsam);	
+			 return new AcquisitionHomePage(driver);
+			}
+			//CallSamTFNClose.click();
+			//validateNew(callsam);		
+			//return null;
+			
 		}
 		
 		public AcquisitionHomePage validateChatSam() throws InterruptedException {
@@ -1716,6 +1725,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new VPPTestHarnessPage(driver);
 		}
 
+		public OLETestHarnessPage GetOLETestHarnessPage() {
+			return new OLETestHarnessPage(driver);
+		}
+		
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");

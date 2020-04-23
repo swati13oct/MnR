@@ -15,6 +15,7 @@ Given the user is on AARP medicare acquisition site landing page
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
      Then user clicks on resume application button in the AARP site
+    		 | DOB           | <DOB>         |
      Then user enters data to resume the application in the AARP site
        | applicationType           | <applicationType>|
        | ApplicationID |<ApplicationID>|

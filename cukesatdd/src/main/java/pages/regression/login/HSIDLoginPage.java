@@ -232,7 +232,7 @@ public class HSIDLoginPage extends UhcDriver {
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
 			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
-			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
+			//note: workaround - get URL again to check and see if it goes to the no-email.html page or banner page instead
 			emailAddressRequiredWorkaround(username);
 		}
 
@@ -667,9 +667,31 @@ public class HSIDLoginPage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("Unable to resolve no-email page encounter. "+e);
 			}
+		}
+			if (driver.getCurrentUrl().contains("bannerpopup.html"))
+			{
+				System.out.println("User landed on banner page and did not see security questions");
+				try {
+					if (noWaitValidate(homePageNotice,0)) {
+						homePageNotice.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else	if (noWaitValidate(homePageNotice2,0)) {
+						homePageNotice2.click();
+						CommonUtility.checkPageIsReady(driver);
+					} else if (noWaitValidate(homePageNotice3,0)) {
+						homePageNotice3.click();
+						CommonUtility.checkPageIsReady(driver);
+					}	
+					
+			}
+				catch(Exception e)
+				{
+					System.out.println("User landed on banner page and could not proceed ahead");
+				}
+			}
 		}  
 
-	}
+	
 	
 	public Object newRegistereddoLoginWith(String username, String password) throws Exception {
 

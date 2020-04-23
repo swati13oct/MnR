@@ -178,14 +178,14 @@ public class WelcomePage extends UhcDriver{
 		return false;
 	}
 
-	public MedicareInformationPage navigate_to_medicare_info_page() {
+	public PersonalInformationPage navigate_to_Personal_Information_page() {
 		
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
-			System.out.println("OLE Medicare Information Page is Displayed");
-			return new MedicareInformationPage(driver);
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){			
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPage(driver);
 		}
 		return null;
 	}

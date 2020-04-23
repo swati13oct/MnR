@@ -2,7 +2,7 @@
 Feature: 1.19.1 ACQ UHC- To test Home Page in UHC site
 
 @samChatCall
-Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site
+Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename>
 Given user is on blue layer landing page
 And user opens the page to validate on UHC
  | pagename | <pagename> |

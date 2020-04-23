@@ -3,6 +3,7 @@ package pages.memberrdesignVBF;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -322,7 +323,15 @@ public class TestHarness extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
 		CommonUtility.waitForPageLoad(driver, contactUsPageLink, 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		checkForIPerceptionModel(driver);
 		validateNew(contactUsPageLink);
+		checkForIPerceptionModel(driver);
 		contactUsPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
@@ -712,5 +721,30 @@ public class TestHarness extends UhcDriver {
 		scrollToView(planSupportTelephone);
 		Assert.assertTrue("neepHelp is not displayed", planSupportTelephone.isDisplayed());
 		
+	}
+	
+	/**
+	 * For iPerception Model
+	 * @param driver
+	 */
+	public static void checkForIPerceptionModel(WebDriver driver) {
+		int counter = 0;
+		do {
+			System.out.println("current value of counter: " + counter);
+			List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+			if (IPerceptionsFrame.isEmpty()) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				driver.switchTo().frame(IPerceptionsFrame.get(0));
+				driver.findElement(By.className("btn-no")).click();
+				driver.switchTo().defaultContent();
+			}
+			counter++;
+		} while (counter < 2);
 	}
 }
