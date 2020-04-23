@@ -29,6 +29,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("Current mobile page URL: "+driver.getCurrentUrl());
 	}
 	
+	public void openMobileURL() {
+		startNewMobile(AARP_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: "+driver.getCurrentUrl());
+	}
+	
 	public void fixPrivateConnectionMobile() {
 		try {
 			//String URL = "https://self-signed.badssl.com/";

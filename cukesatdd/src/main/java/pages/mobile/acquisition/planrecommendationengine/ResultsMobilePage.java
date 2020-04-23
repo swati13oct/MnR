@@ -33,7 +33,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>h2")
 	private WebElement planZipInfo;
 
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>p")
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main']>div:nth-of-type(1)>p")
 	private WebElement planBasedInfo;
 
 	@FindBy(css = "div[data-rel='#plan-list-1']")
@@ -135,6 +135,16 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='uhc-container']//*[contains(text(),'Need Help?')]")
 	private WebElement needhelptxt;
 
+	@FindBy(css = "input#cta-zipcode")
+	private WebElement homePageZiptxt;
+
+	@FindBy(css = "button#zipcodebtn")
+	private WebElement homePageFindPlans;
+
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
+	private WebElement enterDrugInfoMS1stPlan;
+
+	
 	public void resultsUI(String zip, String county, String R1, String plan, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
@@ -328,4 +338,13 @@ public class ResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(RCount == 2, "Recommendation is not equals to Two");
 	}
 
+	public void navigateVPP(String zip) {
+		validate(homePageZiptxt,60);
+		mobileactionsendkeys(MSPlanDOB, zip);
+		hidekeypad();
+		mobileUtils.mobileLocateElementClick(MSPlanGender);
+		threadsleep(8000);
+		
+	}
+	
 }

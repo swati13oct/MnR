@@ -105,6 +105,9 @@ public class DrugMobilePage extends UhcDriver {
 
 	// drugs Page Modal popup
 
+	@FindBy(css = "#modal div.modal-header")
+	private WebElement modalheader;
+	
 	@FindBy(css = "#modal uhc-radio[class*='checked']")
 	private WebElement modalSelcetedDrug;
 
@@ -336,6 +339,8 @@ public class DrugMobilePage extends UhcDriver {
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
 				mobileactionsendkeys(modalQuantity, count);
+				modalheader.click();
+				threadsleep(2000);
 			}
 			if (threeeMonthfrequency)
 				mobileSelectOption(freq, "Every 3 Months");
@@ -351,7 +356,9 @@ public class DrugMobilePage extends UhcDriver {
 				threadsleep(2000);
 				// Generic modal
 				if (switchGeneric) {
+					//justtry();
 					modalGenericSwitch.click();
+					jsClickNew(modalGenericSwitch);
 					drugName = modalGenericDrug.getText();
 				}
 				modalcontinue.click();
@@ -587,4 +594,11 @@ public class DrugMobilePage extends UhcDriver {
 				"Expected Error Message not displayed");
 	}
 
+	public void justtry() {
+		System.out.println("aart");
+		modalGenericKeep.click();
+		mobileactiondragdrop(modalGenericKeep,modalheader,true);
+		System.out.println("end");
+	}
+	
 }

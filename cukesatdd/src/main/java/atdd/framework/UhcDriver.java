@@ -1021,5 +1021,18 @@ try {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
+	
+	public void mobileactiondragdrop(WebElement dragelement,WebElement dropelement,boolean swipeVertical) {
+			System.out.println("Drag Drop");	
+			AppiumDriver mobiledriver = (AppiumDriver) driver;
+			TouchAction mact = new TouchAction(mobiledriver);
+			int dragx = dragelement.getLocation().getX();
+			int dragy = dragelement.getLocation().getY();
+			int dropx =dropelement.getLocation().getX();
+			int dropy =dropelement.getLocation().getY();
+			System.out.println(dragx+","+dragy+","+dropx+","+dropy);
+			mact.longPress(PointOption.point(dragx, dragy)).moveTo(PointOption.point(dropx, dropy)).release().perform();
+			System.out.println("All");
+	}
 
 }

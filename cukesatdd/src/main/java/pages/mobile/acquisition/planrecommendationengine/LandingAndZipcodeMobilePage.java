@@ -206,15 +206,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void navigatezipcodepagemobile() {
-		//Skipping this process due to horizontal issue in mobile home page so Directly going to PRE
-		//HeaderFooterMobile header = new HeaderFooterMobile(driver);
-		//header.navigatePRELandingpageMobile();
+		HeaderFooterMobile header = new HeaderFooterMobile(driver);
+		header.navigatePRELandingpageMobile();
 		
-		driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
-		pageloadcomplete();
-		driver.navigate().refresh();
-		pageloadcomplete();
+		//driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
+		//pageloadcomplete();
+		///driver.navigate().refresh();
 		
+		pageloadcomplete();
 		mobileswipe("50%", true);
 		validate(getStartedBtn, 30);
 		getStartedBtn.click();

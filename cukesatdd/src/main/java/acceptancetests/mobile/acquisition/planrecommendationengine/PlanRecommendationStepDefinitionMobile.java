@@ -405,6 +405,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.resultsUI(zip,county,r1,plan,r2,true);
    	}
 	
+	@Given("^user navigates to vpp summary page mobile$")
+   	public void navigate_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+		String zip = inputValues.get("Zip Code");
+		resultpage.navigateVPP(zip);
+   	}
+	
 	public void readfeaturedata(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
