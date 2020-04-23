@@ -1,5 +1,5 @@
 @eob @fastandfurious
-Feature: 1.04.1 To Test EOB for Members - E2E
+Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
 
   Background: If run on stage then feature security flag needs to be true
      Given feature security flag must set to true when testing on stage env
