@@ -51,8 +51,8 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
-#    Then the user validates the eob count for all available search ranges
-#      | Flag Zero EOB User | <flagZeroEob> |
+    Then the user validates the eob count for all available search ranges
+      | Flag Zero EOB User | <flagZeroEob> |
 
     @dreamEob01a @COMBINDED_EOBs @devRegression
     Examples: 
