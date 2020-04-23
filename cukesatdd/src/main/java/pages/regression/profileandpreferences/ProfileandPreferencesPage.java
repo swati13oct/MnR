@@ -2014,7 +2014,7 @@ private WebElement editEmailAddressArrowbutton;
 		hsidPasswordLink.click();
 		Thread.sleep(10000);
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("security settings"));
+		Assert.assertTrue(driver.getTitle().contains("identity"));
 		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 		try {
 			cs.enterValidSecurityAnswer();
