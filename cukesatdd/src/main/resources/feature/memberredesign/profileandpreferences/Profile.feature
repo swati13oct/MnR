@@ -64,8 +64,8 @@ Feature: 1.02 Member Profile page
     Examples: 
       | TID      | planType | memberType                     |
       | Unknown1 | MAPD     | MAPD_GROUP_GOGreen_Profilepref |
-      | Unknown2 | MA       | MA_AARP_GOGreen_Profilepref    |
-      | Unknown3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
+ #     | Unknown2 | MA       | MA_AARP_GOGreen_Profilepref    |
+ #     | Unknown3 | PDP      | PDP_AARP_GOGreen_Profilepref   |
 
   @accountProfile04 @US957739 @regressionMember
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To verify  the sections on Profile and Preferences page for a NOKIA member
