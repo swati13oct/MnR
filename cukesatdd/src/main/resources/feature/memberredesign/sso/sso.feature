@@ -1,7 +1,7 @@
 @sso
 Feature: 1.13 Member SSO functionality for SSO groups
 
-  @sso1 @US1048825 @regression @regression_sso @regressionMember
+  @sso1 @US1048825 @regression @regression_sso 
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
@@ -23,7 +23,7 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | TID   | GroupName | ssoPartner   | firstName | lastName  | dateOfBirth | uhcID     | eaID | empNumber | userName       | passWord   |
       | 15364 | NC        | benefitfocus | WIDAAD    | BOURGOYNE |    12111948 | 522290266 |      |           | sso_dummy_user | Password@1 |
 
-  @sso2 @US1048825 @regression @regression_sso @regressionMember
+  @sso2 @US1048825 @regression @regression_sso 
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify AT&T SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
@@ -45,7 +45,7 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | TID   | GroupName | ssoPartner | firstName | lastName  | dateOfBirth | uhcID              | eaID | empNumber | userName       | passWord   |
       | 15362 | AT&T      | aonhewitt  | NAWAZISH  | LAMOUREUX |    05231937 | 542670610777869450 |      |           | sso_dummy_user | Password@1 |
 
-  @sso3 @US1048825 @regression @regression_sso @regressionMember
+  @sso3 @US1048825 @regression @regression_sso
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify Verizon MA SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
@@ -67,7 +67,7 @@ Feature: 1.13 Member SSO functionality for SSO groups
       | TID   | GroupName  | ssoPartner | firstName | lastName | dateOfBirth | uhcID | eaID      | empNumber | userName       | passWord   |
       | 15363 | Verizon MA | conduent   | KARENE    | ABBAS    |    04021949 |       | 772911154 |    023978 | sso_dummy_user | Password@1 |
 
-  @sso4 @US1048825 @regression @regression_sso @regressionMember
+  @sso4 @US1048825 @regression @regression_sso
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify Verizon MAPD SSO functionality and check that security and password reset links are not displayed on profile page.
     Given the user access AEM Test Harness Page and enters his AEM Stage username and password and click on signin button
       | CQ UserName | <userName> |
