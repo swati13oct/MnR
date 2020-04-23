@@ -111,6 +111,12 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "emailAddressQuestion.emailAddress")
 	private WebElement Email;
+	
+	@FindBy(xpath="//*[@id='firstName' or @id = 'FirstName']")
+	private WebElement firstNameField;
+	
+	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
+	private WebElement lastNameField;
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -126,6 +132,8 @@ public class PersonalInformationPage extends UhcDriver{
 
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
+		String FirstName = memberDetailsMap.get("First Name");
+		String LastName = memberDetailsMap.get("Last Name");
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
@@ -137,6 +145,8 @@ public class PersonalInformationPage extends UhcDriver{
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
 			GenderSelectMale.click();
@@ -274,6 +284,18 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		return null;
 	}
+	
+	public MedicareInformationPage navigate_to_medicare_info_page() {
+		
+		validateNew(NextBtn);
+		NextBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+			System.out.println("OLE Medicare Information Page is Displayed");
+			return new MedicareInformationPage(driver);
+		}
+		return null;
+	}
 
 	public SpecialElectionPeriodPage navigate_to_SEP_page() {
 
@@ -297,8 +319,10 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		boolean Validation_Flag = true;
 		
-		String FirstNameDisplayText = FirstNameDisplay.getText();
-		String LastNameDisplayText = LastNameDisplay.getText();
+		/*
+		 * String FirstNameDisplayText = FirstNameDisplay.getText(); String
+		 * LastNameDisplayText = LastNameDisplay.getText();
+		 */
 		String StateDisplayText = "";
 		String ZipDisplayText = "";
 
@@ -320,12 +344,16 @@ public class PersonalInformationPage extends UhcDriver{
 			ZipDisplayText = EnterZip.getText();
 		}
 		
-		System.out.println("First Name Expected : "+FirstName+"       Displayed on page  - "+FirstNameDisplayText);
-		System.out.println("Last Name Expected : "+LastName+"       Displayed on page  - "+LastNameDisplayText);
+		/*
+		 * System.out.println("First Name Expected : "
+		 * +FirstName+"       Displayed on page  - "+FirstNameDisplayText);
+		 * System.out.println("Last Name Expected : "
+		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
+		 */
 		System.out.println("State Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
-		if(FirstNameDisplayText.contains(FirstName) && LastNameDisplayText.contains(LastName)){
+		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){
 			System.out.println("Member Details Validated on Personal Information Page");
 			Validation_Flag = true;
 		}

@@ -2912,7 +2912,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		insuredStatus.click();
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppOlePlanSection, 45);
-		nextButton.click();
+		jsClickNew(nextButton);
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview,30);
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg,30);
@@ -2943,7 +2943,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void ResumeApplicationButton(String DateOfBirth) throws InterruptedException{
 		Thread.sleep(5000);
 		//String DateOfBirth ="11/13/1940";
-		MedSupFormValidation(DateOfBirth);
+		//MedSupFormValidation(DateOfBirth);
 		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
@@ -3172,12 +3172,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		
-		if(!driver.findElement(By.xpath("//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
+		jsClickNew(Start_ApplicationBtn);
+		/*if(!driver.findElement(By.xpath("//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
 			Start_ApplicationBtn.click();
-		}
-		
-		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
+		}*/
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(insuredStatus, 45))
 			return new MedSuppOLEPage(driver);
 		else
 			return null;
