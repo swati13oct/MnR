@@ -63,7 +63,8 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
     @dreamEob01b @COMBINDED_EOBs
     Examples: 
-      | 05    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | flagZeroEob | 
+      | index | planType | memberType        | note                              | flagZeroEob |
+      | 05    | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
       | 06    | PDP      | COMBO_SHIP_PDP_RX_DEOB  | 1 new D, 1 or 2 old D       | true        |  
       | 07    | MAPD     | MULTIEOB_NICE_DEOB | 2 Eobs Same Months               | true        |  
 
