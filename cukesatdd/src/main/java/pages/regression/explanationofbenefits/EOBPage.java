@@ -19,9 +19,11 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.joda.time.DateTime;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -37,7 +39,7 @@ public class EOBPage extends EOBBase{
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	
+
 	public EOBPage(WebDriver driver, boolean doBasicPgValidation) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -48,12 +50,25 @@ public class EOBPage extends EOBBase{
 	@Override
 	public void openAndValidate() {
 		eobCheckModelPopup(driver);
+		try {
+			if(!pageHeader.getText().contains("Explanation of Benefits"))
+				Assert.fail("Page header not validated. Error loading the page");
+		} catch (UnhandledAlertException ae) {
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text="+alert.getText());
+			if (alert.getText().contains("an error while processing your information")) {
+				Assert.assertTrue("***** getting unexpected alert error while accessing EOB page - Got Alert message: "+alert.getText(), false);
+			} else {
+				alert.accept();
+				CommonUtility.checkPageIsReady(driver);
+				if(!pageHeader.getText().contains("Explanation of Benefits"))
+					Assert.fail("Page header not validated. Error loading the page");
+			}
+		}
 
-		if(!pageHeader.getText().contains("Explanation of Benefits"))
-			Assert.fail("Page header not validated. Error loading the page");
 
 	}
-	
+
 	public void validateSspContent() {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
@@ -64,7 +79,7 @@ public class EOBPage extends EOBBase{
 				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
 				actText.contains(expText));
 	}
-	
+
 	public void validatePhipContent() {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page error message for PHIP user", eobValidate(phipError));
@@ -74,7 +89,7 @@ public class EOBPage extends EOBBase{
 				+ "Expected='"+expText+"' | Actual='"+actText+"'", 
 				actText.contains(expText));
 	}
-	
+
 	public void validateHeaderSectionContent(String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
@@ -91,7 +106,7 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - Default selected option for EOB Type dropdown is not as expected.  "
 					+ "Expected='"+expectedDefault+"' | Actual='"+actualDefault+"'",
 					expectedDefault.equals(actualDefault));
-			
+
 			List<WebElement> options = eobTypeOptions.getOptions();
 			boolean optionMed=false;
 			boolean optionPre=false;
@@ -113,14 +128,14 @@ public class EOBPage extends EOBBase{
 
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
 		List<WebElement> options = dateRangeOptions.getOptions();
-		
+
 		//note: validate default selected option
 		WebElement defaultOption = dateRangeOptions.getFirstSelectedOption();
 		String expectedDefault="Last 90 Days";
 		String actualDefault=defaultOption.getText();
 		Assert.assertTrue("PROBLEM - Default selected option for Date Range dropdown is not as expected.  Expected='"+expectedDefault+"' | Actual='"+actualDefault+"'",
 				expectedDefault.equals(actualDefault));
-		
+
 		if (planType.contains("SHIP")) {
 			//note: validate all available options
 			boolean optionLast90Days=false;
@@ -169,6 +184,17 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - unable to Date Range option 'Custom Search'",optionCustomSearch);	
 		}
 	}
+
+	public void validateRightRail_DREAMEOB(String planType) {
+		if (planType.contains("SHIP")) {
+			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for SHIP plan", !eobValidate(rightRailLearnMoreHeader));
+			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for SHIP plan", !eobValidate(rightRailLearnMoreLink));
+		} else {
+			//Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section header element", eobValidate(rightRailLearnMoreHeader));
+			Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section link element", eobValidate(rightRailLearnMoreLink));
+		}
+	}
+
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -182,14 +208,14 @@ public class EOBPage extends EOBBase{
 
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
 		List<WebElement> options = dateRangeOptions.getOptions();
-		
+
 		//note: validate default selected option
 		WebElement defaultOption = dateRangeOptions.getFirstSelectedOption();
 		String expectedDefault="Last 90 Days";
 		String actualDefault=defaultOption.getText();
 		Assert.assertTrue("PROBLEM - Default selected option for Date Range dropdown is not as expected.  Expected='"+expectedDefault+"' | Actual='"+actualDefault+"'",
 				expectedDefault.equals(actualDefault));
-		
+
 		if (planType.contains("SHIP")) {
 			//note: validate all available options
 			boolean optionLast90Days=false;
@@ -248,7 +274,6 @@ public class EOBPage extends EOBBase{
 			waitForEobPageToLoad();
 		} 		
 		return new EOBPage(driver);
-		
 	}
 
 	/**
@@ -292,7 +317,7 @@ public class EOBPage extends EOBBase{
 				CommonUtility.waitForPageLoad(driver, toCalendarDatePicker_today, 5);
 				Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", eobValidate(toCalendarDatePicker_today));
 				toCalendarDatePicker_today.click();
-				
+
 				//TODO : system time may not be in-sync w/ local time
 				//note: system time could have been next day already when you run this locally
 				/* keep 
@@ -304,8 +329,8 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
 						+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
 						actualToTxt.equals(todayDate));
-				*/ 
-				
+				 */ 
+
 				//note: custom search range for last 18 months
 				String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
 				String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
@@ -316,7 +341,7 @@ public class EOBPage extends EOBBase{
 				fromTxtField.sendKeys(Keys.DELETE);
 				toTxtField.sendKeys(Keys.CONTROL + "a");
 				toTxtField.sendKeys(Keys.DELETE);
-				
+
 				sendkeys(fromTxtField,fromDate);
 				sendkeys(toTxtField,toDate);
 				CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
@@ -337,88 +362,28 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - EOB finished loading, moving on to next step...");
 				break;
 			}
-			
-		}
-/* tbd		
-		Select dateRangeOptions = new Select(eobDateRangeDropdown);
-		dateRangeOptions.selectByVisibleText(targetDateRange);
-		CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
-		if (targetDateRange.equals("Custom Search")) {
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = new Date();
-			String todayDate=dateFormat.format(date); 
-			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'From' date", eobValidate(fromCalendarIconBtn));
-			Assert.assertTrue("PROBLEM - unable to locate calendar button for 'To' date", eobValidate(toCalendarIconBtn));
-			Assert.assertTrue("PROBLEM - unable to locate From text field", eobValidate(fromTxtField));
-			Assert.assertTrue("PROBLEM - unable to locate To text field", eobValidate(toTxtField));
-			Assert.assertTrue("PROBLEM - unable to locate Search button", eobValidate(customSearchBtn));
-			System.out.println("Proceed to validate 'From' date calendar will hide and show accordingly");
-			fromCalendarIconBtn.click();
-			CommonUtility.waitForPageLoad(driver, fromCalendarDatePicker_today, 5);
-			Assert.assertTrue("PROBLEM - date picker for 'From' calendar button should have been shown today's date clicked", eobValidate(fromCalendarDatePicker_today));
-			fromCalendarDatePicker_today.click();
 
-			System.out.println("Proceed to validate 'To' date calendar will hide and show accordingly");
-			toCalendarIconBtn.click();
-			CommonUtility.waitForPageLoad(driver, toCalendarDatePicker_today, 5);
-			Assert.assertTrue("PROBLEM - date picker for 'To' calendar button should have been shown today's date clicked", eobValidate(toCalendarDatePicker_today));
-			toCalendarDatePicker_today.click();
-			
-			//TODO : system time may not be in-sync w/ local time
-			//note: system time could have been next day already when you run this locally
-			
-			// keep String actualFromTxt=fromTxtField.getAttribute("value");
-			// keep String actualToTxt=toTxtField.getAttribute("value");
-			// keep Assert.assertTrue("PROBLEM - 'From' text not as expected.  Should have been today's date.  "
-			// keep 		+ "Expected='"+todayDate+"' | Actual='"+actualFromTxt+"'", 
-			// keep 		actualFromTxt.equals(todayDate));
-			// keep Assert.assertTrue("PROBLEM - 'To' text not as expected.  Should have been today's date.  "
-			// keep 		+ "Expected='"+todayDate+"' | Actual='"+actualToTxt+"'", 
-			// keep 		actualToTxt.equals(todayDate));
-			 
-			
-			//note: custom search range for last 18 months
-			String fromDate=new SimpleDateFormat("MM/dd/yyyy").format(new DateTime().minusMonths(18).toDate());
-			String toDate=new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-			System.out.println("search range from '"+fromDate+"' to '"+toDate+"'");
-
-			//note: clear the fields just in case
-			fromTxtField.sendKeys(Keys.CONTROL + "a");
-			fromTxtField.sendKeys(Keys.DELETE);
-			toTxtField.sendKeys(Keys.CONTROL + "a");
-			toTxtField.sendKeys(Keys.DELETE);
-			
-			sendkeys(fromTxtField,fromDate);
-			sendkeys(toTxtField,toDate);
-			CommonUtility.waitForPageLoad(driver, customSearchBtn,60);
-			customSearchBtn.click();
 		}
-		waitForEobPageToLoad(30, 5);
-		if (eobValidate(eobLoadingimage)) {
-			waitForEobPageToLoad(30, 5);
-			Assert.assertTrue("PROBLEM - waited for more than 4 min and the loading spinner still on screen, seemed to be taking unusual amount of time to load the result, aborting test", !eobValidate(eobLoadingimage));
-		}
-		*/
 		Assert.assertTrue("PROBLEM - getting internal server problem (already retried the search '"+count+"' times and still getting server problem error)", !eobValidate(internalServerError));
 		sleepBySec(3);
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element (already retried the search '"+count+"' times)", eobValidate(eobCount));
 
 		int totalEob=getNumEobAfterSearch();
-		
+
 		HashMap<String,Integer> searchResult=new HashMap<String,Integer>();
 		searchResult.put(targetDateRange, totalEob);
 		System.out.println("TEST - selectDateRange: hashMap="+Arrays.asList(searchResult)); 
-		
+
 		return searchResult;
 	}
-	
+
 	public void validateBlankDateFieldError() {
 		CommonUtility.waitForPageLoad(driver, blankFromDateErr, 10);
 		CommonUtility.waitForPageLoad(driver, blankToDateErr, 10);
 		Assert.assertTrue("PROBLEM - unable to locate error message when 'From' date is blank", eobValidate(blankFromDateErr));
 		Assert.assertTrue("PROBLEM - unable to locate error message when 'To' date is blank", eobValidate(blankToDateErr));
 	}
-	
+
 	public void validateFutureDateError() {
 		CommonUtility.waitForPageLoad(driver, futureDateErr, 10);
 		Assert.assertTrue("PROBLEM - unable to locate future date error", eobValidate(futureDateErr));
@@ -428,13 +393,13 @@ public class EOBPage extends EOBBase{
 		CommonUtility.waitForPageLoad(driver, beforeDateErr, 10);
 		Assert.assertTrue("PROBLEM - unable to locate error message when 'To' date is older than 'From' date", eobValidate(beforeDateErr));
 	}
-	
+
 	public void validateRangeGreaterThanEighteenMonthsError() {
 		CommonUtility.waitForPageLoad(driver, rangeExceedErr, 10);
 		Assert.assertTrue("PROBLEM - unable to locate error message when search range is greater than 18 months", eobValidate(rangeExceedErr));
 	}
 
-	
+
 	public void doInvalidCustomSearchToDateOlderThanFromDate() {
 		System.out.println("Proceed to validate invalid custom search - 'From' after 'To' date");
 
@@ -451,7 +416,7 @@ public class EOBPage extends EOBBase{
 		customSearchBtn.click();
 		waitForEobPageToLoad();
 	}
-	
+
 	public void doInvalidCustomSearchRangeGreaterThanEighteenMonths() {
 		System.out.println("Proceed to validate invalid custom search - 'From' after 'To' date");
 
@@ -485,7 +450,7 @@ public class EOBPage extends EOBBase{
 		customSearchBtn.click();
 		waitForEobPageToLoad();
 	}
-	
+
 	public void doInvalidCustomSearchBlankDate() {
 		System.out.println("Proceed to validate invalid custom search - blank 'From' and 'To' date");
 		Select dateRangeOptions = new Select(eobDateRangeDropdown);
@@ -520,6 +485,39 @@ public class EOBPage extends EOBBase{
 		return new EOBPage(driver);
 	}
 
+	public EOBPage validateEOBStatements_dream(String numberOfEOB){
+		sleepBySec(6);
+		System.out.println(eobCount.getText());
+		int eobCountInt = Integer.parseInt(eobCount.getText());
+		int numberOfEOBInt = Integer.parseInt(numberOfEOB);
+		System.out.println("EOB expected count = "+numberOfEOBInt);
+		if(numberOfEOBInt==eobCountInt){
+			System.out.println("count displayed correctly");
+		}else{
+			System.out.println("count not displayed correctly");
+			Assert.fail();
+		}
+		System.out.println(eobCountInt);
+		numberOfPageDisplayed(eobCountInt);
+		for(int i=0; i<eobCountInt; i++){
+			if(driver.findElement(By.id("eoblist"+i)).isDisplayed()){
+				System.out.println("EOB at" +i + " displayed correctly" );
+				System.out.println(i%9);
+				if(i%9==0 && i!=0){
+					System.out.println("user clicks on next page arrow button");
+					i=0;
+					nextPageArrow.click();
+					break;
+				}
+			}else{
+				System.out.println("EOB at "+ i +"not displayed");
+				Assert.fail();
+			}
+		}
+		return null;
+	}
+
+
 	/**
 	 * the method to validate Read PDF
 	 */
@@ -541,11 +539,11 @@ public class EOBPage extends EOBBase{
 		jsClickNew(closeVideo);
 		sleepBySec(1);
 		Assert.assertTrue("PROBLEM - should not able to locate overlay EOB video after closing it", !eobValidate(eobVideo));
-		
+
 		//note: when finish testing, collapse the link
 		learnMoreLink.click();
 		Assert.assertTrue("PROBLEM - Should NOT be able to locate Read Medical EOB Video box after collapsed Learn More link", !eobValidate(eobVideoBox));
-		
+
 		System.out.println(driver.getTitle());
 	}
 
@@ -633,17 +631,17 @@ public class EOBPage extends EOBBase{
 		sleepBySec(1);
 		customSearchButton.click();
 	}
-	
+
 	public void validateTextElements(String planType, String memberType, String eobType) {
 		if(eobType.equals("Medical") && !planType.contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
 			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
 		}
-		if (eobType.equals("Prescription Drug")) {
+		if (eobType.equals("Prescription Drug") && !memberType.contains("LIS_")) {
 			Assert.assertTrue("PROBLEM - unable to locate OPTUMRX.COM link on EOB page for EOB Type '"+eobType+"''", eobValidate(optumRxLnk));
 		} 	
 	}
-	
+
 	/**
 	 * the method is to validate eob display on eob page
 	 */
@@ -651,7 +649,7 @@ public class EOBPage extends EOBBase{
 		sleepBySec(6);
 		System.out.println(eobCountInt);
 		int page=numberOfPageDisplayed(eobCountInt);
-		
+
 		if (eobCountInt==0) {
 			//note: if there is no EOB then skip the rest of testing
 			Assert.assertTrue("PROBLEM - unable to locate the 'There are no EOBs available...' error on display when number of EOB count=0", eobValidate(noEobErr));
@@ -659,7 +657,7 @@ public class EOBPage extends EOBBase{
 		} else {
 			Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate the 'There are no EOBs available...' error on display when number of EOB count >0 | EOB count='"+eobCountInt+"'", !eobValidate(noEobErr));
 		}
-		
+
 		if (eobCountInt>10) {
 			try {
 				String testXpath="//*[contains(text(),'Page 1 of "+page+"')]";
@@ -670,7 +668,7 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("Unable to locate 'Page 1 of "+page+"' text", false);
 			}
 		}
-		
+
 		try {
 			String testXpath="//*[contains(text(),'"+eobCountInt+" items') and contains(text(),'Displaying 1 to "+eobCountInt+"')]";
 			if (eobCountInt>10)
@@ -681,7 +679,7 @@ public class EOBPage extends EOBBase{
 		} catch (NoSuchElementException e) {
 			Assert.assertTrue("Unable to locate '"+eobCountInt+" items found' text", false);
 		}
-		
+
 		for (int i = 0; i < eobCountInt; i++) {
 			try {
 				WebElement eob=driver.findElement(By.id("eoblist" + i));
@@ -726,23 +724,25 @@ public class EOBPage extends EOBBase{
 			} 
 		}
 	}
-	
+
 	/**
 	 * the method is to validate eob display on eob page
 	 */
-	public void validateEOBStatements_dream(int ui_eobCountInt, EobApiResponse eobApiResponse){
+	public List<String> validateEOBStatements_dream(int ui_eobCountInt, EobApiResponse eobApiResponse, boolean testApiFlag){
+		List<String> testNote=new ArrayList<String>();
 		sleepBySec(6);
 		System.out.println(ui_eobCountInt);
 		int page=numberOfPageDisplayed(ui_eobCountInt);
-		
+
 		if (ui_eobCountInt==0) {
 			//note: if there is no EOB then skip the rest of testing
 			Assert.assertTrue("PROBLEM - unable to locate the 'There are no EOBs available...' error on display when number of EOB count=0", eobValidate(noEobErr));
-			return;
+			testNote.add("\tLocate the 'There are no EOBs available...' error on display when number of EOB count=0");
+			return testNote;
 		} else {
 			Assert.assertTrue("PROBLEM - SHOULD NOT be able to locate the 'There are no EOBs available...' error on display when number of EOB count >0 | EOB count='"+ui_eobCountInt+"'", !eobValidate(noEobErr));
 		}
-		
+
 		if (ui_eobCountInt>10) {
 			try {
 				String testXpath="//*[contains(text(),'Page 1 of "+page+"')]";
@@ -753,7 +753,7 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("Unable to locate 'Page 1 of "+page+"' text", false);
 			}
 		}
-		
+
 		try {
 			String testXpath="//*[contains(text(),'"+ui_eobCountInt+" items') and contains(text(),'Displaying 1 to "+ui_eobCountInt+"')]";
 			if (ui_eobCountInt>10)
@@ -764,10 +764,15 @@ public class EOBPage extends EOBBase{
 		} catch (NoSuchElementException e) {
 			Assert.assertTrue("Unable to locate '"+ui_eobCountInt+" items found' text", false);
 		}
-		
+
 		waitForEobPageToLoad();
 		for (int i = 1; i <= ui_eobCountInt; i++) {
-			Eob targetEobFromApi=eobApiResponse.getListOfEob().get(i-1);
+			System.out.println("----- Proceed to validate each EOB...Number: "+i);
+			if (testApiFlag) {
+				System.out.println("-- will validating against this API EOB content...");
+				Eob targetEobFromApi=eobApiResponse.getListOfEob().get(i-1);
+				targetEobFromApi.printDetail();
+			}
 			String targetEobXpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]']["+i+"]";
 			try {
 				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
@@ -776,9 +781,9 @@ public class EOBPage extends EOBBase{
 			} catch (NoSuchElementException e) {
 				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
 			}
-			
+
 			//TODO: ask author/developer - does the table has table header??
-			
+
 			//note: each row should have three items: Date  (<month/yyyy>)| EOB Type | EOB Statement
 			String targetEobLineItems=targetEobXpath+"//td";
 			List<WebElement> itemsPerLine=driver.findElements(By.xpath(targetEobLineItems));
@@ -786,7 +791,7 @@ public class EOBPage extends EOBBase{
 			int actNumItems=itemsPerLine.size();
 			Assert.assertTrue("PROBLEM - items per EOB line is not as expected. Expected='"+expNumItems+"' | Actual='"+actNumItems+"'", 
 					actNumItems==expNumItems);
-			
+
 			//--------------------------------
 			//note: item-1 Date  (<month/yyyy>)
 			String dateItemXpath=targetEobXpath+"//td[1]";
@@ -795,17 +800,20 @@ public class EOBPage extends EOBBase{
 				String ui_eobDate=dateItemElement.getText();
 				Assert.assertTrue("PROBLEM - date value should not be empty. Expected format 'month yyyy'", !ui_eobDate.equals(""));
 
-				Date date = targetEobFromApi.getEobDate();
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(date);
-				String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-				int year = cal.get(Calendar.YEAR);
-				String api_eobDate_MMMM_yyyy=month+" "+String.valueOf(year);
-				System.out.println("TEST - API Date after format convert="+api_eobDate_MMMM_yyyy);
-				Assert.assertTrue("PROBLEM - UI EOB Date is not the same as the converted API EOB Date.  "
-						+ "UI ='"+ui_eobDate+"' | API='"+targetEobFromApi.getEobDateStr()+"' convert to '"+api_eobDate_MMMM_yyyy+"'", 
-						ui_eobDate.equals(api_eobDate_MMMM_yyyy));
-				
+				//note: only validate against API data if testAPIFlag=true
+				if (testApiFlag) {
+					Eob targetEobFromApi=eobApiResponse.getListOfEob().get(i-1);
+					Date date = targetEobFromApi.getEobDate();
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(date);
+					String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+					int year = cal.get(Calendar.YEAR);
+					String api_eobDate_MMMM_yyyy=month+" "+String.valueOf(year);
+					System.out.println("TEST - API Date after format convert="+api_eobDate_MMMM_yyyy);
+					Assert.assertTrue("PROBLEM - UI EOB Date is not the same as the converted API EOB Date.  "
+							+ "UI ='"+ui_eobDate+"' | API='"+targetEobFromApi.getEobDateStr()+"' convert to '"+api_eobDate_MMMM_yyyy+"'", 
+							ui_eobDate.equals(api_eobDate_MMMM_yyyy));
+				}
 			} catch(Exception e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to locate the Date element on target EOB line entry '"+i+"'", false);
@@ -818,36 +826,40 @@ public class EOBPage extends EOBBase{
 				String ui_eobType=eobTypeItemElement.getText();
 				Assert.assertTrue("PROBLEM - EOB Type value should not be empty. Expected format 'month yyyy'", !ui_eobType.equals(""));
 				String expText1="Medical";
-				String expText2="Prescription Drug";
-				String expText3="Medical and Prescription Drug";
+				String expText2="Prescription";
+				String expText3="Medical & Prescription";
 				Assert.assertTrue("PROBLEM - EOB Type value is not as expected. "
-						+ "Valid value are: '"+expText1+"' or '"+expText2+"' or '"+expText3+"'", 
-						ui_eobType.equals(expText1) || ui_eobType.equals(expText2) || ui_eobType.equals(expText3));
-		
-				String api_eobType=targetEobFromApi.getEobType();
-				System.out.println("TEST - UI eobType="+ui_eobType);
-				System.out.println("TEST - API eobType="+api_eobType);
-				if (ui_eobType.equals("Medical")) 
-					Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
-						+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
-						api_eobType.equals("PART C"));
-				if (ui_eobType.equals("Prescription Drug")) 
-					Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
-						+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
-						api_eobType.equals("PART D"));
-				if (ui_eobType.equals("Medical and Prescription Drug")) 
-					Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
-						+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
-						api_eobType.equals("PART C+D"));
-				//note:
-				//PART C = Medical 
-				//PART D = Prescription Drug 
-				//PART C+D = Medical and Prescription Drug 
+						+ "Valid expected value are: '"+expText1+"' or '"+expText2+"' or '"+expText3+"' | Actual='"+ui_eobType+"'", 
+						ui_eobType.equals(expText1) || ui_eobType.equals(expText2) || (ui_eobType.contains(expText1) && ui_eobType.contains(expText2)));
+
+				//note: only validate against API data if testAPIFlag=true
+				if (testApiFlag) {
+					Eob targetEobFromApi=eobApiResponse.getListOfEob().get(i-1);
+					String api_eobType=targetEobFromApi.getEobType();
+					System.out.println("TEST - UI eobType="+ui_eobType);
+					System.out.println("TEST - API eobType="+api_eobType);
+					if (ui_eobType.equals("Medical")) 
+						Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
+								+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
+								api_eobType.equals("PART C"));
+					if (ui_eobType.equals("Prescription Drug")) 
+						Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
+								+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
+								api_eobType.equals("PART D"));
+					if (ui_eobType.equals("Medical and Prescription Drug")) 
+						Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
+								+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
+								api_eobType.equals("PART C+D"));
+					//note:
+					//PART C = Medical 
+					//PART D = Prescription Drug 
+					//PART C+D = Medical and Prescription Drug 
+				}
 			} catch(Exception e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to locate the Date element on target EOB line entry '"+i+"'", false);
 			}
-			
+
 			//--------------------------------
 			//note: item-3 EOB Statement
 			String eobStmtItemXpath=targetEobXpath+"//td[3]//a";
@@ -860,30 +872,21 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM - EOB Statement value is not as expected. "
 						+ "Expected to contain: '"+expText1+"' and '"+expText2+"'", 
 						ui_eobLinkTxt.contains(expText1) && ui_eobLinkTxt.contains(expText2)) ;
-				
-				String ui_eobLink=eobStmtItemElement.getAttribute("href");
-				String api_eobLink=targetEobFromApi.getEsp();
-				System.out.println("TEST - UI eobLink="+ui_eobLink);
-				System.out.println("TEST - API esp="+api_eobLink);
-				Assert.assertTrue("PROBLEM - eob link between UI and API are not the same. Expect to contain '"+api_eobLink+"' | Actual='"+ui_eobLink+"'",ui_eobLink.contains(api_eobLink));
+
+				//note: only validate against API data if testAPIFlag=true
+				if (testApiFlag) {
+					Eob targetEobFromApi=eobApiResponse.getListOfEob().get(i-1);
+					String ui_eobLink=eobStmtItemElement.getAttribute("href");
+					String api_eobLink=targetEobFromApi.getEsp();
+					System.out.println("TEST - UI eobLink="+ui_eobLink);
+					System.out.println("TEST - API esp="+api_eobLink);
+					Assert.assertTrue("PROBLEM - eob link between UI and API are not the same. Expect to contain '"+api_eobLink+"' | Actual='"+ui_eobLink+"'",ui_eobLink.contains(api_eobLink));
+				}
 			} catch(Exception e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to locate the Date element on target EOB line entry '"+i+"'", false);
 			}
 
-			String targetEobXpath_kb=eobStmtItemXpath+"//*[contains(text(), 'kb') or contains(text(), 'KB')]";
-			try {
-				WebElement pdflink=driver.findElement(By.xpath(targetEobXpath_kb));
-				System.out.println("EOB at" + i + " PDF Link text : "+pdflink.getText());
-				//note: bypass for now, it's not stable, need to ask developer, UI behavior is not stable
-				Assert.assertTrue("PROBLEM - EOB PDF link text not as expected.  "
-				 		+ "Expect to NOT contains '0kb' and '0 kb' and '0 KB' and '0 KB' | Actual='"+pdflink.getText()+"'",
-						!pdflink.getText().contains(", 0kb") && !pdflink.getText().contains(", 0 kb")
-						&& !pdflink.getText().contains(", 0KB") && !pdflink.getText().contains(", 0 KB"));
-			} catch (NoSuchElementException e) {
-				//note: bypass for now, it's not stable, need to ask developer
-				Assert.assertTrue("PROBLEM, unable to locate kb field for eob number "+(i+1)+" from display with xpath="+targetEobXpath_kb, false);
-			}
 			//--------------------------------
 
 			//note - validate the pagination
@@ -905,8 +908,10 @@ public class EOBPage extends EOBBase{
 				CommonUtility.checkPageIsReady(driver);
 				Assert.assertTrue("PROBLEM - unable to locate the disabled prev page arrow after clicking prev page arrow", eobValidate(prevPageArrow_disabled));
 				break;
-			} 
+			}
+			testNote.add("\tEOB number "+(i)+" entry eleemnts validation: PASSED");
 		}
+		return testNote;
 	}
 
 	public void validateEobEntries (String planType, String memberId) {
@@ -921,7 +926,7 @@ public class EOBPage extends EOBBase{
 		//note: Use the list of window handles to switch between windows
 		driver.switchTo().window(newTab.get(1));
 		CommonUtility.checkPageIsReady(driver);
-		
+
 		String pdfUrl = driver.getCurrentUrl();
 		System.out.println(" pdf url: '" + pdfUrl+"'");
 		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
@@ -929,12 +934,11 @@ public class EOBPage extends EOBBase{
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
 		if (MRScenario.environment.contains("stage")) {
-			
+
 			try {
 				URL TestURL = new URL(pdfUrl);
 				HttpURLConnection urlConnection = (HttpURLConnection) TestURL.openConnection();        
 				urlConnection.setRequestProperty("uuid", targetUuid);      
-				//tbd urlConnection.setRequestProperty("uuid", "4d15e53a-d4af-430a-845e-c6c1596176a3");     
 
 				int responseCode;
 				responseCode = urlConnection.getResponseCode();
@@ -946,7 +950,7 @@ public class EOBPage extends EOBBase{
 					urlConnection.setRequestProperty("uuid", targetUuid);      
 					responseCode = urlConnection.getResponseCode();
 				}
-				
+
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 ("+urlConnection.getResponseCode()+") response code.  "
 						+ "PDF link='"+pdfUrl+"'",
@@ -960,7 +964,7 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
 						+ "Do not expect to see '"+error+"'", 
 						!PDFText.contains(error));
-				
+
 				//note: check to see if EOB contains memebr ID
 				String memberId_portion=memberId;
 				//note: strip the leading 0 
@@ -975,7 +979,7 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
 				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
 						PDFText.contains(memberId_portion));
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - got exception when opening pdf link, unable to validate pdf content",false);
@@ -984,87 +988,125 @@ public class EOBPage extends EOBBase{
 			System.out.println("Having' figure out how to work on team env yet");
 		}
 
-
 		//note: Switch back to original window
 		driver.close();
 		driver.switchTo().window(newTab.get(0));
 		CommonUtility.checkPageIsReady(driver);
 		sleepBySec(5);
-		
+	}
+	
+	public String validatePdfContent_dream(String pdfUrl, String targetUuid, String memberId) {
+		String result="PASSED";
+		try {
+			URL TestURL = new URL(pdfUrl);
+			HttpsURLConnection urlConnection = (HttpsURLConnection) TestURL.openConnection();        
+			urlConnection.setRequestProperty("uuid", targetUuid);      
+
+			int responseCode;
+			responseCode = urlConnection.getResponseCode();
+			System.out.println("TEST - responseCode="+ urlConnection.getResponseCode());
+			System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
+			//note: keep - re-enable when download API is more stable
+			if (responseCode!=200) {
+				result="PROBLEM - attempted to run the download API again separately to obtain the PDF content for validation but is getting non-200 ("+responseCode+") response code in this separately run. You will have to check screen capture to see if the doc is loaded successfully..."
+						+ "PDF link='"+pdfUrl+"'";
+				return result;
+			}
+			System.out.println("TEST - is able to open pdf url, proceed to validate content");
+			PDDocument document = PDDocument.load(urlConnection.getInputStream());
+			String PDFText = new PDFTextStripper().getText(document);
+			System.out.println("PDF text : " + PDFText);
+
+			String error="Your Explannation of Benefits is currently unavailable.";
+			if (PDFText.contains(error)) {
+				result="PROBLEM : pdf content is not as expected.  "
+					+ "Do not expect to see '"+error+"'";
+				return result;
+			}
+
+			//note: check to see if EOB contains memebr ID
+			String memberId_portion=memberId;
+			//note: strip the leading 0 
+			//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+			System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
+			if (memberId.contains("-")) {
+				String[] tmp=memberId.split("-");
+				memberId_portion=tmp[0];
+			}
+			//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+			memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
+			System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
+			if (!PDFText.contains(memberId_portion)) {
+				result="PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"'";
+				return result;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			if (MRScenario.environment.contains("team-a"))
+				result="Able to click pdf on new tab but unable to validate PDF content on "+MRScenario.environment+" env";
+			else
+				result="PROBLEM - got exception when opening pdf link, unable to validate pdf content";
+			return result;
+		}   
+		return result;
 	}
 
-	public void validateEobEntries_dream(String planType, String memberId) {
+	/**
+	 * Validate the PDF content of the EOB entry
+	 * @param planType
+	 * @param memberId
+	 * @param testApiFlag
+	 */
+	public List<String> validateEobEntries_dream(String planType, String memberId, boolean testApiFlag, int eobCount) {
+		List<String> testNote=new ArrayList<String>();
 		CommonUtility.waitForPageLoad(driver, eobFirst_dream, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst_dream));
-		eobFirst_dream.click();
-		sleepBySec(5);
-
-		//note: Get the list of window handles
-		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
-		System.out.println(newTab.size());
-		//note: Use the list of window handles to switch between windows
-		driver.switchTo().window(newTab.get(1));
-		CommonUtility.checkPageIsReady(driver);
-		
-		String pdfUrl = driver.getCurrentUrl();
-		System.out.println(" pdf url: '" + pdfUrl+"'");
-		Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
-		if (MRScenario.environment.contains("stage") && !planType.contains("SHIP")) {
-			Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
-			try {
-				URL TestURL = new URL(pdfUrl);
-				HttpsURLConnection urlConnection = (HttpsURLConnection) TestURL.openConnection();        
-				urlConnection.setRequestProperty("uuid", targetUuid);      
+		Assert.assertTrue("PROBLEM - unable to locate the uuid valie from localStorage.consumerDetails - need it to open pdf url for pdf content validatoin", targetUuid!=null);
+		for (int i = 1; i <= eobCount; i++) {
+			System.out.println("----- Proceed to validate each EOB PDF content...");//lyc
 
-				int responseCode;
-				responseCode = urlConnection.getResponseCode();
-				System.out.println("TEST - responseCode="+ urlConnection.getResponseCode());
-				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
-				//note: keep - re-enable when download API is more stable
-				Assert.assertTrue("PROBLEM - attempted to run the download API again separately to obtain the PDF content for validation but is getting non-200 ("+responseCode+") response code in this separately run. You will have to check screen capture to see if the doc is loaded successfully..."
-						+ "PDF link='"+pdfUrl+"'",
-						responseCode==200);
-				System.out.println("TEST - is able to open pdf url, proceed to validate content");
-				PDDocument document = PDDocument.load(urlConnection.getInputStream());
-				String PDFText = new PDFTextStripper().getText(document);
-				System.out.println("PDF text : " + PDFText);
-				
-				String error="Your Explannation of Benefits is currently unavailable.";
-				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
-						+ "Do not expect to see '"+error+"'", 
-						!PDFText.contains(error));
-					
-				//note: check to see if EOB contains memebr ID
-				String memberId_portion=memberId;
-				//note: strip the leading 0 
-				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
-				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
-				if (memberId.contains("-")) {
-					String[] tmp=memberId.split("-");
-					memberId_portion=tmp[0];
+			//String targetEobXpath="//tr[@ng-repeat='eobData in pagedListItems[currentPage]']["+i+"]//td[3]";
+			String targetEobXpath="//tr[contains(@ng-repeat,'eobData in pagedListItems')]["+i+"]//td[3]//a";
+			try {
+				WebElement eob=driver.findElement(By.xpath(targetEobXpath));
+				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", eobValidate(eob));
+				moveMouseToElement(eob);
+				eob.click();
+				CommonUtility.checkPageIsReady(driver);
+				sleepBySec(5);
+
+				//note: Get the list of window handles
+				ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+				System.out.println(newTab.size());
+				Assert.assertTrue("PROBLEM - clicked PDF but didn't open a new tab to load PDF", newTab.size()>1);
+				//note: Use the list of window handles to switch between windows
+				driver.switchTo().window(newTab.get(1));
+				CommonUtility.checkPageIsReady(driver);
+
+				//--------------------------------------
+				//note: validate content of PDF
+				String pdfUrl = driver.getCurrentUrl();
+				System.out.println(" pdf url: '" + pdfUrl+"'");
+				Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
+				if (MRScenario.environment.contains("stage")) {
+					String result=validatePdfContent_dream(pdfUrl, targetUuid, memberId);
+					testNote.add("\tEOB number "+(i)+" PDF content validation result: "+result);
 				}
-				//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
-				memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
-				System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
-				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
-						PDFText.contains(memberId_portion));
-			} catch (IOException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - got exception when opening pdf link, unable to validate pdf content",false);
-			}             		
-		} else {
-			System.out.println("Having' figure out how to work on team env yet");
+				//--------------------------------------
+				driver.close();
+				driver.switchTo().window(newTab.get(0));
+			} catch (NoSuchElementException e) {
+				Assert.assertTrue("PROBLEM, unable to locate eob number "+(i)+" from display", false);
+			}
 		}
-                       
-		//note: Switch back to original window
-		driver.close();
-		driver.switchTo().window(newTab.get(0));
-		
+		for (String s: testNote)
+			System.out.println(s);
+		return testNote;
 	}
-	
-	
+
+
 	public int getNumEobAfterSearch(){
 		sleepBySec(5); //note: wait for page to settle before storing the count just in case
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
@@ -1076,7 +1118,7 @@ public class EOBPage extends EOBBase{
 			System.out.println("No EOBs are displayed");
 		return eobCountInt;
 	}
-	
+
 	public void validateLearnMoreText() {
 		CommonUtility.waitForPageLoad(driver, learnMoreLink, 10);
 		Assert.assertTrue("PROBLEM - Unable to locate Learn More link", eobValidate(learnMoreLink));
@@ -1084,7 +1126,7 @@ public class EOBPage extends EOBBase{
 		CommonUtility.waitForPageLoad(driver, drugText, 5);
 		Assert.assertTrue("PROBLEM - Unable to locate Learn More text related to Prescription Drug", eobValidate(drugText));
 	}
-	
+
 	public void validateComboTab(String memberType) {
 		if (memberType.contains("MULTI_SHIP")) {
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should not show with mulitple tabs",comboTabList.size()==1);
@@ -1092,13 +1134,13 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - user with multiple ship plans should have single tab with text 'SUPPLEMENTAL INSURANCE PLANS'",comboTabList.get(0).getText().equals("SUPPLEMENTAL INSURANCE PLANS"));
 			//should not see tabs
 		} else 
-		if (memberType.contains("COMBO")) {
-			if (memberType.contains("SSP")) {
-				Assert.assertTrue("PROBLEM - user with SSP as one of the combo plan SHOULD NOT have SSP tab showing on EOB page",!eobValidate(comboTab_SSP));
-			} else {
-				Assert.assertTrue("PROBLEM - user with combo plan should have more than one tab, please check input user if it's really a combo plan user",comboTabList.size()>1);
+			if (memberType.contains("COMBO")) {
+				if (memberType.contains("SSP")) {
+					Assert.assertTrue("PROBLEM - user with SSP as one of the combo plan SHOULD NOT have SSP tab showing on EOB page",!eobValidate(comboTab_SSP));
+				} else {
+					Assert.assertTrue("PROBLEM - user with combo plan should have more than one tab, please check input user if it's really a combo plan user",comboTabList.size()>1);
+				}
 			}
-		}
 	}
 
 	public void validateSpendingCostSummaryTab(boolean expectTab) {
@@ -1121,11 +1163,11 @@ public class EOBPage extends EOBBase{
 			Assert.assertTrue("PROBLEM - should not be able to locate the 'Spending Cost Summary' tab on top sub menu", !eobValidate(spendingCostSummaryTab_topSubMenu) && !eobValidate(spendingCostSummaryTab_topSubMenu2));
 		}
 	}
-	
+
 	public void validateMyClaimsTopSubMenu() {
 		Assert.assertTrue("PROBLEM - unable to locate MyClaims sub menu option from top menu", eobValidate(myClaimsSubTopMenu));
 	}
-	
+
 	public ClaimsSummaryPage clickMyClaimsTopSubMenu() {
 		eobCheckModelPopup(driver);
 		if(eobValidate(myClaimsSubTopMenu)) {
@@ -1145,6 +1187,20 @@ public class EOBPage extends EOBBase{
 			}
 		}
 		return null;
+	}
+
+	public void selectDateRange_dream(String dateRange){
+		validate(eobMonthDateRange);	
+		Select select;
+		select = new Select(eobMonthDateRange);
+		System.out.println(dateRange);
+		select.selectByVisibleText(dateRange);
+	}
+	
+	public void validateSearchResultTableHeader_DREAMEOB() {
+		Assert.assertTrue("PROBLEM - unable to locate the search result table header for 'Date'", eobValidate(tblHeaderDate));
+		Assert.assertTrue("PROBLEM - unable to locate the search result table header for 'EOB Type'", eobValidate(tblHeaderType));
+		Assert.assertTrue("PROBLEM - unable to locate the search result table header for 'EOB Statement'", eobValidate(tblHeaderStmt));
 	}
 }
 

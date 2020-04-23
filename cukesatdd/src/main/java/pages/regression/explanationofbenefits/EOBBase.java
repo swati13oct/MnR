@@ -441,7 +441,7 @@ public class EOBBase extends EOBWebElements{
 
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
-				System.out.println("TEST each line="+line);
+				//System.out.println("TEST each line="+line);
 				if (memberType.contains("COMBO")) {
 					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
 						apiReqeust=line;
@@ -464,7 +464,6 @@ public class EOBBase extends EOBWebElements{
 			lookForText1="/dreamEob/rx/search?medicareId";
 			for (LogEntry entry : entries) {
 				String line=entry.getMessage();
-				//tbd System.out.println("TEST each line="+line);
 				if (line.contains(lookForText1) && line.contains(lookForText2)) {
 					apiReqeust=line;
 					System.out.println("TEST found line="+line);
@@ -522,7 +521,7 @@ public class EOBBase extends EOBWebElements{
 		}
 		String apiResponseJsonStr=apiResponseJson.getText();
 		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
-		if (apiResponseJsonStr.contains("\"errorCode\":\"500\"")) {
+		if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"")) {
 			sleepBySec(5);
 			System.out.println("Retry one more time before giving up...");
 			driver.get(inputUrl);
@@ -577,12 +576,14 @@ public class EOBBase extends EOBWebElements{
 			String eobDate = (String) eachObj.get("eobDate");
 			String esp = (String) eachObj.get("esp");
 			String eobType = (String) eachObj.get("eobType");
+			String compoundDoc=(String) eachObj.get("compoundDoc");
+			
 			if (eobType!=null && !eobType.equals("")) { 
-				System.out.println("TEST - this is DREAM EOB");
-				apiResponse.addEob(eobDate, esp, eobType);
+				System.out.println("TEST - this is DREAM EOB - eobDate="+eobDate+" | espType="+eobType+" | esp="+esp+" | compoundDoc="+compoundDoc);
+				apiResponse.addEob(eobDate, esp, eobType, compoundDoc);
 			} else {
-				System.out.println("TEST - this is NON-DREAM EOB");
-				apiResponse.addEob(eobDate, esp);
+				System.out.println("TEST - this is NON-DREAM EOB - eobDate="+eobDate+" | esp="+esp+" | compoundDoc="+compoundDoc);
+				apiResponse.addEob(eobDate, esp, compoundDoc);
 			}
 		} 
 		return apiResponse;
