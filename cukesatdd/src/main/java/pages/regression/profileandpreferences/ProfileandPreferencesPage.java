@@ -2020,7 +2020,7 @@ private WebElement editEmailAddressArrowbutton;
 			cs.enterValidSecurityAnswer();
 			System.out.println(driver.getCurrentUrl());
 			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReadyNew(driver); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
