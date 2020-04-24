@@ -78,7 +78,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 08    | MA       | COSMOS_EOB_R      | old C                             | true        |
+      | 08    | MA       | COSMOS_EOB_R      | old C                             | false       |
       | 02    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @dreamEob01d 
