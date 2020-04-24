@@ -2014,13 +2014,13 @@ private WebElement editEmailAddressArrowbutton;
 		hsidPasswordLink.click();
 		Thread.sleep(10000);
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("identity"));
+		Assert.assertTrue(driver.getTitle().contains("security settings"));
 		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
 		try {
 			cs.enterValidSecurityAnswer();
 			System.out.println(driver.getCurrentUrl());
 			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.checkPageIsReadyNew(driver); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
