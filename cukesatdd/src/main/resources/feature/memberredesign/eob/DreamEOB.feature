@@ -98,5 +98,5 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01f @PDP_EOBs
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 12    | PDP      | LIS_PDP_SSP_COMBO_EOB | old D                             | true        |
+      | 12    | PDP      | LIS_PDP_SSP_COMBO_EOB | old D                         | true        |
       | 13    | PDP      | PDP_SHIP_COMBO_EOB| old D                             | true        |
