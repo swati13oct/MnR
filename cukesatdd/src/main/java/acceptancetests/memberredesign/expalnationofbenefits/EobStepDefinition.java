@@ -147,21 +147,21 @@ public class EobStepDefinition {
 			//note: there are two requests for dream, need to fix up the string
 			List<String> tmpResponsJson=eobPage.getApiRequestUrl(planType, memberType, eobType);
 			String m_requestUrl=tmpResponsJson.get(0);
-			String r_requestUrl=tmpResponsJson.get(1);
 			System.out.println("TEST - m_requestUrl="+m_requestUrl);
-			System.out.println("TEST - r_requestUrl="+r_requestUrl);
-			
 			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
-			String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
-
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
 			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
-
-			EobApiResponse r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
-
 			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
-			System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
+
+			EobApiResponse r_eobResponseObj=new EobApiResponse();
+			if (!planType.equals("MA")) {
+				String r_requestUrl=tmpResponsJson.get(1);
+				System.out.println("TEST - r_requestUrl="+r_requestUrl);
+				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
+				r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
+				Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
+				System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
+			}
 			//note: remove duplicated compoundDoc
 			List<Eob> uniqueEobList=new ArrayList<Eob>();
 			if (eobResponseObj.getListOfEob().size()>0) {

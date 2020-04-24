@@ -352,9 +352,6 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
 	protected WebElement tblHeaderStmt;
 	
-	@FindBy(xpath="//*[contains(text(),'We are currently experiencing an internal server problem')]")
-	protected WebElement internalErrorMsg;
-	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

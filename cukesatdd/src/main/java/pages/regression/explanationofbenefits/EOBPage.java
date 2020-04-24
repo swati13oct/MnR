@@ -191,18 +191,14 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		System.out.println("OMG - planType="+planType);
 		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
-			System.out.println("OMG 1- planType="+planType);
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for SHIP plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for SHIP plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
-			System.out.println("OMG 2- planType="+planType);
 			Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section header element", eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section link element", eobValidate(rightRailLearnMoreLink));
 			
 			//note: validate pdf content
-			String winHandleBefore = driver.getWindowHandle();
 			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 			int beforeClicked_numTabs=beforeClicked_tabs.size();	
 
@@ -228,7 +224,7 @@ public class EOBPage extends EOBBase{
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
-		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalErrorMsg));
+		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
@@ -324,8 +320,10 @@ public class EOBPage extends EOBBase{
 	public HashMap<String,Integer> selectDateRange(String planType, String targetDateRange, String targetEobType){
 		int maxRetry=3;
 		int count=0;
+		
 		while (count < maxRetry) {
 			System.out.println("Proceed to do search range - try# "+count);
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
 			Select dateRangeOptions = new Select(eobDateRangeDropdown);
 			dateRangeOptions.selectByVisibleText(targetDateRange);
 			CommonUtility.waitForPageLoad(driver, fromCalendarIconBtn, 10);
