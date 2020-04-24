@@ -70,7 +70,7 @@ Feature: 1.05 Member Footer validation
       | TID   | planType | memberType             |
       | 15347 | SHIP     | IND_footer             |
 
-  @footer03 @thePredators @regressionMember @needHelp
+  @footer03 @thePredators @regressionMember @needHelp @F423677
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
     # note: not going to validate pages from Rally, i.e. Dashboard (DCE), Find Care & Costs
     # note: if system is in future date, payment page may not show for user and this test will end up failing
@@ -102,7 +102,7 @@ Feature: 1.05 Member Footer validation
      | 15347 | MEDICA   | Ind_footer                 |
      | 15347 | PCP      | Ind_footer                 |
       
-  @footer04 @thePredators @shipFooter @regressionMember @needHelp
+  @footer04 @thePredators @shipFooter @regressionMember @needHelp @F423677
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

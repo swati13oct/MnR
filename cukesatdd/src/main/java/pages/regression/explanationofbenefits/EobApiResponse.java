@@ -4,14 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.junit.Assert;
 
 public class EobApiResponse {
 
@@ -19,7 +12,9 @@ public class EobApiResponse {
 	protected String errorCode;
 
 	protected List<Eob> listOfEob;
-	
+
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
 	public EobApiResponse() {
 		success=false;
 		errorCode="";
@@ -40,35 +35,33 @@ public class EobApiResponse {
 		listOfEob.add(inputEob);
 	}
 	
-	public void addEob(String eobDateStr, String esp) {
+	public void addEob(String eobDateStr, String esp, String compoundDoc) {
 		try {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		Date eobDate= sdf.parse(eobDateStr);
-			Eob e=new Eob(eobDate, esp);
+			Date eobDate= sdf.parse(eobDateStr);
+			Eob e=new Eob(eobDate, esp, compoundDoc);
 			listOfEob.add(e);
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
 	}
 
-	public void addEob(Date eobDate, String esp) {
-			Eob e=new Eob(eobDate, esp);
+	public void addEob(Date eobDate, String esp, String compoundDoc) {
+			Eob e=new Eob(eobDate, esp, compoundDoc);
 			listOfEob.add(e);
 	}
 	
-	public void addEob(String eobDateStr, String esp, String eobType) {
+	public void addEob(String eobDateStr, String esp, String eobType, String compoundDoc) {
 		try {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		Date eobDate=sdf.parse(eobDateStr);
-			Eob e=new Eob(eobDate, esp, eobType);
+			Date eobDate=sdf.parse(eobDateStr);
+			Eob e=new Eob(eobDate, esp, eobType, compoundDoc);
 			listOfEob.add(e);
 		} catch (java.text.ParseException e1) {
 			e1.printStackTrace();
 		}
 	}
 	
-	public void addEob(Date eobDate, String esp, String eobType) {
-		Eob e=new Eob(eobDate, esp, eobType);
+	public void addEob(Date eobDate, String esp, String eobType, String compoundDoc) {
+		Eob e=new Eob(eobDate, esp, eobType, compoundDoc);
 		listOfEob.add(e);
 	}
 	
@@ -76,7 +69,7 @@ public class EobApiResponse {
 		listOfEob.addAll(eobList);
 	}
 	
-	public void sortListOfEob() {
+	public void sortListOfEobLatestFirst() {
 		System.out.println("TEST - before sort: ");
 		printApiResponse();
 		Collections.sort(listOfEob);
@@ -114,16 +107,14 @@ public class EobApiResponse {
 		System.out.println("  errorCode="+errorCode);
 		System.out.println("  There are total of '"+getNumEobs()+"' EOB in the response");
 		for (int i=0; i<getNumEobs(); i++) {
+			String eobDateStr= sdf.format(listOfEob.get(i).getEobDate());
 			System.out.print("    EOB # '"+(i+1)+"' detail");
-			System.out.print(":  eobDate="+listOfEob.get(i).getEobDate());
-			System.out.print("|  esp="+listOfEob.get(i).getEsp());
+			System.out.print(":  eobDate="+eobDateStr);
+			System.out.print(" |  compoundDoc="+listOfEob.get(i).getCompoundDoc());
 			if (!listOfEob.get(i).getEobType().equals(""))
-				System.out.print("|  esp="+listOfEob.get(i).getEobType());
+				System.out.print(" |  eobType="+listOfEob.get(i).getEobType());
+			System.out.print(" |  esp="+listOfEob.get(i).getEsp());
 			System.out.println("\n");
-			
 		}
 	}
-
-	
-
 }
