@@ -1909,6 +1909,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -2114,6 +2115,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Medical Reimbursement Form (Online)");
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
+				targetTestDocList.add("Prescription Drug Reimbursement Form");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
