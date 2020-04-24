@@ -17,7 +17,7 @@ import cucumber.api.CucumberOptions;
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, plugin = { "pretty",
 				"html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobile.json" }, 
-				tags = {"@F372736","~@headerfootermobile"})
+				tags = {"@F384284","~@headerfootermobile"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineMobile {
 
 }
