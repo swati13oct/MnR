@@ -94,10 +94,9 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 11    | PDP      | Rx_EOB            | old D                             | true        |
-      | 12    | PDP      | GROUP_Rx_EOB      | old D                             | true        |
 
     @dreamEob01f @PDP_EOBs
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 13    | PDP      | PDP_SSP_COMBO_EOB | old D                             | true        |
-      | 14    | PDP      | PDP_SHIP_COMBO_EOB| old D                             | true        |
+      | 12    | PDP      | LIS_PDP_SSP_COMBO_EOB | old D                             | true        |
+      | 13    | PDP      | PDP_SHIP_COMBO_EOB| old D                             | true        |

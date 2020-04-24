@@ -164,20 +164,22 @@ public class EobStepDefinition {
 			System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
 			//note: remove duplicated compoundDoc
 			List<Eob> uniqueEobList=new ArrayList<Eob>();
-			uniqueEobList.add(eobResponseObj.getListOfEob().get(0));
-			for(int i=1; i<eobResponseObj.getListOfEob().size(); i++) {
-				boolean found=false;
-				System.out.println("TEST - 1 - check to see if compoundDoc='"+eobResponseObj.getListOfEob().get(i).getCompoundDoc()+"' has been added to the list yet");
-				for(int k=0; k<uniqueEobList.size(); k++) {
-					if (eobResponseObj.getListOfEob().get(i).getCompoundDoc().equals(uniqueEobList.get(k).getCompoundDoc())) {
-						found=true;
-						System.out.println("TEST - already added, skip");
-						break;
+			if (eobResponseObj.getListOfEob().size()>0) {
+				uniqueEobList.add(eobResponseObj.getListOfEob().get(0));
+				for(int i=1; i<eobResponseObj.getListOfEob().size(); i++) {
+					boolean found=false;
+					System.out.println("TEST - 1 - check to see if compoundDoc='"+eobResponseObj.getListOfEob().get(i).getCompoundDoc()+"' has been added to the list yet");
+					for(int k=0; k<uniqueEobList.size(); k++) {
+						if (eobResponseObj.getListOfEob().get(i).getCompoundDoc().equals(uniqueEobList.get(k).getCompoundDoc())) {
+							found=true;
+							System.out.println("TEST - already added, skip");
+							break;
+						}
 					}
-				}
-				if (!found) {
-					System.out.println("TEST - not yet added, add it");
-					uniqueEobList.add(eobResponseObj.getListOfEob().get(i));
+					if (!found) {
+						System.out.println("TEST - not yet added, add it");
+						uniqueEobList.add(eobResponseObj.getListOfEob().get(i));
+					}
 				}
 			}
 			for(int i=0; i<r_eobResponseObj.getListOfEob().size(); i++) {

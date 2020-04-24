@@ -415,7 +415,7 @@ public class EOBBase extends EOBWebElements{
 		System.out.println("TEST - responseObj="+responseObj.toString());
 		Long statusValue = (Long) responseObj.get("status");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
-		Assert.assertTrue("PROBLEM - API response is not getting status=200", statusValue==200 || statusValue==206);
+		Assert.assertTrue("PROBLEM - API response is not getting status=200.  Actual statusValue='"+statusValue+"'", statusValue==200 || statusValue==206);
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
@@ -521,7 +521,7 @@ public class EOBBase extends EOBWebElements{
 		}
 		String apiResponseJsonStr=apiResponseJson.getText();
 		//System.out.println("apiResponseJsonStr="+apiResponseJsonStr);
-		if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"")) {
+		if (!apiResponseJsonStr.contains("\"errorCode\":\"200\"") && !apiResponseJsonStr.contains("\"errorCode\":\"206\"")) {
 			sleepBySec(5);
 			System.out.println("Retry one more time before giving up...");
 			driver.get(inputUrl);
