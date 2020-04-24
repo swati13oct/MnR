@@ -134,17 +134,12 @@ Feature: 2.05.4.ACQ-OLE SNP UMS
 #    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
-#    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
-		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
-    Then the user answers following questions in Medicare Information Page
-      | PDP Question      | <pdpFlag>      |
-      | LongTerm Question | <longTermFlag> |
-#    Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
-#      | Provider Name           | <providername>    |
-#      | Provider Street Address | <provideraddress> |
-#      | City                    | <providercity>    |
-#      | Zip                     | <providerzipcode> |
-#      | Provider Phone Number   | <providernumber>  |
+		Then the user validates the required fields for CSNP plans on Medicare Information Page
+   		 | MedicaidNumber | <medicaidnumber> |
+#		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
+#    Then the user answers following questions in Medicare Information Page
+#      | PDP Question      | <pdpFlag>      |
+#      | LongTerm Question | <longTermFlag> |
     Then the user navigates to SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
