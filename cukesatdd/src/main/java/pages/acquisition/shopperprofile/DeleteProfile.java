@@ -1,22 +1,13 @@
 package pages.acquisition.shopperprofile;
 
-import java.util.List;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-
-import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class DeleteProfile extends UhcDriver {
 	
@@ -37,6 +28,7 @@ public class DeleteProfile extends UhcDriver {
 	
 	public static final String DELETE_PROFILE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/delete-profile";
 	
+	public static final String DELETE_PROFILE_URL_STAGE = "https://stage-generic.uhc.com/admin/shopper-profile.html/delete-profile";
 	
 	public DeleteProfile(WebDriver driver) {
 		super(driver);
@@ -46,7 +38,14 @@ public class DeleteProfile extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		start(DELETE_PROFILE_URL);
+		if (MRScenario.environment.equals("offline")) {
+		}
+		else if (MRScenario.environment.equals("stage")) {
+			start(DELETE_PROFILE_URL_STAGE);
+		}else {
+			start(DELETE_PROFILE_URL);
+		}
+
 		CommonUtility.waitForPageLoadNew(driver, email, 15);
 		CommonUtility.waitForPageLoadNew(driver, mbi, 15);
 		CommonUtility.waitForPageLoadNew(driver, btnDelete, 15);

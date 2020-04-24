@@ -31,7 +31,8 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline")) {
 		}
-		else if (MRScenario.environment.equals("prod")) {
+		else if (MRScenario.environment.equals("stage")) {
+			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
 		}else {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
 		}
