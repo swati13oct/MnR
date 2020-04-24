@@ -214,9 +214,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		///driver.navigate().refresh();
 		
 		pageloadcomplete();
-		mobileswipe("50%", true);
-		validate(getStartedBtn, 30);
-		getStartedBtn.click();
+		//validate(getStartedBtn, 30);
+		mobileUtils.mobileLocateElementClick(getStartedBtn);
 	}
 
 	public void validatecontains(String primarystring, String substring) {

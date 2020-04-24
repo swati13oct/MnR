@@ -358,7 +358,7 @@ public class DrugMobilePage extends UhcDriver {
 				if (switchGeneric) {
 					//justtry();
 					modalGenericSwitch.click();
-					jsClickNew(modalGenericSwitch);
+					//jsClickNew(modalGenericSwitch);
 					drugName = modalGenericDrug.getText();
 				}
 				modalcontinue.click();
