@@ -185,18 +185,50 @@ public class EOBPage extends EOBBase{
 		}
 	}
 
-	public void validateRightRail_DREAMEOB(String planType) {
-		if (planType.contains("SHIP")) {
+	/**
+	 * NOTE: Right rail for medical pdf info will only show for MAPD / MA users and if there is EOB
+	 * @param planType
+	 */
+	public void validateRightRail_DREAMEOB(String planType, int ui_eobResultCount) {
+		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
+		System.out.println("OMG - planType="+planType);
+		if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
+			System.out.println("OMG 1- planType="+planType);
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for SHIP plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for SHIP plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
-			//Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section header element", eobValidate(rightRailLearnMoreHeader));
+			System.out.println("OMG 2- planType="+planType);
+			Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section header element", eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - unable to locate right rail Learn More section link element", eobValidate(rightRailLearnMoreLink));
+			
+			//note: validate pdf content
+			String winHandleBefore = driver.getWindowHandle();
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+			rightRailLearnMoreLink.click();
+			CommonUtility.checkPageIsReady(driver);
+			System.out.println("Clicked the doc link...");
+			sleepBySec(3);
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs=afterClicked_tabs.size();
+			Assert.assertTrue("PROBLEM - Learn More PDF should open on same tab after clicking Learn More link", (afterClicked_numTabs-beforeClicked_numTabs)==0);
+
+			String expUrl="How_to_read_Medical_EOB.pdf";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - Learn More PDF is not as expected. Expect URL to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			//TODO - validate PDF content when code deploy onto stage
+			
+			driver.navigate().back();
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, pageHeader, 5);
+			sleepBySec(3);
 		}
 	}
 
 	
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
+		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalErrorMsg));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 

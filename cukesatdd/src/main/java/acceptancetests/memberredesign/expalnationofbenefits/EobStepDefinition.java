@@ -380,7 +380,9 @@ public class EobStepDefinition {
 	public void validate_rightRail() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-		eobPage.validateRightRail_DREAMEOB(planType);
+		int ui_eobResultCount=eobPage.getNumEobAfterSearch();
+		getLoginScenario().saveBean(EobCommonConstants.UI_EOB_COUNT, ui_eobResultCount);
+		eobPage.validateRightRail_DREAMEOB(planType, ui_eobResultCount);
 	}
 
 	@Then("^the user validate sub option EXPLANATION OF BENEFITS under Claims option$")

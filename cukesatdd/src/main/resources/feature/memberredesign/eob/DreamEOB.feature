@@ -13,7 +13,6 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
       | Member Type | <memberType> |
     Then the user navigates to EOB page
     Then the user validates the header section content on DREAM EOB
-    Then the user validates the right rail section content
     Then the user validates site leaving pop up after clicking Adobe link
     #----- Validate Date Range Custom Search invalid cases ----  
     When the user selects Custom Search with blank From and To Date values
@@ -58,17 +57,18 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
     Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    Then the user validates the right rail section content
     Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
     Then the user validates the eob count for all available search ranges
       | Flag Zero EOB User | <flagZeroEob> |
 
-@abc    @dreamEob01a @COMBINDED_EOBs @devRegression
+    @dreamEob01a @COMBINDED_EOBs @devRegression
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 01    | MAPD     | COSMOS_DEOB       | 1 new both, 1 old C, 1 or 2 old D overlap | true|
-#      | 02    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
-#      | 03    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
+      | 02    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
+      | 03    | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
     @dreamEob01b @COMBINDED_EOBs
     Examples: 

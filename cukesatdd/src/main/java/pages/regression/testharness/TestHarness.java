@@ -989,6 +989,7 @@ public class TestHarness extends UhcDriver {
 		orderMaterials.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, heading, CommonConstants.TIMEOUT_60);
+		checkModelPopup(driver,5);
 		if (heading.isDisplayed()) {
 			return new OrderMaterialsPage(driver);
 		}
@@ -1004,6 +1005,7 @@ public class TestHarness extends UhcDriver {
 		System.out.println("Inside navigateToPaymentOverview functions");
 		validateNew(premiumPayment);
 		premiumPayment.click();
+		checkModelPopup(driver,5);
 		if (driver.getTitle().contains("Payment")) {
 			return new PaymentHistoryPage(driver);
 		}

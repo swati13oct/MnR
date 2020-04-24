@@ -108,7 +108,7 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath = "//*[@id='71710697']")
 	protected WebElement mapdNavTab;
 
-	@FindBy(xpath = "//*[contains(text(),'Learn More About EOB')]")
+	@FindBy(xpath = "//div[contains(@class,'learnmore') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Learn More About EOB')]")
 	protected WebElement rightRailLearnMoreHeader;
 
 	@FindBy(xpath = "//a[contains(text(),'How to read your monthly Medical Explanation of Benefits')]")
@@ -351,6 +351,9 @@ public class EOBWebElements extends UhcDriver{
 	
 	@FindBy(xpath="//table//tr/th[3][contains(text(),'EOB Statement')]")
 	protected WebElement tblHeaderStmt;
+	
+	@FindBy(xpath="//*[contains(text(),'We are currently experiencing an internal server problem')]")
+	protected WebElement internalErrorMsg;
 	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
