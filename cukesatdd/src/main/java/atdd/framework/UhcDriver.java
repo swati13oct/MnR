@@ -823,11 +823,19 @@ try {
 		return timeStr;
 	}
 
+	/**
+	 * @author Murali - mmurugas
+	 * This method will open give URL in mobile 
+	 */	
 	public void startNewMobile(String url) {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will perform vertical swipe on mobile screen for given %
+	 */
 	public void mobileswipe(String percentage,boolean swipeup) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
@@ -855,6 +863,10 @@ try {
 		}
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will hide mobile keypad
+	 */
 	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
 		try {
@@ -931,6 +943,10 @@ try {
 		}
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will select option from dropdown based on visible text mobile
+	 */
 	public void mobileSelectOption(Select element,String option) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			element.selectByVisibleText(option);
@@ -977,10 +993,15 @@ try {
 		System.out.println("curHandle - "+((AndroidDriver) driver).getContext());
 	}
 	
+	/**
+	 * @author Murali - mmurugas
+	 * This method will re-submit if form submission popup arises mobile 
+	 */	
 	public void fixFormResubmission(boolean positive) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
 	}
+	
 	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
 		String ReturnValue = "";
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -1005,6 +1026,10 @@ try {
 		}
 	}
 
+	/**
+	 * @author Murali - mmurugas
+	 * This method will perform horizontal swipe on mobile screen
+	 */
 	public void mobileswipeHorizantal(String percentage,boolean swiperight) {
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
